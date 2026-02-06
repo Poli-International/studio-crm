@@ -1,0 +1,39 @@
+--------------------------------------------------------------------------------
+STUDIO CRM - PROFESSIONAL COMMUNITY EDITION
+FULL DOCUMENTATION & TECHNICAL MANUAL
+--------------------------------------------------------------------------------
+
+1. OVERVIEW
+Studio CRM is a comprehensive, multi-module management system designed for 
+tattoo and piercing studios. It integrates client management, scheduling, 
+financial reporting, inventory tracking, and health compliance into a single 
+secure platform.
+
+
+2. CORE MODULES
+- Client Management: Secure database for client history, medical notes (AES-256), digital photo galleries, and detailed professional profiles.
+- Team Management: Role-based access control (Admin, Manager, Artist) with performance tracking and commission management.
+- Studio Gallery: Shared creative portfolio with social media integration, tagging, and artist-specific filtering.
+- Smart Scheduling: Visual drag-and-drop calendar with Google Calendar sync and context-aware booking from client profiles.
+- Financial Hub: Revenue tracking, artist commission calculations, and CSV reports.
+- Inventory Control: Real-time stock tracking with "Low Stock" smart alerts.
+- Compliance Vault: HIPAA-compliant storage for waivers and sterilization logs.
+
+3. TECHNICAL ARCHITECTURE
+- Framework: Laravel 10 (Backend)
+- Frontend: Tailwind-inspired Vanilla CSS & Blade Templates
+- Security: CSRF Protection, Encrypted Database Fields, Secure Session Management
+- Icons: Lucide Icon Library
+
+4. INSTALLATION (COMMUNITY EDITION)
+1. Upload the 'studio-crm' folder to your /wp-content/standalone-tools/ directory.
+2. Create a MySQL database 'u978947437_crm'.
+3. Import the 'database/schema.sql' file.
+4. Update the '.env' file with your credentials.
+
+5. SUPPORT
+For technical assistance, please visit https://poliinternational.com/tools/ or 
+email support@poliinternational.com.
+
+(c) 2026 Poli International. All rights reserved.
+--------------------------------------------------------------------------------

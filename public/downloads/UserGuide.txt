@@ -1,0 +1,50 @@
+--------------------------------------------------------------------------------
+STUDIO CRM - USER GUIDE & QUICK START
+--------------------------------------------------------------------------------
+
+STEP 1: LOGIN & DASHBOARD
+- Launch the CRM from your landing page.
+- The Dashboard shows your appointments for "Today" and live revenue summaries.
+- Use the Quick Action buttons (New Appointment, Add Client) to save time.
+
+STEP 2: MANAGING CLIENTS
+- Go to the 'Clients' tab.
+- Add new clients with their email and phone.
+- IMPORTANT: Always check for existing profiles before creating new ones to 
+  maintain accurate service history.
+
+STEP 3: RECORDING PAYMENTS
+- After a session, click "Record Payment" on the Dashboard.
+- Select the client and payment method (Cash, Card, Transfer).
+- Payments are automatically synced to the 'Financial' tab for your reports.
+
+STEP 4: TEAM & ROLES (ADMINS ONLY)
+- Navigate to "Team Management" in the sidebar.
+- Add Artists, Piercers, or Receptionists.
+- The system generates unique, secure credentials for each staff member.
+- Monitor your team's live activity from the Dashboard Overview.
+
+STEP 5: STUDIO GALLERY
+- Upload your best tattoos and piercings to the shared Studio Gallery.
+- Tag your work (e.g., #realism, #gold) for easy searching.
+- Use the "Share" buttons to instantly send portfolio pieces to clients via Email, Facebook, or WhatsApp.
+
+STEP 6: CLIENT PROFILES
+- Click the "Action" (Eye Icon) next to any client in the list.
+- View comprehensive history, medical alerts, and contact details.
+- Use the context-aware "Book New" button to schedule appointments instantly for that specific client.
+
+STEP 7: INVENTORY ALERTS
+- Check the 'Inventory' tab daily.
+- Items highlighted in RED have fallen below their reorder point.
+- Use the "Add Item" button to restock needles, ink, or jewelry.
+
+STEP 8: COMPLIANCE LOGS
+- Each morning, use the "Health Check" button in the 'Compliance' tab.
+- Log your station sanitization and autoclave tests.
+- These records are legally required and securely saved in the Compliance Logs.
+
+PRO TIP:
+Use "Dark Mode" in the Settings tab for a high-contrast experience during 
+technical sessions in low-light environments.
+--------------------------------------------------------------------------------

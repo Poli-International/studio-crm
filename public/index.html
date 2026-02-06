@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio CRM</title>
+    <script type="module" crossorigin
+        src="/wp-content/standalone-tools/studio-crm/public/assets/index-C2ZF1OBy.js"></script>
+    <link rel="stylesheet" crossorigin href="/wp-content/standalone-tools/studio-crm/public/assets/index-DXzqoJaX.css">
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <!-- AUTOMATIC IFRAME CONTENT HIDER (ADDED BY ANTIGRAVITY) -->
+    <script>
+        if (window.self !== window.top) {
+            document.addEventListener('DOMContentLoaded', function () {
+                const selectors = [
+                    '.site-header', '.site-footer', '.equip-checker__header',
+                    '.equip-checker__footer', '.tool-title-section', '.more-tools-section',
+                    '.feedback-section', '.related-tools-section', '.geo-summary-block',
+                    '.needle-selector__header', '.needle-selector__footer',
+                    '.needle-selector__more-tools', '.community-feedback',
+                    '.poli-footer', '.share-card', '.need-support-card', '.explore-all-card'
+                ];
+                selectors.forEach(selector => {
+                    const elements = document.querySelectorAll(selector);
+                    elements.forEach(el => el.style.display = 'none');
+                });
+                // Force reset body margins for embed
+                document.body.style.paddingTop = '0';
+                document.body.style.marginTop = '0';
+                document.body.style.paddingBottom = '0';
+                document.body.style.marginBottom = '0';
+            });
+        }
+    </script>
+
+</body>
+
+</html>

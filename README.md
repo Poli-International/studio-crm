@@ -6,7 +6,7 @@
 ![PHP](https://img.shields.io/badge/PHP-8.1+-777BB4?logo=php&logoColor=white)
 ![Laravel](https://img.shields.io/badge/Laravel-10-FF2D20?logo=laravel&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-5.7+-4479A1?logo=mysql&logoColor=white)
-[![Ko-fi](https://img.shields.io/badge/Support-Ko--fi-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/poliinternational)
+[![Ko-fi](https://img.shields.io/badge/Support-Ko--fi-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/patrickkofi)
 
 **Professional Studio Management System for Tattoo & Piercing Studios**
 
@@ -172,7 +172,7 @@ Studio CRM is one of **17 free tools** we've built for the tattoo & piercing ind
 
 If Studio CRM helps your business, consider supporting its development:
 
-[![Ko-fi](https://img.shields.io/badge/Support%20on-Ko--fi-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/poliinternational)
+[![Ko-fi](https://img.shields.io/badge/Support%20on-Ko--fi-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/patrickkofi)
 
 Your support helps us:
 
@@ -196,6 +196,6 @@ If you find this project useful, please consider giving it a ⭐ on GitHub!
 *Empowering studios with professional tools since 2026*
 
 [![Website](https://img.shields.io/badge/Website-poliinternational.com-0693e3?style=flat-square)](https://poliinternational.com)
-[![Ko-fi](https://img.shields.io/badge/Ko--fi-poliinternational-FF5E5B?style=flat-square&logo=ko-fi)](https://ko-fi.com/poliinternational)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-patrickkofi-FF5E5B?style=flat-square&logo=ko-fi)](https://ko-fi.com/patrickkofi)
 
 </div>

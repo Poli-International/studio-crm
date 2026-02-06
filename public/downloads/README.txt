@@ -14,6 +14,6 @@ Features Included:
 - Health Compliance Logs
 
 Documentation: https://poliinternational.com/studio-crm/documentation/
-Support: admin@poliinternational.com
+Support: patrick@poli-international.com
 
 (c) 2026 Poli International

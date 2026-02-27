@@ -1,0 +1,1 @@
+import{_ as e,c as o,a,o as c}from"./index-CDUqUUsz.js";const s={},t={class:"page-container"};function r(i,n){return c(),o("div",t,[...n[0]||(n[0]=[a("h1",null,"Financial Management",-1),a("div",{class:"card"},[a("p",null,"Financial Module Coming Soon")],-1)])])}const d=e(s,[["render",r]]);export{d as default};

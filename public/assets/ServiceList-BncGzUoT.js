@@ -1,0 +1,1 @@
+import{_ as o,c as s,a as e,o as n}from"./index-CDUqUUsz.js";const r={},a={class:"page-container"};function t(i,c){return n(),s("div",a,[...c[0]||(c[0]=[e("h1",null,"Services",-1),e("div",{class:"card"},[e("p",null,"Service Tracking Module Coming Soon")],-1)])])}const d=o(r,[["render",t]]);export{d as default};

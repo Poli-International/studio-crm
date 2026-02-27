@@ -1,0 +1,1 @@
+import{q as s,U as a,o as t,B as n}from"./index-fDQjJq_K.js";const r={},i={class:"page-container"};function e(c,o){return t(),a("div",i,[...o[0]||(o[0]=[n("h1",null,"Settings",-1),n("div",{class:"card"},[n("p",null,"System Configuration Coming Soon")],-1)])])}const d=s(r,[["render",e]]);export{d as default};

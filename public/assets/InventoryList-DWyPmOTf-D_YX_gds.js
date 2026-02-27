@@ -1,0 +1,1 @@
+import{q as r,U as s,o as a,B as n}from"./index-fDQjJq_K.js";const e={},t={class:"page-container"};function l(c,o){return a(),s("div",t,[...o[0]||(o[0]=[n("h1",null,"Inventory",-1),n("div",{class:"card"},[n("p",null,"Inventory Module Coming Soon")],-1)])])}const d=r(e,[["render",l]]);export{d as default};

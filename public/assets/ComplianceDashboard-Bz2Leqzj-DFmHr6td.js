@@ -1,0 +1,1 @@
+import{q as s,U as a,o as l,B as o}from"./index-fDQjJq_K.js";const c={},r={class:"page-container"};function e(t,n){return l(),a("div",r,[...n[0]||(n[0]=[o("h1",null,"Compliance & Docs",-1),o("div",{class:"card"},[o("p",null,"Compliance Module Coming Soon")],-1)])])}const d=s(c,[["render",e]]);export{d as default};

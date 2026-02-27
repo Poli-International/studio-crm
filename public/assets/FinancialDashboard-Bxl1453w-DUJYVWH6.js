@@ -1,0 +1,1 @@
+import{q as o,U as s,o as i,B as n}from"./index-fDQjJq_K.js";const e={},l={class:"page-container"};function r(t,a){return i(),s("div",l,[...a[0]||(a[0]=[n("h1",null,"Financial Management",-1),n("div",{class:"card"},[n("p",null,"Financial Module Coming Soon")],-1)])])}const d=o(e,[["render",r]]);export{d as default};

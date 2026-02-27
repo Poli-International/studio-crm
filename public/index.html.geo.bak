@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio CRM</title>
+    <script type="module" crossorigin
+        src="/wp-content/standalone-tools/studio-crm/public/assets/index-C2ZF1OBy.js"></script>
+    <link rel="stylesheet" crossorigin href="/wp-content/standalone-tools/studio-crm/public/assets/index-DXzqoJaX.css">
+<script type='application/ld+json'>
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Studio CRM",
+  "url": "https://poliinternational.com/tools/studio-crm-laravel/",
+  "description": "Professional Studio Management System for Tattoo & Piercing Studios",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "codeRepository": "https://github.com/poli-international/studio-crm",
+  "author": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "https://poliinternational.com",
+    "sameAs": [
+      "https://github.com/poli-international"
+    ]
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "https://poliinternational.com"
+  },
+  "maintainer": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "https://poliinternational.com"
+  },
+  "dateModified": "2026-02-07",
+  "license": "https://opensource.org/licenses/MIT",
+  "isAccessibleForFree": true
+}
+</script>
+
+</head>
+
+<body>
+<!-- GitHub CTA -->
+<div class='github-cta' style='margin: 1.5rem 0;'>
+  <a href='https://github.com/poli-international/studio-crm' 
+     target='_blank' rel='noopener noreferrer' class='btn-github' 
+     style='display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: #24292e; color: #ffffff; border-radius: 6px; text-decoration: none; font-weight: 500;'>
+    <svg width='20' height='20' viewBox='0 0 16 16' fill='currentColor'>
+      <path d='M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z'/>
+    </svg>
+    <span>View on GitHub</span>
+  </a>
+</div>
+<!-- GitHub Stats -->
+<div class='github-stats' style='display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0;'>
+  <img src='https://img.shields.io/github/stars/poli-international/studio-crm?style=social' alt='Stars' loading='lazy'>
+  <img src='https://img.shields.io/github/last-commit/poli-international/studio-crm' alt='Last commit' loading='lazy'>
+</div>
+
+    <div id="app"></div>
+
+    <!-- AUTOMATIC IFRAME CONTENT HIDER (ADDED BY ANTIGRAVITY) -->
+    <script>
+        if (window.self !== window.top) {
+            document.addEventListener('DOMContentLoaded', function () {
+                const selectors = [
+                    '.site-header', '.site-footer', '.equip-checker__header',
+                    '.equip-checker__footer', '.tool-title-section', '.more-tools-section',
+                    '.feedback-section', '.related-tools-section', '.geo-summary-block',
+                    '.needle-selector__header', '.needle-selector__footer',
+                    '.needle-selector__more-tools', '.community-feedback',
+                    '.poli-footer', '.share-card', '.need-support-card', '.explore-all-card'
+                ];
+                selectors.forEach(selector => {
+                    const elements = document.querySelectorAll(selector);
+                    elements.forEach(el => el.style.display = 'none');
+                });
+                // Force reset body margins for embed
+                document.body.style.paddingTop = '0';
+                document.body.style.marginTop = '0';
+                document.body.style.paddingBottom = '0';
+                document.body.style.marginBottom = '0';
+            });
+        }
+    </script>
+
+</body>
+
+</html>

@@ -139,12 +139,17 @@
             @csrf
             <div class="form-group">
                 <label class="form-label">Email Address</label>
-                <input type="email" name="email" class="form-control" placeholder="studio@example.com" required>
+                <input type="email" name="email" class="form-control" placeholder="marcus@studio.com" required>
             </div>
 
             <div class="form-group">
                 <label class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+                <input type="password" name="password" class="form-control" placeholder="password" required>
+            </div>
+
+            <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border: 1px dashed var(--primary); font-size: 0.8rem; text-align: center;">
+                <strong style="color: var(--primary); display: block; margin-bottom: 0.25rem;">PRO-GRADE DEMO LOGIN</strong>
+                Email: <code>marcus@studio.com</code> | Pass: <code>password</code>
             </div>
 
             <button type="submit" class="btn btn-primary">

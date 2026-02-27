@@ -158,10 +158,10 @@
         <p>A professional, All-in-One CRM system designed specifically for Tattoo and Piercing Studios. Secure, HIPAA-compliant, and completely free for the community.</p>
         <div style="display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap">
             <a href="{{ route('login') }}" class="btn btn-primary">
-                <i data-lucide="play"></i> Launch Demo Version
+                <i data-lucide="play"></i> Launch Interactive Demo
             </a>
-            <a href="{{ route('download.resource', ['filename' => 'studio-crm-community-edition.zip']) }}" class="btn" style="background: var(--card); color: white; border: 1px solid var(--primary);">
-                <i data-lucide="download-cloud"></i> Download Community Package
+            <a href="https://github.com/poli-international/studio-crm" target="_blank" class="btn" style="background: var(--card); color: white; border: 1px solid var(--primary);">
+                <i data-lucide="github"></i> Download Full App (Free)
             </a>
         </div>
     </header>
@@ -265,11 +265,22 @@
 
         <div class="test-login-box">
             <i data-lucide="key" size="48" style="color:var(--primary); margin-bottom:1.5rem"></i>
-            <h2>How to Test the Demo</h2>
-            <p>You can explore the full power of the CRM right now. No registration required for the demo. Simply click the button below to log in as a <strong>Manager</strong> and see live data for scheduling, financials, and inventory.</p>
-            <a href="{{ route('login') }}" class="btn btn-primary" style="padding: 1.25rem 3rem;">
-                <i data-lucide="log-in"></i> Start Testing Now
-            </a>
+            <h2>Interactive Demo Mode</h2>
+            <p>Explore the full power of the CRM right now with our hosted demo. Use the credentials below to log in as a <strong>Manager</strong> and see live data for scheduling, financials, and inventory.</p>
+            
+            <div style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 12px; display: inline-block; margin-bottom: 2rem; border: 1px dashed var(--primary); text-align: left;">
+                <code style="display: block; margin-bottom: 0.5rem; font-size: 1rem; color: #fff;">Email: marcus@studio.com</code>
+                <code style="display: block; font-size: 1rem; color: #fff;">Password: password</code>
+            </div>
+
+            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
+                <a href="{{ route('login') }}" class="btn btn-primary" style="padding: 1.25rem 3rem;">
+                    <i data-lucide="log-in"></i> Launch Demo
+                </a>
+                <a href="https://github.com/poli-international/studio-crm" target="_blank" class="btn" style="background: var(--success); color: white; padding: 1.25rem 3rem;">
+                    <i data-lucide="github"></i> Download Full App (Free)
+                </a>
+            </div>
         </div>
     </div>
 

@@ -15,7 +15,7 @@
 Once you push this file, visitors will see:
 
 ```
-[❤️ Sponsor] button → Links to: https://ko-fi.com/poliinternational
+[❤️ Sponsor] button → Links to: https://ko-fi.com/patrickkofi
 ```
 
 **License Compatibility:** ✅ 100% Compatible

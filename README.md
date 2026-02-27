@@ -6,11 +6,11 @@
 ![PHP](https://img.shields.io/badge/PHP-8.1+-777BB4?logo=php&logoColor=white)
 ![Laravel](https://img.shields.io/badge/Laravel-10-FF2D20?logo=laravel&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-5.7+-4479A1?logo=mysql&logoColor=white)
-[![Ko-fi](https://img.shields.io/badge/Support-Ko--fi-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/patrickkofi)
+[![Ko-fi](https://img.shields.io/badge/Support-Ko--fi-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/C0C81NEXBV)
 
 **Professional Studio Management System for Tattoo & Piercing Studios**
 
-[🌐 Live Demo](https://poliinternational.com/studio-crm) • [📖 Documentation](https://poliinternational.com/studio-crm/documentation/) • [🐛 Report Bug](https://github.com/Poli-International/studio-crm/issues) • [💡 Request Feature](https://github.com/Poli-International/studio-crm/discussions)
+[🌐 Interactive Demo](https://poliinternational.com/studio-crm) • [📖 Documentation](https://poliinternational.com/studio-crm/documentation/) • [🐛 Report Bug](https://github.com/Poli-International/studio-crm/issues) • [💡 Request Feature](https://github.com/Poli-International/studio-crm/discussions)
 
 </div>
 
@@ -20,7 +20,9 @@
 
 Built by industry professionals for industry professionals. Studio CRM combines powerful management features with an intuitive interface designed specifically for tattoo and piercing studios.
 
-**🎯 Try it now:** [poliinternational.com/studio-crm](https://poliinternational.com/studio-crm) - *No installation required!*
+**🎯 Try the Demo:** [poliinternational.com/studio-crm](https://poliinternational.com/studio-crm)
+- **Demo User:** `marcus@studio.com`
+- **Demo Password:** `password`
 
 ---
 
@@ -49,14 +51,9 @@ Built by industry professionals for industry professionals. Studio CRM combines 
 
 ## 📦 Installation
 
-### Prerequisites
+### 🐳 Option 1: Quick Start with Docker (Recommended)
 
-- PHP 8.1 or higher
-- Composer
-- MySQL 5.7 or higher
-- Node.js & npm (for asset compilation)
-
-### Quick Start
+The easiest way to get started is using Docker.
 
 1. **Clone the repository**:
 
@@ -65,7 +62,31 @@ Built by industry professionals for industry professionals. Studio CRM combines 
    cd studio-crm
    ```
 
-2. **Environment Setup**:
+2. **Run Automated Setup**:
+
+   ```bash
+   # On Linux/macOS
+   chmod +x setup.sh && ./setup.sh
+
+   # On Windows (PowerShell)
+   .\setup.ps1
+   ```
+
+3. **Access the App**: [http://localhost:8080](http://localhost:8080)
+
+---
+
+### 🛠️ Option 2: Manual Installation
+
+### Prerequisites
+
+- PHP 8.1 or higher
+- Composer
+- MySQL 5.7 or higher
+
+### Steps
+
+1. **Environment Setup**:
 
    ```bash
    cp .env.example .env
@@ -73,36 +94,35 @@ Built by industry professionals for industry professionals. Studio CRM combines 
 
    Edit `.env` and configure your database and mail settings.
 
-3. **Install Dependencies**:
+2. **Install Dependencies**:
 
    ```bash
    composer install
-   npm install
    ```
 
-4. **Generate Application Key**:
+3. **Generate Application Key**:
 
    ```bash
    php artisan key:generate
    ```
 
-5. **Database Setup**:
+4. **Database Setup**:
 
-   Import `database/schema.sql` into your MySQL database or run migrations if applicable.
+   ```bash
+   php artisan migrate --seed
+   ```
 
-6. **Symlink Storage**:
+5. **Symlink Storage**:
 
    ```bash
    php artisan storage:link
    ```
 
-7. **Start Development Server**:
+6. **Start Development Server**:
 
    ```bash
    php artisan serve
    ```
-
-   Visit `http://localhost:8000` in your browser.
 
 ---
 
@@ -172,7 +192,7 @@ Studio CRM is one of **17 free tools** we've built for the tattoo & piercing ind
 
 If Studio CRM helps your business, consider supporting its development:
 
-[![Ko-fi](https://img.shields.io/badge/Support%20on-Ko--fi-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/patrickkofi)
+[![Ko-fi](https://img.shields.io/badge/Support%20on-Ko--fi-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/C0C81NEXBV)
 
 Your support helps us:
 
@@ -196,6 +216,6 @@ If you find this project useful, please consider giving it a ⭐ on GitHub!
 *Empowering studios with professional tools since 2026*
 
 [![Website](https://img.shields.io/badge/Website-poliinternational.com-0693e3?style=flat-square)](https://poliinternational.com)
-[![Ko-fi](https://img.shields.io/badge/Ko--fi-patrickkofi-FF5E5B?style=flat-square&logo=ko-fi)](https://ko-fi.com/patrickkofi)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-C0C81NEXBV-FF5E5B?style=flat-square&logo=ko-fi)](https://ko-fi.com/C0C81NEXBV)
 
 </div>

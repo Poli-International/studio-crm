@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="de">
+<head><meta name="robots" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schmuckgrößen-Visualisierer: Benutzerhandbuch Dokumentation | Poli International</title>
+    <meta name="description" content="Der Schmuckgrößen-Visualisierer ist ein interaktives Werkzeug zur 1:1-Bildschirmkalibrierung, Längenberechnung und klinischen Referenz für professionelle Piercing-Artists, Auszubildende und Kunden auf der Suche nach verifizierten Abmessungen.">
+    <link rel="canonical" href="https://poliinternational.com/jewelry-size-visualizer/">
+    <style>
+        body { background: #0f0f0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; }
+        body.in-iframe .doc-hero h1 { display: none; }
+        * { box-sizing: border-box; }
+        .entry-content { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .doc-hero { background: linear-gradient(135deg, #3B82F6, #8B5CF6); padding: 3rem 2rem; text-align: center; border-radius: 0.75rem; margin-bottom: 2rem; }
+        .doc-hero h1 { font-size: 2.2rem; margin: 0 0 1rem; font-weight: 700; }
+        .doc-hero p { font-size: 1.15rem; color: #E0E7FF; margin: 0; }
+        .doc-hero .v2 { display: inline-block; margin-bottom: 1rem; padding: 0.2rem 0.75rem; border-radius: 999px; background: #10B981; color: #04241a; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; }
+        .doc-section { margin: 2rem 0; padding: 2rem; background: #1a1a1a; border-radius: 0.75rem; border-left: 4px solid #3B82F6; }
+        .doc-section h2 { color: #60A5FA; font-size: 1.7rem; margin: 0 0 1.25rem; font-weight: 600; }
+        .doc-section h3 { color: #A78BFA; font-size: 1.3rem; margin: 1.75rem 0 0.75rem; font-weight: 600; }
+        .doc-section p, .doc-section li { color: #ccc; line-height: 1.75; font-size: 1.02rem; }
+        .doc-section ul, .doc-section ol { padding-left: 1.5rem; }
+        .doc-section li { margin: 0.4rem 0; }
+        .doc-section code { background: #2a2a2a; padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.92em; }
+        .doc-section a { color: #60A5FA; font-weight: 600; }
+        .highlight-box { background: linear-gradient(135deg, #1E3A8A, #4C1D95); padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; border-left: 4px solid #10B981; }
+        .highlight-box p { color: #E0E7FF; margin: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border: 1px solid #333; vertical-align: top; }
+        th { background: #2a2a2a; color: #60A5FA; }
+        td { color: #ccc; }
+        .doc-langs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.5rem; font-size: 0.9rem; }
+        .doc-langs a, .doc-langs span { padding: 0.3rem 0.7rem; border-radius: 999px; border: 1px solid #333; text-decoration: none; }
+        .doc-langs a { color: #60A5FA; }
+        .doc-langs span { background: #1E3A8A; color: #E0E7FF; border-color: #1E3A8A; font-weight: 700; }
+    </style>
+</head>
+<body>
+<script>if (window.self !== window.top) document.body.classList.add('in-iframe');</script>
+    <div class="entry-content">
+        <nav class="doc-langs" aria-label="Documentation language"><a lang="en" href="documentation.html">English</a><a lang="fr" href="documentation-fr.html">Francais</a><span lang="de">Deutsch</span><a lang="es" href="documentation-es.html">Espanol</a><a lang="it" href="documentation-it.html">Italiano</a><a lang="nl" href="documentation-nl.html">Nederlands</a><a lang="pt" href="documentation-pt.html">Portugues</a></nav>
+        <div class="doc-hero">
+            <span class="v2">V2</span>
+            <h1>Schmuckgrößen-Visualisierer: Benutzerhandbuch</h1>
+            <p>Der Schmuckgrößen-Visualisierer ist ein interaktives Werkzeug zur 1:1-Bildschirmkalibrierung, Längenberechnung und klinischen Referenz für professionelle Piercing-Artists, Auszubildende und Kunden auf der Suche nach verifizierten Abmessungen.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Wofür das Tool dient</h2>
+        <p>Dieses Werkzeug stellt Piercingschmuck in seinen exakten physischen Abmessungen auf digitalen Bildschirmen dar. Durch die Kalibrierung anhand einer standardisierten physischen Bankkarte wird der Schmuck unabhängig von der Pixeldichte des Displays in echter Lebensgröße angezeigt. Die Software berechnet zudem Längen für gebogene sowie Industrial-Barbells, gleicht Schwellungszugaben der Erstversorgung mit Downsize-Zielen nach der Abheilung ab, stellt eine private Foto-Messfläche bereit und erzeugt druckfertige Passformkarten für das Beratungsgespräch im Studio.</p>
+        </div>
+        <div class="doc-section">
+        <h2>An wen es sich richtet</h2>
+        <p>Diese Anwendung unterstützt vier primäre Zielgruppen:</p>
+        <ul>
+        <li>Professionelle Piercing-Artists, die Stablängen präzise ermitteln und Dokumentationskarten für die Kundenberatung anfertigen.</li>
+        <li>Studio-Counter-Personal und Auszubildende, die Drahtstärken zwischen American Wire Gauge und Millimetern abgleichen.</li>
+        <li>Piercing-Kunden, die echte Schmuckmaße vor dem Kauf von Wechselschmuck für abgeheilte Stichkanäle prüfen möchten.</li>
+        <li>Dozenten und Ausbilder im Studio, die anatomische Abstände, Geometrien von Scaffold-Piercings und Standards der Biokompatibilität vermitteln.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Bedienung und Funktionen</h2>
+        <h3>Sprache wechseln</h3>
+        <p>Die Anwendung steht in sieben Sprachen zur Verfügung: Englisch (EN), Deutsch (DE), Französisch (FR), Spanisch (ES), Italienisch (IT), Portugiesisch (PT) und Niederländisch (NL).</p>
+        <ol>
+        <li><strong>Sprachauswahl in der oberen Leiste:</strong> Nutzen Sie das Dropdown-Menü in der oberen fixierten Funktionsleiste (oder im Seitenfuß), um Ihre bevorzugte Sprache auf jedem Endgerät auszuwählen.</li>
+        <li><strong>Schnellwechsel-Schaltflächen (Desktop &amp; Tablet):</strong> Klicken Sie auf eines der Länderkürzel (<code>EN</code>, <code>DE</code>, <code>FR</code>, <code>ES</code>, <code>IT</code>, <code>PT</code>, <code>NL</code>), um die gesamte Benutzeroberfläche mit einem Klick umzuschalten. Die aktive Sprache wird in Roségold hervorgehoben.</li>
+        <li><strong>Tooltip beim Überfahren des Sprach-Symbols:</strong> Fahren Sie mit der Maus über das Globus-Symbol (<code>🌐</code>), um die vollständige Liste der verfügbaren Sprachen einzublenden.</li>
+        <li><strong>Dauerhafte Speicherung:</strong> Ihre Sprachauswahl wird automatisch lokal in Ihrem Browser (<code>localStorage</code>) gespeichert und bei jedem erneuten Aufruf beibehalten.</li>
+        </ol>
+        <h3>Bildschirm auf echten 1:1-Maßstab kalibrieren</h3>
+        <ol>
+        <li>Klicken Sie im oberen Bereich auf <code>Bildschirm kalibrieren (85,60 mm Karte)</code>.</li>
+        <li>Halten Sie eine handelsübliche physische Bankkarte (85,60 mm Breite gemäß ISO/IEC 7810 ID-1) an Ihren Bildschirm.</li>
+        <li>Verschieben Sie den Regler <code>Kartenbreite an physische Karte anpassen:</code>, bis beide Breiten exakt übereinstimmen.</li>
+        <li>Klicken Sie auf <code>Kalibrierung speichern (Echtes 1:1 setzen)</code>, um den kalibrierten Maßstab für alle Ansichten zu fixieren.</li>
+        </ol>
+        <h3>Schmuckstücke im 1:1-Visualisierer durchsuchen und prüfen</h3>
+        <ol>
+        <li>Öffnen Sie den Reiter <code>1:1 Visualisierer</code> in der Hauptnavigation.</li>
+        <li>Filtern Sie das Sortiment nach Kategorie, Drahtstärke, Material oder Körperregion.</li>
+        <li>Wechseln Sie die Maßeinheit nach Bedarf zwischen <code>mm</code> und <code>Zoll</code>.</li>
+        <li>Klicken Sie auf eine Schmuckkarte, um Tragelänge, Drahtstärke und Kugelgröße im echten 1:1-Maßstab zu prüfen.</li>
+        <li>Fügen Sie Artikel dem <code>Größenvergleich</code> hinzu oder sichern Sie sie in Ihrer <code>Gespeicherte Kollektion</code>.</li>
+        </ol>
+        <h3>Länge für gebogene Barbells berechnen</h3>
+        <ol>
+        <li>Rufen Sie den Reiter <code>Gebogene Barbell</code> in der Menüleiste auf.</li>
+        <li>Wählen Sie die gewünschte Platzierung unter <code>Piercing-Platzierung wählen:</code>.</li>
+        <li>Tragen Sie den mit dem Messschieber ermittelten Wert in <code>Gemessene Gewebespanne (Loch zu Loch / Tiefe):</code> ein.</li>
+        <li>Bestimmen Sie die <code>Standard-Drahtstärke:</code> und klicken Sie auf <code>Barbell-Länge berechnen</code>.</li>
+        <li>Prüfen Sie die Maße unter <code>Frisches Piercing (Erstschmuck-Länge)</code> sowie <code>Verheiltes Piercing (Downsize-Länge)</code>.</li>
+        <li>Klicken Sie auf <code>Auf druckbare Passformkarte übertragen</code>, um die berechneten Werte zu übernehmen.</li>
+        </ol>
+        <h3>Industrial-Barbells und Scaffold-Piercings dimensionieren</h3>
+        <ol>
+        <li>Öffnen Sie den Reiter <code>Industrial-Barbell</code> in der Navigation.</li>
+        <li>Geben Sie den Messwert in das Feld <code>Knorpelabstand Loch-zu-Loch (20–80 mm):</code> ein.</li>
+        <li>Wählen Sie den gewünschten Durchmesser unter <code>Kugeldurchmesser:</code> (3 mm, 4 mm oder 5 mm).</li>
+        <li>Überprüfen Sie die Empfehlungen unter <code>Frisches Industrial (Erstschmuck-Größe)</code> und <code>Verheiltes Industrial (Downsize-Größe)</code>.</li>
+        <li>Klicken Sie auf <code>Auf druckbare Passformkarte übertragen</code>, um die technischen Angaben zu exportieren.</li>
+        </ol>
+        <h3>Platzierung mit der virtuellen Foto-Anprobe testen</h3>
+        <ol>
+        <li>Rufen Sie den Reiter <code>Virtuelle Anprobe</code> auf.</li>
+        <li>Klicken Sie auf <code>Foto vom Gerät auswählen</code> oder auf <code>Foto / Selfie aufnehmen</code>.</li>
+        <li>Wählen Sie eine Schmucksilhouetten-Vorlage aus der Bibliothek.</li>
+        <li>Passen Sie <code>Maßstabseinstellung:</code>, <code>Drehung:</code> und <code>Deckkraft:</code> an, um das Schmuckstück auf Ihrer Anatomie auszurichten.</li>
+        </ol>
+        <h3>Schmuckgrößen im Direktvergleich gegenüberstellen</h3>
+        <ol>
+        <li>Öffnen Sie den Reiter <code>Größenvergleich</code>.</li>
+        <li>Wählen Sie zwei bis vier Stücke aus Ihrer Vergleichsliste oder den Dropdown-Menüs.</li>
+        <li>Vergleichen Sie Drahtstärken und Stablängen direkt nebeneinander im kalibrierten 1:1-Maßstab.</li>
+        </ol>
+        <h3>Anatomischen Piercing-Leitfaden konsultieren</h3>
+        <ol>
+        <li>Öffnen Sie den Reiter <code>Körper-Guide</code>.</li>
+        <li>Wählen Sie ein Areal wie Ohrläppchen, Helix, Conch oder Bauchnabel aus.</li>
+        <li>Informieren Sie sich über bewährte Ausgangsdrahtstärken, Erstschmucklängen, Downsize-Ziele und reguläre Abheilzeiten aus der etablierten Fachpraxis.</li>
+        </ol>
+        <h3>Gewebespannen anhand von Fotos vermessen</h3>
+        <ol>
+        <li>Rufen Sie den Reiter <code>Foto-Vermessung</code> auf.</li>
+        <li>Laden Sie ein Foto hoch, auf dem die Piercingstelle neben einer echten Bankkarte abgebildet ist.</li>
+        <li>Setzen Sie die Kalibriermarkierungen über die 85,60 mm breite Kante der Referenzkarte.</li>
+        <li>Positionieren Sie die Messmarkierungen über der Gewebespanne, um die Millimeter automatisch zu ermitteln.</li>
+        </ol>
+        <h3>Gespeicherte Schmuckkollektion verwalten</h3>
+        <ol>
+        <li>Rufen Sie den Reiter <code>Gespeicherte Kollektion</code> auf.</li>
+        <li>Prüfen Sie hinterlegte Schmuckstücke, technische Spezifikationen und persönliche Notizen.</li>
+        <li>Exportieren Sie eine strukturierte CSV-Tabelle oder drucken Sie eine Papierübersicht für den Tresenbetrieb.</li>
+        </ol>
+        <h3>Passformkarten für Kunden erstellen und drucken</h3>
+        <ol>
+        <li>Öffnen Sie den Reiter <code>Druckbare Passformkarte</code>.</li>
+        <li>Erfassen Sie <code>Studio / Piercing-Artist:</code>, <code>Kundenname / Kennung:</code> und <code>Piercing-Platzierung:</code>.</li>
+        <li>Kontrollieren Sie <code>Schmuckstärke:</code>, <code>Länge Erstschmuck (Schwellungszugabe):</code> und <code>Länge Folgeschmuck (Downsize-Ziel):</code>.</li>
+        <li>Wählen Sie das <code>Empfohlenes Material:</code> und ergänzen Sie <code>Hinweise &amp; Anweisungen des Piercers:</code>.</li>
+        <li>Klicken Sie auf <code>Passformkarte drucken (Einzelseite)</code>, um einen sauberen Bogen mit 85,60-mm-Skalenprüfbox zu drucken.</li>
+        </ol>
+        </div>
+        <div class="doc-section">
+        <h2>Was dieses Tool nicht leistet</h2>
+        <p>Dieses Programm konzentriert sich streng auf maßstäbliche Größenanzeigen, geometrische Stabberechnungen und die Erstellung von Kundendokumentationen. Für angrenzende Aufgaben stehen folgende Spezialwerkzeuge bereit:</p>
+        <ul>
+        <li>Dehnungszeitpläne für Ohrläppchen und Ruhephasen zwischen Größen: nutzen Sie die Ear Stretching Timeline unter https://poliinternational.com/ear-stretching-timeline/.</li>
+        <li>Detaillierte Pflegeanleitungen und Kochsalzspülungen: nutzen Sie den Aftercare Schedule Generator unter https://poliinternational.com/aftercare-schedule-generator/.</li>
+        <li>Autoklav-Kesseldruck und Dampfsterilisationszyklen: nutzen Sie den Autoclave Calculator unter https://poliinternational.com/autoclave-calculator/.</li>
+        <li>Abstimmung von Piercingnadelstärken und passenden Receiver Tubes: nutzen Sie den Needle Selector unter https://poliinternational.com/needle-selector/.</li>
+        <li>Tattoo-Vorlagen-Skalierung und Hautkrümmungskompensation: nutzen Sie den Stencil Calculator unter https://poliinternational.com/stencil-calculator/.</li>
+        <li>Nicht-körperspezifische Industrie-Drahtnormen: nutzen Sie den Gauge Converter unter https://poliinternational.com/gauge-converter/.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Wo Ihre Daten gespeichert werden</h2>
+        <p>Sämtliche Berechnungen, Bildschirmkalibrierungen, Foto-Anproben und gesicherten Schmuckdaten verbleiben ausschließlich in Ihrer lokalen Browser-Sitzung auf Ihrem Endgerät. Kalibrierungswerte und Kollektionsdaten werden im <code>localStorage</code> des Browsers abgelegt. Hochgeladene Fotos werden rein im lokalen Arbeitsspeicher verarbeitet und zu keinem Zeitpunkt an einen externen Server gesendet. Das Leeren des Browser-Caches oder der Websitedaten löscht die gespeicherten Angaben vollständig. Beim CSV-Export oder Klick auf <code>Passformkarte drucken (Einzelseite)</code> entstehen die Ausgaben unmittelbar aus dem lokalen Gerätespeicher.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Drucken und Exportieren</h2>
+        <p>Die Passformkarte und die Kollektionsverwaltung stellen papierbasierte Studioausgaben bereit. Die druckbare Kundenkarte nutzt eigene Druck-Stylesheets, die störende Navigationselemente und Hintergründe ausblenden, um tintensparend auf DIN A4 oder US Letter zu drucken. Jede gedruckte Karte enthält ein auf 85,60 mm genormtes Kontrollfeld, auf das eine physische Bankkarte gelegt werden kann, um unzulässige Druckerskalierungen sofort zu erkennen. Die Kollektionsansicht exportiert aktive Schmuckstücke als saubere CSV-Tabelle für Lagerhaltung und Nachbestellungen.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Häufig gestellte Fragen</h2>
+        <h3>Wie kalibriere ich meinen Bildschirm für den echten 1:1-Maßstab?</h3>
+        <p>Klicken Sie oben in der Anwendung auf <code>Bildschirm kalibrieren (85,60 mm Karte)</code>. Halten Sie eine physische Bankkarte an den Monitor und verschieben Sie den Regler, bis die Bildschirmkarte deckungsgleich ist. Nach dem Speichern ermittelt das Tool die Pixeldichte Ihres Displays und skaliert alle Vektorgrafiken auf reale Lebensgröße.</p>
+        <h3>Warum ist Erstschmuck länger als der endgültige Folgeschmuck?</h3>
+        <p>Erstschmuck benötigt zusätzliche Nutzlänge, um die posttraumatische Wundschwellung und Wundsekretion ohne schädlichen Gewebedruck aufzufangen. Sobald die Schwellung abgeklungen ist und das Gewebe stabilisiert wurde, setzt der Piercer einen kürzeren Stab ein, um Hängenbleiben und Schiefwachsen zu verhindern.</p>
+        <h3>Wie berechne ich die richtige Barbell-Länge für Augenbraue oder Bauchnabel?</h3>
+        <p>Öffnen Sie den Reiter <code>Gebogene Barbell</code> und wählen Sie die Platzierung im Menü aus. Tragen Sie das mit dem Messschieber ermittelte Gewebemaß ein, um unmittelbar die Schwellungslänge für den Ersteinsatz und das Downsize-Ziel für den verheilten Zustand zu erhalten.</p>
+        <h3>Welche Barbell-Größe wird für ein Industrial-Scaffold-Piercing benötigt?</h3>
+        <p>Rufen Sie den <code>Industrial-Barbell</code> Rechner auf und tragen Sie die gemessene Stichkanaldistanz ein. Das System addiert Kugelüberstände sowie Wundheilungszugaben und empfiehlt die passenden Standardgrößen für die Erstphase und den Dauerbetrieb.</p>
+        <h3>Lädt die virtuelle Anprobe mein Foto auf einen externen Server hoch?</h3>
+        <p>Nein, die virtuelle Foto-Anprobe verarbeitet Ihre Aufnahme vollständig innerhalb Ihres Webbrowsers über clientseitiges JavaScript. Das Bild wird weder an Poli International übertragen noch in einer externen Datenbank gespeichert oder über Netzwerke geteilt.</p>
+        <h3>Welche Materialien werden für frische Piercings verwendet?</h3>
+        <p>Erstschmuck sollte aus einem Material mit dokumentierter Biokompatibilität und nachvollziehbarer Spezifikation bestehen: zum Beispiel Implantattitan nach ASTM F-136, Implantatstahl nach ASTM F-138, massives Gold von einem Lieferanten, der die Legierung angibt, oder BioFlex(R) body jewelry, ein PP-R-Random-Copolymer. Ihr Piercer wählt das Material mit Ihnen aus und sollte den Nachweis dafür zeigen können.</p>
+        <h3>Wie übertrage ich berechnete Maße direkt auf eine druckbare Kundenkarte?</h3>
+        <p>Klicken Sie im Reiter <code>Gebogene Barbell</code> oder <code>Industrial-Barbell</code> auf die Schaltfläche <code>Auf druckbare Passformkarte übertragen</code>. Die Ansicht wechselt automatisch zur Kundenkarte und befüllt Platzierung, Messwert, Drahtstärke, Erstlänge und Folgeschmucklänge selbsttätig.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Grenzen des Tools</h2>
+        <p>Dieses Tool liefert mathematische Berechnungen und grafische Maßstäbe auf Basis standardisierter geometrischer Modelle. Es kann individuelle anatomische Gegebenheiten wie spezifische Gewebestärke, Knorpelwölbungen, Durchblutung oder Einstichwinkel nicht sensorisch erfassen. Sämtliche Ausgaben dienen als beratende Planungshilfe; die endgültige Festlegung von Schmucktyp, Drahtstärke, Länge und Werkstoff muss stets durch den ausführenden Piercing-Artist im Rahmen einer persönlichen Begutachtung vor Ort erfolgen.</p>
+        </div>
+        <div class="doc-section">
+            <h2>Das Werkzeug nutzen</h2>
+            <p><a href="https://poliinternational.com/jewelry-size-visualizer/" target="_top">Oeffnen: Schmuckgrößen-Visualisierer: Benutzerhandbuch</a>. Alles laeuft in Ihrem Browser; nichts, was Sie eingeben, wird uebertragen.</p>
+        </div>
+    </div>
+</body>
+</html>

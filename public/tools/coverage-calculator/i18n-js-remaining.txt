@@ -1,0 +1,74 @@
+# Lines a script must not touch: the English is spliced around a computed
+# value, so the key needs a placeholder and a person has to place it.
+calculator.js:2087  saved
+calculator.js:2322  Session Selected
+calculator.js:2908  ⚠️ + % vs Studio Avg
+calculator.js:2913  ⚡ % vs Studio Avg
+calculator.js:2918  ↗ + % vs Avg
+calculator.js:2918  ↘ % vs Avg
+calculator.js:2923  ✓ Studio Baseline ( %)
+calculator.js:2937  ⚠️ High Saturation Dwell Deviation (+ % vs % Studio Average): Current needle set
+calculator.js:2943  ⚡ Light Wash / Fine Line Mode ( % vs % Studio Average): Minimal pigment depositi
+calculator.js:3084  ↗ + % (Increasing)
+calculator.js:3089  ↘ % (Decreasing)
+calculator.js:3094  → Steady (±0%)
+calculator.js:3349  Applied Factor: x baseline ( mL/sq in • mL/cm² • fl oz/sq in)
+calculator.js:3354  : Delivers ~ mL/in² ( % saturation) at in²/hr.
+calculator.js:3383  ~ % Cartridge Retention
+calculator.js:3421  +0.00 mL Overhead
+calculator.js:3424  Gross: -- mL
+calculator.js:3430  : Baseline speed of sq in/hr ( cm²/hr) with ink density. Enter an area above to 
+calculator.js:4820  Total Coverage: sq in ( cm²)\n
+calculator.js:4821  Working Time: \n
+calculator.js:4822  Coverage Rate: sq in/hr\n
+calculator.js:4825  Total Time: \n
+calculator.js:4826  Sessions Needed: \n
+calculator.js:4827  Per Session Duration: \n
+calculator.js:4828  Timeline: \n
+calculator.js:4831  Total Ink: \n
+calculator.js:4832  Per Color: \n
+calculator.js:4833  Ink Caps: \n
+calculator.js:4834  Estimated Cost: \n
+calculator.js:4837  Suggested Price: \n
+calculator.js:4838  Price Range: \n
+calculator.js:4839  Deposit: \n
+calculator.js:4840  Per Square Inch: \n
+calculator.js:4996  Logged Breaks:
+calculator.js:5026  hrs ( )
+calculator.js:5463  /100 • Optimal Health
+calculator.js:5469  /100 • Moderate Workload Risk
+calculator.js:5475  /100 • High Fatigue & Twitch Risk
+calculator.js:5617  🦾 Muscle Group:
+calculator.js:5624  Skin Tension:
+calculator.js:5627  💡 Ergonomic Tip:
+calculator.js:5785  break(s) logged
+calculator.js:5982  matching ink
+calculator.js:6003  Selected " "
+calculator.js:6143  Bottle Low (< mL)
+calculator.js:6354  Vivid Colors ( %)
+calculator.js:6795  🚨 CRITICAL LOW
+calculator.js:7800  🎯 Milestone Reached ( h)!
+calculator.js:8565  hours
+calculator.js:8651  hrs
+calculator.js:8734  \nTime Window: \n\n
+
+# Literal not found on the recorded line:
+calculator.js:1785  + data.priceMin.toFixed(0) +
+calculator.js:2110  No saved calculations yet. Perform a calculation below to auto-save your session
+calculator.js:3312  Low (1.5 / 5) • Superficial Dermal Dwell
+calculator.js:3320  Moderate (3 / 5) • Mid-Dermis Dwell
+calculator.js:3328  Intense (4.8 / 5) • Dense Multi-Pass Trauma
+calculator.js:3532  )[0].trim() : (prevState.needleValue ||
+calculator.js:3685  )[0].trim() :
+calculator.js:3763  )[0].trim() :
+calculator.js:3907  )[0].trim() :
+calculator.js:4031  )[0].trim() :
+calculator.js:4141  )[0].trim() :
+calculator.js:4235  )[0].trim() :
+calculator.js:4503  )[0].trim() :
+calculator.js:5655  Selected:
+calculator.js:5679  Selected:
+calculator.js:6882  No upcoming appointments scheduled.
+calculator.js:6883  Your appointment schedule is clear. Add an appointment above to plan ink volume 
+calculator.js:7760  No session goals set. Add a milestone above!
+calculator.js:8011  No historical session records found. Finish a session using the Timer widget or 

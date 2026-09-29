@@ -1,0 +1,113 @@
+<svg width="300" height="400" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- White background -->
+  <rect width="300" height="400" fill="white"/>
+
+  <!-- Skin layers cross-section -->
+
+  <!-- Epidermis (top layer - lightest) -->
+  <rect x="50" y="80" width="200" height="40" fill="#F3E5D8" stroke="#B76E79" stroke-width="2"/>
+  <text x="260" y="105" font-family="Arial, sans-serif" font-size="10" fill="#B76E79">Epidermis</text>
+
+  <!-- Dermis (middle layer - medium) -->
+  <rect x="50" y="120" width="200" height="60" fill="#E8D4C3" stroke="#0EA5E9" stroke-width="2"/>
+  <text x="260" y="155" font-family="Arial, sans-serif" font-size="10" fill="#0EA5E9">Dermis</text>
+
+  <!-- Hypodermis/Subcutaneous (bottom layer - darkest) -->
+  <rect x="50" y="180" width="200" height="50" fill="#D9C4B0" stroke="#6B7280" stroke-width="2"/>
+  <text x="260" y="210" font-family="Arial, sans-serif" font-size="10" fill="#6B7280">Subcutaneous</text>
+
+  <!-- Hair follicle detail -->
+  <ellipse cx="80" cy="110" rx="3" ry="15" fill="#6B7280" opacity="0.4"/>
+  <line x1="80" y1="80" x2="80" y2="95" stroke="#6B7280" stroke-width="1.5"/>
+
+  <!-- Blood vessels in dermis -->
+  <path d="M 70 140 Q 90 145 110 140 Q 130 135 150 140"
+        fill="none" stroke="#EF4444" stroke-width="2" opacity="0.4"/>
+  <path d="M 160 165 Q 180 160 200 165"
+        fill="none" stroke="#EF4444" stroke-width="2" opacity="0.4"/>
+
+  <!-- Fat cells in subcutaneous -->
+  <g opacity="0.3">
+    <circle cx="80" cy="205" r="8" fill="#F59E0B"/>
+    <circle cx="100" cy="210" r="7" fill="#F59E0B"/>
+    <circle cx="120" cy="205" r="9" fill="#F59E0B"/>
+    <circle cx="145" cy="208" r="8" fill="#F59E0B"/>
+    <circle cx="170" cy="205" r="7" fill="#F59E0B"/>
+    <circle cx="190" cy="210" r="8" fill="#F59E0B"/>
+  </g>
+
+  <!-- Surface Bar (90 degree bends) -->
+  <g stroke="#B76E79" stroke-width="3" fill="none">
+    <!-- Left side -->
+    <line x1="110" y1="70" x2="110" y2="130"/>
+    <line x1="110" y1="130" x2="140" y2="130"/>
+    <!-- Right side -->
+    <line x1="160" y1="130" x2="190" y2="130"/>
+    <line x1="190" y1="130" x2="190" y2="70"/>
+  </g>
+
+  <!-- Surface bar balls -->
+  <circle cx="110" cy="70" r="7" fill="#0EA5E9" stroke="#0EA5E9" stroke-width="1"/>
+  <circle cx="190" cy="70" r="7" fill="#0EA5E9" stroke="#0EA5E9" stroke-width="1"/>
+
+  <!-- Dermal Anchor (separate example) -->
+  <g transform="translate(50, 260)">
+    <!-- Skin layers (smaller) -->
+    <rect x="0" y="0" width="80" height="15" fill="#F3E5D8" stroke="#B76E79" stroke-width="1"/>
+    <rect x="0" y="15" width="80" height="25" fill="#E8D4C3" stroke="#0EA5E9" stroke-width="1"/>
+    <rect x="0" y="40" width="80" height="20" fill="#D9C4B0" stroke="#6B7280" stroke-width="1"/>
+
+    <!-- Dermal anchor base (under skin) -->
+    <rect x="25" y="30" width="30" height="3" fill="#6B7280"/>
+    <circle cx="30" cy="28" r="3" fill="#6B7280"/>
+    <circle cx="50" cy="28" r="3" fill="#6B7280"/>
+
+    <!-- Post through skin -->
+    <rect x="38" y="10" width="4" height="25" fill="#6B7280"/>
+
+    <!-- Top jewelry -->
+    <circle cx="40" cy="5" r="6" fill="#B76E79"/>
+    <circle cx="40" cy="5" r="3" fill="#0EA5E9"/>
+  </g>
+
+  <!-- Dermal anchor diagram labels -->
+  <text x="95" y="273" font-family="Arial, sans-serif" font-size="9" fill="#6B7280">Dermal Anchor</text>
+  <text x="95" y="285" font-family="Arial, sans-serif" font-size="8" fill="#9CA3AF">Base sits in</text>
+  <text x="95" y="295" font-family="Arial, sans-serif" font-size="8" fill="#9CA3AF">dermis layer</text>
+
+  <!-- Microdermal example -->
+  <g transform="translate(170, 260)">
+    <!-- Cross section view -->
+    <rect x="0" y="0" width="80" height="15" fill="#F3E5D8" stroke="#B76E79" stroke-width="1"/>
+    <rect x="0" y="15" width="80" height="25" fill="#E8D4C3" stroke="#0EA5E9" stroke-width="1"/>
+
+    <!-- Anchor plate -->
+    <path d="M 30 30 L 35 35 L 45 35 L 50 30 Z" fill="#6B7280"/>
+    <circle cx="35" cy="33" r="2" fill="#E8D4C3"/>
+    <circle cx="45" cy="33" r="2" fill="#E8D4C3"/>
+
+    <!-- Post -->
+    <rect x="38" y="10" width="4" height="25" fill="#6B7280"/>
+
+    <!-- Gem top -->
+    <circle cx="40" cy="5" r="6" fill="#0EA5E9"/>
+  </g>
+
+  <text x="170" y="305" font-family="Arial, sans-serif" font-size="8" fill="#9CA3AF">Microdermal</text>
+
+  <!-- Labels for main diagram -->
+  <text x="150" y="25" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1F2937" text-anchor="middle">SURFACE PIERCING</text>
+  <text x="150" y="45" font-family="Arial, sans-serif" font-size="11" fill="#6B7280" text-anchor="middle">Cross-Section View</text>
+
+  <!-- Surface bar label -->
+  <text x="105" y="65" font-family="Arial, sans-serif" font-size="9" fill="#0EA5E9">Ball</text>
+  <text x="185" y="65" font-family="Arial, sans-serif" font-size="9" fill="#0EA5E9">Ball</text>
+  <text x="150" y="145" font-family="Arial, sans-serif" font-size="9" fill="#B76E79" text-anchor="middle">Surface Bar</text>
+  <text x="150" y="156" font-family="Arial, sans-serif" font-size="8" fill="#B76E79" text-anchor="middle">(90° bends)</text>
+
+  <!-- Info box -->
+  <rect x="30" y="340" width="240" height="50" rx="8" fill="#F3F4F6" stroke="#6B7280" stroke-width="1"/>
+  <text x="150" y="358" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#1F2937" text-anchor="middle">Surface Bar Standard</text>
+  <text x="150" y="373" font-family="Arial, sans-serif" font-size="9" fill="#6B7280" text-anchor="middle">Gauge: 12g-14g • Distance: 1/2"-3/4"</text>
+  <text x="150" y="385" font-family="Arial, sans-serif" font-size="8" fill="#F59E0B" text-anchor="middle">⚠ High rejection risk - proper angle critical</text>
+</svg>

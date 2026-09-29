@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#b76e79">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Jewelry Size Visualizer | Poli International">
+    <meta property="og:description" content="Visualize and compare body jewelry sizes in real-time at 1:1 scale on your screen.">
+    <meta property="og:url" content="https://poliinternational.com/jewelry-size-visualizer/">
+    <meta property="og:site_name" content="Poli International">
+    <meta property="og:image" content="https://poliinternational.com/wp-content/uploads/poli-tools-preview.jpg">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Jewelry Size Visualizer | Poli International">
+    <meta name="twitter:description" content="Visualize and compare body jewelry sizes in real-time at 1:1 scale on your screen.">
+    <meta name="twitter:image" content="https://poliinternational.com/wp-content/uploads/poli-tools-preview.jpg">
+    <meta property="og:image" content="https://poliinternational.com/wp-content/uploads/poli-tools-preview.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Body Piercing Jewelry Size Visualizer - See actual jewelry sizes at 1:1 scale, compare body piercing jewelry, and get professional fitting recommendations with both imperial and metric measurements.">
+    <title>Body Piercing Jewelry Size Visualizer & Fitting Guide | Poli International</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/tools/jewelry-size-visualizer/css/style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='38' stroke='%23b76e79' stroke-width='8' fill='none'/%3E%3Ccircle cx='50' cy='20' r='10' fill='%23b76e79'/%3E%3C/svg%3E">
+<script type='application/ld+json'>
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Body Jewelry Size Visualizer",
+  "url": "https://poliinternational.com/jewelry-size-visualizer/",
+  "description": "Visualize how different jewelry sizes look on the body",
+  "inLanguage": ["en", "fr", "de", "es", "it", "nl", "pt"],
+    "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "codeRepository": "https://github.com/poli-international/jewelry-size-visualizer",
+  "author": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "https://poliinternational.com",
+    "sameAs": [
+      "https://github.com/poli-international"
+    ]
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "https://poliinternational.com"
+  },
+  "maintainer": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "https://poliinternational.com"
+  },
+  "dateModified": "2026-02-07",
+  "license": "https://opensource.org/licenses/MIT",
+  "isAccessibleForFree": true
+}
+</script>
+
+<style>
+/* Breadcrumb Styles */
+.breadcrumb-nav {
+    padding: 1rem 0;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.breadcrumb-nav a {
+    color: #0693e3;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.breadcrumb-nav a:hover {
+    color: #0575be;
+    text-decoration: underline;
+}
+
+.breadcrumb-nav span {
+    color: #666;
+    margin: 0 0.5rem;
+}
+
+.breadcrumb-nav strong {
+    color: #333;
+}
+
+/* Dark mode breadcrumb */
+body.dark-mode .breadcrumb-nav span {
+    color: #999;
+}
+
+body.dark-mode .breadcrumb-nav a {
+    color: #60a5fa;
+}
+
+body.dark-mode .breadcrumb-nav strong {
+    color: #e0e0e0;
+}
+</style>
+  <link rel="stylesheet" href="/tools/shared/theme.css">
+  <script src="/js/input-guards.js"></script>
+  <link rel="stylesheet" href="/tools/shared/print.css" media="print">
+  <link rel="stylesheet" href="/tools/shared/a11y.css">
+</head>
+<body>
+<nav class="breadcrumb-nav" aria-label="Breadcrumb">
+    <a href="https://poliinternational.com/" data-i18n="breadcrumb.home">Home</a>
+    <span>›</span>
+    <a href="https://poliinternational.com/tools/" data-i18n="breadcrumb.tools">Tools</a>
+    <span>›</span>
+    <a href="https://poliinternational.com/tools/#piercing-tools" data-i18n="breadcrumb.piercingTools">Piercing Tools</a>
+    <span>›</span>
+    <strong data-i18n="breadcrumb.visualizer">Jewelry Size Visualizer</strong>
+</nav>
+
+<!-- IFRAME DETECTION - RUNS IMMEDIATELY -->
+<script>
+(function() {
+    'use strict';
+
+    // Detect if we're in an iframe
+    var isInIframe = (window.self !== window.top);
+
+    if (isInIframe) {
+        console.log('[IFRAME MODE] Detected - cleaning up...');
+
+        // Add style to HEAD immediately to prevent loading/showing elements
+        var style = document.createElement('style');
+        style.textContent = `
+            .site-header,
+            .tool-title-section,
+            header,
+            footer,
+            .footer,
+            .community-feedback,
+            .feedback-section,
+            .newsletter-section,
+            .email-signup,
+            .get-notified,
+            .social-share {
+                display: none !important;
+                visibility: hidden !important;
+            }
+            .tool-utility-bar {
+                display: block !important;
+                position: sticky !important;
+                top: 0 !important;
+                z-index: 95 !important;
+            }
+            .nav-tabs {
+                top: 48px !important;
+                position: sticky !important;
+            }
+            body {
+                padding-top: 0 !important;
+                margin-top: 0 !important;
+            }
+            .main, main {
+                padding-top: 1rem !important;
+                margin-top: 0 !important;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Also remove from DOM when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            var selectorsToRemove = [
+                '.site-header',
+                '.tool-title-section',
+                'header:not(.visualizer-header):not(.gauge-converter__header):not(.cbb-header)',
+                'footer',
+                '.footer',
+                '.community-feedback',
+                '.feedback-section',
+                '.newsletter-section',
+                '.email-signup',
+                '.get-notified',
+                '.social-share'
+            ];
+
+            selectorsToRemove.forEach(function(selector) {
+                var elements = document.querySelectorAll(selector);
+                elements.forEach(function(el) {
+                    if (el && el.parentNode) {
+                        el.parentNode.removeChild(el);
+                        console.log('[IFRAME MODE] Removed:', selector);
+                    }
+                });
+            });
+
+            // Fix nav and utility bar positioning
+            var utilityBar = document.querySelector('.tool-utility-bar');
+            var navTabs = document.querySelector('.nav-tabs');
+            if (utilityBar) {
+                utilityBar.style.top = '0';
+                utilityBar.style.position = 'sticky';
+            }
+            if (navTabs) {
+                var barHeight = utilityBar ? (utilityBar.offsetHeight || 48) : 0;
+                navTabs.style.top = barHeight + 'px';
+                navTabs.style.position = 'sticky';
+                console.log('[IFRAME MODE] Fixed nav position below utility bar:', barHeight);
+            }
+
+            console.log('[IFRAME MODE] Cleanup complete!');
+        });
+    }
+})();
+</script>
+
+    <!-- Top Navigation Header (matching homepage style) -->
+    <header class="site-header">
+        <div class="site-header__container">
+            <a href="https://poliinternational.com/" class="site-header__logo-link">
+                <img src="/tools/jewelry-size-visualizer/images/Poli-International-Co.webp" alt="Poli International" class="site-header__logo">
+            </a>
+            <nav class="site-nav">
+                <a href="https://poliinternational.com/" class="site-nav__link" data-i18n="nav.home">HOME</a>
+                <a href="https://poliinternational.com/who-we-are/" class="site-nav__link" data-i18n="nav.about">ABOUT</a>
+                <a href="https://poliinternational.com/our-creation/" class="site-nav__link" data-i18n="nav.innovation">INNOVATION</a>
+                <a href="https://poliinternational.com/they-trust-us/" class="site-nav__link" data-i18n="nav.trust">They trust us!</a>
+                <a href="https://poliinternational.com/contact-us/" class="site-nav__link" data-i18n="nav.contact">CONTACT</a>
+            </nav>
+            <div class="lang-selector-wrapper">
+                <label for="lang-select" style="font-size: 0.9rem; color: var(--text-secondary); cursor: pointer;" title="Available languages: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL)" data-i18n-title="common.langTooltip">🌐</label>
+                <select id="lang-select" class="lang-select" aria-label="Select Language" data-i18n-aria-label="common.language" onchange="if(window.i18n) window.i18n.setLocale(this.value)">
+                    <option value="en" selected>English</option>
+                    <option value="de">Deutsch</option>
+                    <option value="fr">Français</option>
+                    <option value="es">Español</option>
+                    <option value="it">Italiano</option>
+                    <option value="pt">Português</option>
+                    <option value="nl">Nederlands</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tool Title Section -->
+    <section class="tool-title-section">
+        <div class="container">
+            <h1 class="tool-title" data-i18n="app.title">Body Piercing Jewelry Size Visualizer & Fitting Guide</h1>
+<!-- GitHub CTA -->
+<div class='github-cta' style='margin: 1.5rem 0;'>
+  <a href='https://github.com/poli-international/jewelry-size-visualizer' 
+     target='_blank' rel='noopener noreferrer' class='btn-github' 
+     style='display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 500;'>
+    <svg width='20' height='20' viewBox='0 0 16 16' fill='currentColor'>
+      <path d='M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z'/>
+    </svg>
+    <span data-i18n="nav.github">View on GitHub</span>
+  </a>
+</div>
+<!-- GitHub Stats -->
+<div class='github-stats' style='display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0;'>
+  <span class="cbb-badge" style="margin-bottom: 0;" data-i18n="nav.githubBadge">★ Open Source on GitHub</span>
+</div>
+
+            <p class="tool-subtitle" data-i18n="app.subtitle">See actual piercing jewelry sizes at 1:1 scale • Virtual Try-On • Professional Fitting Guide</p>
+        </div>
+    </section>
+
+    <!-- Tool Utility & Language Switcher Bar -->
+    <div class="tool-utility-bar" id="tool-utility-bar">
+        <div class="container tool-utility-bar__inner">
+            <div class="tool-utility-bar__left">
+                <span class="tool-utility-bar__brand">
+                    <span class="tool-utility-bar__icon" aria-hidden="true">💎</span>
+                    <strong class="tool-utility-bar__title" data-i18n="app.title">Jewelry Size Visualizer</strong>
+                </span>
+                <span class="tool-utility-bar__badge tool-utility-bar__badge--calibrated" id="toolbar-scale-badge" title="Screen calibration status — click to calibrate" data-i18n-title="calibration.indicator.titleCalibrated">
+                    <span class="scale-dot" aria-hidden="true">●</span>
+                    <span id="toolbar-scale-text" data-i18n="common.calibrated">Calibrated (1:1 Active)</span>
+                </span>
+            </div>
+            <div class="tool-utility-bar__right">
+                <!-- Calibrate Display Button -->
+                <button type="button" class="btn-utility" id="toolbar-calibrate-btn" title="Calibrate screen with 85.60 mm standard card" data-i18n-title="calibration.btnTooltip">
+                    <span aria-hidden="true">📏</span>
+                    <span data-i18n="calibration.banner.btn">Calibrate Screen (85.60 mm Card)</span>
+                </button>
+
+                <!-- Dedicated Language Switcher -->
+                <div class="lang-switcher-container" id="tool-lang-container">
+                    <label for="tool-lang-select" class="lang-switcher-label" id="tool-lang-label" title="Available languages: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL)" data-i18n-title="common.langTooltip">
+                        <span class="lang-switcher-icon" id="lang-switcher-icon" aria-hidden="true" title="Available languages: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL)" data-i18n-title="common.langTooltip">🌐</span>
+                        <span class="lang-label-text" data-i18n="common.language">Language</span>:
+                    </label>
+                    <select id="tool-lang-select" class="lang-select" aria-label="Select Language" data-i18n-aria-label="common.language">
+                        <option value="en">English (EN)</option>
+                        <option value="de">Deutsch (DE)</option>
+                        <option value="fr">Français (FR)</option>
+                        <option value="es">Español (ES)</option>
+                        <option value="it">Italiano (IT)</option>
+                        <option value="pt">Português (PT)</option>
+                        <option value="nl">Nederlands (NL)</option>
+                    </select>
+                    <!-- Quick Pill buttons for 1-click switching on desktop -->
+                    <div class="lang-pills-group" role="group" aria-label="Quick language switch">
+                        <button type="button" class="lang-btn active" data-lang="en" title="English" aria-pressed="true">EN</button>
+                        <button type="button" class="lang-btn" data-lang="de" title="Deutsch" aria-pressed="false">DE</button>
+                        <button type="button" class="lang-btn" data-lang="fr" title="Français" aria-pressed="false">FR</button>
+                        <button type="button" class="lang-btn" data-lang="es" title="Español" aria-pressed="false">ES</button>
+                        <button type="button" class="lang-btn" data-lang="it" title="Italiano" aria-pressed="false">IT</button>
+                        <button type="button" class="lang-btn" data-lang="pt" title="Português" aria-pressed="false">PT</button>
+                        <button type="button" class="lang-btn" data-lang="nl" title="Nederlands" aria-pressed="false">NL</button>
+                    </div>
+                </div>
+
+                <!-- Theme Toggle Button -->
+                <button type="button" class="btn-utility btn-utility--icon" id="dark-mode-toggle" aria-label="Toggle theme" title="Toggle Light/Dark Theme" data-i18n-title="theme.toggleTitle">
+                    <span class="dark-mode-icon" aria-hidden="true">🌓</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Tabs -->
+    <nav class="nav-tabs">
+        <div class="container">
+            <button class="nav-tab active" data-tab="visualizer">
+                <span class="nav-tab__icon">👁️</span>
+                <span class="nav-tab__text" data-i18n="nav.visualizer">1:1 Visualizer</span>
+            </button>
+            <button class="nav-tab" data-tab="curved-barbell" id="tab-btn-curved-barbell">
+                <span class="nav-tab__icon">📐</span>
+                <span class="nav-tab__text" data-i18n="nav.curvedBarbell">Curved Barbell</span>
+            </button>
+            <button class="nav-tab" data-tab="industrial-barbell" id="tab-btn-industrial-barbell">
+                <span class="nav-tab__icon">📏</span>
+                <span class="nav-tab__text" data-i18n="nav.industrialBarbell">Industrial Barbell</span>
+            </button>
+            <button class="nav-tab" data-tab="try-on">
+                <span class="nav-tab__icon">📸</span>
+                <span class="nav-tab__text" data-i18n="nav.tryOn">Virtual Try-On</span>
+            </button>
+            <button class="nav-tab" data-tab="compare">
+                <span class="nav-tab__icon">⚖️</span>
+                <span class="nav-tab__text" data-i18n="nav.compare">Size Compare</span>
+            </button>
+            <button class="nav-tab" data-tab="anatomy">
+                <span class="nav-tab__icon">🎯</span>
+                <span class="nav-tab__text" data-i18n="nav.anatomy">Body Guide</span>
+            </button>
+            <button class="nav-tab" data-tab="photo-measure" id="tab-btn-photo-measure">
+                <span class="nav-tab__icon">📷</span>
+                <span class="nav-tab__text" data-i18n="nav.photoMeasure">Photo Sizing</span>
+            </button>
+            <button class="nav-tab" data-tab="collection" id="tab-btn-collection">
+                <span class="nav-tab__icon">💎</span>
+                <span class="nav-tab__text" data-i18n="nav.collection">Saved Collection</span>
+            </button>
+            <button class="nav-tab" data-tab="fit-card" id="tab-btn-fit-card">
+                <span class="nav-tab__icon">🖨️</span>
+                <span class="nav-tab__text" data-i18n="nav.fitCard">Printable Fit Card</span>
+            </button>
+            <!-- Clinical & Material Matrices tab hidden 2026-09-26 until its claims are rewritten and translated -->
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="main">
+        <div class="container">
+
+            <!-- Tab 1: Interactive Visualizer -->
+            <section id="tab-visualizer" class="tab-content active">
+                <div class="section-header">
+                    <h2 class="section-title" data-i18n="visualizer.title">Interactive Jewelry Visualizer</h2>
+                    <p class="section-description" data-i18n="visualizer.subtitle">View jewelry at true 1:1 scale on your screen. All measurements shown in both imperial and metric.</p>
+                </div>
+
+                <!-- Calibration Banner -->
+                <div class="calibration-banner" id="calibration-banner">
+                    <div class="calibration-banner__content">
+                        <span class="calibration-banner__icon">⚠️</span>
+                        <div class="calibration-banner__text" data-i18n="calibration.requiredBanner">
+                            <strong>Calibration Required:</strong> For accurate 1:1 scale display, please calibrate your screen first.
+                        </div>
+                        <button class="btn btn--primary btn--small" id="calibrate-button" data-i18n="calibration.calibrateNow">Calibrate Now</button>
+                    </div>
+                </div>
+
+                <!-- External Ear Stretching Timeline Link Notice -->
+                <div class="external-tool-notice">
+                    <div class="external-tool-notice__text">
+                        <span data-i18n="app.stretchingNotice">For stretching schedules and step-by-step gauge sizes, see the Ear Stretching Timeline.</span>
+                    </div>
+                    <a href="https://poliinternational.com/ear-stretching-timeline/" target="_top" class="external-tool-notice__btn" data-i18n="app.openStretchingTool">
+                        Ear Stretching Timeline →
+                    </a>
+                </div>
+
+                <!-- Filter Controls -->
+                <div class="filter-panel">
+                    <div class="filter-group" style="grid-column: 1 / -1;">
+                        <p data-i18n="visualizer.filter.tip" style="font-size: 0.875rem; color: var(--text-tertiary); margin-bottom: 0.5rem;">
+                            <strong>💡 Tip:</strong> Showing popular items by default for faster loading. Use filters below to see all items.
+                        </p>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-category" class="filter-label" data-i18n="visualizer.filter.category">Category:</label>
+                        <select id="filter-category" class="filter-select">
+                            <option value="all" data-i18n="visualizer.filter.allJewelry">All Jewelry</option>
+                            <option value="rings" data-i18n="visualizer.filter.rings">Rings</option>
+                            <option value="labrets" data-i18n="visualizer.filter.labrets">Labrets & Studs</option>
+                            <option value="barbells" data-i18n="visualizer.filter.barbells">Barbells</option>
+                            <option value="circular" data-i18n="visualizer.filter.circular">Circular Barbells & Horseshoes</option>
+                            <option value="captive" data-i18n="visualizer.filter.captive">Ball Closure Rings (BCR)</option>
+                            <option value="clickers" data-i18n="visualizer.filter.clickers">Clickers & Seamless</option>
+                            <option value="plugs" data-i18n="visualizer.filter.plugs">Plugs & Tunnels</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filter-gauge" class="filter-label" data-i18n="visualizer.spec.gaugeLabel">Gauge:</label>
+                        <select id="filter-gauge" class="filter-select">
+                            <option value="all" data-i18n="matrices.filterAllGauges">All Gauges</option>
+                            <option value="20g">20g (0.8mm)</option>
+                            <option value="18g">18g (1.0mm)</option>
+                            <option value="16g">16g (1.2mm)</option>
+                            <option value="14g">14g (1.6mm)</option>
+                            <option value="12g">12g (2.0mm)</option>
+                            <option value="10g">10g (2.4mm)</option>
+                            <option value="8g">8g (3.2mm)</option>
+                            <option value="6g">6g (4.0mm)</option>
+                            <option value="4g">4g (5.0mm)</option>
+                            <option value="2g">2g (6.0mm)</option>
+                            <option value="0g">0g (8.0mm)</option>
+                            <option value="00g">00g (10.0mm)</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filter-material" class="filter-label" data-i18n="visualizer.filter.materialLabel">Material:</label>
+                        <select id="filter-material" class="filter-select">
+                            <option value="all" data-i18n="visualizer.filter.allMaterialsOpt">All Materials</option>
+                            <option value="titanium" data-i18n="material.titanium">Implant-Grade Titanium</option>
+                            <option value="steel" data-i18n="material.steel">Surgical Steel</option>
+                            <option value="gold" data-i18n="material.gold">14k/18k Gold</option>
+                            <option value="niobium" data-i18n="material.niobium">Niobium</option>
+                            <option value="glass" data-i18n="material.glass">Glass</option>
+                            <option value="stone" data-i18n="material.stone">Stone</option>
+                            <option value="acrylic" data-i18n="material.acrylic">Acrylic</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filter-location" class="filter-label" data-i18n="visualizer.filter.locationLabel">Body Location:</label>
+                        <select id="filter-location" class="filter-select">
+                            <option value="all" data-i18n="visualizer.filter.allLocationsOpt">All Locations</option>
+                            <option value="ear" data-i18n="visualizer.filter.ear">Ear</option>
+                            <option value="nose" data-i18n="visualizer.filter.nose">Nose</option>
+                            <option value="lip" data-i18n="visualizer.filter.lip">Lip</option>
+                            <option value="tongue" data-i18n="visualizer.filter.tongue">Tongue</option>
+                            <option value="eyebrow" data-i18n="visualizer.filter.eyebrow">Eyebrow</option>
+                            <option value="navel" data-i18n="visualizer.filter.navel">Navel</option>
+                            <option value="nipple" data-i18n="visualizer.filter.nipple">Nipple</option>
+                            <option value="surface" data-i18n="visualizer.filter.surface">Surface</option>
+                            <option value="genital" data-i18n="visualizer.filter.genitalAll">Genital (All)</option>
+                            <option value="male-genital" data-i18n="visualizer.filter.maleGenital">Male Genital</option>
+                            <option value="female-genital" data-i18n="visualizer.filter.femaleGenital">Female Genital</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Jewelry Gallery -->
+                <div class="jewelry-gallery" id="jewelry-gallery">
+                    <!-- Jewelry items will be dynamically populated by JavaScript -->
+                    <div class="gallery-loading">
+                        
+                        <p data-i18n="visualizer.loading">Loading jewelry database...</p>
+                    </div>
+                </div>
+
+                <!-- Selected Jewelry Detail View -->
+                <div class="jewelry-detail" id="jewelry-detail" style="display: none;">
+                    <div class="jewelry-detail__close" id="detail-close">✕</div>
+                    <div class="jewelry-detail__content">
+                        <div class="jewelry-detail__visual">
+                            <h3 class="jewelry-detail__title" data-i18n="visualizer.preview.scaleTitle">1:1 Scale Preview</h3>
+                            <div class="jewelry-detail__canvas-wrapper">
+                                <canvas id="jewelry-canvas" class="jewelry-detail__canvas"></canvas>
+                            </div>
+                            <div class="jewelry-detail__ruler" id="detail-ruler">
+                                <!-- Ruler markings for scale reference -->
+                            </div>
+                        </div>
+                        <div class="jewelry-detail__info">
+                            <h2 id="detail-name" data-i18n="visualizer.preview.defaultName">Jewelry Name</h2>
+                            <div class="jewelry-detail__specs">
+                                <div class="spec-row">
+                                    <span class="spec-label" data-i18n="visualizer.spec.gaugeLabel">Gauge:</span>
+                                    <span class="spec-value" id="detail-gauge">--</span>
+                                </div>
+                                <div class="spec-row">
+                                    <span class="spec-label" data-i18n="visualizer.spec.sizeLabel">Diameter/Length:</span>
+                                    <span class="spec-value" id="detail-size">--</span>
+                                </div>
+                                <div class="spec-row">
+                                    <span class="spec-label" data-i18n="visualizer.filter.materialLabel">Material:</span>
+                                    <span class="spec-value" id="detail-material">--</span>
+                                </div>
+                                <div class="spec-row">
+                                    <span class="spec-label" data-i18n="visualizer.spec.recommendedLabel">Recommended For:</span>
+                                    <span class="spec-value" id="detail-locations">--</span>
+                                </div>
+                            </div>
+                            <div class="jewelry-detail__comparisons">
+                                <h4 data-i18n="visualizer.comparisons.title">Size Comparisons</h4>
+                                <ul id="detail-comparisons">
+                                    <!-- Size comparisons will be populated by JavaScript -->
+                                </ul>
+                            </div>
+                            <div class="jewelry-detail__actions">
+                                <button class="btn btn--primary" id="try-on-button" data-i18n="visualizer.detail.tryOn">Try On Virtual</button>
+                                <button class="btn btn--secondary" id="compare-button" data-i18n="visualizer.detail.addToCompare">Add to Compare</button>
+                                <button class="btn btn--secondary" id="save-button" data-i18n="visualizer.detail.saveToCollection">Save to Collection</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab 2: Virtual Try-On -->
+            <section id="tab-try-on" class="tab-content">
+                <div class="section-header">
+                    <h2 class="section-title" data-i18n="tryOn.title">Virtual Try-On</h2>
+                    <p class="section-description" data-i18n="tryOn.desc">Upload a photo and see how jewelry looks on you with accurate size overlay.</p>
+                </div>
+
+                <!-- Photo Upload Area -->
+                <div class="upload-section">
+                    <div class="upload-area" id="upload-area">
+                        <div class="upload-area__content">
+                            <div class="upload-area__icon">📷</div>
+                            <h3 class="upload-area__title" data-i18n="tryon.upload.title">Upload Your Photo</h3>
+                            <p class="upload-area__text" data-i18n="tryon.upload.dragText">Drag & drop or click to select</p>
+                            <p class="upload-area__hint" data-i18n="tryon.upload.tips">For best results: Clear, well-lit photos • Close-up of piercing area • Minimal jewelry</p>
+                            <input type="file" id="photo-upload" accept="image/*" class="upload-area__input">
+                            <input type="file" id="camera-upload" accept="image/*" capture="user" style="display:none;">
+                            <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
+                                <button class="btn btn--primary" id="upload-button" data-i18n="tryon.btn.choosePhoto">Choose Photo</button>
+                                <button class="btn btn--secondary" id="camera-button" data-i18n="tryon.btn.takePhoto">📸 Take Photo / Selfie</button>
+                                <button class="btn btn--outline" id="sample-photo-btn" data-i18n="tryon.btn.sampleEar">👂 Use Sample Anatomical Ear</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Try-On Canvas (shown after photo upload) -->
+                <div class="try-on-workspace" id="try-on-workspace" style="display: none;">
+                    <div class="try-on-controls">
+                        <h3 class="try-on-controls__title" data-i18n="tryon.controls.calibration">Calibration & Placement</h3>
+
+                        <div class="control-group">
+                            <label class="control-label">
+                                <span class="control-label__text" data-i18n="tryon.controls.scaleLabel">Scale Calibration:</span>
+                                <span class="control-label__hint" data-i18n="tryon.controls.scaleAdjust">Adjust to match real size</span>
+                            </label>
+                            <div class="control-input">
+                                <button class="btn-icon" id="scale-down">-</button>
+                                <input type="range" id="scale-slider" min="50" max="150" value="100" class="slider">
+                                <button class="btn-icon" id="scale-up">+</button>
+                                <span class="control-value" id="scale-value">100%</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">
+                                <span class="control-label__text" data-i18n="tryon.controls.rotationLabel">Rotation:</span>
+                            </label>
+                            <div class="control-input">
+                                <button class="btn-icon" id="rotate-left">↶</button>
+                                <input type="range" id="rotation-slider" min="0" max="360" value="0" class="slider">
+                                <button class="btn-icon" id="rotate-right">↷</button>
+                                <span class="control-value" id="rotation-value">0°</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">
+                                <span class="control-label__text" data-i18n="tryon.controls.opacityLabel">Opacity:</span>
+                            </label>
+                            <div class="control-input">
+                                <input type="range" id="opacity-slider" min="10" max="100" value="100" class="slider">
+                                <span class="control-value" id="opacity-value">100%</span>
+                            </div>
+                        </div>
+
+                        <div class="control-actions">
+                            <button class="btn btn--primary" id="save-try-on" data-i18n="tryon.btn.saveResult">Save Result</button>
+                            <button class="btn btn--secondary" id="new-photo" data-i18n="tryon.btn.newPhoto">New Photo</button>
+                            <button class="btn btn--secondary" id="share-try-on" data-i18n="tryon.btn.share">Share</button>
+                        </div>
+                    </div>
+
+                    <div class="try-on-canvas-container">
+                        <canvas id="try-on-canvas" class="try-on-canvas"></canvas>
+                        <div class="try-on-info">
+                            <p class="try-on-info__text" data-i18n="tryon.instructions">Click and drag jewelry to position • Use controls to adjust size and rotation</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab 3: Size Comparison Tool -->
+            <section id="tab-compare" class="tab-content">
+                <div class="section-header">
+                    <h2 class="section-title" data-i18n="compare.title">Size Comparison Tool</h2>
+                    <p class="section-description" data-i18n="compare.desc">Compare multiple jewelry pieces side-by-side with European paper standards and metric measurements.</p>
+                    <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid var(--color-rose-gold);">
+                        <p data-i18n="compare.howToUseDesc" style="margin: 0; font-size: 0.875rem; color: var(--text-secondary);">
+                            <strong>💡 How to use:</strong> Click on any box below to select jewelry items to compare. You can add up to 4 items at once.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Comparison Selection -->
+                <div class="compare-selection">
+                    <div class="compare-slot" data-slot="1">
+                        <div class="compare-slot__empty">
+                            <span class="compare-slot__icon">+</span>
+                            <span class="compare-slot__text" data-i18n="compare.slot.add1">Click to Add Item 1</span>
+                        </div>
+                    </div>
+                    <div class="compare-slot" data-slot="2">
+                        <div class="compare-slot__empty">
+                            <span class="compare-slot__icon">+</span>
+                            <span class="compare-slot__text" data-i18n="compare.slot.add2">Click to Add Item 2</span>
+                        </div>
+                    </div>
+                    <div class="compare-slot" data-slot="3">
+                        <div class="compare-slot__empty">
+                            <span class="compare-slot__icon">+</span>
+                            <span class="compare-slot__text" data-i18n="compare.slot.add3">Click to Add Item 3</span>
+                        </div>
+                    </div>
+                    <div class="compare-slot" data-slot="4">
+                        <div class="compare-slot__empty">
+                            <span class="compare-slot__icon">+</span>
+                            <span class="compare-slot__text" data-i18n="compare.slot.add4">Click to Add Item 4</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparison Display -->
+                <div class="comparison-display" id="comparison-display" style="display: none;">
+                    <div class="comparison-canvas-wrapper">
+                        <canvas id="comparison-canvas" class="comparison-canvas"></canvas>
+                    </div>
+
+                    <div class="comparison-table">
+                        <h3 class="comparison-table__title" data-i18n="compare.table.title">Detailed Comparison</h3>
+                        <div class="comparison-table-wrapper">
+                            <table class="specs-table" id="comparison-table">
+                                <thead>
+                                    <tr>
+                                        <th data-i18n="compare.table.spec">Specification</th>
+                                        <th id="compare-header-1" data-i18n="compare.table.item1">Item 1</th>
+                                        <th id="compare-header-2" data-i18n="compare.table.item2">Item 2</th>
+                                        <th id="compare-header-3" data-i18n="compare.table.item3">Item 3</th>
+                                        <th id="compare-header-4" data-i18n="compare.table.item4">Item 4</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="comparison-tbody">
+                                    <!-- Populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Size Reference Standards -->
+                    <div class="size-standards">
+                        <h4 class="size-standards__title" data-i18n="compare.standards.title">European Size Standards</h4>
+                        <div class="standards-grid">
+                            <div class="standard-card">
+                                <div class="standard-card__name" data-i18n="compare.standards.creditCard">Credit Card</div>
+                                <div class="standard-card__size" data-i18n="calibration.card.dims">85.6mm × 54mm</div>
+                                <div class="standard-card__size-imperial">(3.375" × 2.125")</div>
+                                <div class="standard-card__area">46.25 cm² (7.17 sq in)</div>
+                            </div>
+                            <div class="standard-card">
+                                <div class="standard-card__name" data-i18n="compare.standards.a5">A5 Paper</div>
+                                <div class="standard-card__size">148mm × 210mm</div>
+                                <div class="standard-card__size-imperial">(5.8" × 8.3")</div>
+                                <div class="standard-card__area">310 cm² (48.15 sq in)</div>
+                            </div>
+                            <div class="standard-card">
+                                <div class="standard-card__name" data-i18n="compare.standards.a4">A4 Paper</div>
+                                <div class="standard-card__size">210mm × 297mm</div>
+                                <div class="standard-card__size-imperial">(8.3" × 11.7")</div>
+                                <div class="standard-card__area">623 cm² (97.09 sq in)</div>
+                            </div>
+                            <div class="standard-card">
+                                <div class="standard-card__name" data-i18n="compare.standards.a3">A3 Paper</div>
+                                <div class="standard-card__size">297mm × 420mm</div>
+                                <div class="standard-card__size-imperial">(11.7" × 16.5")</div>
+                                <div class="standard-card__area">1,245 cm² (193.05 sq in)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab 4: Body Location & Anatomy Guide -->
+            <section id="tab-anatomy" class="tab-content">
+                <div class="section-header">
+                    <h2 class="section-title" data-i18n="anatomy.guide.title">Body Location & Anatomy Guide</h2>
+                    <p class="section-description" data-i18n="anatomy.guide.desc">Professional recommendations for jewelry sizing based on anatomy and piercing location.</p>
+                    <p data-i18n="anatomy.proWarningDesc" style="font-size: 0.875rem; color: var(--text-tertiary); margin-top: 1rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+                        <strong>⚕️ Professional Use Only:</strong> This guide provides anatomical information for professional piercing practitioners and healthcare providers. All piercings shown require professional consultation and assessment. Anatomy varies significantly between individuals - sizes and suitability must be determined by a qualified professional piercer adhering to established professional practice.
+                    </p>
+                </div>
+
+                <!-- Body Location Selector -->
+                <div class="anatomy-selector">
+                    <div class="anatomy-grid">
+                        <button class="anatomy-btn" data-location="ear">
+                            <span class="anatomy-btn__icon">👂</span>
+                            <span class="anatomy-btn__text" data-i18n="visualizer.filter.ear">Ear</span>
+                        </button>
+                        <button class="anatomy-btn" data-location="nose">
+                            <span class="anatomy-btn__icon">👃</span>
+                            <span class="anatomy-btn__text" data-i18n="visualizer.filter.nose">Nose</span>
+                        </button>
+                        <button class="anatomy-btn" data-location="lip">
+                            <span class="anatomy-btn__icon">👄</span>
+                            <span class="anatomy-btn__text" data-i18n="visualizer.filter.lip">Lip</span>
+                        </button>
+                        <button class="anatomy-btn" data-location="tongue">
+                            <span class="anatomy-btn__icon">👅</span>
+                            <span class="anatomy-btn__text" data-i18n="visualizer.filter.tongue">Tongue</span>
+                        </button>
+                        <button class="anatomy-btn" data-location="eyebrow">
+                            <span class="anatomy-btn__icon">🤨</span>
+                            <span class="anatomy-btn__text" data-i18n="visualizer.filter.eyebrow">Eyebrow</span>
+                        </button>
+                        <button class="anatomy-btn" data-location="navel">
+                            <span class="anatomy-btn__icon">⭕</span>
+                            <span class="anatomy-btn__text" data-i18n="visualizer.filter.navel">Navel</span>
+                        </button>
+                        <button class="anatomy-btn" data-location="nipple">
+                            <span class="anatomy-btn__icon">◉</span>
+                            <span class="anatomy-btn__text" data-i18n="visualizer.filter.nipple">Nipple</span>
+                        </button>
+                        <button class="anatomy-btn" data-location="surface">
+                            <span class="anatomy-btn__icon">📍</span>
+                            <span class="anatomy-btn__text" data-i18n="visualizer.filter.surface">Surface</span>
+                        </button>
+                        <button class="anatomy-btn" data-location="male-genital">
+                            <span class="anatomy-btn__icon">♂️</span>
+                            <span class="anatomy-btn__text" data-i18n="visualizer.filter.maleGenital">Male Genital</span>
+                        </button>
+                        <button class="anatomy-btn" data-location="female-genital">
+                            <span class="anatomy-btn__icon">♀️</span>
+                            <span class="anatomy-btn__text" data-i18n="visualizer.filter.femaleGenital">Female Genital</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Anatomy Details (populated when location selected) -->
+                <div class="anatomy-details" id="anatomy-details" style="display: none;">
+                    <div class="anatomy-details__diagram">
+                        <img id="anatomy-diagram" src="" alt="Anatomy diagram" class="anatomy-diagram">
+                        <div class="anatomy-details__measurements" id="anatomy-measurements">
+                            <!-- Measurement annotations will be added by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="anatomy-details__info">
+                        <h3 id="anatomy-title" data-i18n="anatomy.th.location">Location Name</h3>
+                        <div class="anatomy-info-section">
+                            <h4 data-i18n="anatomy.th.recommendedTypes">Recommended Jewelry Types</h4>
+                            <ul id="anatomy-jewelry-types" class="anatomy-list">
+                                <!-- Populated by JavaScript -->
+                            </ul>
+                        </div>
+                        <div class="anatomy-info-section">
+                            <h4 data-i18n="anatomy.th.standardGauges">Standard Gauges</h4>
+                            <div id="anatomy-gauges" class="gauge-chips">
+                                <!-- Gauge chips populated by JavaScript -->
+                            </div>
+                        </div>
+                        <div class="anatomy-info-section">
+                            <h4 data-i18n="anatomy.th.typicalSizes">Typical Sizes</h4>
+                            <table class="size-table" id="anatomy-size-table">
+                                <thead>
+                                    <tr>
+                                        <th data-i18n="anatomy.th.piercingType">Piercing Type</th>
+                                        <th data-i18n="anatomy.th.recommendedGauge">Recommended Gauge</th>
+                                        <th data-i18n="anatomy.th.typicalSize">Typical Size</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="anatomy-sizes">
+                                    <!-- Sizes populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="anatomy-info-section">
+                            <h4 data-i18n="anatomy.notes.title">Healing & Sizing Notes</h4>
+                            <div id="anatomy-notes" class="anatomy-notes">
+                                <!-- Notes populated by JavaScript -->
+                            </div>
+                        </div>
+                        <div class="anatomy-info-section">
+                            <h4 data-i18n="anatomy.browse.btn">Browse Compatible Jewelry</h4>
+                            <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
+                                <button class="btn btn--primary" id="browse-location-jewelry" data-i18n="anatomy.browse.all">View All Options</button>
+                                <button class="btn btn--secondary" id="anatomy-calc-curved-barbell" style="display: none;"><span>📐</span> <span data-i18n="curved.calc.internalTitle">Calculate Curved Barbell Length</span></button>
+                                <button class="btn btn--secondary" id="anatomy-calc-industrial-barbell" style="display: none;"><span>📏</span> <span data-i18n="tools.industrialBarbellCalc">Calculate Industrial Barbell Length</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: Photo Sizing -->
+            <section id="tab-photo-measure" class="tab-content">
+                <div class="photo-measure-container">
+                    <div class="photo-measure-header">
+                        <div>
+                            <h2 class="section-title" data-i18n="photo.header.title">Photo Reference Sizing</h2>
+                            <p class="section-description" data-i18n="photo.header.desc">Calibrate against a standard 85.60 mm bank card in the photograph to measure anatomical tissue spans with sub-millimeter precision.</p>
+                        </div>
+                        <div class="photo-measure-actions">
+                            <label class="btn btn--primary file-input-label" for="pm-file-input" style="cursor: pointer;">
+                                <span>📁</span> <span data-i18n="tryon.upload.title">Upload Photo</span>
+                                <input type="file" id="pm-file-input" accept="image/*" style="display: none;">
+                            </label>
+                            <button type="button" class="btn btn--secondary" id="pm-camera-btn">
+                                <span>📷</span> <span data-i18n="common.camera">Camera</span>
+                            </button>
+                            <button type="button" class="btn btn--secondary" id="pm-sample-btn">
+                                <span>🖼️</span> <span data-i18n="photo.btn.sample">Load Sample</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Notice banner -->
+                    <div class="banner banner--info" style="margin-bottom: var(--spacing-md);">
+                        <div class="banner__icon">ℹ️</div>
+                        <div class="banner__content" data-i18n="photo.standardRefDesc">
+                            <strong>Standard Reference Required:</strong> Place a standard bank card (ISO/IEC 7810 ID-1: 85.60 mm wide) in the same plane as the piercing site. Drag handles A &amp; B to the card ends, and C &amp; D across the anatomical tissue span.
+                        </div>
+                    </div>
+
+                    <div class="photo-measure-grid">
+                        <!-- Canvas / Stage -->
+                        <div class="photo-measure-stage" id="pm-stage-wrapper">
+                            <canvas id="photo-measure-canvas" width="640" height="480"></canvas>
+                        </div>
+
+                        <!-- Readout & Transfer Controls -->
+                        <div class="photo-measure-sidebar">
+                            <div class="card photo-measure-card">
+                                <h3 class="card__title" data-i18n="photo.summary.title">Measurement Summary</h3>
+                                <div class="photo-measure-readout-item">
+                                    <span class="photo-measure-readout-label" data-i18n="photo.summary.calcScale">Calculated Scale:</span>
+                                    <span class="photo-measure-readout-val" id="pm-readout-card-scale">—</span>
+                                </div>
+                                <div class="photo-measure-readout-item">
+                                    <span class="photo-measure-readout-label" data-i18n="photo.summary.tissueSpan">Tissue Span (C to D):</span>
+                                    <span class="photo-measure-readout-val photo-measure-readout-highlight" id="pm-readout-span">—</span>
+                                </div>
+                                <div class="photo-measure-readout-item" style="font-size: 0.85rem; color: var(--color-text-secondary);">
+                                    <span id="pm-readout-detail" data-i18n="photo.summary.emptyText">Upload or capture a photo with an 85.60 mm bank card in frame.</span>
+                                </div>
+                                <div style="margin-top: var(--spacing-sm);">
+                                    <button type="button" class="btn btn--secondary btn--block" id="pm-copy-measurement" data-i18n="photo.btn.copyMeasurement">📋 Copy Measurement</button>
+                                </div>
+                            </div>
+
+                            <div class="card photo-measure-card">
+                                <h3 class="card__title" data-i18n="photo.btn.transferCalc">Transfer to Calculator</h3>
+                                <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin-bottom: var(--spacing-sm);" data-i18n="photoMeasure.transferSubtitle">
+                                    Directly populate calculators or client fit card with this measured tissue span:
+                                </p>
+                                <div class="photo-measure-transfer-btns">
+                                    <button type="button" class="btn btn--outline btn--block" id="pm-transfer-curved">
+                                        <span>📐</span> <span data-i18n="photo.btn.transferCurved">Send to Curved Barbell Calculator</span>
+                                    </button>
+                                    <button type="button" class="btn btn--outline btn--block" id="pm-transfer-industrial">
+                                        <span>📏</span> <span data-i18n="photoMeasure.sendToIndustrial">Send to Industrial Barbell Calculator</span>
+                                    </button>
+                                    <button type="button" class="btn btn--outline btn--block" id="pm-transfer-fitcard">
+                                        <span>🖨️</span> <span data-i18n="photo.btn.transferFitCard">Send to Printable Fit Card</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: Saved Collection -->
+            <section id="tab-collection" class="tab-content">
+                <div class="collection-wrapper">
+                    <div class="collection-header-bar">
+                        <div>
+                            <h2 class="section-title" data-i18n="collection.header.title">Saved Jewellery Collection</h2>
+                            <p class="section-description" data-i18n="collection.header.desc">Studio inventory and client sizing collection stored locally in your browser. Never transmitted to any remote server.</p>
+                        </div>
+                        <div class="collection-header-actions">
+                            <span class="badge badge--pill" style="font-size: 0.9rem; padding: 6px 14px; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text);">
+                                Items: <strong id="collection-count-badge">0</strong>
+                            </span>
+                            <button type="button" class="btn btn--secondary" id="collection-export-csv" title="Export entire collection to CSV spreadsheet" data-i18n-title="collection.tooltip.exportCsv" data-i18n="collection.btn.exportCsv">📊 Export CSV</button>
+                            <button type="button" class="btn btn--secondary" id="collection-print-btn" title="Print entire collection list" data-i18n-title="collection.tooltip.print" data-i18n="collection.btn.printList">🖨️ Print List</button>
+                        </div>
+                    </div>
+
+                    <!-- Add Manual Piece Card -->
+                    <div class="card" style="margin-bottom: var(--spacing-lg); padding: var(--spacing-md);">
+                        <h3 class="card__title" style="margin-bottom: var(--spacing-sm);" data-i18n="collection.form.title">Add Jewellery Piece to Collection</h3>
+                        <div id="collection-form-error" class="banner banner--error" style="display: none; margin-bottom: var(--spacing-sm); padding: 8px 12px; font-size: 0.85rem;"></div>
+                        <form id="collection-add-form" class="fit-card-form" onsubmit="return false;">
+                            <div class="fit-card-form-row">
+                                <div class="fit-card-form-group">
+                                    <label for="col-input-placement" class="fit-card-form-label" data-i18n="collection.form.placement">Placement *</label>
+                                    <input type="text" id="col-input-placement" class="fit-card-form-input" placeholder="e.g. Rook, Conch, Helix, Septum" data-i18n-placeholder="collection.form.placementPlaceholder" required>
+                                </div>
+                                <div class="fit-card-form-group">
+                                    <label for="col-input-name" class="fit-card-form-label" data-i18n="collection.form.jewelleryType">Jewellery Type *</label>
+                                    <input type="text" id="col-input-name" class="fit-card-form-input" placeholder="e.g. Curved Barbell, Labret, BCR" data-i18n-placeholder="collection.form.jewelryTypePlaceholder" required>
+                                </div>
+                            </div>
+                            <div class="fit-card-form-row">
+                                <div class="fit-card-form-group">
+                                    <label for="col-input-gauge" class="fit-card-form-label" data-i18n="collection.form.wireGauge">Wire Gauge</label>
+                                    <input type="text" id="col-input-gauge" class="fit-card-form-input" placeholder="e.g. 16g (1.2 mm)" data-i18n-placeholder="collection.form.wireGaugePlaceholder" value="16g (1.2 mm)">
+                                </div>
+                                <div class="fit-card-form-group">
+                                    <label for="col-input-length" class="fit-card-form-label" data-i18n="collection.form.lengthDia">Length / Diameter (mm) *</label>
+                                    <input type="number" step="0.1" min="1" max="100" id="col-input-length" class="fit-card-form-input" placeholder="e.g. 8.0" data-i18n-placeholder="fitcard.form.freshPlaceholder" required>
+                                </div>
+                            </div>
+                            <div class="fit-card-form-row">
+                                <div class="fit-card-form-group">
+                                    <label for="col-input-ball" class="fit-card-form-label" data-i18n="collection.form.ballSize">Ball / End Size (mm)</label>
+                                    <input type="number" step="0.1" min="1" max="25" id="col-input-ball" class="fit-card-form-input" placeholder="e.g. 3.0" data-i18n-placeholder="fitcard.form.ballPlaceholder">
+                                </div>
+                                <div class="fit-card-form-group">
+                                    <label for="col-input-material" class="fit-card-form-label" data-i18n="collection.form.material">Material</label>
+                                    <select id="col-input-material" class="fit-card-form-input">
+                                        <option value="ASTM F-136 Titanium" data-i18n="mat.f136Titanium">ASTM F-136 Titanium</option>
+                                        <option value="ASTM F-138 Steel" data-i18n="mat.f138Steel">ASTM F-138 Implant Steel</option>
+                                        <option value="ASTM F-67 Pure Titanium" data-i18n="mat.f67Titanium">ASTM F-67 Titanium</option>
+                                        <option value="14K Solid Gold" data-i18n="mat.gold14k">14K Solid Gold</option>
+                                        <option value="18K Solid Gold" data-i18n="mat.gold18k">18K Solid Gold</option>
+                                        <option value="BioFlex® body jewelry (PP-R)" data-i18n="mat.bioflex">BioFlex® body jewelry (PP-R)</option>
+                                        <option value="Borosilicate Glass" data-i18n="matrices.filterGlass">Borosilicate Glass</option>
+                                        <option value="Niobium (ASTM B392)" data-i18n="mat.niobium">Niobium (ASTM B392)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="text-align: right; margin-top: var(--spacing-sm);">
+                                <button type="submit" class="btn btn--primary" data-i18n="collection.form.btnAdd">➕ Add to Saved Collection</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Collection Table -->
+                    <div class="card" style="padding: var(--spacing-md); overflow-x: auto;">
+                        <table class="table" style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="border-bottom: 2px solid var(--color-border); text-align: left;">
+                                    <th style="padding: 10px 8px;" data-i18n="collection.table.thPlacement">Placement</th>
+                                    <th style="padding: 10px 8px;" data-i18n="collection.table.thType">Type</th>
+                                    <th style="padding: 10px 8px;" data-i18n="collection.table.thGauge">Gauge</th>
+                                    <th style="padding: 10px 8px;" data-i18n="collection.table.thLengthDia">Length/Dia</th>
+                                    <th style="padding: 10px 8px;" data-i18n="collection.table.thBall">Ball</th>
+                                    <th style="padding: 10px 8px;" data-i18n="collection.form.material">Material</th>
+                                    <th style="padding: 10px 8px;" data-i18n="collection.table.thDate">Date Added</th>
+                                    <th style="padding: 10px 8px; width: 140px;" data-i18n="collection.table.thActions">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="collection-table-body">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                        <div id="collection-empty-state" style="text-align: center; padding: var(--spacing-xl) 0; color: var(--color-text-secondary);">
+                            <div style="font-size: 2.5rem; margin-bottom: var(--spacing-xs);">💎</div>
+                            <p style="font-weight: 500;" data-i18n="collection.empty.title">No jewellery pieces in your collection yet.</p>
+                            <p style="font-size: 0.85rem;" data-i18n="collection.empty.desc">Save sizes from the 1:1 Visualizer, Printable Fit Card, or use the form above to add pieces.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: Printable Fit Card -->
+            <section id="tab-fit-card" class="tab-content">
+                <div class="fit-card-wrapper">
+                    <div class="fit-card-header-bar">
+                        <div>
+                            <h2 class="section-title" data-i18n="fitCard.title">Printable Client Piercing Fit Card</h2>
+                            <p class="section-description" data-i18n="fitCard.subtitle">Physical sizing record for client downsize reminders and verified jewelry specifications.</p>
+                        </div>
+                        <div class="fit-card-actions">
+                            <button type="button" class="btn btn--secondary" id="fit-card-copy-summary-btn" title="Copy single-line sizing summary for quick messaging" data-i18n-title="fitcard.tooltip.copySummary" data-i18n="fitCard.copyBtn">📋 Copy Size Summary</button>
+                            <button type="button" class="btn btn--secondary" id="fit-card-save-collection-btn" title="Save this sizing record to your local collection" data-i18n-title="fitcard.tooltip.saveCollection" data-i18n="fitCard.saveCollection">💎 Save to Collection</button>
+                            <button type="button" class="btn btn--secondary" id="fit-card-reset-btn" data-i18n="fitCard.reset">Reset</button>
+                            <button type="button" class="btn btn--primary" id="fit-card-print-btn" data-i18n="fitCard.print">🖨️ Print / Save PDF</button>
+                        </div>
+                    </div>
+
+                    <div class="fit-card-grid">
+                        <!-- Left: Form inputs for editing -->
+                        <div class="fit-card-editor">
+                            <div class="fit-card-editor__header">
+                                <h3 class="fit-card-editor__title" data-i18n="fitCard.editRecord">Edit Client Record</h3>
+                                <div class="fit-card-presets">
+                                    <span class="fit-card-presets__label" data-i18n="fitcard.presets.label">Presets:</span>
+                                    <button type="button" class="btn-chip fit-preset-btn" data-preset="rook" data-i18n="fitCard.presetRook">Rook (Curve)</button>
+                                    <button type="button" class="btn-chip fit-preset-btn" data-preset="industrial" data-i18n="fitCard.presetIndustrial">Industrial</button>
+                                    <button type="button" class="btn-chip fit-preset-btn" data-preset="navel" data-i18n="visualizer.filter.navel">Navel</button>
+                                    <button type="button" class="btn-chip fit-preset-btn" data-preset="eyebrow" data-i18n="visualizer.filter.eyebrow">Eyebrow</button>
+                                </div>
+                            </div>
+                            <form id="fit-card-form" class="fit-card-form" onsubmit="return false;">
+                                <div class="fit-card-form-row">
+                                    <div class="fit-card-form-group">
+                                        <label for="fit-input-studio" class="fit-card-form-label" data-i18n="fitCard.studioName">Studio Name</label>
+                                        <input type="text" id="fit-input-studio" name="studio" class="fit-card-form-input" placeholder="e.g. Studio Practice" data-i18n-placeholder="fitcard.form.studioPlaceholder">
+                                    </div>
+                                    <div class="fit-card-form-group">
+                                        <label for="fit-input-piercer" class="fit-card-form-label" data-i18n="fitCard.piercerName">Piercer</label>
+                                        <input type="text" id="fit-input-piercer" name="piercer" class="fit-card-form-input" placeholder="e.g. Senior Piercer" data-i18n-placeholder="fitcard.form.piercerPlaceholder">
+                                    </div>
+                                </div>
+
+                                <div class="fit-card-form-row">
+                                    <div class="fit-card-form-group">
+                                        <label for="fit-input-client" class="fit-card-form-label" data-i18n="fitCard.clientName">Client Name</label>
+                                        <input type="text" id="fit-input-client" name="client" class="fit-card-form-input" placeholder="Client Name" data-i18n-placeholder="fitCard.clientName">
+                                    </div>
+                                    <div class="fit-card-form-group">
+                                        <label for="fit-input-date" class="fit-card-form-label" data-i18n="fitCard.date">Date</label>
+                                        <input type="date" id="fit-input-date" name="date" class="fit-card-form-input">
+                                    </div>
+                                </div>
+
+                                <div class="fit-card-form-row">
+                                    <div class="fit-card-form-group">
+                                        <label for="fit-input-placement" class="fit-card-form-label" data-i18n="fitCard.placement">Placement</label>
+                                        <input type="text" id="fit-input-placement" name="placement" class="fit-card-form-input" placeholder="e.g. Rook, Conch, Nostril" data-i18n-placeholder="fitcard.form.placementPlaceholder">
+                                    </div>
+                                    <div class="fit-card-form-group">
+                                        <label for="fit-input-gauge" class="fit-card-form-label" data-i18n="fitCard.wireGauge">Wire Gauge</label>
+                                        <input type="text" id="fit-input-gauge" name="gauge" class="fit-card-form-input" placeholder="e.g. 16G (1.2 mm)" data-i18n-placeholder="collection.form.wireGaugePlaceholder">
+                                    </div>
+                                </div>
+
+                                <div class="fit-card-form-row">
+                                    <div class="fit-card-form-group">
+                                        <label for="fit-input-measurement" class="fit-card-form-label" data-i18n="fitCard.measuredSpan">Measured Span / Distance</label>
+                                        <input type="text" id="fit-input-measurement" name="measurement" class="fit-card-form-input" placeholder="e.g. 6.5 mm" data-i18n-placeholder="fitcard.form.lengthPlaceholder">
+                                    </div>
+                                    <div class="fit-card-form-group">
+                                        <label for="fit-input-ball-size" class="fit-card-form-label" data-i18n="fitCard.ballSize">End / Ball Size</label>
+                                        <input type="text" id="fit-input-ball-size" name="ballSize" class="fit-card-form-input" placeholder="e.g. 3.0 mm" data-i18n-placeholder="fitcard.form.ballPlaceholder">
+                                    </div>
+                                </div>
+
+                                <div class="fit-card-form-row">
+                                    <div class="fit-card-form-group">
+                                        <label for="fit-input-fresh" class="fit-card-form-label" data-i18n="fitCard.freshInitial">Initial / Fresh Length</label>
+                                        <input type="text" id="fit-input-fresh" name="freshLength" class="fit-card-form-input" placeholder="e.g. 8.0 mm" data-i18n-placeholder="fitcard.form.freshPlaceholder">
+                                    </div>
+                                    <div class="fit-card-form-group">
+                                        <label for="fit-input-healed" class="fit-card-form-label" data-i18n="fitCard.downsizeHealed">Downsize / Healed Length</label>
+                                        <input type="text" id="fit-input-healed" name="healedLength" class="fit-card-form-input" placeholder="e.g. 6.5 mm" data-i18n-placeholder="fitcard.form.healedPlaceholder">
+                                    </div>
+                                </div>
+
+                                <div class="fit-card-form-group">
+                                    <label for="fit-input-notes" class="fit-card-form-label" data-i18n="fitCard.notes">Fitting & Downsize Notes</label>
+                                    <textarea id="fit-input-notes" name="notes" class="fit-card-form-textarea" rows="2" placeholder="Downsize check scheduled in 4-6 weeks..." data-i18n-placeholder="fitcard.form.notesPlaceholder"></textarea>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Right: Live Print Preview Sheet -->
+                        <div class="fit-card-sheet-container">
+                            <div class="fit-card-preview-toolbar">
+                                <div class="fit-card-preview-badge">
+                                    <span class="preview-dot"></span>
+                                    <span data-i18n="fitcard.livePreview.title">Live Print Preview</span>
+                                </div>
+                                <div class="fit-card-preview-controls">
+                                    <button type="button" class="preview-mode-toggle active" id="fit-paper-mode-btn" title="Simulate physical high-contrast paper" data-i18n-title="fitcard.tooltip.themePaper" data-i18n="fitCard.paperMode">📄 Ink-Friendly Paper</button>
+                                    <button type="button" class="preview-mode-toggle" id="fit-theme-mode-btn" title="Match app theme" data-i18n-title="fitcard.tooltip.themeStudio" data-i18n="fitCard.themeMode">🎨 Studio Theme</button>
+                                </div>
+                            </div>
+                            <div id="fit-card-render" class="fit-card-render--paper">
+                                <!-- Rendered dynamically by FitCardModule.render() -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab 7: Clinical & Material Matrices -->
+            <section id="tab-matrices" class="tab-content" hidden style="display:none">
+                <div class="matrices-header">
+                    <h2 class="matrices-title" data-i18n="matrices.title">Clinical & Material Matrices</h2>
+                    <p class="matrices-subtitle">
+                        Objective implant-grade metallurgical certifications, biocompatibility standards, and biomechanical wire gauge guidance.
+                        Formulated to align with established professional practice, ASTM F-136, ASTM F-138, and international clinical healthcare benchmarks.
+                    </p>
+                    <div class="clinical-standards-banner" data-i18n="matrices.advisory.desc">
+                        <strong>Clinical Advisory for Piercers & Healthcare Providers:</strong> All initial body piercings require verified implant-grade materials meeting ASTM F-136 titanium, ASTM F-138 surgical steel, or solid nickel-free biocompatible gold. Ensure jewelry sizing is verified by a qualified professional piercer using calibrated calipers before insertion.
+                    </div>
+                </div>
+
+                <!-- Material Certification Matrix -->
+                <div class="matrix-section">
+                    <div class="matrix-section__title-wrap">
+                        <h3 class="matrix-section__title">
+                            <span>🛡️</span> <span data-i18n="matrices.materials.tab">Implant-Grade Material & Alloy Standards</span>
+                        </h3>
+                    </div>
+
+                    <div class="matrix-controls">
+                        <input type="text" id="matrix-material-search" class="matrix-search-box" placeholder="Search alloy, standard (e.g. F-136, 316LVM, MRI safe)..." data-i18n-placeholder="matrices.searchAlloy">
+                        <div class="matrix-filter-pills">
+                            <button type="button" class="matrix-filter-pill active" data-material-filter="all" data-i18n="matrices.tab.allStandards">All Standards</button>
+                            <button type="button" class="matrix-filter-pill" data-material-filter="titanium" data-i18n="matrices.tab.titanium">Titanium (ASTM F-136 / F-67)</button>
+                            <button type="button" class="matrix-filter-pill" data-material-filter="steel" data-i18n="matrices.tab.steel">Surgical Steel (ASTM F-138)</button>
+                            <button type="button" class="matrix-filter-pill" data-material-filter="niobium" data-i18n="matrices.tab.niobium">Pure Niobium</button>
+                            <button type="button" class="matrix-filter-pill" data-material-filter="gold" data-i18n="matrices.tab.gold">Biocompatible Gold</button>
+                            <button type="button" class="matrix-filter-pill" data-material-filter="glass" data-i18n="matrices.filterGlass">Borosilicate Glass</button>
+                            <button type="button" class="matrix-filter-pill" data-material-filter="polymer" data-i18n="matrices.tab.polymers">Polymers</button>
+                        </div>
+                    </div>
+
+                    <div class="matrix-cards-grid" id="material-matrix-container">
+                        <!-- Populated dynamically by matrices.js -->
+                    </div>
+                </div>
+
+                <!-- Clinical Wire Gauge & Migration Guidance Matrix -->
+                <div class="matrix-section">
+                    <div class="matrix-section__title-wrap">
+                        <h3 class="matrix-section__title">
+                            <span>📐</span> <span data-i18n="matrices.gauges.tab">Clinical Wire Gauge & Biomechanical Guidance Matrix</span>
+                        </h3>
+                    </div>
+
+                    <div class="matrix-controls">
+                        <input type="text" id="matrix-gauge-search" class="matrix-search-box" placeholder="Search gauge, mm, or clinical recommendation..." data-i18n-placeholder="matrices.searchGauge">
+                        <div class="matrix-filter-pills">
+                            <button type="button" class="matrix-filter-pill active" data-gauge-filter="all" data-i18n="matrices.filterAllGauges">All Gauges</button>
+                            <button type="button" class="matrix-filter-pill" data-gauge-filter="initial" data-i18n="matrices.tab.initialApproved">Initial Piercing Approved</button>
+                            <button type="button" class="matrix-filter-pill" data-gauge-filter="downsize" data-i18n="matrices.tab.healedDownsize">Healed Downsize Only</button>
+                            <button type="button" class="matrix-filter-pill" data-gauge-filter="stretched" data-i18n="matrices.tab.stretchedSizes">Stretched Sizes (8g - 00g)</button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive-wrapper">
+                        <table class="wire-gauge-table">
+                            <thead>
+                                <tr>
+                                    <th data-i18n="collection.form.wireGauge">Wire Gauge</th>
+                                    <th data-i18n="matrices.tableMetric">Metric (mm)</th>
+                                    <th data-i18n="matrices.tableImperial">Imperial (in)</th>
+                                    <th data-i18n="matrices.th.contactArea">Contact Area</th>
+                                    <th data-i18n="matrices.th.stability">Structural Stability</th>
+                                    <th data-i18n="matrices.th.migration">Migration Risk</th>
+                                    <th data-i18n="matrices.th.guidance">Clinical Guidance & Standards</th>
+                                </tr>
+                            </thead>
+                            <tbody id="wire-gauge-table-body">
+                                <!-- Populated dynamically by matrices.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab 8: Curved Barbell Length Calculator (Integrated from https://github.com/Poli-International/curved-barbell-calculator) -->
+            <section id="tab-curved-barbell" class="tab-content">
+                <div class="cbb-wrapper">
+                    <header class="cbb-header">
+                        <div class="cbb-badge" data-i18n="curved.calc.internalTitle">📐 Internal Length Calculator</div>
+                        <h2 class="cbb-title" data-i18n="curved.title">Curved Barbell Length Calculator</h2>
+                        <p class="cbb-subtitle" data-i18n="curved.desc">
+                            Select your piercing type, enter your anatomy measurement, and get the correct internal length — with calibrated clearance for fresh or healed tissue.
+                        </p>
+                    </header>
+
+                    <div class="cbb-layout-grid">
+                        <!-- Left Column: Input Controls & Presets -->
+                        <div class="cbb-col">
+                            <div class="cbb-input-card">
+                                <div class="cbb-form-grid">
+                                    <div class="cbb-form-group">
+                                        <label for="cbb-piercing-type" class="cbb-label" data-i18n="anatomy.th.piercingType">Piercing Type</label>
+                                        <select id="cbb-piercing-type" class="cbb-select">
+                                            <!-- Populated dynamically by curved-barbell.js -->
+                                        </select>
+                                    </div>
+                                    <div class="cbb-form-group">
+                                        <label for="cbb-healing-stage" class="cbb-label" data-i18n="curved.stage.label">Healing Stage</label>
+                                        <select id="cbb-healing-stage" class="cbb-select">
+                                            <option value="fresh" data-i18n="curved.stage.fresh">Fresh / unhealed (+ swelling clearance)</option>
+                                            <option value="healed" data-i18n="curved.stage.healed">Fully healed (snug comfort fit)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="cbb-form-group">
+                                    <label for="cbb-anatomy-mm" class="cbb-label" data-i18n="curved.span.label">Anatomy Span (Tissue Depth)</label>
+                                    <div class="cbb-input-suffix">
+                                        <input id="cbb-anatomy-mm" type="number" class="cbb-input" min="1" max="40" step="0.5" placeholder="e.g. 8" data-i18n-placeholder="curved.input.placeholder">
+                                        <span class="cbb-suffix-tag" data-i18n="common.mm">mm</span>
+                                    </div>
+                                    <div class="cbb-quick-spans-label" data-i18n="curved.typicalDepthsHint">Typical depths for this piercing (click to test):</div>
+                                    <div id="cbb-quick-spans" class="cbb-quick-spans">
+                                        <!-- Quick span buttons populated by curved-barbell.js -->
+                                    </div>
+                                </div>
+
+                                <button type="button" id="cbb-calc-btn" class="btn btn--primary">
+                                    <span>📐</span> <span data-i18n="curved.calcBtn">Calculate Internal Length</span>
+                                </button>
+                            </div>
+
+                            <!-- Preset Info Card -->
+                            <div id="cbb-preset-info">
+                                <!-- Populated dynamically by curved-barbell.js -->
+                            </div>
+
+                            <div class="cbb-disclaimer" data-i18n="curved.clinicalNote">
+                                <strong>Clinical Note:</strong> Measurements are an anatomical guide. Anatomy varies significantly — always verify sizing with a qualified piercer before ordering jewelry. Internal length refers to the distance between the two ball seats along the curved chord, not the overall barbell length. Initial piercings require implant-grade materials meeting ASTM F-136 titanium, ASTM F-138 surgical steel, or BioFlex® body jewelry.
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Results & 1:1 Scale Preview -->
+                        <div class="cbb-col">
+                            <div id="cbb-results">
+                                <div class="cbb-empty-state">
+                                    <div class="cbb-empty-state__icon">📐</div>
+                                    <h3 data-i18n="curved.readyPromptTitle">Ready to Calculate</h3>
+                                    <p data-i18n="curved.readyPromptDesc">Select your piercing location, enter your measured anatomy span, and click Calculate Internal Length.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab 9: Industrial Barbell Length Calculator (Integrated from https://github.com/Poli-International/industrial-barbell-calculator) -->
+            <section id="tab-industrial-barbell" class="tab-content">
+                <div class="cbb-wrapper">
+                    <!-- Header -->
+                    <div class="cbb-header">
+                        <div class="cbb-badge">
+                            <span>📏</span> <span data-i18n="industrial.badge">Industrial & Scaffold Sizing</span>
+                        </div>
+                        <h2 class="cbb-title" data-i18n="industrial.title">Industrial Barbell Length Calculator</h2>
+                        <p class="cbb-subtitle" data-i18n="industrial.desc">
+                            Calculate the exact barbell shaft length needed between two cartilage punctures based on measured hole-to-hole distance, ball protrusion, and healing stage tissue clearance.
+                        </p>
+                    </div>
+
+                    <!-- Diagram hint -->
+                    <div class="diagram-hint" style="max-width: 800px; margin: 0 auto var(--spacing-lg);">
+                        <strong data-i18n="industrial.whatToMeasure">What to Measure</strong>
+                        <span data-i18n="industrial.whatToMeasureDesc">Measure with precision calipers from the <em>outer edge of the entrance hole</em> across the ear to the <em>outer edge of the exit hole</em>. This is your hole-to-hole distance. The calculator automatically adds ball protrusion (+3mm to +5mm) and healing clearance (+4mm fresh, +2mm healed).</span>
+                        <div class="diagram-ascii">●━━━━━━━━━━━━━━━━━━━━━━━━━━━━●
+ball  ←——hole-to-hole span——→  ball
+      [      your input     ]</div>
+                    </div>
+
+                    <div class="cbb-layout-grid">
+                        <!-- Left Column: Input Form -->
+                        <div class="cbb-col">
+                            <div class="cbb-input-card">
+                                <h3 class="cbb-card-title" data-i18n="industrial.paramsTitle">Anatomy & Jewelry Parameters</h3>
+
+                                <div class="cbb-form-grid">
+                                    <div class="cbb-form-group">
+                                        <label for="ibb-ball-size" class="cbb-label" data-i18n="industrial.ball.label">Ball Diameter</label>
+                                        <select id="ibb-ball-size" class="cbb-select">
+                                            <option value="3mm" data-i18n="industrial.ball.petite">3 mm (petite / fine)</option>
+                                            <option value="4mm" selected data-i18n="industrial.ball.standard">4 mm (standard clinical)</option>
+                                            <option value="5mm" data-i18n="industrial.ball.large">5 mm (large / bold)</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="cbb-form-group">
+                                        <label for="ibb-healing-stage" class="cbb-label" data-i18n="curved.stage.label">Healing Stage</label>
+                                        <select id="ibb-healing-stage" class="cbb-select">
+                                            <option value="fresh" selected data-i18n="industrial.stage.fresh">Fresh / Unhealed (+4mm clearance)</option>
+                                            <option value="healed" data-i18n="industrial.stage.healed">Fully Healed (+2mm clearance)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="cbb-form-group">
+                                    <label for="ibb-hole-distance" class="cbb-label" data-i18n="industrial.dist.label">Hole-to-Hole Distance (mm)</label>
+                                    <div class="cbb-input-suffix">
+                                        <input type="number" id="ibb-hole-distance" class="cbb-input" min="20" max="80" step="0.5" value="38" placeholder="e.g. 38" data-i18n-placeholder="industrial.input.placeholder">
+                                        <span class="cbb-suffix-tag" data-i18n="common.mm">mm</span>
+                                    </div>
+                                    <div class="ibb-quick-spans" id="ibb-quick-spans">
+                                        <!-- Quick span buttons populated by industrial-barbell.js -->
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn--primary" id="ibb-calc-btn" style="width: 100%; justify-content: center; margin-top: var(--spacing-xs);">
+                                    <span>📏</span> <span data-i18n="industrial.calc.btnCalculate">Calculate Barbell Length</span>
+                                </button>
+                            </div>
+
+                            <!-- Visual Reference & Clinical Presets -->
+                            <div class="cbb-preset-card">
+                                <div class="cbb-preset-card__top">
+                                    <span class="cbb-preset-icon">👂</span>
+                                    <div>
+                                        <div class="cbb-preset-name" data-i18n="industrial.scaffoldStandard">Clinical Scaffold Standard</div>
+                                        <div class="cbb-preset-desc" data-i18n="industrial.presetDesc">14g (1.6 mm) ASTM F-136 Titanium / ASTM F-138 Steel / BioFlex®</div>
+                                    </div>
+                                </div>
+                                <div class="cbb-preset-details">
+                                    <div class="cbb-preset-detail">
+                                        <span class="cbb-detail-lbl" data-i18n="curved.specStandardGauge">Standard Gauge</span>
+                                        <span class="cbb-detail-val">14g (1.6 mm)</span>
+                                    </div>
+                                    <div class="cbb-preset-detail">
+                                        <span class="cbb-detail-lbl" data-i18n="industrial.typicalSpanRange">Typical Span Range</span>
+                                        <span class="cbb-detail-val">30 mm – 48 mm</span>
+                                    </div>
+                                    <div class="cbb-preset-detail">
+                                        <span class="cbb-detail-lbl" data-i18n="curved.specFreshAllowance">Fresh Swelling Allowance</span>
+                                        <span class="cbb-detail-val">+4.0 mm</span>
+                                    </div>
+                                    <div class="cbb-preset-detail">
+                                        <span class="cbb-detail-lbl" data-i18n="curved.specHealedAllowance">Healed Snug Fit Allowance</span>
+                                        <span class="cbb-detail-val">+2.0 mm</span>
+                                    </div>
+                                    <div class="cbb-preset-detail">
+                                        <span class="cbb-detail-lbl" data-i18n="industrial.fistulaMaturation">Fistula Maturation Period</span>
+                                        <span class="cbb-detail-val" data-i18n="industrial.maturationVal">6 – 12 Months</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Results & 1:1 Scale Preview -->
+                        <div class="cbb-col">
+                            <!-- Results Card -->
+                            <div id="ibb-results">
+                                <!-- Populated dynamically by industrial-barbell.js -->
+                            </div>
+
+                            <!-- 1:1 True Scale Preview -->
+                            <div class="cbb-scale-preview" id="ibb-scale-preview-container">
+                                <div class="cbb-scale-preview__header">
+                                    <h4 data-i18n="industrial.visualizerScaleTitle">1:1 True Scale Barbell Visualizer</h4>
+                                    <span class="cbb-scale-tag" data-i18n="industrial.calibratedScreenScale">Calibrated Screen Scale</span>
+                                </div>
+                                <div class="cbb-scale-canvas-box">
+                                    <canvas id="ibb-scale-canvas"></canvas>
+                                </div>
+                                <p class="cbb-scale-hint" data-i18n="industrial.scaleHint">
+                                    Place your caliper or jewelry against your screen for a direct 1:1 visual match. Ensure screen calibration is completed in the Visualizer tab for millimeter precision.
+                                </p>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="cbb-actions">
+                                <button type="button" class="btn btn--secondary" id="ibb-copy-btn">
+                                    <span>📋</span> <span data-i18n="industrial.btn.copy">Copy Sizing Specs</span>
+                                </button>
+                                <button type="button" class="btn btn--secondary" id="ibb-tryon-btn">
+                                    <span>🪞</span> <span data-i18n="industrial.btn.tryon">Try-On in Virtual Studio</span>
+                                </button>
+                            </div>
+
+                            <!-- Clinical Disclaimer -->
+                            <div class="cbb-disclaimer" data-i18n="industrial.clinicalNoteDesc">
+                                <strong>Clinical Note:</strong> Industrial piercings connect two independent cartilage punctures via a single rigid bar. Bilateral tissue swelling during the first 6–12 months requires proper initial length to prevent localized ischemia, migration, and permanent cartilaginous deformity. Consult a qualified professional piercer adhering to established professional practice before downsizing.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+<!-- Related Tools Section -->
+<section class="related-tools-section" style="padding: 2rem 1rem; background: var(--bg-secondary); border-top: 1px solid var(--border-color);">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: var(--text-primary);" data-i18n="footer.recommended">Recommended for You</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+            <a href="https://poliinternational.com/gauge-converter/" style="display: block; padding: 1rem; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 8px; text-decoration: none; color: var(--color-rose-gold); font-weight: 500; text-align: center; transition: background 0.2s;" data-i18n="tools.gaugeConverter">Gauge Converter</a>
+            <a href="https://poliinternational.com/healing-tracker/" style="display: block; padding: 1rem; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 8px; text-decoration: none; color: var(--color-rose-gold); font-weight: 500; text-align: center; transition: background 0.2s;" data-i18n="tools.healingTracker">Healing Tracker</a>
+            <a href="https://poliinternational.com/material-certification/" style="display: block; padding: 1rem; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 8px; text-decoration: none; color: var(--color-rose-gold); font-weight: 500; text-align: center; transition: background 0.2s;" data-i18n="tools.materialCert">Material Certification</a>
+        </div>
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <a href="https://poliinternational.com/tools/" style="color: var(--text-secondary); text-decoration: underline; font-size: 0.9rem;" data-i18n="footer.viewAll17">View All 17 Free Tools</a>
+        </div>
+    </div>
+</section>
+
+<!-- GEO Semantic Block -->
+<aside class="geo-summary-block" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-left: 4px solid var(--color-rose-gold); padding: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--text-secondary); border-radius: 0 8px 8px 0;">
+    <p style="margin: 0; line-height: 1.6;" data-i18n="footer.advisory">Expert Safety Advisory: Precision in gauge and material selection is critical for bio-compatibility. Our tools utilize industry-standard AWG and ASTM mappings to protect client health and ensure procedural success in every session.</p>
+</aside>
+
+</main>
+
+    <!-- Calibration Modal -->
+    <div class="modal" id="calibration-modal" style="display: none;">
+        
+        <div class="modal__content">
+            <div class="modal__header">
+                <h3 class="modal__title" data-i18n="calibration.modal.title">Screen Calibration</h3>
+                <button class="modal__close" id="modal-close">✕</button>
+            </div>
+            <div class="modal__body">
+                <p class="modal__description" data-i18n="calibration.modal.description">
+                    To display jewelry at true 1:1 scale, we need to calibrate your screen's pixel density (PPI).
+                    Please use a physical ruler or credit card to measure the reference below.
+                </p>
+
+                <div class="calibration-method">
+                    <h4 data-i18n="calibration.modal.method1">Method 1: Credit Card</h4>
+                    <p data-i18n="calibration.modal.desc1">Place a credit card on your screen and adjust the slider until it matches perfectly.</p>
+                    <div class="calibration-card" id="calibration-card">
+                        <div class="card-mockup">
+                            
+                            <div class="card-mockup__text" data-i18n="calibration.card.label">CREDIT CARD</div>
+                            <div class="card-mockup__size" data-i18n="calibration.card.dims">85.6mm × 54mm</div>
+                        </div>
+                    </div>
+                    <div class="calibration-slider">
+                        <label data-i18n="calibration.card.adjust">Adjust size:</label>
+                        <input type="range" id="card-calibration-slider" min="50" max="200" value="100">
+                        <span id="card-size-display">85.6mm</span>
+                    </div>
+                </div>
+
+                <div class="calibration-method">
+                    <h4 data-i18n="calibration.modal.method2">Method 2: Ruler</h4>
+                    <p data-i18n="calibration.modal.desc2">Measure the ruler below and adjust until it shows exactly 100mm (10cm).</p>
+                    <div class="calibration-ruler" id="calibration-ruler-display">
+                        <svg width="100%" height="60" id="ruler-svg">
+                            <!-- Ruler will be drawn by JavaScript -->
+                        </svg>
+                    </div>
+                    <div class="calibration-slider">
+                        <label data-i18n="calibration.card.adjust">Adjust size:</label>
+                        <input type="range" id="ruler-calibration-slider" min="50" max="200" value="100">
+                        <span id="ruler-size-display">100mm</span>
+                    </div>
+                </div>
+
+                <div class="calibration-auto">
+                    <h4 data-i18n="calibration.modal.method3">Or Use Auto-Detection</h4>
+                    <p data-i18n="calibration.modal.desc3">We'll estimate your screen's PPI based on your device specifications.</p>
+                    <button class="btn btn--secondary" id="auto-detect-ppi" data-i18n="calibration.modal.btnAuto">Auto-Detect PPI</button>
+                    <p class="calibration-auto__result" id="auto-detect-result"></p>
+                </div>
+            </div>
+            <div class="modal__footer">
+                <button class="btn btn--primary" id="save-calibration" data-i18n="calibration.modal.btnSave">Save Calibration</button>
+                <button class="btn btn--secondary" id="skip-calibration" data-i18n="calibration.modal.btnSkip">Skip for Now</button>
+            </div>
+        </div>
+    </div>
+
+        <!-- MORE TOOLS NAVIGATION -->
+    <section class="jewelry-viz__more-tools">
+        <div class="jewelry-viz__container" style="text-align: center; padding: 2rem 1rem;">
+            <p style="font-size: 1.05rem; margin: 0; color: var(--text-secondary);">
+                <a href="https://poliinternational.com/tools/" target="_top" style="color: var(--color-rose-gold); text-decoration: none; font-weight: 600; transition: color 0.2s;" data-i18n="common.exploreTools">
+                    Explore all our free professional tools →
+                </a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    
+                    <p class="footer__tagline" data-i18n="footer.heading">Professional Body Piercing Jewelry & Tools</p>
+                </div>
+                <div class="footer__links">
+                    <h4 class="footer__heading" data-i18n="footer.proTools">Professional Tools</h4>
+                    <ul class="footer__list">
+                        <li><a href="https://poliinternational.com/gauge-converter/" target="_top" data-i18n="tools.gaugeConverter">Gauge Converter</a></li>
+                        <li><a href="https://poliinternational.com/needle-selector/" target="_top" data-i18n="tools.needleSelector">Needle Selector</a></li>
+                        <li><a href="https://poliinternational.com/material-certification/" target="_top" data-i18n="tools.materialCert">Material Certification</a></li>
+                        <li><a href="https://poliinternational.com/autoclave-calculator/" target="_top" data-i18n="tools.autoclaveCalc">Autoclave Calculator</a></li>
+                        <li><a href="https://poliinternational.com/equipment-compatibility/" target="_top" data-i18n="tools.equipCompat">Equipment Compatibility</a></li>
+                        <li><a href="https://poliinternational.com/coverage-calculator/" target="_top" data-i18n="tools.coverageCalc">Coverage Calculator</a></li>
+                        <li><a href="https://poliinternational.com/curved-barbell-calculator/" target="_top" data-i18n="tools.curvedBarbellCalc">Curved Barbell Calculator</a></li>
+                        <li><a href="https://poliinternational.com/industrial-barbell-calculator/" target="_top" data-i18n="tools.industrialBarbellCalc">Industrial Barbell Calculator</a></li>
+                    </ul>
+                </div>
+                <div class="footer__links">
+                    <h4 class="footer__heading" data-i18n="footer.moreTools">More Tools</h4>
+                    <ul class="footer__list">
+                        <li><a href="https://poliinternational.com/ink-mixer/" target="_top" data-i18n="tools.inkMixer">Ink Color Mixer</a></li>
+                        <li><a href="https://poliinternational.com/healing-tracker/" target="_top" data-i18n="tools.healingTracker">Healing Tracker</a></li>
+                        <li><a href="https://poliinternational.com/pain-guide/" target="_top" data-i18n="tools.painGuide">Pain Guide</a></li>
+                        <li><a href="https://poliinternational.com/piercing-angle-guide/" target="_top" data-i18n="tools.piercingAngleGuide">Piercing Angle Guide</a></li>
+                        <li><a href="https://poliinternational.com/stencil-calculator/" target="_top" data-i18n="tools.stencilCalc">Stencil Calculator</a></li>
+                        <li><a href="https://poliinternational.com/touch-up-timeline/" target="_top" data-i18n="tools.touchupTimeline">Touch-up Timeline</a></li>
+                    </ul>
+                </div>
+                <div class="footer__disclaimer">
+                    <h4 class="footer__heading" data-i18n="footer.disclaimer">Medical Disclaimer</h4>
+                    <p class="footer__text" data-i18n="footer.disclaimerText">
+                        This tool provides general size information only and is not a substitute for professional piercing advice.
+                        Always consult a qualified professional piercer adhering to established professional practice for proper jewelry sizing and fitting. Individual anatomy varies significantly.
+                        Poli International is not responsible for jewelry selection or sizing decisions made using this tool.
+                    </p>
+                </div>
+            </div>
+
+<div class="footer__bottom">
+                <div class="footer__lang">
+                    <label for="footer-lang-select" class="footer__lang-label" title="Available languages: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL)" data-i18n-title="common.langTooltip">
+                        <span aria-hidden="true">🌐</span>
+                        <span data-i18n="common.language">Language</span>:
+                    </label>
+                    <select id="footer-lang-select" class="lang-select" aria-label="Select Language" data-i18n-aria-label="common.language">
+                        <option value="en">English</option>
+                        <option value="de">Deutsch</option>
+                        <option value="fr">Français</option>
+                        <option value="es">Español</option>
+                        <option value="it">Italiano</option>
+                        <option value="pt">Português</option>
+                        <option value="nl">Nederlands</option>
+                    </select>
+                </div>
+                <p><span data-i18n="footer.copyright">&copy; 2025 Poli International Co. All rights reserved.</span> | <a href="https://poliinternational.com/privacy/" target="_top" data-i18n="footer.privacy">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/tools/jewelry-size-visualizer/js/i18n/en.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/i18n/de.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/i18n/fr.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/i18n/es.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/i18n/it.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/i18n/pt.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/i18n/nl.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/i18n.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/database.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/calibration.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/visualizer.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/try-on.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/comparison.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/anatomy.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/matrices.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/curved-barbell.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/industrial-barbell.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/photo-measure.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/collection.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/fit-card.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/main.js"></script>
+
+    
+
+<!-- AUTOMATIC IFRAME CONTENT HIDER (ADDED BY ANTIGRAVITY) -->
+<script>
+    if (window.self !== window.top) {
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectors = ['.breadcrumb-nav', '.site-header', '.site-footer', '.equip-checker__header', 
+                '.equip-checker__footer', '.tool-title-section', '.more-tools-section',
+                '.feedback-section', '.related-tools-section', '.geo-summary-block',
+                '.needle-selector__header', '.needle-selector__footer', 
+                '.needle-selector__more-tools', '.community-feedback',
+                '.poli-footer', '.share-card', '.need-support-card', '.explore-all-card'];
+            selectors.forEach(selector => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(el => el.style.display = 'none');
+            });
+            // Force reset body margins for embed
+            document.body.style.paddingTop = '0';
+            document.body.style.marginTop = '0';
+            document.body.style.paddingBottom = '0';
+            document.body.style.marginBottom = '0';
+
+/* Center align tool headers when in iframe */
+if (window.self !== window.top) {
+    const style = document.createElement('style');
+    style.textContent = `
+        /* Center the entire header section */
+        [class*="__header-content"],
+        [class*="__title-group"],
+        [class*="__header-buttons"] {
+            text-align: center !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        /* Center H2 headings */
+        [class*="__header"] h2,
+        [class*="__title-group"] h2,
+        header h2 {
+            text-align: center !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        /* Center subtitles/descriptions */
+        [class*="__subtitle"],
+        [class*="__header"] p {
+            text-align: center !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        /* Center button containers */
+        [class*="__header-buttons"] {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            flex-wrap: wrap !important;
+        }
+    `;
+    document.head.appendChild(style);
+}
+        });
+    }
+</script>
+
+</body>
+</html>

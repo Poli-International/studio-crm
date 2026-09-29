@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+<script>
+if (window.self !== window.top) {
+    var poliRoot = document.documentElement;
+    var poliApply = function (light) {
+        poliRoot.setAttribute('data-theme', light ? 'light' : 'dark');
+        var b = document.body;
+        if (b) {
+            b.classList.toggle('dark-mode', !light);
+            b.classList.toggle('light-mode', !!light);
+        }
+    };
+    poliApply(false);
+    document.addEventListener('DOMContentLoaded', function () {
+        poliApply(poliRoot.getAttribute('data-theme') === 'light');
+    });
+    window.addEventListener('message', function (e) {
+        if (e.data && e.data.type === 'poli-theme') {
+            poliApply(!!e.data.light);
+        }
+    });
+}
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gauge Converter | Poli International</title>
+<style>
+:root{--color-primary:#0066CC;--color-primary-dark:#004C99;--color-primary-light:#3385D6;--color-text-primary:#333;--color-text-secondary:#666;--color-text-light:#999;--color-text-white:#FFF;--color-background:#F5F5F5;--color-background-white:#FFF;--color-background-light:#FAFAFA;--color-border:#DDD;--color-border-light:#E8E8E8;--color-border-focus:#0066CC;--color-error:#DC3545;--color-error-bg:#F8D7DA;--font-family-base:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--font-family-mono:"SF Mono",Monaco,"Cascadia Code","Roboto Mono",Consolas,"Courier New",monospace;--font-size-base:16px;--font-size-small:14px;--font-size-large:18px;--font-size-input:18px;--font-size-h1:28px;--font-size-h2:20px;--spacing-xs:0.5rem;--spacing-sm:1rem;--spacing-md:1.5rem;--spacing-lg:2rem;--border-radius:8px;--border-radius-small:4px;--transition-speed:0.3s;--transition-ease:ease;--shadow-small:0 2px 4px rgba(0,0,0,0.1);--shadow-focus:0 0 0 3px rgba(0,102,204,0.25)}*{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--font-family-base);font-size:var(--font-size-base);line-height:1.5;color:var(--color-text-primary);background-color:var(--color-background-white);-webkit-font-smoothing:antialiased}.gauge-converter{max-width:1200px;margin:0 auto;padding:var(--spacing-md)}.gauge-converter__header{text-align:center;padding:var(--spacing-md) var(--spacing-sm);border-bottom:2px solid var(--color-primary);margin-bottom:var(--spacing-lg)}.gauge-converter__title{font-size:var(--font-size-h1);font-weight:700;color:var(--color-primary);line-height:1.2;margin-bottom:var(--spacing-xs)}.gauge-converter__subtitle{font-size:var(--font-size-base);color:var(--color-text-secondary);font-weight:400}.gauge-converter__main{display:flex;flex-direction:column;gap:var(--spacing-lg)}.gauge-converter__input-section,.gauge-converter__visual-section{background-color:var(--color-background-light);padding:var(--spacing-md);border-radius:var(--border-radius);border:1px solid var(--color-border-light)}.gauge-converter__section-title{font-size:var(--font-size-h2);font-weight:700;color:var(--color-primary-dark);margin-bottom:var(--spacing-xs)}.gauge-converter__instruction{font-size:var(--font-size-base);color:var(--color-text-secondary);margin-bottom:var(--spacing-md)}.gauge-converter__inputs{display:grid;grid-template-columns:1fr;gap:var(--spacing-md);margin-bottom:var(--spacing-md)}.gauge-converter__input-group{display:flex;flex-direction:column;gap:var(--spacing-xs)}.gauge-converter__label{font-size:var(--font-size-base);font-weight:500;color:var(--color-text-primary);display:flex;flex-direction:column;gap:0.25rem}.gauge-converter__label-hint{font-size:var(--font-size-small);font-weight:400;color:var(--color-text-light);font-style:italic}.gauge-converter__input,.gauge-converter__select{font-family:var(--font-family-base);font-size:var(--font-size-input);padding:var(--spacing-sm) var(--spacing-md);border:2px solid var(--color-border);border-radius:var(--border-radius-small);background-color:var(--color-background-white);color:var(--color-text-primary);transition:all var(--transition-speed) var(--transition-ease);width:100%;min-height:48px}.gauge-converter__input:hover,.gauge-converter__select:hover{border-color:var(--color-primary-light)}.gauge-converter__input:focus,.gauge-converter__select:focus{outline:0;border-color:var(--color-border-focus);box-shadow:var(--shadow-focus)}.gauge-converter__input::placeholder{color:var(--color-text-light)}.gauge-converter__input::-webkit-outer-spin-button,.gauge-converter__input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}.gauge-converter__input[type="number"]{-moz-appearance:textfield}.gauge-converter__help-text{font-size:var(--font-size-small);color:var(--color-text-secondary);line-height:1.3}.gauge-converter__error{background-color:var(--color-error-bg);border-left:4px solid var(--color-error);padding:var(--spacing-sm) var(--spacing-md);border-radius:var(--border-radius-small);color:var(--color-error);font-weight:500;margin-top:var(--spacing-md)}.gauge-converter__visual-container{display:flex;flex-direction:column;gap:var(--spacing-md);align-items:center}.gauge-converter__circle-display{width:100%;max-width:250px;background-color:var(--color-background-white);border:2px solid var(--color-border);border-radius:var(--border-radius);padding:var(--spacing-md)}.gauge-converter__svg{width:100%;height:auto;display:block}.gauge-converter__measurement-display{display:flex;flex-direction:column;gap:var(--spacing-xs);width:100%;max-width:350px}.gauge-converter__measurement-value{display:flex;justify-content:space-between;align-items:center;padding:var(--spacing-xs) var(--spacing-md);background-color:var(--color-background-white);border:1px solid var(--color-border);border-radius:var(--border-radius-small);transition:all var(--transition-speed) var(--transition-ease)}.gauge-converter__measurement-value:hover{border-color:var(--color-primary-light);box-shadow:var(--shadow-small)}.gauge-converter__measurement-label{font-weight:500;color:var(--color-text-secondary);font-size:var(--font-size-small)}.gauge-converter__measurement-number{font-family:var(--font-family-mono);font-weight:700;color:var(--color-primary);font-size:var(--font-size-large)}.gauge-converter__footer{margin-top:var(--spacing-lg);padding:var(--spacing-md);text-align:center;border-top:1px solid var(--color-border-light);background-color:var(--color-background-light);font-size:var(--font-size-small)}.gauge-converter__brand-text{color:var(--color-text-secondary);margin:0}.gauge-converter__brand-text strong{color:var(--color-primary);font-weight:700}.gauge-converter__link{color:var(--color-primary);text-decoration:none;font-weight:500;transition:color var(--transition-speed) var(--transition-ease)}.gauge-converter__link:hover{color:var(--color-primary-dark);text-decoration:underline}@media (min-width:768px){.gauge-converter__inputs{grid-template-columns:repeat(3,1fr)}.gauge-converter__visual-container{flex-direction:row;justify-content:space-around;align-items:flex-start}.gauge-converter__circle-display{max-width:280px}}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}}
+</style>
+  <script src="/js/input-guards.js"></script>
+  <link rel="stylesheet" href="/tools/shared/print.css" media="print">
+  <link rel="stylesheet" href="/tools/shared/a11y.css">
+</head>
+<body>
+<div class="gauge-converter">
+<header class="gauge-converter__header">
+<div class="gauge-converter__header-content">
+<h1 class="gauge-converter__title">Professional Gauge Converter</h1>
+<p class="gauge-converter__subtitle">Instant gauge, mm, and inch conversions</p>
+<div class="gauge-converter__header-buttons">
+
+<button id="dark-mode-toggle" class="gauge-converter__dark-mode-toggle" aria-label="Toggle dark mode">
+<span class="dark-mode-icon">◐</span>
+</button>
+</div>
+</div>
+</header>
+<main class="gauge-converter__main">
+<section class="gauge-converter__input-section" aria-labelledby="input-heading">
+<h2 id="input-heading" class="gauge-converter__section-title">Enter Measurement</h2>
+<p class="gauge-converter__instruction">Enter a value in any field to see instant conversions</p>
+<div class="gauge-converter__inputs">
+<div class="gauge-converter__input-group">
+<label for="gauge-input" class="gauge-converter__label">Gauge Size<span class="gauge-converter__label-hint">(e.g., 14G, 16G)</span></label>
+<select id="gauge-input" class="gauge-converter__select" data-input-type="gauge" aria-describedby="gauge-help">
+<option value="">Select Gauge</option>
+<option value="00G">00G (10.0mm)</option>
+<option value="0G">0G (8.0mm)</option>
+<option value="1G">1G (7.0mm)</option>
+<option value="2G">2G (6.0mm)</option>
+<option value="4G">4G (5.0mm)</option>
+<option value="6G">6G (4.0mm)</option>
+<option value="8G">8G (3.2mm)</option>
+<option value="10G">10G (2.4mm)</option>
+<option value="12G">12G (2.0mm)</option>
+<option value="14G">14G (1.6mm)</option>
+<option value="16G">16G (1.2mm)</option>
+<option value="18G">18G (1.0mm)</option>
+<option value="20G">20G (0.8mm)</option>
+<option value="22G">22G (0.6mm)</option>
+</select>
+<small id="gauge-help" class="gauge-converter__help-text">Standard AWG sizes</small>
+</div>
+<div class="gauge-converter__input-group">
+<label for="mm-input" class="gauge-converter__label">Millimeters (mm)<span class="gauge-converter__label-hint">(decimal)</span></label>
+<input type="number" id="mm-input" class="gauge-converter__input" placeholder="0.0" step="0.1" min="0" max="20" data-input-type="mm" aria-describedby="mm-help"/>
+<small id="mm-help" class="gauge-converter__help-text">Metric measurement</small>
+</div>
+<div class="gauge-converter__input-group">
+<label for="inch-input" class="gauge-converter__label">Inches (in)<span class="gauge-converter__label-hint">(decimal)</span></label>
+<input type="number" id="inch-input" class="gauge-converter__input" placeholder="0.000" step="0.001" min="0" max="1" data-input-type="inches" aria-describedby="inch-help"/>
+<small id="inch-help" class="gauge-converter__help-text">Imperial measurement</small>
+</div>
+</div>
+<div class="gauge-converter__error" id="error-message" role="alert" aria-live="polite" style="display:none;"></div>
+</section>
+<section class="gauge-converter__visual-section" aria-labelledby="visual-heading">
+<h2 id="visual-heading" class="gauge-converter__section-title">Visual Reference</h2>
+<p class="gauge-converter__instruction">Life-size diameter representation</p>
+<div class="gauge-converter__visual-container">
+<div class="gauge-converter__circle-display" aria-label="Visual representation of gauge size">
+<svg class="gauge-converter__svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="circle-title circle-desc">
+<title id="circle-title">Gauge Size Visual</title>
+<desc id="circle-desc">A circle showing the actual diameter of the selected gauge size</desc>
+<circle cx="150" cy="150" r="140" fill="none" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="5,5"/>
+<circle id="gauge-circle" cx="150" cy="150" r="0" fill="#0066CC" fill-opacity="0.3" stroke="#0066CC" stroke-width="2" data-gauge-circle/>
+</svg>
+</div>
+<div class="gauge-converter__measurement-display">
+<div class="gauge-converter__measurement-value" id="display-gauge" data-display="gauge">
+<span class="gauge-converter__measurement-label">Gauge:</span>
+<span class="gauge-converter__measurement-number">--</span>
+</div>
+<div class="gauge-converter__measurement-value" id="display-mm" data-display="mm">
+<span class="gauge-converter__measurement-label">Diameter:</span>
+<span class="gauge-converter__measurement-number">-- mm</span>
+</div>
+<div class="gauge-converter__measurement-value" id="display-inches" data-display="inches">
+<span class="gauge-converter__measurement-label">Inches:</span>
+<span class="gauge-converter__measurement-number">-- in</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="embed-footer">
+<div class="embed-footer-content">
+<a href="https://poliinternational.com/tools/" target="_top" class="embed-footer-btn embed-footer-btn--tools">
+<span class="btn-icon">🔧</span>
+<span class="btn-text">More Tools</span>
+</a>
+
+<a href="https://poliinternational.com/tools/gauge-converter/index.html" target="_top" class="embed-footer-link">
+Open Full Version →
+</a>
+</div>
+</footer>
+</div>
+<script>
+'use strict';const GAUGE_TO_MM={'00G':10.0,'0G':8.0,'1G':7.0,'2G':6.0,'4G':5.0,'6G':4.0,'8G':3.2,'10G':2.4,'12G':2.0,'14G':1.6,'16G':1.2,'18G':1.0,'20G':0.8,'22G':0.6};const MM_TO_GAUGE=Object.entries(GAUGE_TO_MM).reduce((acc,[gauge,mm])=>{acc[mm]=gauge;return acc},{});const MM_PER_INCH=25.4;const PIXELS_PER_MM=3.78;const MAX_CIRCLE_RADIUS=140;const DEBOUNCE_DELAY=300;function gaugeToMM(gauge){if(!gauge||gauge==='')return null;return GAUGE_TO_MM[gauge]||null}function mmToInches(mm){if(mm===null||mm===undefined||mm==='')return null;const mmNum=parseFloat(mm);if(isNaN(mmNum)||mmNum<0)return null;return parseFloat((mmNum/MM_PER_INCH).toFixed(3))}function inchesToMM(inches){if(inches===null||inches===undefined||inches==='')return null;const inchNum=parseFloat(inches);if(isNaN(inchNum)||inchNum<0)return null;return parseFloat((inchNum*MM_PER_INCH).toFixed(1))}function mmToClosestGauge(mm){if(mm===null||mm===undefined||mm==='')return null;const mmNum=parseFloat(mm);if(isNaN(mmNum)||mmNum<0)return null;if(MM_TO_GAUGE[mmNum]){return MM_TO_GAUGE[mmNum]}const gauges=Object.keys(GAUGE_TO_MM);let closestGauge=null;let smallestDiff=Infinity;gauges.forEach(gauge=>{const gaugeMM=GAUGE_TO_MM[gauge];const diff=Math.abs(gaugeMM-mmNum);if(diff<smallestDiff){smallestDiff=diff;closestGauge=gauge}});return closestGauge}function inchesToClosestGauge(inches){const mm=inchesToMM(inches);return mmToClosestGauge(mm)}function updateCircleDisplay(mm){const circle=document.getElementById('gauge-circle');if(!circle)return;if(mm===null||mm===undefined||mm===''){circle.setAttribute('r','0');return}const mmNum=parseFloat(mm);if(isNaN(mmNum)||mmNum<=0){circle.setAttribute('r','0');return}let radiusPixels=(mmNum/2)*PIXELS_PER_MM;if(radiusPixels>MAX_CIRCLE_RADIUS){radiusPixels=MAX_CIRCLE_RADIUS}circle.setAttribute('r',radiusPixels.toFixed(2))}function updateMeasurementDisplay(values){const{gauge,mm,inches}=values;const gaugeDisplay=document.querySelector('#display-gauge .gauge-converter__measurement-number');if(gaugeDisplay){gaugeDisplay.textContent=gauge||'--'}const mmDisplay=document.querySelector('#display-mm .gauge-converter__measurement-number');if(mmDisplay){mmDisplay.textContent=mm!==null?`${mm} mm`:'-- mm'}const inchesDisplay=document.querySelector('#display-inches .gauge-converter__measurement-number');if(inchesDisplay){inchesDisplay.textContent=inches!==null?`${inches} in`:'-- in'}}function showError(message){const errorElement=document.getElementById('error-message');if(!errorElement)return;errorElement.textContent=message;errorElement.style.display='block';setTimeout(()=>{hideError()},5000)}function hideError(){const errorElement=document.getElementById('error-message');if(!errorElement)return;errorElement.textContent='';errorElement.style.display='none'}function clearAllInputs(){const gaugeInput=document.getElementById('gauge-input');const mmInput=document.getElementById('mm-input');const inchInput=document.getElementById('inch-input');if(gaugeInput)gaugeInput.value='';if(mmInput)mmInput.value='';if(inchInput)inchInput.value='';updateCircleDisplay(null);updateMeasurementDisplay({gauge:null,mm:null,inches:null});hideError()}function validateNumericInput(value,min=0,max=Infinity){if(value===''||value===null||value===undefined)return true;const num=parseFloat(value);if(isNaN(num))return false;if(num<min||num>max)return false;return true}let debounceTimer=null;function handleGaugeChange(){hideError();const gaugeInput=document.getElementById('gauge-input');const gauge=gaugeInput.value;if(!gauge||gauge===''){clearAllInputs();return}const mm=gaugeToMM(gauge);if(mm===null){showError('Invalid gauge selection');return}const inches=mmToInches(mm);const mmInput=document.getElementById('mm-input');const inchInput=document.getElementById('inch-input');if(mmInput)mmInput.value=mm.toFixed(1);if(inchInput)inchInput.value=inches.toFixed(3);updateCircleDisplay(mm);updateMeasurementDisplay({gauge,mm:mm.toFixed(1),inches:inches.toFixed(3)})}function handleMMChange(){hideError();if(debounceTimer){clearTimeout(debounceTimer)}debounceTimer=setTimeout(()=>{const mmInput=document.getElementById('mm-input');const mmValue=mmInput.value;if(!mmValue||mmValue===''){clearAllInputs();return}if(!validateNumericInput(mmValue,0,20)){showError('Please enter a valid measurement between 0 and 20 mm');return}const mm=parseFloat(mmValue);const gauge=mmToClosestGauge(mm);const inches=mmToInches(mm);const gaugeInput=document.getElementById('gauge-input');const inchInput=document.getElementById('inch-input');if(gaugeInput)gaugeInput.value=gauge||'';if(inchInput)inchInput.value=inches!==null?inches.toFixed(3):'';updateCircleDisplay(mm);updateMeasurementDisplay({gauge,mm:mm.toFixed(1),inches:inches!==null?inches.toFixed(3):null})},DEBOUNCE_DELAY)}function handleInchesChange(){hideError();if(debounceTimer){clearTimeout(debounceTimer)}debounceTimer=setTimeout(()=>{const inchInput=document.getElementById('inch-input');const inchValue=inchInput.value;if(!inchValue||inchValue===''){clearAllInputs();return}if(!validateNumericInput(inchValue,0,1)){showError('Please enter a valid measurement between 0 and 1 inch');return}const inches=parseFloat(inchValue);const mm=inchesToMM(inches);const gauge=inchesToClosestGauge(inches);const gaugeInput=document.getElementById('gauge-input');const mmInput=document.getElementById('mm-input');if(gaugeInput)gaugeInput.value=gauge||'';if(mmInput)mmInput.value=mm!==null?mm.toFixed(1):'';updateCircleDisplay(mm);updateMeasurementDisplay({gauge,mm:mm!==null?mm.toFixed(1):null,inches:inches.toFixed(3)})},DEBOUNCE_DELAY)}function initConverter(){const gaugeInput=document.getElementById('gauge-input');const mmInput=document.getElementById('mm-input');const inchInput=document.getElementById('inch-input');if(gaugeInput){gaugeInput.addEventListener('change',handleGaugeChange)}if(mmInput){mmInput.addEventListener('input',handleMMChange);mmInput.addEventListener('keyup',handleMMChange)}if(inchInput){inchInput.addEventListener('input',handleInchesChange);inchInput.addEventListener('keyup',handleInchesChange)}updateCircleDisplay(null);updateMeasurementDisplay({gauge:null,mm:null,inches:null})}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initConverter)}else{initConverter()}
+</script>
+</body>
+</html>

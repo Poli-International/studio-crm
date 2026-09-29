@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="robots" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Supply &amp; Machine Troubleshooter: user guide Documentation | Poli International</title>
+    <meta name="description" content="The Power Supply &amp; Machine Troubleshooter is an interactive diagnostic guide for tattoo artists, apprentices, and studio technicians to isolate electrical and mechanical faults across tattoo machines, power supply units, cables, and foot pedals.">
+    <link rel="canonical" href="https://poliinternational.com/power-supply-troubleshooter/">
+    <style>
+        body { background: #0f0f0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; }
+        body.in-iframe .doc-hero h1 { display: none; }
+        * { box-sizing: border-box; }
+        .entry-content { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .doc-hero { background: linear-gradient(135deg, #3B82F6, #8B5CF6); padding: 3rem 2rem; text-align: center; border-radius: 0.75rem; margin-bottom: 2rem; }
+        .doc-hero h1 { font-size: 2.2rem; margin: 0 0 1rem; font-weight: 700; }
+        .doc-hero p { font-size: 1.15rem; color: #E0E7FF; margin: 0; }
+        .doc-hero .v2 { display: inline-block; margin-bottom: 1rem; padding: 0.2rem 0.75rem; border-radius: 999px; background: #10B981; color: #04241a; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; }
+        .doc-section { margin: 2rem 0; padding: 2rem; background: #1a1a1a; border-radius: 0.75rem; border-left: 4px solid #3B82F6; }
+        .doc-section h2 { color: #60A5FA; font-size: 1.7rem; margin: 0 0 1.25rem; font-weight: 600; }
+        .doc-section h3 { color: #A78BFA; font-size: 1.3rem; margin: 1.75rem 0 0.75rem; font-weight: 600; }
+        .doc-section p, .doc-section li { color: #ccc; line-height: 1.75; font-size: 1.02rem; }
+        .doc-section ul, .doc-section ol { padding-left: 1.5rem; }
+        .doc-section li { margin: 0.4rem 0; }
+        .doc-section code { background: #2a2a2a; padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.92em; }
+        .doc-section a { color: #60A5FA; font-weight: 600; }
+        .highlight-box { background: linear-gradient(135deg, #1E3A8A, #4C1D95); padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; border-left: 4px solid #10B981; }
+        .highlight-box p { color: #E0E7FF; margin: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border: 1px solid #333; vertical-align: top; }
+        th { background: #2a2a2a; color: #60A5FA; }
+        td { color: #ccc; }
+        .doc-langs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.5rem; font-size: 0.9rem; }
+        .doc-langs a, .doc-langs span { padding: 0.3rem 0.7rem; border-radius: 999px; border: 1px solid #333; text-decoration: none; }
+        .doc-langs a { color: #60A5FA; }
+        .doc-langs span { background: #1E3A8A; color: #E0E7FF; border-color: #1E3A8A; font-weight: 700; }
+    </style>
+</head>
+<body>
+<script>if (window.self !== window.top) document.body.classList.add('in-iframe');</script>
+    <div class="entry-content">
+        <nav class="doc-langs" aria-label="Documentation language"><span lang="en">English</span><a lang="fr" href="documentation-fr.html">Francais</a><a lang="de" href="documentation-de.html">Deutsch</a><a lang="es" href="documentation-es.html">Espanol</a><a lang="it" href="documentation-it.html">Italiano</a><a lang="nl" href="documentation-nl.html">Nederlands</a><a lang="pt" href="documentation-pt.html">Portugues</a></nav>
+        <div class="doc-hero">
+            <span class="v2">V2</span>
+            <h1>Power Supply &amp; Machine Troubleshooter: user guide</h1>
+            <p>The Power Supply &amp; Machine Troubleshooter is an interactive diagnostic guide for tattoo artists, apprentices, and studio technicians to isolate electrical and mechanical faults across tattoo machines, power supply units, cables, and foot pedals.</p>
+        </div>
+        <div class="doc-section">
+        <h2>What it is for</h2>
+        <p>Tattoo equipment operates as an interconnected circuit. When a machine stutters, overheats, slows down, or fails to start, guessing which component failed wastes valuable time. Swapping cables or adjusting contact screws at random risks mechanical misalignment or electrical damage.</p>
+        <p>This tool provides a symptom-based decision tree. It guides users through observable faults to determine whether an issue originates in the power supply, foot switch, cord, motor assembly, or coil components. Each path concludes with an objective severity classification and an actionable fix checklist.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Who it is for</h2>
+        <p>This tool is built for:</p>
+        <ul>
+        <li><strong>Tattoo artists</strong> troubleshooting equipment stalls, erratic voltage, or bogging needles during studio sessions.</li>
+        <li><strong>Tattoo apprentices</strong> learning to test electrical connections, machine tuning, and station hardware systematically.</li>
+        <li><strong>Studio owners and technicians</strong> auditing workstation equipment, identifying damaged cables, and deciding when hardware needs professional servicing.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>How to use it</h2>
+        <p>The troubleshooter guides you through a progressive decision tree directly in your browser:</p>
+        <h3>Safety note and diagnostics header</h3>
+        <p>Before testing equipment, review the safety guidance displayed on screen:</p>
+        <ol>
+        <li>Confirm the header displays the <code>⚡ Machine Diagnostics</code> badge and the title <code>Power Supply &amp; Machine Troubleshooter</code>.</li>
+        <li>Read the operational summary: <code>Step-by-step fault diagnosis for tattoo machines. Answer a few questions about your symptoms to get a targeted fix checklist.</code></li>
+        <li>Check the <code>Safety note:</code> panel at the base of the interface before handling hardware.</li>
+        <li>If you notice burning odors, smoke, or sparking, disconnect the machine from wall power immediately.</li>
+        </ol>
+        <h3>Selecting the primary symptom</h3>
+        <p>Begin diagnosis by identifying the primary observable behavior of your equipment:</p>
+        <ol>
+        <li>Locate the initial question: <code>What is the primary symptom?</code></li>
+        <li>Select the option matching your machine or power supply behavior:</li>
+        </ol>
+        <ul>
+        <li><code>Machine will not power on</code> for a dead unit with no sound or movement.</li>
+        <li><code>Voltage inconsistent or fluctuating</code> when speed drops or voltage readouts jump.</li>
+        <li><code>Running too fast or too slow</code> if speed varies during running or stalls in skin.</li>
+        <li><code>Excessive noise or vibration</code> if you notice excessive buzzing, rattling, or grinding.</li>
+        <li><code>Cable or connection dropping out</code> if power drops when moving the cable.</li>
+        <li><code>Machine overheating</code> if hardware runs hot after short periods.</li>
+        </ul>
+        <h3>Progressing through diagnostic steps and multimeter verification</h3>
+        <p>Follow the progressive questions presented by the wizard to isolate the fault:</p>
+        <ol>
+        <li>Track your position using the <code>Step {step} of ~{total}</code> progress bar.</li>
+        <li>Read the specific question regarding display lights, foot switch bypass, or machine type.</li>
+        <li>Check or leave unchecked the <strong>Multimeter / test meter confirmed measurement</strong> toggle:</li>
+        </ol>
+        <ul>
+        <li>Check the toggle if you verified voltage, continuity, resistance, or amperage with a digital multimeter on your bench.</li>
+        <li>Leave it unchecked if you are deciding based on visual observation or sound alone.</li>
+        </ul>
+        <ol>
+        <li>Click the button corresponding to your test result.</li>
+        <li>If you need to retrace a choice, click the <code>← Back</code> button to return to the previous question.</li>
+        </ol>
+        <h3>Reviewing recommended actions, measurement confidence, and escalation</h3>
+        <p>When you reach the conclusion of a diagnostic path, review the results card:</p>
+        <ol>
+        <li>Check the result banner at the top to see the verdict and severity status (<code>ok</code>, <code>check</code>, <code>service</code>, <code>stop</code>).</li>
+        <li>Examine the <strong>Measurement Confidence</strong> panel:</li>
+        </ol>
+        <ul>
+        <li><strong>Bench-Confirmed</strong>: Appears when every question along your path was confirmed using a multimeter.</li>
+        <li><strong>Confidence-Limited</strong>: Appears when any step was answered based on observation alone, advising you to confirm with electrical meter checks before replacing hardware.</li>
+        </ul>
+        <ol>
+        <li>Review the <code>Recommended Actions</code> checklist for station-level steps, cleaning instructions, or repair advice.</li>
+        <li>For hardware faults requiring professional bench servicing or immediate shutdown, follow the <strong>When to Call a Tech</strong> prompt or click the tab in the top navigation to view the comprehensive Escalation Directory (16 categorized conditions).</li>
+        <li>Click <strong>Print Diagnosis Ticket</strong> to print a clean bench ticket with technician sign-off fields and your measurement confidence rating.</li>
+        <li>Click the <code>← Start Over</code> button to reset the wizard and return to <code>What is the primary symptom?</code>.</li>
+        </ol>
+        <h3>When to call a technician or the manufacturer</h3>
+        <p>The <strong>When to Call a Tech</strong> tab compiles every terminal condition across the diagnostic system that requires specialized workshop intervention, manufacturer RMA, or immediate decommissioning:</p>
+        <ul>
+        <li>Filter between <strong>Immediate Stop</strong> (5 safety/fire/short hazards) and <strong>Bench Service</strong> (11 component wear/calibration faults).</li>
+        <li>Review full trigger pathways and required service actions.</li>
+        <li>Click <strong>Open in Wizard</strong> to load any condition directly into the diagnostic interface and print a bench repair ticket.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>What it does not do</h2>
+        <p>The troubleshooter isolates workstation hardware faults. It does not perform the following functions:</p>
+        <ul>
+        <li><strong>Calculate tattoo session rates or pricing tiers.</strong> For pricing calculations, use the <a href="https://poliinternational.com/studio-pricing-benchmark/" target="_top">Studio Pricing Benchmark</a>.</li>
+        <li><strong>Generate client consent waivers or medical disclosures.</strong> For digital and printable consent forms, use the <a href="https://poliinternational.com/form-builder/" target="_top">Consent Form Builder</a>.</li>
+        <li><strong>Manage client appointments, bookings, or artist schedules.</strong> For studio scheduling, use the <a href="https://poliinternational.com/studio-crm/" target="_top">Studio CRM</a>.</li>
+        <li><strong>Convert piercing needle gauges, millimeters, or fractional body jewelry measurements.</strong> For sizing tables, use the <a href="https://poliinternational.com/gauge-converter/" target="_top">Body Jewelry Sizing Converter</a>.</li>
+        <li><strong>Record autoclave sterilization cycles or spore tests.</strong> For maintaining decontamination records, use the <a href="https://poliinternational.com/autoclave-calculator/" target="_top">Autoclave Log</a>.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Where your data lives</h2>
+        <p>The troubleshooter runs entirely on your local device inside your web browser:</p>
+        <ul>
+        <li><strong>Local browser execution</strong>: All diagnostic logic, decision trees, and language translations run in client-side JavaScript.</li>
+        <li><strong>No external transmission</strong>: No diagnostic answers, machine symptoms, or studio data are transmitted to remote servers.</li>
+        <li><strong>Session reset</strong>: The diagnostic path is held only in active browser memory. Clicking <code>← Start Over</code> or refreshing the page clears the session immediately.</li>
+        <li><strong>No local storage</strong>: The tool does not store client data, machine serial numbers, or operational history in cookies, local storage, or indexed databases.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Printing and exporting</h2>
+        <p>The tool does not generate data files or digital exports because it collects no user data. To create a physical or digital record of your troubleshooting result:</p>
+        <ol>
+        <li>Complete the wizard until the <code>Recommended Actions</code> checklist is displayed on screen.</li>
+        <li>Open your browser print menu by pressing <code>Ctrl+P</code> on Windows or Linux, or <code>Cmd+P</code> on macOS.</li>
+        <li>Select your physical printer or choose the PDF destination option.</li>
+        <li>The stylesheet formats the result card cleanly for standard paper printing, hiding interactive navigation buttons.</li>
+        </ol>
+        </div>
+        <div class="doc-section">
+        <h2>Questions and answers</h2>
+        <h3>Why is my tattoo machine cutting out when I move the cable?</h3>
+        <p>Intermittent power loss during cable movement indicates internal copper strand fatigue inside the cord. Copper wires fracture near strain-relief points while the external silicone jacket remains intact. If gently flexing the cord near either connector makes the machine cut out, replace the cable immediately.</p>
+        <h3>How do I determine if a startup fault is caused by the foot pedal or the power supply?</h3>
+        <p>Activate continuous-run mode or foot switch bypass on your power supply if available. If the machine runs reliably with bypass active, the problem lies in the foot pedal contacts or its cord. If your unit lacks a bypass toggle, unplug the pedal and test with a known working spare switch.</p>
+        <h3>Why does my rotary tattoo pen bog down when entering the skin?</h3>
+        <p>Rotary machines bog down in skin when operating below their intended motor power band or when mechanical resistance is too high. Excessive needle membrane tension, dried ink in the drive mechanism, or an unlubricated swash-plate forces the motor to stall under load. Clean the grip assembly, test with a softer membrane cartridge, and verify that your power supply delivers stable voltage.</p>
+        <h3>What causes a coil tattoo machine to spark excessively at the contact screw?</h3>
+        <p>Heavy arcing between the contact screw and front spring indicates a failing capacitor, incorrect contact gap, or dirty points. When the capacitor degrades, it fails to absorb electrical collapse from the coils, forcing energy to arc across the gap. Clean the contact points with fine abrasive paper and replace the capacitor if heavy sparking continues after adjusting the screw.</p>
+        <h3>Why is my tattoo machine running hot to the touch during a session?</h3>
+        <p>Mild warmth is normal during prolonged work, but extreme heat indicates electrical overload or mechanical binding. In rotary machines, high internal friction from a worn motor bearing or a stiff cartridge membrane forces the motor to overwork. In coil machines, running excessively high voltage to overcome poor spring tuning causes coil core saturation and rapid overheating.</p>
+        <h3>Why is my power supply displaying an error light or jumping voltage?</h3>
+        <p>Power supply error indicators and erratic voltage readouts usually signal an electrical short circuit or an overcurrent condition. A short can occur inside a damaged RCA connector, within a crushed clip cord wire, or across machine binding posts that have lost their insulating washers. Unplug the machine cable from the power supply; if the error clears, the short is located in your cable or machine wiring.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Limits</h2>
+        <p>The troubleshooter provides structured logic based on observable symptoms, but operates with clear technical boundaries:</p>
+        <ul>
+        <li><strong>No electrical measurements</strong>: The tool cannot measure actual amperage, circuit resistance, or voltage under load. Only an artist or technician using a calibrated multimeter can test continuity and output.</li>
+        <li><strong>Invisible internal components</strong>: The tool cannot inspect coil insulation breakdown, cartridge membrane micro-tears, or board-level thermal stress.</li>
+        <li><strong>Physical verification</strong>: The studio artist or qualified repair technician always makes the final determination on equipment safety and serviceability.</li>
+        <li><strong>Mandatory shutdown</strong>: If equipment emits smoke, burning odors, or sparks, unplug it from wall power immediately. Do not attempt further troubleshooting; retire the device or contact the manufacturer.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+            <h2>Use the tool</h2>
+            <p><a href="https://poliinternational.com/power-supply-troubleshooter/" target="_top">Open the Power Supply &amp; Machine Troubleshooter: user guide</a>. Everything runs in your browser; nothing you enter is sent anywhere.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+app.js:1279  open
+app.js:2041  ✅ Copied!
+app.js:2042  📋 Copy Artist Checklist
+app.js:2150  ✅ Copied!
+app.js:2335  No medications currently selected in checker.
+app.js:2426  ✅ Copied to Clipboard!
+app.js:2427  📋 Copy Draft Message
+app.js:2657  / Sections Read ( %)
+app.js:2674  / FAQs Read ( %)

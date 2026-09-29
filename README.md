@@ -1,221 +1,51 @@
-# Studio CRM - Community Edition
+# Studio CRM
 
-<div align="center">
+A free studio management app for tattoo and piercing studios, by [Poli International](https://poliinternational.com/tools/). It runs on one computer in your studio; staff use it from a browser on that computer or on any device on the studio network. Your data stays in a file on that computer. Nothing is sent to Poli International.
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![PHP](https://img.shields.io/badge/PHP-8.1+-777BB4?logo=php&logoColor=white)
-![Laravel](https://img.shields.io/badge/Laravel-10-FF2D20?logo=laravel&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-5.7+-4479A1?logo=mysql&logoColor=white)
-[![Ko-fi](https://img.shields.io/badge/Support-Ko--fi-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/C0C81NEXBV)
+## What it does
 
-**Professional Studio Management System for Tattoo & Piercing Studios**
+- **Clients**: contact details, allergies and medical notes, signed waivers, total spent.
+- **Appointments**: single bookings, and an auto scheduler that finds an artist's free slots and books multi-session work.
+- **Digital waivers**: pick the client, confirm the age check, sign on the screen; saved with the signature.
+- **Stock**: quantities, lots, expiry dates, suppliers, low-stock alerts, a camera QR/barcode scanner, purchase orders as PDF.
+- **Gallery**: portfolio photos and flash designs, with sharing to WhatsApp, LINE, X or email.
+- **Money and staff**: tip splits, shift clock in/out, exports (CSV and PDF).
+- **Compliance records**: closing checklist, autoclave cycle log, expiry warnings.
+- **Poli tools built in**: aftercare schedules, consent form builder, gauge converter, price estimator and more.
+- **8 languages**: English, French, Italian, German, Spanish, Dutch, Portuguese, Thai.
 
-[🌐 Interactive Demo](https://poliinternational.com/studio-crm) • [📖 Documentation](https://poliinternational.com/studio-crm/documentation/) • [🐛 Report Bug](https://github.com/Poli-International/studio-crm/issues) • [💡 Request Feature](https://github.com/Poli-International/studio-crm/discussions)
+The CRM prepares messages (aftercare emails, reminders, supplier orders) and opens them in your own email, WhatsApp or LINE; it does not send anything by itself.
 
-</div>
+## Install
 
----
+Requires [Node.js](https://nodejs.org/) 20 or newer.
 
-## ✨ Why Studio CRM?
+```bash
+npm ci
+npm start
+```
 
-Built by industry professionals for industry professionals. Studio CRM combines powerful management features with an intuitive interface designed specifically for tattoo and piercing studios.
+Then open `http://localhost:3000`. A new install starts with demo data so you can try every screen; click **Start with an empty studio** on the Dashboard before entering real clients.
 
-**🎯 Try the Demo:** [poliinternational.com/studio-crm](https://poliinternational.com/studio-crm)
-- **Demo User:** `marcus@studio.com`
-- **Demo Password:** `password`
+Settings go in a `.env` file (copy `.env.example`): `PORT`, `STUDIO_MANAGER_EMAIL`, `SQLITE_DB_PATH`.
 
----
+## User guide
 
-## 🚀 Features
+In the app under **Docs**, or in [`docs/USER-GUIDE.md`](docs/USER-GUIDE.md) and [`docs/user-guide/`](docs/user-guide/) (FR, IT, DE, ES, NL, PT, TH).
 
-- **👥 Client Management**: Secure database for client history, medical notes, and detailed professional profiles with AES-256 encryption
-- **🎨 Studio Gallery**: Shared creative portfolio with social media integration, tagging, and artist-specific filtering
-- **🔐 Team Management**: Role-based access control (Admin, Manager, Artist) with performance tracking and commission management
-- **📅 Smart Scheduling**: Visual drag-and-drop calendar with Google Calendar sync and context-aware booking
-- **💰 Financial Hub**: Revenue tracking, artist commission calculations, and comprehensive CSV reporting
-- **🏥 Compliance Vault**: HIPAA-compliant storage for waivers, sterilization logs, and health compliance records
-- **📦 Inventory Control**: Real-time stock tracking with intelligent low-stock alerts
+## Backups
 
----
+All data is in `data/studio_crm.sqlite`. Copy that file to back up the studio.
 
-## 🛠️ Tech Stack
+## Development
 
-- **Backend**: Laravel 10 (PHP 8.1+)
-- **Frontend**: Blade Templates + Vanilla CSS (Glassmorphism design)
-- **Database**: MySQL 5.7+
-- **Icons**: Lucide Icon Library
-- **Auth**: Laravel Session + Social Authentication (Google/Facebook)
-- **Security**: CSRF Protection, Encrypted Database Fields, Secure Session Management
+```bash
+npm test           # test battery + vitest
+npm run guide      # rebuild public/guide/<lang>.html from docs/
+```
 
----
+Interface text is translated by `public/js/i18n-phrases.js` from `public/i18n/<lang>.json`, keyed on the exact English text.
 
-## 📦 Installation
+## License
 
-### 🐳 Option 1: Quick Start with Docker (Recommended)
-
-The easiest way to get started is using Docker.
-
-1. **Clone the repository**:
-
-   ```bash
-   git clone https://github.com/Poli-International/studio-crm.git
-   cd studio-crm
-   ```
-
-2. **Run Automated Setup**:
-
-   ```bash
-   # On Linux/macOS
-   chmod +x setup.sh && ./setup.sh
-
-   # On Windows (PowerShell)
-   .\setup.ps1
-   ```
-
-3. **Access the App**: [http://localhost:8080](http://localhost:8080)
-
----
-
-### 🛠️ Option 2: Manual Installation
-
-### Prerequisites
-
-- PHP 8.1 or higher
-- Composer
-- MySQL 5.7 or higher
-
-### Steps
-
-1. **Environment Setup**:
-
-   ```bash
-   cp .env.example .env
-   ```
-
-   Edit `.env` and configure your database and mail settings.
-
-2. **Install Dependencies**:
-
-   ```bash
-   composer install
-   ```
-
-3. **Generate Application Key**:
-
-   ```bash
-   php artisan key:generate
-   ```
-
-4. **Database Setup**:
-
-   ```bash
-   php artisan migrate --seed
-   ```
-
-5. **Symlink Storage**:
-
-   ```bash
-   php artisan storage:link
-   ```
-
-6. **Start Development Server**:
-
-   ```bash
-   php artisan serve
-   ```
-
----
-
-## 🌐 Live Demo
-
-**Try Studio CRM without installation:**
-
-👉 **[poliinternational.com/studio-crm](https://poliinternational.com/studio-crm)**
-
-*Experience all features in action with our hosted demo!*
-
----
-
-## 📸 Screenshots
-
-> 📝 *Screenshots coming soon! Check the [live demo](https://poliinternational.com/studio-crm) to see it in action.*
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! Whether it's:
-
-- 🐛 Bug reports
-- 💡 Feature requests
-- 📖 Documentation improvements
-- 🔧 Code contributions
-
-Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
----
-
-## 📄 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
-**TL;DR:** Free to use, modify, and distribute. No restrictions!
-
----
-
-## 🛠️ More Professional Tools
-
-Studio CRM is one of **17 free tools** we've built for the tattoo & piercing industry:
-
-- 🎨 [Tattoo Font Previewer](https://poliinternational.com/tools/tattoo-font-previewer/) - Preview custom text in 100+ tattoo fonts
-- 📏 [Gauge Converter](https://poliinternational.com/tools/gauge-converter/) - Convert between gauge sizes and millimeters
-- 🩹 [Healing Tracker](https://poliinternational.com/tools/healing-tracker/) - Track healing progress with photos
-- 💉 [Pain Guide](https://poliinternational.com/tools/pain-guide/) - Interactive body pain level guide
-- 📐 [Stencil Calculator](https://poliinternational.com/tools/stencil-calculator/) - Calculate stencil sizes
-- 🎯 [Piercing Angle Guide](https://poliinternational.com/tools/piercing-angle-guide/) - Proper piercing angles
-- ...and 11 more!
-
-**Explore all tools:** [poliinternational.com/tools](https://poliinternational.com/tools)
-
----
-
-## 💬 Support & Community
-
-- 📧 **Email**: [patrick@poli-international.com](mailto:patrick@poli-international.com)
-- 🌐 **Website**: [poliinternational.com](https://poliinternational.com)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/Poli-International/studio-crm/discussions)
-- 🐛 **Issues**: [GitHub Issues](https://github.com/Poli-International/studio-crm/issues)
-
----
-
-## ☕ Support This Project
-
-If Studio CRM helps your business, consider supporting its development:
-
-[![Ko-fi](https://img.shields.io/badge/Support%20on-Ko--fi-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/C0C81NEXBV)
-
-Your support helps us:
-
-- 🚀 Add new features
-- 🐛 Fix bugs faster
-- 📖 Improve documentation
-- 🆓 Keep it free forever
-
----
-
-## 🌟 Star History
-
-If you find this project useful, please consider giving it a ⭐ on GitHub!
-
----
-
-<div align="center">
-
-**Built with ❤️ by [Poli International](https://poliinternational.com)**
-
-*Empowering studios with professional tools since 2026*
-
-[![Website](https://img.shields.io/badge/Website-poliinternational.com-0693e3?style=flat-square)](https://poliinternational.com)
-[![Ko-fi](https://img.shields.io/badge/Ko--fi-C0C81NEXBV-FF5E5B?style=flat-square&logo=ko-fi)](https://ko-fi.com/C0C81NEXBV)
-
-</div>
+MIT, see [LICENSE](LICENSE).

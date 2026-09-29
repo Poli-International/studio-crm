@@ -1,0 +1,72 @@
+<svg width="300" height="400" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- White background -->
+  <rect width="300" height="400" fill="white"/>
+
+  <!-- Tongue shape (rose gold) -->
+  <ellipse cx="150" cy="200" rx="70" ry="110" fill="#B76E79" opacity="0.2" stroke="#B76E79" stroke-width="4"/>
+
+  <!-- Tongue tip -->
+  <path d="M 150 310 Q 130 315 125 305 Q 120 295 150 290 Q 180 295 175 305 Q 170 315 150 310 Z"
+        fill="#B76E79" opacity="0.3" stroke="#B76E79" stroke-width="2"/>
+
+  <!-- Median groove -->
+  <line x1="150" y1="100" x2="150" y2="290" stroke="#6B7280" stroke-width="2" stroke-dasharray="8,4"/>
+
+  <!-- Taste buds texture -->
+  <g opacity="0.3">
+    <circle cx="130" cy="150" r="3" fill="#0EA5E9"/>
+    <circle cx="145" cy="160" r="3" fill="#0EA5E9"/>
+    <circle cx="160" cy="155" r="3" fill="#0EA5E9"/>
+    <circle cx="170" cy="165" r="3" fill="#0EA5E9"/>
+    <circle cx="135" cy="175" r="3" fill="#0EA5E9"/>
+    <circle cx="155" cy="180" r="3" fill="#0EA5E9"/>
+    <circle cx="170" cy="185" r="3" fill="#0EA5E9"/>
+    <circle cx="130" cy="195" r="3" fill="#0EA5E9"/>
+    <circle cx="150" cy="200" r="3" fill="#0EA5E9"/>
+    <circle cx="165" cy="205" r="3" fill="#0EA5E9"/>
+    <circle cx="140" cy="220" r="3" fill="#0EA5E9"/>
+    <circle cx="160" cy="225" r="3" fill="#0EA5E9"/>
+    <circle cx="135" cy="240" r="3" fill="#0EA5E9"/>
+    <circle cx="165" cy="245" r="3" fill="#0EA5E9"/>
+  </g>
+
+  <!-- Frenulum (underside) -->
+  <line x1="150" y1="260" x2="150" y2="280" stroke="#6B7280" stroke-width="3" opacity="0.4"/>
+
+  <!-- Standard piercing location -->
+  <circle cx="150" cy="180" r="6" fill="#0EA5E9"/>
+  <circle cx="150" cy="180" r="6" fill="none" stroke="#0EA5E9" stroke-width="2"/>
+
+  <!-- Barbell through tongue -->
+  <line x1="150" y1="165" x2="150" y2="195" stroke="#6B7280" stroke-width="4" opacity="0.6"/>
+  <circle cx="150" cy="165" r="7" fill="#B76E79" opacity="0.7"/>
+  <circle cx="150" cy="195" r="7" fill="#B76E79" opacity="0.7"/>
+
+  <!-- Venom piercings (side by side) -->
+  <circle cx="130" cy="175" r="4" fill="#0EA5E9" opacity="0.5"/>
+  <circle cx="170" cy="175" r="4" fill="#0EA5E9" opacity="0.5"/>
+  <line x1="130" y1="165" x2="130" y2="185" stroke="#6B7280" stroke-width="2" opacity="0.3"/>
+  <line x1="170" y1="165" x2="170" y2="185" stroke="#6B7280" stroke-width="2" opacity="0.3"/>
+
+  <!-- Surface/horizontal piercing example -->
+  <line x1="130" y1="220" x2="170" y2="220" stroke="#B76E79" stroke-width="2" stroke-dasharray="4,4" opacity="0.4"/>
+
+  <!-- Mouth opening context -->
+  <ellipse cx="150" cy="80" rx="80" ry="20" fill="none" stroke="#E5E7EB" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="150" y="70" font-family="Arial, sans-serif" font-size="10" fill="#9CA3AF" text-anchor="middle">Mouth Opening</text>
+
+  <!-- Labels -->
+  <text x="150" y="25" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1F2937" text-anchor="middle">TONGUE ANATOMY</text>
+
+  <text x="180" y="180" font-family="Arial, sans-serif" font-size="10" fill="#0EA5E9">Standard</text>
+  <text x="105" y="170" font-family="Arial, sans-serif" font-size="9" fill="#0EA5E9">Venom</text>
+  <text x="160" y="140" font-family="Arial, sans-serif" font-size="9" fill="#B76E79">Top Ball</text>
+  <text x="160" y="210" font-family="Arial, sans-serif" font-size="9" fill="#B76E79">Bottom Ball</text>
+
+  <!-- Info box -->
+  <rect x="40" y="320" width="220" height="70" rx="8" fill="#F3F4F6" stroke="#6B7280" stroke-width="1"/>
+  <text x="150" y="340" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#1F2937" text-anchor="middle">Standard Barbell Size</text>
+  <text x="150" y="358" font-family="Arial, sans-serif" font-size="10" fill="#6B7280" text-anchor="middle">Gauge: 14g (most common)</text>
+  <text x="150" y="373" font-family="Arial, sans-serif" font-size="10" fill="#6B7280" text-anchor="middle">Initial: 3/4" - 7/8" (19-22mm)</text>
+  <text x="150" y="388" font-family="Arial, sans-serif" font-size="9" fill="#9CA3AF" text-anchor="middle">Downsize after healing</text>
+</svg>

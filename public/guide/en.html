@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Studio CRM user guide</title>
+<style>body{margin:0;padding:24px;background:#0F172A;color:#E2E8F0;font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:760px;margin:0 auto}h1{font-size:1.6rem;color:#F8FAFC}h2{font-size:1.15rem;color:#38BDF8;margin-top:1.8em}
+code{background:#1E293B;padding:1px 5px;border-radius:4px;font-size:0.9em}strong{color:#F8FAFC}li{margin:4px 0}</style>
+</head>
+<body>
+<main>
+<h1>Studio CRM user guide</h1>
+<p>Studio CRM runs on one computer in your studio. Staff open it in a web browser on that computer or on any device on the studio network. Your data stays in a file on that computer. Nothing is sent to Poli International.</p>
+<h2>Install and start</h2>
+<ol>
+<li>Install Node.js 20 or newer.</li>
+<li>Download the Studio CRM files and open a terminal in the <code>studio-crm</code> folder.</li>
+<li>Run <code>npm ci</code> once, then <code>npm start</code>.</li>
+<li>Open <code>http://localhost:3000</code> in the browser. Other devices use the computer's network address instead of <code>localhost</code>.</li>
+</ol>
+<p>To use a different port, set <code>PORT</code> in a <code>.env</code> file (copy <code>.env.example</code>). Set <code>STUDIO_MANAGER_EMAIL</code> there too, so alerts are addressed to you.</p>
+<h2>First run: demo data</h2>
+<p>A new install opens with demo clients, appointments, stock and staff, so you can try every screen. When you are ready for real work, click <strong>Start with an empty studio</strong> on the Dashboard. It deletes the demo records and keeps the service list, categories, templates, stations and settings. This cannot be undone.</p>
+<h2>Language</h2>
+<p>Choose English, French, Italian, German, Spanish, Dutch, Portuguese or Thai from the language menu at the top. The Poli tools inside the CRM open in the same language where they offer it (tools without Thai open in English).</p>
+<h2>Studio settings</h2>
+<p>Open <strong>Settings</strong> to enter your prices, deposit rule, tax (VAT) rate, touch-up policy and stock thresholds. The price estimator, quotes and invoices read these figures, so set them first. <strong>Export CSV</strong> downloads your price list; edit it and use <strong>Import CSV</strong> to load it back. You can also upload your studio logo; it appears in the top bar.</p>
+<h2>Clients</h2>
+<p><strong>Clients</strong> lists everyone with their contact details, allergies and medical notes, signed waivers and total spent. Use <strong>New Client</strong> to add one. Search filters the list as you type. <strong>View Profile</strong> opens the full record.</p>
+<h2>Appointments and scheduling</h2>
+<p><strong>New Appointment</strong> books a single session with artist, station, price and deposit. For multi-session work, the <strong>Auto Scheduler</strong> looks up the artist's free slots on a chosen day and books up to six sessions a set number of weeks apart. The Dashboard shows today's figures, upcoming bookings, station status and low stock.</p>
+<h2>Digital waivers</h2>
+<p>Open the waiver form, pick the client from the list (their allergies are filled in), confirm the age check, and have the client sign on the pad. The waiver is saved with the signature image. It will not save without a client and a signature.</p>
+<h2>Messages: the CRM prepares, you send</h2>
+<p>Studio CRM does not send email, SMS or chat messages itself. When you prepare an aftercare email, a reminder or a supplier order, a <strong>Message ready</strong> panel appears. Click <strong>Email</strong>, <strong>WhatsApp</strong> or <strong>LINE</strong> to open it in your own app with the text filled in, then press send there, or click <strong>Copy</strong>.</p>
+<h2>Stock, scanner and purchase orders</h2>
+<p><strong>Inventory</strong> tracks quantities, lots, expiry dates and suppliers. Items at or below their reorder level count as low stock.</p>
+<p>The scanner in <strong>Log Activity</strong> uses the device camera. Scan a stock SKU or lot number to see the item, or a <code>CLIENT-&lt;number&gt;</code> code to open a client. You can also scan a code from a photo. Unknown codes are listed under <strong>Error Logs</strong>.</p>
+<p><strong>Purchase Order</strong> lists your suppliers and their low-stock items, creates a PO number, downloads a PDF and prepares the order email.</p>
+<h2>Gallery</h2>
+<p><strong>Portfolio Works</strong> holds photos of finished work, linked to the client and artist. <strong>Flash Sheets</strong> holds designs with price and deposit; mark one as claimed when a client reserves it. <strong>Share</strong> prepares a message for WhatsApp, LINE, X or email; the phone's share sheet can include the photo.</p>
+<h2>Money and staff</h2>
+<p>The <strong>Tip Calculator</strong> splits a tip 80% artist, 15% apprentice, 5% desk and records it. Staff clock in and out with the shift button. Exports give you the activity log, low stock, shifts and session durations as CSV or PDF.</p>
+<h2>Compliance records</h2>
+<p>The <strong>closing checklist</strong> records which items were done, the supervisor, the autoclave cycle number and your notes. The <strong>Autoclave Vault</strong> lists sterilisation cycle records, and the Dashboard warns about stock past its expiry date. These are your own records: check your local health authority's rules for what you must keep.</p>
+<h2>Poli tools</h2>
+<p>The <strong>Tools</strong> screen opens the Poli International tools (aftercare schedules, consent form builder, gauge converter, price estimator and more) inside the CRM.</p>
+<h2>Backups</h2>
+<p>Everything is stored in <code>data/studio_crm.sqlite</code> (or the path set in <code>SQLITE_DB_PATH</code>). Copy that file to back up the studio. The snapshot button also writes a copy to <code>storage/backups/</code>.</p>
+</main>
+</body>
+</html>

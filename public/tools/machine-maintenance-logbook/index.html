@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Machine Maintenance Logbook | Poli International</title>
+  <meta name="description" content="Track tattoo machine identity, running hours, service intervals, calibration, costs, and maintenance schedules. Stored locally in your browser.">
+  <meta property="og:title" content="Machine Maintenance Logbook | Poli International">
+  <meta property="og:description" content="Track tattoo machine identity, running hours, service intervals, calibration, costs, and maintenance schedules. Stored locally in your browser.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="/tools/machine-maintenance-logbook/css/style.css">
+  <script>
+    if (window.self !== window.top) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      window.addEventListener('message', function(e) {
+        if (e.data && e.data.type === 'poli-theme') {
+          document.documentElement.setAttribute('data-theme', e.data.light ? 'light' : 'dark');
+        }
+      });
+    }
+  </script>
+  <script src="/js/input-guards.js"></script>
+  <link rel="stylesheet" href="/tools/shared/print.css" media="print">
+  <link rel="stylesheet" href="/tools/shared/a11y.css">
+</head>
+<body>
+<div class="tool-wrapper">
+
+  <header class="tool-header">
+    <div class="tool-header__top">
+      <div class="tool-header__badge" data-i18n="header.badge">🔧 Machine Maintenance</div>
+      <div class="lang-selector-wrap">
+        <label for="language-select" data-i18n="header.lang_label">Language</label>
+        <select id="language-select" class="lang-select" aria-label="Select language" data-i18n-aria="header.lang_aria">
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="it">Italiano</option>
+          <option value="pt">Português</option>
+          <option value="nl">Nederlands</option>
+        </select>
+      </div>
+    </div>
+    <h1 data-i18n="header.title">Machine Maintenance Logbook</h1>
+    <p data-i18n="header.description">Track machine identity, running hours, service history, costs, and upcoming maintenance schedules. Stored locally in your browser.</p>
+  </header>
+
+  <!-- Due / Overdue Banner (Improvement D, F) -->
+  <section id="due-banner" class="due-banner" aria-label="Maintenance due status" data-i18n-aria="due.section_aria">
+    <div class="due-banner__head">
+      <h2 id="due-banner-title" class="due-banner__title" data-i18n="due.banner_title">Maintenance Due &amp; Overdue</h2>
+    </div>
+    <div id="due-items-container" class="due-items-list"></div>
+  </section>
+
+  <!-- Navigation Tabs -->
+  <nav class="tool-nav" aria-label="Main navigation" data-i18n-aria="nav.aria_label">
+    <button type="button" class="nav-tab active" data-tab="view-log" data-i18n="nav.tab_log">Service Log</button>
+    <button type="button" class="nav-tab" data-tab="view-machines" data-i18n="nav.tab_machines">Machines</button>
+    <button type="button" class="nav-tab" data-tab="view-costs" data-i18n="nav.tab_costs">Parts &amp; Costs</button>
+    <button type="button" class="nav-tab" data-tab="view-backup" data-i18n="nav.tab_backup">Backup &amp; Restore</button>
+  </nav>
+
+  <!-- VIEW 1: Service Log -->
+  <section id="view-log" class="tab-panel">
+    <div class="card-panel">
+      <h2 class="card-title" data-i18n="log.section_title">Log Maintenance Event</h2>
+      <form id="log-form" novalidate>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="entry-machine" data-i18n="log.field_machine">Select Machine</label>
+            <select id="entry-machine" class="input-field" required>
+              <option value="" data-i18n="log.opt_select_machine">Select machine…</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="entry-date" data-i18n="log.field_date">Service Date</label>
+            <input type="date" id="entry-date" class="input-field" required>
+          </div>
+          <div class="form-field">
+            <label for="entry-hours">
+              <span data-i18n="log.field_hours">Current Running Hours</span>
+              <span class="opt-label" data-i18n="common.optional">(optional)</span>
+            </label>
+            <input type="number" id="entry-hours" class="input-field" min="0" step="0.1">
+          </div>
+          <div class="form-field">
+            <label for="entry-type" data-i18n="log.field_type">Maintenance Type</label>
+            <select id="entry-type" class="input-field" required>
+              <option value="" data-i18n="log.opt_select_type">Select maintenance type…</option>
+              <option value="Voltage calibration" data-i18n="log.opt_type_voltage_cal">Voltage calibration</option>
+              <option value="Clean & sanitise" data-i18n="log.opt_type_clean_sanitise">Clean & sanitise</option>
+              <option value="Needle cartridge change" data-i18n="log.opt_type_needle_cartridge">Needle cartridge change</option>
+              <option value="Full service" data-i18n="log.opt_type_full_service">Full service (bearing/motor)</option>
+              <option value="Cord / RCA check" data-i18n="log.opt_type_cord_rca">Cord / RCA check</option>
+              <option value="Grip sterilisation" data-i18n="log.opt_grip_steril">Grip sterilisation</option>
+              <option value="Parts replacement" data-i18n="log.opt_type_parts_swap">Parts replacement</option>
+              <option value="Other" data-i18n="log.opt_type_other">Other</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="entry-voltage">
+              <span data-i18n="log.field_voltage">Running Voltage (V)</span>
+              <span class="opt-label" data-i18n="common.optional">(optional)</span>
+            </label>
+            <input type="number" id="entry-voltage" class="input-field" min="0" max="25" step="0.1">
+          </div>
+          <div class="form-field">
+            <label for="entry-parts">
+              <span data-i18n="log.field_parts">Parts Replaced</span>
+              <span class="opt-label" data-i18n="common.optional">(optional)</span>
+            </label>
+            <input type="text" id="entry-parts" class="input-field">
+          </div>
+          <div class="form-field">
+            <label for="entry-cost">
+              <span data-i18n="log.field_cost">Cost</span>
+              <span class="opt-label" data-i18n="common.optional">(optional)</span>
+            </label>
+            <input type="number" id="entry-cost" class="input-field" min="0" step="0.01">
+          </div>
+          <div class="form-field">
+            <label for="entry-filing-ref">
+              <span data-i18n="log.field_filing_ref">Filing Reference (Paper Report / Receipt Binder)</span>
+              <span class="opt-label" data-i18n="common.optional">(optional)</span>
+            </label>
+            <input type="text" id="entry-filing-ref" class="input-field">
+          </div>
+          <div class="form-field form-field--wide">
+            <label for="entry-notes">
+              <span data-i18n="log.field_notes">Service Notes</span>
+              <span class="opt-label" data-i18n="common.optional">(optional)</span>
+            </label>
+            <textarea id="entry-notes" class="input-field textarea" rows="2"></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button id="add-entry-btn" type="submit" class="btn-primary" data-i18n="log.btn_add">Add to Log</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Filters (Improvement G) -->
+    <div class="filter-bar" aria-label="Log filters" data-i18n-aria="filter.aria_label">
+      <select id="filter-station" class="filter-select" aria-label="Filter by station" data-i18n-aria="filter.aria_station">
+        <option value="" data-i18n="filter.station_all">All Stations / Rooms</option>
+      </select>
+      <select id="filter-artist" class="filter-select" aria-label="Filter by artist" data-i18n-aria="filter.aria_artist">
+        <option value="" data-i18n="filter.artist_all">All Artists</option>
+      </select>
+      <select id="filter-machine" class="filter-select" aria-label="Filter by machine" data-i18n-aria="filter.aria_machine">
+        <option value="" data-i18n="filter.machine_all">All Machines</option>
+      </select>
+      <select id="filter-type" class="filter-select" aria-label="Filter by maintenance type" data-i18n-aria="filter.aria_type">
+        <option value="" data-i18n="filter.type_all">All Types</option>
+      </select>
+      <select id="filter-status" class="filter-select" aria-label="Filter by machine status" data-i18n-aria="filter.aria_status">
+        <option value="all" data-i18n="filter.status_all">Status: All</option>
+        <option value="active" data-i18n="filter.status_active">Status: Active only</option>
+        <option value="retired" data-i18n="filter.status_retired">Status: Retired only</option>
+      </select>
+    </div>
+
+    <div class="log-summary-row">
+      <div id="log-count-display"></div>
+      <div class="log-actions-group">
+        <button id="export-csv-btn" class="btn-secondary" type="button" data-i18n="log.btn_export_csv">Export CSV</button>
+      </div>
+    </div>
+
+    <div id="log-table-wrap">
+      <div id="log-empty-state" class="empty-state" data-i18n="log.empty" hidden>No maintenance records match your filters.</div>
+      <div class="table-responsive" id="log-table-container">
+        <table class="data-table" aria-label="Maintenance Records" data-i18n-aria="log.table_aria">
+          <thead>
+            <tr>
+              <th data-i18n="log.th_date">Date</th>
+              <th data-i18n="log.th_machine">Machine</th>
+              <th data-i18n="log.th_type">Type</th>
+              <th data-i18n="log.th_hours">Hours (Delta)</th>
+              <th data-i18n="log.th_voltage">Voltage</th>
+              <th data-i18n="log.th_parts_cost">Parts &amp; Cost</th>
+              <th data-i18n="log.th_filing">Filing Ref</th>
+              <th data-i18n="log.th_notes">Notes</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="log-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIEW 2: Machines (Improvement A, F, G) -->
+  <section id="view-machines" class="tab-panel" hidden>
+    <div class="card-panel">
+      <h2 class="card-title" data-i18n="machines.section_title">Register New Machine</h2>
+      <form id="machine-form" novalidate>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="m-name" data-i18n="machines.field_name">Machine Name / ID</label>
+            <input type="text" id="m-name" class="input-field" required>
+          </div>
+          <div class="form-field">
+            <label for="m-serial" data-i18n="machines.field_serial">Serial Number</label>
+            <input type="text" id="m-serial" class="input-field">
+          </div>
+          <div class="form-field">
+            <label for="m-model" data-i18n="machines.field_model">Model</label>
+            <input type="text" id="m-model" class="input-field">
+          </div>
+          <div class="form-field">
+            <label for="m-supplier" data-i18n="machines.field_supplier">Supplier / Distributor</label>
+            <input type="text" id="m-supplier" class="input-field">
+          </div>
+          <div class="form-field">
+            <label for="m-purchase-date" data-i18n="machines.field_purchase_date">Purchase Date</label>
+            <input type="date" id="m-purchase-date" class="input-field">
+          </div>
+          <div class="form-field">
+            <label for="m-warranty-date" data-i18n="machines.field_warranty_end">Warranty End Date</label>
+            <input type="date" id="m-warranty-date" class="input-field">
+          </div>
+          <div class="form-field">
+            <label for="m-station" data-i18n="machines.field_station">Station / Room</label>
+            <input type="text" id="m-station" class="input-field">
+          </div>
+          <div class="form-field">
+            <label for="m-artist" data-i18n="machines.field_artist">Assigned Artist</label>
+            <input type="text" id="m-artist" class="input-field">
+          </div>
+          <div class="form-field">
+            <label for="m-interval-days">
+              <span data-i18n="machines.field_interval_days">Service Interval (Days)</span>
+              <span class="opt-label" data-i18n="common.optional">(optional)</span>
+            </label>
+            <input type="number" id="m-interval-days" class="input-field" min="1" step="1">
+          </div>
+          <div class="form-field">
+            <label for="m-interval-hours">
+              <span data-i18n="machines.field_interval_hours">Service Interval (Hours)</span>
+              <span class="opt-label" data-i18n="common.optional">(optional)</span>
+            </label>
+            <input type="number" id="m-interval-hours" class="input-field" min="1" step="1">
+          </div>
+        </div>
+        <div class="form-actions">
+          <button id="save-machine-btn" type="submit" class="btn-primary" data-i18n="machines.btn_save">Save Machine</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="table-responsive">
+      <table class="data-table" aria-label="Registered Machines" data-i18n-aria="machines.table_aria">
+        <thead>
+          <tr>
+            <th data-i18n="machines.th_machine">Machine</th>
+            <th data-i18n="machines.th_serial">Serial / Model</th>
+            <th data-i18n="machines.th_supplier">Supplier</th>
+            <th data-i18n="machines.th_dates">Purchase / Warranty</th>
+            <th data-i18n="machines.th_location">Station / Artist</th>
+            <th data-i18n="machines.th_interval">Interval</th>
+            <th data-i18n="machines.th_status">Status</th>
+            <th data-i18n="machines.th_actions">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="machines-table-body"></tbody>
+      </table>
+    </div>
+    <div id="machines-empty-state" class="empty-state" data-i18n="machines.empty" hidden>No machines registered yet. Add your first machine above.</div>
+  </section>
+
+  <!-- VIEW 3: Parts & Costs (Improvement C) -->
+  <section id="view-costs" class="tab-panel" hidden>
+    <div class="card-panel">
+      <h2 class="card-title" data-i18n="costs.section_title">Parts &amp; Cost Breakdown</h2>
+      <h3 class="card-title" data-i18n="costs.summary_machine">Total Costs by Machine</h3>
+      <div class="table-responsive">
+        <table class="data-table" aria-label="Costs by Machine" data-i18n-aria="costs.table_aria_machine">
+          <thead>
+            <tr>
+              <th data-i18n="costs.th_machine">Machine</th>
+              <th data-i18n="costs.th_parts">Parts Replaced</th>
+              <th data-i18n="costs.th_calc">Cost Calculation</th>
+              <th data-i18n="costs.th_total">Total Cost</th>
+            </tr>
+          </thead>
+          <tbody id="costs-machine-body"></tbody>
+        </table>
+      </div>
+      <div id="costs-machine-empty" class="empty-state" data-i18n="costs.empty_machine" hidden>No parts or service costs logged for any machine.</div>
+    </div>
+
+    <div class="card-panel">
+      <h2 class="card-title" data-i18n="costs.summary_year">Total Costs by Year</h2>
+      <div class="table-responsive">
+        <table class="data-table" aria-label="Costs by Year" data-i18n-aria="costs.table_aria_year">
+          <thead>
+            <tr>
+              <th data-i18n="costs.th_year">Calendar Year</th>
+              <th data-i18n="costs.th_events">Events</th>
+              <th data-i18n="costs.th_calc">Cost Calculation</th>
+              <th data-i18n="costs.th_total">Total Cost</th>
+            </tr>
+          </thead>
+          <tbody id="costs-year-body"></tbody>
+        </table>
+      </div>
+      <div id="costs-year-empty" class="empty-state" data-i18n="costs.empty_year" hidden>No yearly costs logged yet.</div>
+    </div>
+
+    <!-- Equipment ROI Link (Improvement C, Rule 18) -->
+    <div class="roi-notice-box">
+      <span data-i18n="costs.roi_note">For equipment payback analysis, consult the</span>
+      <a id="roi-link" href="#" target="_top" data-i18n="costs.roi_link">Equipment ROI Calculator</a>
+      <span data-i18n="costs.roi_suffix">on Poli International.</span>
+    </div>
+  </section>
+
+  <!-- VIEW 4: Backup & Restore (Improvement H) -->
+  <section id="view-backup" class="tab-panel" hidden>
+    <div class="card-panel">
+      <h2 class="card-title" data-i18n="backup.section_title">Data Backup &amp; Restore</h2>
+      <p class="backup-note" data-i18n="backup.description">All data stays in your browser. Download a complete JSON backup to preserve machine identities, service logs, and costs before clearing your browser cache.</p>
+      
+      <div class="backup-actions">
+        <button id="backup-json-btn" class="btn-primary" type="button" data-i18n="backup.btn_export">Export JSON Backup</button>
+        <button id="restore-trigger-btn" class="btn-secondary" type="button" data-i18n="backup.btn_restore">Restore JSON Backup</button>
+        <input type="file" id="restore-file-input" accept=".json" class="file-input-hidden" aria-label="Choose JSON backup file" data-i18n-aria="backup.file_aria">
+        <button id="clear-all-btn" class="btn-secondary btn-danger" type="button" data-i18n="backup.btn_clear">Clear All Data</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Modal Dialog -->
+<div id="confirm-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+  <div class="modal-card">
+    <h3 id="modal-title" class="modal-title" data-i18n="modal.confirm_title">Confirm Action</h3>
+    <p id="modal-message" class="modal-desc"></p>
+    <div class="modal-actions">
+      <button id="modal-cancel-btn" class="btn-secondary" type="button" data-i18n="modal.btn_cancel">Cancel</button>
+      <button id="modal-confirm-btn" class="btn-primary btn-danger" type="button" data-i18n="modal.btn_confirm">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Message -->
+<div id="toast-msg" class="toast-msg" role="alert" hidden></div>
+
+<script src="/tools/machine-maintenance-logbook/js/i18n-en.js"></script>
+<script src="/tools/machine-maintenance-logbook/js/i18n-fr.js"></script>
+<script src="/tools/machine-maintenance-logbook/js/i18n-it.js"></script>
+<script src="/tools/machine-maintenance-logbook/js/i18n-de.js"></script>
+<script src="/tools/machine-maintenance-logbook/js/i18n-es.js"></script>
+<script src="/tools/machine-maintenance-logbook/js/i18n-nl.js"></script>
+<script src="/tools/machine-maintenance-logbook/js/i18n-pt.js"></script>
+<script src="/tools/machine-maintenance-logbook/js/app.js"></script>
+</body>
+</html>

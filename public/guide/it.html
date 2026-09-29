@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Guida utente di Studio CRM</title>
+<style>body{margin:0;padding:24px;background:#0F172A;color:#E2E8F0;font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:760px;margin:0 auto}h1{font-size:1.6rem;color:#F8FAFC}h2{font-size:1.15rem;color:#38BDF8;margin-top:1.8em}
+code{background:#1E293B;padding:1px 5px;border-radius:4px;font-size:0.9em}strong{color:#F8FAFC}li{margin:4px 0}</style>
+</head>
+<body>
+<main>
+<h1>Guida utente di Studio CRM</h1>
+<p>Studio CRM funziona su un solo computer nel vostro studio. Il personale lo apre in un browser web su quel computer o su qualsiasi dispositivo della rete dello studio. I vostri dati restano in un file su quel computer. Niente viene inviato a Poli International.</p>
+<h2>Installazione e avvio</h2>
+<ol>
+<li>Installate Node.js 20 o una versione più recente.</li>
+<li>Scaricate i file di Studio CRM e aprite un terminale nella cartella <code>studio-crm</code>.</li>
+<li>Eseguite <code>npm ci</code> una volta, poi <code>npm start</code>.</li>
+<li>Aprite <code>http://localhost:3000</code> nel browser. Gli altri dispositivi usano l'indirizzo di rete del computer invece di <code>localhost</code>.</li>
+</ol>
+<p>Per usare una porta diversa, impostate <code>PORT</code> in un file <code>.env</code> (copiate <code>.env.example</code>). Impostate anche <code>STUDIO_MANAGER_EMAIL</code> lì, in modo che gli avvisi siano indirizzati a voi.</p>
+<h2>Primo avvio: dati demo</h2>
+<p>Una nuova installazione si apre con clienti, appuntamenti, magazzino e personale di esempio, così potete provare ogni schermata. Quando siete pronti per il lavoro reale, cliccate su <strong>Inizia con uno studio vuoto</strong> nella Dashboard. Questo elimina i dati demo e conserva l'elenco dei servizi, le categorie, i modelli, le postazioni e le impostazioni. Questa azione è irreversibile.</p>
+<h2>Lingua</h2>
+<p>Scegliete inglese, francese, italiano, tedesco, spagnolo, olandese, portoghese o thailandese dal menu della lingua in alto. Gli strumenti Poli all'interno del CRM si aprono nella stessa lingua quando la offrono (gli strumenti senza thailandese si aprono in inglese).</p>
+<h2>Impostazioni dello studio</h2>
+<p>Aprite <strong>Impostazioni</strong> per inserire i vostri prezzi, la regola dell'acconto, l'aliquota fiscale (IVA), la politica dei ritocchi e le soglie di magazzino. Il preventivatore prezzi, i preventivi e le fatture leggono questi valori, quindi impostateli prima. <strong>Esporta CSV</strong> scarica il vostro listino prezzi; modificatelo e usate <strong>Importa CSV</strong> per ricaricarlo. Potete anche caricare il logo del vostro studio; appare nella barra superiore.</p>
+<h2>Clienti</h2>
+<p><strong>Clienti</strong> elenca tutti con i loro dati di contatto, allergie e note mediche, consensi firmati e totale spesa. Usate <strong>Nuovo cliente</strong> per aggiungerne uno. La ricerca filtra l'elenco mentre digitate. <strong>Visualizza profilo</strong> apre la scheda completa.</p>
+<h2>Appuntamenti e pianificazione</h2>
+<p><strong>Nuovo appuntamento</strong> prenota una singola sessione con artista, postazione, prezzo e acconto. Per lavori su più sessioni, il <strong>Pianificatore automatico</strong> cerca gli slot liberi dell'artista in un giorno scelto e prenota fino a sei sessioni a un numero fisso di settimane di distanza. La Dashboard mostra i dati di oggi, le prenotazioni in arrivo, lo stato delle postazioni e le scorte basse.</p>
+<h2>Consensi digitali</h2>
+<p>Aprite il modulo di consenso, scegliete il cliente dall'elenco (le sue allergie vengono compilate automaticamente), confermate la verifica dell'età e fate firmare il cliente sul tablet. Il consenso viene salvato con l'immagine della firma. Non si salva senza un cliente e una firma.</p>
+<h2>Messaggi: il CRM prepara, voi inviate</h2>
+<p>Studio CRM non invia da solo email, SMS o messaggi di chat. Quando preparate un'email di aftercare, un promemoria o un ordine al fornitore, appare un pannello <strong>Messaggio pronto</strong>. Cliccate su <strong>Email</strong>, <strong>WhatsApp</strong> o <strong>LINE</strong> per aprirlo nella vostra app con il testo già compilato, poi premete invia lì, oppure cliccate su <strong>Copia</strong>.</p>
+<h2>Magazzino, scanner e ordini d'acquisto</h2>
+<p><strong>Magazzino</strong> tiene traccia di quantità, lotti, date di scadenza e fornitori. Gli articoli al livello di riordino o sotto di esso sono considerati scorte basse.</p>
+<p>Lo scanner in <strong>Registro attività</strong> usa la fotocamera del dispositivo. Scansionate un codice articolo o un numero di lotto per vedere l'articolo, oppure un codice <code>CLIENT-&lt;number&gt;</code> per aprire un cliente. Potete anche scansionare un codice da una foto. I codici non riconosciuti sono elencati in <strong>Registro errori</strong>.</p>
+<p><strong>Ordine d'acquisto</strong> elenca i vostri fornitori e i loro articoli in scorta bassa, crea un numero d'ordine, scarica un PDF e prepara l'email d'ordine.</p>
+<h2>Galleria</h2>
+<p><strong>Portfolio lavori</strong> contiene le foto dei lavori finiti, collegate al cliente e all'artista. <strong>Flash</strong> contiene i disegni con prezzo e acconto; contrassegnate uno come riservato quando un cliente lo prenota. <strong>Condividi</strong> prepara un messaggio per WhatsApp, LINE, X o email; il menu di condivisione del telefono può includere la foto.</p>
+<h2>Denaro e personale</h2>
+<p>Il <strong>Calcolatore mance</strong> divide una mancia 80% artista, 15% apprendista, 5% reception e la registra. Il personale timbra entrata e uscita con il pulsante turno. Le esportazioni forniscono il registro attività, le scorte basse, i turni e le durate delle sessioni in CSV o PDF.</p>
+<h2>Registri di conformità</h2>
+<p>La <strong>checklist di chiusura</strong> registra quali attività sono state svolte, il supervisore, il numero di ciclo dell'autoclave e le vostre note. Il <strong>Registro autoclave</strong> elenca i cicli di sterilizzazione, e la Dashboard avvisa sulle scorte oltre la data di scadenza. Questi sono i vostri registri: verificate le regole della vostra autorità sanitaria locale su cosa dovete conservare.</p>
+<h2>Strumenti Poli</h2>
+<p>La schermata <strong>Strumenti</strong> apre gli strumenti Poli International (calendari di aftercare, generatore di moduli di consenso, convertitore di calibro, preventivatore prezzi e altro) all'interno del CRM.</p>
+<h2>Backup</h2>
+<p>Tutto è memorizzato in <code>data/studio_crm.sqlite</code> (o nel percorso impostato in <code>SQLITE_DB_PATH</code>). Copiate quel file per fare il backup dello studio. Il pulsante snapshot scrive anche una copia in <code>storage/backups/</code>.</p>
+</main>
+</body>
+</html>

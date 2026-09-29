@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Studio CRM-gebruikershandleiding</title>
+<style>body{margin:0;padding:24px;background:#0F172A;color:#E2E8F0;font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:760px;margin:0 auto}h1{font-size:1.6rem;color:#F8FAFC}h2{font-size:1.15rem;color:#38BDF8;margin-top:1.8em}
+code{background:#1E293B;padding:1px 5px;border-radius:4px;font-size:0.9em}strong{color:#F8FAFC}li{margin:4px 0}</style>
+</head>
+<body>
+<main>
+<h1>Studio CRM-gebruikershandleiding</h1>
+<p>Studio CRM draait op één computer in uw studio. Medewerkers openen het in een webbrowser op die computer of op elk apparaat in het studionetwerk. Uw gegevens blijven in een bestand op die computer. Er wordt niets naar Poli International verzonden.</p>
+<h2>Installeren en starten</h2>
+<ol>
+<li>Installeer Node.js 20 of nieuwer.</li>
+<li>Download de Studio CRM-bestanden en open een terminal in de map <code>studio-crm</code>.</li>
+<li>Voer eenmalig <code>npm ci</code> uit, daarna <code>npm start</code>.</li>
+<li>Open <code>http://localhost:3000</code> in de browser. Andere apparaten gebruiken het netwerkadres van de computer in plaats van <code>localhost</code>.</li>
+</ol>
+<p>Om een andere poort te gebruiken, stelt u <code>PORT</code> in een <code>.env</code>-bestand in (kopieer <code>.env.example</code>). Stel daar ook <code>STUDIO_MANAGER_EMAIL</code> in, zodat meldingen aan u worden geadresseerd.</p>
+<h2>Eerste keer opstarten: demogegevens</h2>
+<p>Een nieuwe installatie start met demoklanten, afspraken, voorraad en personeel, zodat u elk scherm kunt uitproberen. Wanneer u klaar bent voor echt werk, klikt u op <strong>Beginnen met een lege studio</strong> op het dashboard. Dit verwijdert de demogegevens en behoudt de dienstenlijst, categorieën, sjablonen, stations en instellingen. Dit kan niet ongedaan worden gemaakt.</p>
+<h2>Taal</h2>
+<p>Kies Engels, Frans, Italiaans, Duits, Spaans, Nederlands, Portugees of Thai in het taalmenu boven aan. De Poli-tools binnen de CRM openen in dezelfde taal wanneer die beschikbaar is (tools zonder Thai openen in het Engels).</p>
+<h2>Studio-instellingen</h2>
+<p>Open <strong>Instellingen</strong> om uw prijzen, aanbetalingsregel, belastingtarief (btw), retoucherbeleid en voorraaddrempels in te voeren. De prijsschatter, offertes en facturen gebruiken deze waarden, stel ze dus eerst in. <strong>CSV exporteren</strong> downloadt uw prijslijst; bewerk deze en gebruik <strong>CSV importeren</strong> om ze terug te laden. U kunt ook uw studiologo uploaden; dit verschijnt in de bovenste balk.</p>
+<h2>Klanten</h2>
+<p><strong>Klanten</strong> toont iedereen met contactgegevens, allergieën en medische notities, ondertekende toestemmingsformulieren en totaal besteed. Gebruik <strong>Nieuwe klant</strong> om er een toe te voegen. Zoeken filtert de lijst terwijl u typt. <strong>Profiel bekijken</strong> opent het volledige dossier.</p>
+<h2>Afspraken en planning</h2>
+<p><strong>Nieuwe afspraak</strong> boekt één sessie met artiest, station, prijs en aanbetaling. Voor werk met meerdere sessies zoekt de <strong>Automatische planner</strong> de vrije tijdslots van de artiest op een gekozen dag en boekt tot zes sessies met een vast aantal weken ertussen. Het dashboard toont de cijfers van vandaag, aankomende boekingen, stationsstatus en lage voorraad.</p>
+<h2>Digitale toestemmingsformulieren</h2>
+<p>Open het toestemmingsformulier, kies de klant uit de lijst (diens allergieën worden ingevuld), bevestig de leeftijdscontrole en laat de klant tekenen op het tablet. Het toestemmingsformulier wordt opgeslagen met de handtekeningafbeelding. Het wordt niet opgeslagen zonder klant en handtekening.</p>
+<h2>Berichten: de CRM bereidt voor, u verstuurt</h2>
+<p>Studio CRM verstuurt zelf geen e-mail, sms of chatberichten. Wanneer u een nazorg-e-mail, een herinnering of een leveranciersbestelling voorbereidt, verschijnt een paneel <strong>Bericht klaar</strong>. Klik op <strong>E-mail</strong>, <strong>WhatsApp</strong> of <strong>LINE</strong> om het met de ingevulde tekst in uw eigen app te openen, en druk daar op verzenden, of klik op <strong>Kopiëren</strong>.</p>
+<h2>Voorraad, scanner en inkooporders</h2>
+<p><strong>Voorraad</strong> houdt hoeveelheden, partijen, vervaldatums en leveranciers bij. Artikelen op of onder hun bestelniveau tellen als lage voorraad.</p>
+<p>De scanner in <strong>Activiteitenlogboek</strong> gebruikt de camera van het apparaat. Scan een voorraad-SKU of partijnummer om het artikel te zien, of een <code>CLIENT-&lt;number&gt;</code>-code om een klant te openen. U kunt ook een code van een foto scannen. Onbekende codes worden vermeld onder <strong>Foutenlogboek</strong>.</p>
+<p><strong>Inkooporder</strong> toont uw leveranciers en hun artikelen met lage voorraad, maakt een inkoopordernummer, downloadt een PDF en bereidt de bestel-e-mail voor.</p>
+<h2>Galerij</h2>
+<p><strong>Portfolio</strong> bevat foto's van afgewerkt werk, gekoppeld aan klant en artiest. <strong>Flash sheets</strong> bevat ontwerpen met prijs en aanbetaling; markeer een als gereserveerd wanneer een klant het reserveert. <strong>Delen</strong> bereidt een bericht voor WhatsApp, LINE, X of e-mail voor; het deelmenu van de telefoon kan de foto bevatten.</p>
+<h2>Geld en personeel</h2>
+<p>De <strong>Fooicalculator</strong> verdeelt een fooi 80% artiest, 15% leerling, 5% balie en registreert dit. Personeel klokt in en uit met de diensttoets. Exports geven u het activiteitenlogboek, lage voorraad, diensten en sessieduur als CSV of PDF.</p>
+<h2>Compliancedossiers</h2>
+<p>De <strong>afsluitchecklist</strong> registreert welke taken zijn uitgevoerd, de leidinggevende, het autoclaafcyclusnummer en uw notities. Het <strong>Autoclaafregister</strong> toont sterilisatiecycli, en het dashboard waarschuwt voor voorraad die de vervaldatum heeft overschreden. Dit zijn uw eigen dossiers: controleer de regels van uw lokale gezondheidsautoriteit over wat u moet bewaren.</p>
+<h2>Poli-tools</h2>
+<p>Het scherm <strong>Tools</strong> opent de Poli International-tools (nazorgschema's, generator voor toestemmingsformulieren, gauge-omrekenaar, prijsschatter en meer) binnen de CRM.</p>
+<h2>Backups</h2>
+<p>Alles wordt opgeslagen in <code>data/studio_crm.sqlite</code> (of het pad ingesteld in <code>SQLITE_DB_PATH</code>). Kopieer dat bestand om de studio te backuppen. De snapshotknop schrijft ook een kopie naar <code>storage/backups/</code>.</p>
+</main>
+</body>
+</html>

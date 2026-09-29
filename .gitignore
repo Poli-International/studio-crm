@@ -32,3 +32,8 @@ IMPLEMENTATION_ROADMAP.md
 # OS files
 .DS_Store
 Thumbs.db
+
+# Studio data: every install creates its own
+/data/*.sqlite
+/data/*.sqlite-*
+/storage/backups/

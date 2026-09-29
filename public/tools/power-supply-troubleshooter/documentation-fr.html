@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta name="robots" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide de dépannage alimentation et machine : guide de l’utilisateur Documentation | Poli International</title>
+    <meta name="description" content="Le Guide de dépannage alimentation et machine est un outil de diagnostic interactif conçu pour les tatoueurs, les apprentis et les techniciens d’atelier afin d’isoler les pannes électriques et mécaniques sur les machines de tatouage, blocs d’alimentation, câbles et pédales.">
+    <link rel="canonical" href="https://poliinternational.com/power-supply-troubleshooter/">
+    <style>
+        body { background: #0f0f0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; }
+        body.in-iframe .doc-hero h1 { display: none; }
+        * { box-sizing: border-box; }
+        .entry-content { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .doc-hero { background: linear-gradient(135deg, #3B82F6, #8B5CF6); padding: 3rem 2rem; text-align: center; border-radius: 0.75rem; margin-bottom: 2rem; }
+        .doc-hero h1 { font-size: 2.2rem; margin: 0 0 1rem; font-weight: 700; }
+        .doc-hero p { font-size: 1.15rem; color: #E0E7FF; margin: 0; }
+        .doc-hero .v2 { display: inline-block; margin-bottom: 1rem; padding: 0.2rem 0.75rem; border-radius: 999px; background: #10B981; color: #04241a; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; }
+        .doc-section { margin: 2rem 0; padding: 2rem; background: #1a1a1a; border-radius: 0.75rem; border-left: 4px solid #3B82F6; }
+        .doc-section h2 { color: #60A5FA; font-size: 1.7rem; margin: 0 0 1.25rem; font-weight: 600; }
+        .doc-section h3 { color: #A78BFA; font-size: 1.3rem; margin: 1.75rem 0 0.75rem; font-weight: 600; }
+        .doc-section p, .doc-section li { color: #ccc; line-height: 1.75; font-size: 1.02rem; }
+        .doc-section ul, .doc-section ol { padding-left: 1.5rem; }
+        .doc-section li { margin: 0.4rem 0; }
+        .doc-section code { background: #2a2a2a; padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.92em; }
+        .doc-section a { color: #60A5FA; font-weight: 600; }
+        .highlight-box { background: linear-gradient(135deg, #1E3A8A, #4C1D95); padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; border-left: 4px solid #10B981; }
+        .highlight-box p { color: #E0E7FF; margin: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border: 1px solid #333; vertical-align: top; }
+        th { background: #2a2a2a; color: #60A5FA; }
+        td { color: #ccc; }
+        .doc-langs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.5rem; font-size: 0.9rem; }
+        .doc-langs a, .doc-langs span { padding: 0.3rem 0.7rem; border-radius: 999px; border: 1px solid #333; text-decoration: none; }
+        .doc-langs a { color: #60A5FA; }
+        .doc-langs span { background: #1E3A8A; color: #E0E7FF; border-color: #1E3A8A; font-weight: 700; }
+    </style>
+</head>
+<body>
+<script>if (window.self !== window.top) document.body.classList.add('in-iframe');</script>
+    <div class="entry-content">
+        <nav class="doc-langs" aria-label="Documentation language"><a lang="en" href="documentation.html">English</a><span lang="fr">Francais</span><a lang="de" href="documentation-de.html">Deutsch</a><a lang="es" href="documentation-es.html">Espanol</a><a lang="it" href="documentation-it.html">Italiano</a><a lang="nl" href="documentation-nl.html">Nederlands</a><a lang="pt" href="documentation-pt.html">Portugues</a></nav>
+        <div class="doc-hero">
+            <span class="v2">V2</span>
+            <h1>Guide de dépannage alimentation et machine : guide de l’utilisateur</h1>
+            <p>Le Guide de dépannage alimentation et machine est un outil de diagnostic interactif conçu pour les tatoueurs, les apprentis et les techniciens d’atelier afin d’isoler les pannes électriques et mécaniques sur les machines de tatouage, blocs d’alimentation, câbles et pédales.</p>
+        </div>
+        <div class="doc-section">
+        <h2>À quoi sert cet outil</h2>
+        <p>Le matériel de tatouage fonctionne comme un circuit électrique complet. Lorsqu’une machine saccade, surchauffe, ralentit ou refuse de démarrer, chercher au hasard le composant défaillant fait perdre un temps précieux. Changer des câbles ou dérégler les vis de contact sans méthode risque d’aggraver l’alignement mécanique ou d’endommager les composants.</p>
+        <p>Cet outil propose un arbre décisionnel méthodique fondé sur les symptômes observés. Il guide l’utilisateur à travers les anomalies visibles pour déterminer si l’origine du dysfonctionnement se situe au niveau de l’alimentation, du contacteur au pied, du cordon, du moteur ou de l’ensemble des bobines. Chaque parcours aboutit à une évaluation claire de la gravité et à une liste de contrôles pratiques.</p>
+        </div>
+        <div class="doc-section">
+        <h2>À qui s’adresse cet outil</h2>
+        <p>Cet outil a été conçu pour :</p>
+        <ul>
+        <li><strong>Les tatoueurs</strong> confrontés à des arrêts imprévus, des variations de tension ou un manque de puissance dans la peau pendant leurs séances en studio.</li>
+        <li><strong>Les apprentis tatoueurs</strong> qui apprennent à tester méthodiquement les continuités électriques, le réglage des machines et la maintenance du poste de travail.</li>
+        <li><strong>Les gérants de studio et techniciens</strong> qui contrôlent l’état du matériel, identifient les câbles détériorés et déterminent quand un retour chez le fabricant s’impose.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Comment l’utiliser</h2>
+        <p>Le guide vous accompagne pas à pas dans un arbre décisionnel accessible directement dans votre navigateur web :</p>
+        <h3>Consigne de sécurité et en-tête de diagnostic</h3>
+        <p>Avant de manipuler ou tester votre matériel, prenez connaissance des consignes affichées à l’écran :</p>
+        <ol>
+        <li>Vérifiez que l’en-tête affiche le badge <code>⚡ Diagnostic machine</code> ainsi que le titre <code>Guide de dépannage alimentation et machine</code>.</li>
+        <li>Lisez le résumé de fonctionnement : <code>Diagnostic des pannes étape par étape pour machines de tatouage. Répondez à quelques questions sur vos symptômes pour obtenir une liste d’actions ciblées.</code>.</li>
+        <li>Prenez connaissance de l’encadré <code>Consigne de sécurité :</code> situé sous l’interface avant de manipuler les raccordements.</li>
+        <li>En cas d’odeur de brûlé, de fumée ou d’étincelles anormales, débranchez immédiatement la prise murale de l’alimentation.</li>
+        </ol>
+        <h3>Sélection du symptôme principal</h3>
+        <p>Commencez votre diagnostic en identifiant le comportement anormal de votre équipement :</p>
+        <ol>
+        <li>Consultez la question initiale : <code>Quel est le symptôme principal ?</code>.</li>
+        <li>Cliquez sur l’option correspondant à la panne observée :</li>
+        </ol>
+        <ul>
+        <li><code>La machine ne s’allume pas</code> pour un appareil totalement inerte sans vibration ni bruit.</li>
+        <li><code>Tension instable ou fluctuante</code> lorsque la vitesse chute ou que l’affichage numérique saute.</li>
+        <li><code>Vitesse trop rapide ou trop lente</code> si la cadence varie anormalement ou que l’aiguille cale dans la peau.</li>
+        <li><code>Bruit ou vibration excessifs</code> en présence de cliquetis violents, de frottements ou de bruits métalliques.</li>
+        <li><code>Coupures de câble ou de connectique</code> lorsque le courant se coupe dès que l’on manipule le cordon.</li>
+        <li><code>Surchauffe de la machine</code> si le boîtier ou le bloc moteur devient brûlant en quelques minutes.</li>
+        </ul>
+        <h3>Progression dans les étapes de diagnostic</h3>
+        <p>Suivez les questions successives de l’assistant pour cibler la panne :</p>
+        <ol>
+        <li>Repérez votre progression grâce à l’indicateur <code>Étape {step} sur ~{total}</code>.</li>
+        <li>Lisez attentivement la question relative aux voyants d’alimentation, au mode continu de la pédale ou au type de machine.</li>
+        <li>Cliquez sur le bouton correspondant au résultat du test physique réalisé à votre plan de travail.</li>
+        <li>Pour modifier un choix ou tester une autre piste, cliquez sur <code>← Retour</code> pour revenir en arrière.</li>
+        </ol>
+        <h3>Consultation des actions recommandées et redémarrage</h3>
+        <p>À l’issue du parcours de diagnostic, examinez la fiche récapitulative :</p>
+        <ol>
+        <li>Observez le bandeau supérieur pour connaître la conclusion technique et le niveau de gravité.</li>
+        <li>Consultez la section <code>Actions recommandées</code> pour obtenir les étapes de nettoyage, de réglage ou de réparation.</li>
+        <li>Effectuez les opérations recommandées sur votre poste de travail dans l’ordre indiqué.</li>
+        <li>Cliquez sur le bouton <code>← Recommencer</code> pour réinitialiser le questionnaire et revenir à <code>Quel est le symptôme principal ?</code>.</li>
+        </ol>
+        </div>
+        <div class="doc-section">
+        <h2>Ce que cet outil ne fait pas</h2>
+        <p>Cet outil sert uniquement à isoler les pannes matérielles au poste de travail. Il n’assure pas les fonctions suivantes :</p>
+        <ul>
+        <li><strong>Calculer les tarifs de séance ou la grille horaire.</strong> Pour définir vos prix minimaux et vos forfaits horaires, utilisez le <a href="https://poliinternational.com/studio-pricing-benchmark/" target="_top">Studio Pricing Benchmark</a>.</li>
+        <li><strong>Éditer des formulaires de consentement ou décharges médicales.</strong> Pour créer des décharges client numériques et imprimables, utilisez le <a href="https://poliinternational.com/form-builder/" target="_top">Consent Form Builder</a>.</li>
+        <li><strong>Gérer le planning des rendez-vous et le fichier client.</strong> Pour l’organisation des rendez-vous et le suivi des clients, utilisez le <a href="https://poliinternational.com/studio-crm/" target="_top">Studio CRM</a>.</li>
+        <li><strong>Convertir les jauges, diamètres et mesures de bijoux de piercing.</strong> Pour consulter les correspondances de calibres et tailles, utilisez le <a href="https://poliinternational.com/gauge-converter/" target="_top">Body Jewelry Sizing Converter</a>.</li>
+        <li><strong>Archiver les cycles de stérilisation en autoclave.</strong> Pour tenir un registre numérique conforme de décontamination, utilisez l’<a href="https://poliinternational.com/autoclave-calculator/" target="_top">Autoclave Log</a>.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Où sont conservées vos données</h2>
+        <p>L’outil fonctionne intégralement en local sur votre appareil dans votre navigateur web :</p>
+        <ul>
+        <li><strong>Exécution locale</strong> : Toute la logique décisionnelle, les arbres de pannes et les dictionnaires linguistiques s’exécutent dans votre navigateur via JavaScript.</li>
+        <li><strong>Aucune transmission distante</strong> : Aucune réponse, aucun symptôme d’équipement et aucune donnée de studio ne sont envoyés vers un serveur externe.</li>
+        <li><strong>Remise à zéro de session</strong> : Le parcours de diagnostic reste uniquement en mémoire vive. Cliquer sur <code>← Recommencer</code> ou rafraîchir la page efface immédiatement les données.</li>
+        <li><strong>Pas de stockage persistant</strong> : L’application n’écrit aucun identifiant d’appareil, numéro de série ou historique de test dans les cookies ou le stockage local.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Impression et exportation</h2>
+        <p>L’outil ne génère pas de fichiers numériques exportables car il ne collecte aucune donnée personnelle. Pour garder une trace physique ou électronique de votre diagnostic :</p>
+        <ol>
+        <li>Poursuivez le questionnaire jusqu’à l’affichage complet de la section <code>Actions recommandées</code>.</li>
+        <li>Ouvrez la boîte d’impression de votre navigateur via le raccourci <code>Ctrl+P</code> sur Windows ou Linux, ou <code>Cmd+P</code> sur macOS.</li>
+        <li>Choisissez votre imprimante habituelle ou sélectionnez l’option d’enregistrement au format PDF.</li>
+        <li>La feuille de style optimise automatiquement l’affichage pour une impression papier propre, en masquant les boutons de navigation.</li>
+        </ol>
+        </div>
+        <div class="doc-section">
+        <h2>Questions fréquentes</h2>
+        <h3>Pourquoi ma machine de tatouage se coupe-t-elle quand je bouge le câble ?</h3>
+        <p>Une coupure d’alimentation intermittente lors des mouvements de câble indique une rupture par fatigue des brins de cuivre à l’intérieur du cordon. Les fils conducteurs se cassent au niveau des passe-câbles de soulagement de traction alors que la gaine en silicone extérieure reste intacte. Si une légère flexion du cordon près des fiches RCA ou jack provoque des micro-coupures, remplacez immédiatement le câble.</p>
+        <h3>Comment savoir si la panne de démarrage vient de la pédale ou de l’alimentation ?</h3>
+        <p>Activez le mode de fonctionnement continu ou le commutateur de dérivation de pédale sur votre alimentation si elle en dispose. Si la machine tourne de manière stable sans la pédale, le problème provient des contacts internes du commutateur ou du câble de la pédale. Si l’alimentation ne possède pas de mode continu, débranchez la pédale et essayez avec une pédale de test dont le bon fonctionnement est avéré.</p>
+        <h3>Pourquoi mon dermographe rotatif ralentit-il en pénétrant dans la peau ?</h3>
+        <p>Une machine rotative cale ou perd sa vitesse dans la peau lorsqu’elle tourne sous sa plage de puissance utile ou rencontre une résistance mécanique trop élevée. Une tension excessive de membrane de cartouche, des résidus d’encre séchée dans le mécanisme ou un plateau oscillant non lubrifié forcent le moteur à forcer. Nettoyez le manchon, essayez une cartouche à membrane plus souple et assurez-vous que votre alimentation délivre une tension bien stabilisée.</p>
+        <h3>Qu’est-ce qui provoque des étincelles excessives sur la vis de contact d’une machine à bobines ?</h3>
+        <p>Une formation intense d’étincelles entre la vis de contact et la lame avant signale généralement un condensateur fatigué, un écartement mal ajusté ou des points de contact encrassés. Lorsque le condensateur vieillit, il n’absorbe plus la tension de rupture induite par les bobines, provoquant un arc électrique destructeur. Nettoyez la pointe de contact avec un abrasif très fin et remplacez le condensateur si l’arc persiste après un réglage minutieux de la vis.</p>
+        <h3>Pourquoi ma machine de tatouage chauffe-t-elle anormalement pendant une séance ?</h3>
+        <p>Une légère tiédeur est normale lors de séances prolongées, mais une chaleur intense traduit une surcharge électrique ou une contrainte mécanique anormale. Sur une machine rotative, une friction interne due à un roulement grippé ou une membrane de cartouche trop rigide fait peiner le moteur. Sur une machine à bobines, appliquer une tension trop haute pour compenser un mauvais réglage des ressorts sature le noyau magnétique et fait chauffer l’ensemble.</p>
+        <h3>Pourquoi mon alimentation affiche-t-elle un voyant d’erreur ou une tension instable ?</h3>
+        <p>Les signaux d’erreur et les variations brusques de tension sur l’afficheur signalent en général un court-circuit franc ou une surintensité de protection. Ce court-circuit peut se produire dans un connecteur RCA écrasé, entre les fils d’un clip-cord abîmé ou au niveau des colonnettes de liaison de la machine ayant perdu leurs rondelles isolantes. Débranchez le cordon de la machine côté alimentation : si l’erreur disparaît, le défaut se situe bien dans votre câble ou dans le câblage de la machine.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Limites techniques</h2>
+        <p>Le guide propose une démarche d’analyse logique à partir de symptômes physiques observables, mais comporte des limites matérielles précises :</p>
+        <ul>
+        <li><strong>Pas de mesure électrique directe</strong> : L’outil ne mesure pas l’intensité réelle en ampères, la résistance du circuit ni la chute de tension en charge sur votre plan de travail. Seul un artiste ou un technicien muni d’un multimètre étalonné peut tester la continuité et le voltage effectif.</li>
+        <li><strong>Composants internes non visibles</strong> : L’outil ne peut pas vérifier l’état de dégradation des vernis d’isolation des bobines, les micro-fissures des membranes de cartouche ou la fatigue thermique des cartes électroniques.</li>
+        <li><strong>Contrôle physique impératif</strong> : L’évaluation finale de sécurité et de conformité appartient toujours au tatoueur ou au réparateur qualifié sur place.</li>
+        <li><strong>Arrêt d’urgence obligatoire</strong> : Si un appareil électrique émet de la fumée, des odeurs de brûlé ou des étincelles anormales, débranchez-le immédiatement du secteur. Ne poursuivez pas le diagnostic et confiez le matériel au fabricant ou à un atelier spécialisé.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+            <h2>Utiliser l’outil</h2>
+            <p><a href="https://poliinternational.com/power-supply-troubleshooter/" target="_top">Ouvrir Guide de dépannage alimentation et machine : guide de l’utilisateur</a>. Tout fonctionne dans votre navigateur; rien de ce que vous saisissez n’est transmis.</p>
+        </div>
+    </div>
+</body>
+</html>

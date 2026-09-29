@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <script>
+    if (window.self !== window.top) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      window.addEventListener('message', function(e) {
+        if (e.data && e.data.type === 'poli-theme') {
+          document.documentElement.setAttribute('data-theme', e.data.light ? 'light' : 'dark');
+        }
+      });
+    }
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Diagnose tattoo machine and power supply faults with this step-by-step troubleshooter. Covers rotary, coil, and wireless machines: voltage issues, connection faults, motor problems.">
+  <title>Power Supply &amp; Machine Troubleshooter | Poli International</title>
+  <meta property="og:title" content="Power Supply &amp; Machine Troubleshooter | Poli International">
+  <meta property="og:description" content="Diagnose tattoo machine and power supply faults with this step-by-step troubleshooter. Covers rotary, coil, and wireless machines: voltage issues, connection faults, motor problems.">
+  <link rel="stylesheet" crossorigin href="/tools/power-supply-troubleshooter/assets/index-evBaZdgI.css">
+  <script src="/js/input-guards.js"></script>
+  <link rel="stylesheet" href="/tools/shared/print.css" media="print">
+  <link rel="stylesheet" href="/tools/shared/a11y.css">
+</head>
+<body>
+<div class="tool-wrapper" id="tool-wrapper">
+
+  <header class="tool-header" id="tool-header">
+    <div class="tool-header-top" id="tool-header-top">
+      <div class="tool-header__badge" id="tool-header-badge" data-i18n="app.badge">⚡ Machine Diagnostics</div>
+      <div class="lang-selector-wrap" id="lang-selector-wrap">
+        <select id="lang-select" class="lang-select" aria-label="Select Language">
+          <option value="en">English</option>
+          <option value="fr">Français</option>
+          <option value="it">Italiano</option>
+          <option value="de">Deutsch</option>
+          <option value="es">Español</option>
+          <option value="nl">Nederlands</option>
+          <option value="pt">Português</option>
+        </select>
+      </div>
+    </div>
+    <h1 id="tool-title" data-i18n="app.title">Power Supply &amp; Machine Troubleshooter</h1>
+    <p id="tool-desc" data-i18n="app.desc">Step-by-step fault diagnosis for tattoo machines. Answer a few questions about your symptoms to get a targeted fix checklist.</p>
+  </header>
+
+  <div class="search-section" id="search-section">
+    <div class="search-input-wrap" id="search-input-wrap">
+      <span class="search-icon" id="search-icon" aria-hidden="true">🔍</span>
+      <input type="search" id="symptom-search" class="symptom-search" placeholder="Search symptoms, error codes (E-1, OVERLOAD, etc.)..." aria-label="Search symptoms and error codes" autocomplete="off" spellcheck="false" data-i18n-placeholder="search.placeholder">
+      <button type="button" id="search-clear-btn" class="search-clear-btn" aria-label="Clear search" hidden>×</button>
+    </div>
+    <div id="search-results" class="search-results" hidden aria-live="polite"></div>
+  </div>
+
+  <nav class="tool-tabs" id="tool-tabs" role="tablist" aria-label="Troubleshooter tools and references">
+    <button class="tool-tab active" id="tab-btn-wizard" role="tab" aria-selected="true" aria-controls="view-wizard" data-tab="wizard" data-i18n="nav.tab_wizard">Troubleshooting Wizard</button>
+    <button class="tool-tab" id="tab-btn-calc" role="tab" aria-selected="false" aria-controls="view-calc" data-tab="calc" data-i18n="nav.tab_calc">Bench Calculator</button>
+    <button class="tool-tab" id="tab-btn-audio" role="tab" aria-selected="false" aria-controls="view-audio" data-tab="audio" data-i18n="nav.tab_audio">Audio Library</button>
+    <button class="tool-tab" id="tab-btn-pinouts" role="tab" aria-selected="false" aria-controls="view-pinouts" data-tab="pinouts" data-i18n="nav.tab_pinouts">Pinouts &amp; Polarity</button>
+    <button class="tool-tab" id="tab-btn-matrix" role="tab" aria-selected="false" aria-controls="view-matrix" data-tab="matrix" data-i18n="nav.tab_matrix">Rig Comparison</button>
+    <button class="tool-tab" id="tab-btn-escalation" role="tab" aria-selected="false" aria-controls="view-escalation" data-tab="escalation" data-i18n="nav.tab_escalation">When to Call a Tech</button>
+  </nav>
+
+  <main class="tab-panels" id="tab-panels">
+    <section class="tab-panel active" id="view-wizard" role="tabpanel" aria-labelledby="tab-btn-wizard">
+      <div id="wizard"></div>
+    </section>
+
+    <section class="tab-panel" id="view-calc" role="tabpanel" aria-labelledby="tab-btn-calc" hidden>
+      <div class="panel-card" id="calc-panel-card">
+        <h2 class="panel-title" id="calc-title" data-i18n="calc.title">Bench Multimeter &amp; Voltage-Drop Calculator</h2>
+        <p class="panel-intro" id="calc-desc" data-i18n="calc.desc">Practical electrical math with fully visible arithmetic steps. Enter your measured readings and equipment ratings.</p>
+
+        <!-- Duty Cycle Calculator -->
+        <div class="calc-subcard" id="calc-duty-subcard">
+          <h3 class="calc-subtitle" id="calc-duty-title" data-i18n="calc.duty.title">Duty Cycle Calculator</h3>
+          <div class="calc-grid" id="calc-duty-grid">
+            <div class="calc-field" id="calc-duty-f1">
+              <label for="duty-closure-input" id="duty-closure-label" data-i18n="calc.duty.closure_label">Contact Closure Dwell (ms):</label>
+              <input type="number" id="duty-closure-input" class="calc-input" value="3.2" min="0.1" max="50" step="0.1">
+            </div>
+            <div class="calc-field" id="calc-duty-f2">
+              <label for="duty-period-input" id="duty-period-label" data-i18n="calc.duty.period_label">Total Cycle Period (ms):</label>
+              <input type="number" id="duty-period-input" class="calc-input" value="7.5" min="0.5" max="100" step="0.1">
+            </div>
+          </div>
+          <div class="calc-result-box" id="duty-result-box">
+            <div class="calc-result-main" id="duty-result-val">42.7%</div>
+            <div class="calc-formula" id="duty-formula-val">Duty Cycle (%) = (3.2 ms / 7.5 ms) × 100 = 42.67%</div>
+          </div>
+          <div class="calc-note" id="duty-note-text" data-i18n="calc.duty.note">Directional check note: Compare with machine builder's tuning sheet. Lower percentage indicates shorter contact dwell; higher percentage indicates prolonged contact dwell before armature release.</div>
+        </div>
+
+        <!-- Speed / Frequency Calculator -->
+        <div class="calc-subcard" id="calc-speed-subcard">
+          <h3 class="calc-subtitle" id="calc-speed-title" data-i18n="calc.speed.title">Machine Speed (Frequency) Calculator</h3>
+          <div class="calc-grid" id="calc-speed-grid">
+            <div class="calc-field" id="calc-speed-f1">
+              <label for="speed-period-input" id="speed-period-label" data-i18n="calc.speed.period_label">Cycle Period (ms):</label>
+              <input type="number" id="speed-period-input" class="calc-input" value="7.5" min="1" max="100" step="0.1">
+            </div>
+          </div>
+          <div class="calc-result-box" id="speed-result-box">
+            <div class="calc-result-main" id="speed-result-val">133.3 Hz</div>
+            <div class="calc-formula" id="speed-formula-val">Speed (Hz) = 1000 / 7.5 ms = 133.33 Hz</div>
+          </div>
+          <div class="calc-note" id="speed-note-text" data-i18n="calc.speed.note">Directional check note: Frequency in Hertz reflects cycles per second. Compare against builder specifications for lining versus shading.</div>
+        </div>
+
+        <!-- Clip-Cord Voltage Drop Calculator -->
+        <div class="calc-subcard" id="calc-vdrop-subcard">
+          <h3 class="calc-subtitle" id="calc-vdrop-title" data-i18n="calc.vdrop.title">Clip-Cord Voltage-Drop Calculator</h3>
+          <div class="calc-grid calc-grid-4" id="calc-vdrop-grid">
+            <div class="calc-field" id="calc-vdrop-f1">
+              <label for="vdrop-gauge-select" id="vdrop-gauge-label" data-i18n="calc.vdrop.gauge_label">Wire Gauge (AWG copper):</label>
+              <select id="vdrop-gauge-select" class="calc-input">
+                <option value="0.00639">18 AWG (0.00639 Ω/ft)</option>
+                <option value="0.01015">20 AWG (0.01015 Ω/ft)</option>
+                <option value="0.01614">22 AWG (0.01614 Ω/ft)</option>
+              </select>
+            </div>
+            <div class="calc-field" id="calc-vdrop-f2">
+              <label for="vdrop-length-input" id="vdrop-length-label" data-i18n="calc.vdrop.length_label">Cord Length (feet):</label>
+              <input type="number" id="vdrop-length-input" class="calc-input" value="6.0" min="1" max="25" step="0.5">
+            </div>
+            <div class="calc-field" id="calc-vdrop-f3">
+              <label for="vdrop-current-input" id="vdrop-current-label" data-i18n="calc.vdrop.current_label">Operating Current (A):</label>
+              <input type="number" id="vdrop-current-input" class="calc-input" value="1.2" min="0.1" max="5.0" step="0.1">
+            </div>
+            <div class="calc-field" id="calc-vdrop-f4">
+              <label for="vdrop-psu-input" id="vdrop-psu-label" data-i18n="calc.vdrop.psu_v_label">Power Supply Voltage (V):</label>
+              <input type="number" id="vdrop-psu-input" class="calc-input" value="8.5" min="2.0" max="18.0" step="0.1">
+            </div>
+          </div>
+          <div class="calc-result-box" id="vdrop-result-box">
+            <div class="calc-result-grid" id="vdrop-res-grid">
+              <div class="calc-stat" id="vdrop-stat-res">
+                <span class="calc-stat-label" data-i18n="calc.vdrop.res_result">Round-Trip Resistance:</span>
+                <span class="calc-stat-val" id="vdrop-res-val">0.0767 Ω</span>
+              </div>
+              <div class="calc-stat" id="vdrop-stat-drop">
+                <span class="calc-stat-label" data-i18n="calc.vdrop.drop_result">Estimated Voltage Drop:</span>
+                <span class="calc-stat-val" id="vdrop-drop-val">0.092 V</span>
+              </div>
+              <div class="calc-stat" id="vdrop-stat-load">
+                <span class="calc-stat-label" data-i18n="calc.vdrop.load_result">Actual Machine Voltage:</span>
+                <span class="calc-stat-val" id="vdrop-load-val">8.408 V</span>
+              </div>
+            </div>
+            <div class="calc-formula" id="vdrop-formula-val">Resistance = 2 × 6.0 ft × 0.00639 Ω/ft = 0.0767 Ω; Drop = 1.2 A × 0.0767 Ω = 0.092 V; Machine Voltage = 8.5 V - 0.092 V = 8.408 V</div>
+          </div>
+          <div class="calc-note" id="vdrop-note-text" data-i18n="calc.vdrop.note">Based on standard annealed copper wire resistance per ASTM at 20°C (18 AWG: 0.00639 Ω/ft; 20 AWG: 0.01015 Ω/ft; 22 AWG: 0.01614 Ω/ft).</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="view-audio" role="tabpanel" aria-labelledby="tab-btn-audio" hidden>
+      <div class="panel-card" id="audio-panel-card">
+        <h2 class="panel-title" id="audio-title" data-i18n="audio.title">Synthesised Audio Diagnosis Library</h2>
+        <div class="audio-disclaimer" id="audio-disclaimer-box" data-i18n="audio.disclaimer">Purely illustrative comparison. Synthesized tones represent qualitative acoustic characteristics to help isolate faults, not an exact model reproduction of any specific machine.</div>
+
+        <div class="audio-grid" id="audio-grid">
+          <!-- Sound 1: Clean Coil Hum -->
+          <div class="audio-card" id="audio-card-coil">
+            <div class="audio-card-head" id="audio-head-coil">
+              <span class="audio-icon" aria-hidden="true">🔊</span>
+              <div>
+                <h3 class="audio-card-title" id="audio-title-coil" data-i18n="audio.coil_hum.title">Clean Coil Hum</h3>
+                <p class="audio-card-desc" id="audio-desc-coil" data-i18n="audio.coil_hum.desc">A steady, continuous hum with stable fundamental harmonics, indicating clean armature travel and solid contact closure.</p>
+              </div>
+            </div>
+            <div class="audio-controls" id="audio-controls-coil">
+              <button type="button" class="audio-btn" id="audio-btn-coil" data-sound="coil_hum">
+                <span class="btn-play-icon" aria-hidden="true">▶</span>
+                <span class="btn-play-text" data-i18n="audio.play">Play Sound</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Sound 2: Contact Screw Chatter -->
+          <div class="audio-card" id="audio-card-chatter">
+            <div class="audio-card-head" id="audio-head-chatter">
+              <span class="audio-icon" aria-hidden="true">⚡</span>
+              <div>
+                <h3 class="audio-card-title" id="audio-title-chatter" data-i18n="audio.chatter.title">Contact Screw Chatter</h3>
+                <p class="audio-card-desc" id="audio-desc-chatter" data-i18n="audio.chatter.desc">A stuttering, sputtering hum with flutter and intermittent dropouts, indicative of tired springs, contact bounce, or fouled contact faces.</p>
+              </div>
+            </div>
+            <div class="audio-controls" id="audio-controls-chatter">
+              <button type="button" class="audio-btn" id="audio-btn-chatter" data-sound="chatter">
+                <span class="btn-play-icon" aria-hidden="true">▶</span>
+                <span class="btn-play-text" data-i18n="audio.play">Play Sound</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Sound 3: Electrical Arcing / Capacitor Breakdown -->
+          <div class="audio-card" id="audio-card-arcing">
+            <div class="audio-card-head" id="audio-head-arcing">
+              <span class="audio-icon" aria-hidden="true">💥</span>
+              <div>
+                <h3 class="audio-card-title" id="audio-title-arcing" data-i18n="audio.arcing.title">Electrical Arcing / Crackle</h3>
+                <p class="audio-card-desc" id="audio-desc-arcing" data-i18n="audio.arcing.desc">Sharp snapping and electrical sizzling superimposed on the hum, caused by point arcing or failing capacitor breakdown.</p>
+              </div>
+            </div>
+            <div class="audio-controls" id="audio-controls-arcing">
+              <button type="button" class="audio-btn" id="audio-btn-arcing" data-sound="arcing">
+                <span class="btn-play-icon" aria-hidden="true">▶</span>
+                <span class="btn-play-text" data-i18n="audio.play">Play Sound</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Sound 4: Dry Motor Bearing Friction -->
+          <div class="audio-card" id="audio-card-bearing">
+            <div class="audio-card-head" id="audio-head-bearing">
+              <span class="audio-icon" aria-hidden="true">⚙️</span>
+              <div>
+                <h3 class="audio-card-title" id="audio-title-bearing" data-i18n="audio.bearing.title">Dry Motor Bearing Friction</h3>
+                <p class="audio-card-desc" id="audio-desc-bearing" data-i18n="audio.bearing.desc">High-frequency mechanical whine and scraping friction over the rotary motor hum, characteristic of unlubricated bearings or swashplate binding.</p>
+              </div>
+            </div>
+            <div class="audio-controls" id="audio-controls-bearing">
+              <button type="button" class="audio-btn" id="audio-btn-bearing" data-sound="bearing">
+                <span class="btn-play-icon" aria-hidden="true">▶</span>
+                <span class="btn-play-text" data-i18n="audio.play">Play Sound</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="view-pinouts" role="tabpanel" aria-labelledby="tab-btn-pinouts" hidden>
+      <div class="panel-card" id="pinouts-panel-card">
+        <h2 class="panel-title" id="pinout-title" data-i18n="pinout.title">Pinout Diagrams &amp; Polarity Reference</h2>
+        <div class="pinout-disclaimer" id="pinout-disclaimer-box" data-i18n="pinout.disclaimer">Standard, common convention: check the specific machine's own manual in case of doubt. Polarity setups can vary by builder or custom wiring.</div>
+
+        <div class="pinout-grid" id="pinout-grid">
+          <!-- Diagram 1: 1/4" Mono Jack -->
+          <div class="pinout-card" id="pinout-card-jack">
+            <h3 class="pinout-card-title" id="pinout-title-jack" data-i18n="pinout.jack.title">1/4" (6.35 mm) Mono Phone Jack</h3>
+            <p class="pinout-card-desc" id="pinout-desc-jack" data-i18n="pinout.jack.desc">Standard power supply output connector. Tip carries positive (+); sleeve provides ground/return (-).</p>
+            <div class="svg-diagram-wrap" id="svg-wrap-jack">
+              <svg viewBox="0 0 460 140" class="pinout-svg" id="svg-jack" aria-label="1/4 inch mono jack pinout diagram">
+                <!-- Plug Body Outline -->
+                <rect x="20" y="45" width="90" height="50" rx="4" class="svg-handle" />
+                <rect x="110" y="52" width="25" height="36" class="svg-metal-dark" />
+                <!-- Sleeve (-) -->
+                <rect x="135" y="55" width="130" height="30" class="svg-sleeve" />
+                <!-- Insulating Ring -->
+                <rect x="265" y="55" width="10" height="30" class="svg-insulator" />
+                <!-- Tip (+) -->
+                <path d="M 275 55 L 320 55 C 330 55 340 60 345 70 C 340 80 330 85 320 85 L 275 85 Z" class="svg-tip" />
+                <!-- Dimension / Labels -->
+                <line x1="200" y1="40" x2="200" y2="20" class="svg-leader" />
+                <text x="200" y="15" text-anchor="middle" class="svg-label-neg">Sleeve: Negative / Return (-)</text>
+                <line x1="315" y1="45" x2="315" y2="20" class="svg-leader" />
+                <text x="315" y="15" text-anchor="middle" class="svg-label-pos">Tip: Positive (+)</text>
+                <text x="65" y="75" text-anchor="middle" class="svg-label-muted">Handle</text>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Diagram 2: RCA Plug & Ground Leaves -->
+          <div class="pinout-card" id="pinout-card-rca">
+            <h3 class="pinout-card-title" id="pinout-title-rca" data-i18n="pinout.rca.title">RCA Plug Anatomy &amp; Ground Leaves</h3>
+            <p class="pinout-card-desc" id="pinout-desc-rca" data-i18n="pinout.rca.desc">Center pin carries positive (+); outer segmented collar provides ground (-). Loose outer leaves lose friction fit, leading to intermittent power dropouts when cord flexes.</p>
+            <div class="svg-diagram-wrap" id="svg-wrap-rca">
+              <svg viewBox="0 0 460 140" class="pinout-svg" id="svg-rca" aria-label="RCA plug diagram showing center pin and outer ground leaves">
+                <!-- Molded Grip -->
+                <rect x="20" y="45" width="100" height="50" rx="4" class="svg-handle" />
+                <!-- Ground Collar Base -->
+                <rect x="120" y="50" width="40" height="40" class="svg-sleeve" />
+                <!-- Slotted Ground Leaves -->
+                <path d="M 160 50 L 220 50 L 220 62 L 160 62 Z" class="svg-leaf" />
+                <path d="M 160 78 L 220 78 L 220 90 L 160 90 Z" class="svg-leaf" />
+                <!-- Insulator inside shell -->
+                <rect x="220" y="58" width="10" height="24" class="svg-insulator" />
+                <!-- Center Pin (+) -->
+                <rect x="220" y="65" width="75" height="10" rx="3" class="svg-tip" />
+                <!-- Annotations -->
+                <line x1="190" y1="45" x2="190" y2="20" class="svg-leader" />
+                <text x="190" y="15" text-anchor="middle" class="svg-label-neg">Outer Leaves: Ground / Shield (-)</text>
+                <line x1="260" y1="60" x2="260" y2="20" class="svg-leader" />
+                <text x="260" y="15" text-anchor="middle" class="svg-label-pos">Center Pin: Positive (+)</text>
+                <text x="190" y="125" text-anchor="middle" class="svg-label-sub">Inspect tension: spread leaves cause dropouts</text>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Diagram 3: Clip-Cord Polarity on Coil Machine -->
+          <div class="pinout-card" id="pinout-card-clip">
+            <h3 class="pinout-card-title" id="pinout-title-clip" data-i18n="pinout.clip.title">Coil Machine Clip-Cord Polarity</h3>
+            <p class="pinout-card-desc" id="pinout-desc-clip" data-i18n="pinout.clip.desc">Traditional setup: connect positive (+) clip to rear binding post for proper capacitor discharge orientation; negative (-) clip to front binding post or frame.</p>
+            <div class="svg-diagram-wrap" id="svg-wrap-clip">
+              <svg viewBox="0 0 460 150" class="pinout-svg" id="svg-clip" aria-label="Clip-cord polarity connection on coil machine">
+                <!-- Machine Frame Silhouette -->
+                <path d="M 50 120 L 390 120 L 390 100 L 260 100 L 260 35 L 220 35 L 220 100 L 110 100 L 110 50 L 50 50 Z" class="svg-frame" />
+                <!-- Rear Binding Post (Positive) -->
+                <circle cx="90" cy="50" r="14" class="svg-post-pos" />
+                <!-- Front Binding Post (Negative) -->
+                <circle cx="240" cy="45" r="14" class="svg-post-neg" />
+                <!-- Capacitor representation between posts -->
+                <rect x="135" y="42" width="60" height="16" rx="3" class="svg-cap" />
+                <text x="165" y="54" text-anchor="middle" class="svg-cap-text">Capacitor</text>
+                <!-- Labels -->
+                <line x1="90" y1="30" x2="90" y2="15" class="svg-leader" />
+                <text x="90" y="10" text-anchor="middle" class="svg-label-pos">Rear Post: Positive (+)</text>
+                <line x1="240" y1="25" x2="240" y2="15" class="svg-leader" />
+                <text x="240" y="10" text-anchor="middle" class="svg-label-neg">Front Post / Frame: Negative (-)</text>
+                <text x="220" y="138" text-anchor="middle" class="svg-label-sub">Positive to rear post aligns capacitor discharge polarity</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="view-matrix" role="tabpanel" aria-labelledby="tab-btn-matrix" hidden>
+      <div class="panel-card" id="matrix-panel-card">
+        <h2 class="panel-title" id="matrix-title" data-i18n="matrix.title">Studio Rig Comparison Matrix</h2>
+        <p class="panel-intro" id="matrix-desc" data-i18n="matrix.desc">Technical comparison across primary drive architectures.</p>
+        <div class="matrix-disclaimer" id="matrix-disclaimer-box" data-i18n="matrix.disclaimer">Note: Operating characteristics vary across manufacturers. Check your specific machine manual for manufacturer-rated operating voltages and current specifications.</div>
+
+        <div class="matrix-table-wrap" id="matrix-table-wrap">
+          <table class="matrix-table" id="matrix-table">
+            <thead>
+              <tr>
+                <th scope="col" id="th-rig" data-i18n="matrix.th_rig">Machine Rig</th>
+                <th scope="col" id="th-voltage" data-i18n="matrix.th_voltage">Voltage Behavior</th>
+                <th scope="col" id="th-current" data-i18n="matrix.th_current">Current Draw Characteristics</th>
+                <th scope="col" id="th-wear" data-i18n="matrix.th_wear">Wear Points &amp; Routine Inspection</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Twin Coil -->
+              <tr id="tr-coil">
+                <th scope="row" class="row-title" id="td-coil-rig" data-i18n="matrix.coil.rig">Traditional Twin-Coil</th>
+                <td id="td-coil-v" data-i18n="matrix.coil.voltage">Typically 6.0V to 10.5V (tuning-dependent)</td>
+                <td id="td-coil-c" data-i18n="matrix.coil.current">High pulsing peak current at point closure; requires power supply with robust instantaneous headroom.</td>
+                <td id="td-coil-w" data-i18n="matrix.coil.wear">Front and rear spring fatigue, contact screw pitting, capacitor decay, armature nipple wear.</td>
+              </tr>
+              <!-- Direct Drive Rotary -->
+              <tr id="tr-dd">
+                <th scope="row" class="row-title" id="td-dd-rig" data-i18n="matrix.dd.rig">Direct-Drive Rotary</th>
+                <td id="td-dd-v" data-i18n="matrix.dd.voltage">Typically 6.0V to 9.0V (motor-dependent)</td>
+                <td id="td-dd-c" data-i18n="matrix.dd.current">Steady baseline current with moderate rise under needle penetration; lower idle draw than coils.</td>
+                <td id="td-dd-w" data-i18n="matrix.dd.wear">Eccentric cam bearing wear, cam runout, motor brush wear, drive bar slide friction.</td>
+              </tr>
+              <!-- Cartridge Pen -->
+              <tr id="tr-pen">
+                <th scope="row" class="row-title" id="td-pen-rig" data-i18n="matrix.pen.rig">Cartridge Pen (Rotary)</th>
+                <td id="td-pen-v" data-i18n="matrix.pen.voltage">Typically 5.5V to 11.0V (stroke &amp; motor-dependent)</td>
+                <td id="td-pen-c" data-i18n="matrix.pen.current">Significantly influenced by cartridge membrane tension; stiff membranes elevate continuous motor load.</td>
+                <td id="td-pen-w" data-i18n="matrix.pen.wear">Internal swashdrive lubrication, O-rings, RCA jack retention leaves, lead screw tolerance.</td>
+              </tr>
+              <!-- Wireless Battery Pack -->
+              <tr id="tr-wb">
+                <th scope="row" class="row-title" id="td-wb-rig" data-i18n="matrix.wb.rig">Wireless Battery Pack</th>
+                <td id="td-wb-v" data-i18n="matrix.wb.voltage">Typically 5.0V to 12.0V (lithium-ion 3.7V nominal, 4.2V full charge)</td>
+                <td id="td-wb-c" data-i18n="matrix.wb.current">Constrained by onboard BMS discharge curve; voltage sag possible under heavy membrane resistance.</td>
+                <td id="td-wb-w" data-i18n="matrix.wb.wear">Cell capacity fade after 300 to 500 charge cycles, USB-C port physical fatigue, power switch wear.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="view-escalation" role="tabpanel" aria-labelledby="tab-btn-escalation" hidden>
+      <div class="panel-card" id="escalation-panel-card">
+        <div class="escalation-header" id="escalation-header">
+          <h2 class="panel-title" id="escalation-title" data-i18n="escalation.title">When to Call a Technician or the Manufacturer</h2>
+          <p class="panel-intro" id="escalation-desc" data-i18n="escalation.intro">Consolidated escalation directory collecting every condition in the diagnostic tree requiring professional bench repair, component replacement, or manufacturer service.</p>
+          <div class="escalation-filters" id="escalation-filters" role="group" aria-label="Filter escalation conditions">
+            <button type="button" class="escalation-filter-btn active" id="filter-all-btn" data-filter="all" data-i18n="escalation.filter_all">All Escalations (16)</button>
+            <button type="button" class="escalation-filter-btn" id="filter-stop-btn" data-filter="stop" data-i18n="escalation.filter_stop">Immediate Stop (5)</button>
+            <button type="button" class="escalation-filter-btn" id="filter-service-btn" data-filter="service" data-i18n="escalation.filter_service">Bench Service (11)</button>
+          </div>
+        </div>
+        <div class="escalation-grid" id="escalation-grid" role="list"></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="disclaimer" id="disclaimer">
+    <strong data-i18n="safety.title">Safety note:</strong> <span data-i18n="safety.text">Always disconnect your machine from the power supply before inspecting internal components.
+    If a machine sparks, smells of burning, or shows signs of electrical damage: stop use immediately.</span>
+  </div>
+
+</div>
+<script src="/tools/power-supply-troubleshooter/js/i18n.js"></script>
+<script src="/tools/power-supply-troubleshooter/js/app.js"></script>
+</body>
+</html>
+

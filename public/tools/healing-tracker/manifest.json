@@ -1,0 +1,19 @@
+{
+  "id": "/",
+  "name": "Tattoo & Piercing Healing Timeline & Longevity Suite",
+  "short_name": "HealingSuite",
+  "description": "Daily healing log, milestone photo comparisons, symptom trend analysis, and touch-up longevity projections.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0ea5e9",
+  "icons": [
+    {
+      "src": "./images/Poli-International-Co.webp",
+      "sizes": "192x192 512x512",
+      "type": "image/webp",
+      "purpose": "any"
+    }
+  ]
+}

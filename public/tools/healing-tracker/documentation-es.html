@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seguimiento de Cicatrización - Documentación Técnica</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script>
+    if (window.self !== window.top) {
+      document.documentElement.classList.add('docs-in-frame');
+      var poliRoot = document.documentElement;
+      var poliApply = function (light) {
+        poliRoot.setAttribute('data-theme', light ? 'light' : 'dark');
+        var b = document.body;
+        if (b) {
+          b.classList.toggle('dark-mode', !light);
+          b.classList.toggle('light-mode', !!light);
+        }
+      };
+      poliApply(false);
+      document.addEventListener('DOMContentLoaded', function () {
+        poliApply(poliRoot.getAttribute('data-theme') === 'light');
+      });
+      window.addEventListener('message', function (e) {
+        if (e.data && e.data.type === 'poli-theme') {
+          poliApply(!!e.data.light);
+        }
+      });
+    }
+  </script>
+</head>
+<body class="dark-mode">
+  <article class="docs-container" style="max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; color: var(--text-primary);">
+    <nav class="docs-lang-toolbar" style="margin-bottom: 2rem; border-radius: var(--border-radius); border: 1px solid var(--border-primary);" aria-label="Documentation Languages">
+      <span class="docs-lang-label" data-i18n="nav.language">Idioma:</span>
+      <a href="./documentation.html" class="docs-lang-link" data-lang="en">English</a>
+      <a href="./documentation-fr.html" class="docs-lang-link" data-lang="fr">Français</a>
+      <a href="./documentation-de.html" class="docs-lang-link" data-lang="de">Deutsch</a>
+      <a href="./documentation-it.html" class="docs-lang-link" data-lang="it">Italiano</a>
+      <a href="./documentation-es.html" class="docs-lang-link active" data-lang="es">Español</a>
+      <a href="./documentation-nl.html" class="docs-lang-link" data-lang="nl">Nederlands</a>
+      <a href="./documentation-pt.html" class="docs-lang-link" data-lang="pt">Português</a>
+    </nav>
+    <header class="docs-header" style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-primary); padding-bottom: 1.5rem;">
+      <h1 style="color: var(--healing-purple); font-size: 2rem; margin-bottom: 0.5rem;">Seguimiento de Cicatrización de Piercings y Tatuajes: Documentación Técnica</h1>
+      <p style="color: var(--text-secondary); font-size: 1rem;">Arquitectura del sistema, lógica de cálculo, modelos de datos y guía de integración.</p>
+    </header>
+
+    <section class="docs-section" style="margin-bottom: 2.5rem;">
+      <h2 style="color: var(--calm-blue); font-size: 1.4rem; margin-bottom: 1rem;">1. Descripción General de la Arquitectura</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        El Seguimiento de Cicatrización es una aplicación web autónoma ejecutada en el cliente, diseñada para calcular y mostrar las expectativas fase a fase de piercings corporales y tatuajes. Funciona sin dependencias de red externas, sin servidores y sin rastreadores.
+      </p>
+      <ul style="color: var(--text-secondary); padding-left: 1.5rem; margin-bottom: 1rem; line-height: 1.8;">
+        <li><strong>HTML5:</strong> Estructura semántica con controles de formulario accesibles e interfaz por pestañas.</li>
+        <li><strong>CSS3:</strong> Hojas de estilo basadas en variables CSS con alternancia dinámica entre modo oscuro y claro.</li>
+        <li><strong>JavaScript:</strong> Módulos deterministas para el cálculo de cronogramas, clasificación de síntomas y verificación de cuidados.</li>
+        <li><strong>Almacenamiento Local:</strong> Persistencia segura en el navegador para configuraciones y registros sin transmisión remota.</li>
+      </ul>
+    </section>
+
+    <section class="docs-section" style="margin-bottom: 2.5rem;">
+      <h2 style="color: var(--calm-blue); font-size: 1.4rem; margin-bottom: 1rem;">2. Lógica Central y Algoritmos de Cálculo</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        El motor calcula los días transcurridos mediante diferencias de fechas UTC estandarizadas:
+      </p>
+      <pre class="tab-embed-textarea" style="height: auto; padding: 1rem; overflow-x: auto; margin-bottom: 1.5rem;"><code>const procDate = new Date(date);
+const today = new Date();
+const daysElapsed = Math.max(0, Math.floor((today - procDate) / (1000 * 60 * 60 * 24)));</code></pre>
+
+      <h3 style="color: var(--text-primary); font-size: 1.15rem; margin-bottom: 0.75rem;">Triaje Clínico de Síntomas</h3>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        Los síntomas registrados se clasifican en tres niveles de alerta:
+      </p>
+      <ul style="color: var(--text-secondary); padding-left: 1.5rem; line-height: 1.8; margin-bottom: 1.5rem;">
+        <li><strong>Preocupante:</strong> Activado por sangrado continuo, estrías rojas que se expanden o secreción purulenta con mal olor. Requiere evaluación médica o profesional inmediata.</li>
+        <li><strong>Monitorear de cerca:</strong> Activado por hinchazón moderada, enrojecimiento persistente o calor localizado. Requiere observación activa en un plazo de 24 a 48 horas.</li>
+        <li><strong>Normal:</strong> Respuestas fisiológicas esperadas que incluyen secreción linfática clara o blanquecina (costras secas), ligera sensibilidad y sequedad.</li>
+      </ul>
+
+      <h3 style="color: var(--text-primary); font-size: 1.15rem; margin-bottom: 0.75rem;">Registro de Cicatrización y Análisis de Tendencias</h3>
+      <ul style="color: var(--text-secondary); padding-left: 1.5rem; line-height: 1.8; margin-bottom: 1.5rem;">
+        <li><strong>Comparación Fotográfica:</strong> Permite la comparación visual directa entre el Día 0 de referencia y cualquier entrada posterior mediante un divisor interactivo deslizable (<code>renderPhotoComparison()</code>).</li>
+        <li><strong>Curvas de Síntomas:</strong> Visualización gráfica de la evolución del enrojecimiento, inflamación, dolor y secreción mediante SVG puro (<code>renderSymptomTrends()</code>).</li>
+        <li><strong>Detección de Cambio de Dirección:</strong> Identifica un empeoramiento sostenido en <strong>3 entradas consecutivas</strong> (o >= 48 horas de elevación persistente) para evitar falsas alarmas por fricciones cotidianas (<code>detectDirectionChange()</code>).</li>
+        <li><strong>Evaluación de Factores Desencadenantes:</strong> Consulta de forma automática los factores físicos detonantes (enganchón, dormir sobre la zona, cambio de joya, nuevo producto, baño, gimnasio) ante cualquier empeoramiento (<code>evaluateWhatChangedTrigger()</code>).</li>
+        <li><strong>Copia de Seguridad y Restauración:</strong> Exportación e importación en un archivo JSON único con imágenes en base64 para migración entre dispositivos (<code>exportBackupData()</code> y <code>importBackupData()</code>).</li>
+      </ul>
+    </section>
+
+    <section class="docs-section" style="margin-bottom: 2.5rem;" id="docsFaqSection">
+      <h2 style="color: var(--calm-blue); font-size: 1.4rem; margin-bottom: 0.5rem;">3. Preguntas Frecuentes y Datos Clínicos</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+        Aclaraciones científicas sobre biocompatibilidad, exudado linfático y polímeros médicos.
+      </p>
+
+      <div class="docs-faq-item" style="margin-bottom: 1.5rem; padding: 1.25rem; background: var(--bg-card); border: 1px solid var(--border-primary); border-radius: var(--border-radius);">
+        <h3 style="color: var(--healing-purple); font-size: 1.1rem; margin-bottom: 0.75rem;">P: ¿Es el titanio el único material seguro para la joyería de perforación inicial?</h3>
+        <p style="color: var(--text-secondary); line-height: 1.7; margin: 0;">
+          Hecho: No. Si bien el titanio de grado implante (como ASTM F-136 o ISO 5832-3) es un material inerte de calidad óptima y ampliamente recomendado para piercings recién hechos, no es la única opción segura. Otros materiales biocompatibles contrastados aptos para la cicatrización inicial incluyen el acero quirúrgico de grado implante (ASTM F-138), el niobio biocompatible (ASTM B392), el oro macizo de 14k o 18k libre de níquel y el copolímero aleatorio de PP-R de grado médico (BioFlex®). La seguridad radica en la biocompatibilidad comprobada, la ausencia de citotoxicidad y el cumplimiento estricto de los límites de liberación de níquel (EN 1811 / Anexo XVII del Reglamento REACH).
+        </p>
+      </div>
+
+      <div class="docs-faq-item" style="margin-bottom: 1.5rem; padding: 1.25rem; background: var(--bg-card); border: 1px solid var(--border-primary); border-radius: var(--border-radius);">
+        <h3 style="color: var(--healing-purple); font-size: 1.1rem; margin-bottom: 0.75rem;">P: ¿Está BioFlex concebido únicamente para un uso temporal o a corto plazo?</h3>
+        <p style="color: var(--text-secondary); line-height: 1.7; margin: 0; white-space: pre-line;">
+          Hecho: No. BioFlex es PP-R de grado médico (copolímero aleatorio de polipropileno), un polímero biocompatible moldeado por inyección desarrollado para el uso continuo prolongado y para la perforación inicial. Es esterilizable en autoclave a vapor, biológicamente inerte y flexible para amortiguar impactos y traumatismos en los tejidos.
+
+Distinción de material esencial: BioFlex no es PTFE (politetrafluoroetileno). El PTFE es un fluoropolímero mecanizado a partir de barras extruidas, con propiedades mecánicas y de roscado distintas; BioFlex es una pieza monolítica moldeada por inyección en copolímero PP-R.
+        </p>
+      </div>
+
+      <div class="docs-faq-item" style="margin-bottom: 1.5rem; padding: 1.25rem; background: var(--bg-card); border: 1px solid var(--border-primary); border-radius: var(--border-radius);">
+        <h3 style="color: var(--healing-purple); font-size: 1.1rem; margin-bottom: 0.75rem;">P: Mi piercing supura un líquido claro o blanquecino que se seca formando costras. ¿Está infectado?</h3>
+        <p style="color: var(--text-secondary); line-height: 1.7; margin: 0; white-space: pre-line;">
+          Hecho: No. El líquido claro, blanquecino o pajizo que se seca formando costras es líquido linfático (linfa) mezclado con células desprendidas. La secreción de linfa es una fase fisiológica natural, sana y normal de la cicatrización de heridas. No es pus y no constituye un signo de infección.
+
+Los síntomas de una infección auténtica son claramente diferentes: pus espeso y opaco de color amarillo oscuro o verdoso, calor radiante intenso, enrojecimiento oscuro que se extiende, dolor punzante agudo o fiebre general.
+        </p>
+      </div>
+    </section>
+
+    <section class="docs-section" style="margin-bottom: 2.5rem;">
+      <h2 style="color: var(--calm-blue); font-size: 1.4rem; margin-bottom: 1rem;">4. Integración en Sitios Web de Estudios</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        La herramienta se integra de forma sencilla mediante un iframe estándar:
+      </p>
+      <pre class="tab-embed-textarea" style="height: auto; padding: 1rem; overflow-x: auto;"><code>&lt;iframe src="/tools/healing-tracker/index.html" width="100%" height="800" frameborder="0" style="border-radius: 8px;" title="Seguimiento de Cicatrización Poli International"&gt;&lt;/iframe&gt;</code></pre>
+    </section>
+
+    <section class="docs-section" style="margin-bottom: 2.5rem;">
+      <h2 style="color: var(--calm-blue); font-size: 1.4rem; margin-bottom: 1rem;">5. Privacidad y Protección de Datos</h2>
+      <p style="color: var(--text-secondary); line-height: 1.7;">
+        Todos los cálculos y registros se ejecutan exclusivamente en el navegador local del usuario. Jamás se transmiten fechas, síntomas ni fotografías a servidores externos ni a terceros.
+      </p>
+    </section>
+  </article>
+
+  <script src="./js/locales/en.js"></script>
+  <script src="./js/locales/fr.js"></script>
+  <script src="./js/locales/fr-timeline.js"></script>
+  <script src="./js/locales/it.js"></script>
+  <script src="./js/locales/it-timeline.js"></script>
+  <script src="./js/locales/de.js"></script>
+  <script src="./js/locales/de-timeline.js"></script>
+  <script src="./js/locales/es.js"></script>
+  <script src="./js/locales/es-timeline.js"></script>
+  <script src="./js/locales/nl.js"></script>
+  <script src="./js/locales/nl-timeline.js"></script>
+  <script src="./js/locales/pt.js"></script>
+  <script src="./js/locales/pt-timeline.js"></script>
+  <script src="./js/i18n.js"></script>
+</body>
+</html>

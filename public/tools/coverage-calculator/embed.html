@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Needle Coverage Calculator - Embed</title>
+    <style>
+        /* Reset & Base Styles */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #1A1A1A;
+            color: #E8E8E8;
+            line-height: 1.6;
+            font-size: 14px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Light Mode */
+        body.light-mode {
+            background: #F8F8F8;
+            color: #1A1A1A;
+        }
+
+        body.light-mode .embed__header,
+        body.light-mode .embed__tab,
+        body.light-mode .embed__panel,
+        body.light-mode .embed__form-group input,
+        body.light-mode .embed__form-group select,
+        body.light-mode .embed__results,
+        body.light-mode .embed__result-card {
+            background: #FFFFFF;
+            color: #1A1A1A;
+        }
+
+        body.light-mode .embed__form-group input,
+        body.light-mode .embed__form-group select {
+            border-color: #CCCCCC;
+        }
+
+        body.light-mode .embed__tab {
+            border-bottom-color: #CCCCCC;
+        }
+
+        body.light-mode .embed__result-card {
+            border-color: #DDDDDD;
+        }
+
+        /* Container */
+        .embed__container {
+            max-width: 100%;
+            padding: 1rem;
+        }
+
+        /* Header */
+        .embed__header {
+            background: rgba(26, 26, 26, 0.95);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid #2C5F7C;
+        }
+
+        .embed__title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #FF006E;
+            margin: 0;
+        }
+
+        
+
+        
+
+        
+
+        
+
+        .embed__theme-toggle {
+            background: #2C5F7C;
+            color: #FFFFFF;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .embed__theme-toggle:hover {
+            background: #FF006E;
+            transform: scale(1.05);
+        }
+
+        /* Tab Navigation */
+        .embed__tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid #2C5F7C;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #2C5F7C #1A1A1A;
+        }
+
+        .embed__tab {
+            background: transparent;
+            color: #B0B0B0;
+            border: none;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .embed__tab:hover {
+            color: #E8E8E8;
+            background: rgba(44, 95, 124, 0.1);
+        }
+
+        .embed__tab--active {
+            color: #FF006E;
+            border-bottom-color: #FF006E;
+        }
+
+        /* Panels */
+        .embed__panel {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .embed__panel--active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Forms */
+        .embed__form {
+            background: rgba(26, 26, 26, 0.95);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #2C5F7C;
+            margin-bottom: 1.5rem;
+        }
+
+        .embed__form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .embed__form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .embed__form-group label {
+            font-weight: 600;
+            color: #B0B0B0;
+            font-size: 0.85rem;
+        }
+
+        .embed__form-group input,
+        .embed__form-group select {
+            background: #2A2A2A;
+            border: 2px solid #2C5F7C;
+            color: #E8E8E8;
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .embed__form-group input:focus,
+        .embed__form-group select:focus {
+            outline: none;
+            border-color: #FF006E;
+            box-shadow: 0 0 0 3px rgba(255, 0, 110, 0.1);
+        }
+
+        .embed__calculate-btn {
+            background: linear-gradient(135deg, #2C5F7C 0%, #FF006E 100%);
+            color: #FFFFFF;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 1rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .embed__calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 0, 110, 0.3);
+        }
+
+        /* Results */
+        .embed__results {
+            background: rgba(26, 26, 26, 0.95);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #00D084;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .embed__results-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #00D084;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .embed__results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .embed__result-card {
+            background: #2A2A2A;
+            padding: 1rem;
+            border-radius: 6px;
+            border: 2px solid #2C5F7C;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .embed__result-card:hover {
+            border-color: #FF006E;
+            transform: translateY(-3px);
+        }
+
+        .embed__result-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #FF006E;
+            margin-bottom: 0.25rem;
+        }
+
+        .embed__result-label {
+            font-size: 0.8rem;
+            color: #B0B0B0;
+        }
+
+        .embed__result-details {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(44, 95, 124, 0.1);
+            border-radius: 6px;
+            border-left: 4px solid #2C5F7C;
+        }
+
+        .embed__result-details p {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #B0B0B0;
+        }
+
+        .embed__result-details strong {
+            color: #E8E8E8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .embed__container {
+                padding: 0.5rem;
+            }
+
+            .embed__header {
+                padding: 0.75rem;
+            }
+
+            .embed__title {
+                font-size: 1rem;
+            }
+
+            .embed__tabs {
+                gap: 0.25rem;
+            }
+
+            .embed__tab {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.8rem;
+            }
+
+            .embed__form {
+                padding: 1rem;
+            }
+
+            .embed__form-grid {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+
+            .embed__results-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 0.75rem;
+            }
+
+            .embed__result-value {
+                font-size: 1.2rem;
+            }
+
+            .embed__calculate-btn {
+                padding: 0.75rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .embed__results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Email Notification Section */
+        .embed__email-section {
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            padding: 2rem 1rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .embed__email-box {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .embed__email-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 0.5rem;
+        }
+
+        .embed__email-subtitle {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+        }
+
+        .embed__email-input-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .embed__email-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #1A1A1A;
+            font-size: 0.9rem;
+        }
+
+        .embed__email-input:focus {
+            outline: none;
+            border-color: #FFFFFF;
+            background: #FFFFFF;
+        }
+
+        .embed__email-submit {
+            padding: 0.75rem 1.5rem;
+            background: #FF006E;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .embed__email-submit:hover {
+            background: #D6005C;
+            transform: translateY(-2px);
+        }
+
+        .embed__email-success, .embed__email-error {
+            padding: 0.5rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        .embed__email-success {
+            background: rgba(40, 167, 69, 0.2);
+            color: #FFFFFF;
+            border: 1px solid rgba(40, 167, 69, 0.5);
+        }
+
+        .embed__email-error {
+            background: rgba(220, 53, 69, 0.2);
+            color: #FFFFFF;
+            border: 1px solid rgba(220, 53, 69, 0.5);
+        }
+
+        .embed__email-trust {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.8);
+            flex-wrap: wrap;
+        }
+
+        /* Features Section */
+        .embed__features-section {
+            background: rgba(26, 26, 26, 0.95);
+            padding: 2rem 1rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            border: 2px solid #2C5F7C;
+        }
+
+        body.light-mode .embed__features-section {
+            background: #FFFFFF;
+            border-color: #DDDDDD;
+        }
+
+        .embed__features-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #FF006E;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        body.light-mode .embed__features-title {
+            color: #8B5CF6;
+        }
+
+        .embed__features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.75rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .embed__feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: rgba(44, 95, 124, 0.1);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        body.light-mode .embed__feature-item {
+            background: #F8F8F8;
+        }
+
+        .embed__feature-check {
+            color: #00D084;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .embed__feature-text {
+            color: #E8E8E8;
+        }
+
+        body.light-mode .embed__feature-text {
+            color: #1A1A1A;
+        }
+
+        /* Footer Styles */
+        .embed-footer {
+            background: rgba(26, 26, 26, 0.95);
+            padding: 1.5rem 1rem;
+            border-radius: 8px;
+            border-top: 2px solid #2C5F7C;
+            margin-top: 2rem;
+        }
+
+        body.light-mode .embed-footer {
+            background: #F8F8F8;
+            border-color: #DDDDDD;
+        }
+
+        .embed-footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .embed-footer-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .embed-footer-btn--tools {
+            background: linear-gradient(135deg, #2C5F7C 0%, #FF006E 100%);
+            color: #FFFFFF;
+        }
+
+        .embed-footer-btn--tools:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 0, 110, 0.3);
+        }
+
+        .embed-footer-btn--support {
+            background: #FF5E5B;
+            color: #FFFFFF;
+        }
+
+        .embed-footer-btn--support:hover {
+            background: #FF4E4B;
+            transform: translateY(-2px);
+        }
+
+        .embed-footer-link {
+            color: #2C5F7C;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        body.light-mode .embed-footer-link {
+            color: #8B5CF6;
+        }
+
+        .embed-footer-link:hover {
+            color: #FF006E;
+        }
+
+        @media (max-width: 600px) {
+            .embed__email-input-group {
+                flex-direction: column;
+            }
+
+            .embed__features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .embed-footer-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="embed__container">
+        <!-- Header -->
+        <header class="embed__header">
+            <h1 class="embed__title" data-i18n="embed_title">Needle Coverage Calculator</h1>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <select id="embed-language-select" aria-label="Select Language" onchange="window.I18N && window.I18N.setLanguage(this.value)" style="background: rgba(0,0,0,0.4); color: #fff; border: 1px solid #2C5F7C; font-size: 0.8rem; font-weight: 600; padding: 4px 6px; border-radius: 6px; cursor: pointer;">
+                    <option value="en">🇬🇧 EN</option>
+                    <option value="fr">🇫🇷 FR</option>
+                    <option value="it">🇮🇹 IT</option>
+                    <option value="de">🇩🇪 DE</option>
+                    <option value="es">🇪🇸 ES</option>
+                    <option value="nl">🇳🇱 NL</option>
+                    <option value="pt">🇵🇹 PT</option>
+                </select>
+                
+                <button id="theme-toggle" class="embed__theme-toggle" aria-label="Toggle theme">◐</button>
+            </div>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="embed__tabs" role="tablist">
+            <button class="embed__tab embed__tab--active" data-tab="coverage" role="tab" aria-selected="true" data-i18n="tab_coverage">
+                📏 Coverage
+            </button>
+            <button class="embed__tab" data-tab="session" role="tab" aria-selected="false" data-i18n="tab_session">
+                ⏱️ Session
+            </button>
+            <button class="embed__tab" data-tab="ink" role="tab" aria-selected="false" data-i18n="tab_ink">
+                💧 Ink
+            </button>
+            <button class="embed__tab" data-tab="pricing" role="tab" aria-selected="false" data-i18n="tab_pricing">
+                💰 Pricing
+            </button>
+        </nav>
+
+        <!-- Coverage Calculator Panel -->
+        <div id="coverage-panel" class="embed__panel embed__panel--active" role="tabpanel">
+            <form id="coverage-form" class="embed__form">
+                <div class="embed__form-grid">
+                    <div class="embed__form-group">
+                        <label for="needle-config">Needle Configuration</label>
+                        <select id="needle-config" required>
+                            <optgroup label="Round Liners">
+                                <option value="1RL">1RL - Single Needle</option>
+                                <option value="3RL">3RL - 3 Round Liner</option>
+                                <option value="5RL">5RL - 5 Round Liner</option>
+                                <option value="7RL">7RL - 7 Round Liner</option>
+                            </optgroup>
+                            <optgroup label="Round Shaders">
+                                <option value="5RS">5RS - 5 Round Shader</option>
+                                <option value="7RS">7RS - 7 Round Shader</option>
+                                <option value="9RS">9RS - 9 Round Shader</option>
+                            </optgroup>
+                            <optgroup label="Magnums">
+                                <option value="5M1">5M1 - 5 Magnum</option>
+                                <option value="7M1" selected>7M1 - 7 Magnum</option>
+                                <option value="9M1">9M1 - 9 Magnum (Most Common)</option>
+                                <option value="11M1">11M1 - 11 Magnum</option>
+                                <option value="13M1">13M1 - 13 Magnum</option>
+                                <option value="15M1">15M1 - 15 Magnum</option>
+                            </optgroup>
+                            <optgroup label="Curved Magnums">
+                                <option value="9CM">9CM - 9 Curved Magnum</option>
+                                <option value="11CM">11CM - 11 Curved Magnum</option>
+                                <option value="13CM">13CM - 13 Curved Magnum</option>
+                            </optgroup>
+                            <optgroup label="Flats">
+                                <option value="7F">7F - 7 Flat</option>
+                                <option value="9F">9F - 9 Flat</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="embed__form-group">
+                        <label for="work-speed">Work Speed</label>
+                        <select id="work-speed" required>
+                            <option value="slow">Slow/Detailed (Precision)</option>
+                            <option value="medium" selected>Medium (Standard)</option>
+                            <option value="fast">Fast (Coverage)</option>
+                        </select>
+                    </div>
+
+                    <div class="embed__form-group">
+                        <label for="session-hours">Session Length (hours)</label>
+                        <input type="number" id="session-hours" min="0.5" max="12" step="0.5" value="4" required>
+                    </div>
+
+                    <div class="embed__form-group">
+                        <label for="break-time">Break Time (min/hour)</label>
+                        <input type="number" id="break-time" min="0" max="30" step="5" value="10" required>
+                    </div>
+
+                    <div class="embed__form-group">
+                        <label for="passes">Number of Passes</label>
+                        <input type="number" id="passes" min="1" max="5" value="2" required>
+                    </div>
+                </div>
+                <button type="submit" class="embed__calculate-btn">Calculate Coverage</button>
+            </form>
+            <div id="coverage-results" class="embed__results" style="display: none;"></div>
+        </div>
+
+        <!-- Session Time Panel -->
+        <div id="session-panel" class="embed__panel" role="tabpanel">
+            <form id="session-form" class="embed__form">
+                <div class="embed__form-grid">
+                    <div class="embed__form-group">
+                        <label for="tattoo-width">Tattoo Width (inches)</label>
+                        <input type="number" id="tattoo-width" min="0.5" max="50" step="0.5" value="6" required>
+                    </div>
+
+                    <div class="embed__form-group">
+                        <label for="tattoo-height">Tattoo Height (inches)</label>
+                        <input type="number" id="tattoo-height" min="0.5" max="50" step="0.5" value="8" required>
+                    </div>
+
+                    <div class="embed__form-group">
+                        <label for="complexity">Design Complexity</label>
+                        <select id="complexity" required>
+                            <option value="simple">Simple (Minimal detail)</option>
+                            <option value="moderate" selected>Moderate (Some detail)</option>
+                            <option value="detailed">Detailed (Complex work)</option>
+                            <option value="highly-detailed">Highly Detailed (Intricate)</option>
+                            <option value="masterwork">Masterwork (Maximum detail)</option>
+                        </select>
+                    </div>
+
+                    <div class="embed__form-group">
+                        <label for="body-location">Body Location</label>
+                        <select id="body-location" required>
+                            <optgroup label="Easy Areas">
+                                <option value="outer-upper-arm" selected>Outer Upper Arm</option>
+                                <option value="outer-thigh">Outer Thigh</option>
+                                <option value="calf">Calf</option>
+                                <option value="shoulder">Shoulder</option>
+                            </optgroup>
+                            <optgroup label="Moderate Areas">
+                                <option value="inner-upper-arm">Inner Upper Arm</option>
+                                <option value="forearm">Forearm</option>
+                                <option value="back">Back</option>
+                                <option value="chest">Chest</option>
+                            </optgroup>
+                            <optgroup label="Difficult Areas">
+                                <option value="ribs">Ribs</option>
+                                <option value="inner-thigh">Inner Thigh</option>
+                                <option value="feet">Feet</option>
+                                <option value="hands">Hands</option>
+                                <option value="neck">Neck</option>
+                                <option value="spine">Spine</option>
+                                <option value="face">Face</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="embed__form-group">
+                        <label for="color-work">Color Work</label>
+                        <select id="color-work" required>
+                            <option value="blackwork">Black Only</option>
+                            <option value="minimal-color">Minimal Color (1-2 colors)</option>
+                            <option value="full-color" selected>Full Color (3+ colors)</option>
+                        </select>
+                    </div>
+
+                    <div class="embed__form-group">
+                        <label for="pain-tolerance">Pain Tolerance</label>
+                        <select id="pain-tolerance" required>
+                            <option value="low">Low (Frequent breaks)</option>
+                            <option value="medium" selected>Medium (Normal breaks)</option>
+                            <option value="high">High (Minimal breaks)</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="embed__calculate-btn">Estimate Session Time</button>
+            </form>
+            <div id="session-results" class="embed__results" style="display: none;"></div>
+        </div>
+
+        <!-- Ink Calculator Panel -->
+        <div id="ink-panel" class="embed__panel" role="tabpanel">
+            <form id="ink-form" class="embed__form">
+                <div class="embed__form-grid">
+                    <div class="embed__form-group">
+                        <label for="ink-width">Area Width (inches)</label>
+                        <input type="number" id="ink-width" min="0.5" max="50" step="0.5" value="6" required>
+                    </div>
+
+                    <div class="embed__form-group">
+                        <label for="ink-height">Area Height (inches)</label>
+                        <input type="number" id="ink-height" min="0.5" max="50" step="0.5" value="8" required>
+                    </div>
+
+                    <div class="embed__form-group">
+                        <label for="technique">Technique</label>
+                        <select id="technique" required>
+                            <option value="lining">Lining (Outlines)</option>
+                            <option value="shading" selected>Shading (Gradients)</option>
+                            <option value="solid-packing">Solid Color Packing</option>
+                            <option value="whip-shading">Whip Shading</option>
+                            <option value="realism">Realism (High Detail)</option>
+                            <option value="geometric">Geometric (Precise)</option>
+                        </select>
+                    </div>
+
+                    <div class="embed__form-group">
+                        <label for="saturation">Saturation Level</label>
+                        <select id="saturation" required>
+                            <option value="light">Light (Subtle)</option>
+                            <option value="medium" selected>Medium (Standard)</option>
+                            <option value="heavy">Heavy (Bold/Solid)</option>
+                        </select>
+                    </div>
+
+                    <div class="embed__form-group">
+                        <label for="colors">Number of Colors</label>
+                        <input type="number" id="colors" min="1" max="20" value="3" required>
+                    </div>
+
+                    <div class="embed__form-group">
+                        <label for="ink-passes">Passes Required</label>
+                        <input type="number" id="ink-passes" min="1" max="5" value="2" required>
+                    </div>
+                </div>
+                <button type="submit" class="embed__calculate-btn">Calculate Ink Needed</button>
+            </form>
+            <div id="ink-results" class="embed__results" style="display: none;"></div>
+        </div>
+
+        <!-- Pricing Calculator Panel -->
+        <div id="pricing-panel" class="embed__panel" role="tabpanel">
+            <form id="pricing-form" class="embed__form">
+                <div class="embed__form-grid">
+                    <div class="embed__form-group">
+                        <label for="estimated-hours">Estimated Hours</label>
+                        <input type="number" id="estimated-hours" min="0.5" max="100" step="0.5" value="8" required>
+                    </div>
+
+                    <div class="embed__form-group">
+                        <label for="hourly-rate">Hourly Rate ($)</label>
+                        <input type="number" id="hourly-rate" min="50" max="500" step="10" value="150" required>
+                    </div>
+
+                    <div class="embed__form-group">
+                        <label for="pricing-complexity">Design Complexity</label>
+                        <select id="pricing-complexity" required>
+                            <option value="simple">Simple (0-10% adjustment)</option>
+                            <option value="moderate" selected>Moderate (10-20% adjustment)</option>
+                            <option value="detailed">Detailed (20-30% adjustment)</option>
+                            <option value="highly-detailed">Highly Detailed (30-50% adjustment)</option>
+                            <option value="masterwork">Masterwork (50-100% adjustment)</option>
+                        </select>
+                    </div>
+
+                    <div class="embed__form-group">
+                        <label for="deposit-percent">Deposit Percentage</label>
+                        <input type="number" id="deposit-percent" min="10" max="100" step="5" value="25" required>
+                    </div>
+
+                    <div class="embed__form-group">
+                        <label for="sessions">Number of Sessions</label>
+                        <input type="number" id="sessions" min="1" max="20" value="2" required>
+                    </div>
+                </div>
+                <button type="submit" class="embed__calculate-btn">Calculate Pricing</button>
+            </form>
+            <div id="pricing-results" class="embed__results" style="display: none;"></div>
+        </div>
+
+        <!-- Email Notification Section -->
+        <section class="embed__email-section">
+            <div class="embed__email-box">
+                <h2 class="embed__email-title">🔔 Get Notified of New Tools!</h2>
+                <p class="embed__email-subtitle">Be first to know when we launch new free tools for tattoo professionals.</p>
+
+                <form id="embed-email-form" class="embed__email-form">
+                    <div class="embed__email-input-group">
+                        <input type="email"
+                               id="embed-email-input"
+                               class="embed__email-input"
+                               placeholder="Your email address"
+                               required
+                               aria-label="Email address">
+                        <button type="submit" class="embed__email-submit">Notify Me</button>
+                    </div>
+                    <p class="embed__email-success" id="embed-email-success" style="display: none;">
+                        ✅ Thanks! We'll notify you when new tools launch!
+                    </p>
+                    <p class="embed__email-error" id="embed-email-error" style="display: none;">
+                        ❌ Please enter a valid email address.
+                    </p>
+                    <div class="embed__email-trust">
+                        <span>✅ Free tool updates only</span>
+                        <span>✅ No spam</span>
+                        <span>✅ Unsubscribe anytime</span>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="embed__features-section">
+            <h2 class="embed__features-title">✨ Tool Features</h2>
+            <div class="embed__features-grid">
+                <div class="embed__feature-item">
+                    <span class="embed__feature-check">✅</span>
+                    <span class="embed__feature-text">Coverage Area Calculator</span>
+                </div>
+                <div class="embed__feature-item">
+                    <span class="embed__feature-check">✅</span>
+                    <span class="embed__feature-text">Session Time Estimator</span>
+                </div>
+                <div class="embed__feature-item">
+                    <span class="embed__feature-check">✅</span>
+                    <span class="embed__feature-text">Ink Consumption Planner</span>
+                </div>
+                <div class="embed__feature-item">
+                    <span class="embed__feature-check">✅</span>
+                    <span class="embed__feature-text">Pricing Calculator</span>
+                </div>
+                <div class="embed__feature-item">
+                    <span class="embed__feature-check">✅</span>
+                    <span class="embed__feature-text">Mobile-Responsive Design</span>
+                </div>
+                <div class="embed__feature-item">
+                    <span class="embed__feature-check">✅</span>
+                    <span class="embed__feature-text">Dark/Light Mode</span>
+                </div>
+                <div class="embed__feature-item">
+                    <span class="embed__feature-check">✅</span>
+                    <span class="embed__feature-text">100% Free, No Ads</span>
+                </div>
+                <div class="embed__feature-item">
+                    <span class="embed__feature-check">✅</span>
+                    <span class="embed__feature-text">Professional Results</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="embed-footer">
+        <div class="embed-footer-content">
+            <a href="https://poliinternational.com/tools" target="_blank" class="embed-footer-btn embed-footer-btn--tools">
+                <span class="btn-icon">🔧</span>
+                <span class="btn-text">More Tools</span>
+            </a>
+            
+            <a href="index.html" target="_blank" class="embed-footer-link">
+                Open Full Version →
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Needle Coverage Database
+        const NEEDLE_COVERAGE_RATES = {
+            '1RL': { type: 'liner', needles: 1, coverage_rate: { slow: 0.5, medium: 1.0, fast: 1.5 }, passes_required: 2, ink_efficiency: 'low' },
+            '3RL': { type: 'liner', needles: 3, coverage_rate: { slow: 1.5, medium: 3.0, fast: 4.5 }, passes_required: 2, ink_efficiency: 'low' },
+            '5RL': { type: 'liner', needles: 5, coverage_rate: { slow: 2.5, medium: 5.0, fast: 7.5 }, passes_required: 2, ink_efficiency: 'medium' },
+            '7RL': { type: 'liner', needles: 7, coverage_rate: { slow: 3.5, medium: 7.0, fast: 10.5 }, passes_required: 2, ink_efficiency: 'medium' },
+            '5RS': { type: 'shader', needles: 5, coverage_rate: { slow: 3.0, medium: 6.0, fast: 9.0 }, passes_required: 2, ink_efficiency: 'medium' },
+            '7RS': { type: 'shader', needles: 7, coverage_rate: { slow: 4.5, medium: 9.0, fast: 13.5 }, passes_required: 2, ink_efficiency: 'good' },
+            '9RS': { type: 'shader', needles: 9, coverage_rate: { slow: 6.0, medium: 12.0, fast: 18.0 }, passes_required: 2, ink_efficiency: 'good' },
+            '5M1': { type: 'magnum', needles: 5, coverage_rate: { slow: 5.0, medium: 10.0, fast: 15.0 }, passes_required: 2, ink_efficiency: 'good' },
+            '7M1': { type: 'magnum', needles: 7, coverage_rate: { slow: 7.5, medium: 15.0, fast: 22.5 }, passes_required: 2, ink_efficiency: 'excellent' },
+            '9M1': { type: 'magnum', needles: 9, coverage_rate: { slow: 10.0, medium: 20.0, fast: 30.0 }, passes_required: 2, ink_efficiency: 'excellent' },
+            '11M1': { type: 'magnum', needles: 11, coverage_rate: { slow: 12.5, medium: 25.0, fast: 37.5 }, passes_required: 2, ink_efficiency: 'excellent' },
+            '13M1': { type: 'magnum', needles: 13, coverage_rate: { slow: 15.0, medium: 30.0, fast: 45.0 }, passes_required: 2, ink_efficiency: 'excellent' },
+            '15M1': { type: 'magnum', needles: 15, coverage_rate: { slow: 17.5, medium: 35.0, fast: 52.5 }, passes_required: 2, ink_efficiency: 'excellent' },
+            '9CM': { type: 'curved-magnum', needles: 9, coverage_rate: { slow: 11.0, medium: 22.0, fast: 33.0 }, passes_required: 2, ink_efficiency: 'excellent' },
+            '11CM': { type: 'curved-magnum', needles: 11, coverage_rate: { slow: 13.5, medium: 27.0, fast: 40.5 }, passes_required: 2, ink_efficiency: 'excellent' },
+            '13CM': { type: 'curved-magnum', needles: 13, coverage_rate: { slow: 16.0, medium: 32.0, fast: 48.0 }, passes_required: 2, ink_efficiency: 'excellent' },
+            '7F': { type: 'flat', needles: 7, coverage_rate: { slow: 6.0, medium: 12.0, fast: 18.0 }, passes_required: 2, ink_efficiency: 'good' },
+            '9F': { type: 'flat', needles: 9, coverage_rate: { slow: 8.0, medium: 16.0, fast: 24.0 }, passes_required: 2, ink_efficiency: 'good' }
+        };
+
+        // Body Location Factors
+        const BODY_LOCATION_FACTORS = {
+            'outer-upper-arm': { difficulty: 'easy', time_multiplier: 1.0, typical_session: 4.0 },
+            'outer-thigh': { difficulty: 'easy', time_multiplier: 1.0, typical_session: 4.0 },
+            'calf': { difficulty: 'easy', time_multiplier: 1.1, typical_session: 4.0 },
+            'shoulder': { difficulty: 'easy', time_multiplier: 1.1, typical_session: 4.0 },
+            'inner-upper-arm': { difficulty: 'moderate', time_multiplier: 1.3, typical_session: 3.5 },
+            'forearm': { difficulty: 'moderate', time_multiplier: 1.2, typical_session: 3.5 },
+            'back': { difficulty: 'moderate', time_multiplier: 1.15, typical_session: 4.0 },
+            'chest': { difficulty: 'moderate', time_multiplier: 1.4, typical_session: 3.0 },
+            'ribs': { difficulty: 'difficult', time_multiplier: 2.0, typical_session: 2.0 },
+            'inner-thigh': { difficulty: 'difficult', time_multiplier: 1.6, typical_session: 2.5 },
+            'feet': { difficulty: 'difficult', time_multiplier: 1.8, typical_session: 2.0 },
+            'hands': { difficulty: 'difficult', time_multiplier: 1.7, typical_session: 2.5 },
+            'neck': { difficulty: 'difficult', time_multiplier: 1.8, typical_session: 2.0 },
+            'spine': { difficulty: 'difficult', time_multiplier: 2.0, typical_session: 2.0 },
+            'face': { difficulty: 'difficult', time_multiplier: 2.2, typical_session: 1.5 }
+        };
+
+        // Complexity Factors
+        const COMPLEXITY_FACTORS = {
+            'simple': { time_multiplier: 0.8, price_adjustment: { min: 0, max: 0.10 } },
+            'moderate': { time_multiplier: 1.0, price_adjustment: { min: 0.10, max: 0.20 } },
+            'detailed': { time_multiplier: 1.4, price_adjustment: { min: 0.20, max: 0.30 } },
+            'highly-detailed': { time_multiplier: 1.8, price_adjustment: { min: 0.30, max: 0.50 } },
+            'masterwork': { time_multiplier: 2.5, price_adjustment: { min: 0.50, max: 1.0 } }
+        };
+
+        // Ink Consumption Rates (ml per square inch)
+        const INK_CONSUMPTION_RATES = {
+            'lining': { base_rate: 0.05, saturation: { light: 0.7, medium: 1.0, heavy: 1.3 }, waste_factor: 1.2 },
+            'shading': { base_rate: 0.15, saturation: { light: 0.6, medium: 1.0, heavy: 1.5 }, waste_factor: 1.3 },
+            'solid-packing': { base_rate: 0.25, saturation: { light: 0.8, medium: 1.0, heavy: 1.4 }, waste_factor: 1.4 },
+            'whip-shading': { base_rate: 0.12, saturation: { light: 0.6, medium: 1.0, heavy: 1.4 }, waste_factor: 1.3 },
+            'realism': { base_rate: 0.20, saturation: { light: 0.7, medium: 1.0, heavy: 1.3 }, waste_factor: 1.5 },
+            'geometric': { base_rate: 0.10, saturation: { light: 0.8, medium: 1.0, heavy: 1.2 }, waste_factor: 1.2 }
+        };
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const savedTheme = localStorage.getItem('coverage-embed-theme');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-mode');
+        }
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('light-mode');
+                const isLight = document.body.classList.contains('light-mode');
+                localStorage.setItem('coverage-embed-theme', isLight ? 'light' : 'dark');
+            });
+        }
+
+        // Tab Navigation
+        const tabs = document.querySelectorAll('.embed__tab');
+        const panels = document.querySelectorAll('.embed__panel');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const targetTab = this.getAttribute('data-tab');
+
+                tabs.forEach(t => {
+                    t.classList.remove('embed__tab--active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                panels.forEach(p => p.classList.remove('embed__panel--active'));
+
+                this.classList.add('embed__tab--active');
+                this.setAttribute('aria-selected', 'true');
+                document.getElementById(`${targetTab}-panel`).classList.add('embed__panel--active');
+            });
+        });
+
+        // Coverage Calculator
+        const coverageFormEmbed = document.getElementById('coverage-form');
+        if (coverageFormEmbed) {
+            coverageFormEmbed.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const needleConfig = document.getElementById('needle-config').value;
+            const workSpeed = document.getElementById('work-speed').value;
+            const sessionHours = parseFloat(document.getElementById('session-hours').value);
+            const breakTime = parseFloat(document.getElementById('break-time').value);
+            const passes = parseInt(document.getElementById('passes').value);
+
+            const needleData = NEEDLE_COVERAGE_RATES[needleConfig];
+            const breakHours = (breakTime / 60) * sessionHours;
+            const effectiveHours = sessionHours - breakHours;
+            const baseCoverageRate = needleData.coverage_rate[workSpeed];
+            const totalCoverage = baseCoverageRate * effectiveHours;
+            const adjustedCoverage = totalCoverage / passes;
+            const coverageMetric = adjustedCoverage * 6.4516;
+
+            const resultsDiv = document.getElementById('coverage-results');
+            resultsDiv.style.display = 'block';
+            resultsDiv.innerHTML = `
+                <h3 class="embed__results-title">✓ Coverage Results</h3>
+                <div class="embed__results-grid">
+                    <div class="embed__result-card">
+                        <div class="embed__result-value">${adjustedCoverage.toFixed(1)}</div>
+                        <div class="embed__result-label">Square Inches</div>
+                    </div>
+                    <div class="embed__result-card">
+                        <div class="embed__result-value">${coverageMetric.toFixed(1)}</div>
+                        <div class="embed__result-label">Square Cm</div>
+                    </div>
+                    <div class="embed__result-card">
+                        <div class="embed__result-value">${effectiveHours.toFixed(1)}</div>
+                        <div class="embed__result-label">Working Hours</div>
+                    </div>
+                    <div class="embed__result-card">
+                        <div class="embed__result-value">${passes}</div>
+                        <div class="embed__result-label">Passes</div>
+                    </div>
+                </div>
+                <div class="embed__result-details">
+                    <p><strong>Needle:</strong> ${needleConfig} (${needleData.needles} needles)</p>
+                    <p><strong>Speed:</strong> ${workSpeed.charAt(0).toUpperCase() + workSpeed.slice(1)}</p>
+                    <p><strong>Coverage per Hour:</strong> ${baseCoverageRate.toFixed(1)} sq in (${(baseCoverageRate * 6.4516).toFixed(1)} cm²)</p>
+                    <p><strong>Size Comparisons:</strong></p>
+                    <ul style="font-size: 0.85em; margin-left: 1.2em;">
+                        <li>${(adjustedCoverage / 48.15).toFixed(2)}× A5 paper (148×210mm / 5.8"×8.3")</li>
+                        <li>${(adjustedCoverage / 97.09).toFixed(2)}× A4 paper (210×297mm / 8.3"×11.7")</li>
+                        <li>${(adjustedCoverage / 7.17).toFixed(1)}× credit card (85.6×54mm / 3.375"×2.125")</li>
+                    </ul>
+                </div>
+            `;
+        });
+
+        // Session Time Estimator
+        const sessionFormEmbed = document.getElementById('session-form');
+        if (sessionFormEmbed) {
+            sessionFormEmbed.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const width = parseFloat(document.getElementById('tattoo-width').value);
+            const height = parseFloat(document.getElementById('tattoo-height').value);
+            const complexity = document.getElementById('complexity').value;
+            const bodyLocation = document.getElementById('body-location').value;
+            const colorWork = document.getElementById('color-work').value;
+            const painTolerance = document.getElementById('pain-tolerance').value;
+
+            const totalArea = width * height;
+            const complexityData = COMPLEXITY_FACTORS[complexity];
+            const locationData = BODY_LOCATION_FACTORS[bodyLocation];
+
+            const colorMultiplier = {
+                'blackwork': 1.0,
+                'minimal-color': 1.2,
+                'full-color': 1.5
+            };
+
+            const toleranceMultiplier = {
+                'low': 1.3,
+                'medium': 1.0,
+                'high': 0.85
+            };
+
+            const baseNeedleRate = 20;
+            let baseTime = totalArea / baseNeedleRate;
+            baseTime *= complexityData.time_multiplier;
+            baseTime *= locationData.time_multiplier;
+            baseTime *= colorMultiplier[colorWork];
+            baseTime *= toleranceMultiplier[painTolerance];
+            const totalTime = baseTime * 1.15;
+
+            const sessionsNeeded = Math.ceil(totalTime / locationData.typical_session);
+            const timePerSession = totalTime / sessionsNeeded;
+
+            const resultsDiv = document.getElementById('session-results');
+            resultsDiv.style.display = 'block';
+            resultsDiv.innerHTML = `
+                <h3 class="embed__results-title">✓ Session Estimate</h3>
+                <div class="embed__results-grid">
+                    <div class="embed__result-card">
+                        <div class="embed__result-value">${totalTime.toFixed(1)}</div>
+                        <div class="embed__result-label">Total Hours</div>
+                    </div>
+                    <div class="embed__result-card">
+                        <div class="embed__result-value">${sessionsNeeded}</div>
+                        <div class="embed__result-label">Sessions</div>
+                    </div>
+                    <div class="embed__result-card">
+                        <div class="embed__result-value">${timePerSession.toFixed(1)}</div>
+                        <div class="embed__result-label">Hours/Session</div>
+                    </div>
+                    <div class="embed__result-card">
+                        <div class="embed__result-value">${totalArea.toFixed(1)}</div>
+                        <div class="embed__result-label">Square Inches</div>
+                    </div>
+                </div>
+                <div class="embed__result-details">
+                    <p><strong>Size:</strong> ${width}" × ${height}"</p>
+                    <p><strong>Complexity:</strong> ${complexity.charAt(0).toUpperCase() + complexity.slice(1).replace('-', ' ')}</p>
+                    <p><strong>Location:</strong> ${BODY_LOCATION_FACTORS[bodyLocation].difficulty.charAt(0).toUpperCase() + BODY_LOCATION_FACTORS[bodyLocation].difficulty.slice(1)} area</p>
+                    <p><strong>Note:</strong> Estimate includes 15% buffer time for setup and breaks</p>
+                </div>
+            `;
+        });
+
+        // Ink Calculator
+        const inkFormEmbed = document.getElementById('ink-form');
+        if (inkFormEmbed) {
+            inkFormEmbed.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const width = parseFloat(document.getElementById('ink-width').value);
+            const height = parseFloat(document.getElementById('ink-height').value);
+            const technique = document.getElementById('technique').value;
+            const saturation = document.getElementById('saturation').value;
+            const colors = parseInt(document.getElementById('colors').value);
+            const passes = parseInt(document.getElementById('ink-passes').value);
+
+            const totalArea = width * height;
+            const techniqueData = INK_CONSUMPTION_RATES[technique];
+            const baseRate = techniqueData.base_rate;
+            const saturationMultiplier = techniqueData.saturation[saturation];
+            const wasteFactor = techniqueData.waste_factor;
+
+            let inkPerColor = totalArea * baseRate * saturationMultiplier * passes;
+            inkPerColor *= wasteFactor;
+            const totalInk = inkPerColor * colors;
+
+            const capsPerColor = Math.ceil(inkPerColor / 15);
+            const totalCaps = capsPerColor * colors;
+
+            const resultsDiv = document.getElementById('ink-results');
+            resultsDiv.style.display = 'block';
+            resultsDiv.innerHTML = `
+                <h3 class="embed__results-title">✓ Ink Requirements</h3>
+                <div class="embed__results-grid">
+                    <div class="embed__result-card">
+                        <div class="embed__result-value">${totalInk.toFixed(1)}</div>
+                        <div class="embed__result-label">Total ml</div>
+                    </div>
+                    <div class="embed__result-card">
+                        <div class="embed__result-value">${inkPerColor.toFixed(1)}</div>
+                        <div class="embed__result-label">ml per Color</div>
+                    </div>
+                    <div class="embed__result-card">
+                        <div class="embed__result-value">${totalCaps}</div>
+                        <div class="embed__result-label">Total Caps</div>
+                    </div>
+                    <div class="embed__result-card">
+                        <div class="embed__result-value">${capsPerColor}</div>
+                        <div class="embed__result-label">Caps/Color</div>
+                    </div>
+                </div>
+                <div class="embed__result-details">
+                    <p><strong>Area:</strong> ${totalArea.toFixed(1)} square inches</p>
+                    <p><strong>Technique:</strong> ${technique.charAt(0).toUpperCase() + technique.slice(1).replace('-', ' ')}</p>
+                    <p><strong>Saturation:</strong> ${saturation.charAt(0).toUpperCase() + saturation.slice(1)}</p>
+                    <p><strong>Note:</strong> Includes ${((wasteFactor - 1) * 100).toFixed(0)}% waste factor and ${colors} colors</p>
+                </div>
+            `;
+        });
+
+        // Pricing Calculator
+        const pricingFormEmbed = document.getElementById('pricing-form');
+        if (pricingFormEmbed) {
+            pricingFormEmbed.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const hours = parseFloat(document.getElementById('estimated-hours').value);
+            const rate = parseFloat(document.getElementById('hourly-rate').value);
+            const complexity = document.getElementById('pricing-complexity').value;
+            const depositPercent = parseFloat(document.getElementById('deposit-percent').value);
+            const sessions = parseInt(document.getElementById('sessions').value);
+
+            const complexityData = COMPLEXITY_FACTORS[complexity];
+            const basePrice = hours * rate;
+            const minAdjustment = basePrice * complexityData.price_adjustment.min;
+            const maxAdjustment = basePrice * complexityData.price_adjustment.max;
+
+            const minPrice = basePrice + minAdjustment;
+            const maxPrice = basePrice + maxAdjustment;
+            const midPrice = (minPrice + maxPrice) / 2;
+
+            const depositAmount = midPrice * (depositPercent / 100);
+            const perSessionMin = minPrice / sessions;
+            const perSessionMax = maxPrice / sessions;
+
+            const resultsDiv = document.getElementById('pricing-results');
+            resultsDiv.style.display = 'block';
+            resultsDiv.innerHTML = `
+                <h3 class="embed__results-title">✓ Pricing Suggestion</h3>
+                <div class="embed__results-grid">
+                    <div class="embed__result-card">
+                        <div class="embed__result-value">$${minPrice.toFixed(0)}</div>
+                        <div class="embed__result-label">Minimum Price</div>
+                    </div>
+                    <div class="embed__result-card">
+                        <div class="embed__result-value">$${midPrice.toFixed(0)}</div>
+                        <div class="embed__result-label">Target Price</div>
+                    </div>
+                    <div class="embed__result-card">
+                        <div class="embed__result-value">$${maxPrice.toFixed(0)}</div>
+                        <div class="embed__result-label">Maximum Price</div>
+                    </div>
+                    <div class="embed__result-card">
+                        <div class="embed__result-value">$${depositAmount.toFixed(0)}</div>
+                        <div class="embed__result-label">Deposit</div>
+                    </div>
+                </div>
+                <div class="embed__result-details">
+                    <p><strong>Base Rate:</strong> $${rate}/hour × ${hours} hours = $${basePrice.toFixed(0)}</p>
+                    <p><strong>Complexity Adjustment:</strong> ${complexity.charAt(0).toUpperCase() + complexity.slice(1).replace('-', ' ')}</p>
+                    <p><strong>Per Session:</strong> $${perSessionMin.toFixed(0)} - $${perSessionMax.toFixed(0)} (${sessions} sessions)</p>
+                    <p><strong>Deposit:</strong> ${depositPercent}% upfront</p>
+                </div>
+            `;
+        });
+    </script>
+    <script src="js/i18n.js"></script>
+</body>
+</html>

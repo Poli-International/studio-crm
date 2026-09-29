@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Guia do utilizador do Studio CRM</title>
+<style>body{margin:0;padding:24px;background:#0F172A;color:#E2E8F0;font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:760px;margin:0 auto}h1{font-size:1.6rem;color:#F8FAFC}h2{font-size:1.15rem;color:#38BDF8;margin-top:1.8em}
+code{background:#1E293B;padding:1px 5px;border-radius:4px;font-size:0.9em}strong{color:#F8FAFC}li{margin:4px 0}</style>
+</head>
+<body>
+<main>
+<h1>Guia do utilizador do Studio CRM</h1>
+<p>O Studio CRM funciona num único computador do seu estúdio. A equipa abre-o num navegador nesse computador ou em qualquer dispositivo da rede do estúdio. Os seus dados permanecem num ficheiro nesse computador. Não é enviado nada para a Poli International.</p>
+<h2>Instalação e arranque</h2>
+<ol>
+<li>Instale o Node.js 20 ou uma versão mais recente.</li>
+<li>Descarregue os ficheiros do Studio CRM e abra um terminal na pasta <code>studio-crm</code>.</li>
+<li>Execute <code>npm ci</code> uma vez e depois <code>npm start</code>.</li>
+<li>Abra <code>http://localhost:3000</code> no navegador. Os outros dispositivos usam o endereço de rede do computador em vez de <code>localhost</code>.</li>
+</ol>
+<p>Para usar uma porta diferente, defina <code>PORT</code> num ficheiro <code>.env</code> (copie <code>.env.example</code>). Defina também ali <code>STUDIO_MANAGER_EMAIL</code>, para que os alertas lhe sejam dirigidos.</p>
+<h2>Primeira utilização: dados de demonstração</h2>
+<p>Uma nova instalação abre com clientes, marcações, stock e equipa de demonstração, para que possa experimentar todos os ecrãs. Quando estiver pronto para o trabalho real, clique em <strong>Começar com um estúdio vazio</strong> no Dashboard. Isto elimina os registos de demonstração e mantém a lista de serviços, categorias, modelos, estações e definições. Esta ação não pode ser desfeita.</p>
+<h2>Idioma</h2>
+<p>Escolha inglês, francês, italiano, alemão, espanhol, neerlandês, português ou tailandês no menu de idioma no topo. As ferramentas Poli dentro do CRM abrem no mesmo idioma quando o oferecem (as ferramentas sem tailandês abrem em inglês).</p>
+<h2>Definições do estúdio</h2>
+<p>Abra <strong>Definições</strong> para introduzir os seus preços, a regra de depósito, a taxa de imposto (IVA), a política de retoques e os limiares de stock. O estimador de preços, os orçamentos e as faturas utilizam estes valores, por isso defina-os primeiro. <strong>Exportar CSV</strong> descarrega a sua lista de preços; edite-a e use <strong>Importar CSV</strong> para a carregar de novo. Também pode carregar o logótipo do seu estúdio; este aparece na barra superior.</p>
+<h2>Clientes</h2>
+<p><strong>Clientes</strong> lista todos com os seus dados de contacto, alergias e notas médicas, consentimentos assinados e total gasto. Use <strong>Novo cliente</strong> para adicionar um. A pesquisa filtra a lista à medida que escreve. <strong>Ver perfil</strong> abre o registo completo.</p>
+<h2>Marcações e agendamento</h2>
+<p><strong>Nova marcação</strong> reserva uma única sessão com artista, estação, preço e depósito. Para trabalhos de várias sessões, o <strong>Agendador automático</strong> procura os horários livres do artista num dia escolhido e reserva até seis sessões com um número fixo de semanas de intervalo. O Dashboard mostra os números do dia, as próximas marcações, o estado das estações e o stock baixo.</p>
+<h2>Consentimentos digitais</h2>
+<p>Abra o formulário de consentimento, escolha o cliente na lista (as suas alergias são preenchidas automaticamente), confirme a verificação de idade e peça ao cliente para assinar no tablet. O consentimento é guardado com a imagem da assinatura. Não é guardado sem um cliente e uma assinatura.</p>
+<h2>Mensagens: o CRM prepara, você envia</h2>
+<p>O Studio CRM não envia, por si próprio, e-mails, SMS ou mensagens de chat. Quando prepara um e-mail de cuidados pós-procedimento, um recordatório ou uma encomenda a um fornecedor, aparece um painel <strong>Mensagem pronta</strong>. Clique em <strong>E-mail</strong>, <strong>WhatsApp</strong> ou <strong>LINE</strong> para o abrir na sua própria aplicação com o texto já preenchido, e depois envie a partir daí, ou clique em <strong>Copiar</strong>.</p>
+<h2>Stock, scanner e encomendas</h2>
+<p><strong>Inventário</strong> acompanha quantidades, lotes, datas de validade e fornecedores. Os artigos no nível de reposição ou abaixo dele contam como stock baixo.</p>
+<p>O scanner em <strong>Registo de atividade</strong> usa a câmara do dispositivo. Digitalize um SKU de stock ou número de lote para ver o artigo, ou um código <code>CLIENT-&lt;number&gt;</code> para abrir um cliente. Também pode digitalizar um código a partir de uma fotografia. Os códigos desconhecidos são listados em <strong>Registo de erros</strong>.</p>
+<p><strong>Encomenda</strong> lista os seus fornecedores e os respetivos artigos com stock baixo, cria um número de encomenda, descarrega um PDF e prepara o e-mail da encomenda.</p>
+<h2>Galeria</h2>
+<p><strong>Portefólio</strong> contém fotografias de trabalhos concluídos, associadas ao cliente e ao artista. <strong>Flash sheets</strong> contém desenhos com preço e depósito; marque um como reservado quando um cliente o reservar. <strong>Partilhar</strong> prepara uma mensagem para WhatsApp, LINE, X ou e-mail; o menu de partilha do telemóvel pode incluir a fotografia.</p>
+<h2>Dinheiro e equipa</h2>
+<p>A <strong>Calculadora de gorjetas</strong> divide uma gorjeta em 80% artista, 15% aprendiz, 5% receção e regista-a. A equipa regista a entrada e a saída com o botão de turno. As exportações fornecem-lhe o registo de atividade, o stock baixo, os turnos e as durações das sessões em CSV ou PDF.</p>
+<h2>Registos de conformidade</h2>
+<p>A <strong>checklist de fecho</strong> regista quais os itens realizados, o supervisor, o número do ciclo do autoclave e as suas notas. O <strong>Registo do autoclave</strong> lista os ciclos de esterilização, e o Dashboard avisa sobre stock com a validade expirada. Estes são os seus próprios registos: consulte as regras da sua autoridade de saúde local sobre o que deve conservar.</p>
+<h2>Ferramentas Poli</h2>
+<p>O ecrã <strong>Ferramentas</strong> abre as ferramentas da Poli International (calendários de cuidados pós-procedimento, criador de formulários de consentimento, conversor de calibre, estimador de preços e mais) dentro do CRM.</p>
+<h2>Cópias de segurança</h2>
+<p>Tudo é guardado em <code>data/studio_crm.sqlite</code> (ou no caminho definido em <code>SQLITE_DB_PATH</code>). Copie esse ficheiro para fazer uma cópia de segurança do estúdio. O botão de snapshot também escreve uma cópia em <code>storage/backups/</code>.</p>
+</main>
+</body>
+</html>

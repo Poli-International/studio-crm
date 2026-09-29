@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Body Piercing Gauge Converter & Size Chart | Poli International">
+  <meta property="og:description" content="Convert between gauge sizes, millimeters, and fractional inches with calibrated true-scale visual reference and reverse caliper lookup.">
+  <meta property="og:url" content="https://poliinternational.com/tools/gauge-converter/index.html">
+  <meta property="og:site_name" content="Poli International">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Body Piercing Gauge Converter & Size Chart | Poli International">
+  <meta name="twitter:description" content="Convert between gauge sizes, millimeters, and fractional inches with calibrated true-scale visual reference and reverse caliper lookup.">
+
+  <meta name="description" content="Convert between gauge sizes, millimeters, and fractional inches with calibrated true-scale visual reference and reverse caliper lookup.">
+  <meta name="keywords" content="body piercing gauge converter, piercing gauge chart, piercing size chart, mm to gauge, gauge to inches, stretched piercing sizes, caliper measurement, true scale gauge chart">
+  <title data-i18n="meta.title">Body Piercing Gauge Converter & Size Chart | Poli International</title>
+
+  <!-- Pre-render synchronous dictionary -->
+  <script src="/tools/gauge-converter/js/i18n.js"></script>
+
+  <link rel="stylesheet" href="/tools/gauge-converter/css/style.css">
+  <link rel="manifest" href="./manifest.webmanifest">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Body Piercing Gauge Converter & Size Chart",
+    "url": "https://poliinternational.com/gauge-converter/",
+    "description": "Convert between gauge sizes, millimeters, and fractional inches with calibrated true-scale visual reference and reverse caliper lookup.",
+    "inLanguage": ["en", "fr", "de", "es", "it", "nl", "pt"],
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript. Requires HTML5.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "codeRepository": "https://github.com/poli-international/gauge-converter",
+    "author": {
+      "@type": "Organization",
+      "name": "Poli International",
+      "url": "https://poliinternational.com"
+    },
+    "creator": {
+      "@type": "Organization",
+      "name": "Poli International",
+      "url": "https://poliinternational.com"
+    },
+    "maintainer": {
+      "@type": "Organization",
+      "name": "Poli International",
+      "url": "https://poliinternational.com"
+    },
+    "license": "https://opensource.org/licenses/MIT",
+    "isAccessibleForFree": true
+  }
+  </script>
+  <script src="/js/input-guards.js"></script>
+  <link rel="stylesheet" href="/tools/shared/print.css" media="print">
+  <link rel="stylesheet" href="/tools/shared/a11y.css">
+</head>
+<body>
+  <!-- Breadcrumb Navigation -->
+  <nav class="breadcrumb-nav" aria-label="Breadcrumb" data-i18n-aria="nav.breadcrumb_aria">
+    <a href="https://poliinternational.com/" target="_top" data-i18n="nav.breadcrumb_home">Home</a>
+    <span>›</span>
+    <a href="https://poliinternational.com/tools/" target="_top" data-i18n="nav.breadcrumb_tools">Tools</a>
+    <span>›</span>
+    <a href="https://poliinternational.com/tools/#piercing-tools" target="_top" data-i18n="nav.breadcrumb_piercing">Piercing Tools</a>
+    <span>›</span>
+    <strong data-i18n="nav.breadcrumb_current">Gauge Converter</strong>
+  </nav>
+
+  <!-- Top Navigation Header -->
+  <header class="site-header">
+    <div class="site-header__container">
+      <a href="https://poliinternational.com/" target="_top" class="site-header__logo-link">
+        <img src="/tools/gauge-converter/images/Poli-International-Co.webp" alt="Poli International" class="site-header__logo" data-i18n-alt="brand.name">
+      </a>
+      <nav class="site-nav">
+        <a href="https://poliinternational.com/" target="_top" class="site-nav__link" data-i18n="nav.home">HOME</a>
+        <a href="https://poliinternational.com/who-we-are/" target="_top" class="site-nav__link" data-i18n="nav.about">ABOUT</a>
+        <a href="https://poliinternational.com/our-creation/" target="_top" class="site-nav__link" data-i18n="nav.innovation">INNOVATION</a>
+        <a href="https://poliinternational.com/they-trust-us/" target="_top" class="site-nav__link" data-i18n="nav.trust">They trust us!</a>
+        <a href="https://poliinternational.com/contact-us/" target="_top" class="site-nav__link" data-i18n="nav.contact">CONTACT</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Tool Title & GitHub Section -->
+  <section class="tool-title-section">
+    <div class="container">
+      <h1 class="tool-title" data-i18n="hero.title">Body Piercing Gauge Converter & Size Chart</h1>
+      <div class="github-cta">
+        <a href="https://github.com/Poli-International/gauge-converter" 
+           target="_blank" rel="noopener noreferrer" class="btn-github">
+          <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+          </svg>
+          <span data-i18n="hero.github">View on GitHub</span>
+        </a>
+      </div>
+      <p class="tool-subtitle" data-i18n="hero.subtitle">True-scale conversion between gauge, millimetres, and inches with reverse caliper lookup and card calibration.</p>
+    </div>
+  </section>
+
+  <!-- Main Container -->
+  <div class="gauge-converter">
+
+    <!-- Header Section -->
+    <header class="gauge-converter__header">
+      <div class="gauge-converter__header-content">
+        <div class="gauge-converter__title-group">
+          <h2 class="gauge-converter__title" data-i18n="section.converter_title">Size Converter</h2>
+          <p class="gauge-converter__subtitle" data-i18n="section.converter_desc">
+            Select a gauge or enter a dimension to see calibrated true-scale conversions.
+          </p>
+        </div>
+        <div class="gauge-converter__header-buttons">
+          <!-- Language Selector -->
+          <div class="language-selector-wrapper">
+            <span class="lang-icon" aria-hidden="true">🌐</span>
+            <select id="language-selector" class="language-selector" aria-label="Select language" data-i18n-aria="hero.lang_select_label">
+              <option value="en" data-i18n="lang.en">English (EN)</option>
+              <option value="fr">Français (FR)</option>
+              <option value="it">Italiano (IT)</option>
+              <option value="de">Deutsch (DE)</option>
+              <option value="es">Español (ES)</option>
+              <option value="nl">Nederlands (NL)</option>
+              <option value="pt">Português (PT)</option>
+            </select>
+          </div>
+
+          <button
+            id="embed-button"
+            class="gauge-converter__embed-button"
+            aria-label="Embed this tool"
+            title="Get embed code for your website"
+            data-i18n-aria="hero.embed_aria"
+            data-i18n-title="hero.embed_title"
+          >
+            <span class="embed-icon">⚡</span>
+            <span class="embed-text" data-i18n="hero.free_embed">Free Embed</span>
+          </button>
+          
+          <button
+            id="dark-mode-toggle"
+            class="gauge-converter__dark-mode-toggle"
+            aria-label="Toggle dark mode"
+            title="Toggle dark/light mode"
+            data-i18n-aria="hero.dark_toggle_aria"
+            data-i18n-title="hero.dark_toggle"
+          >
+            <span class="dark-mode-icon">◐</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Embed Modal -->
+    <div id="embed-modal" class="gauge-converter__modal" style="display: none;" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="gauge-converter__modal-content">
+        <button class="gauge-converter__modal-close" id="modal-close" aria-label="Close modal" data-i18n-aria="embed.close_aria">×</button>
+
+        <h2 class="gauge-converter__modal-title" data-i18n="embed.modal_title">Free Tool Embed for Studio Websites</h2>
+        <p class="gauge-converter__modal-subtitle" data-i18n="embed.modal_subtitle">
+          Embed this gauge converter on your studio website - completely free, no attribution required.
+        </p>
+
+        <div class="gauge-converter__modal-section">
+          <h3 class="gauge-converter__modal-section-title" data-i18n="embed.copy_title">Copy Embed Code</h3>
+          <p class="gauge-converter__modal-description" data-i18n="embed.copy_desc">
+            Copy this responsive iframe snippet into your website markup:
+          </p>
+          <div class="gauge-converter__code-container">
+            <code class="gauge-converter__embed-code" id="embed-code">&lt;iframe src="https://poliinternational.com/tools/gauge-converter/index.html" width="100%" height="800" frameborder="0"&gt;&lt;/iframe&gt;</code>
+            <button class="gauge-converter__copy-button" id="copy-embed-code">
+              📋 <span data-i18n="embed.copy_btn">Copy Code</span>
+            </button>
+          </div>
+          <p class="gauge-converter__success-message" id="copy-success" style="display: none;">
+            ✅ <span data-i18n="embed.copied">Code copied to clipboard!</span>
+          </p>
+        </div>
+
+        <div class="gauge-converter__modal-section">
+          <div class="gauge-converter__download-buttons">
+            <a href="embed.html" download class="gauge-converter__download-button">
+              ⬇️ <span data-i18n="embed.download_btn">Download HTML File</span>
+            </a>
+            <a href="https://poliinternational.com/tools/" target="_top" class="gauge-converter__download-button gauge-converter__download-button--secondary">
+              🔗 <span data-i18n="related.all_tools">View All Free Tools</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen Calibration Modal -->
+    <div id="calibration-modal" class="gauge-converter__modal" style="display: none;" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="gauge-converter__modal-content calibration-modal-content">
+        <button class="gauge-converter__modal-close" id="close-calibrate-modal" aria-label="Close modal" data-i18n-aria="visual.close_modal_aria">×</button>
+        <h2 class="gauge-converter__modal-title" data-i18n="visual.modal_title">True-Scale Card Calibration</h2>
+        <p class="gauge-converter__modal-subtitle" data-i18n="visual.modal_desc">
+          Hold a standard plastic card (bank card or ID card, ISO/IEC 7810 ID-1, 85.60 mm wide) flat against your display. Adjust the slider until the guide box matches your card exactly.
+        </p>
+
+        <!-- Visual card alignment box -->
+        <div class="calibration-preview-area">
+          <div id="calibration-card-guide" class="calibration-card-guide">
+            <div class="card-guide-label" data-i18n="visual.card_guide_label">Standard ID-1 Card (85.60 mm)</div>
+            <div class="card-guide-chip"></div>
+          </div>
+        </div>
+
+        <div class="calibration-slider-box">
+          <label for="card-slider" class="gauge-converter__label" data-i18n="visual.slider_label">Adjust width in screen pixels:</label>
+          <div class="slider-control-row">
+            <input type="range" id="card-slider" min="200" max="500" step="1" class="calibration-range" />
+            <span id="slider-px-val" class="slider-px-display">323px</span>
+          </div>
+        </div>
+
+        <div class="calibration-modal-actions">
+          <button id="save-calibrate-btn" class="feedback-submit-btn" data-i18n="visual.save_calib_btn">Save & Apply Calibration</button>
+          <button id="cancel-calibrate-btn" class="gauge-converter__download-button gauge-converter__download-button--secondary" data-i18n="visual.cancel_calib_btn">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Tool Section -->
+    <main class="gauge-converter__main">
+
+      <!-- Input Section -->
+      <section class="gauge-converter__input-section" aria-labelledby="input-heading">
+        <h2 id="input-heading" class="gauge-converter__section-title" data-i18n="section.converter_title">Size Converter</h2>
+        <p class="gauge-converter__instruction" data-i18n="section.converter_desc">Select a gauge or enter a dimension to see calibrated true-scale conversions.</p>
+
+        <div class="gauge-converter__inputs">
+
+          <!-- Gauge Input -->
+          <div class="gauge-converter__input-group">
+            <label for="gauge-input" class="gauge-converter__label">
+              <span data-i18n="label.gauge_select">Gauge Size</span>
+              <span class="gauge-converter__label-hint" data-i18n="label.gauge_hint">(e.g., 14G, 16G, 00G, or stretched mm)</span>
+            </label>
+            <select
+              id="gauge-input"
+              class="gauge-converter__select"
+              data-input-type="gauge"
+              aria-describedby="gauge-help"
+            >
+              <!-- Populated dynamically via JS dictionary -->
+            </select>
+            <small id="gauge-help" class="gauge-converter__help-text" data-i18n="hint.gauge_standard">
+              Convention derived from AWG with rounded mm values.
+            </small>
+          </div>
+
+          <!-- Millimeters Input -->
+          <div class="gauge-converter__input-group">
+            <label for="mm-input" class="gauge-converter__label">
+              <span data-i18n="label.mm_input">Millimetres (mm)</span>
+              <span class="gauge-converter__label-hint" data-i18n="label.mm_hint">(decimal)</span>
+            </label>
+            <input
+              type="number"
+              id="mm-input"
+              class="gauge-converter__input"
+              data-i18n-placeholder="placeholder.mm"
+              placeholder="0.0"
+              step="0.1"
+              min="0"
+              max="50"
+              data-input-type="mm"
+              aria-describedby="mm-help"
+            />
+            <small id="mm-help" class="gauge-converter__help-text" data-i18n="hint.mm_desc">
+              Metric thickness or diameter
+            </small>
+          </div>
+
+          <!-- Inches Input -->
+          <div class="gauge-converter__input-group">
+            <label for="inch-input" class="gauge-converter__label">
+              <span data-i18n="label.inch_input">Inches (in)</span>
+              <span class="gauge-converter__label-hint" data-i18n="label.inch_hint">(decimal or fractional)</span>
+            </label>
+            <input
+              type="number"
+              id="inch-input"
+              class="gauge-converter__input"
+              data-i18n-placeholder="placeholder.inch"
+              placeholder="0.000"
+              step="0.001"
+              min="0"
+              max="2"
+              data-input-type="inches"
+              aria-describedby="inch-help"
+            />
+            <small id="inch-help" class="gauge-converter__help-text" data-i18n="hint.inch_desc">
+              Imperial decimal measurement
+            </small>
+          </div>
+
+        </div>
+
+        <!-- Error Message Display -->
+        <div
+          class="gauge-converter__error"
+          id="error-message"
+          role="alert"
+          aria-live="polite"
+          style="display: none;"
+        >
+        </div>
+
+      </section>
+
+      <!-- Visual Display Section -->
+      <section class="gauge-converter__visual-section" aria-labelledby="visual-heading">
+        <div class="visual-header-row">
+          <h2 id="visual-heading" class="gauge-converter__section-title" data-i18n="visual.title">True-Scale Visual Reference</h2>
+          <div class="calibration-control-group">
+            <span id="calibration-status-badge" class="calibration-status calibration-status--fallback" data-i18n="visual.status_fallback">96 DPI Fallback</span>
+            <button id="open-calibrate-modal" class="btn-calibrate" data-i18n="visual.calibrate_btn">Calibrate Screen Scale</button>
+            <button id="reset-calibration-btn" class="btn-reset-calib" style="display: none;" data-i18n="visual.reset_scale_btn">Reset to Default (96 DPI)</button>
+          </div>
+        </div>
+        <p id="visual-scale-instruction" class="gauge-converter__instruction" data-i18n="visual.instruction_approx">Approximate life-size (using standard 96 DPI fallback)</p>
+
+        <div class="gauge-converter__visual-container">
+          <!-- Visual Circle Display -->
+          <div
+            class="gauge-converter__circle-display"
+            aria-label="Visual representation of selected gauge size"
+            data-i18n-aria="visual.circle_aria"
+          >
+            <svg
+              class="gauge-converter__svg"
+              viewBox="0 0 300 300"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-labelledby="circle-title circle-desc"
+            >
+              <title id="circle-title" data-i18n="visual.svg_title">Gauge Size Visual</title>
+              <desc id="circle-desc" data-i18n="visual.svg_desc">A circle showing the actual diameter of the selected gauge size</desc>
+
+              <!-- Background circle for reference -->
+              <circle
+                cx="150"
+                cy="150"
+                r="140"
+                fill="none"
+                class="gauge-converter__bg-circle"
+                stroke-dasharray="5,5"
+              />
+
+              <!-- Actual gauge size circle -->
+              <circle
+                id="gauge-circle"
+                cx="150"
+                cy="150"
+                r="0"
+                class="gauge-converter__active-circle"
+                data-gauge-circle
+              />
+            </svg>
+          </div>
+
+          <!-- Measurement Display -->
+          <div class="gauge-converter__measurement-display">
+            <div class="gauge-converter__measurement-value" id="display-gauge" data-display="gauge">
+              <span class="gauge-converter__measurement-label" data-i18n="visual.disp_gauge">Gauge:</span>
+              <span class="gauge-converter__measurement-number">--</span>
+            </div>
+            <div class="gauge-converter__measurement-value" id="display-mm" data-display="mm">
+              <span class="gauge-converter__measurement-label" data-i18n="visual.disp_diameter">Diameter:</span>
+              <span class="gauge-converter__measurement-number">-- mm</span>
+            </div>
+            <div class="gauge-converter__measurement-value" id="display-inches" data-display="inches">
+              <span class="gauge-converter__measurement-label" data-i18n="visual.disp_inches">Inches:</span>
+              <span class="gauge-converter__measurement-number">-- in</span>
+            </div>
+            <div class="gauge-converter__measurement-value" id="display-fraction" data-display="fraction">
+              <span class="gauge-converter__measurement-label" data-i18n="visual.disp_fraction">Fractional:</span>
+              <span class="gauge-converter__measurement-number">--</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Measure Your Own Piece (Reverse Lookup) Section -->
+      <section class="caliper-lookup-section" aria-labelledby="caliper-heading">
+        <div class="caliper-box">
+          <h2 id="caliper-heading" class="gauge-converter__section-title" data-i18n="caliper.title">Measure Your Own Piece (Reverse Lookup)</h2>
+          <p class="gauge-converter__instruction" data-i18n="caliper.desc">Measure your post or ring thickness using digital calipers, then enter the value to find the closest gauge and variance.</p>
+
+          <div class="caliper-guide-card">
+            <h3 class="caliper-guide-title" data-i18n="caliper.guide_title">How to Measure with Calipers</h3>
+            <ul class="caliper-guide-steps">
+              <li data-i18n="caliper.guide_step1">1. Zero your calipers while fully closed.</li>
+              <li data-i18n="caliper.guide_step2">2. Measure the thickness of the post or wire directly across the shaft, avoiding balls, flares, or threads.</li>
+              <li data-i18n="caliper.guide_step3">3. Take three gentle readings along the wearable area to confirm uniformity.</li>
+            </ul>
+          </div>
+
+          <div class="caliper-form-row">
+            <label for="caliper-input" class="gauge-converter__label" data-i18n="caliper.input_label">Measured Caliper Thickness (mm):</label>
+            <div class="caliper-input-group">
+              <input type="number" id="caliper-input" step="0.01" min="0.1" max="50" placeholder="e.g. 1.25" data-i18n-placeholder="caliper.input_placeholder" class="gauge-converter__input caliper-input" />
+              <button id="caliper-calc-btn" class="feedback-submit-btn caliper-btn" data-i18n="caliper.calc_btn">Find Closest Gauge</button>
+            </div>
+          </div>
+
+          <div id="caliper-error" class="gauge-converter__error" style="display: none;" role="alert"></div>
+
+          <div id="caliper-result-card" class="caliper-result-card" style="display: none;">
+            <h3 class="caliper-result-heading" data-i18n="caliper.result_title">Reverse Lookup Result</h3>
+            <div id="caliper-result-text" class="caliper-result-text"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Honest Reference Table Section -->
+      <section class="gauge-converter__reference-section" aria-labelledby="reference-heading">
+        <h2 id="reference-heading" class="gauge-converter__section-title" data-i18n="table.title">
+          Honest Gauge & Size Reference Table
+        </h2>
+        <p class="gauge-converter__instruction" data-i18n="table.intro">
+          Body jewellery gauge sizes are an industry convention derived from American Wire Gauge (AWG) with rounded millimetre values. Where manufacturers produce different standard diameters, both are listed. The piece's own specification wins.
+        </p>
+
+        <div class="honest-table-wrapper">
+          <table class="gauge-converter__table honest-table">
+            <thead>
+              <tr>
+                <th scope="col" data-i18n="table.col_gauge">Gauge / Size</th>
+                <th scope="col" data-i18n="table.col_awg_exact">Derived AWG</th>
+                <th scope="col" data-i18n="table.col_industry_mm">Industry mm</th>
+                <th scope="col" data-i18n="table.col_inch">Approx. Inches</th>
+                <th scope="col" data-i18n="table.col_fraction">Nearest Common Fraction</th>
+                <th scope="col" data-i18n="table.col_placements">Typical Starting Placements</th>
+              </tr>
+            </thead>
+            <tbody id="honest-table-body">
+              <!-- Rendered dynamically by converter.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-legend-note">
+          <p><span class="table-legend-icon">💡</span> <span data-i18n="table.click_hint">Click any row to load into converter.</span></p>
+        </div>
+
+        <!-- Safety Notice -->
+        <div class="gauge-converter__notice" role="note">
+          <p class="gauge-converter__notice-text" data-i18n="geo.advisory">
+            Safety Advisory: Precision in gauge and material selection is critical for biocompatibility. Our tools utilize established professional practice, standard AWG and ASTM F-136/ASTM F-138 mappings to protect client health and ensure procedural success in every session.
+          </p>
+        </div>
+
+      </section>
+
+      <!-- Printable Chart Section -->
+      <section class="printable-chart-section">
+        <div class="print-callout-card">
+          <h2 class="gauge-converter__section-title" data-i18n="print.section_title">Printable True-Scale Wall Chart</h2>
+          <p class="gauge-converter__instruction" data-i18n="print.section_desc">Print an unscaled, calibrated 1-page workshop reference chart (Gauge, mm, Decimal Inch, Nearest Common Fraction).</p>
+          <button id="trigger-print-btn" class="feedback-submit-btn print-trigger-btn">
+            🖨️ <span data-i18n="print.btn">Print 1-Page Wall Chart</span>
+          </button>
+          <small class="print-instruction-note" data-i18n="print.notice">Print at 100% scale (no fit-to-page) on standard A4 or US Letter paper. Verify the 50 mm calibration bar with a ruler after printing.</small>
+        </div>
+      </section>
+
+      <!-- Related Tools Section -->
+      <section class="related-tools-section">
+        <div class="related-tools-container">
+          <h3 class="related-tools-title" data-i18n="related.title">Recommended Studio Tools</h3>
+          <div class="related-tools-grid">
+            <a href="https://poliinternational.com/healing-tracker/" target="_top" class="related-tool-card" data-i18n="related.healing_tracker">Healing Tracker</a>
+            <a href="https://poliinternational.com/jewelry-size-visualizer/" target="_top" class="related-tool-card" data-i18n="related.size_visualizer">Jewelry Size Visualizer</a>
+            <a href="https://poliinternational.com/material-certification-checker/" target="_top" class="related-tool-card" data-i18n="related.material_cert">Material Certification</a>
+          </div>
+          <div class="related-tools-all-wrapper">
+            <a href="https://poliinternational.com/tools/" target="_top" class="related-tools-all-link" data-i18n="related.all_tools">View All Free Tools</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- GEO Semantic Block -->
+      <aside class="geo-summary-block">
+        <p class="geo-summary-text" data-i18n="geo.advisory">Safety Advisory: Precision in gauge and material selection is critical for biocompatibility. Our tools utilize established professional practice, standard AWG and ASTM F-136/ASTM F-138 mappings to protect client health and ensure procedural success in every session.</p>
+      </aside>
+
+    </main>
+
+    <!-- More Tools Navigation -->
+    <section class="gauge-converter__more-tools">
+      <div class="gauge-converter__more-tools-container">
+        <p>
+          <a href="https://poliinternational.com/tools/" target="_top" class="gauge-converter__more-tools-link" data-i18n="nav.explore_tools">
+            Explore all our free professional tools →
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Community Feedback Section -->
+    <section class="community-feedback">
+      <div class="container">
+        <div class="feedback-card">
+          <div class="feedback-header">
+            <h2 class="feedback-title" data-i18n="feedback.title">Community Feedback</h2>
+            <p class="feedback-subtitle" data-i18n="feedback.desc">
+              Your feedback helps us build better tools for piercers, apprentices, and studio owners.
+            </p>
+          </div>
+
+          <form class="feedback-form" id="feedbackForm">
+            <div class="feedback-form-grid">
+              <div class="form-group">
+                <label for="userEmail" class="form-label" data-i18n="feedback.email_label">Your Email (so we can reply)</label>
+                <input type="email" id="userEmail" name="userEmail" class="form-input"
+                       data-i18n-placeholder="feedback.email_placeholder"
+                       placeholder="your.email@example.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="userRole" class="form-label" data-i18n="feedback.role_label">You are a...</label>
+                <select id="userRole" name="userRole" class="form-select" required>
+                  <option value="" data-i18n="feedback.role_select">Choose one</option>
+                  <option value="piercer" data-i18n="feedback.role_piercer">Professional Piercer</option>
+                  <option value="apprentice" data-i18n="feedback.role_apprentice">Piercing Apprentice</option>
+                  <option value="shop_owner" data-i18n="feedback.role_owner">Studio Owner</option>
+                  <option value="tattoo_artist" data-i18n="feedback.role_tattooist">Tattoo Artist</option>
+                  <option value="enthusiast" data-i18n="feedback.role_enthusiast">Client / Collector</option>
+                  <option value="other" data-i18n="feedback.role_other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="feedbackText" class="form-label" data-i18n="feedback.text_label">Suggestions or feedback</label>
+              <textarea id="feedbackText" name="feedbackText" class="form-textarea"
+                        data-i18n-placeholder="feedback.text_placeholder"
+                        placeholder="Tell us what you need or what could be improved..."
+                        rows="5" required></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="feedback-submit-btn">
+                <span class="btn-icon">✉️</span>
+                <span class="btn-text" data-i18n="feedback.submit_btn">Send Feedback</span>
+              </button>
+            </div>
+
+            <!-- Success/Error Messages -->
+            <div class="feedback-message feedback-message--success" id="feedbackSuccess" style="display: none;">
+              <strong data-i18n="feedback.success">Thank you! Your feedback has been recorded.</strong>
+            </div>
+            <div class="feedback-message feedback-message--error" id="feedbackError" style="display: none;">
+              <strong data-i18n="feedback.error">Could not submit feedback. Please check your connection.</strong>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Hidden Container for Printable Chart during Print Mode -->
+  <div id="printable-chart-container" class="printable-chart-container"></div>
+
+  <script src="/tools/gauge-converter/js/converter.js"></script>
+  <script src="/tools/gauge-converter/js/feedback.js"></script>
+  <!-- Shareable result card (PoliShare), carried over from V1: same element ids. -->
+  <script src="/tools/shared/share-card.js"></script>
+  <script src="/tools/gauge-converter/js/share.js"></script>
+
+  <!-- Hide site navigation when embedded in iframe -->
+  <script>
+    if (window.self !== window.top) {
+      document.addEventListener('DOMContentLoaded', function() {
+        var header = document.querySelector('.site-header');
+        if (header) {
+          header.style.display = 'none';
+        }
+        var toolTitle = document.querySelector('.tool-title-section');
+        if (toolTitle) {
+          toolTitle.style.display = 'none';
+        }
+        var breadcrumb = document.querySelector('.breadcrumb-nav');
+        if (breadcrumb) {
+          breadcrumb.style.display = 'none';
+        }
+        document.body.style.paddingTop = '0';
+        document.body.style.marginTop = '0';
+      });
+    }
+  </script>
+</body>
+</html>

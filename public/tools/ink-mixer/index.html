@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ink Mixer | Poli International">
+    <meta property="og:description" content="Mix custom tattoo ink colors with precise ratios. Color matching and formula saving for professional tattoo artists.">
+    <meta property="og:url" content="//poliinternational.com/ink-mixer/">
+    <meta property="og:site_name" content="Poli International">
+    <meta property="og:image" content="images/Poli-International-Co.webp">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ink Mixer | Poli International">
+    <meta name="twitter:description" content="Mix custom tattoo ink colors with precise ratios. Color matching and formula saving for professional tattoo artists.">
+    <meta name="twitter:image" content="images/Poli-International-Co.webp">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Tattoo Ink Color Mixer & Formula Calculator - Poli International</title>
+    <meta name="description" content="Professional tattoo ink color mixing calculator. Calculate precise ratios, save custom formulas, analyze formula ink substitutions, and create gray washes. Professional tool for tattoo artists.">
+    <meta name="keywords" content="tattoo ink mixing, tattoo color mixing calculator, formula ink substitution, gray wash calculator, tattoo color formulas, tattoo ink ratios">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/lang-switcher.css">
+<script type='application/ld+json'>
+{
+  "@context": "//schema.org",
+  "@type": "WebApplication",
+  "name": "Tattoo Ink Mixer & Palette Creator",
+  "url": "//poliinternational.com/tools/ink-mixer/",
+  "description": "Mix colors and create custom ink palettes",
+  "applicationCategory": "DesignApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "codeRepository": "//github.com/poli-international/ink-mixer",
+  "author": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "//poliinternational.com",
+    "sameAs": [
+      "//github.com/poli-international"
+    ]
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "//poliinternational.com"
+  },
+  "maintainer": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "//poliinternational.com"
+  },
+  "dateModified": "2026-02-07",
+  "license": "//opensource.org/licenses/MIT",
+  "isAccessibleForFree": true
+}
+</script>
+
+<style>
+/* Breadcrumb Styles */
+.breadcrumb-nav {
+    padding: 1rem 0;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.breadcrumb-nav a {
+    color: #0693e3;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.breadcrumb-nav a:hover {
+    color: #0575be;
+    text-decoration: underline;
+}
+
+.breadcrumb-nav span {
+    color: #666;
+    margin: 0 0.5rem;
+}
+
+.breadcrumb-nav strong {
+    color: #333;
+}
+
+/* Dark mode breadcrumb */
+body.dark-mode .breadcrumb-nav span {
+    color: #999;
+}
+
+body.dark-mode .breadcrumb-nav a {
+    color: #60a5fa;
+}
+
+body.dark-mode .breadcrumb-nav strong {
+    color: #e0e0e0;
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link" data-i18n="app.skipLink">Skip to main content</a>
+<nav class="breadcrumb-nav" aria-label="Breadcrumb">
+    <a href="//poliinternational.com/" data-i18n="breadcrumb.home">Home</a>
+    <span>›</span>
+    <a href="//poliinternational.com/tools/" data-i18n="breadcrumb.tools">Tools</a>
+    <span>›</span>
+    <a href="//poliinternational.com/tools/#tattoo-tools" data-i18n="breadcrumb.tattooTools">Tattoo Tools</a>
+    <span>›</span>
+    <strong data-i18n="breadcrumb.inkMixer">Ink Mixer</strong>
+</nav>
+
+    <!-- Top Navigation Header (matching homepage style) -->
+    <header class="site-header">
+        <div class="site-header__container">
+            <a href="//poliinternational.com/" class="site-header__logo-link">
+                <img src="images/Poli-International-Co.webp" alt="Poli International" class="site-header__logo">
+            </a>
+            <nav class="site-nav">
+                <a href="//poliinternational.com/" class="site-nav__link" data-i18n="nav.home">HOME</a>
+                <a href="//poliinternational.com/who-we-are/" class="site-nav__link" data-i18n="nav.about">ABOUT</a>
+                <a href="//poliinternational.com/our-creation/" class="site-nav__link" data-i18n="nav.innovation">INNOVATION</a>
+                <a href="//poliinternational.com/they-trust-us/" class="site-nav__link" data-i18n="nav.trust">They trust us!</a>
+                <a href="//poliinternational.com/contact-us/" class="site-nav__link" data-i18n="nav.contact">CONTACT</a>
+            </nav>
+            <div class="lang-switcher">
+                <label for="siteLanguageSelect" class="sr-only" data-i18n="app.language">Language</label>
+                <span class="lang-switcher__icon" aria-hidden="true">🌐</span>
+                <select id="siteLanguageSelect" class="lang-switcher__select" aria-label="Language">
+                    <option value="en" data-i18n="languages.en">English (EN)</option>
+                    <option value="fr" data-i18n="languages.fr">Français (FR)</option>
+                    <option value="it" data-i18n="languages.it">Italiano (IT)</option>
+                    <option value="de" data-i18n="languages.de">Deutsch (DE)</option>
+                    <option value="es" data-i18n="languages.es">Español (ES)</option>
+                    <option value="nl" data-i18n="languages.nl">Nederlands (NL)</option>
+                    <option value="pt" data-i18n="languages.pt">Português (PT)</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tool Title Section -->
+    <section class="tool-title-section">
+        <div class="container">
+            <h1 class="tool-title" data-i18n="app.headerTitle">Professional Tattoo Ink Color Mixer</h1>
+<!-- GitHub CTA -->
+<div class="github-cta">
+  <a href="//github.com/poli-international/ink-mixer" 
+     target="_blank" rel="noopener noreferrer" class="btn-github">
+    <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+    </svg>
+    <span data-i18n="app.githubCta">View on GitHub</span>
+  </a>
+</div>
+
+            <p class="tool-subtitle" data-i18n="app.toolSubtitle">Mix custom ink colors • Save your recipes • Professional color matching</p>
+        </div>
+    </section>
+
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link" data-i18n="app.skipLink">Skip to main content</a>
+
+    <!-- HEADER -->
+    <header class="ink-mixer__header">
+        <div class="ink-mixer__header-content">
+            <!-- Logo -->
+
+            <!-- Title Group -->
+            <div class="ink-mixer__title-group">
+                <h2 class="ink-mixer__header-title" data-i18n="app.title">Professional Tattoo Ink Color Mixer & Formula Calculator</h2>
+                <p class="ink-mixer__header-subtitle" data-i18n="app.headerSubtitle">
+                    Calculate precise tattoo ink color mixtures, save custom formulas, and master color theory
+                </p>
+            </div>
+
+            <!-- Header Buttons -->
+            <div class="ink-mixer__header-buttons">
+                <div class="lang-switcher">
+                    <label for="languageSelect" class="sr-only" data-i18n="app.language">Language</label>
+                    <span class="lang-switcher__icon" aria-hidden="true">🌐</span>
+                    <select id="languageSelect" class="lang-switcher__select" aria-label="Language">
+                    <option value="en" data-i18n="languages.en">English (EN)</option>
+                    <option value="fr" data-i18n="languages.fr">Français (FR)</option>
+                    <option value="it" data-i18n="languages.it">Italiano (IT)</option>
+                    <option value="de" data-i18n="languages.de">Deutsch (DE)</option>
+                    <option value="es" data-i18n="languages.es">Español (ES)</option>
+                    <option value="nl" data-i18n="languages.nl">Nederlands (NL)</option>
+                    <option value="pt" data-i18n="languages.pt">Português (PT)</option>
+                    </select>
+                </div>
+
+                <button id="embedBtn" class="ink-mixer__embed-button" aria-label="Open embed options">
+                    <span class="embed-icon">⚡</span>
+                    <span class="embed-text" data-i18n="app.embedBtn">Free Embed</span>
+                </button>
+                
+                <button id="darkModeToggle" class="ink-mixer__dark-mode-toggle" aria-label="Toggle dark/light mode">
+                    <span class="dark-mode-icon">◐</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="main-content" id="main-content">
+        <div class="container">
+            <!-- Tool Interface -->
+            <div class="tool-interface">
+
+                <!-- Tab Navigation -->
+                <div class="ink-mixer__tabs" role="tablist" aria-label="Ink mixer tool sections">
+                    <button class="ink-mixer__tab ink-mixer__tab--active" data-tab="mixer" role="tab" aria-selected="true" aria-controls="tab-mixer" id="tabBtnMixer" data-i18n="tabs.mixer">
+                        🎨 Color Mixer &amp; Target Solver
+                    </button>
+                    <button class="ink-mixer__tab" data-tab="reference-studio" role="tab" aria-selected="false" aria-controls="tab-reference-studio" id="tabBtnRefStudio" data-i18n="tabs.referenceStudio">
+                        📷 Reference Studio
+                    </button>
+                    <button class="ink-mixer__tab" data-tab="gradient-caps" role="tab" aria-selected="false" aria-controls="tab-gradient-caps" id="tabBtnGradientCaps" data-i18n="tabs.gradientCaps">
+                        💧 Gradient Caps
+                    </button>
+                    <button class="ink-mixer__tab" data-tab="diluent-formulator" role="tab" aria-selected="false" aria-controls="tab-diluent-formulator" id="tabBtnDiluent" data-i18n="tabs.diluentFormulator">
+                        🧪 Diluent Formulator
+                    </button>
+                    <button class="ink-mixer__tab" data-tab="studio-vault" role="tab" aria-selected="false" aria-controls="tab-studio-vault" id="tabBtnVault" data-i18n="tabs.studioTools">
+                        🔐 Studio Tools &amp; Vault
+                    </button>
+                    <button class="ink-mixer__tab" data-tab="inventory" role="tab" aria-selected="false" aria-controls="tab-inventory" id="tabBtnInventory" data-i18n="tabs.inventory">
+                        📦 My Inventory
+                    </button>
+                    <button class="ink-mixer__tab" data-tab="library" role="tab" aria-selected="false" aria-controls="tab-library" id="tabBtnLibrary" data-i18n="tabs.library">
+                        📚 Saved Formulas
+                    </button>
+                    <button class="ink-mixer__tab" data-tab="gray-wash" role="tab" aria-selected="false" aria-controls="tab-gray-wash" id="tabBtnGrayWash" data-i18n="tabs.grayWash">
+                        🌫️ Gray Wash Ladder
+                    </button>
+                    <button class="ink-mixer__tab" data-tab="color-wheel" role="tab" aria-selected="false" aria-controls="tab-color-wheel" id="tabBtnColorWheel" data-i18n="tabs.colorWheel">
+                        🎡 Color Science
+                    </button>
+                </div>
+
+                <!-- Tab 1: Color Mixer & Target Solver -->
+                <div id="tab-mixer" class="ink-mixer__tab-content ink-mixer__tab-content--active">
+                    
+                    <!-- Section A: Mix by Target (Inverse Solver) -->
+                    <section class="ink-mixer__section target-solver-card" id="targetSolverSection">
+                        <div class="ink-mixer__section-header">
+                            <h2 class="ink-mixer__section-title">
+                                <span class="ink-mixer__step-number">🎯</span>
+                                <span data-i18n="targetSolver.headerTitle">Mix by Target Color (Inverse Ratio Solver)</span>
+                            </h2>
+                            <p class="ink-mixer__helper-text" data-i18n="targetSolver.subtitle">Pick any reference shade or enter a hex code to calculate the exact parts ratio needed from your ink stock.</p>
+                        </div>
+
+                        <div class="target-solver-controls">
+                            <div class="ink-mixer__form-group">
+                                <label class="ink-mixer__label" for="targetColorPicker" data-i18n="targetSolver.hexRgbLabel">Target Desired Color (Hex or RGB)</label>
+                                <div class="ink-mixer__color-pick-wrap" style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+                                    <input type="color" id="targetColorPicker" value="#8b3a3a" class="ink-mixer__color-input-large" style="width: 54px; height: 42px; border-radius: 8px; border: 1px solid var(--border-secondary); cursor: pointer;" oninput="if(window.syncTargetColorFromPicker) window.syncTargetColorFromPicker(this.value); else document.getElementById('targetHexInput').value = this.value.toUpperCase();" onchange="if(window.syncTargetColorFromPicker) window.syncTargetColorFromPicker(this.value); else document.getElementById('targetHexInput').value = this.value.toUpperCase();">
+                                    <input type="text" id="targetHexInput" value="#8B3A3A" class="ink-mixer__input" style="max-width: 220px; font-family: monospace;" placeholder="e.g. #D84315 or rgb(216, 67, 21)" oninput="if(window.syncTargetPickerFromHex) window.syncTargetPickerFromHex(this.value);" onchange="if(window.syncTargetPickerFromHex) window.syncTargetPickerFromHex(this.value);">
+                                    <button type="button" id="targetEyedropperBtn" class="ink-mixer__btn ink-mixer__btn--outline ink-mixer__btn--small" title="Eyedrop color from screen" data-i18n="targetSolver.eyedropBtn">
+                                        🔍 Eyedrop
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="ink-mixer__form-group">
+                                <label class="ink-mixer__label" data-i18n="targetSolver.quickPresets">Quick Target Presets</label>
+                                <div class="target-preset-grid" id="targetPresetGrid">
+                                    <!-- Populated by JS -->
+                                </div>
+                            </div>
+
+                            <div class="ink-mixer__form-group">
+                                <label class="ink-mixer__checkbox-label">
+                                    <input type="checkbox" id="useInventoryOnlyToggle">
+                                    <span data-i18n="targetSolver.restrictInventory">Restrict solver strictly to bottles marked "On Hand" in My Inventory</span>
+                                </label>
+                            </div>
+
+                            <button type="button" id="solveTargetBtn" class="ink-mixer__btn ink-mixer__btn--primary" data-i18n="targetSolver.calculateBtn">
+                                🔍 Calculate Optimal Mix Ratio
+                            </button>
+                        </div>
+
+                        <!-- Target Solver Results -->
+                        <div id="targetSolverResults" class="target-solver-results" style="display: none; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border-primary);">
+                            <div class="target-vs-predicted">
+                                <div class="target-compare-box">
+                                    <div class="target-compare-swatch" id="targetOriginalSwatch" role="img" aria-label="Target Goal Swatch"></div>
+                                    <span class="target-compare-label" data-i18n="targetSolver.targetGoal">Target Goal</span>
+                                    <span id="targetOriginalHexText" class="swatch-text-hex-sm">#000000</span>
+                                    <span id="targetOriginalLStarText" class="swatch-text-lstar-sm">L* --</span>
+                                </div>
+                                <div style="font-size: 1.5rem; color: var(--text-secondary);">➔</div>
+                                <div class="target-compare-box">
+                                    <div class="target-compare-swatch" id="targetResultSwatch" role="img" aria-label="Predicted Match Swatch"></div>
+                                    <span class="target-compare-label" data-i18n="targetSolver.predictedMatch">Predicted Match</span>
+                                    <span id="targetResultHexText" class="swatch-text-hex-sm">#000000</span>
+                                    <span id="targetResultLStarText" class="swatch-text-lstar-sm">L* --</span>
+                                </div>
+                                <div class="target-match-badge" id="targetMatchQuality" style="margin-left: auto; font-size: 0.85rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 16px;"></div>
+                            </div>
+
+                            <!-- Honest Match Assessment Box -->
+                            <div id="targetHonestAssessment" class="target-honest-box" style="margin: 0.85rem 0; padding: 0.75rem 1rem; border-radius: var(--border-radius); background: var(--bg-secondary); border-left: 4px solid var(--color-blue); font-size: 0.9rem; color: var(--text-primary); line-height: 1.45;">
+                                <!-- Populated by JS -->
+                            </div>
+
+                            <div class="ink-mixer__ratio-display" style="margin: 1rem 0;">
+                                <h4 style="margin: 0 0 0.35rem 0; font-size: 0.95rem; color: var(--text-primary);" data-i18n="targetSolver.solvedRecipe">Solved Recipe:</h4>
+                                <p id="targetRatioString" style="font-size: 1.1rem; font-weight: 700; color: var(--color-blue); margin: 0;"></p>
+                            </div>
+
+                            <div class="ink-mixer__table-responsive">
+                                <table class="ink-mixer__table" style="margin-bottom: 1.25rem;">
+                                    <thead>
+                                        <tr>
+                                            <th data-i18n="targetSolver.componentInk">Component Ink</th>
+                                            <th data-i18n="mixer.brandLabel">Brand</th>
+                                            <th data-i18n="targetSolver.ratioParts">Ratio Parts</th>
+                                            <th data-i18n="targetSolver.singleCapHeader">Single Cap (#16 / 2ml)</th>
+                                            <th data-i18n="targetSolver.mix5mlHeader">5 ml Mix</th>
+                                            <th data-i18n="targetSolver.bottle30mlHeader">30 ml Bottle</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="targetMeasurementsBody">
+                                        <!-- Populated by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="ink-mixer__button-group">
+                                <button type="button" id="loadTargetToMixerBtn" class="ink-mixer__btn ink-mixer__btn--secondary" data-i18n="targetSolver.loadIntoMixerBtn">
+                                    📥 Load Into Forward Mixer
+                                </button>
+                                <button type="button" id="saveTargetFormulaBtn" class="ink-mixer__btn ink-mixer__btn--success" data-i18n="targetSolver.saveToLibraryBtn">
+                                    💾 Save to Formula Library
+                                </button>
+                                <button type="button" id="printTargetSolutionBtn" class="ink-mixer__btn ink-mixer__btn--secondary" data-i18n="targetSolver.printFormulaSheetBtn">
+                                    🖨️ Print Formula Sheet
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Brand Mismatch Alert Banner -->
+                    <div id="brandMismatchBanner" class="brand-mismatch-banner" style="display: none;">
+                        <span style="font-size: 1.3rem;">⚠️</span>
+                        <div class="mismatch-text"></div>
+                    </div>
+
+                    <!-- Side-by-Side Split Layout: Inputs on Left, Swatch & Results on Right -->
+                    <div class="ink-mixer__split-layout">
+                        <div class="ink-mixer__split-inputs">
+                            <!-- Section B: Forward Manual Mixer -->
+                            <section class="ink-mixer__section">
+                                <h2 class="ink-mixer__section-title">
+                                    <span class="ink-mixer__step-number">🎨</span>
+                                    <span data-i18n="mixer.manualHeaderTitle">Manual Subtractive Ink Mixing Calculator</span>
+                                </h2>
+                                <p class="ink-mixer__helper-text" data-i18n="mixer.subtitle">Input specific pigment parts and batch numbers to predict the subtractive CMYKW blend and volumetric breakdown.</p>
+
+                                <div id="colorSelectors" class="ink-mixer__color-selectors">
+                                    <!-- Populated dynamically by JS with visual swatches and brand/batch inputs -->
+                                </div>
+
+                                <div class="ink-mixer__button-group" style="margin-bottom: 1.5rem;">
+                                    <button id="addColorBtn" class="ink-mixer__btn ink-mixer__btn--secondary" data-i18n="mixer.addComponent">
+                                        + Add Another Component
+                                    </button>
+                                    <button id="resetMixerBtn" class="ink-mixer__btn ink-mixer__btn--outline" data-i18n="mixer.resetInputs">
+                                        ↺ Reset Inputs
+                                    </button>
+                                </div>
+
+                                <div class="ink-mixer__volume-control">
+                                    <label class="ink-mixer__label" data-i18n="mixer.totalVolume">Total Volume Needed</label>
+                                    <div class="ink-mixer__input-group" style="margin-bottom: 0.5rem;">
+                                        <input type="number" id="totalVolume" class="ink-mixer__input" min="0.1" step="0.1" value="5" placeholder="5.0" oninput="if(window.calculateMix) window.calculateMix();" onchange="if(window.calculateMix) window.calculateMix();">
+                                        <select id="volumeUnit" class="ink-mixer__select ink-mixer__select--small" onchange="if(window.calculateMix) window.calculateMix();">
+                                            <option value="ml" selected data-i18n="mixer.unitMl">ml (Milliliters)</option>
+                                            <option value="caps_large" data-i18n="mixer.unitCapsLarge">caps (#16 Large / 2ml)</option>
+                                            <option value="caps_small" data-i18n="mixer.unitCapsSmall">caps (#9 Small / 1ml)</option>
+                                            <option value="oz" data-i18n="mixer.unitOz">oz (Fluid Ounces / 30ml)</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="volume-presets-wrap" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                        <button type="button" class="ink-mixer__btn ink-mixer__btn--small ink-mixer__btn--outline volume-preset-btn" data-volume="1" data-unit="caps_large" onclick="if(window.setVolumePreset) window.setVolumePreset(this);" data-i18n="mixer.preset1Cap">1 Large Cap (2ml)</button>
+                                        <button type="button" class="ink-mixer__btn ink-mixer__btn--small ink-mixer__btn--primary volume-preset-btn volume-preset-btn--active" data-volume="5" data-unit="ml" onclick="if(window.setVolumePreset) window.setVolumePreset(this);" data-i18n="mixer.preset5ml">Standard 5 ml</button>
+                                        <button type="button" class="ink-mixer__btn ink-mixer__btn--small ink-mixer__btn--outline volume-preset-btn" data-volume="1" data-unit="oz" onclick="if(window.setVolumePreset) window.setVolumePreset(this);" data-i18n="mixer.preset1oz">1 oz Bottle (30ml)</button>
+                                    </div>
+                                </div>
+
+                                <button id="calculateMixBtn" class="ink-mixer__btn ink-mixer__btn--primary" style="margin-top: 1rem;" data-i18n="mixer.calculateBlend">
+                                    🧪 Calculate Subtractive Blend
+                                </button>
+                            </section>
+                        </div>
+
+                        <!-- Results Section: Positioned beside inputs on desktop, beneath on mobile -->
+                        <div class="ink-mixer__split-results">
+                            <section id="mixerResults" class="ink-mixer__section" style="display: none;">
+                                <h2 class="ink-mixer__section-title">
+                                    <span class="ink-mixer__step-number">✓</span>
+                                    <span data-i18n="mixer.predictedColorHeader">Predicted Color &amp; Dispensing Measurements</span>
+                                </h2>
+
+                                <div class="ink-mixer__results-card">
+                                    <!-- Color Preview: Large judgeable swatch with exact numerical text metadata -->
+                                    <div class="ink-mixer__color-preview">
+                                        <div id="resultColorSwatch" class="ink-mixer__swatch ink-mixer__swatch--large" role="img" aria-label="Predicted Mixed Ink Color"></div>
+                                        <div class="ink-mixer__swatch-text-block">
+                                            <div id="resultColorHexText" class="swatch-text-hex">#000000</div>
+                                            <div id="resultColorDescText" class="swatch-text-desc" data-i18n="mixer.predictedBlend">Predicted Blend</div>
+                                            <div id="resultColorValuesText" class="swatch-text-values">
+                                                <span><span data-i18n="mixer.lightnessPrefix">Lightness</span>: <strong id="resultColorLightnessVal">--</strong></span> • 
+                                                <span><span data-i18n="mixer.lStarPrefix">L*</span>: <strong id="resultColorLStarVal">--</strong></span> • 
+                                                <span><span data-i18n="mixer.tonePrefix">Tone</span>: <strong id="resultColorToneVal">--</strong></span>
+                                            </div>
+                                        </div>
+                                        <p class="ink-mixer__swatch-note" style="margin: 0.5rem 0 0; font-size: 0.8rem; color: var(--text-secondary); text-align: center;" data-i18n="mixer.subtractiveModel">Subtractive Pigment Model Simulation (CMYKW)</p>
+                                    </div>
+
+                                    <!-- Ratio Display -->
+                                    <div class="ink-mixer__ratio-display">
+                                        <h3 data-i18n="mixer.proportionalRatio">Proportional Formula Ratio</h3>
+                                        <p id="ratioFormula" style="font-size: 1.25rem; font-weight: 700; color: var(--color-blue);"></p>
+                                    </div>
+
+                                    <!-- Measurements Table -->
+                                    <div class="ink-mixer__measurements">
+                                        <h3 data-i18n="mixer.dispenserBreakdown">Dispenser Breakdown</h3>
+                                        <table class="ink-mixer__table">
+                                            <thead>
+                                                <tr>
+                                                    <th data-i18n="mixer.pigmentShade">Pigment / Shade</th>
+                                                    <th data-i18n="mixer.parts">Parts</th>
+                                                    <th data-i18n="mixer.volume">Volume (ml)</th>
+                                                    <th data-i18n="mixer.dropsHeader">Drops (≈20 drops/ml)</th>
+                                                    <th data-i18n="mixer.percentage">Percentage</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="measurementsTableBody">
+                                                <!-- Populated by JavaScript -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <!-- Skin Tone Pigment Matcher External Tool Redirect Card -->
+                                    <div class="ink-mixer__tool-card" style="margin-top: 1.25rem; padding: 1rem 1.25rem; background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: var(--border-radius); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+                                        <div style="font-size: 0.9rem; color: var(--text-primary); font-weight: 500;">
+                                            <span data-i18n="skinMatcher.cardQuestion">Matching ink to skin tone?</span>
+                                        </div>
+                                        <a href="https://poliinternational.com/skin-tone-pigment-matcher/" target="_top" class="ink-mixer__btn ink-mixer__btn--secondary ink-mixer__btn--small" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem;" data-i18n="skinMatcher.cardLink">
+                                            Use the Skin Tone Pigment Matcher. &rarr;
+                                        </a>
+                                    </div>
+
+                                    <!-- Save Formula Section -->
+                                    <div class="ink-mixer__save-section" style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border-primary);">
+                                        <h3 data-i18n="mixer.saveRecipeTitle">Save Recipe to Local Studio Library</h3>
+                                        <div class="ink-mixer__form-group">
+                                            <label class="ink-mixer__label" data-i18n="saveFormulaModal.nameLabel">Formula Name</label>
+                                            <input type="text" id="formulaName" class="ink-mixer__input" placeholder="e.g., Warm Ochre Portrait Shadow" data-i18n-attr="placeholder:mixer.formulaNamePlaceholder">
+                                        </div>
+                                        <div class="ink-mixer__form-group">
+                                            <label class="ink-mixer__label" data-i18n="mixer.artistNotes">Artist Notes (Optional)</label>
+                                            <textarea id="formulaNotes" class="ink-mixer__textarea" placeholder="e.g., Calibrated with Dynamic Black lot 44B. Test swatch on practice skin before full saturation." data-i18n-attr="placeholder:mixer.formulaNotesPlaceholder"></textarea>
+                                        </div>
+                                        <div class="ink-mixer__form-group">
+                                            <label class="ink-mixer__label" data-i18n="mixer.tags">Tags (comma-separated)</label>
+                                            <input type="text" id="formulaTags" class="ink-mixer__input" placeholder="e.g., portrait, shadow, warm, realism" data-i18n-attr="placeholder:mixer.formulaTagsPlaceholder">
+                                        </div>
+                                        <div class="ink-mixer__button-group">
+                                            <button id="saveFormulaBtn" class="ink-mixer__btn ink-mixer__btn--success" data-i18n="mixer.saveBtn">
+                                                💾 Save to Library
+                                            </button>
+                                            <button type="button" id="printCurrentMixBtn" class="ink-mixer__btn ink-mixer__btn--secondary" data-i18n="mixer.printBtn">
+                                                🖨️ Print Studio Formula Sheet
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: My Inventory -->
+                <div id="tab-inventory" class="ink-mixer__tab-content">
+                    <section class="ink-mixer__section">
+                        <div class="ink-mixer__library-header">
+                            <div>
+                                <h2 class="ink-mixer__section-title" data-i18n="inventory.title">Studio Ink Inventory</h2>
+                                <p class="ink-mixer__helper-text" id="inventoryCountBadge" data-i18n="inventory.subtitle">Record the ink bottles in your workstation to constrain mixes and target solving strictly to what you own.</p>
+                            </div>
+                            <div class="ink-mixer__library-actions">
+                                <button id="addInventoryItemBtn" type="button" class="ink-mixer__btn ink-mixer__btn--primary" onclick="if(window.openAddBottleModal) window.openAddBottleModal();" data-i18n="inventory.addBottle">
+                                    + Add Bottle
+                                </button>
+                                <button id="loadInventoryPresetBtn" type="button" class="ink-mixer__btn ink-mixer__btn--secondary" onclick="if(window.openStarterPaletteModal) window.openStarterPaletteModal();" data-i18n="inventory.loadStarterPalette">
+                                    ⚡ Load Starter Palette
+                                </button>
+                                <button id="qrTransferInventoryBtn" type="button" class="ink-mixer__btn ink-mixer__btn--outline" onclick="if(window.openInventoryQrTransfer) window.openInventoryQrTransfer();" data-i18n="inventory.qrBtn">
+                                    📱 QR Transfer
+                                </button>
+                                <button id="exportInventoryBtn" type="button" class="ink-mixer__btn ink-mixer__btn--outline" onclick="if(window.openExportInventoryModal) window.openExportInventoryModal();" data-i18n="inventory.export">
+                                    📤 Export
+                                </button>
+                                <label for="importInventoryFileInput" class="ink-mixer__btn ink-mixer__btn--outline" style="cursor: pointer; margin: 0; display: inline-flex; align-items: center;" data-i18n="inventory.import">
+                                    📥 Import
+                                </label>
+                                <input type="file" id="importInventoryFileInput" accept=".json" style="display: none;">
+                            </div>
+                        </div>
+
+                        <div id="inventoryListContainer" class="inventory-grid">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Tab 3: Formula Library -->
+                <div id="tab-library" class="ink-mixer__tab-content">
+                    <section class="ink-mixer__section">
+                        <div class="ink-mixer__library-header">
+                            <div>
+                                <h2 class="ink-mixer__section-title" data-i18n="library.title">Saved Studio Formulas</h2>
+                                <p class="ink-mixer__helper-text" id="formulaCount" data-i18n="library.subtitle">Saved recipes remain in browser storage only. Never transmitted externally.</p>
+                            </div>
+                            <div class="ink-mixer__library-actions">
+                                <button id="importFormulasBtn" class="ink-mixer__btn ink-mixer__btn--secondary" data-i18n="library.importJson">
+                                    📥 Import JSON
+                                </button>
+                                <input type="file" id="importFormulasFileInput" accept=".json" style="display: none;">
+                                <button id="exportFormulasBtn" class="ink-mixer__btn ink-mixer__btn--secondary" data-i18n="library.exportJson">
+                                    📤 Export JSON
+                                </button>
+                                <button id="exportFormulasCsvBtn" class="ink-mixer__btn ink-mixer__btn--secondary" title="Export selected formula into formatted CSV" data-i18n="library.downloadCsv">
+                                    📊 Download CSV
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="ink-mixer__search-bar">
+                            <input type="text" id="formulaSearch" class="ink-mixer__input" placeholder="🔍 Search formulas by name, brand, notes, or tags..." data-i18n-attr="placeholder:library.searchBarPlaceholder">
+                        </div>
+
+                        <div id="savedFormulasContainer" class="ink-mixer__formula-library">
+                            <p class="ink-mixer__empty-state" data-i18n="library.noSavedFormulas">No saved formulas yet. Create and save your first formula from the Color Mixer tab!</p>
+                        </div>
+                    </section>
+
+                    <!-- Common Formulas Reference Section -->
+                    <section class="ink-mixer__section">
+                        <h2 class="ink-mixer__section-title" data-i18n="library.benchmarkTitle">Studio Benchmark Formulas</h2>
+                        <p class="ink-mixer__helper-text" data-i18n="library.benchmarkSubtitle">Click any formula to load it into the mixer and calibrate for your specific bottle lot.</p>
+
+                        <div class="ink-mixer__common-formulas">
+                            <h3 data-i18n="library.skinToneBases">Skin Tone Bases</h3>
+                            <div id="commonSkinTones" class="ink-mixer__formula-grid">
+                                <!-- Populated by JavaScript -->
+                            </div>
+
+                            <h3 data-i18n="library.portraitAccents">Portrait &amp; Realism Accents</h3>
+                            <div id="commonPortrait" class="ink-mixer__formula-grid">
+                                <!-- Populated by JavaScript -->
+                            </div>
+
+                            <h3 data-i18n="library.graysNeutrals">Grays &amp; Neutrals</h3>
+                            <div id="commonGrays" class="ink-mixer__formula-grid">
+                                <!-- Populated by JavaScript -->
+                            </div>
+
+                            <h3 data-i18n="library.landscapeBotanical">Landscape &amp; Botanical</h3>
+                            <div id="commonLandscape" class="ink-mixer__formula-grid">
+                                <!-- Populated by JavaScript -->
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Substitution View Section -->
+                    <section class="ink-mixer__section" id="substitutionViewSection">
+                        <div class="ink-mixer__section-header">
+                            <h2 class="ink-mixer__section-title" data-i18n="substitution.title">🔄 Formula Ink Substitution View</h2>
+                            <p class="ink-mixer__helper-text" data-i18n="substitution.subtitle">Pick a saved recipe, mark an ink as out of stock, and select a replacement from inventory to verify CIEDE2000 color difference (&Delta;E₀₀).</p>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+                            <div class="ink-mixer__form-group">
+                                <label class="ink-mixer__label" for="subRecipeSelect" data-i18n="substitution.selectRecipe">Select Saved Recipe</label>
+                                <select id="subRecipeSelect" class="ink-mixer__select">
+                                    <!-- Populated by JavaScript -->
+                                </select>
+                            </div>
+
+                            <div class="ink-mixer__form-group">
+                                <label class="ink-mixer__label" for="subReplacementSelect" data-i18n="substitution.selectReplacement">Select Replacement Ink from Inventory</label>
+                                <select id="subReplacementSelect" class="ink-mixer__select">
+                                    <!-- Populated by JavaScript -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="ink-mixer__form-group">
+                            <label class="ink-mixer__label" data-i18n="substitution.markOutOfStock">Mark One Ink Out of Stock (Click to Toggle):</label>
+                            <div id="subOutOfStockContainer" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.35rem;">
+                                <!-- Populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <div id="subComparisonResults" style="display: none;">
+                            <!-- Populated dynamically by js/substitution.js -->
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Tab 5: Gray Wash Studio Series Ladder -->
+                <div id="tab-gray-wash" class="ink-mixer__tab-content">
+                    <section class="ink-mixer__section">
+                        <div class="ink-mixer__section-header">
+                            <h2 class="ink-mixer__section-title" data-i18n="grayWash.title">🌫️ Gray Wash Studio Series Ladder</h2>
+                            <p class="ink-mixer__helper-text" data-i18n="grayWash.subtitle">Standardize your black &amp; gray shade gradations across caps with drop-accurate dilution formulas.</p>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                            <div class="ink-mixer__form-group">
+                                <label class="ink-mixer__label" for="washSystemSelect" data-i18n="grayWash.systemLabel">Wash Series System</label>
+                                <select id="washSystemSelect" class="ink-mixer__select" onchange="if(window.renderGrayWashLadder) window.renderGrayWashLadder();">
+                                    <option value="system_4cap" data-i18n="grayWash.system4cap">4-Cap Studio Standard (Light / Medium / Dark / Solid)</option>
+                                    <option value="system_3cap" data-i18n="grayWash.system3cap">3-Cap Essential (Light / Medium / Dark)</option>
+                                    <option value="system_5cap" data-i18n="grayWash.system5cap">5-Cap Micro-Gradient (X-Light to Solid Black)</option>
+                                </select>
+                            </div>
+
+                            <div class="ink-mixer__form-group">
+                                <label class="ink-mixer__label" for="washCapSizeSelect" data-i18n="grayWash.capSizeLabel">Container / Cap Size</label>
+                                <select id="washCapSizeSelect" class="ink-mixer__select" onchange="if(window.renderGrayWashLadder) window.renderGrayWashLadder();">
+                                    <option value="caps_large" data-i18n="grayWash.cap16Large">#16 Large Cap (2.0 ml ≈ 40 drops)</option>
+                                    <option value="caps_medium" data-i18n="grayWash.cap12Medium">#12 Medium Cap (1.0 ml ≈ 20 drops)</option>
+                                    <option value="caps_small" data-i18n="grayWash.cap9Small">#9 Small Cap (0.5 ml ≈ 10 drops)</option>
+                                    <option value="bottle_1oz" data-i18n="grayWash.bottle1oz">1 oz Squeeze Bottle (30 ml ≈ 600 drops)</option>
+                                    <option value="bottle_2oz" data-i18n="grayWash.bottle2oz">2 oz Squeeze Bottle (60 ml ≈ 1,200 drops)</option>
+                                    <option value="bottle_4oz" data-i18n="grayWash.bottle4oz">4 oz Squeeze Bottle (120 ml ≈ 2,400 drops)</option>
+                                </select>
+                            </div>
+
+                            <div class="ink-mixer__form-group">
+                                <label class="ink-mixer__label" for="washDiluentSelect" data-i18n="grayWash.diluentLabel">Diluent Formulation</label>
+                                <select id="washDiluentSelect" class="ink-mixer__select" onchange="if(window.renderGrayWashLadder) window.renderGrayWashLadder();">
+                                    <option value="balanced_blend" data-i18n="grayWash.diluentBalanced">Studio Balanced Blend (70% Water, 25% Witch Hazel, 5% Glycerin)</option>
+                                    <option value="distilled" data-i18n="grayWash.diluentDistilled">100% Pure Distilled Water (Carrier)</option>
+                                    <option value="witch_hazel" data-i18n="grayWash.diluentWitchHazel">USP Witch Hazel (Astringent Carrier)</option>
+                                    <option value="glycerin" data-i18n="grayWash.diluentGlycerin">USP Vegetable Glycerin (Needle Flow &amp; Anti-Drying)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Gray Wash Action Buttons -->
+                        <div class="ink-mixer__button-group" style="margin-bottom: 1.25rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                            <button type="button" id="generateWashBtn" class="ink-mixer__btn ink-mixer__btn--primary" onclick="if(window.renderGrayWashLadder) window.renderGrayWashLadder();" data-i18n="grayWash.generateBtn">
+                                🌫️ Generate Gray Wash Ladder
+                            </button>
+                            <button type="button" id="saveWashSeriesBtn" class="ink-mixer__btn ink-mixer__btn--secondary" onclick="if(window.saveGrayWashSeries) window.saveGrayWashSeries();" data-i18n="grayWash.saveSeriesBtn">
+                                💾 Save Full Series to Library
+                            </button>
+                            <button type="button" id="copyWashSeriesBtn" class="ink-mixer__btn ink-mixer__btn--outline" onclick="if(window.copyGrayWashSeries) window.copyGrayWashSeries();" data-i18n="grayWash.copyBreakdownBtn">
+                                📋 Copy Series Breakdown
+                            </button>
+                        </div>
+
+                        <!-- Volumetric Diluent Summary Box -->
+                        <div id="diluentVolumeSummary" class="diluent-summary-box" style="margin-bottom: 1.5rem; padding: 0.85rem 1rem; border-radius: var(--border-radius); background: var(--bg-secondary); border: 1px solid var(--border-primary);">
+                            <!-- Populated by JavaScript -->
+                        </div>
+
+                        <div id="washLadderGrid" class="wash-ladder-grid">
+                            <!-- Populated by JavaScript -->
+                        </div>
+
+                        <div style="margin-top: 1.25rem;">
+                            <button type="button" id="openCapTrayFromWashBtn" class="ink-mixer__btn ink-mixer__btn--secondary" data-i18n="grayWash.openCapTrayBtn">
+                                🏷️ Generate Printable Cap Tray Label Sheets (6 &amp; 12 Cap Trays)
+                            </button>
+                        </div>
+
+                        <!-- Custom Percentage Wash Calculator -->
+                        <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-primary);">
+                            <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;" data-i18n="grayWash.customDensityTitle">Custom Density Wash Mixer</h3>
+                            <div class="ink-mixer__form-group">
+                                <label class="ink-mixer__label"><span data-i18n="grayWash.densityTargetLabel">Density Target</span>: <strong id="customWashVal">25%</strong></label>
+                                <input type="range" id="customWashSlider" min="2" max="98" step="1" value="25" class="ink-mixer__slider" style="width: 100%;">
+                            </div>
+                            <div class="custom-wash-box" id="customWashResult">
+                                <!-- Populated by JavaScript -->
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Tab 6: Color Theory -->
+                <div id="tab-color-wheel" class="ink-mixer__tab-content">
+                    <section class="ink-mixer__section">
+                        <h2 class="ink-mixer__section-title" data-i18n="theory.title">Color Theory &amp; Subtractive Physics for Tattoo Artists</h2>
+                        <p class="ink-mixer__helper-text" data-i18n="theory.subtitle">Why tattoo inks behave differently than digital RGB displays and how to achieve consistent healed values.</p>
+
+                        <!-- Feature 6: Subtractive Complementary & Neutralising Hue Assistant -->
+                        <div class="ink-mixer__theory-section" id="neutralizerAssistantSection" style="margin-bottom: 2rem; padding: 1.25rem; border-radius: var(--border-radius); background: var(--bg-secondary); border: 1px solid var(--border-primary);">
+                            <h3 style="margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">
+                                <span>🎯</span> <span data-i18n="neutralizing.headerTitle">Subtractive Complementary &amp; Neutralising Hue Assistant</span>
+                            </h3>
+                            <p class="ink-mixer__helper-text" style="margin-bottom: 1.25rem;" data-i18n="neutralizing.subtitle">
+                                Calculate subtractive color-wheel opposites to neutralize unwanted undertones in ink (e.g., a faded blue-green healed brow, or an overly warm cast in gray wash). Corrects pigment only; does not diagnose skin conditions.
+                            </p>
+
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-bottom: 1.25rem;">
+                                <div class="ink-mixer__form-group">
+                                    <label class="ink-mixer__label" for="unwantedTonePresetSelect" data-i18n="neutralizing.commonUndertones">Common Unwanted Pigment Undertones</label>
+                                    <select id="unwantedTonePresetSelect" class="ink-mixer__select">
+                                        <option value="#1e3a8a" data-i18n="neutralizing.blueSlate">Faded Blue / Slate Pigment (#1E3A8A)</option>
+                                        <option value="#0d9488" data-i18n="neutralizing.blueGreenTeal">Faded Blue-Green / Teal Pigment (#0D9488)</option>
+                                        <option value="#6b21a8" data-i18n="neutralizing.purpleViolet">Faded Purple / Violet Cast (#6B21A8)</option>
+                                        <option value="#e11d48" data-i18n="neutralizing.salmonPink">Faded Salmon / Pinkish Cast (#E11D48)</option>
+                                        <option value="#78350f" data-i18n="neutralizing.brassyWarm">Brassy / Warm Gray Wash Cast (#78350F)</option>
+                                        <option value="#475569" data-i18n="neutralizing.chalkyBlue">Chalky / Muddy Blue-Gray Cast (#475569)</option>
+                                        <option value="custom" data-i18n="neutralizing.customColor">Custom Color Value...</option>
+                                    </select>
+                                </div>
+
+                                <div class="ink-mixer__form-group" id="customNeutralizeInputWrap">
+                                    <label class="ink-mixer__label" for="neutralizeCustomInput" data-i18n="neutralizing.orEnterCustom">Or Enter Custom Tone (Hex or RGB)</label>
+                                    <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+                                        <input type="color" id="neutralizeColorPicker" value="#1e3a8a" class="ink-mixer__color-input-large" style="width: 48px; height: 40px; border-radius: 8px; border: 1px solid var(--border-secondary); cursor: pointer;" oninput="if(window.syncNeutralizeColorFromPicker) window.syncNeutralizeColorFromPicker(this.value); else document.getElementById('neutralizeCustomInput').value = this.value.toUpperCase();" onchange="if(window.syncNeutralizeColorFromPicker) window.syncNeutralizeColorFromPicker(this.value); else document.getElementById('neutralizeCustomInput').value = this.value.toUpperCase();">
+                                        <input type="text" id="neutralizeCustomInput" value="#1E3A8A" class="ink-mixer__input" style="max-width: 170px; font-family: monospace;" placeholder="#RRGGBB or rgb(...)" oninput="if(window.syncNeutralizePickerFromHex) window.syncNeutralizePickerFromHex(this.value);" onchange="if(window.syncNeutralizePickerFromHex) window.syncNeutralizePickerFromHex(this.value);">
+                                        <button type="button" id="calcNeutralizerBtn" class="ink-mixer__btn ink-mixer__btn--primary ink-mixer__btn--small" data-i18n="neutralizing.analyzeBtn">Analyze</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Live Neutralizer Result Box -->
+                            <div id="neutralizerResultBox" class="neutralizer-result-card" style="padding: 1.25rem; border-radius: var(--border-radius); background: var(--bg-primary); border: 1px solid var(--border-primary);">
+                                <!-- Populated by JS -->
+                            </div>
+
+                            <div class="ink-mixer__disclaimer" style="margin-top: 1rem; border-radius: var(--border-radius);">
+                                <div class="ink-mixer__disclaimer-icon">⚠️</div>
+                                <div class="ink-mixer__disclaimer-content">
+                                    <strong data-i18n="neutralizing.scopeNoticeTitle">Scope Notice:</strong>
+                                    <p data-i18n="neutralizing.scopeNoticeText">This assistant calculates subtractive pigment neutralization for tattoo ink suspensions in cups and palettes. It does not diagnose, treat, or address medical skin conditions or biological dermatitis.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ink-mixer__color-theory">
+                            <div class="ink-mixer__theory-section">
+                                <h3 data-i18n="theory.subtractiveVsAdditive">🎨 Subtractive vs. Additive Color</h3>
+                                <p style="line-height: 1.6; color: var(--text-secondary); margin-bottom: 1rem;" data-i18n="theory.subtractiveDesc">
+                                    Digital screens emit light additively (RGB mixing toward pure white). Tattoo ink is a physical pigment in liquid suspension that absorbs specific wavelengths of light subtractively (CMYKW mixing toward black/brown). Red and yellow create orange, blue and yellow create olive/green, and yellow requires 2-3× volume because of its lower pigment opacity.
+                                </p>
+                            </div>
+
+                            <div class="ink-mixer__theory-section">
+                                <h3 data-i18n="theory.tintingStrengthsTitle">💡 Pigment Tinting Strengths</h3>
+                                <div class="ink-mixer__tips-grid">
+                                    <div class="ink-mixer__tip-card">
+                                        <h4 data-i18n="theory.carbonBlack">🔵 Carbon Black &amp; Blue (Dominant)</h4>
+                                        <p data-i18n="theory.carbonBlackDesc">Extremely high tinting strength. A single drop of carbon black can overpower 20 drops of yellow or white. Always add darks one drop at a time.</p>
+                                    </div>
+                                    <div class="ink-mixer__tip-card">
+                                        <h4 data-i18n="theory.magenta">🔴 Magenta / Crimson (Medium)</h4>
+                                        <p data-i18n="theory.magentaDesc">Moderate tinting strength with warm undertones. Blends cleanly with yellow for peach/skin and blue for deep violets.</p>
+                                    </div>
+                                    <div class="ink-mixer__tip-card">
+                                        <h4 data-i18n="theory.yellow">🟡 Yellow (Recessive)</h4>
+                                        <p data-i18n="theory.yellowDesc">Lowest opacity and tinting power. Requires 2-3x volume to influence darker pigment suspensions.</p>
+                                    </div>
+                                    <div class="ink-mixer__tip-card">
+                                        <h4 data-i18n="theory.titaniumWhite">⚪ Titanium White (Lightener/Opaquing)</h4>
+                                        <p data-i18n="theory.titaniumWhiteDesc">Creates tints and pastels by increasing light scattering. Excessive white in mixes can heal chalky in deeper melanin fields.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Tab: Reference Studio & Palette Extractor -->
+                <div id="tab-reference-studio" class="ink-mixer__tab-content">
+                    <section class="ink-mixer__section" id="refStudioSection">
+                        <div class="ink-mixer__section-header">
+                            <h2 class="ink-mixer__section-title">
+                                <span class="ink-mixer__step-number">📷</span>
+                                <span data-i18n="refStudio.title">Reference Studio &amp; Color Analysis</span>
+                            </h2>
+                            <p class="ink-mixer__helper-text" data-i18n="refStudio.subtitle">Extract dominant palettes, inspect CIE L* value contrast, and simulate color vision deficiencies.</p>
+                        </div>
+
+                        <!-- Dropzone -->
+                        <div class="ref-dropzone" id="refDropzone">
+                            <div class="ref-dropzone__icon">🖼️</div>
+                            <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: var(--text-primary);" data-i18n="refStudio.dropzoneTitle">Drop reference photo or stencil here, or click to browse</h3>
+                            <p style="margin: 0; font-size: 0.85rem; color: var(--text-secondary);" data-i18n="refStudio.dropzoneHint">Supports PNG, JPEG, and WebP. 100% client-side, zero network upload.</p>
+                            <input type="file" id="refFileInput" accept="image/png, image/jpeg, image/webp" style="display: none;">
+                        </div>
+
+                        <!-- Workspace Grid -->
+                        <div class="ref-studio-grid" id="refStudioWorkspace" style="display: none;">
+                            <!-- Main Canvas Viewport -->
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; cursor: pointer; color: var(--text-primary);">
+                                        <input type="checkbox" id="refGreyscaleToggle">
+                                        <span data-i18n="refStudio.greyscaleToggle">Greyscale Luminance View (L*)</span>
+                                    </label>
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <label for="refCvdSelect" style="font-size: 0.85rem; color: var(--text-secondary);" data-i18n="refStudio.cvdLabel">Color Vision Deficiency (CVD):</label>
+                                        <select id="refCvdSelect" class="ink-mixer__select ink-mixer__select--small">
+                                            <option value="normal" data-i18n="refStudio.cvdNormal">Normal Color Vision</option>
+                                            <option value="protanopia" data-i18n="refStudio.cvdProtanopia">Protanopia (Red-Blind)</option>
+                                            <option value="deuteranopia" data-i18n="refStudio.cvdDeuteranopia">Deuteranopia (Green-Blind)</option>
+                                            <option value="tritanopia" data-i18n="refStudio.cvdTritanopia">Tritanopia (Blue-Blind)</option>
+                                            <option value="achromatopsia" data-i18n="refStudio.cvdAchromatopsia">Achromatopsia (Monochrome)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="ref-canvas-wrap" id="refCanvasWrap">
+                                    <canvas id="refImageCanvas" width="600" height="400"></canvas>
+                                </div>
+                                <p style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 0.5rem;" data-i18n="refStudio.hoverLoupeHint">💡 Hover over image for precision loupe. Click any pixel to lock shade.</p>
+                            </div>
+
+                            <!-- Loupe & Analysis Sidebar -->
+                            <div class="ref-sidebar-panel">
+                                <!-- Loupe Card -->
+                                <div class="ref-loupe-card">
+                                    <h4 style="margin: 0 0 0.75rem 0; font-size: 0.95rem; color: var(--text-primary);" data-i18n="refStudio.loupeTitle">Precision Magnifier Loupe</h4>
+                                    <div class="ref-loupe-display">
+                                        <canvas id="refLoupeCanvas" width="96" height="96" class="ref-loupe-canvas"></canvas>
+                                        <div class="ref-loupe-details">
+                                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                                <div id="refLoupeSwatch" style="width: 20px; height: 20px; border-radius: 4px; border: 1px solid var(--border-secondary); background-color: var(--bg-tertiary);"></div>
+                                                <div id="refLoupeHex" style="font-family: monospace; font-size: 1.05rem; font-weight: 700; color: var(--text-primary);">#FFFFFF</div>
+                                            </div>
+                                            <div id="refLoupeRgb" style="font-size: 0.8rem; color: var(--text-secondary);">RGB(255, 255, 255)</div>
+                                            <div id="refLoupeLStar" style="font-size: 0.8rem; color: var(--artist-purple); font-weight: 600;">CIE L*: 100.0</div>
+                                        </div>
+                                    </div>
+                                    <div style="margin-bottom: 0.75rem; padding: 0.5rem; background-color: var(--bg-tertiary); border-radius: var(--border-radius-sm); border: 1px solid var(--border-primary); display: flex; align-items: center; justify-content: space-between;">
+                                        <span style="font-size: 0.8rem; color: var(--text-secondary);" data-i18n="refStudio.lockedShade">Locked Shade:</span>
+                                        <div style="display: flex; align-items: center; gap: 0.4rem;">
+                                            <div id="refSampledLockSwatch" style="width: 16px; height: 16px; border-radius: 3px; border: 1px solid var(--border-secondary); background-color: var(--bg-tertiary);"></div>
+                                            <span id="refSampledLockHex" style="font-family: monospace; font-size: 0.85rem; font-weight: 600; color: var(--text-primary);">#FFFFFF</span>
+                                        </div>
+                                    </div>
+                                    <button type="button" id="refSampleToSolverBtn" class="ink-mixer__btn ink-mixer__btn--primary ink-mixer__btn--small" style="width: 100%; justify-content: center;" data-i18n="refStudio.sendToSolver">
+                                        🎯 Send to Target Solver
+                                    </button>
+                                </div>
+
+                                <!-- Dominant Palette Card -->
+                                <div class="ref-loupe-card">
+                                    <h4 style="margin: 0 0 0.75rem 0; font-size: 0.95rem; color: var(--text-primary);" data-i18n="refStudio.dominantPaletteTitle">Extracted Dominant Palette</h4>
+                                    <div id="refPaletteList" class="ref-palette-grid">
+                                        <!-- Populated dynamically -->
+                                    </div>
+                                </div>
+
+                                <!-- Contrast & Longevity Card -->
+                                <div class="ref-loupe-card">
+                                    <h4 style="margin: 0 0 0.75rem 0; font-size: 0.95rem; color: var(--text-primary);" data-i18n="refStudio.contrastTitle">CIE L* Value Contrast &amp; Longevity Analysis</h4>
+                                    <div id="refContrastReport" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-secondary);" data-i18n="refStudio.contrastHelp">
+                                        Load a reference image to calculate minimum delta L* between key shades and assess post-macrophage encapsulation contrast.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Tab: Gradient Caps & Shading Ladder -->
+                <div id="tab-gradient-caps" class="ink-mixer__tab-content">
+                    <section class="ink-mixer__section" id="gradientCapsSection">
+                        <div class="ink-mixer__section-header">
+                            <h2 class="ink-mixer__section-title">
+                                <span class="ink-mixer__step-number">💧</span>
+                                <span data-i18n="gradientCaps.title">Continuous Shading Ladder &amp; Gradient Cap Tray</span>
+                            </h2>
+                            <p class="ink-mixer__helper-text" data-i18n="gradientCaps.subtitle">Calculate non-linear optical dilution steps and print workstation barrier tray guide strips.</p>
+                        </div>
+
+                        <!-- Generator Controls Form -->
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--spacing-lg); margin-bottom: var(--spacing-xl); background-color: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--border-radius); border: 1px solid var(--border-primary);">
+                            <div>
+                                <label class="ink-mixer__label" for="gradOriginHex" data-i18n="gradientCaps.originLabel">Origin Dark Ink</label>
+                                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                    <input type="color" id="gradOriginColor" value="#111111" style="width: 44px; height: 38px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-secondary); cursor: pointer;">
+                                    <input type="text" id="gradOriginHex" class="ink-mixer__input" value="#111111" style="width: 90px; font-family: monospace;">
+                                    <input type="text" id="gradOriginName" class="ink-mixer__input" value="Lining Black" placeholder="Origin Ink Name">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="ink-mixer__label" for="gradDestType" data-i18n="gradientCaps.destTypeLabel">Destination Type</label>
+                                <select id="gradDestType" class="ink-mixer__select">
+                                    <option value="diluent" data-i18n="gradientCaps.destDiluent">Shading Diluent (Wash)</option>
+                                    <option value="color" data-i18n="gradientCaps.destColor">Secondary Ink / Tint</option>
+                                </select>
+                            </div>
+
+                            <div id="gradDestColorGroup" style="display: none;">
+                                <label class="ink-mixer__label" for="gradDestHex" data-i18n="gradientCaps.destColor">Destination Ink</label>
+                                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                    <input type="color" id="gradDestColor" value="#ffffff" style="width: 44px; height: 38px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-secondary); cursor: pointer;">
+                                    <input type="text" id="gradDestHex" class="ink-mixer__input" value="#ffffff" style="width: 90px; font-family: monospace;">
+                                    <input type="text" id="gradDestName" class="ink-mixer__input" value="Mixing White" placeholder="Destination Name">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="ink-mixer__label" for="gradCapCount" data-i18n="gradientCaps.capCountLabel">Cap Count</label>
+                                <select id="gradCapCount" class="ink-mixer__select">
+                                    <option value="4" data-i18n="gradientCaps.ladder4">4-Cap Shading Ladder</option>
+                                    <option value="5" data-i18n="gradientCaps.ladder5">5-Cap Shading Ladder</option>
+                                    <option value="6" selected data-i18n="gradientCaps.tray6">6-Cap Standard Tray</option>
+                                    <option value="8" data-i18n="gradientCaps.transition8">8-Cap Smooth Transition</option>
+                                    <option value="10" data-i18n="gradientCaps.gradient10">10-Cap Micro-Gradient</option>
+                                    <option value="12" data-i18n="gradientCaps.tray12">12-Cap Full Grid Tray</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="ink-mixer__label" for="gradCapSize" data-i18n="gradientCaps.capSizeLabel">Cap Size</label>
+                                <select id="gradCapSize" class="ink-mixer__select">
+                                    <option value="small" data-i18n="gradientCaps.cap9">#9 Small (0.5 ml)</option>
+                                    <option value="medium" selected data-i18n="gradientCaps.cap12">#12 Medium (1.0 ml)</option>
+                                    <option value="large" data-i18n="gradientCaps.cap16">#16 Large (1.8 ml)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: var(--spacing-xl);">
+                            <button type="button" id="gradGenerateBtn" class="ink-mixer__btn ink-mixer__btn--primary" data-i18n="gradientCaps.generateBtn">
+                                💧 Generate Tray Setup
+                            </button>
+                            <button type="button" id="gradPrintBtn" class="ink-mixer__btn ink-mixer__btn--outline" data-i18n="gradientCaps.printBtn">
+                                🖨️ Print Tray Guide Card
+                            </button>
+                        </div>
+
+                        <!-- Generated Tray Output Grid -->
+                        <div id="gradientCapTray" class="gradient-tray-grid">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Tab: Custom Shading Diluent Vehicle Formulator -->
+                <div id="tab-diluent-formulator" class="ink-mixer__tab-content">
+                    <section class="ink-mixer__section" id="diluentFormulatorSection">
+                        <div class="ink-mixer__section-header">
+                            <h2 class="ink-mixer__section-title">
+                                <span class="ink-mixer__step-number">🧪</span>
+                                <span data-i18n="diluentFormulator.title">Custom Shading Diluent Vehicle Formulator</span>
+                            </h2>
+                            <p class="ink-mixer__helper-text" data-i18n="diluentFormulator.subtitle">Formulate sterile water, witch hazel, and USP glycerin carrier vehicles for smooth gray wash and color blends.</p>
+                        </div>
+
+                        <div class="diluent-grid">
+                            <!-- Left: Formulation Inputs -->
+                            <div style="display: flex; flex-direction: column; gap: var(--spacing-lg);">
+                                <div>
+                                    <label class="ink-mixer__label" for="diluentSizeSelect" data-i18n="diluentFormulator.sizeLabel">Container Size</label>
+                                    <select id="diluentSizeSelect" class="ink-mixer__select">
+                                        <option value="30" data-i18n="diluentFormulator.bottle30">30 ml (1 fl oz) Squeeze Dropper</option>
+                                        <option value="60" data-i18n="diluentFormulator.bottle60">60 ml (2 fl oz) Squeeze Bottle</option>
+                                        <option value="120" selected data-i18n="diluentFormulator.bottle120">120 ml (4 fl oz) Dispenser Bottle</option>
+                                        <option value="240" data-i18n="diluentFormulator.bottle240">240 ml (8 fl oz) Studio Supply</option>
+                                        <option value="custom" data-i18n="diluentFormulator.customVolumeOption">Custom Volume (ml)</option>
+                                    </select>
+                                </div>
+
+                                <div id="diluentCustomMlGroup" style="display: none;">
+                                    <label class="ink-mixer__label" for="diluentCustomMl" data-i18n="diluentFormulator.customVolumeOption">Custom Volume (ml)</label>
+                                    <input type="number" id="diluentCustomMl" class="ink-mixer__input" value="100" min="10" max="1000">
+                                </div>
+
+                                <div>
+                                    <label class="ink-mixer__label" for="diluentPresetSelect" data-i18n="diluentFormulator.presetLabel">Recipe Formulation Preset</label>
+                                    <select id="diluentPresetSelect" class="ink-mixer__select">
+                                        <option value="balanced" selected data-i18n="diluentFormulator.recipeBalanced">Classic Balanced (75% Water / 20% Witch Hazel / 5% Glycerin)</option>
+                                        <option value="soft" data-i18n="diluentFormulator.recipeUltraSoft">Ultra-Soft Shading (80% Water / 10% Witch Hazel / 10% Glycerin)</option>
+                                        <option value="aqueous" data-i18n="diluentFormulator.recipeFastSet">Fast-Set Aqueous (85% Water / 15% Witch Hazel / 0% Glycerin)</option>
+                                        <option value="astringent" data-i18n="diluentFormulator.recipeAstringent">Astringent Toning (60% Water / 35% Witch Hazel / 5% Glycerin)</option>
+                                        <option value="custom" data-i18n="diluentFormulator.recipeCustom">Custom Ratio</option>
+                                    </select>
+                                </div>
+
+                                <div class="diluent-slider-group">
+                                    <div class="diluent-slider-row">
+                                        <div class="diluent-slider-header">
+                                            <span data-i18n="diluentFormulator.water">Sterile Distilled Water</span>
+                                            <span id="diluentWaterVal" style="font-weight: 700; color: var(--text-primary);">75%</span>
+                                        </div>
+                                        <input type="range" id="diluentWaterSlider" min="0" max="100" value="75" class="ink-mixer__slider">
+                                    </div>
+
+                                    <div class="diluent-slider-row">
+                                        <div class="diluent-slider-header">
+                                            <span data-i18n="diluentFormulator.witchHazel">Distilled Witch Hazel</span>
+                                            <span id="diluentWitchVal" style="font-weight: 700; color: var(--text-primary);">20%</span>
+                                        </div>
+                                        <input type="range" id="diluentWitchSlider" min="0" max="100" value="20" class="ink-mixer__slider">
+                                    </div>
+
+                                    <div class="diluent-slider-row">
+                                        <div class="diluent-slider-header">
+                                            <span data-i18n="diluentFormulator.glycerin">USP Vegetable Glycerin</span>
+                                            <span id="diluentGlycVal" style="font-weight: 700; color: var(--text-primary);">5%</span>
+                                        </div>
+                                        <input type="range" id="diluentGlycSlider" min="0" max="100" value="5" class="ink-mixer__slider">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="ink-mixer__label" for="diluentNotesInput" data-i18n="diluentFormulator.notes">Batch Lot / Notes</label>
+                                    <input type="text" id="diluentNotesInput" class="ink-mixer__input" value="Lot 2026-A1 • Standard Gray Wash Diluent">
+                                </div>
+
+                                <button type="button" id="diluentPrintBtn" class="ink-mixer__btn ink-mixer__btn--primary" data-i18n="diluentFormulator.printLabel">
+                                    🖨️ Print Bottle Label
+                                </button>
+                            </div>
+
+                            <!-- Right: Real-time Breakdown -->
+                            <div class="diluent-out-box">
+                                <h3 style="margin: 0 0 1rem 0; font-size: 1.05rem; color: var(--text-primary);" data-i18n="diluentFormulator.breakdownTitle">Formulation Breakdown</h3>
+                                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background-color: var(--bg-tertiary); border-radius: var(--border-radius-sm);">
+                                        <span style="font-size: 0.85rem; color: var(--text-secondary);" data-i18n="diluentFormulator.water">Sterile Water</span>
+                                        <span id="diluentOutWater" style="font-weight: 700; color: var(--text-primary);">90.0 ml (1800 drops / 90.0 g)</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background-color: var(--bg-tertiary); border-radius: var(--border-radius-sm);">
+                                        <span style="font-size: 0.85rem; color: var(--text-secondary);" data-i18n="diluentFormulator.witchHazel">Witch Hazel</span>
+                                        <span id="diluentOutWitch" style="font-weight: 700; color: var(--text-primary);">24.0 ml (480 drops / 24.0 g)</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background-color: var(--bg-tertiary); border-radius: var(--border-radius-sm);">
+                                        <span style="font-size: 0.85rem; color: var(--text-secondary);" data-i18n="diluentFormulator.glycerin">USP Glycerin</span>
+                                        <span id="diluentOutGlyc" style="font-weight: 700; color: var(--text-primary);">6.0 ml (120 drops / 7.6 g)</span>
+                                    </div>
+                                    <hr style="border: none; border-top: 1px solid var(--border-secondary); margin: 0.25rem 0;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background-color: var(--bg-secondary); border-radius: var(--border-radius-sm); border: 1px solid var(--border-primary);">
+                                        <span style="font-weight: 600; color: var(--text-primary);" data-i18n="diluentFormulator.totalBatch">Total Formulation Batch</span>
+                                        <span id="diluentOutTotal" style="font-size: 1.1rem; font-weight: 700; color: var(--artist-purple);">120.0 ml (2400 drops)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Tab: Studio Tools & Vault -->
+                <div id="tab-studio-vault" class="ink-mixer__tab-content">
+                    <div class="studio-tools-grid">
+                        <!-- Module 7: Drop Calibration -->
+                        <section class="ink-mixer__section" id="calibrationSection" style="margin-bottom: 0;">
+                            <div class="ink-mixer__section-header">
+                                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                                    <h2 class="ink-mixer__section-title" style="font-size: 1.15rem; margin: 0;">
+                                        <span class="ink-mixer__step-number">⚖️</span>
+                                        <span data-i18n="studioCalibration.title">Drop-Volume &amp; Dispenser Tip Calibration</span>
+                                    </h2>
+                                    <span id="calibStatusBadge" class="ink-mixer__badge" style="background-color: var(--bg-tertiary); color: var(--text-primary);" data-i18n="studioCalibration.nominalBadge">Nominal: 20 d/ml</span>
+                                </div>
+                                <p class="ink-mixer__helper-text" data-i18n="studioCalibration.subtitle">Calibrate actual drops per mL for your specific bottle tips or transfer pipettes.</p>
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+                                <div>
+                                    <label class="ink-mixer__label" for="calibTipSelect" data-i18n="studioCalibration.tipPresetLabel">Tip Category Preset</label>
+                                    <select id="calibTipSelect" class="ink-mixer__select">
+                                        <option value="20" data-i18n="studioCalibration.tipStandard">Standard Twist Dropper (20-22 d/ml)</option>
+                                        <option value="30" data-i18n="studioCalibration.tipNeedle">Needle-Nose Precision Tip (28-34 d/ml)</option>
+                                        <option value="25" data-i18n="studioCalibration.tipPipette">Graduated Transfer Pipette (24-26 d/ml)</option>
+                                        <option value="custom" data-i18n="studioCalibration.tipCustom">Custom Calibration Test</option>
+                                    </select>
+                                </div>
+
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--spacing-md);">
+                                    <div>
+                                        <label class="ink-mixer__label" for="calibTestCount" data-i18n="studioCalibration.testLabel">Dispensed Drops</label>
+                                        <input type="number" id="calibTestCount" class="ink-mixer__input" value="40" min="10" max="200">
+                                    </div>
+                                    <div>
+                                        <label class="ink-mixer__label" for="calibMeasuredVal" data-i18n="studioCalibration.measuredLabel">Measured Quantity</label>
+                                        <input type="number" id="calibMeasuredVal" class="ink-mixer__input" value="2.0" step="0.05" min="0.1" max="20">
+                                    </div>
+                                    <div>
+                                        <label class="ink-mixer__label" for="calibUnitSelect" data-i18n="studioCalibration.unitLabel">Unit</label>
+                                        <select id="calibUnitSelect" class="ink-mixer__select">
+                                            <option value="ml" data-i18n="studioCalibration.unitMl">ml (Volume)</option>
+                                            <option value="g" data-i18n="studioCalibration.unitGrams">g (Mass)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div id="calibResultBox" style="background-color: var(--bg-tertiary); padding: var(--spacing-md); border-radius: var(--border-radius-sm); border: 1px solid var(--border-primary); display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <div style="font-size: 0.85rem; color: var(--text-secondary);" data-i18n="studioCalibration.calculatedYield">Calculated Tip Yield:</div>
+                                        <div id="calibOutputDpm" style="font-size: 1.3rem; font-weight: 700; color: var(--color-green);">20.0 drops / ml</div>
+                                    </div>
+                                    <div style="text-align: right;">
+                                        <div style="font-size: 0.85rem; color: var(--text-secondary);" data-i18n="studioCalibration.volumePerDrop">Volume per Drop:</div>
+                                        <div id="calibOutputMpd" style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary);">0.0500 ml / drop</div>
+                                    </div>
+                                </div>
+
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <button type="button" id="calibSaveBtn" class="ink-mixer__btn ink-mixer__btn--primary ink-mixer__btn--small" data-i18n="studioCalibration.saveBtn">
+                                        💾 Save Studio Calibration
+                                    </button>
+                                    <button type="button" id="calibResetBtn" class="ink-mixer__btn ink-mixer__btn--outline ink-mixer__btn--small" data-i18n="studioCalibration.resetBtn">
+                                        ↺ Reset (20 d/ml)
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Module 10: Encrypted Studio Vault -->
+                        <section class="ink-mixer__section" id="vaultSection" style="margin-bottom: 0;">
+                            <div class="ink-mixer__section-header">
+                                <h2 class="ink-mixer__section-title" style="font-size: 1.15rem;">
+                                    <span class="ink-mixer__step-number">🔐</span>
+                                    <span data-i18n="studioVault.title">Offline Studio Backup &amp; Encrypted Vault Export</span>
+                                </h2>
+                                <p class="ink-mixer__helper-text" data-i18n="studioVault.subtitle">Secure, encrypted client-side backup of formulas, inventory, and calibration profiles.</p>
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+                                <div>
+                                    <label class="ink-mixer__label" for="vaultEncPassphrase" data-i18n="studioVault.encPassphrase">Vault Encryption Passphrase</label>
+                                    <input type="password" id="vaultEncPassphrase" class="ink-mixer__input" placeholder="Enter secure passphrase for AES-256 vault" data-i18n-attr="placeholder:studioVault.encPassPlaceholder">
+                                </div>
+
+                                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                    <button type="button" id="vaultExportJsonBtn" class="ink-mixer__btn ink-mixer__btn--outline ink-mixer__btn--small" data-i18n="studioVault.exportJson">
+                                        📄 Plain JSON Backup
+                                    </button>
+                                    <button type="button" id="vaultExportEncBtn" class="ink-mixer__btn ink-mixer__btn--primary ink-mixer__btn--small" data-i18n="studioVault.exportEnc">
+                                        🔒 Export AES-256 Vault
+                                    </button>
+                                </div>
+
+                                <hr style="border: none; border-top: 1px solid var(--border-secondary); margin: 0.5rem 0;">
+
+                                <div>
+                                    <h4 style="margin: 0 0 0.5rem 0; font-size: 0.95rem; color: var(--text-primary);" data-i18n="studioVault.restoreTitle">Restore Studio Backup or Vault</h4>
+                                    <input type="file" id="vaultFileInput" accept=".json, .vault" class="ink-mixer__input" style="font-size: 0.85rem; margin-bottom: 0.5rem;">
+                                    <div id="vaultDecPassGroup" style="display: none; margin-bottom: 0.5rem;">
+                                        <input type="password" id="vaultDecPassphrase" class="ink-mixer__input" placeholder="Decryption passphrase (required for .vault files)" data-i18n-attr="placeholder:studioVault.decPassPlaceholder">
+                                    </div>
+                                    <button type="button" id="vaultRestoreBtn" class="ink-mixer__btn ink-mixer__btn--outline ink-mixer__btn--small" data-i18n="studioVault.restoreBtn">
+                                        📥 Restore Studio Data
+                                    </button>
+                                </div>
+
+                                <div id="vaultPreviewSummary" style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
+                                    <!-- Populated on file select -->
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Print Recipe Card Modal -->
+        <div id="printRecipeModal" class="print-modal">
+            <div class="print-modal__dialog">
+                <div class="print-modal__bar">
+                    <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-primary);" data-i18n="app.printFormulaCard">Print Formula Card</h3>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button type="button" id="doPrintBtn" class="ink-mixer__btn ink-mixer__btn--small ink-mixer__btn--primary" data-i18n="printModal.printPdf">🖨️ Print / Save PDF</button>
+                        <button type="button" id="closePrintModalBtn" class="ink-mixer__btn ink-mixer__btn--small ink-mixer__btn--outline" data-i18n="capTray.closeBtn">✕ Close</button>
+                    </div>
+                </div>
+                <div class="ink-mixer__disclaimer" style="margin: 0.75rem 0; border-radius: var(--border-radius);">
+                    <div class="ink-mixer__disclaimer-icon">⚠️</div>
+                    <div class="ink-mixer__disclaimer-content">
+                        <strong data-i18n="printModal.disclaimerTitle">Important Disclaimer:</strong>
+                        <p data-i18n="printModal.disclaimerText">Color mixing results vary based on ink brands, skin type, and application technique. These formulas are guidelines - always test colors on practice skin before use on clients. Color preview is approximate and may not match actual result. Professional judgment and experience are essential.</p>
+                    </div>
+                </div>
+                <div class="print-modal__body" id="printRecipeContent">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Printable Cap Tray Label Sheets Modal -->
+        <div id="capTrayModal" class="print-modal" style="display: none;">
+            <div class="print-modal__dialog print-modal__dialog--wide">
+                <div class="print-modal__bar">
+                    <div>
+                        <h3 class="tray-modal__title" data-i18n="capTray.modalTitle">Printable Cap Tray Label Sheets</h3>
+                        <p class="tray-modal__subtitle" data-i18n="capTray.subtitle">High-contrast station label strips formatted for standard 6-cap and 12-cap acrylic and silicone trays.</p>
+                    </div>
+                    <div class="tray-modal__bar-actions">
+                        <button type="button" id="doPrintTrayBtn" class="ink-mixer__btn ink-mixer__btn--small ink-mixer__btn--primary" data-i18n="capTray.printSheetBtn">🖨️ Print Tray Sheet</button>
+                        <button type="button" id="closeTrayModalBtn" class="ink-mixer__btn ink-mixer__btn--small ink-mixer__btn--outline" data-i18n="capTray.closeBtn">✕ Close</button>
+                    </div>
+                </div>
+
+                <div class="tray-modal__controls">
+                    <div class="tray-modal__control-item">
+                        <label for="trayGridTypeSelect" class="tray-modal__label" data-i18n="capTray.layoutLabel">Tray Layout:</label>
+                        <select id="trayGridTypeSelect" class="ink-mixer__select ink-mixer__select--small">
+                            <option value="6cap" data-i18n="capTray.tray6Option">Standard 6-Cap Tray (1×6 Strip / 2×3 Grid)</option>
+                            <option value="12cap" data-i18n="capTray.tray12Option">Standard 12-Cap Tray (2×6 Strip / 3×4 Grid)</option>
+                        </select>
+                    </div>
+                    <div class="tray-modal__control-item">
+                        <label for="trayContentSourceSelect" class="tray-modal__label" data-i18n="capTray.contentSourceLabel">Label Content:</label>
+                        <select id="trayContentSourceSelect" class="ink-mixer__select ink-mixer__select--small">
+                            <option value="graywash" data-i18n="capTray.contentGrayWash">Active Gray Wash Series</option>
+                            <option value="mixer" data-i18n="capTray.contentMixer">Active Color Mixer Recipe</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="print-modal__body" id="capTrayPrintContent">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Offline QR Formula Transfer Modal -->
+        <div id="qrTransferModal" class="print-modal" style="display: none;">
+            <div class="print-modal__dialog print-modal__dialog--medium">
+                <div class="print-modal__bar">
+                    <div>
+                        <h3 class="qr-modal__title" data-i18n="qrTransfer.title">Offline QR Formula Transfer</h3>
+                        <p class="qr-modal__subtitle" data-i18n="qrTransfer.subtitle">Direct optical transfer without cloud servers or external connections.</p>
+                    </div>
+                    <button type="button" id="closeQrModalBtn" class="ink-mixer__btn ink-mixer__btn--small ink-mixer__btn--outline" data-i18n="capTray.closeBtn">✕ Close</button>
+                </div>
+
+                <div class="qr-modal__body">
+                    <!-- Payload Byte Meter -->
+                    <div class="qr-meter-box">
+                        <div class="qr-meter-header">
+                            <span class="qr-meter-label" data-i18n="qrTransfer.payloadSizeLabel">Measured Payload Size:</span>
+                            <span id="qrByteCount" class="qr-meter-val">0 bytes / 2,048 max</span>
+                        </div>
+                        <div class="qr-meter-track">
+                            <div id="qrByteBar" class="qr-meter-bar"></div>
+                        </div>
+                    </div>
+
+                    <!-- Exceeded capacity warning banner (hidden by default) -->
+                    <div id="qrCapacityWarning" class="qr-warning-banner" style="display: none;">
+                        <strong class="qr-warning-title" data-i18n="qrTransfer.capacityExceededTitle">⚠️ QR Capacity Exceeded (&gt; 2,048 bytes)</strong>
+                        <p class="qr-warning-text" data-i18n="qrTransfer.capacityExceededText">
+                            The full multi-record inventory exceeds standard QR scannability. To transfer reliably, export the complete database as a JSON file, or transfer a single selected formula via QR.
+                        </p>
+                        <div class="qr-warning-actions">
+                            <button type="button" id="qrFallbackSingleBtn" class="ink-mixer__btn ink-mixer__btn--small ink-mixer__btn--primary" data-i18n="qrTransfer.transferSingleBtn">Transfer Single Formula</button>
+                            <button type="button" id="qrFallbackJsonBtn" class="ink-mixer__btn ink-mixer__btn--small ink-mixer__btn--outline" data-i18n="qrTransfer.jsonExportBtn">Download Full JSON File</button>
+                        </div>
+                    </div>
+
+                    <!-- QR Display Box -->
+                    <div id="qrCodeContainer" class="qr-code-box">
+                        <!-- Rendered by QRCode or fallback container -->
+                    </div>
+
+                    <div id="qrTargetTitle" class="qr-target-title"></div>
+                    <p class="qr-instructions" data-i18n="qrTransfer.instructions">
+                        Point camera or barcode scanner on the recipient device at this screen to import the formula instantly.
+                    </p>
+
+                    <div class="qr-actions">
+                        <button type="button" id="copyQrPayloadBtn" class="ink-mixer__btn ink-mixer__btn--outline ink-mixer__btn--small" data-i18n="qrTransfer.copyPayloadBtn">📋 Copy Raw Payload</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Ink Bottle Modal -->
+        <div id="addBottleModal" class="print-modal" style="display: none;">
+            <div class="print-modal__dialog print-modal__dialog--medium">
+                <div class="print-modal__bar">
+                    <div>
+                        <h3 class="modal-title" style="margin: 0; font-size: 1.2rem;" data-i18n="addBottleModal.title">+ Add Ink Bottle to Studio Inventory</h3>
+                        <p class="modal-subtitle" style="margin: 0.25rem 0 0; font-size: 0.82rem; color: var(--text-secondary);" data-i18n="addBottleModal.subtitle">Record a specific ink brand, shade, pigment class, and lot number.</p>
+                    </div>
+                    <button type="button" id="closeAddBottleModalBtn" class="ink-mixer__btn ink-mixer__btn--small ink-mixer__btn--outline">✕</button>
+                </div>
+                <form id="addBottleForm" class="print-modal__body" style="padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">
+                    <div class="ink-mixer__form-group">
+                        <label class="ink-mixer__label" for="addBottleShade"><span data-i18n="inventory.addModal.shadeNameLabel">Shade Name</span> <span style="color: var(--color-danger);">*</span></label>
+                        <input type="text" id="addBottleShade" class="ink-mixer__input" placeholder="e.g. Lipstick Red, Lining Black, Snow White" required>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div class="ink-mixer__form-group">
+                            <label class="ink-mixer__label" for="addBottleBrand" data-i18n="addBottleModal.brandLabel">Brand Name</label>
+                            <input type="text" id="addBottleBrand" class="ink-mixer__input" list="inkBrandSuggestions" placeholder="e.g. Dynamic, Eternal, Intenze" value="Standard">
+                            <datalist id="inkBrandSuggestions">
+                                <option value="Dynamic">
+                                <option value="Eternal">
+                                <option value="Intenze">
+                                <option value="World Famous">
+                                <option value="Kuro Sumi">
+                                <option value="Solid Ink">
+                                <option value="Fusion">
+                                <option value="Panthera">
+                                <option value="Silverback">
+                                <option value="Empire">
+                                <option value="Standard">
+                            </datalist>
+                        </div>
+                        <div class="ink-mixer__form-group">
+                            <label class="ink-mixer__label" for="addBottlePigmentClass" data-i18n="addBottleModal.classLabel">Base Pigment Class</label>
+                            <select id="addBottlePigmentClass" class="ink-mixer__select">
+                                <option value="black" data-i18n="addBottleModal.classBlack">Black (Carbon)</option>
+                                <option value="white" data-i18n="addBottleModal.classWhite">White (Titanium)</option>
+                                <option value="red" selected data-i18n="addBottleModal.classRed">Red (Scarlet/Crimson)</option>
+                                <option value="yellow" data-i18n="addBottleModal.classYellow">Yellow (Golden/Bright)</option>
+                                <option value="blue" data-i18n="addBottleModal.classBlue">Blue (Cobalt/Cyan)</option>
+                                <option value="orange" data-i18n="addBottleModal.classOrange">Orange (Cadmium)</option>
+                                <option value="green" data-i18n="addBottleModal.classGreen">Green (Emerald/Forest)</option>
+                                <option value="purple" data-i18n="addBottleModal.classPurple">Purple (Deep Violet)</option>
+                                <option value="brown" data-i18n="addBottleModal.classBrown">Brown (Burnt Umber)</option>
+                                <option value="magenta" data-i18n="addBottleModal.classMagenta">Magenta (Process/Neon)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div class="ink-mixer__form-group">
+                            <label class="ink-mixer__label" for="addBottleBatch" data-i18n="addBottleModal.batchLabel">Batch / Lot # (Optional)</label>
+                            <input type="text" id="addBottleBatch" class="ink-mixer__input" placeholder="e.g. LOT-2026-08A">
+                        </div>
+                        <div class="ink-mixer__form-group">
+                            <label class="ink-mixer__label" for="addBottleHex" data-i18n="addBottleModal.colorSwatchLabel">Color Swatch</label>
+                            <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                <input type="color" id="addBottleColorPicker" value="#d61818" class="ink-mixer__color-input-large" style="width: 44px; height: 38px; border-radius: 6px; border: 1px solid var(--border-primary); cursor: pointer;" oninput="document.getElementById('addBottleHex').value = this.value.toUpperCase();" onchange="document.getElementById('addBottleHex').value = this.value.toUpperCase();">
+                                <input type="text" id="addBottleHex" class="ink-mixer__input" value="#D61818" style="font-family: monospace;" oninput="if(/^#[0-9A-Fa-f]{6}$/.test(this.value)) document.getElementById('addBottleColorPicker').value = this.value;">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 0.5rem;">
+                        <button type="button" id="cancelAddBottleBtn" class="ink-mixer__btn ink-mixer__btn--outline" data-i18n="addBottleModal.cancelBtn">Cancel</button>
+                        <button type="submit" class="ink-mixer__btn ink-mixer__btn--primary" data-i18n="addBottleModal.submitBtn">✓ Add to Inventory</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Load Starter Palette Modal -->
+        <div id="starterPaletteModal" class="print-modal" style="display: none;">
+            <div class="print-modal__dialog print-modal__dialog--medium">
+                <div class="print-modal__bar">
+                    <div>
+                        <h3 class="modal-title" style="margin: 0; font-size: 1.2rem;" data-i18n="starterPaletteModal.title">⚡ Load Starter Ink Palette</h3>
+                        <p class="modal-subtitle" style="margin: 0.25rem 0 0; font-size: 0.82rem; color: var(--text-secondary);" data-i18n="starterPaletteModal.subtitle">Populate your inventory instantly with verified manufacturer sets.</p>
+                    </div>
+                    <button type="button" id="closeStarterModalBtn" class="ink-mixer__btn ink-mixer__btn--small ink-mixer__btn--outline">✕</button>
+                </div>
+                <div class="print-modal__body" style="padding: 1.25rem; display: flex; flex-direction: column; gap: 0.85rem;">
+                    <div class="palette-preset-card" style="padding: 0.85rem 1rem; border: 1px solid var(--border-primary); border-radius: var(--border-radius); background: var(--bg-secondary); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+                        <div>
+                            <h4 style="margin: 0; font-size: 0.95rem; font-weight: 700;" data-i18n="starterPaletteModal.dynamicTitle">Dynamic Black &amp; White Basics</h4>
+                            <p style="margin: 0.2rem 0 0; font-size: 0.8rem; color: var(--text-secondary);" data-i18n="starterPaletteModal.dynamicDesc">3 essential inks: Standard Black, Triple Black, Heavy White</p>
+                        </div>
+                        <button type="button" class="ink-mixer__btn ink-mixer__btn--primary ink-mixer__btn--small load-preset-action-btn" data-preset="dynamic_essential" data-i18n="starterPaletteModal.loadBtn">Load Palette</button>
+                    </div>
+                    <div class="palette-preset-card" style="padding: 0.85rem 1rem; border: 1px solid var(--border-primary); border-radius: var(--border-radius); background: var(--bg-secondary); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+                        <div>
+                            <h4 style="margin: 0; font-size: 0.95rem; font-weight: 700;" data-i18n="starterPaletteModal.eternalTitle">Eternal 12-Color Primary Set</h4>
+                            <p style="margin: 0.2rem 0 0; font-size: 0.8rem; color: var(--text-secondary);" data-i18n="starterPaletteModal.eternalDesc">12 studio primaries: Lining Black, White, Lipstick Red, Bright Yellow, True Blue, Orange, Dark Green, Purple, Brown, Magenta, Sky Blue, Lime</p>
+                        </div>
+                        <button type="button" class="ink-mixer__btn ink-mixer__btn--primary ink-mixer__btn--small load-preset-action-btn" data-preset="eternal_primary_12" data-i18n="starterPaletteModal.loadBtn">Load Palette</button>
+                    </div>
+                    <div class="palette-preset-card" style="padding: 0.85rem 1rem; border: 1px solid var(--border-primary); border-radius: var(--border-radius); background: var(--bg-secondary); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+                        <div>
+                            <h4 style="margin: 0; font-size: 0.95rem; font-weight: 700;" data-i18n="starterPaletteModal.intenzeTitle">Intenze Core Palette</h4>
+                            <p style="margin: 0.2rem 0 0; font-size: 0.8rem; color: var(--text-secondary);" data-i18n="starterPaletteModal.intenzeDesc">9 foundational inks: Zuper Black, Snow White, Bright Red, Banana Cream, Mario's Blue, Tangerine, True Green, Dark Purple, Dark Brown</p>
+                        </div>
+                        <button type="button" class="ink-mixer__btn ink-mixer__btn--primary ink-mixer__btn--small load-preset-action-btn" data-preset="intenze_essential" data-i18n="starterPaletteModal.loadBtn">Load Palette</button>
+                    </div>
+                    <div class="palette-preset-card" style="padding: 0.85rem 1rem; border: 1px solid var(--border-primary); border-radius: var(--border-radius); background: var(--bg-secondary); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+                        <div>
+                            <h4 style="margin: 0; font-size: 0.95rem; font-weight: 700;" data-i18n="starterPaletteModal.standardTitle">Standard 10 Core Pigments (Universal)</h4>
+                            <p style="margin: 0.2rem 0 0; font-size: 0.8rem; color: var(--text-secondary);" data-i18n="starterPaletteModal.standardDesc">10 universal pigments covering full CMYK + RGB subtractive color space</p>
+                        </div>
+                        <button type="button" class="ink-mixer__btn ink-mixer__btn--primary ink-mixer__btn--small load-preset-action-btn" data-preset="master_standard_10" data-i18n="starterPaletteModal.loadBtn">Load Palette</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Export Inventory Modal -->
+        <div id="exportInventoryModal" class="print-modal" style="display: none;">
+            <div class="print-modal__dialog print-modal__dialog--medium">
+                <div class="print-modal__bar">
+                    <div>
+                        <h3 class="modal-title" style="margin: 0; font-size: 1.2rem;" data-i18n="exportInventoryModal.title">📤 Export Studio Inventory</h3>
+                        <p class="modal-subtitle" style="margin: 0.25rem 0 0; font-size: 0.82rem; color: var(--text-secondary);" data-i18n="exportInventoryModal.subtitle">Your inventory backup data. Download as a JSON file or copy to clipboard.</p>
+                    </div>
+                    <button type="button" id="closeExportInventoryModalBtn" class="ink-mixer__btn ink-mixer__btn--small ink-mixer__btn--outline">✕</button>
+                </div>
+                <div class="print-modal__body" style="padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">
+                    <textarea id="exportInventoryTextarea" class="ink-mixer__textarea" style="height: 180px; font-family: monospace; font-size: 0.8rem;" readonly></textarea>
+                    <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+                        <button type="button" id="copyExportJsonBtn" class="ink-mixer__btn ink-mixer__btn--secondary" data-i18n="exportInventoryModal.copyBtn">📋 Copy JSON to Clipboard</button>
+                        <button type="button" id="downloadExportJsonBtn" class="ink-mixer__btn ink-mixer__btn--primary" data-i18n="exportInventoryModal.downloadBtn">💾 Download JSON File</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Save Formula In-Page Modal -->
+        <div id="saveFormulaModal" class="print-modal" style="display: none;">
+            <div class="print-modal__dialog print-modal__dialog--small">
+                <div class="print-modal__bar">
+                    <div>
+                        <h3 class="modal-title" style="margin: 0; font-size: 1.15rem;" data-i18n="saveFormulaModal.title">💾 Save Formula to Studio Library</h3>
+                        <p class="modal-subtitle" style="margin: 0.25rem 0 0; font-size: 0.8rem; color: var(--text-secondary);" data-i18n="saveFormulaModal.subtitle">Stored locally in browser storage. Zero cloud transmission.</p>
+                    </div>
+                    <button type="button" id="closeSaveFormulaModalBtn" class="ink-mixer__btn ink-mixer__btn--small ink-mixer__btn--outline">✕</button>
+                </div>
+                <form id="saveFormulaForm" class="print-modal__body" style="padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">
+                    <div class="ink-mixer__form-group">
+                        <label class="ink-mixer__label" for="saveFormulaNameInput"><span data-i18n="saveFormulaModal.formulaNameLabel">Formula Name</span> <span style="color: var(--color-danger);">*</span></label>
+                        <input type="text" id="saveFormulaNameInput" class="ink-mixer__input" required placeholder="e.g. Vintage Crimson Shadow">
+                    </div>
+                    <div class="ink-mixer__form-group">
+                        <label class="ink-mixer__label" for="saveFormulaNotesInput" data-i18n="saveFormulaModal.notesLabel">Notes / Usage (Optional)</label>
+                        <input type="text" id="saveFormulaNotesInput" class="ink-mixer__input" placeholder="e.g. Best for traditional neo-Japanese rose shading">
+                    </div>
+                    <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+                        <button type="button" id="cancelSaveFormulaBtn" class="ink-mixer__btn ink-mixer__btn--outline" data-i18n="addBottleModal.cancelBtn">Cancel</button>
+                        <button type="submit" class="ink-mixer__btn ink-mixer__btn--primary" data-i18n="saveFormulaModal.submitBtn">✓ Save Formula</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+<!-- Related Tools Section -->
+<section class="related-tools-section">
+    <div class="related-tools__container">
+        <h3 class="related-tools__title" data-i18n="relatedTools.title">Recommended for You</h3>
+        <div class="related-tools__grid">
+            <a href="//poliinternational.com/coverage-calculator/" class="related-tools__item" data-i18n="relatedTools.coverageCalc">Coverage Calculator</a>
+            <a href="//poliinternational.com/needle-selector/" class="related-tools__item" data-i18n="relatedTools.needleSelector">Needle Selector</a>
+            <a href="//poliinternational.com/stencil-calculator/" class="related-tools__item" data-i18n="relatedTools.stencilCalc">Stencil Calculator</a>
+        </div>
+        <div class="related-tools__footer">
+            <a href="//poliinternational.com/tools/" class="related-tools__all-link" data-i18n="relatedTools.allTools">View All 17 Free Tools</a>
+        </div>
+    </div>
+</section>
+
+<!-- GEO Semantic Block -->
+<aside class="geo-summary-block">
+    <p data-i18n="geoSummary.text">Pro Artist Insight: Proper planning is the mark of a master. Integrating precision calculations into your workflow ensures consistent results and high-quality healing for every client. Use this tool to bridge the gap between artistic vision and technical execution.</p>
+</aside>
+
+</main>
+
+    <!-- MORE TOOLS NAVIGATION -->
+    <section class="inkmixer__more-tools">
+        <div class="inkmixer__more-tools-inner">
+            <p class="inkmixer__more-tools-text">
+                <a href="//poliinternational.com/tools" target="_blank" rel="noopener" class="inkmixer__more-tools-link" data-i18n="moreTools.explore">
+                    Explore all our free professional tools →
+                </a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Embed Modal (Required on ALL tools) -->
+    <div id="embedModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2 data-i18n="app.embedModalTitle">Embed This Tool</h2>
+            <p data-i18n="embedModal.desc">Copy this code to embed the tool on your website:</p>
+            <textarea id="embedCode" readonly></textarea>
+            <button id="copyEmbedCode" class="copy-btn" data-i18n="app.copyCode">Copy Code</button>
+        </div>
+    </div>
+
+    <!-- File Import Input (Hidden) -->
+    <input type="file" id="importFileInput" accept=".json" style="display: none;">
+
+    <!-- Scripts -->
+    <script src="js/vendor/qrcode.min.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/i18n/fr.js"></script>
+    <script src="js/i18n/de.js"></script>
+    <script src="js/i18n/it.js"></script>
+    <script src="js/i18n/es.js"></script>
+    <script src="js/i18n/nl.js"></script>
+    <script src="js/i18n/pt.js"></script>
+    <script src="js/ciede2000.js"></script>
+    <script src="js/ink-database.js"></script>
+    <script src="js/inventory.js"></script>
+    <script src="js/formulas.js"></script>
+    <script src="js/substitution.js"></script>
+    <script src="js/library.js"></script>
+    <script src="js/mixer.js"></script>
+    <script src="js/studio-calibration.js"></script>
+    <script src="js/reference-studio.js"></script>
+    <script src="js/gradient-caps.js"></script>
+    <script src="js/diluent-formulator.js"></script>
+    <script src="js/studio-vault.js"></script>
+    <script src="js/common.js"></script>
+
+    <!-- Hide header when embedded in iframe -->
+    <script>
+        // Detect if page is loaded in iframe and hide header
+        if (window.self !== window.top) {
+            document.addEventListener('DOMContentLoaded', function() {
+                var header = document.querySelector('.site-header');
+                if (header) {
+                    header.style.display = 'none';
+                }
+                // Also hide tool title section if present
+                var toolTitle = document.querySelector('.tool-title-section');
+                if (toolTitle) {
+                    toolTitle.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+<!-- AUTOMATIC IFRAME CONTENT HIDER (ADDED BY ANTIGRAVITY) -->
+<script>
+    if (window.self !== window.top) {
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectors = ['.breadcrumb-nav', '.site-header', '.site-footer', '.equip-checker__header', 
+                '.equip-checker__footer', '.tool-title-section', '.more-tools-section',
+                '.feedback-section', '.related-tools-section', '.geo-summary-block',
+                '.needle-selector__header', '.needle-selector__footer', 
+                '.needle-selector__more-tools', '.community-feedback',
+                '.poli-footer', '.share-card', '.need-support-card', '.explore-all-card'];
+            selectors.forEach(selector => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(el => el.style.display = 'none');
+            });
+            // Force reset body margins for embed
+            document.body.style.paddingTop = '0';
+            document.body.style.marginTop = '0';
+            document.body.style.paddingBottom = '0';
+            document.body.style.marginBottom = '0';
+
+/* Center align tool headers when in iframe */
+if (window.self !== window.top) {
+    const style = document.createElement('style');
+    style.textContent = `
+        /* Center the entire header section */
+        [class*="__header-content"],
+        [class*="__title-group"],
+        [class*="__header-buttons"] {
+            text-align: center !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        /* Center H2 headings */
+        [class*="__header"] h2,
+        [class*="__title-group"] h2,
+        header h2 {
+            text-align: center !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        /* Center subtitles/descriptions */
+        [class*="__subtitle"],
+        [class*="__header"] p {
+            text-align: center !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        /* Center button containers */
+        [class*="__header-buttons"] {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            flex-wrap: wrap !important;
+        }
+    `;
+    document.head.appendChild(style);
+}
+        });
+    }
+</script>
+
+</body>
+</html>

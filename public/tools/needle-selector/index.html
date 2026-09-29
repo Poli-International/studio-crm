@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+<script>
+if (window.self !== window.top) {
+    var poliRoot = document.documentElement;
+    var poliApply = function (light) {
+        poliRoot.setAttribute('data-theme', light ? 'light' : 'dark');
+        var b = document.body;
+        if (b) {
+            b.classList.toggle('dark-mode', !light);
+            b.classList.toggle('light-mode', !!light);
+        }
+    };
+    poliApply(false);
+    document.addEventListener('DOMContentLoaded', function () {
+        poliApply(poliRoot.getAttribute('data-theme') === 'light');
+    });
+    window.addEventListener('message', function (e) {
+        if (e.data && e.data.type === 'poli-theme') {
+            poliApply(!!e.data.light);
+        }
+    });
+}
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="app.titleTag">Professional Tattoo Needle Selector | Poli International</title>
+    <meta name="description" content="Professional tattoo needle selector - Choose the perfect needle configuration for any tattoo style, technique, or desired effect.">
+    <meta property="og:title" content="Professional Tattoo Needle Selector | Poli International">
+    <meta property="og:description" content="Professional tattoo needle selector - Choose the perfect needle configuration for any tattoo style, technique, or desired effect.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://poliinternational.com/needle-selector/">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="/tools/needle-selector/css/style.css">
+    <link rel="stylesheet" href="/tools/shared/theme.css">
+    <script src="/js/input-guards.js"></script>
+    <link rel="stylesheet" href="/tools/shared/print.css" media="print">
+    <link rel="stylesheet" href="/tools/shared/a11y.css">
+<script type='application/ld+json'>
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Tattoo Needle Selector",
+  "url": "https://poliinternational.com/needle-selector/",
+  "description": "Choose a needle configuration by style and technique, decode blister-pack codes, and compare up to three needles side by side. Seven languages.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "citation": "Needle Taper and Diameter Configuration Specifications",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "codeRepository": "https://github.com/poli-international/needle-selector",
+  "author": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "https://poliinternational.com",
+    "sameAs": [
+      "https://github.com/poli-international"
+    ]
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "https://poliinternational.com"
+  },
+  "maintainer": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "https://poliinternational.com"
+  },
+  "dateModified": "2026-09-26",
+  "license": "https://opensource.org/licenses/MIT",
+  "isAccessibleForFree": true,
+  "inLanguage": ["en", "fr", "de", "es", "it", "nl", "pt"]
+}
+</script>
+<script type='application/ld+json'>
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does 1207RL mean?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It indicates a #12 diameter (.35mm) needle with a 7-needle Round Liner configuration."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between a bugpin and a regular needle?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bugpins have a thinner diameter (usually #10 or #08), allowing for finer detail and smoother gradients."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+    <div class="needle-selector">
+        <!-- Site Header -->
+        <header class="site-header">
+            <div class="site-header__container">
+                <a href="https://poliinternational.com" class="site-header__logo-link" target="_top">
+                    <img src="/tools/needle-selector/images/Poli-International-Co.webp" alt="Poli International" class="site-header__logo" width="180" height="60">
+                </a>
+
+                <nav class="site-nav" aria-label="Main Navigation">
+                    <a href="#quick-selector" class="site-nav__link" data-i18n="nav.selector">Quick Selector</a>
+                    <a href="#code-decoder" class="site-nav__link" data-i18n="nav.decoder">Code Decoder</a>
+                    <a href="#needle-comparator" class="site-nav__link" data-i18n="nav.comparator">Needle Comparator</a>
+                    <a href="#technical-matrix" class="site-nav__link" data-i18n="nav.reference">Technical Reference</a>
+                    <button type="button" class="site-nav__link site-nav__btn" id="tools-catalog-button" data-i18n="app.toolsCatalog">Poli Tools Catalog</button>
+                </nav>
+
+                <div class="site-header__actions">
+                    <div class="language-switcher-wrapper">
+                        <label for="language-select" class="visually-hidden" data-i18n="app.languageSelect">Select language</label>
+                        <select id="language-select" class="header-action-select language-select" aria-label="Select language" data-i18n-aria-label="app.languageSelect">
+                            <option value="en" data-i18n="languages.en">English (EN)</option>
+                            <option value="fr" data-i18n="languages.fr">Français (FR)</option>
+                            <option value="it" data-i18n="languages.it">Italiano (IT)</option>
+                            <option value="de" data-i18n="languages.de">Deutsch (DE)</option>
+                            <option value="es" data-i18n="languages.es">Español (ES)</option>
+                            <option value="nl" data-i18n="languages.nl">Nederlands (NL)</option>
+                            <option value="pt" data-i18n="languages.pt">Português (PT)</option>
+                        </select>
+                    </div>
+                    <button type="button" id="dark-mode-toggle" class="header-action-btn theme-toggle-btn" data-i18n-aria-label="app.themeToggle" aria-label="Toggle theme">
+                        <span class="theme-icon">◐</span>
+                    </button>
+                    <button type="button" id="embed-button" class="header-action-btn embed-trigger-btn" data-i18n="app.embedButton">Embed Tool</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Title Banner -->
+        <div class="tool-title-section">
+            <h1 class="tool-title" data-i18n="app.title">Tattoo Needle Selector</h1>
+            <p class="tool-subtitle" data-i18n="app.subtitle">Professional configuration advisor, blister-pack code decoder, and side-by-side needle comparator for tattoo artists and apprentices.</p>
+        </div>
+
+        <!-- Main Content -->
+        <main class="needle-selector__main">
+            <!-- 1. Quick Selector -->
+            <section class="needle-selector__quick-selector" id="quick-selector">
+                <h2 class="needle-selector__section-title" data-i18n="selector.title">Find Your Optimal Needle</h2>
+                <p class="needle-selector__section-subtitle" data-i18n="selector.subtitle">Select your tattooing technique, artistic style, and skin condition for instant configuration recommendations.</p>
+
+                <form id="needle-form" class="needle-selector__form">
+                    <div class="needle-selector__form-grid">
+                        <!-- Technique -->
+                        <div class="needle-selector__field">
+                            <label for="technique" class="needle-selector__label">
+                                <span class="label-icon">✍️</span>
+                                <span data-i18n="selector.techniqueLabel">Technique</span>
+                            </label>
+                            <select id="technique" name="technique" class="needle-selector__select" required>
+                                <option value="" data-i18n="selector.selectTechniquePrompt">-- Select Technique --</option>
+                                <option value="lining" data-i18n="selector.techniques.lining">Lining & Outlines</option>
+                                <option value="shading" data-i18n="selector.techniques.shading">Shading & Blending</option>
+                                <option value="packing" data-i18n="selector.techniques.packing">Solid Color Packing</option>
+                                <option value="stipple" data-i18n="selector.techniques.stippling">Stippling & Dotwork</option>
+                                <option value="graywash" data-i18n="selector.techniques.graywash">Black & Gray / Smooth Wash</option>
+                            </select>
+                        </div>
+
+                        <!-- Style -->
+                        <div class="needle-selector__field">
+                            <label for="style" class="needle-selector__label">
+                                <span class="label-icon">🎨</span>
+                                <span data-i18n="selector.styleLabel">Artistic Style</span>
+                            </label>
+                            <select id="style" name="style" class="needle-selector__select" required>
+                                <option value="" data-i18n="selector.selectStylePrompt">-- Select Style --</option>
+                                <option value="traditional" data-i18n="selector.styles.traditional">Traditional / Old School</option>
+                                <option value="fine_line" data-i18n="selector.styles.fineLine">Fine Line & Micro</option>
+                                <option value="realism" data-i18n="selector.styles.realism">Realism & Portraiture</option>
+                                <option value="neo_traditional" data-i18n="selector.styles.neoTraditional">Neo-Traditional</option>
+                                <option value="japanese" data-i18n="selector.styles.japanese">Japanese / Irezumi</option>
+                                <option value="blackwork" data-i18n="selector.styles.blackwork">Blackwork & Geometry</option>
+                            </select>
+                        </div>
+
+                        <!-- Skin Type -->
+                        <div class="needle-selector__field">
+                            <label for="skin-type" class="needle-selector__label">
+                                <span class="label-icon">🖐️</span>
+                                <span data-i18n="selector.skinTypeLabel">Skin Type</span>
+                            </label>
+                            <select id="skin-type" name="skinType" class="needle-selector__select">
+                                <option value="normal" data-i18n="selector.skinTypes.normal">Normal Skin</option>
+                                <option value="thin" data-i18n="selector.skinTypes.thinDelicate">Thin / Delicate (Wrists, Ribs, Neck)</option>
+                                <option value="thick" data-i18n="selector.skinTypes.thickTough">Thick / Tough (Palms, Elbows, Back)</option>
+                                <option value="aging" data-i18n="selector.skinTypes.agingMature">Aging / Mature Skin</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="needle-selector__form-actions">
+                        <button type="submit" class="needle-selector__submit-btn" data-i18n="selector.submitBtn">Get Recommendation</button>
+                        <button type="reset" class="needle-selector__reset-btn" id="reset-button" data-i18n="selector.resetBtn">Reset</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Results Section -->
+            <section class="needle-selector__results" id="results-section" style="display: none;">
+                <h2 class="needle-selector__section-title" data-i18n="results.title">Recommended Needle Configuration</h2>
+
+                <div class="needle-selector__result-card">
+                    <!-- Primary Recommendation -->
+                    <div class="needle-selector__primary-result">
+                        <div class="needle-selector__needle-code" id="primary-needle-code" data-i18n="results.defaultNeedleCode">9RL</div>
+                        <div class="needle-selector__needle-name" id="primary-needle-name" data-i18n="results.defaultNeedleName">9 Round Liner</div>
+                        <div class="needle-selector__visual-container">
+                            <svg class="needle-selector__needle-diagram" id="primary-needle-diagram" width="200" height="200" viewBox="0 0 200 200" aria-label="Needle cross section diagram">
+                                <!-- Needle cluster diagram rendered by JavaScript -->
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Needle Details -->
+                    <div class="needle-selector__details">
+                        <div class="needle-selector__detail-item">
+                            <h3 class="needle-selector__detail-title" data-i18n="results.needleCountLabel">Needle Count</h3>
+                            <p class="needle-selector__detail-text" id="needle-count" data-i18n="results.defaultNeedleCount">9 needles</p>
+                        </div>
+
+                        <div class="needle-selector__detail-item">
+                            <h3 class="needle-selector__detail-title" data-i18n="results.configTypeLabel">Configuration Type</h3>
+                            <p class="needle-selector__detail-text" id="config-type" data-i18n="results.defaultConfigType">Round Liner (RL)</p>
+                        </div>
+
+                        <div class="needle-selector__detail-item">
+                            <h3 class="needle-selector__detail-title" data-i18n="results.bestForLabel">Best For</h3>
+                            <ul class="needle-selector__use-list" id="use-list"></ul>
+                        </div>
+
+                        <div class="needle-selector__detail-item">
+                            <h3 class="needle-selector__detail-title" data-i18n="results.settingsLabel">Operating Guidelines</h3>
+                            <p class="needle-selector__detail-text" id="settings"></p>
+                        </div>
+
+                        <div class="needle-selector__detail-item">
+                            <h3 class="needle-selector__detail-title" data-i18n="results.proTipsLabel">Technical Guidance</h3>
+                            <ul class="needle-selector__tip-list" id="tip-list"></ul>
+                        </div>
+                    </div>
+
+                    <!-- Alternative Recommendations -->
+                    <div class="needle-selector__alternatives">
+                        <h3 class="needle-selector__alt-title" data-i18n="results.alternativesLabel">Viable Alternatives</h3>
+                        <div class="needle-selector__alt-grid" id="alternatives-grid">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Blister-Pack Code Decoder -->
+            <section class="needle-selector__decoder" id="code-decoder">
+                <h2 class="needle-selector__section-title" data-i18n="decoder.title">Blister-Pack Code Decoder</h2>
+                <p class="needle-selector__section-subtitle" data-i18n="decoder.subtitle">Enter any standard tattoo needle packaging code (e.g., 9RL, 1209RL, 1011M1, 15RS, 7CM) to decode its physical specifications.</p>
+
+                <div class="needle-selector__decoder-form">
+                    <div class="needle-selector__input-group">
+                        <label for="needle-code-input" class="needle-selector__label">
+                            <span class="label-icon">🔢</span>
+                            <span data-i18n="decoder.inputLabel">Packaging Code</span>
+                        </label>
+                        <input
+                            type="text"
+                            id="needle-code-input"
+                            class="needle-selector__text-input"
+                            data-i18n-placeholder="decoder.placeholder"
+                            placeholder="e.g., 1209RL, 11M1, 15RS, 7CM"
+                            aria-label="Enter needle code">
+                        <button type="button" id="decode-button" class="needle-selector__decode-button" data-i18n="decoder.decodeBtn">Decode Needle</button>
+                    </div>
+
+                    <div class="needle-selector__decoder-result" id="decoder-result" style="display: none;">
+                        <!-- Rendered dynamically by displayDecodedNeedle -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Side-by-Side Needle Comparator -->
+            <section class="needle-selector__comparator" id="needle-comparator">
+                <h2 class="needle-selector__section-title" data-i18n="comparator.title">Side-by-Side Needle Comparator</h2>
+                <p class="needle-selector__section-subtitle" data-i18n="comparator.subtitle">Compare cluster cross-sections, effective coverage diameter, and working settings for up to three needle configurations.</p>
+
+                <div class="comparator-controls-card">
+                    <div class="comparator-inputs-grid">
+                        <div class="comparator-select-group">
+                            <label for="compare-1" class="comparator-label" data-i18n="comparator.slot1Label">First Needle</label>
+                            <select id="compare-1" class="needle-selector__select">
+                                <option value="" data-i18n="comparator.chooseNeedlePrompt">-- Choose a Needle --</option>
+                            </select>
+                        </div>
+                        <div class="comparator-select-group">
+                            <label for="compare-2" class="comparator-label" data-i18n="comparator.slot2Label">Second Needle</label>
+                            <select id="compare-2" class="needle-selector__select">
+                                <option value="" data-i18n="comparator.chooseNeedlePrompt">-- Choose a Needle --</option>
+                            </select>
+                        </div>
+                        <div class="comparator-select-group">
+                            <label for="compare-3" class="comparator-label" data-i18n="comparator.slot3Label">Third Needle (Optional)</label>
+                            <select id="compare-3" class="needle-selector__select">
+                                <option value="" data-i18n="comparator.noneOptional">-- None (Optional) --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="comparator-action-wrapper">
+                        <button type="button" id="compare-button" class="needle-selector__submit-btn" data-i18n="comparator.compareBtn">Compare Configurations</button>
+                    </div>
+                </div>
+
+                <div id="compare-results" class="compare-results-container" style="display: none;">
+                    <!-- Rendered dynamically by displayComparison -->
+                </div>
+            </section>
+
+            <!-- 4. Technical Needle Matrix -->
+            <section class="needle-selector__reference" id="technical-matrix">
+                <h2 class="needle-selector__section-title" data-i18n="reference.title">Technical Needle Matrix</h2>
+                <p class="needle-selector__section-subtitle" data-i18n="reference.subtitle">Complete library of professional tattoo needle configurations. Click any configuration to inspect in the decoder.</p>
+
+                <div class="matrix-groups-grid">
+                    <div class="matrix-group-card">
+                        <h3 class="matrix-group-title" data-i18n="reference.tabRL">Round Liners (RL)</h3>
+                        <div id="rl-list" class="matrix-item-list"></div>
+                    </div>
+                    <div class="matrix-group-card">
+                        <h3 class="matrix-group-title" data-i18n="reference.tabRS">Round Shaders (RS)</h3>
+                        <div id="rs-list" class="matrix-item-list"></div>
+                    </div>
+                    <div class="matrix-group-card">
+                        <h3 class="matrix-group-title" data-i18n="reference.tabM1">Weaved Magnums (M1)</h3>
+                        <div id="m1-list" class="matrix-item-list"></div>
+                    </div>
+                    <div class="matrix-group-card">
+                        <h3 class="matrix-group-title" data-i18n="reference.tabCM">Curved Magnums (CM)</h3>
+                        <div id="cm-list" class="matrix-item-list"></div>
+                    </div>
+                    <div class="matrix-group-card">
+                        <h3 class="matrix-group-title" data-i18n="reference.tabF">Flats (F)</h3>
+                        <div id="f-list" class="matrix-item-list"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="needle-selector__footer">
+            <div class="footer-inner">
+                <p class="footer-brand" data-i18n="footer.brandNote">Published by Poli International as a free professional tool for tattoo artists, piercers, and studio owners.</p>
+                <div class="footer-links">
+                    <a href="https://poliinternational.com/tools/" class="footer-tool-link" target="_top" data-i18n="footer.toolsLink">Explore All Poli Studio Tools</a>
+                    <span class="footer-sep">•</span>
+                    <a href="https://poliinternational.com" class="footer-tool-link" target="_top" data-i18n="footer.websiteLink">Poli International Official Website</a>
+                    <span class="footer-sep">•</span>
+                    <a href="https://github.com/Poli-International/needle-selector" class="footer-tool-link" target="_blank" rel="noopener" data-i18n="footer.githubLink">GitHub Repository</a>
+                </div>
+                <p class="footer-disclaimer" data-i18n="footer.disclaimer">Operating voltages, stroke lengths, and needle hanging depths are baseline technical recommendations from established professional practice. Always adjust machine settings to client skin response, machine torque, and stroke geometry.</p>
+            </div>
+        </footer>
+
+        <!-- Embed Modal -->
+        <div id="embed-modal" class="needle-selector__modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="embed-modal-title">
+            <div class="needle-selector__modal-content">
+                <div class="embed-modal-header">
+                    <h3 id="embed-modal-title" class="embed-modal-title" data-i18n="embedModal.title">Embed Needle Selector on Your Studio Website</h3>
+                    <button type="button" class="embed-modal-close" id="close-modal" aria-label="Close embed modal" data-i18n-aria-label="embedModal.closeAriaLabel">&times;</button>
+                </div>
+                <p class="embed-modal-desc" data-i18n="embedModal.subtitle">Add this free technical tool directly to your website for your studio team and apprentices.</p>
+                <label for="embed-code" class="embed-code-label" data-i18n="embedModal.codeLabel">HTML Embed Snippet (Self-Contained Responsive Iframe)</label>
+                <pre class="embed-code-box"><code id="embed-code">&lt;iframe src="https://poliinternational.com/tools/needle-selector/index.html" width="100%" height="800" frameborder="0" style="border:0; border-radius:12px; max-width:100%;" title="Tattoo Needle Selector - Poli International"&gt;&lt;/iframe&gt;</code></pre>
+                <div class="embed-modal-actions">
+                    <button type="button" id="copy-code-btn" class="needle-selector__submit-btn" data-i18n="embedModal.copyBtn">Copy Snippet</button>
+                    <button type="button" id="close-modal-btn" class="needle-selector__reset-btn" data-i18n="embedModal.closeBtn">Close</button>
+                </div>
+                <p id="copy-success" class="copy-success-message" style="display: none;" data-i18n="embedModal.copied">Snippet copied to clipboard!</p>
+                <p class="embed-modal-tip" data-i18n="embedModal.tip">Pastes cleanly into WordPress, Squarespace, Webflow, Shopify, or custom HTML.</p>
+            </div>
+        </div>
+
+        <!-- Poli Tools Catalog Modal -->
+        <div id="tools-catalog-modal" class="needle-selector__modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="tools-modal-title">
+            <div class="needle-selector__modal-content tools-catalog-modal-content">
+                <div class="embed-modal-header">
+                    <div>
+                        <h3 id="tools-modal-title" class="embed-modal-title" data-i18n="toolsModal.title">Poli Studio Tools Suite</h3>
+                        <p class="embed-modal-desc" data-i18n="toolsModal.subtitle">Free professional digital utilities for tattoo artists, piercers, and studio owners.</p>
+                    </div>
+                    <button type="button" class="embed-modal-close" id="close-tools-modal" aria-label="Close catalog modal" data-i18n-aria-label="toolsModal.closeAriaLabel">&times;</button>
+                </div>
+                <div class="tools-modal-grid">
+                    <a href="https://poliinternational.com/jewelry-size-visualizer/" class="tools-modal-card" target="_top">
+                        <span class="tools-modal-icon">📐</span>
+                        <h4 class="tools-modal-name" data-i18n="toolsModal.sizerName">Body Piercing Sizer</h4>
+                        <p class="tools-modal-desc" data-i18n="toolsModal.sizerDesc">Interactive gauge, diameter, and length sizing calculator for anatomical piercing placements.</p>
+                    </a>
+                    <a href="https://poliinternational.com/form-builder/" class="tools-modal-card" target="_top">
+                        <span class="tools-modal-icon">📋</span>
+                        <h4 class="tools-modal-name" data-i18n="toolsModal.consentName">Consent & Health Intake Form</h4>
+                        <p class="tools-modal-desc" data-i18n="toolsModal.consentDesc">Digital intake forms, procedure disclosure statements, and client record export.</p>
+                    </a>
+                    <a href="https://poliinternational.com/autoclave-calculator/" class="tools-modal-card" target="_top">
+                        <span class="tools-modal-icon">🧪</span>
+                        <h4 class="tools-modal-name" data-i18n="toolsModal.logName">Studio Sterilization Log</h4>
+                        <p class="tools-modal-desc" data-i18n="toolsModal.logDesc">Autoclave cycle tracking, spore testing documentation, and instrument processing records.</p>
+                    </a>
+                    <a href="https://poliinternational.com/studio-crm/" class="tools-modal-card" target="_top">
+                        <span class="tools-modal-icon">💼</span>
+                        <h4 class="tools-modal-name" data-i18n="toolsModal.crmName">Studio CRM</h4>
+                        <p class="tools-modal-desc" data-i18n="toolsModal.crmDesc">Local studio management system for client histories, appointments, and daily procedure tracking.</p>
+                    </a>
+                    <a href="https://poliinternational.com/studio-pricing-benchmark/" class="tools-modal-card" target="_top">
+                        <span class="tools-modal-icon">📊</span>
+                        <h4 class="tools-modal-name" data-i18n="toolsModal.benchmarkName">Studio Pricing Benchmark</h4>
+                        <p class="tools-modal-desc" data-i18n="toolsModal.benchmarkDesc">Regional rate card comparisons and pricing calculators for body art studios.</p>
+                    </a>
+                </div>
+                <div class="embed-modal-actions tools-modal-actions">
+                    <a href="https://poliinternational.com/tools/" class="needle-selector__submit-btn tools-modal-hub-btn" target="_top" data-i18n="toolsModal.visitAll">Open Full Web Catalog</a>
+                    <button type="button" id="close-tools-modal-btn" class="needle-selector__reset-btn" data-i18n="toolsModal.closeBtn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts loaded synchronously in document order, zero external resources -->
+    <script src="/tools/needle-selector/js/needle-data.js"></script>
+    <script src="/tools/needle-selector/js/i18n.js"></script>
+    <script src="/tools/needle-selector/js/selector.js"></script>
+</body>
+</html>

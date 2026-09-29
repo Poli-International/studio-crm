@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta name="robots" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registre de maintenance des machines : guide d'utilisation Documentation | Poli International</title>
+    <meta name="description" content="Le Registre de maintenance des machines suit l'identité des appareils, les heures de fonctionnement, les valeurs d'étalonnage, les intervalles d'entretien, les coûts de réparation et l'historique des contrôles pour les studios de tatouage, les perceurs et les techniciens de maintenance en art corporel.">
+    <link rel="canonical" href="https://poliinternational.com/machine-maintenance-logbook/">
+    <style>
+        body { background: #0f0f0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; }
+        body.in-iframe .doc-hero h1 { display: none; }
+        * { box-sizing: border-box; }
+        .entry-content { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .doc-hero { background: linear-gradient(135deg, #3B82F6, #8B5CF6); padding: 3rem 2rem; text-align: center; border-radius: 0.75rem; margin-bottom: 2rem; }
+        .doc-hero h1 { font-size: 2.2rem; margin: 0 0 1rem; font-weight: 700; }
+        .doc-hero p { font-size: 1.15rem; color: #E0E7FF; margin: 0; }
+        .doc-hero .v2 { display: inline-block; margin-bottom: 1rem; padding: 0.2rem 0.75rem; border-radius: 999px; background: #10B981; color: #04241a; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; }
+        .doc-section { margin: 2rem 0; padding: 2rem; background: #1a1a1a; border-radius: 0.75rem; border-left: 4px solid #3B82F6; }
+        .doc-section h2 { color: #60A5FA; font-size: 1.7rem; margin: 0 0 1.25rem; font-weight: 600; }
+        .doc-section h3 { color: #A78BFA; font-size: 1.3rem; margin: 1.75rem 0 0.75rem; font-weight: 600; }
+        .doc-section p, .doc-section li { color: #ccc; line-height: 1.75; font-size: 1.02rem; }
+        .doc-section ul, .doc-section ol { padding-left: 1.5rem; }
+        .doc-section li { margin: 0.4rem 0; }
+        .doc-section code { background: #2a2a2a; padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.92em; }
+        .doc-section a { color: #60A5FA; font-weight: 600; }
+        .highlight-box { background: linear-gradient(135deg, #1E3A8A, #4C1D95); padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; border-left: 4px solid #10B981; }
+        .highlight-box p { color: #E0E7FF; margin: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border: 1px solid #333; vertical-align: top; }
+        th { background: #2a2a2a; color: #60A5FA; }
+        td { color: #ccc; }
+        .doc-langs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.5rem; font-size: 0.9rem; }
+        .doc-langs a, .doc-langs span { padding: 0.3rem 0.7rem; border-radius: 999px; border: 1px solid #333; text-decoration: none; }
+        .doc-langs a { color: #60A5FA; }
+        .doc-langs span { background: #1E3A8A; color: #E0E7FF; border-color: #1E3A8A; font-weight: 700; }
+    </style>
+</head>
+<body>
+<script>if (window.self !== window.top) document.body.classList.add('in-iframe');</script>
+    <div class="entry-content">
+        <nav class="doc-langs" aria-label="Documentation language"><a lang="en" href="documentation.html">English</a><span lang="fr">Francais</span><a lang="de" href="documentation-de.html">Deutsch</a><a lang="es" href="documentation-es.html">Espanol</a><a lang="it" href="documentation-it.html">Italiano</a><a lang="nl" href="documentation-nl.html">Nederlands</a><a lang="pt" href="documentation-pt.html">Portugues</a></nav>
+        <div class="doc-hero">
+            <span class="v2">V2</span>
+            <h1>Registre de maintenance des machines : guide d'utilisation</h1>
+            <p>Le Registre de maintenance des machines suit l'identité des appareils, les heures de fonctionnement, les valeurs d'étalonnage, les intervalles d'entretien, les coûts de réparation et l'historique des contrôles pour les studios de tatouage, les perceurs et les techniciens de maintenance en art corporel.</p>
+        </div>
+        <div class="doc-section">
+        <h2>À quoi sert cet outil</h2>
+        <p>Le Registre de maintenance des machines fournit un inventaire structuré pour chaque machine rotative, machine à bobines, dermographe stylo ou alimentation de votre atelier. Il consigne la provenance du matériel, les numéros de série des fabricants, les coordonnées des fournisseurs, les dates d'échéance de garantie, les postes de travail et les tatoueurs attitrés.</p>
+        <p>L'application assure le suivi des entretiens opérationnels : étalonnage de la tension, nettoyage aux ultrasons, remplacement des mécanismes d'entraînement de cartouches d'aiguilles, révision des moteurs et des roulements, contrôle des câbles RCA, stérilisation des manchons et remplacement de pièces détachées. Elle comptabilise l'évolution des heures de fonctionnement entre deux interventions, alerte l'équipe lorsque les intervalles planifiés arrivent à terme, regroupe les dépenses par machine et par année civile, et génère des fichiers de calendrier hors ligne pour planifier les révisions en atelier.</p>
+        </div>
+        <div class="doc-section">
+        <h2>À qui s'adresse cet outil</h2>
+        <ul>
+        <li><strong>Responsables et gérants de studios de tatouage</strong> assurant la gestion du parc de machines partagé, la régularité des entretiens sur chaque poste et le contrôle des frais de réparation annuels.</li>
+        <li><strong>Tatoueurs résidents ou invités et perceurs</strong> gérant leur équipement personnel, consignant leurs réglages de tension sur mesure et suivant l'usure de leurs moteurs.</li>
+        <li><strong>Référents hygiène et sécurité</strong> tenant à jour les registres d'inspection et reliant les classeurs de factures papier aux fiches techniques numériques.</li>
+        <li><strong>Techniciens réparateurs et concepteurs de machines</strong> effectuant les révisions d'atelier, le remplacement de roulements et le relevé des heures de service pour leurs clients.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Comment l'utiliser</h2>
+        <h3>Vérifier les alertes d'entretien et exporter le calendrier</h3>
+        <ol>
+        <li>Consultez le bandeau <code>Entretiens requis et en retard</code> situé en haut de l'écran. Les appareils dont l'échéance est dépassée affichent l'avertissement <code>En retard de {days} jours</code> ou <code>Dépassement de {hours} heures d'usage</code>.</li>
+        <li>Lorsqu'un appareil approche de sa date cible dans un délai de quatorze jours, le bandeau affiche <code>Prévu dans {days} jours</code>.</li>
+        <li>Cliquez sur le bouton <code>Exporter en .ics</code> en regard de l'appareil concerné pour télécharger un fichier d'événement iCalendar contenant le nom de la machine, le numéro de série, le poste de travail et l'artiste assigné.</li>
+        <li>Lorsque tous les équipements fonctionnent dans leurs tolérances planifiées, le bandeau indique <code>Tous les appareils en service sont à jour.</code>.</li>
+        </ol>
+        <h3>Enregistrer un appareil dans l'inventaire</h3>
+        <ol>
+        <li>Ouvrez l'onglet <code>Parc de machines</code> dans la barre de navigation.</li>
+        <li>Dans le bloc d'enregistrement, saisissez le nom ou la référence interne dans <code>Nom ou identifiant de l'appareil</code>. Ce champ est obligatoire.</li>
+        <li>Renseignez les spécifications matérielles dans <code>Numéro de série</code>, <code>Modèle</code> et <code>Fournisseur / Distributeur</code>.</li>
+        <li>Renseignez les dates repères dans <code>Date d'achat</code> et <code>Fin de garantie</code>.</li>
+        <li>Précisez l'emplacement dans l'atelier dans <code>Poste de travail / Salle</code> et le praticien référent dans <code>Tatoueur assigné</code>.</li>
+        <li>Fixez les seuils d'alerte dans <code>Intervalle d'entretien (jours)</code> ou <code>Intervalle d'entretien (heures)</code>.</li>
+        <li>Cliquez sur <code>Enregistrer l'appareil</code> pour inscrire le matériel dans le tableau d'inventaire.</li>
+        </ol>
+        <h3>Gérer le statut et la mise hors service d'une machine</h3>
+        <ol>
+        <li>Dans l'onglet <code>Parc de machines</code>, repérez l'appareil dans le tableau <code>Machines enregistrées</code>. Les machines en activité portent le badge vert <code>En service</code>.</li>
+        <li>Si un équipement est vendu, déclassé ou placé en réserve, cliquez sur <code>Mettre hors service</code> dans la colonne <code>Opérations</code>.</li>
+        <li>Validez l'action dans la fenêtre de confirmation. La machine reçoit le statut <code>Retirée du service</code>. L'ensemble de son historique technique demeure consultable, mais elle est retirée des alertes de révision courantes.</li>
+        <li>Pour réintégrer un équipement dans le planning actif, cliquez sur <code>Remettre en service</code>.</li>
+        </ol>
+        <h3>Enregistrer une intervention technique</h3>
+        <ol>
+        <li>Ouvrez l'onglet <code>Journal d'entretien</code> dans la barre de navigation.</li>
+        <li>Choisissez l'appareil dans la liste déroulante <code>Sélectionner l'appareil</code>.</li>
+        <li>Indiquez le jour des travaux dans <code>Date d'intervention</code>.</li>
+        <li>Renseignez le relevé horaire dans <code>Compteur d'heures actuel</code> si votre alimentation ou votre minuterie mesure le temps de fonctionnement.</li>
+        <li>Sélectionnez la catégorie appropriée sous <code>Type d'intervention</code> : <code>Étalonnage de la tension</code>, <code>Nettoyage et désinfection</code>, <code>Changement support cartouche</code>, <code>Révision complète (moteur/roulement)</code>, <code>Contrôle câble / fiche RCA</code>, <code>Stérilisation du manchon</code>, <code>Remplacement de composant</code> ou <code>Autre intervention</code>.</li>
+        <li>Complétez les données techniques : tension d'exercice dans <code>Tension mesurée (V)</code>, pièces ou joints installés dans <code>Pièces remplacées</code>, coût engagé dans <code>Dépense</code>, et référence de classement dans <code>Réf. de classement (dossier papier / facture)</code>.</li>
+        <li>Consignez vos remarques d'atelier dans <code>Observations techniques</code>.</li>
+        <li>Cliquez sur <code>Ajouter au journal</code> pour enregistrer l'entrée.</li>
+        </ol>
+        <h3>Filtrer et consulter l'historique d'entretien</h3>
+        <ol>
+        <li>Utilisez la barre de filtres pour affiner l'affichage par poste avec <code>Tous les postes / salles</code>, par professionnel avec <code>Tous les artistes</code>, par équipement avec <code>Tous les appareils</code>, par catégorie de travail avec <code>Toutes les catégories</code>, ou par statut avec <code>Statut : Tous</code>, <code>État : En service seulement</code> et <code>État : Hors service seulement</code>.</li>
+        <li>Dans le tableau des interventions, la colonne <code>Heures (Différence)</code> calcule le temps de travail écoulé depuis la précédente opération de même nature selon la formule <code>{current} hrs - {prev} hrs = {delta} hrs since last {type}</code>.</li>
+        <li>Pour retirer une ligne erronée, cliquez sur le bouton <code>Supprimer</code> (<code>×</code>) de la ligne et confirmez votre choix.</li>
+        </ol>
+        <h3>Analyser les pièces remplacées et les dépenses de maintenance</h3>
+        <ol>
+        <li>Ouvrez l'onglet <code>Pièces et coûts</code> dans la barre de navigation.</li>
+        <li>Dans le cadre <code>Dépenses cumulées par appareil</code>, étudiez le récapitulatif des pièces sous <code>Pièces remplacées</code>, le détail arithmétique sous <code>Détail du calcul</code> et le montant total sous <code>Montant total</code>.</li>
+        <li>Dans le cadre <code>Dépenses cumulées par année civile</code>, examinez le nombre d'interventions et les dépenses annuelles globales.</li>
+        </ol>
+        <h3>Créer et restaurer des sauvegardes</h3>
+        <ol>
+        <li>Ouvrez l'onglet <code>Sauvegarde et restauration</code> dans la barre de navigation.</li>
+        <li>Cliquez sur <code>Exporter sauvegarde JSON</code> pour télécharger une archive autonome contenant la totalité des machines, des entretiens et des périodicités.</li>
+        <li>Pour récupérer vos dossiers sur un autre poste ou après une réinitialisation de navigateur, cliquez sur <code>Restaurer un fichier JSON</code>, désignez votre fichier de sauvegarde et confirmez.</li>
+        <li>Pour effacer définitivement le stockage local du navigateur, cliquez sur <code>Effacer toutes les données</code> et confirmez.</li>
+        </ol>
+        </div>
+        <div class="doc-section">
+        <h2>Ce que l'outil ne fait pas</h2>
+        <ul>
+        <li>Il ne calcule pas l'amortissement du capital, les délais de retour sur investissement ni les taux de rentabilité horaire des machines ; ces études financières sont traitées par le simulateur <a href="https://poliinternational.com/equipment-roi-calculator/" target="_top">Equipment ROI Calculator</a>.</li>
+        <li>Il ne compare pas les tarifs de location de cabine, les taux horaires moyens ni les répartitions de commissions entre artistes ; l'analyse économique du studio relève du <a href="https://poliinternational.com/studio-pricing-benchmark/" target="_top">Studio Pricing Benchmark</a>.</li>
+        <li>Il ne consigne pas les cycles de stérilisation en autoclave à vapeur, les tests biologiques d'inactivation de spores ni les intégrateurs chimiques ; la traçabilité des autoclaves est assurée par le <a href="https://poliinternational.com/autoclave-calculator/" target="_top">Autoclave &amp; Sterilization Calculator</a>.</li>
+        <li>Il ne gère pas les numéros de lots de bijoux de piercing stériles, les rapports d'analyse métallurgique de coulée ni la conformité des alliages ; les certificats matière et les normes d’alliage se vérifient avec le <a href="https://poliinternational.com/material-certification-checker/" target="_top">Biocompatibility Material Checker</a>.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Où sont stockées vos données</h2>
+        <p>L'inventaire de vos machines et l'historique complet des entretiens résident exclusivement dans la mémoire locale de votre navigateur Web, sur votre terminal personnel. L'application utilise l'interface <code>localStorage</code> du navigateur et ne transmet aucune fiche technique, aucun numéro de série, aucun montant financier ni aucun nom d'artiste à Poli International ou vers un quelconque serveur distant.</p>
+        <p>Ces données restant strictement confinées à votre équipement, la suppression des données de navigation, le vidage du cache ou l'utilisation d'une session de navigation privée temporaire effacera vos registres. Téléchargez régulièrement un fichier d'archive grâce au bouton <code>Exporter sauvegarde JSON</code> avant toute opération de nettoyage sur votre système.</p>
+        <p>Une archive JSON complète intègre la version du schéma applicatif, l'horodatage d'exportation, les fiches machines détaillées et l'ensemble des interventions techniques. Un export CSV fournit quant à lui une table prête à l'emploi pour les logiciels de tableur.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Impression et exportations</h2>
+        <ul>
+        <li><strong>Feuilles de calcul CSV</strong> : dans l'onglet <code>Journal d'entretien</code>, cliquez sur <code>Télécharger en CSV</code> pour récupérer un fichier tabulaire reprenant dates, désignations, postes, artistes, types d'intervention, compteurs d'heures, tensions mesurées, pièces changées, dépenses, références de classement et notes techniques.</li>
+        <li><strong>Rappels d'agenda</strong> : dans le bandeau <code>Entretiens requis et en retard</code> ou la table <code>Parc de machines</code>, cliquez sur <code>Exporter en .ics</code> pour obtenir des fiches d'événements compatibles avec Google Calendar, Apple Calendrier ou Microsoft Outlook.</li>
+        <li><strong>Archives complètes JSON</strong> : dans l'onglet <code>Sauvegarde et restauration</code>, cliquez sur <code>Exporter sauvegarde JSON</code> pour générer une sauvegarde intégrale transférable vers un autre appareil.</li>
+        <li><strong>Dossiers papier imprimés</strong> : utilisez la commande d'impression de votre navigateur (Ctrl+P ou Cmd+P) pour imprimer n'importe quel écran. La feuille de style d'impression masque automatiquement la navigation, les commandes et les fonds de couleur pour produire des tableaux nets destinés aux classeurs de contrôle de l'atelier.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Foire aux questions</h2>
+        <h3>Comment savoir si une machine de tatouage nécessite un entretien ?</h3>
+        <p>L'application confronte en permanence l'état de chaque machine en service à ses seuils d'entretien configurés. Dès que l'intervalle en jours calendaires ou en heures de fonctionnement est dépassé depuis la dernière intervention, le bandeau supérieur classe la machine parmi les équipements en retard. Lorsqu'une date cible intervient dans les quatorze jours suivants, le bandeau signale une révision imminente.</p>
+        <h3>Peut-on définir les intervalles d'entretien en heures d'utilisation plutôt qu'en jours ?</h3>
+        <p>Oui, chaque profil de machine autorise la fixation d'un seuil exprimé en heures de service, en jours calendaires, ou en combinant simultanément les deux critères. Dès que vous enregistrez les heures relevées sur votre alimentation lors d'une révision, le logiciel surveille le cumul et déclenche un avertissement dès que le palier horaire est franchi.</p>
+        <h3>Que deviennent les enregistrements de maintenance lorsqu'une machine est retirée du service ?</h3>
+        <p>La mise hors service d'une machine préserve l'intégralité de ses fiches techniques, ses dépenses engagées et ses réglages de tension dans le registre. L'appareil est simplement retiré du bandeau des révisions requises et des alertes de calendrier, tout en restant pleinement accessible à l'aide des filtres de recherche.</p>
+        <h3>Où sont conservées les données relatives à mes machines ?</h3>
+        <p>Toutes les données sont conservées localement dans la mémoire de votre navigateur sur l'ordinateur, la tablette ou le smartphone que vous utilisez. Aucun profil d'appareil, numéro de série, montant de réparation ni nom d'artiste n'est transmis par le réseau ou enregistré sur les serveurs de Poli International.</p>
+        <h3>Comment transférer les registres d'entretien vers un autre ordinateur ou une tablette ?</h3>
+        <p>Accédez à l'onglet <code>Sauvegarde et restauration</code> sur votre premier ordinateur et cliquez sur <code>Exporter sauvegarde JSON</code> pour enregistrer l'archive de votre registre. Transférez ce fichier sur votre nouveau terminal, ouvrez l'application, cliquez sur <code>Restaurer un fichier JSON</code> et sélectionnez le fichier pour charger instantanément vos données.</p>
+        <h3>À quoi sert le champ de référence de classement ?</h3>
+        <p>Le champ de classement relie les enregistrements numériques aux documents physiques archivés dans l'atelier, comme les dossiers de factures, les classeurs de garantie ou les fiches d'intervention atelier. En saisissant un numéro de facture ou un repère de classeur, le personnel du studio peut présenter immédiatement les justificatifs originaux lors d'un contrôle sanitaire.</p>
+        <h3>Peut-on exporter les dates d'entretien prévues vers son agenda Google ou Apple ?</h3>
+        <p>Oui, le bouton <code>Exporter en .ics</code> situé à côté de chaque appareil devant être révisé permet de télécharger un fichier d'agenda normalisé. Il vous suffit d'ouvrir ce fichier pour l'intégrer dans Google Calendar, Apple Calendrier ou Microsoft Outlook et disposer d'un rappel local.</p>
+        <h3>Comment le carnet calcule-t-il la différence d'heures de service entre deux entretiens ?</h3>
+        <p>Lorsque vous saisissez un compteur horaire lors d'une intervention, le système recherche la précédente fiche enregistrée pour cette même machine et cette même catégorie de travail. Il soustrait l'ancien relevé du relevé courant pour afficher le nombre exact d'heures effectuées entre ces deux révisions.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Limites</h2>
+        <p>Le Registre de maintenance des machines constitue un outil d'organisation administrative et arithmétique de votre atelier, mais il ne peut en aucun cas juger de l'état mécanique réel de vos matériels. Le logiciel ne détecte ni l'usure interne des moteurs, ni le jeu mécanique des roulements, ni les défaillances de faisceau électrique, ni la perte de tension des ressorts, ni l'efficacité des cycles de stérilisation.</p>
+        <p>Les tatoueurs, perceurs et exploitants d'ateliers demeurent seuls responsables du contrôle physique de leur parc, de la conformité électrique de leurs installations, du respect des préconisations constructeurs et de l'application rigoureuse des règles sanitaires. Le registre numérique complète la vigilance pratique en atelier sans jamais remplacer l'examen technique direct par un réparateur qualifié.</p>
+        </div>
+        <div class="doc-section">
+            <h2>Utiliser l’outil</h2>
+            <p><a href="https://poliinternational.com/machine-maintenance-logbook/" target="_top">Ouvrir Registre de maintenance des machines : guide d'utilisation</a>. Tout fonctionne dans votre navigateur; rien de ce que vous saisissez n’est transmis.</p>
+        </div>
+    </div>
+</body>
+</html>

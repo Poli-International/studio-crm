@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="robots" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Maintenance Logbook: user guide Documentation | Poli International</title>
+    <meta name="description" content="The Machine Maintenance Logbook tracks machine identity, running hours, calibration values, service intervals, repair costs, and inspection history for tattoo studios, piercers, and body-art equipment technicians.">
+    <link rel="canonical" href="https://poliinternational.com/machine-maintenance-logbook/">
+    <style>
+        body { background: #0f0f0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; }
+        body.in-iframe .doc-hero h1 { display: none; }
+        * { box-sizing: border-box; }
+        .entry-content { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .doc-hero { background: linear-gradient(135deg, #3B82F6, #8B5CF6); padding: 3rem 2rem; text-align: center; border-radius: 0.75rem; margin-bottom: 2rem; }
+        .doc-hero h1 { font-size: 2.2rem; margin: 0 0 1rem; font-weight: 700; }
+        .doc-hero p { font-size: 1.15rem; color: #E0E7FF; margin: 0; }
+        .doc-hero .v2 { display: inline-block; margin-bottom: 1rem; padding: 0.2rem 0.75rem; border-radius: 999px; background: #10B981; color: #04241a; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; }
+        .doc-section { margin: 2rem 0; padding: 2rem; background: #1a1a1a; border-radius: 0.75rem; border-left: 4px solid #3B82F6; }
+        .doc-section h2 { color: #60A5FA; font-size: 1.7rem; margin: 0 0 1.25rem; font-weight: 600; }
+        .doc-section h3 { color: #A78BFA; font-size: 1.3rem; margin: 1.75rem 0 0.75rem; font-weight: 600; }
+        .doc-section p, .doc-section li { color: #ccc; line-height: 1.75; font-size: 1.02rem; }
+        .doc-section ul, .doc-section ol { padding-left: 1.5rem; }
+        .doc-section li { margin: 0.4rem 0; }
+        .doc-section code { background: #2a2a2a; padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.92em; }
+        .doc-section a { color: #60A5FA; font-weight: 600; }
+        .highlight-box { background: linear-gradient(135deg, #1E3A8A, #4C1D95); padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; border-left: 4px solid #10B981; }
+        .highlight-box p { color: #E0E7FF; margin: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border: 1px solid #333; vertical-align: top; }
+        th { background: #2a2a2a; color: #60A5FA; }
+        td { color: #ccc; }
+        .doc-langs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.5rem; font-size: 0.9rem; }
+        .doc-langs a, .doc-langs span { padding: 0.3rem 0.7rem; border-radius: 999px; border: 1px solid #333; text-decoration: none; }
+        .doc-langs a { color: #60A5FA; }
+        .doc-langs span { background: #1E3A8A; color: #E0E7FF; border-color: #1E3A8A; font-weight: 700; }
+    </style>
+</head>
+<body>
+<script>if (window.self !== window.top) document.body.classList.add('in-iframe');</script>
+    <div class="entry-content">
+        <nav class="doc-langs" aria-label="Documentation language"><span lang="en">English</span><a lang="fr" href="documentation-fr.html">Francais</a><a lang="de" href="documentation-de.html">Deutsch</a><a lang="es" href="documentation-es.html">Espanol</a><a lang="it" href="documentation-it.html">Italiano</a><a lang="nl" href="documentation-nl.html">Nederlands</a><a lang="pt" href="documentation-pt.html">Portugues</a></nav>
+        <div class="doc-hero">
+            <span class="v2">V2</span>
+            <h1>Machine Maintenance Logbook: user guide</h1>
+            <p>The Machine Maintenance Logbook tracks machine identity, running hours, calibration values, service intervals, repair costs, and inspection history for tattoo studios, piercers, and body-art equipment technicians.</p>
+        </div>
+        <div class="doc-section">
+        <h2>What it is for</h2>
+        <p>The Machine Maintenance Logbook provides a structured inventory of rotary, coil, pen, and power devices in your studio. It records equipment provenance, serial numbers, suppliers, warranty expiration dates, workstations, and assigned artists.</p>
+        <p>The tool logs ongoing servicing: voltage calibration, ultrasonic cleaning, cartridge drive replacements, motor checks, RCA cord testing, grip sterilisation, and parts replacement. It monitors operating hours between checkups, alerts staff when service intervals elapse, aggregates repair costs across machines and calendar years, and generates offline calendar files for scheduled servicing.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Who it is for</h2>
+        <ul>
+        <li><strong>Studio owners and managers</strong> tracking machinery, maintenance intervals across workstations, and annual repair expenditures.</li>
+        <li><strong>Tattoo artists and piercers</strong> maintaining personal equipment, logging voltage calibrations, and tracking motor wear.</li>
+        <li><strong>Hygiene supervisors and safety officers</strong> maintaining documentation and linking physical receipt binders to digital equipment records.</li>
+        <li><strong>Equipment technicians and machine builders</strong> servicing studio hardware and documenting running hours for clients.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>How to use it</h2>
+        <h3>Checking maintenance due alerts and calendar exports</h3>
+        <ol>
+        <li>Review the <code>Maintenance Due &amp; Overdue</code> banner. Overdue equipment displays <code>Overdue by {days} days</code> or <code>Overdue by {hours} running hours</code>.</li>
+        <li>Deadlines within fourteen days display <code>Due in {days} days</code>.</li>
+        <li>Click <code>Export .ics</code> beside any due machine to download calendar reminders.</li>
+        <li>When on schedule, the banner displays <code>All active machines are up to date.</code>.</li>
+        </ol>
+        <h3>Registering a machine in the inventory</h3>
+        <ol>
+        <li>Open the <code>Machines</code> tab.</li>
+        <li>Enter the identifier in <code>Machine Name / ID</code>. This field is mandatory.</li>
+        <li>Enter hardware details in <code>Serial Number</code>, <code>Model</code>, and <code>Supplier / Distributor</code>.</li>
+        <li>Record dates in <code>Purchase Date</code> and <code>Warranty End Date</code>.</li>
+        <li>Add location details in <code>Station / Room</code> and assign an artist in <code>Assigned Artist</code>.</li>
+        <li>Define service targets in <code>Service Interval (Days)</code> or <code>Service Interval (Hours)</code>.</li>
+        <li>Click <code>Save Machine</code> to add the equipment to the inventory table.</li>
+        </ol>
+        <h3>Managing machine status and retirement</h3>
+        <ol>
+        <li>Locate equipment in the <code>Registered Machines</code> table displaying <code>Active</code>.</li>
+        <li>When storing or retiring equipment, click <code>Retire</code> under <code>Actions</code>.</li>
+        <li>Confirm the action. The status becomes <code>Retired</code>, retaining history while silencing alerts.</li>
+        <li>Click <code>Reactivate</code> to return the machine to active service.</li>
+        </ol>
+        <h3>Logging a maintenance event</h3>
+        <ol>
+        <li>Open the <code>Service Log</code> tab.</li>
+        <li>Choose equipment under <code>Select Machine</code>.</li>
+        <li>Select the calendar date in <code>Service Date</code>.</li>
+        <li>Enter meter readings in <code>Current Running Hours</code>.</li>
+        <li>Select a task under <code>Maintenance Type</code>: <code>Voltage calibration</code>, <code>Clean &amp; sanitise</code>, <code>Needle cartridge change</code>, <code>Full service (bearing/motor)</code>, <code>Cord / RCA check</code>, <code>Grip sterilisation</code>, <code>Parts replacement</code>, or <code>Other</code>.</li>
+        <li>Enter diagnostics in <code>Running Voltage (V)</code>, <code>Parts Replaced</code>, <code>Cost</code>, and <code>Filing Reference (Paper Report / Receipt Binder)</code>.</li>
+        <li>Add remarks in <code>Service Notes</code> and click <code>Add to Log</code>.</li>
+        </ol>
+        <h3>Filtering and reviewing maintenance history</h3>
+        <ol>
+        <li>Filter records using <code>All Stations / Rooms</code>, <code>All Artists</code>, <code>All Machines</code>, <code>All Types</code>, or <code>Status: All</code>, <code>Status: Active only</code>, and <code>Status: Retired only</code>.</li>
+        <li>The <code>Hours (Delta)</code> column calculates time between checks using <code>{current} hrs - {prev} hrs = {delta} hrs since last {type}</code>.</li>
+        <li>To delete an entry, click <code>Delete</code> (<code>×</code>) and confirm.</li>
+        </ol>
+        <h3>Analyzing parts replaced and maintenance costs</h3>
+        <ol>
+        <li>Open the <code>Parts &amp; Costs</code> tab.</li>
+        <li>In <code>Total Costs by Machine</code>, review replaced parts under <code>Parts Replaced</code>, calculations under <code>Cost Calculation</code>, and totals under <code>Total Cost</code>.</li>
+        <li>In <code>Total Costs by Year</code>, review annual service counts and expenditures.</li>
+        </ol>
+        <h3>Creating and restoring backups</h3>
+        <ol>
+        <li>Open the <code>Backup &amp; Restore</code> tab.</li>
+        <li>Click <code>Export JSON Backup</code> to download an offline database archive.</li>
+        <li>Click <code>Restore JSON Backup</code> to import a previously saved archive.</li>
+        <li>Click <code>Clear All Data</code> to erase local records.</li>
+        </ol>
+        </div>
+        <div class="doc-section">
+        <h2>What it does not do</h2>
+        <ul>
+        <li>It does not calculate capital equipment payback periods or hourly break-even rates; those financial analyses belong to the <a href="https://poliinternational.com/equipment-roi-calculator/" target="_top">Equipment ROI Calculator</a>.</li>
+        <li>It does not benchmark studio booth rental fees, hourly pricing rates, or artist commission splits; studio pricing evaluations belong to the <a href="https://poliinternational.com/studio-pricing-benchmark/" target="_top">Studio Pricing Benchmark</a>.</li>
+        <li>It does not record autoclave steam sterilisation cycles, spore tests, or chemical indicator strips; autoclave logging belongs to the <a href="https://poliinternational.com/autoclave-calculator/" target="_top">Autoclave &amp; Sterilization Calculator</a>.</li>
+        <li>It does not track sterile piercing jewelry batch numbers, mill test reports, or alloy standards; mill certificates and alloy standards are checked in the <a href="https://poliinternational.com/material-certification-checker/" target="_top">Biocompatibility Material Checker</a>.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Where your data lives</h2>
+        <p>Your machine inventory and maintenance records reside exclusively in your web browser on your local device. The application stores data in browser <code>localStorage</code> and never transmits machine details, serial numbers, financial figures, or artist names to Poli International or any remote server.</p>
+        <p>Because records are stored locally, clearing your browser site data, emptying website caches, or using temporary private browsing windows will erase your records. Download regular backups via <code>Export JSON Backup</code> before performing system cleanups.</p>
+        <p>A complete JSON export file contains your application schema version, export timestamp, registered machine profiles, and maintenance records. A CSV export contains filtered tabular data formatted for spreadsheet software.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Printing and exporting</h2>
+        <ul>
+        <li><strong>CSV Spreadsheets</strong>: On <code>Service Log</code>, click <code>Export CSV</code> to download tabular files containing dates, machine names, stations, artists, types, running hours, voltages, parts, costs, filing references, and notes.</li>
+        <li><strong>Calendar Reminders</strong>: In <code>Maintenance Due &amp; Overdue</code> or <code>Machines</code>, click <code>Export .ics</code> to download calendar files for Google Calendar, Apple Calendar, or Microsoft Outlook.</li>
+        <li><strong>JSON Archives</strong>: On <code>Backup &amp; Restore</code>, click <code>Export JSON Backup</code> to produce complete database archives for studio migration or backups.</li>
+        <li><strong>Physical Hard Copies</strong>: Use your browser print function (Ctrl+P or Cmd+P) to print clean paper tables suitable for physical inspection folders.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Questions and answers</h2>
+        <h3>How do I know when a tattoo machine is due for maintenance?</h3>
+        <p>The application evaluates active machines against configured service intervals. When days elapsed or running hours exceed configured thresholds, the top banner flags the machine as overdue. If a scheduled service falls within fourteen days, the banner alerts you that maintenance is due soon.</p>
+        <h3>Can I track maintenance intervals by running hours instead of calendar days?</h3>
+        <p>Yes, machine profiles support service intervals measured in running hours, calendar days, or both. When you record operating hours during maintenance, the software tracks usage and triggers alerts when the hourly target is reached.</p>
+        <h3>What happens to maintenance records when a machine is retired?</h3>
+        <p>Retiring equipment preserves all historical maintenance logs, expense calculations, and calibrations. The retired machine is removed from active maintenance alerts, but remains accessible using status filters.</p>
+        <h3>Where is my machine maintenance data stored?</h3>
+        <p>All information is saved locally in your browser storage on your current device. No machine profiles, serial numbers, costs, or artist names are ever sent over the network or stored on Poli International servers.</p>
+        <h3>How do I transfer machine logs to another computer or tablet?</h3>
+        <p>Open <code>Backup &amp; Restore</code> on your current computer and click <code>Export JSON Backup</code> to save your database file. Move this file to your new device, open the tool there, click <code>Restore JSON Backup</code>, and select the file.</p>
+        <h3>What is the filing reference field used for?</h3>
+        <p>The filing reference field connects digital entries to physical paper binders, receipt folders, or invoice files in the studio. Recording invoice numbers or binder coordinates allows studio staff to produce paper receipts or inspection records during inspections.</p>
+        <h3>Can I export upcoming machine service dates to my Google or Apple calendar?</h3>
+        <p>Yes, clicking <code>Export .ics</code> beside any due machine downloads a standardized iCalendar event file. You can import this file into Google Calendar, Apple Calendar, or Outlook to establish local service reminders.</p>
+        <h3>How does the logbook calculate delta running hours between services?</h3>
+        <p>When you log running hours, the system finds the previous entry for that specific machine and service type. It subtracts the earlier reading from the current reading and displays the operating hours completed between those checkups.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Limits</h2>
+        <p>The Machine Maintenance Logbook provides an administrative record of studio service history, but cannot evaluate the physical condition of hardware. The software cannot detect internal motor fatigue, bearing play, electrical short circuits, spring tension decay, or autoclave sterilisation efficacy.</p>
+        <p>Tattoo artists, piercers, and studio owners remain solely responsible for physically examining machinery, testing electrical safety, verifying manufacturer specifications, and adhering to studio health standards. Digital records complement physical workshop diligence, but do not replace direct physical inspection by qualified equipment technicians.</p>
+        </div>
+        <div class="doc-section">
+            <h2>Use the tool</h2>
+            <p><a href="https://poliinternational.com/machine-maintenance-logbook/" target="_top">Open the Machine Maintenance Logbook: user guide</a>. Everything runs in your browser; nothing you enter is sent anywhere.</p>
+        </div>
+    </div>
+</body>
+</html>

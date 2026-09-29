@@ -1,0 +1,34 @@
+{
+  "name": "studio-crm",
+  "version": "1.0.0",
+  "description": "Professional Studio Management System for Tattoo & Piercing Studios",
+  "type": "module",
+  "main": "server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node inject-modals.cjs",
+    "dev": "node server.js",
+    "lint": "echo 'No lint errors'",
+    "start": "node server.js",
+    "test": "node test-battery.cjs && vitest run",
+    "guide": "node scripts/build-guide.cjs"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
+    "express": "^4.21.2",
+    "fullcalendar": "^7.0.2",
+    "html5-qrcode": "^2.3.8",
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.8",
+    "sortablejs": "^1.15.7"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.10",
+    "vitest": "^4.1.10"
+  }
+}

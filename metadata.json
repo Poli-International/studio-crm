@@ -1,0 +1,11 @@
+{
+  "name": "Remix studio-crm Pro",
+  "description": "Professional tattoo studio CRM with inventory cataloging, D3.js supplier procurement analytics, interactive batch CSV validation, automated daily reorder summaries, and supplier communication timelines.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healing Tracker - Technical Documentation</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script>
+    if (window.self !== window.top) {
+      document.documentElement.classList.add('docs-in-frame');
+      var poliRoot = document.documentElement;
+      var poliApply = function (light) {
+        poliRoot.setAttribute('data-theme', light ? 'light' : 'dark');
+        var b = document.body;
+        if (b) {
+          b.classList.toggle('dark-mode', !light);
+          b.classList.toggle('light-mode', !!light);
+        }
+      };
+      poliApply(false);
+      document.addEventListener('DOMContentLoaded', function () {
+        poliApply(poliRoot.getAttribute('data-theme') === 'light');
+      });
+      window.addEventListener('message', function (e) {
+        if (e.data && e.data.type === 'poli-theme') {
+          poliApply(!!e.data.light);
+        }
+      });
+    }
+  </script>
+</head>
+<body class="dark-mode">
+  <article class="docs-container" style="max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; color: var(--text-primary);">
+    <nav class="docs-lang-toolbar" style="margin-bottom: 2rem; border-radius: var(--border-radius); border: 1px solid var(--border-primary);" aria-label="Documentation Languages">
+      <span class="docs-lang-label" data-i18n="nav.language">Language:</span>
+      <a href="./documentation.html" class="docs-lang-link active" data-lang="en">English</a>
+      <a href="./documentation-fr.html" class="docs-lang-link" data-lang="fr">Français</a>
+      <a href="./documentation-de.html" class="docs-lang-link" data-lang="de">Deutsch</a>
+      <a href="./documentation-it.html" class="docs-lang-link" data-lang="it">Italiano</a>
+      <a href="./documentation-es.html" class="docs-lang-link" data-lang="es">Español</a>
+      <a href="./documentation-nl.html" class="docs-lang-link" data-lang="nl">Nederlands</a>
+      <a href="./documentation-pt.html" class="docs-lang-link" data-lang="pt">Português</a>
+    </nav>
+    <div id="docsContentBody">
+    <header class="docs-header" style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-primary); padding-bottom: 1.5rem;">
+      <h1 style="color: var(--healing-purple); font-size: 2rem; margin-bottom: 0.5rem;">Piercing & Tattoo Healing Tracker: Technical Documentation</h1>
+      <p style="color: var(--text-secondary); font-size: 1rem;">Architecture, logic specifications, data schemas, and integration guide.</p>
+    </header>
+
+    <section class="docs-section" style="margin-bottom: 2.5rem;">
+      <h2 style="color: var(--calm-blue); font-size: 1.4rem; margin-bottom: 1rem;">1. Architecture Overview</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        The Healing Tracker is a self-contained, client-side web application designed to compute and display stage-by-stage healing expectations for body piercings and tattoos. It runs without external network dependencies, server requirements, or tracking scripts.
+      </p>
+      <ul style="color: var(--text-secondary); padding-left: 1.5rem; margin-bottom: 1rem; line-height: 1.8;">
+        <li><strong>HTML5:</strong> Semantic markup with accessible form controls and tabbed interfaces.</li>
+        <li><strong>CSS3:</strong> Theme-driven stylesheets using CSS custom properties with real-time dark/light switching.</li>
+        <li><strong>JavaScript:</strong> Modular scripts providing deterministic timeline calculation, symptom triage, and aftercare checklisting.</li>
+        <li><strong>Local Storage:</strong> Client-side persistence for theme preferences.</li>
+      </ul>
+    </section>
+
+    <section class="docs-section" style="margin-bottom: 2.5rem;">
+      <h2 style="color: var(--calm-blue); font-size: 1.4rem; margin-bottom: 1rem;">2. Core Logic &amp; Calculation</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        The healing engine calculates elapsed days using standard UTC day offsets:
+      </p>
+      <pre class="tab-embed-textarea" style="height: auto; padding: 1rem; overflow-x: auto; margin-bottom: 1.5rem;"><code>const procDate = new Date(date);
+const today = new Date();
+const daysElapsed = Math.max(0, Math.floor((today - procDate) / (1000 * 60 * 60 * 24)));</code></pre>
+
+      <h3 style="color: var(--text-primary); font-size: 1.15rem; margin-bottom: 0.75rem;">Symptom Triage Logic</h3>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        Symptoms are categorized across three severity thresholds:
+      </p>
+      <ul style="color: var(--text-secondary); padding-left: 1.5rem; line-height: 1.8; margin-bottom: 1.5rem;">
+        <li><strong>Concerning:</strong> Triggered when symptoms like persistent bleeding, spreading red streaks, or foul discharge are reported. Directs immediate medical/professional escalation.</li>
+        <li><strong>Monitor Closely:</strong> Triggered for moderate swelling, prolonged redness, or localized warmth. Suggests active observation within 24–48 hours.</li>
+        <li><strong>Normal:</strong> Expected healing responses including clear plasma weeping (whitish lymph drying to crust), mild tenderness, and dry crusting.</li>
+      </ul>
+
+      <h3 style="color: var(--text-primary); font-size: 1.15rem; margin-bottom: 0.75rem;">Healing Log &amp; Advanced Analysis Specifications</h3>
+      <ul style="color: var(--text-secondary); padding-left: 1.5rem; line-height: 1.8; margin-bottom: 1.5rem;">
+        <li><strong>Photo Comparison:</strong> Allows side-by-side milestone comparison between Day 0 baseline and any logged entry using an interactive split-view draggable divider. Implemented in <code>renderPhotoComparison()</code>.</li>
+        <li><strong>Symptom Trends &amp; Series Sentences:</strong> Visualizes redness, swelling, tenderness, and discharge severity over time via pure SVG polyline charts and computes trajectory summary sentences. Implemented in <code>renderSymptomTrends()</code> and <code>generateSymptomSentences()</code>.</li>
+        <li><strong>Direction-Change Detection:</strong> Identifies sustained multi-day reversals from an improving trajectory. Implemented in <code>detectDirectionChange()</code> with a strict threshold requirement of <strong>3 consecutive worsening entries</strong> (or >= 48 hours of sustained increase) to eliminate false alarms from transient daily friction while ensuring timely studio review.</li>
+        <li><strong>What Changed Trigger:</strong> Automatically prompts for physical triggers (snagged, slept on it, new jewellery, changed product, swimming, gym workout, nearby piercing) whenever symptoms worsen compared to the preceding entry. Implemented in <code>evaluateWhatChangedTrigger()</code>. Records the cause without diagnosing.</li>
+        <li><strong>Backup &amp; Restore:</strong> Self-contained single-file JSON export and import with embedded base64 milestone imagery for cross-device migration. Implemented in <code>exportBackupData()</code> and <code>importBackupData()</code>.</li>
+      </ul>
+
+      <h3 style="color: var(--text-primary); font-size: 1.15rem; margin-bottom: 0.75rem;">Touch-Up Longevity &amp; Fading Engine</h3>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        The longevity calculator determines the optimal touch-up horizon using empirical modifier multipliers:
+      </p>
+      <ul style="color: var(--text-secondary); padding-left: 1.5rem; line-height: 1.8;">
+        <li><strong>Base Longevity:</strong> Derived from style density (e.g. 10–15 years for tribal/blackwork down to 3–5 years for fine line or watercolor).</li>
+        <li><strong>Placement Multiplier:</strong> Adjusts for friction and epidermal turnover (Covered: 1.1x, Occasionally exposed: 1.0x, Frequently exposed: 0.8x, High friction: 0.5x).</li>
+        <li><strong>Pigment Longevity Hierarchy:</strong> Accounts for differing chemical light-fastness (Black &gt; Dark Blue &gt; Green/Purple &gt; Red &gt; Yellow &gt; Orange &gt; Pink &gt; White).</li>
+        <li><strong>Care &amp; UV Modifiers:</strong> Applies empirical modifiers for daily moisturization and broad-spectrum SPF 50+ protection.</li>
+      </ul>
+    </section>
+
+    <section class="docs-section" style="margin-bottom: 2.5rem;" id="docsFaqSection">
+      <h2 style="color: var(--calm-blue); font-size: 1.4rem; margin-bottom: 0.5rem;" data-i18n="healing.faq.sectionTitle">3. Frequently Asked Questions &amp; Clinical Facts</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1.5rem;" data-i18n="healing.faq.sectionSubtitle">
+        Evidence-based clinical clarification on materials, lymph weeping, and long-term biocompatibility.
+      </p>
+
+      <div class="docs-faq-item" style="margin-bottom: 1.5rem; padding: 1.25rem; background: var(--bg-card); border: 1px solid var(--border-primary); border-radius: var(--border-radius);">
+        <h3 style="color: var(--healing-purple); font-size: 1.1rem; margin-bottom: 0.75rem;" data-i18n="healing.faq.q1Title">Q: Is titanium the only safe material for initial piercing jewellery?</h3>
+        <p style="color: var(--text-secondary); line-height: 1.7; margin: 0;" data-i18n="healing.faq.q1Answer">
+          Fact: No. While implant-grade titanium (such as ASTM F-136 or ISO 5832-3) is an exceptional, highly inert material widely recommended for fresh piercings, it is not the only safe option. Other established, biocompatible materials suitable for initial healing include implant-grade surgical steel (such as ASTM F-138), biocompatible niobium (ASTM B392), solid 14k or 18k nickel-free gold, and medical-grade PP-R random copolymer (BioFlex®). Safe initial jewellery requires proven biocompatibility, non-toxicity, and compliance with strict nickel release limits, rather than a single exclusive material.
+        </p>
+      </div>
+
+      <div class="docs-faq-item" style="margin-bottom: 1.5rem; padding: 1.25rem; background: var(--bg-card); border: 1px solid var(--border-primary); border-radius: var(--border-radius);">
+        <h3 style="color: var(--healing-purple); font-size: 1.1rem; margin-bottom: 0.75rem;" data-i18n="healing.faq.q2Title">Q: Is BioFlex only intended for short-term or temporary wear?</h3>
+        <p style="color: var(--text-secondary); line-height: 1.7; margin: 0; white-space: pre-line;" data-i18n="healing.faq.q2Answer">
+          Fact: No. BioFlex is medical-grade PP-R (polypropylene random copolymer), an injection-moulded biocompatible polymer engineered for long-term continuous wear as well as initial piercings. It is fully autoclave-steam sterilisable, biologically inert, and highly flexible to reduce tissue trauma.
+
+Note on material distinction: BioFlex is not PTFE (polytetrafluoroethylene). PTFE is a machined fluoropolymer rod material with distinct mechanical and threading properties; BioFlex is an injection-moulded monolithic PP-R copolymer. Neither material is restricted to short-term wear when used appropriately.
+        </p>
+      </div>
+
+      <div class="docs-faq-item" style="margin-bottom: 1.5rem; padding: 1.25rem; background: var(--bg-card); border: 1px solid var(--border-primary); border-radius: var(--border-radius);">
+        <h3 style="color: var(--healing-purple); font-size: 1.1rem; margin-bottom: 0.75rem;" data-i18n="healing.faq.q3Title">Q: My piercing has clear or whitish crusty fluid. Does this mean it is infected?</h3>
+        <p style="color: var(--text-secondary); line-height: 1.7; margin: 0; white-space: pre-line;" data-i18n="healing.faq.q3Answer">
+          Fact: No. Clear, pale whitish, or straw-coloured fluid that dries into crust ("crusties") is lymphatic fluid (lymph) mixed with dead cellular matter. Lymph production is a completely normal, healthy component of the body's wound-healing response across all piercing stages. It is not pus and is not a sign of infection.
+
+Signs of actual infection differ distinctly: thick opaque yellow or dark green pus, hot radiating warmth, spreading dark redness, throbbing pain, or systemic fever.
+        </p>
+      </div>
+    </section>
+
+    <section class="docs-section" style="margin-bottom: 2.5rem;">
+      <h2 style="color: var(--calm-blue); font-size: 1.4rem; margin-bottom: 1rem;">4. Integration &amp; Embedding</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        The tool can be seamlessly embedded into studio websites or educational portals:
+      </p>
+      <pre class="tab-embed-textarea" style="height: auto; padding: 1rem; overflow-x: auto;"><code>&lt;iframe src="/tools/healing-tracker/index.html" width="100%" height="800" frameborder="0" style="border-radius: 8px;" title="Healing Tracker by Poli International"&gt;&lt;/iframe&gt;</code></pre>
+    </section>
+
+    <section class="docs-section" style="margin-bottom: 2.5rem;">
+      <h2 style="color: var(--calm-blue); font-size: 1.4rem; margin-bottom: 1rem;">5. Privacy &amp; Compliance</h2>
+      <p style="color: var(--text-secondary); line-height: 1.7;">
+        All calculations are performed entirely within the user's browser. No personal dates, health symptom selections, or procedure details are ever transmitted to any remote server or stored in cookies.
+      </p>
+    </section>
+    </div>
+  </article>
+  <script src="./js/locales/en.js"></script>
+  <script src="./js/locales/fr.js"></script>
+  <script src="./js/locales/fr-timeline.js"></script>
+  <script src="./js/locales/it.js"></script>
+  <script src="./js/locales/it-timeline.js"></script>
+  <script src="./js/locales/de.js"></script>
+  <script src="./js/locales/de-timeline.js"></script>
+  <script src="./js/locales/es.js"></script>
+  <script src="./js/locales/es-timeline.js"></script>
+  <script src="./js/locales/nl.js"></script>
+  <script src="./js/locales/nl-timeline.js"></script>
+  <script src="./js/locales/pt.js"></script>
+  <script src="./js/locales/pt-timeline.js"></script>
+  <script src="./js/i18n.js"></script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heilungs-Tracker - Technische Dokumentation</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script>
+    if (window.self !== window.top) {
+      document.documentElement.classList.add('docs-in-frame');
+      var poliRoot = document.documentElement;
+      var poliApply = function (light) {
+        poliRoot.setAttribute('data-theme', light ? 'light' : 'dark');
+        var b = document.body;
+        if (b) {
+          b.classList.toggle('dark-mode', !light);
+          b.classList.toggle('light-mode', !!light);
+        }
+      };
+      poliApply(false);
+      document.addEventListener('DOMContentLoaded', function () {
+        poliApply(poliRoot.getAttribute('data-theme') === 'light');
+      });
+      window.addEventListener('message', function (e) {
+        if (e.data && e.data.type === 'poli-theme') {
+          poliApply(!!e.data.light);
+        }
+      });
+    }
+  </script>
+</head>
+<body class="dark-mode">
+  <article class="docs-container" style="max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; color: var(--text-primary);">
+    <nav class="docs-lang-toolbar" style="margin-bottom: 2rem; border-radius: var(--border-radius); border: 1px solid var(--border-primary);" aria-label="Documentation Languages">
+      <span class="docs-lang-label" data-i18n="nav.language">Sprache:</span>
+      <a href="./documentation.html" class="docs-lang-link" data-lang="en">English</a>
+      <a href="./documentation-fr.html" class="docs-lang-link" data-lang="fr">Français</a>
+      <a href="./documentation-de.html" class="docs-lang-link active" data-lang="de">Deutsch</a>
+      <a href="./documentation-it.html" class="docs-lang-link" data-lang="it">Italiano</a>
+      <a href="./documentation-es.html" class="docs-lang-link" data-lang="es">Español</a>
+      <a href="./documentation-nl.html" class="docs-lang-link" data-lang="nl">Nederlands</a>
+      <a href="./documentation-pt.html" class="docs-lang-link" data-lang="pt">Português</a>
+    </nav>
+    <header class="docs-header" style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-primary); padding-bottom: 1.5rem;">
+      <h1 style="color: var(--healing-purple); font-size: 2rem; margin-bottom: 0.5rem;">Piercing &amp; Tattoo Heilungs-Tracker: Technische Dokumentation</h1>
+      <p style="color: var(--text-secondary); font-size: 1rem;">Softwarearchitektur, Berechnungslogik, Datenmodelle und Integrationsleitfaden.</p>
+    </header>
+
+    <section class="docs-section" style="margin-bottom: 2.5rem;">
+      <h2 style="color: var(--calm-blue); font-size: 1.4rem; margin-bottom: 1rem;">1. Architekturübersicht</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        Der Heilungs-Tracker ist eine autarke, clientseitige Webanwendung, die stufenweise Heilungsverläufe für Körperpiercings und Tätowierungen berechnet und veranschaulicht. Sie arbeitet vollständig ohne externe Netzwerkabhängigkeiten, Serveranforderungen oder Tracking-Skripte.
+      </p>
+      <ul style="color: var(--text-secondary); padding-left: 1.5rem; margin-bottom: 1rem; line-height: 1.8;">
+        <li><strong>HTML5:</strong> Semantische Struktur mit barrierefreien Formularfeldern und Registerkarten-Layout.</li>
+        <li><strong>CSS3:</strong> Designsystem auf Basis von CSS-Variablen mit nahtloser Dunkel-/Hellmodus-Umschaltung.</li>
+        <li><strong>JavaScript:</strong> Modulare Skripte zur deterministischen Berechnung von Heilungsphasen, Symptomtriage und Pflegeabläufen.</li>
+        <li><strong>Lokaler Speicher:</strong> Lokale Beständigkeit im Browser für Designeinstellungen und Heilungseinträge ohne Datenübermittlung.</li>
+      </ul>
+    </section>
+
+    <section class="docs-section" style="margin-bottom: 2.5rem;">
+      <h2 style="color: var(--calm-blue); font-size: 1.4rem; margin-bottom: 1rem;">2. Kernlogik &amp; Berechnungsalgorithmen</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        Die Berechnungslogik ermittelt die vergangenen Tage über standardisierte UTC-Tagesdifferenzen:
+      </p>
+      <pre class="tab-embed-textarea" style="height: auto; padding: 1rem; overflow-x: auto; margin-bottom: 1.5rem;"><code>const procDate = new Date(date);
+const today = new Date();
+const daysElapsed = Math.max(0, Math.floor((today - procDate) / (1000 * 60 * 60 * 24)));</code></pre>
+
+      <h3 style="color: var(--text-primary); font-size: 1.15rem; margin-bottom: 0.75rem;">Klinische Symptomtriage</h3>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        Erfasste Symptome werden drei differenzierten Schweregraden zugeordnet:
+      </p>
+      <ul style="color: var(--text-secondary); padding-left: 1.5rem; line-height: 1.8; margin-bottom: 1.5rem;">
+        <li><strong>Besorgniserregend:</strong> Ausgelöst bei anhaltenden Blutungen, sich ausbreitenden roten Streifen oder übelriechendem Ausfluss. Erfordert umgehende medizinische oder fachliche Abklärung.</li>
+        <li><strong>Genau beobachten:</strong> Ausgelöst bei mäßiger Schwellung, anhaltender Rötung oder lokaler Überwärmung. Erfordert gezielte Beobachtung innerhalb von 24 bis 48 Stunden.</li>
+        <li><strong>Normal:</strong> Erwartete physiologische Heilungsreaktionen einschließlich klarer oder weißlicher Lymphsekretion (Krustenbildung), leichter Berührungsempfindlichkeit und Trockenheit.</li>
+      </ul>
+
+      <h3 style="color: var(--text-primary); font-size: 1.15rem; margin-bottom: 0.75rem;">Heilungsprotokoll &amp; Verlaufsanalyse</h3>
+      <ul style="color: var(--text-secondary); padding-left: 1.5rem; line-height: 1.8; margin-bottom: 1.5rem;">
+        <li><strong>Fotovergleich:</strong> Ermöglicht den direkten Vorher-Nachher-Vergleich zwischen Tag 0 und jedem späteren Eintrag über einen interaktiven Schieberegler (<code>renderPhotoComparison()</code>).</li>
+        <li><strong>Symptomkurven:</strong> Visualisierung der Rötungs-, Schwellungs-, Schmerz- und Sekretionsverläufe über reines SVG (<code>renderSymptomTrends()</code>).</li>
+        <li><strong>Richtungsumkehr-Erkennung:</strong> Erkennt anhaltende Verschlechterungen ab <strong>3 aufeinanderfolgenden Einträgen</strong> (oder >= 48 Stunden kontinuierlichem Anstieg), um Fehlalarme bei vorübergehender Reizung zu vermeiden (<code>detectDirectionChange()</code>).</li>
+        <li><strong>Auslöser-Abfrage:</strong> Fragt bei Verschlechterung systematisch physische Faktoren ab (hängengeblieben, darauf geschlafen, neuer Schmuck, Produktwechsel, Schwimmen, Fitnessstudio) (<code>evaluateWhatChangedTrigger()</code>).</li>
+        <li><strong>Sicherung &amp; Wiederherstellung:</strong> Eigenständiger JSON-Export und -Import mit Base64-Bilddaten für den Gerätewechsel (<code>exportBackupData()</code> und <code>importBackupData()</code>).</li>
+      </ul>
+    </section>
+
+    <section class="docs-section" style="margin-bottom: 2.5rem;" id="docsFaqSection">
+      <h2 style="color: var(--calm-blue); font-size: 1.4rem; margin-bottom: 0.5rem;">3. Häufig gestellte Fragen &amp; Klinische Fakten</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+        Evidenzbasierte Klarstellungen zu Materialien, Lymphsekretion und Biokompatibilität.
+      </p>
+
+      <div class="docs-faq-item" style="margin-bottom: 1.5rem; padding: 1.25rem; background: var(--bg-card); border: 1px solid var(--border-primary); border-radius: var(--border-radius);">
+        <h3 style="color: var(--healing-purple); font-size: 1.1rem; margin-bottom: 0.75rem;">F: Ist Titan das einzige sichere Material für den Ersteinsatz?</h3>
+        <p style="color: var(--text-secondary); line-height: 1.7; margin: 0;">
+          Fakt: Nein. Obwohl Titan in Implantatqualität (wie ASTM F-136 oder ISO 5832-3) ein inertes und hervorragend geeignetes Material für frische Piercings ist, stellt es nicht die einzige sichere Option dar. Weitere etablierte, biokompatible Werkstoffe für die Erstheilung sind implantierbarer chirurgischer Edelstahl (ASTM F-138), biokompatibles Niob (ASTM B392), nickelfreies 14k- oder 18k-Massivgold und medizinisches PP-R Random-Copolymer (BioFlex®). Entscheidend für die Sicherheit sind nachgewiesene Biokompatibilität, Nicht-Zytotoxizität und die Einhaltung strenger Nickelfreisetzungsgrenzen (EN 1811 / EU REACH Anhang XVII).
+        </p>
+      </div>
+
+      <div class="docs-faq-item" style="margin-bottom: 1.5rem; padding: 1.25rem; background: var(--bg-card); border: 1px solid var(--border-primary); border-radius: var(--border-radius);">
+        <h3 style="color: var(--healing-purple); font-size: 1.1rem; margin-bottom: 0.75rem;">F: Ist BioFlex nur für den kurzzeitigen oder vorübergehenden Einsatz gedacht?</h3>
+        <p style="color: var(--text-secondary); line-height: 1.7; margin: 0; white-space: pre-line;">
+          Fakt: Nein. BioFlex besteht aus medizinischem PP-R (Polypropylen-Random-Copolymer), einem im Spritzgussverfahren hergestellten biokompatiblen Polymer, das für das dauerhafte Tragen ebenso wie für den Ersteinsatz entwickelt wurde. Es ist im Autoklaven dampfsterilisierbar, biologisch inert und flexibel, um mechanische Gewebetraumata zu minimieren.
+
+Wichtige Materialabgrenzung: BioFlex ist kein PTFE (Polytetrafluorethylen). PTFE ist ein aus extrudierten Stäben gefrästes Fluorpolymer mit abweichenden Gewinde- und Materialeigenschaften; BioFlex ist ein einteilig spritzgegossenes PP-R-Copolymer.
+        </p>
+      </div>
+
+      <div class="docs-faq-item" style="margin-bottom: 1.5rem; padding: 1.25rem; background: var(--bg-card); border: 1px solid var(--border-primary); border-radius: var(--border-radius);">
+        <h3 style="color: var(--healing-purple); font-size: 1.1rem; margin-bottom: 0.75rem;">F: Mein Piercing sondert klare oder weißliche Flüssigkeit ab, die zu Krusten trocknet. Liegt eine Infektion vor?</h3>
+        <p style="color: var(--text-secondary); line-height: 1.7; margin: 0; white-space: pre-line;">
+          Fakt: Nein. Klare, blass-weißliche oder strohgelbe Flüssigkeit, die zu Krusten antrocknet, ist Lymphflüssigkeit gemischt mit abgestorbenen Zellresten. Die Bildung von Lymphe ist ein völlig normaler, gesunder Bestandteil der natürlichen Wundheilung. Es handelt sich hierbei nicht um Eiter und nicht um ein Anzeichen für eine Infektion.
+
+Anzeichen einer echten Infektion unterscheiden sich deutlich: dicker, undurchsichtiger, dunkelgelber oder grünlicher Eiter, pochender Schmerz, intensive Überwärmung, sich ausbreitende Rötung oder Fieber.
+        </p>
+      </div>
+    </section>
+
+    <section class="docs-section" style="margin-bottom: 2.5rem;">
+      <h2 style="color: var(--calm-blue); font-size: 1.4rem; margin-bottom: 1rem;">4. Einbindung auf Studio-Websites</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        Das Tool kann über ein Standard-Iframe in Studio-Websites integriert werden:
+      </p>
+      <pre class="tab-embed-textarea" style="height: auto; padding: 1rem; overflow-x: auto;"><code>&lt;iframe src="/tools/healing-tracker/index.html" width="100%" height="800" frameborder="0" style="border-radius: 8px;" title="Heilungs-Tracker von Poli International"&gt;&lt;/iframe&gt;</code></pre>
+    </section>
+
+    <section class="docs-section" style="margin-bottom: 2.5rem;">
+      <h2 style="color: var(--calm-blue); font-size: 1.4rem; margin-bottom: 1rem;">5. Datenschutz &amp; Konformität</h2>
+      <p style="color: var(--text-secondary); line-height: 1.7;">
+        Alle Berechnungen finden ausschließlich im Browser des Nutzers statt. Es werden zu keinem Zeitpunkt persönliche Daten, Symptomangaben oder Fotos an externe Server übertragen oder in Tracking-Cookies gespeichert.
+      </p>
+    </section>
+  </article>
+
+  <script src="./js/locales/en.js"></script>
+  <script src="./js/locales/fr.js"></script>
+  <script src="./js/locales/fr-timeline.js"></script>
+  <script src="./js/locales/it.js"></script>
+  <script src="./js/locales/it-timeline.js"></script>
+  <script src="./js/locales/de.js"></script>
+  <script src="./js/locales/de-timeline.js"></script>
+  <script src="./js/locales/es.js"></script>
+  <script src="./js/locales/es-timeline.js"></script>
+  <script src="./js/locales/nl.js"></script>
+  <script src="./js/locales/nl-timeline.js"></script>
+  <script src="./js/locales/pt.js"></script>
+  <script src="./js/locales/pt-timeline.js"></script>
+  <script src="./js/i18n.js"></script>
+</body>
+</html>

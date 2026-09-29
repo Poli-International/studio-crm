@@ -1,0 +1,175 @@
+/**
+ * Print Styles for Autoclave Calculator & Quality Assurance Logs
+ */
+
+@media print {
+  @page {
+    margin: 12mm 15mm;
+    size: letter portrait;
+  }
+
+  /* Reset layout for crisp paper printing */
+  html, body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-size: 10pt !important;
+    line-height: 1.35 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide interactive / non-printable elements */
+  .site-header,
+  .breadcrumb-nav,
+  .autoclave__header,
+  .autoclave__header-controls,
+  .autoclave__presets-bar,
+  .autoclave__calculator-form,
+  .autoclave__timer-card,
+  .autoclave__results-actions,
+  .autoclave__spore-actions,
+  .autoclave__optimization-section,
+  .autoclave__compatibility-section,
+  .autoclave__troubleshooter-section,
+  .autoclave__education-section,
+  .autoclave__disclaimer-box,
+  .autoclave__footer,
+  .autoclave__modal,
+  .autoclave__toast,
+  .feedback-card,
+  .autoclave-calc__more-tools,
+  #shortcuts-modal,
+  #print-preview-modal,
+  #embed-modal {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* When printing dedicated cycle log */
+  #printable-cycle-log {
+    display: block !important;
+    visibility: visible !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  #printable-cycle-log * {
+    visibility: visible !important;
+    color: #000000 !important;
+  }
+
+  .print-log-header {
+    text-align: center;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+  }
+
+  .print-log-title {
+    font-size: 15pt !important;
+    font-weight: 800 !important;
+    text-transform: uppercase;
+    margin: 0 0 4px 0;
+  }
+
+  .print-log-subtitle {
+    font-size: 9.5pt !important;
+    color: #333333 !important;
+    margin: 0;
+  }
+
+  .print-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 16px;
+    background: #F8F9FA !important;
+    border: 1px solid #000000 !important;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .print-meta-item {
+    font-size: 9.5pt;
+  }
+
+  .print-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 12px;
+  }
+
+  .print-table th,
+  .print-table td {
+    border: 1px solid #000000 !important;
+    padding: 6px 8px;
+    font-size: 9pt;
+    text-align: left;
+  }
+
+  .print-table th {
+    background-color: #E2E8F0 !important;
+    font-weight: bold;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .print-checkbox-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 12px 0;
+  }
+
+  .print-checkbox-item {
+    font-size: 8.5pt;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .print-checkbox {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 1.5px solid #000000 !important;
+    flex-shrink: 0;
+  }
+
+  .print-signoff-box {
+    border: 1.5px solid #000000 !important;
+    padding: 8px 12px;
+    margin-top: 10px;
+    background: #FFFFFF !important;
+  }
+
+  .print-signoff-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 20px;
+    font-size: 9pt;
+  }
+
+  .print-sign-line {
+    border-bottom: 1px solid #000000 !important;
+    height: 18px;
+    margin-top: 4px;
+  }
+
+  .print-footer-note {
+    font-size: 8pt;
+    color: #555555 !important;
+    text-align: center;
+    margin-top: 8px;
+    border-top: 1px solid #CCCCCC;
+    padding-top: 4px;
+  }
+}
+

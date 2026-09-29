@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <script>
+    if (window.self !== window.top) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      window.addEventListener('message', function(e) {
+        if (e.data && e.data.type === 'poli-theme') {
+          document.documentElement.setAttribute('data-theme', e.data.light ? 'light' : 'dark');
+        }
+      });
+    }
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Check how common medications, supplements, numbing creams, and painkillers affect piercing healing, tattoo healing, bleeding risk, and fainting susceptibility. Educational reference for clients, tattoo artists, and piercers.">
+  <title>Medication Interaction Checker for Tattoos & Piercings | Poli International</title>
+  <link rel="stylesheet" href="/tools/medication-interaction-checker/css/style.css">
+<script type='application/ld+json'>
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Medication & Body Art Interaction Checker",
+  "url": "https://poliinternational.com/tools/medication-interaction-checker/",
+  "description": "Check how prescription medications, OTC painkillers, numbing creams, supplements, and recreational substances affect tattoo and piercing procedures. Bleeding risk, ink setting, healing, washout windows.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "https://poliinternational.com"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "https://poliinternational.com"
+  },
+  "maintainer": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "https://poliinternational.com"
+  },
+  "dateModified": "2026-08-13",
+  "license": "https://opensource.org/licenses/MIT",
+  "isAccessibleForFree": true,
+  "inLanguage": ["en", "fr", "it", "es", "de", "nl", "pt"]
+}
+</script>
+<link rel="stylesheet" href="/tools/shared/print.css" media="print">
+  <link rel="stylesheet" href="/tools/shared/a11y.css">
+</head>
+<body>
+<div class="tool-wrapper">
+
+  <header class="tool-header">
+    <div class="header-top-bar">
+      <div class="tool-header__badge" data-i18n="headerBadge">💊 Medication & Safety Reference</div>
+      <div class="lang-switcher-container">
+        <label for="lang-select" class="lang-label" data-i18n="langLabel">🌐 Language:</label>
+        <select id="lang-select" class="lang-select" aria-label="Select language">
+          <option value="en">🇺🇸 English</option>
+          <option value="fr">🇫🇷 Français</option>
+          <option value="it">🇮🇹 Italiano</option>
+          <option value="es">🇪🇸 Español</option>
+          <option value="de">🇩🇪 Deutsch</option>
+          <option value="nl">🇳🇱 Nederlands</option>
+          <option value="pt">🇵🇹 Português</option>
+        </select>
+      </div>
+    </div>
+    <h1 data-i18n="headerTitle">Medication Interaction Checker</h1>
+    <p data-i18n="headerSubtitle">Check how prescription medications, OTC painkillers, numbing creams, and supplements affect bleeding risk, ink setting, and piercing healing for tattoos & piercings.</p>
+    <div class="header-action-row">
+      <button class="header-doctor-btn" id="open-doctor-modal-btn" data-i18n="draftDoctorBtn">✉️ Draft Message to Doctor</button>
+      <button class="header-share-btn" id="header-share-link-btn" data-i18n="x.share_intake_deep_link">📲 Share Intake Deep Link</button>
+      <button class="header-print-btn" id="header-quick-print-btn" data-i18n="x.quick_print_summary">🖨️ Quick Print Summary</button>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="tool-tabs" id="tool-tabs">
+    <!-- data-i18n added 2026-08-25: TRANSLATIONS already carried tabChecker,
+         tabBrief, tabSafety, tabFaq and tabReminders in all seven languages,
+         but no button referenced them, so every tab label was English for the
+         six non-English audiences. The strings existed; nothing applied them. -->
+    <button class="tab-btn active" data-tab="checker" data-i18n="tabChecker">🔍 Checker</button>
+    <button class="tab-btn" data-tab="supplements" data-i18n="tabSupplements">🌿 Supplements</button>
+    <button class="tab-btn" data-tab="brief"><span data-i18n="tabBrief">📄 Artist Brief</span> <span class="badge-count" id="brief-count">0</span></button>
+    <button class="tab-btn" data-tab="reminders" data-i18n="tabReminders">⏰ Reminders & Washout</button>
+    <button class="tab-btn" data-tab="safety" data-i18n="tabSafety">🛡️ Studio Safety</button>
+    <button class="tab-btn" data-tab="faq" data-i18n="tabFaq">❓ FAQs & Tips</button>
+  </nav>
+
+  <!-- TAB: SUPPLEMENTS -->
+  <div id="tab-supplements" class="tab-content" style="display:none;">
+    <!-- The h2 is the SEO carrier, not the tab label: a tab is not a URL and
+         its content sits behind JS, so "Supplement Checker" earns its keep in
+         markup Google actually reads. -->
+    <h2 class="supp-heading" data-i18n="suppHeading">Supplement &amp; Medication Interaction Checker</h2>
+    <p class="supp-intro" data-i18n="suppIntro">Most people do not think of fish oil, garlic capsules or ginkgo as "medication", so they never mention them. Taken alongside a blood thinner or a painkiller, some supplements add to bleeding and oozing during a session. Add what you take below to see what the published evidence says.</p>
+
+    <div class="search-input-wrapper">
+      <span class="search-icon">🌿</span>
+      <input type="text" id="supp-search" data-i18n-placeholder="suppSearchPlaceholder"
+             placeholder="Search a supplement (e.g. fish oil, vitamin E, turmeric, ginseng)..." autocomplete="off">
+    </div>
+
+    <div id="supp-results" class="supp-results"></div>
+
+    <p class="supp-credit" data-i18n="suppCredit">Interaction evidence from SUPP.AI (Allen Institute for AI). Only human and clinical studies are shown; retracted papers are excluded.</p>
+  </div>
+
+  <!-- TAB 1: INTERACTION CHECKER -->
+  <div id="tab-checker" class="tab-content active">
+
+    <!-- Disclaimer sits ABOVE the checker, not at the foot of the page.
+         It used to be the last block before </body>: someone who looked up
+         ibuprofen, read the answer and left never saw it. It also carried no
+         data-i18n, so all six non-English audiences were shown a safety notice
+         in a language they had not selected. Both fixed. -->
+    <div class="disclaimer">
+      <strong data-i18n="disclaimerTitle">Important Disclaimer:</strong>
+      <span data-i18n="disclaimerBody">This tool is an educational reference only and does not constitute medical advice. Never stop or adjust prescribed medication without consulting your prescribing physician. Always inform your tattoo artist and piercer of any medications, health conditions, or supplements you are taking before the procedure.</span>
+    </div>
+
+    <div class="search-filter-box">
+      <div class="search-input-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="med-search" placeholder="Search medication or brand (e.g. Advil, Accutane, Xanax, EMLA, Ozempic)..." data-i18n-placeholder="x.search_medication_or_brand_e_g" autocomplete="off">
+        <button id="clear-search" class="clear-search-btn" style="display:none;">✕</button>
+      </div>
+
+      <!-- Real-Time "Did you mean?" Suggestion Box -->
+      <div id="did-you-mean-box" class="did-you-mean-box" style="display:none;"></div>
+
+      <div class="trending-searches-box">
+        <span class="trending-label" data-i18n="x.trending_inquiries">🔥 Trending Inquiries:</span>
+        <div class="trending-chips">
+          <button class="trending-chip" data-term="Ibuprofen" data-i18n="x.advil_ibuprofen">Advil / Ibuprofen</button>
+          <button class="trending-chip" data-term="Accutane" data-i18n="x.accutane_retinoids">Accutane / Retinoids</button>
+          <button class="trending-chip" data-term="Numbing" data-i18n="x.tktx_numbing">TKTX / Numbing</button>
+          <button class="trending-chip" data-term="Ozempic" data-i18n="x.ozempic_glp_1">Ozempic / GLP-1</button>
+          <button class="trending-chip" data-term="Xanax" data-i18n="x.xanax_anxiety">Xanax / Anxiety</button>
+          <button class="trending-chip" data-term="Cannabis" data-i18n="x.cannabis_thc">Cannabis / THC</button>
+          <button class="trending-chip" data-term="Alcohol" data-i18n="x.alcohol_hangover">Alcohol / Hangover</button>
+          <button class="trending-chip" data-term="Aspirin" data-i18n="x.aspirin_blood_thinners">Aspirin / Blood Thinners</button>
+        </div>
+      </div>
+
+      <div class="recent-searches-box" id="recent-searches-box" style="display:none;">
+        <div class="recent-header">
+          <span class="recent-label" data-i18n="x.recent_searches">🕒 Recent Searches:</span>
+          <button id="clear-recent-btn" class="clear-recent-btn" title="Clear search history" data-i18n="x.clear_history">Clear History</button>
+        </div>
+        <div class="recent-chips" id="recent-chips"></div>
+      </div>
+
+      <div class="filter-tags" id="filter-tags">
+        <button class="filter-tag active" data-cat="all" data-i18n="filterAll">All</button>
+        <button class="filter-tag" data-cat="pain" data-i18n="filterPain">Painkillers & NSAIDs</button>
+        <button class="filter-tag" data-cat="numbing" data-i18n="filterNumbing">Numbing Creams</button>
+        <button class="filter-tag" data-cat="blood" data-i18n="filterBlood">Blood Thinners</button>
+        <button class="filter-tag" data-cat="retinoid" data-i18n="filterRetinoid">Acne / Retinoids</button>
+        <button class="filter-tag" data-cat="anxiety" data-i18n="filterAnxiety">Anti-Anxiety / Sedatives</button>
+        <button class="filter-tag" data-cat="hormone" data-i18n="filterHormone">Hormones & HRT</button>
+        <button class="filter-tag" data-cat="stimulant" data-i18n="filterStimulant">ADHD & Stimulants</button>
+        <button class="filter-tag" data-cat="metabolic" data-i18n="filterMetabolic">Diabetes & GLP-1</button>
+        <button class="filter-tag" data-cat="corticosteroid" data-i18n="filterCorticosteroid">Corticosteroids</button>
+        <button class="filter-tag" data-cat="immuno" data-i18n="filterImmuno">Immunosuppressants</button>
+        <button class="filter-tag" data-cat="supplement" data-i18n="filterSupplement">Supplements</button>
+        <button class="filter-tag" data-cat="substance" data-i18n="filterSubstance">Substances & Lifestyle</button>
+      </div>
+    </div>
+
+    <!-- Share Intake Deep Link Banner -->
+    <div class="share-intake-bar" id="share-intake-bar">
+      <div class="share-bar-info">
+        <span>📲 <strong data-i18n="x.share_intake_status">Share Intake Status:</strong> Generate a deep link containing your pre-selected medications for your artist or pre-arrival review.</span>
+      </div>
+      <button class="share-bar-btn" id="share-deep-link-checker-btn" data-i18n="x.copy_shareable_link">🔗 Copy Shareable Link</button>
+    </div>
+
+    <div class="info-note" data-i18n="x.select_all_medications_and_supplements_you">
+      💡 Select all medications and supplements you take. Results will automatically highlight procedural risks, wait times, and recommended artist precautions.
+    </div>
+
+    <div id="med-list" class="med-list"></div>
+
+    <div id="result"></div>
+  </div>
+
+  <!-- TAB 2: ARTIST CONSULTATION BRIEF -->
+  <div id="tab-brief" class="tab-content" style="display:none;">
+    <div class="brief-card">
+      <div class="brief-header">
+        <h2 data-i18n="x.client_consultation_brief">Client Consultation Brief</h2>
+        <p data-i18n="x.a_printable_and_shareable_summary_of">A printable and shareable summary of selected medications and procedural recommendations for your tattoo artist or piercer.</p>
+      </div>
+
+      <div id="brief-content" class="brief-body">
+        <div class="empty-brief-notice">
+          <p data-i18n="x.no_medications_selected_yet">⚠️ No medications selected yet.</p>
+          <p><a href="#" id="go-to-checker" data-i18n="x.switch_to_the_interaction_checker">Switch to the Interaction Checker</a> and select your medications to generate your custom consultation brief.</p>
+        </div>
+      </div>
+
+      <div class="brief-actions" id="brief-actions" style="display:none;">
+        <button class="action-btn primary" id="full-clinic-packet-btn" data-i18n="x.generate_full_clinic_packet_print">📄 Generate Full Clinic Packet (Print)</button>
+        <button class="action-btn secondary" id="share-brief-link-btn" data-i18n="x.share_deep_link">🔗 Share Deep Link</button>
+        <button class="action-btn secondary" id="export-json-btn" data-i18n="x.export_data_json">💾 Export Data (JSON)</button>
+        <button class="action-btn secondary" id="export-txt-btn" data-i18n="x.export_text_file">📄 Export Text File</button>
+        <button class="action-btn secondary" id="download-pdf-btn" data-i18n="x.download_pdf_document">📥 Download PDF Document</button>
+        <button class="action-btn secondary" id="copy-brief-btn" data-i18n="x.copy_summary">📋 Copy Summary</button>
+        <button class="action-btn secondary" id="print-brief-btn" data-i18n="x.print_brief">🖨️ Print Brief</button>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE HEALING JOURNEY TIMELINE COMPONENT -->
+    <div class="healing-journey-card" id="healing-journey-card">
+      <div class="healing-header">
+        <div class="healing-title-row">
+          <h3 data-i18n="x.expected_healing_journey_timeline">🩺 Expected Healing Journey Timeline</h3>
+          <div class="proc-toggle-group">
+            <button class="proc-toggle-btn active" id="journey-toggle-tattoo" data-proc="tattoo" data-i18n="x.tattoo_healing">🎨 Tattoo Healing</button>
+            <button class="proc-toggle-btn" id="journey-toggle-piercing" data-proc="piercing" data-i18n="x.piercing_healing">💎 Piercing Healing</button>
+          </div>
+        </div>
+        <p class="healing-subtext" data-i18n="x.interactive_timeline_mapping_physiological_milestones_and">Interactive timeline mapping physiological milestones and dynamic medication interaction impacts across healing phases.</p>
+      </div>
+
+      <div class="timeline-wrapper" id="timeline-wrapper">
+        <!-- Dynamically rendered by renderHealingJourneyTimeline() -->
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: REMINDERS & PRE-PROCEDURE WASHOUT -->
+  <div id="tab-reminders" class="tab-content" style="display:none;">
+    <div class="reminders-card">
+      <div class="reminders-header">
+        <h2 data-i18n="x.pre_procedure_medication_washout_reminders">⏰ Pre-Procedure Medication Washout & Reminders</h2>
+        <p data-i18n="x.calculate_precise_discontinuation_deadlines_for_medications">Calculate precise discontinuation deadlines for medications (NSAIDs, blood thinners, alcohol, retinoids) prior to your tattoo or piercing appointment, and set browser notifications or calendar alerts.</p>
+      </div>
+
+      <div class="appointment-picker-box">
+        <label for="appointment-datetime-input" class="appointment-label" data-i18n="x.scheduled_appointment_date_time">📅 Scheduled Appointment Date & Time:</label>
+        <div class="appointment-input-row">
+          <input type="datetime-local" id="appointment-datetime-input" class="appointment-datetime-input">
+          <button class="action-btn primary" id="save-appointment-btn" data-i18n="x.save_compute_washout">💾 Save & Compute Washout</button>
+        </div>
+        <p class="appointment-note" data-i18n="x.setting_your_appointment_date_computes_live">Setting your appointment date computes live countdowns showing exactly when to stop taking specific drugs.</p>
+      </div>
+
+      <div id="washout-cards-container" class="washout-cards-container">
+        <!-- Dynamically populated by renderRemindersTab() -->
+      </div>
+
+      <div class="reminder-global-actions" id="reminder-global-actions">
+        <button class="action-btn primary" id="enable-notifications-btn" data-i18n="x.enable_browser_notification_alerts">🔔 Enable Browser Notification Alerts</button>
+        <button class="action-btn secondary" id="export-gcal-ics-btn" data-i18n="x.download_google_calendar_ics_pre_filled">📅 Download Google Calendar .ics (Pre-filled Washout Deadlines)</button>
+        <button class="action-btn secondary" id="open-gcal-web-btn" data-i18n="x.open_washout_in_google_calendar_web">🌐 Open Washout in Google Calendar Web</button>
+        <button class="action-btn secondary" id="export-ics-btn" data-i18n="x.export_standard_calendar_ics">📅 Export Standard Calendar (.ics)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: STUDIO SAFETY & AFTERCARE GUIDE -->
+  <div id="tab-safety" class="tab-content" style="display:none;">
+    <!-- Interactive Artist Readiness Assessment Tool -->
+    <div class="readiness-card">
+      <div class="readiness-header">
+        <h3 data-i18n="x.artist_piercer_readiness_self_assessment">🎯 Artist & Piercer Readiness Self-Assessment</h3>
+        <p data-i18n="x.answer_3_quick_questions_about_your">Answer 3 quick questions about your client's procedure and medication disclosures to generate a studio precautions checklist.</p>
+      </div>
+
+      <div class="readiness-form">
+        <div class="readiness-q-group">
+          <label class="q-label" for="q-proc-select" data-i18n="x.1_what_procedure_is_being_performed">1. What procedure is being performed?</label>
+          <select id="q-proc-select" class="calc-select">
+            <option value="tattoo_body" data-i18n="x.tattoo_body_linework_shading_color">Tattoo (Body Linework / Shading / Color)</option>
+            <option value="tattoo_cosmetic" data-i18n="x.cosmetic_tattoo_microblading_lip_blush_scalp">Cosmetic Tattoo (Microblading / Lip Blush / Scalp)</option>
+            <option value="piercing_cartilage" data-i18n="x.piercing_ear_cartilage_nose_nipple_body">Piercing (Ear Cartilage / Nose / Nipple / Body)</option>
+            <option value="piercing_oral" data-i18n="x.piercing_oral_lip_tongue">Piercing (Oral / Lip / Tongue)</option>
+          </select>
+        </div>
+
+        <div class="readiness-q-group">
+          <label class="q-label" data-i18n="x.2_disclosed_client_medications_or_topicals">2. Disclosed client medications or topicals? (Check all that apply)</label>
+          <div class="q-check-grid">
+            <label class="q-check-item"><input type="checkbox" id="q-med-nsaid"> <span data-i18n="x.nsaids_blood_thinners_ibuprofen_aspirin_warfarin">NSAIDs / Blood Thinners (Ibuprofen, Aspirin, Warfarin)</span></label>
+            <label class="q-check-item"><input type="checkbox" id="q-med-numbing"> <span data-i18n="x.numbing_cream_applied_lidocaine_epinephrine_tktx">Numbing Cream applied (Lidocaine, Epinephrine, TKTX)</span></label>
+            <label class="q-check-item"><input type="checkbox" id="q-med-retinoid"> <span data-i18n="x.acne_retinoids_accutane_or_corticosteroids">Acne Retinoids (Accutane) or Corticosteroids</span></label>
+            <label class="q-check-item"><input type="checkbox" id="q-med-bp"> <span data-i18n="x.blood_pressure_beta_blockers_glp_1">Blood Pressure / Beta-Blockers / GLP-1 / Stimulants</span></label>
+            <label class="q-check-item"><input type="checkbox" id="q-med-none"> <span data-i18n="x.none_disclosed_healthy">None / Disclosed Healthy</span></label>
+          </div>
+        </div>
+
+        <div class="readiness-q-group">
+          <label class="q-label" for="q-history-select" data-i18n="x.3_client_history_physiological_risk_factors">3. Client history & physiological risk factors?</label>
+          <select id="q-history-select" class="calc-select">
+            <option value="none" data-i18n="x.no_known_fainting_history_or_skin">No known fainting history or skin issues</option>
+            <option value="fainting" data-i18n="x.history_of_vasovagal_syncope_fainting_low">History of vasovagal syncope / fainting / low blood sugar</option>
+            <option value="sensitive_skin" data-i18n="x.extremely_sensitive_skin_eczema_easy_bruising">Extremely sensitive skin / Eczema / Easy bruising</option>
+            <option value="first_time" data-i18n="x.first_time_client_high_nervous_tension">First-time client / High nervous tension</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="readiness-output-container" id="readiness-output-box">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <div class="reading-progress-wrapper" id="safety-progress-wrapper">
+        <div class="reading-progress-header">
+          <span class="progress-title" data-i18n="x.studio_safety_guide_progress">🛡️ Studio Safety Guide Progress</span>
+          <span class="progress-text-badge" id="safety-progress-text" data-i18n="x.0_6_sections_read_0">0 / 6 Sections Read (0%)</span>
+        </div>
+        <div class="reading-progress-track">
+          <div class="reading-progress-fill" id="safety-progress-fill" style="width:0%;"></div>
+        </div>
+      </div>
+
+      <h2 data-i18n="x.studio_safety_clinical_reference">🛡️ Studio Safety & Clinical Reference</h2>
+      <p class="guide-intro" data-i18n="x.essential_clinical_reference_for_clients_tattoo">Essential clinical reference for clients, tattoo artists, and piercers on managing common procedural challenges associated with medications.</p>
+
+      <div class="guide-section">
+        <h3 data-i18n="x.1_painkillers_pre_procedure_pain_management">1. Painkillers & Pre-Procedure Pain Management</h3>
+        <p data-i18n="x.clients_often_take_over_the_counter">Clients often take over-the-counter painkillers before a session to manage pain. It is vital to understand the difference between drug classes:</p>
+        <ul class="guide-list">
+          <li><strong data-i18n="x.aspirin_nsaids_ibuprofen_naproxen_nurofen_aleve">Aspirin & NSAIDs (Ibuprofen, Naproxen, Nurofen, Aleve):</strong> Inhibit platelet aggregation and increase bleeding and plasma oozing during tattooing. Oozing pushes ink out of the skin, causes excessive scab formation, and delays healing. Avoid 24–48 hours before sessions unless prescribed.</li>
+          <li><strong data-i18n="x.paracetamol_acetaminophen_tylenol_panadol">Paracetamol / Acetaminophen (Tylenol, Panadol):</strong> Does NOT affect platelet function or bleeding. It is the preferred mild analgesic before or after procedures if approved by a doctor.</li>
+        </ul>
+      </div>
+
+      <div class="guide-section">
+        <h3 data-i18n="x.2_topical_numbing_creams_local_anaesthetics">2. Topical Numbing Creams & Local Anaesthetics</h3>
+        <p data-i18n="x.numbing_creams_lidocaine_tetracaine_prilocaine_tktx">Numbing creams (Lidocaine, Tetracaine, Prilocaine, TKTX) have exploded in popularity, but introduce specific risks:</p>
+        <ul class="guide-list">
+          <li><strong data-i18n="x.skin_texture_alterations">Skin Texture Alterations:</strong> High-potency creams cause localized edema (swelling) and toughening, making skin spongy or rubbery, which hinders needle penetration and line precision.</li>
+          <li><strong data-i18n="x.rebound_pain_vasoconstriction">Rebound Pain & Vasoconstriction:</strong> Creams containing Epinephrine temporarily constrict blood vessels. As the epinephrine wears off, severe rebound hyperemia (flushing and rapid bleeding) can occur.</li>
+          <li><strong data-i18n="x.toxicity_methemoglobinemia_risk">Toxicity & Methemoglobinemia Risk:</strong> Covering large body areas in thick lidocaine under plastic wrap can cause systemic absorption, leading to toxicity, rapid heart rate, or blood oxygenation drops.</li>
+        </ul>
+      </div>
+
+      <div class="guide-section">
+        <h3 data-i18n="x.3_fainting_vasovagal_syncope_risk_factors">3. Fainting & Vasovagal Syncope Risk Factors</h3>
+        <p data-i18n="x.vasovagal_syncope_is_a_sudden_drop">Vasovagal syncope is a sudden drop in heart rate and blood pressure triggered by pain, nervous tension, or long sessions:</p>
+        <ul class="guide-list">
+          <li><strong data-i18n="x.high_risk_medications">High Risk Medications:</strong> Beta-blockers, ACE inhibitors, GLP-1 agonists (Ozempic), ADHD stimulants, and anti-anxiety meds increase fainting risk.</li>
+          <li><strong data-i18n="x.prevention_protocol">Prevention Protocol:</strong> Eat a complex carbohydrate meal 1–2 hours before the session. Keep sugary drinks (fruit juice, soda) at the station. If feeling lightheaded, lay flat with legs elevated immediately.</li>
+        </ul>
+      </div>
+
+      <div class="guide-section">
+        <h3 data-i18n="x.4_adhesive_aftercare_bandages_saniderm_tegaderm">4. Adhesive Aftercare Bandages (Saniderm / Tegaderm) & Skin Thinning</h3>
+        <ul class="guide-list">
+          <li data-i18n="x.patients_on_topical_retinoids_systemic_steroids">Patients on topical retinoids, systemic steroids, or with thin skin are at high risk of skin tearing, blisters, or contact dermatitis when removing second-skin bandages.</li>
+          <li data-i18n="x.in_these_cases_traditional_breathable_cling">In these cases, traditional breathable cling wrap or non-stick pads with gentle hypoallergenic tape are recommended.</li>
+        </ul>
+      </div>
+
+      <div class="guide-section">
+        <h3 data-i18n="x.5_bloodborne_pathogens_cross_contamination_containment">5. Bloodborne Pathogens & Cross-Contamination Containment</h3>
+        <ul class="guide-list">
+          <li><strong data-i18n="x.barrier_protection">Barrier Protection:</strong> All studio touch surfaces (clip cords, spray bottles, power supplies, armrests) must be wrapped in disposable medical-grade barrier sleeves or film before every client.</li>
+          <li><strong data-i18n="x.single_use_cartridges_needles">Single-Use Cartridges & Needles:</strong> Verify that sterile needle blister packs are opened directly in front of the client. Ensure backflow membrane protection on cartridge needles.</li>
+          <li><strong data-i18n="x.sharps_container_disposal">Sharps Container Disposal:</strong> All used needles and scalpels must be disposed of immediately into marked rigid biohazard sharps containers.</li>
+        </ul>
+      </div>
+
+      <div class="guide-section">
+        <h3 data-i18n="x.6_alcohol_cannabis_recreational_substance_intake">6. Alcohol, Cannabis & Recreational Substance Intake Policy</h3>
+        <ul class="guide-list">
+          <li><strong data-i18n="x.informed_consent_legal_safety">Informed Consent & Legal Safety:</strong> Studios strictly cannot legally obtain informed consent from clients under acute intoxication from alcohol, cannabis, or illicit drugs.</li>
+          <li><strong data-i18n="x.physiological_compromise">Physiological Compromise:</strong> Alcohol causes heavy plasma weeping; cannabis causes vasodilation and panic sensitivity; stimulants cause muscle tremors and heart strain. Intoxicated clients must be rescheduled.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: FAQS & GUIDELINES -->
+  <div id="tab-faq" class="tab-content" style="display:none;">
+    
+    <!-- Interactive Studio Safety & Lifestyle Quiz -->
+    <div class="quiz-card" id="quiz-card">
+      <div class="quiz-header">
+        <div class="quiz-badge" data-i18n="x.studio_safety_lifestyle_quiz">🎮 Studio Safety & Lifestyle Quiz</div>
+        <h3 id="quiz-title-text" data-i18n="x.test_your_studio_safety_medication_iq">Test Your Studio Safety & Medication IQ!</h3>
+        <p id="quiz-subtitle-text" data-i18n="x.answer_7_fun_educational_scenarios_about">Answer 7 fun, educational scenarios about alcohol, cannabis, painkillers, numbing creams, and aftercare prep.</p>
+      </div>
+      <div class="quiz-body" id="quiz-body">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </div>
+
+    <!-- Pre-Session Prep & Vasovagal Syncope Calculator -->
+    <div class="prep-calc-card">
+      <div class="prep-calc-header">
+        <h3 data-i18n="x.pre_session_prep_vasovagal_syncope_calculator">💧 Pre-Session Prep & Vasovagal Syncope Calculator</h3>
+        <p data-i18n="x.calculate_your_custom_fluid_target_blood">Calculate your custom fluid target, blood sugar maintenance schedule, and syncope risk reduction plan before your appointment.</p>
+      </div>
+      
+      <div class="prep-calc-grid">
+        <div class="prep-calc-inputs">
+          <div class="calc-field-group">
+            <label for="calc-weight" data-i18n="x.body_weight">Body Weight:</label>
+            <div class="weight-input-row">
+              <input type="number" id="calc-weight" value="70" min="30" max="220" step="1">
+              <select id="calc-weight-unit" class="unit-select">
+                <option value="kg">kg</option>
+                <option value="lbs" data-i18n="x.lbs">lbs</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="calc-field-group">
+            <label for="calc-hours" data-i18n="x.estimated_session_duration">Estimated Session Duration:</label>
+            <select id="calc-hours" class="calc-select">
+              <option value="1" data-i18n="x.1_hour_piercing_small_tattoo">1 Hour (Piercing / Small Tattoo)</option>
+              <option value="2" data-i18n="x.2_hours_small_medium_tattoo">2 Hours (Small / Medium Tattoo)</option>
+              <option value="3" selected data-i18n="x.3_hours_standard_session">3 Hours (Standard Session)</option>
+              <option value="4" data-i18n="x.4_hours_half_day">4 Hours (Half Day)</option>
+              <option value="6" data-i18n="x.6_hours_full_day_session">6 Hours (Full Day Session)</option>
+              <option value="8" data-i18n="x.8_hours_extended_full_day">8 Hours (Extended Full Day)</option>
+            </select>
+          </div>
+
+          <div class="calc-field-group">
+            <label for="calc-proc-type" data-i18n="x.procedure_type">Procedure Type:</label>
+            <select id="calc-proc-type" class="calc-select">
+              <option value="tattoo" data-i18n="x.tattoo_session_linework_color">Tattoo Session (Linework / Color)</option>
+              <option value="piercing" data-i18n="x.piercing_session_body_ear_oral">Piercing Session (Body / Ear / Oral)</option>
+            </select>
+          </div>
+
+          <div class="calc-field-group">
+            <label for="calc-rhr" data-i18n="x.resting_heart_rate_bpm">Resting Heart Rate (bpm) <span class="opt-label" data-i18n="x.optional">(Optional)</span>:</label>
+            <input type="number" id="calc-rhr" class="calc-input" placeholder="e.g. 72 (bpm)" data-i18n-placeholder="x.e_g_72_bpm" min="40" max="180">
+          </div>
+
+          <div class="calc-field-group">
+            <label for="calc-bp" data-i18n="x.blood_pressure_mmhg">Blood Pressure (mmHg) <span class="opt-label" data-i18n="x.optional">(Optional)</span>:</label>
+            <input type="text" id="calc-bp" class="calc-input" placeholder="e.g. 118/78 or 110/70">
+          </div>
+
+          <div class="calc-field-group">
+            <label data-i18n="x.risk_medication_factors_check_all_that">Risk & Medication Factors (Check all that apply):</label>
+            <div class="calc-checkbox-list">
+              <label class="calc-check-label"><input type="checkbox" id="check-stimulant"> <span data-i18n="x.taking_adhd_stimulants_adderall_vyvanse_ritalin">⚡ Taking ADHD Stimulants (Adderall/Vyvanse/Ritalin)</span></label>
+              <label class="calc-check-label"><input type="checkbox" id="check-beta"> <span data-i18n="x.taking_beta_blockers_blood_pressure_meds">❤️ Taking Beta Blockers / Blood Pressure Meds</span></label>
+              <label class="calc-check-label"><input type="checkbox" id="check-glp1"> <span data-i18n="x.taking_glp_1_weight_loss_meds">💫 Taking GLP-1 Weight Loss Meds (Ozempic/Mounjaro)</span></label>
+              <label class="calc-check-label"><input type="checkbox" id="check-anxiety"> <span data-i18n="x.taking_anxiety_meds_or_history_of">⬇️ Taking Anxiety Meds or History of Fainting</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="prep-calc-output" id="prep-calc-results">
+          <!-- Dynamically rendered by app.js -->
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-card">
+      <div class="reading-progress-wrapper" id="faq-progress-wrapper">
+        <div class="reading-progress-header">
+          <span class="progress-title" data-i18n="x.faq_guidelines_progress">❓ FAQ & Guidelines Progress</span>
+          <span class="progress-text-badge" id="faq-progress-text" data-i18n="x.0_8_faqs_read_0">0 / 8 FAQs Read (0%)</span>
+        </div>
+        <div class="reading-progress-track">
+          <div class="reading-progress-fill" id="faq-progress-fill" style="width:0%;"></div>
+        </div>
+      </div>
+
+      <h2 data-i18n="x.frequently_asked_questions">❓ Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" data-i18n="x.should_i_stop_taking_my_prescribed">Should I stop taking my prescribed medication before getting a tattoo or piercing? <span class="faq-icon">+</span></button>
+        <div class="faq-answer">
+          <p><strong data-i18n="x.never_stop_or_adjust_prescribed_medication">NEVER stop or adjust prescribed medication</strong> without explicit authorization from your prescribing doctor. Stopping blood thinners, cardiac medication, or psychiatric drugs can pose serious health risks far outweighing procedure benefits. If a medication is a contraindication (e.g. Accutane), delay the procedure until after completing your course and waiting the recommended washout period.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" data-i18n="x.why_is_accutane_isotretinoin_a_complete">Why is Accutane (Isotretinoin) a complete contraindication? <span class="faq-icon">+</span></button>
+        <div class="faq-answer">
+          <p data-i18n="x.isotretinoin_fundamentally_alters_skin_cell_turnover">Isotretinoin fundamentally alters skin cell turnover, thins the stratum corneum, and suppresses sebum glands. Tattooing or piercing during or shortly after Accutane treatment leads to unpredictable ink fallout, severe scarring, hypertrophic tissue, and non-healing piercing fistulas. Most professionals require waiting 6 to 12 months after the last dose.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" data-i18n="x.can_i_smoke_marijuana_or_consume">Can I smoke marijuana or consume THC edibles before my tattoo appointment? <span class="faq-icon">+</span></button>
+        <div class="faq-answer">
+          <p data-i18n="x.it_is_strongly_discouraged_thc_causes">It is strongly discouraged. THC causes vasodilation (blood vessel opening), raises baseline heart rate, and can significantly heighten anxiety, paranoia, or pain sensitivity during skin puncture. Many professional artists will refuse to tattoo clients under acute influence.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" data-i18n="x.why_shouldn_t_i_drink_alcohol">Why shouldn't I drink alcohol or have a hangover on my tattoo day? <span class="faq-icon">+</span></button>
+        <div class="faq-answer">
+          <p data-i18n="x.alcohol_thins_your_blood_and_acts">Alcohol thins your blood and acts as a diuretic, leaving you severely dehydrated. During tattooing, thin blood causes heavy plasma weeping that pushes ink pigment out of dermal layers and causes thick, patchy scabs. A hangover also dramatically lowers your pain threshold and blood sugar, making fainting far more likely.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" data-i18n="x.how_does_smoking_cigarettes_or_vaping">How does smoking cigarettes or vaping nicotine affect my new piercing or tattoo? <span class="faq-icon">+</span></button>
+        <div class="faq-answer">
+          <p data-i18n="x.nicotine_is_a_powerful_microvascular_vasoconstrictor">Nicotine is a powerful microvascular vasoconstrictor. It shrinks tiny capillaries near the surface of your skin, restricting oxygenated blood supply needed for dermal cell repair and piercing fistula formation. Heavy nicotine use leads to delayed healing, higher infection risk, and increased piercing rejection rates.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" data-i18n="x.can_i_drink_coffee_or_energy">Can I drink coffee or energy drinks before my session? <span class="faq-icon">+</span></button>
+        <div class="faq-answer">
+          <p data-i18n="x.limit_high_caffeine_intake_right_before">Limit high caffeine intake right before your session. Caffeine raises resting pulse rate and blood pressure, increases muscle jitteriness, and can heighten nervous tension. A small cup of coffee is fine, but avoid large energy drinks or pre-workout supplements prior to tattooing.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" data-i18n="x.what_should_i_bring_to_my">What should I bring to my appointment if I take daily medications? <span class="faq-icon">+</span></button>
+        <div class="faq-answer">
+          <p data-i18n="x.bring_a_complete_list_of_your">Bring a complete list of your medications (or use our Artist Consultation Brief feature), inform your artist/piercer during intake, bring snacks/sugary drinks if you take diabetes or blood pressure medications, and bring a physician's clearance note if taking blood thinners or immunosuppressants.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" data-i18n="x.can_i_take_ibuprofen_or_aspirin">Can I take ibuprofen or aspirin before my appointment for pain control? <span class="faq-icon">+</span></button>
+        <div class="faq-answer">
+          <p data-i18n="x.it_is_strongly_recommended_to_avoid">It is strongly recommended to avoid NSAIDs (Ibuprofen, Naproxen) and Aspirin 24–48 hours before tattooing or piercing because they thin blood and increase procedural bleeding. If you need mild pain relief, Acetaminophen (Paracetamol) is generally safer as it does not affect clotting.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" data-i18n="x.can_i_go_to_the_gym">Can I go to the gym, swim, or exercise after getting a tattoo or piercing? <span class="faq-icon">+</span></button>
+        <div class="faq-answer">
+          <p data-i18n="x.avoid_heavy_exercise_for_24_48">Avoid heavy exercise for 24–48 hours to prevent excessive sweating, stretching, or friction on fresh wounds. Swimming in pools, lakes, rivers, or ocean water is strictly prohibited for 2–4 weeks until completely healed, as standing water contains bacterial pathogens that easily cause severe skin infections.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CONSULT PHYSICIAN MODAL POP-UP -->
+<div id="doctor-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Draft a message to your doctor" style="display:none;">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 data-i18n="x.consult_your_physician_message_draft">✉️ Consult Your Physician - Message Draft</h3>
+      <button class="modal-close" id="close-doctor-modal-btn" >&times;</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-intro" data-i18n="x.use_this_template_to_draft_an">Use this template to draft an email or message to your doctor inquiring about safe medication adjustments before your upcoming procedure.</p>
+      
+      <div class="modal-form-grid">
+        <div class="form-group">
+          <label for="doc-name" data-i18n="x.doctor_or_clinic_name">Doctor or Clinic Name:</label>
+          <input type="text" id="doc-name" placeholder="e.g. Dr. Smith / City Health Clinic" data-i18n-placeholder="x.e_g_dr_smith_city_health" value="Dr. Smith">
+        </div>
+        <div class="form-group">
+          <label for="patient-name" data-i18n="x.your_name">Your Name:</label>
+          <input type="text" id="patient-name" placeholder="e.g. Alex Miller" data-i18n-placeholder="x.e_g_alex_miller" value="">
+        </div>
+        <div class="form-group">
+          <label for="procedure-type" data-i18n="x.procedure_location">Procedure & Location:</label>
+          <input type="text" id="procedure-type" placeholder="e.g. Forearm Tattoo / Septum Piercing" data-i18n-placeholder="x.e_g_forearm_tattoo_septum_piercing" value="Tattoo Session">
+        </div>
+        <div class="form-group">
+          <label for="procedure-date" data-i18n="x.appointment_date">Appointment Date:</label>
+          <input type="date" id="procedure-date">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label data-i18n="x.selected_disclosed_medication_s">Selected Disclosed Medication(s):</label>
+        <div id="modal-med-pills" class="modal-med-pills">
+          <span class="no-meds-pill" data-i18n="x.no_medications_currently_selected_in_checker">No medications currently selected in checker.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="modal-draft-preview" data-i18n="x.generated_message_draft_editable_customize_your">Generated Message Draft (Editable - customize your message below):</label>
+        <textarea id="modal-draft-preview" rows="10" placeholder="Type or customize your physician inquiry message here..." data-i18n-placeholder="x.type_or_customize_your_physician_inquiry"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="action-btn primary" id="copy-doc-msg-btn" data-i18n="x.copy_draft_message">📋 Copy Draft Message</button>
+      <button class="action-btn secondary" id="email-doc-btn" data-i18n="x.open_email_app">✉️ Open Email App</button>
+      <button class="action-btn secondary" id="print-doc-msg-btn" data-i18n="x.print_physician_note">🖨️ Print Physician Note</button>
+      <button class="action-btn secondary" id="cancel-doc-modal-btn" data-i18n="x.close">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- EMERGENCY FIRST AID MODAL -->
+<div id="emergency-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Studio first aid and emergency protocols" style="display:none;">
+  <div class="modal-card emergency-card">
+    <button class="modal-close" id="close-emergency-modal-btn">✕</button>
+    <div class="modal-header emergency-header">
+      <h3 data-i18n="x.studio_emergency_first_aid_protocols">🚨 Studio Emergency First Aid Protocols</h3>
+      <p data-i18n="emergHeadSub">Immediate step-by-step action guides for studio staff during procedural complications.</p>
+    </div>
+    <div class="emergency-callfirst">
+      <div class="emergency-number-line">
+        <span data-i18n="emergCallLabel">Call emergency services first:</span>
+        <strong id="emergency-local-number">112 / 911</strong>
+      </div>
+      <p class="emergency-number-confirm" data-i18n="emergCallConfirm">This number is guessed from your device time zone and can be wrong, for example on a VPN. Confirm the correct number for your country and keep it written on the studio wall.</p>
+    </div>
+    <div class="emergency-disclaimer" data-i18n="emergDisclaimer">This guide is a memory aid for people who are already trained in first aid. It is not first-aid training, and it does not replace it. Call emergency services first, do nothing you are not trained and permitted to do where you work, and stay with the person until help arrives.</div>
+    <div class="modal-body emergency-body">
+      <div class="emergency-nav">
+        <button class="emergency-tab active" data-emergency="fainting" data-i18n="x.fainting_syncope">💫 Fainting / Syncope</button>
+        <button class="emergency-tab" data-emergency="allergy" data-i18n="x.allergic_reaction">🐝 Allergic Reaction</button>
+        <button class="emergency-tab" data-emergency="bleeding" data-i18n="x.excessive_bleeding">🩸 Excessive Bleeding</button>
+        <button class="emergency-tab" data-emergency="panic" data-i18n="x.panic_breathing">🫁 Panic & Breathing</button>
+      </div>
+
+      <!-- FAINTING / SYNCOPE -->
+      <div id="emergency-fainting" class="emergency-content active">
+        <div class="emergency-box warning">
+          <div class="emerg-icon">💫</div>
+          <div>
+            <h4 data-i18n="x.vasovagal_syncope_fainting_protocol">Vasovagal Syncope & Fainting Protocol</h4>
+            <p data-i18n="x.common_response_to_sudden_pain_anxiety">Common response to sudden pain, anxiety, or low blood sugar causing temporary cerebral hypoperfusion.</p>
+          </div>
+        </div>
+        <ol class="emergency-step-list">
+          <li><strong data-i18n="x.stop_procedure_immediately">Stop Procedure Immediately:</strong> Pull needle away, secure equipment, and ensure client cannot fall from table/chair.</li>
+          <li><strong data-i18n="x.lay_flat_elevate_legs">Lay Flat & Elevate Legs:</strong> Place client completely flat on their back and elevate legs 30° above heart level (Trendelenburg position) to quickly restore blood flow to the brain.</li>
+          <li><strong data-i18n="x.cool_ventilate">Cool & Ventilate:</strong> Place a cold, damp paper towel on their forehead or nape of neck. Ensure good air circulation. Loosen tight collars/clothing.</li>
+          <li><strong data-i18n="x.glucose_boost">Glucose Boost:</strong> Once fully conscious and alert, offer cold fruit juice, soda, or glucose tablets. Keep them lying down for at least 15–20 minutes before attempting to sit up slowly.</li>
+        </ol>
+      </div>
+
+      <!-- ALLERGIC REACTION -->
+      <div id="emergency-allergy" class="emergency-content" style="display:none;">
+        <div class="emergency-box danger">
+          <div class="emerg-icon">🐝</div>
+          <div>
+            <h4 data-i18n="x.acute_allergic_reaction_anaphylaxis">Acute Allergic Reaction & Anaphylaxis</h4>
+            <p data-i18n="x.allergic_response_to_topical_numbing_creams">Allergic response to topical numbing creams, latex gloves, stencil chemicals, or inks.</p>
+          </div>
+        </div>
+        <ol class="emergency-step-list">
+          <li><strong data-i18n="x.call_emergency_services_now">CALL EMERGENCY SERVICES NOW:</strong> Throat tightness, noisy or strained breathing, swelling of the tongue or lips, or severe breathing difficulty means anaphylaxis. Call immediately, before anything else, and say the word "anaphylaxis". Do not wait to see whether it settles.</li>
+          <li><strong data-i18n="x.remove_the_trigger">Remove the Trigger:</strong> Stop the procedure, wipe away all topical creams and soaps with sterile saline, and switch to non-latex gloves.</li>
+          <li><strong data-i18n="x.keep_them_lying_flat">Keep Them Lying Flat:</strong> Lay the client flat with legs raised, unless breathing is easier sitting up. Do not stand them up or walk them anywhere, even if they say they feel better.</li>
+          <li><strong data-i18n="x.their_own_auto_injector">Their Own Auto-Injector:</strong> If the client carries their own prescribed adrenaline auto-injector (EpiPen or similar), help them reach it and use it themselves, into the outer mid-thigh. It is their device and their decision. Never use a device prescribed to someone else, and never keep or administer one of your own.</li>
+          <li><strong data-i18n="x.stay_with_them">Stay With Them:</strong> Symptoms can return after they improve. Stay beside the client until the ambulance arrives, and hand over the auto-injector so responders can see what was given and when.</li>
+        </ol>
+      </div>
+
+      <!-- BLEEDING -->
+      <div id="emergency-bleeding" class="emergency-content" style="display:none;">
+        <div class="emergency-box warning">
+          <div class="emerg-icon">🩸</div>
+          <div>
+            <h4 data-i18n="x.excessive_bleeding_heavy_plasma_oozing">Excessive Bleeding & Heavy Plasma Oozing</h4>
+            <p data-i18n="x.triggered_by_recent_nsaids_blood_thinners">Triggered by recent NSAIDs, blood thinners, alcohol intake, or high blood pressure.</p>
+          </div>
+        </div>
+        <ol class="emergency-step-list">
+          <li><strong data-i18n="x.direct_firm_pressure">Direct Firm Pressure:</strong> Place sterile dry gauze over the bleeding site and hold firm, continuous direct pressure for 5–10 full minutes without lifting.</li>
+          <li><strong data-i18n="x.elevate_area">Elevate Area:</strong> Position the bleeding limb or area elevated above the level of the heart.</li>
+          <li><strong data-i18n="x.pressure_wrap">Pressure Wrap:</strong> Apply a clean sterile pressure dressing once bleeding slows down.</li>
+          <li><strong data-i18n="x.bright_spurting_blood_call_immediately">Bright, Spurting Blood: Call Immediately.</strong> Blood that pulses or spurts in time with the heartbeat is arterial. Call emergency services straight away, keep firm direct pressure on the site, and do not wait out any timer. Separately, call if heavy bleeding is still going after 15 minutes of continuous firm pressure.</li>
+        </ol>
+      </div>
+
+      <!-- PANIC & BREATHING -->
+      <div id="emergency-panic" class="emergency-content" style="display:none;">
+        <div class="emergency-box info">
+          <div class="emerg-icon">🫁</div>
+          <div>
+            <h4 data-i18n="x.hyperventilation_acute_panic_attack">Hyperventilation & Acute Panic Attack</h4>
+            <p data-i18n="x.rapid_shallow_breathing_causing_lightheadedness_tingling">Rapid shallow breathing causing lightheadedness, tingling fingers, and muscle tightness.</p>
+          </div>
+        </div>
+        <ol class="emergency-step-list">
+          <li><strong data-i18n="x.pause_reassure">Pause & Reassure:</strong> Step back, remove needles/stencils from view, and speak in a calm, reassuring, grounded voice.</li>
+          <li><strong data-i18n="x.4_4_4_box_breathing">4-4-4 Box Breathing:</strong> Instruct client to breathe with you: Inhale deeply through nose for 4s, hold breath for 4s, slow exhale through mouth for 4s. Repeat 5 times.</li>
+          <li><strong data-i18n="x.physical_grounding">Physical Grounding:</strong> Have client place both feet flat on the floor and focus on feeling the solid ground beneath them. Provide a cold glass of water.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="action-btn secondary" id="close-emergency-modal-bottom" data-i18n="x.close_emergency_guide">Close Emergency Guide</button>
+    </div>
+  </div>
+</div>
+
+<!-- FLOATING QUICK NAVIGATION & EMERGENCY BUTTONS -->
+<div class="floating-btn-group">
+  <button id="floating-emergency-btn" class="floating-emergency-btn" title="Studio First Aid & Emergency Protocols" data-i18n="x.immediate_action">🚨 Immediate Action</button>
+  <button id="floating-top-btn" class="floating-top-btn" data-i18n="backToTopBtn">⬆️ Back to Top</button>
+</div>
+
+<!-- PRINT COVER PAGE CONTAINER FOR FULL MEDICAL REPORT -->
+<div id="print-cover-page" class="print-cover-page"></div>
+
+<!-- TOAST NOTIFICATION CONTAINER -->
+<div id="toast-notification" class="toast-notification" style="display:none;"></div>
+
+<!-- Shown only when the reader has chosen a language other than English.
+     Permanent, not a "work in progress" banner: we translate everything we can
+     and say plainly that English is the version we stand behind. -->
+<div id="translation-notice" class="translation-notice" style="display:none;">
+  <span data-i18n="translationNotice">This page has been translated from English. We cannot guarantee the translation is exact. We do our best so that everyone can understand, but the English version is the one we consider correct - please check anything important against it.</span>
+</div>
+
+<script src="/tools/medication-interaction-checker/js/med-content-i18n.js"></script>
+<script src="/tools/medication-interaction-checker/js/risk-i18n.js"></script>
+<script src="/tools/medication-interaction-checker/js/medication-sources.js"></script>
+<script src="/tools/medication-interaction-checker/js/supplement-stacking.js"></script>
+<script src="/tools/medication-interaction-checker/js/geo-search.js"></script>
+<script src="/tools/medication-interaction-checker/js/app.js"></script>
+</body>
+</html>
+

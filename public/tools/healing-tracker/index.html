@@ -1,0 +1,2354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tattoo &amp; Piercing Healing Timeline &amp; Aftercare Tracker - Poli International Professional Tools</title>
+  <meta name="description" content="Comprehensive studio suite for monitoring tattoo and piercing healing milestones, symptom assessment, aftercare routines, and multi-year tattoo touch-up and longevity projections.">
+  <meta property="og:title" content="Tattoo &amp; Piercing Healing Timeline &amp; Aftercare Tracker - Poli International Professional Tools">
+  <meta property="og:description" content="Comprehensive studio suite for monitoring tattoo and piercing healing milestones, symptom assessment, aftercare routines, and multi-year tattoo touch-up and longevity projections.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#111111">
+  <script>
+    if (window.self !== window.top) {
+      var poliRoot = document.documentElement;
+      var poliApply = function (light) {
+        poliRoot.setAttribute('data-theme', light ? 'light' : 'dark');
+        var b = document.body;
+        if (b) {
+          b.classList.toggle('dark-mode', !light);
+          b.classList.toggle('light-mode', !!light);
+        }
+      };
+      poliApply(false);
+      document.addEventListener('DOMContentLoaded', function () {
+        poliApply(poliRoot.getAttribute('data-theme') === 'light');
+      });
+      window.addEventListener('message', function (e) {
+        if (e.data && e.data.type === 'poli-theme') {
+          poliApply(!!e.data.light);
+        }
+      });
+    }
+  </script>
+</head>
+<body class="dark-mode">
+  <!-- Variation 6: Navigation Sidebar -->
+  <aside class="sidebar" id="appSidebar">
+    <div class="sidebar-top">
+      <div class="brand-badge" title="Poli International Professional Tools">
+        <span class="brand-label" data-i18n="common.brandTools">POLI</span>
+      </div>
+      <nav class="tool-tabs" aria-label="Tool Navigation">
+        <button class="tool-tab active" data-tab="healing" data-i18n-title="nav.healingTracker" data-i18n-aria="nav.healingTracker" aria-label="Healing Tracker">🩹</button>
+        <button class="tool-tab" data-tab="touchup" data-i18n-title="nav.touchupTimeline" data-i18n-aria="nav.touchupTimeline" aria-label="Touch-Up Timeline">⏱️</button>
+        <button class="tool-tab" data-tab="docs" data-i18n-title="nav.documentation" data-i18n-aria="nav.documentation" aria-label="Documentation">📖</button>
+        <button class="tool-tab" data-tab="embed" data-i18n-title="nav.embedCode" data-i18n-aria="nav.embedCode" aria-label="Embed Code">⚡</button>
+      </nav>
+    </div>
+
+    <div class="sidebar-controls">
+      <span id="offlineIndicatorBadge" class="offline-badge" style="display: none;" data-i18n="nav.offlineMode">Offline</span>
+      <button id="darkModeToggle" class="theme-toggle-btn" aria-label="Toggle dark/light theme" data-i18n-aria="nav.toggleTheme" title="Toggle theme">
+        <span class="theme-toggle-track" aria-hidden="true">
+          <span class="theme-toggle-thumb">
+            <span class="dark-mode-icon">◐</span>
+          </span>
+        </span>
+      </button>
+      <div class="language-switcher-container" id="languageSwitcherContainer" title="Select Language">
+        <label for="languageSwitcher" class="sr-only" data-i18n="nav.selectLanguage">Select Language</label>
+        <select id="languageSwitcher" class="language-switcher-select" aria-label="Select Language" data-i18n-aria="nav.selectLanguage" onchange="window.setLanguage && window.setLanguage(this.value)">
+          <option value="en" lang="en" title="English">EN</option>
+          <option value="fr" lang="fr" title="Français">FR</option>
+          <option value="de" lang="de" title="Deutsch">DE</option>
+          <option value="it" lang="it" title="Italiano">IT</option>
+          <option value="es" lang="es" title="Español">ES</option>
+          <option value="nl" lang="nl" title="Nederlands">NL</option>
+          <option value="pt" lang="pt" title="Português">PT</option>
+        </select>
+      </div>
+      <div class="footer-meta">
+        VER 2.4.0<br>
+        POLI INTL
+      </div>
+    </div>
+  </aside>
+    
+  <!-- Main Canvas: Variation 6 Content -->
+  <main class="main-canvas main-content">
+    <header class="main-canvas-header">
+      <span class="label" data-i18n="healing.sidebar.aftercareSystem">AFTERCARE SYSTEM</span>
+      <h1 class="hero-title" id="industrialAppTitle" data-i18n="healing.heroTitle">Healing Timeline &amp; Tracker</h1>
+    </header>
+
+    <!-- Tab Content: Healing Tracker -->
+    <div id="tab-healing" class="wrapper-tab-content">
+      <div class="container layout-split section-grid">
+        <section class="scroll-pane content-col">
+          <!-- Hydration Prompt Banner (Gentle Recurring Check-in) -->
+          <div id="hydrationPromptBanner" class="hydration-prompt-banner" style="display: none;" role="alert">
+            <div class="hydration-prompt-icon">💧</div>
+            <div class="hydration-prompt-content">
+              <div class="hydration-prompt-title" data-i18n="healing.hydration.promptTitle">Hydration Check-in</div>
+              <div class="hydration-prompt-body" data-i18n="healing.hydration.promptBody">Time for a glass of water! Cellular regeneration and lymphatic pigment clearance require optimal epidermal hydration—especially vital during tattoo and piercing healing.</div>
+            </div>
+            <div class="hydration-prompt-actions">
+              <button type="button" id="hydrationBannerDrinkBtn" class="hydration-banner-btn hydration-banner-btn--primary" data-i18n="healing.hydration.drankWaterBtn">💧 Log +1 Glass</button>
+              <button type="button" id="hydrationBannerSnoozeBtn" class="hydration-banner-btn hydration-banner-btn--secondary" data-i18n="healing.hydration.snoozeBtn">Snooze (30m)</button>
+              <button type="button" id="hydrationBannerDismissBtn" class="hydration-banner-btn hydration-banner-btn--dismiss" aria-label="Dismiss" title="Dismiss">&times;</button>
+            </div>
+          </div>
+
+          <span class="label" data-i18n="healing.sidebar.initialization">// INITIALIZATION</span>
+          <!-- Step 1: Setup Your Healing Journey -->
+          <section class="healing-tracker__section step-card">
+            <h2 class="healing-tracker__section-title">
+              <span class="healing-tracker__step-number step-number">01</span>
+              <span data-i18n="healing.setup.title">Setup Your Healing Journey</span>
+            </h2>
+
+            <div class="healing-tracker__setup-form">
+              <div class="healing-tracker__form-group">
+                <label for="procedureType" class="healing-tracker__label" data-i18n="healing.setup.procedureType">Procedure Type</label>
+                <select id="procedureType" class="healing-tracker__select">
+                  <option value="" data-i18n="healing.setup.selectType">-- Select Type --</option>
+                  <option value="piercing" data-i18n="healing.setup.piercing">Piercing</option>
+                  <option value="tattoo" data-i18n="healing.setup.tattoo">Tattoo</option>
+                </select>
+              </div>
+
+                            <!-- Visual Placement Picker (Interactive Inline SVG Body Map) -->
+              <div id="placementPickerSection" class="healing-placement-section" style="display: none;">
+                <div class="placement-header-row">
+                  <div class="placement-selected-badge" id="placementSelectedBadge" aria-live="polite">
+                    <span class="placement-selected-label" data-i18n="healing.map.selectedPrefix">Selected:</span>
+                    <strong id="placementSelectedText" class="placement-selected-value" data-i18n="healing.map.noneSelected">None</strong>
+                  </div>
+                  <div class="placement-view-toggle">
+                    <button type="button" id="sunRiskToggleBtn" class="placement-toggle-btn sun-risk-toggle-btn active" aria-pressed="true" aria-label="Toggle Sun Exposure Risk Layer">
+                      <span id="sunRiskToggleText" data-i18n="healing.map.sunRiskToggle">☀️ Sun Exposure Risk</span>
+                    </button>
+                    <button type="button" id="bodyMapToggleBtn" class="placement-toggle-btn" aria-label="Toggle front and back body views">
+                      <span id="bodyMapToggleText" data-i18n="healing.map.switchToBack">Switch to Back View</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="placement-picker-body">
+                  <div class="placement-map-col">
+<svg id="bodyPlacementMap" viewBox="0 0 280 380" width="100%" class="body-placement-svg" role="region" aria-label="Interactive body placement map">
+                    <style>
+                      .body-part {
+                        fill: var(--bg-tertiary, #e2e8f0);
+                        stroke: var(--border-primary, #cbd5e1);
+                        stroke-width: 1.5;
+                        cursor: pointer;
+                        transition: fill 0.25s ease, stroke 0.25s ease;
+                      }
+                      .body-part:hover, .body-part:focus-visible {
+                        fill: var(--healing-purple, #7c3aed);
+                        stroke: var(--dark-text-primary, #ffffff);
+                        outline: none;
+                      }
+                      .body-part--selected {
+                        fill: var(--healing-purple, #7c3aed);
+                        stroke: var(--dark-text-primary, #ffffff);
+                      }
+                      .body-map-label {
+                        pointer-events: none;
+                        font-size: 8px;
+                        font-weight: 600;
+                        font-family: inherit;
+                        fill: var(--text-secondary, #64748b);
+                        text-anchor: middle;
+                        user-select: none;
+                      }
+                      .body-part:hover + .body-map-label,
+                      .body-part--selected + .body-map-label,
+                      .body-part:focus-visible + .body-map-label {
+                        fill: var(--dark-text-primary, #ffffff);
+                      }
+                      .body-map-view-indicator {
+                        pointer-events: none;
+                        font-size: 10px;
+                        font-weight: 700;
+                        letter-spacing: 0.05em;
+                        fill: var(--text-tertiary, #9ca3af);
+                        text-anchor: middle;
+                        text-transform: uppercase;
+                      }
+                    </style>
+                    <g id="bodyMapFrontView" >
+                      <text x="140" y="11" class="body-map-view-indicator" data-i18n="healing.map.frontView">Front View</text>
+                      <path id="reg_front_head" class="body-part" tabindex="0" role="button" aria-label="Face" data-i18n-aria="healing.map.regions.headFace" data-piercing-zone="facial" data-tattoo-region="head_face" data-name-key="healing.map.regions.headFace" d="M 140 18 C 158 18 165 30 165 44 C 165 54 160 62 153 66 L 127 66 C 120 62 115 54 115 44 C 115 30 122 18 140 18 Z" />
+                      <text x="140" y="46" class="body-map-label" data-i18n="healing.map.regions.headFace">Face</text>
+                      <path id="reg_front_oral" class="body-part" tabindex="0" role="button" aria-label="Oral" data-i18n-aria="healing.map.regions.oral" data-piercing-zone="oral" data-tattoo-region="head_face" data-name-key="healing.map.regions.oral" d="M 129 68 C 129 65 151 65 151 68 C 151 77 129 77 129 68 Z" />
+                      <text x="140" y="74" class="body-map-label" data-i18n="healing.map.regions.oral">Oral</text>
+                      <path id="reg_front_ear_l" class="body-part" tabindex="0" role="button" aria-label="Ear" data-i18n-aria="healing.map.regions.ears" data-piercing-zone="ear" data-tattoo-region="head_face" data-name-key="healing.map.regions.ears" d="M 113 36 C 103 38 103 58 113 62 L 115 58 C 108 55 108 43 115 40 Z" />
+                      <path id="reg_front_ear_r" class="body-part" tabindex="0" role="button" aria-label="Ear" data-i18n-aria="healing.map.regions.ears" data-piercing-zone="ear" data-tattoo-region="head_face" data-name-key="healing.map.regions.ears" d="M 167 36 C 177 38 177 58 167 62 L 165 58 C 172 55 172 43 165 40 Z" />
+                      <path id="reg_front_neck" class="body-part" tabindex="0" role="button" aria-label="Neck" data-i18n-aria="healing.map.regions.neck" data-piercing-zone="surface" data-tattoo-region="neck" data-name-key="healing.map.regions.neck" d="M 128 79 L 152 79 L 156 100 L 124 100 Z" />
+                      <text x="140" y="91" class="body-map-label" data-i18n="healing.map.regions.neck">Neck</text>
+                      <path id="reg_front_chest" class="body-part" tabindex="0" role="button" aria-label="Chest" data-i18n-aria="healing.map.regions.chest" data-piercing-zone="body" data-tattoo-region="chest" data-name-key="healing.map.regions.chest" d="M 124 102 L 156 102 L 176 114 L 172 150 L 108 150 L 104 114 Z" />
+                      <text x="140" y="128" class="body-map-label" data-i18n="healing.map.regions.chest">Chest</text>
+                      <path id="reg_front_stomach" class="body-part" tabindex="0" role="button" aria-label="Abdomen" data-i18n-aria="healing.map.regions.stomach" data-piercing-zone="body" data-tattoo-region="ribs_stomach" data-name-key="healing.map.regions.stomach" d="M 109 152 L 171 152 L 165 204 L 115 204 Z" />
+                      <text x="140" y="178" class="body-map-label" data-i18n="healing.map.regions.stomach">Abdomen</text>
+                      <path id="reg_front_shoulder_l" class="body-part" tabindex="0" role="button" aria-label="Shoulder" data-i18n-aria="healing.map.regions.shoulders" data-piercing-zone="surface" data-tattoo-region="shoulders" data-name-key="healing.map.regions.shoulders" d="M 103 103 L 123 101 L 104 114 L 84 123 L 78 114 Z" />
+                      <path id="reg_front_shoulder_r" class="body-part" tabindex="0" role="button" aria-label="Shoulder" data-i18n-aria="healing.map.regions.shoulders" data-piercing-zone="surface" data-tattoo-region="shoulders" data-name-key="healing.map.regions.shoulders" d="M 177 103 L 157 101 L 176 114 L 196 123 L 202 114 Z" />
+                      <path id="reg_front_bicep_l" class="body-part" tabindex="0" role="button" aria-label="Arm" data-i18n-aria="healing.map.regions.upperArms" data-piercing-zone="surface" data-tattoo-region="upper_arm" data-name-key="healing.map.regions.upperArms" d="M 77 116 L 85 125 L 75 174 L 62 168 Z" />
+                      <path id="reg_front_bicep_r" class="body-part" tabindex="0" role="button" aria-label="Arm" data-i18n-aria="healing.map.regions.upperArms" data-piercing-zone="surface" data-tattoo-region="upper_arm" data-name-key="healing.map.regions.upperArms" d="M 203 116 L 195 125 L 205 174 L 218 168 Z" />
+                      <path id="reg_front_forearm_l" class="body-part" tabindex="0" role="button" aria-label="Forearm" data-i18n-aria="healing.map.regions.forearms" data-piercing-zone="surface" data-tattoo-region="forearm" data-name-key="healing.map.regions.forearms" d="M 61 170 L 74 176 L 66 230 L 52 226 Z" />
+                      <path id="reg_front_forearm_r" class="body-part" tabindex="0" role="button" aria-label="Forearm" data-i18n-aria="healing.map.regions.forearms" data-piercing-zone="surface" data-tattoo-region="forearm" data-name-key="healing.map.regions.forearms" d="M 219 170 L 206 176 L 214 230 L 228 226 Z" />
+                      <path id="reg_front_hand_l" class="body-part" tabindex="0" role="button" aria-label="Hand" data-i18n-aria="healing.map.regions.hands" data-piercing-zone="surface" data-tattoo-region="hand_wrist" data-name-key="healing.map.regions.hands" d="M 51 228 L 65 232 L 60 266 L 46 262 Z" />
+                      <path id="reg_front_hand_r" class="body-part" tabindex="0" role="button" aria-label="Hand" data-i18n-aria="healing.map.regions.hands" data-piercing-zone="surface" data-tattoo-region="hand_wrist" data-name-key="healing.map.regions.hands" d="M 229 228 L 215 232 L 220 266 L 234 262 Z" />
+                      <path id="reg_front_thigh_l" class="body-part" tabindex="0" role="button" aria-label="Thigh" data-i18n-aria="healing.map.regions.thighs" data-piercing-zone="surface" data-tattoo-region="thigh" data-name-key="healing.map.regions.thighs" d="M 115 208 L 136 208 L 133 274 L 114 274 Z" />
+                      <path id="reg_front_thigh_r" class="body-part" tabindex="0" role="button" aria-label="Thigh" data-i18n-aria="healing.map.regions.thighs" data-piercing-zone="surface" data-tattoo-region="thigh" data-name-key="healing.map.regions.thighs" d="M 144 208 L 165 208 L 166 274 L 147 274 Z" />
+                      <path id="reg_front_shin_l" class="body-part" tabindex="0" role="button" aria-label="Shin" data-i18n-aria="healing.map.regions.shins" data-piercing-zone="surface" data-tattoo-region="knee_shin" data-name-key="healing.map.regions.shins" d="M 114 278 L 133 278 L 131 334 L 117 334 Z" />
+                      <path id="reg_front_shin_r" class="body-part" tabindex="0" role="button" aria-label="Shin" data-i18n-aria="healing.map.regions.shins" data-piercing-zone="surface" data-tattoo-region="knee_shin" data-name-key="healing.map.regions.shins" d="M 147 278 L 166 278 L 163 334 L 149 334 Z" />
+                      <path id="reg_front_foot_l" class="body-part" tabindex="0" role="button" aria-label="Foot" data-i18n-aria="healing.map.regions.feet" data-piercing-zone="surface" data-tattoo-region="foot_ankle" data-name-key="healing.map.regions.feet" d="M 116 338 L 131 338 L 133 366 L 110 366 Z" />
+                      <path id="reg_front_foot_r" class="body-part" tabindex="0" role="button" aria-label="Foot" data-i18n-aria="healing.map.regions.feet" data-piercing-zone="surface" data-tattoo-region="foot_ankle" data-name-key="healing.map.regions.feet" d="M 149 338 L 164 338 L 170 366 L 147 366 Z" />
+                    </g>
+                    <g id="bodyMapBackView" style="display: none;">
+                      <text x="140" y="11" class="body-map-view-indicator" data-i18n="healing.map.backView">Back View</text>
+                      <path id="reg_back_head" class="body-part" tabindex="0" role="button" aria-label="Head" data-i18n-aria="healing.map.regions.headFace" data-piercing-zone="facial" data-tattoo-region="head_face" data-name-key="healing.map.regions.headFace" d="M 140 18 C 158 18 165 30 165 44 C 165 56 160 66 153 72 L 127 72 C 120 66 115 56 115 44 C 115 30 122 18 140 18 Z" />
+                      <path id="reg_back_ear_l" class="body-part" tabindex="0" role="button" aria-label="Ear" data-i18n-aria="healing.map.regions.ears" data-piercing-zone="ear" data-tattoo-region="head_face" data-name-key="healing.map.regions.ears" d="M 113 36 C 103 38 103 58 113 62 L 115 58 C 108 55 108 43 115 40 Z" />
+                      <path id="reg_back_ear_r" class="body-part" tabindex="0" role="button" aria-label="Ear" data-i18n-aria="healing.map.regions.ears" data-piercing-zone="ear" data-tattoo-region="head_face" data-name-key="healing.map.regions.ears" d="M 167 36 C 177 38 177 58 167 62 L 165 58 C 172 55 172 43 165 40 Z" />
+                      <path id="reg_back_nape" class="body-part" tabindex="0" role="button" aria-label="Nape" data-i18n-aria="healing.map.regions.nape" data-piercing-zone="surface" data-tattoo-region="neck_nape" data-name-key="healing.map.regions.nape" d="M 128 78 L 152 78 L 156 102 L 124 102 Z" />
+                      <text x="140" y="90" class="body-map-label" data-i18n="healing.map.regions.nape">Nape</text>
+                      <path id="reg_back_upper" class="body-part" tabindex="0" role="button" aria-label="Upper Back" data-i18n-aria="healing.map.regions.upperBack" data-piercing-zone="surface" data-tattoo-region="upper_back" data-name-key="healing.map.regions.upperBack" d="M 124 104 L 156 104 L 176 114 L 172 154 L 108 154 L 104 114 Z" />
+                      <text x="140" y="128" class="body-map-label" data-i18n="healing.map.regions.upperBack">Upper Back</text>
+                      <path id="reg_back_lower" class="body-part" tabindex="0" role="button" aria-label="Lower Back" data-i18n-aria="healing.map.regions.lowerBack" data-piercing-zone="surface" data-tattoo-region="lower_back" data-name-key="healing.map.regions.lowerBack" d="M 109 156 L 171 156 L 165 204 L 115 204 Z" />
+                      <text x="140" y="180" class="body-map-label" data-i18n="healing.map.regions.lowerBack">Lower Back</text>
+                      <path id="reg_back_shoulder_l" class="body-part" tabindex="0" role="button" aria-label="Shoulder" data-i18n-aria="healing.map.regions.shoulders" data-piercing-zone="surface" data-tattoo-region="shoulders" data-name-key="healing.map.regions.shoulders" d="M 103 103 L 123 101 L 104 114 L 84 123 L 78 114 Z" />
+                      <path id="reg_back_shoulder_r" class="body-part" tabindex="0" role="button" aria-label="Shoulder" data-i18n-aria="healing.map.regions.shoulders" data-piercing-zone="surface" data-tattoo-region="shoulders" data-name-key="healing.map.regions.shoulders" d="M 177 103 L 157 101 L 176 114 L 196 123 L 202 114 Z" />
+                      <path id="reg_back_tricep_l" class="body-part" tabindex="0" role="button" aria-label="Tricep" data-i18n-aria="healing.map.regions.upperArms" data-piercing-zone="surface" data-tattoo-region="tricep" data-name-key="healing.map.regions.upperArms" d="M 77 116 L 85 125 L 75 174 L 62 168 Z" />
+                      <path id="reg_back_tricep_r" class="body-part" tabindex="0" role="button" aria-label="Tricep" data-i18n-aria="healing.map.regions.upperArms" data-piercing-zone="surface" data-tattoo-region="tricep" data-name-key="healing.map.regions.upperArms" d="M 203 116 L 195 125 L 205 174 L 218 168 Z" />
+                      <path id="reg_back_forearm_l" class="body-part" tabindex="0" role="button" aria-label="Forearm" data-i18n-aria="healing.map.regions.forearms" data-piercing-zone="surface" data-tattoo-region="forearm" data-name-key="healing.map.regions.forearms" d="M 61 170 L 74 176 L 66 230 L 52 226 Z" />
+                      <path id="reg_back_forearm_r" class="body-part" tabindex="0" role="button" aria-label="Forearm" data-i18n-aria="healing.map.regions.forearms" data-piercing-zone="surface" data-tattoo-region="forearm" data-name-key="healing.map.regions.forearms" d="M 219 170 L 206 176 L 214 230 L 228 226 Z" />
+                      <path id="reg_back_hand_l" class="body-part" tabindex="0" role="button" aria-label="Hand" data-i18n-aria="healing.map.regions.hands" data-piercing-zone="surface" data-tattoo-region="hand_wrist" data-name-key="healing.map.regions.hands" d="M 51 228 L 65 232 L 60 266 L 46 262 Z" />
+                      <path id="reg_back_hand_r" class="body-part" tabindex="0" role="button" aria-label="Hand" data-i18n-aria="healing.map.regions.hands" data-piercing-zone="surface" data-tattoo-region="hand_wrist" data-name-key="healing.map.regions.hands" d="M 229 228 L 215 232 L 220 266 L 234 262 Z" />
+                      <path id="reg_back_thigh_l" class="body-part" tabindex="0" role="button" aria-label="Glute" data-i18n-aria="healing.map.regions.glutes" data-piercing-zone="surface" data-tattoo-region="thigh" data-name-key="healing.map.regions.glutes" d="M 115 208 L 136 208 L 133 274 L 114 274 Z" />
+                      <path id="reg_back_thigh_r" class="body-part" tabindex="0" role="button" aria-label="Glute" data-i18n-aria="healing.map.regions.glutes" data-piercing-zone="surface" data-tattoo-region="thigh" data-name-key="healing.map.regions.glutes" d="M 144 208 L 165 208 L 166 274 L 147 274 Z" />
+                      <path id="reg_back_calf_l" class="body-part" tabindex="0" role="button" aria-label="Calf" data-i18n-aria="healing.map.regions.calves" data-piercing-zone="surface" data-tattoo-region="calf" data-name-key="healing.map.regions.calves" d="M 114 278 L 133 278 L 131 334 L 117 334 Z" />
+                      <path id="reg_back_calf_r" class="body-part" tabindex="0" role="button" aria-label="Calf" data-i18n-aria="healing.map.regions.calves" data-piercing-zone="surface" data-tattoo-region="calf" data-name-key="healing.map.regions.calves" d="M 147 278 L 166 278 L 163 334 L 149 334 Z" />
+                      <path id="reg_back_foot_l" class="body-part" tabindex="0" role="button" aria-label="Heel" data-i18n-aria="healing.map.regions.feet" data-piercing-zone="surface" data-tattoo-region="foot_ankle" data-name-key="healing.map.regions.feet" d="M 116 338 L 131 338 L 133 366 L 110 366 Z" />
+                      <path id="reg_back_foot_r" class="body-part" tabindex="0" role="button" aria-label="Heel" data-i18n-aria="healing.map.regions.feet" data-piercing-zone="surface" data-tattoo-region="foot_ankle" data-name-key="healing.map.regions.feet" d="M 149 338 L 164 338 L 170 366 L 147 366 Z" />
+                    </g>
+                  </svg>
+                  </div>
+
+                  <div class="placement-controls-col">
+                    <div id="piercingLocationGroup" class="healing-tracker__form-group" style="display: none;">
+                      <label for="piercingLocation" class="healing-tracker__label" data-i18n="healing.setup.piercingLocation">Piercing Location</label>
+                      <select id="piercingLocation" class="healing-tracker__select">
+                        <option value="" data-i18n="healing.setup.selectLocation">-- Select Location --</option>
+
+                        <optgroup data-i18n-label="healing.piercingGroups.ear" label="👂 Ear Piercings">
+                          <option value="earlobe" data-i18n="healing.piercingLocations.earlobe">Earlobe</option>
+                          <option value="helix" data-i18n="healing.piercingLocations.helix">Helix (Upper Cartilage)</option>
+                          <option value="industrial" data-i18n="healing.piercingLocations.industrial">Industrial (Scaffold)</option>
+                          <option value="daith" data-i18n="healing.piercingLocations.daith">Daith</option>
+                          <option value="rook" data-i18n="healing.piercingLocations.rook">Rook</option>
+                          <option value="tragus" data-i18n="healing.piercingLocations.tragus">Tragus</option>
+                          <option value="anti_tragus" data-i18n="healing.piercingLocations.anti_tragus">Anti-Tragus</option>
+                          <option value="conch" data-i18n="healing.piercingLocations.conch">Conch</option>
+                          <option value="snug" data-i18n="healing.piercingLocations.snug">Snug</option>
+                          <option value="forward_helix" data-i18n="healing.piercingLocations.forward_helix">Forward Helix</option>
+                          <option value="orbital" data-i18n="healing.piercingLocations.orbital">Orbital</option>
+                        </optgroup>
+
+                        <optgroup data-i18n-label="healing.piercingGroups.facial" label="😊 Facial Piercings">
+                          <option value="nostril" data-i18n="healing.piercingLocations.nostril">Nostril</option>
+                          <option value="septum" data-i18n="healing.piercingLocations.septum">Septum</option>
+                          <option value="bridge" data-i18n="healing.piercingLocations.bridge">Bridge (Earl)</option>
+                          <option value="high_nostril" data-i18n="healing.piercingLocations.high_nostril">High Nostril</option>
+                          <option value="eyebrow" data-i18n="healing.piercingLocations.eyebrow">Eyebrow</option>
+                          <option value="anti_eyebrow" data-i18n="healing.piercingLocations.anti_eyebrow">Anti-Eyebrow (Teardrop)</option>
+                          <option value="cheek" data-i18n="healing.piercingLocations.cheek">Cheek (Dimple)</option>
+                          <option value="medusa" data-i18n="healing.piercingLocations.medusa">Medusa (Philtrum)</option>
+                          <option value="monroe" data-i18n="healing.piercingLocations.monroe">Monroe (Madonna)</option>
+                          <option value="labret" data-i18n="healing.piercingLocations.labret">Labret</option>
+                          <option value="vertical_labret" data-i18n="healing.piercingLocations.vertical_labret">Vertical Labret</option>
+                          <option value="snake_bites" data-i18n="healing.piercingLocations.snake_bites">Snake Bites</option>
+                          <option value="angel_bites" data-i18n="healing.piercingLocations.angel_bites">Angel Bites</option>
+                          <option value="smiley" data-i18n="healing.piercingLocations.smiley">Smiley (Upper Frenulum)</option>
+                          <option value="frowny" data-i18n="healing.piercingLocations.frowny">Frowny (Lower Frenulum)</option>
+                        </optgroup>
+
+                        <optgroup data-i18n-label="healing.piercingGroups.oral" label="👅 Oral Piercings">
+                          <option value="tongue" data-i18n="healing.piercingLocations.tongue">Tongue (Center)</option>
+                          <option value="tongue_web" data-i18n="healing.piercingLocations.tongue_web">Tongue Web (Frenulum)</option>
+                          <option value="venom" data-i18n="healing.piercingLocations.venom">Venom (Double Tongue)</option>
+                          <option value="uvula" data-i18n="healing.piercingLocations.uvula">Uvula</option>
+                        </optgroup>
+
+                        <optgroup data-i18n-label="healing.piercingGroups.body" label="💪 Body Piercings">
+                          <option value="navel" data-i18n="healing.piercingLocations.navel">Navel (Belly Button)</option>
+                          <option value="nipple" data-i18n="healing.piercingLocations.nipple">Nipple</option>
+                        </optgroup>
+
+                        <optgroup data-i18n-label="healing.piercingGroups.surface" label="🔷 Surface &amp; Dermal Piercings">
+                          <option value="surface" data-i18n="healing.piercingLocations.surface">Surface Piercing (General)</option>
+                          <option value="dermal_anchor" data-i18n="healing.piercingLocations.dermal_anchor">Dermal Anchor (Microdermal)</option>
+                          <option value="nape" data-i18n="healing.piercingLocations.nape">Nape (Back of Neck)</option>
+                          <option value="sternum" data-i18n="healing.piercingLocations.sternum">Sternum (Chest)</option>
+                          <option value="madison" data-i18n="healing.piercingLocations.madison">Madison (Front Neck)</option>
+                        </optgroup>
+
+                        <optgroup data-i18n-label="healing.piercingGroups.maleGenital" label="♂️ Male Genital Piercings">
+                          <option value="prince_albert" data-i18n="healing.piercingLocations.prince_albert">Prince Albert (PA)</option>
+                          <option value="reverse_pa" data-i18n="healing.piercingLocations.reverse_pa">Reverse Prince Albert</option>
+                          <option value="ampallang" data-i18n="healing.piercingLocations.ampallang">Ampallang (Horizontal)</option>
+                          <option value="apadravya" data-i18n="healing.piercingLocations.apadravya">Apadravya (Vertical)</option>
+                          <option value="frenum" data-i18n="healing.piercingLocations.frenum">Frenum (Lorum)</option>
+                          <option value="lorum" data-i18n="healing.piercingLocations.lorum">Lorum (Low Frenum)</option>
+                          <option value="hafada" data-i18n="healing.piercingLocations.hafada">Hafada (Scrotal)</option>
+                          <option value="dydoe" data-i18n="healing.piercingLocations.dydoe">Dydoe</option>
+                          <option value="guiche" data-i18n="healing.piercingLocations.guiche">Guiche (Perineum)</option>
+                          <option value="foreskin" data-i18n="healing.piercingLocations.foreskin">Foreskin</option>
+                        </optgroup>
+
+                        <optgroup data-i18n-label="healing.piercingGroups.femaleGenital" label="♀️ Female Genital Piercings">
+                          <option value="vch" data-i18n="healing.piercingLocations.vch">VCH (Vertical Clitoral Hood)</option>
+                          <option value="hch" data-i18n="healing.piercingLocations.hch">HCH (Horizontal Clitoral Hood)</option>
+                          <option value="inner_labia" data-i18n="healing.piercingLocations.inner_labia">Inner Labia</option>
+                          <option value="outer_labia" data-i18n="healing.piercingLocations.outer_labia">Outer Labia</option>
+                          <option value="triangle" data-i18n="healing.piercingLocations.triangle">Triangle</option>
+                          <option value="christina" data-i18n="healing.piercingLocations.christina">Christina</option>
+                          <option value="fourchette" data-i18n="healing.piercingLocations.fourchette">Fourchette</option>
+                        </optgroup>
+                      </select>
+                    </div>
+
+                    <div id="tattooLocationGroup" class="healing-tracker__form-group" style="display: none;">
+                      <label for="tattooPlacement" class="healing-tracker__label" data-i18n="healing.setup.tattooLocation">Tattoo Placement</label>
+                      <select id="tattooPlacement" class="healing-tracker__select">
+                        <option value="" data-i18n="healing.setup.selectTattooLocation">-- Select Placement --</option>
+                        <option value="head_face" data-i18n="healing.map.tattooLocations.head_face">Head &amp; Face</option>
+                        <option value="neck" data-i18n="healing.map.tattooLocations.neck">Neck / Throat</option>
+                        <option value="neck_nape" data-i18n="healing.map.tattooLocations.neck_nape">Back of Neck (Nape)</option>
+                        <option value="chest" data-i18n="healing.map.tattooLocations.chest">Chest / Sternum</option>
+                        <option value="ribs_stomach" data-i18n="healing.map.tattooLocations.ribs_stomach">Ribs / Stomach</option>
+                        <option value="upper_back" data-i18n="healing.map.tattooLocations.upper_back">Upper Back / Shoulders</option>
+                        <option value="lower_back" data-i18n="healing.map.tattooLocations.lower_back">Lower Back / Spine</option>
+                        <option value="shoulders" data-i18n="healing.map.tattooLocations.shoulders">Shoulders</option>
+                        <option value="upper_arm" data-i18n="healing.map.tattooLocations.upper_arm">Upper Arm / Bicep</option>
+                        <option value="tricep" data-i18n="healing.map.tattooLocations.tricep">Tricep / Back of Arm</option>
+                        <option value="forearm" data-i18n="healing.map.tattooLocations.forearm">Forearm</option>
+                        <option value="hand_wrist" data-i18n="healing.map.tattooLocations.hand_wrist">Hand / Wrist</option>
+                        <option value="thigh" data-i18n="healing.map.tattooLocations.thigh">Thigh</option>
+                        <option value="knee_shin" data-i18n="healing.map.tattooLocations.knee_shin">Knee / Shin</option>
+                        <option value="calf" data-i18n="healing.map.tattooLocations.calf">Calf / Back of Leg</option>
+                        <option value="foot_ankle" data-i18n="healing.map.tattooLocations.foot_ankle">Foot / Ankle</option>
+                      </select>
+                    </div>
+
+                    <div id="tattooSizeGroup" class="healing-tracker__form-group" style="display: none;">
+                      <label for="tattooSize" class="healing-tracker__label" data-i18n="healing.setup.tattooSize">Tattoo Size</label>
+                      <select id="tattooSize" class="healing-tracker__select">
+                        <option value="" data-i18n="healing.setup.selectSize">-- Select Size --</option>
+                        <option value="small" data-i18n="healing.setup.sizeSmall">Small (&lt; 2 inches)</option>
+                        <option value="medium" data-i18n="healing.setup.sizeMedium">Medium (2-6 inches)</option>
+                        <option value="large" data-i18n="healing.setup.sizeLarge">Large (&gt; 6 inches)</option>
+                      </select>
+                    </div>
+
+                    <div id="zoneLocationsPanel" class="zone-locations-panel" style="display: none;">
+                      <div class="zone-locations-header">
+                        <span id="zoneLocationsTitle" class="zone-locations-title"></span>
+                        <span class="zone-locations-hint" data-i18n="healing.map.chooseSpecific">Select specific placement:</span>
+                      </div>
+                      <div id="zoneLocationsList" class="zone-locations-grid" role="listbox" aria-label="Zone specific locations"></div>
+                    </div>
+
+                    <!-- Sun Exposure Risk Advisory & Preventative Tips -->
+                    <div id="sunExposureRiskCard" class="sun-exposure-risk-card" style="display: none;">
+                      <div class="sun-exposure-risk-card__header">
+                        <span class="sun-exposure-risk-card__badge" data-i18n="healing.map.sunRiskBadge">☀️ HIGH UV EXPOSURE ZONE</span>
+                      </div>
+                      <div class="sun-exposure-risk-card__body">
+                        <h4 id="sunExposureRiskRegionTitle" class="sun-exposure-risk-card__title"></h4>
+                        <p id="sunExposureRiskRegionTip" class="sun-exposure-risk-card__tip"></p>
+                        <div class="sun-exposure-risk-card__general">
+                          <p class="sun-exposure-risk-card__notice" data-i18n="healing.map.sunRiskSelectedNotice">High UV exposure area selected. Prioritize photo-protection during healing.</p>
+                          <ul class="sun-exposure-risk-card__list">
+                            <li data-i18n="healing.map.sunRiskGeneralTip1">Zero direct sun during active healing (Weeks 1-4). Broken epidermal barrier cannot produce protective melanin evenly and risks hyperpigmentation or scar darkening.</li>
+                            <li data-i18n="healing.map.sunRiskGeneralTip2">Never apply chemical lotions or sunscreens directly onto open puncture wounds or peeling tattoo scabs. Use physical shade, wide-brim hats, or UPF 50+ clothing.</li>
+                            <li data-i18n="healing.map.sunRiskGeneralTip3">Once fully re-epithelialized, apply broad-spectrum mineral sunscreen (Zinc Oxide or Titanium Dioxide SPF 30+) daily to preserve tattoo pigment and prevent piercing scar tissue darkening.</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+
+                    <p class="placement-keyboard-help" data-i18n="healing.map.keyboardHelp">Tab through body regions. Press Enter or Space to choose a zone.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="healing-tracker__form-group">
+                <label for="procedureDate" class="healing-tracker__label" data-i18n="healing.setup.procedureDate">Procedure Date</label>
+                <input type="date" id="procedureDate" class="healing-tracker__input">
+              </div>
+
+              <div class="healing-tracker__form-group">
+                <label for="pieceCustomName" class="healing-tracker__label" data-i18n="healing.setup.pieceName">Custom Label / Name (Optional)</label>
+                <input type="text" id="pieceCustomName" class="healing-tracker__input" data-i18n-placeholder="healing.setup.pieceNamePlaceholder" placeholder="e.g. Left Conch, Forearm Dagger">
+              </div>
+
+              <div class="healing-tracker__form-group">
+                <label class="healing-tracker__label" data-i18n="healing.setup.baselinePhotoPrompt">Day 0 Baseline Photo (Recommended)</label>
+                <p class="healing-tracker__helper-text" data-i18n="healing.setup.baselinePhotoHelp">Upload a Day 0 baseline photo right after your appointment. This gives you a clear point of comparison as healing progresses.</p>
+                <input type="file" id="baselinePhotoInput" accept="image/*" class="healing-tracker__file-input">
+                <div id="baselinePreviewContainer" style="display: none; margin-top: var(--spacing-sm);">
+                  <img id="baselinePhotoPreview" src="" alt="Day 0 Baseline" style="max-width: 140px; height: 140px; object-fit: cover; border-radius: var(--border-radius); border: 1px solid var(--border-primary);">
+                  <div id="baselinePhotoSizeInfo" style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;"></div>
+                </div>
+                <div id="baselineStorageIndicator" class="healing-storage-status" style="margin-top: var(--spacing-xs); font-size: 0.85rem; color: var(--text-secondary);"></div>
+                <div id="baselineLowStorageBanner" class="healing-storage-low-banner" style="display: none; margin-top: var(--spacing-xs); padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--warning-orange); border-radius: var(--border-radius);">
+                  <div class="healing-storage-low-text" style="color: var(--warning-orange); font-size: 0.85rem;" data-i18n="healing.storage.lowWarning">⚠️ Storage is running low!</div>
+                  <p style="margin: 4px 0; font-size: 0.8rem; color: var(--text-secondary);" data-i18n="healing.storage.dropOldestPrompt">Free up space by dropping older photos while keeping their clinical entries, symptom ratings, and trend lines 100% intact.</p>
+                  <button type="button" class="drop-oldest-photos-btn healing-tracker__btn healing-tracker__btn--outline" style="margin-top: 6px; padding: 4px 8px; font-size: 0.8rem;" data-i18n="healing.storage.dropOldestBtn">🧹 Drop Oldest Photos</button>
+                </div>
+              </div>
+
+              <button id="startTracking" class="healing-tracker__btn healing-tracker__btn--primary" data-i18n="healing.setup.startTracking">
+                Start Tracking My Healing
+              </button>
+            </div>
+          </section>
+
+          <!-- Results Section (Hidden until setup complete) -->
+          <div id="resultsSection" style="display: none;">
+            <!-- Direction Reversal Alert (Feature 3) -->
+            <div id="directionChangeAlert" style="display: none;"></div>
+            <div id="symptomTrendEmergencyBanner" class="symptom-trend-alert" style="display: none;" role="alert">
+              <span class="symptom-trend-alert__badge" data-i18n="healing.symptomTrendAlert.badge">⚠️ SYMPTOM TREND ALERT</span>
+              <h3 class="symptom-trend-alert__title" data-i18n="healing.symptomTrendAlert.title">Consecutive Worsening Detected</h3>
+              <p id="symptomTrendAlertDesc" class="symptom-trend-alert__text"></p>
+              <p class="symptom-trend-alert__text"><strong data-i18n="healing.symptomTrendAlert.recommendationLabel">Automated Clinical Recommendation:</strong>
+                <span data-i18n="healing.symptomTrendAlert.recommendation"></span></p>
+            </div>
+
+            <!-- Step 2: Your Healing Timeline -->
+            <section class="healing-tracker__section">
+              <h2 class="healing-tracker__section-title">
+                <span class="healing-tracker__step-number">02</span>
+                <span data-i18n="healing.timeline.title">Your Healing Timeline</span>
+              </h2>
+
+              <div id="timelineResults" class="healing-tracker__timeline">
+                <!-- Timeline will be dynamically generated -->
+              </div>
+            </section>
+
+            <!-- Step 3: Current Status & Symptoms -->
+            <section class="healing-tracker__section">
+              <h2 class="healing-tracker__section-title">
+                <span class="healing-tracker__step-number">03</span>
+                <span data-i18n="healing.symptoms.title">Check Your Current Symptoms</span>
+              </h2>
+
+              <div class="healing-tracker__symptom-checker">
+                <p class="healing-tracker__helper-text" data-i18n="healing.symptoms.subtitle">Select any symptoms you're currently experiencing:</p>
+
+                <div class="healing-tracker__symptoms-grid">
+                  <label class="healing-tracker__checkbox-label">
+                    <input type="checkbox" class="symptom-check" data-severity="normal" value="mild-redness">
+                    <span data-i18n="healing.symptoms.mildRedness">Mild redness</span>
+                  </label>
+                  <label class="healing-tracker__checkbox-label">
+                    <input type="checkbox" class="symptom-check" data-severity="normal" value="slight-swelling">
+                    <span data-i18n="healing.symptoms.slightSwelling">Slight swelling</span>
+                  </label>
+                  <label class="healing-tracker__checkbox-label">
+                    <input type="checkbox" class="symptom-check" data-severity="normal" value="clear-discharge">
+                    <span data-i18n="healing.symptoms.clearDischarge">Clear/light discharge</span>
+                  </label>
+                  <label class="healing-tracker__checkbox-label">
+                    <input type="checkbox" class="symptom-check" data-severity="normal" value="mild-tenderness">
+                    <span data-i18n="healing.symptoms.mildTenderness">Mild tenderness</span>
+                  </label>
+                  <label class="healing-tracker__checkbox-label">
+                    <input type="checkbox" class="symptom-check" data-severity="normal" value="itching">
+                    <span data-i18n="healing.symptoms.itching">Itching (healing stage)</span>
+                  </label>
+                  <label class="healing-tracker__checkbox-label">
+                    <input type="checkbox" class="symptom-check" data-severity="monitor" value="moderate-swelling">
+                    <span data-i18n="healing.symptoms.moderateSwelling">Moderate swelling</span>
+                  </label>
+                  <label class="healing-tracker__checkbox-label">
+                    <input type="checkbox" class="symptom-check" data-severity="monitor" value="increased-redness">
+                    <span data-i18n="healing.symptoms.increasedRedness">Increased redness</span>
+                  </label>
+                  <label class="healing-tracker__checkbox-label">
+                    <input type="checkbox" class="symptom-check" data-severity="monitor" value="yellow-discharge">
+                    <span data-i18n="healing.symptoms.yellowDischarge">Yellow/white discharge</span>
+                  </label>
+                  <label class="healing-tracker__checkbox-label">
+                    <input type="checkbox" class="symptom-check" data-severity="monitor" value="warmth">
+                    <span data-i18n="healing.symptoms.warmth">Warmth around area</span>
+                  </label>
+                  <label class="healing-tracker__checkbox-label">
+                    <input type="checkbox" class="symptom-check" data-severity="concerning" value="severe-pain">
+                    <span data-i18n="healing.symptoms.severePain">Severe pain</span>
+                  </label>
+                  <label class="healing-tracker__checkbox-label">
+                    <input type="checkbox" class="symptom-check" data-severity="concerning" value="fever">
+                    <span data-i18n="healing.symptoms.fever">Fever (&gt;101°F / 38.3°C)</span>
+                  </label>
+                  <label class="healing-tracker__checkbox-label">
+                    <input type="checkbox" class="symptom-check" data-severity="concerning" value="red-streaks">
+                    <span data-i18n="healing.symptoms.redStreaks">Red streaks spreading</span>
+                  </label>
+                  <label class="healing-tracker__checkbox-label">
+                    <input type="checkbox" class="symptom-check" data-severity="concerning" value="green-discharge">
+                    <span data-i18n="healing.symptoms.greenDischarge">Green/foul discharge</span>
+                  </label>
+                  <label class="healing-tracker__checkbox-label">
+                    <input type="checkbox" class="symptom-check" data-severity="concerning" value="excessive-swelling">
+                    <span data-i18n="healing.symptoms.excessiveSwelling">Excessive swelling</span>
+                  </label>
+                  <label class="healing-tracker__checkbox-label">
+                    <input type="checkbox" class="symptom-check" data-severity="concerning" value="bleeding">
+                    <span data-i18n="healing.symptoms.bleeding">Persistent bleeding</span>
+                  </label>
+                </div>
+
+                <button id="checkSymptoms" class="healing-tracker__btn healing-tracker__btn--secondary" data-i18n="healing.symptoms.assessBtn">
+                  Assess My Symptoms
+                </button>
+
+                <div id="symptomResults" class="healing-tracker__symptom-results" style="display: none;">
+                  <!-- Symptom assessment results will appear here -->
+                </div>
+              </div>
+            </section>
+
+            <!-- Step 4: Daily Aftercare Checklist -->
+            <section class="healing-tracker__section">
+              <h2 class="healing-tracker__section-title">
+                <span class="healing-tracker__step-number">04</span>
+                <span data-i18n="healing.checklist.title">Today's Aftercare Checklist</span>
+              </h2>
+
+              <div id="aftercareChecklist" class="healing-tracker__checklist">
+                <!-- Checklist will be dynamically generated based on procedure type -->
+              </div>
+
+              <button id="resetChecklist" class="healing-tracker__btn healing-tracker__btn--outline" data-i18n="healing.checklist.resetBtn">
+                Reset Today's Checklist
+              </button>
+
+              <!-- Dynamic Studio Pro-Tips -->
+              <div id="proTipsContainer" class="pro-tips-container" style="margin-top: var(--spacing-lg);">
+                <div class="pro-tips-header">
+                  <div class="pro-tips-title-group">
+                    <span class="pro-tips-icon">💡</span>
+                    <h3 class="pro-tips-title" data-i18n="healing.proTips.title">Studio Pro-Tips</h3>
+                  </div>
+                  <span id="proTipsStageBadge" class="pro-tips-stage-badge" data-i18n="healing.tips.stageMonitoring">[ STAGE_MONITORING ]</span>
+                </div>
+                <p class="pro-tips-subtitle" data-i18n="healing.proTips.subtitle">
+                  Stage-specific aftercare guidance from professional studio practice
+                </p>
+                <div id="proTipsList" class="pro-tips-list"></div>
+              </div>
+
+              <!-- Feature: Daily Hydration Intake & Skin Regeneration -->
+              <div id="hydrationTrackerCard" class="hydration-tracker-card" style="margin-top: var(--spacing-lg);">
+                <div class="hydration-tracker-header">
+                  <div class="hydration-tracker-title-group">
+                    <span class="hydration-tracker-icon">💧</span>
+                    <div>
+                      <h3 class="hydration-tracker-title" data-i18n="healing.hydration.title">Daily Dermal Hydration Check-in</h3>
+                      <p class="hydration-tracker-subtitle" data-i18n="healing.hydration.subtitle">Track water intake to support epidermal mitosis, scab elasticity, and lymphatic pigment resolution.</p>
+                    </div>
+                  </div>
+                  <span id="hydrationStatusBadge" class="hydration-status-badge hydration-status-badge--moderate">Adequate Hydration</span>
+                </div>
+
+                <div class="hydration-tracker-body">
+                  <div class="hydration-metrics-row">
+                    <div class="hydration-counter-block">
+                      <span class="hydration-counter-val" id="hydrationCurrentCount">0</span>
+                      <span class="hydration-counter-sep">/</span>
+                      <span class="hydration-counter-target" id="hydrationTargetCount">8</span>
+                      <span class="hydration-counter-unit" data-i18n="healing.hydration.unitGlasses">Glasses (250ml)</span>
+                    </div>
+                    <div class="hydration-btn-group">
+                      <button type="button" id="hydrationRemoveCupBtn" class="hydration-circle-btn" aria-label="Subtract 1 glass" title="Subtract 1 glass">-</button>
+                      <button type="button" id="hydrationAddCupBtn" class="hydration-circle-btn hydration-circle-btn--primary" aria-label="Add 1 glass" title="Add 1 glass">+ 1 Glass</button>
+                    </div>
+                  </div>
+
+                  <div class="hydration-progress-bar-wrap">
+                    <div class="hydration-progress-bar-track">
+                      <div id="hydrationProgressBarFill" class="hydration-progress-bar-fill" style="width: 0%;"></div>
+                    </div>
+                    <span id="hydrationProgressPct" class="hydration-progress-pct">0%</span>
+                  </div>
+
+                  <div class="hydration-controls-row">
+                    <label for="hydrationIntervalSelect" class="hydration-interval-label" data-i18n="healing.hydration.reminderIntervalLabel">Reminder Interval:</label>
+                    <select id="hydrationIntervalSelect" class="healing-tracker__select hydration-interval-select">
+                      <option value="60" data-i18n="healing.hydration.interval60">Every 1 hour</option>
+                      <option value="120" selected data-i18n="healing.hydration.interval120">Every 2 hours (Recommended)</option>
+                      <option value="180" data-i18n="healing.hydration.interval180">Every 3 hours</option>
+                      <option value="0" data-i18n="healing.hydration.intervalOff">Notifications Off</option>
+                    </select>
+                  </div>
+
+                  <div class="hydration-clinical-tip">
+                    <span class="hydration-tip-icon">🔬</span>
+                    <span data-i18n="healing.hydration.clinicalNote">Clinical Note: Dehydrated stratum corneum increases scab brittleness and causes premature micro-cracking in healing tattoos. Consistent oral hydration accelerates dermal interstitial fluid exchange.</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Daily Healing Log & Entries -->
+            <section class="healing-tracker__section" id="healingLogSection">
+              <div class="healing-log__header">
+                <div>
+                  <h2 class="healing-tracker__section-title" style="margin-bottom: var(--spacing-xs);">
+                    <span class="healing-tracker__step-number">📝</span>
+                    <span data-i18n="healing.log.title">Daily Healing Log &amp; Entry</span>
+                  </h2>
+                  <p class="healing-tracker__helper-text" data-i18n="healing.log.subtitle">Log your daily observations to track progress, visualize trends, and capture milestone photos.</p>
+                </div>
+                <button id="openNewEntryBtn" class="healing-tracker__btn healing-tracker__btn--primary" data-i18n="healing.log.addNewEntry">
+                  ➕ Log Today's Entry
+                </button>
+              </div>
+
+              <div id="healingEmptyLog" class="healing-tracker__helper-text" style="padding: var(--spacing-lg); background: var(--bg-secondary); border-radius: var(--border-radius-lg);" data-i18n="healing.log.noEntries">
+                No daily entries recorded yet. Tap 'Log Today's Entry' to record your first milestone.
+              </div>
+
+              <div id="healingEntriesList" class="healing-log__entry-list"></div>
+            </section>
+
+            <!-- Feature 1: Milestone Gallery & Photo Comparison -->
+            <section class="healing-tracker__section" id="photoComparisonSection">
+              <div class="milestone-view-header">
+                <div class="milestone-view-header__title-area">
+                  <h2 class="healing-tracker__section-title">
+                    <span class="healing-tracker__step-number">📸</span>
+                    <span data-i18n="healing.gallery.title">Milestone Gallery</span>
+                  </h2>
+                  <p class="healing-tracker__helper-text" data-i18n="healing.gallery.subtitle">
+                    Chronological visual progression of all uploaded healing milestone photos.
+                  </p>
+                </div>
+                <!-- View Mode Switcher -->
+                <div class="milestone-view-mode-tabs" role="tablist" aria-label="Milestone View Options">
+                  <button type="button" class="milestone-tab-btn milestone-tab-btn--active" id="milestoneTabGallery" role="tab" aria-selected="true" data-i18n="healing.gallery.viewGalleryTab">
+                    🖼️ Milestone Gallery Grid
+                  </button>
+                  <button type="button" class="milestone-tab-btn" id="milestoneTabSlider" role="tab" aria-selected="false" data-i18n="healing.gallery.viewSliderTab">
+                    ↔ Split Comparison Slider
+                  </button>
+                </div>
+              </div>
+
+              <!-- VIEW 1: MILESTONE GALLERY GRID -->
+              <div id="milestoneGalleryView" class="milestone-gallery-view">
+                <!-- Gallery controls & stats bar -->
+                <div id="milestoneGalleryControls" class="milestone-gallery-controls" style="display: none;">
+                  <div class="milestone-gallery-stats">
+                    <span class="milestone-stat-item" id="milestoneStatCount" data-i18n="healing.milestones.zeroPhotos">0 Photos</span>
+                    <span class="milestone-stat-divider">•</span>
+                    <span class="milestone-stat-item" id="milestoneStatSpan" data-i18n="healing.milestones.spanDayZero">Span: Day 0</span>
+                  </div>
+                  <div class="milestone-gallery-sort">
+                    <label for="milestoneSortSelect" class="milestone-sort-label" data-i18n="healing.gallery.sortLabel">Sort:</label>
+                    <select id="milestoneSortSelect" class="healing-tracker__select milestone-sort-select">
+                      <option value="asc" data-i18n="healing.gallery.sortOldest">Oldest First (Day 0 ➔)</option>
+                      <option value="desc" data-i18n="healing.gallery.sortNewest">Newest First (➔ Day 0)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Empty State -->
+                <div id="milestoneGalleryEmpty" class="milestone-gallery-empty">
+                  <div class="milestone-empty-icon">📷</div>
+                  <h3 class="milestone-empty-title" data-i18n="healing.gallery.emptyTitle">No Milestone Photos Yet</h3>
+                  <p class="milestone-empty-desc" data-i18n="healing.gallery.emptyDesc">Photos uploaded as Day 0 baseline or during daily check-ins will appear here in chronological order.</p>
+                </div>
+
+                <!-- Gallery Grid -->
+                <div id="milestoneGalleryGrid" class="milestone-gallery-grid" style="display: none;"></div>
+              </div>
+
+              <!-- VIEW 2: SPLIT COMPARISON SLIDER -->
+              <div id="milestoneComparisonView" class="milestone-comparison-view" style="display: none;">
+                <div class="photo-comparison-wrapper">
+                  <p class="healing-tracker__helper-text" data-i18n="healing.photoComparison.subtitle">Compare any two healing milestones side-by-side with an interactive split slider.</p>
+                  
+                  <div id="photoComparisonNoPhotos" class="healing-tracker__helper-text" data-i18n="healing.photoComparison.noPhotos">
+                    At least two entries with photos (or a baseline photo plus an entry photo) are needed for comparison.
+                  </div>
+
+                  <div id="photoComparisonContainer" style="display: none;">
+                    <div class="photo-comparison__selectors">
+                      <div class="photo-comparison__select-group">
+                        <label for="comparePhotoA" data-i18n="healing.photoComparison.selectBefore">Select Earlier Photo (e.g. Day 0 / Baseline)</label>
+                        <select id="comparePhotoA" class="healing-tracker__select"></select>
+                      </div>
+                      <div class="photo-comparison__select-group">
+                        <label for="comparePhotoB" data-i18n="healing.photoComparison.selectAfter">Select Later Photo (e.g. Day 21)</label>
+                        <select id="comparePhotoB" class="healing-tracker__select"></select>
+                      </div>
+                    </div>
+
+                    <div class="comparison-slider-stage" id="comparisonSliderContainer">
+                      <img id="compareImageAfter" class="comparison-img-after" src="" alt="After milestone">
+                      <div id="comparisonBeforeClip" class="comparison-clip-before">
+                        <img id="compareImageBefore" class="comparison-img-before" src="" alt="Before milestone">
+                      </div>
+                      <div id="comparisonDivider" class="comparison-divider-line">
+                        <div class="comparison-divider-handle">↔</div>
+                      </div>
+                    </div>
+
+                    <div class="comparison-labels-bar">
+                      <span id="compareLabelA" data-i18n="healing.comparison.photoA">Photo A</span>
+                      <span id="compareLabelB" data-i18n="healing.comparison.photoB">Photo B</span>
+                    </div>
+                    <p class="what-changed__help" style="text-align: center; margin-top: var(--spacing-sm);" data-i18n="healing.photoComparison.sliderHelp">
+                      Drag the divider horizontally to compare healing progress between the two dates.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Feature: Side-by-Side Symptom Severity Comparison -->
+            <section class="healing-tracker__section" id="symptomSeverityComparisonSection">
+              <h2 class="healing-tracker__section-title">
+                <span class="healing-tracker__step-number">📊</span>
+                <span data-i18n="healing.severityComparison.title">Symptom Severity Comparison</span>
+              </h2>
+              <div class="severity-comparison-wrapper">
+                <p class="healing-tracker__helper-text" data-i18n="healing.severityComparison.subtitle">
+                  Select two historical log entries to visualize the difference in severity levels using a side-by-side bar chart.
+                </p>
+
+                <div id="severityComparisonNoData" class="healing-tracker__helper-text" data-i18n="healing.severityComparison.noEntries">
+                  At least two log entries are needed to compare symptom severity levels over time.
+                </div>
+
+                <div id="severityComparisonContainer" style="display: none;">
+                  <div class="severity-comparison__selectors">
+                    <div class="severity-comparison__select-group">
+                      <label for="compareSeverityEntryA" data-i18n="healing.severityComparison.selectEntryA">Select Earlier Entry (Baseline)</label>
+                      <select id="compareSeverityEntryA" class="healing-tracker__select"></select>
+                    </div>
+                    <div class="severity-comparison__select-group">
+                      <label for="compareSeverityEntryB" data-i18n="healing.severityComparison.selectEntryB">Select Later Entry to Compare</label>
+                      <select id="compareSeverityEntryB" class="healing-tracker__select"></select>
+                    </div>
+                  </div>
+
+                  <!-- Side-by-Side Bar Chart Card -->
+                  <div class="severity-chart-card">
+                    <div class="severity-chart-legend">
+                      <div class="legend-item">
+                        <span class="legend-swatch legend-swatch--a"></span>
+                        <span id="severityLegendA" data-i18n="healing.comparison.entry1">Entry 1</span>
+                      </div>
+                      <div class="legend-item">
+                        <span class="legend-swatch legend-swatch--b"></span>
+                        <span id="severityLegendB" data-i18n="healing.comparison.entry2">Entry 2</span>
+                      </div>
+                    </div>
+                    <div id="severityBarChartContainer" class="severity-barchart-container"></div>
+                  </div>
+
+                  <!-- Symptom Deltas Grid -->
+                  <div id="severityDeltasGrid" class="severity-deltas-grid"></div>
+
+                  <!-- Overall Severity Trajectory Summary Card -->
+                  <div id="severityOverallCard" class="severity-overall-card"></div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Feature 2: Symptom Severity & Milestone Calendar -->
+            <section class="healing-tracker__section" id="healingCalendarSection">
+              <h2 class="healing-tracker__section-title">
+                <span class="healing-tracker__step-number">📅</span>
+                <span data-i18n="healing.calendar.title">Healing &amp; Symptom Calendar</span>
+              </h2>
+              <p class="healing-tracker__helper-text" data-i18n="healing.calendar.subtitle">Map historical discomfort and milestone severity over time to recognize recovery patterns.</p>
+              <div id="healingCalendarContainer" class="calendar-card">
+                <div class="calendar-stats-row">
+                  <div class="calendar-stat-item">
+                    <span class="calendar-stat-label" data-i18n="healing.calendar.loggedDaysLabel">Total Days Logged</span>
+                    <span id="calendarLoggedDaysCount" class="calendar-stat-value">0</span>
+                  </div>
+                  <div class="calendar-stat-item">
+                    <span class="calendar-stat-label" data-i18n="healing.calendar.streakLabel">Consecutive Days</span>
+                    <span id="calendarStreakCount" class="calendar-stat-value">0 d</span>
+                  </div>
+                  <div class="calendar-stat-item">
+                    <span class="calendar-stat-label" data-i18n="healing.calendar.peakDayLabel">Peak Discomfort Day</span>
+                    <span id="calendarPeakDay" class="calendar-stat-value">--</span>
+                  </div>
+                </div>
+                <div class="calendar-nav-bar">
+                  <h3 id="calendarMonthTitle" class="calendar-month-title" aria-live="polite"></h3>
+                  <div class="calendar-nav-controls">
+                    <button type="button" id="calendarPrevMonthBtn" class="calendar-nav-btn" data-i18n-aria="healing.calendar.prevMonth" aria-label="Previous Month">&lsaquo;</button>
+                    <button type="button" id="calendarTodayBtn" class="calendar-nav-btn" data-i18n="healing.calendar.today">Current Month</button>
+                    <button type="button" id="calendarNextMonthBtn" class="calendar-nav-btn" data-i18n-aria="healing.calendar.nextMonth" aria-label="Next Month">&rsaquo;</button>
+                  </div>
+                </div>
+                <div id="calendarWeekdays" class="calendar-weekdays-row" aria-hidden="true"></div>
+                <div id="calendarGrid" class="calendar-grid"></div>
+                <div id="calendarDayDetailsCard" class="calendar-day-details-card" style="display: none;"></div>
+              </div>
+            </section>
+
+            <!-- Feature 3: Symptom Trends Over Time -->
+            <section class="healing-tracker__section" id="symptomTrendsSection">
+              <h2 class="healing-tracker__section-title">
+                <span class="healing-tracker__step-number">📈</span>
+                <span data-i18n="healing.trends.title">Symptom Trends Over Time</span>
+              </h2>
+              <div class="symptom-trends-wrapper">
+                <p class="healing-tracker__helper-text" data-i18n="healing.trends.subtitle">Visualizing the trajectory of your redness, swelling, tenderness, and discharge across logged entries.</p>
+                
+                <div id="symptomTrendsNoData" class="healing-tracker__helper-text" data-i18n="healing.trends.noData">
+                  Log at least 2 entries to view progression curves and trajectory sentences.
+                </div>
+
+                <div id="symptomTrendsChart" style="display: none;"></div>
+                <div id="symptomSentencesList" class="symptom-sentences-container" style="display: none;"></div>
+              </div>
+            </section>
+
+            <!-- Feature: Piercing Tension Gauge (Tightness & Downsizing Evaluation) -->
+            <section class="healing-tracker__section" id="piercingTensionGaugeCard">
+              <div class="tension-gauge-header">
+                <div class="tension-gauge-title-group">
+                  <span class="tension-gauge-icon">📏</span>
+                  <div>
+                    <h3 class="healing-tracker__section-title" style="margin: 0;" data-i18n="healing.tensionGauge.cardTitle">Piercing Tension Gauge</h3>
+                    <p class="healing-tracker__helper-text" style="margin: 4px 0 0 0;" data-i18n="healing.tensionGauge.cardSubtitle">Daily jewelry tightness tracker. Evaluates tissue compression and recommends professional downsizing if persistent for 7+ days.</p>
+                  </div>
+                </div>
+                <span id="tensionGaugeStreakBadge" class="tension-gauge-streak-badge tension-gauge-streak-badge--normal" data-i18n="healing.tensionGauge.streakNormal">✓ Normal Clearance</span>
+              </div>
+
+              <div class="tension-gauge-body">
+                <div class="tension-gauge-status-row">
+                  <span class="tension-gauge-current-label" data-i18n="healing.tensionGauge.currentLevelLabel">Current Rating:</span>
+                  <strong id="tensionGaugeLevelDisplay" class="tension-gauge-level-display">Level 0: Normal / Comfortable Clearance</strong>
+                </div>
+
+                <div class="tension-gauge-bar" aria-label="Tension Gauge Scale">
+                  <div class="tension-gauge-bar__segment active active--normal" data-level="0" title="Level 0: Normal Clearance"></div>
+                  <div class="tension-gauge-bar__segment" data-level="1" title="Level 1: Snug"></div>
+                  <div class="tension-gauge-bar__segment" data-level="2" title="Level 2: Moderate Tightness"></div>
+                  <div class="tension-gauge-bar__segment" data-level="3" title="Level 3: Constricting"></div>
+                </div>
+
+                <div id="tensionGaugeAdvisoryText" class="tension-gauge-advisory tension-gauge-advisory--normal" data-i18n="healing.tensionGauge.normalComfortable">
+                  Jewelry clearance is adequate. Lymphatic drainage and micro-perfusion are uncompromised.
+                </div>
+              </div>
+            </section>
+
+            <!-- Feature: Jewelry Longevity & Downsizing Calculator (piercings only) -->
+            <section class="healing-tracker__section" id="jewelryLongevitySection">
+              <h2 class="healing-tracker__section-title">
+                <span class="healing-tracker__step-number">💍</span>
+                <span data-i18n="jewelryLongevity.title">Jewelry Longevity &amp; Downsizing Calculator</span>
+              </h2>
+              <p class="healing-tracker__helper-text" data-i18n="jewelryLongevity.subtitle">Calculate expected jewelry material lifespan, optimal professional downsizing windows, and fastener integrity check schedules.</p>
+              <form id="jewelryLongevityForm" class="jewelry-longevity-form" novalidate>
+                <div class="healing-tracker__form-group">
+                  <label for="jewelryLocationSelect" class="healing-tracker__label" data-i18n="jewelryLongevity.locationLabel">Piercing Location</label>
+                  <select id="jewelryLocationSelect" class="healing-tracker__select">
+                    <option value="oral_tongue" data-i18n="jewelryLongevity.locations.oral_tongue.name"></option>
+                    <option value="oral_lip" data-i18n="jewelryLongevity.locations.oral_lip.name"></option>
+                    <option value="ear_cartilage" data-i18n="jewelryLongevity.locations.ear_cartilage.name"></option>
+                    <option value="ear_industrial" data-i18n="jewelryLongevity.locations.ear_industrial.name"></option>
+                    <option value="ear_lobe" data-i18n="jewelryLongevity.locations.ear_lobe.name"></option>
+                    <option value="nose_nostril" data-i18n="jewelryLongevity.locations.nose_nostril.name"></option>
+                    <option value="nose_septum" data-i18n="jewelryLongevity.locations.nose_septum.name"></option>
+                    <option value="body_navel" data-i18n="jewelryLongevity.locations.body_navel.name"></option>
+                    <option value="body_nipple" data-i18n="jewelryLongevity.locations.body_nipple.name"></option>
+                    <option value="facial_eyebrow" data-i18n="jewelryLongevity.locations.facial_eyebrow.name"></option>
+                    <option value="surface_dermal" data-i18n="jewelryLongevity.locations.surface_dermal.name"></option>
+                  </select>
+                </div>
+                <div class="healing-tracker__form-group">
+                  <label for="jewelryMaterialSelect" class="healing-tracker__label" data-i18n="jewelryLongevity.materialLabel">Jewelry Material</label>
+                  <select id="jewelryMaterialSelect" class="healing-tracker__select">
+                    <option value="titanium_f136" data-i18n="jewelryLongevity.materials.titanium_f136.name"></option>
+                    <option value="titanium_f67" data-i18n="jewelryLongevity.materials.titanium_f67.name"></option>
+                    <option value="gold_14k" data-i18n="jewelryLongevity.materials.gold_14k.name"></option>
+                    <option value="gold_18k" data-i18n="jewelryLongevity.materials.gold_18k.name"></option>
+                    <option value="bioflex" data-i18n="jewelryLongevity.materials.bioflex.name"></option>
+                  </select>
+                </div>
+                <div class="healing-tracker__form-group">
+                  <label for="jewelryFastenerSelect" class="healing-tracker__label" data-i18n="jewelryLongevity.fastenerLabel">Fastener / Closure Mechanism</label>
+                  <select id="jewelryFastenerSelect" class="healing-tracker__select">
+                    <option value="threadless" data-i18n="jewelryLongevity.fasteners.threadless.name"></option>
+                    <option value="internally_threaded" data-i18n="jewelryLongevity.fasteners.internally_threaded.name"></option>
+                    <option value="clicker_hinge" data-i18n="jewelryLongevity.fasteners.clicker_hinge.name"></option>
+                    <option value="captive_bead" data-i18n="jewelryLongevity.fasteners.captive_bead.name"></option>
+                  </select>
+                </div>
+                <div class="healing-tracker__form-group">
+                  <label for="jewelryProcedureDateInput" class="healing-tracker__label" data-i18n="jewelryLongevity.procedureDateLabel">Procedure Date</label>
+                  <input type="date" id="jewelryProcedureDateInput" class="healing-tracker__input">
+                </div>
+                <button type="submit" id="calculateJewelryLongevityBtn" class="healing-tracker__btn healing-tracker__btn--primary" data-i18n="jewelryLongevity.calculateBtn">Calculate Longevity &amp; Downsizing</button>
+              </form>
+              <div id="jewelryLongevityResults" aria-live="polite" style="display: none;"></div>
+            </section>
+
+            <!-- Feature: Summarized Healing Health Report -->
+            <section class="healing-tracker__section" id="healthReportSection">
+              <h2 class="healing-tracker__section-title">
+                <span class="healing-tracker__step-number">📋</span>
+                <span data-i18n="healing.healthReport.title">Healing Health Report</span>
+              </h2>
+              <p class="healing-tracker__helper-text" data-i18n="healing.healthReport.subtitle">Generate a clinical summary of recovery trajectory, symptom ratings, and milestones to review with your piercer or tattoo artist.</p>
+              
+              <div id="symptomTrendHealthReportNotice" class="symptom-trend-alert symptom-trend-alert--compact" style="display: none;">
+                <span class="symptom-trend-alert__badge" data-i18n="healing.symptomTrendAlert.badge">⚠️ SYMPTOM TREND ALERT</span>
+                <p id="symptomTrendHealthNoticeText" class="symptom-trend-alert__text"></p>
+              </div>
+              <div class="health-report-container">
+                <div class="health-report-actions">
+                  <button id="generateHealthReportBtn" class="healing-tracker__btn healing-tracker__btn--primary" data-i18n="healing.healthReport.generateBtn">
+                    📄 Generate Health Summary
+                  </button>
+                  <div id="healthReportActionsBar" style="display: none; gap: var(--spacing-sm); flex-wrap: wrap;">
+                    <button id="printHealthReportBtn" class="healing-tracker__btn healing-tracker__btn--secondary" data-i18n="healing.healthReport.printBtn">
+                      🖨️ Print / Save as PDF
+                    </button>
+                    <button id="copyHealthReportBtn" class="healing-tracker__btn healing-tracker__btn--outline" data-i18n="healing.healthReport.copyTextBtn">
+                      📋 Copy Clinical Text
+                    </button>
+                    <button id="downloadHealthReportBtn" class="healing-tracker__btn healing-tracker__btn--outline" data-i18n="healing.healthReport.downloadTextBtn">
+                      💾 Download .TXT
+                    </button>
+                  </div>
+                </div>
+
+                <div id="healthReportEmptyNotice" class="healing-tracker__helper-text" style="display: none; padding: var(--spacing-md); background: var(--bg-secondary);" data-i18n="healing.healthReport.emptyNotice">
+                  Please log at least one healing entry to generate your clinical recovery health summary.
+                </div>
+
+                <div id="healthReportPreviewCard" style="display: none; margin-top: var(--spacing-md);"></div>
+              </div>
+            </section>
+
+            <!-- Feature: Healing Journey Snapshot (Visual Infographic Canvas Generator) -->
+            <section class="healing-tracker__section" id="journeySnapshotSection">
+              <div class="snapshot-header">
+                <div>
+                  <h2 class="healing-tracker__section-title" style="margin-bottom: var(--spacing-xs);">
+                    <span class="healing-tracker__step-number">🖼️</span>
+                    <span data-i18n="healing.snapshot.title">Healing Journey Snapshot</span>
+                  </h2>
+                  <p class="healing-tracker__helper-text" data-i18n="healing.snapshot.subtitle">
+                    Generate a shareable, visual infographic summarizing procedure type, milestone photos, recovery velocity, and aftercare trajectories to share directly with your artist or piercer.
+                  </p>
+                </div>
+              </div>
+
+              <div class="snapshot-actions-bar">
+                <button type="button" id="generateSnapshotBtn" class="healing-tracker__btn healing-tracker__btn--primary" data-i18n="healing.snapshot.generateBtn">
+                  🖼️ Generate Infographic
+                </button>
+                <button type="button" id="downloadSnapshotBtn" class="healing-tracker__btn healing-tracker__btn--secondary" data-i18n="healing.snapshot.downloadBtn">
+                  💾 Download Image (PNG)
+                </button>
+                <button type="button" id="copySnapshotBtn" class="healing-tracker__btn healing-tracker__btn--outline" data-i18n="healing.snapshot.copyBtn">
+                  📋 Copy to Clipboard
+                </button>
+              </div>
+
+              <div id="journeySnapshotContainer" class="journey-snapshot-canvas-wrap" style="display: none; margin-top: var(--spacing-md); text-align: center;">
+                <canvas id="journeySnapshotCanvas" width="800" height="960" class="journey-snapshot-canvas" aria-label="Healing Journey Infographic"></canvas>
+              </div>
+            </section>
+
+            <!-- Step 5: Product Allergy & Sensitivity Screener -->
+            <section class="healing-tracker__section" id="allergyScreenerSection">
+              <h2 class="healing-tracker__section-title">
+                <span class="healing-tracker__step-number">🧪</span>
+                <span data-i18n="healing.allergy.title">Product Allergy &amp; Sensitivity Screener</span>
+              </h2>
+              <p class="healing-tracker__helper-text" data-i18n="healing.allergy.subtitle">Screen aftercare washes, soaps, and ointments for contact allergens before applying to compromised skin or piercings.</p>
+              <div id="allergyScreenerContainer" class="allergy-screener-card">
+                <div class="allergy-form-group">
+                  <label for="allergyProductType" class="allergy-label" data-i18n="healing.allergyScreener.productTypeLabel">Product Category</label>
+                  <select id="allergyProductType" class="allergy-select">
+                    <option value="balm" data-i18n="healing.allergyScreener.productTypes.balm">Tattoo Ointment / Balm</option>
+                    <option value="cleanser" data-i18n="healing.allergyScreener.productTypes.cleanser">Piercing Cleanser / Saline Wash</option>
+                    <option value="film" data-i18n="healing.allergyScreener.productTypes.film">Barrier Film / Second Skin</option>
+                    <option value="lotion" data-i18n="healing.allergyScreener.productTypes.lotion">Daily Moisturizing Lotion</option>
+                    <option value="soap" data-i18n="healing.allergyScreener.productTypes.soap">Antiseptic / Antibacterial Soap</option>
+                  </select>
+                  <p id="allergyProductGuidance" class="allergy-guidance" style="display: none;"></p>
+                </div>
+                <div class="allergy-questions-list">
+                  <label class="allergy-checkbox-row">
+                    <input type="checkbox" id="allergyQ1">
+                    <span class="allergy-checkbox-text" data-i18n="healing.allergyScreener.q1"></span>
+                  </label>
+                  <label class="allergy-checkbox-row">
+                    <input type="checkbox" id="allergyQ2">
+                    <span class="allergy-checkbox-text" data-i18n="healing.allergyScreener.q2"></span>
+                  </label>
+                  <label class="allergy-checkbox-row">
+                    <input type="checkbox" id="allergyQ3">
+                    <span class="allergy-checkbox-text" data-i18n="healing.allergyScreener.q3"></span>
+                  </label>
+                  <label class="allergy-checkbox-row">
+                    <input type="checkbox" id="allergyQ4">
+                    <span class="allergy-checkbox-text" data-i18n="healing.allergyScreener.q4"></span>
+                  </label>
+                  <label class="allergy-checkbox-row">
+                    <input type="checkbox" id="allergyQ5">
+                    <span class="allergy-checkbox-text" data-i18n="healing.allergyScreener.q5"></span>
+                  </label>
+                  <label class="allergy-checkbox-row">
+                    <input type="checkbox" id="allergyQ6">
+                    <span class="allergy-checkbox-text" data-i18n="healing.allergyScreener.q6"></span>
+                  </label>
+                </div>
+                <div class="allergy-actions">
+                  <button type="button" id="allergyAssessBtn" class="healing-tracker__btn healing-tracker__btn--primary" data-i18n="healing.allergyScreener.btnAssess">Evaluate Product Safety</button>
+                  <button type="button" id="allergyResetBtn" class="healing-tracker__btn healing-tracker__btn--outline" data-i18n="healing.allergyScreener.btnReset">Reset Screener</button>
+                </div>
+                <div id="allergyResultsCard" class="allergy-results-card" style="display: none;" aria-live="polite">
+                  <span id="allergyRiskBadge" class="allergy-badge"></span>
+                  <p id="allergyRiskDesc" class="allergy-results-desc"></p>
+                  <ul id="allergyFactorsList" class="allergy-factors-list"></ul>
+                  <div id="allergyPatchTestBox" class="allergy-patch-test-box" style="display: none;">
+                    <div class="allergy-patch-title" data-i18n="healing.allergyScreener.patchTestTitle">Patch Test Protocol</div>
+                    <ol class="allergy-patch-steps">
+                      <li data-i18n="healing.allergyScreener.patchTestStep1"></li>
+                      <li data-i18n="healing.allergyScreener.patchTestStep2"></li>
+                      <li data-i18n="healing.allergyScreener.patchTestStep3"></li>
+                    </ol>
+                  </div>
+                  <p class="allergy-clinical-note" data-i18n="healing.allergyScreener.clinicalNote"></p>
+                </div>
+              </div>
+            </section>
+
+            <!-- Feature: Product Ingredient Scanner -->
+            <section class="healing-tracker__section" id="ingredientScannerSection">
+              <h2 class="healing-tracker__section-title">
+                <span class="healing-tracker__step-number">🔍</span>
+                <span data-i18n="healing.scanner.title">Product Ingredient Scanner</span>
+              </h2>
+              <p class="healing-tracker__helper-text" data-i18n="healing.scanner.subtitle">
+                Paste or list ingredients from your lotion, ointment, cleanser, or soap. The scanner cross-references them against a database of contact allergens, drying alcohols, occlusives, and cytotoxics to verify wound safety.
+              </p>
+
+              <div class="ingredient-scanner-card">
+                <div class="ingredient-presets-row">
+                  <span class="ingredient-presets-label" data-i18n="healing.scanner.samplePresetsLabel">Sample Presets:</span>
+                  <button type="button" class="ingredient-preset-btn" data-preset="saline" data-i18n="healing.scanner.presetSaline">Sterile Saline Spray</button>
+                  <button type="button" class="ingredient-preset-btn" data-preset="lotion" data-i18n="healing.scanner.presetLotion">Scented Body Lotion</button>
+                  <button type="button" class="ingredient-preset-btn" data-preset="ointment" data-i18n="healing.scanner.presetOintment">Petroleum Ointment</button>
+                  <button type="button" class="ingredient-preset-btn" data-preset="teatree" data-i18n="healing.scanner.presetTeatree">Tea Tree Antiseptic</button>
+                  <button type="button" class="ingredient-preset-btn" data-preset="cleanser" data-i18n="healing.scanner.presetCleanser">Gentle Unscented Wash</button>
+                </div>
+
+                <div class="ingredient-input-wrap">
+                  <label for="ingredientInputText" class="healing-tracker__label" data-i18n="healing.scanner.inputLabel">Product Ingredient List (INCI):</label>
+                  <textarea id="ingredientInputText" class="healing-tracker__textarea ingredient-textarea" rows="4" placeholder="e.g. Aqua, Petrolatum, Mineral Oil, Fragrance, Panthenol, Alcohol Denat..." data-i18n-placeholder="healing.scanner.placeholder"></textarea>
+                </div>
+
+                <div class="ingredient-actions-row">
+                  <button type="button" id="ingredientScanBtn" class="healing-tracker__btn healing-tracker__btn--primary" data-i18n="healing.scanner.scanBtn">
+                    🔍 Cross-Reference Ingredients
+                  </button>
+                  <button type="button" id="ingredientResetBtn" class="healing-tracker__btn healing-tracker__btn--outline" data-i18n="healing.scanner.resetBtn">
+                    Reset
+                  </button>
+                </div>
+
+                <!-- Results Display -->
+                <div id="ingredientResultsCard" class="ingredient-results-card" style="display: none; margin-top: var(--spacing-md);">
+                  <div class="ingredient-results-header">
+                    <span id="ingredientOverallBadge" class="ingredient-overall-badge"></span>
+                  </div>
+                  <p id="ingredientOverallSummary" class="ingredient-overall-summary"></p>
+                  
+                  <div id="ingredientIrritantsList" class="ingredient-irritants-list"></div>
+                  <div id="ingredientSafeList" class="ingredient-safe-list" style="display: none;"></div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Feature 5: Backup & Restore Data -->
+            <section class="healing-tracker__section" id="backupRestoreSection">
+              <h2 class="healing-tracker__section-title">
+                <span class="healing-tracker__step-number">💾</span>
+                <span data-i18n="healing.backup.title">Backup &amp; Restore Data</span>
+              </h2>
+              <div class="backup-restore-card">
+                <p class="healing-tracker__helper-text" data-i18n="healing.backup.subtitle">Your healing records and photos are stored entirely in your local browser. Export a backup file to move between phone and desktop or safeguard your data.</p>
+                <div class="backup-actions">
+                  <button id="exportBackupBtn" class="healing-tracker__btn healing-tracker__btn--secondary" data-i18n="healing.backup.exportBtn">
+                    📥 Export Complete JSON Backup
+                  </button>
+                  <button id="importBackupBtn" class="healing-tracker__btn healing-tracker__btn--outline" data-i18n="healing.backup.importBtn">
+                    📤 Restore from JSON Backup
+                  </button>
+                  <input type="file" id="importBackupInput" accept=".json,application/json" style="display: none;">
+                </div>
+                <div id="backupStorageIndicator" class="healing-storage-status" style="margin-top: var(--spacing-sm); font-size: 0.85rem; color: var(--text-secondary);"></div>
+                <div id="backupLowStorageBanner" class="healing-storage-low-banner" style="display: none; margin-top: var(--spacing-xs); padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--warning-orange); border-radius: var(--border-radius);">
+                  <div class="healing-storage-low-text" style="color: var(--warning-orange); font-size: 0.85rem;" data-i18n="healing.storage.lowWarning">⚠️ Storage is running low!</div>
+                  <p style="margin: 4px 0; font-size: 0.8rem; color: var(--text-secondary);" data-i18n="healing.storage.dropOldestPrompt">Free up space by dropping older photos while keeping their clinical entries, symptom ratings, and trend lines 100% intact.</p>
+                  <button type="button" class="drop-oldest-photos-btn healing-tracker__btn healing-tracker__btn--outline" style="margin-top: 6px; padding: 4px 8px; font-size: 0.8rem;" data-i18n="healing.storage.dropOldestBtn">🧹 Drop Oldest Photos</button>
+                </div>
+                <p class="healing-tracker__helper-text" style="margin-top: var(--spacing-sm); font-size: 0.85rem;" data-i18n="healing.backup.replaceNotice">
+                  ⚠️ Import Options: You can choose Complete Replacement (replaces current records) or Merge (keeps existing records and appends new ones).
+                </p>
+              </div>
+            </section>
+
+            <!-- Emergency Protocols Banner -->
+            <div class="emergency-banner">
+              <h4 data-i18n="healing.emergency.title">!! EMERGENCY_PROTOCOLS</h4>
+              <ul>
+                <li data-i18n="healing.emergency.protocolFever">→ High Fever (&gt;101°F / 38.3°C)</li>
+                <li data-i18n="healing.emergency.protocolStreaks">→ Expanding Red Streaks radiating from wound</li>
+                <li data-i18n="healing.emergency.protocolPain">→ Severe, worsening pain or respiratory distress</li>
+                <li data-i18n="healing.emergency.protocolInfection">→ Signs of severe infection (green pus, extreme swelling)</li>
+              </ul>
+              <p class="emergency-banner-note" data-i18n="healing.emergency.medicalDisclaimer">If you experience any of these symptoms, contact your healthcare provider immediately or seek emergency medical care.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Right Column: Visual Pane & Metrics Sidebar (Variation 6) -->
+        <aside class="visual-pane metrics-sidebar sidebar-col">
+          <div class="step-card visual-routine-card">
+            <span class="label" data-i18n="healing.checklist.label">CHECKLIST</span>
+            <h2 class="sidebar-routine-title" data-i18n="healing.checklist.dailyRoutineTitle">Daily Routine</h2>
+            <div class="quick-routine-list">
+              <div class="routine-item" data-i18n="healing.checklist.salineSoak">[ ] Saline Soak / Cleanse</div>
+              <div class="routine-item" data-i18n="healing.checklist.patDry">[ ] Pat Dry with Towel</div>
+              <div class="routine-item" data-i18n="healing.checklist.applyBalm">[ ] Apply Thin Balm</div>
+              <div class="routine-item" data-i18n="healing.checklist.monitorSwelling">[ ] Monitor Swelling</div>
+            </div>
+          </div>
+
+          <div id="symptomTrendSidebarAlert" class="symptom-trend-alert symptom-trend-alert--compact" style="display: none;" role="status">
+            <span class="symptom-trend-alert__badge" data-i18n="healing.symptomTrendAlert.badge">⚠️ SYMPTOM TREND ALERT</span>
+            <p id="symptomTrendSidebarText" class="symptom-trend-alert__text"></p>
+          </div>
+
+          <div class="emergency-panel emergency-alert">
+            <span class="label emergency-label" data-i18n="healing.emergency.criticalWarning">CRITICAL WARNING</span>
+            <h3 class="emergency-title" data-i18n="healing.emergency.medicalAttentionTitle">Medical Attention Required If:</h3>
+            <ul class="emergency-list">
+              <li data-i18n="healing.emergency.feverShort">Fever over 101°F (38.3°C)</li>
+              <li data-i18n="healing.emergency.redStreaksShort">Red streaks spreading</li>
+              <li data-i18n="healing.emergency.breathingDifficulty">Difficulty breathing</li>
+              <li data-i18n="healing.emergency.severePainShort">Severe localized pain</li>
+            </ul>
+            <p class="emergency-banner-note" data-i18n="healing.emergency.medicalDisclaimer">If you experience any of these symptoms, contact your healthcare provider immediately or seek emergency medical care.</p>
+          </div>
+
+          <div class="stat-box metric-card" style="margin-top: 2rem;">
+            <span class="label metric-label" data-i18n="healing.telemetry.currentPhase">CURRENT_PHASE</span>
+            <div class="stat-val metric-value" id="currentPhaseStat" data-i18n="healing.telemetry.waitingForData">WAITING_FOR_DATA</div>
+          </div>
+          
+          <div class="card visual-symptom-card">
+            <span class="label" data-i18n="healing.telemetry.symptomChecker">SYMPTOM_CHECKER</span>
+            <div class="visual-symptom-grid" id="visualSymptomGrid">
+              <div class="symptom-tag" id="visualSymptomRedness" data-i18n="healing.telemetry.mildRedness">[ ] MILD REDNESS</div>
+              <div class="symptom-tag" id="visualSymptomSwelling" data-i18n="healing.telemetry.swelling">[ ] SWELLING</div>
+              <div class="symptom-tag" id="visualSymptomTenderness" data-i18n="healing.telemetry.tenderness">[ ] TENDERNESS</div>
+              <div class="symptom-tag" id="visualSymptomItching" data-i18n="healing.telemetry.itching">[ ] ITCHING</div>
+            </div>
+          </div>
+
+          <div class="card visual-status-card" id="visualStatusCard">
+            <span class="label" data-i18n="healing.telemetry.systemTelemetry">SYSTEM_TELEMETRY</span>
+            <div class="telemetry-info">
+              <div class="telemetry-row">
+                <span class="telemetry-label" data-i18n="healing.telemetry.trackerStatus">TRACKER_STATUS:</span>
+                <span class="telemetry-val" id="telemetryTrackerStatus" data-i18n="healing.telemetry.ready">READY</span>
+              </div>
+              <div class="telemetry-row">
+                <span class="telemetry-label" data-i18n="healing.telemetry.clientStorage">CLIENT_STORAGE:</span>
+                <span class="telemetry-val" data-i18n="healing.telemetry.localSecure">LOCAL_SECURE</span>
+              </div>
+              <div class="telemetry-row">
+                <span class="telemetry-label" data-i18n="healing.telemetry.compliance">COMPLIANCE:</span>
+                <span class="telemetry-val">ASTM-F136 / ISO-10993</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="system-status-note">
+            <p><span data-i18n="healing.telemetry.systemStatusActive">SYSTEM_STATUS: ACTIVE</span><br><span data-i18n="healing.telemetry.readyForInput">READY_FOR_INPUT</span></p>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+  <!-- New Log Entry Modal Dialog -->
+  <div id="newEntryModal" class="healing-modal-overlay" style="display: none;">
+    <div class="healing-modal-content">
+      <div class="healing-modal-header">
+        <h3 data-i18n="healing.log.addNewEntry">➕ Log Today's Entry</h3>
+        <button id="closeEntryModalBtn" class="healing-modal-close">&times;</button>
+      </div>
+      <form id="logEntryForm">
+        <div class="healing-modal-body">
+          <div class="healing-tracker__form-group">
+            <label for="entryDate" class="healing-tracker__label" data-i18n="healing.log.entryDate">Entry Date</label>
+            <input type="date" id="entryDate" class="healing-tracker__input" required>
+          </div>
+
+          <div class="healing-tracker__form-group">
+            <label class="healing-tracker__label" data-i18n="healing.log.photoUpload">📷 Entry Photo (Optional)</label>
+            <input type="file" id="entryPhotoInput" accept="image/*" class="healing-tracker__file-input">
+            <div id="entryPreviewContainer" style="display: none; margin-top: var(--spacing-sm);">
+              <img id="entryPhotoPreview" src="" alt="Entry Preview" style="max-width: 140px; height: 140px; object-fit: cover; border-radius: var(--border-radius); border: 1px solid var(--border-primary);">
+              <div id="entryPhotoSizeInfo" style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;"></div>
+            </div>
+            <div id="entryStorageIndicator" class="healing-storage-status" style="margin-top: var(--spacing-xs); font-size: 0.85rem; color: var(--text-secondary);"></div>
+            <div id="entryLowStorageBanner" class="healing-storage-low-banner" style="display: none; margin-top: var(--spacing-xs); padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--warning-orange); border-radius: var(--border-radius);">
+              <div class="healing-storage-low-text" style="color: var(--warning-orange); font-size: 0.85rem;" data-i18n="healing.storage.lowWarning">⚠️ Storage is running low!</div>
+              <p style="margin: 4px 0; font-size: 0.8rem; color: var(--text-secondary);" data-i18n="healing.storage.dropOldestPrompt">Free up space by dropping older photos while keeping their clinical entries, symptom ratings, and trend lines 100% intact.</p>
+              <button type="button" class="drop-oldest-photos-btn healing-tracker__btn healing-tracker__btn--outline" style="margin-top: 6px; padding: 4px 8px; font-size: 0.8rem;" data-i18n="healing.storage.dropOldestBtn">🧹 Drop Oldest Photos</button>
+            </div>
+          </div>
+
+          <!-- Symptom Severity Ratings -->
+          <div class="severity-ratings-block">
+            <h4 style="margin: 0 0 var(--spacing-sm) 0; color: var(--text-primary);" data-i18n="healing.log.symptomRatings">Symptom Severity (0 = None, 3 = Severe)</h4>
+            
+            <!-- Redness -->
+            <div class="severity-rating-group">
+              <label data-i18n="healing.log.redness">🔴 Redness</label>
+              <div class="severity-options">
+                <label class="severity-option"><input type="radio" name="entryRedness" value="0" class="entry-rating-input" checked> <span data-i18n="healing.severity.none">0 - None</span></label>
+                <label class="severity-option"><input type="radio" name="entryRedness" value="1" class="entry-rating-input"> <span data-i18n="healing.severity.mild">1 - Mild</span></label>
+                <label class="severity-option"><input type="radio" name="entryRedness" value="2" class="entry-rating-input"> <span data-i18n="healing.severity.moderate">2 - Moderate</span></label>
+                <label class="severity-option"><input type="radio" name="entryRedness" value="3" class="entry-rating-input"> <span data-i18n="healing.severity.severe">3 - Severe</span></label>
+              </div>
+            </div>
+
+            <!-- Swelling -->
+            <div class="severity-rating-group">
+              <label data-i18n="healing.log.swelling">🎈 Swelling</label>
+              <div class="severity-options">
+                <label class="severity-option"><input type="radio" name="entrySwelling" value="0" class="entry-rating-input" checked> <span data-i18n="healing.severity.none">0 - None</span></label>
+                <label class="severity-option"><input type="radio" name="entrySwelling" value="1" class="entry-rating-input"> <span data-i18n="healing.severity.slight">1 - Slight</span></label>
+                <label class="severity-option"><input type="radio" name="entrySwelling" value="2" class="entry-rating-input"> <span data-i18n="healing.severity.moderate">2 - Moderate</span></label>
+                <label class="severity-option"><input type="radio" name="entrySwelling" value="3" class="entry-rating-input"> <span data-i18n="healing.severity.severe">3 - Severe</span></label>
+              </div>
+            </div>
+
+            <!-- Tenderness -->
+            <div class="severity-rating-group">
+              <label data-i18n="healing.log.tenderness">🩹 Tenderness</label>
+              <div class="severity-options">
+                <label class="severity-option"><input type="radio" name="entryTenderness" value="0" class="entry-rating-input" checked> <span data-i18n="healing.severity.none">0 - None</span></label>
+                <label class="severity-option"><input type="radio" name="entryTenderness" value="1" class="entry-rating-input"> <span data-i18n="healing.severity.mild">1 - Mild</span></label>
+                <label class="severity-option"><input type="radio" name="entryTenderness" value="2" class="entry-rating-input"> <span data-i18n="healing.severity.moderate">2 - Moderate</span></label>
+                <label class="severity-option"><input type="radio" name="entryTenderness" value="3" class="entry-rating-input"> <span data-i18n="healing.severity.severe">3 - Severe</span></label>
+              </div>
+            </div>
+
+            <!-- Discharge -->
+            <div class="severity-rating-group">
+              <label data-i18n="healing.log.discharge">💧 Discharge</label>
+              <p class="what-changed__help" style="margin-bottom: var(--spacing-xs);" data-i18n="healing.log.dischargeHelp">
+                Note: Clear or whitish lymph fluid that dries into crust is normal during healing. It is not pus and not an infection.
+              </p>
+              <div class="severity-options">
+                <label class="severity-option"><input type="radio" name="entryDischarge" value="0" class="entry-rating-input" checked> <span data-i18n="healing.severity.none">0 - None</span></label>
+                <label class="severity-option"><input type="radio" name="entryDischarge" value="1" class="entry-rating-input"> <span data-i18n="healing.severity.clearLymph">1 - Clear/Whitish Lymph</span></label>
+                <label class="severity-option"><input type="radio" name="entryDischarge" value="2" class="entry-rating-input"> <span data-i18n="healing.severity.moderateYellow">2 - Moderate Yellow</span></label>
+                <label class="severity-option"><input type="radio" name="entryDischarge" value="3" class="entry-rating-input"> <span data-i18n="healing.severity.discoloredHeavy">3 - Discolored/Heavy</span></label>
+              </div>
+            </div>
+
+            <!-- Piercing Tension / Tightness Rating (Piercing Only) -->
+            <div id="entryTensionFormGroup" class="severity-rating-group" style="display: none;">
+              <label data-i18n="healing.tensionGauge.inputLabel">📏 Jewelry Tension / Tightness</label>
+              <p class="what-changed__help" style="margin-bottom: var(--spacing-xs);" data-i18n="healing.tensionGauge.inputHelp">
+                Rate how snug or tight your jewelry feels against swelling. Persistent tightness for 7+ days risks embedding and requires studio inspection.
+              </p>
+              <div class="severity-options">
+                <label class="severity-option"><input type="radio" name="entryTension" value="0" class="entry-rating-input" checked> <span data-i18n="healing.tensionGauge.opt0">0 - Normal Clearance</span></label>
+                <label class="severity-option"><input type="radio" name="entryTension" value="1" class="entry-rating-input"> <span data-i18n="healing.tensionGauge.opt1">1 - Snug / In Contact</span></label>
+                <label class="severity-option"><input type="radio" name="entryTension" value="2" class="entry-rating-input"> <span data-i18n="healing.tensionGauge.opt2">2 - Moderately Tight</span></label>
+                <label class="severity-option"><input type="radio" name="entryTension" value="3" class="entry-rating-input"> <span data-i18n="healing.tensionGauge.opt3">3 - Severe / Constricting</span></label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature 4: What Changed Section (Dynamic Trigger) -->
+          <div id="whatChangedSection" class="what-changed-card" style="display: none;">
+            <h4 class="what-changed__title" data-i18n="healing.whatChanged.title">⚡ What Changed Since Last Entry?</h4>
+            <p class="what-changed__prompt" data-i18n="healing.whatChanged.prompt">Your symptoms indicate higher irritation compared to your previous entry. Did any of the following occur recently?</p>
+            
+            <div class="what-changed__grid">
+              <label class="what-changed__label">
+                <input type="checkbox" class="what-changed-check" value="knocked_it">
+                <span data-i18n="healing.whatChanged.knocked_it">Knocked / snagged on clothing or hair</span>
+              </label>
+              <label class="what-changed__label">
+                <input type="checkbox" class="what-changed-check" value="slept_on_it">
+                <span data-i18n="healing.whatChanged.slept_on_it">Slept on it / prolonged pressure</span>
+              </label>
+              <label class="what-changed__label">
+                <input type="checkbox" class="what-changed-check" value="new_jewellery">
+                <span data-i18n="healing.whatChanged.new_jewellery">Changed or inserted new jewellery</span>
+              </label>
+              <label class="what-changed__label">
+                <input type="checkbox" class="what-changed-check" value="changed_product">
+                <span data-i18n="healing.whatChanged.changed_product">Changed soap, lotion, or cleansing product</span>
+              </label>
+              <label class="what-changed__label">
+                <input type="checkbox" class="what-changed-check" value="swimming">
+                <span data-i18n="healing.whatChanged.swimming">Submerged in water (pool, bath, hot tub, sea)</span>
+              </label>
+              <label class="what-changed__label">
+                <input type="checkbox" class="what-changed-check" value="gym">
+                <span data-i18n="healing.whatChanged.gym">Gym workout, heavy sweating, or equipment friction</span>
+              </label>
+              <label class="what-changed__label">
+                <input type="checkbox" class="what-changed-check" value="new_piercing_nearby">
+                <span data-i18n="healing.whatChanged.new_piercing_nearby">Received another piercing or tattoo nearby</span>
+              </label>
+              <label class="what-changed__label">
+                <input type="checkbox" class="what-changed-check" value="other">
+                <span data-i18n="healing.whatChanged.other">Other physical irritation or accidental contact</span>
+              </label>
+            </div>
+            <p class="what-changed__help" data-i18n="healing.whatChanged.help">Recording the likely cause helps you and your professional piercer or tattooist understand irritation triggers. We record the cause; we do not diagnose.</p>
+          </div>
+
+          <div class="healing-tracker__form-group">
+            <label for="entryNotes" class="healing-tracker__label" data-i18n="healing.log.notes">Notes &amp; Observations</label>
+            <textarea id="entryNotes" class="healing-tracker__textarea" rows="2" data-i18n-placeholder="healing.log.notesPlaceholder" placeholder="e.g. Swelling reduced after saline soak; feels comfortable."></textarea>
+          </div>
+        </div>
+        <div class="healing-modal-footer">
+          <button type="button" id="cancelEntryBtn" class="healing-tracker__btn healing-tracker__btn--outline" data-i18n="healing.log.cancel">Cancel</button>
+          <button type="submit" class="healing-tracker__btn healing-tracker__btn--primary" data-i18n="healing.log.saveEntry">Save Log Entry</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Backup Import Choice Modal Dialog (Replace vs Merge) -->
+  <div id="importChoiceModal" class="healing-modal-overlay" style="display: none;">
+    <div class="healing-modal-content" style="max-width: 540px;">
+      <div class="healing-modal-header">
+        <h3 data-i18n="healing.backup.chooseModeTitle">📥 Choose Import Method</h3>
+        <button id="closeImportChoiceModalBtn" class="healing-modal-close" type="button">&times;</button>
+      </div>
+      <div class="healing-modal-body">
+        <p id="importFileSummary" style="color: var(--text-primary); margin-bottom: var(--spacing-sm); font-weight: 600;"></p>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: var(--spacing-md);" data-i18n="healing.backup.chooseModeDesc">The backup has been validated. Please choose whether to replace your existing records or merge with them:</p>
+
+        <div style="display: flex; flex-direction: column; gap: var(--spacing-sm); margin-bottom: var(--spacing-sm);">
+          <!-- Option A: Replace -->
+          <div class="import-mode-card" style="padding: var(--spacing-md); border: 1px solid var(--border-primary); border-radius: var(--border-radius); background: var(--bg-card);">
+            <h4 style="margin: 0 0 6px 0; color: var(--calm-blue); font-size: 0.95rem;" data-i18n="healing.backup.replaceOptionTitle">Option A: Complete Replacement (Overwrite)</h4>
+            <p style="margin: 0 0 var(--spacing-sm) 0; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;" data-i18n="healing.backup.replaceOptionDesc">
+              Discards your current log entirely and replaces all pieces and entries with this backup. Any records currently in this browser will be overwritten.
+            </p>
+            <button id="confirmImportReplaceBtn" type="button" class="healing-tracker__btn healing-tracker__btn--primary" style="width: 100%; font-size: 0.9rem;" data-i18n="healing.backup.replaceBtn">
+              Replace Current Log
+            </button>
+          </div>
+
+          <!-- Option B: Merge -->
+          <div class="import-mode-card" style="padding: var(--spacing-md); border: 1px solid var(--border-primary); border-radius: var(--border-radius); background: var(--bg-card);">
+            <h4 style="margin: 0 0 6px 0; color: var(--calm-blue); font-size: 0.95rem;" data-i18n="healing.backup.mergeOptionTitle">Option B: Merge Records</h4>
+            <p style="margin: 0 0 var(--spacing-sm) 0; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;" data-i18n="healing.backup.mergeOptionDesc">
+              Keeps existing records and imports backup pieces/entries into them. Duplicates are identified by matching piece ID/location and entry date/day offset (duplicate entries will be skipped to prevent duplicate records).
+            </p>
+            <button id="confirmImportMergeBtn" type="button" class="healing-tracker__btn healing-tracker__btn--secondary" style="width: 100%; font-size: 0.9rem;" data-i18n="healing.backup.mergeBtn">
+              Merge with Current Log
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="healing-modal-footer">
+        <button id="cancelImportChoiceBtn" type="button" class="healing-tracker__btn healing-tracker__btn--outline" data-i18n="common.cancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab Content: Tattoo Touch-Up Timeline & Longevity Calculator -->
+  <div id="tab-touchup" class="wrapper-tab-content" style="display:none;">
+    <div class="tool-main-content">
+      <div class="touch-up-timeline__container">
+        <!-- SUB-TABS -->
+        <section class="touch-up-timeline__tabs" aria-label="Touch-Up Tool Modules">
+          <button class="touch-up-timeline__tab touch-up-timeline__tab--active" data-tab="calculator" data-i18n="touchup.tabs.calculator">
+            ⏱️ Touch-Up Calculator
+          </button>
+          <button class="touch-up-timeline__tab" data-tab="fading" data-i18n="touchup.tabs.fading">
+            📉 Fading Predictor
+          </button>
+          <button class="touch-up-timeline__tab" data-tab="maintenance" data-i18n="touchup.tabs.maintenance">
+            📋 Maintenance Plan
+          </button>
+          <button class="touch-up-timeline__tab" data-tab="cost" data-i18n="touchup.tabs.cost">
+            💰 Lifetime Costs
+          </button>
+          <button class="touch-up-timeline__tab" data-tab="readiness" data-i18n="touchup.tabs.readiness">
+            ✅ Touch-Up Readiness
+          </button>
+        </section>
+
+        <!-- SUB-TAB 1: TOUCH-UP TIMELINE CALCULATOR -->
+        <div id="tab-calculator" class="touch-up-timeline__tab-content touch-up-timeline__tab-content--active">
+          <!-- Proactive Touch-Up Reminder Alert Banner -->
+          <div id="touchUpReminderBanner" class="touch-up-reminder-banner" style="display: none;">
+            <div class="touch-up-reminder-banner__header">
+              <span id="touchUpReminderBadge" class="touch-up-reminder-badge" data-i18n="touchup.reminder.badgeOverdue">⚠️ TOUCH-UP OVERDUE</span>
+              <span id="touchUpReminderTimeMeta" class="touch-up-reminder-time"></span>
+            </div>
+            <h3 id="touchUpReminderTitle" class="touch-up-reminder-title" data-i18n="touchup.reminder.alertTitle">Touch-Up Alert & Maintenance Reminder</h3>
+            <p id="touchUpReminderBody" class="touch-up-reminder-body"></p>
+            <div class="touch-up-reminder-actions">
+              <button type="button" id="touchUpReminderDismissBtn" class="btn btn--sm" data-i18n="touchup.reminder.dismissBtn">Dismiss Alert</button>
+              <button type="button" id="touchUpReminderClearBtn" class="btn btn--sm btn--outline" style="display: none;" data-i18n="touchup.reminder.clearReminderBtn">Clear Saved Reminder</button>
+            </div>
+          </div>
+
+          <section class="touch-up-timeline__section">
+            <h2 class="touch-up-timeline__section-title">
+              <span class="touch-up-timeline__step-number">1</span>
+              <span data-i18n="touchup.calc.title">Calculate Your Touch-Up Timeline</span>
+            </h2>
+            <p class="touch-up-timeline__section-subtitle" data-i18n="touchup.calc.subtitle">
+              Enter your tattoo style, pigments, placement, and care habits to project when a touch-up will be recommended.
+            </p>
+
+            <form id="touchUpForm" class="touch-up-timeline__form">
+              <div class="touch-up-timeline__form-grid">
+                <!-- Tattoo Age -->
+                <div class="touch-up-timeline__form-group">
+                  <label class="touch-up-timeline__label" for="tattooAge">
+                    <span class="touch-up-timeline__label-text" data-i18n="touchup.calc.ageLabel">Tattoo Age</span>
+                    <span class="touch-up-timeline__label-help" data-i18n="touchup.calc.ageHelp">How many years since the tattoo was completed?</span>
+                  </label>
+                  <div class="touch-up-timeline__input-with-unit">
+                    <input type="number" id="tattooAge" class="touch-up-timeline__input" step="0.5" min="0" max="50" value="0" required>
+                    <span class="touch-up-timeline__unit" data-i18n="touchup.calculator.yearsUnit">years</span>
+                  </div>
+                </div>
+
+                <!-- Last Recorded Touch-Up Date -->
+                <div class="touch-up-timeline__form-group">
+                  <label class="touch-up-timeline__label" for="lastTouchUpDate">
+                    <span class="touch-up-timeline__label-text" data-i18n="touchup.calc.lastTouchUpLabel">Last Recorded Touch-Up Date</span>
+                    <span class="touch-up-timeline__label-help" data-i18n="touchup.calc.lastTouchUpHelp">Date of most recent touch-up session</span>
+                  </label>
+                  <div class="touch-up-timeline__input-with-checkbox">
+                    <input type="date" id="lastTouchUpDate" class="touch-up-timeline__input" disabled>
+                    <label class="touch-up-timeline__checkbox touch-up-timeline__checkbox--subtext">
+                      <input type="checkbox" id="neverTouchedUpCheck" checked>
+                      <span data-i18n="touchup.calc.neverTouchedUp">Never touched up (Original ink only)</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Tattoo Style -->
+                <div class="touch-up-timeline__form-group">
+                  <label class="touch-up-timeline__label" for="tattooStyle">
+                    <span class="touch-up-timeline__label-text" data-i18n="touchup.calc.styleLabel">Tattoo Style</span>
+                    <span class="touch-up-timeline__label-help" data-i18n="touchup.calc.styleHelp">Style and linework density determine durability</span>
+                  </label>
+                  <select id="tattooStyle" class="touch-up-timeline__select" required>
+                    <option value="" data-i18n="touchup.calc.selectStyle">Select style...</option>
+                    <option value="black_and_grey" data-i18n="touchup.styles.blackAndGrey">Black &amp; Grey</option>
+                    <option value="traditional_color" data-i18n="touchup.styles.traditional">Traditional / American Traditional</option>
+                    <option value="color_realism" data-i18n="touchup.styles.colorRealism">Color Realism</option>
+                    <option value="black_realism" data-i18n="touchup.styles.blackRealism">Black &amp; Grey Realism</option>
+                    <option value="watercolor" data-i18n="touchup.styles.watercolor">Watercolor</option>
+                    <option value="fine_line" data-i18n="touchup.styles.fineLine">Fine Line / Single Needle</option>
+                    <option value="tribal_blackwork" data-i18n="touchup.styles.tribal">Tribal / Solid Blackwork</option>
+                    <option value="script_text" data-i18n="touchup.styles.script">Script / Lettering</option>
+                  </select>
+                </div>
+
+                <!-- Body Location -->
+                <div class="touch-up-timeline__form-group">
+                  <label class="touch-up-timeline__label" for="bodyLocation">
+                    <span class="touch-up-timeline__label-text" data-i18n="touchup.calc.locationLabel">Body Placement</span>
+                    <span class="touch-up-timeline__label-help" data-i18n="touchup.calc.locationHelp">Skin friction and sunlight exposure vary by location</span>
+                  </label>
+                  <select id="bodyLocation" class="touch-up-timeline__select" required>
+                    <option value="occasionally_exposed" data-i18n="touchup.locations.occasionallyExposed">Occasionally Exposed (Forearms, Calves, Shoulders)</option>
+                    <option value="covered_areas" data-i18n="touchup.locations.covered">Covered Areas (Torso, Back, Upper Thighs)</option>
+                    <option value="frequently_exposed" data-i18n="touchup.locations.frequentlyExposed">Frequently Exposed (Hands, Neck, Face)</option>
+                    <option value="high_friction" data-i18n="touchup.locations.highFriction">High Friction (Fingers, Feet, Palms, Ankles)</option>
+                  </select>
+                </div>
+
+                <!-- Colors Used -->
+                <div class="touch-up-timeline__form-group touch-up-timeline__form-group--full">
+                  <label class="touch-up-timeline__label">
+                    <span class="touch-up-timeline__label-text" data-i18n="touchup.calc.colorsLabel">Pigment Colors Present</span>
+                    <span class="touch-up-timeline__label-help" data-i18n="touchup.calc.colorsHelp">Select all ink colors in the tattoo</span>
+                  </label>
+                  <div class="touch-up-timeline__checkbox-grid">
+                    <label class="touch-up-timeline__checkbox">
+                      <input type="checkbox" name="colors" value="black" checked>
+                      <span class="touch-up-timeline__checkbox-label">
+                        <span class="touch-up-timeline__color-swatch swatch-black"></span>
+                        <span data-i18n="touchup.colors.black">Black / Charcoal</span>
+                      </span>
+                    </label>
+                    <label class="touch-up-timeline__checkbox">
+                      <input type="checkbox" name="colors" value="dark_blue">
+                      <span class="touch-up-timeline__checkbox-label">
+                        <span class="touch-up-timeline__color-swatch swatch-dark-blue"></span>
+                        <span data-i18n="touchup.colors.darkBlue">Dark Blue / Navy</span>
+                      </span>
+                    </label>
+                    <label class="touch-up-timeline__checkbox">
+                      <input type="checkbox" name="colors" value="purple">
+                      <span class="touch-up-timeline__checkbox-label">
+                        <span class="touch-up-timeline__color-swatch swatch-purple"></span>
+                        <span data-i18n="touchup.colors.purple">Purple / Violet</span>
+                      </span>
+                    </label>
+                    <label class="touch-up-timeline__checkbox">
+                      <input type="checkbox" name="colors" value="red">
+                      <span class="touch-up-timeline__checkbox-label">
+                        <span class="touch-up-timeline__color-swatch swatch-red"></span>
+                        <span data-i18n="touchup.colors.red">Red / Crimson</span>
+                      </span>
+                    </label>
+                    <label class="touch-up-timeline__checkbox">
+                      <input type="checkbox" name="colors" value="green">
+                      <span class="touch-up-timeline__checkbox-label">
+                        <span class="touch-up-timeline__color-swatch swatch-green"></span>
+                        <span data-i18n="touchup.colors.green">Green / Emerald</span>
+                      </span>
+                    </label>
+                    <label class="touch-up-timeline__checkbox">
+                      <input type="checkbox" name="colors" value="yellow">
+                      <span class="touch-up-timeline__checkbox-label">
+                        <span class="touch-up-timeline__color-swatch swatch-yellow"></span>
+                        <span data-i18n="touchup.colors.yellow">Yellow / Gold</span>
+                      </span>
+                    </label>
+                    <label class="touch-up-timeline__checkbox">
+                      <input type="checkbox" name="colors" value="orange">
+                      <span class="touch-up-timeline__checkbox-label">
+                        <span class="touch-up-timeline__color-swatch swatch-orange"></span>
+                        <span data-i18n="touchup.colors.orange">Orange / Amber</span>
+                      </span>
+                    </label>
+                    <label class="touch-up-timeline__checkbox">
+                      <input type="checkbox" name="colors" value="pink_light_colors">
+                      <span class="touch-up-timeline__checkbox-label">
+                        <span class="touch-up-timeline__color-swatch swatch-pink"></span>
+                        <span data-i18n="touchup.colors.pink">Pink / Pastel Tones</span>
+                      </span>
+                    </label>
+                    <label class="touch-up-timeline__checkbox">
+                      <input type="checkbox" name="colors" value="white">
+                      <span class="touch-up-timeline__checkbox-label">
+                        <span class="touch-up-timeline__color-swatch swatch-white"></span>
+                        <span data-i18n="touchup.colors.white">White / Highlights</span>
+                      </span>
+                    </label>
+                    <label class="touch-up-timeline__checkbox">
+                      <input type="checkbox" name="colors" value="uv_reactive">
+                      <span class="touch-up-timeline__checkbox-label">
+                        <span class="touch-up-timeline__color-swatch swatch-uv"></span>
+                        <span data-i18n="touchup.colors.uvReactive">UV-Reactive / Glow Pigments</span>
+                      </span>
+                    </label>
+                    <label class="touch-up-timeline__checkbox">
+                      <input type="checkbox" name="colors" value="organic_inks">
+                      <span class="touch-up-timeline__checkbox-label">
+                        <span class="touch-up-timeline__color-swatch swatch-organic"></span>
+                        <span data-i18n="touchup.colors.organicInks">Older Organic Inks / Traditional Formulations</span>
+                      </span>
+                    </label>
+                  </div>
+                  <!-- Conditional Advisory for Specialized Pigments -->
+                  <div id="specialPigmentWarning" class="touch-up-timeline__special-pigment-warning" style="display: none;" role="alert">
+                    <div class="touch-up-timeline__warning-icon">⚠️</div>
+                    <div class="touch-up-timeline__warning-content">
+                      <strong class="touch-up-timeline__warning-title" data-i18n="touchup.warnings.specialPigmentsTitle">Special Pigment Consultation Advisory</strong>
+                      <p class="touch-up-timeline__warning-text" data-i18n="touchup.warnings.specialPigmentsText">You have selected specialized pigments (such as UV-reactive pigments or older organic ink formulations). These materials exhibit distinct breakdown patterns under sunlight, photolysis, and natural dermal clearance compared to standard carbon black or modern mineral pigments. Consult your professional tattoo artist directly to evaluate the specific fading behavior, lightfastness, and tailored maintenance protocol for these unique formulations.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Sun Exposure -->
+                <div class="touch-up-timeline__form-group">
+                  <label class="touch-up-timeline__label">
+                    <span class="touch-up-timeline__label-text" data-i18n="touchup.calc.sunLabel">Sun Exposure Level</span>
+                  </label>
+                  <div class="touch-up-timeline__radio-group">
+                    <label class="touch-up-timeline__radio">
+                      <input type="radio" name="sunExposure" value="low" checked>
+                      <span class="touch-up-timeline__radio-label" data-i18n="touchup.sun.low">
+                        Low: Usually covered by clothing
+                      </span>
+                    </label>
+                    <label class="touch-up-timeline__radio">
+                      <input type="radio" name="sunExposure" value="medium">
+                      <span class="touch-up-timeline__radio-label" data-i18n="touchup.sun.medium">
+                        Medium: Moderate outdoor exposure
+                      </span>
+                    </label>
+                    <label class="touch-up-timeline__radio">
+                      <input type="radio" name="sunExposure" value="high">
+                      <span class="touch-up-timeline__radio-label" data-i18n="touchup.sun.high">
+                        High: Frequent sun &amp; outdoor lifestyle
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Care Level -->
+                <div class="touch-up-timeline__form-group">
+                  <label class="touch-up-timeline__label">
+                    <span class="touch-up-timeline__label-text" data-i18n="touchup.calc.careLabel">Skin Care Routine</span>
+                    <span class="touch-up-timeline__label-help" data-i18n="touchup.calc.careHelp">Moisturizing &amp; sunscreen discipline</span>
+                  </label>
+                  <div class="touch-up-timeline__radio-group">
+                    <label class="touch-up-timeline__radio">
+                      <input type="radio" name="careLevel" value="excellent">
+                      <span class="touch-up-timeline__radio-label" data-i18n="touchup.care.excellent">
+                        Excellent: Daily moisturizer &amp; broad-spectrum SPF 50+
+                      </span>
+                    </label>
+                    <label class="touch-up-timeline__radio">
+                      <input type="radio" name="careLevel" value="good" checked>
+                      <span class="touch-up-timeline__radio-label" data-i18n="touchup.care.good">
+                        Good: Regular moisturizer &amp; SPF when exposed
+                      </span>
+                    </label>
+                    <label class="touch-up-timeline__radio">
+                      <input type="radio" name="careLevel" value="fair">
+                      <span class="touch-up-timeline__radio-label" data-i18n="touchup.care.fair">
+                        Fair: Occasional moisturizer, irregular SPF
+                      </span>
+                    </label>
+                    <label class="touch-up-timeline__radio">
+                      <input type="radio" name="careLevel" value="poor">
+                      <span class="touch-up-timeline__radio-label" data-i18n="touchup.care.poor">
+                        Poor: Minimal hydration, rarely apply SPF
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="touch-up-timeline__btn touch-up-timeline__btn--primary" data-i18n="touchup.calc.submitBtn">
+                ⏱️ Calculate Touch-Up Timeline
+              </button>
+            </form>
+
+            <!-- Results Section -->
+            <div id="touchUpResults" class="touch-up-timeline__results" style="display: none;">
+              <h3 class="touch-up-timeline__results-title" data-i18n="touchup.results.title">Your Touch-Up Timeline Results</h3>
+
+              <!-- Urgency Indicator -->
+              <div id="urgencyIndicator" class="touch-up-timeline__urgency-card">
+                <div class="touch-up-timeline__urgency-icon">⏰</div>
+                <div class="touch-up-timeline__urgency-content">
+                  <h4 id="urgencyLevel" class="touch-up-timeline__urgency-level"></h4>
+                  <p id="urgencyMessage" class="touch-up-timeline__urgency-message"></p>
+                </div>
+              </div>
+
+              <!-- Touch-Up Reminder Alert & Status Card -->
+              <div id="touchUpReminderCard" class="touch-up-reminder-card" style="display: none;">
+                <div class="touch-up-reminder-card__header">
+                  <div class="touch-up-reminder-card__title-group">
+                    <span class="touch-up-reminder-card__icon">🔔</span>
+                    <h4 class="touch-up-reminder-card__title" data-i18n="touchup.reminder.cardTitle">Touch-Up Maintenance Alert</h4>
+                  </div>
+                  <span id="touchUpReminderStatusBadge" class="touch-up-reminder-badge"></span>
+                </div>
+                <p id="touchUpReminderCardText" class="touch-up-reminder-card__text"></p>
+                <div class="touch-up-reminder-meta-grid">
+                  <div class="touch-up-reminder-meta-item">
+                    <span class="touch-up-reminder-meta-label" data-i18n="touchup.reminder.lastTouchUp">Last Touch-Up</span>
+                    <span id="touchUpReminderMetaDate" class="touch-up-reminder-meta-val">-</span>
+                  </div>
+                  <div class="touch-up-reminder-meta-item">
+                    <span class="touch-up-reminder-meta-label" data-i18n="touchup.reminder.elapsedTime">Elapsed Time</span>
+                    <span id="touchUpReminderMetaElapsed" class="touch-up-reminder-meta-val">-</span>
+                  </div>
+                  <div class="touch-up-reminder-meta-item">
+                    <span class="touch-up-reminder-meta-label" data-i18n="touchup.reminder.nextRecommended">Next Recommended</span>
+                    <span id="touchUpReminderMetaNext" class="touch-up-reminder-meta-val">-</span>
+                  </div>
+                </div>
+                <div class="touch-up-reminder-actions" style="margin-top: 1rem;">
+                  <button type="button" id="saveTouchUpReminderBtn" class="btn btn--accent btn--sm" data-i18n="touchup.reminder.saveBtn">
+                    🔔 Save Touch-Up Reminder
+                  </button>
+                  <span id="touchUpReminderSavedNotice" class="touch-up-reminder-saved-notice" style="display: none;" data-i18n="touchup.reminder.savedConfirm">
+                    Reminder saved locally! You will receive status alerts when visiting this tool.
+                  </span>
+                </div>
+              </div>
+
+              <!-- Timeline Stats -->
+              <div class="touch-up-timeline__results-grid">
+                <div class="touch-up-timeline__result-card">
+                  <div class="touch-up-timeline__result-icon">📅</div>
+                  <div class="touch-up-timeline__result-label" data-i18n="touchup.results.currentAge">Current Age</div>
+                  <div id="currentAgeDisplay" class="touch-up-timeline__result-value">-</div>
+                </div>
+
+                <div class="touch-up-timeline__result-card touch-up-timeline__result-card--highlight">
+                  <div class="touch-up-timeline__result-icon">⏱️</div>
+                  <div class="touch-up-timeline__result-label" data-i18n="touchup.results.touchUpIn">Touch-Up In</div>
+                  <div id="touchUpTime" class="touch-up-timeline__result-value">-</div>
+                </div>
+
+                <div class="touch-up-timeline__result-card">
+                  <div class="touch-up-timeline__result-icon">📊</div>
+                  <div class="touch-up-timeline__result-label" data-i18n="touchup.results.longevityElapsed">Longevity Elapsed</div>
+                  <div id="fadingProgress" class="touch-up-timeline__result-value">-</div>
+                </div>
+              </div>
+
+              <!-- Fading Order -->
+              <div class="touch-up-timeline__fading-order">
+                <h4 class="touch-up-timeline__subsection-title" data-i18n="touchup.results.fadingOrder">🎨 Estimated Pigment Fading Order</h4>
+                <div id="fadingList" class="touch-up-timeline__fading-list"></div>
+              </div>
+
+              <!-- Recommendations -->
+              <div class="touch-up-timeline__recommendations">
+                <h4 class="touch-up-timeline__subsection-title" data-i18n="touchup.results.recommendations">💡 Personalized Maintenance Recommendations</h4>
+                <div id="recommendationsList"></div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- SUB-TAB 2: FADING PREDICTOR -->
+        <div id="tab-fading" class="touch-up-timeline__tab-content">
+          <section class="touch-up-timeline__section">
+            <h2 class="touch-up-timeline__section-title">
+              <span class="touch-up-timeline__step-number">2</span>
+              <span data-i18n="touchup.fading.title">Visual Fading Prediction Timeline</span>
+            </h2>
+            <p class="touch-up-timeline__section-subtitle" data-i18n="touchup.fading.subtitle">
+              Visual model of pigment saturation, contrast retention, and care impact over time.
+            </p>
+
+            <div id="fadingInfoCard" class="touch-up-timeline__info-card">
+              <p data-i18n="touchup.fading.info">📊 Run the Touch-Up Calculator in Step 1 to generate your custom multi-year fading progression chart.</p>
+            </div>
+
+            <div id="fadingPrediction" style="display: none;">
+              <h3 class="touch-up-timeline__subsection-title" data-i18n="touchup.fading.progressionTitle">Progression by Year</h3>
+              <div id="visualTimeline" class="touch-up-timeline__visual-timeline"></div>
+
+              <h3 class="touch-up-timeline__subsection-title" style="margin-top: 2rem;" data-i18n="touchup.fading.careComparisonTitle">Care Routine Comparison</h3>
+              <div id="careComparison" class="touch-up-timeline__care-comparison"></div>
+            </div>
+          </section>
+        </div>
+
+        <!-- SUB-TAB 3: MAINTENANCE PLAN -->
+        <div id="tab-maintenance" class="touch-up-timeline__tab-content">
+          <section class="touch-up-timeline__section">
+            <h2 class="touch-up-timeline__section-title">
+              <span class="touch-up-timeline__step-number">3</span>
+              <span data-i18n="touchup.maintenance.title">Comprehensive Tattoo Longevity Care Plan</span>
+            </h2>
+            <p class="touch-up-timeline__section-subtitle" data-i18n="touchup.maintenance.subtitle">
+              Essential protocols to protect pigment vibrancy and prevent premature ink dispersion.
+            </p>
+
+            <div class="touch-up-timeline__maintenance-schedule">
+              <!-- Daily Care -->
+              <div class="touch-up-timeline__maintenance-card">
+                <div class="touch-up-timeline__maintenance-header">
+                  <span class="touch-up-timeline__maintenance-icon">🧴</span>
+                  <h4 class="touch-up-timeline__maintenance-title" data-i18n="touchup.maintenance.dailyTitle">Daily Protocol</h4>
+                </div>
+                <ul class="touch-up-timeline__maintenance-list">
+                  <li data-i18n="touchup.maintenance.daily1">Hydrate with fragrance-free, water-based moisturizer.</li>
+                  <li data-i18n="touchup.maintenance.daily2">Apply broad-spectrum SPF 50+ to exposed tattoo skin 15 min prior to going outside.</li>
+                  <li data-i18n="touchup.maintenance.daily3">Avoid vigorous scrubbing with abrasive loofahs over tattooed skin.</li>
+                </ul>
+              </div>
+
+              <!-- Weekly Care -->
+              <div class="touch-up-timeline__maintenance-card">
+                <div class="touch-up-timeline__maintenance-header">
+                  <span class="touch-up-timeline__maintenance-icon">📅</span>
+                  <h4 class="touch-up-timeline__maintenance-title" data-i18n="touchup.maintenance.weeklyTitle">Weekly Routine</h4>
+                </div>
+                <ul class="touch-up-timeline__maintenance-list">
+                  <li data-i18n="touchup.maintenance.weekly1">Gentle exfoliation around (not aggressively over) healed tattoo borders to remove dead skin cells.</li>
+                  <li data-i18n="touchup.maintenance.weekly2">Deep hydration treatment with jojoba oil or ceramide balm.</li>
+                  <li data-i18n="touchup.maintenance.weekly3">Check for any localized dryness or skin irritation.</li>
+                </ul>
+              </div>
+
+              <!-- Seasonal / Ongoing -->
+              <div class="touch-up-timeline__maintenance-card">
+                <div class="touch-up-timeline__maintenance-header">
+                  <span class="touch-up-timeline__maintenance-icon">☀️</span>
+                  <h4 class="touch-up-timeline__maintenance-title" data-i18n="touchup.maintenance.sunTitle">Sun &amp; Outdoor Protocol</h4>
+                </div>
+                <ul class="touch-up-timeline__maintenance-list">
+                  <li data-i18n="touchup.maintenance.sun1">Reapply SPF 50+ every 2 hours during continuous outdoor activity.</li>
+                  <li data-i18n="touchup.maintenance.sun2">Utilize UPF 50+ UV-protective clothing for beach or hiking days.</li>
+                  <li data-i18n="touchup.maintenance.sun3">Rinse promptly after swimming in chlorinated pools or saltwater.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Sun Damage Impact Calculator -->
+            <div class="touch-up-timeline__sun-damage">
+              <h4 class="touch-up-timeline__subsection-title" data-i18n="touchup.sunCalc.title">☀️ Sun Exposure Impact Estimator</h4>
+              <p class="touch-up-timeline__section-subtitle" style="margin-bottom: 1rem;" data-i18n="touchup.sunCalc.subtitle">
+                Calculate how weekly direct UV exposure accelerates fading rate.
+              </p>
+
+              <form id="sunDamageForm" class="touch-up-timeline__mini-form">
+                <div class="touch-up-timeline__form-row">
+                  <div class="touch-up-timeline__form-group">
+                    <label class="touch-up-timeline__label" for="sunHours" data-i18n="touchup.sunCalc.hoursLabel">Direct Sun Hours Per Week</label>
+                    <input type="number" id="sunHours" class="touch-up-timeline__input" min="0" max="100" value="5" step="1">
+                  </div>
+                  <div class="touch-up-timeline__form-group">
+                    <label class="touch-up-timeline__label" for="spfUsage" data-i18n="touchup.sunCalc.spfLabel">Sunscreen Consistency</label>
+                    <select id="spfUsage" class="touch-up-timeline__select">
+                      <option value="never" data-i18n="touchup.spf.never">Never use SPF</option>
+                      <option value="sometimes" data-i18n="touchup.spf.sometimes">Sometimes use SPF</option>
+                      <option value="always" data-i18n="touchup.spf.always">Always use SPF 50+</option>
+                    </select>
+                  </div>
+                  <button type="button" id="calculateSun" class="touch-up-timeline__btn touch-up-timeline__btn--secondary" data-i18n="touchup.sunCalc.calculateBtn">
+                    ☀️ Calculate Impact
+                  </button>
+                </div>
+              </form>
+
+              <div id="sunDamageResults" class="touch-up-timeline__sun-results" style="display: none;">
+                <div class="touch-up-timeline__sun-stats">
+                  <div class="touch-up-timeline__sun-stat">
+                    <div class="touch-up-timeline__sun-stat-label" data-i18n="touchup.sunCalc.fadingAcceleration">Fading Acceleration</div>
+                    <div id="fadingAcceleration" class="touch-up-timeline__sun-stat-value">-</div>
+                  </div>
+                  <div class="touch-up-timeline__sun-stat">
+                    <div class="touch-up-timeline__sun-stat-label" data-i18n="touchup.sunCalc.longevityReduction">Estimated Longevity Reduction</div>
+                    <div id="yearsLost" class="touch-up-timeline__sun-stat-value">-</div>
+                  </div>
+                </div>
+                <div id="sunRecommendation" class="touch-up-timeline__sun-recommendation"></div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- SUB-TAB 4: LIFETIME COST PLANNER -->
+        <div id="tab-cost" class="touch-up-timeline__tab-content">
+          <section class="touch-up-timeline__section">
+            <h2 class="touch-up-timeline__section-title">
+              <span class="touch-up-timeline__step-number">4</span>
+              <span data-i18n="touchup.cost.title">Lifetime Maintenance Cost Planner</span>
+            </h2>
+            <p class="touch-up-timeline__section-subtitle" data-i18n="touchup.cost.subtitle">
+              Budget long-term touch-up investments and see how disciplined aftercare saves substantial money over 30 years.
+            </p>
+
+            <form id="costForm" class="touch-up-timeline__form">
+              <div class="touch-up-timeline__form-grid">
+                <div class="touch-up-timeline__form-group">
+                  <label class="touch-up-timeline__label" for="initialCost" data-i18n="touchup.cost.initialCostLabel">Initial Tattoo Investment</label>
+                  <div class="touch-up-timeline__input-with-unit">
+                    <span class="touch-up-timeline__unit-prefix">$</span>
+                    <input type="number" id="initialCost" class="touch-up-timeline__input" min="0" step="50" value="500" required>
+                  </div>
+                </div>
+
+                <div class="touch-up-timeline__form-group">
+                  <label class="touch-up-timeline__label" for="touchUpFrequency" data-i18n="touchup.cost.frequencyLabel">Estimated Touch-Up Interval</label>
+                  <div class="touch-up-timeline__input-with-unit">
+                    <input type="number" id="touchUpFrequency" class="touch-up-timeline__input" min="1" max="25" step="1" value="8">
+                    <span class="touch-up-timeline__unit" data-i18n="touchup.calculator.yearsUnit">years</span>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="touch-up-timeline__btn touch-up-timeline__btn--primary" data-i18n="touchup.cost.submitBtn">
+                💰 Calculate Lifetime Projections
+              </button>
+            </form>
+
+            <div id="costResults" class="touch-up-timeline__results" style="display: none;">
+              <h3 class="touch-up-timeline__results-title" data-i18n="touchup.cost.resultsTitle">30-Year Financial Projection</h3>
+
+              <div class="touch-up-timeline__cost-summary">
+                <div class="touch-up-timeline__cost-card--total">
+                  <div class="touch-up-timeline__cost-label" data-i18n="touchup.cost.totalInvestment">Total 30-Year Investment</div>
+                  <div id="lifetimeCost" class="touch-up-timeline__cost-value">$0</div>
+                  <div class="touch-up-timeline__cost-breakdown">
+                    <span id="initialCostDisplay">$0</span> <span data-i18n="touchup.cost.initialTattooPlus">initial tattoo +</span> <span id="touchUpCostDisplay">$0</span> <span data-i18n="touchup.cost.touchUpSessions">touch-up sessions</span>
+                  </div>
+                </div>
+
+                <div class="touch-up-timeline__cost-grid">
+                  <div class="touch-up-timeline__cost-stat">
+                    <div class="touch-up-timeline__cost-stat-label" data-i18n="touchup.cost.annualizedCost">Annualized Cost</div>
+                    <div id="annualCost" class="touch-up-timeline__cost-stat-value">$0</div>
+                  </div>
+                  <div class="touch-up-timeline__cost-stat">
+                    <div class="touch-up-timeline__cost-stat-label" data-i18n="touchup.cost.estimatedTouchUps">Estimated Touch-Ups</div>
+                    <div id="numberOfTouchUps" class="touch-up-timeline__cost-stat-value">0</div>
+                  </div>
+                  <div class="touch-up-timeline__cost-stat">
+                    <div class="touch-up-timeline__cost-stat-label" data-i18n="touchup.cost.costPerTouchUp">Est. Cost Per Touch-Up</div>
+                    <div id="touchUpCost" class="touch-up-timeline__cost-stat-value">$0</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="touch-up-timeline__cost-comparison">
+                <h4 class="touch-up-timeline__subsection-title" data-i18n="touchup.cost.comparisonTitle">Care Impact Comparison</h4>
+                <div class="touch-up-timeline__comparison-cards">
+                  <div class="touch-up-timeline__comparison-card touch-up-timeline__comparison-card--good">
+                    <h5 data-i18n="touchup.cost.goodCareTitle">With Diligent Care (SPF + Hydration)</h5>
+                    <div id="goodCareCost" class="touch-up-timeline__comparison-value">$0</div>
+                    <div id="goodCareTouchUps" class="touch-up-timeline__comparison-detail" data-i18n="touchup.cost.defaultTouchUpsOver30">0 touch-ups over 30 years</div>
+                    <div id="savings" class="touch-up-timeline__comparison-savings" data-i18n="touchup.cost.highSavingsLabel">💰 High Savings</div>
+                  </div>
+
+                  <div class="touch-up-timeline__comparison-card touch-up-timeline__comparison-card--poor">
+                    <h5 data-i18n="touchup.cost.poorCareTitle">With Poor Care (Sun &amp; Neglect)</h5>
+                    <div id="poorCareCost" class="touch-up-timeline__comparison-value">$0</div>
+                    <div id="poorCareTouchUps" class="touch-up-timeline__comparison-detail" data-i18n="touchup.cost.defaultTouchUpsOver30">0 touch-ups over 30 years</div>
+                    <div id="extraCost" class="touch-up-timeline__comparison-extra" data-i18n="touchup.cost.extraSpentLabel">Extra spent</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="touch-up-timeline__budget-tip">
+                <h4 class="touch-up-timeline__subsection-title" data-i18n="touchup.cost.tipTitle">💡 Studio Budget Tip</h4>
+                <p id="budgetRecommendation"></p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- SUB-TAB 5: TOUCH-UP READINESS CHECKER -->
+        <div id="tab-readiness" class="touch-up-timeline__tab-content">
+          <section class="touch-up-timeline__section">
+            <h2 class="touch-up-timeline__section-title">
+              <span class="touch-up-timeline__step-number">5</span>
+              <span data-i18n="touchup.readiness.title">Is Your Tattoo Ready for a Touch-Up?</span>
+            </h2>
+            <p class="touch-up-timeline__section-subtitle" data-i18n="touchup.readiness.subtitle">
+              Assess your tattoo's current contrast, pigment density, line spread, and detail retention.
+            </p>
+
+            <form id="readinessForm" class="touch-up-timeline__form">
+              <div class="touch-up-timeline__readiness-questions">
+                <!-- Fading Level -->
+                <div class="touch-up-timeline__question">
+                  <label class="touch-up-timeline__question-label" data-i18n="touchup.readiness.fadingLevelLabel">Pigment Fading Level</label>
+                  <div class="touch-up-timeline__radio-group">
+                    <label class="touch-up-timeline__radio">
+                      <input type="radio" name="fadingLevel" value="slight" checked>
+                      <span class="touch-up-timeline__radio-label" data-i18n="touchup.readiness.fadingSlight">Slight: Barely noticeable softening</span>
+                    </label>
+                    <label class="touch-up-timeline__radio">
+                      <input type="radio" name="fadingLevel" value="moderate">
+                      <span class="touch-up-timeline__radio-label" data-i18n="touchup.readiness.fadingModerate">Moderate: Noticeable loss of saturation</span>
+                    </label>
+                    <label class="touch-up-timeline__radio">
+                      <input type="radio" name="fadingLevel" value="significant">
+                      <span class="touch-up-timeline__radio-label" data-i18n="touchup.readiness.fadingSignificant">Significant: Very faded, pale appearance</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Color Loss -->
+                <div class="touch-up-timeline__question">
+                  <label class="touch-up-timeline__question-label" data-i18n="touchup.readiness.colorLossLabel">Which colors show noticeable degradation?</label>
+                  <div class="touch-up-timeline__checkbox-group">
+                    <label class="touch-up-timeline__checkbox">
+                      <input type="checkbox" name="fadedColors" value="light_colors">
+                      <span class="touch-up-timeline__checkbox-label" data-i18n="touchup.readiness.colorLight">Light colors (yellow, pink, white)</span>
+                    </label>
+                    <label class="touch-up-timeline__checkbox">
+                      <input type="checkbox" name="fadedColors" value="reds_oranges">
+                      <span class="touch-up-timeline__checkbox-label" data-i18n="touchup.readiness.colorReds">Reds &amp; oranges</span>
+                    </label>
+                    <label class="touch-up-timeline__checkbox">
+                      <input type="checkbox" name="fadedColors" value="greens_purples">
+                      <span class="touch-up-timeline__checkbox-label" data-i18n="touchup.readiness.colorGreens">Greens &amp; purples</span>
+                    </label>
+                    <label class="touch-up-timeline__checkbox">
+                      <input type="checkbox" name="fadedColors" value="blues">
+                      <span class="touch-up-timeline__checkbox-label" data-i18n="touchup.readiness.colorBlues">Blues</span>
+                    </label>
+                    <label class="touch-up-timeline__checkbox">
+                      <input type="checkbox" name="fadedColors" value="blacks">
+                      <span class="touch-up-timeline__checkbox-label" data-i18n="touchup.readiness.colorBlacks">Blacks &amp; dark shading</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Line Blurring -->
+                <div class="touch-up-timeline__question">
+                  <label class="touch-up-timeline__question-label" data-i18n="touchup.readiness.lineBlurringLabel">Line Softening &amp; Spread</label>
+                  <div class="touch-up-timeline__radio-group">
+                    <label class="touch-up-timeline__radio">
+                      <input type="radio" name="lineBlurring" value="no" checked>
+                      <span class="touch-up-timeline__radio-label" data-i18n="touchup.readiness.linesNo">No: Outlines are crisp and sharp</span>
+                    </label>
+                    <label class="touch-up-timeline__radio">
+                      <input type="radio" name="lineBlurring" value="slight">
+                      <span class="touch-up-timeline__radio-label" data-i18n="touchup.readiness.linesSlight">Slight: Minor line softening</span>
+                    </label>
+                    <label class="touch-up-timeline__radio">
+                      <input type="radio" name="lineBlurring" value="significant">
+                      <span class="touch-up-timeline__radio-label" data-i18n="touchup.readiness.linesSignificant">Significant: Outlines have blurred or expanded noticeably</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Detail Loss -->
+                <div class="touch-up-timeline__question">
+                  <label class="touch-up-timeline__question-label" data-i18n="touchup.readiness.detailLossLabel">Micro-Detail &amp; Texture Loss</label>
+                  <div class="touch-up-timeline__radio-group">
+                    <label class="touch-up-timeline__radio">
+                      <input type="radio" name="detailLoss" value="no" checked>
+                      <span class="touch-up-timeline__radio-label" data-i18n="touchup.readiness.detailNo">No: Fine details remain crisp</span>
+                    </label>
+                    <label class="touch-up-timeline__radio">
+                      <input type="radio" name="detailLoss" value="some">
+                      <span class="touch-up-timeline__radio-label" data-i18n="touchup.readiness.detailSome">Some: Subtle detail fading</span>
+                    </label>
+                    <label class="touch-up-timeline__radio">
+                      <input type="radio" name="detailLoss" value="major">
+                      <span class="touch-up-timeline__radio-label" data-i18n="touchup.readiness.detailMajor">Major: Intricate details have blended or vanished</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="touch-up-timeline__btn touch-up-timeline__btn--primary" data-i18n="touchup.readiness.submitBtn">
+                ✅ Evaluate Touch-Up Readiness
+              </button>
+            </form>
+
+            <div id="readinessResults" class="touch-up-timeline__results" style="display: none;">
+              <h3 class="touch-up-timeline__results-title" data-i18n="touchup.readiness.resultsTitle">Readiness Assessment Report</h3>
+
+              <div id="readinessStatus" class="touch-up-timeline__readiness-status"></div>
+
+              <div class="touch-up-timeline__readiness-details">
+                <h4 class="touch-up-timeline__subsection-title" data-i18n="touchup.readiness.attentionTitle">Areas of Observation</h4>
+                <ul id="attentionList" class="touch-up-timeline__attention-list"></ul>
+              </div>
+
+              <div class="touch-up-timeline__readiness-action">
+                <h4 class="touch-up-timeline__subsection-title" data-i18n="touchup.readiness.actionTitle">Recommended Next Step</h4>
+                <p id="nextSteps"></p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab Content: Documentation -->
+  <div id="tab-docs" class="wrapper-tab-content docs-frame-container" style="display:none;">
+    <div class="docs-lang-toolbar" role="navigation" aria-label="Documentation Languages">
+      <span class="docs-lang-label" data-i18n="nav.language">Language:</span>
+      <button type="button" class="docs-lang-link active" data-lang="en" data-i18n="common.languages.en">English</button>
+      <button type="button" class="docs-lang-link" data-lang="fr" data-i18n="common.languages.fr">Français</button>
+      <button type="button" class="docs-lang-link" data-lang="de" data-i18n="common.languages.de">Deutsch</button>
+      <button type="button" class="docs-lang-link" data-lang="it" data-i18n="common.languages.it">Italiano</button>
+      <button type="button" class="docs-lang-link" data-lang="es" data-i18n="common.languages.es">Español</button>
+      <button type="button" class="docs-lang-link" data-lang="nl" data-i18n="common.languages.nl">Nederlands</button>
+      <button type="button" class="docs-lang-link" data-lang="pt" data-i18n="common.languages.pt">Português</button>
+    </div>
+    <iframe src="./documentation.html" class="docs-frame" title="Technical Documentation"></iframe>
+  </div>
+
+  <!-- Tab Content: Embed -->
+  <div id="tab-embed" class="wrapper-tab-content tab-embed-container" style="display:none;">
+    <div class="tab-embed-card">
+      <h2 class="tab-embed-title" data-i18n="embed.title">Embed This Tool</h2>
+      <p class="tab-embed-description" data-i18n="embed.description">Copy the code below to embed the complete suite on your studio website:</p>
+      <textarea id="embedCodeTab" class="tab-embed-textarea" readonly>&lt;iframe src="https://poliinternational.com/tools/healing-tracker/index.html" width="100%" height="1000" frameborder="0" style="border-radius:12px;"&gt;&lt;/iframe&gt;</textarea>
+      <button onclick="copyEmbedCode()" class="tab-embed-copy-btn" data-i18n="embed.copyBtn">📋 Copy Code</button>
+    </div>
+  </div>
+
+    <footer class="neobrutalist-footer powered-by-footer">
+      <div><a href="#" class="powered-by-link" data-i18n="common.poweredByPoli">POWERED BY POLI INTERNATIONAL</a></div>
+    </footer>
+  </main>
+
+  <!-- Embed Modal -->
+  <div id="embedModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" data-i18n="embed.modalTitle">🎁 Use This Tool FREE</h2>
+        <span class="modal-close" id="modalClose">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3 data-i18n="embed.copyEmbedCode">📋 Copy Embed Code</h3>
+          <div class="code-container">
+            <textarea id="embedCode" class="embed-code-textarea" readonly></textarea>
+            <button id="copyEmbedCode" class="btn btn--primary btn--small" data-i18n="embed.copyBtn">📋 Copy Code</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Milestone Photo Lightbox Modal -->
+  <div id="milestoneLightboxModal" class="milestone-lightbox" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="milestoneLightboxTitle">
+    <div class="milestone-lightbox__backdrop" id="milestoneLightboxBackdrop"></div>
+    <div class="milestone-lightbox__content">
+      <div class="milestone-lightbox__header">
+        <div class="milestone-lightbox__title-area">
+          <span id="milestoneLightboxBadge" class="milestone-card__badge">DAY 0</span>
+          <h3 id="milestoneLightboxTitle" class="milestone-lightbox__title" data-i18n="healing.milestones.lightboxTitle">Milestone Inspection</h3>
+          <span id="milestoneLightboxDate" class="milestone-lightbox__date"></span>
+        </div>
+        <button type="button" class="milestone-lightbox__close" id="milestoneLightboxClose" aria-label="Close Lightbox">&times;</button>
+      </div>
+      <div class="milestone-lightbox__stage">
+        <button type="button" class="milestone-lightbox__nav-btn milestone-lightbox__nav-btn--prev" id="milestoneLightboxPrev" aria-label="Previous Photo">‹</button>
+        <div class="milestone-lightbox__image-box">
+          <img id="milestoneLightboxImg" src="" alt="Milestone Inspection" class="milestone-lightbox__img">
+        </div>
+        <button type="button" class="milestone-lightbox__nav-btn milestone-lightbox__nav-btn--next" id="milestoneLightboxNext" aria-label="Next Photo">›</button>
+      </div>
+      <div class="milestone-lightbox__footer">
+        <div class="milestone-lightbox__details">
+          <div id="milestoneLightboxSymptoms" class="milestone-lightbox__symptoms"></div>
+          <p id="milestoneLightboxNotes" class="milestone-lightbox__notes"></p>
+        </div>
+        <div class="milestone-lightbox__actions">
+          <button type="button" class="btn btn--accent btn--sm" id="milestoneLightboxCompareBtn" data-i18n="healing.gallery.compareInSlider">
+            ↔ Compare in Split Slider
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/locales/en.js"></script>
+  <script src="./js/locales/fr.js"></script>
+  <script src="./js/locales/fr-timeline.js"></script>
+  <script src="./js/locales/it.js"></script>
+  <script src="./js/locales/it-timeline.js"></script>
+  <script src="./js/locales/de.js"></script>
+  <script src="./js/locales/de-timeline.js"></script>
+  <script src="./js/locales/es.js"></script>
+  <script src="./js/locales/es-timeline.js"></script>
+  <script src="./js/locales/nl.js"></script>
+  <script src="./js/locales/nl-timeline.js"></script>
+  <script src="./js/locales/pt.js"></script>
+  <script src="./js/locales/pt-timeline.js"></script>
+  <script src="./js/i18n.js"></script>
+  <script src="./js/piercing-timelines.js"></script>
+  <script src="./js/tattoo-timelines.js"></script>
+  <script src="./js/body-map.js"></script>
+  <script src="./js/tracker.js"></script>
+  <script src="./js/healing-log.js"></script>
+  <script src="./js/comparison.js"></script>
+  <script src="./js/visualizer.js"></script>
+  <script src="./js/pro-tips.js"></script>
+  <script src="./js/allergy-screener.js"></script>
+  <script src="./js/healing-calendar.js"></script>
+  <script src="./js/health-report.js"></script>
+  <script src="./js/jewelry-longevity.js"></script>
+  <script src="./js/healing-analysis.js"></script>
+  <script src="./js/longevity-database.js"></script>
+  <script src="./js/calculators.js"></script>
+  <script src="./js/timeline.js"></script>
+  <script src="./js/pwa.js"></script>
+  <script src="./js/common.js"></script>
+  <script src="./js/share.js"></script>
+  <script src="./js/hydration-tracker.js"></script>
+  <script src="./js/tension-gauge.js"></script>
+  <script src="./js/journey-snapshot.js"></script>
+  <script src="./js/ingredient-scanner.js"></script>
+  <script>
+    // Tool Tabs Functionality
+    document.querySelectorAll('.tool-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var tabName = tab.dataset.tab;
+        if (!tabName) return;
+        document.querySelectorAll('.tool-tab').forEach(function(t) {
+          t.classList.remove('active');
+        });
+        tab.classList.add('active');
+        document.querySelectorAll('.wrapper-tab-content').forEach(function(content) {
+          content.style.display = 'none';
+        });
+        var targetId = (tabName === 'tool' || tabName === 'healing') ? 'tab-healing' : 'tab-' + tabName;
+        var target = document.getElementById(targetId);
+        if (target) {
+          target.style.display = 'block';
+        }
+        var titleElem = document.getElementById('industrialAppTitle');
+        if (titleElem) {
+          if (tabName === 'touchup') {
+            titleElem.innerHTML = 'Touch-Up<br>Timeline';
+          } else if (tabName === 'docs') {
+            titleElem.innerHTML = 'Technical<br>Documentation';
+          } else if (tabName === 'embed') {
+            titleElem.innerHTML = 'Embed<br>Code';
+          } else {
+            titleElem.innerHTML = 'Healing<br>Timeline &amp;<br>Tracker';
+          }
+        }
+      });
+    });
+
+    // Deep link: ?tab=touchup|docs|embed opens that tab. The retired Touch-Up
+    // Timeline page redirects to /healing-tracker/?tab=touchup, and the site page
+    // passes its query string on to this iframe.
+    (function () {
+      var m = /[?&]tab=(touchup|docs|embed|healing)(?:&|$)/.exec(window.location.search);
+      var btn = m && document.querySelector('.tool-tab[data-tab="' + m[1] + '"]');
+      if (btn) btn.click();
+    })();
+
+    function copyEmbedCode() {
+      var textarea = document.getElementById('embedCodeTab');
+      if (textarea) {
+        textarea.select();
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(textarea.value).catch(function () { document.execCommand('copy'); });
+        } else {
+          document.execCommand('copy');
+        }
+      }
+    }
+
+    // Telemetry and Visual Pane reactive feedback with smooth transitions
+    function updateVisualTelemetry() {
+      var phaseStat = document.getElementById('currentPhaseStat');
+      var telemetryStatus = document.getElementById('telemetryTrackerStatus');
+      var currentPhaseBadge = document.querySelector('.timeline-step--active .timeline-step__title') || document.querySelector('.current-phase-badge');
+      if (currentPhaseBadge && phaseStat) {
+        var newPhase = currentPhaseBadge.textContent.trim().toUpperCase();
+        if (phaseStat.textContent !== newPhase) {
+          phaseStat.textContent = newPhase;
+          phaseStat.classList.remove('pulse');
+          void phaseStat.offsetWidth;
+          phaseStat.classList.add('pulse');
+        }
+      }
+
+      var symRedness = document.getElementById('visualSymptomRedness');
+      var symSwelling = document.getElementById('visualSymptomSwelling');
+      var symTenderness = document.getElementById('visualSymptomTenderness');
+      var symItching = document.getElementById('visualSymptomItching');
+      
+      var isRedness = !!document.querySelector('.symptom-check[value="redness"]:checked, .symptom-check[value="mild-redness"]:checked, .symptom-check[value="increased-redness"]:checked, .entry-symptom-check[value="redness"]:checked');
+      var isSwelling = !!document.querySelector('.symptom-check[value="swelling"]:checked, .symptom-check[value="slight-swelling"]:checked, .symptom-check[value="moderate-swelling"]:checked, .symptom-check[value="excessive-swelling"]:checked, .entry-symptom-check[value="swelling"]:checked');
+      var isTenderness = !!document.querySelector('.symptom-check[value="pain"]:checked, .symptom-check[value="tenderness"]:checked, .symptom-check[value="mild-tenderness"]:checked, .symptom-check[value="severe-pain"]:checked, .entry-symptom-check[value="tenderness"]:checked');
+      var isItching = !!document.querySelector('.symptom-check[value="itching"]:checked, .entry-symptom-check[value="itching"]:checked');
+
+      function updateTag(el, checked, label) {
+        if (!el) return;
+        var text = (checked ? '[X] ' : '[ ] ') + label;
+        if (el.textContent !== text) {
+          el.textContent = text;
+        }
+        if (checked) {
+          if (!el.classList.contains('active')) el.classList.add('active');
+        } else {
+          el.classList.remove('active');
+        }
+      }
+
+      updateTag(symRedness, isRedness, 'MILD REDNESS');
+      updateTag(symSwelling, isSwelling, 'SWELLING');
+      updateTag(symTenderness, isTenderness, 'TENDERNESS');
+      updateTag(symItching, isItching, 'ITCHING');
+
+      if (telemetryStatus) {
+        var resultsSec = document.getElementById('resultsSection');
+        var checkedCount = (isRedness ? 1 : 0) + (isSwelling ? 1 : 0) + (isTenderness ? 1 : 0) + (isItching ? 1 : 0);
+        var targetText = 'READY';
+        if (checkedCount > 0) {
+          targetText = checkedCount + ' FLAGGED';
+        } else if (resultsSec && resultsSec.style.display !== 'none') {
+          targetText = 'ACTIVE_MONITORING';
+        }
+        if (telemetryStatus.textContent !== targetText) {
+          telemetryStatus.textContent = targetText;
+          telemetryStatus.classList.remove('pulse');
+          void telemetryStatus.offsetWidth;
+          telemetryStatus.classList.add('pulse');
+        }
+      }
+    }
+
+    document.addEventListener('change', function(e) {
+      if (e.target && (e.target.classList.contains('symptom-check') || e.target.classList.contains('entry-symptom-check') || e.target.name === 'colors')) {
+        updateVisualTelemetry();
+      }
+    });
+    
+    var startBtn = document.getElementById('startTracking');
+    if (startBtn) {
+      startBtn.addEventListener('click', function() {
+        setTimeout(updateVisualTelemetry, 250);
+      });
+    }
+  </script>
+
+  <!-- Hydration Floating Toast Notification -->
+  <div id="hydrationToast" class="hydration-toast" style="display: none;" role="alert">
+    <div class="hydration-toast-icon">💧</div>
+    <div class="hydration-toast-body">
+      <strong class="hydration-toast-title" data-i18n="healing.hydration.toastTitle">Hydration Check-in</strong>
+      <p class="hydration-toast-text" data-i18n="healing.hydration.toastText">Time to drink a glass of water for cell renewal!</p>
+    </div>
+    <div class="hydration-toast-actions">
+      <button type="button" id="hydrationToastDrinkBtn" class="hydration-toast-btn hydration-toast-btn--drink" data-i18n="healing.hydration.toastDrinkBtn">+1 Glass</button>
+      <button type="button" id="hydrationToastCloseBtn" class="hydration-toast-btn hydration-toast-btn--close" aria-label="Dismiss">&times;</button>
+    </div>
+  </div>
+</body>
+</html>

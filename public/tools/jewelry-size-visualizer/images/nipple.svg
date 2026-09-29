@@ -1,0 +1,84 @@
+<svg width="300" height="400" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- White background -->
+  <rect width="300" height="400" fill="white"/>
+
+  <!-- Areola (rose gold) -->
+  <circle cx="150" cy="200" r="55" fill="#B76E79" opacity="0.2" stroke="#B76E79" stroke-width="3"/>
+
+  <!-- Texture detail on areola -->
+  <g opacity="0.15">
+    <circle cx="130" cy="180" r="2" fill="#B76E79"/>
+    <circle cx="170" cy="185" r="2" fill="#B76E79"/>
+    <circle cx="140" cy="210" r="2" fill="#B76E79"/>
+    <circle cx="165" cy="215" r="2" fill="#B76E79"/>
+    <circle cx="125" cy="205" r="2" fill="#B76E79"/>
+    <circle cx="175" cy="200" r="2" fill="#B76E79"/>
+  </g>
+
+  <!-- Nipple (gem blue) -->
+  <ellipse cx="150" cy="200" rx="18" ry="22" fill="#0EA5E9" opacity="0.3" stroke="#0EA5E9" stroke-width="3"/>
+
+  <!-- Horizontal piercing (most common) -->
+  <line x1="110" y1="200" x2="190" y2="200" stroke="#6B7280" stroke-width="4" opacity="0.7"/>
+  <circle cx="110" cy="200" r="7" fill="#B76E79" opacity="0.8"/>
+  <circle cx="190" cy="200" r="7" fill="#B76E79" opacity="0.8"/>
+
+  <!-- Vertical piercing -->
+  <line x1="150" y1="165" x2="150" y2="235" stroke="#0EA5E9" stroke-width="3" stroke-dasharray="6,6" opacity="0.4"/>
+  <circle cx="150" cy="165" r="6" fill="#0EA5E9" opacity="0.5"/>
+  <circle cx="150" cy="235" r="6" fill="#0EA5E9" opacity="0.5"/>
+
+  <!-- Barbell detail -->
+  <rect x="108" y="198" width="74" height="4" fill="#6B7280" opacity="0.6"/>
+  <circle cx="110" cy="200" r="3" fill="white" opacity="0.7"/>
+  <circle cx="190" cy="200" r="3" fill="white" opacity="0.7"/>
+
+  <!-- Ring option visualization -->
+  <g transform="translate(150, 280)">
+    <text y="-10" font-family="Arial, sans-serif" font-size="11" fill="#6B7280" text-anchor="middle">Ring Option:</text>
+    <circle r="25" fill="none" stroke="#0EA5E9" stroke-width="3"/>
+    <circle cx="0" cy="-25" r="5" fill="#0EA5E9"/>
+  </g>
+
+  <!-- Circular barbell visualization -->
+  <g transform="translate(80, 100)">
+    <text y="0" font-family="Arial, sans-serif" font-size="10" fill="#6B7280">Circular</text>
+    <text y="12" font-family="Arial, sans-serif" font-size="10" fill="#6B7280">Barbell:</text>
+    <path d="M 5 20 Q 5 35 15 40 Q 25 35 25 20"
+          fill="none" stroke="#B76E79" stroke-width="3"/>
+    <circle cx="5" cy="20" r="4" fill="#0EA5E9"/>
+    <circle cx="25" cy="20" r="4" fill="#0EA5E9"/>
+  </g>
+
+  <!-- Straight barbell visualization -->
+  <g transform="translate(200, 100)">
+    <text y="0" font-family="Arial, sans-serif" font-size="10" fill="#6B7280">Straight</text>
+    <text y="12" font-family="Arial, sans-serif" font-size="10" fill="#6B7280">Barbell:</text>
+    <line x1="8" y1="25" x2="8" y2="45" stroke="#6B7280" stroke-width="3"/>
+    <circle cx="8" cy="25" r="4" fill="#B76E79"/>
+    <circle cx="8" cy="45" r="4" fill="#B76E79"/>
+  </g>
+
+  <!-- Montgomery glands detail (small bumps) -->
+  <g opacity="0.2">
+    <circle cx="175" cy="160" r="3" fill="#B76E79"/>
+    <circle cx="125" cy="165" r="3" fill="#B76E79"/>
+    <circle cx="180" cy="240" r="3" fill="#B76E79"/>
+    <circle cx="120" cy="235" r="3" fill="#B76E79"/>
+  </g>
+
+  <!-- Labels -->
+  <text x="150" y="25" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1F2937" text-anchor="middle">NIPPLE ANATOMY</text>
+
+  <text x="95" y="195" font-family="Arial, sans-serif" font-size="10" fill="#B76E79">Ball</text>
+  <text x="195" y="195" font-family="Arial, sans-serif" font-size="10" fill="#B76E79">Ball</text>
+  <text x="115" y="205" font-family="Arial, sans-serif" font-size="9" fill="#6B7280">Horizontal</text>
+  <text x="160" y="170" font-family="Arial, sans-serif" font-size="9" fill="#0EA5E9">Vertical</text>
+  <text x="170" y="180" font-family="Arial, sans-serif" font-size="9" fill="#0EA5E9">(optional)</text>
+
+  <!-- Info box -->
+  <rect x="25" y="330" width="250" height="60" rx="8" fill="#F3F4F6" stroke="#6B7280" stroke-width="1"/>
+  <text x="150" y="350" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#1F2937" text-anchor="middle">Straight Barbell Standard</text>
+  <text x="150" y="368" font-family="Arial, sans-serif" font-size="10" fill="#6B7280" text-anchor="middle">Gauge: 14g (most common) / 12g</text>
+  <text x="150" y="383" font-family="Arial, sans-serif" font-size="10" fill="#6B7280" text-anchor="middle">Length: 1/2" - 3/4" (12-19mm) varies by anatomy</text>
+</svg>

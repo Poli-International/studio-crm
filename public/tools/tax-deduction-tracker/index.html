@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <script>
+    if (window.self !== window.top) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      window.addEventListener('message', function(e) {
+        if (e.data && e.data.type === 'poli-theme') {
+          document.documentElement.setAttribute('data-theme', e.data.light ? 'light' : 'dark');
+        }
+      });
+    }
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Record and track business expenses by category throughout the year for your accountant. Built for tattoo artists, body piercers, and studio owners.">
+  <meta property="og:title" content="Tattoo Artist Tax Deduction Tracker | Poli International">
+  <meta property="og:description" content="Record and track business expenses by category throughout the year for your accountant. Built for tattoo artists, body piercers, and studio owners.">
+  <title data-i18n="meta.title">Tattoo Artist Tax Deduction Tracker | Poli International</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<div class="tool-wrapper">
+
+  <!-- Print-Only Header -->
+  <div class="print-only">
+    <div class="print-header">
+      <h1 data-i18n="print.header.title">Tattoo Artist Business Expense &amp; Tax Deduction Summary</h1>
+      <div class="print-meta">
+        <span id="print-year-label" data-i18n="print.period_all">Period: All Recorded Years</span>
+        <span id="print-date-label" data-i18n="print.generated_prefix">Generated:</span>
+      </div>
+    </div>
+  </div>
+
+  <header class="tool-header no-print">
+    <div class="tool-header__badge" data-i18n="header.badge">🧾 Tax Deduction Tracker V2</div>
+    <h1 data-i18n="header.title">Tattoo Artist Tax Deduction Tracker</h1>
+    <p data-i18n="header.subtitle">Record business expenses through the year in categories your accountant recognises. Fast line-item entry, receipt tracking references, travel logs, and customisable categories. Everything stays in your browser.</p>
+  </header>
+
+  <!-- Top Toolbar -->
+  <div class="top-toolbar no-print">
+    <div class="toolbar-group">
+      <label for="filter-year-select" class="toolbar-label" data-i18n="toolbar.year">Tax / Calendar Year:</label>
+      <select id="filter-year-select" class="toolbar-select" aria-label="Select tax year" data-i18n-aria-label="toolbar.aria_year">
+        <option value="all" data-i18n="toolbar.all_years">All Recorded Years</option>
+      </select>
+    </div>
+    <div class="toolbar-group">
+      <label for="currency-select" class="toolbar-label" data-i18n="toolbar.currency">Currency:</label>
+      <select id="currency-select" class="toolbar-select" aria-label="Select currency" data-i18n-aria-label="toolbar.aria_currency">
+        <option value="£" data-i18n="currency.gbp">£ (GBP)</option>
+        <option value="$" data-i18n="currency.usd">$ (USD/CAD/AUD)</option>
+        <option value="€" data-i18n="currency.eur">€ (EUR)</option>
+        <option value="CHF" data-i18n="currency.chf">CHF (Swiss Franc)</option>
+        <option value="kr" data-i18n="currency.kr">kr (SEK/NOK/DKK)</option>
+        <option value="¥" data-i18n="currency.jpy">¥ (JPY)</option>
+      </select>
+    </div>
+    <div class="toolbar-group">
+      <label for="lang-select" class="toolbar-label" data-i18n="toolbar.language">Language:</label>
+      <select id="lang-select" class="toolbar-select" aria-label="Select language" data-i18n-aria-label="toolbar.aria_language">
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="it">Italiano</option>
+        <option value="de">Deutsch</option>
+        <option value="es">Español</option>
+        <option value="nl">Nederlands</option>
+        <option value="pt">Português</option>
+      </select>
+      <button id="open-cat-btn" class="btn-tool" type="button" aria-haspopup="dialog">
+        <span aria-hidden="true">⚙️</span>
+        <span data-i18n="toolbar.categories">Categories</span>
+      </button>
+      <button id="print-summary-btn" class="btn-tool btn-tool--primary" type="button">
+        <span aria-hidden="true">🖨️</span>
+        <span data-i18n="toolbar.print_summary">Print Summary</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mandatory Record-Keeping Notice -->
+  <div class="notice-panel" role="note">
+    <strong data-i18n="notice.title">Record-Keeping Notice:</strong>
+    <span data-i18n="notice.text"> This application is strictly a record-keeping tool to track business expenses for your accountant. It does not provide tax, legal, or financial advice, nor does it determine or verify deductibility. Tax rules depend on your business structure and jurisdiction. Always consult a qualified professional tax advisor or accountant before filing.</span>
+  </div>
+
+  <!-- Annual Summary Cards -->
+  <div id="summary-row" class="summary-row">
+    <div class="summary-card">
+      <div class="summary-label" data-i18n="summary.total_deductions">Total Recorded Expenses</div>
+      <div id="total-deductions" class="summary-value">£0.00</div>
+      <div id="summary-year-text" class="summary-subtext" data-i18n="summary.all_years_label">All recorded years</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-label" data-i18n="summary.entries_logged">Entries Logged</div>
+      <div id="entry-count" class="summary-value">0</div>
+      <div class="summary-subtext" data-i18n="summary.entries_sub">Recorded items</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-label" data-i18n="summary.travel_total">Travel &amp; Mileage</div>
+      <div id="travel-total" class="summary-value">£0.00</div>
+      <div id="travel-subtext" class="summary-subtext" data-i18n="summary.travel_sub_expenses">Expenses &amp; fares</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-label" data-i18n="summary.top_category">Top Category</div>
+      <div id="top-category" class="summary-value" data-i18n="summary.no_category">-</div>
+      <div id="top-category-sub" class="summary-subtext" data-i18n="summary.highest_exp">Highest expenditure</div>
+    </div>
+  </div>
+
+  <!-- Fast Line-Item Entry Card -->
+  <div class="add-card no-print">
+    <div class="mode-tabs" role="tablist">
+      <button id="tab-standard" class="mode-tab is-active" role="tab" aria-selected="true" aria-controls="form-standard" data-i18n="tab.standard">Standard Expense</button>
+      <button id="tab-mileage" class="mode-tab" role="tab" aria-selected="false" aria-controls="form-mileage" data-i18n="tab.mileage">Travel &amp; Mileage Log</button>
+    </div>
+
+    <!-- Standard Expense Form -->
+    <div id="form-standard" role="tabpanel" aria-labelledby="tab-standard">
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="expense-date" data-i18n="form.date">Date</label>
+          <input type="date" id="expense-date" class="input-field">
+        </div>
+        <div class="form-field">
+          <label for="expense-category" data-i18n="form.category">Category</label>
+          <select id="expense-category" class="input-field" aria-label="Select category" data-i18n-aria-label="form.aria_category"></select>
+        </div>
+        <div class="form-field">
+          <label for="expense-amount">
+            <span data-i18n="form.amount">Amount</span>
+            <span id="amount-currency-label" class="opt-label">(£)</span>
+          </label>
+          <div class="input-addon-wrap">
+            <span id="currency-symbol-addon" class="input-addon">£</span>
+            <input type="number" id="expense-amount" class="input-field" placeholder="0.00" min="0" step="0.01" aria-label="Expense amount" data-i18n-aria-label="form.aria_amount">
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="expense-supplier">
+            <span data-i18n="form.supplier">Supplier / Payee</span>
+            <span class="opt-label" data-i18n="form.optional">optional</span>
+          </label>
+          <input type="text" id="expense-supplier" class="input-field" placeholder="e.g. Inkjecta, Barber DTS, Wholesaler" data-i18n-placeholder="form.placeholder_supplier">
+        </div>
+        <div class="form-field">
+          <label for="expense-receipt-ref">
+            <span data-i18n="form.receipt_ref">Receipt Reference</span>
+            <span class="opt-label" data-i18n="form.receipt_ref_hint">file location or note</span>
+          </label>
+          <input type="text" id="expense-receipt-ref" class="input-field" placeholder="e.g. Envelope #2, Binder 2026, Email #410" data-i18n-placeholder="form.placeholder_receipt_ref">
+        </div>
+        <div class="form-field">
+          <label for="expense-desc">
+            <span data-i18n="form.desc">Description / Notes</span>
+            <span class="opt-label" data-i18n="form.optional">optional</span>
+          </label>
+          <input type="text" id="expense-desc" class="input-field" placeholder="e.g. Box of 50 cartridges, rotary needles, dental bibs" data-i18n-placeholder="form.placeholder_desc">
+        </div>
+      </div>
+      <button id="add-btn" class="add-btn" type="button">
+        <span aria-hidden="true">＋</span>
+        <span data-i18n="form.add_expense">Add Expense</span>
+      </button>
+    </div>
+
+    <!-- Travel & Mileage Form -->
+    <div id="form-mileage" role="tabpanel" aria-labelledby="tab-mileage" class="print-only">
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="mileage-date" data-i18n="mileage.date">Trip Date</label>
+          <input type="date" id="mileage-date" class="input-field">
+        </div>
+        <div class="form-field">
+          <label for="mileage-purpose">
+            <span data-i18n="mileage.purpose">Trip Purpose / Destination</span>
+          </label>
+          <input type="text" id="mileage-purpose" class="input-field" placeholder="e.g. Guest spot in Leeds, Wholesaler supply run" data-i18n-placeholder="mileage.placeholder_purpose">
+        </div>
+        <div class="form-field">
+          <label for="mileage-distance" data-i18n="mileage.distance">Distance (Miles or Km)</label>
+          <input type="number" id="mileage-distance" class="input-field" placeholder="e.g. 45" min="0" step="0.1" data-i18n-placeholder="mileage.placeholder_distance">
+        </div>
+        <div class="form-field">
+          <label for="mileage-rate">
+            <span data-i18n="mileage.rate">Vehicle Rate per Unit</span>
+            <span class="opt-label" data-i18n="mileage.rate_hint">user-specified</span>
+          </label>
+          <input type="number" id="mileage-rate" class="input-field" placeholder="0.00" min="0" step="0.01" data-i18n-placeholder="mileage.placeholder_rate">
+        </div>
+        <div class="form-field">
+          <label for="mileage-extra">
+            <span data-i18n="mileage.extra">Tolls / Parking / Transit</span>
+            <span class="opt-label" data-i18n="form.optional">optional</span>
+          </label>
+          <input type="number" id="mileage-extra" class="input-field" placeholder="0.00" min="0" step="0.01">
+        </div>
+        <div class="form-field">
+          <label for="mileage-receipt-ref">
+            <span data-i18n="mileage.receipt_ref">Receipt / Ticket Reference</span>
+            <span class="opt-label" data-i18n="form.optional">optional</span>
+          </label>
+          <input type="text" id="mileage-receipt-ref" class="input-field" placeholder="e.g. Parking ticket, Odometer photo #4" data-i18n-placeholder="mileage.placeholder_receipt_ref">
+        </div>
+      </div>
+
+      <div class="calc-display">
+        <span data-i18n="mileage.computed_label">Calculated Travel Deduction Total:</span>
+        <strong id="mileage-calc-total">£0.00</strong>
+      </div>
+
+      <button id="add-mileage-btn" class="add-btn" type="button">
+        <span aria-hidden="true">🚗</span>
+        <span data-i18n="mileage.add_btn">Log Travel &amp; Mileage</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Annual Category Breakdown & SVG Diagram Section -->
+  <div id="breakdown-card" class="breakdown-card">
+    <div class="card-header-bar">
+      <div>
+        <h2 class="section-title">
+          <span aria-hidden="true">📊</span>
+          <span data-i18n="breakdown.title">Annual Category Summary</span>
+        </h2>
+        <div id="breakdown-subtitle" class="section-subtitle" data-i18n="breakdown.subtitle_static">Aggregated totals formatted for your accountant</div>
+      </div>
+      <div class="log-actions no-print">
+        <button id="export-summary-btn" class="ctrl-btn" type="button">
+          <span aria-hidden="true">📥</span>
+          <span data-i18n="breakdown.export_csv">Export Summary CSV</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Inline SVG Diagram (Generated in page, no external images) -->
+    <div class="svg-chart-container" id="svg-chart-container">
+      <svg id="category-svg-chart" class="chart-svg" role="img" aria-label="Category expense distribution chart" data-i18n-aria-label="chart.aria_chart"></svg>
+    </div>
+
+    <!-- Breakdown Table for Accounting -->
+    <div class="breakdown-table-wrap">
+      <table id="category-summary-table" class="breakdown-table">
+        <thead>
+          <tr>
+            <th data-i18n="table.category">Category</th>
+            <th data-i18n="table.entries_count">Entries</th>
+            <th data-i18n="table.amount">Total Amount</th>
+            <th data-i18n="table.percent">Share of Total</th>
+          </tr>
+        </thead>
+        <tbody id="category-summary-body"></tbody>
+        <tfoot>
+          <tr>
+            <td data-i18n="table.total">Total</td>
+            <td id="summary-total-entries">0</td>
+            <td id="summary-total-amount">£0.00</td>
+            <td>100%</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- Print Certification / Sign-off for Accountant -->
+    <div class="print-certification print-only">
+      <div class="print-cert-row">
+        <span data-i18n="print.signature">Artist / Studio Signature: _____________________________________</span>
+        <span data-i18n="print.date">Date: ________________________</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Running Expense Log Table Section -->
+  <div class="card-header-bar no-print">
+    <h2 class="section-title">
+      <span aria-hidden="true">📋</span>
+      <span data-i18n="log.title">Running Expense Log</span>
+    </h2>
+  </div>
+
+  <div class="log-controls no-print">
+    <div class="filter-search-wrap">
+      <input type="text" id="log-search-input" class="input-field" placeholder="Search entries, suppliers, receipts..." aria-label="Search expense ledger" data-i18n-placeholder="log.search_placeholder" data-i18n-aria-label="log.aria_search">
+    </div>
+    <div id="log-count" class="log-count" data-i18n="log.count_zero">0 expenses</div>
+    <div class="log-actions">
+      <button id="export-all-btn" class="ctrl-btn" type="button">
+        <span aria-hidden="true">📥</span>
+        <span data-i18n="log.export_all">Export Full Log (CSV)</span>
+      </button>
+      <button id="clear-btn" class="ctrl-btn ctrl-btn--danger" type="button">
+        <span aria-hidden="true">🗑️</span>
+        <span data-i18n="log.clear_all">Clear All</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="expenses-wrap" class="expenses-table-wrap no-print">
+    <div id="empty-state" class="empty-state" data-i18n="log.empty">No expenses logged yet. Add your first expense or mileage entry above.</div>
+    <table id="expenses-table" class="log-table">
+      <thead>
+        <tr>
+          <th data-i18n="table.date">Date</th>
+          <th data-i18n="table.category">Category</th>
+          <th data-i18n="table.amount">Amount</th>
+          <th data-i18n="table.supplier">Supplier / Payee</th>
+          <th data-i18n="table.receipt_ref">Receipt Ref</th>
+          <th data-i18n="table.desc">Description / Notes</th>
+          <th class="no-print" aria-label="Actions" data-i18n-aria-label="table.aria_actions"></th>
+        </tr>
+      </thead>
+      <tbody id="expenses-body"></tbody>
+    </table>
+  </div>
+
+  <!-- Related Studio Tools (Do Not Build Section Navigation) -->
+  <section class="related-tools no-print" aria-labelledby="related-tools-title">
+    <h3 id="related-tools-title" class="related-title" data-i18n="related.title">Related Studio Operational Tools</h3>
+    <div class="related-grid">
+      <a href="https://poliinternational.com/booth-rent-calculator/" target="_top" class="related-link">
+        <span class="related-name" data-i18n="related.booth_title">Booth Rent Calculator</span>
+        <span class="related-desc" data-i18n="related.booth_desc">Evaluate fixed chair rent agreements against percentage commission splits.</span>
+      </a>
+      <a href="https://poliinternational.com/equipment-roi-calculator/" target="_top" class="related-link">
+        <span class="related-name" data-i18n="related.roi_title">Equipment ROI Calculator</span>
+        <span class="related-desc" data-i18n="related.roi_desc">Calculate payback periods and return on investment for tattoo machines and autoclaves.</span>
+      </a>
+      <a href="https://poliinternational.com/studio-pricing-benchmark/" target="_top" class="related-link">
+        <span class="related-name" data-i18n="related.pricing_title">Studio Pricing Benchmark</span>
+        <span class="related-desc" data-i18n="related.pricing_desc">Benchmark your hourly studio rates, piercing fees, and minimum charges.</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Record Keeping Disclaimer -->
+  <footer class="disclaimer">
+    <strong data-i18n="disclaimer.heading">Accountant Record-Keeping Notice:</strong>
+    <span data-i18n="disclaimer.body"> This tool is provided free by Poli International to help body piercers, tattoo artists, and studio owners maintain orderly expense records throughout the tax year. It performs mathematical tabulation only. Deductibility rules differ widely between countries, local jurisdictions, and business entities. This software does not provide tax advice, determine eligible deductions, or compute tax liability. Consult a licensed accountant or tax professional before filing.</span>
+  </footer>
+
+</div>
+
+<!-- Category Editor Modal -->
+<div id="cat-modal" class="modal-overlay no-print" role="dialog" aria-modal="true" aria-labelledby="modal-cat-title">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h3 id="modal-cat-title" class="modal-title" data-i18n="cat_modal.title">Customise Expense Categories</h3>
+      <button id="close-cat-btn" class="modal-close" type="button" aria-label="Close dialog" data-i18n-aria-label="cat_modal.aria_close">×</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-intro" data-i18n="cat_modal.intro">Expense classifications vary across regions and accounting methods. Add custom categories, rename existing ones, or remove categories you do not use.</p>
+      
+      <div class="cat-add-form">
+        <input type="text" id="new-cat-input" class="input-field" placeholder="New category name (e.g. Waste Disposal, Licensing)" aria-label="New category name" data-i18n-placeholder="cat_modal.placeholder_new" data-i18n-aria-label="cat_modal.aria_new">
+        <button id="add-cat-btn" class="btn-tool btn-tool--primary" type="button" data-i18n="cat_modal.add_btn">Add</button>
+      </div>
+
+      <div id="cat-list" class="cat-list" role="list"></div>
+    </div>
+    <div class="modal-footer">
+      <button id="reset-cat-btn" class="ctrl-btn ctrl-btn--danger" type="button" data-i18n="cat_modal.reset_btn">Reset to Defaults</button>
+      <button id="done-cat-btn" class="btn-tool btn-tool--primary" type="button" data-i18n="cat_modal.done_btn">Done</button>
+    </div>
+  </div>
+</div>
+
+<script src="./js/i18n.js"></script>
+<script src="./js/i18n/en.js"></script>
+<script src="./js/i18n/fr.js"></script>
+<script src="./js/i18n/it.js"></script>
+<script src="./js/i18n/de.js"></script>
+<script src="./js/i18n/es.js"></script>
+<script src="./js/i18n/nl.js"></script>
+<script src="./js/i18n/pt.js"></script>
+<script src="./js/app.js"></script>
+</body>
+</html>

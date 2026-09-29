@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ink Color Mixer - Embed</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+    .embed__features-section{background:var(--bg-secondary, #F8F8F8);padding:2rem 1rem;margin:2rem 0;border-radius:8px;border:1px solid var(--border-primary, #E0E0E0)}
+    .embed__features-title{font-size:1.3rem;font-weight:700;color:var(--color-blue, #3B82F6);margin-bottom:1rem;text-align:center}
+    .embed__features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;max-width:600px;margin:0 auto}
+    .embed__feature-item{display:flex;align-items:center;gap:0.5rem;padding:0.75rem;background:var(--bg-primary, #FFF);border-radius:6px;font-size:0.9rem;border:1px solid var(--border-secondary, #E8E8E8)}
+    .embed__feature-check{color:#28A745;font-size:1.1rem;font-weight:700}
+    .embed__feature-text{color:var(--text-primary, #333)}
+    @media (max-width:600px){.embed__features-grid{grid-template-columns:1fr}}
+    </style>
+</head>
+<body class="embed-mode">
+    <!-- Compact Header for Embed -->
+    <header class="embed-header">
+        <div class="embed-header-content">
+            <img src="images/Poli-International-Co.webp" alt="Poli International" class="embed-logo">
+            <span class="embed-title">Ink Color Mixer</span>
+
+            <!-- Header Actions -->
+            <div class="embed-header-actions">
+<!-- Dark Mode Toggle -->
+                <button id="darkModeToggle" class="embed-dark-toggle" aria-label="Toggle dark mode">
+                    <span class="dark-mode-icon">◐</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tool Interface (simplified for embed) -->
+    <main class="embed-main">
+        <div class="container">
+            <!-- Tab Navigation -->
+            <div class="ink-mixer__tabs">
+                <button class="ink-mixer__tab ink-mixer__tab--active" data-tab="mixer">
+                    🎨 Mixer
+                </button>
+                <button class="ink-mixer__tab" data-tab="gray-wash">
+                    🌫️ Gray
+                </button>
+            </div>
+
+            <!-- Tab 1: Color Mixer -->
+            <div id="tab-mixer" class="ink-mixer__tab-content ink-mixer__tab-content--active">
+                <section class="ink-mixer__section ink-mixer__section--compact">
+                    <h2 class="ink-mixer__section-title">Color Mixer</h2>
+
+                    <div id="colorSelectors" class="ink-mixer__color-selectors">
+                        <!-- Color 1 -->
+                        <div class="ink-mixer__color-row">
+                            <div class="ink-mixer__color-control">
+                                <label class="ink-mixer__label">Color 1</label>
+                                <select class="ink-mixer__select color-select" data-color-index="0">
+                                    <option value="">Select</option>
+                                    <option value="black">Black</option>
+                                    <option value="white">White</option>
+                                    <option value="red">Red</option>
+                                    <option value="yellow">Yellow</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="orange">Orange</option>
+                                    <option value="green">Green</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="brown">Brown</option>
+                                </select>
+                            </div>
+                            <div class="ink-mixer__color-control">
+                                <label class="ink-mixer__label">Parts</label>
+                                <input type="number" class="ink-mixer__input parts-input" data-color-index="0" min="0.1" step="0.1" value="1">
+                            </div>
+                        </div>
+
+                        <!-- Color 2 -->
+                        <div class="ink-mixer__color-row">
+                            <div class="ink-mixer__color-control">
+                                <label class="ink-mixer__label">Color 2</label>
+                                <select class="ink-mixer__select color-select" data-color-index="1">
+                                    <option value="">Select</option>
+                                    <option value="black">Black</option>
+                                    <option value="white">White</option>
+                                    <option value="red">Red</option>
+                                    <option value="yellow">Yellow</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="orange">Orange</option>
+                                    <option value="green">Green</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="brown">Brown</option>
+                                </select>
+                            </div>
+                            <div class="ink-mixer__color-control">
+                                <label class="ink-mixer__label">Parts</label>
+                                <input type="number" class="ink-mixer__input parts-input" data-color-index="1" min="0.1" step="0.1" value="1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="addColorBtn" class="ink-mixer__btn ink-mixer__btn--secondary">+ Add Color</button>
+
+                    <div class="ink-mixer__volume-control">
+                        <label class="ink-mixer__label">Total Volume</label>
+                        <div class="ink-mixer__input-group">
+                            <input type="number" id="totalVolume" class="ink-mixer__input" min="0.1" step="0.1" value="5">
+                            <select id="volumeUnit" class="ink-mixer__select ink-mixer__select--small">
+                                <option value="ml">ml</option>
+                                <option value="caps">caps</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button id="calculateMixBtn" class="ink-mixer__btn ink-mixer__btn--primary">Calculate</button>
+                </section>
+
+                <!-- Results -->
+                <section id="mixerResults" class="ink-mixer__section ink-mixer__section--compact" style="display: none;">
+                    <h3>Formula</h3>
+                    <div class="ink-mixer__results-card">
+                        <div id="resultColorSwatch" class="ink-mixer__swatch"></div>
+                        <div id="ratioFormula" class="ink-mixer__ratio-formula"></div>
+
+                        <table class="ink-mixer__table">
+                            <thead>
+                                <tr>
+                                    <th>Color</th>
+                                    <th>ml</th>
+                                    <th>Drops</th>
+                                </tr>
+                            </thead>
+                            <tbody id="measurementsTableBody"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Skin Tone Redirect Card -->
+            <div class="skin-matcher-redirect-card" style="margin: 1.25rem 0; padding: 1rem 1.25rem; border-radius: var(--border-radius); background: var(--bg-secondary); border: 1px solid var(--border-primary); display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+                <span style="font-weight: 500; color: var(--text-secondary);">Matching ink to skin tone?</span>
+                <a href="https://poliinternational.com/skin-tone-pigment-matcher/" target="_top" style="color: var(--color-blue); text-decoration: underline; font-weight: 600;">Use the Skin Tone Pigment Matcher.</a>
+            </div>
+
+            <!-- Tab 2: Gray Wash -->
+            <div id="tab-gray-wash" class="ink-mixer__tab-content">
+                <section class="ink-mixer__section ink-mixer__section--compact">
+                    <h2 class="ink-mixer__section-title">Gray Wash</h2>
+
+                    <div class="ink-mixer__form-group">
+                        <label class="ink-mixer__label">Gray Value (%)</label>
+                        <div class="ink-mixer__slider-container">
+                            <input type="range" id="grayPercentage" class="ink-mixer__slider" min="5" max="90" step="5" value="50">
+                            <span id="grayPercentageValue" class="ink-mixer__slider-value">50%</span>
+                        </div>
+                    </div>
+
+                    <div class="ink-mixer__form-group">
+                        <label class="ink-mixer__label">Volume (ml)</label>
+                        <input type="number" id="grayVolume" class="ink-mixer__input" min="1" value="10">
+                    </div>
+
+                    <button id="calculateGrayBtn" class="ink-mixer__btn ink-mixer__btn--primary">Calculate</button>
+
+                    <div id="grayWashResults" class="ink-mixer__gray-wash-results" style="display: none;"></div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <section class="embed__features-section">
+        <h2 class="embed__features-title">✨ Tool Features</h2>
+        <div class="embed__features-grid">
+            <div class="embed__feature-item"><span class="embed__feature-check">✅</span><span class="embed__feature-text">Custom Color Mixing</span></div>
+            <div class="embed__feature-item"><span class="embed__feature-check">✅</span><span class="embed__feature-text">Shade Calculator</span></div>
+            <div class="embed__feature-item"><span class="embed__feature-check">✅</span><span class="embed__feature-text">Gray Wash Formulas</span></div>
+            <div class="embed__feature-item"><span class="embed__feature-check">✅</span><span class="embed__feature-text">Precise Ratios</span></div>
+            <div class="embed__feature-item"><span class="embed__feature-check">✅</span><span class="embed__feature-text">Mobile-Responsive Design</span></div>
+            <div class="embed__feature-item"><span class="embed__feature-check">✅</span><span class="embed__feature-text">Dark/Light Mode</span></div>
+            <div class="embed__feature-item"><span class="embed__feature-check">✅</span><span class="embed__feature-text">100% Free, No Ads</span></div>
+            <div class="embed__feature-item"><span class="embed__feature-check">✅</span><span class="embed__feature-text">Professional Results</span></div>
+        </div>
+    </section>
+
+    <!-- Compact Footer for Embed -->
+    <footer class="embed-footer">
+        <div class="embed-footer-content">
+            <!-- More Tools Button -->
+            <a href="//poliinternational.com/tools" target="_blank" class="embed-footer-btn embed-footer-btn--tools">
+                <span class="btn-icon">🔧</span>
+                <span class="btn-text">More Tools</span>
+            </a>
+
+<!-- Open Full Version Link -->
+            <a href="index.html" target="_blank" class="embed-footer-link">
+                Open Full Version →
+            </a>
+        </div>
+    </footer>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/ink-database.js"></script>
+    <script src="js/formulas.js"></script>
+    <script src="js/mixer.js"></script>
+    <script src="js/common.js"></script>
+</body>
+</html>

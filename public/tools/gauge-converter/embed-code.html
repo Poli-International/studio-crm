@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+<script>
+if (window.self !== window.top) {
+    var poliRoot = document.documentElement;
+    var poliApply = function (light) {
+        poliRoot.setAttribute('data-theme', light ? 'light' : 'dark');
+        var b = document.body;
+        if (b) {
+            b.classList.toggle('dark-mode', !light);
+            b.classList.toggle('light-mode', !!light);
+        }
+    };
+    poliApply(false);
+    document.addEventListener('DOMContentLoaded', function () {
+        poliApply(poliRoot.getAttribute('data-theme') === 'light');
+    });
+    window.addEventListener('message', function (e) {
+        if (e.data && e.data.type === 'poli-theme') {
+            poliApply(!!e.data.light);
+        }
+    });
+}
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Embed Gauge Converter | Poli International</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f5f5f5;
+      padding: 2rem 1rem;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #0066CC;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+    h2 {
+      color: #004C99;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+    h3 {
+      color: #0066CC;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 1.25rem;
+    }
+    p {
+      margin-bottom: 1rem;
+      color: #666;
+    }
+    .intro {
+      background-color: #E8F4FF;
+      padding: 1.5rem;
+      border-left: 4px solid #0066CC;
+      border-radius: 4px;
+      margin-bottom: 2rem;
+    }
+    .intro p {
+      margin-bottom: 0.5rem;
+      color: #004C99;
+    }
+    .embed-option {
+      background-color: #FAFAFA;
+      padding: 1.5rem;
+      border: 1px solid #DDD;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .embed-option h3 {
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background-color: #0066CC;
+      color: white;
+      font-size: 0.75rem;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+    .badge--recommended {
+      background-color: #00CC66;
+    }
+    .copy-btn.copied {
+      background-color: #00CC66;
+    }
+    .code-block {
+      background-color: #1E1E1E;
+      color: #D4D4D4;
+      padding: 1rem;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, monospace;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      position: relative;
+    }
+    .code-block code {
+      display: block;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: #0066CC;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+    .copy-btn:hover {
+      background-color: #004C99;
+    }
+    .copy-btn:active {
+      background-color: #003366;
+    }
+    .preview {
+      margin-top: 1rem;
+      padding: 1rem;
+      background-color: white;
+      border: 2px dashed #0066CC;
+      border-radius: 4px;
+    }
+    .preview-label {
+      font-weight: 600;
+      color: #0066CC;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+    .features {
+      list-style: none;
+      margin: 1rem 0;
+    }
+    .features li {
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+      position: relative;
+      color: #666;
+    }
+    .features li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #00CC66;
+      font-weight: bold;
+    }
+    .note {
+      background-color: #FFF3CD;
+      border-left: 4px solid #FFC107;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+    .note strong {
+      color: #856404;
+    }
+    .note p {
+      margin-bottom: 0;
+      color: #856404;
+    }
+    .footer {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #DDD;
+      text-align: center;
+      color: #999;
+      font-size: 0.9rem;
+    }
+    .footer a {
+      color: #0066CC;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <script src="/js/input-guards.js"></script>
+  <link rel="stylesheet" href="/tools/shared/print.css" media="print">
+  <link rel="stylesheet" href="/tools/shared/a11y.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🔧 Embed the Professional Gauge Converter</h1>
+
+    <div class="intro">
+      <p><strong>Add this powerful gauge conversion tool to your website in seconds!</strong></p>
+      <p>Simply copy one of the embed codes below and paste it into your HTML. No dependencies, no API keys, no configuration needed.</p>
+    </div>
+
+    <h2>📏 Choose Your Size</h2>
+    <p>Select the embed option that best fits your website layout:</p>
+
+    <!-- Compact Version -->
+    <div class="embed-option">
+      <h3>
+        <span>Compact Version</span>
+        <span class="badge">320×500px</span>
+      </h3>
+      <p>Perfect for sidebars and narrow columns. Includes inputs and measurements only.</p>
+
+      <ul class="features">
+        <li>Minimal height (500px)</li>
+        <li>Mobile-friendly width (320px)</li>
+        <li>All conversion functionality</li>
+        <li>Best for space-constrained layouts</li>
+      </ul>
+
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this, 'compact')">Copy Code</button>
+        <code id="compact">&lt;iframe
+  src="https://poliinternational.com/tools/gauge-converter/embed.html"
+  width="320"
+  height="500"
+  frameborder="0"
+  class="poli-gauge-embed"
+  title="Professional Gauge Converter by Poli International"&gt;
+&lt;/iframe&gt;</code>
+      </div>
+    </div>
+
+    <!-- Standard Version -->
+    <div class="embed-option">
+      <h3>
+        <span>Standard Version</span>
+        <span class="badge">100%×600px</span>
+        <span class="badge badge--recommended">Recommended</span>
+      </h3>
+      <p>Best all-around option. Full-width responsive design with visual display.</p>
+
+      <ul class="features">
+        <li>Responsive full-width design</li>
+        <li>Includes visual circle display</li>
+        <li>Measurement reference panel</li>
+        <li>Optimized for most websites</li>
+      </ul>
+
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this, 'standard')">Copy Code</button>
+        <code id="standard">&lt;iframe
+  src="https://poliinternational.com/tools/gauge-converter/embed.html"
+  width="100%"
+  height="600"
+  frameborder="0"
+  class="poli-gauge-embed"
+  title="Professional Gauge Converter by Poli International"&gt;
+&lt;/iframe&gt;</code>
+      </div>
+
+      <div class="preview">
+        <div class="preview-label">📱 Live Preview:</div>
+        <iframe
+          src="embed.html"
+          width="100%"
+          height="600"
+          frameborder="0"
+          title="Professional Gauge Converter by Poli International">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Large Version -->
+    <div class="embed-option">
+      <h3>
+        <span>Large Version</span>
+        <span class="badge">100%×800px</span>
+      </h3>
+      <p>Maximum visibility. Includes all features with extra breathing room for larger displays.</p>
+
+      <ul class="features">
+        <li>Maximum vertical space (800px)</li>
+        <li>Full-width responsive</li>
+        <li>All features visible</li>
+        <li>Ideal for dedicated tool pages</li>
+      </ul>
+
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this, 'large')">Copy Code</button>
+        <code id="large">&lt;iframe
+  src="https://poliinternational.com/tools/gauge-converter/embed.html"
+  width="100%"
+  height="800"
+  frameborder="0"
+  class="poli-gauge-embed"
+  title="Professional Gauge Converter by Poli International"&gt;
+&lt;/iframe&gt;</code>
+      </div>
+    </div>
+
+    <h2>⚙️ Customization Options</h2>
+    <p>You can customize the iframe styling by modifying CSS classes or attributes:</p>
+
+    <div class="code-block">
+      <code>&lt;!-- Example: Custom responsive iframe embed --&gt;
+&lt;iframe
+  src="https://poliinternational.com/tools/gauge-converter/embed.html"
+  width="100%"
+  height="600"
+  frameborder="0"
+  class="poli-gauge-embed"
+  title="Professional Gauge Converter by Poli International"&gt;
+&lt;/iframe&gt;</code>
+    </div>
+
+    <h2>📋 Implementation Notes</h2>
+
+    <div class="note">
+      <p><strong>Important:</strong> Replace <code>https://poliinternational.com/tools/gauge-converter/embed.html</code> with your actual hosted URL path when deploying to production.</p>
+    </div>
+
+    <h3>✅ Features Included</h3>
+    <ul class="features">
+      <li><strong>No Dependencies:</strong> Everything is self-contained in the iframe</li>
+      <li><strong>Responsive Design:</strong> Adapts to container width automatically</li>
+      <li><strong>Cross-Browser:</strong> Works on Chrome, Firefox, Safari, Edge</li>
+      <li><strong>Mobile-Friendly:</strong> Touch-optimized for mobile devices</li>
+      <li><strong>Accessible:</strong> Designed to WCAG 2.1 AA guidelines with ARIA labels</li>
+      <li><strong>Fast Loading:</strong> Under 50KB total, loads in under 2 seconds</li>
+      <li><strong>SEO-Friendly:</strong> Proper semantic HTML and meta tags</li>
+    </ul>
+
+    <h3>🔒 Security & Privacy</h3>
+    <ul class="features">
+      <li>No external API calls or tracking</li>
+      <li>No cookies or data collection</li>
+      <li>Works on HTTP and HTTPS</li>
+      <li>No cross-origin security issues</li>
+    </ul>
+
+    <h3>🌐 Browser Support</h3>
+    <ul class="features">
+      <li>Chrome 90+ (and all Chromium-based browsers)</li>
+      <li>Firefox 88+</li>
+      <li>Safari 14+</li>
+      <li>Edge 90+</li>
+      <li>iOS Safari 14+</li>
+      <li>Android Chrome 90+</li>
+    </ul>
+
+    <h2>🛠️ Technical Specifications</h2>
+    <p>The gauge converter includes:</p>
+    <ul class="features">
+      <li>14 standard gauge sizes (00G to 22G)</li>
+      <li>American Wire Gauge (AWG) standards for body jewelry</li>
+      <li>Bidirectional conversions (gauge ↔ mm ↔ inches)</li>
+      <li>Real-time visual circle display (life-size representation)</li>
+      <li>Input validation and error handling</li>
+      <li>300ms debounce on numeric inputs for performance</li>
+    </ul>
+
+    <h2>💼 License & Attribution</h2>
+    <p>This tool is provided by <strong>Poli International</strong>, a leading B2B supplier of professional tattoo and piercing equipment.</p>
+    <p>The embed includes a subtle "Powered by Poli International" footer with a link back to the Poli website. This attribution must remain intact.</p>
+
+    <h2>🆘 Support</h2>
+    <p>If you encounter any issues or have questions about embedding this tool:</p>
+    <ul class="features">
+      <li>Email: <a href="mailto:support@poliinternational.com">support@poliinternational.com</a></li>
+      <li>Website: <a href="https://poliinternational.com" target="_top">poliinternational.com</a></li>
+      <li>Documentation: Check the README.md file for technical details</li>
+    </ul>
+
+    <div class="footer">
+      <p>Professional Gauge Converter | Created by <a href="https://poliinternational.com" target="_top">Poli International</a></p>
+      <p>&copy; 2026 Poli International. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script>
+    function copyCode(button, codeId) {
+      const codeElement = document.getElementById(codeId);
+      const textToCopy = codeElement.textContent;
+
+      // Copy to clipboard
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          const originalText = button.textContent;
+          button.textContent = '✓ Copied!';
+          button.classList.add('copied');
+
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+          }, 2000);
+        }).catch(err => {
+          console.error('Failed to copy:', err);
+        });
+      }
+    }
+  </script>
+</body>
+</html>

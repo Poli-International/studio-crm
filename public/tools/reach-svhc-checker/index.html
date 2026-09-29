@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <script>
+    if (window.self !== window.top) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.body && document.body.classList.add('dark-mode');
+      window.addEventListener('message', function(e) {
+        if (e.data && e.data.type === 'poli-theme') {
+          if (e.data.light) {
+            document.documentElement.setAttribute('data-theme', 'light');
+          } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+          }
+        }
+      });
+    }
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Screen tattoo ink, body jewelry, and studio product ingredients against a curated body-art subset of the ECHA SVHC Candidate List by substance name and CAS number.">
+  <meta name="keywords" content="SVHC checker, REACH SVHC, tattoo ink screening, body jewelry alloys, ECHA candidate list, SDS ingredient check, EU REACH pigment screening">
+  <title>REACH SVHC Pigment Checker | Poli International</title>
+
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="REACH SVHC Pigment Checker | Poli International">
+  <meta property="og:description" content="Screen tattoo ink and body jewelry ingredients against a curated body-art subset of the ECHA Candidate List.">
+  <meta property="og:url"         content="https://poliinternational.com/reach-svhc-checker/">
+  <meta property="og:site_name"   content="Poli International">
+  <meta property="og:image"       content="https://poliinternational.com/uploads/branding/poli-international-company-logo.png">
+
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="REACH SVHC Pigment Checker | Poli International">
+  <meta name="twitter:description" content="Screen tattoo & piercing products against a curated body-art subset of the ECHA Candidate List.">
+  <meta name="twitter:image"       content="https://poliinternational.com/uploads/branding/poli-international-company-logo.png">
+
+  <link rel="stylesheet" href="/tools/reach-svhc-checker/css/style.css">
+<script type='application/ld+json'>
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "REACH SVHC Pigment Checker",
+  "url": "https://poliinternational.com/reach-svhc-checker/",
+  "description": "Check tattoo ink and body jewelry ingredients against the ECHA SVHC Candidate List. Paste an SDS block for instant EU REACH screening.",
+  "inLanguage": ["en", "fr", "de", "es", "it", "nl", "pt"],
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "https://poliinternational.com"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "https://poliinternational.com"
+  },
+  "maintainer": {
+    "@type": "Organization",
+    "name": "Poli International",
+    "url": "https://poliinternational.com"
+  },
+  "dateModified": "2026-09-26",
+  "license": "https://opensource.org/licenses/MIT",
+  "isAccessibleForFree": true
+}
+</script>
+  <script src="/js/input-guards.js"></script>
+  <link rel="stylesheet" href="/tools/shared/print.css" media="print">
+  <link rel="stylesheet" href="/tools/shared/a11y.css">
+</head>
+<body>
+
+<div class="tool-wrapper">
+
+  <!-- Header top bar with language selector and theme toggle -->
+  <div class="header-top-bar">
+    <div class="top-bar-controls">
+      <button type="button" id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle color theme" data-i18n-aria="theme.toggle" title="Toggle color theme" data-i18n-title="theme.toggle_title">
+        <span id="theme-icon" class="theme-icon" aria-hidden="true">☀️</span>
+        <span class="sr-only" data-i18n="theme.toggle">Toggle color theme</span>
+      </button>
+      <div class="lang-selector-wrapper">
+        <label for="lang-select" class="sr-only" data-i18n="lang.selector_label">Language</label>
+        <select id="lang-select" class="lang-select" aria-label="Select Language" data-i18n-aria="lang.select_aria">
+          <option value="en" data-i18n="lang.en">English</option>
+          <option value="de" data-i18n="lang.de">Deutsch</option>
+          <option value="es" data-i18n="lang.es">Español</option>
+          <option value="fr" data-i18n="lang.fr">Français</option>
+          <option value="it" data-i18n="lang.it">Italiano</option>
+          <option value="pt" data-i18n="lang.pt">Português</option>
+          <option value="nl" data-i18n="lang.nl">Nederlands</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Staleness Warning Banner (dynamically shown if snapshot > 6 months) -->
+  <div id="stale-banner" class="stale-banner" role="alert" hidden></div>
+
+  <!-- Header -->
+  <header class="tool-header">
+    <div class="tool-header__badge" data-i18n="header.badge">REACH SVHC Candidate Screening</div>
+    <h1 data-i18n="header.title">REACH SVHC Pigment Checker</h1>
+    <p id="header-subtitle"></p>
+    <button type="button" id="coverage-btn" class="coverage-link-btn" data-i18n="coverage.link_btn">
+      Coverage details: 51 curated body-art substances
+    </button>
+  </header>
+
+  <!-- Tabs -->
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" data-tab="search" role="tab" aria-selected="true" data-i18n="nav.tab_search">
+      Search ingredient
+    </button>
+    <button class="tab-btn" data-tab="bulk" role="tab" aria-selected="false" data-i18n="nav.tab_bulk">
+      Paste SDS block
+    </button>
+    <button class="tab-btn" data-tab="browse" role="tab" aria-selected="false" data-i18n="nav.tab_browse">
+      Browse database
+    </button>
+    <button class="tab-btn" data-tab="register" role="tab" aria-selected="false" data-i18n="nav.tab_register">
+      Screening log
+    </button>
+    <button class="tab-btn" data-tab="watchlist" role="tab" aria-selected="false" data-i18n="nav.tab_watchlist">
+      Custom watchlist
+    </button>
+  </div>
+
+  <!-- ── Tab 1: Single search ────────────────────────────────── -->
+  <div id="panel-search" class="tab-panel active" role="tabpanel">
+    <div class="input-card">
+      <label class="input-label" for="search-input" data-i18n="search.label">Ingredient name or CAS number</label>
+      <div class="search-row">
+        <input
+          type="text"
+          id="search-input"
+          class="input-field"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <button id="search-btn" class="btn btn-primary" data-i18n="search.btn">Check</button>
+      </div>
+      <div id="search-error" class="input-error-msg" role="alert" hidden></div>
+      <p class="input-hint" data-i18n="search.hint">
+        Accepts ingredient names, aliases, CAS numbers, or EC numbers.
+        Covers metals, PAHs, phthalates, aromatic amines, and other SVHC categories relevant to body art.
+      </p>
+    </div>
+    <div id="search-results"></div>
+  </div>
+
+  <!-- ── Tab 2: Bulk SDS scan ────────────────────────────────── -->
+  <div id="panel-bulk" class="tab-panel" role="tabpanel">
+    <div class="input-card">
+      <label class="input-label" for="bulk-input" data-i18n="bulk.label">Ingredient list or SDS Section 3</label>
+      <div id="bulk-dropzone" class="dropzone" tabindex="0">
+        <textarea
+          id="bulk-input"
+          class="input-field"
+          spellcheck="false"
+        ></textarea>
+        <div class="dropzone-hint">
+          <span class="dropzone-icon" aria-hidden="true">📄</span>
+          <span id="bulk-dropzone-label" data-i18n="bulk.dropzone_text">or drag and drop a .txt or .csv SDS file here</span>
+          <input type="file" id="bulk-file-input" accept=".txt,.csv" style="display:none;" aria-label="Upload SDS text file">
+        </div>
+      </div>
+      <div id="bulk-error" class="input-error-msg" role="alert" hidden></div>
+      <p class="input-hint" data-i18n="bulk.hint">
+        The scanner extracts CAS numbers (e.g. 7440-02-0) and ingredient names,
+        then checks each against the SVHC list. Works with INCI lists, SDS sections, and raw ingredient blocks.
+      </p>
+      <div class="bulk-btn-row">
+        <button id="bulk-scan-btn" class="btn btn-primary" data-i18n="bulk.scan_btn">Scan for SVHCs</button>
+        <button id="bulk-clear-btn" class="btn btn-secondary" data-i18n="bulk.clear_btn">Clear</button>
+      </div>
+    </div>
+    <div id="bulk-results"></div>
+  </div>
+
+  <!-- ── Tab 3: Interactive Database Browser ─────────────────── -->
+  <div id="panel-browse" class="tab-panel" role="tabpanel">
+    <div class="input-card">
+      <div class="browse-header-row">
+        <h2 class="section-title" data-i18n="browse.title">Curated ECHA Candidate List Browser</h2>
+        <span id="browse-count-badge" class="count-badge"></span>
+      </div>
+      <p id="browse-subtitle-text" class="input-hint"></p>
+      <div class="filter-controls-grid">
+        <div class="filter-group">
+          <label class="filter-label" for="filter-category" data-i18n="browse.filter_category">Category</label>
+          <select id="filter-category" class="filter-select">
+            <option value="all" data-i18n="browse.all">All</option>
+            <option value="metal" data-i18n="browse.cat_metal">Metals & Inorganic</option>
+            <option value="pah" data-i18n="browse.cat_pah">PAHs (Carbon Black)</option>
+            <option value="plasticizer" data-i18n="browse.cat_plasticizer">Phthalate Plasticizers</option>
+            <option value="amine" data-i18n="browse.cat_amine">Aromatic Amines & Azo</option>
+            <option value="solvent" data-i18n="browse.cat_solvent">Solvents</option>
+            <option value="endocrine" data-i18n="browse.cat_endocrine">Endocrine Disruptors</option>
+            <option value="pfas" data-i18n="browse.cat_pfas">PFAS</option>
+            <option value="borate" data-i18n="browse.cat_borate">Borates</option>
+            <option value="siloxane" data-i18n="browse.cat_siloxane">Siloxanes</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label" for="filter-application" data-i18n="browse.filter_application">Product application</label>
+          <select id="filter-application" class="filter-select">
+            <option value="all" data-i18n="browse.all">All</option>
+            <option value="inks" data-i18n="browse.app_inks">Tattoo inks & pigments</option>
+            <option value="jewelry" data-i18n="browse.app_jewelry">Piercing jewelry & alloys</option>
+            <option value="packaging" data-i18n="browse.app_packaging">Packaging, polymers & studio</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label" for="browse-search-input" data-i18n="search.label">Search</label>
+          <input type="text" id="browse-search-input" class="filter-input" placeholder="Filter by name, CAS, EC..." data-i18n-placeholder="browse.filter_placeholder" autocomplete="off">
+        </div>
+      </div>
+    </div>
+    <div id="browse-results" class="results-section"></div>
+  </div>
+
+  <!-- ── Tab 4: Chemical Register & Screening Log ────────────── -->
+  <div id="panel-register" class="tab-panel" role="tabpanel">
+    <div class="input-card">
+      <h2 class="section-title" data-i18n="register.title">Studio Chemical Register (Screening Log)</h2>
+      <p class="input-hint" data-i18n="register.description">
+        Record products screened in this session to your local browser storage. This log records screening activity with this tool on the dates shown; it does not constitute regulatory clearance.
+      </p>
+
+      <div class="register-form-grid">
+        <div class="form-group">
+          <label class="input-label" for="reg-product" data-i18n="register.form_product">Product name</label>
+          <input type="text" id="reg-product" class="input-field" placeholder="e.g. True Black Tattoo Ink" data-i18n-placeholder="register.placeholder_product">
+        </div>
+        <div class="form-group">
+          <label class="input-label" for="reg-batch" data-i18n="register.form_batch">Batch / Lot number</label>
+          <input type="text" id="reg-batch" class="input-field" placeholder="e.g. LOT-2024-08A" data-i18n-placeholder="register.placeholder_batch">
+        </div>
+        <div class="form-group">
+          <label class="input-label" for="reg-notes" data-i18n="register.form_notes">Notes / Supplier</label>
+          <input type="text" id="reg-notes" class="input-field" placeholder="e.g. Verified supplier SDS v2.1" data-i18n-placeholder="register.placeholder_notes">
+        </div>
+      </div>
+
+      <div class="register-btn-row">
+        <button id="reg-save-btn" class="btn btn-primary" data-i18n="register.btn_add_manual">Save entry to log</button>
+        <button id="reg-add-bulk-btn" class="btn btn-secondary" data-i18n="register.btn_add_last_bulk">Add current scan result to log</button>
+      </div>
+
+      <div class="register-actions-row">
+        <button id="reg-export-csv-btn" class="btn btn-sm btn-secondary" data-i18n="register.export_csv">Export screening log (CSV)</button>
+        <button id="reg-export-json-btn" class="btn btn-sm btn-secondary" data-i18n="register.export_json">Export screening log (JSON)</button>
+        <button id="reg-clear-btn" class="btn btn-sm btn-danger-outline" data-i18n="register.clear_log">Clear local log</button>
+      </div>
+    </div>
+
+    <div id="register-table-container" class="register-table-wrapper"></div>
+  </div>
+
+  <!-- ── Tab 5: Custom Studio Watchlist ──────────────────────── -->
+  <div id="panel-watchlist" class="tab-panel" role="tabpanel">
+    <div class="input-card">
+      <h2 class="section-title" data-i18n="watchlist.title">Custom Studio Watchlist</h2>
+      <p class="input-hint" data-i18n="watchlist.description">
+        Add studio-specific substance names or CAS numbers to flag during searches and scans. Hits from this list are clearly marked as studio watchlist matches and are not official ECHA Candidate List entries.
+      </p>
+
+      <div class="watchlist-form-grid">
+        <div class="form-group">
+          <label class="input-label" for="wl-name" data-i18n="watchlist.form_name">Substance name or identifier</label>
+          <input type="text" id="wl-name" class="input-field" placeholder="e.g. Isopropyl alcohol" data-i18n-placeholder="watchlist.placeholder_name">
+        </div>
+        <div class="form-group">
+          <label class="input-label" for="wl-cas" data-i18n="watchlist.form_cas">CAS number (optional)</label>
+          <input type="text" id="wl-cas" class="input-field" placeholder="e.g. 67-63-0" data-i18n-placeholder="watchlist.placeholder_cas">
+        </div>
+        <div class="form-group">
+          <label class="input-label" for="wl-reason" data-i18n="watchlist.form_reason">Studio concern / reason</label>
+          <input type="text" id="wl-reason" class="input-field" placeholder="e.g. Studio allergen policy" data-i18n-placeholder="watchlist.placeholder_reason">
+        </div>
+      </div>
+
+      <div style="margin-top:1rem">
+        <button id="wl-add-btn" class="btn btn-primary" data-i18n="watchlist.btn_add">Add to studio watchlist</button>
+      </div>
+    </div>
+
+    <div id="watchlist-items-container" class="results-section"></div>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer">
+    <strong data-i18n="disclaimer.title">Legal disclaimer:</strong>
+    <span id="disclaimer-text"></span>
+  </div>
+
+  <!-- Print-only Footer -->
+  <footer class="print-footer" id="print-footer" aria-hidden="true">
+    <div class="print-footer__text">
+      Poli International REACH SVHC Pigment Checker · https://poliinternational.com/tools/reach-svhc-checker/index.html · ECHA Candidate List Curated Subset (51 of 244 substances · snapshot 27 June 2024)
+    </div>
+  </footer>
+
+  <!-- Coverage Modal -->
+  <div id="coverage-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2 id="modal-title" data-i18n="coverage.modal_title">SVHC Coverage & Screening Scope</h2>
+        <button type="button" id="coverage-modal-close" class="modal-close-btn" aria-label="Close modal" data-i18n-aria="modal.close_aria">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p data-i18n="coverage.p1">
+          This checker monitors 51 curated Substances of Very High Concern (SVHCs) out of the 244 official entries on the ECHA Candidate List (curated snapshot as of 27 June 2024).
+        </p>
+        <p class="modal-p-gap" data-i18n="coverage.p2">
+          The curated subset focuses specifically on substances with documented presence or high risk in tattoo inks, permanent makeup, body jewelry alloys, and studio consumables:
+        </p>
+        <ul class="coverage-category-list">
+          <li data-i18n="coverage.cat_metals">Heavy metals & metal compounds (lead, cadmium, hexavalent chromium, cobalt salts, nickel)</li>
+          <li data-i18n="coverage.cat_amines">Primary aromatic amines (PAAs) and azo cleavage precursors</li>
+          <li data-i18n="coverage.cat_phthalates">Phthalate plasticizers found in synthetic polymers and packaging</li>
+          <li data-i18n="coverage.cat_pahs">Polycyclic aromatic hydrocarbons (PAHs) associated with Carbon Black (CI 77266)</li>
+          <li data-i18n="coverage.cat_solvents">Industrial solvents, preservatives, and glycol ethers</li>
+        </ul>
+        <div class="coverage-disclaimer" data-i18n="coverage.disclaimer">
+          Note: Negative screening in this tool does not guarantee absence of other SVHCs or compliance with REACH Annex XVII restrictions (such as entry 75 for tattoo inks). Always obtain full supplier SDS declarations.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tool-wrapper -->
+
+<script src="/tools/reach-svhc-checker/js/i18n.js"></script>
+<script src="/tools/reach-svhc-checker/js/svhc-data.js"></script>
+<script src="/tools/reach-svhc-checker/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta name="robots" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REACH SVHC Pigment Checker: guía de usuario Documentacion | Poli International</title>
+    <meta name="description" content="Comprobación de ingredientes de tintas de tatuaje, joyería corporal y productos de estudio frente a una selección específica para arte corporal de la lista de sustancias candidatas SVHC de la ECHA, por nombre de sustancia y número CAS.">
+    <link rel="canonical" href="https://poliinternational.com/reach-svhc-checker/">
+    <style>
+        body { background: #0f0f0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; }
+        body.in-iframe .doc-hero h1 { display: none; }
+        * { box-sizing: border-box; }
+        .entry-content { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .doc-hero { background: linear-gradient(135deg, #3B82F6, #8B5CF6); padding: 3rem 2rem; text-align: center; border-radius: 0.75rem; margin-bottom: 2rem; }
+        .doc-hero h1 { font-size: 2.2rem; margin: 0 0 1rem; font-weight: 700; }
+        .doc-hero p { font-size: 1.15rem; color: #E0E7FF; margin: 0; }
+        .doc-hero .v2 { display: inline-block; margin-bottom: 1rem; padding: 0.2rem 0.75rem; border-radius: 999px; background: #10B981; color: #04241a; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; }
+        .doc-section { margin: 2rem 0; padding: 2rem; background: #1a1a1a; border-radius: 0.75rem; border-left: 4px solid #3B82F6; }
+        .doc-section h2 { color: #60A5FA; font-size: 1.7rem; margin: 0 0 1.25rem; font-weight: 600; }
+        .doc-section h3 { color: #A78BFA; font-size: 1.3rem; margin: 1.75rem 0 0.75rem; font-weight: 600; }
+        .doc-section p, .doc-section li { color: #ccc; line-height: 1.75; font-size: 1.02rem; }
+        .doc-section ul, .doc-section ol { padding-left: 1.5rem; }
+        .doc-section li { margin: 0.4rem 0; }
+        .doc-section code { background: #2a2a2a; padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.92em; }
+        .doc-section a { color: #60A5FA; font-weight: 600; }
+        .highlight-box { background: linear-gradient(135deg, #1E3A8A, #4C1D95); padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; border-left: 4px solid #10B981; }
+        .highlight-box p { color: #E0E7FF; margin: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border: 1px solid #333; vertical-align: top; }
+        th { background: #2a2a2a; color: #60A5FA; }
+        td { color: #ccc; }
+        .doc-langs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.5rem; font-size: 0.9rem; }
+        .doc-langs a, .doc-langs span { padding: 0.3rem 0.7rem; border-radius: 999px; border: 1px solid #333; text-decoration: none; }
+        .doc-langs a { color: #60A5FA; }
+        .doc-langs span { background: #1E3A8A; color: #E0E7FF; border-color: #1E3A8A; font-weight: 700; }
+    </style>
+</head>
+<body>
+<script>if (window.self !== window.top) document.body.classList.add('in-iframe');</script>
+    <div class="entry-content">
+        <nav class="doc-langs" aria-label="Documentation language"><a lang="en" href="documentation.html">English</a><a lang="fr" href="documentation-fr.html">Francais</a><a lang="de" href="documentation-de.html">Deutsch</a><span lang="es">Espanol</span><a lang="it" href="documentation-it.html">Italiano</a><a lang="nl" href="documentation-nl.html">Nederlands</a><a lang="pt" href="documentation-pt.html">Portugues</a></nav>
+        <div class="doc-hero">
+            <span class="v2">V2</span>
+            <h1>REACH SVHC Pigment Checker: guía de usuario</h1>
+            <p>Comprobación de ingredientes de tintas de tatuaje, joyería corporal y productos de estudio frente a una selección específica para arte corporal de la lista de sustancias candidatas SVHC de la ECHA, por nombre de sustancia y número CAS.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Para qué sirve esta herramienta</h2>
+        <p>El REACH SVHC Pigment Checker examina denominaciones químicas, sinónimos comerciales y números de registro del Chemical Abstracts Service (CAS) contrastándolos con una selección específica de sustancias extremadamente preocupantes (SVHC, Substances of Very High Concern). La Agencia Europea de Sustancias y Mezclas Químicas (ECHA) gestiona la lista oficial de sustancias candidatas con arreglo al Reglamento (CE) n.º 1907/2006 (REACH). Cuando una sustancia pasa a formar parte de la lista de candidatas, los proveedores en la Unión Europea están obligados por ley a comunicar su presencia si sobrepasa una concentración del 0,1 % en masa (p/p).</p>
+        <p>Esta herramienta compara búsquedas individuales o bloques completos de composición extraídos de fichas de datos de seguridad (FDS) con 51 sustancias seleccionadas para arte corporal procedentes de la publicación oficial de la ECHA de 241 sustancias (actualizada a 27 de junio de 2024). Ofrece de forma estructurada las clasificaciones de peligro, los usos constatados en el sector y los grados de fiabilidad de cada coincidencia.</p>
+        </div>
+        <div class="doc-section">
+        <h2>A quién va dirigida</h2>
+        <ul>
+        <li><strong>A tatuadores y técnicos en micropigmentación (PMU)</strong> que revisan las formulaciones de los frascos de tinta y las fichas de datos de seguridad antes de admitir nuevos lotes en el estudio.</li>
+        <li><strong>A anilladores corporales y responsables de compras de joyería</strong> que analizan aleaciones metálicas, restos de soldadura, plastificantes y polímeros para detectar metales pesados restringidos o aditivos en lista de candidatas.</li>
+        <li><strong>A titulares de estudio y encargados de bioseguridad</strong> que gestionan el inventario químico del establecimiento, supervisan consumibles, tintas hectográficas de transferencia y desinfectantes, y mantienen archivados sus registros de debida diligencia.</li>
+        <li><strong>A distribuidores e importadores de material de arte corporal</strong> que auditan la Sección 3 de las fichas de datos de seguridad emitidas por fabricantes de terceros países antes de su comercialización en el mercado comunitario.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Cómo se utiliza</h2>
+        <h3>Ajustes visuales y selección de idioma</h3>
+        <ol>
+        <li>Localice la barra de utilidades superior situada sobre el encabezado principal de la herramienta.</li>
+        <li>Haga clic en <code>Alternar tema de color</code> para alternar entre la visualización en modo oscuro y en modo claro.</li>
+        <li>Despliegue el selector <code>Idioma</code> para elegir español (o cualquiera de los siete idiomas disponibles: English, Deutsch, Español, Français, Italiano, Português o Nederlands). Todas las etiquetas, textos de aviso, clasificaciones de peligro y fichas descriptivas se traducen al instante.</li>
+        </ol>
+        <h3>Examinar el alcance de la cobertura</h3>
+        <ol>
+        <li>En el encabezamiento situado bajo el título, haga clic en <code>Detalles de cobertura: 51 sustancias seleccionadas para el arte corporal</code>.</li>
+        <li>Aparecerá en pantalla una ventana emergente titulada <code>Cobertura SVHC y alcance del análisis</code>.</li>
+        <li>Revise la clasificación de sustancias organizadas en cinco grupos fundamentales:</li>
+        </ol>
+        <ul>
+        <li>Metales pesados y compuestos metálicos (plomo, cadmio, cromo hexavalente, sales de cobalto, níquel)</li>
+        <li>Aminas aromáticas primarias (AAP) y precursores de escisión azoica</li>
+        <li>Plastificantes ftálicos empleados en polímeros sintéticos y envases</li>
+        <li>Hidrocarburos aromáticos policíclicos (HAP) asociados al negro de carbón (Carbon Black, CI 77266)</li>
+        <li>Disolventes industriales, conservantes y éteres de glicol</li>
+        </ul>
+        <ol>
+        <li>Haga clic en <code>Cerrar ventana modal</code> o pulse fuera del recuadro para regresar al espacio principal.</li>
+        </ol>
+        <h3>Comprobar un ingrediente individual</h3>
+        <ol>
+        <li>Asegúrese de encontrarse en la primera pestaña titulada <code>Buscar ingrediente</code> (activa por defecto).</li>
+        <li>Pulse sobre el campo de texto ubicado bajo <code>Nombre del ingrediente o número CAS</code>. El texto de ayuda muestra <code>p. ej., Níquel, 7440-02-0, Cobalto, DEHP, CI 77491…</code>.</li>
+        <li>Introduzca el nombre de una sustancia (por ejemplo <em>Níquel</em>), una denominación abreviada (como <em>DBP</em>) o un número CAS normalizado (como <code>7440-02-0</code>).</li>
+        <li>Haga clic en <code>Comprobar</code> o pulse la tecla Intro en su teclado.</li>
+        <li>Si el campo se envía en blanco, el sistema mostrará la advertencia: <code>Introduzca el nombre de un ingrediente o un número CAS para comprobarlo.</code></li>
+        <li>Analice la tarjeta informativa resultante:</li>
+        </ol>
+        <ul>
+        <li>Si la sustancia está catalogada, se abrirá una tarjeta que detalla el nombre químico, el número CAS, el distintivo de peligro, el nivel de riesgo (<code>Riesgo alto</code>, <code>Riesgo medio</code> o <code>Riesgo bajo</code>) y el grado de precisión (<code>Confianza alta</code>, <code>Confianza media</code> o <code>Coincidencia parcial</code>).</li>
+        <li>Si la sustancia no coincide con el registro, se confirmará mediante el mensaje: <code>No se encontraron en las 51 sustancias SVHC seleccionadas para el arte corporal. Verifique frente a la lista oficial de candidatas de la ECHA.</code></li>
+        </ul>
+        <h3>Escanear un bloque de composición de FDS</h3>
+        <ol>
+        <li>Acceda a la segunda pestaña titulada <code>Pegar bloque de FDS</code>.</li>
+        <li>Copie íntegramente la Sección 3 (Composición / Información sobre los componentes) de la ficha de datos de seguridad de su producto.</li>
+        <li>Pegue el contenido en el área de texto bajo <code>Lista de ingredientes o Sección 3 de la FDS</code>.</li>
+        <li>Haga clic en <code>Escanear en busca de SVHC</code>.</li>
+        <li>Si envía el formulario sin contenido previo, se mostrará el aviso: <code>Pegue una lista de ingredientes o un bloque de composición de FDS antes de escanear.</code></li>
+        <li>Evalúe el resumen estadístico superior:</li>
+        </ol>
+        <ul>
+        <li>Se cuantifican por separado los ingredientes marcados como <code>SVHC identificada</code> y los que tienen la indicación <code>no figura en la lista seleccionada</code>.</li>
+        <li>Si se detectan compuestos restringidos, una franja de advertencia le recomendará consultar de inmediato la documentación técnica de su distribuidor.</li>
+        <li>Si el escaneo concluye sin coincidencias, un cuadro informativo corrobora: <code>No se detectaron sustancias SVHC de la lista seleccionada para arte corporal. Verifique siempre con la lista oficial de la ECHA para obtener información legalmente vinculante.</code></li>
+        </ul>
+        <ol>
+        <li>Examine detalladamente las tarjetas agrupadas bajo <code>Sustancias identificadas ({count})</code> seguidas por los ingredientes no registrados bajo <code>No figuran en la lista SVHC seleccionada ({count})</code>.</li>
+        <li>Si desea reiniciar el análisis y vaciar la caja de texto, haga clic en <code>Borrar</code>.</li>
+        </ol>
+        <h3>Interpretación de tarjetas y enlaces a herramientas relacionadas</h3>
+        <ol>
+        <li>Pulse sobre la barra de título de cualquier tarjeta desplegada para expandir u ocultar sus especificaciones técnicas.</li>
+        <li>Compruebe los parámetros desglosados:</li>
+        </ol>
+        <ul>
+        <li><code>Clasificación de peligro</code>: Calificación legal del riesgo según el marco regulatorio.</li>
+        <li><code>Número CE</code>: Número de identificación en el inventario de la Comunidad Europea.</li>
+        <li><code>Número(s) CAS</code>: Identificadores únicos del Chemical Abstracts Service.</li>
+        <li><code>Nivel de confianza</code>: Criterio exacto por el que se produjo la detección (por CAS idéntico, nombre químico estricto, acrónimo o raíz de término).</li>
+        <li><code>Presente en productos de arte corporal</code>: Aplicaciones directas referenciadas (aleaciones para anillado, tintas de tatuaje o materiales plásticos).</li>
+        <li><code>También conocido como</code>: Nombres vulgares, comerciales y sinónimos comunes en la industria.</li>
+        </ul>
+        <ol>
+        <li>Navegue hacia las herramientas de cálculo complementarias cuando proceda:</li>
+        </ol>
+        <ul>
+        <li>En advertencias referidas al níquel, pulse en <code>Calcule la tasa de liberación de níquel según la norma EN 1811 en la Calculadora de liberación de níquel</code> para abrir https://poliinternational.com/nickel-release-calculator/ en la ventana superior.</li>
+        <li>En compuestos y aleaciones metálicas, pulse en <code>Verifique las especificaciones de aleaciones metálicas en el Verificador de certificación de materiales</code> para abrir https://poliinternational.com/material-certification-checker/ en la ventana superior.</li>
+        <li>En pigmentos de tatuaje, aminas aromáticas o plastificantes, pulse en <code>Descifre pigmentos y restricciones en el Decodificador de ingredientes de tintas</code> para abrir https://poliinternational.com/ink-ingredient-decoder/ en la ventana superior.</li>
+        </ul>
+        <ol>
+        <li>Acceda directamente a las fuentes primarias de la agencia química mediante los botones <code>🔗 Ver en la ECHA</code> o <code>📋 Lista completa de SVHC</code>.</li>
+        </ol>
+        </div>
+        <div class="doc-section">
+        <h2>Qué no hace esta herramienta</h2>
+        <ul>
+        <li><strong>No evalúa los límites de concentración establecidos por la Entrada 75 del Anexo XVII de REACH.</strong> La Entrada 75 marca concentraciones máximas obligatorias para sustancias presentes en tintas para tatuaje y maquillaje permanente. Si desea comprobar formulaciones completas y restricciones particulares de colorantes, utilice el <a href="https://poliinternational.com/ink-ingredient-decoder/" target="_top">Decodificador de ingredientes de tintas de Poli International</a>.</li>
+        <li><strong>No calcula tasas de liberación de níquel para piezas de primera puesta.</strong> La Entrada 27 del Anexo XVII de REACH limita la liberación de níquel a un umbral de 0,2 microgramos por centímetro cuadrado y por semana en elementos penetrantes. Si desea comprobar ensayos de migración de acuerdo con la norma de ensayo EN 1811, utilice la <a href="https://poliinternational.com/nickel-release-calculator/" target="_top">Calculadora de liberación de níquel de Poli International</a>.</li>
+        <li><strong>No verifica certificados de colada ni especificaciones químicas de aleaciones.</strong> Si necesita comparar informes de composición con estándares para implantes como el titanio ASTM F-136 o el acero quirúrgico ASTM F-138, utilice el <a href="https://poliinternational.com/material-certification-checker/" target="_top">Verificador de certificación de materiales de Poli International</a>.</li>
+        <li><strong>No calcula tarifas por servicio de anillado ni márgenes de joyería.</strong> Si busca establecer precios de intervención profesional y márgenes de reventa, utilice la herramienta <a href="https://poliinternational.com/studio-pricing-benchmark/" target="_top">Estudio de precios para estudios de Poli International</a>.</li>
+        <li><strong>No sustituye análisis químicos de espectrometría en laboratorio.</strong> Esta herramienta efectúa una contrastación algorítmica de textos y números CAS contra una base de datos local. No es capaz de evidenciar impurezas químicas omitidas o falseamientos en la documentación de un proveedor.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Dónde se guardan sus datos</h2>
+        <ul>
+        <li><strong>Ejecución local en su propio navegador:</strong> Cada término consultado y cada fragmento de ficha pegado se analiza de forma exclusiva en el entorno JavaScript de su navegador en el dispositivo local.</li>
+        <li><strong>Sin transmisión de datos a través de la red:</strong> El software no efectúa llamadas API hacia servidores remotos, no recoge analíticas externas ni transmite consultas secundarias. La composición de los productos analizados jamás sale de su equipo.</li>
+        <li><strong>Volatilidad y limpieza en memoria:</strong> La herramienta no guarda las formulaciones examinadas en bases de datos externas. Al cerrar la pestaña, recargar la página o hacer clic en <code>Borrar</code>, todos los datos y resultados se borran instantáneamente del equipo.</li>
+        <li><strong>Configuración visual guardada:</strong> Únicamente se conservan en el almacenamiento local del navegador sus preferencias de uso visual, como la selección del tema claro u oscuro.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Impresión y exportación</h2>
+        <ul>
+        <li><strong>Hoja de estilo preparada para imprimir:</strong> Puede imprimir los resultados de su comprobación o generar un documento PDF de registro pulsando las combinaciones habituales de impresión de su navegador (Ctrl+P en Windows y Linux, o Cmd+P en macOS).</li>
+        <li><strong>Diseño limpio adaptado a registros físicos:</strong> Los estilos de impresión suprimen de forma automática las pestañas de navegación, los botones de acción, las zonas de entrada de texto y los colores decorativos innecesarios.</li>
+        <li><strong>Identificación en cabecera y pie de página:</strong> Los informes impresos integran la fecha del cribado, la especificación de la muestra analizada (51 sustancias sobre las 253 de la lista oficial de 27 de junio de 2024) y el enlace exacto del recurso (https://poliinternational.com/tools/reach-svhc-checker/index.html) para auditorías internas en el estudio.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Preguntas frecuentes</h2>
+        <h3>¿Qué es una sustancia SVHC según el Reglamento REACH europeo?</h3>
+        <p>Una sustancia SVHC (Substance of Very High Concern) es una sustancia extremadamente preocupante catalogada con arreglo al artículo 57 del Reglamento (CE) n.º 1907/2006 (REACH). Reúne criterios de peligrosidad muy elevados, tales como propiedades carcinógenas, mutágenas o tóxicas para la reproducción (CMR de categoría 1A o 1B), ser persistente, bioacumulable y tóxica (PBT), muy persistente y muy bioacumulable (mPmB), o provocar un nivel de inquietud equivalente como la alteración endocrina. Tras su confirmación por la ECHA, queda formalmente inscrita en la lista de sustancias candidatas para su eventual autorización.</p>
+        <h3>¿Un resultado sin coincidencias garantiza que mi tinta cumple plenamente el Reglamento REACH?</h3>
+        <p>No, un resultado sin coincidencias significa únicamente que ninguna de las 51 sustancias SVHC seleccionadas para arte corporal ha sido identificada en el texto o número CAS sometido a análisis. El cumplimiento normativo global de una tinta de tatuaje exige asimismo respetar las restricciones y umbrales cuantitativos del Anexo XVII, Entrada 75 del Reglamento REACH, que prohíbe miles de sustancias individuales, aminas aromáticas y pigmentos concretos. Resulta imprescindible contrastar la totalidad de la ficha de datos de seguridad facilitada por el fabricante.</p>
+        <h3>¿Por qué esta herramienta comprueba 51 sustancias en vez de las 253 de la lista oficial de la ECHA?</h3>
+        <p>La lista de candidatas de la ECHA integra cientos de compuestos de síntesis, reactivos pesados de fundición e intermediarios aeroespaciales que jamás intervienen en la elaboración de suministros corporales. Este sistema filtra y selecciona 51 sustancias que cuentan con antecedentes constatados o riesgo documentado de contaminación en tintas de tatuaje, pigmentos de maquillaje permanente, piezas de piercing, polímeros de joyería, plastificantes de embalaje o desinfectantes de cabina.</p>
+        <h3>¿Cómo extrae el escáner los componentes químicos al pegar una ficha de seguridad?</h3>
+        <p>El algoritmo de análisis rastrea el texto empleando expresiones regulares orientadas a encontrar la estructura numérica estándar de los códigos CAS (de dos a siete dígitos, un guion, dos dígitos, un segundo guion y un dígito final de comprobación). Filtra los porcentajes de concentración ponderal, separa los compuestos mediante comas, puntos y coma o saltos de línea, y coteja los nombres químicos y acrónimos extraídos frente a su índice local.</p>
+        <h3>¿Qué debe hacer un estudio si un ingrediente aparece señalado como SVHC?</h3>
+        <p>Si el sistema señala una sustancia, consulte de inmediato la Sección 3 de la ficha de datos de seguridad para constatar la concentración declarada. En virtud del artículo 33 del Reglamento REACH, el proveedor tiene la obligación legal de comunicar a sus clientes la presencia de cualquier sustancia de la lista candidata que supere el 0,1 % en masa (p/p). Si el componente excede los límites legales o está sujeto a prohibiciones bajo el Anexo XVII de REACH, solicite explicaciones formales a su distribuidor y aísle preventivamente el lote en cuarentena.</p>
+        <h3>¿Cuál es la diferencia entre la lista de sustancias candidatas SVHC y el Anexo XVII de REACH?</h3>
+        <p>La lista de sustancias candidatas identifica compuestos que están siendo evaluados de cara al régimen de autorización del Título VII de REACH, lo que genera obligaciones inmediatas de información si se supera el 0,1 % p/p en los artículos suministrados. Por contra, el Anexo XVII constituye el régimen de restricciones del Título VIII de REACH, en virtud del cual se prohíbe taxativamente o se limita de forma vinculante la fabricación, venta o uso de determinadas sustancias en productos de consumo, como sucede con la Entrada 27 para el níquel o la Entrada 75 para tintas de tatuaje.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Límites de la herramienta</h2>
+        <ul>
+        <li><strong>Base de datos estática:</strong> El archivo de comprobación corresponde a una selección fija de 51 sustancias extraída de la actualización de la lista de candidatas de la ECHA del 27 de junio de 2024. Si la fecha de esta selección supera los seis meses de antigüedad sin actualización, un aviso visible recomienda contrastar las últimas incorporaciones en la página oficial de la agencia química.</li>
+        <li><strong>Imposibilidad de descubrir ingredientes no declarados:</strong> La herramienta procesa exclusivamente la información escrita que el usuario introduce. Resulta imposible que detecte contaminantes omitidos, disolventes sin declarar o formulaciones adulteradas que el fabricante no haya hecho constar en la ficha de seguridad.</li>
+        <li><strong>Variaciones de grafía en la transcripción:</strong> Determinadas marcas comerciales atípicas, errores mecanográficos o derivados salinos complejos ausentes del diccionario de sinónimos pueden no generar una coincidencia positiva. Ante la duda, efectúe siempre la búsqueda por el código numérico CAS oficial.</li>
+        <li><strong>Valor exclusivamente orientativo:</strong> Este recurso ofrece asistencia técnica rápida para profesionales del arte corporal, pero en ningún caso constituye dictamen legal ni certificación de conformidad oficial. La potestad de control corresponde de manera exclusiva a las autoridades competentes, los servicios de inspección sanitaria y los laboratorios de ensayo acreditados.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+            <h2>Usar la herramienta</h2>
+            <p><a href="https://poliinternational.com/reach-svhc-checker/" target="_top">Abrir REACH SVHC Pigment Checker: guía de usuario</a>. Todo funciona en su navegador; nada de lo que introduce se envia a ninguna parte.</p>
+        </div>
+    </div>
+</body>
+</html>

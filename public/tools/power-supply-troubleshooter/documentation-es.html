@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta name="robots" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de resolución de problemas para fuente de alimentación y máquina: manual de usuario Documentacion | Poli International</title>
+    <meta name="description" content="La Guía de resolución de problemas para fuente de alimentación y máquina es una herramienta interactiva de diagnóstico paso a paso diseñada para tatuadores, aprendices y técnicos de estudio con el fin de aislar averías eléctricas y mecánicas en máquinas de tatuar, fuentes de alimentación, cables y pedales.">
+    <link rel="canonical" href="https://poliinternational.com/power-supply-troubleshooter/">
+    <style>
+        body { background: #0f0f0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; }
+        body.in-iframe .doc-hero h1 { display: none; }
+        * { box-sizing: border-box; }
+        .entry-content { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .doc-hero { background: linear-gradient(135deg, #3B82F6, #8B5CF6); padding: 3rem 2rem; text-align: center; border-radius: 0.75rem; margin-bottom: 2rem; }
+        .doc-hero h1 { font-size: 2.2rem; margin: 0 0 1rem; font-weight: 700; }
+        .doc-hero p { font-size: 1.15rem; color: #E0E7FF; margin: 0; }
+        .doc-hero .v2 { display: inline-block; margin-bottom: 1rem; padding: 0.2rem 0.75rem; border-radius: 999px; background: #10B981; color: #04241a; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; }
+        .doc-section { margin: 2rem 0; padding: 2rem; background: #1a1a1a; border-radius: 0.75rem; border-left: 4px solid #3B82F6; }
+        .doc-section h2 { color: #60A5FA; font-size: 1.7rem; margin: 0 0 1.25rem; font-weight: 600; }
+        .doc-section h3 { color: #A78BFA; font-size: 1.3rem; margin: 1.75rem 0 0.75rem; font-weight: 600; }
+        .doc-section p, .doc-section li { color: #ccc; line-height: 1.75; font-size: 1.02rem; }
+        .doc-section ul, .doc-section ol { padding-left: 1.5rem; }
+        .doc-section li { margin: 0.4rem 0; }
+        .doc-section code { background: #2a2a2a; padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.92em; }
+        .doc-section a { color: #60A5FA; font-weight: 600; }
+        .highlight-box { background: linear-gradient(135deg, #1E3A8A, #4C1D95); padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; border-left: 4px solid #10B981; }
+        .highlight-box p { color: #E0E7FF; margin: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border: 1px solid #333; vertical-align: top; }
+        th { background: #2a2a2a; color: #60A5FA; }
+        td { color: #ccc; }
+        .doc-langs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.5rem; font-size: 0.9rem; }
+        .doc-langs a, .doc-langs span { padding: 0.3rem 0.7rem; border-radius: 999px; border: 1px solid #333; text-decoration: none; }
+        .doc-langs a { color: #60A5FA; }
+        .doc-langs span { background: #1E3A8A; color: #E0E7FF; border-color: #1E3A8A; font-weight: 700; }
+    </style>
+</head>
+<body>
+<script>if (window.self !== window.top) document.body.classList.add('in-iframe');</script>
+    <div class="entry-content">
+        <nav class="doc-langs" aria-label="Documentation language"><a lang="en" href="documentation.html">English</a><a lang="fr" href="documentation-fr.html">Francais</a><a lang="de" href="documentation-de.html">Deutsch</a><span lang="es">Espanol</span><a lang="it" href="documentation-it.html">Italiano</a><a lang="nl" href="documentation-nl.html">Nederlands</a><a lang="pt" href="documentation-pt.html">Portugues</a></nav>
+        <div class="doc-hero">
+            <span class="v2">V2</span>
+            <h1>Guía de resolución de problemas para fuente de alimentación y máquina: manual de usuario</h1>
+            <p>La Guía de resolución de problemas para fuente de alimentación y máquina es una herramienta interactiva de diagnóstico paso a paso diseñada para tatuadores, aprendices y técnicos de estudio con el fin de aislar averías eléctricas y mecánicas en máquinas de tatuar, fuentes de alimentación, cables y pedales.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Para qué sirve esta herramienta</h2>
+        <p>El equipo de tatuaje funciona como un circuito eléctrico continuo. Cuando una máquina sufre cortes, se calienta en exceso, pierde velocidad o no arranca, buscar al azar el componente defectuoso consume un tiempo muy valioso. Cambiar cables sin criterio o manipular los tornillos de contacto sin comprobar las causas reales suele descalibrar el conjunto o provocar averías mayores.</p>
+        <p>Esta herramienta ofrece un árbol de decisiones metódico basado en síntomas observables. Guía al usuario a través de las anomalías visibles para determinar si el problema reside en la fuente de alimentación, el pedal, el cable de conexión, el motor o las bobinas. Cada itinerario concluye con una valoración técnica de la gravedad y una lista práctica de comprobaciones.</p>
+        </div>
+        <div class="doc-section">
+        <h2>A quién está dirigida</h2>
+        <p>Esta herramienta está pensada para:</p>
+        <ul>
+        <li><strong>Tatuadores</strong> que necesitan resolver paradas repentinas, caídas de tensión o falta de fuerza en la piel durante sus sesiones de trabajo.</li>
+        <li><strong>Aprendices de tatuaje</strong> que están aprendiendo a diagnosticar continuidades eléctricas, ajustes de máquinas y mantenimiento preventivo de la mesa de trabajo.</li>
+        <li><strong>Propietarios de estudios y técnicos</strong> que revisan el equipamiento, detectan cables fatigados y determinan cuándo una máquina requiere servicio del fabricante.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Cómo utilizarla</h2>
+        <p>La herramienta interactiva le guía paso a paso a través de un árbol de decisión accesible en su navegador web:</p>
+        <h3>Aviso de seguridad y encabezado de diagnóstico</h3>
+        <p>Antes de manipular o probar cualquier elemento de su equipo, revise la información mostrada en pantalla:</p>
+        <ol>
+        <li>Compruebe que la cabecera muestre el distintivo <code>⚡ Diagnóstico de la máquina</code> y el título <code>Guía de resolución de problemas para fuente de alimentación y máquina</code>.</li>
+        <li>Lea la descripción de funcionamiento: <code>Diagnóstico de averías paso a paso para máquinas de tatuar. Responda unas pocas preguntas sobre los síntomas para obtener una lista de comprobación con soluciones específicas.</code>.</li>
+        <li>Preste atención al bloque de advertencia <code>Aviso de seguridad:</code> situado en la parte inferior antes de tocar los cables.</li>
+        <li>Si percibe olor a quemado, humo o chispas anómalas, desconecte de inmediato la fuente de alimentación de la toma eléctrica.</li>
+        </ol>
+        <h3>Selección del síntoma principal</h3>
+        <p>Inicie el diagnóstico identificando el comportamiento que mejor describe el problema:</p>
+        <ol>
+        <li>Localice la pregunta inicial: <code>¿Cuál es el síntoma principal?</code>.</li>
+        <li>Seleccione la opción correspondiente al estado de su equipo:</li>
+        </ol>
+        <ul>
+        <li><code>La máquina no enciende</code> para un equipo completamente inerte, sin sonido ni vibración del motor.</li>
+        <li><code>Voltaje inestable o fluctuante</code> cuando la velocidad cae de repente o la lectura digital de voltios salta.</li>
+        <li><code>Funciona demasiado rápido o demasiado lento</code> si la velocidad es irregular o la aguja se frena al penetrar en la piel.</li>
+        <li><code>Ruido o vibración excesivos</code> si percibe tableteo violento, zumbidos extraños o rozamiento metálico.</li>
+        <li><code>El cable o la conexión sufren cortes</code> si la corriente se interrumpe al mover el cable.</li>
+        <li><code>La máquina se sobrecalienta</code> si el chasis o el bloque motor quema al tacto tras pocos minutos de trabajo.</li>
+        </ul>
+        <h3>Avance por los pasos de diagnóstico</h3>
+        <p>Siga las preguntas sucesivas del asistente para delimitar el origen del fallo:</p>
+        <ol>
+        <li>Compruebe su posición en el proceso mediante el indicador <code>Paso {step} de aprox. {total}</code>.</li>
+        <li>Lea atentamente la pregunta específica sobre luces de encendido, modo continuo del pedal o tipo de máquina.</li>
+        <li>Pulse el botón que refleje con exactitud la prueba realizada en su estación de trabajo.</li>
+        <li>Si necesita rectificar una respuesta o probar otra vía, pulse <code>← Volver</code> para retroceder a la pregunta anterior.</li>
+        </ol>
+        <h3>Revisión de las medidas recomendadas y reinicio</h3>
+        <p>Al alcanzar el final de una ruta de diagnóstico, examine la tarjeta de resultados:</p>
+        <ol>
+        <li>Observe el panel superior para conocer el veredicto técnico y el nivel de gravedad de la avería.</li>
+        <li>Revise el apartado <code>Medidas recomendadas</code> para seguir las pautas de limpieza, ajuste o reparación indicadas.</li>
+        <li>Lleve a cabo las comprobaciones sugeridas en su estación en el orden especificado.</li>
+        <li>Pulse el botón <code>← Comenzar de nuevo</code> para reiniciar el cuestionario y volver a <code>¿Cuál es el síntoma principal?</code>.</li>
+        </ol>
+        </div>
+        <div class="doc-section">
+        <h2>Qué no hace esta herramienta</h2>
+        <p>Esta herramienta está destinada exclusivamente al diagnóstico técnico de averías de equipamiento en la mesa de trabajo. No realiza las siguientes funciones:</p>
+        <ul>
+        <li><strong>Calcular precios de sesiones o tarifas por hora.</strong> Para calcular tarifas mínimas y precios por hora, utilice <a href="https://poliinternational.com/studio-pricing-benchmark/" target="_top">Studio Pricing Benchmark</a>.</li>
+        <li><strong>Redactar consentimientos informados o cuestionarios de salud.</strong> Para generar consentimientos digitales e impresos para clientes, utilice <a href="https://poliinternational.com/form-builder/" target="_top">Consent Form Builder</a>.</li>
+        <li><strong>Gestionar citas, agenda y fichas de clientes.</strong> Para la gestión diaria del estudio y el archivo de clientes, utilice <a href="https://poliinternational.com/studio-crm/" target="_top">Studio CRM</a>.</li>
+        <li><strong>Convertir calibres, milímetros y medidas de joyería para piercing.</strong> Para consultar tablas de conversión de tamaños, utilice <a href="https://poliinternational.com/gauge-converter/" target="_top">Body Jewelry Sizing Converter</a>.</li>
+        <li><strong>Llevar el registro de ciclos de autoclave y controles de esterilización.</strong> Para mantener registros digitales de descontaminación de instrumental, utilice <a href="https://poliinternational.com/autoclave-calculator/" target="_top">Autoclave Log</a>.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Dónde residen sus datos</h2>
+        <p>Esta herramienta opera de forma 100% local en su dispositivo dentro del navegador web:</p>
+        <ul>
+        <li><strong>Ejecución local</strong>: Toda la lógica del árbol de decisiones y los diccionarios de idiomas se ejecutan en su navegador mediante JavaScript.</li>
+        <li><strong>Sin envíos remotos</strong>: No se transmite ninguna respuesta, síntoma ni dato sobre su equipo a servidores externos.</li>
+        <li><strong>Reinicio de sesión</strong>: El recorrido seguido sólo existe en la memoria activa del navegador. Al pulsar <code>← Comenzar de nuevo</code> o recargar la página, se borra al instante.</li>
+        <li><strong>Sin almacenamiento persistente</strong>: La aplicación no escribe cookies, identificadores de máquina ni historiales de uso en el almacenamiento local de su equipo.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Impresión y exportación</h2>
+        <p>La herramienta no genera archivos de exportación porque no recopila datos de clientes. Para conservar un registro físico o digital de su diagnóstico:</p>
+        <ol>
+        <li>Complete el asistente hasta llegar a la vista completa de <code>Medidas recomendadas</code>.</li>
+        <li>Abra el menú de impresión de su navegador mediante el atajo <code>Ctrl+P</code> en Windows o Linux, o <code>Cmd+P</code> en macOS.</li>
+        <li>Seleccione su impresora habitual o la opción de Guardar como PDF.</li>
+        <li>La hoja de estilos ajusta el formato automáticamente para una impresión en papel limpia y oculta los botones de navegación.</li>
+        </ol>
+        </div>
+        <div class="doc-section">
+        <h2>Preguntas frecuentes</h2>
+        <h3>¿Por qué se apaga mi máquina de tatuar al mover el cable?</h3>
+        <p>Los cortes intermitentes de corriente al mover el cable indican una rotura por fatiga de los filamentos de cobre dentro del cable RCA o clip cord. Los conductores de cobre se quiebran en la zona del pasacables mientras la funda exterior de silicona permanece intacta. Si al flexionar con suavidad el cable cerca de los conectores la máquina se apaga, sustituya el cable de inmediato.</p>
+        <h3>¿Cómo determinar si el fallo de arranque proviene del pedal o de la fuente de alimentación?</h3>
+        <p>Compruebe si su fuente de alimentación dispone de modo de trabajo continuo o de un interruptor para omitir el pedal. Si la máquina funciona sin interrupciones al activar ese modo, el fallo se encuentra en los contactos internos del pedal o en su clavija. Si la fuente carece de esa función, desconecte el pedal y pruebe con un pedal de repuesto que sepa que funciona bien.</p>
+        <h3>¿Por qué mi máquina rotativa pierde fuerza al entrar en la piel?</h3>
+        <p>Una máquina rotativa se frena en la piel cuando opera por debajo de su régimen óptimo de par motor o encuentra una resistencia mecánica excesiva. Una membrana de cartucho demasiado rígida, restos de tinta seca acumulada en el tubo o un plato oscilante sin lubricar obligan al motor a trabajar forzado. Limpie el grip, pruebe un cartucho con membrana más blanda y asegúrese de que su fuente suministre un voltaje estable bajo carga.</p>
+        <h3>¿Qué provoca un exceso de chispas en el tornillo de contacto de una máquina de bobinas?</h3>
+        <p>Un chisporroteo intenso entre el tornillo de contacto y el fleje delantero suele deberse a un condensador degradado, una distancia de contacto mal calibrada o puntas sucias. Al perder capacidad, el condensador ya no absorbe la tensión inducida de las bobinas y se genera un arco voltaico continuo. Limpie los puntos de contacto con lija muy fina y reemplace el condensador si las chispas persisten tras regular la apertura del tornillo.</p>
+        <h3>¿Por qué mi máquina de tatuar se calienta en exceso durante una sesión?</h3>
+        <p>Un templado suave es habitual en sesiones largas, pero una temperatura alta indica sobrecarga eléctrica o resistencia mecánica anormal. En máquinas rotativas, la fricción de un rodamiento gastado o una membrana de cartucho dura sobrecalienta el motor. En máquinas de bobinas, aplicar voltajes desmedidos para compensar muelles mal regulados satura el núcleo magnético y calienta las bobinas rápidamente.</p>
+        <h3>¿Por qué mi fuente de alimentación muestra una luz de error o lecturas de voltaje que saltan?</h3>
+        <p>Las luces de advertencia y los cambios bruscos en la lectura de voltaje señalan un cortocircuito o la activación de la protección por sobrecorriente. Este contacto indebido puede surgir dentro de un conector RCA aplastado, en hilos pelados de un clip cord o en los bornes de la máquina si han perdido sus arandelas aislantes. Desconecte el cable de la máquina en la fuente: si el error desaparece, el fallo está en el cable o en el cableado interno de la máquina.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Límites técnicos</h2>
+        <p>La guía ofrece un método lógico para acotar problemas a partir de indicios observables, pero presenta límites técnicos claros:</p>
+        <ul>
+        <li><strong>Sin medición eléctrica directa</strong>: La herramienta no mide la corriente real en amperios, la resistencia de circuito ni la caída de tensión bajo carga. Solo un técnico con un multímetro calibrado puede verificar la continuidad y la tensión de salida.</li>
+        <li><strong>Componentes internos no visibles</strong>: La herramienta no puede comprobar el estado del barniz aislante de las bobinas, microfisuras en membranas de cartuchos ni el deterioro térmico de circuitos electrónicos internos.</li>
+        <li><strong>Revisión física obligatoria</strong>: La decisión final sobre la seguridad del equipo corresponde siempre al tatuador o a un técnico cualificado sobre el terreno.</li>
+        <li><strong>Protocolo de desconexión inmediata</strong>: Si un equipo emite humo, olor a quemado o chispas descontroladas, desenchúfelo de inmediato de la red. Suspenda cualquier prueba posterior y acuda al servicio técnico oficial.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+            <h2>Usar la herramienta</h2>
+            <p><a href="https://poliinternational.com/power-supply-troubleshooter/" target="_top">Abrir Guía de resolución de problemas para fuente de alimentación y máquina: manual de usuario</a>. Todo funciona en su navegador; nada de lo que introduce se envia a ninguna parte.</p>
+        </div>
+    </div>
+</body>
+</html>

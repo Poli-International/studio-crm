@@ -22,9 +22,9 @@ jobs:
       run:
         shell: bash
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node }}
 
@@ -52,7 +52,7 @@ jobs:
             sleep 2
           done
           page=$(curl -sf http://127.0.0.1:3000/)
-          echo "$page" | grep -q "STUDIO CRM"
+          grep -q "STUDIO CRM" <<< "$page"
           n=$(curl -sf http://127.0.0.1:3000/api/clients | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>console.log(JSON.parse(s).length))")
           echo "demo clients: $n"
           test "$n" -gt 0

@@ -4,7 +4,7 @@ Studio CRM läuft auf einem Computer in Ihrem Studio. Das Personal öffnet es in
 
 ## Installation und Start
 
-1. Installieren Sie Node.js 20 oder neuer.
+1. Installieren Sie Node.js 22 oder neuer.
 2. Laden Sie die Studio-CRM-Dateien herunter und öffnen Sie ein Terminal im Ordner `studio-crm`.
 3. Führen Sie einmal `npm install` aus, dann `npm start`.
 4. Öffnen Sie `http://localhost:3000` im Browser. Andere Geräte verwenden die Netzwerkadresse des Computers statt `localhost`.

@@ -16,7 +16,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
-        node: [20, 22, 24]
+        node: [22, 24]
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -28,8 +28,15 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Install (as the guide says)
-        run: npm install --no-audit --no-fund
+      # A studio computer has no compiler: the install must use ready-made
+      # binaries. Fail if anything was compiled (node-gyp) instead.
+      - name: Install (as the guide says), no compiling
+        run: |
+          npm install --no-audit --no-fund --foreground-scripts 2>&1 | tee "$RUNNER_TEMP/install.log"
+          if grep -q "gyp info spawn" "$RUNNER_TEMP/install.log"; then
+            echo "::error::The install compiled native code; studio computers have no build tools"; exit 1
+          fi
+          test -f node_modules/better-sqlite3/build/Release/better_sqlite3.node
 
       - name: Clean install from the lockfile
         run: rm -rf node_modules && npm ci --no-audit --no-fund
@@ -44,7 +51,8 @@ jobs:
             curl -sf http://127.0.0.1:3000/ > /dev/null && break
             sleep 2
           done
-          curl -sf http://127.0.0.1:3000/ | grep -q "STUDIO CRM"
+          page=$(curl -sf http://127.0.0.1:3000/)
+          echo "$page" | grep -q "STUDIO CRM"
           n=$(curl -sf http://127.0.0.1:3000/api/clients | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>console.log(JSON.parse(s).length))")
           echo "demo clients: $n"
           test "$n" -gt 0

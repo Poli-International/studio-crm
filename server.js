@@ -3726,21 +3726,23 @@ app.delete('/api/financial/:id', (req, res) => {
 // =========================================================================
 // 💼 ACCOUNTING APPLICATIONS INTEGRATION SUITE (QUICKBOOKS & SAGE)
 // =========================================================================
+// Accounting integrations are not built yet (planned for the BYOK version): nothing
+// connects to QuickBooks or Sage. Keep them disconnected with empty credentials.
 let accountingConfig = {
   quickbooks: {
-    enabled: true,
-    connected: true,
+    enabled: false,
+    connected: false,
     environment: 'sandbox', // 'sandbox' | 'production'
-    clientId: 'QB-STUDIO-CLIENT-9920192',
-    clientSecret: '••••••••••••••••••••••••',
-    realmId: '9130350493812930',
-    companyName: 'Poli International Tattoo Studio',
-    lastSyncTimestamp: new Date(Date.now() - 3600000 * 3).toISOString(),
+    clientId: '',
+    clientSecret: '',
+    realmId: '',
+    companyName: '',
+    lastSyncTimestamp: null,
     syncFrequency: 'realtime', // 'realtime' | 'daily' | 'manual'
     autoSyncSales: true,
     autoSyncInventoryValuation: true,
     autoSyncInvoices: true,
-    statusBadge: 'ONLINE_ACTIVE',
+    statusBadge: 'NOT_CONNECTED',
     scopes: {
       accounting: true, // com.intuit.quickbooks.accounting
       payment: true,    // com.intuit.quickbooks.payment
@@ -3749,18 +3751,18 @@ let accountingConfig = {
     }
   },
   sage: {
-    enabled: true,
-    connected: true,
+    enabled: false,
+    connected: false,
     environment: 'production',
-    subscriptionKey: 'sg_sub_992039102831_live',
-    companyId: 'POLI-SAGE-INTACCT-US',
-    companyName: 'Poli International Studio LLC',
-    lastSyncTimestamp: new Date(Date.now() - 3600000 * 8).toISOString(),
+    subscriptionKey: '',
+    companyId: '',
+    companyName: '',
+    lastSyncTimestamp: null,
     syncFrequency: 'daily',
     autoSyncSales: true,
     autoSyncInventoryValuation: true,
     autoSyncInvoices: true,
-    statusBadge: 'ONLINE_ACTIVE',
+    statusBadge: 'NOT_CONNECTED',
     scopes: {
       gl: true,        // com.sage.intacct.gl
       ar: true,        // com.sage.intacct.ar
@@ -4024,6 +4026,7 @@ app.get('/api/accounting/ledger-timeseries', (req, res) => {
 
 // POST Initiate OAuth Handshake / Re-authenticate QuickBooks or Sage
 app.post('/api/accounting/connect/:platform', (req, res) => {
+  return res.status(501).json({ error: 'Accounting connections are not available yet: planned for the free BYOK version.' });
   const platform = req.params.platform.toLowerCase();
   const timestamp = new Date().toISOString();
 
@@ -4064,6 +4067,7 @@ app.post('/api/accounting/connect/:platform', (req, res) => {
 
 // POST Trigger Immediate Accounting Sync for Sales, Invoices & Inventory Assets
 app.post('/api/accounting/sync', (req, res) => {
+  return res.status(501).json({ error: 'Accounting connections are not available yet: planned for the free BYOK version.' });
   const { platform = 'all' } = req.body;
   const timestamp = new Date().toISOString();
 
@@ -4151,6 +4155,7 @@ app.post('/api/accounting/sync', (req, res) => {
 
 // POST Bulk Re-Sync Selected Failed/Pending Transactions
 app.post('/api/accounting/bulk-resync', (req, res) => {
+  return res.status(501).json({ error: 'Accounting connections are not available yet: planned for the free BYOK version.' });
   const ids = req.body.ids || req.body.syncIds || [];
   const timestamp = new Date().toISOString();
   let resyncedCount = 0;

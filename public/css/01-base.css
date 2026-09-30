@@ -1,3 +1,6 @@
+/* base font */
+body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans Thai', sans-serif; }
+
 /* ======================================================== */
     /* 📦 INVENTORY MANAGEMENT MODAL CSS GRID LAYOUT SYSTEM */
     /* ======================================================== */
@@ -385,6 +388,7 @@
         opacity: 1 !important;
         pointer-events: auto !important;
     }
+    } /* closes @media (max-width: 768px) */
 
     /* Base Sidebar Transitions & Navigation Item Focus Styling */
     .sidebar, aside.sidebar {

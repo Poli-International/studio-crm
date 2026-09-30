@@ -1,0 +1,51 @@
+# Installs and runs Studio CRM the way the user guide tells a studio to, on
+# every OS and Node.js version the guide may promise. The website only claims
+# platforms this workflow has passed on.
+name: Install test
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  install:
+    name: ${{ matrix.os }} / Node ${{ matrix.node }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+        node: [20, 22, 24]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install (as the guide says)
+        run: npm install --no-audit --no-fund
+
+      - name: Clean install from the lockfile
+        run: rm -rf node_modules && npm ci --no-audit --no-fund
+
+      - name: Tests
+        run: npm test
+
+      - name: Start and open it
+        run: |
+          PORT=3000 SQLITE_DB_PATH="$RUNNER_TEMP/studio.sqlite" node server.js > "$RUNNER_TEMP/server.log" 2>&1 &
+          for i in $(seq 1 30); do
+            curl -sf http://127.0.0.1:3000/ > /dev/null && break
+            sleep 2
+          done
+          curl -sf http://127.0.0.1:3000/ | grep -q "STUDIO CRM"
+          n=$(curl -sf http://127.0.0.1:3000/api/clients | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>console.log(JSON.parse(s).length))")
+          echo "demo clients: $n"
+          test "$n" -gt 0
+          cat "$RUNNER_TEMP/server.log"

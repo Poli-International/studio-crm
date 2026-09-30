@@ -2112,12 +2112,20 @@
                     if (!hasReplaced) {
                         // Label inside a child span (e.g. a tab with a counter badge): translate
                         // that span only, so sibling badges and counters survive.
-                        var label = null;
-                        for (var j = 0; j < el.children.length; j++) {
+                        // A sidebar button holds an icon span and a label span: the label
+                        // span is the target, never the icon (it used to get "📊 Dashboard").
+                        var labelText = translation;
+                        var label = el.querySelector(':scope > .nav-label, :scope > [class*="label"]');
+                        if (label) {
+                            var icon = el.querySelector(':scope > .nav-icon');
+                            var iconText = icon ? icon.textContent.trim() : '';
+                            if (iconText && translation.indexOf(iconText) === 0) labelText = translation.slice(iconText.length).trim();
+                        }
+                        for (var j = 0; !label && j < el.children.length; j++) {
                             var c = el.children[j];
                             if (c.children.length === 0 && !c.id && c.textContent.trim()) { label = c; break; }
                         }
-                        if (label) label.textContent = translation;
+                        if (label) label.textContent = labelText;
                         else el.textContent = translation;
                     }
                 }

@@ -21,7 +21,7 @@ The CRM prepares messages (aftercare emails, reminders, supplier orders) and ope
 Requires [Node.js](https://nodejs.org/) 20 or newer.
 
 ```bash
-npm ci
+npm install
 npm start
 ```
 

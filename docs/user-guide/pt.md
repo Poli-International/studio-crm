@@ -6,7 +6,7 @@ O Studio CRM funciona num único computador do seu estúdio. A equipa abre-o num
 
 1. Instale o Node.js 20 ou uma versão mais recente.
 2. Descarregue os ficheiros do Studio CRM e abra um terminal na pasta `studio-crm`.
-3. Execute `npm ci` uma vez e depois `npm start`.
+3. Execute `npm install` uma vez e depois `npm start`.
 4. Abra `http://localhost:3000` no navegador. Os outros dispositivos usam o endereço de rede do computador em vez de `localhost`.
 
 Para usar uma porta diferente, defina `PORT` num ficheiro `.env` (copie `.env.example`). Defina também ali `STUDIO_MANAGER_EMAIL`, para que os alertas lhe sejam dirigidos.

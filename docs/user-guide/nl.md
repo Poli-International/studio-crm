@@ -6,7 +6,7 @@ Studio CRM draait op één computer in uw studio. Medewerkers openen het in een 
 
 1. Installeer Node.js 20 of nieuwer.
 2. Download de Studio CRM-bestanden en open een terminal in de map `studio-crm`.
-3. Voer eenmalig `npm ci` uit, daarna `npm start`.
+3. Voer eenmalig `npm install` uit, daarna `npm start`.
 4. Open `http://localhost:3000` in de browser. Andere apparaten gebruiken het netwerkadres van de computer in plaats van `localhost`.
 
 Om een andere poort te gebruiken, stelt u `PORT` in een `.env`-bestand in (kopieer `.env.example`). Stel daar ook `STUDIO_MANAGER_EMAIL` in, zodat meldingen aan u worden geadresseerd.

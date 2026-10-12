@@ -95,11 +95,14 @@ jobs:
             sleep 2
           done
           cat "$RUNNER_TEMP/server.log"
-          curl -sf http://127.0.0.1:3000/ | grep -q "STUDIO CRM"
+          # no pipe into grep -q: it closes early and curl fails under pipefail
+          page=$(curl -sf http://127.0.0.1:3000/)
+          grep -q "STUDIO CRM" <<< "$page"
           code=$(curl -s -o "$RUNNER_TEMP/new.json" -w "%{http_code}" -X POST http://127.0.0.1:3000/api/clients -H "Content-Type: application/json" -d "{\"name\":\"Packaging Test\"}")
           test "$code" = "201"
           sleep 2
-          curl -sf http://127.0.0.1:3000/api/clients | grep -q "Packaging Test"
+          list=$(curl -sf http://127.0.0.1:3000/api/clients)
+          grep -q "Packaging Test" <<< "$list"
           # the data file is inside the unpacked folder, where the guide says it is
           ls -la data
           test -f data/studio_crm.sqlite
@@ -133,5 +136,6 @@ jobs:
           docker compose down
           docker compose up -d
           for i in $(seq 1 30); do curl -sf http://127.0.0.1:3000/ > /dev/null && break; sleep 2; done
-          curl -sf http://127.0.0.1:3000/api/clients | grep -q "Docker Test"
+          list=$(curl -sf http://127.0.0.1:3000/api/clients)
+          grep -q "Docker Test" <<< "$list"
           docker compose logs | tail -20

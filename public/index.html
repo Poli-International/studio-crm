@@ -1475,12 +1475,15 @@
                 <!-- Card 1: ZIP Archive Direct Download -->
                 <div style="background:#111827;padding:1.5rem;border-radius:12px;border:1px solid #374151;display:flex;flex-direction:column;justify-content:space-between;">
                     <div>
-                        <h3 style="margin:0 0 0.5rem 0;color:#38BDF8;font-size:1.1rem;display:flex;align-items:center;gap:8px;">📦 Community Zip Archive</h3>
-                        <p style="color:#9CA3AF;font-size:0.85rem;line-height:1.5;margin-bottom:1rem;">Complete source code in one zip file: the Node.js server and the browser app.</p>
+                        <h3 style="margin:0 0 0.5rem 0;color:#38BDF8;font-size:1.1rem;display:flex;align-items:center;gap:8px;">📦 Ready-to-run download</h3>
+                        <p style="color:#9CA3AF;font-size:0.85rem;line-height:1.5;margin-bottom:1rem;">Nothing else to install. Unzip it, then double-click Start Studio CRM. Your browser opens on the CRM.</p>
                     </div>
-                    <a href="https://github.com/Poli-International/studio-crm/archive/HEAD.zip" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0.75rem 1.25rem;background:linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);color:#FFF;text-decoration:none;border-radius:8px;font-weight:800;font-size:0.88rem;box-shadow:0 4px 12px rgba(14,165,233,0.3);">
-                        ⬇️ Download Community Edition (.ZIP)
-                    </a>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                        <a href="https://github.com/Poli-International/studio-crm/releases/latest/download/studio-crm-windows-x64.zip" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0.6rem 0.9rem;background:linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);color:#FFF;text-decoration:none;border-radius:8px;font-weight:800;font-size:0.88rem;box-shadow:0 4px 12px rgba(14,165,233,0.3);">⬇️ Windows</a>
+                        <a href="https://github.com/Poli-International/studio-crm/releases/latest/download/studio-crm-macos-arm64.zip" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0.6rem 0.9rem;background:linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);color:#FFF;text-decoration:none;border-radius:8px;font-weight:800;font-size:0.88rem;box-shadow:0 4px 12px rgba(14,165,233,0.3);">⬇️ Mac (Apple chip)</a>
+                        <a href="https://github.com/Poli-International/studio-crm/releases/latest/download/studio-crm-macos-x64.zip" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0.6rem 0.9rem;background:linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);color:#FFF;text-decoration:none;border-radius:8px;font-weight:800;font-size:0.88rem;box-shadow:0 4px 12px rgba(14,165,233,0.3);">⬇️ Mac (Intel)</a>
+                        <a href="https://github.com/Poli-International/studio-crm/releases/latest/download/studio-crm-linux-x64.zip" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0.6rem 0.9rem;background:linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);color:#FFF;text-decoration:none;border-radius:8px;font-weight:800;font-size:0.88rem;box-shadow:0 4px 12px rgba(14,165,233,0.3);">⬇️ Linux</a>
+                    </div>
                 </div>
 
                 <!-- Card 2: GitHub Repository & Self-Host -->
@@ -1498,12 +1501,15 @@
             <!-- Terminal Installation Command Guide -->
             <div style="background:#0F172A;padding:1.25rem;border-radius:12px;border:1px solid #374151;">
                 <div style="font-size:0.8rem;font-weight:700;color:#CBD5E1;margin-bottom:0.5rem;display:flex;align-items:center;gap:6px;">
-                    💻 Local Terminal Quickstart Commands:
+                    💻 From the source code (needs Node.js 22 or newer):
                 </div>
                 <pre style="margin:0;background:#090D16;padding:1rem;border-radius:8px;color:#A7F3D0;font-family:monospace;font-size:0.85rem;line-height:1.6;overflow-x:auto;border:1px solid #1E293B;">git clone https://github.com/Poli-International/studio-crm.git
 cd studio-crm
 npm ci
-npm start</pre>
+npm start
+
+# or, with Docker
+docker compose up -d</pre>
             </div>
         </div>
     </div>

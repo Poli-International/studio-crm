@@ -74,8 +74,11 @@ jobs:
             unzip -q "$GITHUB_WORKSPACE/dist/studio-crm-${{ matrix.name }}.zip"
           fi
           cd studio-crm
-          NODE_DIR="$(dirname "$(command -v node)")"
-          export PATH="$(echo "$PATH" | tr ':' '\n' | grep -v -F "$NODE_DIR" | paste -sd: -)"
+          # runners carry more than one Node.js: drop every PATH entry that has one
+          while command -v node > /dev/null; do
+            NODE_DIR="$(dirname "$(command -v node)")"
+            export PATH="$(echo "$PATH" | tr ':' '\n' | grep -v -x -F "$NODE_DIR" | paste -sd: -)"
+          done
           if command -v node > /dev/null; then echo "::error::node is still on the PATH, the test would prove nothing"; exit 1; fi
           if [ "$RUNNER_OS" = "Windows" ]; then
             # through PowerShell: "cmd /c Start Studio CRM.bat" would run cmd's own START command

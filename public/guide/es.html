@@ -15,11 +15,13 @@ code{background:#1E293B;padding:1px 5px;border-radius:4px;font-size:0.9em}strong
 <p>Studio CRM funciona en un solo ordenador de su estudio. El personal lo abre en un navegador web en ese ordenador o en cualquier dispositivo de la red del estudio. Sus datos permanecen en un archivo en ese ordenador. No se envía nada a Poli International.</p>
 <h2>Instalación y puesta en marcha</h2>
 <ol>
-<li>Instale Node.js 22 o una versión más reciente.</li>
-<li>Descargue los archivos de Studio CRM y abra una terminal en la carpeta <code>studio-crm</code>.</li>
-<li>Ejecute <code>npm install</code> una vez, luego <code>npm start</code>.</li>
-<li>Abra <code>http://localhost:3000</code> en el navegador. Otros dispositivos usan la dirección de red del ordenador en lugar de <code>localhost</code>.</li>
+<li>Descargue el ZIP de Studio CRM para su ordenador (Windows, Mac o Linux) desde la página de Studio CRM. Node.js ya está incluido; no hay nada más que instalar.</li>
+<li>Descomprímalo. Ponga la carpeta <code>studio-crm</code> donde pueda quedarse, por ejemplo en Documentos.</li>
+<li>Haga doble clic en <strong>Start Studio CRM</strong> (<code>Start Studio CRM.bat</code> en Windows, <code>Start Studio CRM.command</code> en Mac, <code>./start-studio-crm.sh</code> en Linux). En Mac, la primera vez, haga clic derecho y elija <strong>Abrir</strong>.</li>
+<li>Su navegador se abre en <code>http://localhost:3000</code>. Mantenga abierta la ventana que apareció mientras usa el CRM; al cerrarla, el CRM se detiene. Los demás dispositivos usan la dirección de red del ordenador en lugar de <code>localhost</code>, con <code>:3000</code> al final.</li>
 </ol>
+<p>Si descargó el código fuente, instale Node.js 22 o posterior, ejecute <code>npm install</code> una vez y luego <code>npm start</code>. Con Docker: <code>docker compose up -d</code>.</p>
+<p>Para actualizar, descargue el nuevo ZIP, descomprímalo en una carpeta nueva y copie su carpeta <code>data</code> de la carpeta antigua a la nueva.</p>
 <p>Para usar un puerto distinto, defina <code>PORT</code> en un archivo <code>.env</code> (copie <code>.env.example</code>). Defina también <code>STUDIO_MANAGER_EMAIL</code> ahí, para que las alertas se dirijan a usted.</p>
 <h2>Primer inicio: datos de demostración</h2>
 <p>Una instalación nueva se abre con clientes, citas, stock y personal de demostración, para que pueda probar cada pantalla. Cuando esté listo para el trabajo real, haga clic en <strong>Empezar con un estudio vacío</strong> en el panel principal. Esto elimina los registros de demostración y conserva la lista de servicios, categorías, plantillas, estaciones y ajustes. Esto no se puede deshacer.</p>

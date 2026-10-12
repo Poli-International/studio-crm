@@ -115,7 +115,7 @@ Studio CRM is a free studio management application for tattoo and piercing studi
 
 ### One app on one studio computer
 
-The application is installed with Node.js 22 or newer. You download the Studio CRM files, open a terminal in the `studio-crm` folder, run `npm install` once and then `npm start`. The app then serves at `http://localhost:3000`. Other devices on the studio network reach it using the computer's network address instead of `localhost`. You can change the port by setting `PORT` in a `.env` file, and set `STUDIO_MANAGER_EMAIL` there so alerts are addressed to you.
+The application comes as a ready-to-run ZIP for Windows, Mac and Linux with Node.js inside: you unzip it and double-click Start Studio CRM. From the source code you instead install Node.js 22 or newer, open a terminal in the `studio-crm` folder, run `npm install` once and then `npm start`. The app then serves at `http://localhost:3000`. Other devices on the studio network reach it using the computer's network address instead of `localhost`. You can change the port by setting `PORT` in a `.env` file, and set `STUDIO_MANAGER_EMAIL` there so alerts are addressed to you.
 
 The interface is organised into eight destinations in a fixed order: Dashboard, Clients, Calendar, Inventory, Compliance, Finance, Tools and Settings. A persistent top bar carries six global controls: search and command palette, the active staff switcher, the language selector, the theme toggle, the sync and storage badge, and the database backup warning.
 
@@ -159,7 +159,7 @@ The language menu offers English, French, Italian, German, Spanish, Dutch, Portu
 
 ### Step 1: Install and start the app
 
-Install Node.js 22 or newer. Download the Studio CRM files and open a terminal in the `studio-crm` folder. Run `npm install` once, then `npm start`. Open `http://localhost:3000` in the browser. Other devices use the computer's network address instead of `localhost`. To use a different port, set `PORT` in a `.env` file copied from `.env.example`, and set `STUDIO_MANAGER_EMAIL` there too.
+Download the ready-to-run ZIP for your computer (Windows, Mac or Linux), unzip it and double-click Start Studio CRM. Node.js is inside the ZIP, so there is nothing else to install. Open `http://localhost:3000` in the browser. Other devices use the computer's network address instead of `localhost`. To use a different port, set `PORT` in a `.env` file copied from `.env.example`, and set `STUDIO_MANAGER_EMAIL` there too.
 
 ### Step 2: Set your studio figures in Settings
 
@@ -460,7 +460,7 @@ No. The online demo keeps what you enter in that browser tab only, using session
 
 Link out from this page to related Poli International wiki and blog topics:
 
-- **Self-hosting a studio tool:** a guide to installing Node.js 22 or newer, running `npm install` and `npm start`, and setting `PORT` and `STUDIO_MANAGER_EMAIL` in a `.env` file.
+- **Self-hosting a studio tool:** a guide to the ready-to-run download, the source install (`npm install`, `npm start`) and Docker, and setting `PORT` and `STUDIO_MANAGER_EMAIL` in a `.env` file.
 - **Keeping client records local:** why a SQLite file on the studio computer changes how you handle consent and medical data, and how copying `data/studio_crm.sqlite` works as a backup.
 - **Digital consent and waiver records:** what a signed waiver should capture, how an age check fits in, and why a waiver should not save without a client and a signature.
 - **Sterilisation and autoclave record keeping:** what a cycle record should contain, and a reminder to check your local health authority's rules for what you must keep.

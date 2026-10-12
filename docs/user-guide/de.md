@@ -4,10 +4,14 @@ Studio CRM läuft auf einem Computer in Ihrem Studio. Das Personal öffnet es in
 
 ## Installation und Start
 
-1. Installieren Sie Node.js 22 oder neuer.
-2. Laden Sie die Studio-CRM-Dateien herunter und öffnen Sie ein Terminal im Ordner `studio-crm`.
-3. Führen Sie einmal `npm install` aus, dann `npm start`.
-4. Öffnen Sie `http://localhost:3000` im Browser. Andere Geräte verwenden die Netzwerkadresse des Computers statt `localhost`.
+1. Laden Sie das Studio-CRM-ZIP für Ihren Computer (Windows, Mac oder Linux) von der Studio-CRM-Seite herunter. Node.js ist bereits enthalten; sonst muss nichts installiert werden.
+2. Entpacken Sie es. Legen Sie den Ordner `studio-crm` dort ab, wo er bleiben kann, zum Beispiel unter Dokumente.
+3. Doppelklicken Sie auf **Start Studio CRM** (`Start Studio CRM.bat` unter Windows, `Start Studio CRM.command` auf dem Mac, `./start-studio-crm.sh` unter Linux). Auf dem Mac beim ersten Mal mit der rechten Maustaste klicken und **Öffnen** wählen.
+4. Ihr Browser öffnet `http://localhost:3000`. Lassen Sie das geöffnete Fenster offen, solange Sie das CRM benutzen; wird es geschlossen, stoppt das CRM. Andere Geräte verwenden statt `localhost` die Netzwerkadresse des Computers, mit `:3000` am Ende.
+
+Wenn Sie den Quellcode heruntergeladen haben, installieren Sie Node.js 22 oder neuer und führen Sie einmal `npm install` und dann `npm start` aus. Mit Docker: `docker compose up -d`.
+
+Zum Aktualisieren laden Sie das neue ZIP herunter, entpacken es in einen neuen Ordner und kopieren Ihren Ordner `data` aus dem alten Ordner in den neuen.
 
 Um einen anderen Port zu verwenden, legen Sie `PORT` in einer `.env`-Datei fest (kopieren Sie `.env.example`). Legen Sie dort auch `STUDIO_MANAGER_EMAIL` fest, damit Benachrichtigungen an Sie adressiert werden.
 

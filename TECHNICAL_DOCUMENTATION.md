@@ -321,10 +321,14 @@ The tool is a static HTML/CSS/JS application. It can be embedded in any page wit
 
 The real application runs on the studio's own computer:
 
-1. Install Node.js 22 or newer.
-2. Download the Studio CRM files and open a terminal in the `studio-crm` folder.
-3. Run `npm install` once, then `npm start`.
-4. Open `http://localhost:3000` in the browser. Other devices on the studio network use the computer's network address instead of `localhost`.
+1. Download the Studio CRM ZIP for your computer (Windows, Mac or Linux) from the Studio CRM page. Node.js is already inside; there is nothing else to install.
+2. Unzip it. Put the `studio-crm` folder where it can stay, for example in Documents.
+3. Double-click **Start Studio CRM** (`Start Studio CRM.bat` on Windows, `Start Studio CRM.command` on a Mac, `./start-studio-crm.sh` on Linux). On a Mac, the first time, right-click it and choose **Open**.
+4. Your browser opens on `http://localhost:3000`. Keep the window that opened while you use the CRM; closing it stops the CRM. Other devices use the computer's network address instead of `localhost`, with `:3000` at the end.
+
+If you downloaded the source code instead, install Node.js 22 or newer, then run `npm install` once and `npm start`. Docker users: `docker compose up -d`.
+
+To update, download the new ZIP, unzip it to a new folder, and copy your `data` folder from the old folder into the new one.
 
 Optional environment settings (in a `.env` file copied from `.env.example`):
 

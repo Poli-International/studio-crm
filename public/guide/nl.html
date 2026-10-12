@@ -15,11 +15,13 @@ code{background:#1E293B;padding:1px 5px;border-radius:4px;font-size:0.9em}strong
 <p>Studio CRM draait op één computer in uw studio. Medewerkers openen het in een webbrowser op die computer of op elk apparaat in het studionetwerk. Uw gegevens blijven in een bestand op die computer. Er wordt niets naar Poli International verzonden.</p>
 <h2>Installeren en starten</h2>
 <ol>
-<li>Installeer Node.js 22 of nieuwer.</li>
-<li>Download de Studio CRM-bestanden en open een terminal in de map <code>studio-crm</code>.</li>
-<li>Voer eenmalig <code>npm install</code> uit, daarna <code>npm start</code>.</li>
-<li>Open <code>http://localhost:3000</code> in de browser. Andere apparaten gebruiken het netwerkadres van de computer in plaats van <code>localhost</code>.</li>
+<li>Download de Studio CRM-ZIP voor uw computer (Windows, Mac of Linux) van de Studio CRM-pagina. Node.js zit er al in; u hoeft verder niets te installeren.</li>
+<li>Pak het uit. Zet de map <code>studio-crm</code> op een plek waar hij kan blijven staan, bijvoorbeeld in Documenten.</li>
+<li>Dubbelklik op <strong>Start Studio CRM</strong> (<code>Start Studio CRM.bat</code> op Windows, <code>Start Studio CRM.command</code> op een Mac, <code>./start-studio-crm.sh</code> op Linux). Op een Mac klikt u de eerste keer met de rechtermuisknop en kiest u <strong>Open</strong>.</li>
+<li>Uw browser opent <code>http://localhost:3000</code>. Houd het venster dat verscheen open terwijl u het CRM gebruikt; als u het sluit, stopt het CRM. Andere apparaten gebruiken het netwerkadres van de computer in plaats van <code>localhost</code>, met <code>:3000</code> aan het eind.</li>
 </ol>
+<p>Hebt u de broncode gedownload, installeer dan Node.js 22 of nieuwer, voer één keer <code>npm install</code> uit en daarna <code>npm start</code>. Met Docker: <code>docker compose up -d</code>.</p>
+<p>Om bij te werken downloadt u de nieuwe ZIP, pakt u die uit in een nieuwe map en kopieert u uw map <code>data</code> van de oude map naar de nieuwe.</p>
 <p>Om een andere poort te gebruiken, stelt u <code>PORT</code> in een <code>.env</code>-bestand in (kopieer <code>.env.example</code>). Stel daar ook <code>STUDIO_MANAGER_EMAIL</code> in, zodat meldingen aan u worden geadresseerd.</p>
 <h2>Eerste keer opstarten: demogegevens</h2>
 <p>Een nieuwe installatie start met demoklanten, afspraken, voorraad en personeel, zodat u elk scherm kunt uitproberen. Wanneer u klaar bent voor echt werk, klikt u op <strong>Beginnen met een lege studio</strong> op het dashboard. Dit verwijdert de demogegevens en behoudt de dienstenlijst, categorieën, sjablonen, stations en instellingen. Dit kan niet ongedaan worden gemaakt.</p>

@@ -15,11 +15,13 @@ code{background:#1E293B;padding:1px 5px;border-radius:4px;font-size:0.9em}strong
 <p>Studio CRM läuft auf einem Computer in Ihrem Studio. Das Personal öffnet es in einem Webbrowser auf diesem Computer oder auf jedem Gerät im Studio-Netzwerk. Ihre Daten bleiben in einer Datei auf diesem Computer. Es wird nichts an Poli International gesendet.</p>
 <h2>Installation und Start</h2>
 <ol>
-<li>Installieren Sie Node.js 22 oder neuer.</li>
-<li>Laden Sie die Studio-CRM-Dateien herunter und öffnen Sie ein Terminal im Ordner <code>studio-crm</code>.</li>
-<li>Führen Sie einmal <code>npm install</code> aus, dann <code>npm start</code>.</li>
-<li>Öffnen Sie <code>http://localhost:3000</code> im Browser. Andere Geräte verwenden die Netzwerkadresse des Computers statt <code>localhost</code>.</li>
+<li>Laden Sie das Studio-CRM-ZIP für Ihren Computer (Windows, Mac oder Linux) von der Studio-CRM-Seite herunter. Node.js ist bereits enthalten; sonst muss nichts installiert werden.</li>
+<li>Entpacken Sie es. Legen Sie den Ordner <code>studio-crm</code> dort ab, wo er bleiben kann, zum Beispiel unter Dokumente.</li>
+<li>Doppelklicken Sie auf <strong>Start Studio CRM</strong> (<code>Start Studio CRM.bat</code> unter Windows, <code>Start Studio CRM.command</code> auf dem Mac, <code>./start-studio-crm.sh</code> unter Linux). Auf dem Mac beim ersten Mal mit der rechten Maustaste klicken und <strong>Öffnen</strong> wählen.</li>
+<li>Ihr Browser öffnet <code>http://localhost:3000</code>. Lassen Sie das geöffnete Fenster offen, solange Sie das CRM benutzen; wird es geschlossen, stoppt das CRM. Andere Geräte verwenden statt <code>localhost</code> die Netzwerkadresse des Computers, mit <code>:3000</code> am Ende.</li>
 </ol>
+<p>Wenn Sie den Quellcode heruntergeladen haben, installieren Sie Node.js 22 oder neuer und führen Sie einmal <code>npm install</code> und dann <code>npm start</code> aus. Mit Docker: <code>docker compose up -d</code>.</p>
+<p>Zum Aktualisieren laden Sie das neue ZIP herunter, entpacken es in einen neuen Ordner und kopieren Ihren Ordner <code>data</code> aus dem alten Ordner in den neuen.</p>
 <p>Um einen anderen Port zu verwenden, legen Sie <code>PORT</code> in einer <code>.env</code>-Datei fest (kopieren Sie <code>.env.example</code>). Legen Sie dort auch <code>STUDIO_MANAGER_EMAIL</code> fest, damit Benachrichtigungen an Sie adressiert werden.</p>
 <h2>Erster Start: Demodaten</h2>
 <p>Eine Neuinstallation startet mit Demo-Kunden, -Terminen, -Lagerbestand und -Personal, damit Sie jeden Bildschirm ausprobieren können. Wenn Sie bereit für die echte Arbeit sind, klicken Sie auf <strong>Mit einem leeren Studio beginnen</strong> im Dashboard. Dadurch werden die Demodaten gelöscht, während Leistungsliste, Kategorien, Vorlagen, Stationen und Einstellungen erhalten bleiben. Dies kann nicht rückgängig gemacht werden.</p>

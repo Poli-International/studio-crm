@@ -18,16 +18,37 @@ The CRM prepares messages (aftercare emails, reminders, supplier orders) and ope
 
 ## Install
 
-Requires [Node.js](https://nodejs.org/) 22 or newer (no compiler or build tools needed).
+**The easy way (no Node.js to install).** Download the ZIP for your computer, unzip it, and double-click the starter. Your browser opens on the CRM.
+
+| Computer | Download | Starter |
+|---|---|---|
+| Windows | [studio-crm-windows-x64.zip](https://github.com/Poli-International/studio-crm/releases/latest/download/studio-crm-windows-x64.zip) | `Start Studio CRM.bat` |
+| Mac, Apple chip (M1 and newer) | [studio-crm-macos-arm64.zip](https://github.com/Poli-International/studio-crm/releases/latest/download/studio-crm-macos-arm64.zip) | `Start Studio CRM.command` |
+| Mac, Intel | [studio-crm-macos-x64.zip](https://github.com/Poli-International/studio-crm/releases/latest/download/studio-crm-macos-x64.zip) | `Start Studio CRM.command` |
+| Linux | [studio-crm-linux-x64.zip](https://github.com/Poli-International/studio-crm/releases/latest/download/studio-crm-linux-x64.zip) | `./start-studio-crm.sh` |
+
+Keep the window that opens while you use the CRM; closing it stops the CRM. On a Mac, the first time, right-click the starter and choose **Open**. Windows may ask you to confirm the first time as well.
+
+**From the source.** Requires [Node.js](https://nodejs.org/) 22 or newer (no compiler or build tools needed).
 
 ```bash
 npm install
 npm start
 ```
 
-Then open `http://localhost:3000`. A new install starts with demo data so you can try every screen; click **Start with an empty studio** on the Dashboard before entering real clients.
+**With Docker.**
+
+```bash
+docker compose up -d
+```
+
+In all three cases, open `http://localhost:3000`. Other devices on the studio network use the computer's address instead of `localhost`, always with `:3000`. The CRM is its own web server: do not put the files behind Apache, nginx or PHP, the pages would load but nothing would save.
+
+A new install starts with demo data so you can try every screen; click **Start with an empty studio** on the Dashboard before entering real clients.
 
 Settings go in a `.env` file (copy `.env.example`): `PORT`, `STUDIO_MANAGER_EMAIL`, `SQLITE_DB_PATH`.
+
+**Updating.** Download the new ZIP, unzip it to a new folder, and copy your `data` folder from the old one into it.
 
 ## User guide
 

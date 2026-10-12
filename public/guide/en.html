@@ -15,11 +15,13 @@ code{background:#1E293B;padding:1px 5px;border-radius:4px;font-size:0.9em}strong
 <p>Studio CRM runs on one computer in your studio. Staff open it in a web browser on that computer or on any device on the studio network. Your data stays in a file on that computer. Nothing is sent to Poli International.</p>
 <h2>Install and start</h2>
 <ol>
-<li>Install Node.js 22 or newer.</li>
-<li>Download the Studio CRM files and open a terminal in the <code>studio-crm</code> folder.</li>
-<li>Run <code>npm install</code> once, then <code>npm start</code>.</li>
-<li>Open <code>http://localhost:3000</code> in the browser. Other devices use the computer's network address instead of <code>localhost</code>.</li>
+<li>Download the Studio CRM ZIP for your computer (Windows, Mac or Linux) from the Studio CRM page. Node.js is already inside; there is nothing else to install.</li>
+<li>Unzip it. Put the <code>studio-crm</code> folder where it can stay, for example in Documents.</li>
+<li>Double-click <strong>Start Studio CRM</strong> (<code>Start Studio CRM.bat</code> on Windows, <code>Start Studio CRM.command</code> on a Mac, <code>./start-studio-crm.sh</code> on Linux). On a Mac, the first time, right-click it and choose <strong>Open</strong>.</li>
+<li>Your browser opens on <code>http://localhost:3000</code>. Keep the window that opened while you use the CRM; closing it stops the CRM. Other devices use the computer's network address instead of <code>localhost</code>, with <code>:3000</code> at the end.</li>
 </ol>
+<p>If you downloaded the source code instead, install Node.js 22 or newer, then run <code>npm install</code> once and <code>npm start</code>. Docker users: <code>docker compose up -d</code>.</p>
+<p>To update, download the new ZIP, unzip it to a new folder, and copy your <code>data</code> folder from the old folder into the new one.</p>
 <p>To use a different port, set <code>PORT</code> in a <code>.env</code> file (copy <code>.env.example</code>). Set <code>STUDIO_MANAGER_EMAIL</code> there too, so alerts are addressed to you.</p>
 <h2>First run: demo data</h2>
 <p>A new install opens with demo clients, appointments, stock and staff, so you can try every screen. When you are ready for real work, click <strong>Start with an empty studio</strong> on the Dashboard. It deletes the demo records and keeps the service list, categories, templates, stations and settings. This cannot be undone.</p>

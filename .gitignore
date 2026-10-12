@@ -37,3 +37,7 @@ Thumbs.db
 /data/*.sqlite
 /data/*.sqlite-*
 /storage/backups/
+
+# Ready-to-run packaging
+/runtime
+/dist

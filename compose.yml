@@ -1,0 +1,11 @@
+# docker compose up -d   then open http://localhost:3000
+services:
+  studio-crm:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - studio-crm-data:/app/data
+    restart: unless-stopped
+volumes:
+  studio-crm-data:

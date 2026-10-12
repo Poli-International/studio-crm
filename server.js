@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { spawn } from 'child_process';
 import { jsPDF } from 'jspdf';
 import { db, safeDbQuery, sqlite } from './src/db/index.js';
 import {
@@ -10822,7 +10823,24 @@ restoreState();
 setInterval(scheduleStateSave, 5 * 60 * 1000).unref(); // background jobs change state too
 for (const sig of ['SIGINT', 'SIGTERM']) process.on(sig, () => { try { saveAll(); } catch (e) {} process.exit(0); });
 
+// The double-click starters set STUDIO_CRM_OPEN so the browser opens on the right port.
+function openBrowser() {
+  if (!process.env.STUDIO_CRM_OPEN) return;
+  const url = `http://localhost:${PORT}`;
+  const [cmd, args] = process.platform === 'win32' ? ['cmd', ['/c', 'start', '', url]]
+    : process.platform === 'darwin' ? ['open', [url]] : ['xdg-open', [url]];
+  try { spawn(cmd, args, { stdio: 'ignore', detached: true }).on('error', () => {}).unref(); } catch (e) {}
+}
+
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Studio CRM application server running on http://0.0.0.0:${PORT}`);
+  console.log(`Open http://localhost:${PORT} in your browser. Keep this window open while you use the CRM.`);
+  openBrowser();
+}).on('error', (e) => {
+  if (e.code !== 'EADDRINUSE') throw e;
+  // Started twice: the first one is still running, so just show it.
+  console.log(`Studio CRM is already running on port ${PORT} (or another program uses that port).`);
+  openBrowser();
+  setTimeout(() => process.exit(0), 1500);
 });
 

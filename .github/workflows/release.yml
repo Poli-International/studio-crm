@@ -1,0 +1,141 @@
+# Builds the ready-to-run downloads: one ZIP per system with Node.js and the
+# installed packages inside, so a studio unzips it and double-clicks the starter.
+# Every ZIP is unpacked and started here, without any Node.js on the PATH, before
+# it is published. Runs on pull requests (build and test only) and on a version
+# tag (build, test, publish to the GitHub release).
+name: Ready-to-run downloads
+
+on:
+  push:
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  pack:
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: windows-latest, name: windows-x64 }
+          - { os: macos-latest, name: macos-arm64 }
+          - { os: macos-15-intel, name: macos-x64 }
+          - { os: ubuntu-latest, name: linux-x64 }
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Assemble the folder
+        run: |
+          mkdir -p dist/studio-crm
+          git archive HEAD | tar -x -C dist/studio-crm
+          cd dist/studio-crm
+          rm -rf .github tests
+          npm ci --omit=dev --no-audit --no-fund
+          test -f node_modules/better-sqlite3/build/Release/better_sqlite3.node
+          # The same Node.js that installed the packages goes in the ZIP, so the database add-on matches it.
+          mkdir runtime
+          NODE_BIN="$(node -p "process.execPath")"
+          cp "$NODE_BIN" runtime/
+          for f in "$(dirname "$NODE_BIN")/LICENSE" "$(dirname "$NODE_BIN")/../LICENSE"; do
+            if [ -f "$f" ]; then cp "$f" runtime/NODE-LICENSE.txt; break; fi
+          done
+          ls -la runtime
+
+      - name: Zip
+        run: |
+          cd dist
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            7z a -tzip -mx=7 "studio-crm-${{ matrix.name }}.zip" studio-crm > /dev/null
+          else
+            zip -qry "studio-crm-${{ matrix.name }}.zip" studio-crm
+          fi
+          ls -la *.zip
+
+      # The real test: unpack the ZIP somewhere else and start it with the
+      # starter a studio double-clicks, with no Node.js reachable on the PATH.
+      - name: Unpack and start it like a studio would
+        run: |
+          mkdir "$RUNNER_TEMP/unpacked" && cd "$RUNNER_TEMP/unpacked"
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            7z x "$GITHUB_WORKSPACE/dist/studio-crm-${{ matrix.name }}.zip" > /dev/null
+          else
+            unzip -q "$GITHUB_WORKSPACE/dist/studio-crm-${{ matrix.name }}.zip"
+          fi
+          cd studio-crm
+          # runners carry more than one Node.js: drop every PATH entry that has one
+          while command -v node > /dev/null; do
+            NODE_DIR="$(dirname "$(command -v node)")"
+            export PATH="$(echo "$PATH" | tr ':' '\n' | grep -v -x -F "$NODE_DIR" | paste -sd: -)"
+          done
+          if command -v node > /dev/null; then echo "::error::node is still on the PATH, the test would prove nothing"; exit 1; fi
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            # through PowerShell: "cmd /c Start Studio CRM.bat" would run cmd's own START command
+            powershell -NoProfile -Command "& './Start Studio CRM.bat'" < /dev/null > "$RUNNER_TEMP/server.log" 2>&1 &
+          elif [ "$RUNNER_OS" = "macOS" ]; then
+            test -x "Start Studio CRM.command"
+            "./Start Studio CRM.command" > "$RUNNER_TEMP/server.log" 2>&1 &
+          else
+            test -x start-studio-crm.sh
+            ./start-studio-crm.sh > "$RUNNER_TEMP/server.log" 2>&1 &
+          fi
+          for i in $(seq 1 30); do
+            curl -sf http://127.0.0.1:3000/ > /dev/null && break
+            sleep 2
+          done
+          cat "$RUNNER_TEMP/server.log"
+          # no pipe into grep -q: it closes early and curl fails under pipefail
+          page=$(curl -sf http://127.0.0.1:3000/)
+          grep -q "STUDIO CRM" <<< "$page"
+          code=$(curl -s -o "$RUNNER_TEMP/new.json" -w "%{http_code}" -X POST http://127.0.0.1:3000/api/clients -H "Content-Type: application/json" -d "{\"name\":\"Packaging Test\"}")
+          test "$code" = "201"
+          sleep 2
+          list=$(curl -sf http://127.0.0.1:3000/api/clients)
+          grep -q "Packaging Test" <<< "$list"
+          # the data file is inside the unpacked folder, where the guide says it is
+          ls -la data
+          test -f data/studio_crm.sqlite
+
+      - uses: actions/upload-artifact@v5
+        with:
+          name: studio-crm-${{ matrix.name }}
+          path: dist/studio-crm-${{ matrix.name }}.zip
+          if-no-files-found: error
+
+      - name: Publish to the release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1 || gh release create "$GITHUB_REF_NAME" --title "Studio CRM $GITHUB_REF_NAME" --notes "Ready-to-run downloads: unzip, then double-click Start Studio CRM. Nothing else to install." || true
+          gh release upload "$GITHUB_REF_NAME" "dist/studio-crm-${{ matrix.name }}.zip" --clobber
+
+  docker:
+    name: Docker image builds and saves
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Build, start, add a client, restart, check it is still there
+        run: |
+          docker compose up -d --build
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:3000/ > /dev/null && break; sleep 2; done
+          code=$(curl -s -o /dev/null -w "%{http_code}" -X POST http://127.0.0.1:3000/api/clients -H "Content-Type: application/json" -d "{\"name\":\"Docker Test\"}")
+          test "$code" = "201"
+          sleep 2
+          docker compose down
+          docker compose up -d
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:3000/ > /dev/null && break; sleep 2; done
+          list=$(curl -sf http://127.0.0.1:3000/api/clients)
+          grep -q "Docker Test" <<< "$list"
+          docker compose logs | tail -20

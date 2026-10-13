@@ -1,11 +1,5 @@
 // Global Studio OS Utilities and Modals
-function openStudioProSuiteModal(tab) {
-    const overlay = document.getElementById("studio-pro-suite-modal-overlay");
-    if (overlay) overlay.style.display = "flex";
-    if (tab) switchStudioProSuiteTab(tab);
-    else switchStudioProSuiteTab("ear-planner");
-}
-window.openStudioProSuiteModal = openStudioProSuiteModal;
+
 
 function closeStudioProSuiteModal() {
     const overlay = document.getElementById("studio-pro-suite-modal-overlay");
@@ -228,11 +222,7 @@ function executeQuickExport(format) {
 window.executeQuickExport = executeQuickExport;
 
 // 5. Staff Switcher & Role Login
-function openStaffLoginModal() {
-    const el = document.getElementById("staff-login-modal-overlay");
-    if (el) el.style.display = "flex";
-}
-window.openStaffLoginModal = openStaffLoginModal;
+
 
 function closeStaffLoginModal() {
     const el = document.getElementById("staff-login-modal-overlay");
@@ -249,11 +239,7 @@ function switchStaffRole(role, name) {
 window.switchStaffRole = switchStaffRole;
 
 // 6. Test Diagnostics & Coverage
-function openTestCoverageModal() {
-    const el = document.getElementById("test-coverage-modal-overlay");
-    if (el) el.style.display = "flex";
-}
-window.openTestCoverageModal = openTestCoverageModal;
+
 
 function closeTestCoverageModal() {
     const el = document.getElementById("test-coverage-modal-overlay");
@@ -262,11 +248,7 @@ function closeTestCoverageModal() {
 window.closeTestCoverageModal = closeTestCoverageModal;
 
 // 7. Quick Portal Access Generator
-function openQuickPortalAccessModal(clientId) {
-    const el = document.getElementById("quick-portal-access-modal-overlay");
-    if (el) el.style.display = "flex";
-}
-window.openQuickPortalAccessModal = openQuickPortalAccessModal;
+
 
 function closeQuickPortalAccessModal() {
     const el = document.getElementById("quick-portal-access-modal-overlay");
@@ -292,34 +274,6 @@ function openClientPortalDirectly() {
 window.openClientPortalDirectly = openClientPortalDirectly;
 
 // 8. Client Photo Camera Capture
-function openClientPhotoCameraModal(clientId) {
-    const el = document.getElementById("client-photo-camera-modal-overlay");
-    if (el) el.style.display = "flex";
-}
-window.openClientPhotoCameraModal = openClientPhotoCameraModal;
-
-function closeClientPhotoCameraModal() {
-    const el = document.getElementById("client-photo-camera-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeClientPhotoCameraModal = closeClientPhotoCameraModal;
-
-function saveCapturedClientProfilePhoto(clientId) {
-    try {
-        localStorage.setItem('client_photo_' + (clientId || 'active'), 'data:image/png;base64,mock');
-    } catch(e) {}
-    alert("Client photo captured and saved to profile!");
-    closeClientPhotoCameraModal();
-}
-window.saveCapturedClientProfilePhoto = saveCapturedClientProfilePhoto;
-
-function renderD3ClientAppointmentTimeline(clientId) {
-    const container = document.getElementById("d3-client-appointment-timeline");
-    if (container) {
-        container.innerHTML = "<div style='color:#38BDF8;font-size:0.8rem;'>D3 Appointment Timeline rendered for client</div>";
-    }
-}
-window.renderD3ClientAppointmentTimeline = renderD3ClientAppointmentTimeline;
 
 // 9. Category Settings
 function openCategorySettingsModal() {
@@ -393,19 +347,10 @@ function toggleClientQuickActionsMenu() {
 }
 window.toggleClientQuickActionsMenu = toggleClientQuickActionsMenu;
 
-
-
 function initInventoryRemoteSyncState() {
     // init persistent remote CSV sync
 }
 window.initInventoryRemoteSyncState = initInventoryRemoteSyncState;
-
-
-function openClientDirectoryModal() {
-    const el = document.getElementById("client-directory-modal-overlay");
-    if (el) el.style.display = "flex";
-}
-window.openClientDirectoryModal = openClientDirectoryModal;
 
 function toggleGlobalDarkMode() {
     const body = document.body;
@@ -423,101 +368,6 @@ function toggleGlobalDarkMode() {
 window.toggleGlobalDarkMode = toggleGlobalDarkMode;
 
 // Other Missing Function Stubs
-
-
-
-function dismissBackupWarningToast() {
-    const el = document.getElementById("backup-warning-toast");
-    if (el) el.style.display = "none";
-}
-window.dismissBackupWarningToast = dismissBackupWarningToast;
-
-function closeStaffDashboardComponent() {
-    const el = document.getElementById("staff-dashboard-component");
-    if (el) el.style.display = "none";
-}
-window.closeStaffDashboardComponent = closeStaffDashboardComponent;
-
-
-function openDailyStudioSummaryModal() {
-    const el = document.getElementById("daily-summary-modal-overlay");
-    if (el) el.style.display = "flex";
-}
-window.openDailyStudioSummaryModal = openDailyStudioSummaryModal;
-
-function openQuickNewAppointmentModal() {
-    openAutoSchedulerModal();
-}
-window.openQuickNewAppointmentModal = openQuickNewAppointmentModal;
-
-function openQuickAddClientModal() {
-    openClientDirectoryModal();
-}
-window.openQuickAddClientModal = openQuickAddClientModal;
-
-
-
-function openDepositLedgerModal() {
-    const el = document.getElementById("deposit-ledger-modal-overlay");
-    if (el) el.style.display = "flex";
-    else openStudioProSuiteModal("accounting");
-}
-window.openDepositLedgerModal = openDepositLedgerModal;
-
-
-
-
-
-
-
-
-function openImportModal() {
-    const el = document.getElementById("import-modal");
-    if (el) el.style.display = "flex";
-}
-window.openImportModal = openImportModal;
-
-
-
-function openLowStockModal() {
-    openStudioProSuiteModal("procurement");
-}
-window.openLowStockModal = openLowStockModal;
-
-function openInventoryHealthModal() {
-    openStudioProSuiteModal("procurement");
-}
-window.openInventoryHealthModal = openInventoryHealthModal;
-
-function openAftercarePipelineModal() {
-    openStudioProSuiteModal("aftercare");
-}
-window.openAftercarePipelineModal = openAftercarePipelineModal;
-
-
-
-
-
-
-
-
-function openShiftModal() {
-    const el = document.getElementById("shift-modal");
-    if (el) el.style.display = "flex";
-}
-window.openShiftModal = openShiftModal;
-
-function openVatSettingsModal() {
-    const el = document.getElementById("vat-settings-modal-overlay");
-    if (el) el.style.display = "flex";
-}
-window.openVatSettingsModal = openVatSettingsModal;
-
-function closeVatSettingsModal() {
-    const el = document.getElementById("vat-settings-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeVatSettingsModal = closeVatSettingsModal;
 
 // DOM Binding helper and listeners
 function bindBtn(id, handler) {
@@ -636,195 +486,24 @@ function toggleLiveStreamUpdates() {
 }
 window.toggleLiveStreamUpdates = toggleLiveStreamUpdates;
 
-function toggleArtistPerformanceWidget() {
-    const widget = document.getElementById("artist-performance-widget");
-    if (widget) widget.style.display = widget.style.display === "none" ? "block" : "none";
-}
-window.toggleArtistPerformanceWidget = toggleArtistPerformanceWidget;
-
-function toggleDailySummaryCard() {
-    const card = document.getElementById("daily-summary-card");
-    if (card) card.style.display = card.style.display === "none" ? "block" : "none";
-}
-window.toggleDailySummaryCard = toggleDailySummaryCard;
-
-function openInventoryManagementModal() {
-    openStudioProSuiteModal("procurement");
-}
-window.openInventoryManagementModal = openInventoryManagementModal;
-
-
-
-
 function filterDashboardProcurementHealthSupplier(supplier) {
     if (typeof showToastNotification === "function") showToastNotification("Filtering supplier: " + supplier);
 }
 window.filterDashboardProcurementHealthSupplier = filterDashboardProcurementHealthSupplier;
 
-
-function navigateShiftMonth(direction) {
-    const title = document.getElementById("shift-roster-month-title");
-    if (title) title.textContent = direction > 0 ? "September 2026" : "July 2026";
-}
-window.navigateShiftMonth = navigateShiftMonth;
-
-function jumpToCurrentShiftMonth() {
-    const title = document.getElementById("shift-roster-month-title");
-    if (title) title.textContent = "August 2026 (Current)";
-}
-window.jumpToCurrentShiftMonth = jumpToCurrentShiftMonth;
-
 function renderMonthlyShiftSchedule() {}
 window.renderMonthlyShiftSchedule = renderMonthlyShiftSchedule;
-
-
-
-
-
-
-
-function openClearAllConfirmModal() {
-    if (confirm("Are you sure you want to clear all activity feed history?")) {
-        executeClearAllActivityLogs();
-    }
-}
-window.openClearAllConfirmModal = openClearAllConfirmModal;
 
 function toggleSelectAllActivities(cb) {
     document.querySelectorAll(".activity-checkbox").forEach(c => { c.checked = cb?.checked || false; });
 }
 window.toggleSelectAllActivities = toggleSelectAllActivities;
 
-
-function clearActivitySelection() {
-    document.querySelectorAll(".activity-checkbox").forEach(c => { c.checked = false; });
-}
-window.clearActivitySelection = clearActivitySelection;
-
-
 function filterPortalHistoryList(query) {}
 window.filterPortalHistoryList = filterPortalHistoryList;
 
-
-
-
-
-function openAftercarePipelineModal() {
-    openStudioProSuiteModal("aftercare");
-}
-window.openAftercarePipelineModal = openAftercarePipelineModal;
-
-function closeAftercarePipelineModal() {
-    closeStudioProSuiteModal();
-}
-window.closeAftercarePipelineModal = closeAftercarePipelineModal;
-
-
-
-function toggleClientPortalTheme() {
-    toggleGlobalDarkMode();
-}
-window.toggleClientPortalTheme = toggleClientPortalTheme;
-
-
-
-function logoutClientPortalSession() {
-    switchToStaffDashboardMode();
-}
-window.logoutClientPortalSession = logoutClientPortalSession;
-
-function navigateClientPortalHash(hash) {
-    window.location.hash = hash;
-}
-window.navigateClientPortalHash = navigateClientPortalHash;
-
-function togglePortalSidebar() {
-    const sb = document.getElementById("portal-sidebar");
-    if (sb) sb.style.display = sb.style.display === "none" ? "block" : "none";
-}
-window.togglePortalSidebar = togglePortalSidebar;
-
-function addPortalPinnedNote() {
-    const input = document.getElementById("portal-note-input");
-    if (input && input.value) {
-        alert("Pinned note added: " + input.value);
-        input.value = "";
-    }
-}
-window.addPortalPinnedNote = addPortalPinnedNote;
-
-function addQuickNote() {
-    const input = document.getElementById("quick-note-input");
-    if (input && input.value) {
-        alert("Quick note added: " + input.value);
-        input.value = "";
-    }
-}
-window.addQuickNote = addQuickNote;
-
-
-
-function quickLogFromInput() {
-    addQuickNote();
-}
-window.quickLogFromInput = quickLogFromInput;
-
-function submitQuickLog() {
-    addQuickNote();
-}
-window.submitQuickLog = submitQuickLog;
-
-
-
-
-
-
-
-function closeConflictResolutionModal() {
-    const el = document.getElementById("conflict-resolution-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeConflictResolutionModal = closeConflictResolutionModal;
-
-
-
 function initQrFocusResize() {}
 window.initQrFocusResize = initQrFocusResize;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function insertProcedureTemplate(tmpl) {
-    const desc = document.getElementById("procedure-notes-input") || document.getElementById("waiver-notes-input");
-    if (desc) desc.value = (desc.value ? desc.value + String.fromCharCode(10) : "") + tmpl;
-}
-window.insertProcedureTemplate = insertProcedureTemplate;
-
-
-
-
-
-
-
-
-
-
-function closeSessionDurationReportModal() {
-    const el = document.getElementById("session-duration-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeSessionDurationReportModal = closeSessionDurationReportModal;
 
 function openSessionDurationReportModal() {
     const el = document.getElementById("session-duration-modal-overlay");
@@ -832,132 +511,15 @@ function openSessionDurationReportModal() {
 }
 window.openSessionDurationReportModal = openSessionDurationReportModal;
 
-
-
-
-function closeBulkProgressToast() {
-    const el = document.getElementById("bulk-progress-toast");
-    if (el) el.style.display = "none";
-}
-window.closeBulkProgressToast = closeBulkProgressToast;
-
-
-
-
-
-
-function openTattooConsultationGenerator() {
-    openStudioProSuiteModal("tattoo-estimator");
-}
-window.openTattooConsultationGenerator = openTattooConsultationGenerator;
-
-function bookTattooEstimateAppointment() {
-    openAutoSchedulerModal();
-}
-window.bookTattooEstimateAppointment = bookTattooEstimateAppointment;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function closeShiftModal() {
-    const el = document.getElementById("shift-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeShiftModal = closeShiftModal;
-
-
-
-
-
-
-
-
-
-
-
 function openInventoryExportConfirmModal() {
     openQuickTableExportModal("inventory-catalog-table");
 }
 window.openInventoryExportConfirmModal = openInventoryExportConfirmModal;
 
-function closeInventoryExportConfirmModal() {
-    closeQuickTableExportModal();
-}
-window.closeInventoryExportConfirmModal = closeInventoryExportConfirmModal;
-
-function fetchAndRenderDailyStudioSummary() {
-    openDailyStudioSummaryModal();
-}
-window.fetchAndRenderDailyStudioSummary = fetchAndRenderDailyStudioSummary;
-
-
-function printDailySummaryReport() {
-    window.print();
-}
-window.printDailySummaryReport = printDailySummaryReport;
-
 function openMessengerMacroModal() {
     openTeamMessengerModal();
 }
 window.openMessengerMacroModal = openMessengerMacroModal;
-
-function closeMessengerMacroModal() {
-    closeTeamMessengerModal();
-}
-window.closeMessengerMacroModal = closeMessengerMacroModal;
-
-
-
-
-
-
-
-function saveCategoryThresholdSettings() {
-    handleSaveCategorySetting();
-}
-window.saveCategoryThresholdSettings = saveCategoryThresholdSettings;
-
-function addNewCategoryThresholdFromSettings() {
-    openCategorySettingsModal();
-}
-window.addNewCategoryThresholdFromSettings = addNewCategoryThresholdFromSettings;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // =========================================================================
 // 🎯 EXTENDED STUDIO OPERATIONS HANDLERS & MODAL UTILITIES
@@ -982,48 +544,8 @@ function showToastNotification(msg) {
 }
 window.showToastNotification = showToastNotification;
 
-
-
-
-
-
-function addCustomMessengerMacro() {
-    const text = prompt("Enter custom floor message macro:");
-    if (text) insertMessengerMacro(text);
-}
-window.addCustomMessengerMacro = addCustomMessengerMacro;
-
-
-
-
-
 function updateVatPreviewCalculation() {}
 window.updateVatPreviewCalculation = updateVatPreviewCalculation;
-
-
-
-function closeDepositLedgerModal() {
-    const el = document.getElementById("deposit-ledger-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeDepositLedgerModal = closeDepositLedgerModal;
-
-
-function closeImportModal() {
-    const el = document.getElementById("import-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeImportModal = closeImportModal;
-
-
-
-
-
-
-
-
-
-
 
 function calculateInkWash(drops) {
     return drops ? drops + " drops wash solution" : "Standard 50/50 wash";
@@ -1034,21 +556,6 @@ function recommendPmuPigment(skinType) {
     return "Warm Neutral Mineral Pigment";
 }
 window.recommendPmuPigment = recommendPmuPigment;
-
-
-
-
-
-
-
-
-function closeRecentScanProfileModal() {
-    const el = document.getElementById("recent-scan-profile-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeRecentScanProfileModal = closeRecentScanProfileModal;
-
-
 
 function closeTattooPriceEstimatorModal() { closeStudioProSuiteModal(); }
 window.closeTattooPriceEstimatorModal = closeTattooPriceEstimatorModal;

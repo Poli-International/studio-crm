@@ -6,14 +6,8 @@ let currentProfileActiveTab = 'overview';
 
 async function openClientProfileModal(clientId) {
     if (!clientId) return;
-    const overlay = document.getElementById('client-profile-modal-overlay');
+    const overlay = forceShowModal('client-profile-modal-overlay');
     if (!overlay) return;
-
-    if (typeof forceShowModalOverlay === 'function') {
-        forceShowModalOverlay(overlay);
-    } else {
-        overlay.style.display = 'flex';
-    }
 
     const bodyEl = document.getElementById('client-profile-modal-body');
     if (bodyEl) {
@@ -57,10 +51,23 @@ async function openClientProfileModal(clientId) {
 window.openClientProfileModal = openClientProfileModal;
 
 function closeClientProfileModal() {
-    const overlay = document.getElementById('client-profile-modal-overlay');
-    if (overlay) overlay.style.display = 'none';
+    forceHideModal('client-profile-modal-overlay');
     currentActiveProfileClient = null;
 }
+
+function confirmDeleteActiveClient() {
+    const client = currentActiveProfileClient && (currentActiveProfileClient.client || currentActiveProfileClient);
+    if (!client) return;
+    if (!window.confirm(`Delete ${client.name} from the studio database? This cannot be undone.`)) return;
+    fetch(`/api/clients/${client.id}`, { method: 'DELETE' }).then((res) => {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        closeClientProfileModal();
+        renderClientsTable();
+        populatePeopleSelects();
+        showStudioToast(`Client deleted: ${client.name}`);
+    }).catch(() => showStudioToast('Could not delete the client: the server did not answer'));
+}
+window.confirmDeleteActiveClient = confirmDeleteActiveClient;
 window.closeClientProfileModal = closeClientProfileModal;
 
 function renderClientProfileHeader(data) {
@@ -73,7 +80,7 @@ function renderClientProfileHeader(data) {
 
     if (tagsEl) {
         const isVip = client.is_vip || client.vip;
-        const loyaltyTier = client.loyalty_tier || 'Gold Tier';
+        const loyaltyTier = client.loyalty_tier || '';
         const phone = client.phone || 'No phone recorded';
         const email = client.email || 'No email recorded';
         const totalSpent = Number(client.total_spent || client.lifetime_value || 0).toFixed(2);
@@ -81,7 +88,7 @@ function renderClientProfileHeader(data) {
         tagsEl.innerHTML = `
             <span>📧 ${escapeHtml(email)}</span>
             <span>📞 ${escapeHtml(phone)}</span>
-            <span style="background:rgba(99,102,241,0.2);color:#A5B4FC;padding:2px 8px;border-radius:10px;font-weight:700;">💎 ${loyaltyTier}</span>
+            ${loyaltyTier ? `<span style="background:rgba(99,102,241,0.2);color:#A5B4FC;padding:2px 8px;border-radius:10px;font-weight:700;">💎 ${escapeHtml(loyaltyTier)}</span>` : ''}
             ${isVip ? '<span style="background:rgba(234,179,8,0.2);color:#FDE047;padding:2px 8px;border-radius:10px;font-weight:800;">⭐ VIP</span>' : ''}
             <span style="background:rgba(16,185,129,0.2);color:#6EE7B7;padding:2px 8px;border-radius:10px;font-weight:700;">💵 Spent: $${totalSpent}</span>
         `;
@@ -173,11 +180,11 @@ function switchClientProfileTab(tabName) {
                             </div>
                             <div style="display:flex;justify-content:space-between;border-bottom:1px solid #374151;padding-bottom:4px;">
                                 <span style="color:#9CA3AF;">Date of Birth:</span>
-                                <strong style="color:#FFF;">${escapeHtml(client.dob || client.birthdate || '1992-05-14')}</strong>
+                                <strong style="color:#FFF;">${escapeHtml(client.dob || client.birthdate || 'Not recorded')}</strong>
                             </div>
                             <div style="display:flex;justify-content:space-between;">
                                 <span style="color:#9CA3AF;">Client Since:</span>
-                                <strong style="color:#FFF;">${escapeHtml(client.created_at || '2023-01-10')}</strong>
+                                <strong style="color:#FFF;">${escapeHtml(String(client.created_at || 'Not recorded').slice(0, 10))}</strong>
                             </div>
                         </div>
                     </div>
@@ -204,7 +211,7 @@ function switchClientProfileTab(tabName) {
                             <div style="background:#111827;padding:0.75rem;border-radius:8px;border:1px solid #374151;">
                                 <div style="font-size:0.75rem;color:#9CA3AF;text-transform:uppercase;font-weight:700;">Emergency Contact</div>
                                 <div style="font-weight:600;color:#F3F4F6;margin-top:2px;">
-                                    ${escapeHtml(client.emergency_contact || 'In Case of Emergency (ICE): On File')}
+                                    ${escapeHtml(client.emergency_contact || 'Not recorded')}
                                 </div>
                             </div>
                         </div>
@@ -219,21 +226,14 @@ function switchClientProfileTab(tabName) {
                             <div style="background:#111827;padding:0.75rem;border-radius:8px;border:1px solid #374151;">
                                 <div style="font-size:0.75rem;color:#9CA3AF;text-transform:uppercase;font-weight:700;">Preferred Tattoo / Piercing Style</div>
                                 <div style="font-weight:600;color:#818CF8;margin-top:2px;">
-                                    ${escapeHtml(client.preferred_style || 'Neo-Traditional & Micro-Realism')}
+                                    ${escapeHtml(client.preferred_style || 'Not recorded')}
                                 </div>
                             </div>
 
                             <div style="background:#111827;padding:0.75rem;border-radius:8px;border:1px solid #374151;">
-                                <div style="font-size:0.75rem;color:#9CA3AF;text-transform:uppercase;font-weight:700;">Pain Tolerance & Break Schedule</div>
+                                <div style="font-size:0.75rem;color:#9CA3AF;text-transform:uppercase;font-weight:700;">Preferred Artist</div>
                                 <div style="font-weight:600;color:#F3F4F6;margin-top:2px;">
-                                    Moderate • Prefers 10-minute break every 90 minutes.
-                                </div>
-                            </div>
-
-                            <div style="background:#111827;padding:0.75rem;border-radius:8px;border:1px solid #374151;">
-                                <div style="font-size:0.75rem;color:#9CA3AF;text-transform:uppercase;font-weight:700;">Aftercare Regimen</div>
-                                <div style="font-weight:600;color:#34D399;margin-top:2px;">
-                                    Saniderm / Dermal film adhesive compliant &bull; Hustle Butter aftercare.
+                                    ${escapeHtml(client.preferred_artist || client.assigned_staff_name || 'Not recorded')}
                                 </div>
                             </div>
                         </div>
@@ -4178,14 +4178,45 @@ document.addEventListener("DOMContentLoaded", () => syncUserGuideLanguage());
 window.addEventListener("studioLanguageChanged", (e) => syncUserGuideLanguage(e.detail && e.detail.language));
 
 // --- New Client Modal Handlers ---
+// The same form adds a client and edits one: editingClientId says which.
+let editingClientId = null;
+const CLIENT_FORM_FIELDS = { name: "new-client-name", email: "new-client-email", phone: "new-client-phone", dob: "new-client-dob",
+    preferred_artist: "new-client-artist", emergency_contact: "new-client-emergency", allergies: "new-client-allergies" };
+
+function setClientFormMode(client) {
+    editingClientId = client ? client.id : null;
+    const form = document.getElementById("new-client-form");
+    if (form) form.reset();
+    const title = document.getElementById("new-client-modal-title");
+    if (title) title.textContent = client ? "Edit Client: " + (client.name || "") : "New Client Record";
+    const save = document.getElementById("new-client-save-btn");
+    if (save) save.textContent = client ? "Save changes" : "Save client";
+    if (!client) return;
+    for (const [field, id] of Object.entries(CLIENT_FORM_FIELDS)) {
+        const el = document.getElementById(id);
+        if (el) el.value = client[field] || "";
+    }
+    const vip = document.getElementById("new-client-vip");
+    if (vip) vip.checked = !!(client.is_vip || client.vip);
+}
+
 function openNewClientModal() {
+    setClientFormMode(null);
     forceShowModal("new-client-modal-overlay");
 }
+
+function openEditClientModal() {
+    const client = currentActiveProfileClient && (currentActiveProfileClient.client || currentActiveProfileClient);
+    if (!client) return;
+    setClientFormMode(client);
+    forceShowModal("new-client-modal-overlay");
+}
+window.openEditClientModal = openEditClientModal;
 window.openNewClientModal = openNewClientModal;
 
 function closeNewClientModal() {
-    const el = document.getElementById("new-client-modal-overlay");
-    if (el) el.style.display = "none";
+    forceHideModal("new-client-modal-overlay");
+    editingClientId = null;
 }
 window.closeNewClientModal = closeNewClientModal;
 
@@ -4211,9 +4242,14 @@ async function handleSaveNewClient(event) {
         is_vip: vipInput ? vipInput.checked : false,
     };
 
+    if (!newClient.name) {
+        showStudioToast("Please enter the client's name");
+        return;
+    }
+    const editedId = editingClientId;
     try {
-        const res = await fetch("/api/clients", {
-            method: "POST",
+        const res = await fetch(editedId ? "/api/clients/" + editedId : "/api/clients", {
+            method: editedId ? "PATCH" : "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newClient)
         });
@@ -4228,9 +4264,11 @@ async function handleSaveNewClient(event) {
     populatePeopleSelects();
 
     if (typeof showStudioToast === "function") {
-        showStudioToast(`Client record created: ${newClient.name}`);
+        showStudioToast(editedId ? `Client updated: ${newClient.name}` : `Client record created: ${newClient.name}`);
     }
     closeNewClientModal();
+    // an edit started from the profile: show the profile again with the new details
+    if (editedId && currentActiveProfileClient) openClientProfileModal(editedId);
     if (event && event.target && typeof event.target.reset === "function") {
         event.target.reset();
     }

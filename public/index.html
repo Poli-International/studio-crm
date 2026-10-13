@@ -4879,19 +4879,46 @@ docker compose up -d</pre>
 })();
 </script>
 
+<div id="client-profile-modal-overlay" role="dialog" aria-modal="true" aria-hidden="true" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,23,42,0.85);backdrop-filter:blur(8px);z-index:1999990;align-items:center;justify-content:center;">
+    <div style="background:#0F172A;border:1px solid #334155;border-radius:16px;width:96%;max-width:1000px;height:90vh;display:flex;flex-direction:column;box-shadow:0 25px 60px rgba(0,0,0,0.6);overflow:hidden;color:#F8FAFC;">
+        <div style="padding:16px 20px;background:#1E293B;border-bottom:1px solid #334155;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:14px;min-width:0;">
+                <div id="client-profile-avatar" style="width:56px;height:56px;border-radius:50%;background:#111827;border:2px solid #6366F1;overflow:hidden;flex-shrink:0;"></div>
+                <div style="min-width:0;">
+                    <h3 id="client-profile-name" style="margin:0;font-size:1.2rem;font-weight:800;color:#F8FAFC;">Client Record</h3>
+                    <div id="client-profile-tags" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;font-size:0.78rem;color:#94A3B8;"></div>
+                </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+                <button type="button" id="client-profile-edit-btn" onclick="openEditClientModal()" style="padding:8px 14px;background:#2563EB;color:#FFF;border:none;border-radius:8px;font-weight:800;font-size:0.82rem;cursor:pointer;">✏️ Edit client</button>
+                <button type="button" id="client-profile-delete-btn" onclick="confirmDeleteActiveClient()" style="padding:8px 14px;background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);border-radius:8px;font-weight:700;font-size:0.82rem;cursor:pointer;">🗑️ Delete</button>
+                <button type="button" onclick="closeClientProfileModal()" aria-label="Close" style="background:none;border:none;color:#94A3B8;font-size:1.5rem;cursor:pointer;">&times;</button>
+            </div>
+        </div>
+        <div style="display:flex;gap:2px;padding:0 12px;background:#111827;border-bottom:1px solid #334155;overflow-x:auto;">
+            <button type="button" class="cp-nav-btn" data-cptab="overview" onclick="switchClientProfileTab('overview')" style="padding:10px 14px;background:transparent;color:#9CA3AF;border:none;border-bottom:3px solid transparent;font-weight:700;font-size:0.82rem;cursor:pointer;white-space:nowrap;">Overview</button>
+            <button type="button" class="cp-nav-btn" data-cptab="notes" onclick="switchClientProfileTab('notes')" style="padding:10px 14px;background:transparent;color:#9CA3AF;border:none;border-bottom:3px solid transparent;font-weight:700;font-size:0.82rem;cursor:pointer;white-space:nowrap;">Staff notes (<span id="cp-count-notes">0</span>)</button>
+            <button type="button" class="cp-nav-btn" data-cptab="appointments" onclick="switchClientProfileTab('appointments')" style="padding:10px 14px;background:transparent;color:#9CA3AF;border:none;border-bottom:3px solid transparent;font-weight:700;font-size:0.82rem;cursor:pointer;white-space:nowrap;">Appointments (<span id="cp-count-appointments">0</span>)</button>
+            <button type="button" class="cp-nav-btn" data-cptab="waivers" onclick="switchClientProfileTab('waivers')" style="padding:10px 14px;background:transparent;color:#9CA3AF;border:none;border-bottom:3px solid transparent;font-weight:700;font-size:0.82rem;cursor:pointer;white-space:nowrap;">Waivers (<span id="cp-count-waivers">0</span>)</button>
+            <button type="button" class="cp-nav-btn" data-cptab="tattoo-work" onclick="switchClientProfileTab('tattoo-work')" style="padding:10px 14px;background:transparent;color:#9CA3AF;border:none;border-bottom:3px solid transparent;font-weight:700;font-size:0.82rem;cursor:pointer;white-space:nowrap;">Work and photos (<span id="cp-count-tattoo-work">0</span>)</button>
+        </div>
+        <div id="client-profile-modal-body" style="padding:20px;overflow-y:auto;flex:1;"></div>
+    </div>
+</div>
+
 <div id="new-client-modal-overlay" role="dialog" aria-modal="true" aria-hidden="true" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,23,42,0.85);backdrop-filter:blur(8px);z-index:2000000;align-items:center;justify-content:center;">
     <div style="background:#0F172A;border:1px solid #334155;border-radius:16px;width:95%;max-width:620px;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 25px 60px rgba(0,0,0,0.6);overflow:hidden;color:#F8FAFC;">
         <div style="padding:16px 20px;background:#1E293B;border-bottom:1px solid #334155;display:flex;align-items:center;justify-content:space-between;">
             <div style="display:flex;align-items:center;gap:10px;">
                 <span style="font-size:1.3rem;">👤</span>
                 <div>
-                    <h3 style="margin:0;font-size:1.1rem;font-weight:800;color:#F8FAFC;">New Client Record</h3>
-                    <p style="margin:2px 0 0;font-size:0.75rem;color:#94A3B8;">Creates a client dossier and prepends it to the directory</p>
+                    <h3 id="new-client-modal-title" style="margin:0;font-size:1.1rem;font-weight:800;color:#F8FAFC;">New Client Record</h3>
+                    <p style="margin:2px 0 0;font-size:0.75rem;color:#94A3B8;">Saved in the studio database</p>
                 </div>
             </div>
             <button type="button" onclick="closeNewClientModal()" aria-label="Close" style="background:none;border:none;color:#94A3B8;font-size:1.5rem;cursor:pointer;">&times;</button>
         </div>
-        <form onsubmit="handleSaveNewClient(event)">
+        <form id="new-client-form" onsubmit="handleSaveNewClient(event)">
             <div style="padding:20px;overflow-y:auto;flex:1;">
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;">
                 <div><label for="new-client-name" style="display:block;font-size:0.75rem;font-weight:700;color:#94A3B8;margin-bottom:4px;">Full name</label><input type="text" id="new-client-name" required autocomplete="name" style="width:100%;padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;box-sizing:border-box;"></div>
@@ -4906,7 +4933,7 @@ docker compose up -d</pre>
             </div>
             <div style="padding:14px 20px;background:#1E293B;border-top:1px solid #334155;display:flex;gap:10px;justify-content:flex-end;">
                 <button type="button" onclick="closeNewClientModal()" style="padding:10px 20px;background:transparent;color:#94A3B8;border:1px solid #475569;border-radius:8px;font-weight:700;font-size:0.85rem;cursor:pointer;">Cancel</button>
-                <button type="submit" style="padding:10px 20px;background:#2563EB;color:#FFF;border:none;border-radius:8px;font-weight:800;font-size:0.85rem;cursor:pointer;">Save client</button>
+                <button type="submit" id="new-client-save-btn" style="padding:10px 20px;background:#2563EB;color:#FFF;border:none;border-radius:8px;font-weight:800;font-size:0.85rem;cursor:pointer;">Save client</button>
             </div>
         </form>
     </div>

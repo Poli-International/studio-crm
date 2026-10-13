@@ -8,7 +8,6 @@
     "node": ">=22"
   },
   "scripts": {
-    "build": "node inject-modals.cjs",
     "dev": "node server.js",
     "lint": "echo 'No lint errors'",
     "start": "node server.js",

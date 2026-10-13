@@ -32,6 +32,9 @@ const PAGE_HELPER = `(() => {
   };
   window.open = (u) => { sig.opens.push(String(u)); return null; };
   window.print = () => { sig.prints++; };
+  // where the last click really landed, and a form field the browser refused: read when a step fails
+  document.addEventListener('click', (e) => { sig.lastClick = e.target.tagName + '#' + e.target.id + ' ' + (e.target.innerText || '').trim().slice(0, 30); }, true);
+  document.addEventListener('invalid', (e) => { sig.refused = e.target.id + ': ' + e.target.validationMessage; }, true);
   // on the page and not parked off to the side (a closed drawer slides out of the window)
   const shown = (el) => {
     const r = el.getBoundingClientRect(), cs = getComputedStyle(el);
@@ -173,10 +176,16 @@ export async function launchBrowser() {
       // A real mouse click on the button's centre. Returns null when the button is
       // not on screen, or { covered } when something else lies on top of it.
       async click(key) {
-        // a window that is still sliding or growing into place moves its buttons: wait until this one holds still
+        // Windows pop in with a short animation that can start late; wait for every
+        // animation that ends (and for late fonts) before trusting where the button is.
+        const calm = () => run(`return Promise.race([
+          Promise.all([document.fonts.ready].concat(document.getAnimations().filter(a => a.effect && a.effect.getComputedTiming().iterations !== Infinity).map(a => a.finished.catch(() => {})))),
+          new Promise(done => setTimeout(done, 2500))]).then(() => true);`).catch(() => {});
+        await calm();
         let t = await run(`return window.__ct.target(${js(key)});`);
         for (let i = 0; i < 15 && t; i++) {
           await sleep(80);
+          await calm();
           const again = await run(`return window.__ct.target(${js(key)});`);
           const still = again && Math.abs(again.x - t.x) < 1 && Math.abs(again.y - t.y) < 1 && again.covered === t.covered;
           t = again;
@@ -197,9 +206,15 @@ export async function launchBrowser() {
         if (t.covered) throw new Error(`Button "${text}" cannot be clicked: covered by ${t.covered}`);
       },
       async type(selector, value) {
-        const ok = await run(`const el = document.querySelector(${js(selector)}); if (!el) return false; el.focus(); el.value = ''; return true;`);
-        if (!ok) throw new Error(`No field ${selector}`);
-        await cdp('Input.insertText', { text: value });
+        // the keys go to whatever has the focus: if the page moved it elsewhere meanwhile, type again
+        for (let attempt = 0; ; attempt++) {
+          const ok = await run(`const el = document.querySelector(${js(selector)}); if (!el) return false; el.focus(); el.value = ''; return true;`);
+          if (!ok) throw new Error(`No field ${selector}`);
+          await cdp('Input.insertText', { text: value });
+          if (await run(`return document.querySelector(${js(selector)}).value === ${js(value)};`)) break;
+          if (attempt === 4) throw new Error(`Could not type into ${selector}`);
+          await sleep(200);
+        }
         await run(`const el = document.querySelector(${js(selector)}); el.dispatchEvent(new Event('input', { bubbles: true })); el.dispatchEvent(new Event('change', { bubbles: true }));`);
       },
       // draws a zig-zag across the element with the mouse held down, like a signature
@@ -229,6 +244,8 @@ export async function launchBrowser() {
         await sleep(100);
         if (await evaluate('document.readyState === "complete" && !!window.__ct').catch(() => false)) break;
       }
+      // text moves when a web font arrives late, and a small button moves with it
+      await evaluate('document.fonts.ready.then(() => true)').catch(() => {});
       await settle();
     },
     // a phone or tablet screen

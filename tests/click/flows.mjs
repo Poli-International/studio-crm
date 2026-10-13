@@ -35,6 +35,8 @@ async function flow(name, fn) {
     console.log('ok    ' + name);
   } catch (e) {
     failures.push(name);
+    // what the page was doing, for whoever reads the log
+    console.log('      ' + await b.evaluate(`JSON.stringify({ open: window.__ct.overlays(), calls: window.__ct.sig.fetches.slice(-6).map(f => f.method + ' ' + f.url + ' ' + f.status), said: window.__ct.sig.added.slice(-3), lastClick: window.__ct.sig.lastClick, refused: window.__ct.sig.refused })`).catch(() => ''));
     console.log('FAIL  ' + name + '\n      ' + e.message);
   }
 }
@@ -47,7 +49,7 @@ await flow('New Client opens the form, saves, and the client is listed', async (
   await b.type('#new-client-email', 'flow@example.com');
   await b.clickText('Save client');
   check(!(await shown('new-client-modal-overlay')), 'the form stayed open after Save client');
-  check((await text('#clients-table-tbody')).includes('Flow Client'), 'the new client is not in the list');
+  await eventually(async () => (await text('#clients-table-tbody')).includes('Flow Client'), 'the new client is not in the list');
 });
 
 await flow('View Profile opens the profile, every tab shows, and it closes', async () => {
@@ -70,28 +72,28 @@ await flow('Edit client saves the change; Delete removes the client', async () =
   check((await b.evaluate(`document.getElementById('new-client-name').value`)) === 'Flow Client', 'the edit form is not filled with the client');
   await b.type('#new-client-phone', '555-7777');
   await b.clickText('Save changes');
-  check((await text('#client-profile-tags')).includes('555-7777'), 'the profile does not show the edited phone');
-  check((await api('/api/clients')).some((c) => c.name === 'Flow Client' && c.phone === '555-7777'), 'the edit was not saved');
+  await eventually(async () => (await text('#client-profile-tags')).includes('555-7777'), 'the profile does not show the edited phone');
+  await eventually(async () => (await api('/api/clients')).some((c) => c.name === 'Flow Client' && c.phone === '555-7777'), 'the edit was not saved');
   await b.clickText('Delete', '#client-profile-modal-overlay');
-  check(!(await api('/api/clients')).some((c) => c.name === 'Flow Client'), 'the client was not deleted');
+  await eventually(async () => !(await api('/api/clients')).some((c) => c.name === 'Flow Client'), 'the client was not deleted');
 });
 
 await flow('Staff: add, edit, select and remove a team member', async () => {
   await b.clickText('Staff Login');
-  check((await text('#staff-list-body')).includes('Select'), 'the staff list is empty');
+  await eventually(async () => (await text('#staff-list-body')).includes('Select'), 'the staff list is empty');
   await b.clickText('Add staff member');
   await b.type('#staff-form-name', 'Flow Artist');
   await b.clickText('Save staff member');
-  check((await text('#staff-list-body')).includes('Flow Artist'), 'the new staff member is not listed');
+  await eventually(async () => (await text('#staff-list-body')).includes('Flow Artist'), 'the new staff member is not listed');
   await press('.staff-row', 'Flow Artist', 'Edit');
   await b.type('#staff-form-name', 'Flow Piercer');
   await b.clickText('Save staff member');
-  check((await api('/api/staff')).some((s) => s.name === 'Flow Piercer'), 'the staff edit was not saved');
+  await eventually(async () => (await api('/api/staff')).some((s) => s.name === 'Flow Piercer'), 'the staff edit was not saved');
   await press('.staff-row', 'Flow Piercer', 'Select');
   check((await text('#topbar-user-name')) === 'Flow Piercer', 'Select did not change the name in the top bar');
   check((await b.evaluate(`[...document.getElementById('new-appt-artist').options].map(o => o.textContent).join()`)).includes('Flow Piercer'), 'the new staff member cannot be chosen for an appointment');
   await press('.staff-row', 'Flow Piercer', 'Remove');
-  check(!(await api('/api/staff')).some((s) => s.name === 'Flow Piercer'), 'the staff member was not removed');
+  await eventually(async () => !(await api('/api/staff')).some((s) => s.name === 'Flow Piercer'), 'the staff member was not removed');
   await b.clickText('×', '#staff-login-modal-overlay');
   check(!(await shown('staff-login-modal-overlay')), 'the staff window cannot be closed');
 });
@@ -100,7 +102,7 @@ await flow('Shift rota: add a shift, export it as CSV and PDF, remove it', async
   await b.clickText('Calendar');
   await b.evaluate(`document.getElementById('rota-date').value = new Date().toLocaleDateString('en-CA')`);
   await b.clickText('Add shift');
-  check((await text('#shift-roster-tbody')).includes('Remove'), 'the shift is not in the rota');
+  await eventually(async () => (await text('#shift-roster-tbody')).includes('Remove'), 'the shift is not in the rota');
   for (const [button, file] of [['Download as CSV', 'shift_roster.csv'], ['Export Formatted PDF', 'shift_roster.pdf']]) {
     await b.clickText('Export Shift Roster');
     await b.clickText(button);
@@ -108,14 +110,14 @@ await flow('Shift rota: add a shift, export it as CSV and PDF, remove it', async
     check(b.seen.downloads.includes(file), `${button} said it exported, but no ${file} was downloaded`);
   }
   await b.clickText('Remove', '#shift-roster-tbody');
-  check(!(await text('#shift-roster-tbody')).includes('Remove'), 'the shift was not removed');
+  await eventually(async () => !(await text('#shift-roster-tbody')).includes('Remove'), 'the shift was not removed');
 });
 
 await flow('Staff shifts: clock in shows on shift, clock out, and the window closes', async () => {
   await b.clickText('Calendar');
   await b.clickText('Staff Shifts');
   await b.clickText('Clock in', '#shift-modal');
-  check((await text('#shift-status-text')).startsWith('On shift'), 'the status did not change after clocking in');
+  await eventually(async () => (await text('#shift-status-text')).startsWith('On shift'), 'the status did not change after clocking in');
   await b.clickText('Clock out', '#shift-modal');
   check((await text('#shift-status-text')) === 'Off shift', 'the status did not change after clocking out');
   await b.clickText('×', '#shift-modal');
@@ -128,6 +130,13 @@ await flow('Duration Analytics opens and closes', async () => {
   check(await shown('session-duration-report-modal-overlay'), 'Duration Analytics opened nothing');
   await b.clickText('×', '#session-duration-report-modal-overlay');
   check(!(await shown('session-duration-report-modal-overlay')), 'the report cannot be closed');
+});
+
+await flow('Dashboard: Export CSV downloads the activity log', async () => {
+  await b.clickText('Export CSV');
+  await b.clickText('Download as CSV');
+  await sleep(1000);
+  check(b.seen.downloads.includes('activity_log.csv'), 'Export CSV made no file');
 });
 
 await flow('Inventory: Export Manifest downloads a CSV and a PDF', async () => {
@@ -218,7 +227,7 @@ await flow('Start with an empty studio, then add the first client, staff member 
   await b.clickText('New Client');
   await b.type('#new-client-name', 'First Client');
   await b.clickText('Save client');
-  check((await text('#clients-table-tbody')).includes('First Client'), 'the first client is not in the list');
+  await eventually(async () => (await text('#clients-table-tbody')).includes('First Client'), 'the first client is not in the list');
   await press('.client-directory-row', 'First Client', 'View Profile');
   check((await text('#client-profile-name')) === 'First Client', 'the first client has no profile');
   await b.clickText('×', '#client-profile-modal-overlay');
@@ -226,7 +235,7 @@ await flow('Start with an empty studio, then add the first client, staff member 
   await b.clickText('Add staff member');
   await b.type('#staff-form-name', 'First Artist');
   await b.clickText('Save staff member');
-  check((await api('/api/staff')).some((s) => s.name === 'First Artist'), 'the first staff member was not saved');
+  await eventually(async () => (await api('/api/staff')).some((s) => s.name === 'First Artist'), 'the first staff member was not saved');
   await b.clickText('×', '#staff-login-modal-overlay');
   await b.clickText('Calendar');
   await b.clickText('Book Appointment');

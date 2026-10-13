@@ -4503,7 +4503,7 @@ window.toggleArtistPerformanceWidget = toggleArtistPerformanceWidget;
 // --- Missing Operational Handlers ---
 function triggerExportCSV() {
     if (typeof openQuickTableExportModal === "function") {
-        openQuickTableExportModal("csv");
+        openQuickTableExportModal("summary-events-table"); // the dashboard list: the activity log
     } else if (typeof executeQuickExport === "function") {
         executeQuickExport("csv");
     }

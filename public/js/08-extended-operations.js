@@ -204,6 +204,7 @@ function openQuickTableExportModal(targetTableId) {
     if (targetTableId) {
         const select = document.getElementById("quick-export-target-select");
         if (select) select.value = targetTableId;
+        if (select && !select.value) select.selectedIndex = 0; // an unknown list: never leave the choice empty
     }
 }
 window.openQuickTableExportModal = openQuickTableExportModal;

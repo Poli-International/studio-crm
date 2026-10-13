@@ -224,19 +224,7 @@ window.executeQuickExport = executeQuickExport;
 // 5. Staff Switcher & Role Login
 
 
-function closeStaffLoginModal() {
-    const el = document.getElementById("staff-login-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeStaffLoginModal = closeStaffLoginModal;
 
-function switchStaffRole(role, name) {
-    const badge = document.getElementById("current-staff-role-badge");
-    if (badge) badge.textContent = name;
-    alert("Switched active profile to " + name);
-    closeStaffLoginModal();
-}
-window.switchStaffRole = switchStaffRole;
 
 // 6. Test Diagnostics & Coverage
 

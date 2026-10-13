@@ -2091,10 +2091,6 @@ function openShiftModal() {
 }
 window.openShiftModal = openShiftModal;
 
-function openStaffLoginModal() {
-    forceShowModal('staff-login-modal-overlay');
-}
-window.openStaffLoginModal = openStaffLoginModal;
 
 function openStaffMessagingChannelsModal() {
     forceShowModal('staff-messaging-modal-overlay');

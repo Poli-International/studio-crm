@@ -4377,14 +4377,15 @@ app.get(['/api/staff', '/api/professionals'], (req, res) => {
 });
 
 app.post(['/api/staff', '/api/professionals'], (req, res) => {
+  if (!req.body.name || !String(req.body.name).trim()) return res.status(400).json({ error: 'A name is required' });
   const newStaff = {
-    id: staff.length + 1,
-    name: req.body.name || 'New Professional',
-    email: req.body.email || 'artist@studiocrm.com',
+    id: staff.length ? Math.max(...staff.map(s => s.id)) + 1 : 1, // length + 1 repeated an id after a removal
+    name: String(req.body.name).trim(),
+    email: req.body.email || '',
     role: req.body.role || 'artist',
-    title: req.body.title || 'Tattoo Artist',
-    phone: req.body.phone || '555-0000',
-    specialties: Array.isArray(req.body.specialties) ? req.body.specialties : (req.body.specialties ? req.body.specialties.split(',').map(s => s.trim()) : ['Tattoo']),
+    title: req.body.title || '',
+    phone: req.body.phone || '',
+    specialties: Array.isArray(req.body.specialties) ? req.body.specialties : (req.body.specialties ? req.body.specialties.split(',').map(s => s.trim()).filter(Boolean) : []),
     bio: req.body.bio || '',
     notes: req.body.notes || '',
     instagram: req.body.instagram || '',
@@ -4416,7 +4417,9 @@ app.patch(['/api/staff/:id', '/api/professionals/:id'], (req, res) => {
   if (!member) return res.status(404).json({ error: 'Professional not found' });
 
   if (req.body.specialties && typeof req.body.specialties === 'string') {
-    req.body.specialties = req.body.specialties.split(',').map(s => s.trim());
+    req.body.specialties = req.body.specialties.split(',').map(s => s.trim()).filter(Boolean);
+  } else if (req.body.specialties === '') {
+    req.body.specialties = [];
   }
   Object.assign(member, req.body);
 

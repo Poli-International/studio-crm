@@ -1,0 +1,158 @@
+// =========================================================================
+// 👥 STAFF: the team list (add, edit, remove) and who is at the screen
+// =========================================================================
+// There are no passwords or permission levels: "at the screen" is a name
+// shown in the top bar, so the team can see whose turn it is on a shared PC.
+let staffList = [];
+let editingStaffId = null;
+const STAFF_FORM_FIELDS = { name: 'staff-form-name', title: 'staff-form-title', role: 'staff-form-role',
+    email: 'staff-form-email', phone: 'staff-form-phone', specialties: 'staff-form-specialties' };
+
+function activeStaff() {
+    try { return JSON.parse(localStorage.getItem('studio_active_staff') || 'null'); } catch (e) { return null; }
+}
+
+function showActiveStaff() {
+    const el = document.getElementById('topbar-user-name');
+    const who = activeStaff();
+    if (el) el.textContent = who ? who.name : 'Staff Login';
+}
+document.addEventListener('DOMContentLoaded', showActiveStaff);
+
+async function renderStaffList() {
+    const body = document.getElementById('staff-list-body');
+    if (!body) return;
+    try {
+        const res = await fetch('/api/staff');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        staffList = await res.json();
+    } catch (e) {
+        body.innerHTML = '<div style="padding:16px;color:#EF4444;text-align:center;">Could not load the team: the server did not answer</div>';
+        return;
+    }
+    if (!staffList.length) {
+        body.innerHTML = '<div style="padding:16px;color:#94A3B8;text-align:center;">No staff yet. Add your first team member.</div>';
+        return;
+    }
+    const who = activeStaff();
+    const btn = 'padding:6px 10px;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;';
+    body.innerHTML = staffList.map((s) => {
+        const id = Number(s.id);
+        const here = who && Number(who.id) === id;
+        const details = [s.title, s.email, s.phone].filter(Boolean).map(escapeHtml).join(' · ');
+        return `<div class="staff-row" style="padding:12px 14px;background:#1E293B;border:1px solid ${here ? '#10B981' : '#475569'};border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+            <div style="min-width:0;">
+                <div style="font-weight:800;font-size:0.9rem;">${escapeHtml(s.name || '')}${here ? ' <span style="color:#10B981;font-size:0.72rem;">● at the screen</span>' : ''}</div>
+                <div style="font-size:0.75rem;color:#94A3B8;">${details}</div>
+            </div>
+            <div style="display:flex;gap:6px;">
+                <button type="button" onclick="selectActiveStaff(${id})" style="${btn}background:#10B981;color:#FFF;border:none;">Select</button>
+                <button type="button" onclick="openStaffFormModal(${id})" style="${btn}background:#2563EB;color:#FFF;border:none;">Edit</button>
+                <button type="button" onclick="removeStaffMember(${id})" style="${btn}background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);">Remove</button>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function openStaffLoginModal() {
+    forceShowModal('staff-login-modal-overlay');
+    renderStaffList();
+}
+window.openStaffLoginModal = openStaffLoginModal;
+
+function closeStaffLoginModal() {
+    forceHideModal('staff-login-modal-overlay');
+}
+window.closeStaffLoginModal = closeStaffLoginModal;
+
+function selectActiveStaff(id) {
+    const member = staffList.find((s) => Number(s.id) === Number(id));
+    if (!member) return;
+    try { localStorage.setItem('studio_active_staff', JSON.stringify({ id: member.id, name: member.name })); } catch (e) { /* private window */ }
+    showActiveStaff();
+    renderStaffList();
+    showStudioToast('At the screen now: ' + member.name);
+}
+window.selectActiveStaff = selectActiveStaff;
+
+function openStaffFormModal(id) {
+    const member = id ? staffList.find((s) => Number(s.id) === Number(id)) : null;
+    editingStaffId = member ? member.id : null;
+    const form = document.getElementById('staff-form');
+    if (form) form.reset();
+    const title = document.getElementById('staff-form-modal-title');
+    if (title) title.textContent = member ? 'Edit Staff Member: ' + member.name : 'New Staff Member';
+    if (member) {
+        for (const [field, elId] of Object.entries(STAFF_FORM_FIELDS)) {
+            const el = document.getElementById(elId);
+            if (el) el.value = Array.isArray(member[field]) ? member[field].join(', ') : (member[field] || '');
+        }
+    }
+    forceShowModal('staff-form-modal-overlay');
+}
+window.openStaffFormModal = openStaffFormModal;
+
+function closeStaffFormModal() {
+    forceHideModal('staff-form-modal-overlay');
+    editingStaffId = null;
+}
+window.closeStaffFormModal = closeStaffFormModal;
+
+async function handleSaveStaffMember(event) {
+    if (event) event.preventDefault();
+    const member = {};
+    for (const [field, elId] of Object.entries(STAFF_FORM_FIELDS)) {
+        const el = document.getElementById(elId);
+        member[field] = el ? el.value.trim() : '';
+    }
+    if (!member.name) {
+        showStudioToast("Please enter the staff member's name");
+        return;
+    }
+    const editedId = editingStaffId;
+    let saved;
+    try {
+        const res = await fetch(editedId ? '/api/staff/' + editedId : '/api/staff', {
+            method: editedId ? 'PATCH' : 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(member)
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        saved = await res.json();
+    } catch (e) {
+        showStudioToast('Could not save the staff member: the server did not answer');
+        return;
+    }
+    const who = activeStaff();
+    if (who && Number(who.id) === Number(saved.id)) {
+        try { localStorage.setItem('studio_active_staff', JSON.stringify({ id: saved.id, name: saved.name })); } catch (e) { /* private window */ }
+        showActiveStaff();
+    }
+    closeStaffFormModal();
+    renderStaffList();
+    populatePeopleSelects();
+    showStudioToast(editedId ? 'Staff member updated: ' + saved.name : 'Staff member added: ' + saved.name);
+}
+window.handleSaveStaffMember = handleSaveStaffMember;
+
+async function removeStaffMember(id) {
+    const member = staffList.find((s) => Number(s.id) === Number(id));
+    if (!member) return;
+    if (!window.confirm(`Remove ${member.name} from the team? Their past appointments and notes are kept.`)) return;
+    try {
+        const res = await fetch('/api/staff/' + member.id, { method: 'DELETE' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+    } catch (e) {
+        showStudioToast('Could not remove the staff member: the server did not answer');
+        return;
+    }
+    const who = activeStaff();
+    if (who && Number(who.id) === Number(member.id)) {
+        try { localStorage.removeItem('studio_active_staff'); } catch (e) { /* private window */ }
+        showActiveStaff();
+    }
+    renderStaffList();
+    populatePeopleSelects();
+    showStudioToast('Staff member removed: ' + member.name);
+}
+window.removeStaffMember = removeStaffMember;

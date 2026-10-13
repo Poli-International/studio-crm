@@ -29,15 +29,21 @@ Aprite **Impostazioni** per inserire i vostri prezzi, la regola dell'acconto, l'
 
 ## Clienti
 
-**Clienti** elenca tutti con i loro dati di contatto, allergie e note mediche, consensi firmati e totale spesa. Usate **Nuovo cliente** per aggiungerne uno. La ricerca filtra l'elenco mentre digitate. **Visualizza profilo** apre la scheda completa.
+**Clienti** elenca tutti con i loro dati di contatto, allergie e note mediche, consensi firmati e totale spesa. Usate **Nuovo cliente** per aggiungerne uno. La ricerca filtra l'elenco mentre digitate. **Visualizza profilo** apre la scheda completa. Nel profilo, **Modifica cliente** cambia i dati e **Elimina** rimuove il cliente. Il profilo mostra anche gli appuntamenti, le note del personale, le liberatorie firmate, i moduli di consenso salvati e le foto dei lavori. Per aggiungere molti clienti insieme, aprite **Impostazioni**, **Import Data** e incollate un elenco la cui prima riga è `name,email,phone,allergies,notes`.
+
+## Personale
+
+Fate clic sul pulsante del personale in alto a destra per vedere il team. **Aggiungi membro** aggiunge una persona, **Modifica** ne cambia i dati e **Rimuovi** la toglie dal team. **Seleziona** mostra il nome di quella persona nella barra in alto, così tutti vedono chi è allo schermo. Non ci sono password né livelli di accesso. Un nuovo membro si può scegliere subito ovunque si scelga un artista, per esempio quando si prenota un appuntamento.
 
 ## Appuntamenti e pianificazione
 
-**Nuovo appuntamento** prenota una singola sessione con artista, postazione, prezzo e acconto. Per lavori su più sessioni, il **Pianificatore automatico** cerca gli slot liberi dell'artista in un giorno scelto e prenota fino a sei sessioni a un numero fisso di settimane di distanza. La Dashboard mostra i dati di oggi, le prenotazioni in arrivo, lo stato delle postazioni e le scorte basse.
+**Nuovo appuntamento** prenota una singola sessione con artista, postazione, prezzo e acconto. Per lavori su più sessioni, il **Pianificatore automatico** cerca gli slot liberi dell'artista in un giorno scelto e prenota fino a sei sessioni a un numero fisso di settimane di distanza. La Dashboard mostra i dati di oggi, le prenotazioni in arrivo, lo stato delle postazioni e le scorte basse. Il Calendario elenca tutti gli appuntamenti prenotati, i prossimi per primi. **Completato** segna una sessione come svolta, così viene contata nell'analisi delle durate, e **Rimuovi** la elimina.
 
 ## Consensi digitali
 
 Aprite il modulo di consenso, scegliete il cliente dall'elenco (le sue allergie vengono compilate automaticamente), confermate la verifica dell'età e fate firmare il cliente sul tablet. Il consenso viene salvato con l'immagine della firma. Non si salva senza un cliente e una firma.
+
+Per far compilare un modulo di consenso su un tablet, aprite **Clienti**, il generatore di moduli di consenso, l'anteprima del modulo, poi la modalità chiosco per tablet. Il cliente risponde a una sezione per schermata, firma nell'ultima e tocca il pulsante per completare. Il modulo viene salvato con la firma e viene scaricato un PDF. Se prima non è stato scelto alcun cliente, viene creato un nuovo cliente con nome, email, telefono e data di nascita del modulo. I moduli salvati sono nel profilo del cliente, sotto **Liberatorie**; **Vedi risposte** mostra ogni risposta.
 
 ## Messaggi: il CRM prepara, voi inviate
 
@@ -57,7 +63,7 @@ Lo scanner in **Registro attività** usa la fotocamera del dispositivo. Scansion
 
 ## Denaro e personale
 
-Il **Calcolatore mance** divide una mancia 80% artista, 15% apprendista, 5% reception e la registra. Il personale timbra entrata e uscita con il pulsante turno. Le esportazioni forniscono il registro attività, le scorte basse, i turni e le durate delle sessioni in CSV o PDF.
+Il **Calcolatore mance** divide una mancia 80% artista, 15% apprendista, 5% reception e la registra. Il personale timbra entrata e uscita con il pulsante turno. Le esportazioni forniscono il registro attività, le scorte basse, i turni e le durate delle sessioni in CSV o PDF. Nel Calendario, la finestra dei turni mostra se una persona è in turno, e l'elenco **Turni** riporta i turni previsti: scegliete una persona, una data e l'orario, poi **Aggiungi turno**. L'esportazione dei turni e, in Magazzino, l'esportazione delle scorte salvano un file CSV o PDF nella cartella Download.
 
 ## Registri di conformità
 

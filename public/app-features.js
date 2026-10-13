@@ -6,14 +6,8 @@ let currentProfileActiveTab = 'overview';
 
 async function openClientProfileModal(clientId) {
     if (!clientId) return;
-    const overlay = document.getElementById('client-profile-modal-overlay');
+    const overlay = forceShowModal('client-profile-modal-overlay');
     if (!overlay) return;
-
-    if (typeof forceShowModalOverlay === 'function') {
-        forceShowModalOverlay(overlay);
-    } else {
-        overlay.style.display = 'flex';
-    }
 
     const bodyEl = document.getElementById('client-profile-modal-body');
     if (bodyEl) {
@@ -57,10 +51,23 @@ async function openClientProfileModal(clientId) {
 window.openClientProfileModal = openClientProfileModal;
 
 function closeClientProfileModal() {
-    const overlay = document.getElementById('client-profile-modal-overlay');
-    if (overlay) overlay.style.display = 'none';
+    forceHideModal('client-profile-modal-overlay');
     currentActiveProfileClient = null;
 }
+
+function confirmDeleteActiveClient() {
+    const client = currentActiveProfileClient && (currentActiveProfileClient.client || currentActiveProfileClient);
+    if (!client) return;
+    if (!window.confirm(`Delete ${client.name} from the studio database? This cannot be undone.`)) return;
+    fetch(`/api/clients/${client.id}`, { method: 'DELETE' }).then((res) => {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        closeClientProfileModal();
+        renderClientsTable();
+        populatePeopleSelects();
+        showStudioToast(`Client deleted: ${client.name}`);
+    }).catch(() => showStudioToast('Could not delete the client: the server did not answer'));
+}
+window.confirmDeleteActiveClient = confirmDeleteActiveClient;
 window.closeClientProfileModal = closeClientProfileModal;
 
 function renderClientProfileHeader(data) {
@@ -73,15 +80,15 @@ function renderClientProfileHeader(data) {
 
     if (tagsEl) {
         const isVip = client.is_vip || client.vip;
-        const loyaltyTier = client.loyalty_tier || 'Gold Tier';
+        const loyaltyTier = client.loyalty_tier || '';
         const phone = client.phone || 'No phone recorded';
         const email = client.email || 'No email recorded';
-        const totalSpent = Number(client.total_spent || client.lifetime_value || 0).toFixed(2);
+        const totalSpent = Number((data.stats && data.stats.totalSpend) || 0).toFixed(2);
 
         tagsEl.innerHTML = `
             <span>📧 ${escapeHtml(email)}</span>
             <span>📞 ${escapeHtml(phone)}</span>
-            <span style="background:rgba(99,102,241,0.2);color:#A5B4FC;padding:2px 8px;border-radius:10px;font-weight:700;">💎 ${loyaltyTier}</span>
+            ${loyaltyTier ? `<span style="background:rgba(99,102,241,0.2);color:#A5B4FC;padding:2px 8px;border-radius:10px;font-weight:700;">💎 ${escapeHtml(loyaltyTier)}</span>` : ''}
             ${isVip ? '<span style="background:rgba(234,179,8,0.2);color:#FDE047;padding:2px 8px;border-radius:10px;font-weight:800;">⭐ VIP</span>' : ''}
             <span style="background:rgba(16,185,129,0.2);color:#6EE7B7;padding:2px 8px;border-radius:10px;font-weight:700;">💵 Spent: $${totalSpent}</span>
         `;
@@ -101,7 +108,7 @@ function renderClientProfileHeader(data) {
     if (countAppts) countAppts.textContent = (data.appointments || []).length;
 
     const countWaivers = document.getElementById('cp-count-waivers');
-    if (countWaivers) countWaivers.textContent = (data.waivers || []).length;
+    if (countWaivers) countWaivers.textContent = (data.waivers || []).length + (data.consent_forms || []).length;
 
     const countWork = document.getElementById('cp-count-tattoo-work');
     if (countWork) countWork.textContent = (data.tattoo_work || []).length;
@@ -153,7 +160,7 @@ function switchClientProfileTab(tabName) {
                 </div>
 
                 <!-- Client Demographics & Health Profile -->
-                <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:1rem;">
+                <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(280px, 100%), 1fr));gap:1rem;">
                     <div style="background:#1F2937;border:1px solid #374151;border-radius:12px;padding:1.25rem;">
                         <h4 style="margin:0 0 0.85rem 0;font-size:0.95rem;font-weight:700;color:#F9FAFB;display:flex;align-items:center;gap:6px;">
                             👤 Personal Information
@@ -173,11 +180,11 @@ function switchClientProfileTab(tabName) {
                             </div>
                             <div style="display:flex;justify-content:space-between;border-bottom:1px solid #374151;padding-bottom:4px;">
                                 <span style="color:#9CA3AF;">Date of Birth:</span>
-                                <strong style="color:#FFF;">${escapeHtml(client.dob || client.birthdate || '1992-05-14')}</strong>
+                                <strong style="color:#FFF;">${escapeHtml(client.dob || client.birthdate || 'Not recorded')}</strong>
                             </div>
                             <div style="display:flex;justify-content:space-between;">
                                 <span style="color:#9CA3AF;">Client Since:</span>
-                                <strong style="color:#FFF;">${escapeHtml(client.created_at || '2023-01-10')}</strong>
+                                <strong style="color:#FFF;">${escapeHtml(client.created_at ? String(client.created_at).slice(0, 10) : 'Not recorded')}</strong>
                             </div>
                         </div>
                     </div>
@@ -204,7 +211,7 @@ function switchClientProfileTab(tabName) {
                             <div style="background:#111827;padding:0.75rem;border-radius:8px;border:1px solid #374151;">
                                 <div style="font-size:0.75rem;color:#9CA3AF;text-transform:uppercase;font-weight:700;">Emergency Contact</div>
                                 <div style="font-weight:600;color:#F3F4F6;margin-top:2px;">
-                                    ${escapeHtml(client.emergency_contact || 'In Case of Emergency (ICE): On File')}
+                                    ${escapeHtml(client.emergency_contact || 'Not recorded')}
                                 </div>
                             </div>
                         </div>
@@ -219,21 +226,14 @@ function switchClientProfileTab(tabName) {
                             <div style="background:#111827;padding:0.75rem;border-radius:8px;border:1px solid #374151;">
                                 <div style="font-size:0.75rem;color:#9CA3AF;text-transform:uppercase;font-weight:700;">Preferred Tattoo / Piercing Style</div>
                                 <div style="font-weight:600;color:#818CF8;margin-top:2px;">
-                                    ${escapeHtml(client.preferred_style || 'Neo-Traditional & Micro-Realism')}
+                                    ${escapeHtml(client.preferred_style || 'Not recorded')}
                                 </div>
                             </div>
 
                             <div style="background:#111827;padding:0.75rem;border-radius:8px;border:1px solid #374151;">
-                                <div style="font-size:0.75rem;color:#9CA3AF;text-transform:uppercase;font-weight:700;">Pain Tolerance & Break Schedule</div>
+                                <div style="font-size:0.75rem;color:#9CA3AF;text-transform:uppercase;font-weight:700;">Preferred Artist</div>
                                 <div style="font-weight:600;color:#F3F4F6;margin-top:2px;">
-                                    Moderate • Prefers 10-minute break every 90 minutes.
-                                </div>
-                            </div>
-
-                            <div style="background:#111827;padding:0.75rem;border-radius:8px;border:1px solid #374151;">
-                                <div style="font-size:0.75rem;color:#9CA3AF;text-transform:uppercase;font-weight:700;">Aftercare Regimen</div>
-                                <div style="font-weight:600;color:#34D399;margin-top:2px;">
-                                    Saniderm / Dermal film adhesive compliant &bull; Hustle Butter aftercare.
+                                    ${escapeHtml(client.preferred_artist || client.assigned_staff_name || 'Not recorded')}
                                 </div>
                             </div>
                         </div>
@@ -408,16 +408,16 @@ function switchClientProfileTab(tabName) {
             apptHtml += `
                 <div style="background:#1F2937;border:1px solid #374151;border-radius:10px;padding:1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">
                     <div>
-                        <div style="font-weight:700;font-size:0.95rem;color:#F9FAFB;">${escapeHtml(a.service_type || a.service || 'Tattoo Procedure Session')}</div>
+                        <div style="font-weight:700;font-size:0.95rem;color:#F9FAFB;">${escapeHtml(a.service_type || a.service || 'Appointment')}</div>
                         <div style="font-size:0.8rem;color:#9CA3AF;margin-top:2px;">
-                            📅 <strong>${escapeHtml(a.date || '2025-01-15')}</strong> &bull; ⏰ ${escapeHtml(a.time || '14:00')} &bull; 🎨 Artist: <strong style="color:#60A5FA;">${escapeHtml(a.staff_name || 'Jaxon Vance')}</strong>
+                            📅 <strong>${escapeHtml(a.date || (a.datetime ? new Date(a.datetime).toLocaleDateString() : ''))}</strong> &bull; ⏰ ${escapeHtml(a.time || (a.datetime ? new Date(a.datetime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''))} &bull; 🎨 Artist: <strong style="color:#60A5FA;">${escapeHtml(a.staff_name || 'Not recorded')}</strong>
                         </div>
                     </div>
 
                     <div style="display:flex;align-items:center;gap:10px;">
-                        <span style="font-weight:800;font-size:1.05rem;color:#10B981;">$${Number(a.price || a.amount || 250).toFixed(2)}</span>
+                        <span style="font-weight:800;font-size:1.05rem;color:#10B981;">$${Number(a.estimated_price || a.price || a.amount || 0).toFixed(2)}</span>
                         <span style="background:${statusColor}20;color:${statusColor};border:1px solid ${statusColor}50;padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:800;">
-                            ${escapeHtml(a.status || 'COMPLETED')}
+                            ${escapeHtml(a.status || '')}
                         </span>
                         <button type="button" onclick="generateClientAppointmentReceiptPDF(${JSON.stringify(a).replace(/"/g, '&quot;')}, ${client ? JSON.stringify(client).replace(/"/g, '&quot;') : 'null'})" style="padding:0.4rem 0.75rem;background:linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(59,130,246,0.3);" title="Generate formal printable PDF receipt with Tax/VAT breakdown and artist gratuity">
                             🖨️ Receipt PDF
@@ -431,8 +431,21 @@ function switchClientProfileTab(tabName) {
         bodyEl.innerHTML = apptHtml;
 
     } else if (tabName === 'waivers') {
+        const forms = data.consent_forms || [];
+        const formsHtml = forms.length ? `
+            <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:1.25rem;">
+                <div style="font-size:0.825rem;color:#9CA3AF;margin-bottom:4px;">Consent forms saved from the form builder:</div>
+                ${forms.map(f => `
+                <div class="cp-consent-form-row" style="background:#1F2937;border:1px solid #374151;border-radius:10px;padding:1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">
+                    <div>
+                        <div style="font-weight:700;font-size:0.95rem;color:#F9FAFB;">📝 ${escapeHtml(f.name || 'Consent form')}</div>
+                        <div style="font-size:0.78rem;color:#9CA3AF;margin-top:2px;">Saved ${escapeHtml(String(f.saved_at || ''))} &bull; ${f.signed ? 'signed' : 'not signed'}</div>
+                    </div>
+                    <button type="button" onclick="viewClientConsentForm(${Number(f.id)})" style="padding:0.4rem 0.75rem;background:#2563EB;color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">View answers</button>
+                </div>`).join('')}
+            </div>` : '';
         if (!waivers || waivers.length === 0) {
-            bodyEl.innerHTML = `
+            bodyEl.innerHTML = formsHtml + `
                 <div style="text-align:center;padding:3rem;background:#1F2937;border:1px dashed #374151;border-radius:12px;color:#9CA3AF;">
                     <div style="font-size:2rem;margin-bottom:8px;">📜</div>
                     <div>No signed liability waivers recorded for this client.</div>
@@ -457,7 +470,7 @@ function switchClientProfileTab(tabName) {
                         <div>
                             <div style="font-weight:700;font-size:0.95rem;color:#F9FAFB;">${escapeHtml(w.title || 'Digital Liability & Health Waiver')}</div>
                             <div style="font-size:0.78rem;color:#9CA3AF;margin-top:2px;">
-                                Signed on <strong>${escapeHtml(w.date_signed || w.signed_at || '2025-01-10')}</strong> &bull; IP: <code style="color:#A7F3D0;">${escapeHtml(w.ip_address || '192.168.1.104')}</code>
+                                Signed on <strong>${escapeHtml(w.date_signed || w.signed_at || 'date not recorded')}</strong> &bull; IP: <code style="color:#A7F3D0;">${escapeHtml(w.ip_address || 'not recorded')}</code>
                             </div>
                         </div>
                     </div>
@@ -473,7 +486,7 @@ function switchClientProfileTab(tabName) {
         });
 
         waiverHtml += `</div>`;
-        bodyEl.innerHTML = waiverHtml;
+        bodyEl.innerHTML = formsHtml + waiverHtml;
 
     } else if (tabName === 'tattoo-work') {
         let workHtml = `
@@ -532,7 +545,7 @@ function switchClientProfileTab(tabName) {
                         <div style="padding:0.75rem;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
                             <div>
                                 <div style="font-weight:700;font-size:0.85rem;color:#F9FAFB;margin-bottom:2px;">${escapeHtml(w.title)}</div>
-                                <div style="font-size:0.75rem;color:#9CA3AF;margin-bottom:4px;">📅 ${escapeHtml(w.date || '2025-01-10')}</div>
+                                <div style="font-size:0.75rem;color:#9CA3AF;margin-bottom:4px;">📅 ${escapeHtml(w.date || (w.created_at ? String(w.created_at).slice(0, 10) : ''))}</div>
                                 <div style="font-size:0.75rem;color:#D1D5DB;line-height:1.3;">${escapeHtml(w.notes || '')}</div>
                             </div>
                             <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center;">
@@ -551,6 +564,57 @@ function switchClientProfileTab(tabName) {
     }
 }
 window.switchClientProfileTab = switchClientProfileTab;
+
+function generateClientAppointmentReceiptPDF(a) {
+    const client = currentActiveProfileClient && (currentActiveProfileClient.client || currentActiveProfileClient);
+    const when = a.datetime ? new Date(a.datetime).toLocaleString() : [a.date, a.time].filter(Boolean).join(' ');
+    const price = Number(a.estimated_price || a.price || a.amount || 0), deposit = Number(a.deposit_paid || a.deposit || 0);
+    downloadPdfTable('receipt_appointment_' + a.id + '.pdf', 'Appointment receipt', ['item', 'detail'], [
+        ['Client', (client && client.name) || a.client_name || a.client || ''],
+        ['Service', a.service_type || a.service || ''],
+        ['Artist', a.staff_name || ''],
+        ['Date', when],
+        ['Status', a.status || ''],
+        ['Price', price.toFixed(2)],
+        ['Deposit paid', deposit.toFixed(2)],
+        ['Balance', (price - deposit).toFixed(2)]
+    ]);
+}
+window.generateClientAppointmentReceiptPDF = generateClientAppointmentReceiptPDF;
+
+// One saved consent form, shown inside the profile: every question with the client's answer.
+async function viewClientConsentForm(formId) {
+    const bodyEl = document.getElementById('client-profile-modal-body');
+    if (!bodyEl) return;
+    let form;
+    try {
+        const res = await fetch('/api/consent-forms/' + formId);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        form = await res.json();
+    } catch (e) { showStudioToast('Could not open the consent form: the server did not answer'); return; }
+    const responses = form.responses || {};
+    const show = (v) => {
+        if (typeof v === 'string' && v.startsWith('data:image')) return `<img src="${v}" alt="Signature or drawing" style="max-width:320px;background:#FFF;border-radius:6px;">`;
+        if (Array.isArray(v)) return escapeHtml(v.join(', '));
+        if (v === true) return 'Yes';
+        if (v === false) return 'No';
+        return escapeHtml(v == null || v === '' ? 'No answer' : String(v));
+    };
+    const line = (label, v) => `<div style="display:flex;justify-content:space-between;gap:1rem;border-bottom:1px solid #374151;padding:6px 0;font-size:0.85rem;"><span style="color:#9CA3AF;">${escapeHtml(label)}</span><strong style="color:#FFF;text-align:right;">${show(v)}</strong></div>`;
+    const seen = new Set();
+    let html = '';
+    ((form.schema && form.schema.sections) || []).forEach((sec) => {
+        const rows = (sec.fields || []).filter((f) => f.id in responses).map((f) => { seen.add(f.id); return line(f.label || f.id, responses[f.id]); });
+        if (rows.length) html += `<div style="background:#1F2937;border:1px solid #374151;border-radius:12px;padding:1rem;margin-bottom:1rem;"><h4 style="margin:0 0 0.5rem 0;font-size:0.95rem;color:#F9FAFB;">${escapeHtml(sec.title || '')}</h4>${rows.join('')}</div>`;
+    });
+    const rest = Object.keys(responses).filter((k) => !seen.has(k));
+    if (rest.length) html += `<div style="background:#1F2937;border:1px solid #374151;border-radius:12px;padding:1rem;"><h4 style="margin:0 0 0.5rem 0;font-size:0.95rem;color:#F9FAFB;">Other answers</h4>${rest.map((k) => line(k.replace(/_/g, ' '), responses[k])).join('')}</div>`;
+    bodyEl.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;">
+            <div><div style="font-weight:800;font-size:1.05rem;color:#F9FAFB;">📝 ${escapeHtml(form.name || 'Consent form')}</div><div style="font-size:0.78rem;color:#9CA3AF;">Saved ${escapeHtml(String(form.saved_at || ''))}</div></div>
+            <button type="button" onclick="switchClientProfileTab('waivers')" style="padding:0.4rem 0.75rem;background:#374151;color:#F3F4F6;border:none;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;">← Back to waivers</button>
+        </div>` + (html || '<div style="color:#9CA3AF;">This form was saved with no answers.</div>');
+}
+window.viewClientConsentForm = viewClientConsentForm;
 
 // 🔒 HANDLE PRIVATE STAFF NOTE SUBMISSION
 async function handleStaffNoteSubmit(event, clientId) {
@@ -992,7 +1056,7 @@ window.renderD3SupplyUsageHeatmap = renderD3SupplyUsageHeatmap;
 
 // D3 Client Appointment Timeline Renderer
 function renderD3ClientAppointmentTimeline(appointments) {
-    const container = document.getElementById('d3-client-appointment-timeline');
+    const container = document.querySelector('#client-profile-modal-body #d3-client-appointment-timeline');
     if (!container || !window.d3) return;
 
     container.innerHTML = '';
@@ -1058,7 +1122,7 @@ function renderD3ClientAppointmentTimeline(appointments) {
             .attr('fill', '#9CA3AF')
             .attr('font-size', '10px')
             .attr('font-weight', '700')
-            .text(a.date || '2025-01-15');
+            .text(a.date || (a.datetime ? new Date(a.datetime).toLocaleDateString() : ''));
 
         // Service text below
         svg.append('text')
@@ -1753,6 +1817,7 @@ if (document.readyState === 'loading') {
 function forceShowModal(id) {
     const el = document.getElementById(id);
     if (el) {
+        if (el.parentElement !== document.body && el.closest('.destination-view')) document.body.appendChild(el);
         el.style.display = 'flex';
         el.setAttribute('aria-hidden', 'false');
     }
@@ -2088,13 +2153,10 @@ window.openSanitizationChecklistModal = openSanitizationChecklistModal;
 
 function openShiftModal() {
     forceShowModal('shift-modal');
+    updateShiftStatusView();
 }
 window.openShiftModal = openShiftModal;
 
-function openStaffLoginModal() {
-    forceShowModal('staff-login-modal-overlay');
-}
-window.openStaffLoginModal = openStaffLoginModal;
 
 function openStaffMessagingChannelsModal() {
     forceShowModal('staff-messaging-modal-overlay');
@@ -2373,7 +2435,7 @@ let sessionTimerInterval = null;
 let sessionTimerSeconds = 0;
 
 function toggleSessionTimer() {
-    const btn = document.getElementById('btn-session-timer');
+    const btn = document.getElementById('session-btn-start');
     const display = document.getElementById('session-timer-display');
     if (sessionTimerInterval) {
         clearInterval(sessionTimerInterval);
@@ -2460,12 +2522,16 @@ function switchImportTab(tab) {
         btn.classList.remove('active');
         btn.style.background = 'transparent';
     });
-    const active = document.getElementById('import-tab-btn-' + tab);
+    const active = document.getElementById('tab-csv-' + tab);
     if (active) {
         active.classList.add('active');
         active.style.background = '#1E293B';
     }
-    showStudioToast('Import mode: ' + tab.toUpperCase());
+    ['manual', 'remote', 'history'].forEach((name) => {
+        const section = document.getElementById('import-' + name + '-section');
+        if (section) section.style.display = name === tab ? '' : 'none';
+    });
+    if (tab === 'history' && typeof fetchAndRenderCsvImportHistory === 'function') fetchAndRenderCsvImportHistory();
 }
 window.switchImportTab = switchImportTab;
 
@@ -2547,10 +2613,6 @@ window.copyRecentScanCodeModal = copyRecentScanCodeModal;
 // 9. PRINT HANDLERS (3)
 // =========================================================================
 
-function print() {
-    window.print();
-}
-window.print = window.print || print;
 
 function printDailySummaryReport() {
     window.print();
@@ -2569,7 +2631,7 @@ function resetSessionTimer() {
     sessionTimerSeconds = 0;
     const display = document.getElementById('session-timer-display');
     if (display) display.textContent = '00:00';
-    const btn = document.getElementById('btn-session-timer');
+    const btn = document.getElementById('session-btn-start');
     if (btn) btn.textContent = '▶ Start Session';
     showStudioToast('Session timer reset');
 }
@@ -2759,17 +2821,19 @@ async function fetchAndRenderDailyStudioSummary() {
 }
 window.fetchAndRenderDailyStudioSummary = fetchAndRenderDailyStudioSummary;
 
-function exportCuratedEarPlanToWaiver() {
-    showStudioToast('Curated Ear Plan exported to Client Waiver');
-}
-window.exportCuratedEarPlanToWaiver = exportCuratedEarPlanToWaiver;
 
-function insertProcedureTemplate(template) {
-    const input = document.getElementById('procedure-notes-input') || document.getElementById('drawer-note-input');
-    if (input) {
-        input.value = (input.value ? input.value + '\n' : '') + template;
-    }
-    showStudioToast('Inserted procedure template: ' + template);
+const PROCEDURE_NOTE_TEMPLATES = {
+    tattoo: 'Tattoo session. Placement: . Size: . Needles: . Inks (brand, lot): . Aftercare explained: yes/no.',
+    piercing: 'Piercing. Placement: . Jewelry (material, size): . Needle gauge: . Aftercare explained: yes/no.',
+    autoclave: 'Autoclave cycle. Load: . Temperature and time: . Indicator result: pass/fail.',
+    restock: 'Restock. Item: . Quantity: . Lot: . Expiry: . Supplier: .'
+};
+function insertProcedureTemplate(inputId, kind) {
+    const input = document.getElementById(inputId);
+    const text = PROCEDURE_NOTE_TEMPLATES[kind];
+    if (!input || !text) return;
+    input.value = (input.value ? input.value + '\n' : '') + text;
+    input.focus();
 }
 window.insertProcedureTemplate = insertProcedureTemplate;
 
@@ -2936,7 +3000,7 @@ document.addEventListener("DOMContentLoaded", renderClientsTable);
 // --- Staff and client pickers: filled from the studio database, not hard-coded names ---
 const PEOPLE_SELECTS = {
     staff: { byName: ["sd-artist-filter", "tipcalc-artist", "sani-staff-select", "new-client-artist", "new-appt-artist"],
-             byId: ["shift-staff-select", "gallery-filter-artist", "work-staff-select", "flash-artist-select"] },
+             byId: ["rota-staff", "shift-staff-select", "gallery-filter-artist", "work-staff-select", "flash-artist-select"] },
     clients: { byName: [], byId: ["gallery-filter-client"] }
 };
 async function populatePeopleSelects() {
@@ -3545,6 +3609,7 @@ async function toggleStaffShift() {
     } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
     const shift = (data && (data.shift || data)) || {};
     showStudioToast(shift.clock_out ? "Clocked out" : "Clocked in");
+    updateShiftStatusView();
 }
 window.toggleStaffShift = toggleStaffShift;
 
@@ -3686,6 +3751,7 @@ async function executeAutoSchedulerBooking() {
     } catch (e) { showStudioToast("Could not save the appointment: the server did not answer"); return; }
     showStudioToast(sessions > 1 ? sessions + " sessions booked" : "Appointment booked");
     if (typeof closeAutoSchedulerModal === "function") closeAutoSchedulerModal();
+    renderAppointmentsList();
     if (typeof renderDashboardKpis === "function") renderDashboardKpis();
 }
 window.executeAutoSchedulerBooking = executeAutoSchedulerBooking;
@@ -3985,6 +4051,7 @@ async function updateShiftStatusView() {
     const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
     set("shift-status-text", open ? "On shift since " + new Date(open.clock_in).toLocaleTimeString() : "Off shift");
     set("shift-weekly-hours", hours.toFixed(1) + " h");
+    set("shift-toggle-btn", open ? "🔴 Clock out" : "🟢 Clock in");
 }
 window.updateShiftStatusView = updateShiftStatusView;
 
@@ -4096,7 +4163,7 @@ function validateCsvInRealTime() {
     const btn = document.getElementById("import-csv-submit-btn");
     const lines = text ? text.split(/\r?\n/).filter((l) => l.trim()) : [];
     const head = (lines[0] || "").toLowerCase().split(",").map((h) => h.trim());
-    const need = target === "inventory" ? ["name", "quantity"] : ["name"];
+    const need = ["name"];
     const missing = need.filter((h) => !head.includes(h));
     let msg = "";
     if (!lines.length) msg = "";
@@ -4178,14 +4245,45 @@ document.addEventListener("DOMContentLoaded", () => syncUserGuideLanguage());
 window.addEventListener("studioLanguageChanged", (e) => syncUserGuideLanguage(e.detail && e.detail.language));
 
 // --- New Client Modal Handlers ---
+// The same form adds a client and edits one: editingClientId says which.
+let editingClientId = null;
+const CLIENT_FORM_FIELDS = { name: "new-client-name", email: "new-client-email", phone: "new-client-phone", dob: "new-client-dob",
+    preferred_artist: "new-client-artist", emergency_contact: "new-client-emergency", allergies: "new-client-allergies" };
+
+function setClientFormMode(client) {
+    editingClientId = client ? client.id : null;
+    const form = document.getElementById("new-client-form");
+    if (form) form.reset();
+    const title = document.getElementById("new-client-modal-title");
+    if (title) title.textContent = client ? "Edit Client: " + (client.name || "") : "New Client Record";
+    const save = document.getElementById("new-client-save-btn");
+    if (save) save.textContent = client ? "Save changes" : "Save client";
+    if (!client) return;
+    for (const [field, id] of Object.entries(CLIENT_FORM_FIELDS)) {
+        const el = document.getElementById(id);
+        if (el) el.value = client[field] || "";
+    }
+    const vip = document.getElementById("new-client-vip");
+    if (vip) vip.checked = !!(client.is_vip || client.vip);
+}
+
 function openNewClientModal() {
+    setClientFormMode(null);
     forceShowModal("new-client-modal-overlay");
 }
+
+function openEditClientModal() {
+    const client = currentActiveProfileClient && (currentActiveProfileClient.client || currentActiveProfileClient);
+    if (!client) return;
+    setClientFormMode(client);
+    forceShowModal("new-client-modal-overlay");
+}
+window.openEditClientModal = openEditClientModal;
 window.openNewClientModal = openNewClientModal;
 
 function closeNewClientModal() {
-    const el = document.getElementById("new-client-modal-overlay");
-    if (el) el.style.display = "none";
+    forceHideModal("new-client-modal-overlay");
+    editingClientId = null;
 }
 window.closeNewClientModal = closeNewClientModal;
 
@@ -4211,9 +4309,14 @@ async function handleSaveNewClient(event) {
         is_vip: vipInput ? vipInput.checked : false,
     };
 
+    if (!newClient.name) {
+        showStudioToast("Please enter the client's name");
+        return;
+    }
+    const editedId = editingClientId;
     try {
-        const res = await fetch("/api/clients", {
-            method: "POST",
+        const res = await fetch(editedId ? "/api/clients/" + editedId : "/api/clients", {
+            method: editedId ? "PATCH" : "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newClient)
         });
@@ -4228,14 +4331,72 @@ async function handleSaveNewClient(event) {
     populatePeopleSelects();
 
     if (typeof showStudioToast === "function") {
-        showStudioToast(`Client record created: ${newClient.name}`);
+        showStudioToast(editedId ? `Client updated: ${newClient.name}` : `Client record created: ${newClient.name}`);
     }
     closeNewClientModal();
+    // an edit started from the profile: show the profile again with the new details
+    if (editedId && currentActiveProfileClient) openClientProfileModal(editedId);
     if (event && event.target && typeof event.target.reset === "function") {
         event.target.reset();
     }
 }
 window.handleSaveNewClient = handleSaveNewClient;
+
+// --- Calendar: every booked appointment, the coming ones first ---
+async function renderAppointmentsList() {
+    const tbody = document.getElementById("schedule-appointments-tbody");
+    if (!tbody) return;
+    let appts = [];
+    try {
+        const res = await fetch("/api/appointments");
+        if (res.ok) appts = await res.json();
+    } catch (e) { /* shown as an empty list */ }
+    appts = (Array.isArray(appts) ? appts : []).filter((a) => a && a.datetime);
+    if (!appts.length) {
+        tbody.innerHTML = '<tr><td colspan="7" style="padding:10px;color:#94A3B8;">No appointments yet. Book the first one with Book Appointment.</td></tr>';
+        return;
+    }
+    const startOfToday = new Date(); startOfToday.setHours(0, 0, 0, 0);
+    const time = (a) => new Date(a.datetime).getTime();
+    const coming = appts.filter((a) => time(a) >= startOfToday.getTime()).sort((a, b) => time(a) - time(b));
+    const earlier = appts.filter((a) => time(a) < startOfToday.getTime()).sort((a, b) => time(b) - time(a));
+    const cell = (v, style) => `<td style="padding:8px;${style || ""}">${escapeHtml(String(v == null ? "" : v))}</td>`;
+    const btn = "padding:4px 8px;border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;";
+    const row = (a) => {
+        const open = a.status !== "completed" && a.status !== "cancelled";
+        return `<tr class="appointment-row" style="border-bottom:1px solid #1E293B;">`
+            + cell(new Date(a.datetime).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }), "font-weight:700;color:#FFF;")
+            + cell(a.client_name || a.client) + cell(a.service_type) + cell(a.staff_name || a.artist_name)
+            + cell(Number(a.estimated_price || a.price || 0).toFixed(2)) + cell(a.status || "scheduled")
+            + `<td style="padding:8px;text-align:right;white-space:nowrap;">`
+            + (open ? `<button type="button" onclick="setAppointmentStatus(${Number(a.id)}, 'completed')" style="${btn}background:#10B981;color:#FFF;border:none;">Completed</button> ` : "")
+            + `<button type="button" onclick="removeAppointment(${Number(a.id)})" style="${btn}background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);">Remove</button></td></tr>`;
+    };
+    tbody.innerHTML = coming.map(row).join("")
+        + (earlier.length ? '<tr><td colspan="7" style="padding:10px 8px 4px;color:#94A3B8;font-size:0.75rem;font-weight:700;">Earlier</td></tr>' + earlier.map(row).join("") : "");
+}
+window.renderAppointmentsList = renderAppointmentsList;
+document.addEventListener("DOMContentLoaded", renderAppointmentsList);
+
+async function setAppointmentStatus(id, status) {
+    try {
+        const res = await fetch("/api/appointments/" + id + "/status", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status }) });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+    } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
+    renderAppointmentsList();
+    if (typeof renderStationStripAndSessions === "function") renderStationStripAndSessions();
+}
+window.setAppointmentStatus = setAppointmentStatus;
+
+async function removeAppointment(id) {
+    if (!window.confirm("Remove this appointment? This cannot be undone.")) return;
+    try {
+        const res = await fetch("/api/appointments/" + id, { method: "DELETE" });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+    } catch (e) { showStudioToast("Could not remove the appointment: the server did not answer"); return; }
+    renderAppointmentsList();
+}
+window.removeAppointment = removeAppointment;
 
 // --- New Appointment Modal Handlers ---
 function openNewAppointmentModal() {
@@ -4293,21 +4454,7 @@ async function handleSaveNewAppointment(event) {
         return;
     }
 
-    // Update appointment table if present
-    const tbody = document.getElementById("schedule-appointments-tbody");
-    if (tbody) {
-        const tr = document.createElement("tr");
-        tr.style.borderBottom = "1px solid #374151";
-        tr.innerHTML = `
-            <td style="padding:10px 12px;font-weight:700;color:#FFF;">${escapeHtml(newAppt.date)} ${escapeHtml(newAppt.time)}</td>
-            <td style="padding:10px 12px;color:#F3F4F6;">${escapeHtml(newAppt.client_name)}</td>
-            <td style="padding:10px 12px;color:#38BDF8;">${escapeHtml(newAppt.service_type)}</td>
-            <td style="padding:10px 12px;color:#A78BFA;">${escapeHtml(newAppt.artist_name)}</td>
-            <td style="padding:10px 12px;color:#34D399;">$${newAppt.estimated_price.toFixed(2)}</td>
-            <td style="padding:10px 12px;"><span style="background:rgba(16,185,129,0.2);color:#6EE7B7;padding:2px 8px;border-radius:10px;font-weight:700;font-size:0.75rem;">${escapeHtml(newAppt.status)}</span></td>
-        `;
-        tbody.prepend(tr);
-    }
+    renderAppointmentsList();
 
     if (typeof showStudioToast === "function") {
         showStudioToast(`Appointment booked for ${newAppt.client_name} (${newAppt.date})`);
@@ -4356,7 +4503,7 @@ window.toggleArtistPerformanceWidget = toggleArtistPerformanceWidget;
 // --- Missing Operational Handlers ---
 function triggerExportCSV() {
     if (typeof openQuickTableExportModal === "function") {
-        openQuickTableExportModal("csv");
+        openQuickTableExportModal("summary-events-table"); // the dashboard list: the activity log
     } else if (typeof executeQuickExport === "function") {
         executeQuickExport("csv");
     }
@@ -4816,20 +4963,55 @@ function handleSaveVatSettings(event) {
 }
 window.handleSaveVatSettings = handleSaveVatSettings;
 
-function submitCSVImport(event) {
+// ponytail: commas inside "quotes" are handled, a line break inside quotes is not
+function parseCsvRows(text) {
+    const split = (line) => {
+        const out = []; let cur = "", quoted = false;
+        for (let i = 0; i < line.length; i++) {
+            const c = line[i];
+            if (quoted) {
+                if (c === '"' && line[i + 1] === '"') { cur += '"'; i++; } else if (c === '"') quoted = false; else cur += c;
+            } else if (c === '"') quoted = true;
+            else if (c === ",") { out.push(cur.trim()); cur = ""; } else cur += c;
+        }
+        out.push(cur.trim());
+        return out;
+    };
+    const lines = text.split(/\r?\n/).filter((l) => l.trim());
+    if (lines.length < 2) return [];
+    const head = split(lines[0]).map((h) => h.toLowerCase());
+    return lines.slice(1).map((l) => {
+        const cells = split(l), row = {};
+        head.forEach((h, i) => { row[h] = cells[i] || ""; });
+        return row;
+    }).filter((r) => r.name);
+}
+
+async function submitCSVImport(event) {
     if (event) event.preventDefault();
-    const targetSelect = document.getElementById("import-target-select");
-    const targetType = targetSelect ? targetSelect.value : "inventory";
-    
-    if (typeof showStudioToast === "function") {
-        showStudioToast(`CSV dataset imported into ${targetType} database`);
+    const target = (document.getElementById("import-target-select") || {}).value === "inventory" ? "inventory" : "clients";
+    const box = document.getElementById("import-csv-text");
+    const rows = parseCsvRows(box ? box.value : "");
+    if (!rows.length) {
+        showStudioToast("Nothing to import: paste a first line with the column names (name, ...), then one line per row");
+        return;
     }
-    if (typeof closeImportModal === "function") {
-        closeImportModal();
-    } else {
-        const el = document.getElementById("import-modal");
-        if (el) el.style.display = "none";
+    let result;
+    try {
+        const res = await fetch("/api/" + target + "/import-csv", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ rows }) });
+        result = await res.json();
+        if (!res.ok) throw new Error(result.error || "HTTP " + res.status);
+    } catch (e) {
+        showStudioToast("Could not import: " + (e.message || "the server did not answer"));
+        return;
     }
+    const n = result.count != null ? result.count : (result.imported != null ? result.imported : rows.length);
+    showStudioToast("Imported " + n + (target === "inventory" ? " stock items" : " clients"));
+    if (box) box.value = "";
+    validateCsvInRealTime();
+    renderClientsTable();
+    populatePeopleSelects();
+    closeImportModal();
 }
 window.submitCSVImport = submitCSVImport;
 

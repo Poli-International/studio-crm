@@ -1478,6 +1478,28 @@ app.delete('/api/clients/:id', (req, res) => {
 });
 
 
+// Consent forms saved from the form builder, newest first (answers are fetched one at a time).
+function clientConsentForms(clientId) {
+  try {
+    return sqlite.prepare("SELECT id, description, content, uploaded_at FROM documents WHERE entity_type = 'client' AND entity_id = ? AND type = 'consent_form' ORDER BY id DESC").all(clientId)
+      .map((row) => {
+        let responses = {};
+        try { responses = JSON.parse(row.content).responses || {}; } catch (e) {}
+        return { id: row.id, name: row.description, saved_at: row.uploaded_at,
+          signed: Object.values(responses).some((v) => typeof v === 'string' && v.startsWith('data:image')) };
+      });
+  } catch (e) { return []; }
+}
+
+app.get('/api/consent-forms/:id', (req, res) => {
+  let row;
+  try { row = sqlite.prepare("SELECT id, entity_id, description, content, uploaded_at FROM documents WHERE id = ? AND type = 'consent_form'").get(Number(req.params.id)); } catch (e) {}
+  if (!row) return res.status(404).json({ error: 'Consent form not found' });
+  let content = {};
+  try { content = JSON.parse(row.content); } catch (e) {}
+  res.json({ id: row.id, client_id: row.entity_id, name: row.description, saved_at: row.uploaded_at, ...content });
+});
+
 app.get(['/api/clients/:id/profile', '/api/clients/:id/full-profile'], (req, res) => {
   const clientId = parseInt(req.params.id, 10);
   const clientObj = clients.find(c => c.id === clientId);
@@ -1485,28 +1507,16 @@ app.get(['/api/clients/:id/profile', '/api/clients/:id/full-profile'], (req, res
     return res.status(404).json({ error: 'Client not found' });
   }
 
-  const clientNameLower = (clientObj.name || '').toLowerCase();
+  // By id, or by the exact name on records that carry no id. A name that merely
+  // contains this one belongs to somebody else.
+  const clientNameLower = (clientObj.name || '').trim().toLowerCase();
+  const sameName = (v) => !!clientNameLower && String(v || '').trim().toLowerCase() === clientNameLower;
+  const mine = (r, nameField) => (r.client_id ? parseInt(r.client_id, 10) === clientId : sameName(r[nameField]));
 
-  const clientApps = appointments.filter(a => {
-    if (a.client_id && parseInt(a.client_id, 10) === clientId) return true;
-    if (a.client && a.client.toLowerCase().includes(clientNameLower)) return true;
-    return false;
-  });
-
-  const clientWaivers = waivers.filter(w => {
-    if (w.client_id && parseInt(w.client_id, 10) === clientId) return true;
-    if (w.client_name && w.client_name.toLowerCase().includes(clientNameLower)) return true;
-    return false;
-  });
-
-  const clientWork = clientTattooWork.filter(w => {
-    if (w.client_id && parseInt(w.client_id, 10) === clientId) return true;
-    if (w.client_name && w.client_name.toLowerCase().includes(clientNameLower)) return true;
-    return false;
-  });
-
-  const clientTxns = financial.filter(f => f.client_id === clientId || (f.client_name && f.client_name.toLowerCase().includes(clientNameLower)));
-  const totalSpend = clientTxns.reduce((sum, t) => sum + Number(t.amount || 0), 0) || (clientApps.length * 200) || 450;
+  const clientApps = appointments.filter(a => mine(a, 'client') || (!a.client_id && sameName(a.client_name)));
+  const clientWaivers = waivers.filter(w => mine(w, 'client_name'));
+  const clientWork = clientTattooWork.filter(w => mine(w, 'client_name'));
+  const totalSpend = financial.filter(f => mine(f, 'client_name') && f.type !== 'refund').reduce((sum, t) => sum + Number(t.amount || 0), 0);
 
   const assignedStaff = staff.find(s => s.id === parseInt(clientObj.assigned_staff_id, 10));
 
@@ -1518,13 +1528,14 @@ app.get(['/api/clients/:id/profile', '/api/clients/:id/full-profile'], (req, res
     staff_notes: (clientObj.staff_notes || []).slice().sort((a,b) => new Date(b.timestamp || b.createdAt || 0).getTime() - new Date(a.timestamp || a.createdAt || 0).getTime()),
     appointments: clientApps,
     waivers: clientWaivers,
+    consent_forms: clientConsentForms(clientId),
     tattoo_work: clientWork,
     stats: {
       totalAppointments: clientApps.length,
       signedWaiversCount: clientWaivers.length,
       totalTattooWorkCount: clientWork.length,
       totalSpend: totalSpend,
-      lastVisit: clientObj.lastVisit || (clientApps[0] ? clientApps[0].date : '2025-01-15')
+      lastVisit: clientObj.lastVisit || (clientApps[0] ? clientApps[0].date : '')
     }
   });
 });
@@ -4377,14 +4388,15 @@ app.get(['/api/staff', '/api/professionals'], (req, res) => {
 });
 
 app.post(['/api/staff', '/api/professionals'], (req, res) => {
+  if (!req.body.name || !String(req.body.name).trim()) return res.status(400).json({ error: 'A name is required' });
   const newStaff = {
-    id: staff.length + 1,
-    name: req.body.name || 'New Professional',
-    email: req.body.email || 'artist@studiocrm.com',
+    id: staff.length ? Math.max(...staff.map(s => s.id)) + 1 : 1, // length + 1 repeated an id after a removal
+    name: String(req.body.name).trim(),
+    email: req.body.email || '',
     role: req.body.role || 'artist',
-    title: req.body.title || 'Tattoo Artist',
-    phone: req.body.phone || '555-0000',
-    specialties: Array.isArray(req.body.specialties) ? req.body.specialties : (req.body.specialties ? req.body.specialties.split(',').map(s => s.trim()) : ['Tattoo']),
+    title: req.body.title || '',
+    phone: req.body.phone || '',
+    specialties: Array.isArray(req.body.specialties) ? req.body.specialties : (req.body.specialties ? req.body.specialties.split(',').map(s => s.trim()).filter(Boolean) : []),
     bio: req.body.bio || '',
     notes: req.body.notes || '',
     instagram: req.body.instagram || '',
@@ -4416,7 +4428,9 @@ app.patch(['/api/staff/:id', '/api/professionals/:id'], (req, res) => {
   if (!member) return res.status(404).json({ error: 'Professional not found' });
 
   if (req.body.specialties && typeof req.body.specialties === 'string') {
-    req.body.specialties = req.body.specialties.split(',').map(s => s.trim());
+    req.body.specialties = req.body.specialties.split(',').map(s => s.trim()).filter(Boolean);
+  } else if (req.body.specialties === '') {
+    req.body.specialties = [];
   }
   Object.assign(member, req.body);
 
@@ -5881,19 +5895,20 @@ app.get('/api/staff/monthly-schedule', (req, res) => {
 app.post('/api/staff/assign-shift', (req, res) => {
   const { staff_id, staff_name, date, start_time, end_time, station, status, notes } = req.body;
   const targetStaff = staff.find(s => s.id === parseInt(staff_id));
-  const sName = staff_name || (targetStaff ? targetStaff.name : 'Artist');
+  if (!targetStaff || !date) return res.status(400).json({ error: 'A staff member and a date are required' });
+  const sName = targetStaff.name;
 
   const existingIdx = monthlySchedules.findIndex(s => s.staff_id === parseInt(staff_id) && s.date === date);
   const newShift = {
-    id: existingIdx >= 0 ? monthlySchedules[existingIdx].id : monthlySchedules.length + 1,
+    id: existingIdx >= 0 ? monthlySchedules[existingIdx].id : Math.max(0, ...monthlySchedules.map(s => s.id)) + 1,
     staff_id: parseInt(staff_id),
     staff_name: sName,
     date,
     start_time: start_time || '10:00',
     end_time: end_time || '18:00',
-    station: station || 'Station 1 - Custom Tattoo',
+    station: station || '',
     status: status || 'On-Duty',
-    notes: notes || 'Assigned via Studio Floor Live'
+    notes: notes || ''
   };
 
   if (existingIdx >= 0) {
@@ -8363,18 +8378,17 @@ app.post('/api/clients/import-csv', (req, res) => {
   rows.forEach(r => {
     if (r.name) {
       clients.push({
-        id: clients.length + 1,
+        id: clients.length ? Math.max(...clients.map(c => c.id)) + 1 : 1,
         name: r.name,
-        email: r.email || `${r.name.toLowerCase().replace(/\s+/g, '.')}@example.com`,
-        phone: r.phone || '555-0000',
-        profession: r.profession || 'Client',
-        notes: r.notes || 'Imported via CSV',
+        email: r.email || '',
+        phone: r.phone || '',
+        notes: r.notes || '',
         assigned_staff_id: null,
         assigned_staff_name: 'Unassigned',
-        dob: r.dob || '1990-01-01',
-        allergies: r.allergies || 'None',
-        medical_history: r.medical_history || 'None',
-        lastVisit: new Date().toISOString().split('T')[0]
+        dob: r.dob || '',
+        allergies: r.allergies || '',
+        medical_history: r.medical_history || '',
+        created_at: new Date().toISOString()
       });
       importedCount++;
     }
@@ -8415,7 +8429,7 @@ app.post('/api/inventory/import-csv', (req, res) => {
     const rawQty = r.quantity !== undefined ? r.quantity : (r.Quantity !== undefined ? r.Quantity : (r.stock !== undefined ? r.stock : (r.qty !== undefined ? r.qty : '')));
     const rawPrice = r.unitcost !== undefined ? r.unitcost : (r.UnitCost !== undefined ? r.UnitCost : (r.unit_cost !== undefined ? r.unit_cost : (r.price !== undefined ? r.price : (r.Price !== undefined ? r.Price : (r.cost !== undefined ? r.cost : '')))));
     const rawReorder = r.reorderpoint !== undefined ? r.reorderpoint : (r.ReorderPoint !== undefined ? r.ReorderPoint : (r.reorder_point !== undefined ? r.reorder_point : (r.reorder_threshold !== undefined ? r.reorder_threshold : (r.min_stock !== undefined ? r.min_stock : ''))));
-    const supplier = (r.supplier || r.Supplier || r.vendor || r.Vendor || 'NeedleCraft Supply Co.').toString().trim();
+    const supplier = (r.supplier || r.Supplier || r.vendor || r.Vendor || '').toString().trim();
 
     // 1. Name validation
     if (!name) {
@@ -8425,7 +8439,7 @@ app.post('/api/inventory/import-csv', (req, res) => {
     // 2. Quantity validation
     let qty = 0;
     if (rawQty === '' || rawQty === null || rawQty === undefined) {
-      qty = 10;
+      qty = 0;
     } else {
       const parsedQty = Number(rawQty);
       if (isNaN(parsedQty) || parsedQty < 0 || !Number.isInteger(parsedQty)) {

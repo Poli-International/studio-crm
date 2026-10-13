@@ -44,6 +44,15 @@ jobs:
       - name: Tests
         run: npm test
 
+      # Real mouse clicks in a real browser. The tests above only read the files;
+      # they passed while View Profile, New Client and every export were dead.
+      - name: Click test, the jobs a studio does every day
+        run: node tests/click/flows.mjs
+
+      - name: Click test, every button
+        if: matrix.os == 'ubuntu-latest' && matrix.node == 22
+        run: node tests/click/crawl.mjs
+
       - name: Start and open it
         run: |
           PORT=3000 SQLITE_DB_PATH="$RUNNER_TEMP/studio.sqlite" node server.js > "$RUNNER_TEMP/server.log" 2>&1 &

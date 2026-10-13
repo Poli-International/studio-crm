@@ -29,15 +29,21 @@ Abra **Definições** para introduzir os seus preços, a regra de depósito, a t
 
 ## Clientes
 
-**Clientes** lista todos com os seus dados de contacto, alergias e notas médicas, consentimentos assinados e total gasto. Use **Novo cliente** para adicionar um. A pesquisa filtra a lista à medida que escreve. **Ver perfil** abre o registo completo.
+**Clientes** lista todos com os seus dados de contacto, alergias e notas médicas, consentimentos assinados e total gasto. Use **Novo cliente** para adicionar um. A pesquisa filtra a lista à medida que escreve. **Ver perfil** abre o registo completo. No perfil, **Editar cliente** altera os dados e **Excluir** remove o cliente. O perfil mostra também as marcações, as notas da equipa, os termos assinados, os formulários de consentimento guardados e as fotos dos trabalhos. Para adicionar muitos clientes de uma vez, abra **Definições**, **Import Data** e cole uma lista cuja primeira linha seja `name,email,phone,allergies,notes`.
+
+## Equipa
+
+Clique no botão da equipa, em cima à direita, para ver a sua equipa. **Adicionar membro** adiciona uma pessoa, **Editar** altera os seus dados e **Remover** retira-a da equipa. **Selecionar** mostra o nome dessa pessoa na barra superior, para que todos vejam quem está no ecrã. Não há palavras-passe nem níveis de acesso. Um novo membro pode ser escolhido de imediato em qualquer lugar onde se escolhe um artista, por exemplo ao marcar uma sessão.
 
 ## Marcações e agendamento
 
-**Nova marcação** reserva uma única sessão com artista, estação, preço e depósito. Para trabalhos de várias sessões, o **Agendador automático** procura os horários livres do artista num dia escolhido e reserva até seis sessões com um número fixo de semanas de intervalo. O Dashboard mostra os números do dia, as próximas marcações, o estado das estações e o stock baixo.
+**Nova marcação** reserva uma única sessão com artista, estação, preço e depósito. Para trabalhos de várias sessões, o **Agendador automático** procura os horários livres do artista num dia escolhido e reserva até seis sessões com um número fixo de semanas de intervalo. O Dashboard mostra os números do dia, as próximas marcações, o estado das estações e o stock baixo. O Calendário lista todas as marcações, as próximas primeiro. **Concluída** marca uma sessão como feita, passando a contar na análise de durações, e **Remover** apaga-a.
 
 ## Consentimentos digitais
 
 Abra o formulário de consentimento, escolha o cliente na lista (as suas alergias são preenchidas automaticamente), confirme a verificação de idade e peça ao cliente para assinar no tablet. O consentimento é guardado com a imagem da assinatura. Não é guardado sem um cliente e uma assinatura.
+
+Para o cliente preencher um formulário de consentimento num tablet, abra **Clientes**, o criador de formulários de consentimento, a pré-visualização do formulário e depois o modo quiosque para tablet. O cliente responde a uma secção por ecrã, assina no último e toca no botão para concluir. O formulário é guardado com a assinatura e é descarregado um PDF. Se antes não foi escolhido nenhum cliente, é criado um novo cliente com o nome, o e-mail, o telefone e a data de nascimento do formulário. Os formulários guardados estão no perfil do cliente, em **Termos**; **Ver respostas** mostra cada resposta.
 
 ## Mensagens: o CRM prepara, você envia
 
@@ -57,7 +63,7 @@ O scanner em **Registo de atividade** usa a câmara do dispositivo. Digitalize u
 
 ## Dinheiro e equipa
 
-A **Calculadora de gorjetas** divide uma gorjeta em 80% artista, 15% aprendiz, 5% receção e regista-a. A equipa regista a entrada e a saída com o botão de turno. As exportações fornecem-lhe o registo de atividade, o stock baixo, os turnos e as durações das sessões em CSV ou PDF.
+A **Calculadora de gorjetas** divide uma gorjeta em 80% artista, 15% aprendiz, 5% receção e regista-a. A equipa regista a entrada e a saída com o botão de turno. As exportações fornecem-lhe o registo de atividade, o stock baixo, os turnos e as durações das sessões em CSV ou PDF. No Calendário, a janela dos turnos mostra se uma pessoa está de turno, e a **Escala de turnos** lista os turnos previstos: escolha uma pessoa, uma data e o horário, e clique em **Adicionar turno**. A exportação da escala e, no Inventário, a exportação do stock guardam um ficheiro CSV ou PDF na sua pasta de Transferências.
 
 ## Registos de conformidade
 

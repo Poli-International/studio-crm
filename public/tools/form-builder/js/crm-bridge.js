@@ -79,17 +79,26 @@
     }
 
     function collectResponses() {
-        var app = window.FormPreviewApp;
-        if (app && typeof app.collectResponses === 'function') return app.collectResponses();
+        var app = window.ActiveFormPreview;
+        if (app && app.responses) {
+            // The previewer's own record: it holds kiosk answers too, which the
+            // preview behind the kiosk never shows.
+            var out = Object.assign({}, app.responses);
+            Object.keys(app.signatureManagers || {}).forEach(function (id) {
+                var img = app.signatureManagers[id].getSignatureImage && app.signatureManagers[id].getSignatureImage();
+                if (img) out[id] = img;
+            });
+            return out;
+        }
         // Fallback: read the rendered preview directly.
-        var out = {};
+        var read = {};
         document.querySelectorAll('#preview-container [data-field-id]').forEach(function (el) {
             var input = el.querySelector('input, select, textarea');
             if (!input) return;
-            out[el.getAttribute('data-field-id')] =
+            read[el.getAttribute('data-field-id')] =
                 input.type === 'checkbox' ? !!input.checked : input.value;
         });
-        return out;
+        return read;
     }
 
     function saveToClient(btn) {
@@ -97,7 +106,7 @@
         var form = window.FormBuilderApp && window.FormBuilderApp.currentForm;
         if (!form) return;
 
-        btn.disabled = true;
+        if (btn) btn.disabled = true;
         parent.postMessage({
             type: 'crm-save-consent',
             clientId: host.clientId,
@@ -110,7 +119,7 @@
 
         // The parent answers crm-save-result; re-enable either way so a failed
         // save can be retried rather than leaving a dead button.
-        setTimeout(function () { btn.disabled = false; }, 4000);
+        if (btn) setTimeout(function () { btn.disabled = false; }, 4000);
     }
 
     function addSaveButton() {
@@ -169,9 +178,22 @@
         }
 
         if (e.data.type === 'crm-save-result') {
-            toast(e.data.ok ? t('saved') : t('failed'), e.data.ok ? 'success' : 'error');
+            // A form filled in with no client chosen created the client: later saves go to that record.
+            if (e.data.ok && e.data.clientId && host) host = { clientId: e.data.clientId, clientName: e.data.clientName || host.clientName };
+            toast(e.data.ok ? t('saved') + (e.data.clientName ? ': ' + e.data.clientName : '') : (e.data.error || t('failed')), e.data.ok ? 'success' : 'error');
         }
     });
+
+    // Tablet kiosk: the client taps "Complete" on the last step. When every
+    // mandatory answer and the signature are there, the form is saved to the
+    // client record without a second button to find.
+    document.addEventListener('click', function (e) {
+        var btn = e.target.closest && e.target.closest('.btn-kiosk-next');
+        var app = window.ActiveFormPreview;
+        if (!btn || !host || !app) return;
+        var lastStep = app.currentKioskStep >= app.getKioskSections().length - 1;
+        if (lastStep && app.validateAll().length === 0) saveToClient(null);
+    }, true);
 
     // Announce readiness so the parent can hand over the client context.
     document.addEventListener('DOMContentLoaded', function () {

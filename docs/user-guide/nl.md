@@ -29,15 +29,21 @@ Open **Instellingen** om uw prijzen, aanbetalingsregel, belastingtarief (btw), r
 
 ## Klanten
 
-**Klanten** toont iedereen met contactgegevens, allergieën en medische notities, ondertekende toestemmingsformulieren en totaal besteed. Gebruik **Nieuwe klant** om er een toe te voegen. Zoeken filtert de lijst terwijl u typt. **Profiel bekijken** opent het volledige dossier.
+**Klanten** toont iedereen met contactgegevens, allergieën en medische notities, ondertekende toestemmingsformulieren en totaal besteed. Gebruik **Nieuwe klant** om er een toe te voegen. Zoeken filtert de lijst terwijl u typt. **Profiel bekijken** opent het volledige dossier. In het profiel wijzigt **Klant bewerken** de gegevens en verwijdert **Verwijderen** de klant. Het profiel toont ook afspraken, teamnotities, ondertekende verklaringen, opgeslagen toestemmingsformulieren en foto's van het werk. Om veel klanten tegelijk toe te voegen, opent u **Instellingen**, **Import Data** en plakt u een lijst waarvan de eerste regel `name,email,phone,allergies,notes` is.
+
+## Personeel
+
+Klik rechtsboven op de personeelsknop om uw team te zien. **Teamlid toevoegen** voegt een persoon toe, **Bewerken** wijzigt de gegevens en **Verwijderen** haalt de persoon uit het team. **Selecteren** toont de naam van die persoon in de bovenbalk, zodat iedereen ziet wie er achter het scherm zit. Er zijn geen wachtwoorden en geen toegangsniveaus. Een nieuw teamlid kan meteen worden gekozen op elke plek waar een artiest wordt gekozen, bijvoorbeeld bij het boeken van een afspraak.
 
 ## Afspraken en planning
 
-**Nieuwe afspraak** boekt één sessie met artiest, station, prijs en aanbetaling. Voor werk met meerdere sessies zoekt de **Automatische planner** de vrije tijdslots van de artiest op een gekozen dag en boekt tot zes sessies met een vast aantal weken ertussen. Het dashboard toont de cijfers van vandaag, aankomende boekingen, stationsstatus en lage voorraad.
+**Nieuwe afspraak** boekt één sessie met artiest, station, prijs en aanbetaling. Voor werk met meerdere sessies zoekt de **Automatische planner** de vrije tijdslots van de artiest op een gekozen dag en boekt tot zes sessies met een vast aantal weken ertussen. Het dashboard toont de cijfers van vandaag, aankomende boekingen, stationsstatus en lage voorraad. De Agenda toont alle geboekte afspraken, de eerstvolgende bovenaan. **Afgerond** markeert een sessie als gedaan, zodat ze meetelt in de duuranalyse, en **Verwijderen** wist ze.
 
 ## Digitale toestemmingsformulieren
 
 Open het toestemmingsformulier, kies de klant uit de lijst (diens allergieën worden ingevuld), bevestig de leeftijdscontrole en laat de klant tekenen op het tablet. Het toestemmingsformulier wordt opgeslagen met de handtekeningafbeelding. Het wordt niet opgeslagen zonder klant en handtekening.
+
+Om de klant een toestemmingsformulier op een tablet te laten invullen, opent u **Klanten**, de bouwer van toestemmingsformulieren, het formuliervoorbeeld en daarna de tablet-kioskmodus. De klant beantwoordt één onderdeel per scherm, tekent op het laatste en tikt op de knop om af te ronden. Het formulier wordt met de handtekening opgeslagen en er wordt een PDF gedownload. Als er vooraf geen klant was gekozen, wordt een nieuwe klant aangemaakt met de naam, het e-mailadres, het telefoonnummer en de geboortedatum van het formulier. Opgeslagen formulieren staan in het klantprofiel onder **Verklaringen**; **Antwoorden bekijken** toont elk antwoord.
 
 ## Berichten: de CRM bereidt voor, u verstuurt
 
@@ -57,7 +63,7 @@ De scanner in **Activiteitenlogboek** gebruikt de camera van het apparaat. Scan 
 
 ## Geld en personeel
 
-De **Fooicalculator** verdeelt een fooi 80% artiest, 15% leerling, 5% balie en registreert dit. Personeel klokt in en uit met de diensttoets. Exports geven u het activiteitenlogboek, lage voorraad, diensten en sessieduur als CSV of PDF.
+De **Fooicalculator** verdeelt een fooi 80% artiest, 15% leerling, 5% balie en registreert dit. Personeel klokt in en uit met de diensttoets. Exports geven u het activiteitenlogboek, lage voorraad, diensten en sessieduur als CSV of PDF. In de Agenda toont het dienstenvenster of iemand in dienst is, en het **Dienstrooster** toont de geplande diensten: kies een persoon, een datum en de tijden, en klik op **Dienst toevoegen**. De export van het rooster en, in Voorraad, de export van de voorraad slaan een CSV- of PDF-bestand op in uw map Downloads.
 
 ## Compliancedossiers
 

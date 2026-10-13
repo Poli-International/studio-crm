@@ -8,7 +8,17 @@
 
 ---
 
-## Executive Summary
+## Correction, v1.0.2 (2026-10-13)
+
+The verdict below was wrong. This report is a review of the source files; nobody clicked the buttons. A studio owner who installed v1.0.1 found that **View Profile** did nothing, **New Client** opened the client list, the exports said "exported" and made no file, and the tablet consent form could not be signed. A click-through of the app in a real browser confirmed all of it and found more: no **Print** button worked, the Shift and Import windows could not be closed, **Import CSV Rows** saved nothing, and five windows the code opens did not exist in the page, so the sentence "modal IDs ... all reference elements that exist in the markup" was false.
+
+v1.0.2 fixes these (see the release notes). The lasting change is the test: `tests/click/` drives a real browser with real mouse clicks. It does the jobs a studio does every day, then clicks every button it can reach, and it runs before a release is packed. A button that does nothing, throws an error or cannot be reached with the mouse now blocks the release. The same test, run against v1.0.1, failed on every one of the eleven daily jobs it had at the time.
+
+Still not tested by a person: double-clicking the starter on a real Mac and on a Windows PC that never had Node.js, and the camera scanner (the test machines have no camera). The 31 embedded Poli tools are opened by the click test, but the buttons inside them are not clicked one by one; only the consent form builder is filled in, signed and edited by it.
+
+---
+
+## Executive Summary (v1.0.1 review, kept for the record)
 
 **Verdict: Production Ready (for the online demo and the documented self-hosted app).**
 

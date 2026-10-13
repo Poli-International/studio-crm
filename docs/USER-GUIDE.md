@@ -29,15 +29,21 @@ Open **Settings** to enter your prices, deposit rule, tax (VAT) rate, touch-up p
 
 ## Clients
 
-**Clients** lists everyone with their contact details, allergies and medical notes, signed waivers and total spent. Use **New Client** to add one. Search filters the list as you type. **View Profile** opens the full record.
+**Clients** lists everyone with their contact details, allergies and medical notes, signed waivers and total spent. Use **New Client** to add one. Search filters the list as you type. **View Profile** opens the full record. In the profile, **Edit client** changes the details and **Delete** removes the client. The profile also lists appointments, staff notes, signed waivers, saved consent forms and photos of the work. To add many clients at once, open **Settings**, **Import Data** and paste a list whose first line is `name,email,phone,allergies,notes`.
+
+## Staff
+
+Click the staff button at the top right (it reads **Staff Login** until someone is selected) to see your team. **Add staff member** adds a person, **Edit** changes their details and **Remove** takes them off the team. **Select** shows that person's name in the top bar, so everyone can see who is at the screen. There are no passwords and no access levels. A new staff member can be chosen straight away wherever an artist is picked, for example when you book an appointment.
 
 ## Appointments and scheduling
 
-**New Appointment** books a single session with artist, station, price and deposit. For multi-session work, the **Auto Scheduler** looks up the artist's free slots on a chosen day and books up to six sessions a set number of weeks apart. The Dashboard shows today's figures, upcoming bookings, station status and low stock.
+**New Appointment** books a single session with artist, station, price and deposit. For multi-session work, the **Auto Scheduler** looks up the artist's free slots on a chosen day and books up to six sessions a set number of weeks apart. The Dashboard shows today's figures, upcoming bookings, station status and low stock. The Calendar lists every booked appointment, the coming ones first. **Completed** marks a session as done, so it counts in Duration Analytics, and **Remove** deletes it.
 
 ## Digital waivers
 
 Open the waiver form, pick the client from the list (their allergies are filled in), confirm the age check, and have the client sign on the pad. The waiver is saved with the signature image. It will not save without a client and a signature.
+
+To have the client fill in a consent form on a tablet, open **Clients**, **Consent Form Builder**, **Preview Form**, then **Tablet Kiosk Mode**. The client answers one section per screen, signs on the last one and taps **Complete**. The form is saved with the signature and a PDF is downloaded. If no client was chosen first, a new client is created from the name, email, phone and date of birth on the form. Saved forms are in the client's profile under **Waivers**; **View answers** shows every answer.
 
 ## Messages: the CRM prepares, you send
 
@@ -57,7 +63,7 @@ The scanner in **Log Activity** uses the device camera. Scan a stock SKU or lot 
 
 ## Money and staff
 
-The **Tip Calculator** splits a tip 80% artist, 15% apprentice, 5% desk and records it. Staff clock in and out with the shift button. Exports give you the activity log, low stock, shifts and session durations as CSV or PDF.
+The **Tip Calculator** splits a tip 80% artist, 15% apprentice, 5% desk and records it. Staff clock in and out with the shift button. Exports give you the activity log, low stock, shifts and session durations as CSV or PDF. On the Calendar, **Staff Shifts & Rota** shows whether a person is on shift, and the **Shift Rota** lists planned shifts: choose a person, a date and the hours, then **Add shift**. **Export Shift Roster** and, in Inventory, **Export Manifest** save a CSV or PDF file in your Downloads folder.
 
 ## Compliance records
 

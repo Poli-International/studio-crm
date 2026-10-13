@@ -41,7 +41,8 @@ const PAGE_HELPER = `(() => {
     sig,
     key(el) {
       const text = (el.innerText || el.value || el.title || el.getAttribute('aria-label') || '').trim().replace(/\\s+/g, ' ').slice(0, 40);
-      return [el.tagName, el.id || '', text, (el.getAttribute('onclick') || el.getAttribute('href') || '').trim().slice(0, 120)].join(' | ');
+      // a button with an id is that button whatever it says: its label may change (Clock in / Clock out)
+      return [el.tagName, el.id || '', el.id ? '' : text, (el.getAttribute('onclick') || el.getAttribute('href') || '').trim().slice(0, 120)].join(' | ');
     },
     all() {
       return [...document.querySelectorAll('button,[onclick],a[href],input[type=button],input[type=submit],[role=button]')].filter(shown);
@@ -212,7 +213,9 @@ export async function launchBrowser() {
     seen, settle, ...scope(''),
     frame: (selector) => scope(selector),
     reset() { seen.errors.length = 0; seen.dialogs.length = 0; seen.downloads.length = 0; },
+    // every page load starts like a first visit: nothing remembered from the click before
     async goto(url) {
+      await cdp('Storage.clearDataForOrigin', { origin: new URL(url).origin, storageTypes: 'local_storage,session_storage' }).catch(() => {});
       await cdp('Page.navigate', { url });
       for (let i = 0; i < 100; i++) {
         await sleep(100);
@@ -220,6 +223,8 @@ export async function launchBrowser() {
       }
       await settle();
     },
+    // a phone or tablet screen
+    viewport: (width, height) => cdp('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: true }),
     async screenshot(file) {
       writeFileSync(file, Buffer.from((await cdp('Page.captureScreenshot', { format: 'jpeg', quality: 60 })).data, 'base64'));
     },

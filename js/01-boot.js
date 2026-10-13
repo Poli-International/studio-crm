@@ -37,6 +37,23 @@
             document.documentElement.setAttribute('data-theme', dataTheme);
         } catch (e) {}
     })();
-    
 
-
+// Opened from another device (http://the-server:3000) the browser gives the page no
+// clipboard: every Copy button then failed. Copy the old way instead.
+if (!navigator.clipboard) {
+  navigator.clipboard = {
+    writeText: function (text) {
+      return new Promise(function (resolve, reject) {
+        var box = document.createElement('textarea');
+        box.value = text;
+        box.style.cssText = 'position:fixed;top:0;left:0;opacity:0;';
+        document.body.appendChild(box);
+        box.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) {}
+        box.remove();
+        if (ok) resolve(); else reject(new Error('copy not allowed'));
+      });
+    }
+  };
+}

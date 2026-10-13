@@ -1,6 +1,6 @@
 {
   "name": "studio-crm",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Professional Studio Management System for Tattoo & Piercing Studios",
   "type": "module",
   "main": "server.js",
@@ -12,6 +12,7 @@
     "lint": "echo 'No lint errors'",
     "start": "node server.js",
     "test": "node test-battery.cjs && vitest run",
+    "test:click": "node tests/click/flows.mjs && node tests/click/crawl.mjs",
     "guide": "node scripts/build-guide.cjs"
   },
   "dependencies": {

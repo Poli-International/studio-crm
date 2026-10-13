@@ -4,7 +4,7 @@
 //
 //   node tests/click/crawl.mjs            every button, report in click-report.json
 //   CRAWL_DEPTH=1 node tests/click/crawl.mjs    only the eight main screens
-//   CRAWL_PAGE=/tools/form-builder/ node tests/click/crawl.mjs    one embedded tool
+//   CRAWL_PAGE=tools/form-builder/ node tests/click/crawl.mjs    one embedded tool
 import { writeFileSync } from 'node:fs';
 import { startApp } from './app.mjs';
 
@@ -18,16 +18,20 @@ const queued = new Set();
 const queue = [];
 
 const navKey = (dest) => browser.evaluate(`(() => { const el = document.getElementById('nav-dest-${dest}'); return el ? window.__ct.key(el) : null; })()`);
-// These wipe or replace the studio's data: clicked last, so the rest runs on the demo studio.
-const LAST = /demo-data-clear|empty studio|Restore|Factory|Wipe/i;
+// These delete or replace the studio's data: clicked last, so the rest runs on the demo studio.
+const LAST = /demo-data-clear|empty studio|Restore|Factory|Wipe|Delete|Remove|Clear All|clearAll/i;
 const last = [];
 // A backdrop that closes its window only when the click lands on the backdrop itself: its centre is the window.
 const BACKDROP = /event\.target\s*===?\s*this/;
 // Buttons with nothing to see after the click, each for a reason a person would accept.
 const QUIET = [
   /testQrAudioTheme/, // plays a sound
-  /switchStudioProSuiteTab\('aftercare'\)|switchGalleryTab\('portfolio'\)|setSharePreset\('showcase'\)|prevQrTourStep/, // already on that tab or step
+  /switchStudioProSuiteTab\('(aftercare|ear-planner)'\)|switchGalleryTab\('portfolio'\)|setSharePreset\('showcase'\)|prevQrTourStep|switchClientProfileTab\('overview'\)|switchImportTab\('manual'\)/, // already on that tab or step
+  /sendTeamChatMessage/, // sends nothing until a message is typed
   /qr-validation-toast/, // closes a message that is not showing
+  /clearWaiverSignature/, // clears a signature pad that is still empty
+  /toggleQrScanner/, // starts the camera: there is none on a test machine
+  /shareToPlatform\('email'\)/, // hands the message to the computer's mail program
 ];
 const enqueue = (keys, pathTo) => {
   for (const key of keys) {
@@ -37,8 +41,8 @@ const enqueue = (keys, pathTo) => {
   }
 };
 
-// One embedded tool on its own page (CRAWL_PAGE=/tools/gauge-converter/), or the app with its eight screens
-const PAGE = process.env.CRAWL_PAGE || '/';
+// One embedded tool on its own page (CRAWL_PAGE=tools/gauge-converter/), or the app with its eight screens
+const PAGE = '/' + (process.env.CRAWL_PAGE || '').replace(/^\//, ''); // Git Bash rewrites a leading slash, so tools/x/ works too
 const start = url.replace(/\/$/, '') + PAGE;
 await browser.goto(start);
 if (PAGE !== '/') enqueue(await browser.evaluate('window.__ct.keys()'), []);
@@ -60,8 +64,11 @@ while (queue.length || last.length) {
     let lost = false;
     for (const step of item.path) {
       const t = await browser.click(step);
-      if (!t || t.covered) { lost = true; break; }
+      if (t && t.covered) { r.verdict = 'broken'; r.did = `cannot get there: "${step.split(' | ')[2]}" is covered by ${t.covered}`; break; }
+      if (!t) { lost = true; break; }
     }
+    if (r.verdict) continue;
+    // the way there is gone: an earlier click deleted the record it belongs to
     if (lost) { r.verdict = 'unreachable'; continue; }
 
     const [tag, , , action] = item.key.split(' | ');

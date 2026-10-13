@@ -160,7 +160,7 @@ function switchClientProfileTab(tabName) {
                 </div>
 
                 <!-- Client Demographics & Health Profile -->
-                <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:1rem;">
+                <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(280px, 100%), 1fr));gap:1rem;">
                     <div style="background:#1F2937;border:1px solid #374151;border-radius:12px;padding:1.25rem;">
                         <h4 style="margin:0 0 0.85rem 0;font-size:0.95rem;font-weight:700;color:#F9FAFB;display:flex;align-items:center;gap:6px;">
                             👤 Personal Information
@@ -184,7 +184,7 @@ function switchClientProfileTab(tabName) {
                             </div>
                             <div style="display:flex;justify-content:space-between;">
                                 <span style="color:#9CA3AF;">Client Since:</span>
-                                <strong style="color:#FFF;">${escapeHtml(String(client.created_at || 'Not recorded').slice(0, 10))}</strong>
+                                <strong style="color:#FFF;">${escapeHtml(client.created_at ? String(client.created_at).slice(0, 10) : 'Not recorded')}</strong>
                             </div>
                         </div>
                     </div>
@@ -408,16 +408,16 @@ function switchClientProfileTab(tabName) {
             apptHtml += `
                 <div style="background:#1F2937;border:1px solid #374151;border-radius:10px;padding:1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">
                     <div>
-                        <div style="font-weight:700;font-size:0.95rem;color:#F9FAFB;">${escapeHtml(a.service_type || a.service || 'Tattoo Procedure Session')}</div>
+                        <div style="font-weight:700;font-size:0.95rem;color:#F9FAFB;">${escapeHtml(a.service_type || a.service || 'Appointment')}</div>
                         <div style="font-size:0.8rem;color:#9CA3AF;margin-top:2px;">
-                            📅 <strong>${escapeHtml(a.date || '2025-01-15')}</strong> &bull; ⏰ ${escapeHtml(a.time || '14:00')} &bull; 🎨 Artist: <strong style="color:#60A5FA;">${escapeHtml(a.staff_name || 'Jaxon Vance')}</strong>
+                            📅 <strong>${escapeHtml(a.date || (a.datetime ? new Date(a.datetime).toLocaleDateString() : ''))}</strong> &bull; ⏰ ${escapeHtml(a.time || (a.datetime ? new Date(a.datetime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''))} &bull; 🎨 Artist: <strong style="color:#60A5FA;">${escapeHtml(a.staff_name || 'Not recorded')}</strong>
                         </div>
                     </div>
 
                     <div style="display:flex;align-items:center;gap:10px;">
-                        <span style="font-weight:800;font-size:1.05rem;color:#10B981;">$${Number(a.price || a.amount || 250).toFixed(2)}</span>
+                        <span style="font-weight:800;font-size:1.05rem;color:#10B981;">$${Number(a.estimated_price || a.price || a.amount || 0).toFixed(2)}</span>
                         <span style="background:${statusColor}20;color:${statusColor};border:1px solid ${statusColor}50;padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:800;">
-                            ${escapeHtml(a.status || 'COMPLETED')}
+                            ${escapeHtml(a.status || '')}
                         </span>
                         <button type="button" onclick="generateClientAppointmentReceiptPDF(${JSON.stringify(a).replace(/"/g, '&quot;')}, ${client ? JSON.stringify(client).replace(/"/g, '&quot;') : 'null'})" style="padding:0.4rem 0.75rem;background:linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(59,130,246,0.3);" title="Generate formal printable PDF receipt with Tax/VAT breakdown and artist gratuity">
                             🖨️ Receipt PDF
@@ -470,7 +470,7 @@ function switchClientProfileTab(tabName) {
                         <div>
                             <div style="font-weight:700;font-size:0.95rem;color:#F9FAFB;">${escapeHtml(w.title || 'Digital Liability & Health Waiver')}</div>
                             <div style="font-size:0.78rem;color:#9CA3AF;margin-top:2px;">
-                                Signed on <strong>${escapeHtml(w.date_signed || w.signed_at || '2025-01-10')}</strong> &bull; IP: <code style="color:#A7F3D0;">${escapeHtml(w.ip_address || '192.168.1.104')}</code>
+                                Signed on <strong>${escapeHtml(w.date_signed || w.signed_at || 'date not recorded')}</strong> &bull; IP: <code style="color:#A7F3D0;">${escapeHtml(w.ip_address || 'not recorded')}</code>
                             </div>
                         </div>
                     </div>
@@ -545,7 +545,7 @@ function switchClientProfileTab(tabName) {
                         <div style="padding:0.75rem;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
                             <div>
                                 <div style="font-weight:700;font-size:0.85rem;color:#F9FAFB;margin-bottom:2px;">${escapeHtml(w.title)}</div>
-                                <div style="font-size:0.75rem;color:#9CA3AF;margin-bottom:4px;">📅 ${escapeHtml(w.date || '2025-01-10')}</div>
+                                <div style="font-size:0.75rem;color:#9CA3AF;margin-bottom:4px;">📅 ${escapeHtml(w.date || (w.created_at ? String(w.created_at).slice(0, 10) : ''))}</div>
                                 <div style="font-size:0.75rem;color:#D1D5DB;line-height:1.3;">${escapeHtml(w.notes || '')}</div>
                             </div>
                             <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center;">
@@ -564,6 +564,23 @@ function switchClientProfileTab(tabName) {
     }
 }
 window.switchClientProfileTab = switchClientProfileTab;
+
+function generateClientAppointmentReceiptPDF(a) {
+    const client = currentActiveProfileClient && (currentActiveProfileClient.client || currentActiveProfileClient);
+    const when = a.datetime ? new Date(a.datetime).toLocaleString() : [a.date, a.time].filter(Boolean).join(' ');
+    const price = Number(a.estimated_price || a.price || a.amount || 0), deposit = Number(a.deposit_paid || a.deposit || 0);
+    downloadPdfTable('receipt_appointment_' + a.id + '.pdf', 'Appointment receipt', ['item', 'detail'], [
+        ['Client', (client && client.name) || a.client_name || a.client || ''],
+        ['Service', a.service_type || a.service || ''],
+        ['Artist', a.staff_name || ''],
+        ['Date', when],
+        ['Status', a.status || ''],
+        ['Price', price.toFixed(2)],
+        ['Deposit paid', deposit.toFixed(2)],
+        ['Balance', (price - deposit).toFixed(2)]
+    ]);
+}
+window.generateClientAppointmentReceiptPDF = generateClientAppointmentReceiptPDF;
 
 // One saved consent form, shown inside the profile: every question with the client's answer.
 async function viewClientConsentForm(formId) {
@@ -1039,7 +1056,7 @@ window.renderD3SupplyUsageHeatmap = renderD3SupplyUsageHeatmap;
 
 // D3 Client Appointment Timeline Renderer
 function renderD3ClientAppointmentTimeline(appointments) {
-    const container = document.getElementById('d3-client-appointment-timeline');
+    const container = document.querySelector('#client-profile-modal-body #d3-client-appointment-timeline');
     if (!container || !window.d3) return;
 
     container.innerHTML = '';
@@ -1105,7 +1122,7 @@ function renderD3ClientAppointmentTimeline(appointments) {
             .attr('fill', '#9CA3AF')
             .attr('font-size', '10px')
             .attr('font-weight', '700')
-            .text(a.date || '2025-01-15');
+            .text(a.date || (a.datetime ? new Date(a.datetime).toLocaleDateString() : ''));
 
         // Service text below
         svg.append('text')
@@ -1800,6 +1817,7 @@ if (document.readyState === 'loading') {
 function forceShowModal(id) {
     const el = document.getElementById(id);
     if (el) {
+        if (el.parentElement !== document.body && el.closest('.destination-view')) document.body.appendChild(el);
         el.style.display = 'flex';
         el.setAttribute('aria-hidden', 'false');
     }
@@ -2803,10 +2821,6 @@ async function fetchAndRenderDailyStudioSummary() {
 }
 window.fetchAndRenderDailyStudioSummary = fetchAndRenderDailyStudioSummary;
 
-function exportCuratedEarPlanToWaiver() {
-    showStudioToast('Curated Ear Plan exported to Client Waiver');
-}
-window.exportCuratedEarPlanToWaiver = exportCuratedEarPlanToWaiver;
 
 const PROCEDURE_NOTE_TEMPLATES = {
     tattoo: 'Tattoo session. Placement: . Size: . Needles: . Inks (brand, lot): . Aftercare explained: yes/no.',

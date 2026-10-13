@@ -29,7 +29,11 @@ Abra **Ajustes** para introducir sus precios, la regla de depósito, el tipo de 
 
 ## Clientes
 
-**Clientes** enumera a todos con sus datos de contacto, alergias y notas médicas, consentimientos firmados y total gastado. Use **Nuevo cliente** para añadir uno. La búsqueda filtra la lista mientras escribe. **Ver perfil** abre el registro completo.
+**Clientes** enumera a todos con sus datos de contacto, alergias y notas médicas, consentimientos firmados y total gastado. Use **Nuevo cliente** para añadir uno. La búsqueda filtra la lista mientras escribe. **Ver perfil** abre el registro completo. En el perfil, **Editar cliente** cambia los datos y **Eliminar** borra al cliente. El perfil también muestra las citas, las notas del personal, los consentimientos firmados, los formularios de consentimiento guardados y las fotos de los trabajos. Para añadir muchos clientes a la vez, abra **Ajustes**, **Import Data** y pegue una lista cuya primera línea sea `name,email,phone,allergies,notes`.
+
+## Personal
+
+Haga clic en el botón del personal, arriba a la derecha, para ver a su equipo. **Añadir miembro** añade una persona, **Editar** cambia sus datos y **Quitar** la retira del equipo. **Seleccionar** muestra el nombre de esa persona en la barra superior, para que todos vean quién está en la pantalla. No hay contraseñas ni niveles de acceso. Un miembro nuevo se puede elegir enseguida en cualquier lugar donde se elige un artista, por ejemplo al reservar una cita.
 
 ## Citas y programación
 
@@ -38,6 +42,8 @@ Abra **Ajustes** para introducir sus precios, la regla de depósito, el tipo de 
 ## Consentimientos digitales
 
 Abra el formulario de consentimiento, elija el cliente de la lista (sus alergias se completan automáticamente), confirme la verificación de edad y haga que el cliente firme en la tableta. El consentimiento se guarda con la imagen de la firma. No se guarda sin un cliente y una firma.
+
+Para que el cliente rellene un formulario de consentimiento en una tableta, abra **Clientes**, el creador de formularios de consentimiento, la vista previa del formulario y luego el modo quiosco para tableta. El cliente responde una sección por pantalla, firma en la última y toca el botón para terminar. El formulario se guarda con la firma y se descarga un PDF. Si antes no se eligió ningún cliente, se crea un cliente nuevo con el nombre, el correo, el teléfono y la fecha de nacimiento del formulario. Los formularios guardados están en el perfil del cliente, en **Consentimientos**; **Ver respuestas** muestra cada respuesta.
 
 ## Mensajes: el CRM prepara, usted envía
 
@@ -57,7 +63,7 @@ El escáner en **Registro de actividad** usa la cámara del dispositivo. Escanee
 
 ## Dinero y personal
 
-La **Calculadora de propinas** reparte una propina 80% artista, 15% aprendiz, 5% recepción y la registra. El personal registra la entrada y salida con el botón de turno. Las exportaciones le dan el registro de actividad, el stock bajo, los turnos y las duraciones de sesión en CSV o PDF.
+La **Calculadora de propinas** reparte una propina 80% artista, 15% aprendiz, 5% recepción y la registra. El personal registra la entrada y salida con el botón de turno. Las exportaciones le dan el registro de actividad, el stock bajo, los turnos y las duraciones de sesión en CSV o PDF. En el Calendario, la ventana de turnos muestra si una persona está de turno, y la lista de **Turnos** recoge los turnos previstos: elija una persona, una fecha y el horario, y pulse **Añadir turno**. La exportación de turnos y, en Inventario, la exportación del stock guardan un archivo CSV o PDF en su carpeta de Descargas.
 
 ## Registros de cumplimiento
 

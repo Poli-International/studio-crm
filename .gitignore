@@ -41,3 +41,6 @@ Thumbs.db
 # Ready-to-run packaging
 /runtime
 /dist
+
+# Click test report
+click-report.json

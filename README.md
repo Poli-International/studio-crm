@@ -62,8 +62,11 @@ All data is in `data/studio_crm.sqlite`. Copy that file to back up the studio.
 
 ```bash
 npm test           # test battery + vitest
+npm run test:click # real clicks in Chrome or Edge: the daily jobs, then every button
 npm run guide      # rebuild public/guide/<lang>.html from docs/
 ```
+
+The click test (`tests/click/`) starts the app on a throwaway database, opens a real browser and uses the mouse. `flows.mjs` does the jobs a studio does every day (add, edit and delete a client, manage staff, export, clock in, import a CSV, fill and sign the tablet form). `crawl.mjs` clicks every button it can reach and fails on one that does nothing, throws an error or is covered by something else. Both run before a release is packed, so a dead button blocks the release. It needs Chrome or Edge on the machine and nothing else.
 
 Interface text is translated by `public/js/i18n-phrases.js` from `public/i18n/<lang>.json`, keyed on the exact English text.
 

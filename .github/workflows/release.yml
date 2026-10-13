@@ -15,8 +15,31 @@ permissions:
   contents: write
 
 jobs:
+  # A dead button blocks the release: nothing is packed or published unless every
+  # daily job and every button passes a real click in a real browser.
+  click:
+    name: Click test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: npm ci --no-audit --no-fund
+      - name: The jobs a studio does every day
+        run: node tests/click/flows.mjs
+      - name: Every button
+        run: node tests/click/crawl.mjs
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with:
+          name: click-report
+          path: click-report.json
+          if-no-files-found: ignore
+
   pack:
     name: ${{ matrix.name }}
+    needs: click
     strategy:
       fail-fast: false
       matrix:

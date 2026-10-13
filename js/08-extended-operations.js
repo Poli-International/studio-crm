@@ -1,11 +1,5 @@
 // Global Studio OS Utilities and Modals
-function openStudioProSuiteModal(tab) {
-    const overlay = document.getElementById("studio-pro-suite-modal-overlay");
-    if (overlay) overlay.style.display = "flex";
-    if (tab) switchStudioProSuiteTab(tab);
-    else switchStudioProSuiteTab("ear-planner");
-}
-window.openStudioProSuiteModal = openStudioProSuiteModal;
+
 
 function closeStudioProSuiteModal() {
     const overlay = document.getElementById("studio-pro-suite-modal-overlay");
@@ -64,7 +58,7 @@ function switchStudioProSuiteTab(tab) {
                         </div>
                         <div style="font-size:0.75rem;color:#94A3B8;margin-top:4px;">Includes 3 piercing procedures + titanium bezel gem tops</div>
                     </div>
-                    <button onclick="exportCuratedEarPlanToWaiver()" style="padding:10px;background:linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);color:#FFF;border:none;border-radius:8px;font-weight:800;font-size:0.85rem;cursor:pointer;">📎 Attach Stack Plan to Client Waiver</button>
+                    
                 </div>
             </div>
         `;
@@ -118,7 +112,7 @@ function switchStudioProSuiteTab(tab) {
                         <h4 style="margin:0;color:#38BDF8;font-size:0.95rem;">12-Month Procurement Analytics & PO Generator</h4>
                         <p style="margin:2px 0 0;font-size:0.75rem;color:#94A3B8;">Supply expenditure trajectory and automated supplier restocking</p>
                     </div>
-                    <button onclick="alert('Top-5 Supplier PO PDF generated.')" style="padding:6px 14px;background:linear-gradient(135deg, #10B981 0%, #059669 100%);color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.78rem;cursor:pointer;">📄 Generate Top-5 PO (PDF)</button>
+                    
                 </div>
                 <div style="height:160px;background:#090D16;border-radius:8px;border:1px solid #334155;display:flex;align-items:center;justify-content:center;color:#38BDF8;font-size:0.85rem;">
                     📈 D3 Procurement Spend Trend: $34,850 YTD Spend across 5 primary vendors
@@ -186,7 +180,7 @@ function sendTeamChatMessage() {
     if (stream) {
         const item = document.createElement("div");
         item.style.cssText = "background:#1E293B;border:1px solid #334155;border-radius:8px;padding:8px 12px;font-size:0.8rem;color:#F8FAFC;";
-        item.innerHTML = `<strong style="color:#38BDF8;">Staff User:</strong> ${msg} <span style="font-size:0.7rem;color:#64748B;float:right;">Just now</span>`;
+        item.innerHTML = `<strong style="color:#38BDF8;">${escapeHtml((activeStaff() || {}).name || "Staff")}:</strong> ${escapeHtml(msg)} <span style="font-size:0.7rem;color:#64748B;float:right;">Just now</span>`;
         stream.appendChild(item);
         stream.scrollTop = stream.scrollHeight;
     }
@@ -220,40 +214,50 @@ function closeQuickTableExportModal() {
 }
 window.closeQuickTableExportModal = closeQuickTableExportModal;
 
-function executeQuickExport(format) {
-    const target = document.getElementById("quick-export-target-select")?.value || "table";
-    alert("Exported " + target + " as " + format.toUpperCase() + " successfully!");
+// What each export contains. Tables with their own data source use it; any
+// other table is exported as it is shown on the page.
+async function quickExportData(target) {
+    if (target === "session-duration-breakdown-table") {
+        return { name: "session_durations", title: "Session durations", head: SESSION_HEAD, rows: await sessionDurationRows() };
+    }
+    if (target === "inventory-catalog-table") {
+        const inv = await fetchJson("/api/inventory");
+        const items = Array.isArray(inv) ? inv : (inv.items || []);
+        return { name: "inventory_manifest", title: "Inventory manifest",
+            head: ["name", "sku", "category", "quantity", "reorder point", "unit cost", "lot", "expires", "supplier"],
+            rows: items.map((i) => [i.name, i.sku, i.category || i.item_type, i.quantity, i.reorder_point, i.unit_cost != null ? i.unit_cost : i.price, i.lot_number, i.exp_date, i.supplier].map((v) => (v == null ? "" : v))) };
+    }
+    if (target === "summary-events-table") {
+        const logs = await fetchJson("/api/activity-logs?limit=100");
+        return { name: "activity_log", title: "Activity log", head: ["time", "category", "staff", "title", "details"],
+            rows: (Array.isArray(logs) ? logs : []).map((l) => [l.timestamp ? new Date(l.timestamp).toLocaleString() : "", l.category || "", l.user || "", l.title || "", l.details || ""]) };
+    }
+    const table = document.getElementById(target);
+    const head = table ? [...table.querySelectorAll("thead th")].map((c) => c.innerText.trim()) : [];
+    const cells = (row) => [...row.children].map((c) => c.innerText.trim()).filter((c, i) => head[i]);
+    const rows = table ? [...table.querySelectorAll("tbody tr")].filter((r) => r.children.length > 1).map(cells) : [];
+    return { name: target.replace(/-table$/, "").replace(/-/g, "_"), title: target === "shift-roster-table" ? "Shift rota" : "Studio CRM export",
+        head: head.filter(Boolean), rows };
+}
+
+async function executeQuickExport(format) {
+    const target = document.getElementById("quick-export-target-select")?.value || "";
+    const data = await quickExportData(target);
+    if (!data.rows.length) { showStudioToast("Nothing to export yet: this list is empty"); return; }
+    if (format === "pdf") downloadPdfTable(data.name + ".pdf", data.title, data.head, data.rows);
+    else downloadCsv(data.name + ".csv", data.head, data.rows);
+    showStudioToast("Saved to your Downloads folder: " + data.name + "." + format);
     closeQuickTableExportModal();
 }
 window.executeQuickExport = executeQuickExport;
 
 // 5. Staff Switcher & Role Login
-function openStaffLoginModal() {
-    const el = document.getElementById("staff-login-modal-overlay");
-    if (el) el.style.display = "flex";
-}
-window.openStaffLoginModal = openStaffLoginModal;
 
-function closeStaffLoginModal() {
-    const el = document.getElementById("staff-login-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeStaffLoginModal = closeStaffLoginModal;
 
-function switchStaffRole(role, name) {
-    const badge = document.getElementById("current-staff-role-badge");
-    if (badge) badge.textContent = name;
-    alert("Switched active profile to " + name);
-    closeStaffLoginModal();
-}
-window.switchStaffRole = switchStaffRole;
+
 
 // 6. Test Diagnostics & Coverage
-function openTestCoverageModal() {
-    const el = document.getElementById("test-coverage-modal-overlay");
-    if (el) el.style.display = "flex";
-}
-window.openTestCoverageModal = openTestCoverageModal;
+
 
 function closeTestCoverageModal() {
     const el = document.getElementById("test-coverage-modal-overlay");
@@ -262,11 +266,7 @@ function closeTestCoverageModal() {
 window.closeTestCoverageModal = closeTestCoverageModal;
 
 // 7. Quick Portal Access Generator
-function openQuickPortalAccessModal(clientId) {
-    const el = document.getElementById("quick-portal-access-modal-overlay");
-    if (el) el.style.display = "flex";
-}
-window.openQuickPortalAccessModal = openQuickPortalAccessModal;
+
 
 function closeQuickPortalAccessModal() {
     const el = document.getElementById("quick-portal-access-modal-overlay");
@@ -278,8 +278,9 @@ function copyGeneratedPortalLink() {
     const input = document.getElementById("quick-portal-link-input");
     if (input) {
         input.select();
-        navigator.clipboard.writeText(input.value);
-        alert("Client Portal Access Link copied to clipboard!");
+        navigator.clipboard.writeText(input.value).then(
+            () => showStudioToast("Client portal link copied"),
+            () => showStudioToast("Could not copy: select the link and press Ctrl+C"));
     }
 }
 window.copyGeneratedPortalLink = copyGeneratedPortalLink;
@@ -292,34 +293,6 @@ function openClientPortalDirectly() {
 window.openClientPortalDirectly = openClientPortalDirectly;
 
 // 8. Client Photo Camera Capture
-function openClientPhotoCameraModal(clientId) {
-    const el = document.getElementById("client-photo-camera-modal-overlay");
-    if (el) el.style.display = "flex";
-}
-window.openClientPhotoCameraModal = openClientPhotoCameraModal;
-
-function closeClientPhotoCameraModal() {
-    const el = document.getElementById("client-photo-camera-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeClientPhotoCameraModal = closeClientPhotoCameraModal;
-
-function saveCapturedClientProfilePhoto(clientId) {
-    try {
-        localStorage.setItem('client_photo_' + (clientId || 'active'), 'data:image/png;base64,mock');
-    } catch(e) {}
-    alert("Client photo captured and saved to profile!");
-    closeClientPhotoCameraModal();
-}
-window.saveCapturedClientProfilePhoto = saveCapturedClientProfilePhoto;
-
-function renderD3ClientAppointmentTimeline(clientId) {
-    const container = document.getElementById("d3-client-appointment-timeline");
-    if (container) {
-        container.innerHTML = "<div style='color:#38BDF8;font-size:0.8rem;'>D3 Appointment Timeline rendered for client</div>";
-    }
-}
-window.renderD3ClientAppointmentTimeline = renderD3ClientAppointmentTimeline;
 
 // 9. Category Settings
 function openCategorySettingsModal() {
@@ -393,19 +366,10 @@ function toggleClientQuickActionsMenu() {
 }
 window.toggleClientQuickActionsMenu = toggleClientQuickActionsMenu;
 
-
-
 function initInventoryRemoteSyncState() {
     // init persistent remote CSV sync
 }
 window.initInventoryRemoteSyncState = initInventoryRemoteSyncState;
-
-
-function openClientDirectoryModal() {
-    const el = document.getElementById("client-directory-modal-overlay");
-    if (el) el.style.display = "flex";
-}
-window.openClientDirectoryModal = openClientDirectoryModal;
 
 function toggleGlobalDarkMode() {
     const body = document.body;
@@ -423,101 +387,6 @@ function toggleGlobalDarkMode() {
 window.toggleGlobalDarkMode = toggleGlobalDarkMode;
 
 // Other Missing Function Stubs
-
-
-
-function dismissBackupWarningToast() {
-    const el = document.getElementById("backup-warning-toast");
-    if (el) el.style.display = "none";
-}
-window.dismissBackupWarningToast = dismissBackupWarningToast;
-
-function closeStaffDashboardComponent() {
-    const el = document.getElementById("staff-dashboard-component");
-    if (el) el.style.display = "none";
-}
-window.closeStaffDashboardComponent = closeStaffDashboardComponent;
-
-
-function openDailyStudioSummaryModal() {
-    const el = document.getElementById("daily-summary-modal-overlay");
-    if (el) el.style.display = "flex";
-}
-window.openDailyStudioSummaryModal = openDailyStudioSummaryModal;
-
-function openQuickNewAppointmentModal() {
-    openAutoSchedulerModal();
-}
-window.openQuickNewAppointmentModal = openQuickNewAppointmentModal;
-
-function openQuickAddClientModal() {
-    openClientDirectoryModal();
-}
-window.openQuickAddClientModal = openQuickAddClientModal;
-
-
-
-function openDepositLedgerModal() {
-    const el = document.getElementById("deposit-ledger-modal-overlay");
-    if (el) el.style.display = "flex";
-    else openStudioProSuiteModal("accounting");
-}
-window.openDepositLedgerModal = openDepositLedgerModal;
-
-
-
-
-
-
-
-
-function openImportModal() {
-    const el = document.getElementById("import-modal");
-    if (el) el.style.display = "flex";
-}
-window.openImportModal = openImportModal;
-
-
-
-function openLowStockModal() {
-    openStudioProSuiteModal("procurement");
-}
-window.openLowStockModal = openLowStockModal;
-
-function openInventoryHealthModal() {
-    openStudioProSuiteModal("procurement");
-}
-window.openInventoryHealthModal = openInventoryHealthModal;
-
-function openAftercarePipelineModal() {
-    openStudioProSuiteModal("aftercare");
-}
-window.openAftercarePipelineModal = openAftercarePipelineModal;
-
-
-
-
-
-
-
-
-function openShiftModal() {
-    const el = document.getElementById("shift-modal");
-    if (el) el.style.display = "flex";
-}
-window.openShiftModal = openShiftModal;
-
-function openVatSettingsModal() {
-    const el = document.getElementById("vat-settings-modal-overlay");
-    if (el) el.style.display = "flex";
-}
-window.openVatSettingsModal = openVatSettingsModal;
-
-function closeVatSettingsModal() {
-    const el = document.getElementById("vat-settings-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeVatSettingsModal = closeVatSettingsModal;
 
 // DOM Binding helper and listeners
 function bindBtn(id, handler) {
@@ -636,328 +505,57 @@ function toggleLiveStreamUpdates() {
 }
 window.toggleLiveStreamUpdates = toggleLiveStreamUpdates;
 
-function toggleArtistPerformanceWidget() {
-    const widget = document.getElementById("artist-performance-widget");
-    if (widget) widget.style.display = widget.style.display === "none" ? "block" : "none";
-}
-window.toggleArtistPerformanceWidget = toggleArtistPerformanceWidget;
-
-function toggleDailySummaryCard() {
-    const card = document.getElementById("daily-summary-card");
-    if (card) card.style.display = card.style.display === "none" ? "block" : "none";
-}
-window.toggleDailySummaryCard = toggleDailySummaryCard;
-
-function openInventoryManagementModal() {
-    openStudioProSuiteModal("procurement");
-}
-window.openInventoryManagementModal = openInventoryManagementModal;
-
-
-
-
 function filterDashboardProcurementHealthSupplier(supplier) {
     if (typeof showToastNotification === "function") showToastNotification("Filtering supplier: " + supplier);
 }
 window.filterDashboardProcurementHealthSupplier = filterDashboardProcurementHealthSupplier;
 
 
-function navigateShiftMonth(direction) {
-    const title = document.getElementById("shift-roster-month-title");
-    if (title) title.textContent = direction > 0 ? "September 2026" : "July 2026";
-}
-window.navigateShiftMonth = navigateShiftMonth;
-
-function jumpToCurrentShiftMonth() {
-    const title = document.getElementById("shift-roster-month-title");
-    if (title) title.textContent = "August 2026 (Current)";
-}
-window.jumpToCurrentShiftMonth = jumpToCurrentShiftMonth;
-
-function renderMonthlyShiftSchedule() {}
-window.renderMonthlyShiftSchedule = renderMonthlyShiftSchedule;
-
-
-
-
-
-
-
-function openClearAllConfirmModal() {
-    if (confirm("Are you sure you want to clear all activity feed history?")) {
-        executeClearAllActivityLogs();
-    }
-}
-window.openClearAllConfirmModal = openClearAllConfirmModal;
-
 function toggleSelectAllActivities(cb) {
     document.querySelectorAll(".activity-checkbox").forEach(c => { c.checked = cb?.checked || false; });
 }
 window.toggleSelectAllActivities = toggleSelectAllActivities;
 
-
-function clearActivitySelection() {
-    document.querySelectorAll(".activity-checkbox").forEach(c => { c.checked = false; });
-}
-window.clearActivitySelection = clearActivitySelection;
-
-
 function filterPortalHistoryList(query) {}
 window.filterPortalHistoryList = filterPortalHistoryList;
-
-
-
-
-
-function openAftercarePipelineModal() {
-    openStudioProSuiteModal("aftercare");
-}
-window.openAftercarePipelineModal = openAftercarePipelineModal;
-
-function closeAftercarePipelineModal() {
-    closeStudioProSuiteModal();
-}
-window.closeAftercarePipelineModal = closeAftercarePipelineModal;
-
-
-
-function toggleClientPortalTheme() {
-    toggleGlobalDarkMode();
-}
-window.toggleClientPortalTheme = toggleClientPortalTheme;
-
-
-
-function logoutClientPortalSession() {
-    switchToStaffDashboardMode();
-}
-window.logoutClientPortalSession = logoutClientPortalSession;
-
-function navigateClientPortalHash(hash) {
-    window.location.hash = hash;
-}
-window.navigateClientPortalHash = navigateClientPortalHash;
-
-function togglePortalSidebar() {
-    const sb = document.getElementById("portal-sidebar");
-    if (sb) sb.style.display = sb.style.display === "none" ? "block" : "none";
-}
-window.togglePortalSidebar = togglePortalSidebar;
-
-function addPortalPinnedNote() {
-    const input = document.getElementById("portal-note-input");
-    if (input && input.value) {
-        alert("Pinned note added: " + input.value);
-        input.value = "";
-    }
-}
-window.addPortalPinnedNote = addPortalPinnedNote;
-
-function addQuickNote() {
-    const input = document.getElementById("quick-note-input");
-    if (input && input.value) {
-        alert("Quick note added: " + input.value);
-        input.value = "";
-    }
-}
-window.addQuickNote = addQuickNote;
-
-
-
-function quickLogFromInput() {
-    addQuickNote();
-}
-window.quickLogFromInput = quickLogFromInput;
-
-function submitQuickLog() {
-    addQuickNote();
-}
-window.submitQuickLog = submitQuickLog;
-
-
-
-
-
-
-
-function closeConflictResolutionModal() {
-    const el = document.getElementById("conflict-resolution-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeConflictResolutionModal = closeConflictResolutionModal;
-
-
 
 function initQrFocusResize() {}
 window.initQrFocusResize = initQrFocusResize;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function insertProcedureTemplate(tmpl) {
-    const desc = document.getElementById("procedure-notes-input") || document.getElementById("waiver-notes-input");
-    if (desc) desc.value = (desc.value ? desc.value + String.fromCharCode(10) : "") + tmpl;
-}
-window.insertProcedureTemplate = insertProcedureTemplate;
-
-
-
-
-
-
-
-
-
-
-function closeSessionDurationReportModal() {
-    const el = document.getElementById("session-duration-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeSessionDurationReportModal = closeSessionDurationReportModal;
-
 function openSessionDurationReportModal() {
-    const el = document.getElementById("session-duration-modal-overlay");
-    if (el) el.style.display = "flex";
+    forceShowModal("session-duration-report-modal-overlay");
+    renderSessionDurationReport();
 }
+
+// The report window: the chart, and one line per service and artist.
+async function renderSessionDurationReport() {
+    renderD3SessionDurationChart();
+    const table = document.getElementById("modal-session-duration-breakdown-table");
+    if (!table) return;
+    const groups = {};
+    (await sessionDurationRows()).forEach((r) => {
+        const g = groups[r[1] + "|" + r[0]] = groups[r[1] + "|" + r[0]] || { service: r[1], artist: r[0], n: 0, hours: 0, billed: 0 };
+        g.n++; g.hours += Number(r[4]); g.billed += Number(r[5]);
+    });
+    const cell = (v) => '<td style="padding:8px;">' + escapeHtml(String(v)) + "</td>";
+    table.querySelector("thead").innerHTML = "<tr>" + ["Service", "Artist", "Sessions", "Average hours", "Billed"].map((h) => '<th style="padding:8px;text-align:left;">' + h + "</th>").join("") + "</tr>";
+    const list = Object.values(groups);
+    table.querySelector("tbody").innerHTML = list.length
+        ? list.map((g) => "<tr>" + cell(g.service) + cell(g.artist) + cell(g.n) + cell((g.hours / g.n).toFixed(1)) + cell(g.billed.toFixed(2)) + "</tr>").join("")
+        : '<tr><td colspan="5" style="padding:8px;color:#94A3B8;">No completed sessions yet. Mark an appointment as completed and it appears here.</td></tr>';
+}
+window.renderSessionDurationReport = renderSessionDurationReport;
 window.openSessionDurationReportModal = openSessionDurationReportModal;
-
-
-
-
-function closeBulkProgressToast() {
-    const el = document.getElementById("bulk-progress-toast");
-    if (el) el.style.display = "none";
-}
-window.closeBulkProgressToast = closeBulkProgressToast;
-
-
-
-
-
-
-function openTattooConsultationGenerator() {
-    openStudioProSuiteModal("tattoo-estimator");
-}
-window.openTattooConsultationGenerator = openTattooConsultationGenerator;
-
-function bookTattooEstimateAppointment() {
-    openAutoSchedulerModal();
-}
-window.bookTattooEstimateAppointment = bookTattooEstimateAppointment;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function closeShiftModal() {
-    const el = document.getElementById("shift-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeShiftModal = closeShiftModal;
-
-
-
-
-
-
-
-
-
-
 
 function openInventoryExportConfirmModal() {
     openQuickTableExportModal("inventory-catalog-table");
 }
 window.openInventoryExportConfirmModal = openInventoryExportConfirmModal;
 
-function closeInventoryExportConfirmModal() {
-    closeQuickTableExportModal();
-}
-window.closeInventoryExportConfirmModal = closeInventoryExportConfirmModal;
-
-function fetchAndRenderDailyStudioSummary() {
-    openDailyStudioSummaryModal();
-}
-window.fetchAndRenderDailyStudioSummary = fetchAndRenderDailyStudioSummary;
-
-
-function printDailySummaryReport() {
-    window.print();
-}
-window.printDailySummaryReport = printDailySummaryReport;
-
 function openMessengerMacroModal() {
     openTeamMessengerModal();
 }
 window.openMessengerMacroModal = openMessengerMacroModal;
-
-function closeMessengerMacroModal() {
-    closeTeamMessengerModal();
-}
-window.closeMessengerMacroModal = closeMessengerMacroModal;
-
-
-
-
-
-
-
-function saveCategoryThresholdSettings() {
-    handleSaveCategorySetting();
-}
-window.saveCategoryThresholdSettings = saveCategoryThresholdSettings;
-
-function addNewCategoryThresholdFromSettings() {
-    openCategorySettingsModal();
-}
-window.addNewCategoryThresholdFromSettings = addNewCategoryThresholdFromSettings;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // =========================================================================
 // 🎯 EXTENDED STUDIO OPERATIONS HANDLERS & MODAL UTILITIES
@@ -982,48 +580,8 @@ function showToastNotification(msg) {
 }
 window.showToastNotification = showToastNotification;
 
-
-
-
-
-
-function addCustomMessengerMacro() {
-    const text = prompt("Enter custom floor message macro:");
-    if (text) insertMessengerMacro(text);
-}
-window.addCustomMessengerMacro = addCustomMessengerMacro;
-
-
-
-
-
 function updateVatPreviewCalculation() {}
 window.updateVatPreviewCalculation = updateVatPreviewCalculation;
-
-
-
-function closeDepositLedgerModal() {
-    const el = document.getElementById("deposit-ledger-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeDepositLedgerModal = closeDepositLedgerModal;
-
-
-function closeImportModal() {
-    const el = document.getElementById("import-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeImportModal = closeImportModal;
-
-
-
-
-
-
-
-
-
-
 
 function calculateInkWash(drops) {
     return drops ? drops + " drops wash solution" : "Standard 50/50 wash";
@@ -1034,21 +592,6 @@ function recommendPmuPigment(skinType) {
     return "Warm Neutral Mineral Pigment";
 }
 window.recommendPmuPigment = recommendPmuPigment;
-
-
-
-
-
-
-
-
-function closeRecentScanProfileModal() {
-    const el = document.getElementById("recent-scan-profile-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeRecentScanProfileModal = closeRecentScanProfileModal;
-
-
 
 function closeTattooPriceEstimatorModal() { closeStudioProSuiteModal(); }
 window.closeTattooPriceEstimatorModal = closeTattooPriceEstimatorModal;

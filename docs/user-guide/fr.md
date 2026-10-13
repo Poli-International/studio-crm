@@ -29,7 +29,11 @@ Ouvrez **Réglages** pour saisir vos prix, la règle d'acompte, le taux de taxe 
 
 ## Clients
 
-**Clients** répertorie tout le monde avec leurs coordonnées, allergies et notes médicales, formulaires de consentement signés et total dépensé. Utilisez **Nouveau client** pour en ajouter un. La recherche filtre la liste au fur et à mesure que vous tapez. **Voir le profil** ouvre le dossier complet.
+**Clients** répertorie tout le monde avec leurs coordonnées, allergies et notes médicales, formulaires de consentement signés et total dépensé. Utilisez **Nouveau client** pour en ajouter un. La recherche filtre la liste au fur et à mesure que vous tapez. **Voir le profil** ouvre le dossier complet. Dans le profil, **Modifier le client** change les coordonnées et **Supprimer** retire le client. Le profil affiche aussi les rendez-vous, les notes du personnel, les décharges signées, les formulaires de consentement enregistrés et les photos des travaux. Pour ajouter plusieurs clients à la fois, ouvrez **Réglages**, **Import Data** et collez une liste dont la première ligne est `name,email,phone,allergies,notes`.
+
+## Personnel
+
+Cliquez sur le bouton du personnel en haut à droite (il affiche **Connexion équipe** tant que personne n'est sélectionné) pour voir votre équipe. **Ajouter un membre** ajoute une personne, **Modifier** change ses coordonnées et **Retirer** l'enlève de l'équipe. **Sélectionner** affiche le nom de cette personne dans la barre du haut, pour que chacun voie qui est à l'écran. Il n'y a ni mot de passe ni niveau d'accès. Un nouveau membre peut être choisi tout de suite partout où l'on choisit un artiste, par exemple pour un rendez-vous.
 
 ## Rendez-vous et planification
 
@@ -38,6 +42,8 @@ Ouvrez **Réglages** pour saisir vos prix, la règle d'acompte, le taux de taxe 
 ## Formulaires de consentement numériques
 
 Ouvrez le formulaire de consentement, choisissez le client dans la liste (ses allergies sont déjà renseignées), confirmez la vérification d'âge, puis faites signer le client sur la tablette. Le formulaire est enregistré avec l'image de la signature. Il ne s'enregistre pas sans client ni signature.
+
+Pour faire remplir un formulaire de consentement sur une tablette, ouvrez **Clients**, le créateur de formulaires de consentement, l'aperçu du formulaire, puis le mode kiosque tablette. Le client répond à une section par écran, signe sur le dernier et touche le bouton pour terminer. Le formulaire est enregistré avec la signature et un PDF est téléchargé. Si aucun client n'a été choisi avant, un nouveau client est créé à partir du nom, de l'e-mail, du téléphone et de la date de naissance du formulaire. Les formulaires enregistrés se trouvent dans le profil du client, sous **Décharges** ; **Voir les réponses** affiche chaque réponse.
 
 ## Messages : le CRM prépare, vous envoyez
 
@@ -57,7 +63,7 @@ Le scanner dans **Journal d'activité** utilise la caméra de l'appareil. Scanne
 
 ## Argent et personnel
 
-Le **Calculateur de pourboire** répartit un pourboire à 80 % artiste, 15 % apprenti, 5 % accueil et l'enregistre. Le personnel pointe l'arrivée et le départ avec le bouton de service. Les exports fournissent le journal d'activité, le stock faible, les services et les durées de séance en CSV ou PDF.
+Le **Calculateur de pourboire** répartit un pourboire à 80 % artiste, 15 % apprenti, 5 % accueil et l'enregistre. Le personnel pointe l'arrivée et le départ avec le bouton de service. Les exports fournissent le journal d'activité, le stock faible, les services et les durées de séance en CSV ou PDF. Dans le Calendrier, la fenêtre des services indique si une personne est en service, et le **Planning des services** liste les services prévus : choisissez une personne, une date et les heures, puis **Ajouter un service**. L'export du planning et, dans l'Inventaire, l'export du stock enregistrent un fichier CSV ou PDF dans votre dossier Téléchargements.
 
 ## Registres de conformité
 

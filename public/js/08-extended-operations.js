@@ -58,7 +58,7 @@ function switchStudioProSuiteTab(tab) {
                         </div>
                         <div style="font-size:0.75rem;color:#94A3B8;margin-top:4px;">Includes 3 piercing procedures + titanium bezel gem tops</div>
                     </div>
-                    <button onclick="exportCuratedEarPlanToWaiver()" style="padding:10px;background:linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);color:#FFF;border:none;border-radius:8px;font-weight:800;font-size:0.85rem;cursor:pointer;">📎 Attach Stack Plan to Client Waiver</button>
+                    
                 </div>
             </div>
         `;
@@ -180,7 +180,7 @@ function sendTeamChatMessage() {
     if (stream) {
         const item = document.createElement("div");
         item.style.cssText = "background:#1E293B;border:1px solid #334155;border-radius:8px;padding:8px 12px;font-size:0.8rem;color:#F8FAFC;";
-        item.innerHTML = `<strong style="color:#38BDF8;">Staff User:</strong> ${msg} <span style="font-size:0.7rem;color:#64748B;float:right;">Just now</span>`;
+        item.innerHTML = `<strong style="color:#38BDF8;">${escapeHtml((activeStaff() || {}).name || "Staff")}:</strong> ${escapeHtml(msg)} <span style="font-size:0.7rem;color:#64748B;float:right;">Just now</span>`;
         stream.appendChild(item);
         stream.scrollTop = stream.scrollHeight;
     }
@@ -226,6 +226,11 @@ async function quickExportData(target) {
         return { name: "inventory_manifest", title: "Inventory manifest",
             head: ["name", "sku", "category", "quantity", "reorder point", "unit cost", "lot", "expires", "supplier"],
             rows: items.map((i) => [i.name, i.sku, i.category || i.item_type, i.quantity, i.reorder_point, i.unit_cost != null ? i.unit_cost : i.price, i.lot_number, i.exp_date, i.supplier].map((v) => (v == null ? "" : v))) };
+    }
+    if (target === "summary-events-table") {
+        const logs = await fetchJson("/api/activity-logs?limit=100");
+        return { name: "activity_log", title: "Activity log", head: ["time", "category", "staff", "title", "details"],
+            rows: (Array.isArray(logs) ? logs : []).map((l) => [l.timestamp ? new Date(l.timestamp).toLocaleString() : "", l.category || "", l.user || "", l.title || "", l.details || ""]) };
     }
     const table = document.getElementById(target);
     const head = table ? [...table.querySelectorAll("thead th")].map((c) => c.innerText.trim()) : [];

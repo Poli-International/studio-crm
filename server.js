@@ -1478,6 +1478,28 @@ app.delete('/api/clients/:id', (req, res) => {
 });
 
 
+// Consent forms saved from the form builder, newest first (answers are fetched one at a time).
+function clientConsentForms(clientId) {
+  try {
+    return sqlite.prepare("SELECT id, description, content, uploaded_at FROM documents WHERE entity_type = 'client' AND entity_id = ? AND type = 'consent_form' ORDER BY id DESC").all(clientId)
+      .map((row) => {
+        let responses = {};
+        try { responses = JSON.parse(row.content).responses || {}; } catch (e) {}
+        return { id: row.id, name: row.description, saved_at: row.uploaded_at,
+          signed: Object.values(responses).some((v) => typeof v === 'string' && v.startsWith('data:image')) };
+      });
+  } catch (e) { return []; }
+}
+
+app.get('/api/consent-forms/:id', (req, res) => {
+  let row;
+  try { row = sqlite.prepare("SELECT id, entity_id, description, content, uploaded_at FROM documents WHERE id = ? AND type = 'consent_form'").get(Number(req.params.id)); } catch (e) {}
+  if (!row) return res.status(404).json({ error: 'Consent form not found' });
+  let content = {};
+  try { content = JSON.parse(row.content); } catch (e) {}
+  res.json({ id: row.id, client_id: row.entity_id, name: row.description, saved_at: row.uploaded_at, ...content });
+});
+
 app.get(['/api/clients/:id/profile', '/api/clients/:id/full-profile'], (req, res) => {
   const clientId = parseInt(req.params.id, 10);
   const clientObj = clients.find(c => c.id === clientId);
@@ -1485,28 +1507,16 @@ app.get(['/api/clients/:id/profile', '/api/clients/:id/full-profile'], (req, res
     return res.status(404).json({ error: 'Client not found' });
   }
 
-  const clientNameLower = (clientObj.name || '').toLowerCase();
+  // By id, or by the exact name on records that carry no id. A name that merely
+  // contains this one belongs to somebody else.
+  const clientNameLower = (clientObj.name || '').trim().toLowerCase();
+  const sameName = (v) => !!clientNameLower && String(v || '').trim().toLowerCase() === clientNameLower;
+  const mine = (r, nameField) => (r.client_id ? parseInt(r.client_id, 10) === clientId : sameName(r[nameField]));
 
-  const clientApps = appointments.filter(a => {
-    if (a.client_id && parseInt(a.client_id, 10) === clientId) return true;
-    if (a.client && a.client.toLowerCase().includes(clientNameLower)) return true;
-    return false;
-  });
-
-  const clientWaivers = waivers.filter(w => {
-    if (w.client_id && parseInt(w.client_id, 10) === clientId) return true;
-    if (w.client_name && w.client_name.toLowerCase().includes(clientNameLower)) return true;
-    return false;
-  });
-
-  const clientWork = clientTattooWork.filter(w => {
-    if (w.client_id && parseInt(w.client_id, 10) === clientId) return true;
-    if (w.client_name && w.client_name.toLowerCase().includes(clientNameLower)) return true;
-    return false;
-  });
-
-  const clientTxns = financial.filter(f => f.client_id === clientId || (f.client_name && f.client_name.toLowerCase().includes(clientNameLower)));
-  const totalSpend = clientTxns.reduce((sum, t) => sum + Number(t.amount || 0), 0) || (clientApps.length * 200) || 450;
+  const clientApps = appointments.filter(a => mine(a, 'client') || (!a.client_id && sameName(a.client_name)));
+  const clientWaivers = waivers.filter(w => mine(w, 'client_name'));
+  const clientWork = clientTattooWork.filter(w => mine(w, 'client_name'));
+  const totalSpend = financial.filter(f => mine(f, 'client_name') && f.type !== 'refund').reduce((sum, t) => sum + Number(t.amount || 0), 0);
 
   const assignedStaff = staff.find(s => s.id === parseInt(clientObj.assigned_staff_id, 10));
 
@@ -1518,13 +1528,14 @@ app.get(['/api/clients/:id/profile', '/api/clients/:id/full-profile'], (req, res
     staff_notes: (clientObj.staff_notes || []).slice().sort((a,b) => new Date(b.timestamp || b.createdAt || 0).getTime() - new Date(a.timestamp || a.createdAt || 0).getTime()),
     appointments: clientApps,
     waivers: clientWaivers,
+    consent_forms: clientConsentForms(clientId),
     tattoo_work: clientWork,
     stats: {
       totalAppointments: clientApps.length,
       signedWaiversCount: clientWaivers.length,
       totalTattooWorkCount: clientWork.length,
       totalSpend: totalSpend,
-      lastVisit: clientObj.lastVisit || (clientApps[0] ? clientApps[0].date : '2025-01-15')
+      lastVisit: clientObj.lastVisit || (clientApps[0] ? clientApps[0].date : '')
     }
   });
 });

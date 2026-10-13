@@ -4,6 +4,7 @@
 //
 //   node tests/click/crawl.mjs            every button, report in click-report.json
 //   CRAWL_DEPTH=1 node tests/click/crawl.mjs    only the eight main screens
+//   CRAWL_PAGE=/tools/form-builder/ node tests/click/crawl.mjs    one embedded tool
 import { writeFileSync } from 'node:fs';
 import { startApp } from './app.mjs';
 
@@ -36,9 +37,12 @@ const enqueue = (keys, pathTo) => {
   }
 };
 
-// The buttons on each main screen
-await browser.goto(url);
-for (const dest of NAV) {
+// One embedded tool on its own page (CRAWL_PAGE=/tools/gauge-converter/), or the app with its eight screens
+const PAGE = process.env.CRAWL_PAGE || '/';
+const start = url.replace(/\/$/, '') + PAGE;
+await browser.goto(start);
+if (PAGE !== '/') enqueue(await browser.evaluate('window.__ct.keys()'), []);
+for (const dest of PAGE === '/' ? NAV : []) {
   const nk = await navKey(dest);
   await browser.click(nk);
   queued.add(nk);
@@ -52,7 +56,7 @@ while (queue.length || last.length) {
   if (process.env.CRAWL_VERBOSE) console.log(item.key);
   results.push(r);
   try {
-    await browser.goto(url);
+    await browser.goto(start);
     let lost = false;
     for (const step of item.path) {
       const t = await browser.click(step);

@@ -83,7 +83,7 @@ function renderClientProfileHeader(data) {
         const loyaltyTier = client.loyalty_tier || '';
         const phone = client.phone || 'No phone recorded';
         const email = client.email || 'No email recorded';
-        const totalSpent = Number(client.total_spent || client.lifetime_value || 0).toFixed(2);
+        const totalSpent = Number((data.stats && data.stats.totalSpend) || 0).toFixed(2);
 
         tagsEl.innerHTML = `
             <span>📧 ${escapeHtml(email)}</span>
@@ -108,7 +108,7 @@ function renderClientProfileHeader(data) {
     if (countAppts) countAppts.textContent = (data.appointments || []).length;
 
     const countWaivers = document.getElementById('cp-count-waivers');
-    if (countWaivers) countWaivers.textContent = (data.waivers || []).length;
+    if (countWaivers) countWaivers.textContent = (data.waivers || []).length + (data.consent_forms || []).length;
 
     const countWork = document.getElementById('cp-count-tattoo-work');
     if (countWork) countWork.textContent = (data.tattoo_work || []).length;
@@ -431,8 +431,21 @@ function switchClientProfileTab(tabName) {
         bodyEl.innerHTML = apptHtml;
 
     } else if (tabName === 'waivers') {
+        const forms = data.consent_forms || [];
+        const formsHtml = forms.length ? `
+            <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:1.25rem;">
+                <div style="font-size:0.825rem;color:#9CA3AF;margin-bottom:4px;">Consent forms saved from the form builder:</div>
+                ${forms.map(f => `
+                <div class="cp-consent-form-row" style="background:#1F2937;border:1px solid #374151;border-radius:10px;padding:1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">
+                    <div>
+                        <div style="font-weight:700;font-size:0.95rem;color:#F9FAFB;">📝 ${escapeHtml(f.name || 'Consent form')}</div>
+                        <div style="font-size:0.78rem;color:#9CA3AF;margin-top:2px;">Saved ${escapeHtml(String(f.saved_at || ''))} &bull; ${f.signed ? 'signed' : 'not signed'}</div>
+                    </div>
+                    <button type="button" onclick="viewClientConsentForm(${Number(f.id)})" style="padding:0.4rem 0.75rem;background:#2563EB;color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">View answers</button>
+                </div>`).join('')}
+            </div>` : '';
         if (!waivers || waivers.length === 0) {
-            bodyEl.innerHTML = `
+            bodyEl.innerHTML = formsHtml + `
                 <div style="text-align:center;padding:3rem;background:#1F2937;border:1px dashed #374151;border-radius:12px;color:#9CA3AF;">
                     <div style="font-size:2rem;margin-bottom:8px;">📜</div>
                     <div>No signed liability waivers recorded for this client.</div>
@@ -473,7 +486,7 @@ function switchClientProfileTab(tabName) {
         });
 
         waiverHtml += `</div>`;
-        bodyEl.innerHTML = waiverHtml;
+        bodyEl.innerHTML = formsHtml + waiverHtml;
 
     } else if (tabName === 'tattoo-work') {
         let workHtml = `
@@ -551,6 +564,40 @@ function switchClientProfileTab(tabName) {
     }
 }
 window.switchClientProfileTab = switchClientProfileTab;
+
+// One saved consent form, shown inside the profile: every question with the client's answer.
+async function viewClientConsentForm(formId) {
+    const bodyEl = document.getElementById('client-profile-modal-body');
+    if (!bodyEl) return;
+    let form;
+    try {
+        const res = await fetch('/api/consent-forms/' + formId);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        form = await res.json();
+    } catch (e) { showStudioToast('Could not open the consent form: the server did not answer'); return; }
+    const responses = form.responses || {};
+    const show = (v) => {
+        if (typeof v === 'string' && v.startsWith('data:image')) return `<img src="${v}" alt="Signature or drawing" style="max-width:320px;background:#FFF;border-radius:6px;">`;
+        if (Array.isArray(v)) return escapeHtml(v.join(', '));
+        if (v === true) return 'Yes';
+        if (v === false) return 'No';
+        return escapeHtml(v == null || v === '' ? 'No answer' : String(v));
+    };
+    const line = (label, v) => `<div style="display:flex;justify-content:space-between;gap:1rem;border-bottom:1px solid #374151;padding:6px 0;font-size:0.85rem;"><span style="color:#9CA3AF;">${escapeHtml(label)}</span><strong style="color:#FFF;text-align:right;">${show(v)}</strong></div>`;
+    const seen = new Set();
+    let html = '';
+    ((form.schema && form.schema.sections) || []).forEach((sec) => {
+        const rows = (sec.fields || []).filter((f) => f.id in responses).map((f) => { seen.add(f.id); return line(f.label || f.id, responses[f.id]); });
+        if (rows.length) html += `<div style="background:#1F2937;border:1px solid #374151;border-radius:12px;padding:1rem;margin-bottom:1rem;"><h4 style="margin:0 0 0.5rem 0;font-size:0.95rem;color:#F9FAFB;">${escapeHtml(sec.title || '')}</h4>${rows.join('')}</div>`;
+    });
+    const rest = Object.keys(responses).filter((k) => !seen.has(k));
+    if (rest.length) html += `<div style="background:#1F2937;border:1px solid #374151;border-radius:12px;padding:1rem;"><h4 style="margin:0 0 0.5rem 0;font-size:0.95rem;color:#F9FAFB;">Other answers</h4>${rest.map((k) => line(k.replace(/_/g, ' '), responses[k])).join('')}</div>`;
+    bodyEl.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;">
+            <div><div style="font-weight:800;font-size:1.05rem;color:#F9FAFB;">📝 ${escapeHtml(form.name || 'Consent form')}</div><div style="font-size:0.78rem;color:#9CA3AF;">Saved ${escapeHtml(String(form.saved_at || ''))}</div></div>
+            <button type="button" onclick="switchClientProfileTab('waivers')" style="padding:0.4rem 0.75rem;background:#374151;color:#F3F4F6;border:none;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;">← Back to waivers</button>
+        </div>` + (html || '<div style="color:#9CA3AF;">This form was saved with no answers.</div>');
+}
+window.viewClientConsentForm = viewClientConsentForm;
 
 // 🔒 HANDLE PRIVATE STAFF NOTE SUBMISSION
 async function handleStaffNoteSubmit(event, clientId) {

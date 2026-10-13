@@ -150,8 +150,67 @@ export async function launchBrowser() {
   };
   const js = (v) => JSON.stringify(v);
 
+  const mouse = (type, x, y, down) => cdp('Input.dispatchMouseEvent', { type, x, y, button: 'left', buttons: down ? 1 : 0, clickCount: 1 });
+  const settle = async (ms = 250) => {
+    await sleep(100);
+    for (let i = 0; i < 40 && await evaluate('window.__ct ? window.__ct.sig.inflight : 0').catch(() => 0) > 0; i++) await sleep(100);
+    await sleep(ms);
+  };
+
+  // The same actions on the page itself, or inside one of its embedded tools
+  // (an <iframe> from the same server) when a frame selector is given.
+  const scope = (frameSel) => {
+    // `body` runs with window and document pointing at the page or at the frame
+    const run = (body) => evaluate(frameSel
+      ? `(function (window) { const document = window.document; ${body} })(document.querySelector(${js(frameSel)}).contentWindow)`
+      : `(function () { ${body} })()`);
+    const offset = () => (frameSel
+      ? evaluate(`(() => { const r = document.querySelector(${js(frameSel)}).getBoundingClientRect(); return { x: r.left, y: r.top }; })()`)
+      : { x: 0, y: 0 });
+    return {
+      evaluate: (expression) => run(`return (${expression});`),
+      // A real mouse click on the button's centre. Returns null when the button is
+      // not on screen, or { covered } when something else lies on top of it.
+      async click(key) {
+        const t = await run(`return window.__ct.target(${js(key)});`);
+        if (!t || t.covered) return t;
+        const o = await offset();
+        for (const type of ['mouseMoved', 'mousePressed', 'mouseReleased']) await mouse(type, t.x + o.x, t.y + o.y, type === 'mousePressed');
+        await settle();
+        return t;
+      },
+      // clicks the first visible button whose label contains the text
+      async clickText(text, within = '') {
+        const key = await run(`const s = ${js(within)}; const el = window.__ct.all().find(e => (!s || e.closest(s)) && (e.innerText || e.value || '').includes(${js(text)})); return el ? window.__ct.key(el) : null;`);
+        if (!key) throw new Error(`No visible button "${text}"${within ? ' in ' + within : ''}`);
+        const t = await this.click(key);
+        if (!t) throw new Error(`Button "${text}" disappeared`);
+        if (t.covered) throw new Error(`Button "${text}" cannot be clicked: covered by ${t.covered}`);
+      },
+      async type(selector, value) {
+        const ok = await run(`const el = document.querySelector(${js(selector)}); if (!el) return false; el.focus(); el.value = ''; return true;`);
+        if (!ok) throw new Error(`No field ${selector}`);
+        await cdp('Input.insertText', { text: value });
+        await run(`const el = document.querySelector(${js(selector)}); el.dispatchEvent(new Event('input', { bubbles: true })); el.dispatchEvent(new Event('change', { bubbles: true }));`);
+      },
+      // draws a zig-zag across the element with the mouse held down, like a signature
+      async scribble(selector) {
+        const r = await run(`const el = document.querySelector(${js(selector)}); if (!el) return null; el.scrollIntoView({ block: 'center' }); const b = el.getBoundingClientRect(); return { x: b.left, y: b.top, w: b.width, h: b.height };`);
+        if (!r) throw new Error(`Nothing to sign: ${selector}`);
+        const o = await offset();
+        const at = (i) => [o.x + r.x + r.w * (0.2 + 0.06 * i), o.y + r.y + r.h * (i % 2 ? 0.3 : 0.7)];
+        await mouse('mouseMoved', ...at(0), false);
+        await mouse('mousePressed', ...at(0), true);
+        for (let i = 1; i <= 10; i++) { await mouse('mouseMoved', ...at(i), true); await sleep(20); }
+        await mouse('mouseReleased', ...at(10), false);
+        await settle();
+      },
+    };
+  };
+
   return {
-    seen, evaluate,
+    seen, settle, ...scope(''),
+    frame: (selector) => scope(selector),
     reset() { seen.errors.length = 0; seen.dialogs.length = 0; seen.downloads.length = 0; },
     async goto(url) {
       await cdp('Page.navigate', { url });
@@ -159,38 +218,7 @@ export async function launchBrowser() {
         await sleep(100);
         if (await evaluate('document.readyState === "complete" && !!window.__ct').catch(() => false)) break;
       }
-      await this.settle();
-    },
-    // waits until the page's own requests are answered
-    async settle(ms = 250) {
-      await sleep(100);
-      for (let i = 0; i < 40 && await evaluate('window.__ct ? window.__ct.sig.inflight : 0').catch(() => 0) > 0; i++) await sleep(100);
-      await sleep(ms);
-    },
-    // A real mouse click on the button's centre. Returns null when the button is
-    // not on screen, or { covered } when something else lies on top of it.
-    async click(key) {
-      const t = await evaluate(`window.__ct.target(${js(key)})`);
-      if (!t || t.covered) return t;
-      for (const type of ['mouseMoved', 'mousePressed', 'mouseReleased']) {
-        await cdp('Input.dispatchMouseEvent', { type, x: t.x, y: t.y, button: 'left', buttons: type === 'mousePressed' ? 1 : 0, clickCount: 1 });
-      }
-      await this.settle();
-      return t;
-    },
-    // clicks the first visible button whose label contains the text
-    async clickText(text, within = '') {
-      const key = await evaluate(`(() => { const s = ${js(within)}; const el = window.__ct.all().find(e => (!s || e.closest(s)) && (e.innerText || e.value || '').includes(${js(text)})); return el ? window.__ct.key(el) : null; })()`);
-      if (!key) throw new Error(`No visible button "${text}"${within ? ' in ' + within : ''}`);
-      const t = await this.click(key);
-      if (!t) throw new Error(`Button "${text}" disappeared`);
-      if (t.covered) throw new Error(`Button "${text}" cannot be clicked: covered by ${t.covered}`);
-    },
-    async type(selector, value) {
-      const ok = await evaluate(`(() => { const el = document.querySelector(${js(selector)}); if (!el) return false; el.focus(); el.value = ''; return true; })()`);
-      if (!ok) throw new Error(`No field ${selector}`);
-      await cdp('Input.insertText', { text: value });
-      await evaluate(`(() => { const el = document.querySelector(${js(selector)}); el.dispatchEvent(new Event('input', { bubbles: true })); el.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+      await settle();
     },
     async screenshot(file) {
       writeFileSync(file, Buffer.from((await cdp('Page.captureScreenshot', { format: 'jpeg', quality: 60 })).data, 'base64'));

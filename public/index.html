@@ -4734,6 +4734,26 @@ docker compose up -d</pre>
     document.getElementById('form-builder-modal').style.display = 'block';
   };
 
+  /* Who filled in the form: taken from the form's own fields, by type and label,
+     so it also works on a form the studio built itself. */
+  function clientFromConsentForm(schema, responses) {
+    var fields = [];
+    ((schema && schema.sections) || []).forEach(function (sec) { (sec.fields || []).forEach(function (f) { fields.push(f); }); });
+    var notClient = /studio|artist|tattooist|piercer|practitioner|guardian|parent|emergency|doctor|physician|witness/i;
+    function pick(test) {
+      var f = fields.find(function (x) { return responses[x.id] && !notClient.test(x.id + ' ' + (x.label || '')) && test(x); });
+      return f ? String(responses[f.id]).trim() : '';
+    }
+    var emergency = fields.find(function (x) { return /emergency/i.test(x.id + ' ' + (x.label || '')) && responses[x.id]; });
+    return {
+      name: pick(function (x) { return x.type === 'text' && /name/i.test(x.id + ' ' + (x.label || '')); }),
+      email: pick(function (x) { return x.type === 'email'; }),
+      phone: pick(function (x) { return x.type === 'tel'; }),
+      dob: pick(function (x) { return x.type === 'date' && /birth|dob/i.test(x.id + ' ' + (x.label || '')); }),
+      emergency_contact: emergency ? String(responses[emergency.id]).trim() : ''
+    };
+  }
+
   window.closeFormBuilderModal = function () {
     document.getElementById('form-builder-modal').style.display = 'none';
   };
@@ -4752,14 +4772,33 @@ docker compose up -d</pre>
     }
 
     if (e.data.type === 'crm-save-consent' && frame) {
-      var ok = false;
+      var ok = false, error = '', clientId = e.data.clientId, clientName = pending ? pending.clientName : '';
       try {
-        var r = await fetch('/api/clients/' + encodeURIComponent(e.data.clientId) + '/consent-forms', {
+        if (!clientId) {
+          // No client was chosen: the form is the client's first contact with the studio.
+          var person = clientFromConsentForm(e.data.schema, e.data.responses || {});
+          if (!person.name) throw new Error('The form has no name field filled in, so no client record could be created.');
+          var list = await fetch('/api/clients').then(function (x) { return x.json(); });
+          var same = list.find(function (c) {
+            return String(c.name || '').trim().toLowerCase() === person.name.toLowerCase() &&
+              (!person.email || !c.email || String(c.email).toLowerCase() === person.email.toLowerCase());
+          });
+          if (!same) {
+            var made = await fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(person) });
+            if (!made.ok) throw new Error('The client record could not be created.');
+            same = await made.json();
+          }
+          clientId = same.id; clientName = same.name;
+          pending = { clientId: clientId, clientName: clientName };
+          document.getElementById('form-builder-client').textContent = 'Client: ' + clientName;
+        }
+        var r = await fetch('/api/clients/' + encodeURIComponent(clientId) + '/consent-forms', {
           method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(e.data)
         });
         ok = r.ok;
-      } catch (err) { ok = false; }
-      frame.contentWindow.postMessage({ type: 'crm-save-result', ok: ok }, window.location.origin);
+        if (ok && typeof renderClientsTable === 'function') { renderClientsTable(); populatePeopleSelects(); }
+      } catch (err) { ok = false; error = err.message || ''; }
+      frame.contentWindow.postMessage({ type: 'crm-save-result', ok: ok, error: error, clientId: clientId, clientName: clientName }, window.location.origin);
     }
   });
 })();

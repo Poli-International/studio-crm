@@ -2088,6 +2088,7 @@ window.openSanitizationChecklistModal = openSanitizationChecklistModal;
 
 function openShiftModal() {
     forceShowModal('shift-modal');
+    updateShiftStatusView();
 }
 window.openShiftModal = openShiftModal;
 
@@ -2369,7 +2370,7 @@ let sessionTimerInterval = null;
 let sessionTimerSeconds = 0;
 
 function toggleSessionTimer() {
-    const btn = document.getElementById('btn-session-timer');
+    const btn = document.getElementById('session-btn-start');
     const display = document.getElementById('session-timer-display');
     if (sessionTimerInterval) {
         clearInterval(sessionTimerInterval);
@@ -2456,12 +2457,16 @@ function switchImportTab(tab) {
         btn.classList.remove('active');
         btn.style.background = 'transparent';
     });
-    const active = document.getElementById('import-tab-btn-' + tab);
+    const active = document.getElementById('tab-csv-' + tab);
     if (active) {
         active.classList.add('active');
         active.style.background = '#1E293B';
     }
-    showStudioToast('Import mode: ' + tab.toUpperCase());
+    ['manual', 'remote', 'history'].forEach((name) => {
+        const section = document.getElementById('import-' + name + '-section');
+        if (section) section.style.display = name === tab ? '' : 'none';
+    });
+    if (tab === 'history' && typeof fetchAndRenderCsvImportHistory === 'function') fetchAndRenderCsvImportHistory();
 }
 window.switchImportTab = switchImportTab;
 
@@ -2543,10 +2548,6 @@ window.copyRecentScanCodeModal = copyRecentScanCodeModal;
 // 9. PRINT HANDLERS (3)
 // =========================================================================
 
-function print() {
-    window.print();
-}
-window.print = window.print || print;
 
 function printDailySummaryReport() {
     window.print();
@@ -2565,7 +2566,7 @@ function resetSessionTimer() {
     sessionTimerSeconds = 0;
     const display = document.getElementById('session-timer-display');
     if (display) display.textContent = '00:00';
-    const btn = document.getElementById('btn-session-timer');
+    const btn = document.getElementById('session-btn-start');
     if (btn) btn.textContent = '▶ Start Session';
     showStudioToast('Session timer reset');
 }
@@ -2760,12 +2761,18 @@ function exportCuratedEarPlanToWaiver() {
 }
 window.exportCuratedEarPlanToWaiver = exportCuratedEarPlanToWaiver;
 
-function insertProcedureTemplate(template) {
-    const input = document.getElementById('procedure-notes-input') || document.getElementById('drawer-note-input');
-    if (input) {
-        input.value = (input.value ? input.value + '\n' : '') + template;
-    }
-    showStudioToast('Inserted procedure template: ' + template);
+const PROCEDURE_NOTE_TEMPLATES = {
+    tattoo: 'Tattoo session. Placement: . Size: . Needles: . Inks (brand, lot): . Aftercare explained: yes/no.',
+    piercing: 'Piercing. Placement: . Jewelry (material, size): . Needle gauge: . Aftercare explained: yes/no.',
+    autoclave: 'Autoclave cycle. Load: . Temperature and time: . Indicator result: pass/fail.',
+    restock: 'Restock. Item: . Quantity: . Lot: . Expiry: . Supplier: .'
+};
+function insertProcedureTemplate(inputId, kind) {
+    const input = document.getElementById(inputId);
+    const text = PROCEDURE_NOTE_TEMPLATES[kind];
+    if (!input || !text) return;
+    input.value = (input.value ? input.value + '\n' : '') + text;
+    input.focus();
 }
 window.insertProcedureTemplate = insertProcedureTemplate;
 
@@ -2932,7 +2939,7 @@ document.addEventListener("DOMContentLoaded", renderClientsTable);
 // --- Staff and client pickers: filled from the studio database, not hard-coded names ---
 const PEOPLE_SELECTS = {
     staff: { byName: ["sd-artist-filter", "tipcalc-artist", "sani-staff-select", "new-client-artist", "new-appt-artist"],
-             byId: ["shift-staff-select", "gallery-filter-artist", "work-staff-select", "flash-artist-select"] },
+             byId: ["rota-staff", "shift-staff-select", "gallery-filter-artist", "work-staff-select", "flash-artist-select"] },
     clients: { byName: [], byId: ["gallery-filter-client"] }
 };
 async function populatePeopleSelects() {
@@ -3541,6 +3548,7 @@ async function toggleStaffShift() {
     } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
     const shift = (data && (data.shift || data)) || {};
     showStudioToast(shift.clock_out ? "Clocked out" : "Clocked in");
+    updateShiftStatusView();
 }
 window.toggleStaffShift = toggleStaffShift;
 
@@ -3981,6 +3989,7 @@ async function updateShiftStatusView() {
     const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
     set("shift-status-text", open ? "On shift since " + new Date(open.clock_in).toLocaleTimeString() : "Off shift");
     set("shift-weekly-hours", hours.toFixed(1) + " h");
+    set("shift-toggle-btn", open ? "🔴 Clock out" : "🟢 Clock in");
 }
 window.updateShiftStatusView = updateShiftStatusView;
 
@@ -4092,7 +4101,7 @@ function validateCsvInRealTime() {
     const btn = document.getElementById("import-csv-submit-btn");
     const lines = text ? text.split(/\r?\n/).filter((l) => l.trim()) : [];
     const head = (lines[0] || "").toLowerCase().split(",").map((h) => h.trim());
-    const need = target === "inventory" ? ["name", "quantity"] : ["name"];
+    const need = ["name"];
     const missing = need.filter((h) => !head.includes(h));
     let msg = "";
     if (!lines.length) msg = "";
@@ -4850,20 +4859,55 @@ function handleSaveVatSettings(event) {
 }
 window.handleSaveVatSettings = handleSaveVatSettings;
 
-function submitCSVImport(event) {
+// ponytail: commas inside "quotes" are handled, a line break inside quotes is not
+function parseCsvRows(text) {
+    const split = (line) => {
+        const out = []; let cur = "", quoted = false;
+        for (let i = 0; i < line.length; i++) {
+            const c = line[i];
+            if (quoted) {
+                if (c === '"' && line[i + 1] === '"') { cur += '"'; i++; } else if (c === '"') quoted = false; else cur += c;
+            } else if (c === '"') quoted = true;
+            else if (c === ",") { out.push(cur.trim()); cur = ""; } else cur += c;
+        }
+        out.push(cur.trim());
+        return out;
+    };
+    const lines = text.split(/\r?\n/).filter((l) => l.trim());
+    if (lines.length < 2) return [];
+    const head = split(lines[0]).map((h) => h.toLowerCase());
+    return lines.slice(1).map((l) => {
+        const cells = split(l), row = {};
+        head.forEach((h, i) => { row[h] = cells[i] || ""; });
+        return row;
+    }).filter((r) => r.name);
+}
+
+async function submitCSVImport(event) {
     if (event) event.preventDefault();
-    const targetSelect = document.getElementById("import-target-select");
-    const targetType = targetSelect ? targetSelect.value : "inventory";
-    
-    if (typeof showStudioToast === "function") {
-        showStudioToast(`CSV dataset imported into ${targetType} database`);
+    const target = (document.getElementById("import-target-select") || {}).value === "inventory" ? "inventory" : "clients";
+    const box = document.getElementById("import-csv-text");
+    const rows = parseCsvRows(box ? box.value : "");
+    if (!rows.length) {
+        showStudioToast("Nothing to import: paste a first line with the column names (name, ...), then one line per row");
+        return;
     }
-    if (typeof closeImportModal === "function") {
-        closeImportModal();
-    } else {
-        const el = document.getElementById("import-modal");
-        if (el) el.style.display = "none";
+    let result;
+    try {
+        const res = await fetch("/api/" + target + "/import-csv", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ rows }) });
+        result = await res.json();
+        if (!res.ok) throw new Error(result.error || "HTTP " + res.status);
+    } catch (e) {
+        showStudioToast("Could not import: " + (e.message || "the server did not answer"));
+        return;
     }
+    const n = result.count != null ? result.count : (result.imported != null ? result.imported : rows.length);
+    showStudioToast("Imported " + n + (target === "inventory" ? " stock items" : " clients"));
+    if (box) box.value = "";
+    validateCsvInRealTime();
+    renderClientsTable();
+    populatePeopleSelects();
+    closeImportModal();
 }
 window.submitCSVImport = submitCSVImport;
 

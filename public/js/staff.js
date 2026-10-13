@@ -156,3 +156,49 @@ async function removeStaffMember(id) {
     showStudioToast('Staff member removed: ' + member.name);
 }
 window.removeStaffMember = removeStaffMember;
+
+// =========================================================================
+// 📅 SHIFT ROTA: who works when, from this week on
+// =========================================================================
+async function renderMonthlyShiftSchedule() {
+    const body = document.getElementById('shift-roster-tbody');
+    if (!body) return;
+    let shifts = [];
+    try {
+        const res = await fetch('/api/staff/monthly-schedule');
+        if (res.ok) shifts = await res.json();
+    } catch (e) { /* shown as an empty rota */ }
+    const monday = new Date();
+    monday.setDate(monday.getDate() - ((monday.getDay() + 6) % 7));
+    const from = monday.toLocaleDateString('en-CA');
+    const list = (Array.isArray(shifts) ? shifts : []).filter((x) => x.date >= from)
+        .sort((a, b) => (a.date + a.start_time).localeCompare(b.date + b.start_time));
+    const cell = (v) => '<td style="padding:8px;">' + escapeHtml(String(v || '')) + '</td>';
+    body.innerHTML = list.length ? list.map((x) => '<tr style="border-bottom:1px solid #1E293B;">' + cell(x.staff_name) + cell(x.date) + cell(x.start_time) + cell(x.end_time) + cell(x.station)
+        + `<td style="padding:8px;text-align:right;"><button type="button" onclick="removeRotaShift(${Number(x.id)})" style="padding:4px 8px;background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;">Remove</button></td></tr>`).join('')
+        : '<tr><td colspan="6" style="padding:10px;color:#94A3B8;">No shifts planned from this week on. Add the first one above.</td></tr>';
+}
+window.renderMonthlyShiftSchedule = renderMonthlyShiftSchedule;
+
+async function handleAddRotaShift(event) {
+    if (event) event.preventDefault();
+    const val = (id) => (document.getElementById(id) || {}).value || '';
+    if (!val('rota-staff') || !val('rota-date')) { showStudioToast('Choose a staff member and a date'); return; }
+    try {
+        const res = await fetch('/api/staff/assign-shift', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ staff_id: val('rota-staff'), date: val('rota-date'), start_time: val('rota-start'), end_time: val('rota-end'), station: val('rota-station') }) });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+    } catch (e) { showStudioToast('Could not save the shift: the server did not answer'); return; }
+    showStudioToast('Shift saved');
+    renderMonthlyShiftSchedule();
+}
+window.handleAddRotaShift = handleAddRotaShift;
+
+async function removeRotaShift(id) {
+    try {
+        const res = await fetch('/api/staff/monthly-schedule/' + id, { method: 'DELETE' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+    } catch (e) { showStudioToast('Could not remove the shift: the server did not answer'); return; }
+    renderMonthlyShiftSchedule();
+}
+window.removeRotaShift = removeRotaShift;

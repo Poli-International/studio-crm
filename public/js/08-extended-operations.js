@@ -112,7 +112,7 @@ function switchStudioProSuiteTab(tab) {
                         <h4 style="margin:0;color:#38BDF8;font-size:0.95rem;">12-Month Procurement Analytics & PO Generator</h4>
                         <p style="margin:2px 0 0;font-size:0.75rem;color:#94A3B8;">Supply expenditure trajectory and automated supplier restocking</p>
                     </div>
-                    <button onclick="alert('Top-5 Supplier PO PDF generated.')" style="padding:6px 14px;background:linear-gradient(135deg, #10B981 0%, #059669 100%);color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.78rem;cursor:pointer;">📄 Generate Top-5 PO (PDF)</button>
+                    
                 </div>
                 <div style="height:160px;background:#090D16;border-radius:8px;border:1px solid #334155;display:flex;align-items:center;justify-content:center;color:#38BDF8;font-size:0.85rem;">
                     📈 D3 Procurement Spend Trend: $34,850 YTD Spend across 5 primary vendors
@@ -214,9 +214,34 @@ function closeQuickTableExportModal() {
 }
 window.closeQuickTableExportModal = closeQuickTableExportModal;
 
-function executeQuickExport(format) {
-    const target = document.getElementById("quick-export-target-select")?.value || "table";
-    alert("Exported " + target + " as " + format.toUpperCase() + " successfully!");
+// What each export contains. Tables with their own data source use it; any
+// other table is exported as it is shown on the page.
+async function quickExportData(target) {
+    if (target === "session-duration-breakdown-table") {
+        return { name: "session_durations", title: "Session durations", head: SESSION_HEAD, rows: await sessionDurationRows() };
+    }
+    if (target === "inventory-catalog-table") {
+        const inv = await fetchJson("/api/inventory");
+        const items = Array.isArray(inv) ? inv : (inv.items || []);
+        return { name: "inventory_manifest", title: "Inventory manifest",
+            head: ["name", "sku", "category", "quantity", "reorder point", "unit cost", "lot", "expires", "supplier"],
+            rows: items.map((i) => [i.name, i.sku, i.category || i.item_type, i.quantity, i.reorder_point, i.unit_cost != null ? i.unit_cost : i.price, i.lot_number, i.exp_date, i.supplier].map((v) => (v == null ? "" : v))) };
+    }
+    const table = document.getElementById(target);
+    const head = table ? [...table.querySelectorAll("thead th")].map((c) => c.innerText.trim()) : [];
+    const cells = (row) => [...row.children].map((c) => c.innerText.trim()).filter((c, i) => head[i]);
+    const rows = table ? [...table.querySelectorAll("tbody tr")].filter((r) => r.children.length > 1).map(cells) : [];
+    return { name: target.replace(/-table$/, "").replace(/-/g, "_"), title: target === "shift-roster-table" ? "Shift rota" : "Studio CRM export",
+        head: head.filter(Boolean), rows };
+}
+
+async function executeQuickExport(format) {
+    const target = document.getElementById("quick-export-target-select")?.value || "";
+    const data = await quickExportData(target);
+    if (!data.rows.length) { showStudioToast("Nothing to export yet: this list is empty"); return; }
+    if (format === "pdf") downloadPdfTable(data.name + ".pdf", data.title, data.head, data.rows);
+    else downloadCsv(data.name + ".csv", data.head, data.rows);
+    showStudioToast("Saved to your Downloads folder: " + data.name + "." + format);
     closeQuickTableExportModal();
 }
 window.executeQuickExport = executeQuickExport;
@@ -248,8 +273,9 @@ function copyGeneratedPortalLink() {
     const input = document.getElementById("quick-portal-link-input");
     if (input) {
         input.select();
-        navigator.clipboard.writeText(input.value);
-        alert("Client Portal Access Link copied to clipboard!");
+        navigator.clipboard.writeText(input.value).then(
+            () => showStudioToast("Client portal link copied"),
+            () => showStudioToast("Could not copy: select the link and press Ctrl+C"));
     }
 }
 window.copyGeneratedPortalLink = copyGeneratedPortalLink;
@@ -479,8 +505,6 @@ function filterDashboardProcurementHealthSupplier(supplier) {
 }
 window.filterDashboardProcurementHealthSupplier = filterDashboardProcurementHealthSupplier;
 
-function renderMonthlyShiftSchedule() {}
-window.renderMonthlyShiftSchedule = renderMonthlyShiftSchedule;
 
 function toggleSelectAllActivities(cb) {
     document.querySelectorAll(".activity-checkbox").forEach(c => { c.checked = cb?.checked || false; });
@@ -494,9 +518,28 @@ function initQrFocusResize() {}
 window.initQrFocusResize = initQrFocusResize;
 
 function openSessionDurationReportModal() {
-    const el = document.getElementById("session-duration-modal-overlay");
-    if (el) el.style.display = "flex";
+    forceShowModal("session-duration-report-modal-overlay");
+    renderSessionDurationReport();
 }
+
+// The report window: the chart, and one line per service and artist.
+async function renderSessionDurationReport() {
+    renderD3SessionDurationChart();
+    const table = document.getElementById("modal-session-duration-breakdown-table");
+    if (!table) return;
+    const groups = {};
+    (await sessionDurationRows()).forEach((r) => {
+        const g = groups[r[1] + "|" + r[0]] = groups[r[1] + "|" + r[0]] || { service: r[1], artist: r[0], n: 0, hours: 0, billed: 0 };
+        g.n++; g.hours += Number(r[4]); g.billed += Number(r[5]);
+    });
+    const cell = (v) => '<td style="padding:8px;">' + escapeHtml(String(v)) + "</td>";
+    table.querySelector("thead").innerHTML = "<tr>" + ["Service", "Artist", "Sessions", "Average hours", "Billed"].map((h) => '<th style="padding:8px;text-align:left;">' + h + "</th>").join("") + "</tr>";
+    const list = Object.values(groups);
+    table.querySelector("tbody").innerHTML = list.length
+        ? list.map((g) => "<tr>" + cell(g.service) + cell(g.artist) + cell(g.n) + cell((g.hours / g.n).toFixed(1)) + cell(g.billed.toFixed(2)) + "</tr>").join("")
+        : '<tr><td colspan="5" style="padding:8px;color:#94A3B8;">No completed sessions yet. Mark an appointment as completed and it appears here.</td></tr>';
+}
+window.renderSessionDurationReport = renderSessionDurationReport;
 window.openSessionDurationReportModal = openSessionDurationReportModal;
 
 function openInventoryExportConfirmModal() {

@@ -5884,19 +5884,20 @@ app.get('/api/staff/monthly-schedule', (req, res) => {
 app.post('/api/staff/assign-shift', (req, res) => {
   const { staff_id, staff_name, date, start_time, end_time, station, status, notes } = req.body;
   const targetStaff = staff.find(s => s.id === parseInt(staff_id));
-  const sName = staff_name || (targetStaff ? targetStaff.name : 'Artist');
+  if (!targetStaff || !date) return res.status(400).json({ error: 'A staff member and a date are required' });
+  const sName = targetStaff.name;
 
   const existingIdx = monthlySchedules.findIndex(s => s.staff_id === parseInt(staff_id) && s.date === date);
   const newShift = {
-    id: existingIdx >= 0 ? monthlySchedules[existingIdx].id : monthlySchedules.length + 1,
+    id: existingIdx >= 0 ? monthlySchedules[existingIdx].id : Math.max(0, ...monthlySchedules.map(s => s.id)) + 1,
     staff_id: parseInt(staff_id),
     staff_name: sName,
     date,
     start_time: start_time || '10:00',
     end_time: end_time || '18:00',
-    station: station || 'Station 1 - Custom Tattoo',
+    station: station || '',
     status: status || 'On-Duty',
-    notes: notes || 'Assigned via Studio Floor Live'
+    notes: notes || ''
   };
 
   if (existingIdx >= 0) {
@@ -8366,18 +8367,17 @@ app.post('/api/clients/import-csv', (req, res) => {
   rows.forEach(r => {
     if (r.name) {
       clients.push({
-        id: clients.length + 1,
+        id: clients.length ? Math.max(...clients.map(c => c.id)) + 1 : 1,
         name: r.name,
-        email: r.email || `${r.name.toLowerCase().replace(/\s+/g, '.')}@example.com`,
-        phone: r.phone || '555-0000',
-        profession: r.profession || 'Client',
-        notes: r.notes || 'Imported via CSV',
+        email: r.email || '',
+        phone: r.phone || '',
+        notes: r.notes || '',
         assigned_staff_id: null,
         assigned_staff_name: 'Unassigned',
-        dob: r.dob || '1990-01-01',
-        allergies: r.allergies || 'None',
-        medical_history: r.medical_history || 'None',
-        lastVisit: new Date().toISOString().split('T')[0]
+        dob: r.dob || '',
+        allergies: r.allergies || '',
+        medical_history: r.medical_history || '',
+        created_at: new Date().toISOString()
       });
       importedCount++;
     }
@@ -8418,7 +8418,7 @@ app.post('/api/inventory/import-csv', (req, res) => {
     const rawQty = r.quantity !== undefined ? r.quantity : (r.Quantity !== undefined ? r.Quantity : (r.stock !== undefined ? r.stock : (r.qty !== undefined ? r.qty : '')));
     const rawPrice = r.unitcost !== undefined ? r.unitcost : (r.UnitCost !== undefined ? r.UnitCost : (r.unit_cost !== undefined ? r.unit_cost : (r.price !== undefined ? r.price : (r.Price !== undefined ? r.Price : (r.cost !== undefined ? r.cost : '')))));
     const rawReorder = r.reorderpoint !== undefined ? r.reorderpoint : (r.ReorderPoint !== undefined ? r.ReorderPoint : (r.reorder_point !== undefined ? r.reorder_point : (r.reorder_threshold !== undefined ? r.reorder_threshold : (r.min_stock !== undefined ? r.min_stock : ''))));
-    const supplier = (r.supplier || r.Supplier || r.vendor || r.Vendor || 'NeedleCraft Supply Co.').toString().trim();
+    const supplier = (r.supplier || r.Supplier || r.vendor || r.Vendor || '').toString().trim();
 
     // 1. Name validation
     if (!name) {
@@ -8428,7 +8428,7 @@ app.post('/api/inventory/import-csv', (req, res) => {
     // 2. Quantity validation
     let qty = 0;
     if (rawQty === '' || rawQty === null || rawQty === undefined) {
-      qty = 10;
+      qty = 0;
     } else {
       const parsedQty = Number(rawQty);
       if (isNaN(parsedQty) || parsedQty < 0 || !Number.isInteger(parsedQty)) {

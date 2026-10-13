@@ -32,9 +32,10 @@ const PAGE_HELPER = `(() => {
   };
   window.open = (u) => { sig.opens.push(String(u)); return null; };
   window.print = () => { sig.prints++; };
+  // on the page and not parked off to the side (a closed drawer slides out of the window)
   const shown = (el) => {
     const r = el.getBoundingClientRect(), cs = getComputedStyle(el);
-    return r.width > 0 && r.height > 0 && cs.visibility !== 'hidden' && cs.display !== 'none';
+    return r.width > 0 && r.height > 0 && cs.visibility !== 'hidden' && cs.display !== 'none' && r.right > 0 && r.left < innerWidth;
   };
   const ct = window.__ct = {
     sig,
@@ -57,9 +58,19 @@ const PAGE_HELPER = `(() => {
       let h = 0; for (const c of text + fields + document.documentElement.className + document.body.className + document.documentElement.getAttribute('data-theme')) h = (h * 31 + c.charCodeAt(0)) | 0;
       return { overlays: ct.overlays(), view, hash: h };
     },
+    // A submit button does nothing on an empty form: fill the required fields first, like a person would.
+    fill(form) {
+      for (const f of form.querySelectorAll('[required]')) {
+        if (f.type === 'checkbox') f.checked = true;
+        else if (f.tagName === 'SELECT') { if (!f.value && f.options.length > 1) f.selectedIndex = 1; }
+        else if (!f.value) f.value = f.type === 'number' ? '1' : f.type === 'date' ? '2026-01-15' : f.type === 'time' ? '10:00' : f.type === 'email' ? 'click.test@example.com' : 'Click Test';
+        f.dispatchEvent(new Event('input', { bubbles: true })); f.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    },
     target(key) {
       const el = ct.all().find((e) => ct.key(e) === key);
       if (!el) return null;
+      if (el.form && (el.type === 'submit' || (el.tagName === 'BUTTON' && !el.getAttribute('type') && !el.getAttribute('onclick')))) ct.fill(el.form);
       el.scrollIntoView({ block: 'center', inline: 'center' });
       const r = el.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
       const top = document.elementFromPoint(x, y);

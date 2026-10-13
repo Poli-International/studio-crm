@@ -20,9 +20,17 @@ const navKey = (dest) => browser.evaluate(`(() => { const el = document.getEleme
 // These wipe or replace the studio's data: clicked last, so the rest runs on the demo studio.
 const LAST = /demo-data-clear|empty studio|Restore|Factory|Wipe/i;
 const last = [];
+// A backdrop that closes its window only when the click lands on the backdrop itself: its centre is the window.
+const BACKDROP = /event\.target\s*===?\s*this/;
+// Buttons with nothing to see after the click, each for a reason a person would accept.
+const QUIET = [
+  /testQrAudioTheme/, // plays a sound
+  /switchStudioProSuiteTab\('aftercare'\)|switchGalleryTab\('portfolio'\)|setSharePreset\('showcase'\)|prevQrTourStep/, // already on that tab or step
+  /qr-validation-toast/, // closes a message that is not showing
+];
 const enqueue = (keys, pathTo) => {
   for (const key of keys) {
-    if (queued.has(key)) continue;
+    if (queued.has(key) || BACKDROP.test(key)) continue;
     queued.add(key);
     (LAST.test(key) ? last : queue).push({ key, path: pathTo });
   }
@@ -85,7 +93,7 @@ while (queue.length || last.length) {
     const failed = after.sig.fetches.some((f) => f.status >= 400 || f.status === -1);
     const effect = opened.length || closed.length || r.view || r.changed || r.fetches.length || r.downloads.length
       || r.dialogs.length || r.opens.length || r.prints;
-    r.verdict = r.errors.length || failed ? 'broken' : effect ? 'works' : 'dead';
+    r.verdict = r.errors.length || failed ? 'broken' : effect ? 'works' : QUIET.some((q) => q.test(item.key)) ? 'quiet' : 'dead';
     // says a file was made, but no file came
     const claim = [...r.dialogs, ...r.said].join(' ');
     if (r.verdict === 'works' && /export|download|saved to|generated/i.test(claim) && !r.downloads.length && !r.fetches.some((f) => !f.startsWith('GET'))) r.suspect = 'says exported/saved, but no file and nothing sent to the server';
@@ -102,7 +110,7 @@ while (queue.length || last.length) {
 
 writeFileSync(OUT, JSON.stringify(results, null, 1));
 const count = (v) => results.filter((r) => r.verdict === v).length;
-console.log(`${results.length} buttons: ${count('works')} work, ${count('dead')} dead, ${count('broken')} broken, ${count('unreachable')} unreachable, ${count('external link')} external links`);
+console.log(`${results.length} buttons: ${count('works')} work, ${count('dead')} dead, ${count('broken')} broken, ${count('unreachable')} unreachable, ${count('quiet')} with nothing to see, ${count('external link')} external links`);
 for (const r of results.filter((x) => x.verdict === 'dead' || x.verdict === 'broken')) {
   console.log(`${r.verdict.toUpperCase()}  ${r.key}\n    ${r.did || r.errors.concat(r.fetches.filter((f) => / (4|5)\d\d$| -1$/.test(f))).join('; ')}`);
 }

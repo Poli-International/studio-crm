@@ -656,60 +656,22 @@
             </div>
 
             <!-- Weekly Shift Overview Grid -->
-            <div id="weekly-shift-overview-widget" style="background:#0F172A;padding:1rem;border-radius:12px;border:1px solid #1E293B;margin-bottom:1.5rem;">
-              <h4 style="margin:0 0 0.75rem 0;font-size:0.85rem;font-weight:800;color:#94A3B8;text-transform:uppercase;">
-                Weekly Artist Shift Rota
-              </h4>
-              
-              <table id="shift-roster-table" style="display:none;">
+            <div id="weekly-shift-overview-widget" style="background:#0F172A;border:1px solid #1E293B;border-radius:12px;padding:1rem;margin-bottom:1rem;">
+              <h4 style="margin:0 0 0.75rem 0;font-size:0.95rem;font-weight:800;color:#F8FAFC;">Shift Rota: from this week on</h4>
+              <form id="rota-form" onsubmit="handleAddRotaShift(event)" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:0.75rem;">
+                <select id="rota-staff" required aria-label="Staff member" style="padding:8px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.82rem;"></select>
+                <input type="date" id="rota-date" required aria-label="Date" style="padding:8px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.82rem;">
+                <input type="time" id="rota-start" value="10:00" required aria-label="Start" style="padding:8px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.82rem;">
+                <input type="time" id="rota-end" value="18:00" required aria-label="End" style="padding:8px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.82rem;">
+                <input type="text" id="rota-station" placeholder="Station (optional)" aria-label="Station" style="padding:8px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.82rem;">
+                <button type="submit" id="rota-add-btn" style="padding:8px 14px;background:#2563EB;color:#FFF;border:none;border-radius:8px;font-weight:800;font-size:0.82rem;cursor:pointer;">➕ Add shift</button>
+              </form>
+              <table id="shift-roster-table" style="width:100%;border-collapse:collapse;font-size:0.82rem;text-align:left;">
                 <thead>
-                  <tr><th>Artist</th><th>Role</th><th>Shift Days</th><th>Weekly Hours</th><th>Station Assignment</th></tr>
+                  <tr style="border-bottom:1px solid #334155;"><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">Staff</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">Date</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">Start</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">End</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">Station</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;"></th></tr>
                 </thead>
-                <tbody>
-                  <tr><td>Maya Lin</td><td>Master Piercer</td><td>Mon, Tue, Wed, Thu</td><td>32h</td><td>Station 1 (Sterile Piercing)</td></tr>
-                  <tr><td>Alex Vance</td><td>Lead Tattoo Artist</td><td>Tue, Wed, Thu, Fri, Sat</td><td>38h</td><td>Station 2 (Custom Tattoo)</td></tr>
-                  <tr><td>Elena Gomez</td><td>Senior Artist</td><td>Wed, Thu, Fri, Sat, Sun</td><td>36h</td><td>Station 3 (Flash & Color)</td></tr>
-                  <tr><td>Jordan Bell</td><td>Sterilisation Tech</td><td>Mon, Tue, Wed, Thu, Fri</td><td>40h</td><td>Autoclave & Vault Cleanroom</td></tr>
-                </tbody>
+                <tbody id="shift-roster-tbody"></tbody>
               </table>
-              <div id="shift-overview-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));gap:10px;">
-                <div style="background:#1E293B;padding:0.75rem;border-radius:8px;border:1px solid #334155;text-align:center;">
-                  <div style="font-size:0.75rem;font-weight:700;color:#94A3B8;">Monday</div>
-                  <div style="font-size:0.85rem;font-weight:800;color:#38BDF8;margin:4px 0;">Alex & Jordan</div>
-                  <div style="font-size:0.7rem;color:#10B981;">10:00 - 18:00</div>
-                </div>
-                <div style="background:#1E293B;padding:0.75rem;border-radius:8px;border:1px solid #334155;text-align:center;">
-                  <div style="font-size:0.75rem;font-weight:700;color:#94A3B8;">Tuesday</div>
-                  <div style="font-size:0.85rem;font-weight:800;color:#38BDF8;margin:4px 0;">Alex & Elena</div>
-                  <div style="font-size:0.7rem;color:#10B981;">10:00 - 19:00</div>
-                </div>
-                <div style="background:#1E293B;padding:0.75rem;border-radius:8px;border:1px solid #334155;text-align:center;">
-                  <div style="font-size:0.75rem;font-weight:700;color:#94A3B8;">Wednesday</div>
-                  <div style="font-size:0.85rem;font-weight:800;color:#38BDF8;margin:4px 0;">Full Team</div>
-                  <div style="font-size:0.7rem;color:#10B981;">10:00 - 20:00</div>
-                </div>
-                <div style="background:#1E293B;padding:0.75rem;border-radius:8px;border:1px solid #334155;text-align:center;">
-                  <div style="font-size:0.75rem;font-weight:700;color:#94A3B8;">Thursday</div>
-                  <div style="font-size:0.85rem;font-weight:800;color:#38BDF8;margin:4px 0;">Jordan & Elena</div>
-                  <div style="font-size:0.7rem;color:#10B981;">11:00 - 19:00</div>
-                </div>
-                <div style="background:#1E293B;padding:0.75rem;border-radius:8px;border:1px solid #334155;text-align:center;">
-                  <div style="font-size:0.75rem;font-weight:700;color:#94A3B8;">Friday</div>
-                  <div style="font-size:0.85rem;font-weight:800;color:#38BDF8;margin:4px 0;">Full Team</div>
-                  <div style="font-size:0.7rem;color:#10B981;">10:00 - 21:00</div>
-                </div>
-                <div style="background:#1E293B;padding:0.75rem;border-radius:8px;border:1px solid #334155;text-align:center;">
-                  <div style="font-size:0.75rem;font-weight:700;color:#94A3B8;">Saturday</div>
-                  <div style="font-size:0.85rem;font-weight:800;color:#38BDF8;margin:4px 0;">Full Team</div>
-                  <div style="font-size:0.7rem;color:#10B981;">10:00 - 21:00</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Monthly Shift Schedule Container -->
-            <div id="monthly-shift-schedule-container" style="background:#0F172A;padding:1rem;border-radius:12px;border:1px solid #1E293B;margin-bottom:1.5rem;">
-              <h4 style="margin:0 0 0.75rem 0;font-size:0.85rem;font-weight:800;color:#94A3B8;text-transform:uppercase;">Shift Schedule Calendar</h4>
-              <div id="shift-calendar-grid" style="display:grid;grid-template-columns:repeat(7, 1fr);gap:6px;"></div>
             </div>
 
             <!-- Session Duration Analytics Breakdown Table -->
@@ -3639,8 +3601,8 @@ docker compose up -d</pre>
                     <div>
                         <label style="display:block;font-size:0.85rem;color:#9CA3AF;margin-bottom:4px;font-weight:500;">Import Target</label>
                         <select id="import-target-select" onchange="validateCsvInRealTime()" style="width:100%;padding:0.6rem;background:#111827;border:1px solid #374151;border-radius:6px;color:#fff;outline:none;">
-                            <option value="clients">👥 Clients Database (Name, Email, Phone, Medical Sensitivity Notes)</option>
-                            <option value="inventory">📦 Inventory Catalog (Name, SKU, Qty, Price, Reorder Point)</option>
+                            <option value="clients">👥 Clients (name, email, phone, allergies, notes)</option>
+                            <option value="inventory">📦 Inventory Catalog (name, sku, quantity, price, reorder_point)</option>
                         </select>
                     </div>
                     <div>

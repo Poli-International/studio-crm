@@ -3751,6 +3751,7 @@ async function executeAutoSchedulerBooking() {
     } catch (e) { showStudioToast("Could not save the appointment: the server did not answer"); return; }
     showStudioToast(sessions > 1 ? sessions + " sessions booked" : "Appointment booked");
     if (typeof closeAutoSchedulerModal === "function") closeAutoSchedulerModal();
+    renderAppointmentsList();
     if (typeof renderDashboardKpis === "function") renderDashboardKpis();
 }
 window.executeAutoSchedulerBooking = executeAutoSchedulerBooking;
@@ -4341,6 +4342,62 @@ async function handleSaveNewClient(event) {
 }
 window.handleSaveNewClient = handleSaveNewClient;
 
+// --- Calendar: every booked appointment, the coming ones first ---
+async function renderAppointmentsList() {
+    const tbody = document.getElementById("schedule-appointments-tbody");
+    if (!tbody) return;
+    let appts = [];
+    try {
+        const res = await fetch("/api/appointments");
+        if (res.ok) appts = await res.json();
+    } catch (e) { /* shown as an empty list */ }
+    appts = (Array.isArray(appts) ? appts : []).filter((a) => a && a.datetime);
+    if (!appts.length) {
+        tbody.innerHTML = '<tr><td colspan="7" style="padding:10px;color:#94A3B8;">No appointments yet. Book the first one with Book Appointment.</td></tr>';
+        return;
+    }
+    const startOfToday = new Date(); startOfToday.setHours(0, 0, 0, 0);
+    const time = (a) => new Date(a.datetime).getTime();
+    const coming = appts.filter((a) => time(a) >= startOfToday.getTime()).sort((a, b) => time(a) - time(b));
+    const earlier = appts.filter((a) => time(a) < startOfToday.getTime()).sort((a, b) => time(b) - time(a));
+    const cell = (v, style) => `<td style="padding:8px;${style || ""}">${escapeHtml(String(v == null ? "" : v))}</td>`;
+    const btn = "padding:4px 8px;border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;";
+    const row = (a) => {
+        const open = a.status !== "completed" && a.status !== "cancelled";
+        return `<tr class="appointment-row" style="border-bottom:1px solid #1E293B;">`
+            + cell(new Date(a.datetime).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }), "font-weight:700;color:#FFF;")
+            + cell(a.client_name || a.client) + cell(a.service_type) + cell(a.staff_name || a.artist_name)
+            + cell(Number(a.estimated_price || a.price || 0).toFixed(2)) + cell(a.status || "scheduled")
+            + `<td style="padding:8px;text-align:right;white-space:nowrap;">`
+            + (open ? `<button type="button" onclick="setAppointmentStatus(${Number(a.id)}, 'completed')" style="${btn}background:#10B981;color:#FFF;border:none;">Completed</button> ` : "")
+            + `<button type="button" onclick="removeAppointment(${Number(a.id)})" style="${btn}background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);">Remove</button></td></tr>`;
+    };
+    tbody.innerHTML = coming.map(row).join("")
+        + (earlier.length ? '<tr><td colspan="7" style="padding:10px 8px 4px;color:#94A3B8;font-size:0.75rem;font-weight:700;">Earlier</td></tr>' + earlier.map(row).join("") : "");
+}
+window.renderAppointmentsList = renderAppointmentsList;
+document.addEventListener("DOMContentLoaded", renderAppointmentsList);
+
+async function setAppointmentStatus(id, status) {
+    try {
+        const res = await fetch("/api/appointments/" + id + "/status", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status }) });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+    } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
+    renderAppointmentsList();
+    if (typeof renderStationStripAndSessions === "function") renderStationStripAndSessions();
+}
+window.setAppointmentStatus = setAppointmentStatus;
+
+async function removeAppointment(id) {
+    if (!window.confirm("Remove this appointment? This cannot be undone.")) return;
+    try {
+        const res = await fetch("/api/appointments/" + id, { method: "DELETE" });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+    } catch (e) { showStudioToast("Could not remove the appointment: the server did not answer"); return; }
+    renderAppointmentsList();
+}
+window.removeAppointment = removeAppointment;
+
 // --- New Appointment Modal Handlers ---
 function openNewAppointmentModal() {
     forceShowModal("new-appointment-modal-overlay");
@@ -4397,21 +4454,7 @@ async function handleSaveNewAppointment(event) {
         return;
     }
 
-    // Update appointment table if present
-    const tbody = document.getElementById("schedule-appointments-tbody");
-    if (tbody) {
-        const tr = document.createElement("tr");
-        tr.style.borderBottom = "1px solid #374151";
-        tr.innerHTML = `
-            <td style="padding:10px 12px;font-weight:700;color:#FFF;">${escapeHtml(newAppt.date)} ${escapeHtml(newAppt.time)}</td>
-            <td style="padding:10px 12px;color:#F3F4F6;">${escapeHtml(newAppt.client_name)}</td>
-            <td style="padding:10px 12px;color:#38BDF8;">${escapeHtml(newAppt.service_type)}</td>
-            <td style="padding:10px 12px;color:#A78BFA;">${escapeHtml(newAppt.artist_name)}</td>
-            <td style="padding:10px 12px;color:#34D399;">$${newAppt.estimated_price.toFixed(2)}</td>
-            <td style="padding:10px 12px;"><span style="background:rgba(16,185,129,0.2);color:#6EE7B7;padding:2px 8px;border-radius:10px;font-weight:700;font-size:0.75rem;">${escapeHtml(newAppt.status)}</span></td>
-        `;
-        tbody.prepend(tr);
-    }
+    renderAppointmentsList();
 
     if (typeof showStudioToast === "function") {
         showStudioToast(`Appointment booked for ${newAppt.client_name} (${newAppt.date})`);

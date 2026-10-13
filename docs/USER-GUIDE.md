@@ -37,7 +37,7 @@ Click the staff button at the top right (it reads **Staff Login** until someone 
 
 ## Appointments and scheduling
 
-**New Appointment** books a single session with artist, station, price and deposit. For multi-session work, the **Auto Scheduler** looks up the artist's free slots on a chosen day and books up to six sessions a set number of weeks apart. The Dashboard shows today's figures, upcoming bookings, station status and low stock.
+**New Appointment** books a single session with artist, station, price and deposit. For multi-session work, the **Auto Scheduler** looks up the artist's free slots on a chosen day and books up to six sessions a set number of weeks apart. The Dashboard shows today's figures, upcoming bookings, station status and low stock. The Calendar lists every booked appointment, the coming ones first. **Completed** marks a session as done, so it counts in Duration Analytics, and **Remove** deletes it.
 
 ## Digital waivers
 

@@ -656,6 +656,16 @@
             </div>
 
             <!-- Weekly Shift Overview Grid -->
+            <div id="appointments-widget" style="background:#0F172A;border:1px solid #1E293B;border-radius:12px;padding:1rem;margin-bottom:1rem;">
+              <h4 style="margin:0 0 0.75rem 0;font-size:0.95rem;font-weight:800;color:#F8FAFC;">Appointments</h4>
+              <table id="appointments-table" style="width:100%;border-collapse:collapse;font-size:0.82rem;text-align:left;">
+                <thead>
+                  <tr style="border-bottom:1px solid #334155;"><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">When</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">Client</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">Service</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">Artist</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">Price</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">Status</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;"></th></tr>
+                </thead>
+                <tbody id="schedule-appointments-tbody"></tbody>
+              </table>
+            </div>
+
             <div id="weekly-shift-overview-widget" style="background:#0F172A;border:1px solid #1E293B;border-radius:12px;padding:1rem;margin-bottom:1rem;">
               <h4 style="margin:0 0 0.75rem 0;font-size:0.95rem;font-weight:800;color:#F8FAFC;">Shift Rota: from this week on</h4>
               <form id="rota-form" onsubmit="handleAddRotaShift(event)" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:0.75rem;">

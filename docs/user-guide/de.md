@@ -37,7 +37,7 @@ Klicken Sie oben rechts auf die Personal-Schaltfläche, um Ihr Team zu sehen. **
 
 ## Termine und Terminplanung
 
-**Neuer Termin** bucht eine einzelne Sitzung mit Künstler, Station, Preis und Anzahlung. Für Arbeiten mit mehreren Sitzungen sucht der **Auto-Planer** die freien Zeitfenster des Künstlers an einem gewählten Tag und bucht bis zu sechs Sitzungen im festgelegten Wochenabstand. Das Dashboard zeigt die heutigen Zahlen, kommende Buchungen, den Stationsstatus und niedrigen Lagerbestand.
+**Neuer Termin** bucht eine einzelne Sitzung mit Künstler, Station, Preis und Anzahlung. Für Arbeiten mit mehreren Sitzungen sucht der **Auto-Planer** die freien Zeitfenster des Künstlers an einem gewählten Tag und bucht bis zu sechs Sitzungen im festgelegten Wochenabstand. Das Dashboard zeigt die heutigen Zahlen, kommende Buchungen, den Stationsstatus und niedrigen Lagerbestand. Der Kalender listet alle gebuchten Termine auf, die nächsten zuerst. **Abgeschlossen** markiert eine Sitzung als erledigt, sie zählt dann in der Daueranalyse, und **Entfernen** löscht sie.
 
 ## Digitale Einverständniserklärungen
 

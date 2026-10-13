@@ -37,7 +37,7 @@ Fate clic sul pulsante del personale in alto a destra per vedere il team. **Aggi
 
 ## Appuntamenti e pianificazione
 
-**Nuovo appuntamento** prenota una singola sessione con artista, postazione, prezzo e acconto. Per lavori su più sessioni, il **Pianificatore automatico** cerca gli slot liberi dell'artista in un giorno scelto e prenota fino a sei sessioni a un numero fisso di settimane di distanza. La Dashboard mostra i dati di oggi, le prenotazioni in arrivo, lo stato delle postazioni e le scorte basse.
+**Nuovo appuntamento** prenota una singola sessione con artista, postazione, prezzo e acconto. Per lavori su più sessioni, il **Pianificatore automatico** cerca gli slot liberi dell'artista in un giorno scelto e prenota fino a sei sessioni a un numero fisso di settimane di distanza. La Dashboard mostra i dati di oggi, le prenotazioni in arrivo, lo stato delle postazioni e le scorte basse. Il Calendario elenca tutti gli appuntamenti prenotati, i prossimi per primi. **Completato** segna una sessione come svolta, così viene contata nell'analisi delle durate, e **Rimuovi** la elimina.
 
 ## Consensi digitali
 

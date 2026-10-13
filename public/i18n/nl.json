@@ -1570,5 +1570,9 @@
  "← Back to waivers": "← Terug naar verklaringen",
  "Consent forms saved from the form builder:": "Toestemmingsformulieren opgeslagen vanuit de formulierbouwer:",
  "👥 Clients (name, email, phone, allergies, notes)": "👥 Klanten (name, email, phone, allergies, notes)",
- "📦 Inventory Catalog (name, sku, quantity, price, reorder_point)": "📦 Voorraad (name, sku, quantity, price, reorder_point)"
+ "📦 Inventory Catalog (name, sku, quantity, price, reorder_point)": "📦 Voorraad (name, sku, quantity, price, reorder_point)",
+ "Completed": "Afgerond",
+ "Earlier": "Eerder",
+ "When": "Wanneer",
+ "No appointments yet. Book the first one with Book Appointment.": "Nog geen afspraken. Boek de eerste met de boekingsknop."
 }

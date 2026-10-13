@@ -1570,5 +1570,9 @@
  "← Back to waivers": "← Torna alle liberatorie",
  "Consent forms saved from the form builder:": "Moduli di consenso salvati dal generatore di moduli:",
  "👥 Clients (name, email, phone, allergies, notes)": "👥 Clienti (name, email, phone, allergies, notes)",
- "📦 Inventory Catalog (name, sku, quantity, price, reorder_point)": "📦 Magazzino (name, sku, quantity, price, reorder_point)"
+ "📦 Inventory Catalog (name, sku, quantity, price, reorder_point)": "📦 Magazzino (name, sku, quantity, price, reorder_point)",
+ "Completed": "Completato",
+ "Earlier": "Precedenti",
+ "When": "Quando",
+ "No appointments yet. Book the first one with Book Appointment.": "Nessun appuntamento per ora. Prenotate il primo con il pulsante di prenotazione."
 }

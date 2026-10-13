@@ -1570,5 +1570,9 @@
  "← Back to waivers": "← กลับไปที่ใบยินยอม",
  "Consent forms saved from the form builder:": "แบบฟอร์มยินยอมที่บันทึกจากตัวสร้างแบบฟอร์ม:",
  "👥 Clients (name, email, phone, allergies, notes)": "👥 ลูกค้า (name, email, phone, allergies, notes)",
- "📦 Inventory Catalog (name, sku, quantity, price, reorder_point)": "📦 สต็อก (name, sku, quantity, price, reorder_point)"
+ "📦 Inventory Catalog (name, sku, quantity, price, reorder_point)": "📦 สต็อก (name, sku, quantity, price, reorder_point)",
+ "Completed": "เสร็จสิ้น",
+ "Earlier": "ก่อนหน้านี้",
+ "When": "เมื่อไร",
+ "No appointments yet. Book the first one with Book Appointment.": "ยังไม่มีนัดหมาย จองนัดแรกด้วยปุ่มจองนัดหมาย"
 }

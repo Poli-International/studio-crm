@@ -1570,5 +1570,9 @@
  "← Back to waivers": "← Zurück zu den Einwilligungen",
  "Consent forms saved from the form builder:": "Aus dem Formular-Editor gespeicherte Einwilligungsformulare:",
  "👥 Clients (name, email, phone, allergies, notes)": "👥 Kunden (name, email, phone, allergies, notes)",
- "📦 Inventory Catalog (name, sku, quantity, price, reorder_point)": "📦 Lager (name, sku, quantity, price, reorder_point)"
+ "📦 Inventory Catalog (name, sku, quantity, price, reorder_point)": "📦 Lager (name, sku, quantity, price, reorder_point)",
+ "Completed": "Abgeschlossen",
+ "Earlier": "Frühere",
+ "When": "Wann",
+ "No appointments yet. Book the first one with Book Appointment.": "Noch keine Termine. Buchen Sie den ersten über die Terminbuchung."
 }

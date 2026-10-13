@@ -37,7 +37,7 @@ Cliquez sur le bouton du personnel en haut à droite (il affiche **Connexion éq
 
 ## Rendez-vous et planification
 
-**Nouveau rendez-vous** réserve une séance unique avec artiste, poste, prix et acompte. Pour un travail en plusieurs séances, le **Planificateur automatique** recherche les créneaux libres de l'artiste à une date choisie et réserve jusqu'à six séances espacées d'un nombre de semaines défini. Le tableau de bord affiche les chiffres du jour, les réservations à venir, l'état des postes et les stocks faibles.
+**Nouveau rendez-vous** réserve une séance unique avec artiste, poste, prix et acompte. Pour un travail en plusieurs séances, le **Planificateur automatique** recherche les créneaux libres de l'artiste à une date choisie et réserve jusqu'à six séances espacées d'un nombre de semaines défini. Le tableau de bord affiche les chiffres du jour, les réservations à venir, l'état des postes et les stocks faibles. Le Calendrier affiche tous les rendez-vous réservés, les prochains en premier. **Terminé** marque une séance comme faite, elle compte alors dans l'analyse des durées, et **Retirer** la supprime.
 
 ## Formulaires de consentement numériques
 

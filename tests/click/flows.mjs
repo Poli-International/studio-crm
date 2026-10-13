@@ -194,8 +194,23 @@ await flow('Tablet kiosk: fill, sign, complete; the client and the signed form a
   await eventually(async () => (await text('#client-profile-modal-body')).includes('kiosk.flow@example.com'), 'the saved answers cannot be read back');
 });
 
+await flow('Form builder: changes to one form are still there after opening another form', async () => {
+  await b.goto(url + 'tools/form-builder/index.html');
+  await sleep(1500);
+  const questions = () => b.evaluate('window.FormBuilderApp.currentForm.sections[0].fields.length');
+  const open = (i) => b.evaluate(`(() => { const s = document.getElementById('template-select'); s.selectedIndex = ${i}; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+  const before = await questions();
+  await b.clickText('Add Question');
+  await open(1);
+  await sleep(600);
+  await b.clickText('Add Question');
+  await open(0);
+  await sleep(600);
+  check((await questions()) === before + 1, 'the question added to the first form was lost');
+});
+
 // Last, because it deletes the demo studio: the first thing a real studio does.
-await flow('Start with an empty studio, then add the first client and the first staff member', async () => {
+await flow('Start with an empty studio, then add the first client, staff member and appointment', async () => {
   await b.clickText('Start with an empty studio');
   await sleep(1500);
   check((await api('/api/clients')).length === 0, 'the demo clients were not cleared');
@@ -220,6 +235,11 @@ await flow('Start with an empty studio, then add the first client and the first 
   await b.evaluate(`document.getElementById('new-appt-date').value = new Date().toLocaleDateString('en-CA')`);
   await b.clickText('Book appointment');
   check((await api('/api/appointments')).length === 1, 'the first appointment was not saved');
+  await eventually(async () => (await text('#schedule-appointments-tbody')).includes('First Client'), 'the booked appointment is not listed on the Calendar');
+  await press('.appointment-row', 'First Client', 'Completed');
+  check((await api('/api/appointments'))[0].status === 'completed', 'Completed did not change the appointment');
+  await press('.appointment-row', 'First Client', 'Remove');
+  check((await api('/api/appointments')).length === 0, 'the appointment was not removed');
 });
 
 await stop();

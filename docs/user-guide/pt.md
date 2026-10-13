@@ -37,7 +37,7 @@ Clique no botão da equipa, em cima à direita, para ver a sua equipa. **Adicion
 
 ## Marcações e agendamento
 
-**Nova marcação** reserva uma única sessão com artista, estação, preço e depósito. Para trabalhos de várias sessões, o **Agendador automático** procura os horários livres do artista num dia escolhido e reserva até seis sessões com um número fixo de semanas de intervalo. O Dashboard mostra os números do dia, as próximas marcações, o estado das estações e o stock baixo.
+**Nova marcação** reserva uma única sessão com artista, estação, preço e depósito. Para trabalhos de várias sessões, o **Agendador automático** procura os horários livres do artista num dia escolhido e reserva até seis sessões com um número fixo de semanas de intervalo. O Dashboard mostra os números do dia, as próximas marcações, o estado das estações e o stock baixo. O Calendário lista todas as marcações, as próximas primeiro. **Concluída** marca uma sessão como feita, passando a contar na análise de durações, e **Remover** apaga-a.
 
 ## Consentimentos digitais
 

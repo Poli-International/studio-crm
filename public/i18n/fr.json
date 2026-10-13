@@ -1570,5 +1570,9 @@
  "← Back to waivers": "← Retour aux décharges",
  "Consent forms saved from the form builder:": "Formulaires de consentement enregistrés depuis le créateur de formulaires :",
  "👥 Clients (name, email, phone, allergies, notes)": "👥 Clients (name, email, phone, allergies, notes)",
- "📦 Inventory Catalog (name, sku, quantity, price, reorder_point)": "📦 Stock (name, sku, quantity, price, reorder_point)"
+ "📦 Inventory Catalog (name, sku, quantity, price, reorder_point)": "📦 Stock (name, sku, quantity, price, reorder_point)",
+ "Completed": "Terminé",
+ "Earlier": "Plus anciens",
+ "When": "Quand",
+ "No appointments yet. Book the first one with Book Appointment.": "Aucun rendez-vous pour le moment. Réservez le premier avec le bouton de réservation."
 }

@@ -37,7 +37,7 @@ Klik rechtsboven op de personeelsknop om uw team te zien. **Teamlid toevoegen** 
 
 ## Afspraken en planning
 
-**Nieuwe afspraak** boekt één sessie met artiest, station, prijs en aanbetaling. Voor werk met meerdere sessies zoekt de **Automatische planner** de vrije tijdslots van de artiest op een gekozen dag en boekt tot zes sessies met een vast aantal weken ertussen. Het dashboard toont de cijfers van vandaag, aankomende boekingen, stationsstatus en lage voorraad.
+**Nieuwe afspraak** boekt één sessie met artiest, station, prijs en aanbetaling. Voor werk met meerdere sessies zoekt de **Automatische planner** de vrije tijdslots van de artiest op een gekozen dag en boekt tot zes sessies met een vast aantal weken ertussen. Het dashboard toont de cijfers van vandaag, aankomende boekingen, stationsstatus en lage voorraad. De Agenda toont alle geboekte afspraken, de eerstvolgende bovenaan. **Afgerond** markeert een sessie als gedaan, zodat ze meetelt in de duuranalyse, en **Verwijderen** wist ze.
 
 ## Digitale toestemmingsformulieren
 

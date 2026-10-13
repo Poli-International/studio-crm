@@ -75,7 +75,7 @@ const PAGE_HELPER = `(() => {
       el.scrollIntoView({ block: 'center', inline: 'center' });
       const r = el.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
       const top = document.elementFromPoint(x, y);
-      const hit = top && (el.contains(top) || top.contains(el));
+      const hit = top && el.contains(top); // the click must land on the button itself, not on something around or over it
       return { x, y, covered: hit ? null : (top ? (top.id || top.tagName + '.' + top.className) : 'outside the window') };
     },
   };
@@ -173,7 +173,15 @@ export async function launchBrowser() {
       // A real mouse click on the button's centre. Returns null when the button is
       // not on screen, or { covered } when something else lies on top of it.
       async click(key) {
-        const t = await run(`return window.__ct.target(${js(key)});`);
+        // a window that is still sliding or growing into place moves its buttons: wait until this one holds still
+        let t = await run(`return window.__ct.target(${js(key)});`);
+        for (let i = 0; i < 15 && t; i++) {
+          await sleep(80);
+          const again = await run(`return window.__ct.target(${js(key)});`);
+          const still = again && Math.abs(again.x - t.x) < 1 && Math.abs(again.y - t.y) < 1 && again.covered === t.covered;
+          t = again;
+          if (still) break;
+        }
         if (!t || t.covered) return t;
         const o = await offset();
         for (const type of ['mouseMoved', 'mousePressed', 'mouseReleased']) await mouse(type, t.x + o.x, t.y + o.y, type === 'mousePressed');

@@ -37,7 +37,7 @@ Haga clic en el botón del personal, arriba a la derecha, para ver a su equipo. 
 
 ## Citas y programación
 
-**Nueva cita** reserva una sesión única con artista, estación, precio y depósito. Para trabajos de varias sesiones, el **Programador automático** busca los huecos libres del artista en un día elegido y reserva hasta seis sesiones separadas por un número fijo de semanas. El panel principal muestra las cifras del día, las próximas reservas, el estado de las estaciones y el stock bajo.
+**Nueva cita** reserva una sesión única con artista, estación, precio y depósito. Para trabajos de varias sesiones, el **Programador automático** busca los huecos libres del artista en un día elegido y reserva hasta seis sesiones separadas por un número fijo de semanas. El panel principal muestra las cifras del día, las próximas reservas, el estado de las estaciones y el stock bajo. El Calendario muestra todas las citas reservadas, las próximas primero. **Completada** marca una sesión como hecha, así cuenta en el análisis de duraciones, y **Quitar** la elimina.
 
 ## Consentimientos digitales
 

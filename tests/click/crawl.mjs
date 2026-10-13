@@ -74,7 +74,7 @@ while (queue.length || last.length) {
     const [tag, , , action] = item.key.split(' | ');
     if (tag === 'A' && action && !/^(#|javascript:)/.test(action) && !(await browser.evaluate(`!!window.__ct.all().find(e => window.__ct.key(e) === ${JSON.stringify(item.key)} && e.getAttribute('onclick'))`))) {
       // a plain link: do not leave the app, just check that the address answers
-      const local = action.startsWith('/') || action.startsWith('./') || action.startsWith(url);
+      const local = (action.startsWith('/') && !action.startsWith('//')) || action.startsWith('./') || action.startsWith(url);
       r.status = local ? await browser.evaluate(`fetch(${JSON.stringify(action)}).then(r => r.status, () => -1)`) : null;
       r.verdict = local ? (r.status === 200 ? 'works' : 'broken') : 'external link';
       r.did = 'link to ' + action;

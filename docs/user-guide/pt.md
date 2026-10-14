@@ -35,6 +35,12 @@ Abra **Definições** para introduzir os seus preços, a regra de depósito, a t
 
 Clique no botão da equipa, em cima à direita, para ver a sua equipa. **Adicionar membro** adiciona uma pessoa, **Editar** altera os seus dados e **Remover** retira-a da equipa. **Selecionar** mostra o nome dessa pessoa na barra superior, para que todos vejam quem está no ecrã. Não há palavras-passe nem níveis de acesso. Um novo membro pode ser escolhido de imediato em qualquer lugar onde se escolhe um artista, por exemplo ao marcar uma sessão.
 
+## Tablets, telemóveis e a palavra-passe do estúdio
+
+Os outros dispositivos do estúdio abrem o CRM com o endereço mostrado na janela que o iniciou. Um tablet ou telemóvel que precise da câmara (o scanner) tem de usar o endereço que começa por `https://` e termina em `:3443`. Da primeira vez, o navegador avisa que a ligação não é privada, porque o certificado foi criado pelo seu próprio computador: escolha Avançadas e depois Continuar. Com o endereço `http://` simples funciona tudo, exceto a câmara.
+
+Para manter fora as outras pessoas da mesma rede, abra **Definições** e defina uma **Palavra-passe do estúdio**. Cada dispositivo inicia sessão uma vez. É uma única palavra-passe para todo o estúdio, não uma por pessoa. Se a esquecer, crie um ficheiro vazio chamado `reset-password.txt` na pasta `data` e inicie o CRM de novo.
+
 ## Marcações e agendamento
 
 **Nova marcação** reserva uma única sessão com artista, estação, preço e depósito. Para trabalhos de várias sessões, o **Agendador automático** procura os horários livres do artista num dia escolhido e reserva até seis sessões com um número fixo de semanas de intervalo. O Dashboard mostra os números do dia, as próximas marcações, o estado das estações e o stock baixo. O Calendário lista todas as marcações, as próximas primeiro. **Concluída** marca uma sessão como feita, passando a contar na análise de durações, e **Remover** apaga-a.
@@ -43,7 +49,7 @@ Clique no botão da equipa, em cima à direita, para ver a sua equipa. **Adicion
 
 Abra o formulário de consentimento, escolha o cliente na lista (as suas alergias são preenchidas automaticamente), confirme a verificação de idade e peça ao cliente para assinar no tablet. O consentimento é guardado com a imagem da assinatura. Não é guardado sem um cliente e uma assinatura.
 
-Para o cliente preencher um formulário de consentimento num tablet, abra **Clientes**, o criador de formulários de consentimento, a pré-visualização do formulário e depois o modo quiosque para tablet. O cliente responde a uma secção por ecrã, assina no último e toca no botão para concluir. O formulário é guardado com a assinatura e é descarregado um PDF. Se antes não foi escolhido nenhum cliente, é criado um novo cliente com o nome, o e-mail, o telefone e a data de nascimento do formulário. Os formulários guardados estão no perfil do cliente, em **Termos**; **Ver respostas** mostra cada resposta.
+Para o cliente preencher um formulário de consentimento num tablet, abra **Clientes**, o criador de formulários de consentimento, a pré-visualização do formulário e depois o modo quiosque para tablet. O cliente responde a uma secção por ecrã, assina no último e toca no botão para concluir. O formulário é guardado com a assinatura e é descarregado um PDF. Se antes não foi escolhido nenhum cliente, é criado um novo cliente com o nome, o e-mail, o telefone e a data de nascimento do formulário. Os formulários guardados estão no perfil do cliente, em **Termos**; **Ver respostas** mostra cada resposta. Um formulário editado no criador de formulários é guardado com os dados do estúdio: o tablet mostra o mesmo formulário que o computador onde o editou.
 
 ## Mensagens: o CRM prepara, você envia
 

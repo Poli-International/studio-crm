@@ -51,6 +51,18 @@ const PAGE_HELPER = `(() => {
       return [...document.querySelectorAll('button,[onclick],a[href],input[type=button],input[type=submit],[role=button]')].filter(shown);
     },
     keys() { return [...new Set(ct.all().map(ct.key))]; },
+    // A welcome or consent window that covers a tool when it opens: the button a person would press to get past it.
+    opener() {
+      const cover = [...document.querySelectorAll('body *')].find((el) => { const cs = getComputedStyle(el), r = el.getBoundingClientRect(); return cs.position === 'fixed' && shown(el) && r.width > innerWidth * 0.8 && r.height > innerHeight * 0.8 && Number(cs.zIndex) > 0; });
+      if (!cover) return null;
+      const way = [...cover.querySelectorAll('button,[role=button],[onclick]')].filter(shown).find((el) => /close|skip|got it|start|continue|accept|agree|dismiss|ok|×|✕/i.test((el.innerText || '') + ' ' + (el.getAttribute('aria-label') || '') + ' ' + (el.title || '')));
+      return way ? ct.key(way) : null;
+    },
+    // already the chosen tab, filter or toggle: pressing it again changes nothing, by design
+    chosen(key) {
+      const el = ct.all().find((e) => ct.key(e) === key);
+      return !!el && (/(active|selected|current|is-active)/.test(el.className) || el.getAttribute('aria-selected') === 'true' || el.getAttribute('aria-pressed') === 'true' || el.getAttribute('aria-current') === 'true');
+    },
     overlays() {
       return [...document.querySelectorAll('body [id]')].filter((el) => getComputedStyle(el).position === 'fixed' && shown(el)
         && el.getBoundingClientRect().width > innerWidth * 0.3 && el.getBoundingClientRect().height > innerHeight * 0.3).map((el) => el.id);
@@ -156,7 +168,13 @@ export async function launchBrowser() {
   };
   const js = (v) => JSON.stringify(v);
 
-  const mouse = (type, x, y, down) => cdp('Input.dispatchMouseEvent', { type, x, y, button: 'left', buttons: down ? 1 : 0, clickCount: 1 });
+  // Fingers instead of a mouse once tablet() was called: the same three steps, sent as touches.
+  let fingers = false;
+  const mouse = (type, x, y, down) => (fingers
+    ? (type === 'mouseMoved' && !down ? Promise.resolve() : cdp('Input.dispatchTouchEvent', {
+      type: type === 'mousePressed' ? 'touchStart' : type === 'mouseReleased' ? 'touchEnd' : 'touchMove',
+      touchPoints: type === 'mouseReleased' ? [] : [{ x: Math.round(x), y: Math.round(y) }] }))
+    : cdp('Input.dispatchMouseEvent', { type, x, y, button: 'left', buttons: down ? 1 : 0, clickCount: 1 }));
   const settle = async (ms = 250) => {
     await sleep(100);
     for (let i = 0; i < 40 && await evaluate('window.__ct ? window.__ct.sig.inflight : 0').catch(() => 0) > 0; i++) await sleep(100);
@@ -249,6 +267,17 @@ export async function launchBrowser() {
       // text moves when a web font arrives late, and a small button moves with it
       await evaluate('document.fonts.ready.then(() => true)').catch(() => {});
       await settle();
+    },
+    // a tablet held upright, used with fingers
+    async tablet() {
+      await cdp('Emulation.setDeviceMetricsOverride', { width: 820, height: 1180, deviceScaleFactor: 1, mobile: true });
+      await cdp('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
+      fingers = true;
+    },
+    async desktop() {
+      await cdp('Emulation.clearDeviceMetricsOverride');
+      await cdp('Emulation.setTouchEmulationEnabled', { enabled: false });
+      fingers = false;
     },
     // a phone or tablet screen
     viewport: (width, height) => cdp('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: true }),

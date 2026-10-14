@@ -35,6 +35,12 @@ Wählen Sie Englisch, Französisch, Italienisch, Deutsch, Spanisch, Niederländi
 
 Klicken Sie oben rechts auf die Personal-Schaltfläche, um Ihr Team zu sehen. **Teammitglied hinzufügen** legt eine Person an, **Bearbeiten** ändert ihre Angaben, und **Entfernen** nimmt sie aus dem Team. **Auswählen** zeigt den Namen dieser Person in der oberen Leiste, damit alle sehen, wer am Bildschirm ist. Es gibt keine Passwörter und keine Zugriffsstufen. Ein neues Teammitglied kann sofort überall gewählt werden, wo ein Artist ausgewählt wird, zum Beispiel bei einer Terminbuchung.
 
+## Tablets, Telefone und das Studio-Passwort
+
+Andere Geräte im Studio öffnen das CRM mit der Adresse, die im Startfenster angezeigt wird. Ein Tablet oder Telefon, das die Kamera braucht (den Scanner), muss die Adresse verwenden, die mit `https://` beginnt und mit `:3443` endet. Beim ersten Mal warnt der Browser, dass die Verbindung nicht privat ist, weil das Zertifikat von Ihrem eigenen Rechner erstellt wurde: Wählen Sie Erweitert, dann Weiter. Mit der einfachen `http://`-Adresse funktioniert alles außer der Kamera.
+
+Um andere Personen im selben Netzwerk fernzuhalten, öffnen Sie **Einstellungen** und legen ein **Studio-Passwort** fest. Jedes Gerät meldet sich dann einmal an. Es ist ein Passwort für das ganze Studio, nicht eines pro Person. Wenn Sie es vergessen, legen Sie im Ordner `data` eine leere Datei namens `reset-password.txt` an und starten das CRM neu.
+
 ## Termine und Terminplanung
 
 **Neuer Termin** bucht eine einzelne Sitzung mit Künstler, Station, Preis und Anzahlung. Für Arbeiten mit mehreren Sitzungen sucht der **Auto-Planer** die freien Zeitfenster des Künstlers an einem gewählten Tag und bucht bis zu sechs Sitzungen im festgelegten Wochenabstand. Das Dashboard zeigt die heutigen Zahlen, kommende Buchungen, den Stationsstatus und niedrigen Lagerbestand. Der Kalender listet alle gebuchten Termine auf, die nächsten zuerst. **Abgeschlossen** markiert eine Sitzung als erledigt, sie zählt dann in der Daueranalyse, und **Entfernen** löscht sie.
@@ -43,7 +49,7 @@ Klicken Sie oben rechts auf die Personal-Schaltfläche, um Ihr Team zu sehen. **
 
 Öffnen Sie das Einverständnisformular, wählen Sie den Kunden aus der Liste (dessen Allergien werden automatisch eingetragen), bestätigen Sie die Altersprüfung und lassen Sie den Kunden auf dem Pad unterschreiben. Die Einverständniserklärung wird mit dem Unterschriftsbild gespeichert. Sie wird nicht ohne Kunden und Unterschrift gespeichert.
 
-Damit der Kunde ein Einwilligungsformular auf einem Tablet ausfüllt, öffnen Sie **Kunden**, den Editor für Einwilligungsformulare, die Formularvorschau und dann den Tablet-Kioskmodus. Der Kunde beantwortet einen Abschnitt pro Bildschirm, unterschreibt auf dem letzten und tippt auf die Schaltfläche zum Abschließen. Das Formular wird mit der Unterschrift gespeichert, und ein PDF wird heruntergeladen. Wurde vorher kein Kunde gewählt, wird aus Name, E-Mail, Telefon und Geburtsdatum des Formulars ein neuer Kunde angelegt. Gespeicherte Formulare stehen im Kundenprofil unter **Einwilligungen**; **Antworten ansehen** zeigt jede Antwort.
+Damit der Kunde ein Einwilligungsformular auf einem Tablet ausfüllt, öffnen Sie **Kunden**, den Editor für Einwilligungsformulare, die Formularvorschau und dann den Tablet-Kioskmodus. Der Kunde beantwortet einen Abschnitt pro Bildschirm, unterschreibt auf dem letzten und tippt auf die Schaltfläche zum Abschließen. Das Formular wird mit der Unterschrift gespeichert, und ein PDF wird heruntergeladen. Wurde vorher kein Kunde gewählt, wird aus Name, E-Mail, Telefon und Geburtsdatum des Formulars ein neuer Kunde angelegt. Gespeicherte Formulare stehen im Kundenprofil unter **Einwilligungen**; **Antworten ansehen** zeigt jede Antwort. Ein im Formular-Editor bearbeitetes Formular wird mit den Studiodaten gespeichert: Das Tablet zeigt also dasselbe Formular wie der Rechner, auf dem Sie es bearbeitet haben.
 
 ## Nachrichten: Das CRM bereitet vor, Sie senden
 

@@ -209,6 +209,39 @@ await flow('Tablet kiosk: fill, sign, complete; the client and the signed form a
   await eventually(async () => (await text('#client-profile-modal-body')).includes('kiosk.flow@example.com'), 'the saved answers cannot be read back');
 });
 
+await flow('On a tablet, with fingers: the consent form is filled, signed and saved', async () => {
+  await b.tablet();
+  try {
+    await b.goto(url);
+    await b.evaluate(`navigateToDestination('clients')`); // the menu is behind the hamburger on a tablet; tested on its own below
+    await b.settle();
+    await b.clickText('Consent Form Builder');
+    const f = b.frame('#form-builder-frame');
+    for (let i = 0; i < 80 && !(await f.evaluate('!!(window.__ct && window.FormBuilderApp && window.FormBuilderApp.currentForm && document.getElementById("btn-preview"))').catch(() => false)); i++) await sleep(250);
+    await sleep(800);
+    await f.clickText('Preview Form');
+    await f.clickText('Fill Sample Answers');
+    await f.clickText('Tablet Kiosk Mode');
+    await f.clickText('Next Step', '#tablet-kiosk-modal');
+    await f.type('#tablet-kiosk-modal [name="full_name"]', 'Tablet Flow');
+    for (let i = 0; i < 5; i++) await f.clickText('Next Step', '#tablet-kiosk-modal');
+    await f.scribble('#tablet-kiosk-modal canvas.signature-pad-canvas');
+    check(await f.evaluate('!window.ActiveFormPreview.signatureManagers.client_sig.isEmpty()'), 'a finger does not sign in the signature box');
+    await f.clickText('Complete', '#tablet-kiosk-modal');
+    await eventually(async () => (await api('/api/clients')).some((c) => c.name === 'Tablet Flow'), 'the form signed on the tablet was not saved');
+  } finally { await b.desktop(); }
+});
+
+await flow('On a tablet, the menu button opens the menu and a screen can be chosen', async () => {
+  await b.tablet();
+  try {
+    await b.goto(url);
+    await pressOn('toggleSidebar()');
+    await b.clickText('Calendar');
+    await eventually(async () => (await b.evaluate('window.__ct.state().view')) === 'dest-calendar', 'the Calendar did not open from the tablet menu');
+  } finally { await b.desktop(); }
+});
+
 await flow('Form builder: changes to one form are still there after opening another form', async () => {
   await b.goto(url + 'tools/form-builder/index.html');
   await sleep(1500);

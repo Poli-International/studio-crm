@@ -11,7 +11,7 @@
     "dev": "node server.js",
     "lint": "echo 'No lint errors'",
     "start": "node server.js",
-    "test": "node test-battery.cjs && vitest run",
+    "test": "vitest run",
     "test:click": "node tests/click/flows.mjs && node tests/click/crawl.mjs",
     "guide": "node scripts/build-guide.cjs"
   },

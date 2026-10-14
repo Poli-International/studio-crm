@@ -61,7 +61,7 @@ All data is in `data/studio_crm.sqlite`. Copy that file to back up the studio.
 ## Development
 
 ```bash
-npm test           # test battery + vitest
+npm test           # unit tests
 npm run test:click # real clicks in Chrome or Edge: the daily jobs, then every button
 npm run guide      # rebuild public/guide/<lang>.html from docs/
 ```

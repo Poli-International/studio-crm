@@ -1,7 +1,5 @@
 // Global Studio OS Utilities and Modals
 
-
-
 // 2. Team Messenger Functions
 async function renderTeamMessages() {
     const stream = document.getElementById("mboard-messages-stream");
@@ -138,17 +136,7 @@ window.executeQuickExport = executeQuickExport;
 
 // 5. Staff Switcher & Role Login
 
-
-
-
 // 6. Test Diagnostics & Coverage
-
-
-function closeTestCoverageModal() {
-    const el = document.getElementById("test-coverage-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeTestCoverageModal = closeTestCoverageModal;
 
 // 7. Quick Portal Access Generator
 
@@ -224,18 +212,7 @@ window.renderPrintableQrTagSheet = renderPrintableQrTagSheet;
 
 // Debounced Search and Helpers
 let inventorySearchDebounceTimer = null;
-function handleInventorySearchInput(val) {
-    debouncedInventorySearchInput(val);
-}
-window.handleInventorySearchInput = handleInventorySearchInput;
 
-function debouncedInventorySearchInput(val) {
-    if (inventorySearchDebounceTimer) clearTimeout(inventorySearchDebounceTimer);
-    inventorySearchDebounceTimer = setTimeout(() => {
-        // filter inventory items
-    }, 250);
-}
-window.debouncedInventorySearchInput = debouncedInventorySearchInput;
 
 function renderD3InventoryTrendChart() {
     const cont = document.getElementById("d3-inventory-trend-chart");
@@ -251,10 +228,6 @@ function toggleClientQuickActionsMenu() {
 }
 window.toggleClientQuickActionsMenu = toggleClientQuickActionsMenu;
 
-function initInventoryRemoteSyncState() {
-    // init persistent remote CSV sync
-}
-window.initInventoryRemoteSyncState = initInventoryRemoteSyncState;
 
 function toggleGlobalDarkMode() {
     const body = document.body;
@@ -385,17 +358,6 @@ function toggleLiveStreamUpdates() {
     }
 }
 window.toggleLiveStreamUpdates = toggleLiveStreamUpdates;
-
-function filterDashboardProcurementHealthSupplier(supplier) {
-    if (typeof showToastNotification === "function") showToastNotification("Filtering supplier: " + supplier);
-}
-window.filterDashboardProcurementHealthSupplier = filterDashboardProcurementHealthSupplier;
-
-
-function toggleSelectAllActivities(cb) {
-    document.querySelectorAll(".activity-checkbox").forEach(c => { c.checked = cb?.checked || false; });
-}
-window.toggleSelectAllActivities = toggleSelectAllActivities;
 
 function filterPortalHistoryList(query) {}
 window.filterPortalHistoryList = filterPortalHistoryList;

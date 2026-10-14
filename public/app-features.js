@@ -755,119 +755,18 @@ function closeDeletionConfirmModal() {
 window.closeDeletionConfirmModal = closeDeletionConfirmModal;
 
 // Gallery Item Deletion Confirmation
-function confirmDeleteGalleryWork(id, title, artistName) {
-    openDeletionConfirmModal({
-        title: 'Delete Shared Gallery Artwork',
-        message: 'Are you sure you want to permanently remove this portfolio artwork from the shared gallery?',
-        itemName: title || 'Portfolio Artwork',
-        itemDetails: `Artwork #${id} • Artist: ${artistName || 'Staff'}`,
-        confirmBtnText: '🗑️ Delete Artwork',
-        onConfirm: async () => {
-            try {
-                const res = await fetch(`/api/gallery/${id}`, { method: 'DELETE' });
-                if (!res.ok) throw new Error('Gallery delete failed');
-                if (window.allGalleryWorks) {
-                    window.allGalleryWorks = window.allGalleryWorks.filter(w => w.id !== id);
-                }
-                if (typeof renderGalleryGrid === 'function') renderGalleryGrid();
-                if (typeof showUndoToast === 'function') {
-                    showUndoToast('Removed portfolio artwork from shared gallery.');
-                }
-            } catch (err) {
-                console.error('Failed to delete gallery work:', err);
-            }
-        }
-    });
-}
-window.confirmDeleteGalleryWork = confirmDeleteGalleryWork;
 
 // Gallery B&A Pair Deletion Confirmation
-function confirmDeleteBeforeAfterPair(id, title) {
-    openDeletionConfirmModal({
-        title: 'Delete Before & After Pair',
-        message: 'Are you sure you want to permanently remove this Before & After showcase pair?',
-        itemName: title || 'Before & After Pair',
-        itemDetails: `Pair ID: ${id}`,
-        confirmBtnText: '🗑️ Remove Pair',
-        onConfirm: () => {
-            let pairs = [];
-            try {
-                pairs = JSON.parse(localStorage.getItem('studio_ba_pairs') || '[]');
-            } catch(e) {}
-            pairs = pairs.filter(p => p.id !== id);
-            localStorage.setItem('studio_ba_pairs', JSON.stringify(pairs));
-            if (typeof renderGalleryGrid === 'function') renderGalleryGrid();
-            if (typeof showUndoToast === 'function') {
-                showUndoToast('Removed Before & After Pair from gallery.');
-            }
-        }
-    });
-}
-window.confirmDeleteBeforeAfterPair = confirmDeleteBeforeAfterPair;
 
 // Inventory Item Deletion Confirmation
-function confirmDeleteInventoryItem(id, name, sku) {
-    openDeletionConfirmModal({
-        title: 'Delete Inventory Item',
-        message: 'Are you sure you want to permanently remove this supply item from the studio inventory catalog?',
-        itemName: name || 'Inventory Item',
-        itemDetails: `SKU: ${sku || 'N/A'} • ID: #${id}`,
-        confirmBtnText: '🗑️ Delete Supply Item',
-        onConfirm: async () => {
-            try {
-                const res = await fetch(`/api/inventory/${id}`, { method: 'DELETE' });
-                if (!res.ok) throw new Error('Inventory delete failed');
-                if (window.cachedInventoryList) {
-                    window.cachedInventoryList = window.cachedInventoryList.filter(i => i.id !== id);
-                }
-                if (typeof renderInventoryCatalogTable === 'function') {
-                    renderInventoryCatalogTable(window.cachedInventoryList);
-                }
-                if (typeof showUndoToast === 'function') {
-                    showUndoToast(`🗑️ Removed ${name} from inventory.`);
-                }
-            } catch (err) {
-                console.error('Failed to delete inventory item:', err);
-                alert('Failed to delete inventory item.');
-            }
-        }
-    });
-}
-window.confirmDeleteInventoryItem = confirmDeleteInventoryItem;
 
 // Inventory Category Deletion Confirmation
-function confirmDeleteCategorySetting(id, name) {
-    openDeletionConfirmModal({
-        title: 'Delete Inventory Category',
-        message: `Are you sure you want to delete category "${name}"?`,
-        itemName: `Category: ${name}`,
-        itemDetails: `ID #${id}`,
-        confirmBtnText: '🗑️ Delete Category',
-        onConfirm: async () => {
-            try {
-                const res = await fetch(`/api/inventory/categories/${id}`, { method: 'DELETE' });
-                if (!res.ok) throw new Error('Category delete failed');
-                if (typeof loadCategoriesList === 'function') loadCategoriesList();
-                if (typeof showUndoToast === 'function') showUndoToast(`🗑️ Deleted Category: ${name}`);
-            } catch (err) {
-                console.error('Category delete error:', err);
-            }
-        }
-    });
-}
-window.confirmDeleteCategorySetting = confirmDeleteCategorySetting;
 
 // =========================================================================
 // 🔥 D3.JS SUPPLY USAGE DENSITY HEATMAP (BY DAY OF WEEK & PROCEDURE SHIFT)
 // =========================================================================
 let cachedSupplyUsageHeatmapData = null;
 
-async function openInventoryUsageHeatmapModal() {
-    const modal = document.getElementById('inventory-usage-heatmap-modal');
-    if (modal) modal.style.display = 'flex';
-    await renderD3SupplyUsageHeatmap();
-}
-window.openInventoryUsageHeatmapModal = openInventoryUsageHeatmapModal;
 
 function closeInventoryUsageHeatmapModal() {
     const modal = document.getElementById('inventory-usage-heatmap-modal');
@@ -1208,36 +1107,6 @@ window.deleteClientTattooWork = deleteClientTattooWork;
 let clientPhotoMediaStream = null;
 let capturedClientPhotoDataUrl = null;
 
-function openClientPhotoCameraModal() {
-    const modal = document.getElementById('client-photo-camera-modal-overlay');
-    if (!modal) return;
-    modal.style.display = 'flex';
-
-    const video = document.getElementById('client-photo-video');
-    const preview = document.getElementById('client-photo-preview');
-    const ctrlInitial = document.getElementById('client-photo-controls-initial');
-    const ctrlCaptured = document.getElementById('client-photo-controls-captured');
-
-    if (video) video.style.display = 'block';
-    if (preview) preview.style.display = 'none';
-    if (ctrlInitial) ctrlInitial.style.display = 'flex';
-    if (ctrlCaptured) ctrlCaptured.style.display = 'none';
-
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false })
-            .then(stream => {
-                clientPhotoMediaStream = stream;
-                if (video) {
-                    video.srcObject = stream;
-                    video.play();
-                }
-            })
-            .catch(err => {
-                console.warn('Camera access error:', err);
-            });
-    }
-}
-window.openClientPhotoCameraModal = openClientPhotoCameraModal;
 
 function closeClientPhotoCameraModal() {
     const modal = document.getElementById('client-photo-camera-modal-overlay');
@@ -1248,43 +1117,6 @@ function closeClientPhotoCameraModal() {
     }
 }
 window.closeClientPhotoCameraModal = closeClientPhotoCameraModal;
-
-function snapClientProfilePhoto() {
-    const video = document.getElementById('client-photo-video');
-    const canvas = document.getElementById('client-photo-canvas');
-    const preview = document.getElementById('client-photo-preview');
-    const ctrlInitial = document.getElementById('client-photo-controls-initial');
-    const ctrlCaptured = document.getElementById('client-photo-controls-captured');
-
-    if (!video || !canvas) return;
-    canvas.width = video.videoWidth || 640;
-    canvas.height = video.videoHeight || 480;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-    capturedClientPhotoDataUrl = canvas.toDataURL('image/jpeg', 0.9);
-    if (preview) {
-        preview.src = capturedClientPhotoDataUrl;
-        preview.style.display = 'block';
-    }
-    video.style.display = 'none';
-    if (ctrlInitial) ctrlInitial.style.display = 'none';
-    if (ctrlCaptured) ctrlCaptured.style.display = 'flex';
-}
-window.snapClientProfilePhoto = snapClientProfilePhoto;
-
-function retakeClientProfilePhoto() {
-    const video = document.getElementById('client-photo-video');
-    const preview = document.getElementById('client-photo-preview');
-    const ctrlInitial = document.getElementById('client-photo-controls-initial');
-    const ctrlCaptured = document.getElementById('client-photo-controls-captured');
-
-    if (video) video.style.display = 'block';
-    if (preview) preview.style.display = 'none';
-    if (ctrlInitial) ctrlInitial.style.display = 'flex';
-    if (ctrlCaptured) ctrlCaptured.style.display = 'none';
-}
-window.retakeClientProfilePhoto = retakeClientProfilePhoto;
 
 function saveCapturedClientProfilePhoto() {
     if (!capturedClientPhotoDataUrl || !currentActiveProfileClient || !currentActiveProfileClient.client) {
@@ -1395,16 +1227,6 @@ async function logRapidClientProcedureNote(noteText) {
 }
 window.logRapidClientProcedureNote = logRapidClientProcedureNote;
 
-function promptCustomClientProcedureNote() {
-    toggleClientQuickActionsMenu();
-    switchClientProfileTab('notes');
-    const textEl = document.getElementById('sn-note-text');
-    if (textEl) {
-        textEl.focus();
-        textEl.scrollIntoView({ behavior: 'smooth' });
-    }
-}
-window.promptCustomClientProcedureNote = promptCustomClientProcedureNote;
 
 // =========================================================================
 // ⌨️ GLOBAL KEYBOARD SHORTCUT MANAGER (ALT + O FOR STERILE AUDIT)
@@ -1682,52 +1504,6 @@ async function fetchAndDisplayInventoryCsvSyncStatus() {
 }
 window.fetchAndDisplayInventoryCsvSyncStatus = fetchAndDisplayInventoryCsvSyncStatus;
 
-async function triggerManualCsvSyncFromModal() {
-    const btn = document.getElementById('btn-inv-manual-sync');
-    if (btn) {
-        btn.disabled = true;
-        btn.innerHTML = '⏳ Syncing...';
-    }
-
-    try {
-        const res = await fetch('/api/sync/trigger', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ user: 'Studio Manager' })
-        });
-        const result = await res.json();
-        
-        await fetchAndDisplayInventoryCsvSyncStatus();
-        if (typeof openInventoryManagementModal === 'function') {
-            // refresh inventory cached data
-            const invRes = await fetch('/api/inventory');
-            if (invRes.ok) {
-                const invData = await invRes.json();
-                if (window.cachedInventoryList) {
-                    window.cachedInventoryList = invData;
-                    if (typeof handleInventorySearchInput === 'function') {
-                        handleInventorySearchInput('');
-                    }
-                }
-            }
-        }
-
-        if (typeof showUndoToast === 'function') {
-            showUndoToast('⚡ Remote CSV inventory & client sync completed successfully!');
-        }
-    } catch (err) {
-        console.error('Manual sync failed:', err);
-        if (typeof showUndoToast === 'function') {
-            showUndoToast('⚠️ CSV Sync failed: ' + err.message);
-        }
-    } finally {
-        if (btn) {
-            btn.disabled = false;
-            btn.innerHTML = '⚡ Sync Now';
-        }
-    }
-}
-window.triggerManualCsvSyncFromModal = triggerManualCsvSyncFromModal;
 
 // Auto-poll sync status every 45 seconds when page is active
 setInterval(() => {
@@ -1858,11 +1634,6 @@ function showStudioToast(msg) {
 // 1. OPEN MODAL FUNCTIONS (46)
 // =========================================================================
 
-function openAccountingIntegrationsModal() {
-    forceShowModal('vat-settings-modal-overlay');
-    showStudioToast('Opened Accounting & Tax Configuration');
-}
-window.openAccountingIntegrationsModal = openAccountingIntegrationsModal;
 
 function openAftercareEmailModal(client) {
     forceShowModal('aftercare-email-modal-overlay');
@@ -1900,16 +1671,6 @@ async function openAftercarePipelineModal() {
 }
 window.openAftercarePipelineModal = openAftercarePipelineModal;
 
-function openAssignShiftModal(staff) {
-    forceShowModal('shift-modal');
-    if (staff) {
-        const staffSelect = document.getElementById('shift-staff-select');
-        if (staffSelect) staffSelect.value = staff;
-    }
-}
-window.openAssignShiftModal = openAssignShiftModal;
-
-
 // One line of a ledger window: what on the left, how much on the right.
 function ledgerRow(title, detail, amount) {
     return '<div class="ledger-row" style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;gap:12px;">'
@@ -1946,12 +1707,6 @@ function openBeforeAfterLinkModal() {
     forceShowModal('gallery-before-after-modal-overlay');
 }
 window.openBeforeAfterLinkModal = openBeforeAfterLinkModal;
-
-
-function openClearAllConfirmModal() {
-    forceShowModal('clear-all-confirm-modal');
-}
-window.openClearAllConfirmModal = openClearAllConfirmModal;
 
 async function openClientDirectoryModal() {
     forceShowModal('client-directory-modal-overlay');
@@ -2045,34 +1800,6 @@ function openImportModal() {
 }
 window.openImportModal = openImportModal;
 
-function openInventoryHealthModal() {
-    if (typeof window.openInventoryUsageHeatmapModal === 'function') {
-        window.openInventoryUsageHeatmapModal();
-    } else {
-        forceShowModal('inventory-usage-heatmap-modal');
-    }
-}
-window.openInventoryHealthModal = openInventoryHealthModal;
-
-function openInventoryManagementModal() {
-    const tab = document.querySelector('.tool-tab[data-tab="inventory"]');
-    if (tab) tab.click();
-    showStudioToast('Switched to Inventory Stock Matrix');
-}
-window.openInventoryManagementModal = openInventoryManagementModal;
-
-function openLowStockModal() {
-    const input = document.getElementById('inventory-search-input');
-    if (input) {
-        input.value = 'low';
-        input.dispatchEvent(new Event('input'));
-    }
-    const tab = document.querySelector('.tool-tab[data-tab="inventory"]');
-    if (tab) tab.click();
-    showStudioToast('Filtering inventory for low-stock items');
-}
-window.openLowStockModal = openLowStockModal;
-
 async function openMarginCalculatorModal() {
     forceShowModal('margin-calculator-modal-overlay');
     const body = document.getElementById('margin-calculator-modal-body');
@@ -2117,22 +1844,12 @@ function openQuickRecordPaymentModal() {
 }
 window.openQuickRecordPaymentModal = openQuickRecordPaymentModal;
 
-function openQuickReorderEmailModal(vendor) {
-    forceShowModal('po-modal');
-    showStudioToast('Generating supplier PO draft' + (vendor ? ' for ' + vendor : ''));
-}
-window.openQuickReorderEmailModal = openQuickReorderEmailModal;
 
 function openQuickTableExportModal(targetTableId) {
     forceShowModal('quick-table-export-modal-overlay');
 }
 window.openQuickTableExportModal = openQuickTableExportModal;
 
-function openReceiptModal() {
-    forceShowModal('deposit-ledger-modal-overlay');
-    showStudioToast('Receipt Generator initialized');
-}
-window.openReceiptModal = openReceiptModal;
 
 function openSanitizationChecklistModal() {
     const ts = document.getElementById("sani-timestamp-display");
@@ -2158,21 +1875,11 @@ function openStationHeatmapModal() {
 }
 window.openStationHeatmapModal = openStationHeatmapModal;
 
-function openStationsModal() {
-    forceShowModal('station-heatmap-modal-overlay');
-}
-window.openStationsModal = openStationsModal;
 
 function openSterileAuditModal() {
     forceShowModal('waiver-audit-modal-overlay');
 }
 window.openSterileAuditModal = openSterileAuditModal;
-
-
-function openTattooConsultationGenerator() {
-    openTattooPriceEstimatorModal();
-}
-window.openTattooConsultationGenerator = openTattooConsultationGenerator;
 
 function openTattooPriceEstimatorModal() {
     forceShowModal('tattoo-price-estimator-modal-overlay');
@@ -2184,10 +1891,6 @@ function openTeamMessengerModal() {
 }
 window.openTeamMessengerModal = openTeamMessengerModal;
 
-function openTestCoverageModal() {
-    forceShowModal('test-coverage-modal-overlay');
-}
-window.openTestCoverageModal = openTestCoverageModal;
 
 function openTipCalculatorModal() {
     forceShowModal('tip-calculator-modal-overlay');
@@ -2294,11 +1997,6 @@ window.closeShiftModal = closeShiftModal;
 function closeSkinToneVisualizerModal() { forceHideModal('skin-visualizer-modal'); }
 window.closeSkinToneVisualizerModal = closeSkinToneVisualizerModal;
 
-function closeStaffDashboardComponent() {
-    const el = document.getElementById('staff-dashboard-component');
-    if (el) el.style.display = 'none';
-}
-window.closeStaffDashboardComponent = closeStaffDashboardComponent;
 
 function closeStaffMessagingChannelsModal() { forceHideModal('staff-messaging-modal-overlay'); }
 window.closeStaffMessagingChannelsModal = closeStaffMessagingChannelsModal;
@@ -2348,11 +2046,6 @@ function toggleAllExportColumns() {
 }
 window.toggleAllExportColumns = toggleAllExportColumns;
 
-function toggleArtistPerformanceWidget() {
-    const w = document.getElementById('artist-performance-widget');
-    if (w) w.style.display = w.style.display === 'none' ? 'block' : 'none';
-}
-window.toggleArtistPerformanceWidget = toggleArtistPerformanceWidget;
 
 function toggleClientPortalTheme() {
     document.body.classList.toggle('portal-light-theme');
@@ -2360,11 +2053,6 @@ function toggleClientPortalTheme() {
 }
 window.toggleClientPortalTheme = toggleClientPortalTheme;
 
-function toggleDailySummaryCard() {
-    const card = document.getElementById('daily-summary-dashboard-card');
-    if (card) card.style.display = card.style.display === 'none' ? 'block' : 'none';
-}
-window.toggleDailySummaryCard = toggleDailySummaryCard;
 
 function toggleGlobalDarkMode() {
     const isDark = document.body.classList.contains('dark-mode');
@@ -2380,11 +2068,6 @@ function toggleGlobalDarkMode() {
 }
 window.toggleGlobalDarkMode = toggleGlobalDarkMode;
 
-function toggleOfflineSimulation() {
-    window.isOfflineSimulated = !window.isOfflineSimulated;
-    showStudioToast(window.isOfflineSimulated ? 'Offline network mode simulated' : 'Reconnected to live network');
-}
-window.toggleOfflineSimulation = toggleOfflineSimulation;
 
 function togglePortalSidebar() {
     const sb = document.getElementById('portal-sidebar');
@@ -2485,15 +2168,6 @@ function downloadBlobFile(filename, content, mimeType) {
     URL.revokeObjectURL(url);
 }
 
-
-
-
-
-
-
-
-
-
 // =========================================================================
 // 5. SWITCH TABS & USER MODES (6)
 // =========================================================================
@@ -2517,9 +2191,6 @@ function switchImportTab(tab) {
 }
 window.switchImportTab = switchImportTab;
 
-
-
-
 function switchToClientPortalMode() {
     window.currentPortalMode = 'client';
     const tab = document.querySelector('.tool-tab[data-tab="portal"]');
@@ -2540,23 +2211,9 @@ window.logoutClientPortalSession = logoutClientPortalSession;
 // 6. CLEAR ACTIONS (5)
 // =========================================================================
 
-
-function clearActivitySelection() {
-    document.querySelectorAll('.activity-checkbox').forEach(c => { c.checked = false; });
-    showStudioToast('Cleared activity selections');
-}
-window.clearActivitySelection = clearActivitySelection;
-
-
-
-
 // =========================================================================
 // 7. PRESET SETTERS (5)
 // =========================================================================
-
-
-
-
 
 function setVatPreset(rate) {
     const input = document.getElementById('vat-setting-rate');
@@ -2588,8 +2245,6 @@ function copyRecentScanCodeModal() {
     });
 }
 window.copyRecentScanCodeModal = copyRecentScanCodeModal;
-
-
 
 // =========================================================================
 // 9. PRINT HANDLERS (3)
@@ -2679,8 +2334,6 @@ window.logCompletedSession = logCompletedSession;
 // 13. QR CAMERA & TOUR (4)
 // =========================================================================
 
-
-
 let qrTourStepIndex = 0;
 const qrTourSteps = [
     ['Scan', 'Turn the camera on and point it at a QR code or barcode.'],
@@ -2735,10 +2388,6 @@ async function fetchAndRenderCsvImportHistory() {
 }
 window.fetchAndRenderCsvImportHistory = fetchAndRenderCsvImportHistory;
 
-
-
-
-
 // =========================================================================
 // 14. EXECUTION & ACTION HELPERS (29)
 // =========================================================================
@@ -2748,23 +2397,6 @@ function dismissBackupWarningToast() {
     if (toast) toast.style.display = 'none';
 }
 window.dismissBackupWarningToast = dismissBackupWarningToast;
-
-async function dispatchAllLowStockPOs() {
-    try {
-        const r = await fetch('/api/inventory/purchase-orders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
-        if (r.status === 400) { showStudioToast('No items are below their reorder level'); return; }
-        if (!r.ok) throw new Error();
-    } catch (e) { showStudioToast('Could not save: the server did not answer'); return; }
-    showStudioToast('Purchase order created for all low-stock items');
-}
-window.dispatchAllLowStockPOs = dispatchAllLowStockPOs;
-
-function executeBulkUndoSelected() {
-    const selected = document.querySelectorAll('.activity-checkbox:checked');
-    selected.forEach(c => { c.checked = false; });
-    showStudioToast('Reversed ' + (selected.length || 1) + ' selected activity events');
-}
-window.executeBulkUndoSelected = executeBulkUndoSelected;
 
 function executeClearAllActivityLogs() {
     closeClearAllConfirmModal();
@@ -2819,10 +2451,6 @@ function insertProcedureTemplate(inputId, kind) {
 }
 window.insertProcedureTemplate = insertProcedureTemplate;
 
-function jumpToCurrentShiftMonth() {
-    showStudioToast('Returned to current month shift schedule');
-}
-window.jumpToCurrentShiftMonth = jumpToCurrentShiftMonth;
 
 function navigateClientPortalHash(hash) {
     document.querySelectorAll('.portal-view-section').forEach(sec => { sec.style.display = 'none'; });
@@ -2832,10 +2460,6 @@ function navigateClientPortalHash(hash) {
 }
 window.navigateClientPortalHash = navigateClientPortalHash;
 
-function navigateShiftMonth(dir) {
-    showStudioToast('Navigated shift schedule ' + (dir > 0 ? 'forward' : 'backward') + ' 1 month');
-}
-window.navigateShiftMonth = navigateShiftMonth;
 
 function quickLogFromInput() {
     const input = document.getElementById('quick-log-input');
@@ -2859,20 +2483,6 @@ function resolveCurrentConflict(resolution) {
 }
 window.resolveCurrentConflict = resolveCurrentConflict;
 
-
-function simulateExpiredJWT() {
-    showStudioToast('Simulated token expiry: Client session refreshed automatically');
-}
-window.simulateExpiredJWT = simulateExpiredJWT;
-
-
-
-function testQrOrientation(orientation) {
-    showStudioToast('Camera orientation locked: ' + orientation);
-}
-window.testQrOrientation = testQrOrientation;
-
-
 async function triggerInstantDatabaseSnapshot() {
     try {
         const res = await fetch('/api/database/create-snapshot', { method: 'POST' });
@@ -2884,14 +2494,6 @@ async function triggerInstantDatabaseSnapshot() {
 }
 window.triggerInstantDatabaseSnapshot = triggerInstantDatabaseSnapshot;
 
-function triggerManualProcurementSync() {
-    showStudioToast('Synchronized supplier inventory catalogues');
-}
-window.triggerManualProcurementSync = triggerManualProcurementSync;
-
-
-
-
 // =========================================================================
 // 15. ADDITIONAL SINGLE ACTIONS (7)
 // =========================================================================
@@ -2900,18 +2502,6 @@ function addNewCategoryThresholdFromSettings() {
     forceShowModal('category-settings-modal-overlay');
 }
 window.addNewCategoryThresholdFromSettings = addNewCategoryThresholdFromSettings;
-
-
-function bookTattooEstimateAppointment() {
-    openAutoSchedulerModal();
-}
-window.bookTattooEstimateAppointment = bookTattooEstimateAppointment;
-
-
-function filterFeedByArtist(artist) {
-    showStudioToast('Filtered activity feed for: ' + artist);
-}
-window.filterFeedByArtist = filterFeedByArtist;
 
 async function renderClientDirectoryModal() {
     const body = document.getElementById('client-directory-modal-body');
@@ -2928,8 +2518,6 @@ async function renderClientDirectoryModal() {
     }
 }
 window.renderClientDirectoryModal = renderClientDirectoryModal;
-
-
 
 // =========================================================================
 // 16. CORE MODAL & FORM HANDLERS IMPLEMENTATION
@@ -3817,8 +3405,6 @@ async function handleScannedCode(code) {
     forceShowModal("recent-scan-profile-modal");
 }
 window.handleScannedCode = handleScannedCode;
-function simulateQrScan(code) { handleScannedCode(code); }
-window.simulateQrScan = simulateQrScan;
 
 function renderQrHistory() {
     let hist = [];
@@ -4006,24 +3592,8 @@ async function exportSessionDurationPDF() {
 window.exportSessionDurationPDF = exportSessionDurationPDF;
 
 // --- Staff shifts (clock in / out records) ---
-async function shiftRows() {
-    const [shifts, staff] = await Promise.all([fetchJson("/api/staff/shifts"), fetchJson("/api/staff")]);
-    const name = (id) => ((Array.isArray(staff) ? staff : []).find((s) => s.id === id) || {}).name || "";
-    return (Array.isArray(shifts) ? shifts : []).map((s) => [name(s.staff_id), s.clock_in ? new Date(s.clock_in).toLocaleString() : "", s.clock_out ? new Date(s.clock_out).toLocaleString() : "", s.duration_hours != null ? s.duration_hours : ""]);
-}
+
 const SHIFT_HEAD = ["staff", "clock in", "clock out", "hours"];
-async function exportShiftScheduleCSV() {
-    const rows = await shiftRows();
-    if (!rows.length) { showStudioToast("No shifts recorded yet"); return; }
-    downloadCsv("staff_shifts.csv", SHIFT_HEAD, rows);
-}
-window.exportShiftScheduleCSV = exportShiftScheduleCSV;
-async function exportShiftSchedulePDF() {
-    const rows = await shiftRows();
-    if (!rows.length) { showStudioToast("No shifts recorded yet"); return; }
-    downloadPdfTable("staff_shifts.pdf", "Staff shifts", SHIFT_HEAD, rows);
-}
-window.exportShiftSchedulePDF = exportShiftSchedulePDF;
 async function updateShiftStatusView() {
     const sel = document.getElementById("shift-staff-select");
     if (!sel) return;
@@ -4053,12 +3623,6 @@ async function downloadLowStockManifest() {
     downloadCsv("low_stock.csv", LOW_HEAD, rows);
 }
 window.downloadLowStockManifest = downloadLowStockManifest;
-async function downloadLowStockManifestPDF() {
-    const rows = await lowStockRows();
-    if (!rows.length) { showStudioToast("No items are below their reorder level"); return; }
-    downloadPdfTable("low_stock.pdf", "Low stock", LOW_HEAD, rows);
-}
-window.downloadLowStockManifestPDF = downloadLowStockManifestPDF;
 
 // --- Purchase order modal: the studio's suppliers and their low-stock items ---
 const poState = { suppliers: [], items: [], number: "" };
@@ -4383,6 +3947,9 @@ async function removeAppointment(id) {
 window.removeAppointment = removeAppointment;
 
 // --- New Appointment Modal Handlers ---
+
+// also called by the tattoo price estimator tool (its Book button), from inside its frame
+
 function openNewAppointmentModal() {
     forceShowModal("new-appointment-modal-overlay");
 }
@@ -4451,13 +4018,6 @@ async function handleSaveNewAppointment(event) {
 window.handleSaveNewAppointment = handleSaveNewAppointment;
 
 // --- Inventory Usage Heatmap Handlers ---
-function openInventoryUsageHeatmapModal() {
-    forceShowModal("inventory-usage-heatmap-modal");
-    if (typeof renderD3SupplyUsageHeatmap === "function") {
-        renderD3SupplyUsageHeatmap();
-    }
-}
-window.openInventoryUsageHeatmapModal = openInventoryUsageHeatmapModal;
 
 function closeInventoryUsageHeatmapModal() {
     const el = document.getElementById("inventory-usage-heatmap-modal");
@@ -4476,13 +4036,6 @@ function refreshSupplyUsageHeatmap() {
 window.refreshSupplyUsageHeatmap = refreshSupplyUsageHeatmap;
 
 // --- Artist Performance Widget Toggle ---
-function toggleArtistPerformanceWidget() {
-    const widget = document.getElementById("artist-performance-widget");
-    if (widget) {
-        widget.style.display = (widget.style.display === "none" || !widget.style.display) ? "block" : "none";
-    }
-}
-window.toggleArtistPerformanceWidget = toggleArtistPerformanceWidget;
 
 // --- Missing Operational Handlers ---
 function triggerExportCSV() {
@@ -4594,18 +4147,11 @@ function quickReorderLowStockEmail() {
 }
 window.quickReorderLowStockEmail = quickReorderLowStockEmail;
 
-
-
 function openSkinVisualizerModal() {
     forceShowModal("gallery-before-after-modal-overlay");
 }
 window.openSkinVisualizerModal = openSkinVisualizerModal;
 
-function closeSkinVisualizerModal() {
-    const el = document.getElementById("gallery-before-after-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeSkinVisualizerModal = closeSkinVisualizerModal;
 
 function toggleAudioAlerts() {
     window.audioAlertsEnabled = !window.audioAlertsEnabled;

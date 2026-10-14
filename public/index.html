@@ -1472,7 +1472,6 @@ npm start
 docker compose up -d</pre>
             </div>
         </div>
-    </div>
 
     <!-- Tab Content: Client-Facing Portal View (HashRouter Powered) -->
     
@@ -4107,8 +4106,6 @@ docker compose up -d</pre>
             </form>
         </div>
     </div>
-    </div>
-    </div>
 
     <!-- 9C. Interactive Skin Tone & Placement Visualizer Modal -->
     <div id="skin-visualizer-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.88);z-index:2000015;align-items:center;justify-content:center;padding:1rem;">
@@ -4514,33 +4511,6 @@ docker compose up -d</pre>
     </div>
 </div>
 
-<!-- 6. TEST DIAGNOSTICS & COVERAGE MODAL OVERLAY -->
-<div id="test-coverage-modal-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,23,42,0.85);backdrop-filter:blur(8px);z-index:2000000;align-items:center;justify-content:center;">
-    <div style="background:#0F172A;border:1px solid #334155;border-radius:16px;width:95%;max-width:750px;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 25px 60px rgba(0,0,0,0.6);overflow:hidden;color:#F8FAFC;">
-        <div style="padding:16px 20px;background:#1E293B;border-bottom:1px solid #334155;display:flex;align-items:center;justify-content:space-between;">
-            <div style="display:flex;align-items:center;gap:10px;">
-                <span style="font-size:1.3rem;">🧪</span>
-                <div>
-                    <h3 style="margin:0;font-size:1.1rem;font-weight:800;color:#F8FAFC;">Studio CRM Test Battery & System Diagnostics</h3>
-                    <p style="margin:2px 0 0;font-size:0.75rem;color:#94A3B8;">Automated verification of core modules, database integrity & event pipelines</p>
-                </div>
-            </div>
-            <button onclick="closeTestCoverageModal()" style="background:none;border:none;color:#94A3B8;font-size:1.5rem;cursor:pointer;">&times;</button>
-        </div>
-        <div id="test-battery-log-container" style="padding:20px;overflow-y:auto;flex:1;background:#090D16;font-family:monospace;font-size:0.8rem;line-height:1.6;color:#38BDF8;">
-            <div>⚡ Initializing Studio CRM automated verification suite...</div>
-            <div style="color:#10B981;">✔ Navbar controls & action identifiers validated</div>
-            <div style="color:#10B981;">✔ Modal z-index stacking hierarchy verified (2,000,000)</div>
-            <div style="color:#10B981;">✔ Responsive CSS Grid & fluid stats-grid layouts active</div>
-            <div style="color:#10B981;">✔ D3 timeseries data streams & event telemetry active</div>
-            <div style="color:#10B981;">✔ All 31/31 core test battery assertions passed 100%</div>
-        </div>
-        <div style="padding:14px 20px;background:#1E293B;border-top:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-            <span style="color:#10B981;font-weight:700;font-size:0.85rem;">🟢 System Health: 100% Operational</span>
-            <button onclick="closeTestCoverageModal()" style="padding:8px 18px;background:#334155;color:#FFF;border:none;border-radius:8px;font-size:0.85rem;font-weight:700;cursor:pointer;">Done</button>
-        </div>
-    </div>
-</div>
 
 <!-- 7. QUICK PORTAL ACCESS MODAL OVERLAY -->
 <div id="quick-portal-access-modal-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,23,42,0.85);backdrop-filter:blur(8px);z-index:2000000;align-items:center;justify-content:center;">

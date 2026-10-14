@@ -297,6 +297,25 @@ The live activity stream has no server in the demo. `window.EventSource` is repl
 | `DELETE` | `/api/{collection}/{id}` | Delete a record. Returns `{ success: true }`. |
 | `GET` (SSE) | `/api/*` | Live activity stream. |
 
+Routes of the self-hosted server that the screens above rely on (the online demo answers them from `demo-api.js`):
+
+| Method | Path | Purpose |
+|---|---|---|
+| `PUT` | `/api/app-data/{key}` | Saves one browser-side dataset in the studio database. Keys start with `studio_`, `poli_` or `client_photo_`; a form builder design is saved per form as `poli_form_builder_autosave:{formId}`. |
+| `POST` | `/api/clients` / `PATCH` `/api/clients/{id}` | Add or edit a client (New Client and Edit client share one form). |
+| `POST` / `PATCH` / `DELETE` | `/api/staff`, `/api/staff/{id}` | The team list behind the staff button. |
+| `POST` | `/api/appointments` | Book. A `client_id` links the booking to a client on file. |
+| `PATCH` | `/api/appointments/{id}` | Edit a booked appointment (time, artist, station, price, deposit, notes). |
+| `PATCH` | `/api/appointments/{id}/status` | Completed. |
+| `GET` | `/api/consent-forms` | Every saved consent form with `client_id` and `signed`, for the client list's signed count. |
+| `GET` | `/api/consent-forms/{id}` | One saved consent form with its answers and signature. |
+| `GET` / `POST` | `/api/waivers` | Signed waivers, with the signature as a PNG data URL. |
+| `POST` | `/api/financial` | Record Payment: one transaction (client, amount, method). |
+| `POST` | `/api/database/create-snapshot` | Back up now: a full SQLite copy in `storage/backups/`. |
+| `GET` / `POST` | `/api/access`, `/api/access/login`, `/api/access/logout`, `/api/access/password` | The optional studio password. |
+| `GET` | `/api/studio-meta` | Includes the running `version`, shown in the sidebar. |
+| any | `/api/*` not listed | `404` with a JSON error, never the page. |
+
 ---
 
 ## Integration Guide
@@ -382,11 +401,40 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 - **Output escaping**: user-supplied strings rendered into the profile modal are passed through `escapeHtml(...)` before insertion, including client name, email, phone, allergies, medical history, emergency contact, preferred style, appointment service type, date, time, staff name, status, note author, author role, category and note body. Appointment and client objects passed into `generateClientAppointmentReceiptPDF` are serialised with `JSON.stringify(...).replace(/"/g, '&quot;')` before being placed in inline handlers.
 - **API scoping**: the demo `fetch` wrapper only intercepts same-origin requests whose path begins with `/api/`; everything else is forwarded to the real `fetch`.
 - **Waiver integrity**: a waiver will not save without both a client and a signature.
+- **Studio password** (optional, off by default): scrypt hash in the database, an HttpOnly SameSite=Lax session cookie, five wrong tries then a 30 second wait. An empty `reset-password.txt` in the data folder removes it at the next start.
+- **HTTPS on the studio network**: a self-made certificate (`https-key.pem`, `https-cert.pem` next to the database) on port 3443, so tablets get the camera and the clipboard. `HTTPS_PORT=0` turns it off.
+- **Tablet Kiosk PIN** (optional): a short hash in `poli_kiosk_exit_pin`, shared through `/api/app-data`. It keeps a client inside the consent form on a tablet; it is a deterrent, not a security boundary.
+- **Tool pages** are served with `js/clipboard-fallback.js` added, because a tablet on the plain `http://` address has no `navigator.clipboard`.
+- **Repeated submits**: the same form sent again with the same content within 1.5 seconds is dropped, and save buttons outside forms run one at a time, so a double tap cannot create a record twice.
 - **Compliance records**: the closing checklist, autoclave vault and expiry warnings are the studio's own records; the guide advises checking local health authority rules for retention requirements.
 
 ---
 
 ## Version History
+
+### 1.0.5
+
+- Signed waivers can be viewed (answers and signature) and downloaded as PDF; the client list counts consent forms signed on the tablet.
+- Tablet Kiosk PIN: leaving Kiosk Mode and the "form submitted" screen need it.
+- Calendar: Edit on every appointment; Book Appointment links a client picked from the list.
+- Record Payment is a real form; a window opened from another one comes to the front.
+
+### 1.0.4
+
+- Every button inside the 31 embedded tools clicked and fixed where it was dead or broken; the release check crawls every tool.
+- Per-form designs reach every device; double taps save once; the top bar fits a phone; every field has a name for screen readers.
+
+### 1.0.3
+
+- HTTPS on port 3443 for tablets, optional studio password, form designs saved with the studio data, screens that showed sample figures now show the studio's own records, real Back up now. The sidebar shows the running version (it used to read `v2.5`).
+
+### 1.0.2
+
+- Client profile, New Client, Edit and Delete; staff list; appointments list; tablet kiosk signing and saving; real exports and Print buttons. A click test in a real browser blocks any release with a dead button.
+
+### 1.0.1
+
+- Ready-to-run downloads for Windows, macOS and Linux with Node.js inside.
 
 ### 1.0.0
 

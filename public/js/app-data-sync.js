@@ -17,13 +17,21 @@
   var proto = Storage.prototype;
   var setItem = proto.setItem, removeItem = proto.removeItem;
 
+  // keepalive lets a save finish while the page closes, but the browser allows only 64 KB of
+  // keepalive requests in flight in total, and refuses the rest (the error is swallowed below).
+  // A form design is saved under two keys at once; with a logo or a long form they pass that
+  // limit together. Use keepalive only while the page is closing.
+  var leaving = false;
+  addEventListener('pagehide', function () { leaving = true; });
+  addEventListener('pageshow', function () { leaving = false; });
+
   function send(method, key, value) {
     try {
       fetch('/api/app-data/' + encodeURIComponent(key), {
         method: method,
         headers: { 'Content-Type': 'application/json' },
         body: method === 'PUT' ? JSON.stringify({ value: value }) : undefined,
-        keepalive: method !== 'PUT' || value.length < 60000
+        keepalive: leaving && (method !== 'PUT' || value.length < 60000)
       }).catch(function () {});
     } catch (e) {}
   }

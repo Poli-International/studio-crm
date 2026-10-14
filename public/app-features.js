@@ -1,3 +1,13 @@
+// A save button outside a form (forms are guarded in js/01-boot.js): while one save is running, another tap does nothing.
+window.oneAtATime = function (fn) {
+  var busy = false;
+  return async function () {
+    if (busy) return;
+    busy = true;
+    try { return await fn.apply(this, arguments); } finally { busy = false; }
+  };
+};
+
 // =========================================================================
 // 👤 CLIENT PROFILE MODAL LOGIC (DATABASE INTEGRATED & STAFF NOTES)
 // =========================================================================
@@ -2414,7 +2424,7 @@ async function executePOAndTriggerSupplierEmail() {
     } catch (e) { showStudioToast('Could not save: the server did not answer'); return; }
     showStudioToast('Purchase order ready: send it from your email');
 }
-window.executePOAndTriggerSupplierEmail = executePOAndTriggerSupplierEmail;
+window.executePOAndTriggerSupplierEmail = oneAtATime(executePOAndTriggerSupplierEmail);
 
 
 async function fetchAndRenderDailyStudioSummary() {
@@ -3183,7 +3193,7 @@ async function toggleStaffShift() {
     showStudioToast(shift.clock_out ? "Clocked out" : "Clocked in");
     updateShiftStatusView();
 }
-window.toggleStaffShift = toggleStaffShift;
+window.toggleStaffShift = oneAtATime(toggleStaffShift); // one toggle: a double tap clocked in and straight back out
 
 
 // --- Inventory category threshold: stored with the studio settings ---
@@ -3323,10 +3333,9 @@ async function executeAutoSchedulerBooking() {
     } catch (e) { showStudioToast("Could not save the appointment: the server did not answer"); return; }
     showStudioToast(sessions > 1 ? sessions + " sessions booked" : "Appointment booked");
     if (typeof closeAutoSchedulerModal === "function") closeAutoSchedulerModal();
-    renderAppointmentsList();
-    if (typeof renderDashboardKpis === "function") renderDashboardKpis();
+    refreshAppointmentViews();
 }
-window.executeAutoSchedulerBooking = executeAutoSchedulerBooking;
+window.executeAutoSchedulerBooking = oneAtATime(executeAutoSchedulerBooking);
 
 // --- QR / barcode scanner: real camera (html5-qrcode, js/vendor), real lookups ---
 const qrState = { scanner: null, torch: false, lastCode: "", lastAt: 0, tab: "scans" };
@@ -3926,13 +3935,20 @@ async function renderAppointmentsList() {
 window.renderAppointmentsList = renderAppointmentsList;
 document.addEventListener("DOMContentLoaded", renderAppointmentsList);
 
+// Every screen that shows appointments, after one is booked, completed or removed: the four
+// buttons each refreshed a different part, so a count or a station could show a stale booking.
+function refreshAppointmentViews() {
+    renderAppointmentsList();
+    if (typeof renderDashboardKpis === "function") renderDashboardKpis();
+    if (typeof renderStationStripAndSessions === "function") renderStationStripAndSessions();
+}
+
 async function setAppointmentStatus(id, status) {
     try {
         const res = await fetch("/api/appointments/" + id + "/status", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status }) });
         if (!res.ok) throw new Error("HTTP " + res.status);
     } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
-    renderAppointmentsList();
-    if (typeof renderStationStripAndSessions === "function") renderStationStripAndSessions();
+    refreshAppointmentViews();
 }
 window.setAppointmentStatus = setAppointmentStatus;
 
@@ -3942,7 +3958,7 @@ async function removeAppointment(id) {
         const res = await fetch("/api/appointments/" + id, { method: "DELETE" });
         if (!res.ok) throw new Error("HTTP " + res.status);
     } catch (e) { showStudioToast("Could not remove the appointment: the server did not answer"); return; }
-    renderAppointmentsList();
+    refreshAppointmentViews();
 }
 window.removeAppointment = removeAppointment;
 
@@ -4005,7 +4021,7 @@ async function handleSaveNewAppointment(event) {
         return;
     }
 
-    renderAppointmentsList();
+    refreshAppointmentViews();
 
     if (typeof showStudioToast === "function") {
         showStudioToast(`Appointment booked for ${newAppt.client_name} (${newAppt.date})`);

@@ -1750,14 +1750,6 @@ body.dark-mode .breadcrumb-nav strong {
                                 <h4 class="autoclave__cycle-chart-title" id="cycle-chart-main-title" data-i18n="heading.h4.30.day.sterilization.efficienc">
                                     <span>📈</span> 30-Day Sterilization Efficiency &amp; Total Cycle Time Trend
                                 </h4>
-                                <div class="autoclave__chart-view-toggle" role="group" aria-label="Cycle Chart View Mode" data-i18n-aria-label="aria.cycle.chart.view.mode">
-                                    <button type="button" class="autoclave__chart-view-btn active" id="btn-cycle-view-trend" title="View time-series chronological cycle duration trend" data-i18n="btn.trend.timeline" data-i18n-title="title.view.time.series.chronological">
-                                        <span>📈</span> Trend Timeline
-                                    </button>
-                                    <button type="button" class="autoclave__chart-view-btn" id="btn-cycle-view-distribution" title="View historical frequency distribution histogram and statistical anomaly detector" data-i18n="btn.30.day.distribution.anomalies" data-i18n-title="title.view.historical.frequency.dist">
-                                        <span>📊</span> 30-Day Distribution &amp; Anomalies
-                                    </button>
-                                </div>
                             </div>
                             <p class="autoclave__cycle-chart-subtitle" id="cycle-chart-main-subtitle" data-i18n="txt.tracks.total.cycle.duration.ex">
                                 Tracks total cycle duration (exposure plateau + drying + chamber heat-up) to monitor machine thermal efficiency and detect heating drift
@@ -1788,10 +1780,6 @@ body.dark-mode .breadcrumb-nav strong {
                         <canvas id="cycle-efficiency-chart"></canvas>
                     </div>
 
-                    <!-- View 2: Historical Distribution Histogram & Anomaly Detection Visualization -->
-                    <div id="cycle-distribution-container" class="autoclave__distribution-container" style="display: none;">
-                        <!-- Distribution Visualizer Rendered Dynamically by CycleDistributionManager -->
-                    </div>
                 </div>
 
                 <!-- ═══════════════════════════════════════════════════════════

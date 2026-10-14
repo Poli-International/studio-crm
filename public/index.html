@@ -776,7 +776,7 @@
                   <span id="dashboard-procurement-discount-badge" style="padding:1px 6px;background:rgba(16,185,129,0.2);color:#34D399;border-radius:6px;font-size:0.7rem;font-weight:700;"></span>
                 </div>
                 <div style="display:flex;align-items:center;gap:8px;">
-                  <select id="dashboard-procurement-supplier-filter" onchange="filterProcurementChartBySupplier(this.value)" style="padding:2px 6px;background:#1E293B;color:#E2E8F0;border:1px solid #374151;border-radius:6px;font-size:0.75rem;">
+                  <select id="dashboard-procurement-supplier-filter" aria-label="Supplier" onchange="filterProcurementChartBySupplier(this.value)" style="padding:2px 6px;background:#1E293B;color:#E2E8F0;border:1px solid #374151;border-radius:6px;font-size:0.75rem;">
                     <option value="all">All Suppliers</option>
                   </select>
                   <div id="inventory-remote-sync-toggle-wrapper" onclick="toggleInventoryRemoteSync()" style="padding:2px 8px;background:#1E293B;color:#34D399;border:1px solid rgba(16,185,129,0.3);border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;">
@@ -2241,7 +2241,7 @@ docker compose up -d</pre>
                     </div>
                     <div class="no-print" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
                         <div>
-                            <select id="sd-procedure-filter" onchange="renderD3SessionDurationChart()" style="padding:0.45rem 0.75rem;background:#1F2937;border:1px solid #374151;border-radius:6px;color:#FFF;font-size:0.8rem;outline:none;">
+                            <select id="sd-procedure-filter" aria-label="Procedure" onchange="renderD3SessionDurationChart()" style="padding:0.45rem 0.75rem;background:#1F2937;border:1px solid #374151;border-radius:6px;color:#FFF;font-size:0.8rem;outline:none;">
                                 <option value="all">All Procedures</option>
                                 <option value="Full Back Tattoo">Full Back Tattoo</option>
                                 <option value="Custom Sleeve">Custom Sleeve</option>
@@ -2251,7 +2251,7 @@ docker compose up -d</pre>
                             </select>
                         </div>
                         <div>
-                            <select id="sd-artist-filter" onchange="renderD3SessionDurationChart()" style="padding:0.45rem 0.75rem;background:#1F2937;border:1px solid #374151;border-radius:6px;color:#FFF;font-size:0.8rem;outline:none;">
+                            <select id="sd-artist-filter" aria-label="Artist" onchange="renderD3SessionDurationChart()" style="padding:0.45rem 0.75rem;background:#1F2937;border:1px solid #374151;border-radius:6px;color:#FFF;font-size:0.8rem;outline:none;">
                                 <option value="all">All Artists</option>
                                 <option value="Maya Lin">Maya Lin</option>
                                 <option value="Jaxon Vance">Jaxon Vance</option>
@@ -2857,7 +2857,7 @@ docker compose up -d</pre>
                     <p style="margin:4px 0 0 0;font-size:0.8rem;color:#9CA3AF;">Aggregated end-of-day operations, financial transactions, inventory reorders & artist performance</p>
                 </div>
                 <div style="display:flex;align-items:center;gap:10px;">
-                    <input type="date" id="daily-summary-date-input" style="padding:0.45rem 0.75rem;background:#1F2937;border:1px solid #374151;border-radius:6px;color:#FFF;font-size:0.85rem;outline:none;" onchange="fetchAndRenderDailyStudioSummary()" />
+                    <input type="date" id="daily-summary-date-input" aria-label="Summary date" style="padding:0.45rem 0.75rem;background:#1F2937;border:1px solid #374151;border-radius:6px;color:#FFF;font-size:0.85rem;outline:none;" onchange="fetchAndRenderDailyStudioSummary()" />
                     <button onclick="fetchAndRenderDailyStudioSummary()" style="padding:0.45rem 0.85rem;background:#3B82F6;color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">🔄 Refresh</button>
                     <button onclick="closeDailyStudioSummaryModal()" style="background:none;border:none;color:#9CA3AF;font-size:1.5rem;cursor:pointer;line-height:1;">&times;</button>
                 </div>
@@ -3165,7 +3165,7 @@ docker compose up -d</pre>
                             VAT Percentage Rate (%) *
                         </label>
                         <div style="display:flex;gap:8px;align-items:center;">
-                            <input type="number" id="vat-setting-rate" step="0.01" min="0" max="100" value="20.00" oninput="updateVatPreviewCalculation()"
+                            <input type="number" id="vat-setting-rate" aria-label="VAT percentage rate" step="0.01" min="0" max="100" value="20.00" oninput="updateVatPreviewCalculation()"
                                 style="flex:1;padding:0.65rem;background:#1F2937;border:1px solid #374151;border-radius:8px;color:#38BDF8;font-size:1.1rem;font-weight:800;outline:none;" required />
                             <span style="font-size:1.1rem;font-weight:800;color:#9CA3AF;">%</span>
                         </div>
@@ -3325,7 +3325,7 @@ docker compose up -d</pre>
                             <div style="font-size:0.75rem;color:#9CA3AF;">Fallback minimum stock level for uncategorized items or categories without an explicit override.</div>
                         </div>
                         <div style="display:flex;align-items:center;gap:8px;">
-                            <input type="number" id="settings-global-reorder-threshold" min="1" max="999" value="10" 
+                            <input type="number" id="settings-global-reorder-threshold" aria-label="Default minimum stock level" min="1" max="999" value="10" 
                                 style="width:90px;padding:0.5rem;background:#1F2937;border:1px solid #3B82F6;border-radius:8px;color:#60A5FA;font-size:1rem;font-weight:800;text-align:center;outline:none;" />
                             <span style="font-size:0.85rem;color:#9CA3AF;font-weight:700;">units</span>
                         </div>

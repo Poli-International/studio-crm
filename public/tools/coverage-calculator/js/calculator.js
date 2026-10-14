@@ -5007,7 +5007,12 @@ function resetSessionTimer() {
 }
 
 function recordTimerBreak() {
-    if (!sessionTimerState.seconds) return;
+    if (!sessionTimerState.seconds) {
+        // a break before the session has started: say so instead of doing nothing
+        const list = document.getElementById('timer-laps-list');
+        if (list) { list.style.display = 'block'; list.textContent = TP('x.timer_break_first', 'Start the session timer first, then log a break.'); }
+        return;
+    }
 
     const formatted = formatTimerDisplayString(sessionTimerState.seconds);
     const lapNumber = sessionTimerState.laps.length + 1;

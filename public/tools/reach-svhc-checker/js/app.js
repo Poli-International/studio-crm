@@ -1144,6 +1144,16 @@ function escHtml(str) {
 
 // ─── Initialization ──────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  // Theme button: dark is the default look, light is set with data-theme="light"
+  const themeBtn = document.getElementById('theme-toggle-btn');
+  const themeIcon = document.getElementById('theme-icon');
+  const showTheme = () => { if (themeIcon) themeIcon.textContent = document.documentElement.getAttribute('data-theme') === 'light' ? '🌙' : '☀️'; };
+  if (themeBtn) themeBtn.addEventListener('click', () => {
+    document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+    showTheme();
+  });
+  showTheme();
+
   applyTranslations();
 
   // Auto-expand first flagged card when only one result

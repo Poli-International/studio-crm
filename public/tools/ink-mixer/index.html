@@ -106,6 +106,8 @@ body.dark-mode .breadcrumb-nav strong {
 </style>
 </head>
 <body>
+<!-- every message the mixer shows (saved, copied, errors); it sits above any open window -->
+<div id="messageContainer" class="ink-mixer__message" role="status" aria-live="polite" style="display: none; position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 10001; max-width: min(92vw, 560px); box-shadow: 0 8px 24px rgba(0,0,0,.25);"></div>
 <a href="#main-content" class="skip-link" data-i18n="app.skipLink">Skip to main content</a>
 <nav class="breadcrumb-nav" aria-label="Breadcrumb">
     <a href="//poliinternational.com/" data-i18n="breadcrumb.home">Home</a>

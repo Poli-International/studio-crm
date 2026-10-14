@@ -111,6 +111,17 @@ const CurvedBarbellCalculator = {
         return `${year}-${month}-${day}`;
     },
 
+    // opened from the anatomy view: show this calculator with that piercing chosen
+    selectPreset(presetId) {
+        const tab = document.querySelector('[data-tab="curved-barbell"]');
+        if (tab) tab.click();
+        const select = document.getElementById('cbb-piercing-type');
+        if (select && this.presets.some(p => p.id === presetId)) {
+            select.value = presetId;
+            select.dispatchEvent(new Event('change'));
+        }
+    },
+
     init() {
         const piercingSelect = document.getElementById('cbb-piercing-type');
         const spanInput = document.getElementById('cbb-anatomy-mm');

@@ -3353,7 +3353,8 @@ function displayTroubleshootingSteps(issue) {
     const guide = TROUBLESHOOTING_DATABASE[issue];
 
     if (!guide) {
-        console.error('Troubleshooting guide not found for issue:', issue);
+        // covered by the step-by-step troubleshooter only: do not leave another issue's guide on screen
+        if (resultsDiv) resultsDiv.innerHTML = '';
         return;
     }
 
@@ -6007,7 +6008,7 @@ const AudioChimeManager = {
         });
 
         // Test selected chime button
-        const testBtn = document.getElementById('btn-test-selected-chime');
+        const testBtn = document.getElementById('btn-test-selected-chime') || document.getElementById('test-chime-button');
         if (testBtn) {
             testBtn.addEventListener('click', () => {
                 this.play();
@@ -10310,7 +10311,7 @@ const PouchLabelManager = {
         const modal = document.getElementById('pouch-label-modal');
         if (!modal) return;
 
-        const batchId = record.batchNumber || record.batchId || `LOT-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}-01`;
+        const batchId = this.currentRecord.batchNumber || this.currentRecord.batchId || `LOT-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}-01`;
 
         // Prepopulate form fields
         const batchEl = document.getElementById('pouch-batch-id-display');
@@ -10993,6 +10994,9 @@ const QRScannerManager = {
     activeTab: 'camera',
 
     init: function() {
+        // "Scan Vial QR" next to the BI lot number had no handler
+        const vialBtn = document.getElementById('btn-scan-spore-lot-qr');
+        if (vialBtn) vialBtn.addEventListener('click', () => { this.openScanner(); this.fillTarget = 'log-lot-number'; });
         this.attachListeners();
         this.renderHistory();
     },
@@ -11364,6 +11368,14 @@ const QRScannerManager = {
     },
 
     handleScannedCode: function(qrData) {
+        // opened from a field's scan button (the BI vial lot number): the code goes into that field
+        if (this.fillTarget) {
+            const field = document.getElementById(this.fillTarget);
+            this.closeScanner();
+            if (field) { field.value = qrData; field.dispatchEvent(new Event('input', { bubbles: true })); }
+            showToast('✓ Lot number scanned', 'success', 2500);
+            return;
+        }
         this.addToHistory(qrData);
         this.closeScanner();
 
@@ -11480,6 +11492,7 @@ const QRScannerManager = {
     },
 
     closeScanner: function() {
+        this.fillTarget = null;
         this.isScanning = false;
         if (this.animationId) {
             cancelAnimationFrame(this.animationId);
@@ -13821,6 +13834,16 @@ const DiagnosticDecisionTreeManager = {
                 'Replace HEPA microbiological air filter disk.',
                 'Inspect door gasket springs and bellows.'
             ]
+        },
+        // Codes differ by make and model: point to the manual, never guess what a code means.
+        'error-codes': {
+            title: 'Machine Error Code (E001 / C001)',
+            findings: 'Error codes are set by each manufacturer and mean different things on different models.',
+            correctiveActions: [
+                "Look the code up in your autoclave's manual, or call the manufacturer or your service technician.",
+                'Treat the load as not sterilised: do not release instruments from a cycle that stopped on an error. Repackage and run the cycle again once the fault is cleared.',
+                'Write the code, the date and the load number in your sterilisation log.'
+            ]
         }
     },
 
@@ -13889,10 +13912,11 @@ const DiagnosticDecisionTreeManager = {
                     this.renderNode(issue);
                 } else if (issue === 'temperature-issues') {
                     this.renderNode('lag-heating');
-                } else if (issue === 'pressure-problems' || issue === 'error-codes' || issue === 'package-integrity') {
-                    this.renderNode('ci-incomplete');
                 } else {
-                    this.renderNode('wet-instruments');
+                    // no step-by-step tree for this issue (pressure, pouches): its written guide is shown
+                    // instead, and the questions of another issue would only mislead
+                    const box = document.getElementById('diagnostic-decision-card-container');
+                    if (box) box.innerHTML = '';
                 }
             });
         });
@@ -13911,7 +13935,9 @@ const VoiceAnnouncerManager = {
     isRestarting: false,
 
     isEnabled: function() {
-        return localStorage.getItem(STORAGE_KEYS.VOICE_ANNOUNCEMENTS_ENABLED) !== 'false';
+        // off until the studio switches it on: its panel sat over the corner of every screen,
+        // the print-label button of a record included, and the tool spoke uninvited
+        return localStorage.getItem(STORAGE_KEYS.VOICE_ANNOUNCEMENTS_ENABLED) === 'true';
     },
 
     setEnabled: function(enabled) {

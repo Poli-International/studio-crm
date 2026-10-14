@@ -1,5 +1,6 @@
 // Community Feedback Form Handler
-// Sends feedback to backend endpoint /api/feedback
+// Opens the visitor's email app with the message ready to send. There is no
+// /api/feedback on the website or in Studio CRM, so posting there always failed.
 
 document.addEventListener('DOMContentLoaded', function() {
     const feedbackForm = document.getElementById('feedbackForm');
@@ -7,58 +8,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const errorMsg = document.getElementById('feedbackError');
 
     if (feedbackForm) {
-        feedbackForm.addEventListener('submit', async function(e) {
+        feedbackForm.addEventListener('submit', function(e) {
             e.preventDefault();
-
-            const formData = {
-                email: document.getElementById('userEmail').value,
-                role: document.getElementById('userRole').value,
-                feedback: document.getElementById('feedbackText').value,
-                toolName: document.title,
-                toolUrl: window.location.href,
-                timestamp: new Date().toString()
-            };
-
-            successMsg.style.display = 'none';
+            const role = document.getElementById('userRole');
+            const body = document.getElementById('feedbackText').value
+                + '\n\n' + (role.options[role.selectedIndex] || {}).text
+                + '\n' + document.getElementById('userEmail').value
+                + '\n' + document.title;
             errorMsg.style.display = 'none';
-
-            const submitBtn = feedbackForm.querySelector('button[type="submit"]');
-            const originalBtnText = submitBtn.innerHTML;
-            submitBtn.disabled = true;
-            const sendingText = (window.i18n && typeof window.i18n.t === 'function') ? window.i18n.t('feedback.sending') : 'Sending...';
-            submitBtn.innerHTML = '<span class="btn-icon">⏳</span><span class="btn-text">' + sendingText + '</span>';
-
-            try {
-                const response = await fetch('/api/feedback', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                const result = await response.json();
-
-                if (result.success) {
-                    successMsg.style.display = 'block';
-                    feedbackForm.reset();
-                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    setTimeout(() => {
-                        successMsg.style.display = 'none';
-                    }, 10000);
-                } else {
-                    throw new Error('Submission failed');
-                }
-
-            } catch (error) {
-                console.error('Feedback submission error:', error);
-                errorMsg.style.display = 'block';
-                errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnText;
-            }
+            window.location.href = 'mailto:patrick@poli-international.com'
+                + '?subject=' + encodeURIComponent('Feedback: ' + document.title)
+                + '&body=' + encodeURIComponent(body);
+            successMsg.style.display = 'block';
         });
     }
 });

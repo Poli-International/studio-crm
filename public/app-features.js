@@ -2082,16 +2082,16 @@ function toggleQrCameraGrid() {
 window.toggleQrCameraGrid = toggleQrCameraGrid;
 
 
+// The button starts the camera, and stops it when it is already on. (It used to look at
+// the frame overlay, which is visible from the start, so the first click did nothing.)
 function toggleQrScanner() {
     const overlay = document.getElementById('qr-scanner-overlay');
-    if (overlay) {
-        if (overlay.style.display === 'none' || !overlay.style.display) {
-            overlay.style.display = 'flex';
-            if (typeof window.startQrCamera === 'function') window.startQrCamera();
-        } else {
-            overlay.style.display = 'none';
-            if (typeof window.stopQrCamera === 'function') window.stopQrCamera();
-        }
+    const scanning = typeof qrState !== 'undefined' && qrState.scanner && qrState.scanner.isScanning;
+    if (scanning) {
+        if (typeof window.stopQrCamera === 'function') window.stopQrCamera();
+    } else {
+        if (overlay) overlay.style.display = 'flex';
+        if (typeof window.startQrCamera === 'function') window.startQrCamera();
     }
 }
 window.toggleQrScanner = toggleQrScanner;
@@ -3340,7 +3340,7 @@ async function startQrCamera() {
         await qrState.scanner.start({ facingMode: "environment" }, { fps: 10, qrbox: 240 }, onQrDecoded, () => {});
         showStudioToast("Camera on: point it at a code");
     } catch (e) {
-        showStudioToast("Camera not available: allow camera access in the browser");
+        showStudioToast(window.isSecureContext ? "Camera not available: allow camera access in the browser" : "The camera only works over https: open the https address shown in the window that started the CRM");
     }
 }
 window.startQrCamera = startQrCamera;

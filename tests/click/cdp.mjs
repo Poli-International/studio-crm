@@ -97,6 +97,8 @@ export async function launchBrowser() {
   const dir = mkdtempSync(path.join(os.tmpdir(), 'crm-click-'));
   const proc = spawn(exe, ['--headless=new', '--remote-debugging-port=0', `--user-data-dir=${dir}`, '--no-first-run',
     '--no-default-browser-check', '--disable-gpu', '--window-size=1440,1000',
+    '--ignore-certificate-errors', // the CRM's https certificate is self-made
+    '--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream', // a pretend camera, so the scanner can be opened
     ...(process.platform === 'linux' ? ['--no-sandbox'] : []), 'about:blank']);
   const wsUrl = await new Promise((res, rej) => {
     let buf = '';

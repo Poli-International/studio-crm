@@ -6,6 +6,7 @@ import { spawn } from 'child_process';
 import fs from 'fs';
 import { jsPDF } from 'jspdf';
 import { db, safeDbQuery, sqlite } from './src/db/index.js';
+import { startHttps } from './src/https.js';
 import {
   users as dbUsers,
   activityLogs as dbActivityLogs,
@@ -10717,6 +10718,8 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`Studio CRM application server running on http://0.0.0.0:${PORT}`);
   console.log(`Open http://localhost:${PORT} in your browser. Keep this window open while you use the CRM.`);
   openBrowser();
+  // https for the other devices in the studio; HTTPS_PORT=0 turns it off
+  startHttps(app, process.env.HTTPS_PORT === undefined ? 3443 : Number(process.env.HTTPS_PORT) || 0);
 }).on('error', (e) => {
   if (e.code !== 'EADDRINUSE') throw e;
   // Started twice: the first one is still running, so just show it.

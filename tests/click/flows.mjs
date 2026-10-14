@@ -7,7 +7,7 @@
 import { startApp } from './app.mjs';
 import { sleep } from './cdp.mjs';
 
-const { browser: b, url, stop } = await startApp();
+const { browser: b, url, httpsPort, stop } = await startApp();
 const failures = [];
 const text = (sel) => b.evaluate(`(document.querySelector(${JSON.stringify(sel)}) || {}).innerText || ''`);
 const shown = (id) => b.evaluate(`getComputedStyle(document.getElementById(${JSON.stringify(id)})).display !== 'none'`);
@@ -244,6 +244,16 @@ await flow('Team board: a message is saved and still there after a reload', asyn
 await flow('The sidebar shows the version that is running', async () => {
   const version = (await api('/api/studio-meta')).version;
   await eventually(async () => (await text('#app-version-label')) === 'v' + version, 'the version label does not match ' + version);
+});
+
+await flow('Over https the scanner button starts the camera, and stops it again', async () => {
+  await b.goto(`https://127.0.0.1:${httpsPort}/`);
+  check(await b.evaluate('isSecureContext && !!navigator.mediaDevices'), 'the https address does not give the page a camera');
+  await b.clickText('Log Activity');
+  await b.clickText('Open Camera Scanner');
+  await eventually(async () => b.evaluate(`(() => { const v = document.querySelector('#qr-reader video'); return !!v && !v.paused && v.videoWidth > 0; })()`), 'the camera picture did not start');
+  await b.clickText('Open Camera Scanner');
+  await eventually(async () => b.evaluate(`!document.querySelector('#qr-reader video')`), 'the second click did not stop the camera');
 });
 
 await flow('Back up now writes a real copy of the studio database', async () => {

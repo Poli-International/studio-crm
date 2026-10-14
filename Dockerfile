@@ -6,7 +6,7 @@ COPY package.json package-lock.json ./
 RUN npm ci --omit=dev --no-audit --no-fund
 COPY . .
 ENV PORT=3000
-EXPOSE 3000
+EXPOSE 3000 3443
 # All studio data is the SQLite file in /app/data: mount a volume there.
 VOLUME /app/data
 CMD ["node", "server.js"]

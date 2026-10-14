@@ -30,7 +30,6 @@ const QUIET = [
   /sendTeamChatMessage/, // sends nothing until a message is typed
   /qr-validation-toast/, // closes a message that is not showing
   /clearWaiverSignature/, // clears a signature pad that is still empty
-  /toggleQrScanner/, // starts the camera: there is none on a test machine
   /shareToPlatform\('email'\)/, // hands the message to the computer's mail program
 ];
 const enqueue = (keys, pathTo) => {

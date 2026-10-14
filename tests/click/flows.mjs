@@ -320,6 +320,31 @@ await flow('Start with an empty studio, then add the first client, staff member 
   await eventually(async () => (await text('#autoclave-vault-modal-body')).includes('No autoclave cycles recorded yet'), 'the autoclave vault shows a cycle nobody ran');
 });
 
+// After everything else: while it runs, the studio is locked.
+await flow('Studio password: locks every device out until it signs in, and can be removed', async () => {
+  const anon = (p) => fetch(url + p).then((r) => r.status); // a device that has not signed in
+  check((await anon('api/clients')) === 200, 'the API was not open before a password was set');
+  await b.clickText('Settings');
+  await b.type('#access-next', 'studio-test-password');
+  await b.clickText('Set password');
+  await eventually(async () => (await text('#access-status')).startsWith('A password is set'), 'the password was not saved');
+  check((await anon('api/clients')) === 401, 'the API still answers a device that has not signed in');
+  check((await anon('')) === 401, 'the page still opens for a device that has not signed in');
+  await b.clickText('Sign out on this device');
+  await eventually(async () => b.evaluate(`!!document.getElementById('login-password')`), 'signing out did not show the sign-in page');
+  await b.type('#login-password', 'not the password');
+  await b.clickText('Sign in');
+  await eventually(async () => (await text('#error')) === 'Wrong password', 'a wrong password was not refused');
+  await b.type('#login-password', 'studio-test-password');
+  await b.clickText('Sign in');
+  await eventually(async () => b.evaluate(`!!document.getElementById('nav-dest-settings')`), 'the right password did not open the CRM');
+  await b.clickText('Settings');
+  await b.type('#access-current', 'studio-test-password');
+  await b.clickText('Remove password');
+  await eventually(async () => (await text('#access-status')).startsWith('No password is set'), 'the password was not removed');
+  check((await anon('api/clients')) === 200, 'the API stayed locked after the password was removed');
+});
+
 await stop();
 console.log(failures.length ? `\n${failures.length} flow(s) failed` : '\nAll flows passed');
 process.exit(failures.length ? 1 : 0);

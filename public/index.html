@@ -1391,6 +1391,21 @@
                 </div>
               </div>
 
+              <!-- Setting: studio password -->
+              <div style="background:#0F172A;padding:1.25rem;border-radius:12px;border:1px solid #1E293B;">
+                <h3 style="margin:0 0 6px 0;font-size:1.05rem;font-weight:800;color:#FBBF24;">Studio Password</h3>
+                <p id="access-status" style="margin:0 0 12px 0;font-size:0.8rem;color:#9CA3AF;">No password is set: anyone on the studio network can open the CRM.</p>
+                <form id="access-form" onsubmit="saveStudioPassword(event)" style="display:flex;flex-direction:column;gap:8px;">
+                  <input type="password" id="access-current" placeholder="Current password" autocomplete="current-password" style="display:none;padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;">
+                  <input type="password" id="access-next" placeholder="New password, at least 8 characters" autocomplete="new-password" style="padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;">
+                  <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                    <button type="submit" id="access-save-btn" style="padding:0.45rem 0.9rem;background:#D97706;color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">Set password</button>
+                    <button type="button" id="access-remove-btn" onclick="removeStudioPassword()" style="display:none;padding:0.45rem 0.9rem;background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">Remove password</button>
+                    <button type="button" id="access-signout-btn" onclick="signOutOfStudio()" style="display:none;padding:0.45rem 0.9rem;background:#1E293B;color:#E2E8F0;border:1px solid #475569;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">Sign out on this device</button>
+                  </div>
+                </form>
+              </div>
+
               <!-- Setting 3: Instant Cloud Backup -->
               <div style="background:#0F172A;padding:1.25rem;border-radius:12px;border:1px solid #1E293B;">
                 <h3 style="margin:0 0 6px 0;font-size:1.05rem;font-weight:800;color:#34D399;">Database Backup</h3>
@@ -4474,7 +4489,7 @@ docker compose up -d</pre>
                 <span style="font-size:1.3rem;">👥</span>
                 <div>
                     <h3 style="margin:0;font-size:1.1rem;font-weight:800;color:#F8FAFC;">Staff</h3>
-                    <p style="margin:2px 0 0;font-size:0.75rem;color:#94A3B8;">Your team, and who is at the screen now. No passwords: Select only changes the name in the top bar.</p>
+                    <p style="margin:2px 0 0;font-size:0.75rem;color:#94A3B8;">Your team, and who is at the screen now. Select only changes the name in the top bar. To keep others on the network out, set a studio password in Settings.</p>
                 </div>
             </div>
             <button type="button" onclick="closeStaffLoginModal()" aria-label="Close" style="background:none;border:none;color:#94A3B8;font-size:1.5rem;cursor:pointer;">&times;</button>

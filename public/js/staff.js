@@ -1,8 +1,9 @@
 // =========================================================================
 // 👥 STAFF: the team list (add, edit, remove) and who is at the screen
 // =========================================================================
-// There are no passwords or permission levels: "at the screen" is a name
-// shown in the top bar, so the team can see whose turn it is on a shared PC.
+// "At the screen" is a name shown in the top bar, so the team can see whose turn
+// it is on a shared PC. It is not a login: the optional studio password (below,
+// and src/access.js) is what keeps other people on the network out.
 let staffList = [];
 let editingStaffId = null;
 const STAFF_FORM_FIELDS = { name: 'staff-form-name', title: 'staff-form-title', role: 'staff-form-role',
@@ -202,3 +203,56 @@ async function removeRotaShift(id) {
     renderMonthlyShiftSchedule();
 }
 window.removeRotaShift = removeRotaShift;
+
+// =========================================================================
+// 🔒 STUDIO PASSWORD (Settings): optional, one for the whole studio
+// =========================================================================
+async function showStudioAccess() {
+    const status = document.getElementById('access-status');
+    if (!status) return;
+    let access;
+    try { access = await (await fetch('/api/access')).json(); } catch (e) { return; }
+    const on = !!access.passwordSet;
+    status.textContent = on ? 'A password is set: every device signs in once before it can open the CRM.'
+        : 'No password is set: anyone on the studio network can open the CRM.';
+    const show = (id, visible) => { const el = document.getElementById(id); if (el) el.style.display = visible ? '' : 'none'; };
+    show('access-current', on);
+    show('access-remove-btn', on);
+    show('access-signout-btn', on);
+    const save = document.getElementById('access-save-btn');
+    if (save) save.textContent = on ? 'Change password' : 'Set password';
+}
+document.addEventListener('DOMContentLoaded', showStudioAccess);
+
+async function sendStudioPassword(next) {
+    const current = (document.getElementById('access-current') || {}).value || '';
+    try {
+        const res = await fetch('/api/access/password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ current, next }) });
+        const data = await res.json();
+        if (!res.ok) { showStudioToast(data.error || 'Could not save the password'); return false; }
+    } catch (e) { showStudioToast('Could not save the password: the server did not answer'); return false; }
+    const form = document.getElementById('access-form');
+    if (form) form.reset();
+    showStudioAccess();
+    return true;
+}
+
+async function saveStudioPassword(event) {
+    if (event) event.preventDefault();
+    const next = (document.getElementById('access-next') || {}).value || '';
+    if (next.length < 8) { showStudioToast('Use at least 8 characters'); return; }
+    if (await sendStudioPassword(next)) showStudioToast('Studio password saved. Other devices must sign in again.');
+}
+window.saveStudioPassword = saveStudioPassword;
+
+async function removeStudioPassword() {
+    if (!window.confirm('Remove the studio password? Anyone on the studio network can then open the CRM.')) return;
+    if (await sendStudioPassword('')) showStudioToast('Studio password removed');
+}
+window.removeStudioPassword = removeStudioPassword;
+
+async function signOutOfStudio() {
+    try { await fetch('/api/access/logout', { method: 'POST' }); } catch (e) { /* the reload shows the sign-in page either way */ }
+    window.location.reload();
+}
+window.signOutOfStudio = signOutOfStudio;

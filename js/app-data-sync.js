@@ -13,7 +13,7 @@
 (function () {
   'use strict';
 
-  var SYNCED = /^(studio_(ba_pairs|scheduled_reports|portal_pinned_notes|tip_records|sanitization_logs|aftercare_dispatches|messenger_macros|before_after_gallery|vat_config|remote_sync_config)|poli_(studio_profile|studio_logo|benchmark_studio_rates_v1|tattoo_estimate_draft|form_builder_autosave(:[A-Za-z0-9_-]+)?|pdf_generator_settings|builder_theme_customization)|client_photo_[A-Za-z0-9_]+)$/;
+  var SYNCED = /^(studio_(ba_pairs|scheduled_reports|portal_pinned_notes|tip_records|sanitization_logs|aftercare_dispatches|messenger_macros|before_after_gallery|vat_config|remote_sync_config)|poli_(studio_profile|studio_logo|benchmark_studio_rates_v1|tattoo_estimate_draft|form_builder_autosave(:[A-Za-z0-9_-]+)?|pdf_generator_settings|builder_theme_customization|kiosk_exit_pin)|client_photo_[A-Za-z0-9_]+)$/;
   var proto = Storage.prototype;
   var setItem = proto.setItem, removeItem = proto.removeItem;
 

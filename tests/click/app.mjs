@@ -11,10 +11,11 @@ const root = process.env.CRM_ROOT || path.resolve(path.dirname(fileURLToPath(imp
 export async function startApp() {
   const port = process.env.CLICK_PORT || 3412;
   const url = `http://127.0.0.1:${port}/`;
+  const httpsPort = Number(port) + 1000;
   const dir = mkdtempSync(path.join(os.tmpdir(), 'crm-db-'));
   const server = spawn(process.execPath, ['server.js'], {
     cwd: root, stdio: 'ignore',
-    env: { ...process.env, PORT: port, SQLITE_DB_PATH: path.join(dir, 'studio.sqlite') },
+    env: { ...process.env, PORT: port, HTTPS_PORT: httpsPort, SQLITE_DB_PATH: path.join(dir, 'studio.sqlite') },
   });
   for (let i = 0; ; i++) {
     if (await fetch(url).then((r) => r.ok, () => false)) break;
@@ -23,7 +24,7 @@ export async function startApp() {
   }
   const browser = await launchBrowser();
   return {
-    browser, url,
+    browser, url, httpsPort,
     async stop() {
       await browser.close();
       server.kill();

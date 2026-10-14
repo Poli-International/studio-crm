@@ -30,7 +30,6 @@ const QUIET = [
   /sendTeamChatMessage/, // sends nothing until a message is typed
   /qr-validation-toast/, // closes a message that is not showing
   /clearWaiverSignature/, // clears a signature pad that is still empty
-  /toggleQrScanner/, // starts the camera: there is none on a test machine
   /shareToPlatform\('email'\)/, // hands the message to the computer's mail program
 ];
 const enqueue = (keys, pathTo) => {
@@ -45,7 +44,19 @@ const enqueue = (keys, pathTo) => {
 const PAGE = '/' + (process.env.CRAWL_PAGE || '').replace(/^\//, ''); // Git Bash rewrites a leading slash, so tools/x/ works too
 const start = url.replace(/\/$/, '') + PAGE;
 await browser.goto(start);
-if (PAGE !== '/') enqueue(await browser.evaluate('window.__ct.keys()'), []);
+// a tool may open behind a welcome window: get past it the way a person would, before every click
+const prelude = [];
+if (PAGE !== '/') {
+  for (let i = 0; i < 3; i++) {
+    const way = await browser.evaluate('window.__ct.opener()');
+    if (!way) break;
+    prelude.push(way);
+    queued.add(way);
+    results.push({ key: way, path: [], verdict: 'works', did: 'gets past the opening window' });
+    await browser.click(way);
+  }
+  enqueue(await browser.evaluate('window.__ct.keys()'), prelude);
+}
 for (const dest of PAGE === '/' ? NAV : []) {
   const nk = await navKey(dest);
   await browser.click(nk);
@@ -84,8 +95,11 @@ while (queue.length || last.length) {
     browser.reset();
     await browser.evaluate('(() => { const s = window.__ct.sig; s.fetches.length = 0; s.opens.length = 0; s.prints = 0; s.added.length = 0; })()');
     const before = await browser.evaluate('({ state: window.__ct.state(), keys: window.__ct.keys() })');
+    const chosen = await browser.evaluate(`window.__ct.chosen(${JSON.stringify(item.key)})`);
     const t = await browser.click(item.key);
     if (!t) { r.verdict = 'unreachable'; continue; }
+    // in a strip that scrolls sideways or a menu that is folded away: not on screen, so not a button anyone can press now
+    if (t.covered === 'outside the window') { r.verdict = 'hidden'; continue; }
     if (t.covered) { r.verdict = 'broken'; r.did = 'cannot be clicked: covered by ' + t.covered; continue; }
     const after = await browser.evaluate('({ state: window.__ct.state(), keys: window.__ct.keys(), sig: window.__ct.sig })').catch(() => null);
     if (!after) { r.verdict = 'works'; r.did = 'leaves the page'; continue; }
@@ -104,7 +118,7 @@ while (queue.length || last.length) {
     const failed = after.sig.fetches.some((f) => f.status >= 400 || f.status === -1);
     const effect = opened.length || closed.length || r.view || r.changed || r.fetches.length || r.downloads.length
       || r.dialogs.length || r.opens.length || r.prints;
-    r.verdict = r.errors.length || failed ? 'broken' : effect ? 'works' : QUIET.some((q) => q.test(item.key)) ? 'quiet' : 'dead';
+    r.verdict = r.errors.length || failed ? 'broken' : effect ? 'works' : (chosen || QUIET.some((q) => q.test(item.key))) ? 'quiet' : 'dead';
     // says a file was made, but no file came
     const claim = [...r.dialogs, ...r.said].join(' ');
     if (r.verdict === 'works' && /export|download|saved to|generated/i.test(claim) && !r.downloads.length && !r.fetches.some((f) => !f.startsWith('GET'))) r.suspect = 'says exported/saved, but no file and nothing sent to the server';
@@ -121,7 +135,7 @@ while (queue.length || last.length) {
 
 writeFileSync(OUT, JSON.stringify(results, null, 1));
 const count = (v) => results.filter((r) => r.verdict === v).length;
-console.log(`${results.length} buttons: ${count('works')} work, ${count('dead')} dead, ${count('broken')} broken, ${count('unreachable')} unreachable, ${count('quiet')} with nothing to see, ${count('external link')} external links`);
+console.log(`${results.length} buttons: ${count('works')} work, ${count('dead')} dead, ${count('broken')} broken, ${count('unreachable')} unreachable, ${count('hidden')} not on screen, ${count('quiet')} with nothing to see, ${count('external link')} external links`);
 for (const r of results.filter((x) => x.verdict === 'dead' || x.verdict === 'broken')) {
   console.log(`${r.verdict.toUpperCase()}  ${r.key}\n    ${r.did || r.errors.concat(r.fetches.filter((f) => / (4|5)\d\d$| -1$/.test(f))).join('; ')}`);
 }

@@ -7,7 +7,7 @@
 import { startApp } from './app.mjs';
 import { sleep } from './cdp.mjs';
 
-const { browser: b, url, stop } = await startApp();
+const { browser: b, url, httpsPort, stop } = await startApp();
 const failures = [];
 const text = (sel) => b.evaluate(`(document.querySelector(${JSON.stringify(sel)}) || {}).innerText || ''`);
 const shown = (id) => b.evaluate(`getComputedStyle(document.getElementById(${JSON.stringify(id)})).display !== 'none'`);
@@ -18,6 +18,12 @@ function check(ok, what) { if (!ok) throw new Error(what); }
 async function eventually(fn, what) {
   for (let i = 0; i < 25; i++) { if (await fn()) return; await sleep(200); }
   throw new Error(what);
+}
+// clicks the visible button that runs the given onclick code
+async function pressOn(onclick) {
+  const key = await b.evaluate(`(() => { const el = window.__ct.all().find(e => (e.getAttribute('onclick') || '').trim() === ${JSON.stringify(onclick)}); return el ? window.__ct.key(el) : null; })()`);
+  const t = key && await b.click(key);
+  check(t && !t.covered, `the button for ${onclick} ` + (t ? 'is covered by ' + t.covered : 'is not on the screen'));
 }
 // clicks a button found in a table row, and says why when it cannot be clicked
 async function press(rowSel, rowText, label) {
@@ -203,6 +209,39 @@ await flow('Tablet kiosk: fill, sign, complete; the client and the signed form a
   await eventually(async () => (await text('#client-profile-modal-body')).includes('kiosk.flow@example.com'), 'the saved answers cannot be read back');
 });
 
+await flow('On a tablet, with fingers: the consent form is filled, signed and saved', async () => {
+  await b.tablet();
+  try {
+    await b.goto(url);
+    await b.evaluate(`navigateToDestination('clients')`); // the menu is behind the hamburger on a tablet; tested on its own below
+    await b.settle();
+    await b.clickText('Consent Form Builder');
+    const f = b.frame('#form-builder-frame');
+    for (let i = 0; i < 80 && !(await f.evaluate('!!(window.__ct && window.FormBuilderApp && window.FormBuilderApp.currentForm && document.getElementById("btn-preview"))').catch(() => false)); i++) await sleep(250);
+    await sleep(800);
+    await f.clickText('Preview Form');
+    await f.clickText('Fill Sample Answers');
+    await f.clickText('Tablet Kiosk Mode');
+    await f.clickText('Next Step', '#tablet-kiosk-modal');
+    await f.type('#tablet-kiosk-modal [name="full_name"]', 'Tablet Flow');
+    for (let i = 0; i < 5; i++) await f.clickText('Next Step', '#tablet-kiosk-modal');
+    await f.scribble('#tablet-kiosk-modal canvas.signature-pad-canvas');
+    check(await f.evaluate('!window.ActiveFormPreview.signatureManagers.client_sig.isEmpty()'), 'a finger does not sign in the signature box');
+    await f.clickText('Complete', '#tablet-kiosk-modal');
+    await eventually(async () => (await api('/api/clients')).some((c) => c.name === 'Tablet Flow'), 'the form signed on the tablet was not saved');
+  } finally { await b.desktop(); }
+});
+
+await flow('On a tablet, the menu button opens the menu and a screen can be chosen', async () => {
+  await b.tablet();
+  try {
+    await b.goto(url);
+    await pressOn('toggleSidebar()');
+    await b.clickText('Calendar');
+    await eventually(async () => (await b.evaluate('window.__ct.state().view')) === 'dest-calendar', 'the Calendar did not open from the tablet menu');
+  } finally { await b.desktop(); }
+});
+
 await flow('Form builder: changes to one form are still there after opening another form', async () => {
   await b.goto(url + 'tools/form-builder/index.html');
   await sleep(1500);
@@ -216,6 +255,46 @@ await flow('Form builder: changes to one form are still there after opening anot
   await open(0);
   await sleep(600);
   check((await questions()) === before + 1, 'the question added to the first form was lost');
+  // another device: a browser that has never opened the form builder (goto starts with empty storage)
+  await sleep(800);
+  await b.goto(url + 'tools/form-builder/index.html');
+  await sleep(1500);
+  check((await questions()) === before + 1, 'the edited form did not reach a second device');
+});
+
+await flow('Team board: a message is saved and still there after a reload', async () => {
+  await b.clickText('Settings');
+  await b.clickText('Team M Board');
+  await b.type('#mboard-chat-input', 'Flow message for the team');
+  await b.clickText('Send', '#team-messenger-overlay');
+  await eventually(async () => (await text('#mboard-messages-stream')).includes('Flow message for the team'), 'the message is not on the board');
+  await b.goto(url);
+  await b.clickText('Settings');
+  await b.clickText('Team M Board');
+  await eventually(async () => (await text('#mboard-messages-stream')).includes('Flow message for the team'), 'the message was gone after a reload');
+});
+
+await flow('The sidebar shows the version that is running', async () => {
+  const version = (await api('/api/studio-meta')).version;
+  await eventually(async () => (await text('#app-version-label')) === 'v' + version, 'the version label does not match ' + version);
+});
+
+await flow('Over https the scanner button starts the camera, and stops it again', async () => {
+  await b.goto(`https://127.0.0.1:${httpsPort}/`);
+  check(await b.evaluate('isSecureContext && !!navigator.mediaDevices'), 'the https address does not give the page a camera');
+  await b.clickText('Log Activity');
+  await b.clickText('Open Camera Scanner');
+  await eventually(async () => b.evaluate(`(() => { const v = document.querySelector('#qr-reader video'); return !!v && !v.paused && v.videoWidth > 0; })()`), 'the camera picture did not start');
+  await b.clickText('Open Camera Scanner');
+  await eventually(async () => b.evaluate(`!document.querySelector('#qr-reader video')`), 'the second click did not stop the camera');
+});
+
+await flow('Back up now writes a real copy of the studio database', async () => {
+  await b.clickText('Settings');
+  await pressOn('triggerInstantDatabaseSnapshot()');
+  await eventually(async () => (await b.evaluate('window.__ct.sig.added.join(" ")')).includes('Backup saved in storage/backups'), 'the backup button did not report a saved file');
+  const call = await b.evaluate(`window.__ct.sig.fetches.filter(f => f.url.includes('create-snapshot')).map(f => f.status).join()`);
+  check(call === '200', 'the backup request failed: ' + call);
 });
 
 // Last, because it deletes the demo studio: the first thing a real studio does.
@@ -249,6 +328,54 @@ await flow('Start with an empty studio, then add the first client, staff member 
   check((await api('/api/appointments'))[0].status === 'completed', 'Completed did not change the appointment');
   await press('.appointment-row', 'First Client', 'Remove');
   check((await api('/api/appointments')).length === 0, 'the appointment was not removed');
+  // nothing of the demo studio is left, and no screen shows a figure nobody entered
+  for (const path of ['services', 'financial', 'inventory', 'waivers', 'gallery', 'messages', 'activity-logs?limit=5']) {
+    const left = await api('/api/' + path);
+    check(Array.isArray(left) && left.filter((x) => !/First (Client|Artist)/.test(JSON.stringify(x))).length === 0, `an emptied studio still has ${path}: ` + JSON.stringify(left).slice(0, 120));
+  }
+  check((await api('/api/inventory/usage-heatmap')).summary.total_weekly_units === 0, 'the usage heatmap shows supplies nobody used');
+  check((await api('/api/stations')).every((st) => !st.autoclaveCycle), 'a station shows an autoclave cycle nobody ran');
+  check(!(await api('/api/inventory/sync-status')).lastSuccessfulSyncTime, 'the CSV sync reports a run that never happened');
+  await b.clickText('Finance');
+  for (const [open, body, expected] of [
+    ['openDepositLedgerModal()', '#deposit-ledger-modal-body', 'No deposits are recorded'],
+    ['openCommissionModal()', '#commission-table-body', 'No payments are recorded'],
+    ['openMarginCalculatorModal()', '#margin-calculator-modal-body', 'Nothing to calculate yet'],
+  ]) {
+    await b.goto(url);
+    await b.clickText('Finance');
+    await pressOn(open);
+    await eventually(async () => (await text(body)).includes(expected), `${open} does not say that nothing is recorded: ` + (await text(body)).slice(0, 80));
+  }
+  await b.goto(url);
+  await b.clickText('Compliance');
+  await pressOn('openAutoclaveVaultModal()');
+  await eventually(async () => (await text('#autoclave-vault-modal-body')).includes('No autoclave cycles recorded yet'), 'the autoclave vault shows a cycle nobody ran');
+});
+
+// After everything else: while it runs, the studio is locked.
+await flow('Studio password: locks every device out until it signs in, and can be removed', async () => {
+  const anon = (p) => fetch(url + p).then((r) => r.status); // a device that has not signed in
+  check((await anon('api/clients')) === 200, 'the API was not open before a password was set');
+  await b.clickText('Settings');
+  await b.type('#access-next', 'studio-test-password');
+  await b.clickText('Set password');
+  await eventually(async () => (await text('#access-status')).startsWith('A password is set'), 'the password was not saved');
+  check((await anon('api/clients')) === 401, 'the API still answers a device that has not signed in');
+  check((await anon('')) === 401, 'the page still opens for a device that has not signed in');
+  await b.clickText('Sign out on this device');
+  await eventually(async () => b.evaluate(`!!document.getElementById('login-password')`), 'signing out did not show the sign-in page');
+  await b.type('#login-password', 'not the password');
+  await b.clickText('Sign in');
+  await eventually(async () => (await text('#error')) === 'Wrong password', 'a wrong password was not refused');
+  await b.type('#login-password', 'studio-test-password');
+  await b.clickText('Sign in');
+  await eventually(async () => b.evaluate(`!!document.getElementById('nav-dest-settings')`), 'the right password did not open the CRM');
+  await b.clickText('Settings');
+  await b.type('#access-current', 'studio-test-password');
+  await b.clickText('Remove password');
+  await eventually(async () => (await text('#access-status')).startsWith('No password is set'), 'the password was not removed');
+  check((await anon('api/clients')) === 200, 'the API stayed locked after the password was removed');
 });
 
 await stop();

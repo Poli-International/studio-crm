@@ -755,119 +755,18 @@ function closeDeletionConfirmModal() {
 window.closeDeletionConfirmModal = closeDeletionConfirmModal;
 
 // Gallery Item Deletion Confirmation
-function confirmDeleteGalleryWork(id, title, artistName) {
-    openDeletionConfirmModal({
-        title: 'Delete Shared Gallery Artwork',
-        message: 'Are you sure you want to permanently remove this portfolio artwork from the shared gallery?',
-        itemName: title || 'Portfolio Artwork',
-        itemDetails: `Artwork #${id} • Artist: ${artistName || 'Staff'}`,
-        confirmBtnText: '🗑️ Delete Artwork',
-        onConfirm: async () => {
-            try {
-                const res = await fetch(`/api/gallery/${id}`, { method: 'DELETE' });
-                if (!res.ok) throw new Error('Gallery delete failed');
-                if (window.allGalleryWorks) {
-                    window.allGalleryWorks = window.allGalleryWorks.filter(w => w.id !== id);
-                }
-                if (typeof renderGalleryGrid === 'function') renderGalleryGrid();
-                if (typeof showUndoToast === 'function') {
-                    showUndoToast('Removed portfolio artwork from shared gallery.');
-                }
-            } catch (err) {
-                console.error('Failed to delete gallery work:', err);
-            }
-        }
-    });
-}
-window.confirmDeleteGalleryWork = confirmDeleteGalleryWork;
 
 // Gallery B&A Pair Deletion Confirmation
-function confirmDeleteBeforeAfterPair(id, title) {
-    openDeletionConfirmModal({
-        title: 'Delete Before & After Pair',
-        message: 'Are you sure you want to permanently remove this Before & After showcase pair?',
-        itemName: title || 'Before & After Pair',
-        itemDetails: `Pair ID: ${id}`,
-        confirmBtnText: '🗑️ Remove Pair',
-        onConfirm: () => {
-            let pairs = [];
-            try {
-                pairs = JSON.parse(localStorage.getItem('studio_ba_pairs') || '[]');
-            } catch(e) {}
-            pairs = pairs.filter(p => p.id !== id);
-            localStorage.setItem('studio_ba_pairs', JSON.stringify(pairs));
-            if (typeof renderGalleryGrid === 'function') renderGalleryGrid();
-            if (typeof showUndoToast === 'function') {
-                showUndoToast('Removed Before & After Pair from gallery.');
-            }
-        }
-    });
-}
-window.confirmDeleteBeforeAfterPair = confirmDeleteBeforeAfterPair;
 
 // Inventory Item Deletion Confirmation
-function confirmDeleteInventoryItem(id, name, sku) {
-    openDeletionConfirmModal({
-        title: 'Delete Inventory Item',
-        message: 'Are you sure you want to permanently remove this supply item from the studio inventory catalog?',
-        itemName: name || 'Inventory Item',
-        itemDetails: `SKU: ${sku || 'N/A'} • ID: #${id}`,
-        confirmBtnText: '🗑️ Delete Supply Item',
-        onConfirm: async () => {
-            try {
-                const res = await fetch(`/api/inventory/${id}`, { method: 'DELETE' });
-                if (!res.ok) throw new Error('Inventory delete failed');
-                if (window.cachedInventoryList) {
-                    window.cachedInventoryList = window.cachedInventoryList.filter(i => i.id !== id);
-                }
-                if (typeof renderInventoryCatalogTable === 'function') {
-                    renderInventoryCatalogTable(window.cachedInventoryList);
-                }
-                if (typeof showUndoToast === 'function') {
-                    showUndoToast(`🗑️ Removed ${name} from inventory.`);
-                }
-            } catch (err) {
-                console.error('Failed to delete inventory item:', err);
-                alert('Failed to delete inventory item.');
-            }
-        }
-    });
-}
-window.confirmDeleteInventoryItem = confirmDeleteInventoryItem;
 
 // Inventory Category Deletion Confirmation
-function confirmDeleteCategorySetting(id, name) {
-    openDeletionConfirmModal({
-        title: 'Delete Inventory Category',
-        message: `Are you sure you want to delete category "${name}"?`,
-        itemName: `Category: ${name}`,
-        itemDetails: `ID #${id}`,
-        confirmBtnText: '🗑️ Delete Category',
-        onConfirm: async () => {
-            try {
-                const res = await fetch(`/api/inventory/categories/${id}`, { method: 'DELETE' });
-                if (!res.ok) throw new Error('Category delete failed');
-                if (typeof loadCategoriesList === 'function') loadCategoriesList();
-                if (typeof showUndoToast === 'function') showUndoToast(`🗑️ Deleted Category: ${name}`);
-            } catch (err) {
-                console.error('Category delete error:', err);
-            }
-        }
-    });
-}
-window.confirmDeleteCategorySetting = confirmDeleteCategorySetting;
 
 // =========================================================================
 // 🔥 D3.JS SUPPLY USAGE DENSITY HEATMAP (BY DAY OF WEEK & PROCEDURE SHIFT)
 // =========================================================================
 let cachedSupplyUsageHeatmapData = null;
 
-async function openInventoryUsageHeatmapModal() {
-    const modal = document.getElementById('inventory-usage-heatmap-modal');
-    if (modal) modal.style.display = 'flex';
-    await renderD3SupplyUsageHeatmap();
-}
-window.openInventoryUsageHeatmapModal = openInventoryUsageHeatmapModal;
 
 function closeInventoryUsageHeatmapModal() {
     const modal = document.getElementById('inventory-usage-heatmap-modal');
@@ -909,16 +808,16 @@ async function renderD3SupplyUsageHeatmap() {
 
         // Update Summary Cards
         const unitsEl = document.getElementById('hm-summary-units');
-        if (unitsEl) unitsEl.textContent = `${summary.total_weekly_units || 384} Units`;
+        if (unitsEl) unitsEl.textContent = `${summary.total_weekly_units || 0} Units`;
 
         const peakDayEl = document.getElementById('hm-summary-peak-day');
-        if (peakDayEl) peakDayEl.textContent = `${summary.peak_day || 'Saturday'} (${summary.peak_shift || 'Peak Evening'})`;
+        if (peakDayEl) peakDayEl.textContent = summary.peak_day ? `${summary.peak_day} (${summary.peak_shift})` : 'Not enough data';
 
         const fastestEl = document.getElementById('hm-summary-fastest');
-        if (fastestEl) fastestEl.textContent = summary.fastest_burning_item || 'Kwadron 3RL Needles';
+        if (fastestEl) fastestEl.textContent = summary.fastest_burning_item || 'Not enough data';
 
         const reorderEl = document.getElementById('hm-summary-reorder');
-        if (reorderEl) reorderEl.textContent = summary.recommended_reorder_day || 'Thursday 09:00 AM';
+        if (reorderEl) reorderEl.textContent = summary.recommended_reorder_day || 'Not enough data';
 
         // Clear container for D3 rendering
         container.innerHTML = '';
@@ -1208,36 +1107,6 @@ window.deleteClientTattooWork = deleteClientTattooWork;
 let clientPhotoMediaStream = null;
 let capturedClientPhotoDataUrl = null;
 
-function openClientPhotoCameraModal() {
-    const modal = document.getElementById('client-photo-camera-modal-overlay');
-    if (!modal) return;
-    modal.style.display = 'flex';
-
-    const video = document.getElementById('client-photo-video');
-    const preview = document.getElementById('client-photo-preview');
-    const ctrlInitial = document.getElementById('client-photo-controls-initial');
-    const ctrlCaptured = document.getElementById('client-photo-controls-captured');
-
-    if (video) video.style.display = 'block';
-    if (preview) preview.style.display = 'none';
-    if (ctrlInitial) ctrlInitial.style.display = 'flex';
-    if (ctrlCaptured) ctrlCaptured.style.display = 'none';
-
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false })
-            .then(stream => {
-                clientPhotoMediaStream = stream;
-                if (video) {
-                    video.srcObject = stream;
-                    video.play();
-                }
-            })
-            .catch(err => {
-                console.warn('Camera access error:', err);
-            });
-    }
-}
-window.openClientPhotoCameraModal = openClientPhotoCameraModal;
 
 function closeClientPhotoCameraModal() {
     const modal = document.getElementById('client-photo-camera-modal-overlay');
@@ -1248,43 +1117,6 @@ function closeClientPhotoCameraModal() {
     }
 }
 window.closeClientPhotoCameraModal = closeClientPhotoCameraModal;
-
-function snapClientProfilePhoto() {
-    const video = document.getElementById('client-photo-video');
-    const canvas = document.getElementById('client-photo-canvas');
-    const preview = document.getElementById('client-photo-preview');
-    const ctrlInitial = document.getElementById('client-photo-controls-initial');
-    const ctrlCaptured = document.getElementById('client-photo-controls-captured');
-
-    if (!video || !canvas) return;
-    canvas.width = video.videoWidth || 640;
-    canvas.height = video.videoHeight || 480;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-    capturedClientPhotoDataUrl = canvas.toDataURL('image/jpeg', 0.9);
-    if (preview) {
-        preview.src = capturedClientPhotoDataUrl;
-        preview.style.display = 'block';
-    }
-    video.style.display = 'none';
-    if (ctrlInitial) ctrlInitial.style.display = 'none';
-    if (ctrlCaptured) ctrlCaptured.style.display = 'flex';
-}
-window.snapClientProfilePhoto = snapClientProfilePhoto;
-
-function retakeClientProfilePhoto() {
-    const video = document.getElementById('client-photo-video');
-    const preview = document.getElementById('client-photo-preview');
-    const ctrlInitial = document.getElementById('client-photo-controls-initial');
-    const ctrlCaptured = document.getElementById('client-photo-controls-captured');
-
-    if (video) video.style.display = 'block';
-    if (preview) preview.style.display = 'none';
-    if (ctrlInitial) ctrlInitial.style.display = 'flex';
-    if (ctrlCaptured) ctrlCaptured.style.display = 'none';
-}
-window.retakeClientProfilePhoto = retakeClientProfilePhoto;
 
 function saveCapturedClientProfilePhoto() {
     if (!capturedClientPhotoDataUrl || !currentActiveProfileClient || !currentActiveProfileClient.client) {
@@ -1395,16 +1227,6 @@ async function logRapidClientProcedureNote(noteText) {
 }
 window.logRapidClientProcedureNote = logRapidClientProcedureNote;
 
-function promptCustomClientProcedureNote() {
-    toggleClientQuickActionsMenu();
-    switchClientProfileTab('notes');
-    const textEl = document.getElementById('sn-note-text');
-    if (textEl) {
-        textEl.focus();
-        textEl.scrollIntoView({ behavior: 'smooth' });
-    }
-}
-window.promptCustomClientProcedureNote = promptCustomClientProcedureNote;
 
 // =========================================================================
 // ⌨️ GLOBAL KEYBOARD SHORTCUT MANAGER (ALT + O FOR STERILE AUDIT)
@@ -1682,52 +1504,6 @@ async function fetchAndDisplayInventoryCsvSyncStatus() {
 }
 window.fetchAndDisplayInventoryCsvSyncStatus = fetchAndDisplayInventoryCsvSyncStatus;
 
-async function triggerManualCsvSyncFromModal() {
-    const btn = document.getElementById('btn-inv-manual-sync');
-    if (btn) {
-        btn.disabled = true;
-        btn.innerHTML = '⏳ Syncing...';
-    }
-
-    try {
-        const res = await fetch('/api/sync/trigger', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ user: 'Studio Manager' })
-        });
-        const result = await res.json();
-        
-        await fetchAndDisplayInventoryCsvSyncStatus();
-        if (typeof openInventoryManagementModal === 'function') {
-            // refresh inventory cached data
-            const invRes = await fetch('/api/inventory');
-            if (invRes.ok) {
-                const invData = await invRes.json();
-                if (window.cachedInventoryList) {
-                    window.cachedInventoryList = invData;
-                    if (typeof handleInventorySearchInput === 'function') {
-                        handleInventorySearchInput('');
-                    }
-                }
-            }
-        }
-
-        if (typeof showUndoToast === 'function') {
-            showUndoToast('⚡ Remote CSV inventory & client sync completed successfully!');
-        }
-    } catch (err) {
-        console.error('Manual sync failed:', err);
-        if (typeof showUndoToast === 'function') {
-            showUndoToast('⚠️ CSV Sync failed: ' + err.message);
-        }
-    } finally {
-        if (btn) {
-            btn.disabled = false;
-            btn.innerHTML = '⚡ Sync Now';
-        }
-    }
-}
-window.triggerManualCsvSyncFromModal = triggerManualCsvSyncFromModal;
 
 // Auto-poll sync status every 45 seconds when page is active
 setInterval(() => {
@@ -1858,11 +1634,6 @@ function showStudioToast(msg) {
 // 1. OPEN MODAL FUNCTIONS (46)
 // =========================================================================
 
-function openAccountingIntegrationsModal() {
-    forceShowModal('vat-settings-modal-overlay');
-    showStudioToast('Opened Accounting & Tax Configuration');
-}
-window.openAccountingIntegrationsModal = openAccountingIntegrationsModal;
 
 function openAftercareEmailModal(client) {
     forceShowModal('aftercare-email-modal-overlay');
@@ -1900,36 +1671,35 @@ async function openAftercarePipelineModal() {
 }
 window.openAftercarePipelineModal = openAftercarePipelineModal;
 
-function openAssignShiftModal(staff) {
-    forceShowModal('shift-modal');
-    if (staff) {
-        const staffSelect = document.getElementById('shift-staff-select');
-        if (staffSelect) staffSelect.value = staff;
-    }
+// One line of a ledger window: what on the left, how much on the right.
+function ledgerRow(title, detail, amount) {
+    return '<div class="ledger-row" style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;gap:12px;">'
+        + '<div><strong>' + escapeHtml(String(title)) + '</strong><div style="font-size:0.8rem;color:#94A3B8;">' + escapeHtml(String(detail || '')) + '</div></div>'
+        + '<div style="font-weight:800;color:#34D399;white-space:nowrap;">' + escapeHtml(String(amount == null ? '' : amount)) + '</div></div>';
 }
-window.openAssignShiftModal = openAssignShiftModal;
-
+function ledgerList(body, rows, emptyText) {
+    body.innerHTML = rows.length ? '<div style="display:flex;flex-direction:column;gap:10px;">' + rows.join('') + '</div>'
+        : '<div style="text-align:center;padding:20px;color:#94A3B8;">' + escapeHtml(emptyText) + '</div>';
+}
+const LEDGER_ERROR = '<div style="text-align:center;padding:20px;color:#FCA5A5;">Could not load: the server did not answer</div>';
+async function ledgerJson(url) {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return res.json();
+}
+const ledgerMoney = (n) => Number(n || 0).toFixed(2);
 
 async function openAutoclaveVaultModal() {
     forceShowModal('autoclave-vault-modal-overlay');
     const body = document.getElementById('autoclave-vault-modal-body');
-    if (body) {
-        body.innerHTML = '<div style="text-align:center;padding:24px;color:#94A3B8;">Loading digital autoclave logs...</div>';
-        try {
-            const res = await fetch('/api/autoclave-vault');
-            const data = await res.json();
-            const cycles = data.cycles || data.records || [];
-            if (cycles.length === 0) {
-                body.innerHTML = '<div style="text-align:center;padding:20px;color:#94A3B8;">No recent autoclave cycles recorded. All autoclaves calibrated.</div>';
-            } else {
-                body.innerHTML = '<div style="display:flex;flex-direction:column;gap:10px;">' +
-                    cycles.map(c => '<div style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;"><div><strong>Cycle #' + (c.cycle_number || c.id) + ' - ' + (c.autoclave_model || 'Statim 5000') + '</strong><div style="font-size:0.8rem;color:#94A3B8;">' + (c.date || 'Today') + ' | ' + (c.temperature || '134°C') + ' | ' + (c.pressure || '2.1 bar') + '</div></div><span style="color:#10B981;font-weight:700;font-size:0.85rem;">' + (c.status || 'PASSED (Class 5 Integrator)') + '</span></div>').join('') +
-                    '</div>';
-            }
-        } catch (e) {
-            body.innerHTML = '<div style="background:#0F172A;padding:16px;border-radius:8px;border:1px solid #334155;color:#E2E8F0;"><strong>Autoclave Unit #1 (Statim G4)</strong>: Validated Cycle (134°C, 3.5 min, 204 kPa). Indicator: PASS.</div>';
-        }
-    }
+    if (!body) return;
+    try {
+        const data = await ledgerJson('/api/compliance/autoclave-logs');
+        ledgerList(body, (data.logs || []).map((c) => ledgerRow(
+            'Cycle #' + (c.cycle_number || c.id) + (c.autoclave_id ? ' · ' + c.autoclave_id : ''),
+            [c.date_run, c.station, c.temperature_c ? c.temperature_c + ' °C' : '', c.operator].filter(Boolean).join(' · '),
+            c.spore_test_result || 'result not recorded')), 'No autoclave cycles recorded yet.');
+    } catch (e) { body.innerHTML = LEDGER_ERROR; }
 }
 window.openAutoclaveVaultModal = openAutoclaveVaultModal;
 
@@ -1937,20 +1707,6 @@ function openBeforeAfterLinkModal() {
     forceShowModal('gallery-before-after-modal-overlay');
 }
 window.openBeforeAfterLinkModal = openBeforeAfterLinkModal;
-
-function openBodyMapModal() {
-    if (typeof window.openStudioProSuiteModal === 'function') {
-        window.openStudioProSuiteModal('ear-planner');
-    } else {
-        forceShowModal('studio-pro-suite-modal-overlay');
-    }
-}
-window.openBodyMapModal = openBodyMapModal;
-
-function openClearAllConfirmModal() {
-    forceShowModal('clear-all-confirm-modal');
-}
-window.openClearAllConfirmModal = openClearAllConfirmModal;
 
 async function openClientDirectoryModal() {
     forceShowModal('client-directory-modal-overlay');
@@ -2007,20 +1763,14 @@ window.recalculateTipSplit = recalculateTipSplit;
 
 async function openCommissionModal() {
     forceShowModal('commission-modal');
-    const body = document.getElementById('commission-modal-body');
-    if (body) {
-        body.innerHTML = '<div style="text-align:center;padding:24px;color:#94A3B8;">Loading artist commission ledger...</div>';
-        try {
-            const res = await fetch('/api/commissions');
-            const data = await res.json();
-            const reports = data.reports || data.commissions || [];
-            body.innerHTML = '<div style="display:flex;flex-direction:column;gap:10px;">' +
-                reports.map(r => '<div style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;"><div><strong>' + (r.artist_name || 'Resident Artist') + '</strong><div style="font-size:0.8rem;color:#94A3B8;">' + (r.procedure_count || 0) + ' Procedures completed</div></div><div style="text-align:right;"><span style="color:#10B981;font-weight:700;">$' + (r.total_payout || 0).toLocaleString() + '</span><div style="font-size:0.75rem;color:#94A3B8;">Split: ' + (r.split_rate || '60/40') + '</div></div></div>').join('') +
-                '</div>';
-        } catch (e) {
-            body.innerHTML = '<div style="color:#94A3B8;padding:12px;">Standard Artist Splits: 60% Artist / 40% Studio House.</div>';
-        }
-    }
+    const body = document.getElementById('commission-table-body');
+    if (!body) return;
+    try {
+        const report = await ledgerJson('/api/staff/commissions');
+        ledgerList(body, (Array.isArray(report) ? report : []).filter((r) => r.completedJobs > 0).map((r) => ledgerRow(
+            r.name, r.completedJobs + ' payments recorded', ledgerMoney(r.grossRevenue))),
+            'No payments are recorded against a staff member yet.');
+    } catch (e) { body.innerHTML = LEDGER_ERROR; }
 }
 window.openCommissionModal = openCommissionModal;
 
@@ -2033,19 +1783,14 @@ window.openDailyStudioSummaryModal = openDailyStudioSummaryModal;
 async function openDepositLedgerModal() {
     forceShowModal('deposit-ledger-modal-overlay');
     const body = document.getElementById('deposit-ledger-modal-body');
-    if (body) {
-        body.innerHTML = '<div style="text-align:center;padding:24px;color:#94A3B8;">Loading client deposit ledger...</div>';
-        try {
-            const res = await fetch('/api/deposits');
-            const data = await res.json();
-            const deposits = data.deposits || data.records || [];
-            body.innerHTML = '<div style="display:flex;flex-direction:column;gap:8px;">' +
-                deposits.map(d => '<div style="background:#0F172A;padding:10px 14px;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;"><div><strong>' + (d.client_name || 'Client') + '</strong><div style="font-size:0.78rem;color:#94A3B8;">' + (d.date || 'Today') + ' | ' + (d.method || 'Card') + '</div></div><span style="color:#10B981;font-weight:700;">$' + (d.amount || 50) + ' (' + (d.status || 'CONFIRMED') + ')</span></div>').join('') +
-                '</div>';
-        } catch (e) {
-            body.innerHTML = '<div style="background:#0F172A;padding:16px;border-radius:8px;color:#E2E8F0;">Active Client Holding Escrow: $1,450.00 across 18 bookings.</div>';
-        }
-    }
+    if (!body) return;
+    try {
+        const appts = await ledgerJson('/api/appointments');
+        const withDeposit = (Array.isArray(appts) ? appts : []).filter((a) => Number(a.deposit_paid || a.deposit || 0) > 0);
+        ledgerList(body, withDeposit.map((a) => ledgerRow(
+            a.client_name || '', [a.service_type, a.datetime ? new Date(a.datetime).toLocaleDateString() : '', a.status].filter(Boolean).join(' · '),
+            ledgerMoney(a.deposit_paid || a.deposit))), 'No deposits are recorded on an appointment yet.');
+    } catch (e) { body.innerHTML = LEDGER_ERROR; }
 }
 window.openDepositLedgerModal = openDepositLedgerModal;
 
@@ -2055,47 +1800,19 @@ function openImportModal() {
 }
 window.openImportModal = openImportModal;
 
-function openInventoryHealthModal() {
-    if (typeof window.openInventoryUsageHeatmapModal === 'function') {
-        window.openInventoryUsageHeatmapModal();
-    } else {
-        forceShowModal('inventory-usage-heatmap-modal');
-    }
-}
-window.openInventoryHealthModal = openInventoryHealthModal;
-
-function openInventoryManagementModal() {
-    const tab = document.querySelector('.tool-tab[data-tab="inventory"]');
-    if (tab) tab.click();
-    showStudioToast('Switched to Inventory Stock Matrix');
-}
-window.openInventoryManagementModal = openInventoryManagementModal;
-
-function openLowStockModal() {
-    const input = document.getElementById('inventory-search-input');
-    if (input) {
-        input.value = 'low';
-        input.dispatchEvent(new Event('input'));
-    }
-    const tab = document.querySelector('.tool-tab[data-tab="inventory"]');
-    if (tab) tab.click();
-    showStudioToast('Filtering inventory for low-stock items');
-}
-window.openLowStockModal = openLowStockModal;
-
 async function openMarginCalculatorModal() {
     forceShowModal('margin-calculator-modal-overlay');
     const body = document.getElementById('margin-calculator-modal-body');
-    if (body) {
-        body.innerHTML = '<div style="text-align:center;padding:24px;color:#94A3B8;">Calculating studio net profitability...</div>';
-        try {
-            const res = await fetch('/api/margin-reports');
-            const data = await res.json();
-            body.innerHTML = '<div style="background:#0F172A;border:1px solid #334155;border-radius:10px;padding:16px;"><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;"><div style="background:#1E293B;padding:12px;border-radius:8px;"><div style="font-size:0.75rem;color:#94A3B8;">Average Procedure Margin</div><div style="font-size:1.4rem;font-weight:800;color:#10B981;">' + (data.average_margin_percent || 68) + '%</div></div><div style="background:#1E293B;padding:12px;border-radius:8px;"><div style="font-size:0.75rem;color:#94A3B8;">Net Studio Retained</div><div style="font-size:1.4rem;font-weight:800;color:#38BDF8;">$' + (data.total_studio_net_profit || 4280).toLocaleString() + '</div></div></div><div style="font-size:0.85rem;color:#CBD5E1;">Based on single-use consumable overhead and titanium/gold jewelry landed unit costs.</div></div>';
-        } catch (e) {
-            body.innerHTML = '<div style="color:#94A3B8;padding:16px;">Standard Studio Margin: 68% (Consumable Pack: $14.50, Base Piercing Service: $65.00).</div>';
-        }
-    }
+    if (!body) return;
+    try {
+        const m = await ledgerJson('/api/financials/margin-calculator');
+        if (!m.payments_recorded && !m.procedures_logged) { ledgerList(body, [], 'Nothing to calculate yet: no payments and no supplies are recorded.'); return; }
+        ledgerList(body, [
+            ledgerRow('Payments recorded', 'Completed payments, refunds left out', ledgerMoney(m.payments_recorded)),
+            ledgerRow('Supplies logged as used', m.procedures_logged + ' procedures' + (m.items_without_cost ? ' · ' + m.items_without_cost + ' items have no cost in stock and are not counted' : ''), ledgerMoney(m.supplies_used_cost)),
+            ledgerRow('Difference', 'Before rent, wages and artist shares', ledgerMoney(m.difference))
+        ], '');
+    } catch (e) { body.innerHTML = LEDGER_ERROR; }
 }
 window.openMarginCalculatorModal = openMarginCalculatorModal;
 
@@ -2127,22 +1844,12 @@ function openQuickRecordPaymentModal() {
 }
 window.openQuickRecordPaymentModal = openQuickRecordPaymentModal;
 
-function openQuickReorderEmailModal(vendor) {
-    forceShowModal('po-modal');
-    showStudioToast('Generating supplier PO draft' + (vendor ? ' for ' + vendor : ''));
-}
-window.openQuickReorderEmailModal = openQuickReorderEmailModal;
 
 function openQuickTableExportModal(targetTableId) {
     forceShowModal('quick-table-export-modal-overlay');
 }
 window.openQuickTableExportModal = openQuickTableExportModal;
 
-function openReceiptModal() {
-    forceShowModal('deposit-ledger-modal-overlay');
-    showStudioToast('Receipt Generator initialized');
-}
-window.openReceiptModal = openReceiptModal;
 
 function openSanitizationChecklistModal() {
     const ts = document.getElementById("sani-timestamp-display");
@@ -2168,29 +1875,11 @@ function openStationHeatmapModal() {
 }
 window.openStationHeatmapModal = openStationHeatmapModal;
 
-function openStationsModal() {
-    forceShowModal('station-heatmap-modal-overlay');
-}
-window.openStationsModal = openStationsModal;
 
 function openSterileAuditModal() {
     forceShowModal('waiver-audit-modal-overlay');
 }
 window.openSterileAuditModal = openSterileAuditModal;
-
-function openStudioProSuiteModal(tab) {
-    forceShowModal('studio-pro-suite-modal-overlay');
-    if (typeof window.switchStudioProSuiteTab === 'function') {
-        window.switchStudioProSuiteTab(tab || 'ear-planner');
-    }
-}
-window.openStudioProSuiteModal = openStudioProSuiteModal;
-
-function openTattooConsultationGenerator() {
-    openStudioProSuiteModal('tattoo-estimator');
-    showStudioToast('Tattoo Consultation Form Generator active');
-}
-window.openTattooConsultationGenerator = openTattooConsultationGenerator;
 
 function openTattooPriceEstimatorModal() {
     forceShowModal('tattoo-price-estimator-modal-overlay');
@@ -2202,10 +1891,6 @@ function openTeamMessengerModal() {
 }
 window.openTeamMessengerModal = openTeamMessengerModal;
 
-function openTestCoverageModal() {
-    forceShowModal('test-coverage-modal-overlay');
-}
-window.openTestCoverageModal = openTestCoverageModal;
 
 function openTipCalculatorModal() {
     forceShowModal('tip-calculator-modal-overlay');
@@ -2312,11 +1997,6 @@ window.closeShiftModal = closeShiftModal;
 function closeSkinToneVisualizerModal() { forceHideModal('skin-visualizer-modal'); }
 window.closeSkinToneVisualizerModal = closeSkinToneVisualizerModal;
 
-function closeStaffDashboardComponent() {
-    const el = document.getElementById('staff-dashboard-component');
-    if (el) el.style.display = 'none';
-}
-window.closeStaffDashboardComponent = closeStaffDashboardComponent;
 
 function closeStaffMessagingChannelsModal() { forceHideModal('staff-messaging-modal-overlay'); }
 window.closeStaffMessagingChannelsModal = closeStaffMessagingChannelsModal;
@@ -2366,11 +2046,6 @@ function toggleAllExportColumns() {
 }
 window.toggleAllExportColumns = toggleAllExportColumns;
 
-function toggleArtistPerformanceWidget() {
-    const w = document.getElementById('artist-performance-widget');
-    if (w) w.style.display = w.style.display === 'none' ? 'block' : 'none';
-}
-window.toggleArtistPerformanceWidget = toggleArtistPerformanceWidget;
 
 function toggleClientPortalTheme() {
     document.body.classList.toggle('portal-light-theme');
@@ -2378,11 +2053,6 @@ function toggleClientPortalTheme() {
 }
 window.toggleClientPortalTheme = toggleClientPortalTheme;
 
-function toggleDailySummaryCard() {
-    const card = document.getElementById('daily-summary-dashboard-card');
-    if (card) card.style.display = card.style.display === 'none' ? 'block' : 'none';
-}
-window.toggleDailySummaryCard = toggleDailySummaryCard;
 
 function toggleGlobalDarkMode() {
     const isDark = document.body.classList.contains('dark-mode');
@@ -2398,11 +2068,6 @@ function toggleGlobalDarkMode() {
 }
 window.toggleGlobalDarkMode = toggleGlobalDarkMode;
 
-function toggleOfflineSimulation() {
-    window.isOfflineSimulated = !window.isOfflineSimulated;
-    showStudioToast(window.isOfflineSimulated ? 'Offline network mode simulated' : 'Reconnected to live network');
-}
-window.toggleOfflineSimulation = toggleOfflineSimulation;
 
 function togglePortalSidebar() {
     const sb = document.getElementById('portal-sidebar');
@@ -2417,16 +2082,16 @@ function toggleQrCameraGrid() {
 window.toggleQrCameraGrid = toggleQrCameraGrid;
 
 
+// The button starts the camera, and stops it when it is already on. (It used to look at
+// the frame overlay, which is visible from the start, so the first click did nothing.)
 function toggleQrScanner() {
     const overlay = document.getElementById('qr-scanner-overlay');
-    if (overlay) {
-        if (overlay.style.display === 'none' || !overlay.style.display) {
-            overlay.style.display = 'flex';
-            if (typeof window.startQrCamera === 'function') window.startQrCamera();
-        } else {
-            overlay.style.display = 'none';
-            if (typeof window.stopQrCamera === 'function') window.stopQrCamera();
-        }
+    const scanning = typeof qrState !== 'undefined' && qrState.scanner && qrState.scanner.isScanning;
+    if (scanning) {
+        if (typeof window.stopQrCamera === 'function') window.stopQrCamera();
+    } else {
+        if (overlay) overlay.style.display = 'flex';
+        if (typeof window.startQrCamera === 'function') window.startQrCamera();
     }
 }
 window.toggleQrScanner = toggleQrScanner;
@@ -2503,15 +2168,6 @@ function downloadBlobFile(filename, content, mimeType) {
     URL.revokeObjectURL(url);
 }
 
-
-
-
-
-
-
-
-
-
 // =========================================================================
 // 5. SWITCH TABS & USER MODES (6)
 // =========================================================================
@@ -2535,9 +2191,6 @@ function switchImportTab(tab) {
 }
 window.switchImportTab = switchImportTab;
 
-
-
-
 function switchToClientPortalMode() {
     window.currentPortalMode = 'client';
     const tab = document.querySelector('.tool-tab[data-tab="portal"]');
@@ -2558,23 +2211,9 @@ window.logoutClientPortalSession = logoutClientPortalSession;
 // 6. CLEAR ACTIONS (5)
 // =========================================================================
 
-
-function clearActivitySelection() {
-    document.querySelectorAll('.activity-checkbox').forEach(c => { c.checked = false; });
-    showStudioToast('Cleared activity selections');
-}
-window.clearActivitySelection = clearActivitySelection;
-
-
-
-
 // =========================================================================
 // 7. PRESET SETTERS (5)
 // =========================================================================
-
-
-
-
 
 function setVatPreset(rate) {
     const input = document.getElementById('vat-setting-rate');
@@ -2600,14 +2239,12 @@ function copyDailySummaryToClipboard() {
 window.copyDailySummaryToClipboard = copyDailySummaryToClipboard;
 
 function copyRecentScanCodeModal() {
-    const code = document.getElementById('recent-scan-modal-subtitle')?.textContent || 'PLI-TI-6AL4V-001';
+    const code = document.getElementById('recent-scan-modal-subtitle')?.textContent || '';
     navigator.clipboard.writeText(code).then(() => {
         showStudioToast('Scan barcode copied to clipboard: ' + code);
     });
 }
 window.copyRecentScanCodeModal = copyRecentScanCodeModal;
-
-
 
 // =========================================================================
 // 9. PRINT HANDLERS (3)
@@ -2697,8 +2334,6 @@ window.logCompletedSession = logCompletedSession;
 // 13. QR CAMERA & TOUR (4)
 // =========================================================================
 
-
-
 let qrTourStepIndex = 0;
 const qrTourSteps = [
     ['Scan', 'Turn the camera on and point it at a QR code or barcode.'],
@@ -2753,36 +2388,15 @@ async function fetchAndRenderCsvImportHistory() {
 }
 window.fetchAndRenderCsvImportHistory = fetchAndRenderCsvImportHistory;
 
-
-
-
-
 // =========================================================================
 // 14. EXECUTION & ACTION HELPERS (29)
 // =========================================================================
 
 function dismissBackupWarningToast() {
-    const toast = document.getElementById('backup-warning-toast');
+    const toast = document.getElementById('database-backup-warning-toast');
     if (toast) toast.style.display = 'none';
 }
 window.dismissBackupWarningToast = dismissBackupWarningToast;
-
-async function dispatchAllLowStockPOs() {
-    try {
-        const r = await fetch('/api/inventory/purchase-orders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
-        if (r.status === 400) { showStudioToast('No items are below their reorder level'); return; }
-        if (!r.ok) throw new Error();
-    } catch (e) { showStudioToast('Could not save: the server did not answer'); return; }
-    showStudioToast('Purchase order created for all low-stock items');
-}
-window.dispatchAllLowStockPOs = dispatchAllLowStockPOs;
-
-function executeBulkUndoSelected() {
-    const selected = document.querySelectorAll('.activity-checkbox:checked');
-    selected.forEach(c => { c.checked = false; });
-    showStudioToast('Reversed ' + (selected.length || 1) + ' selected activity events');
-}
-window.executeBulkUndoSelected = executeBulkUndoSelected;
 
 function executeClearAllActivityLogs() {
     closeClearAllConfirmModal();
@@ -2806,18 +2420,18 @@ window.executePOAndTriggerSupplierEmail = executePOAndTriggerSupplierEmail;
 async function fetchAndRenderDailyStudioSummary() {
     const body = document.getElementById('daily-summary-modal-body');
     if (!body) return;
-    body.innerHTML = '<div style="text-align:center;padding:24px;color:#94A3B8;">Aggregating daily studio operations...</div>';
     try {
-        const res = await fetch('/api/dashboard');
-        const data = await res.json();
-        body.innerHTML = '<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));gap:12px;">' +
-            '<div style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;"><div style="font-size:0.75rem;color:#94A3B8;">Appointments Today</div><div style="font-size:1.3rem;font-weight:800;color:#38BDF8;">' + (data.appointments_today || 6) + '</div></div>' +
-            '<div style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;"><div style="font-size:0.75rem;color:#94A3B8;">Active Clients</div><div style="font-size:1.3rem;font-weight:800;color:#10B981;">' + (data.total_clients || 28) + '</div></div>' +
-            '<div style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;"><div style="font-size:0.75rem;color:#94A3B8;">Inventory In Stock</div><div style="font-size:1.3rem;font-weight:800;color:#F59E0B;">' + (data.total_inventory || 142) + ' items</div></div>' +
-            '</div>';
-    } catch (e) {
-        body.innerHTML = '<div style="color:#94A3B8;padding:16px;">Daily summary ready. All station logs current.</div>';
-    }
+        const [appts, clients, stock] = await Promise.all(['/api/appointments', '/api/clients', '/api/inventory'].map(ledgerJson));
+        const today = new Date().toLocaleDateString('en-CA');
+        const items = Array.isArray(stock) ? stock : (stock.items || []);
+        const card = (label, value) => '<div class="summary-card" style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;"><div style="font-size:0.75rem;color:#94A3B8;">' + label + '</div><div style="font-size:1.3rem;font-weight:800;color:#38BDF8;">' + value + '</div></div>';
+        body.innerHTML = '<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));gap:12px;">'
+            + card('Appointments today', appts.filter((a) => a.datetime && new Date(a.datetime).toLocaleDateString('en-CA') === today).length)
+            + card('Clients on file', clients.length)
+            + card('Stock items', items.length)
+            + card('Low stock', items.filter((i) => Number(i.quantity) <= Number(i.reorder_point || 0)).length)
+            + '</div>';
+    } catch (e) { body.innerHTML = LEDGER_ERROR; }
 }
 window.fetchAndRenderDailyStudioSummary = fetchAndRenderDailyStudioSummary;
 
@@ -2837,10 +2451,6 @@ function insertProcedureTemplate(inputId, kind) {
 }
 window.insertProcedureTemplate = insertProcedureTemplate;
 
-function jumpToCurrentShiftMonth() {
-    showStudioToast('Returned to current month shift schedule');
-}
-window.jumpToCurrentShiftMonth = jumpToCurrentShiftMonth;
 
 function navigateClientPortalHash(hash) {
     document.querySelectorAll('.portal-view-section').forEach(sec => { sec.style.display = 'none'; });
@@ -2850,10 +2460,6 @@ function navigateClientPortalHash(hash) {
 }
 window.navigateClientPortalHash = navigateClientPortalHash;
 
-function navigateShiftMonth(dir) {
-    showStudioToast('Navigated shift schedule ' + (dir > 0 ? 'forward' : 'backward') + ' 1 month');
-}
-window.navigateShiftMonth = navigateShiftMonth;
 
 function quickLogFromInput() {
     const input = document.getElementById('quick-log-input');
@@ -2877,38 +2483,16 @@ function resolveCurrentConflict(resolution) {
 }
 window.resolveCurrentConflict = resolveCurrentConflict;
 
-
-function simulateExpiredJWT() {
-    showStudioToast('Simulated token expiry: Client session refreshed automatically');
-}
-window.simulateExpiredJWT = simulateExpiredJWT;
-
-
-
-function testQrOrientation(orientation) {
-    showStudioToast('Camera orientation locked: ' + orientation);
-}
-window.testQrOrientation = testQrOrientation;
-
-
 async function triggerInstantDatabaseSnapshot() {
     try {
         const res = await fetch('/api/database/create-snapshot', { method: 'POST' });
         const data = await res.json();
-        showStudioToast(data.message || 'Database snapshot created successfully');
+        showStudioToast(data.message || (res.ok ? 'Backup saved' : 'The backup could not be written'));
     } catch (e) {
         showStudioToast('Could not save: the server did not answer');
     }
 }
 window.triggerInstantDatabaseSnapshot = triggerInstantDatabaseSnapshot;
-
-function triggerManualProcurementSync() {
-    showStudioToast('Synchronized supplier inventory catalogues');
-}
-window.triggerManualProcurementSync = triggerManualProcurementSync;
-
-
-
 
 // =========================================================================
 // 15. ADDITIONAL SINGLE ACTIONS (7)
@@ -2918,18 +2502,6 @@ function addNewCategoryThresholdFromSettings() {
     forceShowModal('category-settings-modal-overlay');
 }
 window.addNewCategoryThresholdFromSettings = addNewCategoryThresholdFromSettings;
-
-
-function bookTattooEstimateAppointment() {
-    openAutoSchedulerModal();
-}
-window.bookTattooEstimateAppointment = bookTattooEstimateAppointment;
-
-
-function filterFeedByArtist(artist) {
-    showStudioToast('Filtered activity feed for: ' + artist);
-}
-window.filterFeedByArtist = filterFeedByArtist;
 
 async function renderClientDirectoryModal() {
     const body = document.getElementById('client-directory-modal-body');
@@ -2946,8 +2518,6 @@ async function renderClientDirectoryModal() {
     }
 }
 window.renderClientDirectoryModal = renderClientDirectoryModal;
-
-
 
 // =========================================================================
 // 16. CORE MODAL & FORM HANDLERS IMPLEMENTATION
@@ -3514,6 +3084,8 @@ window.updateSkinBlendOpacity = updateSkinBlendOpacity;
 async function showDemoDataBanner() {
     let meta;
     try { const r = await fetch("/api/studio-meta"); meta = r.ok ? await r.json() : null; } catch (e) { return; }
+    const version = document.getElementById("app-version-label");
+    if (version && meta && meta.version) version.textContent = "v" + meta.version;
     if (!meta || !meta.demo) return;
     const dash = document.getElementById("dest-dashboard");
     if (!dash || document.getElementById("demo-data-banner")) return;
@@ -3768,7 +3340,7 @@ async function startQrCamera() {
         await qrState.scanner.start({ facingMode: "environment" }, { fps: 10, qrbox: 240 }, onQrDecoded, () => {});
         showStudioToast("Camera on: point it at a code");
     } catch (e) {
-        showStudioToast("Camera not available: allow camera access in the browser");
+        showStudioToast(window.isSecureContext ? "Camera not available: allow camera access in the browser" : "The camera only works over https: open the https address shown in the window that started the CRM");
     }
 }
 window.startQrCamera = startQrCamera;
@@ -3833,8 +3405,6 @@ async function handleScannedCode(code) {
     forceShowModal("recent-scan-profile-modal");
 }
 window.handleScannedCode = handleScannedCode;
-function simulateQrScan(code) { handleScannedCode(code); }
-window.simulateQrScan = simulateQrScan;
 
 function renderQrHistory() {
     let hist = [];
@@ -4022,24 +3592,8 @@ async function exportSessionDurationPDF() {
 window.exportSessionDurationPDF = exportSessionDurationPDF;
 
 // --- Staff shifts (clock in / out records) ---
-async function shiftRows() {
-    const [shifts, staff] = await Promise.all([fetchJson("/api/staff/shifts"), fetchJson("/api/staff")]);
-    const name = (id) => ((Array.isArray(staff) ? staff : []).find((s) => s.id === id) || {}).name || "";
-    return (Array.isArray(shifts) ? shifts : []).map((s) => [name(s.staff_id), s.clock_in ? new Date(s.clock_in).toLocaleString() : "", s.clock_out ? new Date(s.clock_out).toLocaleString() : "", s.duration_hours != null ? s.duration_hours : ""]);
-}
+
 const SHIFT_HEAD = ["staff", "clock in", "clock out", "hours"];
-async function exportShiftScheduleCSV() {
-    const rows = await shiftRows();
-    if (!rows.length) { showStudioToast("No shifts recorded yet"); return; }
-    downloadCsv("staff_shifts.csv", SHIFT_HEAD, rows);
-}
-window.exportShiftScheduleCSV = exportShiftScheduleCSV;
-async function exportShiftSchedulePDF() {
-    const rows = await shiftRows();
-    if (!rows.length) { showStudioToast("No shifts recorded yet"); return; }
-    downloadPdfTable("staff_shifts.pdf", "Staff shifts", SHIFT_HEAD, rows);
-}
-window.exportShiftSchedulePDF = exportShiftSchedulePDF;
 async function updateShiftStatusView() {
     const sel = document.getElementById("shift-staff-select");
     if (!sel) return;
@@ -4069,12 +3623,6 @@ async function downloadLowStockManifest() {
     downloadCsv("low_stock.csv", LOW_HEAD, rows);
 }
 window.downloadLowStockManifest = downloadLowStockManifest;
-async function downloadLowStockManifestPDF() {
-    const rows = await lowStockRows();
-    if (!rows.length) { showStudioToast("No items are below their reorder level"); return; }
-    downloadPdfTable("low_stock.pdf", "Low stock", LOW_HEAD, rows);
-}
-window.downloadLowStockManifestPDF = downloadLowStockManifestPDF;
 
 // --- Purchase order modal: the studio's suppliers and their low-stock items ---
 const poState = { suppliers: [], items: [], number: "" };
@@ -4399,6 +3947,9 @@ async function removeAppointment(id) {
 window.removeAppointment = removeAppointment;
 
 // --- New Appointment Modal Handlers ---
+
+// also called by the tattoo price estimator tool (its Book button), from inside its frame
+
 function openNewAppointmentModal() {
     forceShowModal("new-appointment-modal-overlay");
 }
@@ -4467,13 +4018,6 @@ async function handleSaveNewAppointment(event) {
 window.handleSaveNewAppointment = handleSaveNewAppointment;
 
 // --- Inventory Usage Heatmap Handlers ---
-function openInventoryUsageHeatmapModal() {
-    forceShowModal("inventory-usage-heatmap-modal");
-    if (typeof renderD3SupplyUsageHeatmap === "function") {
-        renderD3SupplyUsageHeatmap();
-    }
-}
-window.openInventoryUsageHeatmapModal = openInventoryUsageHeatmapModal;
 
 function closeInventoryUsageHeatmapModal() {
     const el = document.getElementById("inventory-usage-heatmap-modal");
@@ -4492,13 +4036,6 @@ function refreshSupplyUsageHeatmap() {
 window.refreshSupplyUsageHeatmap = refreshSupplyUsageHeatmap;
 
 // --- Artist Performance Widget Toggle ---
-function toggleArtistPerformanceWidget() {
-    const widget = document.getElementById("artist-performance-widget");
-    if (widget) {
-        widget.style.display = (widget.style.display === "none" || !widget.style.display) ? "block" : "none";
-    }
-}
-window.toggleArtistPerformanceWidget = toggleArtistPerformanceWidget;
 
 // --- Missing Operational Handlers ---
 function triggerExportCSV() {
@@ -4610,18 +4147,11 @@ function quickReorderLowStockEmail() {
 }
 window.quickReorderLowStockEmail = quickReorderLowStockEmail;
 
-
-
 function openSkinVisualizerModal() {
     forceShowModal("gallery-before-after-modal-overlay");
 }
 window.openSkinVisualizerModal = openSkinVisualizerModal;
 
-function closeSkinVisualizerModal() {
-    const el = document.getElementById("gallery-before-after-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeSkinVisualizerModal = closeSkinVisualizerModal;
 
 function toggleAudioAlerts() {
     window.audioAlertsEnabled = !window.audioAlertsEnabled;

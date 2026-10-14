@@ -100,7 +100,7 @@
       <!-- Sidebar Footer -->
       <div class="sidebar-footer" style="padding:0.75rem 0.4rem 0.25rem 0.4rem;border-top:1px solid rgba(255,255,255,0.08);font-size:0.72rem;color:#64748B;display:flex;align-items:center;justify-content:space-between;">
         <span>Poli International</span>
-        <span style="background:rgba(56,189,248,0.15);color:#38BDF8;padding:1px 6px;border-radius:6px;font-weight:700;font-size:0.65rem;">v2.5</span>
+        <span style="background:rgba(56,189,248,0.15);color:#38BDF8;padding:1px 6px;border-radius:6px;font-weight:700;font-size:0.65rem;" id="app-version-label"></span>
       </div>
     </aside>
 
@@ -149,7 +149,7 @@
           </div>
 
           <!-- Control 6: Cloud Sync & Storage Status Indicator -->
-          <div id="navbar-sync-badge" onclick="triggerNavbarSync()" title="Cloud & Local Sync Status" style="padding:3px 8px;height:26px;background:rgba(16,185,129,0.12);color:#34D399;border:1px solid rgba(16,185,129,0.3);border-radius:12px;font-size:0.72rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:4px;box-sizing:border-box;">
+          <div id="navbar-sync-badge" onclick="triggerNavbarSync()" title="Studio database status" style="padding:3px 8px;height:26px;background:rgba(16,185,129,0.12);color:#34D399;border:1px solid rgba(16,185,129,0.3);border-radius:12px;font-size:0.72rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:4px;box-sizing:border-box;">
             <span id="navbar-sync-dot" style="width:6px;height:6px;border-radius:50%;background:#10B981;"></span>
             <span id="navbar-sync-text">Synced</span>
           </div>
@@ -162,12 +162,12 @@
           <span style="font-size:1.2rem;animation:pulse 1.5s infinite;">⚠️</span>
           <div>
             <span style="font-weight:800;color:#FFF;letter-spacing:0.02em;">DATABASE BACKUP WARNING:</span>
-            <span id="database-backup-warning-text" data-i18n="dashboard.cloud_backup_warning">⚠️ Cloud snapshot database backup is overdue (>6 hours). Secure your records now.</span>
+            <span id="database-backup-warning-text" data-i18n="dashboard.cloud_backup_warning">The studio database has not been backed up for more than a day.</span>
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:10px;">
           <span onclick="triggerInstantDatabaseSnapshot()" id="btn-run-snapshot-now" role="button" data-i18n="dashboard.btn_snapshot_now" style="padding:0.45rem 0.9rem;background:#EF4444;color:#FFF;border:1px solid #FCA5A5;border-radius:6px;font-weight:800;font-size:0.8rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(0,0,0,0.3);transition:all 0.2s;">
-            ⚡ Run Instant Cloud Snapshot Backup
+            Back up now
           </span>
           <span onclick="dismissBackupWarningToast()" role="button" style="background:none;border:none;color:#FCA5A5;font-size:1.1rem;cursor:pointer;line-height:1;padding:2px 6px;" title="Dismiss notification temporary">&times;</span>
         </div>
@@ -958,18 +958,6 @@
                 </button>
               </div>
 
-              <!-- Tool 2: Ear Piercing Placement Planner -->
-              <div style="background:#0F172A;padding:1.25rem;border-radius:12px;border:1px solid #1E293B;display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;">👂</div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:#38BDF8;">Ear Piercing Planner</h3>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:#9CA3AF;">Interactive anatomical ear curation canvas, multi-piercing layout and jewelry stack simulator.</p>
-                </div>
-                <button onclick="openStudioProSuiteModal('ear-planner')" style="width:100%;padding:0.5rem;background:#0284C7;color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Ear Planner
-                </button>
-              </div>
-
               <!-- Tool 3: Needle & Gauge Converter -->
               <div style="background:#0F172A;padding:1.25rem;border-radius:12px;border:1px solid #1E293B;display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
@@ -977,7 +965,7 @@
                   <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:#34D399;">Gauge & Metric Converter</h3>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:#9CA3AF;">Instant conversion matrix between American Wire Gauge (AWG), Millimeters, Inches & French gauges.</p>
                 </div>
-                <button onclick="openStudioProSuiteModal('gauge-converter')" style="width:100%;padding:0.5rem;background:#059669;color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                <button onclick="openGaugeConverterModal()" style="width:100%;padding:0.5rem;background:#059669;color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
                   Open Gauge Converter
                 </button>
               </div>
@@ -1403,12 +1391,27 @@
                 </div>
               </div>
 
+              <!-- Setting: studio password -->
+              <div style="background:#0F172A;padding:1.25rem;border-radius:12px;border:1px solid #1E293B;">
+                <h3 style="margin:0 0 6px 0;font-size:1.05rem;font-weight:800;color:#FBBF24;">Studio Password</h3>
+                <p id="access-status" style="margin:0 0 12px 0;font-size:0.8rem;color:#9CA3AF;">No password is set: anyone on the studio network can open the CRM.</p>
+                <form id="access-form" onsubmit="saveStudioPassword(event)" style="display:flex;flex-direction:column;gap:8px;">
+                  <input type="password" id="access-current" placeholder="Current password" autocomplete="current-password" style="display:none;padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;">
+                  <input type="password" id="access-next" placeholder="New password, at least 8 characters" autocomplete="new-password" style="padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;">
+                  <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                    <button type="submit" id="access-save-btn" style="padding:0.45rem 0.9rem;background:#D97706;color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">Set password</button>
+                    <button type="button" id="access-remove-btn" onclick="removeStudioPassword()" style="display:none;padding:0.45rem 0.9rem;background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">Remove password</button>
+                    <button type="button" id="access-signout-btn" onclick="signOutOfStudio()" style="display:none;padding:0.45rem 0.9rem;background:#1E293B;color:#E2E8F0;border:1px solid #475569;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">Sign out on this device</button>
+                  </div>
+                </form>
+              </div>
+
               <!-- Setting 3: Instant Cloud Backup -->
               <div style="background:#0F172A;padding:1.25rem;border-radius:12px;border:1px solid #1E293B;">
                 <h3 style="margin:0 0 6px 0;font-size:1.05rem;font-weight:800;color:#34D399;">Database Backup</h3>
-                <p style="margin:0 0 12px 0;font-size:0.8rem;color:#9CA3AF;">Take on-demand snapshot backup of studio records, clients & financial ledgers.</p>
+                <p style="margin:0 0 12px 0;font-size:0.8rem;color:#9CA3AF;">Saves a full copy of the studio database in the storage/backups folder on the computer that runs the CRM.</p>
                 <button onclick="triggerInstantDatabaseSnapshot()" style="padding:0.45rem 0.9rem;background:#059669;color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">
-                  Run Snapshot Now
+                  Back up now
                 </button>
               </div>
 
@@ -1484,7 +1487,6 @@ npm start
 docker compose up -d</pre>
             </div>
         </div>
-    </div>
 
     <!-- Tab Content: Client-Facing Portal View (HashRouter Powered) -->
     
@@ -4119,8 +4121,6 @@ docker compose up -d</pre>
             </form>
         </div>
     </div>
-    </div>
-    </div>
 
     <!-- 9C. Interactive Skin Tone & Placement Visualizer Modal -->
     <div id="skin-visualizer-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.88);z-index:2000015;align-items:center;justify-content:center;padding:1rem;">
@@ -4394,42 +4394,6 @@ docker compose up -d</pre>
 <!-- STUDIO OS COMPREHENSIVE MODALS, WIDGETS & OVERLAYS                        -->
 <!-- ========================================================================= -->
 
-<!-- 1. STUDIO PRO SUITE MASTER MODAL OVERLAY -->
-<div id="studio-pro-suite-modal-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,23,42,0.85);backdrop-filter:blur(8px);z-index:2000000;align-items:center;justify-content:center;">
-    <div style="background:#0F172A;border:1px solid #334155;border-radius:16px;width:95%;max-width:1100px;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 25px 60px rgba(0,0,0,0.6);overflow:hidden;color:#F8FAFC;">
-        <div style="padding:16px 24px;background:#1E293B;border-bottom:1px solid #334155;display:flex;align-items:center;justify-content:space-between;">
-            <div style="display:flex;align-items:center;gap:12px;">
-                <span style="font-size:1.4rem;">🚀</span>
-                <div>
-                    <h3 style="margin:0;font-size:1.15rem;font-weight:800;color:#F8FAFC;letter-spacing:-0.02em;">Studio Pro Suite <span style="font-size:0.75rem;padding:2px 8px;background:linear-gradient(135deg, #7C3AED 0%, #2563EB 100%);border-radius:12px;margin-left:6px;font-weight:700;">v2.5</span></h3>
-                    <p style="margin:2px 0 0;font-size:0.78rem;color:#94A3B8;">Integrated Professional Utilities for Tattoo & Piercing Operations</p>
-                </div>
-            </div>
-            <button onclick="closeStudioProSuiteModal()" style="background:none;border:none;color:#94A3B8;font-size:1.5rem;cursor:pointer;padding:4px 8px;line-height:1;border-radius:6px;">&times;</button>
-        </div>
-
-        <!-- Pro Suite Tab Bar -->
-        <div style="display:flex;gap:4px;padding:8px 16px;background:#0F172A;border-bottom:1px solid #334155;overflow-x:auto;">
-            <button id="tab-btn-ear-planner" class="pro-suite-tab-btn active" onclick="switchStudioProSuiteTab('ear-planner')" style="padding:8px 14px;background:#1E293B;color:#38BDF8;border:1px solid #38BDF8;border-radius:8px;font-size:0.8rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;">💎 Curated Ear Planner</button>
-            <button id="tab-btn-tattoo-estimator" class="pro-suite-tab-btn" onclick="openTattooPriceEstimatorModal()" style="padding:8px 14px;background:transparent;color:#94A3B8;border:1px solid transparent;border-radius:8px;font-size:0.8rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;">🎨 Tattoo Price Estimator</button>
-            <button id="tab-btn-procurement" class="pro-suite-tab-btn" onclick="switchStudioProSuiteTab('procurement')" style="padding:8px 14px;background:transparent;color:#94A3B8;border:1px solid transparent;border-radius:8px;font-size:0.8rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;">📊 Procurement Analytics</button>
-            <button id="tab-btn-annual-heatmap" class="pro-suite-tab-btn" onclick="switchStudioProSuiteTab('annual-heatmap')" style="padding:8px 14px;background:transparent;color:#94A3B8;border:1px solid transparent;border-radius:8px;font-size:0.8rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;">🔥 Station Heatmap</button>
-            <button id="tab-btn-gauge-converter" class="pro-suite-tab-btn" onclick="openGaugeConverterModal()" style="padding:8px 14px;background:transparent;color:#94A3B8;border:1px solid transparent;border-radius:8px;font-size:0.8rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;">📐 Gauge & Size Converter</button>
-            <button id="tab-btn-autoclave-vault" class="pro-suite-tab-btn" onclick="switchStudioProSuiteTab('autoclave-vault')" style="padding:8px 14px;background:transparent;color:#94A3B8;border:1px solid transparent;border-radius:8px;font-size:0.8rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;">🛡️ Autoclave Vault</button>
-            <button id="tab-btn-accounting" class="pro-suite-tab-btn" onclick="switchStudioProSuiteTab('accounting')" style="padding:8px 14px;background:transparent;color:#94A3B8;border:1px solid transparent;border-radius:8px;font-size:0.8rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;">💳 Accounting & POS</button>
-            <button id="tab-btn-aftercare" class="pro-suite-tab-btn" onclick="switchStudioProSuiteTab('aftercare')" style="padding:8px 14px;background:transparent;color:#94A3B8;border:1px solid transparent;border-radius:8px;font-size:0.8rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;">🩹 Aftercare Dispatcher</button>
-        </div>
-
-        <!-- Pro Suite Content Body -->
-        <div id="studio-pro-suite-modal-body" style="padding:20px 24px;overflow-y:auto;flex:1;">
-        </div>
-
-        <div style="padding:14px 24px;background:#1E293B;border-top:1px solid #334155;display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:0.78rem;color:#94A3B8;">💡 Pro Tip: Press <kbd style="background:#0F172A;padding:2px 6px;border-radius:4px;border:1px solid #475569;color:#38BDF8;">Alt + P</kbd> to open the Pro Suite anytime.</span>
-            <button onclick="closeStudioProSuiteModal()" style="padding:7px 18px;background:#334155;color:#F8FAFC;border:none;border-radius:8px;font-size:0.85rem;font-weight:700;cursor:pointer;">Close</button>
-        </div>
-    </div>
-</div>
 
 <!-- 2. TEAM MESSENGER / M-BOARD OVERLAY -->
 <div id="team-messenger-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,23,42,0.85);backdrop-filter:blur(8px);z-index:2000000;align-items:center;justify-content:center;">
@@ -4525,7 +4489,7 @@ docker compose up -d</pre>
                 <span style="font-size:1.3rem;">👥</span>
                 <div>
                     <h3 style="margin:0;font-size:1.1rem;font-weight:800;color:#F8FAFC;">Staff</h3>
-                    <p style="margin:2px 0 0;font-size:0.75rem;color:#94A3B8;">Your team, and who is at the screen now. No passwords: Select only changes the name in the top bar.</p>
+                    <p style="margin:2px 0 0;font-size:0.75rem;color:#94A3B8;">Your team, and who is at the screen now. Select only changes the name in the top bar. To keep others on the network out, set a studio password in Settings.</p>
                 </div>
             </div>
             <button type="button" onclick="closeStaffLoginModal()" aria-label="Close" style="background:none;border:none;color:#94A3B8;font-size:1.5rem;cursor:pointer;">&times;</button>
@@ -4562,33 +4526,6 @@ docker compose up -d</pre>
     </div>
 </div>
 
-<!-- 6. TEST DIAGNOSTICS & COVERAGE MODAL OVERLAY -->
-<div id="test-coverage-modal-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,23,42,0.85);backdrop-filter:blur(8px);z-index:2000000;align-items:center;justify-content:center;">
-    <div style="background:#0F172A;border:1px solid #334155;border-radius:16px;width:95%;max-width:750px;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 25px 60px rgba(0,0,0,0.6);overflow:hidden;color:#F8FAFC;">
-        <div style="padding:16px 20px;background:#1E293B;border-bottom:1px solid #334155;display:flex;align-items:center;justify-content:space-between;">
-            <div style="display:flex;align-items:center;gap:10px;">
-                <span style="font-size:1.3rem;">🧪</span>
-                <div>
-                    <h3 style="margin:0;font-size:1.1rem;font-weight:800;color:#F8FAFC;">Studio CRM Test Battery & System Diagnostics</h3>
-                    <p style="margin:2px 0 0;font-size:0.75rem;color:#94A3B8;">Automated verification of core modules, database integrity & event pipelines</p>
-                </div>
-            </div>
-            <button onclick="closeTestCoverageModal()" style="background:none;border:none;color:#94A3B8;font-size:1.5rem;cursor:pointer;">&times;</button>
-        </div>
-        <div id="test-battery-log-container" style="padding:20px;overflow-y:auto;flex:1;background:#090D16;font-family:monospace;font-size:0.8rem;line-height:1.6;color:#38BDF8;">
-            <div>⚡ Initializing Studio CRM automated verification suite...</div>
-            <div style="color:#10B981;">✔ Navbar controls & action identifiers validated</div>
-            <div style="color:#10B981;">✔ Modal z-index stacking hierarchy verified (2,000,000)</div>
-            <div style="color:#10B981;">✔ Responsive CSS Grid & fluid stats-grid layouts active</div>
-            <div style="color:#10B981;">✔ D3 timeseries data streams & event telemetry active</div>
-            <div style="color:#10B981;">✔ All 31/31 core test battery assertions passed 100%</div>
-        </div>
-        <div style="padding:14px 20px;background:#1E293B;border-top:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-            <span style="color:#10B981;font-weight:700;font-size:0.85rem;">🟢 System Health: 100% Operational</span>
-            <button onclick="closeTestCoverageModal()" style="padding:8px 18px;background:#334155;color:#FFF;border:none;border-radius:8px;font-size:0.85rem;font-weight:700;cursor:pointer;">Done</button>
-        </div>
-    </div>
-</div>
 
 <!-- 7. QUICK PORTAL ACCESS MODAL OVERLAY -->
 <div id="quick-portal-access-modal-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,23,42,0.85);backdrop-filter:blur(8px);z-index:2000000;align-items:center;justify-content:center;">

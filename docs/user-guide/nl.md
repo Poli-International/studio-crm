@@ -35,6 +35,12 @@ Open **Instellingen** om uw prijzen, aanbetalingsregel, belastingtarief (btw), r
 
 Klik rechtsboven op de personeelsknop om uw team te zien. **Teamlid toevoegen** voegt een persoon toe, **Bewerken** wijzigt de gegevens en **Verwijderen** haalt de persoon uit het team. **Selecteren** toont de naam van die persoon in de bovenbalk, zodat iedereen ziet wie er achter het scherm zit. Er zijn geen wachtwoorden en geen toegangsniveaus. Een nieuw teamlid kan meteen worden gekozen op elke plek waar een artiest wordt gekozen, bijvoorbeeld bij het boeken van een afspraak.
 
+## Tablets, telefoons en het studiowachtwoord
+
+Andere apparaten in de studio openen het CRM met het adres dat in het startvenster staat. Een tablet of telefoon die de camera nodig heeft (de scanner) moet het adres gebruiken dat begint met `https://` en eindigt op `:3443`. De eerste keer waarschuwt de browser dat de verbinding niet privé is, omdat het certificaat door uw eigen computer is gemaakt: kies Geavanceerd en daarna Doorgaan. Met het gewone `http://`-adres werkt alles behalve de camera.
+
+Om andere mensen op hetzelfde netwerk buiten te houden, opent u **Instellingen** en stelt u een **Studiowachtwoord** in. Elk apparaat meldt zich daarna één keer aan. Het is één wachtwoord voor de hele studio, niet één per persoon. Bent u het vergeten, maak dan een leeg bestand met de naam `reset-password.txt` in de map `data` en start het CRM opnieuw.
+
 ## Afspraken en planning
 
 **Nieuwe afspraak** boekt één sessie met artiest, station, prijs en aanbetaling. Voor werk met meerdere sessies zoekt de **Automatische planner** de vrije tijdslots van de artiest op een gekozen dag en boekt tot zes sessies met een vast aantal weken ertussen. Het dashboard toont de cijfers van vandaag, aankomende boekingen, stationsstatus en lage voorraad. De Agenda toont alle geboekte afspraken, de eerstvolgende bovenaan. **Afgerond** markeert een sessie als gedaan, zodat ze meetelt in de duuranalyse, en **Verwijderen** wist ze.
@@ -43,7 +49,7 @@ Klik rechtsboven op de personeelsknop om uw team te zien. **Teamlid toevoegen** 
 
 Open het toestemmingsformulier, kies de klant uit de lijst (diens allergieën worden ingevuld), bevestig de leeftijdscontrole en laat de klant tekenen op het tablet. Het toestemmingsformulier wordt opgeslagen met de handtekeningafbeelding. Het wordt niet opgeslagen zonder klant en handtekening.
 
-Om de klant een toestemmingsformulier op een tablet te laten invullen, opent u **Klanten**, de bouwer van toestemmingsformulieren, het formuliervoorbeeld en daarna de tablet-kioskmodus. De klant beantwoordt één onderdeel per scherm, tekent op het laatste en tikt op de knop om af te ronden. Het formulier wordt met de handtekening opgeslagen en er wordt een PDF gedownload. Als er vooraf geen klant was gekozen, wordt een nieuwe klant aangemaakt met de naam, het e-mailadres, het telefoonnummer en de geboortedatum van het formulier. Opgeslagen formulieren staan in het klantprofiel onder **Verklaringen**; **Antwoorden bekijken** toont elk antwoord.
+Om de klant een toestemmingsformulier op een tablet te laten invullen, opent u **Klanten**, de bouwer van toestemmingsformulieren, het formuliervoorbeeld en daarna de tablet-kioskmodus. De klant beantwoordt één onderdeel per scherm, tekent op het laatste en tikt op de knop om af te ronden. Het formulier wordt met de handtekening opgeslagen en er wordt een PDF gedownload. Als er vooraf geen klant was gekozen, wordt een nieuwe klant aangemaakt met de naam, het e-mailadres, het telefoonnummer en de geboortedatum van het formulier. Opgeslagen formulieren staan in het klantprofiel onder **Verklaringen**; **Antwoorden bekijken** toont elk antwoord. Een formulier dat u in de formulierbouwer bewerkt, wordt bij de studiogegevens opgeslagen: de tablet toont dus hetzelfde formulier als de computer waarop u het bewerkte.
 
 ## Berichten: de CRM bereidt voor, u verstuurt
 

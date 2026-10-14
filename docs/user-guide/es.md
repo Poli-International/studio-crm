@@ -35,6 +35,12 @@ Abra **Ajustes** para introducir sus precios, la regla de depósito, el tipo de 
 
 Haga clic en el botón del personal, arriba a la derecha, para ver a su equipo. **Añadir miembro** añade una persona, **Editar** cambia sus datos y **Quitar** la retira del equipo. **Seleccionar** muestra el nombre de esa persona en la barra superior, para que todos vean quién está en la pantalla. No hay contraseñas ni niveles de acceso. Un miembro nuevo se puede elegir enseguida en cualquier lugar donde se elige un artista, por ejemplo al reservar una cita.
 
+## Tabletas, teléfonos y la contraseña del estudio
+
+Los demás dispositivos del estudio abren el CRM con la dirección que aparece en la ventana que lo inició. Una tableta o un teléfono que necesite la cámara (el escáner) debe usar la dirección que empieza por `https://` y termina en `:3443`. La primera vez, el navegador avisa de que la conexión no es privada, porque el certificado lo creó su propio equipo: elija Avanzado y luego Continuar. Con la dirección `http://` simple funciona todo menos la cámara.
+
+Para impedir el acceso a otras personas de la misma red, abra **Ajustes** y establezca una **Contraseña del estudio**. Cada dispositivo inicia sesión una vez. Es una sola contraseña para todo el estudio, no una por persona. Si la olvida, cree un archivo vacío llamado `reset-password.txt` en la carpeta `data` y vuelva a iniciar el CRM.
+
 ## Citas y programación
 
 **Nueva cita** reserva una sesión única con artista, estación, precio y depósito. Para trabajos de varias sesiones, el **Programador automático** busca los huecos libres del artista en un día elegido y reserva hasta seis sesiones separadas por un número fijo de semanas. El panel principal muestra las cifras del día, las próximas reservas, el estado de las estaciones y el stock bajo. El Calendario muestra todas las citas reservadas, las próximas primero. **Completada** marca una sesión como hecha, así cuenta en el análisis de duraciones, y **Quitar** la elimina.
@@ -43,7 +49,7 @@ Haga clic en el botón del personal, arriba a la derecha, para ver a su equipo. 
 
 Abra el formulario de consentimiento, elija el cliente de la lista (sus alergias se completan automáticamente), confirme la verificación de edad y haga que el cliente firme en la tableta. El consentimiento se guarda con la imagen de la firma. No se guarda sin un cliente y una firma.
 
-Para que el cliente rellene un formulario de consentimiento en una tableta, abra **Clientes**, el creador de formularios de consentimiento, la vista previa del formulario y luego el modo quiosco para tableta. El cliente responde una sección por pantalla, firma en la última y toca el botón para terminar. El formulario se guarda con la firma y se descarga un PDF. Si antes no se eligió ningún cliente, se crea un cliente nuevo con el nombre, el correo, el teléfono y la fecha de nacimiento del formulario. Los formularios guardados están en el perfil del cliente, en **Consentimientos**; **Ver respuestas** muestra cada respuesta.
+Para que el cliente rellene un formulario de consentimiento en una tableta, abra **Clientes**, el creador de formularios de consentimiento, la vista previa del formulario y luego el modo quiosco para tableta. El cliente responde una sección por pantalla, firma en la última y toca el botón para terminar. El formulario se guarda con la firma y se descarga un PDF. Si antes no se eligió ningún cliente, se crea un cliente nuevo con el nombre, el correo, el teléfono y la fecha de nacimiento del formulario. Los formularios guardados están en el perfil del cliente, en **Consentimientos**; **Ver respuestas** muestra cada respuesta. Un formulario editado en el creador de formularios se guarda con los datos del estudio: la tableta muestra el mismo formulario que el equipo donde lo editó.
 
 ## Mensajes: el CRM prepara, usted envía
 

@@ -35,6 +35,12 @@ Open **Settings** to enter your prices, deposit rule, tax (VAT) rate, touch-up p
 
 Click the staff button at the top right (it reads **Staff Login** until someone is selected) to see your team. **Add staff member** adds a person, **Edit** changes their details and **Remove** takes them off the team. **Select** shows that person's name in the top bar, so everyone can see who is at the screen. There are no passwords and no access levels. A new staff member can be chosen straight away wherever an artist is picked, for example when you book an appointment.
 
+## Tablets, phones and the studio password
+
+Other devices in the studio open the CRM with the address shown in the window that started it. A tablet or phone that needs the camera (the scanner) must use the address that starts with `https://` and ends with `:3443`. The first time, the browser warns that the connection is not private, because the certificate was made by your own computer: choose Advanced, then Continue. On the plain `http://` address everything works except the camera.
+
+To keep other people on the same network out, open **Settings** and set a **Studio Password**. Every device then signs in once. It is one password for the whole studio, not one per person. If you forget it, create an empty file named `reset-password.txt` in the `data` folder and start the CRM again.
+
 ## Appointments and scheduling
 
 **New Appointment** books a single session with artist, station, price and deposit. For multi-session work, the **Auto Scheduler** looks up the artist's free slots on a chosen day and books up to six sessions a set number of weeks apart. The Dashboard shows today's figures, upcoming bookings, station status and low stock. The Calendar lists every booked appointment, the coming ones first. **Completed** marks a session as done, so it counts in Duration Analytics, and **Remove** deletes it.
@@ -43,7 +49,7 @@ Click the staff button at the top right (it reads **Staff Login** until someone 
 
 Open the waiver form, pick the client from the list (their allergies are filled in), confirm the age check, and have the client sign on the pad. The waiver is saved with the signature image. It will not save without a client and a signature.
 
-To have the client fill in a consent form on a tablet, open **Clients**, **Consent Form Builder**, **Preview Form**, then **Tablet Kiosk Mode**. The client answers one section per screen, signs on the last one and taps **Complete**. The form is saved with the signature and a PDF is downloaded. If no client was chosen first, a new client is created from the name, email, phone and date of birth on the form. Saved forms are in the client's profile under **Waivers**; **View answers** shows every answer.
+To have the client fill in a consent form on a tablet, open **Clients**, **Consent Form Builder**, **Preview Form**, then **Tablet Kiosk Mode**. The client answers one section per screen, signs on the last one and taps **Complete**. The form is saved with the signature and a PDF is downloaded. If no client was chosen first, a new client is created from the name, email, phone and date of birth on the form. Saved forms are in the client's profile under **Waivers**; **View answers** shows every answer. A form you edit in the form builder is saved with the studio data, so the tablet shows the same form as the computer you edited it on.
 
 ## Messages: the CRM prepares, you send
 

@@ -3,8 +3,11 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { spawn } from 'child_process';
+import fs from 'fs';
 import { jsPDF } from 'jspdf';
 import { db, safeDbQuery, sqlite } from './src/db/index.js';
+import { startHttps } from './src/https.js';
+import { installAccess } from './src/access.js';
 import {
   users as dbUsers,
   activityLogs as dbActivityLogs,
@@ -33,9 +36,13 @@ export function safeIsoDate(val, fallback = new Date().toISOString()) {
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const APP_VERSION = JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json'), 'utf8')).version;
 
 app.use(cors());
 app.use(express.json({ limit: '15mb' })); // portfolio photos arrive as data URLs
+
+// Optional studio password: when one is set, nothing below answers before the device has signed in.
+installAccess(app, sqlite);
 
 // Save state after every successful write (persistence block at the end of this file).
 app.use((req, res, next) => {
@@ -2294,67 +2301,6 @@ function checkAndAutoDispatchSupplierPO(triggerItem) {
 }
 
 // ========================================================
-// 🔄 INVENTORY & REMOTE CSV BACKGROUND SYNC ENGINE
-// ========================================================
-const SYNC_ENABLED = process.env.SYNC_ENABLED === 'true' || process.env.SYNC_ENABLED === '1' || true;
-const SYNC_INTERVAL_MINUTES = parseInt(process.env.SYNC_INTERVAL_MINUTES || '30', 10);
-let lastInventorySyncTime = new Date().toISOString();
-let inventorySyncStats = {
-  enabled: SYNC_ENABLED,
-  intervalMinutes: SYNC_INTERVAL_MINUTES,
-  lastSync: lastInventorySyncTime,
-  totalSyncRuns: 1,
-  lastStatus: 'SUCCESS',
-  syncedItemsCount: 10,
-  syncSource: 'Local & Cloud Datastore CSV Sync'
-};
-
-function runBackgroundInventorySync() {
-  if (!SYNC_ENABLED) return;
-  lastInventorySyncTime = new Date().toISOString();
-  inventorySyncStats.lastSync = lastInventorySyncTime;
-  inventorySyncStats.totalSyncRuns++;
-  inventorySyncStats.syncedItemsCount = inventory.length;
-  inventorySyncStats.lastStatus = 'SUCCESS';
-
-  logActivity({
-    category: 'inventory',
-    action: 'BACKGROUND_CSV_SYNC',
-    title: 'Automated Background Inventory Sync Completed',
-    details: `Successfully synchronized ${inventory.length} inventory catalog records (Interval: ${SYNC_INTERVAL_MINUTES} min).`,
-    user: 'Sync Engine',
-    badgeColor: 'green'
-  });
-}
-
-// Background sync interval timer
-if (SYNC_ENABLED && SYNC_INTERVAL_MINUTES > 0) {
-  const syncIntervalMs = SYNC_INTERVAL_MINUTES * 60 * 1000;
-  setInterval(runBackgroundInventorySync, syncIntervalMs);
-  console.log(`[Sync Engine] Automated inventory background sync active (Interval: ${SYNC_INTERVAL_MINUTES} minutes, SYNC_ENABLED=true)`);
-}
-
-app.get('/api/inventory/sync-status', (req, res) => {
-  res.json({
-    success: true,
-    sync_enabled: SYNC_ENABLED,
-    interval_minutes: SYNC_INTERVAL_MINUTES,
-    last_sync: lastInventorySyncTime,
-    stats: inventorySyncStats,
-    total_inventory_items: inventory.length
-  });
-});
-
-app.post('/api/inventory/sync-trigger', (req, res) => {
-  runBackgroundInventorySync();
-  res.json({
-    success: true,
-    message: 'Manual background sync triggered successfully.',
-    stats: inventorySyncStats
-  });
-});
-
-// ========================================================
 // 📊 D3.JS PROCUREMENT & MONTHLY SUPPLIER SPENDING ANALYTICS
 // ========================================================
 const procurementMonthlyHistory = [
@@ -3396,6 +3342,7 @@ app.post('/api/inventory/consumption', (req, res) => {
     artist_name: artist_name || 'Studio Artist',
     procedure_type: procedure_type || 'Procedure Session',
     date: new Date().toISOString().split('T')[0],
+    logged_at: new Date().toISOString(),
     items: consumedLogItems,
     notes: notes || ''
   };
@@ -6083,81 +6030,57 @@ app.delete('/api/clients/:id/staff-notes/:noteId', (req, res) => {
 app.get('/api/inventory/usage-heatmap', (req, res) => {
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const shifts = [
-    { key: 'morning', label: 'Morning (09:00 - 12:00)', hours: '9am-12pm' },
-    { key: 'afternoon', label: 'Afternoon (12:00 - 16:00)', hours: '12pm-4pm' },
-    { key: 'peak_evening', label: 'Peak Evening (16:00 - 20:00)', hours: '4pm-8pm' },
-    { key: 'late_night', label: 'Late Night (20:00 - 23:00)', hours: '8pm-11pm' }
+    { key: 'morning', label: 'Morning (09:00 - 12:00)', hours: '9am-12pm', until: 12 },
+    { key: 'afternoon', label: 'Afternoon (12:00 - 16:00)', hours: '12pm-4pm', until: 16 },
+    { key: 'peak_evening', label: 'Peak Evening (16:00 - 20:00)', hours: '4pm-8pm', until: 20 },
+    { key: 'late_night', label: 'Late Night (20:00 - 23:00)', hours: '8pm-11pm', until: 24 }
   ];
-
-  // Base density distribution model tuned with empirical studio procedure schedules
-  const usageMatrix = [
-    // Monday
-    { day: 'Monday', shift: 'Morning (09:00 - 12:00)', shift_key: 'morning', units: 8, density: 25, top_item: 'Sterile Nitrile Gloves', risk_level: 'LOW', procedure_count: 2 },
-    { day: 'Monday', shift: 'Afternoon (12:00 - 16:00)', shift_key: 'afternoon', units: 14, density: 42, top_item: 'Kwadron 3RL Needles', risk_level: 'MODERATE', procedure_count: 4 },
-    { day: 'Monday', shift: 'Peak Evening (16:00 - 20:00)', shift_key: 'peak_evening', units: 18, density: 55, top_item: 'Dynamic Triple Black Ink', risk_level: 'MODERATE', procedure_count: 5 },
-    { day: 'Monday', shift: 'Late Night (20:00 - 23:00)', shift_key: 'late_night', units: 6, density: 18, top_item: 'Aftercare Balm 2oz', risk_level: 'LOW', procedure_count: 1 },
-
-    // Tuesday
-    { day: 'Tuesday', shift: 'Morning (09:00 - 12:00)', shift_key: 'morning', units: 10, density: 30, top_item: 'Medical Dermal Barrier Film', risk_level: 'LOW', procedure_count: 3 },
-    { day: 'Tuesday', shift: 'Afternoon (12:00 - 16:00)', shift_key: 'afternoon', units: 16, density: 48, top_item: 'Kwadron 7RL Needles', risk_level: 'MODERATE', procedure_count: 4 },
-    { day: 'Tuesday', shift: 'Peak Evening (16:00 - 20:00)', shift_key: 'peak_evening', units: 22, density: 66, top_item: 'Titanium 16G Labrets', risk_level: 'HIGH', procedure_count: 6 },
-    { day: 'Tuesday', shift: 'Late Night (20:00 - 23:00)', shift_key: 'late_night', units: 8, density: 24, top_item: 'Green Soap 1-Gallon', risk_level: 'LOW', procedure_count: 2 },
-
-    // Wednesday
-    { day: 'Wednesday', shift: 'Morning (09:00 - 12:00)', shift_key: 'morning', units: 12, density: 36, top_item: 'Sterile Piercing Needles 14G', risk_level: 'LOW', procedure_count: 3 },
-    { day: 'Wednesday', shift: 'Afternoon (12:00 - 16:00)', shift_key: 'afternoon', units: 20, density: 60, top_item: 'Dynamic Triple Black Ink', risk_level: 'HIGH', procedure_count: 5 },
-    { day: 'Wednesday', shift: 'Peak Evening (16:00 - 20:00)', shift_key: 'peak_evening', units: 26, density: 78, top_item: 'Kwadron 3RL Needles', risk_level: 'HIGH', procedure_count: 7 },
-    { day: 'Wednesday', shift: 'Late Night (20:00 - 23:00)', shift_key: 'late_night', units: 10, density: 30, top_item: 'Hustle Butter CBD Ointment', risk_level: 'LOW', procedure_count: 2 },
-
-    // Thursday
-    { day: 'Thursday', shift: 'Morning (09:00 - 12:00)', shift_key: 'morning', units: 15, density: 45, top_item: 'Sterile Nitrile Gloves', risk_level: 'MODERATE', procedure_count: 4 },
-    { day: 'Thursday', shift: 'Afternoon (12:00 - 16:00)', shift_key: 'afternoon', units: 24, density: 72, top_item: 'Eternal Ink Primary Red', risk_level: 'HIGH', procedure_count: 6 },
-    { day: 'Thursday', shift: 'Peak Evening (16:00 - 20:00)', shift_key: 'peak_evening', units: 32, density: 92, top_item: 'Kwadron 7RL Needles', risk_level: 'CRITICAL_PEAK', procedure_count: 9 },
-    { day: 'Thursday', shift: 'Late Night (20:00 - 23:00)', shift_key: 'late_night', units: 14, density: 42, top_item: 'Aftercare Balm 2oz', risk_level: 'MODERATE', procedure_count: 3 },
-
-    // Friday
-    { day: 'Friday', shift: 'Morning (09:00 - 12:00)', shift_key: 'morning', units: 22, density: 68, top_item: 'Cavicide Sterilant 1-Gal', risk_level: 'HIGH', procedure_count: 5 },
-    { day: 'Friday', shift: 'Afternoon (12:00 - 16:00)', shift_key: 'afternoon', units: 38, density: 100, top_item: 'Kwadron 3RL Needles', risk_level: 'CRITICAL_PEAK', procedure_count: 11 },
-    { day: 'Friday', shift: 'Peak Evening (16:00 - 20:00)', shift_key: 'peak_evening', units: 42, density: 100, top_item: 'Dynamic Triple Black Ink', risk_level: 'CRITICAL_PEAK', procedure_count: 13 },
-    { day: 'Friday', shift: 'Late Night (20:00 - 23:00)', shift_key: 'late_night', units: 20, density: 62, top_item: 'Medical Dermal Barrier Film', risk_level: 'HIGH', procedure_count: 5 },
-
-    // Saturday
-    { day: 'Saturday', shift: 'Morning (09:00 - 12:00)', shift_key: 'morning', units: 28, density: 85, top_item: 'Sterile Nitrile Gloves', risk_level: 'CRITICAL_PEAK', procedure_count: 8 },
-    { day: 'Saturday', shift: 'Afternoon (12:00 - 16:00)', shift_key: 'afternoon', units: 45, density: 100, top_item: 'Kwadron 7RL Needles', risk_level: 'CRITICAL_PEAK', procedure_count: 14 },
-    { day: 'Saturday', shift: 'Peak Evening (16:00 - 20:00)', shift_key: 'peak_evening', units: 40, density: 98, top_item: 'Dynamic Triple Black Ink', risk_level: 'CRITICAL_PEAK', procedure_count: 12 },
-    { day: 'Saturday', shift: 'Late Night (20:00 - 23:00)', shift_key: 'late_night', units: 18, density: 56, top_item: 'Titanium 16G Labrets', risk_level: 'MODERATE', procedure_count: 4 },
-
-    // Sunday
-    { day: 'Sunday', shift: 'Morning (09:00 - 12:00)', shift_key: 'morning', units: 16, density: 50, top_item: 'Green Soap 1-Gallon', risk_level: 'MODERATE', procedure_count: 4 },
-    { day: 'Sunday', shift: 'Afternoon (12:00 - 16:00)', shift_key: 'afternoon', units: 28, density: 84, top_item: 'Aftercare Balm 2oz', risk_level: 'CRITICAL_PEAK', procedure_count: 8 },
-    { day: 'Sunday', shift: 'Peak Evening (16:00 - 20:00)', shift_key: 'peak_evening', units: 24, density: 74, top_item: 'Kwadron 3RL Needles', risk_level: 'HIGH', procedure_count: 6 },
-    { day: 'Sunday', shift: 'Late Night (20:00 - 23:00)', shift_key: 'late_night', units: 8, density: 26, top_item: 'Cavicide Sterilant 1-Gal', risk_level: 'LOW', procedure_count: 2 }
-  ];
-
-  const totalWeeklyUnits = usageMatrix.reduce((sum, cell) => sum + cell.units, 0);
-  const totalWeeklyProcedures = usageMatrix.reduce((sum, cell) => sum + cell.procedure_count, 0);
-
-  // Group by day of week totals
-  const dayTotals = days.map(d => {
-    const dayCells = usageMatrix.filter(c => c.day === d);
-    const units = dayCells.reduce((s, c) => s + c.units, 0);
-    const procedures = dayCells.reduce((s, c) => s + c.procedure_count, 0);
-    return { day: d, total_units: units, total_procedures: procedures };
+  const cells = {};
+  const itemTotals = {};
+  let unitsTotal = 0;
+  procedureConsumptions.forEach((log) => {
+    // logs written before v1.0.3 carry a date only: they count at midday
+    const when = new Date(log.logged_at || `${log.date}T12:00:00`);
+    if (isNaN(when.getTime())) return;
+    const day = days[(when.getDay() + 6) % 7];
+    const shift = shifts.find((sh) => when.getHours() < sh.until) || shifts[3];
+    const cell = cells[day + shift.key] = cells[day + shift.key] || { units: 0, procedures: 0, items: {} };
+    cell.procedures++;
+    (log.items || []).forEach((item) => {
+      const qty = Number(item.qty) || 1;
+      cell.units += qty;
+      unitsTotal += qty;
+      cell.items[item.name] = (cell.items[item.name] || 0) + qty;
+      itemTotals[item.name] = (itemTotals[item.name] || 0) + qty;
+    });
   });
-
+  const top = (map) => Object.keys(map).sort((a, b) => map[b] - map[a])[0] || '';
+  const peak = Math.max(1, ...Object.values(cells).map((c) => c.units));
+  const matrix = [];
+  days.forEach((day) => shifts.forEach((shift) => {
+    const cell = cells[day + shift.key] || { units: 0, procedures: 0, items: {} };
+    const density = Math.round((cell.units / peak) * 100);
+    matrix.push({ day, shift: shift.label, shift_key: shift.key, shift_hours: shift.hours, units: cell.units, units_used: cell.units, density,
+      top_item: top(cell.items), top_supply: top(cell.items), procedure_count: cell.procedures,
+      risk_level: cell.units === 0 ? 'LOW' : density >= 85 ? 'CRITICAL' : density >= 60 ? 'HIGH' : density >= 30 ? 'MODERATE' : 'LOW' });
+  }));
+  const dayTotals = days.map((d) => {
+    const row = matrix.filter((c) => c.day === d);
+    return { day: d, total_units: row.reduce((t, c) => t + c.units, 0), total_procedures: row.reduce((t, c) => t + c.procedure_count, 0) };
+  });
+  const peakDay = dayTotals.slice().sort((a, b) => b.total_units - a.total_units)[0];
+  const peakCell = matrix.slice().sort((a, b) => b.units - a.units)[0];
   res.json({
     days,
-    shifts,
-    matrix: usageMatrix,
+    shifts: shifts.map(({ key, label, hours }) => ({ key, label, hours })),
+    matrix,
     day_totals: dayTotals,
     summary: {
-      total_weekly_units: totalWeeklyUnits,
-      total_weekly_procedures: totalWeeklyProcedures,
-      peak_day: 'Saturday (131 units consumed)',
-      peak_shift: 'Friday & Saturday Afternoon to Peak Evening',
-      top_depleted_category: 'Needles & Cartridges (38% of total volume)',
-      recommended_reorder_window: 'Thursday Morning (Dispatches arrive before Friday rush)',
-      fastest_burn_item: 'Kwadron 3RL Needles (68 units/wk)'
+      total_weekly_units: unitsTotal,
+      total_weekly_procedures: procedureConsumptions.length,
+      peak_day: unitsTotal ? peakDay.day : '',
+      peak_shift: unitsTotal ? peakCell.shift : '',
+      fastest_burning_item: top(itemTotals)
     }
   });
 });
@@ -7633,7 +7556,7 @@ app.get('/api/inventory/generate-po-from-digest', (req, res) => {
       }
     ],
     totalCost: totalCost,
-    tracking_number: `TRK-${Math.floor(Math.random() * 899999 + 100000)}`,
+    tracking_number: '', // the supplier gives one, the CRM does not make one up
     lead_time_days: supObj ? supObj.lead_time_days : 3,
     notes: `One-click generated from daily reorder email summary link for ${dailyReorderConfig.manager_email}`
   };
@@ -7730,7 +7653,7 @@ app.post('/api/inventory/generate-po-from-digest', (req, res) => {
       }
     ],
     totalCost: totalCost,
-    tracking_number: `TRK-${Math.floor(Math.random() * 899999 + 100000)}`,
+    tracking_number: '', // the supplier gives one, the CRM does not make one up
     lead_time_days: supObj ? supObj.lead_time_days : 3,
     notes: `One-click generated from daily reorder email summary link for ${dailyReorderConfig.manager_email}`
   };
@@ -8681,19 +8604,19 @@ const syncState = {
   intervalMinutes: parseInt(process.env.SYNC_INTERVAL_MINUTES || '30', 10) || 30,
   clientsUrl: process.env.SYNC_CLIENTS_CSV_URL || process.env.CLIENT_CSV_URL || process.env.SYNC_CLIENT_CSV_URL || '',
   inventoryUrl: process.env.SYNC_INVENTORY_CSV_URL || process.env.INVENTORY_CSV_URL || process.env.SYNC_INVENTORY_CSV_URL || '',
-  lastSyncTime: new Date(Date.now() - 14 * 60000).toISOString(),
-  lastSuccessfulSyncTime: new Date(Date.now() - 14 * 60000).toISOString(),
+  lastSyncTime: null,
+  lastSuccessfulSyncTime: null,
   nextSyncTime: null,
-  syncCount: 1,
+  syncCount: 0,
   status: 'idle',
   lastError: null,
   lastStats: {
-    clientsProcessed: 28,
+    clientsProcessed: 0,
     clientsCreated: 0,
-    clientsUpdated: 28,
-    inventoryProcessed: 42,
+    clientsUpdated: 0,
+    inventoryProcessed: 0,
     inventoryCreated: 0,
-    inventoryUpdated: 42
+    inventoryUpdated: 0
   }
 };
 
@@ -9573,7 +9496,7 @@ app.post('/api/stations/:id/sanitize', (req, res) => {
 
   station.status = 'ready';
   station.lastSanitized = new Date().toISOString();
-  station.autoclaveCycle = `CYCLE-${Math.floor(1000 + Math.random()*9000)}-PASSED`;
+  station.autoclaveCycle = (req.body && req.body.autoclaveCycle) || ''; // cleaning a station is not an autoclave cycle
 
   const newLog = {
     id: Date.now(),
@@ -9702,7 +9625,7 @@ let studioGeneralSettings = {
   studio_name: 'POLI STUDIO CRM Tattoo & Piercing',
   vat_rate: 20.0,
   vat_enabled: true,
-  vat_number: 'GB999888777',
+  vat_number: '',
   default_currency: 'USD ($)',
   theme_mode: 'dark',
   language: 'en',
@@ -10496,50 +10419,17 @@ app.get('/api/waivers/audit-history', (req, res) => {
 
 // 6. Procedure Supply Overhead Margin & Studio Profitability Calculator
 app.get('/api/financials/margin-calculator', (req, res) => {
-  const marginReports = procedureConsumptions.map((proc, idx) => {
-    const grossPrice = proc.procedure_type.toLowerCase().includes('tattoo') ? 350.00 : 120.00;
-
-    // Calculate supply cost from consumed items
-    let supplyCost = 0;
-    (proc.items || []).forEach(item => {
-      const invMatch = inventory.find(i => i.id === item.id || i.name === item.name);
-      const unitCost = invMatch ? (invMatch.price || 15.00) : 12.00;
-      supplyCost += (item.qty || 1) * unitCost;
-    });
-
-    if (supplyCost === 0) supplyCost = 22.50; // Fallback average supply pack cost
-
-    const netStudioRevenue = grossPrice - supplyCost;
-    const artistSplitPercent = 60; // 60% artist share
-    const artistPayout = netStudioRevenue * (artistSplitPercent / 100);
-    const studioNetProfit = netStudioRevenue - artistPayout;
-    const marginPercent = Math.round((studioNetProfit / grossPrice) * 100);
-
-    return {
-      id: proc.id || idx + 1,
-      client_name: proc.client_name,
-      artist_name: proc.artist_name,
-      procedure_type: proc.procedure_type,
-      date: proc.date,
-      gross_price: grossPrice,
-      supply_overhead_cost: supplyCost,
-      net_after_supplies: netStudioRevenue,
-      artist_commission_payout: artistPayout,
-      studio_net_profit: studioNetProfit,
-      margin_percent: marginPercent
-    };
-  });
-
-  const avgMargin = marginReports.length > 0 ? Math.round(marginReports.reduce((acc, c) => acc + c.margin_percent, 0) / marginReports.length) : 30;
-  const totalNetProfit = marginReports.reduce((acc, c) => acc + c.studio_net_profit, 0);
-
-  res.json({
-    success: true,
-    average_margin_percent: avgMargin,
-    total_studio_net_profit: totalNetProfit,
-    procedure_count: marginReports.length,
-    reports: marginReports
-  });
+  const paid = financial.filter((f) => f.status === 'completed' && f.type !== 'refund').reduce((t, f) => t + Number(f.amount || 0), 0);
+  let supplies = 0;
+  let unpriced = 0;
+  procedureConsumptions.forEach((log) => (log.items || []).forEach((item) => {
+    const stock = inventory.find((i) => i.id === item.id || i.name === item.name);
+    const cost = stock ? Number(stock.unit_cost != null ? stock.unit_cost : stock.price) : NaN;
+    if (Number.isFinite(cost)) supplies += (Number(item.qty) || 1) * cost;
+    else unpriced++;
+  }));
+  res.json({ success: true, payments_recorded: paid, supplies_used_cost: supplies, difference: paid - supplies,
+    procedures_logged: procedureConsumptions.length, items_without_cost: unpriced });
 });
 
 // Studio Audit Log Summary
@@ -10575,66 +10465,42 @@ app.get('/api/database/snapshot-status', (req, res) => {
     success: true,
     lastSnapshotTimestamp: lastDatabaseSnapshotTimestamp,
     isOlderThan24h: isOlderThan24h,
-    hoursSinceLastSnapshot: parseFloat(diffHours.toFixed(1)),
-    backupCount: temporaryPortalLinks.length + 1,
-    latestFilename: `snapshot_${lastDatabaseSnapshotTimestamp.replace(/[:.-]/g, '_')}.json`,
-    snapshotSizeFormatted: '1.48 MB'
+    hoursSinceLastSnapshot: parseFloat(diffHours.toFixed(1))
   });
 });
 
-// POST Create Instant Cloud Database Snapshot
-app.post('/api/database/create-snapshot', (req, res) => {
-  lastDatabaseSnapshotTimestamp = new Date().toISOString();
-  const filename = `snapshot_${Date.now()}.json`;
-
+// POST Back up the studio database: a full copy of the SQLite file in storage/backups/
+app.post('/api/database/create-snapshot', async (req, res) => {
   try {
+    saveAll(); // everything in memory is in the file before it is copied
     const backupDir = path.join(__dirname, 'storage', 'backups');
-    if (!fs.existsSync(backupDir)) {
-      fs.mkdirSync(backupDir, { recursive: true });
-    }
-    const backupData = {
-      timestamp: lastDatabaseSnapshotTimestamp,
-      clientsCount: clients ? clients.length : 0,
-      appointmentsCount: appointments ? appointments.length : 0,
-      inventoryCount: inventoryItems ? inventoryItems.length : 0,
-      activityLogsCount: activityLogs ? activityLogs.length : 0
-    };
-    fs.writeFileSync(path.join(backupDir, filename), JSON.stringify(backupData, null, 2));
+    fs.mkdirSync(backupDir, { recursive: true });
+    const stamp = new Date().toISOString();
+    const filename = `studio_crm_${stamp.replace(/[:.]/g, '-')}.sqlite`;
+    await sqlite.backup(path.join(backupDir, filename));
+    const sizeBytes = fs.statSync(path.join(backupDir, filename)).size;
+    lastDatabaseSnapshotTimestamp = stamp;
+    logActivity({
+      category: 'system',
+      action: 'DATABASE_SNAPSHOT_CREATED',
+      title: 'Database backup saved',
+      details: `storage/backups/${filename} (${Math.round(sizeBytes / 1024)} KB)`,
+      user: req.body?.user || 'Admin Manager',
+      badgeColor: 'green'
+    });
+    res.json({ success: true, message: `Backup saved in storage/backups: ${filename} (${Math.round(sizeBytes / 1024)} KB)`, snapshotTimestamp: stamp, filename, sizeBytes });
   } catch (err) {
-    console.warn('Backup file creation notice:', err.message);
+    res.status(500).json({ success: false, message: 'The backup could not be written: ' + err.message });
   }
-
-  logActivity({
-    category: 'system',
-    action: 'DATABASE_SNAPSHOT_CREATED',
-    title: 'Cloud Database Snapshot Backup Completed',
-    details: `Created instant database state snapshot ${filename} (Size: ~1.48 MB).`,
-    user: req.body?.user || 'Admin Manager',
-    badgeColor: 'green'
-  });
-
-  res.json({
-    success: true,
-    message: 'Instant cloud database snapshot backup created successfully!',
-    snapshotTimestamp: lastDatabaseSnapshotTimestamp,
-    filename: filename,
-    isOlderThan24h: false,
-    hoursSinceLastSnapshot: 0,
-    sizeFormatted: '1.48 MB'
-  });
 });
 
 // POST Generate Quick Client Portal Link
 app.post('/api/client-portal/generate-link', (req, res) => {
   const { clientId, expirationHours = 24, channel = 'sms', recipientPhone, recipientEmail } = req.body || {};
-  const client = (clients || []).find(c => String(c.id) === String(clientId)) || {
-    id: clientId || 1,
-    name: 'Alex Rivera',
-    phone: recipientPhone || '+1 (555) 234-5678',
-    email: recipientEmail || 'alex.rivera@example.com'
-  };
+  const client = (clients || []).find(c => String(c.id) === String(clientId));
+  if (!client) return res.status(404).json({ success: false, error: 'Client not found' });
 
-  const token = `sp_link_${Math.random().toString(36).substring(2, 10)}_${Date.now()}`;
+  const token = `sp_link_${globalThis.crypto.randomUUID().replace(/-/g, '')}`;
   const expiresAt = new Date(Date.now() + (Number(expirationHours) * 60 * 60 * 1000)).toISOString();
   
   const protocol = req.protocol || 'https';
@@ -10707,17 +10573,20 @@ app.delete('/api/app-data/:key', (req, res) => {
 // First run: a fresh install opens on demo data. "Start with an empty studio" clears the
 // demo records and keeps the reference lists a studio edits rather than replaces.
 let studioMeta = { demo: true };
-const KEEP_ON_CLEAR = new Set(['services', 'serviceTypes', 'inventoryCategories', 'paymentMethods',
+const KEEP_ON_CLEAR = new Set(['serviceTypes', 'inventoryCategories', 'paymentMethods',
   'disclaimerTemplates', 'aftercareTemplates', 'aftercareEmailTemplates', 'staffMessagingSettings', 'studioStations', 'staff']);
-const APP_DATA_KEEP = /^(poli_studio_profile|poli_studio_logo|poli_benchmark_studio_rates_v1|studio_vat_config|studio_remote_sync_config|studio_messenger_macros|studio_scheduled_reports)$/;
-app.get('/api/studio-meta', (req, res) => res.json(studioMeta));
+const APP_DATA_KEEP = /^(poli_studio_profile|poli_studio_logo|poli_benchmark_studio_rates_v1|studio_vat_config|studio_remote_sync_config|studio_messenger_macros|studio_scheduled_reports|poli_form_builder_autosave(:.+)?|poli_pdf_generator_settings|poli_builder_theme_customization)$/;
+app.get('/api/studio-meta', (req, res) => res.json({ ...studioMeta, version: APP_VERSION }));
 app.post('/api/admin/start-empty', (req, res) => {
   for (const [key, [get]] of Object.entries(PERSISTED)) {
     const v = get();
     if (Array.isArray(v) && !KEEP_ON_CLEAR.has(key)) v.splice(0, v.length);
   }
-  staff.splice(0, staff.length, ...staff.filter((s) => s.role === 'manager').slice(0, 1));
-  studioStations.forEach((st) => { st.status = 'ready'; st.currentClient = null; st.assignedStaff = ''; });
+  // one manager stays so the studio has someone to start with: the name only, none of the demo person's details
+  staff.splice(0, staff.length, ...staff.filter((s) => s.role === 'manager').slice(0, 1)
+    .map((s) => ({ id: s.id, name: s.name, role: s.role, title: s.title, active: true, email: '', phone: '', specialties: [], certifications: [] })));
+  studioStations.forEach((st) => { st.status = 'ready'; st.currentClient = null; st.assignedStaff = ''; st.autoclaveCycle = ''; st.lastSanitized = null; });
+  if (studioGeneralSettings.vat_number === 'GB999888777') studioGeneralSettings.vat_number = '';
   const removedKeys = Object.keys(appData).filter((k) => !APP_DATA_KEEP.test(k));
   removedKeys.forEach((k) => delete appData[k]);
   nextActivityId = 1;
@@ -10727,6 +10596,9 @@ app.post('/api/admin/start-empty', (req, res) => {
   studioMeta = { demo: false, clearedAt: new Date().toISOString() };
   res.json({ ok: true, removedKeys });
 });
+
+// An address under /api that no route answered: say so (it used to return the home page as if it were data).
+app.use('/api', (req, res) => res.status(404).json({ error: 'Not found: ' + req.method + ' ' + req.originalUrl }));
 
 // Catch-all route to serve main app
 app.get('*', (req, res) => {
@@ -10850,6 +10722,8 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`Studio CRM application server running on http://0.0.0.0:${PORT}`);
   console.log(`Open http://localhost:${PORT} in your browser. Keep this window open while you use the CRM.`);
   openBrowser();
+  // https for the other devices in the studio; HTTPS_PORT=0 turns it off
+  startHttps(app, process.env.HTTPS_PORT === undefined ? 3443 : Number(process.env.HTTPS_PORT) || 0);
 }).on('error', (e) => {
   if (e.code !== 'EADDRINUSE') throw e;
   // Started twice: the first one is still running, so just show it.

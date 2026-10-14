@@ -4,6 +4,7 @@ services:
     build: .
     ports:
       - "3000:3000"
+      - "3443:3443" # https, for tablets and phones (camera)
     volumes:
       - studio-crm-data:/app/data
     restart: unless-stopped

@@ -35,6 +35,12 @@ Ouvrez **Réglages** pour saisir vos prix, la règle d'acompte, le taux de taxe 
 
 Cliquez sur le bouton du personnel en haut à droite (il affiche **Connexion équipe** tant que personne n'est sélectionné) pour voir votre équipe. **Ajouter un membre** ajoute une personne, **Modifier** change ses coordonnées et **Retirer** l'enlève de l'équipe. **Sélectionner** affiche le nom de cette personne dans la barre du haut, pour que chacun voie qui est à l'écran. Il n'y a ni mot de passe ni niveau d'accès. Un nouveau membre peut être choisi tout de suite partout où l'on choisit un artiste, par exemple pour un rendez-vous.
 
+## Tablettes, téléphones et mot de passe du studio
+
+Les autres appareils du studio ouvrent le CRM avec l'adresse affichée dans la fenêtre qui l'a démarré. Une tablette ou un téléphone qui a besoin de la caméra (le scanner) doit utiliser l'adresse qui commence par `https://` et se termine par `:3443`. La première fois, le navigateur avertit que la connexion n'est pas privée, car le certificat a été créé par votre propre ordinateur : choisissez Avancé, puis Continuer. Avec l'adresse `http://` simple, tout fonctionne sauf la caméra.
+
+Pour tenir à l'écart les autres personnes du même réseau, ouvrez **Réglages** et définissez un **Mot de passe du studio**. Chaque appareil se connecte alors une fois. C'est un seul mot de passe pour tout le studio, pas un par personne. Si vous l'oubliez, créez un fichier vide nommé `reset-password.txt` dans le dossier `data` et redémarrez le CRM.
+
 ## Rendez-vous et planification
 
 **Nouveau rendez-vous** réserve une séance unique avec artiste, poste, prix et acompte. Pour un travail en plusieurs séances, le **Planificateur automatique** recherche les créneaux libres de l'artiste à une date choisie et réserve jusqu'à six séances espacées d'un nombre de semaines défini. Le tableau de bord affiche les chiffres du jour, les réservations à venir, l'état des postes et les stocks faibles. Le Calendrier affiche tous les rendez-vous réservés, les prochains en premier. **Terminé** marque une séance comme faite, elle compte alors dans l'analyse des durées, et **Retirer** la supprime.
@@ -43,7 +49,7 @@ Cliquez sur le bouton du personnel en haut à droite (il affiche **Connexion éq
 
 Ouvrez le formulaire de consentement, choisissez le client dans la liste (ses allergies sont déjà renseignées), confirmez la vérification d'âge, puis faites signer le client sur la tablette. Le formulaire est enregistré avec l'image de la signature. Il ne s'enregistre pas sans client ni signature.
 
-Pour faire remplir un formulaire de consentement sur une tablette, ouvrez **Clients**, le créateur de formulaires de consentement, l'aperçu du formulaire, puis le mode kiosque tablette. Le client répond à une section par écran, signe sur le dernier et touche le bouton pour terminer. Le formulaire est enregistré avec la signature et un PDF est téléchargé. Si aucun client n'a été choisi avant, un nouveau client est créé à partir du nom, de l'e-mail, du téléphone et de la date de naissance du formulaire. Les formulaires enregistrés se trouvent dans le profil du client, sous **Décharges** ; **Voir les réponses** affiche chaque réponse.
+Pour faire remplir un formulaire de consentement sur une tablette, ouvrez **Clients**, le créateur de formulaires de consentement, l'aperçu du formulaire, puis le mode kiosque tablette. Le client répond à une section par écran, signe sur le dernier et touche le bouton pour terminer. Le formulaire est enregistré avec la signature et un PDF est téléchargé. Si aucun client n'a été choisi avant, un nouveau client est créé à partir du nom, de l'e-mail, du téléphone et de la date de naissance du formulaire. Les formulaires enregistrés se trouvent dans le profil du client, sous **Décharges** ; **Voir les réponses** affiche chaque réponse. Un formulaire modifié dans le créateur de formulaires est enregistré avec les données du studio : la tablette affiche donc le même formulaire que l'ordinateur où vous l'avez modifié.
 
 ## Messages : le CRM prépare, vous envoyez
 

@@ -192,6 +192,8 @@ jobs:
         run: |
           docker compose up -d --build
           for i in $(seq 1 30); do curl -sf http://127.0.0.1:3000/ > /dev/null && break; sleep 2; done
+          # a new install asks for the studio password first; this check continues without one
+          curl -sf -X POST http://127.0.0.1:3000/api/access/skip > /dev/null
           code=$(curl -s -o /dev/null -w "%{http_code}" -X POST http://127.0.0.1:3000/api/clients -H "Content-Type: application/json" -d "{\"name\":\"Docker Test\"}")
           test "$code" = "201"
           sleep 2

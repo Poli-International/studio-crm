@@ -215,6 +215,33 @@ await flow('Record Payment saves a payment', async () => {
   check(!(await b.evaluate(`getComputedStyle(document.getElementById('deposit-ledger-modal-overlay')).display !== 'none'`)), 'Record Payment opened the deposit ledger');
 });
 
+await flow('Book an appointment for a client picked from the list, then edit it', async () => {
+  await b.goto(url);
+  await b.clickText('Calendar');
+  await pressOn('openQuickNewAppointmentModal()');
+  await b.type('#new-appt-client', 'Alex Riv');
+  await eventually(async () => (await text('#new-appt-client-autocomplete-dropdown')).includes('Alex Rivera'), 'typing a name does not offer the existing client');
+  // the suggestion is picked with the mouse, as a person does
+  const pick = await b.evaluate(`(() => { const row = [...document.querySelectorAll('#new-appt-client-autocomplete-dropdown [data-id]')].find(r => r.innerText.includes('Alex Rivera')); const r = row.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2, id: row.dataset.id }; })()`);
+  await b.evaluate(`document.querySelector('#new-appt-client-autocomplete-dropdown [data-id="${pick.id}"]').dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }))`);
+  check((await b.evaluate(`document.getElementById('new-appt-client-id').value`)) === pick.id, 'picking the client did not choose them');
+  await b.evaluate(`(() => { const set = (id, v) => { const el = document.getElementById(id); el.value = v; el.dispatchEvent(new Event('change', { bubbles: true })); }; set('new-appt-date', '2031-03-04'); set('new-appt-time', '11:00'); set('new-appt-notes', 'Edit check'); })()`);
+  await b.clickText('Book appointment', '#new-appointment-modal-overlay');
+  let appt;
+  await eventually(async () => { appt = (await api('/api/appointments')).find((a) => a.notes === 'Edit check'); return !!appt; }, 'the appointment was not booked');
+  check(String(appt.client_id) === pick.id, 'the booking is not linked to the client picked from the list: ' + JSON.stringify({ saved: appt.client_id, name: appt.client_name, picked: pick.id, field: await b.evaluate(`document.getElementById('new-appt-client-id').value`) }));
+  // Edit: change the deposit
+  await b.goto(url);
+  await b.clickText('Calendar');
+  await press('.appointment-row', 'Mar 4, 2031', 'Edit');
+  check((await text('#new-appt-title')) === 'Edit Appointment', 'Edit did not open the appointment');
+  check((await b.evaluate(`document.getElementById('new-appt-notes').value`)) === 'Edit check', 'Edit opened another appointment');
+  await b.type('#new-appt-deposit', '75');
+  await b.clickText('Save changes', '#new-appointment-modal-overlay');
+  await eventually(async () => Number((await api('/api/appointments')).find((a) => a.id === appt.id).deposit_paid) === 75, 'the change was not saved');
+  check((await api('/api/appointments')).filter((a) => a.notes === 'Edit check').length === 1, 'Save changes booked a second appointment');
+});
+
 await flow('Removing an appointment also updates the dashboard count', async () => {
   const [client] = await api('/api/clients');
   const [staff] = await api('/api/staff');
@@ -341,6 +368,56 @@ await flow('On a tablet, with fingers: the consent form is filled, signed and sa
         + ' | last click on the page: ' + await b.evaluate('window.__ct.sig.lastClick')
         + ' | page calls: ' + await b.evaluate(`window.__ct.sig.fetches.filter(x => x.method !== 'GET').slice(-4).map(x => x.method + ' ' + x.url + ' ' + x.status).join(', ')`), 20);
   } finally { await b.desktop(); }
+});
+
+await flow('Kiosk PIN: the client cannot leave the form; a finished form shows Thank you', async () => {
+  await b.goto(url);
+  await b.clickText('Settings');
+  await b.type('#kiosk-pin-next', '4321');
+  await b.clickText('Set PIN');
+  await eventually(async () => (await text('#kiosk-pin-status')).startsWith('A PIN is set'), 'the kiosk PIN was not saved');
+  try {
+    await b.goto(url); // a fresh page: the PIN must come back from the studio database
+    await b.clickText('Clients');
+    await b.clickText('Consent Form Builder');
+    const f = b.frame('#form-builder-frame');
+    for (let i = 0; i < 80 && !(await f.evaluate('!!(window.__ct && window.FormBuilderApp && window.FormBuilderApp.currentForm && document.getElementById("btn-preview"))').catch(() => false)); i++) await sleep(250);
+    await sleep(800);
+    await f.clickText('Preview Form');
+    await f.clickText('Fill Sample Answers');
+    await eventually(async () => f.evaluate(`Object.keys(window.ActiveFormPreview.responses).length > 10`), 'the sample answers were not filled in');
+    await f.clickText('Tablet Kiosk Mode');
+    const inKiosk = () => f.evaluate(`getComputedStyle(document.getElementById('tablet-kiosk-modal')).display !== 'none'`);
+    // ✕ Exit asks for the PIN: a wrong one keeps the client in the form
+    await f.clickText('Exit Kiosk', '#tablet-kiosk-modal');
+    await f.type('#kiosk-pin-lock input', '1111');
+    await f.clickText('Unlock', '#kiosk-pin-lock');
+    check((await f.evaluate(`document.querySelector('#kiosk-pin-lock .kiosk-pin-error').innerText`)) === 'Wrong PIN', 'a wrong PIN was not refused');
+    check(await inKiosk(), 'a wrong PIN let the client out of the kiosk');
+    await f.type('#kiosk-pin-lock input', '4321');
+    await f.clickText('Unlock', '#kiosk-pin-lock');
+    check(!(await inKiosk()), 'the right PIN did not leave the kiosk');
+    // finished form: saved, then a Thank you screen that only the PIN leaves
+    await f.clickText('Tablet Kiosk Mode');
+    await f.clickText('Next Step', '#tablet-kiosk-modal');
+    await f.type('#tablet-kiosk-modal [name="full_name"]', 'Locked Kiosk');
+    for (let i = 0; i < 5; i++) await f.clickText('Next Step', '#tablet-kiosk-modal');
+    // not signed yet: Complete keeps the client in the form and says what is missing
+    await f.clickText('Complete', '#tablet-kiosk-modal');
+    check(await inKiosk(), 'an unsigned form let the client out of the locked kiosk');
+    check(/Please complete:/.test(await f.evaluate(`document.getElementById('tablet-kiosk-modal').innerText`)), 'the locked kiosk does not say what is missing');
+    await f.scribble('#tablet-kiosk-modal canvas.signature-pad-canvas');
+    await f.clickText('Complete', '#tablet-kiosk-modal');
+    await eventually(async () => (await f.evaluate(`document.getElementById('tablet-kiosk-modal').innerText`)).includes('Your form has been submitted'), 'no Thank you screen after a finished form');
+    await eventually(async () => (await api('/api/clients')).some((c) => c.name === 'Locked Kiosk'), 'the form finished in the locked kiosk was not saved');
+    await f.clickText('Staff: exit', '#tablet-kiosk-modal');
+    await f.type('#kiosk-pin-lock input', '4321');
+    await f.clickText('Unlock', '#kiosk-pin-lock');
+    check(!(await inKiosk()), 'the PIN did not leave the Thank you screen');
+  } finally {
+    await b.goto(url);
+    await b.evaluate('removeKioskPin()');
+  }
 });
 
 await flow('On a tablet, the menu button opens the menu and a screen can be chosen', async () => {

@@ -224,6 +224,52 @@ async function showStudioAccess() {
 }
 document.addEventListener('DOMContentLoaded', showStudioAccess);
 
+// =========================================================================
+// 🔒 TABLET KIOSK PIN (Settings): asked to leave the consent form kiosk on a tablet
+// =========================================================================
+// Stored as a short hash in poli_kiosk_exit_pin, which app-data-sync shares with every device.
+// ponytail: a deterrent for a client left alone with the tablet, not a security boundary
+// (a 4-digit PIN is easy to try out); the studio password protects the data itself.
+const KIOSK_PIN_KEY = 'poli_kiosk_exit_pin';
+function kioskPinHash(pin) {
+    let h = 0;
+    for (const c of 'poli-kiosk:' + String(pin)) h = (h * 31 + c.charCodeAt(0)) | 0;
+    return 'h' + (h >>> 0).toString(36);
+}
+
+function showKioskPin() {
+    let set = false;
+    try { set = !!localStorage.getItem(KIOSK_PIN_KEY); } catch (e) { /* private window */ }
+    const status = document.getElementById('kiosk-pin-status');
+    if (status) status.textContent = set
+        ? 'A PIN is set: leaving Kiosk Mode, and the "form submitted" screen, needs it.'
+        : 'No PIN is set: anyone holding the tablet can leave Kiosk Mode.';
+    const save = document.getElementById('kiosk-pin-save-btn');
+    if (save) save.textContent = set ? 'Change PIN' : 'Set PIN';
+    const remove = document.getElementById('kiosk-pin-remove-btn');
+    if (remove) remove.style.display = set ? '' : 'none';
+}
+document.addEventListener('DOMContentLoaded', showKioskPin);
+
+function saveKioskPin(event) {
+    if (event) event.preventDefault();
+    const field = document.getElementById('kiosk-pin-next');
+    const pin = (field && field.value || '').trim();
+    if (!/^[0-9]{4,8}$/.test(pin)) { showStudioToast('Use 4 to 8 digits'); return; }
+    try { localStorage.setItem(KIOSK_PIN_KEY, kioskPinHash(pin)); } catch (e) { showStudioToast('This browser could not save the PIN'); return; }
+    field.value = '';
+    showKioskPin();
+    showStudioToast('Tablet kiosk PIN saved');
+}
+window.saveKioskPin = saveKioskPin;
+
+function removeKioskPin() {
+    try { localStorage.removeItem(KIOSK_PIN_KEY); } catch (e) { /* private window */ }
+    showKioskPin();
+    showStudioToast('Tablet kiosk PIN removed');
+}
+window.removeKioskPin = removeKioskPin;
+
 async function sendStudioPassword(next) {
     const current = (document.getElementById('access-current') || {}).value || '';
     try {

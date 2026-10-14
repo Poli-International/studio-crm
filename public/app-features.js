@@ -1841,8 +1841,10 @@ function openQuickAddClientModal() {
 }
 window.openQuickAddClientModal = openQuickAddClientModal;
 
+// one way in: the form may still be in edit mode from the last Edit, and Save would change
+// that appointment instead of booking a new one
 function openQuickNewAppointmentModal() {
-    forceShowModal('new-appointment-modal-overlay');
+    openNewAppointmentModal();
 }
 window.openQuickNewAppointmentModal = openQuickNewAppointmentModal;
 
@@ -2773,7 +2775,7 @@ async function handleClientAutocomplete(kind, query) {
     box.querySelectorAll("[data-id]").forEach((row) => row.addEventListener("mousedown", (e) => {
         e.preventDefault();
         const c = hits.find((x) => String(x.id) === row.dataset.id);
-        const input = document.getElementById(kind + "-client-search");
+        const input = document.getElementById(kind + "-client-search") || document.getElementById(kind + "-client"); // the booking form names it new-appt-client
         if (input) input.value = c.name;
         if (idField) idField.value = String(c.id);
         if (kind === "waiver") {
@@ -4053,6 +4055,7 @@ async function renderAppointmentsList() {
             + cell(a.client_name || a.client) + cell(a.service_type) + cell(a.staff_name || a.artist_name)
             + cell(Number(a.estimated_price || a.price || 0).toFixed(2)) + cell(a.status || "scheduled")
             + `<td style="padding:8px;text-align:right;white-space:nowrap;">`
+            + `<button type="button" onclick="openEditAppointment(${Number(a.id)})" style="${btn}background:#334155;color:#E2E8F0;border:1px solid #475569;">Edit</button> `
             + (open ? `<button type="button" onclick="setAppointmentStatus(${Number(a.id)}, 'completed')" style="${btn}background:#10B981;color:#FFF;border:none;">Completed</button> ` : "")
             + `<button type="button" onclick="removeAppointment(${Number(a.id)})" style="${btn}background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);">Remove</button></td></tr>`;
     };
@@ -4094,8 +4097,48 @@ window.removeAppointment = removeAppointment;
 // also called by the tattoo price estimator tool (its Book button), from inside its frame
 
 function openNewAppointmentModal() {
+    setAppointmentFormMode(null);
     forceShowModal("new-appointment-modal-overlay");
 }
+
+// The booking form also edits a booked appointment: editingAppointmentId says which.
+let editingAppointmentId = null;
+function setAppointmentFormMode(appt) {
+    editingAppointmentId = appt ? appt.id : null;
+    autocompleteClients = null; // clients added since the last booking must be offered too
+    const set = (id, v) => { const el = document.getElementById(id); if (el && v !== undefined && v !== null) el.value = v; };
+    const form = document.querySelector("#new-appointment-modal-overlay form");
+    if (form && !appt) form.reset();
+    set("new-appt-client-id", appt && appt.client_id ? String(appt.client_id) : "");
+    const title = document.getElementById("new-appt-title");
+    if (title) title.textContent = appt ? "Edit Appointment" : "Book Appointment";
+    const save = document.getElementById("new-appt-save-btn");
+    if (save) save.textContent = appt ? "Save changes" : "Book appointment";
+    if (!appt) return;
+    const when = appt.datetime ? new Date(appt.datetime) : null;
+    set("new-appt-client", appt.client_name || "");
+    set("new-appt-service", appt.service_type);
+    set("new-appt-artist", appt.staff_name);
+    set("new-appt-station", appt.station);
+    if (when && !isNaN(when.getTime())) {
+        set("new-appt-date", when.toLocaleDateString("en-CA"));
+        set("new-appt-time", when.toTimeString().slice(0, 5));
+    }
+    set("new-appt-duration", appt.duration_minutes);
+    set("new-appt-price", appt.estimated_price);
+    set("new-appt-deposit", appt.deposit_paid);
+    set("new-appt-notes", appt.notes);
+}
+
+// Henry: see and change a booked appointment (deposit, time, artist...) from the Calendar
+async function openEditAppointment(id) {
+    let appt;
+    try { appt = (await (await fetch("/api/appointments")).json()).find((a) => Number(a.id) === Number(id)); } catch (e) {}
+    if (!appt) { showStudioToast("This appointment could not be loaded"); return; }
+    setAppointmentFormMode(appt);
+    forceShowModal("new-appointment-modal-overlay");
+}
+window.openEditAppointment = openEditAppointment;
 window.openNewAppointmentModal = openNewAppointmentModal;
 
 function closeNewAppointmentModal() {
@@ -4131,15 +4174,18 @@ async function handleSaveNewAppointment(event) {
         status: "Confirmed"
     };
 
+    const editedId = editingAppointmentId;
+    const pickedClient = (document.getElementById("new-appt-client-id") || {}).value || "";
     try {
         const when = new Date(newAppt.date + "T" + (newAppt.time || "00:00"));
-        const res = await fetch("/api/appointments", {
-            method: "POST",
+        const res = await fetch(editedId ? "/api/appointments/" + editedId : "/api/appointments", {
+            method: editedId ? "PATCH" : "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(Object.assign({}, newAppt, {
                 staff_name: newAppt.artist_name,
+                client_id: pickedClient || undefined, // a client picked from the list: the booking is theirs
                 datetime: isNaN(when.getTime()) ? undefined : when.toISOString(),
-                status: "scheduled"
+                status: editedId ? undefined : "scheduled"
             }))
         });
         if (!res.ok) throw new Error("HTTP " + res.status);

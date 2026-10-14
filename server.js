@@ -1940,6 +1940,27 @@ app.post('/api/appointments', (req, res) => {
   res.status(201).json(newApp);
 });
 
+// Change a booked appointment (time, artist, deposit, notes...) from the Calendar's Edit button.
+app.patch('/api/appointments/:id', (req, res) => {
+  const appt = appointments.find((a) => a.id === parseInt(req.params.id, 10));
+  if (!appt) return res.status(404).json({ error: 'Appointment not found' });
+  const b = req.body || {};
+  if (b.client_id) {
+    const client = clients.find((c) => c.id === parseInt(b.client_id, 10));
+    if (client) { appt.client_id = client.id; appt.client_name = client.name; }
+  } else if (b.client_name) { appt.client_id = null; appt.client_name = String(b.client_name); }
+  if (b.staff_id || b.staff_name) {
+    const st = staff.find((s) => (b.staff_id && s.id === parseInt(b.staff_id, 10)) || s.name === b.staff_name);
+    appt.staff_id = st ? st.id : appt.staff_id;
+    appt.staff_name = st ? st.name : String(b.staff_name || appt.staff_name);
+  }
+  for (const f of ['service_type', 'datetime', 'station', 'notes']) if (b[f] !== undefined) appt[f] = String(b[f]);
+  for (const f of ['duration_minutes', 'estimated_price', 'deposit_paid']) if (b[f] !== undefined && !isNaN(Number(b[f]))) appt[f] = Number(b[f]);
+  logActivity({ category: 'appointment', action: 'UPDATED', title: `Appointment Changed: ${appt.client_name}`,
+    details: `${appt.service_type} on ${appt.datetime}`, user: 'Admin Manager', badgeColor: 'blue' });
+  res.json(appt);
+});
+
 app.delete('/api/appointments/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const idx = appointments.findIndex(a => a.id === id);
@@ -3107,7 +3128,9 @@ app.get('/api/inventory', (req, res) => {
   res.json(enriched);
 });
 app.post('/api/inventory', (req, res) => {
-  const newItem = { id: inventory.length + 1, ...req.body };
+  // the id is the server's: length + 1 repeated an id after a deletion, and the body could set one
+  const { id: _ignored, ...fields } = req.body || {};
+  const newItem = { ...fields, id: inventory.length ? Math.max(...inventory.map((i) => Number(i.id) || 0)) + 1 : 1 };
   inventory.push(newItem);
 
   logActivity({
@@ -3136,7 +3159,8 @@ app.patch('/api/inventory/:id', (req, res) => {
   const oldQty = item.quantity;
   const oldPrice = item.price;
   const oldSku = item.sku;
-  Object.assign(item, req.body);
+  const { id: _keep, ...changes } = req.body || {};
+  Object.assign(item, changes);
 
   // If price changed, or SKU changed, or stock adjusted, record into supplier audit logs
   if (typeof supplierInventoryAuditLogs !== 'undefined' && Array.isArray(supplierInventoryAuditLogs)) {
@@ -10599,7 +10623,7 @@ app.delete('/api/app-data/:key', (req, res) => {
 let studioMeta = { demo: true };
 const KEEP_ON_CLEAR = new Set(['serviceTypes', 'inventoryCategories', 'paymentMethods',
   'disclaimerTemplates', 'aftercareTemplates', 'aftercareEmailTemplates', 'staffMessagingSettings', 'studioStations', 'staff']);
-const APP_DATA_KEEP = /^(poli_studio_profile|poli_studio_logo|poli_benchmark_studio_rates_v1|studio_vat_config|studio_remote_sync_config|studio_messenger_macros|studio_scheduled_reports|poli_form_builder_autosave(:.+)?|poli_pdf_generator_settings|poli_builder_theme_customization)$/;
+const APP_DATA_KEEP = /^(poli_kiosk_exit_pin|poli_studio_profile|poli_studio_logo|poli_benchmark_studio_rates_v1|studio_vat_config|studio_remote_sync_config|studio_messenger_macros|studio_scheduled_reports|poli_form_builder_autosave(:.+)?|poli_pdf_generator_settings|poli_builder_theme_customization)$/;
 app.get('/api/studio-meta', (req, res) => res.json({ ...studioMeta, version: APP_VERSION }));
 app.post('/api/admin/start-empty', (req, res) => {
   for (const [key, [get]] of Object.entries(PERSISTED)) {

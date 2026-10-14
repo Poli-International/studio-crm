@@ -51,6 +51,8 @@ Open the waiver form, pick the client from the list (their allergies are filled 
 
 To have the client fill in a consent form on a tablet, open **Clients**, **Consent Form Builder**, **Preview Form**, then **Tablet Kiosk Mode**. The client answers one section per screen, signs on the last one and taps **Complete**. The form is saved with the signature and a PDF is downloaded. If no client was chosen first, a new client is created from the name, email, phone and date of birth on the form. Saved forms are in the client's profile under **Waivers**; **View answers** shows every answer. A form you edit in the form builder is saved with the studio data, so the tablet shows the same form as the computer you edited it on.
 
+To keep a client inside the form when you step away, set a **Tablet Kiosk PIN** in **Settings**. Leaving Kiosk Mode then needs the PIN. When the client taps **Complete**, the kiosk checks that nothing is missing, saves the form and shows "Thank you, your form has been submitted" until a staff member enters the PIN. Signed waivers are in the client's profile under **Waivers**: **View waiver** shows the answers and the signature, and **Download PDF** saves a copy to print or keep.
+
 ## Messages: the CRM prepares, you send
 
 Studio CRM does not send email, SMS or chat messages itself. When you prepare an aftercare email, a reminder or a supplier order, a **Message ready** panel appears. Click **Email**, **WhatsApp** or **LINE** to open it in your own app with the text filled in, then press send there, or click **Copy**.

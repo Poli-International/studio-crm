@@ -36,7 +36,7 @@ async function sendTeamChatMessage() {
     renderTeamMessages();
     if (typeof playMessengerChime === "function") playMessengerChime();
 }
-window.sendTeamChatMessage = sendTeamChatMessage;
+window.sendTeamChatMessage = oneAtATime(sendTeamChatMessage);
 
 function closeTeamMessengerModal() {
     const el = document.getElementById("team-messenger-overlay");

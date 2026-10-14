@@ -4,7 +4,7 @@
 // Each step fails loudly, so a button that stops working blocks the release.
 //
 //   node tests/click/flows.mjs
-import { startApp } from './app.mjs';
+import { startApp, startFreshServer } from './app.mjs';
 import { sleep } from './cdp.mjs';
 
 const { browser: b, url, httpsPort, stop } = await startApp();
@@ -626,11 +626,39 @@ await flow('Studio password: locks every device out until it signs in, and can b
   await b.type('#login-password', 'studio-test-password');
   await b.clickText('Sign in');
   await eventually(async () => b.evaluate(`!!document.getElementById('nav-dest-settings')`), 'the right password did not open the CRM');
+  // idle lock: 5 minutes, then the clock is wound back instead of waiting
   await b.clickText('Settings');
+  await b.evaluate(`(() => { const s = document.getElementById('access-idle-minutes'); s.value = '5'; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+  await eventually(async () => (await api('/api/access')).idleMinutes === 5, 'the idle lock was not saved');
+  await b.evaluate('idleLastUse = Date.now() - 6 * 60000');
+  await eventually(async () => b.evaluate(`!!document.getElementById('login-password')`).catch(() => false), 'a device left unused did not lock', 25);
+  await b.type('#login-password', 'studio-test-password');
+  await b.clickText('Sign in');
+  await eventually(async () => b.evaluate(`!!document.getElementById('nav-dest-settings')`), 'signing in after the idle lock did not open the CRM');
+  await b.clickText('Settings');
+  await b.evaluate(`(() => { const s = document.getElementById('access-idle-minutes'); s.value = '0'; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+  await eventually(async () => (await api('/api/access')).idleMinutes === 0, 'the idle lock could not be turned off');
   await b.type('#access-current', 'studio-test-password');
   await b.clickText('Remove password');
   await eventually(async () => (await text('#access-status')).startsWith('No password is set'), 'the password was not removed');
   check((await anon('api/clients')) === 200, 'the API stayed locked after the password was removed');
+});
+
+await flow('First start: the CRM asks for a studio password before anything loads', async () => {
+  const fresh = await startFreshServer(Number(process.env.CLICK_PORT || 3412) + 7);
+  try {
+    check((await fetch(fresh.url + 'api/clients').then((r) => r.status)) === 401, 'a new studio answers data requests before the first-start choice');
+    await b.goto(fresh.url);
+    check(await b.evaluate(`document.body.innerText.includes('Welcome to Studio CRM')`), 'a new studio does not ask for a password');
+    await b.type('#setup-password', 'first-start-pass');
+    await b.type('#setup-again', 'not-the-same-pass');
+    await b.clickText('Create password and open the CRM');
+    await eventually(async () => (await text('#error')).includes('not the same'), 'two different passwords were accepted');
+    await b.type('#setup-again', 'first-start-pass');
+    await b.clickText('Create password and open the CRM');
+    await eventually(async () => b.evaluate(`!!document.getElementById('nav-dest-settings')`), 'creating the password did not open the CRM');
+    check((await fetch(fresh.url + 'api/clients').then((r) => r.status)) === 401, 'the new password does not protect the data');
+  } finally { await fresh.stop(); }
 });
 
 await stop();

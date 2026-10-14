@@ -1433,6 +1433,12 @@
                     <button type="button" id="access-signout-btn" onclick="signOutOfStudio()" style="display:none;padding:0.45rem 0.9rem;background:#1E293B;color:#E2E8F0;border:1px solid #475569;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">Sign out on this device</button>
                   </div>
                 </form>
+                <div id="access-idle-row" style="display:none;margin-top:12px;">
+                  <label for="access-idle-minutes" style="display:block;font-size:0.8rem;color:#9CA3AF;margin-bottom:4px;">Lock a device that is not used for</label>
+                  <select id="access-idle-minutes" onchange="saveIdleLock(this.value)" style="padding:8px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;">
+                    <option value="0">Never (off)</option><option value="5">5 minutes</option><option value="10">10 minutes</option><option value="15">15 minutes</option><option value="30">30 minutes</option>
+                  </select>
+                </div>
               </div>
 
               <!-- Setting: tablet kiosk PIN (locks the consent form kiosk on a tablet) -->

@@ -221,8 +221,64 @@ async function showStudioAccess() {
     show('access-signout-btn', on);
     const save = document.getElementById('access-save-btn');
     if (save) save.textContent = on ? 'Change password' : 'Set password';
+    show('access-idle-row', on);
+    const idle = document.getElementById('access-idle-minutes');
+    if (idle) idle.value = String(access.idleMinutes || 0);
+    startIdleLock(on ? access.idleMinutes : 0);
 }
 document.addEventListener('DOMContentLoaded', showStudioAccess);
+
+// =========================================================================
+// ⏱️ IDLE LOCK (Settings, with the studio password): a device left unused signs out
+// =========================================================================
+// Use anywhere counts, inside the embedded tools and the form builder too. The tablet kiosk is
+// never locked: it has its own PIN, and a client filling in a long form is not "idle".
+// ponytail: the lock runs in the page; the studio password is what protects the data on the server.
+let idleLockTimer = null;
+let idleLastUse = Date.now();
+const markUsed = () => { idleLastUse = Date.now(); };
+['pointerdown', 'keydown', 'touchstart', 'wheel', 'mousemove'].forEach((ev) => window.addEventListener(ev, markUsed, { passive: true, capture: true }));
+// the embedded tools are pages of their own: listen inside them as they load
+document.addEventListener('load', (e) => {
+    const frame = e.target;
+    if (!frame || frame.tagName !== 'IFRAME') return;
+    try { ['pointerdown', 'keydown', 'touchstart', 'wheel', 'mousemove'].forEach((ev) => frame.contentWindow.addEventListener(ev, markUsed, { passive: true, capture: true })); } catch (err) { /* another site */ }
+}, true);
+
+function kioskOpen() {
+    for (const frame of document.querySelectorAll('iframe')) {
+        try {
+            const k = frame.contentDocument && frame.contentDocument.getElementById('tablet-kiosk-modal');
+            if (k && k.style.display !== 'none') return true;
+        } catch (e) { /* another site */ }
+    }
+    return false;
+}
+
+function startIdleLock(minutes) {
+    if (idleLockTimer) clearInterval(idleLockTimer);
+    idleLockTimer = null;
+    if (!minutes) return;
+    markUsed();
+    idleLockTimer = setInterval(async () => {
+        if (kioskOpen()) { markUsed(); return; }
+        if (Date.now() - idleLastUse < minutes * 60000) return;
+        clearInterval(idleLockTimer);
+        try { await fetch('/api/access/logout', { method: 'POST' }); } catch (e) { /* the reload shows the sign-in page anyway */ }
+        window.location.reload();
+    }, 15000);
+}
+
+async function saveIdleLock(minutes) {
+    try {
+        const res = await fetch('/api/access/idle', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ minutes: Number(minutes) }) });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) { showStudioToast(data.error || 'Could not save'); return; }
+        startIdleLock(data.idleMinutes);
+        showStudioToast(data.idleMinutes ? 'Devices lock after ' + data.idleMinutes + ' minutes without use' : 'Idle lock is off');
+    } catch (e) { showStudioToast('Could not save: the server did not answer'); }
+}
+window.saveIdleLock = saveIdleLock;
 
 // =========================================================================
 // 🔒 TABLET KIOSK PIN (Settings): asked to leave the consent form kiosk on a tablet

@@ -29,7 +29,7 @@ Wählen Sie Englisch, Französisch, Italienisch, Deutsch, Spanisch, Niederländi
 
 ## Kunden
 
-**Kunden** listet alle mit Kontaktdaten, Allergien und medizinischen Hinweisen, unterschriebenen Einverständniserklärungen und Gesamtumsatz auf. Verwenden Sie **Neuer Kunde**, um einen hinzuzufügen. Die Suche filtert die Liste während der Eingabe. **Profil ansehen** öffnet den vollständigen Datensatz. Im Profil ändert **Kunde bearbeiten** die Angaben, und **Löschen** entfernt den Kunden. Das Profil zeigt außerdem Termine, Teamnotizen, unterschriebene Einwilligungen, gespeicherte Einwilligungsformulare und Fotos der Arbeiten. Um viele Kunden auf einmal anzulegen, öffnen Sie **Einstellungen**, **Import Data** und fügen eine Liste ein, deren erste Zeile `name,email,phone,allergies,notes` lautet.
+**Kunden** listet alle mit Kontaktdaten, Allergien und medizinischen Hinweisen, unterschriebenen Einverständniserklärungen und Gesamtumsatz auf. Verwenden Sie **Neuer Kunde**, um einen hinzuzufügen. Die Suche filtert die Liste während der Eingabe. **Profil ansehen** öffnet den vollständigen Datensatz. Im Profil ändert **Kunde bearbeiten** die Angaben, und **Löschen** entfernt den Kunden. Das Profil zeigt außerdem Termine, Teamnotizen, unterschriebene Einwilligungen, gespeicherte Einwilligungsformulare und Fotos der Arbeiten. Um viele Kunden auf einmal anzulegen, öffnen Sie **Einstellungen**, **Import Data** und fügen eine Liste ein, deren erste Zeile `name,email,phone,allergies,notes` lautet. Die Zahl **Signed** zählt auch Einwilligungsformulare, die auf dem Tablet unterschrieben wurden. **Healing Pipeline** listet die Kunden, deren Sitzung in den letzten 90 Tagen als erledigt markiert wurde, nach Tagen seit der Sitzung gruppiert, mit **View Profile** und **Download PDF**.
 
 ## Personal
 
@@ -43,21 +43,23 @@ Um andere Personen im selben Netzwerk fernzuhalten, öffnen Sie **Einstellungen*
 
 ## Termine und Terminplanung
 
-**Neuer Termin** bucht eine einzelne Sitzung mit Künstler, Station, Preis und Anzahlung. Für Arbeiten mit mehreren Sitzungen sucht der **Auto-Planer** die freien Zeitfenster des Künstlers an einem gewählten Tag und bucht bis zu sechs Sitzungen im festgelegten Wochenabstand. Das Dashboard zeigt die heutigen Zahlen, kommende Buchungen, den Stationsstatus und niedrigen Lagerbestand. Der Kalender listet alle gebuchten Termine auf, die nächsten zuerst. **Abgeschlossen** markiert eine Sitzung als erledigt, sie zählt dann in der Daueranalyse, und **Entfernen** löscht sie.
+**Neuer Termin** bucht eine einzelne Sitzung mit Künstler, Station, Preis und Anzahlung. Für Arbeiten mit mehreren Sitzungen sucht der **Auto-Planer** die freien Zeitfenster des Künstlers an einem gewählten Tag und bucht bis zu sechs Sitzungen im festgelegten Wochenabstand. Das Dashboard zeigt die heutigen Zahlen, kommende Buchungen, den Stationsstatus und niedrigen Lagerbestand. Der Kalender listet alle gebuchten Termine auf, die nächsten zuerst. **Abgeschlossen** markiert eine Sitzung als erledigt, sie zählt dann in der Daueranalyse, und **Entfernen** löscht sie. **Edit** bei einem Termin ändert Zeit, Künstler, Station, Preis, Anzahlung oder Notizen. Tippen Sie beim Buchen den Namen des Kunden und wählen Sie ihn aus der Liste, damit der Termin in seinem Profil erscheint. Zweimal schnell auf eine Speichern-Schaltfläche tippen speichert nur einmal. Die Liste zeigt zu jedem Termin auch die Anzahlung und den noch offenen Betrag (Preis minus Anzahlung).
 
 ## Digitale Einverständniserklärungen
 
-Öffnen Sie das Einverständnisformular, wählen Sie den Kunden aus der Liste (dessen Allergien werden automatisch eingetragen), bestätigen Sie die Altersprüfung und lassen Sie den Kunden auf dem Pad unterschreiben. Die Einverständniserklärung wird mit dem Unterschriftsbild gespeichert. Sie wird nicht ohne Kunden und Unterschrift gespeichert.
+Öffnen Sie das Einverständnisformular, wählen Sie den Kunden aus der Liste (dessen Allergien werden automatisch eingetragen), bestätigen Sie die Altersprüfung und lassen Sie den Kunden auf dem Pad unterschreiben. Die Einverständniserklärung wird mit dem Unterschriftsbild gespeichert. Sie wird nicht ohne Kunden und Unterschrift gespeichert. Aus dem Profil eines Kunden geöffnet, ist dieser Kunde im Formular bereits gewählt.
 
 Damit der Kunde ein Einwilligungsformular auf einem Tablet ausfüllt, öffnen Sie **Kunden**, den Editor für Einwilligungsformulare, die Formularvorschau und dann den Tablet-Kioskmodus. Der Kunde beantwortet einen Abschnitt pro Bildschirm, unterschreibt auf dem letzten und tippt auf die Schaltfläche zum Abschließen. Das Formular wird mit der Unterschrift gespeichert, und ein PDF wird heruntergeladen. Wurde vorher kein Kunde gewählt, wird aus Name, E-Mail, Telefon und Geburtsdatum des Formulars ein neuer Kunde angelegt. Gespeicherte Formulare stehen im Kundenprofil unter **Einwilligungen**; **Antworten ansehen** zeigt jede Antwort. Ein im Formular-Editor bearbeitetes Formular wird mit den Studiodaten gespeichert: Das Tablet zeigt also dasselbe Formular wie der Rechner, auf dem Sie es bearbeitet haben.
 
+
+Damit ein Kunde das Formular nicht verlassen kann, wenn Sie kurz weggehen, legen Sie in **Einstellungen** eine **Tablet Kiosk PIN** fest. Der Kioskmodus lässt sich dann nur mit der PIN verlassen. Tippt der Kunde auf **Complete**, prüft der Kiosk, dass nichts fehlt, speichert das Formular und zeigt „Thank you, your form has been submitted“, bis ein Mitarbeiter die PIN eingibt. Unterschriebene Einwilligungen stehen im Kundenprofil unter **Einwilligungen**: **View waiver** zeigt die Angaben und die Unterschrift, **Download PDF** speichert eine Kopie zum Drucken oder Aufbewahren.
 ## Nachrichten: Das CRM bereitet vor, Sie senden
 
 Studio CRM sendet selbst keine E-Mails, SMS oder Chat-Nachrichten. Wenn Sie eine Nachsorge-E-Mail, eine Erinnerung oder eine Lieferantenbestellung vorbereiten, erscheint ein Panel **Nachricht bereit**. Klicken Sie auf **E-Mail**, **WhatsApp** oder **LINE**, um sie mit dem bereits eingefügten Text in Ihrer eigenen App zu öffnen, und drücken Sie dort auf Senden, oder klicken Sie auf **Kopieren**.
 
 ## Lager, Scanner und Bestellungen
 
-**Inventar** verfolgt Mengen, Chargen, Ablaufdaten und Lieferanten. Artikel auf oder unter ihrem Nachbestellniveau zählen als niedriger Lagerbestand.
+**Inventar** verfolgt Mengen, Chargen, Ablaufdaten und Lieferanten. Artikel auf oder unter ihrem Nachbestellniveau zählen als niedriger Lagerbestand. Die Liste **Stock items** zeigt jeden Artikel mit Menge, Nachbestellgrenze, Charge, Ablaufdatum und Lieferant; suchen Sie nach Name, SKU oder Lieferant. **+ Add item** legt einen Artikel von Hand an, **Edit** ändert ihn. **Suppliers** listet Ihre Lieferanten: **+ Add supplier** und **Edit**. Bestellungen gehen an die Bestell-E-Mail des Lieferanten; prüfen Sie sie.
 
 Der Scanner in **Aktivitätsprotokoll** nutzt die Gerätekamera. Scannen Sie eine Lager-SKU oder Chargennummer, um den Artikel zu sehen, oder einen `CLIENT-<number>`-Code, um einen Kunden zu öffnen. Sie können auch einen Code von einem Foto scannen. Unbekannte Codes werden unter **Fehlerprotokoll** aufgeführt.
 
@@ -69,7 +71,7 @@ Der Scanner in **Aktivitätsprotokoll** nutzt die Gerätekamera. Scannen Sie ein
 
 ## Geld und Personal
 
-Der **Trinkgeldrechner** teilt ein Trinkgeld 80 % Künstler, 15 % Auszubildender, 5 % Empfang und erfasst es. Das Personal stempelt Beginn und Ende der Schicht mit dem Schicht-Button. Exporte liefern Ihnen das Aktivitätsprotokoll, niedrigen Lagerbestand, Schichten und Sitzungsdauern als CSV oder PDF. Im Kalender zeigt das Schichtfenster, ob eine Person im Dienst ist, und der **Dienstplan** listet die geplanten Schichten: Wählen Sie eine Person, ein Datum und die Zeiten, dann **Schicht hinzufügen**. Der Export des Dienstplans und, im Lager, der Export des Bestands speichern eine CSV- oder PDF-Datei in Ihrem Download-Ordner.
+Der **Trinkgeldrechner** teilt ein Trinkgeld 80 % Künstler, 15 % Auszubildender, 5 % Empfang und erfasst es. Das Personal stempelt Beginn und Ende der Schicht mit dem Schicht-Button. Exporte liefern Ihnen das Aktivitätsprotokoll, niedrigen Lagerbestand, Schichten und Sitzungsdauern als CSV oder PDF. Im Kalender zeigt das Schichtfenster, ob eine Person im Dienst ist, und der **Dienstplan** listet die geplanten Schichten: Wählen Sie eine Person, ein Datum und die Zeiten, dann **Schicht hinzufügen**. Der Export des Dienstplans und, im Lager, der Export des Bestands speichern eine CSV- oder PDF-Datei in Ihrem Download-Ordner. Unter **Finanzen** erfasst **Record Payment** eine Zahlung: Kunde, Betrag und Zahlungsart. **Deposit Ledger** listet die bei der Buchung erhaltenen Anzahlungen.
 
 ## Compliance-Aufzeichnungen
 

@@ -29,7 +29,7 @@ Aprite **Impostazioni** per inserire i vostri prezzi, la regola dell'acconto, l'
 
 ## Clienti
 
-**Clienti** elenca tutti con i loro dati di contatto, allergie e note mediche, consensi firmati e totale spesa. Usate **Nuovo cliente** per aggiungerne uno. La ricerca filtra l'elenco mentre digitate. **Visualizza profilo** apre la scheda completa. Nel profilo, **Modifica cliente** cambia i dati e **Elimina** rimuove il cliente. Il profilo mostra anche gli appuntamenti, le note del personale, le liberatorie firmate, i moduli di consenso salvati e le foto dei lavori. Per aggiungere molti clienti insieme, aprite **Impostazioni**, **Import Data** e incollate un elenco la cui prima riga è `name,email,phone,allergies,notes`.
+**Clienti** elenca tutti con i loro dati di contatto, allergie e note mediche, consensi firmati e totale spesa. Usate **Nuovo cliente** per aggiungerne uno. La ricerca filtra l'elenco mentre digitate. **Visualizza profilo** apre la scheda completa. Nel profilo, **Modifica cliente** cambia i dati e **Elimina** rimuove il cliente. Il profilo mostra anche gli appuntamenti, le note del personale, le liberatorie firmate, i moduli di consenso salvati e le foto dei lavori. Per aggiungere molti clienti insieme, aprite **Impostazioni**, **Import Data** e incollate un elenco la cui prima riga è `name,email,phone,allergies,notes`. Il conteggio **Signed** include i moduli di consenso firmati sul tablet. **Healing Pipeline** elenca i clienti la cui seduta è stata segnata come completata negli ultimi 90 giorni, raggruppati per giorni dalla seduta, con **View Profile** e **Download PDF**.
 
 ## Personale
 
@@ -43,21 +43,23 @@ Per tenere fuori le altre persone sulla stessa rete, aprite **Impostazioni** e i
 
 ## Appuntamenti e pianificazione
 
-**Nuovo appuntamento** prenota una singola sessione con artista, postazione, prezzo e acconto. Per lavori su più sessioni, il **Pianificatore automatico** cerca gli slot liberi dell'artista in un giorno scelto e prenota fino a sei sessioni a un numero fisso di settimane di distanza. La Dashboard mostra i dati di oggi, le prenotazioni in arrivo, lo stato delle postazioni e le scorte basse. Il Calendario elenca tutti gli appuntamenti prenotati, i prossimi per primi. **Completato** segna una sessione come svolta, così viene contata nell'analisi delle durate, e **Rimuovi** la elimina.
+**Nuovo appuntamento** prenota una singola sessione con artista, postazione, prezzo e acconto. Per lavori su più sessioni, il **Pianificatore automatico** cerca gli slot liberi dell'artista in un giorno scelto e prenota fino a sei sessioni a un numero fisso di settimane di distanza. La Dashboard mostra i dati di oggi, le prenotazioni in arrivo, lo stato delle postazioni e le scorte basse. Il Calendario elenca tutti gli appuntamenti prenotati, i prossimi per primi. **Completato** segna una sessione come svolta, così viene contata nell'analisi delle durate, e **Rimuovi** la elimina. **Edit** su un appuntamento cambia ora, artista, postazione, prezzo, acconto o note. Quando prenoti, digita il nome del cliente e sceglilo dall'elenco, così l'appuntamento compare nella sua scheda. Due tocchi rapidi su un pulsante di salvataggio salvano una sola volta. L'elenco mostra anche l'acconto di ogni appuntamento e quanto resta da pagare (prezzo meno acconto).
 
 ## Consensi digitali
 
-Aprite il modulo di consenso, scegliete il cliente dall'elenco (le sue allergie vengono compilate automaticamente), confermate la verifica dell'età e fate firmare il cliente sul tablet. Il consenso viene salvato con l'immagine della firma. Non si salva senza un cliente e una firma.
+Aprite il modulo di consenso, scegliete il cliente dall'elenco (le sue allergie vengono compilate automaticamente), confermate la verifica dell'età e fate firmare il cliente sul tablet. Il consenso viene salvato con l'immagine della firma. Non si salva senza un cliente e una firma. Aperto dalla scheda di un cliente, il modulo ha già quel cliente selezionato.
 
 Per far compilare un modulo di consenso su un tablet, aprite **Clienti**, il generatore di moduli di consenso, l'anteprima del modulo, poi la modalità chiosco per tablet. Il cliente risponde a una sezione per schermata, firma nell'ultima e tocca il pulsante per completare. Il modulo viene salvato con la firma e viene scaricato un PDF. Se prima non è stato scelto alcun cliente, viene creato un nuovo cliente con nome, email, telefono e data di nascita del modulo. I moduli salvati sono nel profilo del cliente, sotto **Liberatorie**; **Vedi risposte** mostra ogni risposta. Un modulo modificato nel generatore di moduli viene salvato con i dati dello studio: il tablet mostra quindi lo stesso modulo del computer su cui lo avete modificato.
 
+
+Per impedire al cliente di uscire dal modulo quando ti allontani, imposta un **Tablet Kiosk PIN** in **Impostazioni**. Per uscire dalla modalità kiosk servirà il PIN. Quando il cliente tocca **Complete**, il kiosk controlla che non manchi nulla, salva il modulo e mostra «Thank you, your form has been submitted» finché un membro dello staff non inserisce il PIN. I consensi firmati sono nella scheda del cliente, sotto **Liberatorie**: **View waiver** mostra le risposte e la firma, e **Download PDF** salva una copia da stampare o conservare.
 ## Messaggi: il CRM prepara, voi inviate
 
 Studio CRM non invia da solo email, SMS o messaggi di chat. Quando preparate un'email di aftercare, un promemoria o un ordine al fornitore, appare un pannello **Messaggio pronto**. Cliccate su **Email**, **WhatsApp** o **LINE** per aprirlo nella vostra app con il testo già compilato, poi premete invia lì, oppure cliccate su **Copia**.
 
 ## Magazzino, scanner e ordini d'acquisto
 
-**Magazzino** tiene traccia di quantità, lotti, date di scadenza e fornitori. Gli articoli al livello di riordino o sotto di esso sono considerati scorte basse.
+**Magazzino** tiene traccia di quantità, lotti, date di scadenza e fornitori. Gli articoli al livello di riordino o sotto di esso sono considerati scorte basse. L'elenco **Stock items** mostra ogni articolo con quantità, soglia di riordino, lotto, scadenza e fornitore; cerca per nome, SKU o fornitore. **+ Add item** aggiunge un articolo a mano e **Edit** lo modifica. **Suppliers** elenca i fornitori: **+ Add supplier** e **Edit**. Gli ordini partono all'email ordini del fornitore: controllala.
 
 Lo scanner in **Registro attività** usa la fotocamera del dispositivo. Scansionate un codice articolo o un numero di lotto per vedere l'articolo, oppure un codice `CLIENT-<number>` per aprire un cliente. Potete anche scansionare un codice da una foto. I codici non riconosciuti sono elencati in **Registro errori**.
 
@@ -69,7 +71,7 @@ Lo scanner in **Registro attività** usa la fotocamera del dispositivo. Scansion
 
 ## Denaro e personale
 
-Il **Calcolatore mance** divide una mancia 80% artista, 15% apprendista, 5% reception e la registra. Il personale timbra entrata e uscita con il pulsante turno. Le esportazioni forniscono il registro attività, le scorte basse, i turni e le durate delle sessioni in CSV o PDF. Nel Calendario, la finestra dei turni mostra se una persona è in turno, e l'elenco **Turni** riporta i turni previsti: scegliete una persona, una data e l'orario, poi **Aggiungi turno**. L'esportazione dei turni e, in Magazzino, l'esportazione delle scorte salvano un file CSV o PDF nella cartella Download.
+Il **Calcolatore mance** divide una mancia 80% artista, 15% apprendista, 5% reception e la registra. Il personale timbra entrata e uscita con il pulsante turno. Le esportazioni forniscono il registro attività, le scorte basse, i turni e le durate delle sessioni in CSV o PDF. Nel Calendario, la finestra dei turni mostra se una persona è in turno, e l'elenco **Turni** riporta i turni previsti: scegliete una persona, una data e l'orario, poi **Aggiungi turno**. L'esportazione dei turni e, in Magazzino, l'esportazione delle scorte salvano un file CSV o PDF nella cartella Download. In **Finanze**, **Record Payment** registra un pagamento: il cliente, l'importo e il metodo di pagamento. **Deposit Ledger** elenca gli acconti incassati alla prenotazione.
 
 ## Registri di conformità
 

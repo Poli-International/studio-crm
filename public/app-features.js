@@ -489,7 +489,7 @@ function switchClientProfileTab(tabName) {
                         <span style="background:rgba(16,185,129,0.2);color:#34D399;border:1px solid #10B981;padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:800;">
                             ✅ VERIFIED & SIGNED
                         </span>
-                        <button type="button" onclick="openWaiverModal(${client.id})" style="padding:0.4rem 0.75rem;background:#374151;color:#F3F4F6;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">View Signature</button>
+                        <button type="button" onclick="viewWaiverRecord(${Number(w.id)})" style="padding:0.4rem 0.75rem;background:#374151;color:#F3F4F6;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">View waiver</button>
                     </div>
                 </div>
             `;
@@ -1606,6 +1606,11 @@ function forceShowModal(id) {
         if (el.parentElement !== document.body && el.closest('.destination-view')) document.body.appendChild(el);
         el.style.display = 'flex';
         el.setAttribute('aria-hidden', 'false');
+        // a window opened from another one goes in front of it: View Profile from Health Alerts
+        // opened the profile behind the alerts window
+        const top = [...document.body.children].filter((o) => o !== el && o.style.display !== 'none' && getComputedStyle(o).position === 'fixed' && getComputedStyle(o).display !== 'none')
+            .reduce((max, o) => Math.max(max, parseInt(getComputedStyle(o).zIndex, 10) || 0), 0);
+        if ((parseInt(getComputedStyle(el).zIndex, 10) || 0) <= top) el.style.zIndex = String(top + 1);
     }
     return el;
 }
@@ -1658,27 +1663,220 @@ function openAftercareModal() {
 }
 window.openAftercareModal = openAftercareModal;
 
-async function openAftercarePipelineModal() {
-    const overlay = forceShowModal('aftercare-pipeline-modal-overlay');
-    const body = document.getElementById('aftercare-pipeline-modal-body');
-    if (body) {
-        body.innerHTML = '<div style="text-align:center;padding:24px;color:#94A3B8;">Loading healing milestones...</div>';
-        try {
-            const res = await fetch('/api/aftercare/pipeline');
-            const data = await res.json();
-            const milestones = data.milestones || data.stages || [
-                { stage: 'Day 1-3 (Fresh)', count: 4, action: 'Saline Soak 2x/day' },
-                { stage: 'Day 7-14 (Healing)', count: 6, action: 'Downsizing Check' },
-                { stage: 'Day 30+ (Settled)', count: 12, action: 'Complete' }
-            ];
-            body.innerHTML = '<div style="display:flex;flex-direction:column;gap:12px;">' +
-                milestones.map(m => '<div style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;"><div><strong style="color:#38BDF8;">' + (m.stage || m.title) + '</strong><div style="font-size:0.8rem;color:#94A3B8;">' + (m.action || 'Standard sterile routine') + '</div></div><span style="background:#1E293B;color:#CBD5E1;padding:4px 8px;border-radius:6px;font-size:0.8rem;font-weight:700;">' + (m.count || 0) + ' Clients</span></div>').join('') +
-                '</div>';
-        } catch (e) {
-            body.innerHTML = '<div style="color:#EF4444;text-align:center;padding:16px;">Failed to load aftercare pipeline.</div>';
-        }
+// --- Inventory: every stock item, with Add item and Edit (POST/PATCH /api/inventory) ---
+const INVENTORY_FIELDS = [
+    ["name", "Item name", "text", true], ["category", "Category", "text"], ["sku", "SKU", "text"],
+    ["quantity", "In stock", "number", true], ["reorder_point", "Reorder at", "number"], ["price", "Unit price", "number"],
+    ["lot_number", "Lot number", "text"], ["exp_date", "Expires", "date"], ["supplier", "Supplier", "text"],
+];
+let inventoryItems = [];
+let editingInventoryId = null;
+
+async function renderInventoryItems() {
+    const tbody = document.getElementById("inventory-items-tbody");
+    if (!tbody) return;
+    try { inventoryItems = await ledgerJson("/api/inventory"); } catch (e) { tbody.innerHTML = '<tr><td colspan="10" style="padding:10px;color:#FCA5A5;">Could not load: the server did not answer</td></tr>'; return; }
+    inventoryItems = Array.isArray(inventoryItems) ? inventoryItems : (inventoryItems.items || []);
+    const q = ((document.getElementById("inventory-items-search") || {}).value || "").toLowerCase().trim();
+    const shown = inventoryItems.filter((i) => !q || [i.name, i.sku, i.supplier, i.category, i.item_type].some((v) => String(v || "").toLowerCase().includes(q)))
+        .sort((a, b) => String(a.name || "").localeCompare(String(b.name || "")));
+    if (!shown.length) {
+        tbody.innerHTML = '<tr><td colspan="10" style="padding:10px;color:#94A3B8;">' + (q ? "No item matches." : "No stock items yet. Add the first one with + Add item.") + '</td></tr>';
+        return;
     }
+    const cell = (v, style) => '<td style="padding:8px;' + (style || "") + '">' + escapeHtml(String(v == null ? "" : v)) + '</td>';
+    tbody.innerHTML = shown.map((i) => {
+        const low = Number(i.quantity) <= Number(i.reorder_point ?? 10);
+        return '<tr class="inventory-item-row" style="border-bottom:1px solid #1E293B;">' + cell(i.name, "font-weight:700;color:#FFF;") + cell(i.category || i.item_type) + cell(i.sku)
+            + cell(i.quantity, low ? "color:#FCA5A5;font-weight:800;" : "") + cell(i.reorder_point) + cell(i.price != null && i.price !== "" ? Number(i.price).toFixed(2) : "")
+            + cell(i.lot_number) + cell(i.exp_date) + cell(i.supplier)
+            + '<td style="padding:8px;text-align:right;"><button type="button" onclick="openInventoryItemForm(' + Number(i.id) + ')" style="padding:4px 8px;border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;background:#334155;color:#E2E8F0;border:1px solid #475569;">Edit</button></td></tr>';
+    }).join("");
 }
+window.renderInventoryItems = renderInventoryItems;
+document.addEventListener("DOMContentLoaded", renderInventoryItems);
+
+function openInventoryItemForm(id) {
+    const item = id ? inventoryItems.find((i) => Number(i.id) === Number(id)) : null;
+    editingInventoryId = item ? item.id : null;
+    let overlay = document.getElementById("inventory-item-modal-overlay");
+    if (!overlay) {
+        overlay = document.createElement("div");
+        overlay.id = "inventory-item-modal-overlay";
+        overlay.setAttribute("role", "dialog");
+        overlay.setAttribute("aria-modal", "true");
+        overlay.setAttribute("aria-labelledby", "inventory-item-title");
+        overlay.style.cssText = "display:none;position:fixed;inset:0;background:rgba(15,23,42,0.85);z-index:2000000;align-items:center;justify-content:center;";
+        const field = "width:100%;box-sizing:border-box;padding:8px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.9rem;";
+        overlay.innerHTML = '<form id="inventory-item-form" style="background:#0F172A;border:1px solid #334155;border-radius:14px;padding:20px;width:min(94vw,520px);max-height:90vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px;color:#F8FAFC;">'
+            + '<h3 id="inventory-item-title" style="grid-column:1/-1;margin:0;font-size:1.1rem;"></h3>'
+            + INVENTORY_FIELDS.map(([key, label, type, required]) => '<label style="font-size:0.8rem;color:#94A3B8;' + (key === "name" || key === "supplier" ? "grid-column:1/-1;" : "") + '">' + label
+                + '<input id="inventory-item-' + key + '" type="' + type + '"' + (type === "number" ? ' min="0" step="any"' : "") + (required ? " required" : "") + ' style="' + field + '"></label>').join("")
+            + '<div style="grid-column:1/-1;display:flex;gap:10px;justify-content:flex-end;margin-top:4px;">'
+            + '<button type="button" onclick="forceHideModal(\'inventory-item-modal-overlay\')" style="padding:9px 16px;background:transparent;color:#94A3B8;border:1px solid #475569;border-radius:8px;cursor:pointer;">Cancel</button>'
+            + '<button type="submit" id="inventory-item-save-btn" style="padding:9px 16px;background:#10B981;color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;"></button></div></form>';
+        document.body.appendChild(overlay);
+        overlay.querySelector("form").addEventListener("submit", saveInventoryItem);
+    }
+    overlay.querySelector("form").reset();
+    document.getElementById("inventory-item-title").textContent = item ? "Edit stock item" : "Add a stock item";
+    document.getElementById("inventory-item-save-btn").textContent = item ? "Save changes" : "Add item";
+    if (item) for (const [key] of INVENTORY_FIELDS) {
+        const el = document.getElementById("inventory-item-" + key);
+        const v = key === "category" ? (item.category || item.item_type) : item[key];
+        if (el && v != null) el.value = v;
+    }
+    forceShowModal("inventory-item-modal-overlay");
+    document.getElementById("inventory-item-name").focus();
+}
+window.openInventoryItemForm = openInventoryItemForm;
+
+async function saveInventoryItem(event) {
+    event.preventDefault();
+    const body = {};
+    for (const [key, , type] of INVENTORY_FIELDS) {
+        const v = document.getElementById("inventory-item-" + key).value.trim();
+        if (v !== "") body[key] = type === "number" ? Number(v) : v;
+    }
+    if (body.category) body.item_type = body.category;
+    const editedId = editingInventoryId;
+    try {
+        const res = await fetch(editedId ? "/api/inventory/" + editedId : "/api/inventory", { method: editedId ? "PATCH" : "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+    } catch (e) { showStudioToast("Could not save the item: the server did not answer"); return; }
+    forceHideModal("inventory-item-modal-overlay");
+    showStudioToast(editedId ? "Item updated: " + body.name : "Item added: " + body.name);
+    renderInventoryItems();
+}
+
+// --- Suppliers: list, Add supplier and Edit (POST /api/inventory/suppliers, PUT .../:id) ---
+const SUPPLIER_FIELDS = [
+    ["name", "Supplier name", "text", true], ["contact_person", "Contact person", "text"], ["phone", "Phone", "tel"],
+    ["email", "Email", "email"], ["order_email", "Order email (purchase orders)", "email"], ["website", "Website", "url"],
+    ["lead_time_days", "Lead time (days)", "number"], ["payment_terms", "Payment terms", "text"], ["notes", "Notes", "text"],
+];
+let supplierList = [];
+let editingSupplierId = null;
+
+async function renderSupplierList() {
+    const tbody = document.getElementById("suppliers-tbody");
+    if (!tbody) return;
+    try { supplierList = await ledgerJson("/api/inventory/suppliers"); } catch (e) { tbody.innerHTML = '<tr><td colspan="7" style="padding:10px;color:#FCA5A5;">Could not load: the server did not answer</td></tr>'; return; }
+    supplierList = Array.isArray(supplierList) ? supplierList : [];
+    if (!supplierList.length) { tbody.innerHTML = '<tr><td colspan="7" style="padding:10px;color:#94A3B8;">No suppliers yet. Add the first one with + Add supplier.</td></tr>'; return; }
+    const cell = (v, style) => '<td style="padding:8px;' + (style || "") + '">' + escapeHtml(String(v == null ? "" : v)) + '</td>';
+    tbody.innerHTML = supplierList.slice().sort((a, b) => String(a.name).localeCompare(String(b.name))).map((sp) => '<tr class="supplier-row" style="border-bottom:1px solid #1E293B;">'
+        + cell(sp.name, "font-weight:700;color:#FFF;") + cell(sp.contact_person) + cell(sp.phone) + cell(sp.order_email || sp.email)
+        + cell(sp.lead_time_days ? sp.lead_time_days + " days" : "") + cell(sp.item_count)
+        + '<td style="padding:8px;text-align:right;"><button type="button" onclick="openSupplierForm(' + Number(sp.id) + ')" style="padding:4px 8px;border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;background:#334155;color:#E2E8F0;border:1px solid #475569;">Edit</button></td></tr>').join("");
+}
+window.renderSupplierList = renderSupplierList;
+document.addEventListener("DOMContentLoaded", renderSupplierList);
+
+function openSupplierForm(id) {
+    const sp = id ? supplierList.find((x) => Number(x.id) === Number(id)) : null;
+    editingSupplierId = sp ? sp.id : null;
+    let overlay = document.getElementById("supplier-modal-overlay");
+    if (!overlay) {
+        overlay = document.createElement("div");
+        overlay.id = "supplier-modal-overlay";
+        overlay.setAttribute("role", "dialog");
+        overlay.setAttribute("aria-modal", "true");
+        overlay.setAttribute("aria-labelledby", "supplier-form-title");
+        overlay.style.cssText = "display:none;position:fixed;inset:0;background:rgba(15,23,42,0.85);z-index:2000000;align-items:center;justify-content:center;";
+        const field = "width:100%;box-sizing:border-box;padding:8px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.9rem;";
+        overlay.innerHTML = '<form id="supplier-form" style="background:#0F172A;border:1px solid #334155;border-radius:14px;padding:20px;width:min(94vw,520px);max-height:90vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px;color:#F8FAFC;">'
+            + '<h3 id="supplier-form-title" style="grid-column:1/-1;margin:0;font-size:1.1rem;"></h3>'
+            + SUPPLIER_FIELDS.map(([key, label, type, required]) => '<label style="font-size:0.8rem;color:#94A3B8;' + (["name", "order_email", "notes"].includes(key) ? "grid-column:1/-1;" : "") + '">' + label
+                + '<input id="supplier-' + key + '" type="' + type + '"' + (type === "number" ? ' min="0" step="1"' : "") + (required ? " required" : "") + ' style="' + field + '"></label>').join("")
+            + '<div style="grid-column:1/-1;display:flex;gap:10px;justify-content:flex-end;margin-top:4px;">'
+            + '<button type="button" onclick="forceHideModal(\'supplier-modal-overlay\')" style="padding:9px 16px;background:transparent;color:#94A3B8;border:1px solid #475569;border-radius:8px;cursor:pointer;">Cancel</button>'
+            + '<button type="submit" id="supplier-save-btn" style="padding:9px 16px;background:#10B981;color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;"></button></div></form>';
+        document.body.appendChild(overlay);
+        overlay.querySelector("form").addEventListener("submit", saveSupplier);
+    }
+    overlay.querySelector("form").reset();
+    document.getElementById("supplier-form-title").textContent = sp ? "Edit supplier" : "Add a supplier";
+    document.getElementById("supplier-save-btn").textContent = sp ? "Save changes" : "Add supplier";
+    if (sp) for (const [key] of SUPPLIER_FIELDS) { const el = document.getElementById("supplier-" + key); if (el && sp[key] != null) el.value = sp[key]; }
+    forceShowModal("supplier-modal-overlay");
+    document.getElementById("supplier-name").focus();
+}
+window.openSupplierForm = openSupplierForm;
+
+async function saveSupplier(event) {
+    event.preventDefault();
+    const body = {};
+    for (const [key, , type] of SUPPLIER_FIELDS) body[key] = type === "number" ? (document.getElementById("supplier-" + key).value === "" ? undefined : Number(document.getElementById("supplier-" + key).value)) : document.getElementById("supplier-" + key).value.trim();
+    const editedId = editingSupplierId;
+    try {
+        const res = await fetch(editedId ? "/api/inventory/suppliers/" + editedId : "/api/inventory/suppliers", { method: editedId ? "PUT" : "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+    } catch (e) { showStudioToast("Could not save the supplier: the server did not answer"); return; }
+    forceHideModal("supplier-modal-overlay");
+    showStudioToast(editedId ? "Supplier updated: " + body.name : "Supplier added: " + body.name);
+    renderSupplierList();
+    if (typeof renderInventoryItems === "function") renderInventoryItems();
+}
+
+// Healing Pipeline: the clients whose session is done, grouped by days since the session.
+// It used to show fixed sample counts (4, 6, 12): the server's records were never read, and
+// nothing ever added one. Built from the studio's own completed appointments now.
+// ponytail: days since the session only, no healing advice (a piercing heals far slower than a tattoo).
+const PIPELINE_GROUPS = [
+    { from: 0, to: 3, label: "Days 0 to 3" },
+    { from: 4, to: 14, label: "Days 4 to 14" },
+    { from: 15, to: 30, label: "Days 15 to 30" },
+    { from: 31, to: 90, label: "Days 31 to 90" },
+];
+let pipelineGroups = [];
+
+async function openAftercarePipelineModal() {
+    forceShowModal('aftercare-pipeline-modal-overlay');
+    const body = document.getElementById('aftercare-pipeline-modal-body');
+    if (!body) return;
+    body.innerHTML = '<div style="text-align:center;padding:24px;color:#94A3B8;">Loading...</div>';
+    let appts;
+    try { appts = await ledgerJson('/api/appointments'); } catch (e) { body.innerHTML = LEDGER_ERROR; return; }
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const days = (a) => Math.floor((today - new Date(new Date(a.datetime).setHours(0, 0, 0, 0))) / 86400000);
+    const done = (Array.isArray(appts) ? appts : []).filter((a) => a && a.status === 'completed' && a.datetime && days(a) >= 0 && days(a) <= 90);
+    pipelineGroups = PIPELINE_GROUPS.map((g) => ({ label: g.label, items: done.filter((a) => days(a) >= g.from && days(a) <= g.to)
+        .sort((a, b) => new Date(b.datetime) - new Date(a.datetime)).map((a) => Object.assign({ days: days(a) }, a)) }));
+    if (!done.length) {
+        body.innerHTML = '<div style="text-align:center;padding:20px;color:#94A3B8;">No sessions completed in the last 90 days. Mark an appointment as Completed in the Calendar and the client appears here.</div>';
+        return;
+    }
+    const btn = 'padding:4px 8px;border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;background:#334155;color:#E2E8F0;border:1px solid #475569;';
+    body.innerHTML = '<div style="display:flex;justify-content:flex-end;margin-bottom:10px;"><button type="button" onclick="downloadPipelinePdf()" style="' + btn + 'background:#2563EB;color:#FFF;border:none;">⬇ Download PDF</button></div>'
+        + pipelineGroups.map((g) => '<div class="pipeline-group" style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;margin-bottom:10px;">'
+            + '<div style="display:flex;justify-content:space-between;font-weight:800;margin-bottom:6px;"><span>' + escapeHtml(g.label) + '</span><span style="color:#38BDF8;">' + g.items.length + '</span></div>'
+            + (g.items.length ? g.items.map((a) => '<div class="pipeline-client" style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-top:1px solid #1E293B;">'
+                + '<div><strong>' + escapeHtml(a.client_name || '') + '</strong><div style="font-size:0.78rem;color:#94A3B8;">' + escapeHtml([a.service_type, a.staff_name, new Date(a.datetime).toLocaleDateString(), 'day ' + a.days].filter(Boolean).join(' · ')) + '</div></div>'
+                + (a.client_id ? '<button type="button" onclick="forceHideModal(\'aftercare-pipeline-modal-overlay\'); openClientProfileModal(' + Number(a.client_id) + ')" style="' + btn + '">View Profile</button>' : '')
+                + '</div>').join('') : '<div style="font-size:0.8rem;color:#64748B;">Nobody in this group.</div>')
+            + '</div>').join('');
+}
+
+function downloadPipelinePdf() {
+    if (!(window.jspdf && window.jspdf.jsPDF)) { showStudioToast('The PDF library did not load'); return; }
+    const doc = new window.jspdf.jsPDF();
+    let y = 18;
+    doc.setFontSize(16); doc.text('Healing pipeline', 15, y); y += 7;
+    doc.setFontSize(9); doc.text('Clients by days since their completed session. ' + new Date().toLocaleDateString(), 15, y); y += 10;
+    for (const g of pipelineGroups) {
+        if (y > 270) { doc.addPage(); y = 18; }
+        doc.setFontSize(12); doc.text(g.label + ' (' + g.items.length + ')', 15, y); y += 7;
+        doc.setFontSize(10);
+        for (const a of g.items) {
+            if (y > 280) { doc.addPage(); y = 18; }
+            doc.text([a.client_name, a.service_type, a.staff_name, new Date(a.datetime).toLocaleDateString(), 'day ' + a.days].filter(Boolean).join('  |  '), 18, y); y += 6;
+        }
+        y += 4;
+    }
+    doc.save('healing-pipeline-' + new Date().toISOString().slice(0, 10) + '.pdf');
+}
+window.downloadPipelinePdf = downloadPipelinePdf;
 window.openAftercarePipelineModal = openAftercarePipelineModal;
 
 // One line of a ledger window: what on the left, how much on the right.
@@ -1836,8 +2034,10 @@ function openQuickAddClientModal() {
 }
 window.openQuickAddClientModal = openQuickAddClientModal;
 
+// one way in: the form may still be in edit mode from the last Edit, and Save would change
+// that appointment instead of booking a new one
 function openQuickNewAppointmentModal() {
-    forceShowModal('new-appointment-modal-overlay');
+    openNewAppointmentModal();
 }
 window.openQuickNewAppointmentModal = openQuickNewAppointmentModal;
 
@@ -1848,9 +2048,59 @@ function openQuickPortalAccessModal(clientId) {
 }
 window.openQuickPortalAccessModal = openQuickPortalAccessModal;
 
-function openQuickRecordPaymentModal() {
-    forceShowModal('deposit-ledger-modal-overlay');
-    showStudioToast('Payment Recording Terminal ready');
+// Record Payment used to open the deposit ledger and say "Payment Recording Terminal ready":
+// nothing could be recorded. A real form now, saved as a transaction (/api/financial).
+async function openQuickRecordPaymentModal() {
+    let overlay = document.getElementById('record-payment-modal-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'record-payment-modal-overlay';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-labelledby', 'record-payment-title');
+        overlay.style.cssText = 'display:none;position:fixed;inset:0;background:rgba(15,23,42,0.85);z-index:2000000;align-items:center;justify-content:center;';
+        const field = 'width:100%;box-sizing:border-box;padding:9px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.95rem;';
+        overlay.innerHTML = `
+            <form id="record-payment-form" style="background:#0F172A;border:1px solid #334155;border-radius:14px;padding:22px;width:min(92vw,420px);display:flex;flex-direction:column;gap:12px;color:#F8FAFC;">
+                <h3 id="record-payment-title" style="margin:0;font-size:1.1rem;">💵 Record a payment</h3>
+                <label style="font-size:0.8rem;color:#94A3B8;">Client
+                    <select id="record-payment-client" style="${field}"><option value="">Walk-in / not on file</option></select></label>
+                <label style="font-size:0.8rem;color:#94A3B8;">Amount
+                    <input id="record-payment-amount" type="number" min="0.01" step="0.01" required style="${field}" /></label>
+                <label style="font-size:0.8rem;color:#94A3B8;">Paid by
+                    <select id="record-payment-method" style="${field}"><option>Cash</option><option>Card</option><option>Bank transfer</option><option>Other</option></select></label>
+                <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:4px;">
+                    <button type="button" onclick="forceHideModal('record-payment-modal-overlay')" style="padding:9px 16px;background:transparent;color:#94A3B8;border:1px solid #475569;border-radius:8px;cursor:pointer;">Cancel</button>
+                    <button type="submit" style="padding:9px 16px;background:#10B981;color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;">Save payment</button>
+                </div>
+            </form>`;
+        document.body.appendChild(overlay);
+        overlay.querySelector('form').addEventListener('submit', saveQuickPayment);
+    }
+    overlay.querySelector('form').reset();
+    forceShowModal('record-payment-modal-overlay');
+    try {
+        const clients = await (await fetch('/api/clients')).json();
+        const sel = document.getElementById('record-payment-client');
+        sel.innerHTML = '<option value="">Walk-in / not on file</option>' + (Array.isArray(clients) ? clients : [])
+            .map((c) => `<option value="${Number(c.id)}">${escapeHtml(c.name || '')}</option>`).join('');
+    } catch (e) { /* the form still records a walk-in payment */ }
+    document.getElementById('record-payment-amount').focus();
+}
+
+async function saveQuickPayment(event) {
+    event.preventDefault();
+    const amount = parseFloat(document.getElementById('record-payment-amount').value);
+    if (!(amount > 0)) { showStudioToast('Enter the amount paid'); return; }
+    const clientId = document.getElementById('record-payment-client').value;
+    try {
+        const res = await fetch('/api/financial', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ client_id: clientId || null, amount, method: document.getElementById('record-payment-method').value, type: 'payment', source: 'in-studio' }) });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+    } catch (e) { showStudioToast('Could not save the payment: the server did not answer'); return; }
+    forceHideModal('record-payment-modal-overlay');
+    showStudioToast('Payment recorded: $' + amount.toFixed(2));
+    if (typeof renderDashboardKpis === 'function') renderDashboardKpis();
 }
 window.openQuickRecordPaymentModal = openQuickRecordPaymentModal;
 
@@ -2537,12 +2787,13 @@ window.renderClientDirectoryModal = renderClientDirectoryModal;
 async function renderClientsTable() {
     const tbody = document.getElementById("clients-table-tbody");
     if (!tbody) return;
-    let clients, waivers = [], payments = [];
+    let clients, waivers = [], payments = [], forms = [];
     try {
-        const [c, w, f] = await Promise.all(["/api/clients", "/api/waivers", "/api/financial"].map((u) => fetch(u).then((r) => (r.ok ? r.json() : []))));
+        const [c, w, f, cf] = await Promise.all(["/api/clients", "/api/waivers", "/api/financial", "/api/consent-forms"].map((u) => fetch(u).then((r) => (r.ok ? r.json() : []))));
         clients = Array.isArray(c) ? c : [];
         waivers = Array.isArray(w) ? w : [];
         payments = Array.isArray(f) ? f : [];
+        forms = Array.isArray(cf) ? cf : [];
     } catch (e) {
         tbody.innerHTML = '<tr><td colspan="6" style="padding:16px;color:#EF4444;text-align:center;">Could not load clients: the server did not answer</td></tr>';
         return;
@@ -2555,7 +2806,9 @@ async function renderClientsTable() {
     const flagged = (v) => v && !/^(none|n\/a|no)$/i.test(String(v).trim());
     tbody.innerHTML = clients.map((c) => {
         const initials = String(c.name || "?").split(/\s+/).map((w) => w[0] || "").join("").slice(0, 2).toUpperCase();
-        const signed = waivers.filter((w) => w.client_id === c.id && w.status !== "revoked").length;
+        // signed waivers and consent forms signed on the tablet alike
+        const signed = waivers.filter((w) => w.client_id === c.id && w.status !== "revoked").length
+            + forms.filter((f) => Number(f.client_id) === Number(c.id) && f.signed).length;
         const spent = payments.filter((p) => p.client_id === c.id && p.status === "completed" && p.type !== "refund").reduce((t, p) => t + Number(p.amount || 0), 0);
         const health = [c.allergies, c.medical_history].filter(flagged).map(escapeHtml).join(", ");
         return `<tr class="client-directory-row" style="border-bottom:1px solid #1F2937;">
@@ -2701,10 +2954,13 @@ async function handleClientAutocomplete(kind, query) {
     const box = document.getElementById(kind + "-client-autocomplete-dropdown");
     const idField = document.getElementById(kind + "-client-id");
     if (!box) return;
-    if (idField) idField.value = ""; // typing invalidates a previous pick
     if (!autocompleteClients) {
         try { const r = await fetch("/api/clients"); autocompleteClients = r.ok ? await r.json() : []; } catch (e) { autocompleteClients = []; }
     }
+    // a different name forgets the client picked before; tapping the field again, or the same
+    // name, keeps it (it was cleared on every focus, so a picked waiver client got lost)
+    const picked = idField && autocompleteClients.find((c) => String(c.id) === idField.value);
+    if (idField && !(picked && String(picked.name || "") === String(query || ""))) idField.value = "";
     const q = String(query || "").toLowerCase().trim();
     const hits = autocompleteClients.filter((c) => !q || String(c.name || "").toLowerCase().includes(q)).slice(0, 8);
     box.innerHTML = hits.map((c) => `<div data-id="${Number(c.id)}" style="padding:8px 12px;cursor:pointer;color:#E2E8F0;border-bottom:1px solid #1E293B;">${escapeHtml(c.name || "")}</div>`).join("");
@@ -2712,7 +2968,7 @@ async function handleClientAutocomplete(kind, query) {
     box.querySelectorAll("[data-id]").forEach((row) => row.addEventListener("mousedown", (e) => {
         e.preventDefault();
         const c = hits.find((x) => String(x.id) === row.dataset.id);
-        const input = document.getElementById(kind + "-client-search");
+        const input = document.getElementById(kind + "-client-search") || document.getElementById(kind + "-client"); // the booking form names it new-appt-client
         if (input) input.value = c.name;
         if (idField) idField.value = String(c.id);
         if (kind === "waiver") {
@@ -2743,11 +2999,77 @@ function initWaiverSignaturePad() {
     ["pointerup", "pointercancel", "pointerleave"].forEach((t) => canvas.addEventListener(t, () => { drawing = false; }));
 }
 
-function openWaiverModal() {
+async function openWaiverModal(clientId) {
     forceShowModal("waiver-modal");
     initWaiverSignaturePad();
     clearWaiverSignature();
+    autocompleteClients = null; // a client added since the last look must be found too
+    // opened from a client's profile: that client is already chosen
+    const idField = document.getElementById("waiver-client-id"), nameField = document.getElementById("waiver-client-search");
+    if (idField) idField.value = clientId ? String(clientId) : "";
+    if (nameField) nameField.value = "";
+    if (clientId && nameField) {
+        try {
+            const c = (await (await fetch("/api/clients")).json()).find((x) => Number(x.id) === Number(clientId));
+            if (c) nameField.value = c.name || "";
+        } catch (e) { /* the name can still be typed */ }
+    }
 }
+
+// A signed waiver: what was signed, by whom and when, with the signature, and a PDF to print or keep.
+// "View signature" used to open an empty signing window instead.
+async function loadWaiver(waiverId) {
+    try { return (await (await fetch("/api/waivers")).json()).find((x) => Number(x.id) === Number(waiverId)); } catch (e) { return null; }
+}
+
+async function viewWaiverRecord(waiverId) {
+    const w = await loadWaiver(waiverId);
+    if (!w) { showStudioToast("This waiver could not be loaded"); return; }
+    let overlay = document.getElementById("waiver-record-modal-overlay");
+    if (!overlay) {
+        overlay = document.createElement("div");
+        overlay.id = "waiver-record-modal-overlay";
+        overlay.setAttribute("role", "dialog");
+        overlay.setAttribute("aria-modal", "true");
+        overlay.setAttribute("aria-label", "Signed waiver");
+        overlay.style.cssText = "display:none;position:fixed;inset:0;background:rgba(15,23,42,0.85);z-index:2000000;align-items:center;justify-content:center;";
+        document.body.appendChild(overlay);
+    }
+    const when = w.signed_at ? new Date(w.signed_at).toLocaleString() : "date not recorded";
+    const line = (label, value) => `<div style="display:flex;gap:10px;padding:6px 0;border-bottom:1px solid #1E293B;"><span style="width:150px;color:#94A3B8;flex-shrink:0;">${label}</span><span>${escapeHtml(String(value || "-"))}</span></div>`;
+    const signature = typeof w.signature === "string" && w.signature.startsWith("data:image/") ? w.signature : "";
+    overlay.innerHTML = `
+        <div style="background:#0F172A;border:1px solid #334155;border-radius:14px;padding:22px;width:min(94vw,560px);max-height:90vh;overflow:auto;color:#F8FAFC;font-size:0.9rem;">
+            <h3 style="margin:0 0 12px;font-size:1.1rem;">📜 Signed waiver</h3>
+            ${line("Client", w.client_name)}${line("Service", w.service_type)}${line("Signed", when)}
+            ${line("Age verified", w.age_verified ? "Yes" : "No")}${line("Medical disclosures", w.medical_disclosures)}${line("Verified by", w.staff_verifier)}
+            <div style="margin-top:12px;color:#94A3B8;">Signature</div>
+            ${signature ? `<img src="${signature}" alt="Client signature" style="display:block;margin-top:6px;max-width:100%;background:#FFF;border-radius:8px;" />` : `<div style="margin-top:6px;">No signature was captured.</div>`}
+            <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px;">
+                <button type="button" onclick="downloadWaiverPdf(${Number(w.id)})" style="padding:9px 16px;background:#2563EB;color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;">⬇ Download PDF</button>
+                <button type="button" onclick="forceHideModal('waiver-record-modal-overlay')" style="padding:9px 16px;background:transparent;color:#94A3B8;border:1px solid #475569;border-radius:8px;cursor:pointer;">Close</button>
+            </div>
+        </div>`;
+    forceShowModal("waiver-record-modal-overlay");
+}
+window.viewWaiverRecord = viewWaiverRecord;
+
+async function downloadWaiverPdf(waiverId) {
+    if (!(window.jspdf && window.jspdf.jsPDF)) { showStudioToast("The PDF library did not load"); return; }
+    const w = await loadWaiver(waiverId);
+    if (!w) { showStudioToast("This waiver could not be loaded"); return; }
+    const doc = new window.jspdf.jsPDF();
+    let y = 20;
+    doc.setFontSize(16); doc.text("Signed waiver", 15, y); y += 12;
+    doc.setFontSize(11);
+    for (const [label, value] of [["Client", w.client_name], ["Service", w.service_type], ["Signed", w.signed_at ? new Date(w.signed_at).toLocaleString() : "date not recorded"],
+        ["Age verified", w.age_verified ? "Yes" : "No"], ["Verified by", w.staff_verifier]]) { doc.text(label + ": " + String(value || "-"), 15, y); y += 8; }
+    const disclosures = doc.splitTextToSize("Medical disclosures: " + String(w.medical_disclosures || "-"), 180);
+    doc.text(disclosures, 15, y); y += disclosures.length * 6 + 8;
+    if (typeof w.signature === "string" && w.signature.startsWith("data:image/png")) { doc.text("Signature:", 15, y); try { doc.addImage(w.signature, "PNG", 15, y + 3, 90, 24); } catch (e) {} }
+    doc.save("waiver-" + String(w.client_name || "client").replace(/[^a-z0-9]+/gi, "-") + "-" + String(w.signed_at || "").slice(0, 10) + ".pdf");
+}
+window.downloadWaiverPdf = downloadWaiverPdf;
 window.openWaiverModal = openWaiverModal;
 
 function clearWaiverSignature() {
@@ -3910,7 +4232,7 @@ async function renderAppointmentsList() {
     } catch (e) { /* shown as an empty list */ }
     appts = (Array.isArray(appts) ? appts : []).filter((a) => a && a.datetime);
     if (!appts.length) {
-        tbody.innerHTML = '<tr><td colspan="7" style="padding:10px;color:#94A3B8;">No appointments yet. Book the first one with Book Appointment.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="9" style="padding:10px;color:#94A3B8;">No appointments yet. Book the first one with Book Appointment.</td></tr>';
         return;
     }
     const startOfToday = new Date(); startOfToday.setHours(0, 0, 0, 0);
@@ -3924,13 +4246,19 @@ async function renderAppointmentsList() {
         return `<tr class="appointment-row" style="border-bottom:1px solid #1E293B;">`
             + cell(new Date(a.datetime).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }), "font-weight:700;color:#FFF;")
             + cell(a.client_name || a.client) + cell(a.service_type) + cell(a.staff_name || a.artist_name)
-            + cell(Number(a.estimated_price || a.price || 0).toFixed(2)) + cell(a.status || "scheduled")
+            + cell(Number(a.estimated_price || a.price || 0).toFixed(2))
+            // Henry: the deposit and what is still to pay, at a glance (payments are recorded per
+            // client, not per appointment, so they are not subtracted here)
+            + cell(Number(a.deposit_paid || 0).toFixed(2))
+            + cell(Math.max(0, Number(a.estimated_price || a.price || 0) - Number(a.deposit_paid || 0)).toFixed(2), "font-weight:700;")
+            + cell(a.status || "scheduled")
             + `<td style="padding:8px;text-align:right;white-space:nowrap;">`
+            + `<button type="button" onclick="openEditAppointment(${Number(a.id)})" style="${btn}background:#334155;color:#E2E8F0;border:1px solid #475569;">Edit</button> `
             + (open ? `<button type="button" onclick="setAppointmentStatus(${Number(a.id)}, 'completed')" style="${btn}background:#10B981;color:#FFF;border:none;">Completed</button> ` : "")
             + `<button type="button" onclick="removeAppointment(${Number(a.id)})" style="${btn}background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);">Remove</button></td></tr>`;
     };
     tbody.innerHTML = coming.map(row).join("")
-        + (earlier.length ? '<tr><td colspan="7" style="padding:10px 8px 4px;color:#94A3B8;font-size:0.75rem;font-weight:700;">Earlier</td></tr>' + earlier.map(row).join("") : "");
+        + (earlier.length ? '<tr><td colspan="9" style="padding:10px 8px 4px;color:#94A3B8;font-size:0.75rem;font-weight:700;">Earlier</td></tr>' + earlier.map(row).join("") : "");
 }
 window.renderAppointmentsList = renderAppointmentsList;
 document.addEventListener("DOMContentLoaded", renderAppointmentsList);
@@ -3967,8 +4295,48 @@ window.removeAppointment = removeAppointment;
 // also called by the tattoo price estimator tool (its Book button), from inside its frame
 
 function openNewAppointmentModal() {
+    setAppointmentFormMode(null);
     forceShowModal("new-appointment-modal-overlay");
 }
+
+// The booking form also edits a booked appointment: editingAppointmentId says which.
+let editingAppointmentId = null;
+function setAppointmentFormMode(appt) {
+    editingAppointmentId = appt ? appt.id : null;
+    autocompleteClients = null; // clients added since the last booking must be offered too
+    const set = (id, v) => { const el = document.getElementById(id); if (el && v !== undefined && v !== null) el.value = v; };
+    const form = document.querySelector("#new-appointment-modal-overlay form");
+    if (form && !appt) form.reset();
+    set("new-appt-client-id", appt && appt.client_id ? String(appt.client_id) : "");
+    const title = document.getElementById("new-appt-title");
+    if (title) title.textContent = appt ? "Edit Appointment" : "Book Appointment";
+    const save = document.getElementById("new-appt-save-btn");
+    if (save) save.textContent = appt ? "Save changes" : "Book appointment";
+    if (!appt) return;
+    const when = appt.datetime ? new Date(appt.datetime) : null;
+    set("new-appt-client", appt.client_name || "");
+    set("new-appt-service", appt.service_type);
+    set("new-appt-artist", appt.staff_name);
+    set("new-appt-station", appt.station);
+    if (when && !isNaN(when.getTime())) {
+        set("new-appt-date", when.toLocaleDateString("en-CA"));
+        set("new-appt-time", when.toTimeString().slice(0, 5));
+    }
+    set("new-appt-duration", appt.duration_minutes);
+    set("new-appt-price", appt.estimated_price);
+    set("new-appt-deposit", appt.deposit_paid);
+    set("new-appt-notes", appt.notes);
+}
+
+// Henry: see and change a booked appointment (deposit, time, artist...) from the Calendar
+async function openEditAppointment(id) {
+    let appt;
+    try { appt = (await (await fetch("/api/appointments")).json()).find((a) => Number(a.id) === Number(id)); } catch (e) {}
+    if (!appt) { showStudioToast("This appointment could not be loaded"); return; }
+    setAppointmentFormMode(appt);
+    forceShowModal("new-appointment-modal-overlay");
+}
+window.openEditAppointment = openEditAppointment;
 window.openNewAppointmentModal = openNewAppointmentModal;
 
 function closeNewAppointmentModal() {
@@ -4004,15 +4372,18 @@ async function handleSaveNewAppointment(event) {
         status: "Confirmed"
     };
 
+    const editedId = editingAppointmentId;
+    const pickedClient = (document.getElementById("new-appt-client-id") || {}).value || "";
     try {
         const when = new Date(newAppt.date + "T" + (newAppt.time || "00:00"));
-        const res = await fetch("/api/appointments", {
-            method: "POST",
+        const res = await fetch(editedId ? "/api/appointments/" + editedId : "/api/appointments", {
+            method: editedId ? "PATCH" : "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(Object.assign({}, newAppt, {
                 staff_name: newAppt.artist_name,
+                client_id: pickedClient || undefined, // a client picked from the list: the booking is theirs
                 datetime: isNaN(when.getTime()) ? undefined : when.toISOString(),
-                status: "scheduled"
+                status: editedId ? undefined : "scheduled"
             }))
         });
         if (!res.ok) throw new Error("HTTP " + res.status);

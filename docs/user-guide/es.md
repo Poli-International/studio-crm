@@ -29,7 +29,7 @@ Abra **Ajustes** para introducir sus precios, la regla de depósito, el tipo de 
 
 ## Clientes
 
-**Clientes** enumera a todos con sus datos de contacto, alergias y notas médicas, consentimientos firmados y total gastado. Use **Nuevo cliente** para añadir uno. La búsqueda filtra la lista mientras escribe. **Ver perfil** abre el registro completo. En el perfil, **Editar cliente** cambia los datos y **Eliminar** borra al cliente. El perfil también muestra las citas, las notas del personal, los consentimientos firmados, los formularios de consentimiento guardados y las fotos de los trabajos. Para añadir muchos clientes a la vez, abra **Ajustes**, **Import Data** y pegue una lista cuya primera línea sea `name,email,phone,allergies,notes`.
+**Clientes** enumera a todos con sus datos de contacto, alergias y notas médicas, consentimientos firmados y total gastado. Use **Nuevo cliente** para añadir uno. La búsqueda filtra la lista mientras escribe. **Ver perfil** abre el registro completo. En el perfil, **Editar cliente** cambia los datos y **Eliminar** borra al cliente. El perfil también muestra las citas, las notas del personal, los consentimientos firmados, los formularios de consentimiento guardados y las fotos de los trabajos. Para añadir muchos clientes a la vez, abra **Ajustes**, **Import Data** y pegue una lista cuya primera línea sea `name,email,phone,allergies,notes`. El recuento **Signed** incluye los formularios de consentimiento firmados en la tableta. **Healing Pipeline** lista los clientes cuya sesión se marcó como completada en los últimos 90 días, agrupados por días desde la sesión, con **View Profile** y **Download PDF**.
 
 ## Personal
 
@@ -43,21 +43,23 @@ Para impedir el acceso a otras personas de la misma red, abra **Ajustes** y esta
 
 ## Citas y programación
 
-**Nueva cita** reserva una sesión única con artista, estación, precio y depósito. Para trabajos de varias sesiones, el **Programador automático** busca los huecos libres del artista en un día elegido y reserva hasta seis sesiones separadas por un número fijo de semanas. El panel principal muestra las cifras del día, las próximas reservas, el estado de las estaciones y el stock bajo. El Calendario muestra todas las citas reservadas, las próximas primero. **Completada** marca una sesión como hecha, así cuenta en el análisis de duraciones, y **Quitar** la elimina.
+**Nueva cita** reserva una sesión única con artista, estación, precio y depósito. Para trabajos de varias sesiones, el **Programador automático** busca los huecos libres del artista en un día elegido y reserva hasta seis sesiones separadas por un número fijo de semanas. El panel principal muestra las cifras del día, las próximas reservas, el estado de las estaciones y el stock bajo. El Calendario muestra todas las citas reservadas, las próximas primero. **Completada** marca una sesión como hecha, así cuenta en el análisis de duraciones, y **Quitar** la elimina. **Edit** en una cita cambia la hora, el artista, la estación, el precio, el depósito o las notas. Al reservar, escriba el nombre del cliente y elíjalo de la lista, para que la cita aparezca en su perfil. Pulsar dos veces seguidas un botón de guardar guarda una sola vez. La lista muestra también el depósito de cada cita y lo que queda por pagar (precio menos depósito).
 
 ## Consentimientos digitales
 
-Abra el formulario de consentimiento, elija el cliente de la lista (sus alergias se completan automáticamente), confirme la verificación de edad y haga que el cliente firme en la tableta. El consentimiento se guarda con la imagen de la firma. No se guarda sin un cliente y una firma.
+Abra el formulario de consentimiento, elija el cliente de la lista (sus alergias se completan automáticamente), confirme la verificación de edad y haga que el cliente firme en la tableta. El consentimiento se guarda con la imagen de la firma. No se guarda sin un cliente y una firma. Abierto desde el perfil de un cliente, el formulario ya tiene ese cliente elegido.
 
 Para que el cliente rellene un formulario de consentimiento en una tableta, abra **Clientes**, el creador de formularios de consentimiento, la vista previa del formulario y luego el modo quiosco para tableta. El cliente responde una sección por pantalla, firma en la última y toca el botón para terminar. El formulario se guarda con la firma y se descarga un PDF. Si antes no se eligió ningún cliente, se crea un cliente nuevo con el nombre, el correo, el teléfono y la fecha de nacimiento del formulario. Los formularios guardados están en el perfil del cliente, en **Consentimientos**; **Ver respuestas** muestra cada respuesta. Un formulario editado en el creador de formularios se guarda con los datos del estudio: la tableta muestra el mismo formulario que el equipo donde lo editó.
 
+
+Para que el cliente no pueda salir del formulario si usted se aleja, defina un **Tablet Kiosk PIN** en **Ajustes**. Salir del modo quiosco pedirá entonces el PIN. Cuando el cliente pulsa **Complete**, el quiosco comprueba que no falte nada, guarda el formulario y muestra «Thank you, your form has been submitted» hasta que alguien del estudio introduce el PIN. Los consentimientos firmados están en el perfil del cliente, en **Consentimientos**: **View waiver** muestra las respuestas y la firma, y **Download PDF** guarda una copia para imprimir o conservar.
 ## Mensajes: el CRM prepara, usted envía
 
 Studio CRM no envía por sí mismo correos, SMS ni mensajes de chat. Cuando prepara un correo de cuidados posteriores, un recordatorio o un pedido a un proveedor, aparece un panel **Mensaje listo**. Haga clic en **Correo**, **WhatsApp** o **LINE** para abrirlo en su propia app con el texto ya escrito, y pulse enviar allí, o haga clic en **Copiar**.
 
 ## Stock, escáner y pedidos de compra
 
-**Inventario** hace seguimiento de cantidades, lotes, fechas de caducidad y proveedores. Los artículos en su nivel de reposición o por debajo cuentan como stock bajo.
+**Inventario** hace seguimiento de cantidades, lotes, fechas de caducidad y proveedores. Los artículos en su nivel de reposición o por debajo cuentan como stock bajo. La lista **Stock items** muestra cada artículo con su cantidad, nivel de pedido, lote, caducidad y proveedor; busque por nombre, SKU o proveedor. **+ Add item** añade uno a mano y **Edit** lo cambia. **Suppliers** lista sus proveedores: **+ Add supplier** y **Edit**. Los pedidos se envían al correo de pedidos del proveedor; compruébelo.
 
 El escáner en **Registro de actividad** usa la cámara del dispositivo. Escanee un SKU de stock o un número de lote para ver el artículo, o un código `CLIENT-<number>` para abrir un cliente. También puede escanear un código desde una foto. Los códigos desconocidos se listan en **Registro de errores**.
 
@@ -69,7 +71,7 @@ El escáner en **Registro de actividad** usa la cámara del dispositivo. Escanee
 
 ## Dinero y personal
 
-La **Calculadora de propinas** reparte una propina 80% artista, 15% aprendiz, 5% recepción y la registra. El personal registra la entrada y salida con el botón de turno. Las exportaciones le dan el registro de actividad, el stock bajo, los turnos y las duraciones de sesión en CSV o PDF. En el Calendario, la ventana de turnos muestra si una persona está de turno, y la lista de **Turnos** recoge los turnos previstos: elija una persona, una fecha y el horario, y pulse **Añadir turno**. La exportación de turnos y, en Inventario, la exportación del stock guardan un archivo CSV o PDF en su carpeta de Descargas.
+La **Calculadora de propinas** reparte una propina 80% artista, 15% aprendiz, 5% recepción y la registra. El personal registra la entrada y salida con el botón de turno. Las exportaciones le dan el registro de actividad, el stock bajo, los turnos y las duraciones de sesión en CSV o PDF. En el Calendario, la ventana de turnos muestra si una persona está de turno, y la lista de **Turnos** recoge los turnos previstos: elija una persona, una fecha y el horario, y pulse **Añadir turno**. La exportación de turnos y, en Inventario, la exportación del stock guardan un archivo CSV o PDF en su carpeta de Descargas. En **Finanzas**, **Record Payment** registra un pago: el cliente, el importe y la forma de pago. **Deposit Ledger** lista los depósitos cobrados al reservar.
 
 ## Registros de cumplimiento
 

@@ -26,7 +26,8 @@ const last = [];
 const BACKDROP = /event\.target\s*===?\s*this/;
 // Buttons with nothing to see after the click, each for a reason a person would accept.
 const QUIET = [
-  /testQrAudioTheme|btn-test-voice-announcement|test-chime-button/, // plays a sound
+  /testQrAudioTheme|btn-test-voice-announcement|test-chime-button|timer-test-sound-btn/, // plays a sound
+  /reset-optimization-btn|reset-compatibility-btn|timer-reset-btn/, // resets a form that is still empty, or a timer already at zero
   /switchStudioProSuiteTab\('(aftercare|ear-planner)'\)|switchGalleryTab\('portfolio'\)|setSharePreset\('showcase'\)|prevQrTourStep|switchClientProfileTab\('overview'\)|switchImportTab\('manual'\)/, // already on that tab or step
   /sendTeamChatMessage/, // sends nothing until a message is typed
   /qr-validation-toast/, // closes a message that is not showing
@@ -47,6 +48,9 @@ const enqueue = (keys, pathTo) => {
   for (const key of keys) {
     // a handle that is dragged, not pressed (the angle guide's discs): nothing to click
     if (queued.has(key) || BACKDROP.test(key) || /^\w+ \| [^|]* \| Drag /.test(key)) continue;
+    // made by a click just now (a duplicated section, id with the time in it): a copy of a button
+    // already tested, and the next replay makes a different id, so it can never be reached again
+    if (/\b[a-z]+_\d{13}/.test(key)) continue;
     queued.add(key);
     (LAST.test(key) ? last : queue).push({ key, path: pathTo });
   }
@@ -56,8 +60,21 @@ const enqueue = (keys, pathTo) => {
 const PAGE = '/' + (process.env.CRAWL_PAGE || '').replace(/^\//, ''); // Git Bash rewrites a leading slash, so tools/x/ works too
 const start = url.replace(/\/$/, '') + PAGE;
 // a tool's welcome window can appear a moment after the page
-const arrive = async () => { await browser.goto(start); if (PAGE !== '/') await sleep(1200); };
+// A tool saves what it changes on the server (the form builder: every Duplicate). Each click
+// starts from the data the crawl started with, or the tool grows from one click to the next.
+let snapshot = null;
+const restore = () => browser.evaluate(`(async () => {
+  const start = ${JSON.stringify(snapshot)}, now = await (await fetch('/api/app-data')).json();
+  for (const k of Object.keys(now)) if (!(k in start)) await fetch('/api/app-data/' + encodeURIComponent(k), { method: 'DELETE' });
+  for (const [k, v] of Object.entries(start)) if (now[k] !== v) await fetch('/api/app-data/' + encodeURIComponent(k), { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ value: v }) });
+})()`).catch(() => {});
+const arrive = async () => {
+  if (snapshot) await restore();
+  await browser.goto(start);
+  if (PAGE !== '/') await sleep(1200);
+};
 await arrive();
+if (PAGE !== '/') snapshot = await browser.evaluate(`fetch('/api/app-data').then(r => r.json())`);
 // a tool may open behind a welcome window: get past it the way a person would, before every click
 const prelude = [];
 if (PAGE !== '/') {

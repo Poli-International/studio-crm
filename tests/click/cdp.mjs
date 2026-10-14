@@ -38,7 +38,7 @@ const PAGE_HELPER = `(() => {
     return getContext.call(this, type, /webgl/.test(type) ? Object.assign({}, opts, { preserveDrawingBuffer: true }) : opts);
   };
   // where the last click really landed, and a form field the browser refused: read when a step fails
-  document.addEventListener('click', (e) => { sig.lastClick = e.target.tagName + '#' + e.target.id + ' ' + (e.target.innerText || '').trim().slice(0, 30); }, true);
+  document.addEventListener('click', (e) => { sig.clicks = (sig.clicks || 0) + 1; sig.lastClick = e.target.tagName + '#' + e.target.id + ' ' + (e.target.innerText || '').trim().slice(0, 30); }, true);
   document.addEventListener('invalid', (e) => { sig.refused = e.target.id + ': ' + e.target.validationMessage; }, true);
   // on the page and not parked off to the side (a closed drawer slides out of the window)
   const shown = (el) => {
@@ -76,7 +76,9 @@ const PAGE_HELPER = `(() => {
       const fields = [...document.querySelectorAll('input,select,textarea')].map((f) => f.type === 'checkbox' || f.type === 'radio' ? +f.checked : f.value).join('|');
       const text = document.body.innerText.replace(/[0-9]/g, '');
       const view = [...document.querySelectorAll('.destination-view')].filter(shown).map((v) => v.id).join(',');
-      let h = 0; for (const c of text + fields + document.documentElement.className + document.body.className + document.documentElement.getAttribute('data-theme')) h = (h * 31 + c.charCodeAt(0)) | 0;
+      // a field that now has the cursor ("Go to field"): a button taking the focus by being clicked does not count
+      const a = document.activeElement, focused = a && /^(INPUT|SELECT|TEXTAREA|CANVAS)$/.test(a.tagName) ? a.tagName + a.id + a.name : '';
+      let h = 0; for (const c of text + fields + focused + document.documentElement.className + document.body.className + document.documentElement.getAttribute('data-theme')) h = (h * 31 + c.charCodeAt(0)) | 0;
       // what a tool shows without new text: a highlighted choice, a moved or redrawn picture, a scrolled page
       let look = Math.round(scrollY) + '|';
       for (const el of document.querySelectorAll('body *')) {
@@ -225,7 +227,7 @@ export async function launchBrowser() {
         let t = await run(`return window.__ct.target(${js(key)});`);
         for (let i = 0; i < 15 && t; i++) {
           await sleep(80);
-          await calm();
+          if (i % 5 === 4) await calm(); // a page that keeps animating would cost 2.5 s on every pass
           const again = await run(`return window.__ct.target(${js(key)});`);
           const still = again && Math.abs(again.x - t.x) < 1 && Math.abs(again.y - t.y) < 1 && again.covered === t.covered;
           t = again;
@@ -233,7 +235,19 @@ export async function launchBrowser() {
         }
         if (!t || t.covered) return t;
         const o = await offset();
+        const clicks = () => run('return window.__ct.sig.clicks || 0;').catch(() => -1);
+        const before = fingers ? await clicks() : 0;
         for (const type of ['mouseMoved', 'mousePressed', 'mouseReleased']) await mouse(type, t.x + o.x, t.y + o.y, type === 'mousePressed');
+        // A slow machine can deliver finger-down and finger-up so far apart that Chrome takes it
+        // for a long press and makes no click at all. Tap again only when no click reached the
+        // page: a click the app ignores still fails the test.
+        if (fingers && before >= 0) {
+          for (let i = 0; i < 10 && (await clicks()) === before; i++) await sleep(100);
+          if ((await clicks()) === before) {
+            seen.retaps = (seen.retaps || 0) + 1;
+            for (const type of ['mousePressed', 'mouseReleased']) await mouse(type, t.x + o.x, t.y + o.y, type === 'mousePressed');
+          }
+        }
         await settle();
         return t;
       },

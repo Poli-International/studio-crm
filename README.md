@@ -56,7 +56,13 @@ In the app under **Docs**, or in [`docs/USER-GUIDE.md`](docs/USER-GUIDE.md) and 
 
 ## Backups
 
-All data is in `data/studio_crm.sqlite`. Copy that file to back up the studio.
+All data is in `data/studio_crm.sqlite`. Copy that file to back up the studio. **Back up now** in Settings saves a full copy in `storage/backups/`.
+
+## Other devices in the studio
+
+- Computers open `http://THE-COMPUTER:3000`.
+- Tablets and phones that need the camera (the scanner) open `https://THE-COMPUTER:3443`. The certificate is made by the CRM itself, so the browser warns once: choose Advanced, then Continue. Browsers give a page the camera only on `localhost` or over https. `HTTPS_PORT=0` turns https off.
+- To keep other people on the network out, set a **Studio Password** in Settings. It is off by default and is one password for the whole studio. Forgotten: create an empty file `reset-password.txt` in the `data` folder and restart.
 
 ## Development
 

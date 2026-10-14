@@ -234,6 +234,7 @@ await flow('On a tablet, with fingers: the consent form is filled, signed and sa
     await f.clickText('Complete', '#tablet-kiosk-modal');
     await eventually(async () => (await api('/api/clients')).some((c) => c.name === 'Tablet Flow'),
       async () => 'the form signed on the tablet was not saved. In the form: ' + await f.evaluate(`JSON.stringify({ kiosk: window.ActiveFormPreview.isKioskMode, missing: window.ActiveFormPreview.validateAll().map(e => e.fieldLabel), said: window.__ct.sig.added.slice(-3), lastClick: window.__ct.sig.lastClick })`).catch((e) => e.message)
+        + ' | last click on the page: ' + await b.evaluate('window.__ct.sig.lastClick')
         + ' | page calls: ' + await b.evaluate(`window.__ct.sig.fetches.filter(x => x.method !== 'GET').slice(-4).map(x => x.method + ' ' + x.url + ' ' + x.status).join(', ')`), 20);
   } finally { await b.desktop(); }
 });

@@ -19,6 +19,12 @@ async function eventually(fn, what) {
   for (let i = 0; i < 25; i++) { if (await fn()) return; await sleep(200); }
   throw new Error(what);
 }
+// clicks the visible button that runs the given onclick code
+async function pressOn(onclick) {
+  const key = await b.evaluate(`(() => { const el = window.__ct.all().find(e => (e.getAttribute('onclick') || '').trim() === ${JSON.stringify(onclick)}); return el ? window.__ct.key(el) : null; })()`);
+  const t = key && await b.click(key);
+  check(t && !t.covered, `the button for ${onclick} ` + (t ? 'is covered by ' + t.covered : 'is not on the screen'));
+}
 // clicks a button found in a table row, and says why when it cannot be clicked
 async function press(rowSel, rowText, label) {
   const t = await b.click(await rowButton(rowSel, rowText, label));
@@ -240,6 +246,14 @@ await flow('The sidebar shows the version that is running', async () => {
   await eventually(async () => (await text('#app-version-label')) === 'v' + version, 'the version label does not match ' + version);
 });
 
+await flow('Back up now writes a real copy of the studio database', async () => {
+  await b.clickText('Settings');
+  await pressOn('triggerInstantDatabaseSnapshot()');
+  await eventually(async () => (await b.evaluate('window.__ct.sig.added.join(" ")')).includes('Backup saved in storage/backups'), 'the backup button did not report a saved file');
+  const call = await b.evaluate(`window.__ct.sig.fetches.filter(f => f.url.includes('create-snapshot')).map(f => f.status).join()`);
+  check(call === '200', 'the backup request failed: ' + call);
+});
+
 // Last, because it deletes the demo studio: the first thing a real studio does.
 await flow('Start with an empty studio, then add the first client, staff member and appointment', async () => {
   await b.clickText('Start with an empty studio');
@@ -271,6 +285,29 @@ await flow('Start with an empty studio, then add the first client, staff member 
   check((await api('/api/appointments'))[0].status === 'completed', 'Completed did not change the appointment');
   await press('.appointment-row', 'First Client', 'Remove');
   check((await api('/api/appointments')).length === 0, 'the appointment was not removed');
+  // nothing of the demo studio is left, and no screen shows a figure nobody entered
+  for (const path of ['services', 'financial', 'inventory', 'waivers', 'gallery', 'messages', 'activity-logs?limit=5']) {
+    const left = await api('/api/' + path);
+    check(Array.isArray(left) && left.filter((x) => !/First (Client|Artist)/.test(JSON.stringify(x))).length === 0, `an emptied studio still has ${path}: ` + JSON.stringify(left).slice(0, 120));
+  }
+  check((await api('/api/inventory/usage-heatmap')).summary.total_weekly_units === 0, 'the usage heatmap shows supplies nobody used');
+  check((await api('/api/stations')).every((st) => !st.autoclaveCycle), 'a station shows an autoclave cycle nobody ran');
+  check(!(await api('/api/inventory/sync-status')).lastSuccessfulSyncTime, 'the CSV sync reports a run that never happened');
+  await b.clickText('Finance');
+  for (const [open, body, expected] of [
+    ['openDepositLedgerModal()', '#deposit-ledger-modal-body', 'No deposits are recorded'],
+    ['openCommissionModal()', '#commission-table-body', 'No payments are recorded'],
+    ['openMarginCalculatorModal()', '#margin-calculator-modal-body', 'Nothing to calculate yet'],
+  ]) {
+    await b.goto(url);
+    await b.clickText('Finance');
+    await pressOn(open);
+    await eventually(async () => (await text(body)).includes(expected), `${open} does not say that nothing is recorded: ` + (await text(body)).slice(0, 80));
+  }
+  await b.goto(url);
+  await b.clickText('Compliance');
+  await pressOn('openAutoclaveVaultModal()');
+  await eventually(async () => (await text('#autoclave-vault-modal-body')).includes('No autoclave cycles recorded yet'), 'the autoclave vault shows a cycle nobody ran');
 });
 
 await stop();

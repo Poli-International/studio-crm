@@ -149,7 +149,7 @@
           </div>
 
           <!-- Control 6: Cloud Sync & Storage Status Indicator -->
-          <div id="navbar-sync-badge" onclick="triggerNavbarSync()" title="Cloud & Local Sync Status" style="padding:3px 8px;height:26px;background:rgba(16,185,129,0.12);color:#34D399;border:1px solid rgba(16,185,129,0.3);border-radius:12px;font-size:0.72rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:4px;box-sizing:border-box;">
+          <div id="navbar-sync-badge" onclick="triggerNavbarSync()" title="Studio database status" style="padding:3px 8px;height:26px;background:rgba(16,185,129,0.12);color:#34D399;border:1px solid rgba(16,185,129,0.3);border-radius:12px;font-size:0.72rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:4px;box-sizing:border-box;">
             <span id="navbar-sync-dot" style="width:6px;height:6px;border-radius:50%;background:#10B981;"></span>
             <span id="navbar-sync-text">Synced</span>
           </div>
@@ -162,12 +162,12 @@
           <span style="font-size:1.2rem;animation:pulse 1.5s infinite;">⚠️</span>
           <div>
             <span style="font-weight:800;color:#FFF;letter-spacing:0.02em;">DATABASE BACKUP WARNING:</span>
-            <span id="database-backup-warning-text" data-i18n="dashboard.cloud_backup_warning">⚠️ Cloud snapshot database backup is overdue (>6 hours). Secure your records now.</span>
+            <span id="database-backup-warning-text" data-i18n="dashboard.cloud_backup_warning">The studio database has not been backed up for more than a day.</span>
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:10px;">
           <span onclick="triggerInstantDatabaseSnapshot()" id="btn-run-snapshot-now" role="button" data-i18n="dashboard.btn_snapshot_now" style="padding:0.45rem 0.9rem;background:#EF4444;color:#FFF;border:1px solid #FCA5A5;border-radius:6px;font-weight:800;font-size:0.8rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(0,0,0,0.3);transition:all 0.2s;">
-            ⚡ Run Instant Cloud Snapshot Backup
+            Back up now
           </span>
           <span onclick="dismissBackupWarningToast()" role="button" style="background:none;border:none;color:#FCA5A5;font-size:1.1rem;cursor:pointer;line-height:1;padding:2px 6px;" title="Dismiss notification temporary">&times;</span>
         </div>
@@ -1394,9 +1394,9 @@
               <!-- Setting 3: Instant Cloud Backup -->
               <div style="background:#0F172A;padding:1.25rem;border-radius:12px;border:1px solid #1E293B;">
                 <h3 style="margin:0 0 6px 0;font-size:1.05rem;font-weight:800;color:#34D399;">Database Backup</h3>
-                <p style="margin:0 0 12px 0;font-size:0.8rem;color:#9CA3AF;">Take on-demand snapshot backup of studio records, clients & financial ledgers.</p>
+                <p style="margin:0 0 12px 0;font-size:0.8rem;color:#9CA3AF;">Saves a full copy of the studio database in the storage/backups folder on the computer that runs the CRM.</p>
                 <button onclick="triggerInstantDatabaseSnapshot()" style="padding:0.45rem 0.9rem;background:#059669;color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">
-                  Run Snapshot Now
+                  Back up now
                 </button>
               </div>
 

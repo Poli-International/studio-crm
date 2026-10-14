@@ -909,16 +909,16 @@ async function renderD3SupplyUsageHeatmap() {
 
         // Update Summary Cards
         const unitsEl = document.getElementById('hm-summary-units');
-        if (unitsEl) unitsEl.textContent = `${summary.total_weekly_units || 384} Units`;
+        if (unitsEl) unitsEl.textContent = `${summary.total_weekly_units || 0} Units`;
 
         const peakDayEl = document.getElementById('hm-summary-peak-day');
-        if (peakDayEl) peakDayEl.textContent = `${summary.peak_day || 'Saturday'} (${summary.peak_shift || 'Peak Evening'})`;
+        if (peakDayEl) peakDayEl.textContent = summary.peak_day ? `${summary.peak_day} (${summary.peak_shift})` : 'Not enough data';
 
         const fastestEl = document.getElementById('hm-summary-fastest');
-        if (fastestEl) fastestEl.textContent = summary.fastest_burning_item || 'Kwadron 3RL Needles';
+        if (fastestEl) fastestEl.textContent = summary.fastest_burning_item || 'Not enough data';
 
         const reorderEl = document.getElementById('hm-summary-reorder');
-        if (reorderEl) reorderEl.textContent = summary.recommended_reorder_day || 'Thursday 09:00 AM';
+        if (reorderEl) reorderEl.textContent = summary.recommended_reorder_day || 'Not enough data';
 
         // Clear container for D3 rendering
         container.innerHTML = '';
@@ -1910,26 +1910,35 @@ function openAssignShiftModal(staff) {
 window.openAssignShiftModal = openAssignShiftModal;
 
 
+// One line of a ledger window: what on the left, how much on the right.
+function ledgerRow(title, detail, amount) {
+    return '<div class="ledger-row" style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;gap:12px;">'
+        + '<div><strong>' + escapeHtml(String(title)) + '</strong><div style="font-size:0.8rem;color:#94A3B8;">' + escapeHtml(String(detail || '')) + '</div></div>'
+        + '<div style="font-weight:800;color:#34D399;white-space:nowrap;">' + escapeHtml(String(amount == null ? '' : amount)) + '</div></div>';
+}
+function ledgerList(body, rows, emptyText) {
+    body.innerHTML = rows.length ? '<div style="display:flex;flex-direction:column;gap:10px;">' + rows.join('') + '</div>'
+        : '<div style="text-align:center;padding:20px;color:#94A3B8;">' + escapeHtml(emptyText) + '</div>';
+}
+const LEDGER_ERROR = '<div style="text-align:center;padding:20px;color:#FCA5A5;">Could not load: the server did not answer</div>';
+async function ledgerJson(url) {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return res.json();
+}
+const ledgerMoney = (n) => Number(n || 0).toFixed(2);
+
 async function openAutoclaveVaultModal() {
     forceShowModal('autoclave-vault-modal-overlay');
     const body = document.getElementById('autoclave-vault-modal-body');
-    if (body) {
-        body.innerHTML = '<div style="text-align:center;padding:24px;color:#94A3B8;">Loading digital autoclave logs...</div>';
-        try {
-            const res = await fetch('/api/autoclave-vault');
-            const data = await res.json();
-            const cycles = data.cycles || data.records || [];
-            if (cycles.length === 0) {
-                body.innerHTML = '<div style="text-align:center;padding:20px;color:#94A3B8;">No recent autoclave cycles recorded. All autoclaves calibrated.</div>';
-            } else {
-                body.innerHTML = '<div style="display:flex;flex-direction:column;gap:10px;">' +
-                    cycles.map(c => '<div style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;"><div><strong>Cycle #' + (c.cycle_number || c.id) + ' - ' + (c.autoclave_model || 'Statim 5000') + '</strong><div style="font-size:0.8rem;color:#94A3B8;">' + (c.date || 'Today') + ' | ' + (c.temperature || '134°C') + ' | ' + (c.pressure || '2.1 bar') + '</div></div><span style="color:#10B981;font-weight:700;font-size:0.85rem;">' + (c.status || 'PASSED (Class 5 Integrator)') + '</span></div>').join('') +
-                    '</div>';
-            }
-        } catch (e) {
-            body.innerHTML = '<div style="background:#0F172A;padding:16px;border-radius:8px;border:1px solid #334155;color:#E2E8F0;"><strong>Autoclave Unit #1 (Statim G4)</strong>: Validated Cycle (134°C, 3.5 min, 204 kPa). Indicator: PASS.</div>';
-        }
-    }
+    if (!body) return;
+    try {
+        const data = await ledgerJson('/api/compliance/autoclave-logs');
+        ledgerList(body, (data.logs || []).map((c) => ledgerRow(
+            'Cycle #' + (c.cycle_number || c.id) + (c.autoclave_id ? ' · ' + c.autoclave_id : ''),
+            [c.date_run, c.station, c.temperature_c ? c.temperature_c + ' °C' : '', c.operator].filter(Boolean).join(' · '),
+            c.spore_test_result || 'result not recorded')), 'No autoclave cycles recorded yet.');
+    } catch (e) { body.innerHTML = LEDGER_ERROR; }
 }
 window.openAutoclaveVaultModal = openAutoclaveVaultModal;
 
@@ -1999,20 +2008,14 @@ window.recalculateTipSplit = recalculateTipSplit;
 
 async function openCommissionModal() {
     forceShowModal('commission-modal');
-    const body = document.getElementById('commission-modal-body');
-    if (body) {
-        body.innerHTML = '<div style="text-align:center;padding:24px;color:#94A3B8;">Loading artist commission ledger...</div>';
-        try {
-            const res = await fetch('/api/commissions');
-            const data = await res.json();
-            const reports = data.reports || data.commissions || [];
-            body.innerHTML = '<div style="display:flex;flex-direction:column;gap:10px;">' +
-                reports.map(r => '<div style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;"><div><strong>' + (r.artist_name || 'Resident Artist') + '</strong><div style="font-size:0.8rem;color:#94A3B8;">' + (r.procedure_count || 0) + ' Procedures completed</div></div><div style="text-align:right;"><span style="color:#10B981;font-weight:700;">$' + (r.total_payout || 0).toLocaleString() + '</span><div style="font-size:0.75rem;color:#94A3B8;">Split: ' + (r.split_rate || '60/40') + '</div></div></div>').join('') +
-                '</div>';
-        } catch (e) {
-            body.innerHTML = '<div style="color:#94A3B8;padding:12px;">Standard Artist Splits: 60% Artist / 40% Studio House.</div>';
-        }
-    }
+    const body = document.getElementById('commission-table-body');
+    if (!body) return;
+    try {
+        const report = await ledgerJson('/api/staff/commissions');
+        ledgerList(body, (Array.isArray(report) ? report : []).filter((r) => r.completedJobs > 0).map((r) => ledgerRow(
+            r.name, r.completedJobs + ' payments recorded', ledgerMoney(r.grossRevenue))),
+            'No payments are recorded against a staff member yet.');
+    } catch (e) { body.innerHTML = LEDGER_ERROR; }
 }
 window.openCommissionModal = openCommissionModal;
 
@@ -2025,19 +2028,14 @@ window.openDailyStudioSummaryModal = openDailyStudioSummaryModal;
 async function openDepositLedgerModal() {
     forceShowModal('deposit-ledger-modal-overlay');
     const body = document.getElementById('deposit-ledger-modal-body');
-    if (body) {
-        body.innerHTML = '<div style="text-align:center;padding:24px;color:#94A3B8;">Loading client deposit ledger...</div>';
-        try {
-            const res = await fetch('/api/deposits');
-            const data = await res.json();
-            const deposits = data.deposits || data.records || [];
-            body.innerHTML = '<div style="display:flex;flex-direction:column;gap:8px;">' +
-                deposits.map(d => '<div style="background:#0F172A;padding:10px 14px;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;"><div><strong>' + (d.client_name || 'Client') + '</strong><div style="font-size:0.78rem;color:#94A3B8;">' + (d.date || 'Today') + ' | ' + (d.method || 'Card') + '</div></div><span style="color:#10B981;font-weight:700;">$' + (d.amount || 50) + ' (' + (d.status || 'CONFIRMED') + ')</span></div>').join('') +
-                '</div>';
-        } catch (e) {
-            body.innerHTML = '<div style="background:#0F172A;padding:16px;border-radius:8px;color:#E2E8F0;">Active Client Holding Escrow: $1,450.00 across 18 bookings.</div>';
-        }
-    }
+    if (!body) return;
+    try {
+        const appts = await ledgerJson('/api/appointments');
+        const withDeposit = (Array.isArray(appts) ? appts : []).filter((a) => Number(a.deposit_paid || a.deposit || 0) > 0);
+        ledgerList(body, withDeposit.map((a) => ledgerRow(
+            a.client_name || '', [a.service_type, a.datetime ? new Date(a.datetime).toLocaleDateString() : '', a.status].filter(Boolean).join(' · '),
+            ledgerMoney(a.deposit_paid || a.deposit))), 'No deposits are recorded on an appointment yet.');
+    } catch (e) { body.innerHTML = LEDGER_ERROR; }
 }
 window.openDepositLedgerModal = openDepositLedgerModal;
 
@@ -2078,16 +2076,16 @@ window.openLowStockModal = openLowStockModal;
 async function openMarginCalculatorModal() {
     forceShowModal('margin-calculator-modal-overlay');
     const body = document.getElementById('margin-calculator-modal-body');
-    if (body) {
-        body.innerHTML = '<div style="text-align:center;padding:24px;color:#94A3B8;">Calculating studio net profitability...</div>';
-        try {
-            const res = await fetch('/api/margin-reports');
-            const data = await res.json();
-            body.innerHTML = '<div style="background:#0F172A;border:1px solid #334155;border-radius:10px;padding:16px;"><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;"><div style="background:#1E293B;padding:12px;border-radius:8px;"><div style="font-size:0.75rem;color:#94A3B8;">Average Procedure Margin</div><div style="font-size:1.4rem;font-weight:800;color:#10B981;">' + (data.average_margin_percent || 68) + '%</div></div><div style="background:#1E293B;padding:12px;border-radius:8px;"><div style="font-size:0.75rem;color:#94A3B8;">Net Studio Retained</div><div style="font-size:1.4rem;font-weight:800;color:#38BDF8;">$' + (data.total_studio_net_profit || 4280).toLocaleString() + '</div></div></div><div style="font-size:0.85rem;color:#CBD5E1;">Based on single-use consumable overhead and titanium/gold jewelry landed unit costs.</div></div>';
-        } catch (e) {
-            body.innerHTML = '<div style="color:#94A3B8;padding:16px;">Standard Studio Margin: 68% (Consumable Pack: $14.50, Base Piercing Service: $65.00).</div>';
-        }
-    }
+    if (!body) return;
+    try {
+        const m = await ledgerJson('/api/financials/margin-calculator');
+        if (!m.payments_recorded && !m.procedures_logged) { ledgerList(body, [], 'Nothing to calculate yet: no payments and no supplies are recorded.'); return; }
+        ledgerList(body, [
+            ledgerRow('Payments recorded', 'Completed payments, refunds left out', ledgerMoney(m.payments_recorded)),
+            ledgerRow('Supplies logged as used', m.procedures_logged + ' procedures' + (m.items_without_cost ? ' · ' + m.items_without_cost + ' items have no cost in stock and are not counted' : ''), ledgerMoney(m.supplies_used_cost)),
+            ledgerRow('Difference', 'Before rent, wages and artist shares', ledgerMoney(m.difference))
+        ], '');
+    } catch (e) { body.innerHTML = LEDGER_ERROR; }
 }
 window.openMarginCalculatorModal = openMarginCalculatorModal;
 
@@ -2584,7 +2582,7 @@ function copyDailySummaryToClipboard() {
 window.copyDailySummaryToClipboard = copyDailySummaryToClipboard;
 
 function copyRecentScanCodeModal() {
-    const code = document.getElementById('recent-scan-modal-subtitle')?.textContent || 'PLI-TI-6AL4V-001';
+    const code = document.getElementById('recent-scan-modal-subtitle')?.textContent || '';
     navigator.clipboard.writeText(code).then(() => {
         showStudioToast('Scan barcode copied to clipboard: ' + code);
     });
@@ -2746,7 +2744,7 @@ window.fetchAndRenderCsvImportHistory = fetchAndRenderCsvImportHistory;
 // =========================================================================
 
 function dismissBackupWarningToast() {
-    const toast = document.getElementById('backup-warning-toast');
+    const toast = document.getElementById('database-backup-warning-toast');
     if (toast) toast.style.display = 'none';
 }
 window.dismissBackupWarningToast = dismissBackupWarningToast;
@@ -2790,18 +2788,18 @@ window.executePOAndTriggerSupplierEmail = executePOAndTriggerSupplierEmail;
 async function fetchAndRenderDailyStudioSummary() {
     const body = document.getElementById('daily-summary-modal-body');
     if (!body) return;
-    body.innerHTML = '<div style="text-align:center;padding:24px;color:#94A3B8;">Aggregating daily studio operations...</div>';
     try {
-        const res = await fetch('/api/dashboard');
-        const data = await res.json();
-        body.innerHTML = '<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));gap:12px;">' +
-            '<div style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;"><div style="font-size:0.75rem;color:#94A3B8;">Appointments Today</div><div style="font-size:1.3rem;font-weight:800;color:#38BDF8;">' + (data.appointments_today || 6) + '</div></div>' +
-            '<div style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;"><div style="font-size:0.75rem;color:#94A3B8;">Active Clients</div><div style="font-size:1.3rem;font-weight:800;color:#10B981;">' + (data.total_clients || 28) + '</div></div>' +
-            '<div style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;"><div style="font-size:0.75rem;color:#94A3B8;">Inventory In Stock</div><div style="font-size:1.3rem;font-weight:800;color:#F59E0B;">' + (data.total_inventory || 142) + ' items</div></div>' +
-            '</div>';
-    } catch (e) {
-        body.innerHTML = '<div style="color:#94A3B8;padding:16px;">Daily summary ready. All station logs current.</div>';
-    }
+        const [appts, clients, stock] = await Promise.all(['/api/appointments', '/api/clients', '/api/inventory'].map(ledgerJson));
+        const today = new Date().toLocaleDateString('en-CA');
+        const items = Array.isArray(stock) ? stock : (stock.items || []);
+        const card = (label, value) => '<div class="summary-card" style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;"><div style="font-size:0.75rem;color:#94A3B8;">' + label + '</div><div style="font-size:1.3rem;font-weight:800;color:#38BDF8;">' + value + '</div></div>';
+        body.innerHTML = '<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));gap:12px;">'
+            + card('Appointments today', appts.filter((a) => a.datetime && new Date(a.datetime).toLocaleDateString('en-CA') === today).length)
+            + card('Clients on file', clients.length)
+            + card('Stock items', items.length)
+            + card('Low stock', items.filter((i) => Number(i.quantity) <= Number(i.reorder_point || 0)).length)
+            + '</div>';
+    } catch (e) { body.innerHTML = LEDGER_ERROR; }
 }
 window.fetchAndRenderDailyStudioSummary = fetchAndRenderDailyStudioSummary;
 
@@ -2879,7 +2877,7 @@ async function triggerInstantDatabaseSnapshot() {
     try {
         const res = await fetch('/api/database/create-snapshot', { method: 'POST' });
         const data = await res.json();
-        showStudioToast(data.message || 'Database snapshot created successfully');
+        showStudioToast(data.message || (res.ok ? 'Backup saved' : 'The backup could not be written'));
     } catch (e) {
         showStudioToast('Could not save: the server did not answer');
     }

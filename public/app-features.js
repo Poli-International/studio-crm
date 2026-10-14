@@ -1,3 +1,13 @@
+// A save button outside a form (forms are guarded in js/01-boot.js): while one save is running, another tap does nothing.
+window.oneAtATime = function (fn) {
+  var busy = false;
+  return async function () {
+    if (busy) return;
+    busy = true;
+    try { return await fn.apply(this, arguments); } finally { busy = false; }
+  };
+};
+
 // =========================================================================
 // 👤 CLIENT PROFILE MODAL LOGIC (DATABASE INTEGRATED & STAFF NOTES)
 // =========================================================================
@@ -2414,7 +2424,7 @@ async function executePOAndTriggerSupplierEmail() {
     } catch (e) { showStudioToast('Could not save: the server did not answer'); return; }
     showStudioToast('Purchase order ready: send it from your email');
 }
-window.executePOAndTriggerSupplierEmail = executePOAndTriggerSupplierEmail;
+window.executePOAndTriggerSupplierEmail = oneAtATime(executePOAndTriggerSupplierEmail);
 
 
 async function fetchAndRenderDailyStudioSummary() {
@@ -3326,7 +3336,7 @@ async function executeAutoSchedulerBooking() {
     renderAppointmentsList();
     if (typeof renderDashboardKpis === "function") renderDashboardKpis();
 }
-window.executeAutoSchedulerBooking = executeAutoSchedulerBooking;
+window.executeAutoSchedulerBooking = oneAtATime(executeAutoSchedulerBooking);
 
 // --- QR / barcode scanner: real camera (html5-qrcode, js/vendor), real lookups ---
 const qrState = { scanner: null, torch: false, lastCode: "", lastAt: 0, tab: "scans" };

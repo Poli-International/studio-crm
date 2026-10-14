@@ -37,9 +37,48 @@ jobs:
           path: click-report.json
           if-no-files-found: ignore
 
+  # The same for every embedded tool, one runner per tool. The list is read from
+  # public/tools, so a new tool is crawled without touching this file.
+  tool-list:
+    name: List the tools
+    runs-on: ubuntu-latest
+    outputs:
+      tools: ${{ steps.list.outputs.tools }}
+    steps:
+      - uses: actions/checkout@v5
+      - id: list
+        run: echo "tools=$(ls public/tools | grep -v '^shared$' | jq -Rsc 'split("\n") | map(select(length > 0))')" >> "$GITHUB_OUTPUT"
+
+  tools:
+    name: Tool ${{ matrix.tool }}
+    needs: tool-list
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        tool: ${{ fromJSON(needs.tool-list.outputs.tools) }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: npm ci --no-audit --no-fund
+      - name: Every button in the tool
+        run: node tests/click/crawl.mjs
+        env:
+          CRAWL_PAGE: tools/${{ matrix.tool }}/
+          CRAWL_DEPTH: 2
+          CRAWL_OUT: tool-report.json
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with:
+          name: tool-report-${{ matrix.tool }}
+          path: tool-report.json
+          if-no-files-found: ignore
+
   pack:
     name: ${{ matrix.name }}
-    needs: click
+    needs: [click, tools]
     strategy:
       fail-fast: false
       matrix:

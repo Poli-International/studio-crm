@@ -2898,6 +2898,12 @@ body {
     z-index: var(--z-modal-backdrop);
 }
 
+/* the window sits above its own backdrop, or the backdrop takes every click */
+.autoclave__modal-container {
+    position: relative;
+    z-index: var(--z-modal);
+}
+
 .autoclave__modal-content {
     position: relative;
     z-index: var(--z-modal);

@@ -2260,6 +2260,9 @@
         } else {
           document.execCommand('copy');
         }
+        // say so: a copy is otherwise invisible
+        var btn = document.querySelector('[onclick="copyEmbedCode()"]');
+        if (btn) { var was = btn.innerHTML; btn.textContent = '✓ Copied'; setTimeout(function () { btn.innerHTML = was; }, 2000); }
       }
     }
 

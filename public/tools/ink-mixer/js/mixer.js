@@ -1748,13 +1748,11 @@ function initInventoryUI() {
       const textarea = document.getElementById('exportInventoryTextarea');
       if (!textarea) return;
       const _t = typeof window.t === 'function' ? window.t : (k) => 'Inventory JSON copied to clipboard!';
-      navigator.clipboard.writeText(textarea.value).then(() => {
-        showMessage(_t('inventory.jsonCopied'), 'success');
-      }).catch(() => {
-        textarea.select();
-        document.execCommand('copy');
-        showMessage(_t('inventory.jsonCopied'), 'success');
-      });
+      const copied = () => showMessage(_t('inventory.jsonCopied'), 'success');
+      const fallback = () => { textarea.select(); document.execCommand('copy'); copied(); };
+      // a tablet on the studio's http address has no navigator.clipboard
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(textarea.value).then(copied, fallback);
+      else fallback();
     };
   }
   if (downloadExportBtn && exportModal) {

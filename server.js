@@ -51,8 +51,19 @@ app.use((req, res, next) => {
 });
 app.use(express.urlencoded({ extended: true }));
 
+// Tool pages get the clipboard fallback: dozens of Copy buttons in the tools call
+// navigator.clipboard, which a tablet on the http address does not have.
+const PUBLIC_DIR = path.join(__dirname, 'public');
+app.use((req, res, next) => {
+  if (req.method !== 'GET' || !/^\/tools\/.+(\.html|\/)$/.test(req.path)) return next();
+  const file = path.join(PUBLIC_DIR, req.path.endsWith('/') ? req.path + 'index.html' : req.path);
+  if (!file.startsWith(PUBLIC_DIR + path.sep)) return next();
+  fs.readFile(file, 'utf8', (err, html) => (err ? next()
+    : res.type('html').send(html.replace(/<head[^>]*>/i, (head) => head + '<script src="/js/clipboard-fallback.js"></script>'))));
+});
+
 // Serve static assets from public directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(PUBLIC_DIR));
 
 // Real-time SSE Clients & Activity Log Data Store
 const sseClients = [];
@@ -10558,7 +10569,8 @@ app.get('/api/client-portal/active-links', (req, res) => {
 // Browser-side datasets (settings, tips, checklists, macros...) mirrored by
 // public/js/app-data-sync.js so they live in the studio database, not one browser.
 let appData = {};
-const APP_DATA_KEY = /^(studio_|poli_|client_photo_)[A-Za-z0-9_]{1,80}$/;
+// a form builder design is saved per form: poli_form_builder_autosave:<form id>
+const APP_DATA_KEY = /^(studio_|poli_|client_photo_)[A-Za-z0-9_]{1,80}(:[A-Za-z0-9_-]{1,80})?$/;
 app.get('/api/app-data', (req, res) => res.json(appData));
 app.put('/api/app-data/:key', (req, res) => {
   if (!APP_DATA_KEY.test(req.params.key) || typeof req.body.value !== 'string') return res.status(400).json({ error: 'bad key or value' });

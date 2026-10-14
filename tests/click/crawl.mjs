@@ -7,6 +7,7 @@
 //   CRAWL_PAGE=tools/form-builder/ node tests/click/crawl.mjs    one embedded tool
 import { writeFileSync } from 'node:fs';
 import { startApp } from './app.mjs';
+import { sleep } from './cdp.mjs';
 
 const DEPTH = Number(process.env.CRAWL_DEPTH || 3);
 const OUT = process.env.CRAWL_OUT || 'click-report.json';
@@ -30,11 +31,21 @@ const QUIET = [
   /sendTeamChatMessage/, // sends nothing until a message is typed
   /qr-validation-toast/, // closes a message that is not showing
   /clearWaiverSignature/, // clears a signature pad that is still empty
-  /shareToPlatform\('email'\)/, // hands the message to the computer's mail program
+  /shareToPlatform\('email'\)|email-doc-btn/, // hands the message to the computer's mail program
+  /clear-search-btn/, // clears a search box that is still empty
+  /Standard Comparison \(Flat Rent/, // booth rent: the comparison already shown
+  /BUTTON \|  \| (📊 Benchmark Table|View Formatted Guide|📏 Curvature Calculator|📐 Standard Stencil Mode|High-Res Print Reference \(4800 x 1600 px) \| $/, // the tab or mode already shown
+  /BUTTON \|  \| [^|]*Copied/, // a copy button whose label just said so: pressing again copies the same text
+  /BUTTON \|  \| 👂 Lobe vs Helix/, // angle guide: the comparison shown when compare mode opens
+  /BUTTON \|  \| ❌ /, // ink mixer: picks again the colour already marked out of stock
+  /BUTTON \|  \| View Record \| $/, // material checker: the record just made is already the one shown
+  /btn-recheck-integrity/, // form builder: scans again, and an unchanged form gives the same report
+  /BUTTON \|  \| Submit Intake \| $/, // form builder: a sample button inside the theme preview
 ];
 const enqueue = (keys, pathTo) => {
   for (const key of keys) {
-    if (queued.has(key) || BACKDROP.test(key)) continue;
+    // a handle that is dragged, not pressed (the angle guide's discs): nothing to click
+    if (queued.has(key) || BACKDROP.test(key) || /^\w+ \| [^|]* \| Drag /.test(key)) continue;
     queued.add(key);
     (LAST.test(key) ? last : queue).push({ key, path: pathTo });
   }
@@ -43,7 +54,9 @@ const enqueue = (keys, pathTo) => {
 // One embedded tool on its own page (CRAWL_PAGE=tools/gauge-converter/), or the app with its eight screens
 const PAGE = '/' + (process.env.CRAWL_PAGE || '').replace(/^\//, ''); // Git Bash rewrites a leading slash, so tools/x/ works too
 const start = url.replace(/\/$/, '') + PAGE;
-await browser.goto(start);
+// a tool's welcome window can appear a moment after the page
+const arrive = async () => { await browser.goto(start); if (PAGE !== '/') await sleep(1200); };
+await arrive();
 // a tool may open behind a welcome window: get past it the way a person would, before every click
 const prelude = [];
 if (PAGE !== '/') {
@@ -71,7 +84,7 @@ while (queue.length || last.length) {
   if (process.env.CRAWL_VERBOSE) console.log(item.key);
   results.push(r);
   try {
-    await browser.goto(start);
+    await arrive();
     let lost = false;
     for (const step of item.path) {
       const t = await browser.click(step);
@@ -95,9 +108,16 @@ while (queue.length || last.length) {
     browser.reset();
     await browser.evaluate('(() => { const s = window.__ct.sig; s.fetches.length = 0; s.opens.length = 0; s.prints = 0; s.added.length = 0; })()');
     const before = await browser.evaluate('({ state: window.__ct.state(), keys: window.__ct.keys() })');
+    // a page that moves on its own (a ticking clock, a turning model) says nothing about the click
+    const restless = (await browser.evaluate('new Promise(r => setTimeout(() => r(window.__ct.state().look), 400))')) !== before.state.look;
     const chosen = await browser.evaluate(`window.__ct.chosen(${JSON.stringify(item.key)})`);
+    // greyed out until something is chosen first (a file to import): nobody can press it yet
+    if (await browser.evaluate(`!!(window.__ct.all().find(e => window.__ct.key(e) === ${JSON.stringify(item.key)}) || {}).disabled`)) { r.verdict = 'disabled'; continue; }
+    const ownLook = `(() => { const el = window.__ct.all().find(e => window.__ct.key(e) === ${JSON.stringify(item.key)}); return el ? el.getAttribute('class') + '|' + el.getAttribute('aria-pressed') + '|' + el.getAttribute('aria-selected') : null; })()`;
+    const ownBefore = await browser.evaluate(ownLook);
     const t = await browser.click(item.key);
     if (!t) { r.verdict = 'unreachable'; continue; }
+    const ownAfter = await browser.evaluate(ownLook).catch(() => ownBefore);
     // in a strip that scrolls sideways or a menu that is folded away: not on screen, so not a button anyone can press now
     if (t.covered === 'outside the window') { r.verdict = 'hidden'; continue; }
     if (t.covered) { r.verdict = 'broken'; r.did = 'cannot be clicked: covered by ' + t.covered; continue; }
@@ -109,7 +129,8 @@ while (queue.length || last.length) {
     Object.assign(r, {
       opened, closed,
       view: after.state.view !== before.state.view ? after.state.view : undefined,
-      changed: after.state.hash !== before.state.hash,
+      // the button itself now shows as the chosen one (a filter chip, a tab): seen even on a page that moves on its own
+      changed: after.state.hash !== before.state.hash || (!restless && after.state.look !== before.state.look) || (ownBefore !== null && ownAfter !== ownBefore),
       fetches: after.sig.fetches.map((f) => `${f.method} ${f.url} ${f.status}`),
       downloads: [...browser.seen.downloads], dialogs: [...browser.seen.dialogs], errors: [...browser.seen.errors],
       opens: after.sig.opens, prints: after.sig.prints,

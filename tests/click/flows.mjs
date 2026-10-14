@@ -71,6 +71,36 @@ await flow('View Profile opens the profile, every tab shows, and it closes', asy
   check(!(await shown('client-profile-modal-overlay')), 'the profile cannot be closed');
 });
 
+await flow('Two quick taps on Save make one client, not two', async () => {
+  await b.goto(url);
+  await b.clickText('Clients');
+  await b.clickText('New Client');
+  await b.type('#new-client-name', 'Double Tap');
+  await b.evaluate(`(() => { const btn = [...document.querySelectorAll('#new-client-modal-overlay button')].find(x => /Save client/.test(x.innerText)); btn.click(); btn.click(); })()`);
+  await sleep(1500);
+  const copies = (await api('/api/clients')).filter((c) => c.name === 'Double Tap');
+  check(copies.length === 1, `two taps saved ${copies.length} clients`);
+  await b.evaluate(`fetch('/api/clients/${copies[0] && copies[0].id}', { method: 'DELETE' })`);
+});
+
+await flow('On a phone, nothing is cut off on any screen', async () => {
+  await b.phone();
+  try {
+    for (const dest of ['dashboard', 'clients', 'calendar', 'inventory', 'compliance', 'finance', 'tools', 'settings']) {
+      await b.goto(url);
+      await b.evaluate(`navigateToDestination('${dest}')`);
+      await sleep(400);
+      // past the right edge, shown, and not inside a box that scrolls sideways: no finger can reach it
+      const cut = await b.evaluate(`(() => { const v = innerWidth;
+        const scrolls = (e) => { for (let p = e.parentElement; p && p !== document.body; p = p.parentElement) { const o = getComputedStyle(p).overflowX; if ((o === 'auto' || o === 'scroll') && p.getBoundingClientRect().right <= v + 2) return true; } return false; };
+        const seen = (e) => { for (let p = e; p; p = p.parentElement) { const cs = getComputedStyle(p); if (cs.display === 'none' || cs.visibility === 'hidden') return false; } return true; };
+        return [...document.querySelectorAll('body *')].filter(e => { const r = e.getBoundingClientRect(); return r.width && r.left < v && r.right > v + 2 && getComputedStyle(e).position !== 'fixed' && seen(e) && !scrolls(e); })
+          .filter((e, i, all) => !all.some(o => o !== e && o.contains(e))).map(e => e.id || e.tagName).slice(0, 3); })()`);
+      check(!cut.length, `${dest}: cut off on a phone: ${cut.join(', ')}`);
+    }
+  } finally { await b.desktop(); }
+});
+
 await flow('Edit client saves the change; Delete removes the client', async () => {
   await b.clickText('Clients');
   await press('.client-directory-row', 'Flow Client', 'View Profile');
@@ -257,15 +287,24 @@ await flow('Form builder: changes to one form are still there after opening anot
   await b.clickText('Add Question');
   await open(1);
   await sleep(600);
+  const second = await questions();
   await b.clickText('Add Question');
   await open(0);
   await sleep(600);
   check((await questions()) === before + 1, 'the question added to the first form was lost');
+  // every save to the studio database went through: two at once used to exceed the browser's keepalive limit
+  await sleep(800);
+  const lost = await b.evaluate(`window.__ct.sig.fetches.filter(f => f.url.includes('/api/app-data/') && f.method === 'PUT' && f.status !== 200).map(f => f.url + ' ' + f.status)`);
+  check(!lost.length, 'form designs not saved on the server: ' + lost.join(', '));
   // another device: a browser that has never opened the form builder (goto starts with empty storage)
   await sleep(800);
   await b.goto(url + 'tools/form-builder/index.html');
   await sleep(1500);
   check((await questions()) === before + 1, 'the edited form did not reach a second device');
+  // and every other form edited there, each saved under its own name
+  await open(1);
+  await sleep(600);
+  check((await questions()) === second + 1, 'the second edited form did not reach a second device');
 });
 
 await flow('Team board: a message is saved and still there after a reload', async () => {

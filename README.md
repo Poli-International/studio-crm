@@ -72,7 +72,7 @@ npm run test:click # real clicks in Chrome or Edge: the daily jobs, then every b
 npm run guide      # rebuild public/guide/<lang>.html from docs/
 ```
 
-The click test (`tests/click/`) starts the app on a throwaway database, opens a real browser and uses the mouse. `flows.mjs` does the jobs a studio does every day (add, edit and delete a client, manage staff, export, clock in, import a CSV, fill and sign the tablet form). `crawl.mjs` clicks every button it can reach and fails on one that does nothing, throws an error or is covered by something else. Both run before a release is packed, so a dead button blocks the release. It needs Chrome or Edge on the machine and nothing else.
+The click test (`tests/click/`) starts the app on a throwaway database, opens a real browser and uses the mouse. `flows.mjs` does the jobs a studio does every day (add, edit and delete a client, manage staff, export, clock in, import a CSV, fill and sign the tablet form), plus the awkward cases: two quick taps on Save, every screen at phone width. `crawl.mjs` clicks every button it can reach and fails on one that does nothing, throws an error or is covered by something else. `CRAWL_PAGE=tools/<tool>/ node tests/click/crawl.mjs` does the same inside one of the embedded tools, and the release workflow crawls every tool in `public/tools`, one runner each. All of it runs before a release is packed, so a dead button blocks the release. It needs Chrome or Edge on the machine and nothing else.
 
 Interface text is translated by `public/js/i18n-phrases.js` from `public/i18n/<lang>.json`, keyed on the exact English text.
 

@@ -314,7 +314,10 @@ Routes of the self-hosted server that the screens above rely on (the online demo
 | `GET` / `POST` / `PATCH` | `/api/inventory`, `/api/inventory/{id}` | Stock items list, + Add item and Edit. The id is always the server's. |
 | `GET` / `POST` / `PUT` | `/api/inventory/suppliers`, `/api/inventory/suppliers/{id}` | Suppliers list, + Add supplier and Edit. Missing contact details stay empty; purchase orders go to `order_email`. |
 | `POST` | `/api/database/create-snapshot` | Back up now: a full SQLite copy in `storage/backups/`. |
-| `GET` / `POST` | `/api/access`, `/api/access/login`, `/api/access/logout`, `/api/access/password` | The optional studio password. |
+| `GET` / `POST` | `/api/access`, `/api/access/login`, `/api/access/logout`, `/api/access/password` | The optional studio password. `GET /api/access` also returns `staffLogins`, `level`, `me` and (administrators only) `logins`. |
+| `POST` | `/api/access/skip` | First start: open the CRM without a password. |
+| `POST` | `/api/access/idle` | Idle lock minutes (0, 5, 10, 15, 30). |
+| `GET` / `POST` | `/api/access/people`, `/api/access/staff-login` | Names shown on the sign-in page; give a staff member a level and password (`{ staff_id, level, password }`) or remove it (`{ staff_id, remove: true }`). |
 | `GET` | `/api/studio-meta` | Includes the running `version`, shown in the sidebar. |
 | any | `/api/*` not listed | `404` with a JSON error, never the page. |
 
@@ -403,7 +406,17 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 - **Output escaping**: user-supplied strings rendered into the profile modal are passed through `escapeHtml(...)` before insertion, including client name, email, phone, allergies, medical history, emergency contact, preferred style, appointment service type, date, time, staff name, status, note author, author role, category and note body. Appointment and client objects passed into `generateClientAppointmentReceiptPDF` are serialised with `JSON.stringify(...).replace(/"/g, '&quot;')` before being placed in inline handlers.
 - **API scoping**: the demo `fetch` wrapper only intercepts same-origin requests whose path begins with `/api/`; everything else is forwarded to the real `fetch`.
 - **Waiver integrity**: a waiver will not save without both a client and a signature.
-- **Studio password** (optional, off by default): scrypt hash in the database, an HttpOnly SameSite=Lax session cookie, five wrong tries then a 30 second wait. An empty `reset-password.txt` in the data folder removes it at the next start.
+- **Studio password** (asked for at the first start, can be skipped): scrypt hash in the database, an HttpOnly SameSite=Lax session cookie, five wrong tries then a 30 second wait. An empty `reset-password.txt` in the data folder removes it, and all staff logins, at the next start.
+- **Idle lock** (optional): a device with no pointer, key, touch or wheel input (inside the embedded tools too) for the chosen minutes signs out and reloads to the sign-in page. It runs in the page; the session cookie on the server is what protects the data. The tablet kiosk is excluded.
+- **Staff logins and levels** (optional, on once an administrator has a login): each login is a scrypt hash in `app_state.staffLogins`. `needLevel(method, path)` in `src/access.js` decides the lowest level for every `/api/` request and the server answers 403 below it; hiding Finance and Settings in the sidebar is only a convenience.
+
+| Level | May do |
+|---|---|
+| Front desk | Clients, appointments, waivers, payments, clocking in and out, and reading everything except the money reports. |
+| Staff | Front desk, plus writes to stock, suppliers, compliance, aftercare, the rota and the consent form designs. |
+| Administrator | Everything: every `DELETE`, the money reports (`/api/financial`, `/api/financials`, `/api/staff/commissions`), `/api/settings`, studio-setting keys in `/api/app-data`, the team, logins, backups, imports. |
+
+  The studio password signs in as administrator. Without staff logins everyone who is signed in is an administrator, as in 1.0.5.
 - **HTTPS on the studio network**: a self-made certificate (`https-key.pem`, `https-cert.pem` next to the database) on port 3443, so tablets get the camera and the clipboard. `HTTPS_PORT=0` turns it off.
 - **Tablet Kiosk PIN** (optional): a short hash in `poli_kiosk_exit_pin`, shared through `/api/app-data`. It keeps a client inside the consent form on a tablet; it is a deterrent, not a security boundary.
 - **Tool pages** are served with `js/clipboard-fallback.js` added, because a tablet on the plain `http://` address has no `navigator.clipboard`.
@@ -416,9 +429,9 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ### 1.0.6
 
-- Inventory: a list of every stock item with Add item and Edit; suppliers with Add supplier and Edit.
-- Healing Pipeline built from completed appointments (days since the session), with View Profile and a PDF; it used to show fixed sample counts.
-- Calendar list: Deposit and To pay columns.
+- The first start asks for the studio password (it can be skipped and set later in Settings).
+- Idle lock: Settings choice (off, 5, 10, 15, 30 minutes); a device not used for that long signs out. The tablet kiosk is never locked.
+- Staff logins with three levels (Front desk, Staff, Administrator), checked by the server on every request.
 
 ### 1.0.5
 
@@ -426,6 +439,9 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 - Tablet Kiosk PIN: leaving Kiosk Mode and the "form submitted" screen need it.
 - Calendar: Edit on every appointment; Book Appointment links a client picked from the list.
 - Record Payment is a real form; a window opened from another one comes to the front.
+- Inventory: a list of every stock item with Add item and Edit; suppliers with Add supplier and Edit.
+- Healing Pipeline built from completed appointments (days since the session), with View Profile and a PDF; it used to show fixed sample counts.
+- Calendar list: Deposit and To pay columns.
 
 ### 1.0.4
 

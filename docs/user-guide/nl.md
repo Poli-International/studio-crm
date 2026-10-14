@@ -33,13 +33,23 @@ Open **Instellingen** om uw prijzen, aanbetalingsregel, belastingtarief (btw), r
 
 ## Personeel
 
-Klik rechtsboven op de personeelsknop om uw team te zien. **Teamlid toevoegen** voegt een persoon toe, **Bewerken** wijzigt de gegevens en **Verwijderen** haalt de persoon uit het team. **Selecteren** toont de naam van die persoon in de bovenbalk, zodat iedereen ziet wie er achter het scherm zit. Er zijn geen wachtwoorden en geen toegangsniveaus. Een nieuw teamlid kan meteen worden gekozen op elke plek waar een artiest wordt gekozen, bijvoorbeeld bij het boeken van een afspraak.
+Klik rechtsboven op de personeelsknop om uw team te zien. **Teamlid toevoegen** voegt een persoon toe, **Bewerken** wijzigt de gegevens en **Verwijderen** haalt de persoon uit het team. **Selecteren** toont de naam van die persoon in de bovenbalk, zodat iedereen ziet wie er achter het scherm zit. Zodra er een studiowachtwoord is, kan iedereen ook een eigen login en toegangsniveau krijgen (zie hieronder). Een nieuw teamlid kan meteen worden gekozen op elke plek waar een artiest wordt gekozen, bijvoorbeeld bij het boeken van een afspraak.
 
 ## Tablets, telefoons en het studiowachtwoord
 
 Andere apparaten in de studio openen het CRM met het adres dat in het startvenster staat. Een tablet of telefoon die de camera nodig heeft (de scanner) moet het adres gebruiken dat begint met `https://` en eindigt op `:3443`. De eerste keer waarschuwt de browser dat de verbinding niet privé is, omdat het certificaat door uw eigen computer is gemaakt: kies Geavanceerd en daarna Doorgaan. Met het gewone `http://`-adres werkt alles behalve de camera.
 
-Om andere mensen op hetzelfde netwerk buiten te houden, opent u **Instellingen** en stelt u een **Studiowachtwoord** in. Elk apparaat meldt zich daarna één keer aan. Het is één wachtwoord voor de hele studio, niet één per persoon. Bent u het vergeten, maak dan een leeg bestand met de naam `reset-password.txt` in de map `data` en start het CRM opnieuw.
+De eerste keer dat het CRM start, vraagt het u het **studiowachtwoord** aan te maken. Elke computer, tablet en telefoon meldt zich daarna één keer daarmee aan. U kunt **Continue without a password** kiezen en het later instellen in **Instellingen**, **Studiowachtwoord**. Vergeten? Maak een leeg bestand `reset-password.txt` in de map `data` en start het CRM opnieuw: dat verwijdert het studiowachtwoord en alle personeelslogins.
+
+**Een ongebruikt apparaat vergrendelen:** kies in **Instellingen**, onder het studiowachtwoord, hoe lang een apparaat ongebruikt mag blijven (5, 10, 15 of 30 minuten) voordat het zichzelf afmeldt. De tabletkiosk wordt nooit vergrendeld: die heeft een eigen pincode om af te sluiten.
+
+**Logins en niveaus voor personeel:** met het studiowachtwoord ingesteld opent u de personeelslijst, klikt u bij iemand op **Bewerken** en kiest u een **Toegangsniveau** en een **Loginwachtwoord** (minstens 8 tekens). Geef uzelf eerst het niveau **Beheerder**: personeelslogins werken zodra één beheerder een login heeft. Daarna vraagt de aanmeldpagina **Who are you?** en meldt iedereen zich aan met een eigen wachtwoord. Het studiowachtwoord blijft werken en meldt aan als beheerder.
+
+- **Receptie**: klanten, afspraken, toestemmingsformulieren, betalingen, in- en uitklokken.
+- **Personeel**: alles van de receptie, plus voorraad, leveranciers, compliance-registraties, nazorg, het rooster en het ontwerp van de toestemmingsformulieren.
+- **Beheerder**: alles, ook verwijderen, de financiële overzichten, Instellingen, het team, logins, back-ups en imports.
+
+Receptie en personeel zien Financiën en Instellingen niet. Probeert iemand iets wat het niveau niet toestaat, dan meldt het CRM dat en verandert er niets. Een login verwijderen: zet het niveau op **Geen login**.
 
 ## Afspraken en planning
 

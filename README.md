@@ -62,7 +62,7 @@ All data is in `data/studio_crm.sqlite`. Copy that file to back up the studio. *
 
 - Computers open `http://THE-COMPUTER:3000`.
 - Tablets and phones that need the camera (the scanner) open `https://THE-COMPUTER:3443`. The certificate is made by the CRM itself, so the browser warns once: choose Advanced, then Continue. Browsers give a page the camera only on `localhost` or over https. `HTTPS_PORT=0` turns https off.
-- To keep other people on the network out, set a **Studio Password** in Settings. It is off by default and is one password for the whole studio. Forgotten: create an empty file `reset-password.txt` in the `data` folder and restart.
+- To keep other people on the network out, set a **Studio Password**: the first start asks for it (you can skip it and set it later in Settings). Settings can also lock a device that is not used for 5 to 30 minutes, and each staff member can get their own login with a level (Front desk, Staff, Administrator). Forgotten: create an empty file `reset-password.txt` in the `data` folder and restart; it removes the studio password and the staff logins.
 
 ## Development
 

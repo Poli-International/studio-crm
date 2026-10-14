@@ -33,13 +33,23 @@ Abra **Definições** para introduzir os seus preços, a regra de depósito, a t
 
 ## Equipa
 
-Clique no botão da equipa, em cima à direita, para ver a sua equipa. **Adicionar membro** adiciona uma pessoa, **Editar** altera os seus dados e **Remover** retira-a da equipa. **Selecionar** mostra o nome dessa pessoa na barra superior, para que todos vejam quem está no ecrã. Não há palavras-passe nem níveis de acesso. Um novo membro pode ser escolhido de imediato em qualquer lugar onde se escolhe um artista, por exemplo ao marcar uma sessão.
+Clique no botão da equipa, em cima à direita, para ver a sua equipa. **Adicionar membro** adiciona uma pessoa, **Editar** altera os seus dados e **Remover** retira-a da equipa. **Selecionar** mostra o nome dessa pessoa na barra superior, para que todos vejam quem está no ecrã. Depois de definida a palavra-passe do estúdio, cada pessoa pode ter também o seu próprio acesso e nível (ver abaixo). Um novo membro pode ser escolhido de imediato em qualquer lugar onde se escolhe um artista, por exemplo ao marcar uma sessão.
 
 ## Tablets, telemóveis e a palavra-passe do estúdio
 
 Os outros dispositivos do estúdio abrem o CRM com o endereço mostrado na janela que o iniciou. Um tablet ou telemóvel que precise da câmara (o scanner) tem de usar o endereço que começa por `https://` e termina em `:3443`. Da primeira vez, o navegador avisa que a ligação não é privada, porque o certificado foi criado pelo seu próprio computador: escolha Avançadas e depois Continuar. Com o endereço `http://` simples funciona tudo, exceto a câmara.
 
-Para manter fora as outras pessoas da mesma rede, abra **Definições** e defina uma **Palavra-passe do estúdio**. Cada dispositivo inicia sessão uma vez. É uma única palavra-passe para todo o estúdio, não uma por pessoa. Se a esquecer, crie um ficheiro vazio chamado `reset-password.txt` na pasta `data` e inicie o CRM de novo.
+Na primeira vez que arranca, o CRM pede-lhe que crie a **palavra-passe do estúdio**. Cada computador, tablet e telemóvel inicia sessão uma vez com ela. Pode escolher **Continue without a password** e defini-la mais tarde em **Definições**, **Palavra-passe do estúdio**. Se a esquecer, crie um ficheiro vazio chamado `reset-password.txt` na pasta `data` e volte a iniciar o CRM: isto remove a palavra-passe do estúdio e todos os acessos da equipa.
+
+**Bloquear um dispositivo sem uso:** em **Definições**, por baixo da palavra-passe do estúdio, escolha quanto tempo um dispositivo pode ficar sem uso (5, 10, 15 ou 30 minutos) antes de terminar a sessão sozinho. O quiosque do tablet nunca é bloqueado: tem o seu próprio PIN de saída.
+
+**Acessos e níveis da equipa:** com a palavra-passe do estúdio definida, abra a lista da equipa, clique em **Editar** numa pessoa e escolha um **Nível de acesso** e uma **Palavra-passe de acesso** (pelo menos 8 caracteres). Dê primeiro a si próprio o nível **Administrador**: os acessos da equipa funcionam assim que um administrador tiver um. A partir daí, a página de início de sessão pergunta **Who are you?** e cada pessoa entra com a sua palavra-passe. A palavra-passe do estúdio continua a funcionar e entra como administrador.
+
+- **Recepção**: clientes, marcações, consentimentos, pagamentos, registo de entrada e saída.
+- **Equipa**: tudo o que a recepção faz, mais stock, fornecedores, registos de conformidade, cuidados pós-sessão, escalas e o design dos consentimentos.
+- **Administrador**: tudo, incluindo apagar registos, os relatórios financeiros, as Definições, a equipa, os acessos, as cópias de segurança e as importações.
+
+A recepção e a equipa não veem Finanças nem Definições. Se alguém tentar algo que o seu nível não permite, o CRM avisa e não altera nada. Para remover um acesso, defina o nível como **Sem acesso**.
 
 ## Marcações e agendamento
 

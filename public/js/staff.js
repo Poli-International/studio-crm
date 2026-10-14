@@ -20,6 +20,27 @@ function showActiveStaff() {
 }
 document.addEventListener('DOMContentLoaded', showActiveStaff);
 
+// Who is signed in, and whether staff logins are on (from /api/access).
+let accessInfo = {};
+const LEVEL_LABEL = { front_desk: 'Front desk', staff: 'Staff', admin: 'Administrator' };
+async function loadAccessInfo() {
+    try { accessInfo = await (await fetch('/api/access')).json(); } catch (e) { accessInfo = {}; }
+    // lower levels do not see the money reports and the studio settings (the server refuses them anyway)
+    document.body.dataset.level = accessInfo.level || 'admin';
+    for (const id of ['nav-dest-finance', 'nav-dest-settings']) {
+        const el = document.getElementById(id);
+        // the nav styles say display:flex !important, so the hiding needs !important too
+        if (el) el.style.setProperty('display', accessInfo.level && accessInfo.level !== 'admin' ? 'none' : '', 'important');
+    }
+    // signed in with a staff login: that person is at the screen
+    if (accessInfo.staffLogins && accessInfo.me) {
+        try { localStorage.setItem('studio_active_staff', JSON.stringify({ id: 0, name: accessInfo.me + ' (' + LEVEL_LABEL[accessInfo.level] + ')' })); } catch (e) { /* private window */ }
+        showActiveStaff();
+    }
+    return accessInfo;
+}
+document.addEventListener('DOMContentLoaded', loadAccessInfo);
+
 async function renderStaffList() {
     const body = document.getElementById('staff-list-body');
     if (!body) return;
@@ -41,9 +62,10 @@ async function renderStaffList() {
         const id = Number(s.id);
         const here = who && Number(who.id) === id;
         const details = [s.title, s.email, s.phone].filter(Boolean).map(escapeHtml).join(' · ');
+        const level = accessInfo.logins && accessInfo.logins[id];
         return `<div class="staff-row" style="padding:12px 14px;background:#1E293B;border:1px solid ${here ? '#10B981' : '#475569'};border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
             <div style="min-width:0;">
-                <div style="font-weight:800;font-size:0.9rem;">${escapeHtml(s.name || '')}${here ? ' <span style="color:#10B981;font-size:0.72rem;">● at the screen</span>' : ''}</div>
+                <div style="font-weight:800;font-size:0.9rem;">${escapeHtml(s.name || '')}${here ? ' <span style="color:#10B981;font-size:0.72rem;">● at the screen</span>' : ''}${level ? ` <span class="staff-level-badge" style="background:#312E81;color:#C7D2FE;border-radius:6px;padding:1px 6px;font-size:0.7rem;">🔑 ${LEVEL_LABEL[level]}</span>` : ''}</div>
                 <div style="font-size:0.75rem;color:#94A3B8;">${details}</div>
             </div>
             <div style="display:flex;gap:6px;">
@@ -55,8 +77,9 @@ async function renderStaffList() {
     }).join('');
 }
 
-function openStaffLoginModal() {
+async function openStaffLoginModal() {
     forceShowModal('staff-login-modal-overlay');
+    await loadAccessInfo();
     renderStaffList();
 }
 window.openStaffLoginModal = openStaffLoginModal;
@@ -89,6 +112,11 @@ function openStaffFormModal(id) {
             if (el) el.value = Array.isArray(member[field]) ? member[field].join(', ') : (member[field] || '');
         }
     }
+    // the login fields: an administrator, once the studio password is set
+    const access = document.getElementById('staff-form-access');
+    if (access) access.style.display = accessInfo.passwordSet && accessInfo.level === 'admin' ? '' : 'none';
+    const levelEl = document.getElementById('staff-form-level');
+    if (levelEl) levelEl.value = (member && accessInfo.logins && accessInfo.logins[member.id]) || '';
     forceShowModal('staff-form-modal-overlay');
 }
 window.openStaffFormModal = openStaffFormModal;
@@ -128,6 +156,21 @@ async function handleSaveStaffMember(event) {
     if (who && Number(who.id) === Number(saved.id)) {
         try { localStorage.setItem('studio_active_staff', JSON.stringify({ id: saved.id, name: saved.name })); } catch (e) { /* private window */ }
         showActiveStaff();
+    }
+    // their login: level and password (an administrator, with the studio password set)
+    const levelEl = document.getElementById('staff-form-level');
+    const pwEl = document.getElementById('staff-form-login-password');
+    const accessShown = document.getElementById('staff-form-access') && document.getElementById('staff-form-access').style.display !== 'none';
+    if (accessShown && levelEl) {
+        const had = accessInfo.logins && accessInfo.logins[saved.id];
+        const level = levelEl.value, password = (pwEl && pwEl.value) || '';
+        if (level || had) {
+            const res = await fetch('/api/access/staff-login', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(level ? { staff_id: saved.id, level, password } : { staff_id: saved.id, remove: true }) });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok) { showStudioToast(data.error || 'Could not save the login'); return; }
+            await loadAccessInfo();
+        }
     }
     closeStaffFormModal();
     renderStaffList();

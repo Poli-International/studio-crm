@@ -33,13 +33,23 @@ Aprite **Impostazioni** per inserire i vostri prezzi, la regola dell'acconto, l'
 
 ## Personale
 
-Fate clic sul pulsante del personale in alto a destra per vedere il team. **Aggiungi membro** aggiunge una persona, **Modifica** ne cambia i dati e **Rimuovi** la toglie dal team. **Seleziona** mostra il nome di quella persona nella barra in alto, così tutti vedono chi è allo schermo. Non ci sono password né livelli di accesso. Un nuovo membro si può scegliere subito ovunque si scelga un artista, per esempio quando si prenota un appuntamento.
+Fate clic sul pulsante del personale in alto a destra per vedere il team. **Aggiungi membro** aggiunge una persona, **Modifica** ne cambia i dati e **Rimuovi** la toglie dal team. **Seleziona** mostra il nome di quella persona nella barra in alto, così tutti vedono chi è allo schermo. Una volta impostata la password dello studio, ogni persona può avere anche un proprio accesso e livello (vedi sotto). Un nuovo membro si può scegliere subito ovunque si scelga un artista, per esempio quando si prenota un appuntamento.
 
 ## Tablet, telefoni e password dello studio
 
 Gli altri dispositivi dello studio aprono il CRM con l'indirizzo mostrato nella finestra che lo ha avviato. Un tablet o un telefono che ha bisogno della fotocamera (lo scanner) deve usare l'indirizzo che inizia con `https://` e finisce con `:3443`. La prima volta il browser avvisa che la connessione non è privata, perché il certificato è stato creato dal vostro computer: scegliete Avanzate, poi Continua. Con il semplice indirizzo `http://` funziona tutto tranne la fotocamera.
 
-Per tenere fuori le altre persone sulla stessa rete, aprite **Impostazioni** e impostate una **Password dello studio**. Ogni dispositivo accede poi una volta. È una sola password per tutto lo studio, non una per persona. Se la dimenticate, create un file vuoto chiamato `reset-password.txt` nella cartella `data` e riavviate il CRM.
+Al primo avvio il CRM vi chiede di creare la **password dello studio**. Ogni computer, tablet e telefono accede poi una volta con essa. Potete scegliere **Continue without a password** e impostarla più tardi in **Impostazioni**, **Password dello studio**. Se la dimenticate, create un file vuoto chiamato `reset-password.txt` nella cartella `data` e riavviate il CRM: questo rimuove la password dello studio e tutti gli accessi del personale.
+
+**Bloccare un dispositivo inutilizzato:** in **Impostazioni**, sotto la password dello studio, scegliete per quanto tempo un dispositivo può restare inutilizzato (5, 10, 15 o 30 minuti) prima di disconnettersi da solo. Il chiosco del tablet non viene mai bloccato: ha il suo PIN di uscita.
+
+**Accessi e livelli del personale:** con la password dello studio impostata, aprite l'elenco del personale, cliccate su **Modifica** per una persona e scegliete un **Livello di accesso** e una **Password di accesso** (almeno 8 caratteri). Date prima a voi stessi il livello **Amministratore**: gli accessi del personale funzionano appena un amministratore ne ha uno. Da quel momento la pagina di accesso chiede **Who are you?** e ognuno entra con la propria password. La password dello studio funziona ancora ed entra come amministratore.
+
+- **Reception**: clienti, appuntamenti, consensi, pagamenti, timbratura di entrata e uscita.
+- **Staff**: tutto quello della reception, più magazzino, fornitori, registri di conformità, cura post-trattamento, turni e il design dei moduli di consenso.
+- **Amministratore**: tutto, compresa l'eliminazione dei record, i report economici, le Impostazioni, il team, gli accessi, i backup e le importazioni.
+
+Reception e personale non vedono Finanza e Impostazioni. Se qualcuno prova un'azione che il suo livello non consente, il CRM lo dice e non cambia nulla. Per rimuovere un accesso, impostate il livello su **Nessun accesso**.
 
 ## Appuntamenti e pianificazione
 

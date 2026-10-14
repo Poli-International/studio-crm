@@ -158,6 +158,10 @@ jobs:
           done
           cat "$RUNNER_TEMP/server.log"
           # no pipe into grep -q: it closes early and curl fails under pipefail
+          # a new install asks for the studio password first; this check continues without one
+          page=$(curl -sf http://127.0.0.1:3000/)
+          grep -q "Create the studio password" <<< "$page"
+          curl -sf -X POST http://127.0.0.1:3000/api/access/skip > /dev/null
           page=$(curl -sf http://127.0.0.1:3000/)
           grep -q "STUDIO CRM" <<< "$page"
           code=$(curl -s -o "$RUNNER_TEMP/new.json" -w "%{http_code}" -X POST http://127.0.0.1:3000/api/clients -H "Content-Type: application/json" -d "{\"name\":\"Packaging Test\"}")

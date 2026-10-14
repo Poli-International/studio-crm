@@ -166,6 +166,55 @@ await flow('Staff shifts: clock in shows on shift, clock out, and the window clo
   check(!(await shown('shift-modal')), 'the shift window cannot be closed');
 });
 
+await flow('A waiver signed in the profile can be read back and downloaded', async () => {
+  // a client with no waiver yet, as in Henry's report
+  await b.evaluate(`fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Waiver Flow' }) })`);
+  await b.goto(url);
+  await b.clickText('Clients');
+  await press('.client-directory-row', 'Waiver Flow', 'View Profile');
+  await b.clickText('Waivers', '#client-profile-modal-overlay');
+  await b.clickText('Open', '#client-profile-modal-overlay');
+  check((await b.evaluate(`document.getElementById('waiver-client-search').value`)) === 'Waiver Flow', 'the signing window does not know which client it is for');
+  await b.type('#waiver-service-input', 'Helix piercing');
+  await b.scribble('#waiver-sig-canvas');
+  await b.clickText('Sign & Log Waiver', '#waiver-modal');
+  await eventually(async () => (await api('/api/waivers')).some((w) => w.client_name === 'Waiver Flow' && w.signature), 'the waiver was not saved');
+  await b.goto(url);
+  await b.clickText('Clients');
+  await press('.client-directory-row', 'Waiver Flow', 'View Profile');
+  await b.clickText('Waivers', '#client-profile-modal-overlay');
+  await b.clickText('View waiver');
+  await eventually(async () => (await text('#waiver-record-modal-overlay')).includes('Helix piercing'), 'View waiver does not show the signed waiver');
+  check(await b.evaluate(`!!document.querySelector('#waiver-record-modal-overlay img[alt="Client signature"]')`), 'the signature is not shown');
+  b.reset();
+  await b.clickText('Download PDF');
+  await eventually(async () => b.seen.downloads.some((d) => d.endsWith('.pdf')), 'Download PDF made no file');
+});
+
+await flow('Health Alerts: View Profile opens the profile in front', async () => {
+  await b.goto(url);
+  await b.clickText('Clients');
+  await pressOn('openClientDirectoryModal()');
+  // the client list behind has a View Profile button with the same label and action: name this one
+  await b.evaluate(`[...document.querySelectorAll('#client-directory-modal-overlay button')].find(x => /View Profile/.test(x.innerText)).id = 'alerts-view-profile'`);
+  const t = await b.click(await b.evaluate(`window.__ct.key(document.getElementById('alerts-view-profile'))`));
+  check(t && !t.covered, 'View Profile in Health Alerts cannot be clicked');
+  await sleep(500);
+  const front = await b.evaluate(`(() => { const r = document.getElementById('client-profile-name').getBoundingClientRect(); return document.getElementById('client-profile-modal-overlay').contains(document.elementFromPoint(r.left + 5, r.top + r.height / 2)); })()`);
+  check(front, 'the profile opened behind the alerts window');
+});
+
+await flow('Record Payment saves a payment', async () => {
+  await b.goto(url);
+  await b.clickText('Finance');
+  const before = (await api('/api/financial')).length;
+  await pressOn('openQuickRecordPaymentModal()');
+  await b.type('#record-payment-amount', '50');
+  await b.clickText('Save payment');
+  await eventually(async () => (await api('/api/financial')).length === before + 1, 'Record Payment saved nothing');
+  check(!(await b.evaluate(`getComputedStyle(document.getElementById('deposit-ledger-modal-overlay')).display !== 'none'`)), 'Record Payment opened the deposit ledger');
+});
+
 await flow('Removing an appointment also updates the dashboard count', async () => {
   const [client] = await api('/api/clients');
   const [staff] = await api('/api/staff');
@@ -256,6 +305,9 @@ await flow('Tablet kiosk: fill, sign, complete; the client and the signed form a
   const forms = (await api(`/api/clients/${client.id}/profile`)).consent_forms;
   check(forms.length === 1 && forms[0].signed, 'the signed form is not in the client profile');
   await b.clickText('Close', '#form-builder-modal button');
+  // Henry: the client list still said "0 signed" after a form was signed on the tablet
+  await eventually(async () => (await b.evaluate(`[...document.querySelectorAll('.client-directory-row')].find(r => r.innerText.includes('Kiosk Flow'))?.innerText || ''`)).includes('1 Signed'),
+    'the client list does not count the form signed on the tablet');
   await press('.client-directory-row', 'Kiosk Flow', 'View Profile');
   await b.clickText('Waivers', '#client-profile-modal-overlay');
   await b.clickText('View answers');

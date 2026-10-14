@@ -1509,6 +1509,18 @@ function clientConsentForms(clientId) {
   } catch (e) { return []; }
 }
 
+// Every saved consent form, for counts: the client list showed "0 signed" after a form was
+// signed on the tablet, because it counted the separate waivers only.
+app.get('/api/consent-forms', (req, res) => {
+  let rows = [];
+  try { rows = sqlite.prepare("SELECT id, entity_id, content FROM documents WHERE entity_type = 'client' AND type = 'consent_form'").all(); } catch (e) {}
+  res.json(rows.map((row) => {
+    let responses = {};
+    try { responses = JSON.parse(row.content).responses || {}; } catch (e) {}
+    return { id: row.id, client_id: row.entity_id, signed: Object.values(responses).some((v) => typeof v === 'string' && v.startsWith('data:image')) };
+  }));
+});
+
 app.get('/api/consent-forms/:id', (req, res) => {
   let row;
   try { row = sqlite.prepare("SELECT id, entity_id, description, content, uploaded_at FROM documents WHERE id = ? AND type = 'consent_form'").get(Number(req.params.id)); } catch (e) {}
@@ -5683,7 +5695,7 @@ app.post('/api/waivers', (req, res) => {
   const ipHash = req.body.ip_hash || '';
   
   const newWaiver = {
-    id: waivers.length + 1,
+    id: waivers.length ? Math.max(...waivers.map((x) => Number(x.id) || 0)) + 1 : 1, // length + 1 repeated an id after a deletion
     client_id: req.body.client_id ? parseInt(req.body.client_id) : null,
     client_name: req.body.client_name || 'Guest Client',
     service_type: req.body.service_type || 'Body Art Service Waiver',

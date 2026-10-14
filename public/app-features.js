@@ -489,7 +489,7 @@ function switchClientProfileTab(tabName) {
                         <span style="background:rgba(16,185,129,0.2);color:#34D399;border:1px solid #10B981;padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:800;">
                             ✅ VERIFIED & SIGNED
                         </span>
-                        <button type="button" onclick="openWaiverModal(${client.id})" style="padding:0.4rem 0.75rem;background:#374151;color:#F3F4F6;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">View Signature</button>
+                        <button type="button" onclick="viewWaiverRecord(${Number(w.id)})" style="padding:0.4rem 0.75rem;background:#374151;color:#F3F4F6;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">View waiver</button>
                     </div>
                 </div>
             `;
@@ -1606,6 +1606,11 @@ function forceShowModal(id) {
         if (el.parentElement !== document.body && el.closest('.destination-view')) document.body.appendChild(el);
         el.style.display = 'flex';
         el.setAttribute('aria-hidden', 'false');
+        // a window opened from another one goes in front of it: View Profile from Health Alerts
+        // opened the profile behind the alerts window
+        const top = [...document.body.children].filter((o) => o !== el && o.style.display !== 'none' && getComputedStyle(o).position === 'fixed' && getComputedStyle(o).display !== 'none')
+            .reduce((max, o) => Math.max(max, parseInt(getComputedStyle(o).zIndex, 10) || 0), 0);
+        if ((parseInt(getComputedStyle(el).zIndex, 10) || 0) <= top) el.style.zIndex = String(top + 1);
     }
     return el;
 }
@@ -1848,9 +1853,59 @@ function openQuickPortalAccessModal(clientId) {
 }
 window.openQuickPortalAccessModal = openQuickPortalAccessModal;
 
-function openQuickRecordPaymentModal() {
-    forceShowModal('deposit-ledger-modal-overlay');
-    showStudioToast('Payment Recording Terminal ready');
+// Record Payment used to open the deposit ledger and say "Payment Recording Terminal ready":
+// nothing could be recorded. A real form now, saved as a transaction (/api/financial).
+async function openQuickRecordPaymentModal() {
+    let overlay = document.getElementById('record-payment-modal-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'record-payment-modal-overlay';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-labelledby', 'record-payment-title');
+        overlay.style.cssText = 'display:none;position:fixed;inset:0;background:rgba(15,23,42,0.85);z-index:2000000;align-items:center;justify-content:center;';
+        const field = 'width:100%;box-sizing:border-box;padding:9px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.95rem;';
+        overlay.innerHTML = `
+            <form id="record-payment-form" style="background:#0F172A;border:1px solid #334155;border-radius:14px;padding:22px;width:min(92vw,420px);display:flex;flex-direction:column;gap:12px;color:#F8FAFC;">
+                <h3 id="record-payment-title" style="margin:0;font-size:1.1rem;">💵 Record a payment</h3>
+                <label style="font-size:0.8rem;color:#94A3B8;">Client
+                    <select id="record-payment-client" style="${field}"><option value="">Walk-in / not on file</option></select></label>
+                <label style="font-size:0.8rem;color:#94A3B8;">Amount
+                    <input id="record-payment-amount" type="number" min="0.01" step="0.01" required style="${field}" /></label>
+                <label style="font-size:0.8rem;color:#94A3B8;">Paid by
+                    <select id="record-payment-method" style="${field}"><option>Cash</option><option>Card</option><option>Bank transfer</option><option>Other</option></select></label>
+                <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:4px;">
+                    <button type="button" onclick="forceHideModal('record-payment-modal-overlay')" style="padding:9px 16px;background:transparent;color:#94A3B8;border:1px solid #475569;border-radius:8px;cursor:pointer;">Cancel</button>
+                    <button type="submit" style="padding:9px 16px;background:#10B981;color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;">Save payment</button>
+                </div>
+            </form>`;
+        document.body.appendChild(overlay);
+        overlay.querySelector('form').addEventListener('submit', saveQuickPayment);
+    }
+    overlay.querySelector('form').reset();
+    forceShowModal('record-payment-modal-overlay');
+    try {
+        const clients = await (await fetch('/api/clients')).json();
+        const sel = document.getElementById('record-payment-client');
+        sel.innerHTML = '<option value="">Walk-in / not on file</option>' + (Array.isArray(clients) ? clients : [])
+            .map((c) => `<option value="${Number(c.id)}">${escapeHtml(c.name || '')}</option>`).join('');
+    } catch (e) { /* the form still records a walk-in payment */ }
+    document.getElementById('record-payment-amount').focus();
+}
+
+async function saveQuickPayment(event) {
+    event.preventDefault();
+    const amount = parseFloat(document.getElementById('record-payment-amount').value);
+    if (!(amount > 0)) { showStudioToast('Enter the amount paid'); return; }
+    const clientId = document.getElementById('record-payment-client').value;
+    try {
+        const res = await fetch('/api/financial', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ client_id: clientId || null, amount, method: document.getElementById('record-payment-method').value, type: 'payment', source: 'in-studio' }) });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+    } catch (e) { showStudioToast('Could not save the payment: the server did not answer'); return; }
+    forceHideModal('record-payment-modal-overlay');
+    showStudioToast('Payment recorded: $' + amount.toFixed(2));
+    if (typeof renderDashboardKpis === 'function') renderDashboardKpis();
 }
 window.openQuickRecordPaymentModal = openQuickRecordPaymentModal;
 
@@ -2537,12 +2592,13 @@ window.renderClientDirectoryModal = renderClientDirectoryModal;
 async function renderClientsTable() {
     const tbody = document.getElementById("clients-table-tbody");
     if (!tbody) return;
-    let clients, waivers = [], payments = [];
+    let clients, waivers = [], payments = [], forms = [];
     try {
-        const [c, w, f] = await Promise.all(["/api/clients", "/api/waivers", "/api/financial"].map((u) => fetch(u).then((r) => (r.ok ? r.json() : []))));
+        const [c, w, f, cf] = await Promise.all(["/api/clients", "/api/waivers", "/api/financial", "/api/consent-forms"].map((u) => fetch(u).then((r) => (r.ok ? r.json() : []))));
         clients = Array.isArray(c) ? c : [];
         waivers = Array.isArray(w) ? w : [];
         payments = Array.isArray(f) ? f : [];
+        forms = Array.isArray(cf) ? cf : [];
     } catch (e) {
         tbody.innerHTML = '<tr><td colspan="6" style="padding:16px;color:#EF4444;text-align:center;">Could not load clients: the server did not answer</td></tr>';
         return;
@@ -2555,7 +2611,9 @@ async function renderClientsTable() {
     const flagged = (v) => v && !/^(none|n\/a|no)$/i.test(String(v).trim());
     tbody.innerHTML = clients.map((c) => {
         const initials = String(c.name || "?").split(/\s+/).map((w) => w[0] || "").join("").slice(0, 2).toUpperCase();
-        const signed = waivers.filter((w) => w.client_id === c.id && w.status !== "revoked").length;
+        // signed waivers and consent forms signed on the tablet alike
+        const signed = waivers.filter((w) => w.client_id === c.id && w.status !== "revoked").length
+            + forms.filter((f) => Number(f.client_id) === Number(c.id) && f.signed).length;
         const spent = payments.filter((p) => p.client_id === c.id && p.status === "completed" && p.type !== "refund").reduce((t, p) => t + Number(p.amount || 0), 0);
         const health = [c.allergies, c.medical_history].filter(flagged).map(escapeHtml).join(", ");
         return `<tr class="client-directory-row" style="border-bottom:1px solid #1F2937;">
@@ -2701,10 +2759,13 @@ async function handleClientAutocomplete(kind, query) {
     const box = document.getElementById(kind + "-client-autocomplete-dropdown");
     const idField = document.getElementById(kind + "-client-id");
     if (!box) return;
-    if (idField) idField.value = ""; // typing invalidates a previous pick
     if (!autocompleteClients) {
         try { const r = await fetch("/api/clients"); autocompleteClients = r.ok ? await r.json() : []; } catch (e) { autocompleteClients = []; }
     }
+    // a different name forgets the client picked before; tapping the field again, or the same
+    // name, keeps it (it was cleared on every focus, so a picked waiver client got lost)
+    const picked = idField && autocompleteClients.find((c) => String(c.id) === idField.value);
+    if (idField && !(picked && String(picked.name || "") === String(query || ""))) idField.value = "";
     const q = String(query || "").toLowerCase().trim();
     const hits = autocompleteClients.filter((c) => !q || String(c.name || "").toLowerCase().includes(q)).slice(0, 8);
     box.innerHTML = hits.map((c) => `<div data-id="${Number(c.id)}" style="padding:8px 12px;cursor:pointer;color:#E2E8F0;border-bottom:1px solid #1E293B;">${escapeHtml(c.name || "")}</div>`).join("");
@@ -2743,11 +2804,77 @@ function initWaiverSignaturePad() {
     ["pointerup", "pointercancel", "pointerleave"].forEach((t) => canvas.addEventListener(t, () => { drawing = false; }));
 }
 
-function openWaiverModal() {
+async function openWaiverModal(clientId) {
     forceShowModal("waiver-modal");
     initWaiverSignaturePad();
     clearWaiverSignature();
+    autocompleteClients = null; // a client added since the last look must be found too
+    // opened from a client's profile: that client is already chosen
+    const idField = document.getElementById("waiver-client-id"), nameField = document.getElementById("waiver-client-search");
+    if (idField) idField.value = clientId ? String(clientId) : "";
+    if (nameField) nameField.value = "";
+    if (clientId && nameField) {
+        try {
+            const c = (await (await fetch("/api/clients")).json()).find((x) => Number(x.id) === Number(clientId));
+            if (c) nameField.value = c.name || "";
+        } catch (e) { /* the name can still be typed */ }
+    }
 }
+
+// A signed waiver: what was signed, by whom and when, with the signature, and a PDF to print or keep.
+// "View signature" used to open an empty signing window instead.
+async function loadWaiver(waiverId) {
+    try { return (await (await fetch("/api/waivers")).json()).find((x) => Number(x.id) === Number(waiverId)); } catch (e) { return null; }
+}
+
+async function viewWaiverRecord(waiverId) {
+    const w = await loadWaiver(waiverId);
+    if (!w) { showStudioToast("This waiver could not be loaded"); return; }
+    let overlay = document.getElementById("waiver-record-modal-overlay");
+    if (!overlay) {
+        overlay = document.createElement("div");
+        overlay.id = "waiver-record-modal-overlay";
+        overlay.setAttribute("role", "dialog");
+        overlay.setAttribute("aria-modal", "true");
+        overlay.setAttribute("aria-label", "Signed waiver");
+        overlay.style.cssText = "display:none;position:fixed;inset:0;background:rgba(15,23,42,0.85);z-index:2000000;align-items:center;justify-content:center;";
+        document.body.appendChild(overlay);
+    }
+    const when = w.signed_at ? new Date(w.signed_at).toLocaleString() : "date not recorded";
+    const line = (label, value) => `<div style="display:flex;gap:10px;padding:6px 0;border-bottom:1px solid #1E293B;"><span style="width:150px;color:#94A3B8;flex-shrink:0;">${label}</span><span>${escapeHtml(String(value || "-"))}</span></div>`;
+    const signature = typeof w.signature === "string" && w.signature.startsWith("data:image/") ? w.signature : "";
+    overlay.innerHTML = `
+        <div style="background:#0F172A;border:1px solid #334155;border-radius:14px;padding:22px;width:min(94vw,560px);max-height:90vh;overflow:auto;color:#F8FAFC;font-size:0.9rem;">
+            <h3 style="margin:0 0 12px;font-size:1.1rem;">📜 Signed waiver</h3>
+            ${line("Client", w.client_name)}${line("Service", w.service_type)}${line("Signed", when)}
+            ${line("Age verified", w.age_verified ? "Yes" : "No")}${line("Medical disclosures", w.medical_disclosures)}${line("Verified by", w.staff_verifier)}
+            <div style="margin-top:12px;color:#94A3B8;">Signature</div>
+            ${signature ? `<img src="${signature}" alt="Client signature" style="display:block;margin-top:6px;max-width:100%;background:#FFF;border-radius:8px;" />` : `<div style="margin-top:6px;">No signature was captured.</div>`}
+            <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px;">
+                <button type="button" onclick="downloadWaiverPdf(${Number(w.id)})" style="padding:9px 16px;background:#2563EB;color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;">⬇ Download PDF</button>
+                <button type="button" onclick="forceHideModal('waiver-record-modal-overlay')" style="padding:9px 16px;background:transparent;color:#94A3B8;border:1px solid #475569;border-radius:8px;cursor:pointer;">Close</button>
+            </div>
+        </div>`;
+    forceShowModal("waiver-record-modal-overlay");
+}
+window.viewWaiverRecord = viewWaiverRecord;
+
+async function downloadWaiverPdf(waiverId) {
+    if (!(window.jspdf && window.jspdf.jsPDF)) { showStudioToast("The PDF library did not load"); return; }
+    const w = await loadWaiver(waiverId);
+    if (!w) { showStudioToast("This waiver could not be loaded"); return; }
+    const doc = new window.jspdf.jsPDF();
+    let y = 20;
+    doc.setFontSize(16); doc.text("Signed waiver", 15, y); y += 12;
+    doc.setFontSize(11);
+    for (const [label, value] of [["Client", w.client_name], ["Service", w.service_type], ["Signed", w.signed_at ? new Date(w.signed_at).toLocaleString() : "date not recorded"],
+        ["Age verified", w.age_verified ? "Yes" : "No"], ["Verified by", w.staff_verifier]]) { doc.text(label + ": " + String(value || "-"), 15, y); y += 8; }
+    const disclosures = doc.splitTextToSize("Medical disclosures: " + String(w.medical_disclosures || "-"), 180);
+    doc.text(disclosures, 15, y); y += disclosures.length * 6 + 8;
+    if (typeof w.signature === "string" && w.signature.startsWith("data:image/png")) { doc.text("Signature:", 15, y); try { doc.addImage(w.signature, "PNG", 15, y + 3, 90, 24); } catch (e) {} }
+    doc.save("waiver-" + String(w.client_name || "client").replace(/[^a-z0-9]+/gi, "-") + "-" + String(w.signed_at || "").slice(0, 10) + ".pdf");
+}
+window.downloadWaiverPdf = downloadWaiverPdf;
 window.openWaiverModal = openWaiverModal;
 
 function clearWaiverSignature() {

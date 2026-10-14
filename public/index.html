@@ -100,7 +100,7 @@
       <!-- Sidebar Footer -->
       <div class="sidebar-footer" style="padding:0.75rem 0.4rem 0.25rem 0.4rem;border-top:1px solid rgba(255,255,255,0.08);font-size:0.72rem;color:#64748B;display:flex;align-items:center;justify-content:space-between;">
         <span>Poli International</span>
-        <span style="background:rgba(56,189,248,0.15);color:#38BDF8;padding:1px 6px;border-radius:6px;font-weight:700;font-size:0.65rem;">v2.5</span>
+        <span style="background:rgba(56,189,248,0.15);color:#38BDF8;padding:1px 6px;border-radius:6px;font-weight:700;font-size:0.65rem;" id="app-version-label"></span>
       </div>
     </aside>
 
@@ -958,18 +958,6 @@
                 </button>
               </div>
 
-              <!-- Tool 2: Ear Piercing Placement Planner -->
-              <div style="background:#0F172A;padding:1.25rem;border-radius:12px;border:1px solid #1E293B;display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;">👂</div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:#38BDF8;">Ear Piercing Planner</h3>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:#9CA3AF;">Interactive anatomical ear curation canvas, multi-piercing layout and jewelry stack simulator.</p>
-                </div>
-                <button onclick="openStudioProSuiteModal('ear-planner')" style="width:100%;padding:0.5rem;background:#0284C7;color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Ear Planner
-                </button>
-              </div>
-
               <!-- Tool 3: Needle & Gauge Converter -->
               <div style="background:#0F172A;padding:1.25rem;border-radius:12px;border:1px solid #1E293B;display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
@@ -977,7 +965,7 @@
                   <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:#34D399;">Gauge & Metric Converter</h3>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:#9CA3AF;">Instant conversion matrix between American Wire Gauge (AWG), Millimeters, Inches & French gauges.</p>
                 </div>
-                <button onclick="openStudioProSuiteModal('gauge-converter')" style="width:100%;padding:0.5rem;background:#059669;color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                <button onclick="openGaugeConverterModal()" style="width:100%;padding:0.5rem;background:#059669;color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
                   Open Gauge Converter
                 </button>
               </div>
@@ -4394,42 +4382,6 @@ docker compose up -d</pre>
 <!-- STUDIO OS COMPREHENSIVE MODALS, WIDGETS & OVERLAYS                        -->
 <!-- ========================================================================= -->
 
-<!-- 1. STUDIO PRO SUITE MASTER MODAL OVERLAY -->
-<div id="studio-pro-suite-modal-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,23,42,0.85);backdrop-filter:blur(8px);z-index:2000000;align-items:center;justify-content:center;">
-    <div style="background:#0F172A;border:1px solid #334155;border-radius:16px;width:95%;max-width:1100px;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 25px 60px rgba(0,0,0,0.6);overflow:hidden;color:#F8FAFC;">
-        <div style="padding:16px 24px;background:#1E293B;border-bottom:1px solid #334155;display:flex;align-items:center;justify-content:space-between;">
-            <div style="display:flex;align-items:center;gap:12px;">
-                <span style="font-size:1.4rem;">🚀</span>
-                <div>
-                    <h3 style="margin:0;font-size:1.15rem;font-weight:800;color:#F8FAFC;letter-spacing:-0.02em;">Studio Pro Suite <span style="font-size:0.75rem;padding:2px 8px;background:linear-gradient(135deg, #7C3AED 0%, #2563EB 100%);border-radius:12px;margin-left:6px;font-weight:700;">v2.5</span></h3>
-                    <p style="margin:2px 0 0;font-size:0.78rem;color:#94A3B8;">Integrated Professional Utilities for Tattoo & Piercing Operations</p>
-                </div>
-            </div>
-            <button onclick="closeStudioProSuiteModal()" style="background:none;border:none;color:#94A3B8;font-size:1.5rem;cursor:pointer;padding:4px 8px;line-height:1;border-radius:6px;">&times;</button>
-        </div>
-
-        <!-- Pro Suite Tab Bar -->
-        <div style="display:flex;gap:4px;padding:8px 16px;background:#0F172A;border-bottom:1px solid #334155;overflow-x:auto;">
-            <button id="tab-btn-ear-planner" class="pro-suite-tab-btn active" onclick="switchStudioProSuiteTab('ear-planner')" style="padding:8px 14px;background:#1E293B;color:#38BDF8;border:1px solid #38BDF8;border-radius:8px;font-size:0.8rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;">💎 Curated Ear Planner</button>
-            <button id="tab-btn-tattoo-estimator" class="pro-suite-tab-btn" onclick="openTattooPriceEstimatorModal()" style="padding:8px 14px;background:transparent;color:#94A3B8;border:1px solid transparent;border-radius:8px;font-size:0.8rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;">🎨 Tattoo Price Estimator</button>
-            <button id="tab-btn-procurement" class="pro-suite-tab-btn" onclick="switchStudioProSuiteTab('procurement')" style="padding:8px 14px;background:transparent;color:#94A3B8;border:1px solid transparent;border-radius:8px;font-size:0.8rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;">📊 Procurement Analytics</button>
-            <button id="tab-btn-annual-heatmap" class="pro-suite-tab-btn" onclick="switchStudioProSuiteTab('annual-heatmap')" style="padding:8px 14px;background:transparent;color:#94A3B8;border:1px solid transparent;border-radius:8px;font-size:0.8rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;">🔥 Station Heatmap</button>
-            <button id="tab-btn-gauge-converter" class="pro-suite-tab-btn" onclick="openGaugeConverterModal()" style="padding:8px 14px;background:transparent;color:#94A3B8;border:1px solid transparent;border-radius:8px;font-size:0.8rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;">📐 Gauge & Size Converter</button>
-            <button id="tab-btn-autoclave-vault" class="pro-suite-tab-btn" onclick="switchStudioProSuiteTab('autoclave-vault')" style="padding:8px 14px;background:transparent;color:#94A3B8;border:1px solid transparent;border-radius:8px;font-size:0.8rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;">🛡️ Autoclave Vault</button>
-            <button id="tab-btn-accounting" class="pro-suite-tab-btn" onclick="switchStudioProSuiteTab('accounting')" style="padding:8px 14px;background:transparent;color:#94A3B8;border:1px solid transparent;border-radius:8px;font-size:0.8rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;">💳 Accounting & POS</button>
-            <button id="tab-btn-aftercare" class="pro-suite-tab-btn" onclick="switchStudioProSuiteTab('aftercare')" style="padding:8px 14px;background:transparent;color:#94A3B8;border:1px solid transparent;border-radius:8px;font-size:0.8rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;">🩹 Aftercare Dispatcher</button>
-        </div>
-
-        <!-- Pro Suite Content Body -->
-        <div id="studio-pro-suite-modal-body" style="padding:20px 24px;overflow-y:auto;flex:1;">
-        </div>
-
-        <div style="padding:14px 24px;background:#1E293B;border-top:1px solid #334155;display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:0.78rem;color:#94A3B8;">💡 Pro Tip: Press <kbd style="background:#0F172A;padding:2px 6px;border-radius:4px;border:1px solid #475569;color:#38BDF8;">Alt + P</kbd> to open the Pro Suite anytime.</span>
-            <button onclick="closeStudioProSuiteModal()" style="padding:7px 18px;background:#334155;color:#F8FAFC;border:none;border-radius:8px;font-size:0.85rem;font-weight:700;cursor:pointer;">Close</button>
-        </div>
-    </div>
-</div>
 
 <!-- 2. TEAM MESSENGER / M-BOARD OVERLAY -->
 <div id="team-messenger-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,23,42,0.85);backdrop-filter:blur(8px);z-index:2000000;align-items:center;justify-content:center;">

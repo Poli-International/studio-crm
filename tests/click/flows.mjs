@@ -216,6 +216,28 @@ await flow('Form builder: changes to one form are still there after opening anot
   await open(0);
   await sleep(600);
   check((await questions()) === before + 1, 'the question added to the first form was lost');
+  // another device: a browser that has never opened the form builder (goto starts with empty storage)
+  await sleep(800);
+  await b.goto(url + 'tools/form-builder/index.html');
+  await sleep(1500);
+  check((await questions()) === before + 1, 'the edited form did not reach a second device');
+});
+
+await flow('Team board: a message is saved and still there after a reload', async () => {
+  await b.clickText('Settings');
+  await b.clickText('Team M Board');
+  await b.type('#mboard-chat-input', 'Flow message for the team');
+  await b.clickText('Send', '#team-messenger-overlay');
+  await eventually(async () => (await text('#mboard-messages-stream')).includes('Flow message for the team'), 'the message is not on the board');
+  await b.goto(url);
+  await b.clickText('Settings');
+  await b.clickText('Team M Board');
+  await eventually(async () => (await text('#mboard-messages-stream')).includes('Flow message for the team'), 'the message was gone after a reload');
+});
+
+await flow('The sidebar shows the version that is running', async () => {
+  const version = (await api('/api/studio-meta')).version;
+  await eventually(async () => (await text('#app-version-label')) === 'v' + version, 'the version label does not match ' + version);
 });
 
 // Last, because it deletes the demo studio: the first thing a real studio does.

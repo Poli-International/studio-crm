@@ -1,142 +1,43 @@
 // Global Studio OS Utilities and Modals
 
 
-function closeStudioProSuiteModal() {
-    const overlay = document.getElementById("studio-pro-suite-modal-overlay");
-    if (overlay) overlay.style.display = "none";
-}
-window.closeStudioProSuiteModal = closeStudioProSuiteModal;
-
-function switchStudioProSuiteTab(tab) {
-    document.querySelectorAll(".pro-suite-tab-btn").forEach(btn => {
-        btn.classList.remove("active");
-        btn.style.background = "transparent";
-        btn.style.color = "#94A3B8";
-        btn.style.borderColor = "transparent";
-    });
-    const activeBtn = document.getElementById("tab-btn-" + tab);
-    if (activeBtn) {
-        activeBtn.classList.add("active");
-        activeBtn.style.background = "#1E293B";
-        activeBtn.style.color = "#38BDF8";
-        activeBtn.style.borderColor = "#38BDF8";
-    }
-
-    const body = document.getElementById("studio-pro-suite-modal-body");
-    if (!body) return;
-
-    if (tab === "ear-planner") {
-        body.innerHTML = `
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;">
-                <div style="background:#090D16;border:1px solid #334155;border-radius:12px;padding:16px;text-align:center;">
-                    <h4 style="margin:0 0 12px;color:#38BDF8;font-size:0.95rem;">Interactive Ear Anatomy & Jewelry Nodes</h4>
-                    <svg viewBox="0 0 200 280" style="width:100%;max-width:220px;height:auto;margin:0 auto;display:block;">
-                        <path d="M70,30 Q140,20 160,80 Q175,130 150,190 Q130,240 90,260 Q60,270 50,240 Q40,200 65,160 Q85,130 75,90 Q65,60 70,30 Z" fill="none" stroke="#64748B" stroke-width="3"/>
-                        <circle cx="85" cy="245" r="7" fill="#38BDF8" cursor="pointer" title="Lobe 1"/>
-                        <circle cx="100" cy="235" r="6" fill="#FBBF24" cursor="pointer" title="Lobe 2"/>
-                        <circle cx="115" cy="215" r="6" fill="#34D399" cursor="pointer" title="Lobe 3"/>
-                        <circle cx="150" cy="110" r="7" fill="#F43F5E" cursor="pointer" title="Helix"/>
-                        <circle cx="110" cy="100" r="6" fill="#A855F7" cursor="pointer" title="Flat"/>
-                        <circle cx="95" cy="140" r="6" fill="#EC4899" cursor="pointer" title="Daith"/>
-                        <circle cx="78" cy="160" r="6" fill="#EAB308" cursor="pointer" title="Tragus"/>
-                        <circle cx="125" cy="165" r="6" fill="#06B6D4" cursor="pointer" title="Conch"/>
-                    </svg>
-                    <div style="font-size:0.75rem;color:#94A3B8;margin-top:8px;">Drag nodes or click markers to configure jewellery specs</div>
-                </div>
-                <div style="display:flex;flex-direction:column;gap:12px;">
-                    <div style="background:#1E293B;border:1px solid #334155;border-radius:10px;padding:14px;">
-                        <div style="font-weight:700;color:#F8FAFC;font-size:0.85rem;margin-bottom:8px;">Selected Piercing: <span style="color:#38BDF8;">Lobe 1 (Initial Stack)</span></div>
-                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:0.8rem;">
-                            <div><label style="color:#94A3B8;">Gauge:</label> <select style="width:100%;background:#0F172A;color:#FFF;border:1px solid #475569;border-radius:6px;padding:4px;"><option>18G (1.0mm)</option><option selected>16G (1.2mm)</option><option>14G (1.6mm)</option></select></div>
-                            <div><label style="color:#94A3B8;">Material:</label> <select style="width:100%;background:#0F172A;color:#FFF;border:1px solid #475569;border-radius:6px;padding:4px;"><option selected>ASTM F-136 Titanium</option><option>14k Solid Gold</option><option>Niobium</option></select></div>
-                        </div>
-                    </div>
-                    <div style="background:#1E293B;border:1px solid #334155;border-radius:10px;padding:14px;">
-                        <div style="display:flex;justify-content:space-between;font-weight:700;font-size:0.85rem;color:#F8FAFC;">
-                            <span>Curated Stack Estimate:</span>
-                            <span style="color:#10B981;font-size:1rem;">$245.00</span>
-                        </div>
-                        <div style="font-size:0.75rem;color:#94A3B8;margin-top:4px;">Includes 3 piercing procedures + titanium bezel gem tops</div>
-                    </div>
-                    
-                </div>
-            </div>
-        `;
-    } else if (tab === "tattoo-estimator") {
-        body.innerHTML = `
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-                <div style="background:#1E293B;border:1px solid #334155;border-radius:12px;padding:16px;">
-                    <h4 style="margin:0 0 12px;color:#38BDF8;font-size:0.95rem;">Procedure Dimensions & Style</h4>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
-                        <div><label style="font-size:0.75rem;color:#94A3B8;">Height (in):</label><input type="number" id="est-height" value="6" style="width:100%;background:#0F172A;color:#FFF;border:1px solid #475569;border-radius:6px;padding:6px;"></div>
-                        <div><label style="font-size:0.75rem;color:#94A3B8;">Width (in):</label><input type="number" id="est-width" value="4" style="width:100%;background:#0F172A;color:#FFF;border:1px solid #475569;border-radius:6px;padding:6px;"></div>
-                    </div>
-                    <label style="font-size:0.75rem;color:#94A3B8;">Body Placement:</label>
-                    <select id="est-placement" style="width:100%;background:#0F172A;color:#FFF;border:1px solid #475569;border-radius:6px;padding:6px;margin-bottom:10px;">
-                        <option value="1.0">Outer Forearm / Arm (1.0x)</option>
-                        <option value="1.35" selected>Ribs / Sternum (1.35x Difficulty)</option>
-                        <option value="1.45">Neck / Throat (1.45x Difficulty)</option>
-                        <option value="1.2">Calf / Shin (1.2x Difficulty)</option>
-                    </select>
-                    <label style="font-size:0.75rem;color:#94A3B8;">Style Category:</label>
-                    <select id="est-style" style="width:100%;background:#0F172A;color:#FFF;border:1px solid #475569;border-radius:6px;padding:6px;">
-                        <option>Micro-Realism / Fine-Line</option>
-                        <option selected>Black & Grey Realism</option>
-                        <option>Traditional / Bold Color</option>
-                        <option>Japanese / Neo-Traditional</option>
-                    </select>
-                </div>
-                <div style="background:#090D16;border:1px solid #334155;border-radius:12px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;">
-                    <div>
-                        <div style="font-size:0.8rem;color:#94A3B8;">Calculated Surface Area: <strong style="color:#FFF;">24.0 sq in</strong></div>
-                        <div style="font-size:0.8rem;color:#94A3B8;margin-top:4px;">Estimated Needle Cartridges: <strong style="color:#FFF;">3x (3RL, 7M1, 9RS)</strong></div>
-                        <div style="font-size:0.8rem;color:#94A3B8;margin-top:4px;">Estimated Ink Consumption: <strong style="color:#FFF;">18.5 mL (Dynamic Black + Wash)</strong></div>
-                        <div style="margin-top:16px;padding:12px;background:#1E293B;border-radius:8px;border:1px solid #334155;">
-                            <div style="font-size:0.75rem;color:#94A3B8;">Estimated Quote:</div>
-                            <div style="font-size:1.6rem;font-weight:800;color:#10B981;">$650.00 - $780.00</div>
-                            <div style="font-size:0.75rem;color:#64748B;">Duration: ~3.5 - 4.5 Hours @ $180/hr</div>
-                        </div>
-                    </div>
-                    <div style="display:flex;gap:8px;margin-top:14px;">
-                        <button onclick="alert('Quote copied to clipboard!')" style="flex:1;padding:8px;background:#1E293B;border:1px solid #475569;color:#FFF;border-radius:6px;font-size:0.8rem;cursor:pointer;">📋 Copy Quote</button>
-                        <button onclick="closeStudioProSuiteModal();openAutoSchedulerModal();" style="flex:1;padding:8px;background:linear-gradient(135deg, #10B981 0%, #059669 100%);border:none;color:#FFF;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;">📅 Book Session</button>
-                    </div>
-                </div>
-            </div>
-        `;
-    } else if (tab === "procurement") {
-        body.innerHTML = `
-            <div style="background:#1E293B;border:1px solid #334155;border-radius:12px;padding:16px;">
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-                    <div>
-                        <h4 style="margin:0;color:#38BDF8;font-size:0.95rem;">12-Month Procurement Analytics & PO Generator</h4>
-                        <p style="margin:2px 0 0;font-size:0.75rem;color:#94A3B8;">Supply expenditure trajectory and automated supplier restocking</p>
-                    </div>
-                    
-                </div>
-                <div style="height:160px;background:#090D16;border-radius:8px;border:1px solid #334155;display:flex;align-items:center;justify-content:center;color:#38BDF8;font-size:0.85rem;">
-                    📈 D3 Procurement Spend Trend: $34,850 YTD Spend across 5 primary vendors
-                </div>
-            </div>
-        `;
-    } else {
-        body.innerHTML = `
-            <div style="background:#1E293B;border:1px solid #334155;border-radius:12px;padding:20px;text-align:center;">
-                <h4 style="margin:0 0 8px;color:#38BDF8;">${tab.toUpperCase().replace("-", " ")} Module</h4>
-                <p style="color:#94A3B8;font-size:0.85rem;">Operational module active and synced with Studio OS core.</p>
-            </div>
-        `;
-    }
-}
-window.switchStudioProSuiteTab = switchStudioProSuiteTab;
 
 // 2. Team Messenger Functions
+async function renderTeamMessages() {
+    const stream = document.getElementById("mboard-messages-stream");
+    if (!stream) return;
+    const list = await fetchJson("/api/messages");
+    const messages = (Array.isArray(list) ? list : []).slice().reverse(); // the server keeps the newest first
+    stream.innerHTML = messages.length ? messages.map((m) => `<div class="mboard-message" style="background:#1E293B;border:1px solid #334155;border-radius:8px;padding:8px 12px;font-size:0.8rem;color:#F8FAFC;">
+            <strong style="color:#38BDF8;">${escapeHtml(m.author || "Staff")}:</strong> ${escapeHtml(m.text || "")}
+            <span style="font-size:0.7rem;color:#64748B;float:right;">${escapeHtml(m.timestamp ? new Date(m.timestamp).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }) : "")}</span>
+        </div>`).join("") : '<div style="color:#94A3B8;font-size:0.8rem;">No messages yet.</div>';
+    stream.scrollTop = stream.scrollHeight;
+}
+window.renderTeamMessages = renderTeamMessages;
+
 function openTeamMessengerModal() {
-    const el = document.getElementById("team-messenger-overlay");
-    if (el) el.style.display = "flex";
+    forceShowModal("team-messenger-overlay");
     restoreMessengerDraft();
+    renderTeamMessages();
 }
 window.openTeamMessengerModal = openTeamMessengerModal;
+
+async function sendTeamChatMessage() {
+    const input = document.getElementById("mboard-chat-input");
+    if (!input || !input.value.trim()) return;
+    const text = input.value.trim();
+    try {
+        const res = await fetch("/api/messages", { method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ author: (activeStaff() || {}).name || "Staff", text }) });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+    } catch (e) { showStudioToast("Could not send the message: the server did not answer"); return; }
+    input.value = "";
+    onMessengerInputDraft("");
+    renderTeamMessages();
+    if (typeof playMessengerChime === "function") playMessengerChime();
+}
+window.sendTeamChatMessage = sendTeamChatMessage;
 
 function closeTeamMessengerModal() {
     const el = document.getElementById("team-messenger-overlay");
@@ -170,23 +71,6 @@ function restoreMessengerDraft() {
 }
 window.restoreMessengerDraft = restoreMessengerDraft;
 
-function sendTeamChatMessage() {
-    const input = document.getElementById("mboard-chat-input");
-    if (!input || !input.value.trim()) return;
-    const msg = input.value.trim();
-    input.value = "";
-    onMessengerInputDraft("");
-    const stream = document.getElementById("mboard-messages-stream");
-    if (stream) {
-        const item = document.createElement("div");
-        item.style.cssText = "background:#1E293B;border:1px solid #334155;border-radius:8px;padding:8px 12px;font-size:0.8rem;color:#F8FAFC;";
-        item.innerHTML = `<strong style="color:#38BDF8;">${escapeHtml((activeStaff() || {}).name || "Staff")}:</strong> ${escapeHtml(msg)} <span style="font-size:0.7rem;color:#64748B;float:right;">Just now</span>`;
-        stream.appendChild(item);
-        stream.scrollTop = stream.scrollHeight;
-    }
-    if (typeof playMessengerChime === "function") playMessengerChime();
-}
-window.sendTeamChatMessage = sendTeamChatMessage;
 
 // 3. Auto Scheduler Functions
 
@@ -401,7 +285,6 @@ document.addEventListener("DOMContentLoaded", function() {
     bindBtn('btn-m-board', openTeamMessengerModal);
     bindBtn('btn-auto-scheduler', openAutoSchedulerModal);
     bindBtn('btn-quick-export', function() { openQuickTableExportModal(); });
-    bindBtn('btn-studio-pro-suite', function() { openStudioProSuiteModal(); });
 });
 
 // Global Keyboard Hotkeys
@@ -420,9 +303,6 @@ window.addEventListener("keydown", function(e) {
         } else if (e.key.toLowerCase() === 'c') {
             e.preventDefault();
             openClientDirectoryModal();
-        } else if (e.key.toLowerCase() === 'p') {
-            e.preventDefault();
-            openStudioProSuiteModal();
         } else if (e.key.toLowerCase() === 'm') {
             e.preventDefault();
             openTeamMessengerModal();
@@ -431,7 +311,7 @@ window.addEventListener("keydown", function(e) {
             openAutoSchedulerModal();
         } else if (e.key.toLowerCase() === 'v') {
             e.preventDefault();
-            openStudioProSuiteModal("annual-heatmap");
+            openStationHeatmapModal();
         } else if (e.key.toLowerCase() === 'e') {
             e.preventDefault();
             openQuickTableExportModal();
@@ -594,5 +474,3 @@ function recommendPmuPigment(skinType) {
 }
 window.recommendPmuPigment = recommendPmuPigment;
 
-function closeTattooPriceEstimatorModal() { closeStudioProSuiteModal(); }
-window.closeTattooPriceEstimatorModal = closeTattooPriceEstimatorModal;

@@ -3,6 +3,7 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { spawn } from 'child_process';
+import fs from 'fs';
 import { jsPDF } from 'jspdf';
 import { db, safeDbQuery, sqlite } from './src/db/index.js';
 import {
@@ -33,6 +34,7 @@ export function safeIsoDate(val, fallback = new Date().toISOString()) {
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const APP_VERSION = JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json'), 'utf8')).version;
 
 app.use(cors());
 app.use(express.json({ limit: '15mb' })); // portfolio photos arrive as data URLs
@@ -10709,8 +10711,8 @@ app.delete('/api/app-data/:key', (req, res) => {
 let studioMeta = { demo: true };
 const KEEP_ON_CLEAR = new Set(['services', 'serviceTypes', 'inventoryCategories', 'paymentMethods',
   'disclaimerTemplates', 'aftercareTemplates', 'aftercareEmailTemplates', 'staffMessagingSettings', 'studioStations', 'staff']);
-const APP_DATA_KEEP = /^(poli_studio_profile|poli_studio_logo|poli_benchmark_studio_rates_v1|studio_vat_config|studio_remote_sync_config|studio_messenger_macros|studio_scheduled_reports)$/;
-app.get('/api/studio-meta', (req, res) => res.json(studioMeta));
+const APP_DATA_KEEP = /^(poli_studio_profile|poli_studio_logo|poli_benchmark_studio_rates_v1|studio_vat_config|studio_remote_sync_config|studio_messenger_macros|studio_scheduled_reports|poli_form_builder_autosave(:.+)?|poli_pdf_generator_settings|poli_builder_theme_customization)$/;
+app.get('/api/studio-meta', (req, res) => res.json({ ...studioMeta, version: APP_VERSION }));
 app.post('/api/admin/start-empty', (req, res) => {
   for (const [key, [get]] of Object.entries(PERSISTED)) {
     const v = get();

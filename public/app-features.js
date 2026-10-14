@@ -1938,14 +1938,6 @@ function openBeforeAfterLinkModal() {
 }
 window.openBeforeAfterLinkModal = openBeforeAfterLinkModal;
 
-function openBodyMapModal() {
-    if (typeof window.openStudioProSuiteModal === 'function') {
-        window.openStudioProSuiteModal('ear-planner');
-    } else {
-        forceShowModal('studio-pro-suite-modal-overlay');
-    }
-}
-window.openBodyMapModal = openBodyMapModal;
 
 function openClearAllConfirmModal() {
     forceShowModal('clear-all-confirm-modal');
@@ -2178,17 +2170,9 @@ function openSterileAuditModal() {
 }
 window.openSterileAuditModal = openSterileAuditModal;
 
-function openStudioProSuiteModal(tab) {
-    forceShowModal('studio-pro-suite-modal-overlay');
-    if (typeof window.switchStudioProSuiteTab === 'function') {
-        window.switchStudioProSuiteTab(tab || 'ear-planner');
-    }
-}
-window.openStudioProSuiteModal = openStudioProSuiteModal;
 
 function openTattooConsultationGenerator() {
-    openStudioProSuiteModal('tattoo-estimator');
-    showStudioToast('Tattoo Consultation Form Generator active');
+    openTattooPriceEstimatorModal();
 }
 window.openTattooConsultationGenerator = openTattooConsultationGenerator;
 
@@ -3514,6 +3498,8 @@ window.updateSkinBlendOpacity = updateSkinBlendOpacity;
 async function showDemoDataBanner() {
     let meta;
     try { const r = await fetch("/api/studio-meta"); meta = r.ok ? await r.json() : null; } catch (e) { return; }
+    const version = document.getElementById("app-version-label");
+    if (version && meta && meta.version) version.textContent = "v" + meta.version;
     if (!meta || !meta.demo) return;
     const dash = document.getElementById("dest-dashboard");
     if (!dash || document.getElementById("demo-data-banner")) return;

@@ -29,7 +29,7 @@ Open **Settings** to enter your prices, deposit rule, tax (VAT) rate, touch-up p
 
 ## Clients
 
-**Clients** lists everyone with their contact details, allergies and medical notes, signed waivers and total spent. Use **New Client** to add one. Search filters the list as you type. **View Profile** opens the full record. In the profile, **Edit client** changes the details and **Delete** removes the client. The profile also lists appointments, staff notes, signed waivers, saved consent forms and photos of the work. To add many clients at once, open **Settings**, **Import Data** and paste a list whose first line is `name,email,phone,allergies,notes`. The **Signed** count includes consent forms signed on the tablet.
+**Clients** lists everyone with their contact details, allergies and medical notes, signed waivers and total spent. Use **New Client** to add one. Search filters the list as you type. **View Profile** opens the full record. In the profile, **Edit client** changes the details and **Delete** removes the client. The profile also lists appointments, staff notes, signed waivers, saved consent forms and photos of the work. To add many clients at once, open **Settings**, **Import Data** and paste a list whose first line is `name,email,phone,allergies,notes`. The **Signed** count includes consent forms signed on the tablet. **Healing Pipeline** lists the clients whose session was marked Completed in the last 90 days, grouped by days since the session, with **View Profile** and **Download PDF**.
 
 ## Staff
 
@@ -43,7 +43,7 @@ To keep other people on the same network out, open **Settings** and set a **Stud
 
 ## Appointments and scheduling
 
-**New Appointment** books a single session with artist, station, price and deposit. For multi-session work, the **Auto Scheduler** looks up the artist's free slots on a chosen day and books up to six sessions a set number of weeks apart. The Dashboard shows today's figures, upcoming bookings, station status and low stock. The Calendar lists every booked appointment, the coming ones first. **Completed** marks a session as done, so it counts in Duration Analytics, and **Remove** deletes it. **Edit** on an appointment changes its time, artist, station, price, deposit or notes. When booking, type the client's name and pick them from the list, so the appointment appears in their profile. Tapping a save button twice quickly saves once.
+**New Appointment** books a single session with artist, station, price and deposit. For multi-session work, the **Auto Scheduler** looks up the artist's free slots on a chosen day and books up to six sessions a set number of weeks apart. The Dashboard shows today's figures, upcoming bookings, station status and low stock. The Calendar lists every booked appointment, the coming ones first. **Completed** marks a session as done, so it counts in Duration Analytics, and **Remove** deletes it. **Edit** on an appointment changes its time, artist, station, price, deposit or notes. When booking, type the client's name and pick them from the list, so the appointment appears in their profile. Tapping a save button twice quickly saves once. The list also shows each appointment's deposit and the amount still to pay (price minus deposit).
 
 ## Digital waivers
 
@@ -59,7 +59,7 @@ Studio CRM does not send email, SMS or chat messages itself. When you prepare an
 
 ## Stock, scanner and purchase orders
 
-**Inventory** tracks quantities, lots, expiry dates and suppliers. Items at or below their reorder level count as low stock.
+**Inventory** tracks quantities, lots, expiry dates and suppliers. Items at or below their reorder level count as low stock. The **Stock items** list shows every item with its quantity, reorder level, lot, expiry and supplier; search by name, SKU or supplier. **+ Add item** adds one by hand and **Edit** changes it. **Suppliers** lists your suppliers: **+ Add supplier** and **Edit**. Purchase orders are emailed to the supplier's order email, so check it.
 
 The scanner in **Log Activity** uses the device camera. Scan a stock SKU or lot number to see the item, or a `CLIENT-<number>` code to open a client. You can also scan a code from a photo. Unknown codes are listed under **Error Logs**.
 

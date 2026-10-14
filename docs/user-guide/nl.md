@@ -29,7 +29,7 @@ Open **Instellingen** om uw prijzen, aanbetalingsregel, belastingtarief (btw), r
 
 ## Klanten
 
-**Klanten** toont iedereen met contactgegevens, allergieën en medische notities, ondertekende toestemmingsformulieren en totaal besteed. Gebruik **Nieuwe klant** om er een toe te voegen. Zoeken filtert de lijst terwijl u typt. **Profiel bekijken** opent het volledige dossier. In het profiel wijzigt **Klant bewerken** de gegevens en verwijdert **Verwijderen** de klant. Het profiel toont ook afspraken, teamnotities, ondertekende verklaringen, opgeslagen toestemmingsformulieren en foto's van het werk. Om veel klanten tegelijk toe te voegen, opent u **Instellingen**, **Import Data** en plakt u een lijst waarvan de eerste regel `name,email,phone,allergies,notes` is. De teller **Signed** telt ook toestemmingsformulieren die op de tablet zijn ondertekend.
+**Klanten** toont iedereen met contactgegevens, allergieën en medische notities, ondertekende toestemmingsformulieren en totaal besteed. Gebruik **Nieuwe klant** om er een toe te voegen. Zoeken filtert de lijst terwijl u typt. **Profiel bekijken** opent het volledige dossier. In het profiel wijzigt **Klant bewerken** de gegevens en verwijdert **Verwijderen** de klant. Het profiel toont ook afspraken, teamnotities, ondertekende verklaringen, opgeslagen toestemmingsformulieren en foto's van het werk. Om veel klanten tegelijk toe te voegen, opent u **Instellingen**, **Import Data** en plakt u een lijst waarvan de eerste regel `name,email,phone,allergies,notes` is. De teller **Signed** telt ook toestemmingsformulieren die op de tablet zijn ondertekend. **Healing Pipeline** toont de klanten van wie de sessie de afgelopen 90 dagen als voltooid is gemarkeerd, gegroepeerd per dagen sinds de sessie, met **View Profile** en **Download PDF**.
 
 ## Personeel
 
@@ -43,7 +43,7 @@ Om andere mensen op hetzelfde netwerk buiten te houden, opent u **Instellingen**
 
 ## Afspraken en planning
 
-**Nieuwe afspraak** boekt één sessie met artiest, station, prijs en aanbetaling. Voor werk met meerdere sessies zoekt de **Automatische planner** de vrije tijdslots van de artiest op een gekozen dag en boekt tot zes sessies met een vast aantal weken ertussen. Het dashboard toont de cijfers van vandaag, aankomende boekingen, stationsstatus en lage voorraad. De Agenda toont alle geboekte afspraken, de eerstvolgende bovenaan. **Afgerond** markeert een sessie als gedaan, zodat ze meetelt in de duuranalyse, en **Verwijderen** wist ze. **Edit** bij een afspraak wijzigt tijd, artiest, werkplek, prijs, aanbetaling of notities. Typ bij het boeken de naam van de klant en kies die uit de lijst, zodat de afspraak in het klantprofiel verschijnt. Twee keer snel op een opslagknop tikken slaat één keer op.
+**Nieuwe afspraak** boekt één sessie met artiest, station, prijs en aanbetaling. Voor werk met meerdere sessies zoekt de **Automatische planner** de vrije tijdslots van de artiest op een gekozen dag en boekt tot zes sessies met een vast aantal weken ertussen. Het dashboard toont de cijfers van vandaag, aankomende boekingen, stationsstatus en lage voorraad. De Agenda toont alle geboekte afspraken, de eerstvolgende bovenaan. **Afgerond** markeert een sessie als gedaan, zodat ze meetelt in de duuranalyse, en **Verwijderen** wist ze. **Edit** bij een afspraak wijzigt tijd, artiest, werkplek, prijs, aanbetaling of notities. Typ bij het boeken de naam van de klant en kies die uit de lijst, zodat de afspraak in het klantprofiel verschijnt. Twee keer snel op een opslagknop tikken slaat één keer op. De lijst toont bij elke afspraak ook de aanbetaling en wat nog te betalen is (prijs min aanbetaling).
 
 ## Digitale toestemmingsformulieren
 
@@ -59,7 +59,7 @@ Studio CRM verstuurt zelf geen e-mail, sms of chatberichten. Wanneer u een nazor
 
 ## Voorraad, scanner en inkooporders
 
-**Voorraad** houdt hoeveelheden, partijen, vervaldatums en leveranciers bij. Artikelen op of onder hun bestelniveau tellen als lage voorraad.
+**Voorraad** houdt hoeveelheden, partijen, vervaldatums en leveranciers bij. Artikelen op of onder hun bestelniveau tellen als lage voorraad. De lijst **Stock items** toont elk artikel met aantal, bestelgrens, lot, vervaldatum en leverancier; zoek op naam, SKU of leverancier. **+ Add item** voegt een artikel met de hand toe en **Edit** wijzigt het. **Suppliers** toont uw leveranciers: **+ Add supplier** en **Edit**. Bestellingen gaan naar het bestel-e-mailadres van de leverancier; controleer het.
 
 De scanner in **Activiteitenlogboek** gebruikt de camera van het apparaat. Scan een voorraad-SKU of partijnummer om het artikel te zien, of een `CLIENT-<number>`-code om een klant te openen. U kunt ook een code van een foto scannen. Onbekende codes worden vermeld onder **Foutenlogboek**.
 

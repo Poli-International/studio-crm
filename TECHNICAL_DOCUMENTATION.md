@@ -311,6 +311,8 @@ Routes of the self-hosted server that the screens above rely on (the online demo
 | `GET` | `/api/consent-forms/{id}` | One saved consent form with its answers and signature. |
 | `GET` / `POST` | `/api/waivers` | Signed waivers, with the signature as a PNG data URL. |
 | `POST` | `/api/financial` | Record Payment: one transaction (client, amount, method). |
+| `GET` / `POST` / `PATCH` | `/api/inventory`, `/api/inventory/{id}` | Stock items list, + Add item and Edit. The id is always the server's. |
+| `GET` / `POST` / `PUT` | `/api/inventory/suppliers`, `/api/inventory/suppliers/{id}` | Suppliers list, + Add supplier and Edit. Missing contact details stay empty; purchase orders go to `order_email`. |
 | `POST` | `/api/database/create-snapshot` | Back up now: a full SQLite copy in `storage/backups/`. |
 | `GET` / `POST` | `/api/access`, `/api/access/login`, `/api/access/logout`, `/api/access/password` | The optional studio password. |
 | `GET` | `/api/studio-meta` | Includes the running `version`, shown in the sidebar. |
@@ -411,6 +413,12 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 ---
 
 ## Version History
+
+### 1.0.6
+
+- Inventory: a list of every stock item with Add item and Edit; suppliers with Add supplier and Edit.
+- Healing Pipeline built from completed appointments (days since the session), with View Profile and a PDF; it used to show fixed sample counts.
+- Calendar list: Deposit and To pay columns.
 
 ### 1.0.5
 

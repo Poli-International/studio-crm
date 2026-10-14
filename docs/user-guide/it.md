@@ -29,7 +29,7 @@ Aprite **Impostazioni** per inserire i vostri prezzi, la regola dell'acconto, l'
 
 ## Clienti
 
-**Clienti** elenca tutti con i loro dati di contatto, allergie e note mediche, consensi firmati e totale spesa. Usate **Nuovo cliente** per aggiungerne uno. La ricerca filtra l'elenco mentre digitate. **Visualizza profilo** apre la scheda completa. Nel profilo, **Modifica cliente** cambia i dati e **Elimina** rimuove il cliente. Il profilo mostra anche gli appuntamenti, le note del personale, le liberatorie firmate, i moduli di consenso salvati e le foto dei lavori. Per aggiungere molti clienti insieme, aprite **Impostazioni**, **Import Data** e incollate un elenco la cui prima riga è `name,email,phone,allergies,notes`. Il conteggio **Signed** include i moduli di consenso firmati sul tablet.
+**Clienti** elenca tutti con i loro dati di contatto, allergie e note mediche, consensi firmati e totale spesa. Usate **Nuovo cliente** per aggiungerne uno. La ricerca filtra l'elenco mentre digitate. **Visualizza profilo** apre la scheda completa. Nel profilo, **Modifica cliente** cambia i dati e **Elimina** rimuove il cliente. Il profilo mostra anche gli appuntamenti, le note del personale, le liberatorie firmate, i moduli di consenso salvati e le foto dei lavori. Per aggiungere molti clienti insieme, aprite **Impostazioni**, **Import Data** e incollate un elenco la cui prima riga è `name,email,phone,allergies,notes`. Il conteggio **Signed** include i moduli di consenso firmati sul tablet. **Healing Pipeline** elenca i clienti la cui seduta è stata segnata come completata negli ultimi 90 giorni, raggruppati per giorni dalla seduta, con **View Profile** e **Download PDF**.
 
 ## Personale
 
@@ -43,7 +43,7 @@ Per tenere fuori le altre persone sulla stessa rete, aprite **Impostazioni** e i
 
 ## Appuntamenti e pianificazione
 
-**Nuovo appuntamento** prenota una singola sessione con artista, postazione, prezzo e acconto. Per lavori su più sessioni, il **Pianificatore automatico** cerca gli slot liberi dell'artista in un giorno scelto e prenota fino a sei sessioni a un numero fisso di settimane di distanza. La Dashboard mostra i dati di oggi, le prenotazioni in arrivo, lo stato delle postazioni e le scorte basse. Il Calendario elenca tutti gli appuntamenti prenotati, i prossimi per primi. **Completato** segna una sessione come svolta, così viene contata nell'analisi delle durate, e **Rimuovi** la elimina. **Edit** su un appuntamento cambia ora, artista, postazione, prezzo, acconto o note. Quando prenoti, digita il nome del cliente e sceglilo dall'elenco, così l'appuntamento compare nella sua scheda. Due tocchi rapidi su un pulsante di salvataggio salvano una sola volta.
+**Nuovo appuntamento** prenota una singola sessione con artista, postazione, prezzo e acconto. Per lavori su più sessioni, il **Pianificatore automatico** cerca gli slot liberi dell'artista in un giorno scelto e prenota fino a sei sessioni a un numero fisso di settimane di distanza. La Dashboard mostra i dati di oggi, le prenotazioni in arrivo, lo stato delle postazioni e le scorte basse. Il Calendario elenca tutti gli appuntamenti prenotati, i prossimi per primi. **Completato** segna una sessione come svolta, così viene contata nell'analisi delle durate, e **Rimuovi** la elimina. **Edit** su un appuntamento cambia ora, artista, postazione, prezzo, acconto o note. Quando prenoti, digita il nome del cliente e sceglilo dall'elenco, così l'appuntamento compare nella sua scheda. Due tocchi rapidi su un pulsante di salvataggio salvano una sola volta. L'elenco mostra anche l'acconto di ogni appuntamento e quanto resta da pagare (prezzo meno acconto).
 
 ## Consensi digitali
 
@@ -59,7 +59,7 @@ Studio CRM non invia da solo email, SMS o messaggi di chat. Quando preparate un'
 
 ## Magazzino, scanner e ordini d'acquisto
 
-**Magazzino** tiene traccia di quantità, lotti, date di scadenza e fornitori. Gli articoli al livello di riordino o sotto di esso sono considerati scorte basse.
+**Magazzino** tiene traccia di quantità, lotti, date di scadenza e fornitori. Gli articoli al livello di riordino o sotto di esso sono considerati scorte basse. L'elenco **Stock items** mostra ogni articolo con quantità, soglia di riordino, lotto, scadenza e fornitore; cerca per nome, SKU o fornitore. **+ Add item** aggiunge un articolo a mano e **Edit** lo modifica. **Suppliers** elenca i fornitori: **+ Add supplier** e **Edit**. Gli ordini partono all'email ordini del fornitore: controllala.
 
 Lo scanner in **Registro attività** usa la fotocamera del dispositivo. Scansionate un codice articolo o un numero di lotto per vedere l'articolo, oppure un codice `CLIENT-<number>` per aprire un cliente. Potete anche scansionare un codice da una foto. I codici non riconosciuti sono elencati in **Registro errori**.
 

@@ -29,7 +29,7 @@ Abra **Definições** para introduzir os seus preços, a regra de depósito, a t
 
 ## Clientes
 
-**Clientes** lista todos com os seus dados de contacto, alergias e notas médicas, consentimentos assinados e total gasto. Use **Novo cliente** para adicionar um. A pesquisa filtra a lista à medida que escreve. **Ver perfil** abre o registo completo. No perfil, **Editar cliente** altera os dados e **Excluir** remove o cliente. O perfil mostra também as marcações, as notas da equipa, os termos assinados, os formulários de consentimento guardados e as fotos dos trabalhos. Para adicionar muitos clientes de uma vez, abra **Definições**, **Import Data** e cole uma lista cuja primeira linha seja `name,email,phone,allergies,notes`. A contagem **Signed** inclui os formulários de consentimento assinados no tablet.
+**Clientes** lista todos com os seus dados de contacto, alergias e notas médicas, consentimentos assinados e total gasto. Use **Novo cliente** para adicionar um. A pesquisa filtra a lista à medida que escreve. **Ver perfil** abre o registo completo. No perfil, **Editar cliente** altera os dados e **Excluir** remove o cliente. O perfil mostra também as marcações, as notas da equipa, os termos assinados, os formulários de consentimento guardados e as fotos dos trabalhos. Para adicionar muitos clientes de uma vez, abra **Definições**, **Import Data** e cole uma lista cuja primeira linha seja `name,email,phone,allergies,notes`. A contagem **Signed** inclui os formulários de consentimento assinados no tablet. **Healing Pipeline** lista os clientes cuja sessão foi marcada como concluída nos últimos 90 dias, agrupados por dias desde a sessão, com **View Profile** e **Download PDF**.
 
 ## Equipa
 
@@ -43,7 +43,7 @@ Para manter fora as outras pessoas da mesma rede, abra **Definições** e defina
 
 ## Marcações e agendamento
 
-**Nova marcação** reserva uma única sessão com artista, estação, preço e depósito. Para trabalhos de várias sessões, o **Agendador automático** procura os horários livres do artista num dia escolhido e reserva até seis sessões com um número fixo de semanas de intervalo. O Dashboard mostra os números do dia, as próximas marcações, o estado das estações e o stock baixo. O Calendário lista todas as marcações, as próximas primeiro. **Concluída** marca uma sessão como feita, passando a contar na análise de durações, e **Remover** apaga-a. **Edit** numa marcação altera a hora, o artista, o posto, o preço, o sinal ou as notas. Ao marcar, escreva o nome do cliente e escolha-o na lista, para que a marcação apareça no perfil dele. Dois toques rápidos num botão de guardar guardam uma só vez.
+**Nova marcação** reserva uma única sessão com artista, estação, preço e depósito. Para trabalhos de várias sessões, o **Agendador automático** procura os horários livres do artista num dia escolhido e reserva até seis sessões com um número fixo de semanas de intervalo. O Dashboard mostra os números do dia, as próximas marcações, o estado das estações e o stock baixo. O Calendário lista todas as marcações, as próximas primeiro. **Concluída** marca uma sessão como feita, passando a contar na análise de durações, e **Remover** apaga-a. **Edit** numa marcação altera a hora, o artista, o posto, o preço, o sinal ou as notas. Ao marcar, escreva o nome do cliente e escolha-o na lista, para que a marcação apareça no perfil dele. Dois toques rápidos num botão de guardar guardam uma só vez. A lista mostra também o sinal de cada marcação e o que falta pagar (preço menos sinal).
 
 ## Consentimentos digitais
 
@@ -59,7 +59,7 @@ O Studio CRM não envia, por si próprio, e-mails, SMS ou mensagens de chat. Qua
 
 ## Stock, scanner e encomendas
 
-**Inventário** acompanha quantidades, lotes, datas de validade e fornecedores. Os artigos no nível de reposição ou abaixo dele contam como stock baixo.
+**Inventário** acompanha quantidades, lotes, datas de validade e fornecedores. Os artigos no nível de reposição ou abaixo dele contam como stock baixo. A lista **Stock items** mostra cada artigo com quantidade, nível de encomenda, lote, validade e fornecedor; pesquise por nome, SKU ou fornecedor. **+ Add item** acrescenta um artigo à mão e **Edit** altera-o. **Suppliers** lista os fornecedores: **+ Add supplier** e **Edit**. As encomendas seguem para o email de encomendas do fornecedor: confirme-o.
 
 O scanner em **Registo de atividade** usa a câmara do dispositivo. Digitalize um SKU de stock ou número de lote para ver o artigo, ou um código `CLIENT-<number>` para abrir um cliente. Também pode digitalizar um código a partir de uma fotografia. Os códigos desconhecidos são listados em **Registo de erros**.
 

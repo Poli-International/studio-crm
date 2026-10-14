@@ -29,7 +29,7 @@ Wählen Sie Englisch, Französisch, Italienisch, Deutsch, Spanisch, Niederländi
 
 ## Kunden
 
-**Kunden** listet alle mit Kontaktdaten, Allergien und medizinischen Hinweisen, unterschriebenen Einverständniserklärungen und Gesamtumsatz auf. Verwenden Sie **Neuer Kunde**, um einen hinzuzufügen. Die Suche filtert die Liste während der Eingabe. **Profil ansehen** öffnet den vollständigen Datensatz. Im Profil ändert **Kunde bearbeiten** die Angaben, und **Löschen** entfernt den Kunden. Das Profil zeigt außerdem Termine, Teamnotizen, unterschriebene Einwilligungen, gespeicherte Einwilligungsformulare und Fotos der Arbeiten. Um viele Kunden auf einmal anzulegen, öffnen Sie **Einstellungen**, **Import Data** und fügen eine Liste ein, deren erste Zeile `name,email,phone,allergies,notes` lautet. Die Zahl **Signed** zählt auch Einwilligungsformulare, die auf dem Tablet unterschrieben wurden.
+**Kunden** listet alle mit Kontaktdaten, Allergien und medizinischen Hinweisen, unterschriebenen Einverständniserklärungen und Gesamtumsatz auf. Verwenden Sie **Neuer Kunde**, um einen hinzuzufügen. Die Suche filtert die Liste während der Eingabe. **Profil ansehen** öffnet den vollständigen Datensatz. Im Profil ändert **Kunde bearbeiten** die Angaben, und **Löschen** entfernt den Kunden. Das Profil zeigt außerdem Termine, Teamnotizen, unterschriebene Einwilligungen, gespeicherte Einwilligungsformulare und Fotos der Arbeiten. Um viele Kunden auf einmal anzulegen, öffnen Sie **Einstellungen**, **Import Data** und fügen eine Liste ein, deren erste Zeile `name,email,phone,allergies,notes` lautet. Die Zahl **Signed** zählt auch Einwilligungsformulare, die auf dem Tablet unterschrieben wurden. **Healing Pipeline** listet die Kunden, deren Sitzung in den letzten 90 Tagen als erledigt markiert wurde, nach Tagen seit der Sitzung gruppiert, mit **View Profile** und **Download PDF**.
 
 ## Personal
 
@@ -43,7 +43,7 @@ Um andere Personen im selben Netzwerk fernzuhalten, öffnen Sie **Einstellungen*
 
 ## Termine und Terminplanung
 
-**Neuer Termin** bucht eine einzelne Sitzung mit Künstler, Station, Preis und Anzahlung. Für Arbeiten mit mehreren Sitzungen sucht der **Auto-Planer** die freien Zeitfenster des Künstlers an einem gewählten Tag und bucht bis zu sechs Sitzungen im festgelegten Wochenabstand. Das Dashboard zeigt die heutigen Zahlen, kommende Buchungen, den Stationsstatus und niedrigen Lagerbestand. Der Kalender listet alle gebuchten Termine auf, die nächsten zuerst. **Abgeschlossen** markiert eine Sitzung als erledigt, sie zählt dann in der Daueranalyse, und **Entfernen** löscht sie. **Edit** bei einem Termin ändert Zeit, Künstler, Station, Preis, Anzahlung oder Notizen. Tippen Sie beim Buchen den Namen des Kunden und wählen Sie ihn aus der Liste, damit der Termin in seinem Profil erscheint. Zweimal schnell auf eine Speichern-Schaltfläche tippen speichert nur einmal.
+**Neuer Termin** bucht eine einzelne Sitzung mit Künstler, Station, Preis und Anzahlung. Für Arbeiten mit mehreren Sitzungen sucht der **Auto-Planer** die freien Zeitfenster des Künstlers an einem gewählten Tag und bucht bis zu sechs Sitzungen im festgelegten Wochenabstand. Das Dashboard zeigt die heutigen Zahlen, kommende Buchungen, den Stationsstatus und niedrigen Lagerbestand. Der Kalender listet alle gebuchten Termine auf, die nächsten zuerst. **Abgeschlossen** markiert eine Sitzung als erledigt, sie zählt dann in der Daueranalyse, und **Entfernen** löscht sie. **Edit** bei einem Termin ändert Zeit, Künstler, Station, Preis, Anzahlung oder Notizen. Tippen Sie beim Buchen den Namen des Kunden und wählen Sie ihn aus der Liste, damit der Termin in seinem Profil erscheint. Zweimal schnell auf eine Speichern-Schaltfläche tippen speichert nur einmal. Die Liste zeigt zu jedem Termin auch die Anzahlung und den noch offenen Betrag (Preis minus Anzahlung).
 
 ## Digitale Einverständniserklärungen
 
@@ -59,7 +59,7 @@ Studio CRM sendet selbst keine E-Mails, SMS oder Chat-Nachrichten. Wenn Sie eine
 
 ## Lager, Scanner und Bestellungen
 
-**Inventar** verfolgt Mengen, Chargen, Ablaufdaten und Lieferanten. Artikel auf oder unter ihrem Nachbestellniveau zählen als niedriger Lagerbestand.
+**Inventar** verfolgt Mengen, Chargen, Ablaufdaten und Lieferanten. Artikel auf oder unter ihrem Nachbestellniveau zählen als niedriger Lagerbestand. Die Liste **Stock items** zeigt jeden Artikel mit Menge, Nachbestellgrenze, Charge, Ablaufdatum und Lieferant; suchen Sie nach Name, SKU oder Lieferant. **+ Add item** legt einen Artikel von Hand an, **Edit** ändert ihn. **Suppliers** listet Ihre Lieferanten: **+ Add supplier** und **Edit**. Bestellungen gehen an die Bestell-E-Mail des Lieferanten; prüfen Sie sie.
 
 Der Scanner in **Aktivitätsprotokoll** nutzt die Gerätekamera. Scannen Sie eine Lager-SKU oder Chargennummer, um den Artikel zu sehen, oder einen `CLIENT-<number>`-Code, um einen Kunden zu öffnen. Sie können auch einen Code von einem Foto scannen. Unbekannte Codes werden unter **Fehlerprotokoll** aufgeführt.
 

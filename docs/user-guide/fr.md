@@ -29,7 +29,7 @@ Ouvrez **Réglages** pour saisir vos prix, la règle d'acompte, le taux de taxe 
 
 ## Clients
 
-**Clients** répertorie tout le monde avec leurs coordonnées, allergies et notes médicales, formulaires de consentement signés et total dépensé. Utilisez **Nouveau client** pour en ajouter un. La recherche filtre la liste au fur et à mesure que vous tapez. **Voir le profil** ouvre le dossier complet. Dans le profil, **Modifier le client** change les coordonnées et **Supprimer** retire le client. Le profil affiche aussi les rendez-vous, les notes du personnel, les décharges signées, les formulaires de consentement enregistrés et les photos des travaux. Pour ajouter plusieurs clients à la fois, ouvrez **Réglages**, **Import Data** et collez une liste dont la première ligne est `name,email,phone,allergies,notes`. Le compteur **Signed** inclut les formulaires de consentement signés sur la tablette.
+**Clients** répertorie tout le monde avec leurs coordonnées, allergies et notes médicales, formulaires de consentement signés et total dépensé. Utilisez **Nouveau client** pour en ajouter un. La recherche filtre la liste au fur et à mesure que vous tapez. **Voir le profil** ouvre le dossier complet. Dans le profil, **Modifier le client** change les coordonnées et **Supprimer** retire le client. Le profil affiche aussi les rendez-vous, les notes du personnel, les décharges signées, les formulaires de consentement enregistrés et les photos des travaux. Pour ajouter plusieurs clients à la fois, ouvrez **Réglages**, **Import Data** et collez une liste dont la première ligne est `name,email,phone,allergies,notes`. Le compteur **Signed** inclut les formulaires de consentement signés sur la tablette. **Healing Pipeline** liste les clients dont la séance a été marquée terminée ces 90 derniers jours, groupés par jours depuis la séance, avec **View Profile** et **Download PDF**.
 
 ## Personnel
 
@@ -43,7 +43,7 @@ Pour tenir à l'écart les autres personnes du même réseau, ouvrez **Réglages
 
 ## Rendez-vous et planification
 
-**Nouveau rendez-vous** réserve une séance unique avec artiste, poste, prix et acompte. Pour un travail en plusieurs séances, le **Planificateur automatique** recherche les créneaux libres de l'artiste à une date choisie et réserve jusqu'à six séances espacées d'un nombre de semaines défini. Le tableau de bord affiche les chiffres du jour, les réservations à venir, l'état des postes et les stocks faibles. Le Calendrier affiche tous les rendez-vous réservés, les prochains en premier. **Terminé** marque une séance comme faite, elle compte alors dans l'analyse des durées, et **Retirer** la supprime. **Edit** sur un rendez-vous modifie l'heure, l'artiste, le poste, le prix, l'acompte ou les notes. À la réservation, tapez le nom du client et choisissez-le dans la liste : le rendez-vous apparaît alors dans sa fiche. Deux appuis rapides sur un bouton d'enregistrement n'enregistrent qu'une fois.
+**Nouveau rendez-vous** réserve une séance unique avec artiste, poste, prix et acompte. Pour un travail en plusieurs séances, le **Planificateur automatique** recherche les créneaux libres de l'artiste à une date choisie et réserve jusqu'à six séances espacées d'un nombre de semaines défini. Le tableau de bord affiche les chiffres du jour, les réservations à venir, l'état des postes et les stocks faibles. Le Calendrier affiche tous les rendez-vous réservés, les prochains en premier. **Terminé** marque une séance comme faite, elle compte alors dans l'analyse des durées, et **Retirer** la supprime. **Edit** sur un rendez-vous modifie l'heure, l'artiste, le poste, le prix, l'acompte ou les notes. À la réservation, tapez le nom du client et choisissez-le dans la liste : le rendez-vous apparaît alors dans sa fiche. Deux appuis rapides sur un bouton d'enregistrement n'enregistrent qu'une fois. La liste montre aussi l'acompte de chaque rendez-vous et le reste à payer (prix moins acompte).
 
 ## Formulaires de consentement numériques
 
@@ -59,7 +59,7 @@ Studio CRM n'envoie pas lui-même d'e-mails, de SMS ou de messages de chat. Lors
 
 ## Stock, scanner et bons de commande
 
-**Inventaire** suit les quantités, les lots, les dates d'expiration et les fournisseurs. Les articles à leur seuil de réapprovisionnement ou en dessous sont considérés comme stock faible.
+**Inventaire** suit les quantités, les lots, les dates d'expiration et les fournisseurs. Les articles à leur seuil de réapprovisionnement ou en dessous sont considérés comme stock faible. La liste **Stock items** montre chaque article avec sa quantité, son seuil de commande, son lot, sa date de péremption et son fournisseur ; cherchez par nom, SKU ou fournisseur. **+ Add item** ajoute un article à la main et **Edit** le modifie. **Suppliers** liste vos fournisseurs : **+ Add supplier** et **Edit**. Les bons de commande partent à l'e-mail de commande du fournisseur : vérifiez-le.
 
 Le scanner dans **Journal d'activité** utilise la caméra de l'appareil. Scannez une référence de stock ou un numéro de lot pour voir l'article, ou un code `CLIENT-<number>` pour ouvrir un client. Vous pouvez aussi scanner un code à partir d'une photo. Les codes inconnus sont répertoriés dans **Journal des erreurs**.
 

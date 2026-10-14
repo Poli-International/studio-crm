@@ -29,7 +29,7 @@ Abra **Ajustes** para introducir sus precios, la regla de depósito, el tipo de 
 
 ## Clientes
 
-**Clientes** enumera a todos con sus datos de contacto, alergias y notas médicas, consentimientos firmados y total gastado. Use **Nuevo cliente** para añadir uno. La búsqueda filtra la lista mientras escribe. **Ver perfil** abre el registro completo. En el perfil, **Editar cliente** cambia los datos y **Eliminar** borra al cliente. El perfil también muestra las citas, las notas del personal, los consentimientos firmados, los formularios de consentimiento guardados y las fotos de los trabajos. Para añadir muchos clientes a la vez, abra **Ajustes**, **Import Data** y pegue una lista cuya primera línea sea `name,email,phone,allergies,notes`. El recuento **Signed** incluye los formularios de consentimiento firmados en la tableta.
+**Clientes** enumera a todos con sus datos de contacto, alergias y notas médicas, consentimientos firmados y total gastado. Use **Nuevo cliente** para añadir uno. La búsqueda filtra la lista mientras escribe. **Ver perfil** abre el registro completo. En el perfil, **Editar cliente** cambia los datos y **Eliminar** borra al cliente. El perfil también muestra las citas, las notas del personal, los consentimientos firmados, los formularios de consentimiento guardados y las fotos de los trabajos. Para añadir muchos clientes a la vez, abra **Ajustes**, **Import Data** y pegue una lista cuya primera línea sea `name,email,phone,allergies,notes`. El recuento **Signed** incluye los formularios de consentimiento firmados en la tableta. **Healing Pipeline** lista los clientes cuya sesión se marcó como completada en los últimos 90 días, agrupados por días desde la sesión, con **View Profile** y **Download PDF**.
 
 ## Personal
 
@@ -43,7 +43,7 @@ Para impedir el acceso a otras personas de la misma red, abra **Ajustes** y esta
 
 ## Citas y programación
 
-**Nueva cita** reserva una sesión única con artista, estación, precio y depósito. Para trabajos de varias sesiones, el **Programador automático** busca los huecos libres del artista en un día elegido y reserva hasta seis sesiones separadas por un número fijo de semanas. El panel principal muestra las cifras del día, las próximas reservas, el estado de las estaciones y el stock bajo. El Calendario muestra todas las citas reservadas, las próximas primero. **Completada** marca una sesión como hecha, así cuenta en el análisis de duraciones, y **Quitar** la elimina. **Edit** en una cita cambia la hora, el artista, la estación, el precio, el depósito o las notas. Al reservar, escriba el nombre del cliente y elíjalo de la lista, para que la cita aparezca en su perfil. Pulsar dos veces seguidas un botón de guardar guarda una sola vez.
+**Nueva cita** reserva una sesión única con artista, estación, precio y depósito. Para trabajos de varias sesiones, el **Programador automático** busca los huecos libres del artista en un día elegido y reserva hasta seis sesiones separadas por un número fijo de semanas. El panel principal muestra las cifras del día, las próximas reservas, el estado de las estaciones y el stock bajo. El Calendario muestra todas las citas reservadas, las próximas primero. **Completada** marca una sesión como hecha, así cuenta en el análisis de duraciones, y **Quitar** la elimina. **Edit** en una cita cambia la hora, el artista, la estación, el precio, el depósito o las notas. Al reservar, escriba el nombre del cliente y elíjalo de la lista, para que la cita aparezca en su perfil. Pulsar dos veces seguidas un botón de guardar guarda una sola vez. La lista muestra también el depósito de cada cita y lo que queda por pagar (precio menos depósito).
 
 ## Consentimientos digitales
 
@@ -59,7 +59,7 @@ Studio CRM no envía por sí mismo correos, SMS ni mensajes de chat. Cuando prep
 
 ## Stock, escáner y pedidos de compra
 
-**Inventario** hace seguimiento de cantidades, lotes, fechas de caducidad y proveedores. Los artículos en su nivel de reposición o por debajo cuentan como stock bajo.
+**Inventario** hace seguimiento de cantidades, lotes, fechas de caducidad y proveedores. Los artículos en su nivel de reposición o por debajo cuentan como stock bajo. La lista **Stock items** muestra cada artículo con su cantidad, nivel de pedido, lote, caducidad y proveedor; busque por nombre, SKU o proveedor. **+ Add item** añade uno a mano y **Edit** lo cambia. **Suppliers** lista sus proveedores: **+ Add supplier** y **Edit**. Los pedidos se envían al correo de pedidos del proveedor; compruébelo.
 
 El escáner en **Registro de actividad** usa la cámara del dispositivo. Escanee un SKU de stock o un número de lote para ver el artículo, o un código `CLIENT-<number>` para abrir un cliente. También puede escanear un código desde una foto. Los códigos desconocidos se listan en **Registro de errores**.
 

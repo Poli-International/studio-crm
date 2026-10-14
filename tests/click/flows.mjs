@@ -156,8 +156,30 @@ await flow('Staff shifts: clock in shows on shift, clock out, and the window clo
   await eventually(async () => (await text('#shift-status-text')).startsWith('On shift'), 'the status did not change after clocking in');
   await b.clickText('Clock out', '#shift-modal');
   check((await text('#shift-status-text')) === 'Off shift', 'the status did not change after clocking out');
+  // one button clocks in and out: a double tap must not clock in and straight back out
+  await b.evaluate(`(() => { const btn = document.getElementById('shift-toggle-btn'); btn.click(); btn.click(); })()`);
+  await eventually(async () => (await text('#shift-status-text')).startsWith('On shift'), 'a double tap on Clock in left the person off shift');
+  await sleep(800);
+  check((await text('#shift-status-text')).startsWith('On shift'), 'a double tap on Clock in clocked in and straight back out');
+  await b.clickText('Clock out', '#shift-modal');
   await b.clickText('×', '#shift-modal');
   check(!(await shown('shift-modal')), 'the shift window cannot be closed');
+});
+
+await flow('Removing an appointment also updates the dashboard count', async () => {
+  const [client] = await api('/api/clients');
+  const [staff] = await api('/api/staff');
+  const when = new Date(Date.now() + 3600000);
+  if (when.getDate() !== new Date().getDate()) when.setTime(Date.now()); // late evening: keep it today
+  await b.evaluate(`fetch('/api/appointments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ client_id: ${client.id}, staff_id: ${staff.id}, service_type: 'Count Check', datetime: '${when.toISOString()}', duration_minutes: 60 }) })`);
+  await b.goto(url);
+  const today = async () => parseInt(await text('#kpi-revenue-sub'), 10);
+  await eventually(async () => (await today()) >= 1, 'the dashboard does not count the appointment booked for today');
+  const before = await today();
+  await b.clickText('Calendar');
+  await press('.appointment-row', 'Count Check', 'Remove');
+  await b.clickText('Dashboard');
+  await eventually(async () => (await today()) === before - 1, async () => `the dashboard still counts ${await today()} appointments today after one was removed (was ${before})`);
 });
 
 await flow('Duration Analytics opens and closes', async () => {

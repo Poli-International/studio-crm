@@ -3193,7 +3193,7 @@ async function toggleStaffShift() {
     showStudioToast(shift.clock_out ? "Clocked out" : "Clocked in");
     updateShiftStatusView();
 }
-window.toggleStaffShift = toggleStaffShift;
+window.toggleStaffShift = oneAtATime(toggleStaffShift); // one toggle: a double tap clocked in and straight back out
 
 
 // --- Inventory category threshold: stored with the studio settings ---
@@ -3333,8 +3333,7 @@ async function executeAutoSchedulerBooking() {
     } catch (e) { showStudioToast("Could not save the appointment: the server did not answer"); return; }
     showStudioToast(sessions > 1 ? sessions + " sessions booked" : "Appointment booked");
     if (typeof closeAutoSchedulerModal === "function") closeAutoSchedulerModal();
-    renderAppointmentsList();
-    if (typeof renderDashboardKpis === "function") renderDashboardKpis();
+    refreshAppointmentViews();
 }
 window.executeAutoSchedulerBooking = oneAtATime(executeAutoSchedulerBooking);
 
@@ -3936,13 +3935,20 @@ async function renderAppointmentsList() {
 window.renderAppointmentsList = renderAppointmentsList;
 document.addEventListener("DOMContentLoaded", renderAppointmentsList);
 
+// Every screen that shows appointments, after one is booked, completed or removed: the four
+// buttons each refreshed a different part, so a count or a station could show a stale booking.
+function refreshAppointmentViews() {
+    renderAppointmentsList();
+    if (typeof renderDashboardKpis === "function") renderDashboardKpis();
+    if (typeof renderStationStripAndSessions === "function") renderStationStripAndSessions();
+}
+
 async function setAppointmentStatus(id, status) {
     try {
         const res = await fetch("/api/appointments/" + id + "/status", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status }) });
         if (!res.ok) throw new Error("HTTP " + res.status);
     } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
-    renderAppointmentsList();
-    if (typeof renderStationStripAndSessions === "function") renderStationStripAndSessions();
+    refreshAppointmentViews();
 }
 window.setAppointmentStatus = setAppointmentStatus;
 
@@ -3952,7 +3958,7 @@ async function removeAppointment(id) {
         const res = await fetch("/api/appointments/" + id, { method: "DELETE" });
         if (!res.ok) throw new Error("HTTP " + res.status);
     } catch (e) { showStudioToast("Could not remove the appointment: the server did not answer"); return; }
-    renderAppointmentsList();
+    refreshAppointmentViews();
 }
 window.removeAppointment = removeAppointment;
 
@@ -4015,7 +4021,7 @@ async function handleSaveNewAppointment(event) {
         return;
     }
 
-    renderAppointmentsList();
+    refreshAppointmentViews();
 
     if (typeof showStudioToast === "function") {
         showStudioToast(`Appointment booked for ${newAppt.client_name} (${newAppt.date})`);

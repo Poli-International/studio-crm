@@ -184,6 +184,7 @@ await flow('Tablet kiosk: fill, sign, complete; the client and the signed form a
   await sleep(800);
   await f.clickText('Preview Form');
   await f.clickText('Fill Sample Answers');
+    await eventually(async () => f.evaluate(`Object.keys(window.ActiveFormPreview.responses).length > 10 && window.ActiveFormPreview.validateAll().every(e => /signature/i.test(e.fieldLabel + e.message))`), 'the sample answers were not filled in');
   await f.clickText('Tablet Kiosk Mode');
   await f.clickText('Next Step', '#tablet-kiosk-modal');
   await f.type('#tablet-kiosk-modal [name="full_name"]', 'Kiosk Flow');
@@ -221,12 +222,15 @@ await flow('On a tablet, with fingers: the consent form is filled, signed and sa
     await sleep(800);
     await f.clickText('Preview Form');
     await f.clickText('Fill Sample Answers');
+    await eventually(async () => f.evaluate(`Object.keys(window.ActiveFormPreview.responses).length > 10 && window.ActiveFormPreview.validateAll().every(e => /signature/i.test(e.fieldLabel + e.message))`), 'the sample answers were not filled in');
     await f.clickText('Tablet Kiosk Mode');
     await f.clickText('Next Step', '#tablet-kiosk-modal');
     await f.type('#tablet-kiosk-modal [name="full_name"]', 'Tablet Flow');
     for (let i = 0; i < 5; i++) await f.clickText('Next Step', '#tablet-kiosk-modal');
     await f.scribble('#tablet-kiosk-modal canvas.signature-pad-canvas');
     check(await f.evaluate('!window.ActiveFormPreview.signatureManagers.client_sig.isEmpty()'), 'a finger does not sign in the signature box');
+    const missing = await f.evaluate(`window.ActiveFormPreview.validateAll().map(e => e.fieldLabel).join(', ')`);
+    check(!missing, 'the form still asks for: ' + missing);
     await f.clickText('Complete', '#tablet-kiosk-modal');
     await eventually(async () => (await api('/api/clients')).some((c) => c.name === 'Tablet Flow'), 'the form signed on the tablet was not saved');
   } finally { await b.desktop(); }

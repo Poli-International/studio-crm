@@ -4,7 +4,7 @@
 // Each step fails loudly, so a button that stops working blocks the release.
 //
 //   node tests/click/flows.mjs
-import { startApp } from './app.mjs';
+import { startApp, startFreshServer } from './app.mjs';
 import { sleep } from './cdp.mjs';
 
 const { browser: b, url, httpsPort, stop } = await startApp();
@@ -626,11 +626,107 @@ await flow('Studio password: locks every device out until it signs in, and can b
   await b.type('#login-password', 'studio-test-password');
   await b.clickText('Sign in');
   await eventually(async () => b.evaluate(`!!document.getElementById('nav-dest-settings')`), 'the right password did not open the CRM');
+  // idle lock: 5 minutes, then the clock is wound back instead of waiting
   await b.clickText('Settings');
+  await b.evaluate(`(() => { const s = document.getElementById('access-idle-minutes'); s.value = '5'; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+  await eventually(async () => (await api('/api/access')).idleMinutes === 5, 'the idle lock was not saved');
+  await b.evaluate('idleLastUse = Date.now() - 6 * 60000');
+  await eventually(async () => b.evaluate(`!!document.getElementById('login-password')`).catch(() => false), 'a device left unused did not lock', 25);
+  await b.type('#login-password', 'studio-test-password');
+  await b.clickText('Sign in');
+  await eventually(async () => b.evaluate(`!!document.getElementById('nav-dest-settings')`), 'signing in after the idle lock did not open the CRM');
+  await b.clickText('Settings');
+  await b.evaluate(`(() => { const s = document.getElementById('access-idle-minutes'); s.value = '0'; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+  await eventually(async () => (await api('/api/access')).idleMinutes === 0, 'the idle lock could not be turned off');
   await b.type('#access-current', 'studio-test-password');
   await b.clickText('Remove password');
   await eventually(async () => (await text('#access-status')).startsWith('No password is set'), 'the password was not removed');
   check((await anon('api/clients')) === 200, 'the API stayed locked after the password was removed');
+});
+
+await flow('Staff levels: each person signs in; front desk cannot delete or see money and settings', async () => {
+  const setLevel = async (name, level, password) => {
+    await press('.staff-row', name, 'Edit');
+    await eventually(async () => b.evaluate(`getComputedStyle(document.getElementById('staff-form-access')).display !== 'none'`), 'the login fields are not shown to the administrator');
+    await b.evaluate(`(() => { const s = document.getElementById('staff-form-level'); s.value = '${level}'; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+    if (password) await b.type('#staff-form-login-password', password);
+    await b.clickText('Save staff member');
+  };
+  const signIn = async (name, password) => {
+    await eventually(async () => b.evaluate(`!!document.getElementById('login-password')`), 'the sign-in page is not shown');
+    await eventually(async () => b.evaluate(`[...document.getElementById('login-who').options].some(o => o.text === ${JSON.stringify(name)})`), `${name} is not on the sign-in page`);
+    await b.evaluate(`(() => { const s = document.getElementById('login-who'); s.value = [...s.options].find(o => o.text === ${JSON.stringify(name)}).value; })()`);
+    await b.type('#login-password', password);
+    await b.clickText('Sign in');
+    await eventually(async () => b.evaluate(`!!document.getElementById('nav-dest-dashboard')`), `${name} could not sign in`);
+  };
+  await b.goto(url);
+  await b.clickText('Settings');
+  await b.type('#access-next', 'studio-test-password');
+  await b.clickText('Set password');
+  await eventually(async () => (await text('#access-status')).startsWith('A password is set'), 'the studio password was not saved');
+  const [admin] = await api('/api/staff');
+  try {
+    // the administrator gives themself a login, and a new person a front desk login
+    await b.clickText('Staff Login');
+    await eventually(async () => (await text('#staff-list-body')).includes(admin.name), 'the staff list is empty');
+    await setLevel(admin.name, 'admin', 'admin-pass-123');
+    await eventually(async () => (await text('#staff-list-body')).includes('Administrator'), 'the administrator level is not shown');
+    await b.clickText('Add staff member');
+    await b.type('#staff-form-name', 'Desk Flow');
+    await b.evaluate(`(() => { const s = document.getElementById('staff-form-level'); s.value = 'front_desk'; })()`);
+    await b.type('#staff-form-login-password', 'desk-pass-123');
+    await b.clickText('Save staff member');
+    await eventually(async () => (await text('#staff-list-body')).includes('Front desk'), 'the front desk login was not created');
+    // front desk: signs in by name; no Settings, no Finance, no deleting, no money reports; clients yes
+    await b.evaluate('signOutOfStudio()');
+    await signIn('Desk Flow', 'desk-pass-123');
+    await eventually(async () => !(await b.evaluate(`!!document.getElementById('nav-dest-settings').offsetParent`)), 'front desk still sees Settings');
+    check(!(await b.evaluate(`!!document.getElementById('nav-dest-finance').offsetParent`)), 'front desk still sees Finance');
+    check((await b.evaluate(`fetch('/api/financial').then(r => r.status)`)) === 403, 'front desk can read the money reports');
+    const [someClient] = await api('/api/clients');
+    check((await b.evaluate(`fetch('/api/clients/${someClient.id}', { method: 'DELETE' }).then(r => r.status)`)) === 403, 'front desk can delete a client');
+    await eventually(async () => (await b.evaluate('window.__ct.sig.added.join(" ")')).includes('Your level (Front desk) cannot do this'), 'a refused action shows no message');
+    await b.clickText('Clients');
+    await b.clickText('New Client');
+    await b.type('#new-client-name', 'Desk Made Client');
+    await b.clickText('Save client');
+    await eventually(async () => (await api('/api/clients')).some((cl) => cl.name === 'Desk Made Client'), 'front desk cannot add a client');
+    // a wrong password for a person is refused
+    await b.evaluate('signOutOfStudio()');
+    await eventually(async () => b.evaluate(`!!document.getElementById('login-password')`), 'the sign-in page is not shown');
+    await b.type('#login-password', 'not-their-password');
+    await b.clickText('Sign in');
+    await eventually(async () => (await text('#error')) === 'Wrong password', 'a wrong password was not refused');
+    await signIn(admin.name, 'admin-pass-123');
+    await eventually(async () => b.evaluate(`!!document.getElementById('nav-dest-settings').offsetParent`), 'the administrator does not see Settings');
+  } finally {
+    // back to a studio without logins or a password, for the flows after this one
+    await b.goto(url);
+    // the studio password signs in as administrator, whoever was signed in before
+    await b.evaluate(`fetch('/api/access/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: 'studio-test-password' }) })`).catch(() => {});
+    for (const p of await b.evaluate(`fetch('/api/staff').then(r => r.json())`).catch(() => [])) {
+      await b.evaluate(`fetch('/api/access/staff-login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ staff_id: ${p.id}, remove: true }) })`).catch(() => {});
+    }
+    await b.evaluate(`fetch('/api/access/password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ current: 'studio-test-password', next: '' }) })`).catch(() => {});
+  }
+});
+
+await flow('First start: the CRM asks for a studio password before anything loads', async () => {
+  const fresh = await startFreshServer(Number(process.env.CLICK_PORT || 3412) + 7);
+  try {
+    check((await fetch(fresh.url + 'api/clients').then((r) => r.status)) === 401, 'a new studio answers data requests before the first-start choice');
+    await b.goto(fresh.url);
+    check(await b.evaluate(`document.body.innerText.includes('Welcome to Studio CRM')`), 'a new studio does not ask for a password');
+    await b.type('#setup-password', 'first-start-pass');
+    await b.type('#setup-again', 'not-the-same-pass');
+    await b.clickText('Create password and open the CRM');
+    await eventually(async () => (await text('#error')).includes('not the same'), 'two different passwords were accepted');
+    await b.type('#setup-again', 'first-start-pass');
+    await b.clickText('Create password and open the CRM');
+    await eventually(async () => b.evaluate(`!!document.getElementById('nav-dest-settings')`), 'creating the password did not open the CRM');
+    check((await fetch(fresh.url + 'api/clients').then((r) => r.status)) === 401, 'the new password does not protect the data');
+  } finally { await fresh.stop(); }
 });
 
 await stop();

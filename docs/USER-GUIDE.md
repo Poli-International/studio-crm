@@ -33,13 +33,23 @@ Open **Settings** to enter your prices, deposit rule, tax (VAT) rate, touch-up p
 
 ## Staff
 
-Click the staff button at the top right (it reads **Staff Login** until someone is selected) to see your team. **Add staff member** adds a person, **Edit** changes their details and **Remove** takes them off the team. **Select** shows that person's name in the top bar, so everyone can see who is at the screen. There are no passwords and no access levels. A new staff member can be chosen straight away wherever an artist is picked, for example when you book an appointment.
+Click the staff button at the top right (it reads **Staff Login** until someone is selected) to see your team. **Add staff member** adds a person, **Edit** changes their details and **Remove** takes them off the team. **Select** shows that person's name in the top bar, so everyone can see who is at the screen. Once a studio password is set, each person can also have their own login and access level (see below). A new staff member can be chosen straight away wherever an artist is picked, for example when you book an appointment.
 
 ## Tablets, phones and the studio password
 
 Other devices in the studio open the CRM with the address shown in the window that started it. A tablet or phone that needs the camera (the scanner) must use the address that starts with `https://` and ends with `:3443`. The first time, the browser warns that the connection is not private, because the certificate was made by your own computer: choose Advanced, then Continue. On the plain `http://` address everything works except the camera.
 
-To keep other people on the same network out, open **Settings** and set a **Studio Password**. Every device then signs in once. It is one password for the whole studio, not one per person. If you forget it, create an empty file named `reset-password.txt` in the `data` folder and start the CRM again.
+The first time the CRM starts, it asks you to create the **studio password**. Every computer, tablet and phone then signs in once with it. You can choose **Continue without a password** and set one later in **Settings**, **Studio Password**. If you forget it, create an empty file named `reset-password.txt` in the `data` folder and start the CRM again: this removes the studio password and all staff logins.
+
+**Lock a device that is not used:** in **Settings**, under the studio password, choose how long a device may stay unused (5, 10, 15 or 30 minutes) before it signs out by itself. The tablet kiosk is never locked: it has its own exit PIN.
+
+**Staff logins and levels:** with the studio password set, open the staff list, click **Edit** on a person and choose an **Access level** and a **Login password** (at least 8 characters). Give yourself the **Administrator** level first: staff logins start working once one administrator has a login. From then on the sign-in page asks **Who are you?** and each person signs in with their own password. The studio password still works and signs in as administrator.
+
+- **Front desk**: clients, appointments, waivers, payments, clocking in and out.
+- **Staff**: everything front desk does, plus stock, suppliers, compliance records, aftercare, the rota and the consent form designs.
+- **Administrator**: everything, including deleting records, the money reports, Settings, the team, logins, backups and imports.
+
+Front desk and Staff do not see Finance and Settings. When someone tries something their level does not allow, the CRM says so and changes nothing. To remove a login, set the level to **No login**.
 
 ## Appointments and scheduling
 

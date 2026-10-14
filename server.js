@@ -42,7 +42,7 @@ app.use(cors());
 app.use(express.json({ limit: '15mb' })); // portfolio photos arrive as data URLs
 
 // Optional studio password: when one is set, nothing below answers before the device has signed in.
-installAccess(app, sqlite);
+installAccess(app, sqlite, () => staff);
 
 // Save state after every successful write (persistence block at the end of this file).
 app.use((req, res, next) => {

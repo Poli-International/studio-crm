@@ -62,6 +62,22 @@ function nameUnlabelledField(f) {
 document.addEventListener('DOMContentLoaded', function () { document.querySelectorAll('input,select,textarea').forEach(nameUnlabelledField); });
 document.addEventListener('focusin', function (e) { nameUnlabelledField(e.target); });
 
+// Staff levels: when the server refuses an action for this person's level, say so. The screens
+// would otherwise report "the server did not answer".
+(function () {
+  var realFetch = window.fetch;
+  window.fetch = function () {
+    return realFetch.apply(this, arguments).then(function (res) {
+      if (res.status === 403) {
+        res.clone().json().then(function (body) {
+          if (body && body.level && typeof showStudioToast === 'function') showStudioToast(body.error);
+        }).catch(function () {});
+      }
+      return res;
+    });
+  };
+})();
+
 // Opened from another device (http://the-server:3000) the browser gives the page no
 // clipboard: every Copy button then failed. Copy the old way instead.
 if (!navigator.clipboard) {

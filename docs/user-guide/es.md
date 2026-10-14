@@ -33,13 +33,23 @@ Abra **Ajustes** para introducir sus precios, la regla de depósito, el tipo de 
 
 ## Personal
 
-Haga clic en el botón del personal, arriba a la derecha, para ver a su equipo. **Añadir miembro** añade una persona, **Editar** cambia sus datos y **Quitar** la retira del equipo. **Seleccionar** muestra el nombre de esa persona en la barra superior, para que todos vean quién está en la pantalla. No hay contraseñas ni niveles de acceso. Un miembro nuevo se puede elegir enseguida en cualquier lugar donde se elige un artista, por ejemplo al reservar una cita.
+Haga clic en el botón del personal, arriba a la derecha, para ver a su equipo. **Añadir miembro** añade una persona, **Editar** cambia sus datos y **Quitar** la retira del equipo. **Seleccionar** muestra el nombre de esa persona en la barra superior, para que todos vean quién está en la pantalla. Una vez establecida la contraseña del estudio, cada persona puede tener también su propio acceso y nivel (ver más abajo). Un miembro nuevo se puede elegir enseguida en cualquier lugar donde se elige un artista, por ejemplo al reservar una cita.
 
 ## Tabletas, teléfonos y la contraseña del estudio
 
 Los demás dispositivos del estudio abren el CRM con la dirección que aparece en la ventana que lo inició. Una tableta o un teléfono que necesite la cámara (el escáner) debe usar la dirección que empieza por `https://` y termina en `:3443`. La primera vez, el navegador avisa de que la conexión no es privada, porque el certificado lo creó su propio equipo: elija Avanzado y luego Continuar. Con la dirección `http://` simple funciona todo menos la cámara.
 
-Para impedir el acceso a otras personas de la misma red, abra **Ajustes** y establezca una **Contraseña del estudio**. Cada dispositivo inicia sesión una vez. Es una sola contraseña para todo el estudio, no una por persona. Si la olvida, cree un archivo vacío llamado `reset-password.txt` en la carpeta `data` y vuelva a iniciar el CRM.
+La primera vez que se inicia, el CRM le pide crear la **contraseña del estudio**. Cada ordenador, tableta y teléfono inicia sesión una vez con ella. Puede elegir **Continue without a password** y establecerla más tarde en **Ajustes**, **Contraseña del estudio**. Si la olvida, cree un archivo vacío llamado `reset-password.txt` en la carpeta `data` y vuelva a iniciar el CRM: esto elimina la contraseña del estudio y todos los accesos del personal.
+
+**Bloquear un dispositivo sin usar:** en **Ajustes**, bajo la contraseña del estudio, elija cuánto tiempo puede estar un dispositivo sin usarse (5, 10, 15 o 30 minutos) antes de cerrar la sesión por sí solo. El quiosco de la tableta nunca se bloquea: tiene su propio PIN de salida.
+
+**Accesos y niveles del personal:** con la contraseña del estudio establecida, abra la lista del personal, haga clic en **Editar** en una persona y elija un **Nivel de acceso** y una **Contraseña de acceso** (8 caracteres como mínimo). Asígnese primero el nivel **Administrador**: los accesos del personal funcionan en cuanto un administrador tiene uno. A partir de ahí, la página de inicio de sesión pregunta **Who are you?** y cada persona entra con su propia contraseña. La contraseña del estudio sigue funcionando y entra como administrador.
+
+- **Recepción**: clientes, citas, consentimientos, pagos, fichar entrada y salida.
+- **Personal**: todo lo de recepción, más stock, proveedores, registros de cumplimiento, cuidados posteriores, turnos y el diseño de los consentimientos.
+- **Administrador**: todo, incluido borrar registros, los informes de dinero, Ajustes, el equipo, los accesos, las copias de seguridad y las importaciones.
+
+Recepción y personal no ven Finanzas ni Ajustes. Si alguien intenta algo que su nivel no permite, el CRM lo indica y no cambia nada. Para quitar un acceso, ponga el nivel en **Sin acceso**.
 
 ## Citas y programación
 

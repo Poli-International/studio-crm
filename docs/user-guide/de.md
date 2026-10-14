@@ -33,13 +33,23 @@ Wählen Sie Englisch, Französisch, Italienisch, Deutsch, Spanisch, Niederländi
 
 ## Personal
 
-Klicken Sie oben rechts auf die Personal-Schaltfläche, um Ihr Team zu sehen. **Teammitglied hinzufügen** legt eine Person an, **Bearbeiten** ändert ihre Angaben, und **Entfernen** nimmt sie aus dem Team. **Auswählen** zeigt den Namen dieser Person in der oberen Leiste, damit alle sehen, wer am Bildschirm ist. Es gibt keine Passwörter und keine Zugriffsstufen. Ein neues Teammitglied kann sofort überall gewählt werden, wo ein Artist ausgewählt wird, zum Beispiel bei einer Terminbuchung.
+Klicken Sie oben rechts auf die Personal-Schaltfläche, um Ihr Team zu sehen. **Teammitglied hinzufügen** legt eine Person an, **Bearbeiten** ändert ihre Angaben, und **Entfernen** nimmt sie aus dem Team. **Auswählen** zeigt den Namen dieser Person in der oberen Leiste, damit alle sehen, wer am Bildschirm ist. Sobald ein Studio-Passwort gesetzt ist, kann jede Person auch eine eigene Anmeldung und Zugriffsstufe bekommen (siehe unten). Ein neues Teammitglied kann sofort überall gewählt werden, wo ein Artist ausgewählt wird, zum Beispiel bei einer Terminbuchung.
 
 ## Tablets, Telefone und das Studio-Passwort
 
 Andere Geräte im Studio öffnen das CRM mit der Adresse, die im Startfenster angezeigt wird. Ein Tablet oder Telefon, das die Kamera braucht (den Scanner), muss die Adresse verwenden, die mit `https://` beginnt und mit `:3443` endet. Beim ersten Mal warnt der Browser, dass die Verbindung nicht privat ist, weil das Zertifikat von Ihrem eigenen Rechner erstellt wurde: Wählen Sie Erweitert, dann Weiter. Mit der einfachen `http://`-Adresse funktioniert alles außer der Kamera.
 
-Um andere Personen im selben Netzwerk fernzuhalten, öffnen Sie **Einstellungen** und legen ein **Studio-Passwort** fest. Jedes Gerät meldet sich dann einmal an. Es ist ein Passwort für das ganze Studio, nicht eines pro Person. Wenn Sie es vergessen, legen Sie im Ordner `data` eine leere Datei namens `reset-password.txt` an und starten das CRM neu.
+Beim ersten Start fordert das CRM Sie auf, das **Studio-Passwort** anzulegen. Jeder Computer, jedes Tablet und jedes Telefon meldet sich dann einmal damit an. Sie können **Continue without a password** wählen und es später unter **Einstellungen**, **Studio-Passwort** festlegen. Wenn Sie es vergessen, legen Sie im Ordner `data` eine leere Datei namens `reset-password.txt` an und starten das CRM neu: Das entfernt das Studio-Passwort und alle Anmeldungen des Personals.
+
+**Unbenutztes Gerät sperren:** Wählen Sie unter **Einstellungen**, unter dem Studio-Passwort, wie lange ein Gerät unbenutzt bleiben darf (5, 10, 15 oder 30 Minuten), bevor es sich selbst abmeldet. Der Tablet-Kiosk wird nie gesperrt: Er hat seine eigene Ausgangs-PIN.
+
+**Anmeldungen und Stufen für das Personal:** Ist das Studio-Passwort gesetzt, öffnen Sie die Personalliste, klicken bei einer Person auf **Bearbeiten** und wählen ein **Zugriffsstufe** und ein **Anmeldepasswort** (mindestens 8 Zeichen). Geben Sie sich zuerst selbst die Stufe **Administrator**: Die Anmeldungen des Personals gelten, sobald ein Administrator eine Anmeldung hat. Danach fragt die Anmeldeseite **Who are you?** und jede Person meldet sich mit ihrem eigenen Passwort an. Das Studio-Passwort funktioniert weiterhin und meldet als Administrator an.
+
+- **Empfang**: Kunden, Termine, Einverständniserklärungen, Zahlungen, Ein- und Ausstempeln.
+- **Personal**: alles vom Empfang, dazu Lager, Lieferanten, Compliance-Aufzeichnungen, Nachsorge, Dienstplan und die Gestaltung der Einverständnisformulare.
+- **Administrator**: alles, auch Löschen, Finanzberichte, Einstellungen, das Team, Anmeldungen, Backups und Importe.
+
+Empfang und Personal sehen Finanzen und Einstellungen nicht. Versucht jemand etwas, das seine Stufe nicht erlaubt, sagt das CRM es und ändert nichts. Um eine Anmeldung zu entfernen, setzen Sie die Stufe auf **Keine Anmeldung**.
 
 ## Termine und Terminplanung
 

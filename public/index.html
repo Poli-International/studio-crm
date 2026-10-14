@@ -1433,6 +1433,12 @@
                     <button type="button" id="access-signout-btn" onclick="signOutOfStudio()" style="display:none;padding:0.45rem 0.9rem;background:#1E293B;color:#E2E8F0;border:1px solid #475569;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">Sign out on this device</button>
                   </div>
                 </form>
+                <div id="access-idle-row" style="display:none;margin-top:12px;">
+                  <label for="access-idle-minutes" style="display:block;font-size:0.8rem;color:#9CA3AF;margin-bottom:4px;">Lock a device that is not used for</label>
+                  <select id="access-idle-minutes" onchange="saveIdleLock(this.value)" style="padding:8px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;">
+                    <option value="0">Never (off)</option><option value="5">5 minutes</option><option value="10">10 minutes</option><option value="15">15 minutes</option><option value="30">30 minutes</option>
+                  </select>
+                </div>
               </div>
 
               <!-- Setting: tablet kiosk PIN (locks the consent form kiosk on a tablet) -->
@@ -4558,6 +4564,7 @@ docker compose up -d</pre>
                 <div><label for="staff-form-email" style="display:block;font-size:0.75rem;font-weight:700;color:#94A3B8;margin-bottom:4px;">Email</label><input type="email" id="staff-form-email" autocomplete="off" style="width:100%;padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;box-sizing:border-box;"></div>
                 <div><label for="staff-form-phone" style="display:block;font-size:0.75rem;font-weight:700;color:#94A3B8;margin-bottom:4px;">Phone</label><input type="tel" id="staff-form-phone" autocomplete="off" style="width:100%;padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;box-sizing:border-box;"></div>
                 <div><label for="staff-form-specialties" style="display:block;font-size:0.75rem;font-weight:700;color:#94A3B8;margin-bottom:4px;">Specialties, separated by commas</label><input type="text" id="staff-form-specialties" placeholder="Fine line, Blackwork" style="width:100%;padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;box-sizing:border-box;"></div>
+                <div id="staff-form-access" style="display:none;grid-column:1/-1;border-top:1px solid #334155;padding-top:10px;display:none;"><div style="font-size:0.8rem;color:#94A3B8;margin-bottom:6px;">Login: what this person may do in the CRM</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div><label for="staff-form-level" style="display:block;font-size:0.75rem;font-weight:700;color:#94A3B8;margin-bottom:4px;">Access level</label><select id="staff-form-level" style="width:100%;padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;box-sizing:border-box;"><option value="">No login</option><option value="front_desk">Front desk</option><option value="staff">Staff</option><option value="admin">Administrator</option></select></div><div><label for="staff-form-login-password" style="display:block;font-size:0.75rem;font-weight:700;color:#94A3B8;margin-bottom:4px;">Login password</label><input type="password" id="staff-form-login-password" autocomplete="new-password" placeholder="At least 8 characters" style="width:100%;padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;box-sizing:border-box;"></div></div></div>
                 </div>
             </div>
             <div style="padding:14px 20px;background:#1E293B;border-top:1px solid #334155;display:flex;gap:10px;justify-content:flex-end;">

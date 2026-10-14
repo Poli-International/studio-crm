@@ -33,13 +33,23 @@ Ouvrez **Réglages** pour saisir vos prix, la règle d'acompte, le taux de taxe 
 
 ## Personnel
 
-Cliquez sur le bouton du personnel en haut à droite (il affiche **Connexion équipe** tant que personne n'est sélectionné) pour voir votre équipe. **Ajouter un membre** ajoute une personne, **Modifier** change ses coordonnées et **Retirer** l'enlève de l'équipe. **Sélectionner** affiche le nom de cette personne dans la barre du haut, pour que chacun voie qui est à l'écran. Il n'y a ni mot de passe ni niveau d'accès. Un nouveau membre peut être choisi tout de suite partout où l'on choisit un artiste, par exemple pour un rendez-vous.
+Cliquez sur le bouton du personnel en haut à droite (il affiche **Connexion équipe** tant que personne n'est sélectionné) pour voir votre équipe. **Ajouter un membre** ajoute une personne, **Modifier** change ses coordonnées et **Retirer** l'enlève de l'équipe. **Sélectionner** affiche le nom de cette personne dans la barre du haut, pour que chacun voie qui est à l'écran. Une fois le mot de passe du studio défini, chaque personne peut aussi avoir son propre identifiant et son niveau d'accès (voir plus bas). Un nouveau membre peut être choisi tout de suite partout où l'on choisit un artiste, par exemple pour un rendez-vous.
 
 ## Tablettes, téléphones et mot de passe du studio
 
 Les autres appareils du studio ouvrent le CRM avec l'adresse affichée dans la fenêtre qui l'a démarré. Une tablette ou un téléphone qui a besoin de la caméra (le scanner) doit utiliser l'adresse qui commence par `https://` et se termine par `:3443`. La première fois, le navigateur avertit que la connexion n'est pas privée, car le certificat a été créé par votre propre ordinateur : choisissez Avancé, puis Continuer. Avec l'adresse `http://` simple, tout fonctionne sauf la caméra.
 
-Pour tenir à l'écart les autres personnes du même réseau, ouvrez **Réglages** et définissez un **Mot de passe du studio**. Chaque appareil se connecte alors une fois. C'est un seul mot de passe pour tout le studio, pas un par personne. Si vous l'oubliez, créez un fichier vide nommé `reset-password.txt` dans le dossier `data` et redémarrez le CRM.
+Au premier démarrage, le CRM vous demande de créer le **mot de passe du studio**. Chaque ordinateur, tablette et téléphone se connecte ensuite une fois avec lui. Vous pouvez choisir **Continue without a password** et le définir plus tard dans **Réglages**, **Mot de passe du studio**. Si vous l'oubliez, créez un fichier vide nommé `reset-password.txt` dans le dossier `data` et redémarrez le CRM : cela supprime le mot de passe du studio et tous les identifiants du personnel.
+
+**Verrouiller un appareil inutilisé :** dans **Réglages**, sous le mot de passe du studio, choisissez combien de temps un appareil peut rester inutilisé (5, 10, 15 ou 30 minutes) avant de se déconnecter tout seul. Le kiosque tablette n'est jamais verrouillé : il a son propre code PIN de sortie.
+
+**Identifiants et niveaux du personnel :** une fois le mot de passe du studio défini, ouvrez la liste du personnel, cliquez sur **Modifier** pour une personne et choisissez un **Niveau d'accès** et un **Mot de passe de connexion** (8 caractères minimum). Donnez-vous d'abord le niveau **Administrateur** : les identifiants du personnel fonctionnent dès qu'un administrateur en a un. Ensuite, la page de connexion demande **Who are you?** et chacun se connecte avec son propre mot de passe. Le mot de passe du studio fonctionne toujours et connecte en administrateur.
+
+- **Accueil** : clients, rendez-vous, formulaires de consentement, paiements, pointage.
+- **Personnel** : tout ce que fait l'accueil, plus le stock, les fournisseurs, les registres de conformité, les soins post-séance, le planning et la conception des formulaires de consentement.
+- **Administrateur** : tout, y compris la suppression, les rapports financiers, les Réglages, l'équipe, les identifiants, les sauvegardes et les imports.
+
+L'accueil et le personnel ne voient pas Finance ni Réglages. Si quelqu'un tente une action que son niveau ne permet pas, le CRM le dit et ne change rien. Pour supprimer un identifiant, choisissez le niveau **Pas d'identifiant**.
 
 ## Rendez-vous et planification
 

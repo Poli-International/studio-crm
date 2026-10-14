@@ -22,6 +22,8 @@ export async function startApp() {
     if (i > 60) { server.kill(); throw new Error('The app did not start'); }
     await sleep(500);
   }
+  // a fresh studio first asks for a password: the tests continue without one
+  await fetch(url + 'api/access/skip', { method: 'POST' }).catch(() => {});
   const browser = await launchBrowser();
   return {
     browser, url, httpsPort,
@@ -32,4 +34,19 @@ export async function startApp() {
       try { rmSync(dir, { recursive: true, force: true }); } catch { /* Windows may still hold the file */ }
     },
   };
+}
+
+// A second, brand-new studio that has not made its first-start choice (for that test only).
+export async function startFreshServer(port) {
+  const dir = mkdtempSync(path.join(os.tmpdir(), 'crm-db-'));
+  const server = spawn(process.execPath, ['server.js'], {
+    cwd: root, stdio: 'ignore', env: { ...process.env, PORT: port, HTTPS_PORT: 0, SQLITE_DB_PATH: path.join(dir, 'studio.sqlite') },
+  });
+  const url = `http://127.0.0.1:${port}/`;
+  for (let i = 0; ; i++) {
+    if (await fetch(url).then((r) => r.ok, () => false)) break;
+    if (i > 60) { server.kill(); throw new Error('The fresh app did not start'); }
+    await sleep(500);
+  }
+  return { url, async stop() { server.kill(); await sleep(300); try { rmSync(dir, { recursive: true, force: true }); } catch { /* Windows */ } } };
 }

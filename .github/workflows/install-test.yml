@@ -60,6 +60,9 @@ jobs:
             curl -sf http://127.0.0.1:3000/ > /dev/null && break
             sleep 2
           done
+          # a new install asks for the studio password first; this check continues without one
+          grep -q "Create the studio password" <<< "$(curl -sf http://127.0.0.1:3000/)"
+          curl -sf -X POST http://127.0.0.1:3000/api/access/skip > /dev/null
           page=$(curl -sf http://127.0.0.1:3000/)
           grep -q "STUDIO CRM" <<< "$page"
           n=$(curl -sf http://127.0.0.1:3000/api/clients | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>console.log(JSON.parse(s).length))")

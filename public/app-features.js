@@ -1663,27 +1663,220 @@ function openAftercareModal() {
 }
 window.openAftercareModal = openAftercareModal;
 
-async function openAftercarePipelineModal() {
-    const overlay = forceShowModal('aftercare-pipeline-modal-overlay');
-    const body = document.getElementById('aftercare-pipeline-modal-body');
-    if (body) {
-        body.innerHTML = '<div style="text-align:center;padding:24px;color:#94A3B8;">Loading healing milestones...</div>';
-        try {
-            const res = await fetch('/api/aftercare/pipeline');
-            const data = await res.json();
-            const milestones = data.milestones || data.stages || [
-                { stage: 'Day 1-3 (Fresh)', count: 4, action: 'Saline Soak 2x/day' },
-                { stage: 'Day 7-14 (Healing)', count: 6, action: 'Downsizing Check' },
-                { stage: 'Day 30+ (Settled)', count: 12, action: 'Complete' }
-            ];
-            body.innerHTML = '<div style="display:flex;flex-direction:column;gap:12px;">' +
-                milestones.map(m => '<div style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;"><div><strong style="color:#38BDF8;">' + (m.stage || m.title) + '</strong><div style="font-size:0.8rem;color:#94A3B8;">' + (m.action || 'Standard sterile routine') + '</div></div><span style="background:#1E293B;color:#CBD5E1;padding:4px 8px;border-radius:6px;font-size:0.8rem;font-weight:700;">' + (m.count || 0) + ' Clients</span></div>').join('') +
-                '</div>';
-        } catch (e) {
-            body.innerHTML = '<div style="color:#EF4444;text-align:center;padding:16px;">Failed to load aftercare pipeline.</div>';
-        }
+// --- Inventory: every stock item, with Add item and Edit (POST/PATCH /api/inventory) ---
+const INVENTORY_FIELDS = [
+    ["name", "Item name", "text", true], ["category", "Category", "text"], ["sku", "SKU", "text"],
+    ["quantity", "In stock", "number", true], ["reorder_point", "Reorder at", "number"], ["price", "Unit price", "number"],
+    ["lot_number", "Lot number", "text"], ["exp_date", "Expires", "date"], ["supplier", "Supplier", "text"],
+];
+let inventoryItems = [];
+let editingInventoryId = null;
+
+async function renderInventoryItems() {
+    const tbody = document.getElementById("inventory-items-tbody");
+    if (!tbody) return;
+    try { inventoryItems = await ledgerJson("/api/inventory"); } catch (e) { tbody.innerHTML = '<tr><td colspan="10" style="padding:10px;color:#FCA5A5;">Could not load: the server did not answer</td></tr>'; return; }
+    inventoryItems = Array.isArray(inventoryItems) ? inventoryItems : (inventoryItems.items || []);
+    const q = ((document.getElementById("inventory-items-search") || {}).value || "").toLowerCase().trim();
+    const shown = inventoryItems.filter((i) => !q || [i.name, i.sku, i.supplier, i.category, i.item_type].some((v) => String(v || "").toLowerCase().includes(q)))
+        .sort((a, b) => String(a.name || "").localeCompare(String(b.name || "")));
+    if (!shown.length) {
+        tbody.innerHTML = '<tr><td colspan="10" style="padding:10px;color:#94A3B8;">' + (q ? "No item matches." : "No stock items yet. Add the first one with + Add item.") + '</td></tr>';
+        return;
     }
+    const cell = (v, style) => '<td style="padding:8px;' + (style || "") + '">' + escapeHtml(String(v == null ? "" : v)) + '</td>';
+    tbody.innerHTML = shown.map((i) => {
+        const low = Number(i.quantity) <= Number(i.reorder_point ?? 10);
+        return '<tr class="inventory-item-row" style="border-bottom:1px solid #1E293B;">' + cell(i.name, "font-weight:700;color:#FFF;") + cell(i.category || i.item_type) + cell(i.sku)
+            + cell(i.quantity, low ? "color:#FCA5A5;font-weight:800;" : "") + cell(i.reorder_point) + cell(i.price != null && i.price !== "" ? Number(i.price).toFixed(2) : "")
+            + cell(i.lot_number) + cell(i.exp_date) + cell(i.supplier)
+            + '<td style="padding:8px;text-align:right;"><button type="button" onclick="openInventoryItemForm(' + Number(i.id) + ')" style="padding:4px 8px;border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;background:#334155;color:#E2E8F0;border:1px solid #475569;">Edit</button></td></tr>';
+    }).join("");
 }
+window.renderInventoryItems = renderInventoryItems;
+document.addEventListener("DOMContentLoaded", renderInventoryItems);
+
+function openInventoryItemForm(id) {
+    const item = id ? inventoryItems.find((i) => Number(i.id) === Number(id)) : null;
+    editingInventoryId = item ? item.id : null;
+    let overlay = document.getElementById("inventory-item-modal-overlay");
+    if (!overlay) {
+        overlay = document.createElement("div");
+        overlay.id = "inventory-item-modal-overlay";
+        overlay.setAttribute("role", "dialog");
+        overlay.setAttribute("aria-modal", "true");
+        overlay.setAttribute("aria-labelledby", "inventory-item-title");
+        overlay.style.cssText = "display:none;position:fixed;inset:0;background:rgba(15,23,42,0.85);z-index:2000000;align-items:center;justify-content:center;";
+        const field = "width:100%;box-sizing:border-box;padding:8px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.9rem;";
+        overlay.innerHTML = '<form id="inventory-item-form" style="background:#0F172A;border:1px solid #334155;border-radius:14px;padding:20px;width:min(94vw,520px);max-height:90vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px;color:#F8FAFC;">'
+            + '<h3 id="inventory-item-title" style="grid-column:1/-1;margin:0;font-size:1.1rem;"></h3>'
+            + INVENTORY_FIELDS.map(([key, label, type, required]) => '<label style="font-size:0.8rem;color:#94A3B8;' + (key === "name" || key === "supplier" ? "grid-column:1/-1;" : "") + '">' + label
+                + '<input id="inventory-item-' + key + '" type="' + type + '"' + (type === "number" ? ' min="0" step="any"' : "") + (required ? " required" : "") + ' style="' + field + '"></label>').join("")
+            + '<div style="grid-column:1/-1;display:flex;gap:10px;justify-content:flex-end;margin-top:4px;">'
+            + '<button type="button" onclick="forceHideModal(\'inventory-item-modal-overlay\')" style="padding:9px 16px;background:transparent;color:#94A3B8;border:1px solid #475569;border-radius:8px;cursor:pointer;">Cancel</button>'
+            + '<button type="submit" id="inventory-item-save-btn" style="padding:9px 16px;background:#10B981;color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;"></button></div></form>';
+        document.body.appendChild(overlay);
+        overlay.querySelector("form").addEventListener("submit", saveInventoryItem);
+    }
+    overlay.querySelector("form").reset();
+    document.getElementById("inventory-item-title").textContent = item ? "Edit stock item" : "Add a stock item";
+    document.getElementById("inventory-item-save-btn").textContent = item ? "Save changes" : "Add item";
+    if (item) for (const [key] of INVENTORY_FIELDS) {
+        const el = document.getElementById("inventory-item-" + key);
+        const v = key === "category" ? (item.category || item.item_type) : item[key];
+        if (el && v != null) el.value = v;
+    }
+    forceShowModal("inventory-item-modal-overlay");
+    document.getElementById("inventory-item-name").focus();
+}
+window.openInventoryItemForm = openInventoryItemForm;
+
+async function saveInventoryItem(event) {
+    event.preventDefault();
+    const body = {};
+    for (const [key, , type] of INVENTORY_FIELDS) {
+        const v = document.getElementById("inventory-item-" + key).value.trim();
+        if (v !== "") body[key] = type === "number" ? Number(v) : v;
+    }
+    if (body.category) body.item_type = body.category;
+    const editedId = editingInventoryId;
+    try {
+        const res = await fetch(editedId ? "/api/inventory/" + editedId : "/api/inventory", { method: editedId ? "PATCH" : "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+    } catch (e) { showStudioToast("Could not save the item: the server did not answer"); return; }
+    forceHideModal("inventory-item-modal-overlay");
+    showStudioToast(editedId ? "Item updated: " + body.name : "Item added: " + body.name);
+    renderInventoryItems();
+}
+
+// --- Suppliers: list, Add supplier and Edit (POST /api/inventory/suppliers, PUT .../:id) ---
+const SUPPLIER_FIELDS = [
+    ["name", "Supplier name", "text", true], ["contact_person", "Contact person", "text"], ["phone", "Phone", "tel"],
+    ["email", "Email", "email"], ["order_email", "Order email (purchase orders)", "email"], ["website", "Website", "url"],
+    ["lead_time_days", "Lead time (days)", "number"], ["payment_terms", "Payment terms", "text"], ["notes", "Notes", "text"],
+];
+let supplierList = [];
+let editingSupplierId = null;
+
+async function renderSupplierList() {
+    const tbody = document.getElementById("suppliers-tbody");
+    if (!tbody) return;
+    try { supplierList = await ledgerJson("/api/inventory/suppliers"); } catch (e) { tbody.innerHTML = '<tr><td colspan="7" style="padding:10px;color:#FCA5A5;">Could not load: the server did not answer</td></tr>'; return; }
+    supplierList = Array.isArray(supplierList) ? supplierList : [];
+    if (!supplierList.length) { tbody.innerHTML = '<tr><td colspan="7" style="padding:10px;color:#94A3B8;">No suppliers yet. Add the first one with + Add supplier.</td></tr>'; return; }
+    const cell = (v, style) => '<td style="padding:8px;' + (style || "") + '">' + escapeHtml(String(v == null ? "" : v)) + '</td>';
+    tbody.innerHTML = supplierList.slice().sort((a, b) => String(a.name).localeCompare(String(b.name))).map((sp) => '<tr class="supplier-row" style="border-bottom:1px solid #1E293B;">'
+        + cell(sp.name, "font-weight:700;color:#FFF;") + cell(sp.contact_person) + cell(sp.phone) + cell(sp.order_email || sp.email)
+        + cell(sp.lead_time_days ? sp.lead_time_days + " days" : "") + cell(sp.item_count)
+        + '<td style="padding:8px;text-align:right;"><button type="button" onclick="openSupplierForm(' + Number(sp.id) + ')" style="padding:4px 8px;border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;background:#334155;color:#E2E8F0;border:1px solid #475569;">Edit</button></td></tr>').join("");
+}
+window.renderSupplierList = renderSupplierList;
+document.addEventListener("DOMContentLoaded", renderSupplierList);
+
+function openSupplierForm(id) {
+    const sp = id ? supplierList.find((x) => Number(x.id) === Number(id)) : null;
+    editingSupplierId = sp ? sp.id : null;
+    let overlay = document.getElementById("supplier-modal-overlay");
+    if (!overlay) {
+        overlay = document.createElement("div");
+        overlay.id = "supplier-modal-overlay";
+        overlay.setAttribute("role", "dialog");
+        overlay.setAttribute("aria-modal", "true");
+        overlay.setAttribute("aria-labelledby", "supplier-form-title");
+        overlay.style.cssText = "display:none;position:fixed;inset:0;background:rgba(15,23,42,0.85);z-index:2000000;align-items:center;justify-content:center;";
+        const field = "width:100%;box-sizing:border-box;padding:8px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.9rem;";
+        overlay.innerHTML = '<form id="supplier-form" style="background:#0F172A;border:1px solid #334155;border-radius:14px;padding:20px;width:min(94vw,520px);max-height:90vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px;color:#F8FAFC;">'
+            + '<h3 id="supplier-form-title" style="grid-column:1/-1;margin:0;font-size:1.1rem;"></h3>'
+            + SUPPLIER_FIELDS.map(([key, label, type, required]) => '<label style="font-size:0.8rem;color:#94A3B8;' + (["name", "order_email", "notes"].includes(key) ? "grid-column:1/-1;" : "") + '">' + label
+                + '<input id="supplier-' + key + '" type="' + type + '"' + (type === "number" ? ' min="0" step="1"' : "") + (required ? " required" : "") + ' style="' + field + '"></label>').join("")
+            + '<div style="grid-column:1/-1;display:flex;gap:10px;justify-content:flex-end;margin-top:4px;">'
+            + '<button type="button" onclick="forceHideModal(\'supplier-modal-overlay\')" style="padding:9px 16px;background:transparent;color:#94A3B8;border:1px solid #475569;border-radius:8px;cursor:pointer;">Cancel</button>'
+            + '<button type="submit" id="supplier-save-btn" style="padding:9px 16px;background:#10B981;color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;"></button></div></form>';
+        document.body.appendChild(overlay);
+        overlay.querySelector("form").addEventListener("submit", saveSupplier);
+    }
+    overlay.querySelector("form").reset();
+    document.getElementById("supplier-form-title").textContent = sp ? "Edit supplier" : "Add a supplier";
+    document.getElementById("supplier-save-btn").textContent = sp ? "Save changes" : "Add supplier";
+    if (sp) for (const [key] of SUPPLIER_FIELDS) { const el = document.getElementById("supplier-" + key); if (el && sp[key] != null) el.value = sp[key]; }
+    forceShowModal("supplier-modal-overlay");
+    document.getElementById("supplier-name").focus();
+}
+window.openSupplierForm = openSupplierForm;
+
+async function saveSupplier(event) {
+    event.preventDefault();
+    const body = {};
+    for (const [key, , type] of SUPPLIER_FIELDS) body[key] = type === "number" ? (document.getElementById("supplier-" + key).value === "" ? undefined : Number(document.getElementById("supplier-" + key).value)) : document.getElementById("supplier-" + key).value.trim();
+    const editedId = editingSupplierId;
+    try {
+        const res = await fetch(editedId ? "/api/inventory/suppliers/" + editedId : "/api/inventory/suppliers", { method: editedId ? "PUT" : "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+    } catch (e) { showStudioToast("Could not save the supplier: the server did not answer"); return; }
+    forceHideModal("supplier-modal-overlay");
+    showStudioToast(editedId ? "Supplier updated: " + body.name : "Supplier added: " + body.name);
+    renderSupplierList();
+    if (typeof renderInventoryItems === "function") renderInventoryItems();
+}
+
+// Healing Pipeline: the clients whose session is done, grouped by days since the session.
+// It used to show fixed sample counts (4, 6, 12): the server's records were never read, and
+// nothing ever added one. Built from the studio's own completed appointments now.
+// ponytail: days since the session only, no healing advice (a piercing heals far slower than a tattoo).
+const PIPELINE_GROUPS = [
+    { from: 0, to: 3, label: "Days 0 to 3" },
+    { from: 4, to: 14, label: "Days 4 to 14" },
+    { from: 15, to: 30, label: "Days 15 to 30" },
+    { from: 31, to: 90, label: "Days 31 to 90" },
+];
+let pipelineGroups = [];
+
+async function openAftercarePipelineModal() {
+    forceShowModal('aftercare-pipeline-modal-overlay');
+    const body = document.getElementById('aftercare-pipeline-modal-body');
+    if (!body) return;
+    body.innerHTML = '<div style="text-align:center;padding:24px;color:#94A3B8;">Loading...</div>';
+    let appts;
+    try { appts = await ledgerJson('/api/appointments'); } catch (e) { body.innerHTML = LEDGER_ERROR; return; }
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const days = (a) => Math.floor((today - new Date(new Date(a.datetime).setHours(0, 0, 0, 0))) / 86400000);
+    const done = (Array.isArray(appts) ? appts : []).filter((a) => a && a.status === 'completed' && a.datetime && days(a) >= 0 && days(a) <= 90);
+    pipelineGroups = PIPELINE_GROUPS.map((g) => ({ label: g.label, items: done.filter((a) => days(a) >= g.from && days(a) <= g.to)
+        .sort((a, b) => new Date(b.datetime) - new Date(a.datetime)).map((a) => Object.assign({ days: days(a) }, a)) }));
+    if (!done.length) {
+        body.innerHTML = '<div style="text-align:center;padding:20px;color:#94A3B8;">No sessions completed in the last 90 days. Mark an appointment as Completed in the Calendar and the client appears here.</div>';
+        return;
+    }
+    const btn = 'padding:4px 8px;border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;background:#334155;color:#E2E8F0;border:1px solid #475569;';
+    body.innerHTML = '<div style="display:flex;justify-content:flex-end;margin-bottom:10px;"><button type="button" onclick="downloadPipelinePdf()" style="' + btn + 'background:#2563EB;color:#FFF;border:none;">⬇ Download PDF</button></div>'
+        + pipelineGroups.map((g) => '<div class="pipeline-group" style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;margin-bottom:10px;">'
+            + '<div style="display:flex;justify-content:space-between;font-weight:800;margin-bottom:6px;"><span>' + escapeHtml(g.label) + '</span><span style="color:#38BDF8;">' + g.items.length + '</span></div>'
+            + (g.items.length ? g.items.map((a) => '<div class="pipeline-client" style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-top:1px solid #1E293B;">'
+                + '<div><strong>' + escapeHtml(a.client_name || '') + '</strong><div style="font-size:0.78rem;color:#94A3B8;">' + escapeHtml([a.service_type, a.staff_name, new Date(a.datetime).toLocaleDateString(), 'day ' + a.days].filter(Boolean).join(' · ')) + '</div></div>'
+                + (a.client_id ? '<button type="button" onclick="forceHideModal(\'aftercare-pipeline-modal-overlay\'); openClientProfileModal(' + Number(a.client_id) + ')" style="' + btn + '">View Profile</button>' : '')
+                + '</div>').join('') : '<div style="font-size:0.8rem;color:#64748B;">Nobody in this group.</div>')
+            + '</div>').join('');
+}
+
+function downloadPipelinePdf() {
+    if (!(window.jspdf && window.jspdf.jsPDF)) { showStudioToast('The PDF library did not load'); return; }
+    const doc = new window.jspdf.jsPDF();
+    let y = 18;
+    doc.setFontSize(16); doc.text('Healing pipeline', 15, y); y += 7;
+    doc.setFontSize(9); doc.text('Clients by days since their completed session. ' + new Date().toLocaleDateString(), 15, y); y += 10;
+    for (const g of pipelineGroups) {
+        if (y > 270) { doc.addPage(); y = 18; }
+        doc.setFontSize(12); doc.text(g.label + ' (' + g.items.length + ')', 15, y); y += 7;
+        doc.setFontSize(10);
+        for (const a of g.items) {
+            if (y > 280) { doc.addPage(); y = 18; }
+            doc.text([a.client_name, a.service_type, a.staff_name, new Date(a.datetime).toLocaleDateString(), 'day ' + a.days].filter(Boolean).join('  |  '), 18, y); y += 6;
+        }
+        y += 4;
+    }
+    doc.save('healing-pipeline-' + new Date().toISOString().slice(0, 10) + '.pdf');
+}
+window.downloadPipelinePdf = downloadPipelinePdf;
 window.openAftercarePipelineModal = openAftercarePipelineModal;
 
 // One line of a ledger window: what on the left, how much on the right.
@@ -4039,7 +4232,7 @@ async function renderAppointmentsList() {
     } catch (e) { /* shown as an empty list */ }
     appts = (Array.isArray(appts) ? appts : []).filter((a) => a && a.datetime);
     if (!appts.length) {
-        tbody.innerHTML = '<tr><td colspan="7" style="padding:10px;color:#94A3B8;">No appointments yet. Book the first one with Book Appointment.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="9" style="padding:10px;color:#94A3B8;">No appointments yet. Book the first one with Book Appointment.</td></tr>';
         return;
     }
     const startOfToday = new Date(); startOfToday.setHours(0, 0, 0, 0);
@@ -4053,14 +4246,19 @@ async function renderAppointmentsList() {
         return `<tr class="appointment-row" style="border-bottom:1px solid #1E293B;">`
             + cell(new Date(a.datetime).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }), "font-weight:700;color:#FFF;")
             + cell(a.client_name || a.client) + cell(a.service_type) + cell(a.staff_name || a.artist_name)
-            + cell(Number(a.estimated_price || a.price || 0).toFixed(2)) + cell(a.status || "scheduled")
+            + cell(Number(a.estimated_price || a.price || 0).toFixed(2))
+            // Henry: the deposit and what is still to pay, at a glance (payments are recorded per
+            // client, not per appointment, so they are not subtracted here)
+            + cell(Number(a.deposit_paid || 0).toFixed(2))
+            + cell(Math.max(0, Number(a.estimated_price || a.price || 0) - Number(a.deposit_paid || 0)).toFixed(2), "font-weight:700;")
+            + cell(a.status || "scheduled")
             + `<td style="padding:8px;text-align:right;white-space:nowrap;">`
             + `<button type="button" onclick="openEditAppointment(${Number(a.id)})" style="${btn}background:#334155;color:#E2E8F0;border:1px solid #475569;">Edit</button> `
             + (open ? `<button type="button" onclick="setAppointmentStatus(${Number(a.id)}, 'completed')" style="${btn}background:#10B981;color:#FFF;border:none;">Completed</button> ` : "")
             + `<button type="button" onclick="removeAppointment(${Number(a.id)})" style="${btn}background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);">Remove</button></td></tr>`;
     };
     tbody.innerHTML = coming.map(row).join("")
-        + (earlier.length ? '<tr><td colspan="7" style="padding:10px 8px 4px;color:#94A3B8;font-size:0.75rem;font-weight:700;">Earlier</td></tr>' + earlier.map(row).join("") : "");
+        + (earlier.length ? '<tr><td colspan="9" style="padding:10px 8px 4px;color:#94A3B8;font-size:0.75rem;font-weight:700;">Earlier</td></tr>' + earlier.map(row).join("") : "");
 }
 window.renderAppointmentsList = renderAppointmentsList;
 document.addEventListener("DOMContentLoaded", renderAppointmentsList);

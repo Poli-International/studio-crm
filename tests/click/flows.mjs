@@ -236,10 +236,68 @@ await flow('Book an appointment for a client picked from the list, then edit it'
   await press('.appointment-row', 'Mar 4, 2031', 'Edit');
   check((await text('#new-appt-title')) === 'Edit Appointment', 'Edit did not open the appointment');
   check((await b.evaluate(`document.getElementById('new-appt-notes').value`)) === 'Edit check', 'Edit opened another appointment');
+  await b.type('#new-appt-price', '200');
   await b.type('#new-appt-deposit', '75');
   await b.clickText('Save changes', '#new-appointment-modal-overlay');
   await eventually(async () => Number((await api('/api/appointments')).find((a) => a.id === appt.id).deposit_paid) === 75, 'the change was not saved');
   check((await api('/api/appointments')).filter((a) => a.notes === 'Edit check').length === 1, 'Save changes booked a second appointment');
+  // the deposit and what is still to pay, at a glance in the list
+  await eventually(async () => { const row = await b.evaluate(`[...document.querySelectorAll('.appointment-row')].find(r => r.innerText.includes('Mar 4, 2031'))?.innerText || ''`); return row.includes('75.00') && row.includes('125.00'); }, 'the list does not show the deposit and the amount still to pay');
+});
+
+await flow('Healing Pipeline lists the clients of completed sessions, with a PDF', async () => {
+  const [client] = await api('/api/clients');
+  const fiveDaysAgo = new Date(Date.now() - 5 * 86400000).toISOString();
+  const appt = await b.evaluate(`fetch('/api/appointments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ client_id: ${client.id}, service_type: 'Pipeline Check', datetime: '${fiveDaysAgo}' }) }).then(r => r.json())`);
+  await b.evaluate(`fetch('/api/appointments/${appt.id}/status', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: 'completed' }) })`);
+  await b.goto(url);
+  await b.clickText('Clients');
+  await pressOn('openAftercarePipelineModal()');
+  await eventually(async () => (await b.evaluate(`[...document.querySelectorAll('#aftercare-pipeline-modal-body .pipeline-group')].find(g => g.innerText.startsWith('Days 4 to 14'))?.innerText || ''`)).includes('Pipeline Check'),
+    'the client of a session completed five days ago is not under Days 4 to 14');
+  check(!(await text('#aftercare-pipeline-modal-body')).includes('Saline Soak'), 'the pipeline still shows sample figures');
+  b.reset();
+  await b.clickText('Download PDF', '#aftercare-pipeline-modal-body');
+  await eventually(async () => b.seen.downloads.some((d) => d.endsWith('.pdf')), 'the pipeline PDF was not made');
+  await press('#aftercare-pipeline-modal-body .pipeline-client', 'Pipeline Check', 'View Profile');
+  await eventually(async () => (await text('#client-profile-name')) === client.name, 'View Profile did not open the client');
+});
+
+await flow('Inventory: add a stock item by hand, find it, edit it', async () => {
+  await b.goto(url);
+  await b.clickText('Inventory');
+  await b.clickText('+ Add item');
+  await b.type('#inventory-item-name', 'Flow Black Ink 8oz');
+  await b.type('#inventory-item-quantity', '5');
+  await b.type('#inventory-item-reorder_point', '10');
+  await b.type('#inventory-item-supplier', 'Flow Supplies');
+  await b.clickText('Add item', '#inventory-item-modal-overlay');
+  let item;
+  await eventually(async () => { const list = await api('/api/inventory'); item = (Array.isArray(list) ? list : list.items).find((i) => i.name === 'Flow Black Ink 8oz'); return !!item; }, 'the item was not added');
+  await b.type('#inventory-items-search', 'Flow Black');
+  await eventually(async () => (await b.evaluate(`document.querySelectorAll('.inventory-item-row').length`)) === 1, 'the search does not find the new item alone');
+  await press('.inventory-item-row', 'Flow Black Ink 8oz', 'Edit');
+  check((await b.evaluate(`document.getElementById('inventory-item-supplier').value`)) === 'Flow Supplies', 'Edit did not open the item');
+  await b.type('#inventory-item-quantity', '20');
+  await b.clickText('Save changes', '#inventory-item-modal-overlay');
+  await eventually(async () => { const list = await api('/api/inventory'); return Number((Array.isArray(list) ? list : list.items).find((i) => i.id === item.id).quantity) === 20; }, 'the change was not saved');
+});
+
+await flow('Suppliers: add one by hand and edit it; nothing is made up', async () => {
+  await b.goto(url);
+  await b.clickText('Inventory');
+  await b.clickText('+ Add supplier');
+  await b.type('#supplier-name', 'Flow Pigments Ltd');
+  await b.type('#supplier-phone', '555-0100');
+  await b.clickText('Add supplier', '#supplier-modal-overlay');
+  let sp;
+  await eventually(async () => { sp = (await api('/api/inventory/suppliers')).find((x) => x.name === 'Flow Pigments Ltd'); return !!sp; }, 'the supplier was not added');
+  check(!sp.order_email && !sp.email, 'an email address was invented for the supplier: ' + (sp.order_email || sp.email));
+  await press('.supplier-row', 'Flow Pigments Ltd', 'Edit');
+  check((await b.evaluate(`document.getElementById('supplier-phone').value`)) === '555-0100', 'Edit did not open the supplier');
+  await b.type('#supplier-order_email', 'orders@flowpigments.example');
+  await b.clickText('Save changes', '#supplier-modal-overlay');
+  await eventually(async () => (await api('/api/inventory/suppliers')).find((x) => x.id === sp.id).order_email === 'orders@flowpigments.example', 'the change was not saved');
 });
 
 await flow('Removing an appointment also updates the dashboard count', async () => {

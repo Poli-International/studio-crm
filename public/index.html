@@ -660,7 +660,7 @@
               <h4 style="margin:0 0 0.75rem 0;font-size:0.95rem;font-weight:800;color:#F8FAFC;">Appointments</h4>
               <table id="appointments-table" style="width:100%;border-collapse:collapse;font-size:0.82rem;text-align:left;">
                 <thead>
-                  <tr style="border-bottom:1px solid #334155;"><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">When</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">Client</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">Service</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">Artist</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">Price</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">Status</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;"></th></tr>
+                  <tr style="border-bottom:1px solid #334155;"><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">When</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">Client</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">Service</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">Artist</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">Price</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">Deposit</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">To pay</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;">Status</th><th style="padding:8px;text-align:left;color:#94A3B8;font-size:0.75rem;"></th></tr>
                 </thead>
                 <tbody id="schedule-appointments-tbody"></tbody>
               </table>
@@ -712,6 +712,35 @@
         <!-- 4. DESTINATION: INVENTORY -->
         <!-- =================================================================== -->
         <section id="dest-inventory" class="destination-view" style="display:none;">
+          <!-- Every stock item, added and changed by hand (Henry: there was no way to add or edit an item) -->
+          <div id="inventory-items-card" style="background:#111827;border:1px solid #374151;border-radius:16px;padding:1.25rem;margin-bottom:1.5rem;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:0.9rem;">
+              <h2 style="margin:0;font-size:1.2rem;font-weight:900;color:#FFF;">📋 Stock items</h2>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <input type="search" id="inventory-items-search" placeholder="Search name, SKU, supplier" aria-label="Search stock items" oninput="renderInventoryItems()" style="padding:7px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.85rem;">
+                <button type="button" onclick="openInventoryItemForm()" style="padding:0.45rem 0.9rem;background:#10B981;color:#FFF;border:none;border-radius:8px;font-weight:800;font-size:0.85rem;cursor:pointer;">+ Add item</button>
+              </div>
+            </div>
+            <div style="overflow-x:auto;">
+              <table style="width:100%;border-collapse:collapse;font-size:0.85rem;color:#E2E8F0;">
+                <thead><tr style="border-bottom:1px solid #334155;"><th style="padding:8px;text-align:left;color:#94A3B8;font-weight:700;">Item</th><th style="padding:8px;text-align:left;color:#94A3B8;font-weight:700;">Category</th><th style="padding:8px;text-align:left;color:#94A3B8;font-weight:700;">SKU</th><th style="padding:8px;text-align:left;color:#94A3B8;font-weight:700;">In stock</th><th style="padding:8px;text-align:left;color:#94A3B8;font-weight:700;">Reorder at</th><th style="padding:8px;text-align:left;color:#94A3B8;font-weight:700;">Price</th><th style="padding:8px;text-align:left;color:#94A3B8;font-weight:700;">Lot</th><th style="padding:8px;text-align:left;color:#94A3B8;font-weight:700;">Expires</th><th style="padding:8px;text-align:left;color:#94A3B8;font-weight:700;">Supplier</th><th style="padding:8px;text-align:left;color:#94A3B8;font-weight:700;"></th></tr></thead>
+                <tbody id="inventory-items-tbody"><tr><td colspan="10" style="padding:10px;color:#94A3B8;">Loading...</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Suppliers, added and changed by hand -->
+          <div id="suppliers-card" style="background:#111827;border:1px solid #374151;border-radius:16px;padding:1.25rem;margin-bottom:1.5rem;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:0.9rem;">
+              <h2 style="margin:0;font-size:1.2rem;font-weight:900;color:#FFF;">🚚 Suppliers</h2>
+              <button type="button" onclick="openSupplierForm()" style="padding:0.45rem 0.9rem;background:#10B981;color:#FFF;border:none;border-radius:8px;font-weight:800;font-size:0.85rem;cursor:pointer;">+ Add supplier</button>
+            </div>
+            <div style="overflow-x:auto;">
+              <table style="width:100%;border-collapse:collapse;font-size:0.85rem;color:#E2E8F0;">
+                <thead><tr style="border-bottom:1px solid #334155;"><th style="padding:8px;text-align:left;color:#94A3B8;font-weight:700;">Supplier</th><th style="padding:8px;text-align:left;color:#94A3B8;font-weight:700;">Contact</th><th style="padding:8px;text-align:left;color:#94A3B8;font-weight:700;">Phone</th><th style="padding:8px;text-align:left;color:#94A3B8;font-weight:700;">Order email</th><th style="padding:8px;text-align:left;color:#94A3B8;font-weight:700;">Lead time</th><th style="padding:8px;text-align:left;color:#94A3B8;font-weight:700;">Items</th><th style="padding:8px;text-align:left;color:#94A3B8;font-weight:700;"></th></tr></thead>
+                <tbody id="suppliers-tbody"><tr><td colspan="7" style="padding:10px;color:#94A3B8;">Loading...</td></tr></tbody>
+              </table>
+            </div>
+          </div>
           <div style="background:#111827;border:1px solid #374151;border-radius:16px;padding:1.25rem;margin-bottom:1.5rem;">
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:1.2rem;border-bottom:1px solid #1F2937;padding-bottom:0.85rem;">
               <div>

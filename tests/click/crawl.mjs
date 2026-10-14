@@ -26,7 +26,7 @@ const last = [];
 const BACKDROP = /event\.target\s*===?\s*this/;
 // Buttons with nothing to see after the click, each for a reason a person would accept.
 const QUIET = [
-  /testQrAudioTheme/, // plays a sound
+  /testQrAudioTheme|btn-test-voice-announcement|test-chime-button/, // plays a sound
   /switchStudioProSuiteTab\('(aftercare|ear-planner)'\)|switchGalleryTab\('portfolio'\)|setSharePreset\('showcase'\)|prevQrTourStep|switchClientProfileTab\('overview'\)|switchImportTab\('manual'\)/, // already on that tab or step
   /sendTeamChatMessage/, // sends nothing until a message is typed
   /qr-validation-toast/, // closes a message that is not showing
@@ -34,7 +34,8 @@ const QUIET = [
   /shareToPlatform\('email'\)|email-doc-btn/, // hands the message to the computer's mail program
   /clear-search-btn/, // clears a search box that is still empty
   /Standard Comparison \(Flat Rent/, // booth rent: the comparison already shown
-  /BUTTON \|  \| (📊 Benchmark Table|View Formatted Guide|📏 Curvature Calculator|📐 Standard Stencil Mode|High-Res Print Reference \(4800 x 1600 px) \| $/, // the tab or mode already shown
+  /BUTTON \|  \| (📊 Benchmark Table|View Formatted Guide|📏 Curvature Calculator|📐 Standard Stencil Mode|High-Res Print Reference \(4800 x 1600 px|File Backup & JSON|Export Direct Sync Payload) \| $/,
+  /BUTTON \| tab_decoder_btn \|/, // ink decoder: the tab it opens on // the tab or mode already shown
   /BUTTON \|  \| [^|]*Copied/, // a copy button whose label just said so: pressing again copies the same text
   /BUTTON \|  \| 👂 Lobe vs Helix/, // angle guide: the comparison shown when compare mode opens
   /BUTTON \|  \| ❌ /, // ink mixer: picks again the colour already marked out of stock

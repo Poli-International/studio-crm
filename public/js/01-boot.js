@@ -38,13 +38,16 @@
         } catch (e) {}
     })();
 
-// A double tap on Save sent every form twice: two clients, two bookings. A second
-// submit of the same form within a moment is dropped before it reaches the form.
-// ponytail: time window, not request tracking; a retry after a failed save waits 1.5 s.
+// A double tap on Save sent every form twice: two clients, two bookings. The same form
+// sent again with the same content within a moment is dropped before it reaches the form;
+// different content (add a person, then edit them in the same form) goes through.
+// ponytail: time window, not request tracking; resending the same failed save waits 1.5 s.
 document.addEventListener('submit', function (e) {
-  var form = e.target;
-  if (form.__submittedAt && Date.now() - form.__submittedAt < 1500) { e.preventDefault(); e.stopPropagation(); return; }
-  form.__submittedAt = Date.now();
+  var form = e.target, sent = '';
+  try { sent = JSON.stringify(Array.from(new FormData(form).entries())) + [].map.call(form.elements, function (f) { return f.value; }).join('|'); } catch (err) {}
+  if (form.__sent === sent && Date.now() - form.__sentAt < 1500) { e.preventDefault(); e.stopPropagation(); return; }
+  form.__sent = sent;
+  form.__sentAt = Date.now();
 }, true);
 
 // Screen readers: most fields have a placeholder or a caption in front of them but no

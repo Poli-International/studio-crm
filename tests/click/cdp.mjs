@@ -84,7 +84,9 @@ const PAGE_HELPER = `(() => {
         look += (el.getAttribute('class') || '') + (el.getAttribute('style') || '') + (el.getAttribute('transform') || '') + (el.getAttribute('d') || '') + (el.getAttribute('src') || '') + (el.scrollTop | 0);
       }
       let g = 0; for (let i = 0; i < look.length; i++) g = (g * 31 + look.charCodeAt(i)) | 0;
-      return { overlays: ct.overlays(), view, hash: h, look: g };
+      // the text with its numbers ("Step 2 of 24"): counted only on a page without a ticking clock
+      let n = 0; for (const c of document.body.innerText) n = (n * 31 + c.charCodeAt(0)) | 0;
+      return { overlays: ct.overlays(), view, hash: h, look: g + '|' + n };
     },
     // A submit button does nothing on an empty form: fill the required fields first, like a person would.
     fill(form) {
@@ -99,7 +101,7 @@ const PAGE_HELPER = `(() => {
       const el = ct.all().find((e) => ct.key(e) === key);
       if (!el) return null;
       if (el.form && (el.type === 'submit' || (el.tagName === 'BUTTON' && !el.getAttribute('type') && !el.getAttribute('onclick')))) ct.fill(el.form);
-      el.scrollIntoView({ block: 'center', inline: 'center' });
+      el.scrollIntoView({ block: 'center', inline: 'center', behavior: 'instant' }); // instant: a page with smooth scrolling is still moving when we look
       // a marker on a drawn map is pressed on its dot, not in the middle of dot and label together
       const aim = (el instanceof SVGGElement && el.querySelector('circle')) || el;
       const r = aim.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
@@ -257,7 +259,7 @@ export async function launchBrowser() {
       },
       // draws a zig-zag across the element with the mouse held down, like a signature
       async scribble(selector) {
-        const r = await run(`const el = document.querySelector(${js(selector)}); if (!el) return null; el.scrollIntoView({ block: 'center' }); const b = el.getBoundingClientRect(); return { x: b.left, y: b.top, w: b.width, h: b.height };`);
+        const r = await run(`const el = document.querySelector(${js(selector)}); if (!el) return null; el.scrollIntoView({ block: 'center', behavior: 'instant' }); const b = el.getBoundingClientRect(); return { x: b.left, y: b.top, w: b.width, h: b.height };`);
         if (!r) throw new Error(`Nothing to sign: ${selector}`);
         const o = await offset();
         const at = (i) => [o.x + r.x + r.w * (0.2 + 0.06 * i), o.y + r.y + r.h * (i % 2 ? 0.3 : 0.7)];

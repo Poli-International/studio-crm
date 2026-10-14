@@ -5,10 +5,11 @@ async function renderTeamMessages() {
     const stream = document.getElementById("mboard-messages-stream");
     if (!stream) return;
     const list = await fetchJson("/api/messages");
-    const messages = (Array.isArray(list) ? list : []).slice().reverse(); // the server keeps the newest first
+    const sentAt = (m) => new Date(m.timestamp || m.created_at || 0).getTime();
+    const messages = (Array.isArray(list) ? list : []).slice().sort((x, y) => sentAt(x) - sentAt(y)); // oldest first, newest at the bottom
     stream.innerHTML = messages.length ? messages.map((m) => `<div class="mboard-message" style="background:#1E293B;border:1px solid #334155;border-radius:8px;padding:8px 12px;font-size:0.8rem;color:#F8FAFC;">
             <strong style="color:#38BDF8;">${escapeHtml(m.author || "Staff")}:</strong> ${escapeHtml(m.text || "")}
-            <span style="font-size:0.7rem;color:#64748B;float:right;">${escapeHtml(m.timestamp ? new Date(m.timestamp).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }) : "")}</span>
+            <span style="font-size:0.7rem;color:#64748B;float:right;">${escapeHtml(sentAt(m) ? new Date(sentAt(m)).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }) : "")}</span>
         </div>`).join("") : '<div style="color:#94A3B8;font-size:0.8rem;">No messages yet.</div>';
     stream.scrollTop = stream.scrollHeight;
 }

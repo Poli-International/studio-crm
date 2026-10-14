@@ -235,6 +235,11 @@ export async function launchBrowser() {
         }
         if (!t || t.covered) return t;
         const o = await offset();
+        if (frameSel) {
+          // inside an embedded tool, the page around it can still lie on top (a message, a window)
+          const over = await evaluate(`(() => { const f = document.querySelector(${js(frameSel)}), top = document.elementFromPoint(${t.x + o.x}, ${t.y + o.y}); return top === f ? null : (top ? 'the page around the tool: ' + (top.id || top.tagName + '.' + top.className) + ' "' + (top.innerText || '').trim().slice(0, 60) + '"' : 'outside the window'); })()`);
+          if (over) return { ...t, covered: over };
+        }
         const clicks = () => run('return window.__ct.sig.clicks || 0;').catch(() => -1);
         const before = fingers ? await clicks() : 0;
         for (const type of ['mouseMoved', 'mousePressed', 'mouseReleased']) await mouse(type, t.x + o.x, t.y + o.y, type === 'mousePressed');

@@ -1,7 +1,6 @@
 /**
  * Keeps the CRM's browser-side datasets (studio settings and prices, tips, closing
- * checklists, aftercare dispatches, macros, before/after pairs, client photos, the consent
- * forms edited in the form builder...) in the
+ * checklists, aftercare dispatches, macros, before/after pairs, client photos...) in the
  * studio database via /api/app-data, so they survive a cleared browser and are shared
  * by every computer in the studio.
  *
@@ -13,17 +12,9 @@
 (function () {
   'use strict';
 
-  var SYNCED = /^(studio_(ba_pairs|scheduled_reports|portal_pinned_notes|tip_records|sanitization_logs|aftercare_dispatches|messenger_macros|before_after_gallery|vat_config|remote_sync_config)|poli_(studio_profile|studio_logo|benchmark_studio_rates_v1|tattoo_estimate_draft|form_builder_autosave(:[A-Za-z0-9_-]+)?|pdf_generator_settings|builder_theme_customization|kiosk_exit_pin)|client_photo_[A-Za-z0-9_]+)$/;
+  var SYNCED = /^(studio_(ba_pairs|scheduled_reports|portal_pinned_notes|tip_records|sanitization_logs|aftercare_dispatches|messenger_macros|before_after_gallery|vat_config|remote_sync_config)|poli_(studio_profile|studio_logo|benchmark_studio_rates_v1|tattoo_estimate_draft)|client_photo_[A-Za-z0-9_]+)$/;
   var proto = Storage.prototype;
   var setItem = proto.setItem, removeItem = proto.removeItem;
-
-  // keepalive lets a save finish while the page closes, but the browser allows only 64 KB of
-  // keepalive requests in flight in total, and refuses the rest (the error is swallowed below).
-  // A form design is saved under two keys at once; with a logo or a long form they pass that
-  // limit together. Use keepalive only while the page is closing.
-  var leaving = false;
-  addEventListener('pagehide', function () { leaving = true; });
-  addEventListener('pageshow', function () { leaving = false; });
 
   function send(method, key, value) {
     try {
@@ -31,7 +22,7 @@
         method: method,
         headers: { 'Content-Type': 'application/json' },
         body: method === 'PUT' ? JSON.stringify({ value: value }) : undefined,
-        keepalive: leaving && (method !== 'PUT' || value.length < 60000)
+        keepalive: method !== 'PUT' || value.length < 60000
       }).catch(function () {});
     } catch (e) {}
   }

@@ -718,6 +718,11 @@ await flow('First start: the CRM asks for a studio password before anything load
     check((await fetch(fresh.url + 'api/clients').then((r) => r.status)) === 401, 'a new studio answers data requests before the first-start choice');
     await b.goto(fresh.url);
     check(await b.evaluate(`document.body.innerText.includes('Welcome to Studio CRM')`), 'a new studio does not ask for a password');
+    // the page speaks the language this device chose in the CRM
+    await b.evaluate(`(() => { localStorage.setItem('studio_crm_lang', 'de'); location.reload(); })()`);
+    await eventually(async () => b.evaluate(`document.body.innerText.includes('Willkommen bei Studio CRM')`), 'the first-start page ignores the chosen language');
+    await b.evaluate(`(() => { localStorage.setItem('studio_crm_lang', 'en'); location.reload(); })()`);
+    await eventually(async () => b.evaluate(`document.body.innerText.includes('Welcome to Studio CRM')`), 'the first-start page did not go back to English');
     await b.type('#setup-password', 'first-start-pass');
     await b.type('#setup-again', 'not-the-same-pass');
     await b.clickText('Create password and open the CRM');

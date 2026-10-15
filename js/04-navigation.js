@@ -60,7 +60,6 @@ function navigateToDestination(destId) {
     if (typeof renderD3InventoryTrendChart === 'function') setTimeout(renderD3InventoryTrendChart, 50);
   } else if (destId === 'calendar') {
     if (typeof renderMonthlyShiftSchedule === 'function') setTimeout(renderMonthlyShiftSchedule, 50);
-    if (typeof renderAppointmentsList === 'function') setTimeout(renderAppointmentsList, 50);
   }
 }
 window.navigateToDestination = navigateToDestination;

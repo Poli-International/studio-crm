@@ -734,6 +734,30 @@ await flow('First start: the CRM asks for a studio password before anything load
   } finally { await fresh.stop(); }
 });
 
+await flow('Thai: the form builder, the consent form on the kiosk and the PDFs show Thai', async () => {
+  await b.goto(url);
+  await b.evaluate(`setLanguage('th')`);
+  try {
+    await b.evaluate(`openFormBuilderModal()`);
+    const f = b.frame('#form-builder-frame');
+    for (let i = 0; i < 80 && !(await f.evaluate('!!(window.__ct && window.FormBuilderApp && window.FormBuilderApp.currentForm && document.getElementById("btn-preview"))').catch(() => false)); i++) await sleep(250);
+    await sleep(800);
+    const thai = (s) => /[฀-๿]/.test(s);
+    check((await f.evaluate(`window.i18n.currentLanguage`)) === 'th', 'the form builder did not follow the CRM to Thai');
+    check(thai(await f.evaluate(`document.getElementById('btn-preview').innerText`)), 'the form builder buttons are not in Thai');
+    await f.evaluate(`document.getElementById('btn-preview').click()`); await sleep(600);
+    await f.evaluate(`document.getElementById('btn-toggle-kiosk').click()`); await sleep(600);
+    const kiosk = await f.evaluate(`document.getElementById('tablet-kiosk-modal').innerText`);
+    check(thai(kiosk), 'the kiosk is not in Thai: ' + kiosk.slice(0, 120));
+    check(thai(await f.evaluate(`window.FormBuilderApp.currentForm.sections.map((s) => s.title).join(' ')`)), 'the consent form itself was not translated to Thai');
+    // Helvetica has no Thai letters: a PDF with a Thai name must carry a Thai font
+    const pdf = await f.evaluate(`(() => { const d = new window.jspdf.jsPDF(); d.text('ลูกค้า: สมชาย ใจดี', 10, 10); return d.output(); })()`);
+    check(pdf.includes('/Sarabun'), 'a PDF with Thai text has no Thai font');
+  } finally {
+    await b.evaluate(`setLanguage('en')`);
+  }
+});
+
 await stop();
 console.log(failures.length ? `\n${failures.length} flow(s) failed` : '\nAll flows passed');
 process.exit(failures.length ? 1 : 0);

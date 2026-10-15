@@ -427,6 +427,12 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.8
+
+- Thai in the form builder: its whole interface, the tablet kiosk screens and the wording of the built-in consent forms (355 form texts, about 1,270 interface texts). Translated with AI (Gemini) and not yet read by a native Thai speaker.
+- Thai letters in every PDF the app makes (signed waiver, consent form, reports): jsPDF's built-in fonts have no Thai, so `public/js/vendor/thai-pdf-font.js` embeds Sarabun (SIL Open Font License, `Sarabun-OFL.txt`) and uses it for any text that contains Thai; other text keeps its font.
+- Known limits of Thai in PDFs: jsPDF places Thai vowel and tone marks without OpenType positioning, so stacked marks can sit slightly off; long Thai lines wrap at spaces, and a very long run with no space breaks between letters.
+
 ### 1.0.7
 
 - The sign-in and first-start password pages follow the language chosen on that device (the browser's language before any choice); their words are inside the page, because the password gate blocks the translation files.

@@ -28,27 +28,30 @@
     // These four strings are CRM-only, so they live here rather than polluting
     // i18n.json, which has to stay identical to the site copy.
     var STRINGS = {
-        en: { save: 'Save to client record', saved: 'Saved to client record',
+        en: { sendKiosk: 'Send to kiosk', save: 'Save to client record', saved: 'Saved to client record',
               failed: 'Could not save. The record was not stored.',
               privacy: 'Stored in your studio database on this machine. Never sent to Poli International.' },
-        fr: { save: 'Enregistrer dans le dossier client', saved: 'Enregistre dans le dossier client',
+        fr: { sendKiosk: 'Envoyer à la borne', save: 'Enregistrer dans le dossier client', saved: 'Enregistre dans le dossier client',
               failed: 'Echec de l\'enregistrement. Le dossier n\'a pas ete stocke.',
               privacy: 'Enregistre dans la base de votre studio, sur cette machine. Jamais transmis a Poli International.' },
-        it: { save: 'Salva nella scheda cliente', saved: 'Salvato nella scheda cliente',
+        it: { sendKiosk: 'Invia al chiosco', save: 'Salva nella scheda cliente', saved: 'Salvato nella scheda cliente',
               failed: 'Salvataggio non riuscito. La scheda non e stata memorizzata.',
               privacy: 'Memorizzato nel database del tuo studio, su questa macchina. Mai inviato a Poli International.' },
-        de: { save: 'In Kundenakte speichern', saved: 'In Kundenakte gespeichert',
+        de: { sendKiosk: 'An den Kiosk senden', save: 'In Kundenakte speichern', saved: 'In Kundenakte gespeichert',
               failed: 'Speichern fehlgeschlagen. Der Datensatz wurde nicht gespeichert.',
               privacy: 'In der Datenbank Ihres Studios auf diesem Rechner gespeichert. Wird nie an Poli International gesendet.' },
-        es: { save: 'Guardar en la ficha del cliente', saved: 'Guardado en la ficha del cliente',
+        es: { sendKiosk: 'Enviar al quiosco', save: 'Guardar en la ficha del cliente', saved: 'Guardado en la ficha del cliente',
               failed: 'No se pudo guardar. El registro no se almaceno.',
               privacy: 'Guardado en la base de datos de su estudio, en este equipo. Nunca se envia a Poli International.' },
-        nl: { save: 'Opslaan in klantdossier', saved: 'Opgeslagen in klantdossier',
+        nl: { sendKiosk: 'Naar de kiosk sturen', save: 'Opslaan in klantdossier', saved: 'Opgeslagen in klantdossier',
               failed: 'Opslaan mislukt. Het dossier is niet bewaard.',
               privacy: 'Opgeslagen in de database van uw studio, op deze machine. Wordt nooit naar Poli International gestuurd.' },
-        pt: { save: 'Salvar no cadastro do cliente', saved: 'Salvo no cadastro do cliente',
+        pt: { sendKiosk: 'Enviar para o quiosque', save: 'Salvar no cadastro do cliente', saved: 'Salvo no cadastro do cliente',
               failed: 'Nao foi possivel salvar. O registro nao foi armazenado.',
-              privacy: 'Armazenado no banco de dados do seu estudio, nesta maquina. Nunca enviado para a Poli International.' }
+              privacy: 'Armazenado no banco de dados do seu estudio, nesta maquina. Nunca enviado para a Poli International.' },
+        th: { sendKiosk: 'ส่งไปที่คีออส', save: 'บันทึกลงในประวัติลูกค้า', saved: 'บันทึกลงในประวัติลูกค้าแล้ว',
+              failed: 'บันทึกไม่สำเร็จ ข้อมูลยังไม่ได้ถูกจัดเก็บ',
+              privacy: 'จัดเก็บในฐานข้อมูลของสตูดิโอบนเครื่องนี้ ไม่มีการส่งไปยัง Poli International' }
     };
 
     function t(key) {
@@ -145,6 +148,30 @@
         // Saving to the client record is the primary action inside the CRM, so it
         // leads the group rather than the PDF button remaining the default.
         bar.insertBefore(btn, bar.firstChild);
+
+        // A kiosk tablet on a stand: the client fills this form in there, and it comes back to this record.
+        // Also at the top of the preview: a consent form is long, and the desk sends it unfilled.
+        if (host.noKiosk) return;
+        btn.insertAdjacentElement('afterend', sendButton('crm-send-kiosk-btn', 'btn-secondary btn-large'));
+        var top = document.querySelector('.preview-tools');
+        if (top && top !== bar && !document.getElementById('crm-send-kiosk-top')) top.insertBefore(sendButton('crm-send-kiosk-top', 'btn-primary'), top.firstChild);
+    }
+
+    function sendButton(id, cls) {
+        var send = document.createElement('button');
+        send.type = 'button';
+        send.id = id;
+        send.className = cls;
+        send.textContent = '📲 ' + t('sendKiosk');
+        send.addEventListener('click', function () {
+            var form = window.FormBuilderApp && window.FormBuilderApp.currentForm;
+            if (!form) return;
+            parent.postMessage({
+                type: 'crm-send-kiosk', clientId: host.clientId, formName: form.name || 'Consent form',
+                formCategory: form.category || null, language: (window.i18n && window.i18n.currentLanguage) || 'en', schema: form
+            }, window.location.origin);
+        });
+        return send;
     }
 
     // The preview is re-rendered on language change and on entering preview, so
@@ -168,7 +195,8 @@
         if (e.origin !== window.location.origin || !e.data) return;
 
         if (e.data.type === 'crm-host') {
-            host = { clientId: e.data.clientId, clientName: e.data.clientName };
+            // noKiosk: this page is the kiosk tablet itself, which has nothing to send on
+            host = { clientId: e.data.clientId, clientName: e.data.clientName, noKiosk: !!e.data.noKiosk };
             addSaveButton();
             correctPrivacyNote();
             var root = document.getElementById('preview-container');
@@ -176,6 +204,8 @@
             addSaveButton();          // preview may already be open
             correctPrivacyNote();
         }
+
+        if (e.data.type === 'crm-kiosk-result') toast(e.data.text, e.data.ok ? 'success' : 'error');
 
         if (e.data.type === 'crm-save-result') {
             // A form filled in with no client chosen created the client: later saves go to that record.

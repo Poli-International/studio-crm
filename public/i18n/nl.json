@@ -1720,5 +1720,22 @@
  "Verified by": "Gecontroleerd door",
  "Signature": "Handtekening",
  "No signature was captured.": "Er is geen handtekening vastgelegd.",
- "⬇ Download PDF": "⬇ PDF downloaden"
+ "⬇ Download PDF": "⬇ PDF downloaden",
+ "Kiosk Tablets": "Kiosktablets",
+ "A tablet that only shows the forms the desk sends it. On the tablet, open this address in the browser:": "Een tablet die alleen de formulieren toont die de balie stuurt. Open op de tablet dit adres in de browser:",
+ "Set the studio password first: the kiosk password comes on top of it.": "Stel eerst het studiowachtwoord in: het kioskwachtwoord komt daarbovenop.",
+ "No studio password is set, so a tablet opens the kiosk page without signing in. Set the studio password to give tablets their own password.": "Geen studiowachtwoord ingesteld: een tablet opent de kioskpagina zonder aanmelden. Stel het in om tablets een eigen wachtwoord te geven.",
+ "A kiosk password is set: a tablet signs in with it once and can then only receive and return forms.": "Er is een kioskwachtwoord: een tablet meldt zich één keer aan en kan daarna alleen formulieren ontvangen en terugsturen.",
+ "Set a kiosk password: a tablet signs in with it and can then only receive and return forms, never open the CRM.": "Stel een kioskwachtwoord in: een tablet meldt zich ermee aan en kan dan alleen formulieren ontvangen en terugsturen, nooit het CRM openen.",
+ "Kiosk password, at least 6 characters": "Kioskwachtwoord, minstens 6 tekens",
+ "Kiosk password": "Kioskwachtwoord",
+ "Set kiosk password": "Kioskwachtwoord instellen",
+ "Change kiosk password": "Kioskwachtwoord wijzigen",
+ "Remove kiosk password": "Kioskwachtwoord verwijderen",
+ "Send to which kiosk?": "Naar welke kiosk sturen?",
+ "● online": "● verbonden",
+ "● not connected": "● niet verbonden",
+ "Take back": "Terugnemen",
+ "Kiosk password saved: sign each tablet in with it": "Kioskwachtwoord opgeslagen: meld elke tablet ermee aan",
+ "Kiosk password removed": "Kioskwachtwoord verwijderd"
 }

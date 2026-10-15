@@ -113,15 +113,18 @@ document.getElementById('setup-skip').addEventListener('click', function () {
 </script></body></html>`;
 
 // Staff levels, lowest to highest. What each may do is decided in needLevel() below.
-const LEVELS = ['front_desk', 'staff', 'admin'];
-const LEVEL_NAMES = { front_desk: 'Front desk', staff: 'Staff', admin: 'Administrator' };
+// 'kiosk' is a tablet signed in with the kiosk password: it only receives forms and sends them back signed.
+const LEVELS = ['kiosk', 'front_desk', 'staff', 'admin'];
+const LEVEL_NAMES = { kiosk: 'Kiosk tablet', front_desk: 'Front desk', staff: 'Staff', admin: 'Administrator' };
 // shared data that is studio settings: only an administrator may change it
 const ADMIN_DATA = /^(studio_vat_config|studio_remote_sync_config|studio_scheduled_reports|poli_studio_profile|poli_studio_logo|poli_benchmark_studio_rates_v1|poli_kiosk_exit_pin|poli_pdf_generator_settings|poli_builder_theme_customization)$/;
 
 // The lowest level a request needs. Checked on the server, so hiding a button is not the only guard.
 export function needLevel(method, apiPath) {
-  if (!apiPath.startsWith('/api/')) return 'front_desk';
-  if (['/api/access', '/api/access/login', '/api/access/logout', '/api/access/people'].includes(apiPath)) return 'front_desk';
+  // pages and their files hold no studio data (that is all behind /api); only the CRM itself is closed to a kiosk
+  if (!apiPath.startsWith('/api/')) return ['/', '/index.html'].includes(apiPath) ? 'front_desk' : 'kiosk';
+  if (['/api/access', '/api/access/logout', '/api/kiosk/next', '/api/kiosk/submit'].includes(apiPath)) return 'kiosk';
+  if (['/api/access/login', '/api/access/people'].includes(apiPath)) return 'front_desk';
   const write = method !== 'GET' && method !== 'HEAD';
   if (method === 'DELETE') return 'admin';                                        // deleting anything
   if (/^\/api\/(access|admin|database)\//.test(apiPath)) return 'admin';           // password, levels, backups, empty studio
@@ -187,7 +190,13 @@ export function installAccess(app, sqlite, getStaff = () => []) {
   const session = (req) => { const s = sessions.get(tokenOf(req)); return s && s.expiry > Date.now() ? s : null; };
   const signedIn = (req) => !!session(req);
   // without staff logins everyone who is in may do everything, as before
-  const levelOf = (req) => (loginsOn() ? ((session(req) || {}).level || 'front_desk') : 'admin');
+  const levelOf = (req) => {
+    const s = session(req) || {};
+    if (s.level === 'kiosk') return 'kiosk';            // a kiosk tablet stays a kiosk, with or without staff logins
+    return loginsOn() ? (s.level || 'front_desk') : 'admin';
+  };
+  // The kiosk password: separate from the studio password, so a tablet on a stand never holds the studio's.
+  const kioskAccess = () => { try { return JSON.parse(setting('kioskAccess') || 'null'); } catch (e) { return null; } };
   const startSession = (req, res, who = {}) => {
     const token = crypto.randomBytes(32).toString('hex');
     sessions.set(token, { expiry: Date.now() + SESSION_DAYS * 86400000, staffId: who.staffId || null, level: who.level || 'admin' });
@@ -201,7 +210,8 @@ export function installAccess(app, sqlite, getStaff = () => []) {
       if (req.path.startsWith('/api/')) return res.status(401).json({ error: 'Create the studio password first (or choose to continue without one)' });
       return res.status(200).set('Cache-Control', 'no-store').type('html').send(SETUP_PAGE);
     }
-    if (!access || signedIn(req) || req.path.startsWith('/api/access')) return next();
+    // the kiosk page shows its own sign-in (the kiosk password) and must load before it
+    if (!access || signedIn(req) || req.path.startsWith('/api/access') || ['/kiosk', '/kiosk.html', '/api/kiosk/login'].includes(req.path)) return next();
     if (req.path.startsWith('/api/')) return res.status(401).json({ error: 'Sign in with the studio password first' });
     res.status(401).set('Cache-Control', 'no-store').type('html').send(LOGIN_PAGE);
   });
@@ -210,6 +220,8 @@ export function installAccess(app, sqlite, getStaff = () => []) {
   app.use((req, res, next) => {
     const need = needLevel(req.method, req.path);
     const have = levelOf(req);
+    // a kiosk tablet that wanders to a CRM page (the home page, an old bookmark) goes back to its own page
+    if (have === 'kiosk' && !req.path.startsWith('/api/') && req.method === 'GET' && (req.path === '/index.html' || !/\.[a-z0-9]+$/i.test(req.path)) && !req.path.startsWith('/tools/') && req.path !== '/kiosk') return res.redirect('/kiosk');
     if (LEVELS.indexOf(have) >= LEVELS.indexOf(need)) return next();
     res.status(403).json({ error: `Your level (${LEVEL_NAMES[have]}) cannot do this. Ask an administrator.`, level: have });
   });
@@ -220,7 +232,7 @@ export function installAccess(app, sqlite, getStaff = () => []) {
     const all = logins();
     res.json({ passwordSet: !!access, signedIn: !access || signedIn(req), chosen: chosen(),
       idleMinutes: Number(setting('studioIdleMinutes')) || 0,
-      staffLogins: loginsOn(), level: levelOf(req), me: me || null,
+      staffLogins: loginsOn(), level: levelOf(req), me: me || null, kioskPasswordSet: !!kioskAccess(),
       // who has a login and at which level: for the staff list, administrators only
       logins: levelOf(req) === 'admin' ? Object.fromEntries(Object.entries(all).map(([id, l]) => [id, l.level])) : undefined });
   });
@@ -291,6 +303,38 @@ export function installAccess(app, sqlite, getStaff = () => []) {
     }
     failures.delete(who);
     startSession(req, res, entry ? { staffId: Number(body.staff_id), level: entry.level } : { level: 'admin' });
+    res.json({ ok: true });
+  });
+
+  // Set or remove the kiosk password (administrators: /api/access/ needs that level). It needs the studio password:
+  // without one every device is in anyway, and the kiosk page works with no sign-in.
+  app.post('/api/access/kiosk-password', (req, res) => {
+    if (!access) return res.status(400).json({ error: 'Set the studio password first: the kiosk password comes on top of it' });
+    if (!signedIn(req)) return res.status(401).json({ error: 'Sign in first' });   // the gate lets /api/access through
+    const password = String((req.body || {}).password || '');
+    for (const [t, s] of sessions) if (s.level === 'kiosk') sessions.delete(t);  // tablets sign in again
+    if (!password) { sqlite.prepare("DELETE FROM app_state WHERE key = 'kioskAccess'").run(); return res.json({ ok: true, kioskPasswordSet: false }); }
+    if (password.length < 6) return res.status(400).json({ error: 'Use at least 6 characters' });
+    if (access && matches(password)) return res.status(400).json({ error: 'Use a different password from the studio password' });
+    const salt = crypto.randomBytes(16);
+    setSetting('kioskAccess', JSON.stringify({ salt: salt.toString('hex'), hash: hashOf(password, salt).toString('hex') }));
+    res.json({ ok: true, kioskPasswordSet: true });
+  });
+
+  // A tablet signs in as a kiosk: it can then only receive forms and send them back signed.
+  app.post('/api/kiosk/login', (req, res) => {
+    const who = req.ip;
+    const fail = failures.get(who) || { count: 0, until: 0 };
+    if (fail.until > Date.now()) return res.status(429).json({ error: 'Too many wrong passwords. Wait half a minute and try again.' });
+    const entry = kioskAccess();
+    if (!entry || !checkHash((req.body || {}).password, entry)) {
+      fail.count++;
+      if (fail.count >= 5) { fail.until = Date.now() + 30000; fail.count = 0; }
+      failures.set(who, fail);
+      return res.status(401).json({ error: entry ? 'Wrong password' : 'No kiosk password is set: an administrator sets one in Settings' });
+    }
+    failures.delete(who);
+    startSession(req, res, { level: 'kiosk' });
     res.json({ ok: true });
   });
 

@@ -995,14 +995,17 @@ app.get('/api/activity-logs', async (req, res) => {
  * client's existing document list with no extra wiring.
  */
 app.post('/api/clients/:id/consent-forms', async (req, res) => {
-  const clientId = Number(req.params.id);
-  const { formName, formCategory, language, schema, responses } = req.body || {};
+  const r = await saveConsentForm(Number(req.params.id), req.body || {});
+  res.status(r.status).json(r.body);
+});
 
+// Shared by the form builder's Save and by the kiosk tablet. Answers { status, body }.
+async function saveConsentForm(clientId, { formName, formCategory, language, schema, responses }) {
   if (!Number.isInteger(clientId) || clientId <= 0) {
-    return res.status(400).json({ error: 'A valid client id is required.' });
+    return { status: 400, body: { error: 'A valid client id is required.' } };
   }
   if (!schema || typeof schema !== 'object') {
-    return res.status(400).json({ error: 'A form schema is required.' });
+    return { status: 400, body: { error: 'A form schema is required.' } };
   }
 
   const record = {
@@ -1023,10 +1026,80 @@ app.post('/api/clients/:id/consent-forms', async (req, res) => {
   if (!saved) {
     // safeDbQuery returns the fallback when no database is configured. Say so
     // rather than reporting a save that did not happen.
-    return res.status(503).json({ error: 'No database configured, the consent form was not stored.' });
+    return { status: 503, body: { error: 'No database configured, the consent form was not stored.' } };
   }
 
-  res.status(201).json({ ok: true, id: Array.isArray(saved) ? saved[0]?.id : undefined });
+  return { status: 201, body: { ok: true, id: Array.isArray(saved) ? saved[0]?.id : undefined } };
+}
+
+/**
+ * Kiosk tablets (Henry, 2026-10-15): a tablet on a stand opens /kiosk, signs in with the kiosk
+ * password and waits. Front desk sends it a form for a client; the client signs; the form is
+ * saved to that client's record and the tablet waits again.
+ *
+ * Each tablet names itself, so a studio can have several. One form waits per tablet.
+ * Kept in memory: a server restart drops forms not yet signed, and the desk sends them again.
+ */
+const kioskQueue = new Map();   // kiosk name -> { id, clientId, clientName, formName, formCategory, language, schema, sentAt, sentBy }
+const kioskSeen = new Map();    // kiosk name -> last time it asked for a form
+let nextKioskItemId = 1;
+const kioskName = (v) => String(v || '').trim().slice(0, 40) || 'Kiosk';
+
+// The tablet asks every few seconds: "is there a form for me?"
+app.get('/api/kiosk/next', (req, res) => {
+  const name = kioskName(req.query.kiosk);
+  kioskSeen.set(name, Date.now());
+  const item = kioskQueue.get(name);
+  res.set('Cache-Control', 'no-store').json({ kiosk: name, item: item ? { id: item.id, clientName: item.clientName, formName: item.formName, language: item.language, schema: item.schema } : null });
+});
+
+// The tablets seen in the last two minutes, and what waits on each: for the desk's "Send to kiosk".
+app.get('/api/kiosk/devices', (req, res) => {
+  const recent = Date.now() - 120000;
+  const names = new Set([...kioskSeen].filter(([, t]) => t > recent).map(([n]) => n));
+  for (const n of kioskQueue.keys()) names.add(n);
+  res.json([...names].sort().map((n) => {
+    const item = kioskQueue.get(n);
+    return { kiosk: n, online: (kioskSeen.get(n) || 0) > recent, waiting: item ? { id: item.id, clientName: item.clientName, formName: item.formName, sentAt: item.sentAt } : null };
+  }));
+});
+
+app.post('/api/kiosk/send', (req, res) => {
+  const b = req.body || {};
+  const clientId = Number(b.clientId);
+  const client = clients.find((c) => c.id === clientId);
+  if (!client) return res.status(400).json({ error: 'Choose the client first: the signed form is saved to their record.' });
+  if (!b.schema || typeof b.schema !== 'object') return res.status(400).json({ error: 'Choose a form first.' });
+  const name = kioskName(b.kiosk);
+  const item = { id: nextKioskItemId++, clientId, clientName: client.name, formName: String(b.formName || 'Consent form').slice(0, 300),
+    formCategory: b.formCategory || null, language: String(b.language || 'en').slice(0, 5), schema: b.schema, sentAt: new Date().toISOString(), sentBy: b.sentBy || '' };
+  const replaced = kioskQueue.get(name);
+  kioskQueue.set(name, item);
+  logActivity({ category: 'compliance', action: 'KIOSK_FORM_SENT', title: `Form sent to the kiosk: ${client.name}`,
+    details: `${item.formName} sent to ${name}` + (replaced ? ` (replaced the form waiting for ${replaced.clientName})` : ''), user: item.sentBy || 'Front desk', badgeColor: 'indigo' });
+  res.status(201).json({ ok: true, kiosk: name, id: item.id, replaced: replaced ? replaced.clientName : null });
+});
+
+// The desk takes a form back (wrong client, client left): the tablet returns to waiting.
+app.post('/api/kiosk/cancel', (req, res) => {
+  const name = kioskName((req.body || {}).kiosk);
+  const had = kioskQueue.get(name);
+  kioskQueue.delete(name);
+  res.json({ ok: true, removed: had ? had.clientName : null });
+});
+
+// The client tapped Complete on the tablet: save to the client's record, tell the studio.
+app.post('/api/kiosk/submit', async (req, res) => {
+  const b = req.body || {};
+  const name = kioskName(b.kiosk);
+  const item = kioskQueue.get(name);
+  if (!item || item.id !== Number(b.id)) return res.status(409).json({ error: 'This form was taken back by the studio. Please ask a member of staff.' });
+  const r = await saveConsentForm(item.clientId, { formName: item.formName, formCategory: item.formCategory, language: b.language || item.language, schema: item.schema, responses: b.responses || {} });
+  if (r.status >= 400) return res.status(r.status).json(r.body);
+  kioskQueue.delete(name);
+  logActivity({ category: 'compliance', action: 'KIOSK_FORM_SIGNED', title: `Form completed on the kiosk: ${item.clientName}`,
+    details: `${item.formName}, completed on ${name}. Check it in the client's record.`, user: item.clientName, badgeColor: 'emerald' });
+  res.status(201).json({ ok: true, id: r.body.id });
 });
 
 app.post('/api/activity-logs', (req, res) => {
@@ -10647,6 +10720,9 @@ app.post('/api/admin/start-empty', (req, res) => {
 
 // An address under /api that no route answered: say so (it used to return the home page as if it were data).
 app.use('/api', (req, res) => res.status(404).json({ error: 'Not found: ' + req.method + ' ' + req.originalUrl }));
+
+// The kiosk tablet's page (see /api/kiosk above).
+app.get('/kiosk', (req, res) => res.set('Cache-Control', 'no-store').sendFile(path.join(__dirname, 'public', 'kiosk.html')));
 
 // Catch-all route to serve main app
 app.get('*', (req, res) => {

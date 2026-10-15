@@ -268,8 +268,37 @@ async function showStudioAccess() {
     const idle = document.getElementById('access-idle-minutes');
     if (idle) idle.value = String(access.idleMinutes || 0);
     startIdleLock(on ? access.idleMinutes : 0);
+    // kiosk tablets: their own password, on top of the studio password
+    const addr = document.getElementById('kiosk-address');
+    if (addr) addr.textContent = window.location.origin + '/kiosk';
+    const kStatus = document.getElementById('kiosk-access-status');
+    const kForm = document.getElementById('kiosk-access-form');
+    if (kStatus) kStatus.textContent = !on ? 'No studio password is set, so a tablet opens the kiosk page without signing in. Set the studio password to give tablets their own password.'
+        : access.kioskPasswordSet ? 'A kiosk password is set: a tablet signs in with it once and can then only receive and return forms.'
+        : 'Set a kiosk password: a tablet signs in with it and can then only receive and return forms, never open the CRM.';
+    if (kForm) kForm.style.display = on && access.level === 'admin' ? 'flex' : 'none';
+    show('kiosk-access-remove-btn', !!access.kioskPasswordSet);
+    const kSave = document.getElementById('kiosk-access-save-btn');
+    if (kSave) kSave.textContent = access.kioskPasswordSet ? 'Change kiosk password' : 'Set kiosk password';
 }
 document.addEventListener('DOMContentLoaded', showStudioAccess);
+
+// event: the form was submitted (set or change); null: remove
+async function saveKioskPassword(event) {
+    if (event) event.preventDefault();
+    const input = document.getElementById('kiosk-access-next');
+    const password = event ? (input ? input.value : '') : '';
+    if (event && password.length < 6) { showStudioToast('Use at least 6 characters'); return; }
+    try {
+        const res = await fetch('/api/access/kiosk-password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password }) });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) { showStudioToast(data.error || 'Could not save'); return; }
+        if (input) input.value = '';
+        showStudioToast(data.kioskPasswordSet ? 'Kiosk password saved: sign each tablet in with it' : 'Kiosk password removed');
+        showStudioAccess();
+    } catch (e) { showStudioToast('Could not save: the server did not answer'); }
+}
+window.saveKioskPassword = saveKioskPassword;
 
 // =========================================================================
 // ⏱️ IDLE LOCK (Settings, with the studio password): a device left unused signs out

@@ -38,9 +38,21 @@ describe('staff levels', () => {
     ['PUT', '/api/app-data/poli_kiosk_exit_pin', 'admin'],
     // signing in and out is for everyone
     ['POST', '/api/access/login', 'front_desk'],
-    ['POST', '/api/access/logout', 'front_desk'],
+    ['POST', '/api/access/logout', 'kiosk'],
     ['GET', '/api/access/people', 'front_desk'],
     ['GET', '/index.html', 'front_desk'],
+    ['GET', '/', 'front_desk'],
+    // a kiosk tablet: waits for a form and sends it back signed, and loads the form builder's files; nothing else
+    ['GET', '/api/kiosk/next', 'kiosk'],
+    ['POST', '/api/kiosk/submit', 'kiosk'],
+    ['GET', '/api/access', 'kiosk'],
+    ['GET', '/tools/form-builder/index.html', 'kiosk'],
+    ['GET', '/kiosk', 'kiosk'],
+    ['POST', '/api/kiosk/send', 'front_desk'],
+    ['POST', '/api/kiosk/cancel', 'front_desk'],
+    ['GET', '/api/kiosk/devices', 'front_desk'],
+    ['GET', '/api/clients/4/profile', 'front_desk'],
+    ['POST', '/api/access/kiosk-password', 'admin'],
   ];
   for (const [method, path, level] of cases) {
     it(`${method} ${path} needs ${level}`, () => expect(needLevel(method, path)).toBe(level));

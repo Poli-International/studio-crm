@@ -1720,5 +1720,22 @@
  "Verified by": "ตรวจสอบโดย",
  "Signature": "ลายเซ็น",
  "No signature was captured.": "ไม่มีการบันทึกลายเซ็น",
- "⬇ Download PDF": "⬇ ดาวน์โหลด PDF"
+ "⬇ Download PDF": "⬇ ดาวน์โหลด PDF",
+ "Kiosk Tablets": "แท็บเล็ตคีออส",
+ "A tablet that only shows the forms the desk sends it. On the tablet, open this address in the browser:": "แท็บเล็ตที่แสดงเฉพาะแบบฟอร์มที่เคาน์เตอร์ส่งมา บนแท็บเล็ต ให้เปิดที่อยู่นี้ในเบราว์เซอร์:",
+ "Set the studio password first: the kiosk password comes on top of it.": "ตั้งรหัสผ่านสตูดิโอก่อน รหัสผ่านคีออสจะใช้เพิ่มเติมจากรหัสผ่านนั้น",
+ "No studio password is set, so a tablet opens the kiosk page without signing in. Set the studio password to give tablets their own password.": "ยังไม่ได้ตั้งรหัสผ่านสตูดิโอ แท็บเล็ตจึงเปิดหน้าคีออสได้โดยไม่ต้องเข้าสู่ระบบ ตั้งรหัสผ่านสตูดิโอเพื่อให้แท็บเล็ตมีรหัสผ่านของตัวเอง",
+ "A kiosk password is set: a tablet signs in with it once and can then only receive and return forms.": "ตั้งรหัสผ่านคีออสแล้ว แท็บเล็ตเข้าสู่ระบบครั้งเดียว จากนั้นทำได้เพียงรับและส่งแบบฟอร์มกลับเท่านั้น",
+ "Set a kiosk password: a tablet signs in with it and can then only receive and return forms, never open the CRM.": "ตั้งรหัสผ่านคีออส แท็บเล็ตจะเข้าสู่ระบบด้วยรหัสนี้ และทำได้เพียงรับและส่งแบบฟอร์มกลับ ไม่สามารถเปิด CRM ได้",
+ "Kiosk password, at least 6 characters": "รหัสผ่านคีออส อย่างน้อย 6 ตัวอักษร",
+ "Kiosk password": "รหัสผ่านคีออส",
+ "Set kiosk password": "ตั้งรหัสผ่านคีออส",
+ "Change kiosk password": "เปลี่ยนรหัสผ่านคีออส",
+ "Remove kiosk password": "ลบรหัสผ่านคีออส",
+ "Send to which kiosk?": "ส่งไปที่คีออสเครื่องใด",
+ "● online": "● ออนไลน์",
+ "● not connected": "● ไม่ได้เชื่อมต่อ",
+ "Take back": "เรียกคืน",
+ "Kiosk password saved: sign each tablet in with it": "บันทึกรหัสผ่านคีออสแล้ว ใช้รหัสนี้เข้าสู่ระบบแท็บเล็ตแต่ละเครื่อง",
+ "Kiosk password removed": "ลบรหัสผ่านคีออสแล้ว"
 }

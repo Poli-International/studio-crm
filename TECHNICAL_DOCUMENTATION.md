@@ -318,6 +318,11 @@ Routes of the self-hosted server that the screens above rely on (the online demo
 | `POST` | `/api/access/skip` | First start: open the CRM without a password. |
 | `POST` | `/api/access/idle` | Idle lock minutes (0, 5, 10, 15, 30). |
 | `GET` / `POST` | `/api/access/people`, `/api/access/staff-login` | Names shown on the sign-in page; give a staff member a level and password (`{ staff_id, level, password }`) or remove it (`{ staff_id, remove: true }`). |
+| `POST` | `/api/access/kiosk-password` | Set (`{ password }`, at least 6 characters, not the studio password) or remove (`{ password: '' }`) the kiosk password. Administrators; needs the studio password. |
+| `POST` | `/api/kiosk/login` | A tablet signs in with the kiosk password; its session has the level `kiosk`. |
+| `GET` | `/api/kiosk/next?kiosk={name}` | The tablet asks every 3 seconds for the form waiting for it: `{ kiosk, item: { id, clientName, formName, language, schema } \| null }`. |
+| `POST` | `/api/kiosk/submit` | `{ kiosk, id, language, responses }`: saves the completed form to the client of the waiting item (as `POST /api/clients/{id}/consent-forms` does) and clears it. 409 when the desk took the form back. |
+| `GET` / `POST` | `/api/kiosk/devices`, `/api/kiosk/send`, `/api/kiosk/cancel` | The desk: tablets seen in the last 2 minutes and what waits on each; send `{ kiosk, clientId, formName, language, schema }` (one form waits per tablet, a new one replaces it); take a waiting form back `{ kiosk }`. |
 | `GET` | `/api/studio-meta` | Includes the running `version`, shown in the sidebar. |
 | any | `/api/*` not listed | `404` with a JSON error, never the page. |
 
@@ -418,6 +423,7 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
   The studio password signs in as administrator. Without staff logins everyone who is signed in is an administrator, as in 1.0.5.
 - **HTTPS on the studio network**: a self-made certificate (`https-key.pem`, `https-cert.pem` next to the database) on port 3443, so tablets get the camera and the clipboard. `HTTPS_PORT=0` turns it off.
+- **Kiosk tablets** (optional): `public/kiosk.html` at `/kiosk`. With a studio password, a tablet signs in with the separate kiosk password (scrypt hash in `app_state.kioskAccess`, same five-tries rule) and gets a session at the level `kiosk`, below Front desk: of `/api` it may only call `/api/kiosk/next`, `/api/kiosk/submit`, `GET /api/access` and sign out; other pages redirect to `/kiosk`. Files under `public/` carry no studio data, so it may load them (the form builder runs inside the kiosk page). The waiting forms are kept in memory: a restart drops forms not yet signed. A kiosk can see the client name of a form waiting on another kiosk of the same studio. Without a studio password the kiosk page needs no sign-in, like every other page.
 - **Tablet Kiosk PIN** (optional): a short hash in `poli_kiosk_exit_pin`, shared through `/api/app-data`. It keeps a client inside the consent form on a tablet; it is a deterrent, not a security boundary.
 - **Tool pages** are served with `js/clipboard-fallback.js` added, because a tablet on the plain `http://` address has no `navigator.clipboard`.
 - **Repeated submits**: the same form sent again with the same content within 1.5 seconds is dropped, and save buttons outside forms run one at a time, so a double tap cannot create a record twice.
@@ -426,6 +432,12 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 ---
 
 ## Version History
+
+### 1.0.9
+
+- Kiosk tablets (asked for by a studio): a tablet on a stand opens `/kiosk`, signs in once with its own kiosk password and waits. The desk opens the form builder for a client, picks the form and taps **Send to kiosk**; the form opens on the tablet in the tablet kiosk mode; **Complete** checks it and saves it to that client, then the tablet waits again. Several tablets, each with a name; a waiting form can be taken back. A kiosk sign-in reaches nothing else of the CRM. Works in any browser (Android, Windows, iPad), nothing to install on the tablet.
+- Settings: **Kiosk Tablets** (the address to open, the kiosk password). The guide explains it in the 8 languages.
+- On the kiosk the last button reads Complete (not "Complete & Review PDF") and no PDF is saved on the tablet.
 
 ### 1.0.8
 

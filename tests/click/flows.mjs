@@ -5,7 +5,7 @@
 //
 //   node tests/click/flows.mjs
 import { startApp, startFreshServer } from './app.mjs';
-import { sleep } from './cdp.mjs';
+import { sleep, launchBrowser } from './cdp.mjs';
 
 const { browser: b, url, httpsPort, stop } = await startApp();
 const failures = [];
@@ -732,6 +732,83 @@ await flow('First start: the CRM asks for a studio password before anything load
     await eventually(async () => b.evaluate(`!!document.getElementById('nav-dest-settings')`), 'creating the password did not open the CRM');
     check((await fetch(fresh.url + 'api/clients').then((r) => r.status)) === 401, 'the new password does not protect the data');
   } finally { await fresh.stop(); }
+});
+
+await flow('Kiosk tablet: signs in with its own password, receives a form from the desk, the signed form lands on the client', async () => {
+  // Henry, 2026-10-15: a tablet on a stand waits; the desk sends a form; the client signs; it returns to waiting
+  const k = await launchBrowser();          // the tablet: a second device with its own sign-in
+  try {
+    await b.clickText('Settings');
+    await b.type('#access-next', 'studio-test-password');
+    await b.clickText('Set password');
+    await eventually(async () => (await text('#access-status')).startsWith('A password is set'), 'the studio password was not saved');
+    await eventually(async () => b.evaluate(`getComputedStyle(document.getElementById('kiosk-access-form')).display !== 'none'`), 'the kiosk password field is not shown');
+    await b.type('#kiosk-access-next', 'kiosk-pass-1');
+    await b.clickText('Set kiosk password');
+    await eventually(async () => (await api('/api/access')).kioskPasswordSet, 'the kiosk password was not saved');
+    check((await text('#kiosk-address')).endsWith('/kiosk'), 'Settings does not say which address to open on the tablet');
+
+    await k.tablet();
+    await k.goto(url + 'kiosk');
+    await eventually(async () => k.evaluate(`document.getElementById('login').classList.contains('on')`), 'the kiosk page does not ask for the kiosk password');
+    await k.type('#login-password', 'studio-test-password');
+    await k.clickText('Sign in');
+    await eventually(async () => (await k.evaluate(`document.getElementById('login-error').innerText`)) === 'Wrong password', 'the studio password was accepted as the kiosk password');
+    await k.type('#login-password', 'kiosk-pass-1');
+    await k.type('#login-name', 'Front Stand');
+    await k.clickText('Sign in');
+    await eventually(async () => k.evaluate(`document.getElementById('idle').classList.contains('on')`), 'the signed-in kiosk does not show the waiting screen');
+    // a kiosk reaches nothing of the CRM
+    check((await k.evaluate(`fetch('/api/clients').then(r => r.status)`)) === 403, 'a kiosk tablet can read the client list');
+    check((await k.evaluate(`fetch('/api/kiosk/send', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' }).then(r => r.status)`)) === 403, 'a kiosk tablet can send forms');
+    check((await k.evaluate(`fetch('/').then(r => r.url)`)).endsWith('/kiosk'), 'a kiosk tablet can open the CRM page');
+    await eventually(async () => (await api('/api/kiosk/devices')).some((d) => d.kiosk === 'Front Stand' && d.online), 'the desk does not see the kiosk', 8);
+
+    // the desk: a new client, the consent form, Send to kiosk
+    const made = await b.evaluate(`fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Stand Client', email: 'stand@example.com' }) }).then(r => r.json())`);
+    await b.goto(url);
+    await b.clickText('Clients');
+    await press('.client-directory-row', 'Stand Client', 'Sign Waiver');
+    const f = b.frame('#form-builder-frame');
+    for (let i = 0; i < 80 && !(await f.evaluate('!!(window.__ct && window.FormBuilderApp && window.FormBuilderApp.currentForm && document.getElementById("btn-preview"))').catch(() => false)); i++) await sleep(250);
+    await sleep(800);
+    await f.clickText('Preview Form');
+    await eventually(async () => f.evaluate(`!!document.getElementById('crm-send-kiosk-btn')`), 'there is no Send to kiosk button');
+    await f.clickText('Send to kiosk');
+    await eventually(async () => (await api('/api/kiosk/devices')).some((d) => d.waiting && d.waiting.clientName === 'Stand Client'), 'the form did not reach the kiosk queue');
+
+    // the tablet: the form opens by itself in kiosk mode; the client fills it in, signs, completes
+    const kf = k.frame('#frame');
+    await eventually(async () => kf.evaluate(`!!document.getElementById('tablet-kiosk-modal') && getComputedStyle(document.getElementById('tablet-kiosk-modal')).display !== 'none'`).catch(() => false), 'the form did not open on the kiosk', 20);
+    check(!(await kf.evaluate(`!!(document.querySelector('.btn-exit-kiosk') || {}).offsetParent`)), 'the client can leave the form on the kiosk');
+    await kf.evaluate(`(() => { const p = window.ActiveFormPreview; p.fillSampleData(); p.renderKioskStep(); })()`);
+    for (let i = 0; i < 12 && !(await kf.evaluate(`window.ActiveFormPreview.currentKioskStep >= window.ActiveFormPreview.getKioskSections().length - 1`)); i++) await kf.clickText('Next Step', '#tablet-kiosk-modal');
+    await kf.scribble('#tablet-kiosk-modal canvas.signature-pad-canvas');
+    check(!(await kf.evaluate(`document.getElementById('tablet-kiosk-modal').innerText`)).includes('PDF'), 'the kiosk promises the client a PDF it never shows');
+    await kf.clickText('Complete', '#tablet-kiosk-modal');
+    await eventually(async () => k.evaluate(`document.getElementById('done').classList.contains('on')`), 'the kiosk did not say Thank you', 8);
+    const forms = (await api(`/api/clients/${made.id}/profile`)).consent_forms;
+    check(forms.length === 1 && forms[0].signed, 'the signed form is not on the client record');
+    check(!k.seen.downloads.length, 'the kiosk saved a file on the tablet: ' + k.seen.downloads.join(', '));
+    check((await api('/api/activity-logs?limit=20')).some((a) => a.action === 'KIOSK_FORM_SIGNED'), 'the studio is not told the form was completed');
+    await eventually(async () => k.evaluate(`document.getElementById('idle').classList.contains('on')`), 'the kiosk did not go back to waiting', 12);
+
+    // the desk takes a form back (the client left): the tablet returns to waiting
+    await f.clickText('Send to kiosk');
+    await eventually(async () => kf.evaluate(`!!document.getElementById('tablet-kiosk-modal') && getComputedStyle(document.getElementById('tablet-kiosk-modal')).display !== 'none'`).catch(() => false), 'the second form did not open on the kiosk', 20);
+    await f.clickText('Send to kiosk');
+    await eventually(async () => b.evaluate(`!!document.getElementById('kiosk-chooser')`), 'with a form waiting, the desk is not asked what to do');
+    await b.clickText('Take back');
+    await eventually(async () => k.evaluate(`document.getElementById('idle').classList.contains('on') && !document.getElementById('frame').classList.contains('on')`), 'the kiosk kept a form the desk took back', 10);
+    check(!(await b.evaluate(`!!document.getElementById('kiosk-chooser')`)), 'the kiosk chooser stayed open after Take back');
+    check(!k.seen.errors.length, 'script error on the kiosk: ' + k.seen.errors[0]);
+  } finally {
+    await k.close().catch(() => {});
+    await b.goto(url);
+    await b.evaluate(`fetch('/api/access/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: 'studio-test-password' }) })`).catch(() => {});
+    await b.evaluate(`fetch('/api/access/kiosk-password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: '' }) })`).catch(() => {});
+    await b.evaluate(`fetch('/api/access/password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ current: 'studio-test-password', next: '' }) })`).catch(() => {});
+  }
 });
 
 await flow('Thai: the form builder, the consent form on the kiosk and the PDFs show Thai', async () => {

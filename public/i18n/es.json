@@ -1720,5 +1720,22 @@
  "Verified by": "Verificado por",
  "Signature": "Firma",
  "No signature was captured.": "No se registró ninguna firma.",
- "⬇ Download PDF": "⬇ Descargar PDF"
+ "⬇ Download PDF": "⬇ Descargar PDF",
+ "Kiosk Tablets": "Tabletas quiosco",
+ "A tablet that only shows the forms the desk sends it. On the tablet, open this address in the browser:": "Una tableta que solo muestra los formularios que envía la recepción. En la tableta, abra esta dirección en el navegador:",
+ "Set the studio password first: the kiosk password comes on top of it.": "Defina primero la contraseña del estudio: la del quiosco se añade a ella.",
+ "No studio password is set, so a tablet opens the kiosk page without signing in. Set the studio password to give tablets their own password.": "No hay contraseña del estudio: una tableta abre la página del quiosco sin iniciar sesión. Defínala para dar a las tabletas su propia contraseña.",
+ "A kiosk password is set: a tablet signs in with it once and can then only receive and return forms.": "Hay contraseña de quiosco: una tableta entra una vez y después solo puede recibir y devolver formularios.",
+ "Set a kiosk password: a tablet signs in with it and can then only receive and return forms, never open the CRM.": "Defina una contraseña de quiosco: una tableta entra con ella y solo puede recibir y devolver formularios, nunca abrir el CRM.",
+ "Kiosk password, at least 6 characters": "Contraseña del quiosco, al menos 6 caracteres",
+ "Kiosk password": "Contraseña del quiosco",
+ "Set kiosk password": "Definir contraseña del quiosco",
+ "Change kiosk password": "Cambiar contraseña del quiosco",
+ "Remove kiosk password": "Quitar contraseña del quiosco",
+ "Send to which kiosk?": "¿Enviar a qué quiosco?",
+ "● online": "● conectado",
+ "● not connected": "● sin conexión",
+ "Take back": "Retirar",
+ "Kiosk password saved: sign each tablet in with it": "Contraseña del quiosco guardada: úsela para conectar cada tableta",
+ "Kiosk password removed": "Contraseña del quiosco eliminada"
 }

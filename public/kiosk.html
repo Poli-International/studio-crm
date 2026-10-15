@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Studio CRM: kiosk</title>
+<!--
+  The kiosk tablet (Henry's idea, 2026-10-15). Any tablet with a browser opens <studio address>/kiosk,
+  signs in once with the kiosk password and waits. The desk sends it a form for a client (form builder,
+  "Send to kiosk"); the form opens in the form builder's own tablet mode; when the client taps Complete
+  it is saved to that client's record and the tablet waits again.
+  A kiosk sign-in reaches nothing else: the server answers it only /api/kiosk/next and /api/kiosk/submit.
+-->
+<style>
+  html, body { margin: 0; height: 100%; background: #0B1120; color: #F8FAFC; font-family: system-ui, sans-serif; }
+  .screen { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; text-align: center; padding: 24px; box-sizing: border-box; }
+  .screen.on { display: flex; }
+  .box { max-width: 560px; width: 100%; }
+  h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); margin: 0 0 12px; }
+  p { color: #CBD5E1; font-size: clamp(1rem, 2.4vw, 1.3rem); line-height: 1.5; margin: 0 0 10px; }
+  .small { color: #64748B; font-size: .85rem; }
+  form { background: #0F172A; border: 1px solid #334155; border-radius: 16px; padding: 24px; text-align: left; }
+  label { display: block; font-size: .85rem; color: #94A3B8; margin: 12px 0 4px; }
+  input, select { width: 100%; box-sizing: border-box; padding: 11px 12px; background: #1E293B; border: 1px solid #475569; border-radius: 8px; color: #F8FAFC; font-size: 1rem; }
+  button { padding: 12px 18px; background: #2563EB; color: #FFF; border: none; border-radius: 8px; font-weight: 800; font-size: 1rem; cursor: pointer; }
+  form button { width: 100%; margin-top: 16px; }
+  #login-error { color: #FCA5A5; min-height: 1.2em; margin-top: 10px; font-size: .9rem; }
+  .pulse { width: 18px; height: 18px; border-radius: 50%; background: #38BDF8; margin: 0 auto 24px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: .25; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.1); } }
+  #corner { position: fixed; bottom: 10px; right: 12px; display: flex; gap: 8px; align-items: center; }
+  #corner button { padding: 6px 10px; font-size: .75rem; background: #1E293B; color: #94A3B8; border: 1px solid #334155; }
+  #frame { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; background: #FFF; visibility: hidden; }
+  #frame.on { visibility: visible; }
+</style>
+</head>
+<body>
+<section id="login" class="screen">
+  <div class="box">
+    <form id="login-form">
+      <h1 style="font-size:1.4rem" data-w="Kiosk sign-in"></h1>
+      <p class="small" data-w="Sign this tablet in once. It will then only show the forms the studio sends to it."></p>
+      <label for="login-password" data-w="Kiosk password"></label>
+      <input id="login-password" type="password" autocomplete="current-password" required>
+      <label for="login-name" data-w="Name of this tablet"></label>
+      <input id="login-name" maxlength="40" placeholder="Kiosk">
+      <label for="login-lang" data-w="Language"></label>
+      <select id="login-lang"></select>
+      <button type="submit" data-w="Sign in"></button>
+      <div id="login-error" role="alert"></div>
+    </form>
+  </div>
+</section>
+
+<section id="idle" class="screen">
+  <div class="box">
+    <div class="pulse"></div>
+    <h1 data-w="Please wait"></h1>
+    <p data-w="Your form will appear here in a moment."></p>
+    <p class="small" data-w="If you need help, please ask a member of staff."></p>
+  </div>
+</section>
+
+<section id="done" class="screen">
+  <div class="box">
+    <div style="font-size:3rem">✅</div>
+    <h1 data-w="Thank you"></h1>
+    <p data-w="Your form has been saved. Please hand the tablet back to the studio."></p>
+  </div>
+</section>
+
+<section id="problem" class="screen">
+  <div class="box">
+    <h1 data-w="Please ask a member of staff"></h1>
+    <p id="problem-text"></p>
+  </div>
+</section>
+
+<div id="corner">
+  <span id="kiosk-label" class="small"></span>
+  <button type="button" id="btn-fullscreen" data-w="Full screen"></button>
+</div>
+
+<iframe id="frame" title="Form" src="about:blank"></iframe>
+
+<script>
+(function () {
+  'use strict';
+  var LANGS = { en: 'English', fr: 'Français', it: 'Italiano', de: 'Deutsch', es: 'Español', nl: 'Nederlands', pt: 'Português', th: 'ไทย' };
+  var WORDS = {
+    fr: { 'Kiosk sign-in': 'Connexion de la borne', 'Sign this tablet in once. It will then only show the forms the studio sends to it.': 'Connectez cette tablette une seule fois. Elle n’affichera ensuite que les formulaires envoyés par le studio.', 'Kiosk password': 'Mot de passe de la borne', 'Name of this tablet': 'Nom de cette tablette', 'Language': 'Langue', 'Sign in': 'Se connecter', 'Please wait': 'Veuillez patienter', 'Your form will appear here in a moment.': 'Votre formulaire va apparaître ici dans un instant.', 'If you need help, please ask a member of staff.': 'Si vous avez besoin d’aide, adressez-vous à un membre de l’équipe.', 'Thank you': 'Merci', 'Your form has been saved. Please hand the tablet back to the studio.': 'Votre formulaire est enregistré. Merci de rendre la tablette au studio.', 'Please ask a member of staff': 'Veuillez vous adresser à un membre de l’équipe', 'Full screen': 'Plein écran', 'Wrong password': 'Mot de passe incorrect', 'The form could not be saved.': 'Le formulaire n’a pas pu être enregistré.' },
+    it: { 'Kiosk sign-in': 'Accesso del chiosco', 'Sign this tablet in once. It will then only show the forms the studio sends to it.': 'Collega questo tablet una sola volta. Poi mostrerà solo i moduli inviati dallo studio.', 'Kiosk password': 'Password del chiosco', 'Name of this tablet': 'Nome di questo tablet', 'Language': 'Lingua', 'Sign in': 'Accedi', 'Please wait': 'Attendere prego', 'Your form will appear here in a moment.': 'Il tuo modulo apparirà qui tra un momento.', 'If you need help, please ask a member of staff.': 'Se hai bisogno di aiuto, chiedi a un membro dello staff.', 'Thank you': 'Grazie', 'Your form has been saved. Please hand the tablet back to the studio.': 'Il tuo modulo è stato salvato. Restituisci il tablet allo studio.', 'Please ask a member of staff': 'Chiedi a un membro dello staff', 'Full screen': 'Schermo intero', 'Wrong password': 'Password errata', 'The form could not be saved.': 'Non è stato possibile salvare il modulo.' },
+    de: { 'Kiosk sign-in': 'Kiosk-Anmeldung', 'Sign this tablet in once. It will then only show the forms the studio sends to it.': 'Melden Sie dieses Tablet einmal an. Danach zeigt es nur die Formulare, die das Studio sendet.', 'Kiosk password': 'Kiosk-Passwort', 'Name of this tablet': 'Name dieses Tablets', 'Language': 'Sprache', 'Sign in': 'Anmelden', 'Please wait': 'Bitte warten', 'Your form will appear here in a moment.': 'Ihr Formular erscheint gleich hier.', 'If you need help, please ask a member of staff.': 'Wenn Sie Hilfe brauchen, fragen Sie bitte das Studioteam.', 'Thank you': 'Vielen Dank', 'Your form has been saved. Please hand the tablet back to the studio.': 'Ihr Formular wurde gespeichert. Bitte geben Sie das Tablet an das Studio zurück.', 'Please ask a member of staff': 'Bitte wenden Sie sich an das Studioteam', 'Full screen': 'Vollbild', 'Wrong password': 'Falsches Passwort', 'The form could not be saved.': 'Das Formular konnte nicht gespeichert werden.' },
+    es: { 'Kiosk sign-in': 'Acceso del quiosco', 'Sign this tablet in once. It will then only show the forms the studio sends to it.': 'Conecte esta tableta una sola vez. Después solo mostrará los formularios que envíe el estudio.', 'Kiosk password': 'Contraseña del quiosco', 'Name of this tablet': 'Nombre de esta tableta', 'Language': 'Idioma', 'Sign in': 'Entrar', 'Please wait': 'Espere, por favor', 'Your form will appear here in a moment.': 'Su formulario aparecerá aquí en un momento.', 'If you need help, please ask a member of staff.': 'Si necesita ayuda, pregunte a un miembro del equipo.', 'Thank you': 'Gracias', 'Your form has been saved. Please hand the tablet back to the studio.': 'Su formulario se ha guardado. Devuelva la tableta al estudio, por favor.', 'Please ask a member of staff': 'Pregunte a un miembro del equipo', 'Full screen': 'Pantalla completa', 'Wrong password': 'Contraseña incorrecta', 'The form could not be saved.': 'No se pudo guardar el formulario.' },
+    nl: { 'Kiosk sign-in': 'Kiosk aanmelden', 'Sign this tablet in once. It will then only show the forms the studio sends to it.': 'Meld deze tablet één keer aan. Daarna toont hij alleen de formulieren die de studio stuurt.', 'Kiosk password': 'Kioskwachtwoord', 'Name of this tablet': 'Naam van deze tablet', 'Language': 'Taal', 'Sign in': 'Aanmelden', 'Please wait': 'Even geduld', 'Your form will appear here in a moment.': 'Uw formulier verschijnt hier zo meteen.', 'If you need help, please ask a member of staff.': 'Hulp nodig? Vraag het een medewerker.', 'Thank you': 'Dank u', 'Your form has been saved. Please hand the tablet back to the studio.': 'Uw formulier is opgeslagen. Geef de tablet terug aan de studio.', 'Please ask a member of staff': 'Vraag het een medewerker', 'Full screen': 'Volledig scherm', 'Wrong password': 'Verkeerd wachtwoord', 'The form could not be saved.': 'Het formulier kon niet worden opgeslagen.' },
+    pt: { 'Kiosk sign-in': 'Acesso do quiosque', 'Sign this tablet in once. It will then only show the forms the studio sends to it.': 'Conecte este tablet uma única vez. Depois ele só mostrará os formulários enviados pelo estúdio.', 'Kiosk password': 'Senha do quiosque', 'Name of this tablet': 'Nome deste tablet', 'Language': 'Idioma', 'Sign in': 'Entrar', 'Please wait': 'Aguarde, por favor', 'Your form will appear here in a moment.': 'O seu formulário vai aparecer aqui em instantes.', 'If you need help, please ask a member of staff.': 'Se precisar de ajuda, fale com alguém da equipe.', 'Thank you': 'Obrigado', 'Your form has been saved. Please hand the tablet back to the studio.': 'O seu formulário foi salvo. Devolva o tablet ao estúdio, por favor.', 'Please ask a member of staff': 'Fale com alguém da equipe', 'Full screen': 'Tela cheia', 'Wrong password': 'Senha incorreta', 'The form could not be saved.': 'Não foi possível salvar o formulário.' },
+    th: { 'Kiosk sign-in': 'เข้าสู่ระบบคีออส', 'Sign this tablet in once. It will then only show the forms the studio sends to it.': 'เข้าสู่ระบบแท็บเล็ตเครื่องนี้เพียงครั้งเดียว หลังจากนั้นจะแสดงเฉพาะแบบฟอร์มที่สตูดิโอส่งมาเท่านั้น', 'Kiosk password': 'รหัสผ่านคีออส', 'Name of this tablet': 'ชื่อแท็บเล็ตเครื่องนี้', 'Language': 'ภาษา', 'Sign in': 'เข้าสู่ระบบ', 'Please wait': 'กรุณารอสักครู่', 'Your form will appear here in a moment.': 'แบบฟอร์มของคุณจะแสดงที่นี่ในอีกสักครู่', 'If you need help, please ask a member of staff.': 'หากต้องการความช่วยเหลือ กรุณาติดต่อพนักงาน', 'Thank you': 'ขอบคุณ', 'Your form has been saved. Please hand the tablet back to the studio.': 'บันทึกแบบฟอร์มของคุณแล้ว กรุณาคืนแท็บเล็ตให้ทางสตูดิโอ', 'Please ask a member of staff': 'กรุณาติดต่อพนักงาน', 'Full screen': 'เต็มหน้าจอ', 'Wrong password': 'รหัสผ่านไม่ถูกต้อง', 'The form could not be saved.': 'ไม่สามารถบันทึกแบบฟอร์มได้' }
+  };
+  function get(k, d) { try { return localStorage.getItem(k) || d; } catch (e) { return d; } }
+  function put(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private window: the choice lasts this visit */ } }
+  var q = new URLSearchParams(location.search);
+  if (q.get('name')) put('studio_kiosk_name', q.get('name'));
+  var lang = get('studio_kiosk_lang', '') || get('poli_tools_language', '') || (navigator.language || 'en').slice(0, 2);
+  if (!LANGS[lang]) lang = 'en';
+  var kiosk = get('studio_kiosk_name', 'Kiosk');
+  function w(en) { return (WORDS[lang] && WORDS[lang][en]) || en; }
+  function translate() {
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-w]').forEach(function (el) { el.textContent = w(el.getAttribute('data-w')); });
+    document.getElementById('kiosk-label').textContent = kiosk;
+  }
+  function show(id) { document.querySelectorAll('.screen').forEach(function (s) { s.classList.toggle('on', s.id === id); }); }
+
+  var frame = document.getElementById('frame');
+  var current = null;      // the form on screen: { id, ... }
+  var busy = false;        // a form is being opened or saved
+
+  // The form builder, ready for the next form. Reloaded after each client so nothing of theirs stays behind.
+  function loadFrame() {
+    frame.classList.remove('on');
+    frame.src = '/tools/form-builder/index.html?kiosk=1&t=' + Date.now();
+  }
+  function frameReady() {
+    var fw = frame.contentWindow;
+    return !!(fw && fw.FormBuilderApp && fw.i18n && fw.i18n.isLoaded !== false && fw.openTabletKioskMode && fw.FormPreview && fw.document.readyState === 'complete');
+  }
+
+  function openForm(item) {
+    busy = true;
+    var tries = 0;
+    (function wait() {
+      if (!frameReady()) { if (++tries > 120) { busy = false; loadFrame(); return; } return setTimeout(wait, 250); }
+      var fw = frame.contentWindow;
+      // On this tablet: Complete always checks the form first (a kiosk PIN would), and the client cannot leave the
+      // form for the editor; the PDF the form builder makes on Complete is not saved to the tablet.
+      fw.FormPreview.prototype.kioskPin = function () { return 'kiosk'; };
+      if (fw.PDFGenerator) fw.PDFGenerator.generateFormPDF = function () { return Promise.resolve(); };
+      var style = fw.document.createElement('style');
+      style.textContent = '.btn-exit-kiosk,.btn-kiosk-staff-exit{display:none!important}';
+      fw.document.head.appendChild(style);
+      // the last button says "Complete & Review PDF" in the form builder; this tablet shows no PDF
+      var COMPLETE = { en: 'Complete', fr: 'Terminer', it: 'Completa', de: 'Abschließen', es: 'Completar', nl: 'Afronden', pt: 'Concluir', th: 'เสร็จสิ้น' };
+      Object.keys(COMPLETE).forEach(function (l) { var tr = fw.i18n.translations[l]; if (tr && tr.kiosk) tr.kiosk.complete = COMPLETE[l]; });
+      if (item.language && fw.i18n.currentLanguage !== item.language) fw.i18n.setLanguage(item.language);
+      fw.FormBuilderApp.loadForm(item.schema, 'Kiosk');
+      // the bridge in the form builder then posts crm-save-consent here when the client completes the form
+      fw.postMessage({ type: 'crm-host', clientId: item.id, clientName: item.clientName, noKiosk: true }, location.origin);
+      fw.openTabletKioskMode();
+      current = item;
+      frame.classList.add('on');
+      busy = false;
+    })();
+  }
+
+  function idle() { current = null; show('idle'); loadFrame(); }
+
+  window.addEventListener('message', function (e) {
+    if (e.origin !== location.origin || !e.data || e.data.type !== 'crm-save-consent' || !current || busy) return;
+    busy = true;
+    var item = current;
+    fetch('/api/kiosk/submit', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ kiosk: kiosk, id: item.id, language: e.data.language, responses: e.data.responses || {} }) })
+      .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, b: b }; }); })
+      .then(function (res) {
+        frame.classList.remove('on');
+        if (res.ok) { current = null; show('done'); setTimeout(function () { busy = false; idle(); }, 6000); }
+        else { document.getElementById('problem-text').textContent = res.b.error || w('The form could not be saved.'); show('problem'); current = null; setTimeout(function () { busy = false; idle(); }, 8000); }
+      })
+      .catch(function () {
+        // the network dropped: keep the form on screen so nothing the client entered is lost; Complete can be tapped again
+        busy = false;
+        frame.contentWindow.postMessage({ type: 'crm-save-result', ok: false, error: w('The form could not be saved.') }, location.origin);
+      });
+  });
+
+  function poll() {
+    fetch('/api/kiosk/next?kiosk=' + encodeURIComponent(kiosk), { cache: 'no-store' })
+      .then(function (r) { if (r.status === 401 || r.status === 403) { location.reload(); throw new Error('signed out'); } return r.json(); })
+      .then(function (d) {
+        if (busy) return;
+        var item = d.item;
+        if (item && (!current || current.id !== item.id)) openForm(item);
+        else if (!item && current) idle();       // the studio took the form back
+      })
+      .catch(function () { /* the server is restarting or the Wi-Fi dropped: ask again at the next tick */ })
+      .then(function () { setTimeout(poll, 3000); });
+  }
+
+  // keep the screen awake while waiting, where the browser allows it (https or localhost)
+  function stayAwake() { try { navigator.wakeLock && navigator.wakeLock.request('screen').catch(function () {}); } catch (e) {} }
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) stayAwake(); });
+  document.getElementById('btn-fullscreen').addEventListener('click', function () {
+    var el = document.documentElement;
+    (el.requestFullscreen || el.webkitRequestFullscreen || function () {}).call(el);
+  });
+
+  var sel = document.getElementById('login-lang');
+  Object.keys(LANGS).forEach(function (k) { var o = document.createElement('option'); o.value = k; o.textContent = LANGS[k]; sel.appendChild(o); });
+  sel.value = lang;
+  sel.addEventListener('change', function () { lang = sel.value; translate(); });
+  document.getElementById('login-name').value = kiosk === 'Kiosk' ? '' : kiosk;
+  document.getElementById('login-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var err = document.getElementById('login-error');
+    err.textContent = '';
+    fetch('/api/kiosk/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: document.getElementById('login-password').value }) })
+      .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, b: b }; }); })
+      .then(function (res) {
+        if (!res.ok) { err.textContent = res.b.error === 'Wrong password' ? w('Wrong password') : (res.b.error || ''); return; }
+        kiosk = document.getElementById('login-name').value.trim() || 'Kiosk';
+        put('studio_kiosk_name', kiosk); put('studio_kiosk_lang', lang);
+        start();
+      });
+  });
+
+  function start() { translate(); show('idle'); stayAwake(); loadFrame(); poll(); }
+
+  translate();
+  fetch('/api/access', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (a) {
+    if (a.passwordSet && !a.signedIn) show('login'); else start();
+  }).catch(function () { start(); });
+})();
+</script>
+</body>
+</html>

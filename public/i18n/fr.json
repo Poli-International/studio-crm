@@ -1720,5 +1720,22 @@
  "Verified by": "Vérifié par",
  "Signature": "Signature",
  "No signature was captured.": "Aucune signature n'a été enregistrée.",
- "⬇ Download PDF": "⬇ Télécharger le PDF"
+ "⬇ Download PDF": "⬇ Télécharger le PDF",
+ "Kiosk Tablets": "Tablettes borne",
+ "A tablet that only shows the forms the desk sends it. On the tablet, open this address in the browser:": "Une tablette qui n’affiche que les formulaires envoyés par l’accueil. Sur la tablette, ouvrez cette adresse dans le navigateur :",
+ "Set the studio password first: the kiosk password comes on top of it.": "Définissez d’abord le mot de passe du studio : celui de la borne s’y ajoute.",
+ "No studio password is set, so a tablet opens the kiosk page without signing in. Set the studio password to give tablets their own password.": "Aucun mot de passe studio : une tablette ouvre la page borne sans se connecter. Définissez-le pour donner aux tablettes leur propre mot de passe.",
+ "A kiosk password is set: a tablet signs in with it once and can then only receive and return forms.": "Un mot de passe borne est défini : une tablette s’y connecte une fois, puis ne peut que recevoir et renvoyer des formulaires.",
+ "Set a kiosk password: a tablet signs in with it and can then only receive and return forms, never open the CRM.": "Définissez un mot de passe borne : une tablette s’y connecte et ne peut alors que recevoir et renvoyer des formulaires, jamais ouvrir le CRM.",
+ "Kiosk password, at least 6 characters": "Mot de passe borne, au moins 6 caractères",
+ "Kiosk password": "Mot de passe de la borne",
+ "Set kiosk password": "Définir le mot de passe borne",
+ "Change kiosk password": "Changer le mot de passe borne",
+ "Remove kiosk password": "Supprimer le mot de passe borne",
+ "Send to which kiosk?": "Envoyer à quelle borne ?",
+ "● online": "● connectée",
+ "● not connected": "● non connectée",
+ "Take back": "Reprendre",
+ "Kiosk password saved: sign each tablet in with it": "Mot de passe borne enregistré : connectez chaque tablette avec",
+ "Kiosk password removed": "Mot de passe borne supprimé"
 }

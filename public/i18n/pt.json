@@ -1720,5 +1720,22 @@
  "Verified by": "Verificado por",
  "Signature": "Assinatura",
  "No signature was captured.": "Não foi registada nenhuma assinatura.",
- "⬇ Download PDF": "⬇ Transferir PDF"
+ "⬇ Download PDF": "⬇ Transferir PDF",
+ "Kiosk Tablets": "Tablets de quiosque",
+ "A tablet that only shows the forms the desk sends it. On the tablet, open this address in the browser:": "Um tablet que só mostra os formulários enviados pela recepção. No tablet, abra este endereço no navegador:",
+ "Set the studio password first: the kiosk password comes on top of it.": "Defina primeiro a senha do estúdio: a do quiosque vem por cima dela.",
+ "No studio password is set, so a tablet opens the kiosk page without signing in. Set the studio password to give tablets their own password.": "Sem senha do estúdio: um tablet abre a página do quiosque sem entrar. Defina-a para dar aos tablets uma senha própria.",
+ "A kiosk password is set: a tablet signs in with it once and can then only receive and return forms.": "Há uma senha de quiosque: um tablet entra uma vez e depois só pode receber e devolver formulários.",
+ "Set a kiosk password: a tablet signs in with it and can then only receive and return forms, never open the CRM.": "Defina uma senha de quiosque: um tablet entra com ela e só pode receber e devolver formulários, nunca abrir o CRM.",
+ "Kiosk password, at least 6 characters": "Senha do quiosque, pelo menos 6 caracteres",
+ "Kiosk password": "Senha do quiosque",
+ "Set kiosk password": "Definir senha do quiosque",
+ "Change kiosk password": "Alterar senha do quiosque",
+ "Remove kiosk password": "Remover senha do quiosque",
+ "Send to which kiosk?": "Enviar para qual quiosque?",
+ "● online": "● conectado",
+ "● not connected": "● sem conexão",
+ "Take back": "Retirar",
+ "Kiosk password saved: sign each tablet in with it": "Senha do quiosque salva: use-a para conectar cada tablet",
+ "Kiosk password removed": "Senha do quiosque removida"
 }

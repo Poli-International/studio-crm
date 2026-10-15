@@ -1720,5 +1720,22 @@
  "Verified by": "Verificato da",
  "Signature": "Firma",
  "No signature was captured.": "Nessuna firma è stata acquisita.",
- "⬇ Download PDF": "⬇ Scarica PDF"
+ "⬇ Download PDF": "⬇ Scarica PDF",
+ "Kiosk Tablets": "Tablet chiosco",
+ "A tablet that only shows the forms the desk sends it. On the tablet, open this address in the browser:": "Un tablet che mostra solo i moduli inviati dalla reception. Sul tablet, apri questo indirizzo nel browser:",
+ "Set the studio password first: the kiosk password comes on top of it.": "Imposta prima la password dello studio: quella del chiosco si aggiunge a essa.",
+ "No studio password is set, so a tablet opens the kiosk page without signing in. Set the studio password to give tablets their own password.": "Nessuna password dello studio: un tablet apre la pagina del chiosco senza accedere. Impostala per dare ai tablet una password propria.",
+ "A kiosk password is set: a tablet signs in with it once and can then only receive and return forms.": "La password del chiosco è impostata: un tablet accede una volta e poi può solo ricevere e restituire moduli.",
+ "Set a kiosk password: a tablet signs in with it and can then only receive and return forms, never open the CRM.": "Imposta una password del chiosco: un tablet accede con essa e può solo ricevere e restituire moduli, mai aprire il CRM.",
+ "Kiosk password, at least 6 characters": "Password del chiosco, almeno 6 caratteri",
+ "Kiosk password": "Password del chiosco",
+ "Set kiosk password": "Imposta password del chiosco",
+ "Change kiosk password": "Cambia password del chiosco",
+ "Remove kiosk password": "Rimuovi password del chiosco",
+ "Send to which kiosk?": "Inviare a quale chiosco?",
+ "● online": "● connesso",
+ "● not connected": "● non connesso",
+ "Take back": "Ritira",
+ "Kiosk password saved: sign each tablet in with it": "Password del chiosco salvata: usala per l’accesso di ogni tablet",
+ "Kiosk password removed": "Password del chiosco rimossa"
 }

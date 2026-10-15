@@ -63,6 +63,8 @@ To have the client fill in a consent form on a tablet, open **Clients**, **Conse
 
 To keep a client inside the form when you step away, set a **Tablet Kiosk PIN** in **Settings**. Leaving Kiosk Mode then needs the PIN. When the client taps **Complete**, the kiosk checks that nothing is missing, saves the form and shows "Thank you, your form has been submitted" until a staff member enters the PIN. Signed waivers are in the client's profile under **Waivers**: **View waiver** shows the answers and the signature, and **Download PDF** saves a copy to print or keep.
 
+**Kiosk tablets:** a tablet on a stand can do nothing but forms. In **Settings**, **Kiosk Tablets**, set a kiosk password (it needs the studio password). On the tablet, open the address shown there (it ends in `/kiosk`), sign in with the kiosk password and give the tablet a name; it then shows "Please wait". To send a form, open **Clients**, **Sign Waiver** on the client, choose the form, **Preview Form**, then **Send to kiosk**. The form opens on the tablet; when the client taps **Complete** it is saved to that client (under **Waivers**) and the tablet waits again. If you send while a form is still waiting, you can **Take back** the waiting one. A kiosk sign-in cannot open the CRM or read any client data. Turn on the tablet's full-screen or kiosk mode (for example Android screen pinning, or a kiosk browser) so the client stays on the page.
+
 ## Messages: the CRM prepares, you send
 
 Studio CRM does not send email, SMS or chat messages itself. When you prepare an aftercare email, a reminder or a supplier order, a **Message ready** panel appears. Click **Email**, **WhatsApp** or **LINE** to open it in your own app with the text filled in, then press send there, or click **Copy**.

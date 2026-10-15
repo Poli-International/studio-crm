@@ -882,15 +882,15 @@ class FormPreview {
                     <div class="kiosk-top-bar">
                         <div class="kiosk-top-left">
                             <span class="kiosk-logo-badge">POLI STUDIO INTAKE</span>
-                            <h3 class="kiosk-doc-title">Tablet Kiosk Mode</h3>
+                            <h3 class="kiosk-doc-title">${t('kiosk.mode_title', 'Tablet Kiosk Mode')}</h3>
                         </div>
                         <div class="kiosk-top-right">
-                            <button type="button" class="btn-exit-kiosk" onclick="window.ActiveFormPreview && window.ActiveFormPreview.requestKioskExit()">✕ Exit Kiosk</button>
+                            <button type="button" class="btn-exit-kiosk" onclick="window.ActiveFormPreview && window.ActiveFormPreview.requestKioskExit()">✕ ${t('kiosk.exit', 'Exit Kiosk')}</button>
                         </div>
                     </div>
                     <div class="kiosk-content-area" style="text-align:center; padding:3rem 1.5rem;">
-                        <p style="font-size:1.1rem; color:#64748b; margin-bottom:1.5rem;">No sections found in current form. Please add sections to the form in the editor.</p>
-                        <button type="button" class="btn-primary" onclick="window.ActiveFormPreview && window.ActiveFormPreview.exitKioskMode()">Back to Editor</button>
+                        <p style="font-size:1.1rem; color:#64748b; margin-bottom:1.5rem;">${t('kiosk.no_sections', 'No sections found in current form. Please add sections to the form in the editor.')}</p>
+                        <button type="button" class="btn-primary" onclick="window.ActiveFormPreview && window.ActiveFormPreview.exitKioskMode()">${t('kiosk.back_to_editor', 'Back to Editor')}</button>
                     </div>
                 </div>
             `;
@@ -928,11 +928,11 @@ class FormPreview {
                         <h3 class="kiosk-doc-title">${this.escapeHtml(this.formData.name || 'Client Consultation')}</h3>
                     </div>
                     <div class="kiosk-top-center">
-                        <div class="kiosk-step-pill">Step ${this.currentKioskStep + 1} of ${totalSteps}</div>
+                        <div class="kiosk-step-pill">${t('kiosk.step_of', { current: this.currentKioskStep + 1, total: totalSteps }, 'Step ' + (this.currentKioskStep + 1) + ' of ' + totalSteps)}</div>
                         <div class="kiosk-step-title">${this.escapeHtml(currentSec.title)}</div>
                     </div>
                     <div class="kiosk-top-right">
-                        <button type="button" class="btn-exit-kiosk" onclick="window.ActiveFormPreview && window.ActiveFormPreview.requestKioskExit()">✕ Exit Kiosk</button>
+                        <button type="button" class="btn-exit-kiosk" onclick="window.ActiveFormPreview && window.ActiveFormPreview.requestKioskExit()">✕ ${t('kiosk.exit', 'Exit Kiosk')}</button>
                     </div>
                 </div>
 
@@ -944,7 +944,7 @@ class FormPreview {
                 <div class="kiosk-content-area" id="kiosk-content-area">
                     <div class="kiosk-section-header-banner">
                         <h2 class="kiosk-section-title">${this.escapeHtml(currentSec.title)}</h2>
-                        <p class="kiosk-section-sub">Please review and complete the fields below</p>
+                        <p class="kiosk-section-sub">${t('kiosk.review', 'Please review and complete the fields below')}</p>
                     </div>
                     <div class="kiosk-fields-wrapper">
                         ${fieldsHtml}
@@ -954,13 +954,13 @@ class FormPreview {
                 <!-- Touch Optimized Bottom Action Bar -->
                 <div class="kiosk-bottom-bar">
                     <button type="button" class="btn-kiosk-nav btn-kiosk-prev" ${isFirst ? 'disabled' : ''} onclick="window.ActiveFormPreview && window.ActiveFormPreview.prevKioskStep()">
-                        ← Previous Step
+                        ← ${t('kiosk.previous', 'Previous Step')}
                     </button>
                     <div class="kiosk-bottom-dots">
                         ${sections.map((_, idx) => `<span class="kiosk-dot ${idx === this.currentKioskStep ? 'active' : (idx < this.currentKioskStep ? 'done' : '')}"></span>`).join('')}
                     </div>
                     <button type="button" class="btn-kiosk-nav btn-kiosk-next" onclick="window.ActiveFormPreview && window.ActiveFormPreview.nextKioskStep()">
-                        ${isLast ? '✅ Complete & Review PDF →' : 'Next Step →'}
+                        ${isLast ? '✅ ' + t('kiosk.complete', 'Complete & Review PDF') + ' →' : t('kiosk.next', 'Next Step') + ' →'}
                     </button>
                 </div>
             </div>
@@ -1009,17 +1009,17 @@ class FormPreview {
         box = document.createElement('div');
         box.id = 'kiosk-pin-lock';
         box.setAttribute('role', 'dialog');
-        box.setAttribute('aria-label', 'Staff PIN');
+        box.setAttribute('aria-label', t('kiosk.staff_pin', 'Staff PIN'));
         box.style.cssText = 'position:absolute;inset:0;background:rgba(15,23,42,0.92);display:flex;align-items:center;justify-content:center;z-index:10;';
         box.innerHTML = `
             <form style="background:#fff;color:#0f172a;border-radius:14px;padding:22px;width:min(90vw,340px);display:flex;flex-direction:column;gap:10px;text-align:center;">
-                <strong style="font-size:1.1rem;">Staff only</strong>
-                <span style="font-size:0.9rem;color:#475569;">Enter the kiosk PIN to leave the form.</span>
-                <input type="password" inputmode="numeric" autocomplete="off" aria-label="Kiosk PIN" style="font-size:1.4rem;text-align:center;padding:10px;border:1px solid #cbd5e1;border-radius:8px;letter-spacing:0.3em;" />
+                <strong style="font-size:1.1rem;">${t('kiosk.staff_only', 'Staff only')}</strong>
+                <span style="font-size:0.9rem;color:#475569;">${t('kiosk.enter_pin', 'Enter the kiosk PIN to leave the form.')}</span>
+                <input type="password" inputmode="numeric" autocomplete="off" aria-label="${t('kiosk.pin', 'Kiosk PIN')}" style="font-size:1.4rem;text-align:center;padding:10px;border:1px solid #cbd5e1;border-radius:8px;letter-spacing:0.3em;" />
                 <span class="kiosk-pin-error" role="alert" style="color:#dc2626;font-size:0.85rem;min-height:1.1em;"></span>
                 <div style="display:flex;gap:8px;">
-                    <button type="button" class="kiosk-pin-cancel" style="flex:1;padding:10px;border:1px solid #cbd5e1;background:#fff;border-radius:8px;cursor:pointer;">Cancel</button>
-                    <button type="submit" style="flex:1;padding:10px;border:none;background:#2563eb;color:#fff;border-radius:8px;font-weight:700;cursor:pointer;">Unlock</button>
+                    <button type="button" class="kiosk-pin-cancel" style="flex:1;padding:10px;border:1px solid #cbd5e1;background:#fff;border-radius:8px;cursor:pointer;">${t('kiosk.cancel', 'Cancel')}</button>
+                    <button type="submit" style="flex:1;padding:10px;border:none;background:#2563eb;color:#fff;border-radius:8px;font-weight:700;cursor:pointer;">${t('kiosk.unlock', 'Unlock')}</button>
                 </div>
             </form>`;
         overlay.appendChild(box);
@@ -1028,7 +1028,7 @@ class FormPreview {
         box.querySelector('form').addEventListener('submit', (e) => {
             e.preventDefault();
             if (this.kioskPinHash(input.value) !== pin) {
-                box.querySelector('.kiosk-pin-error').textContent = 'Wrong PIN';
+                box.querySelector('.kiosk-pin-error').textContent = t('kiosk.wrong_pin', 'Wrong PIN');
                 input.value = '';
                 return;
             }
@@ -1048,9 +1048,9 @@ class FormPreview {
             <div class="kiosk-frame" style="position:relative;">
                 <div class="kiosk-content-area" style="text-align:center;padding:4rem 1.5rem;">
                     <div style="font-size:3rem;">✅</div>
-                    <h2 style="margin:0.5rem 0;">Thank you</h2>
-                    <p style="font-size:1.1rem;color:#475569;">Your form has been submitted. Please hand the tablet back to the studio.</p>
-                    <button type="button" class="btn-kiosk-staff-exit" style="margin-top:2rem;padding:10px 18px;border:1px solid #cbd5e1;background:#fff;border-radius:8px;cursor:pointer;">Staff: exit</button>
+                    <h2 style="margin:0.5rem 0;">${t('kiosk.thank_you', 'Thank you')}</h2>
+                    <p style="font-size:1.1rem;color:#475569;">${t('kiosk.submitted', 'Your form has been submitted. Please hand the tablet back to the studio.')}</p>
+                    <button type="button" class="btn-kiosk-staff-exit" style="margin-top:2rem;padding:10px 18px;border:1px solid #cbd5e1;background:#fff;border-radius:8px;cursor:pointer;">${t('kiosk.staff_exit', 'Staff: exit')}</button>
                 </div>
             </div>`;
         overlay.querySelector('.btn-kiosk-staff-exit').addEventListener('click', () => this.requestKioskExit(() => {
@@ -1073,7 +1073,7 @@ class FormPreview {
                 const note = document.createElement('div');
                 note.setAttribute('role', 'alert');
                 note.style.cssText = 'background:#fef2f2;border:1px solid #fca5a5;color:#991b1b;padding:12px;border-radius:8px;margin-bottom:12px;';
-                note.textContent = 'Please complete: ' + [...new Set(missing.map((e) => e.fieldLabel))].slice(0, 6).join(', ') + (missing.length > 6 ? ' and more' : '');
+                note.textContent = t('kiosk.please_complete', 'Please complete:') + ' ' + [...new Set(missing.map((e) => e.fieldLabel))].slice(0, 6).join(', ') + (missing.length > 6 ? ' ' + t('kiosk.and_more', 'and more') : '');
                 if (content) { content.prepend(note); content.scrollTop = 0; }
                 return;
             }

@@ -427,6 +427,13 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.7
+
+- The sign-in and first-start password pages follow the language chosen on that device (the browser's language before any choice); their words are inside the page, because the password gate blocks the translation files.
+- About 110 interface phrases translated in the 7 other languages: stock and supplier lists, the signed waiver window, the Tablet Kiosk PIN card, the client profile, the download card and more.
+- The tablet kiosk (form builder) translates its own screens: steps, Previous / Next / Complete, the staff PIN lock and the Thank you screen; the form builder follows the language chosen in the CRM.
+- Removed copies of the website demo that an old sync had added at the top of the repository (`js/`, `css/`, `assets/`, `manifest.json`, `i18n.json`, `demo-data.json`); the app only ever served `public/`.
+
 ### 1.0.6
 
 - The first start asks for the studio password (it can be skipped and set later in Settings).

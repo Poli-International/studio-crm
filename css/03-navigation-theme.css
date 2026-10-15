@@ -72,13 +72,3 @@
       display: block !important;
     }
   }
-
-/* Phones: the top bar was wider than the screen, so the language, theme and sync
-   controls were cut off with no way to reach them. Search keeps its icon, the rest wraps. */
-@media (max-width: 600px) {
-  #main-topbar, #main-topbar > div:last-child { flex-wrap: wrap; }
-  #main-topbar > div:last-child { justify-content: flex-end; row-gap: 6px; }
-  #topbar-search-btn span:nth-child(2), #topbar-search-btn kbd { display: none; }
-  /* a phone rule elsewhere stretches every select to the full width */
-  #global-studio-language-select { flex: 0 0 auto; width: auto !important; max-width: 140px; }
-}

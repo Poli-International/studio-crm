@@ -4771,7 +4771,10 @@ docker compose up -d</pre>
   /* Which kiosk tablet gets the form. One online: that one. Several: the desk picks (and can take back a form
      still waiting, for a client who left). None: how to connect one. */
   function chooseKiosk(send, fail, done) {
-    fetch('/api/kiosk/devices').then(function (r) { return r.json(); }).then(function (list) {
+    fetch('/api/kiosk/devices').then(function (r) {
+      // the server's own reason when there is no list (the online demo has no tablets)
+      return r.json().then(function (b) { if (!r.ok || !Array.isArray(b)) throw new Error((b && b.error) || 'Could not reach the server'); return b; });
+    }).then(function (list) {
       var online = list.filter(function (k) { return k.online; });
       if (!list.length) return fail('No kiosk tablet is connected. On the tablet, open ' + window.location.origin + '/kiosk');
       if (online.length === 1 && !online[0].waiting && list.length === 1) return send(online[0].kiosk);
@@ -4802,7 +4805,7 @@ docker compose up -d</pre>
         }
       });
       document.body.appendChild(box);
-    }).catch(function () { fail('Could not reach the server'); });
+    }).catch(function (err) { fail(err.message || 'Could not reach the server'); });
   }
   window.chooseKiosk = chooseKiosk;
 

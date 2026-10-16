@@ -1460,6 +1460,9 @@
                 <h3 style="margin:0 0 6px 0;font-size:1.05rem;font-weight:800;color:#2DD4BF;">Kiosk Tablets</h3>
                 <p style="margin:0 0 8px 0;font-size:0.8rem;color:#9CA3AF;">A tablet that only shows the forms the desk sends it. On the tablet, open this address in the browser:</p>
                 <p style="margin:0 0 8px 0;"><code id="kiosk-address" style="color:#5EEAD4;font-size:0.85rem;word-break:break-all;"></code></p>
+                <p style="margin:0 0 6px 0;font-size:0.75rem;color:#9CA3AF;">The first time, the tablet warns that the connection is not private. Tap Advanced, then Proceed (Chrome) or Continue (Edge): it is your own server, the certificate was made by it.</p>
+                <p id="kiosk-address-plain-row" style="display:none;margin:0 0 6px 0;font-size:0.75rem;color:#9CA3AF;">If the warning keeps coming back, or a kiosk browser stops on it, use this address instead. No warning, but the forms cross your network unencrypted, so only on the studio's own Wi-Fi: <code id="kiosk-address-plain" style="color:#5EEAD4;word-break:break-all;"></code></p>
+                <p style="margin:0 0 8px 0;font-size:0.75rem;color:#9CA3AF;">Give this computer a fixed address in your router ("DHCP reservation" or "static IP"), or the tablets lose it when the address changes.</p>
                 <p id="kiosk-access-status" style="margin:0 0 12px 0;font-size:0.8rem;color:#9CA3AF;">Set the studio password first: the kiosk password comes on top of it.</p>
                 <form id="kiosk-access-form" onsubmit="saveKioskPassword(event)" style="display:none;flex-direction:column;gap:8px;">
                   <input type="password" id="kiosk-access-next" minlength="6" placeholder="Kiosk password, at least 6 characters" autocomplete="new-password" aria-label="Kiosk password" style="padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;">

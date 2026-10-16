@@ -1781,5 +1781,8 @@
  "expires": "validade",
  "supplier": "fornecedor",
  "Shift rota": "Escala de turnos",
- "Studio CRM export": "Exportação do Studio CRM"
+ "Studio CRM export": "Exportação do Studio CRM",
+ "The first time, the tablet warns that the connection is not private. Tap Advanced, then Proceed (Chrome) or Continue (Edge): it is your own server, the certificate was made by it.": "Na primeira vez, o tablet avisa que a ligação não é privada. Toque em Avançadas e depois em Continuar (Chrome ou Edge): é o seu próprio servidor, foi ele que criou o certificado.",
+ "If the warning keeps coming back, or a kiosk browser stops on it, use this address instead. No warning, but the forms cross your network unencrypted, so only on the studio's own Wi-Fi:": "Se o aviso voltar sempre, ou um navegador de quiosque parar nele, use antes este endereço. Sem aviso, mas os formulários passam pela rede sem encriptação, por isso só na rede Wi-Fi do próprio estúdio:",
+ "Give this computer a fixed address in your router (\"DHCP reservation\" or \"static IP\"), or the tablets lose it when the address changes.": "Dê a este computador um endereço fixo no router (\"reserva DHCP\" ou \"IP estático\"); caso contrário, os tablets perdem-no quando o endereço muda."
 }

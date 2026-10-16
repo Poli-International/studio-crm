@@ -1781,5 +1781,8 @@
  "expires": "vervalt",
  "supplier": "leverancier",
  "Shift rota": "Rooster",
- "Studio CRM export": "Studio CRM-export"
+ "Studio CRM export": "Studio CRM-export",
+ "The first time, the tablet warns that the connection is not private. Tap Advanced, then Proceed (Chrome) or Continue (Edge): it is your own server, the certificate was made by it.": "De eerste keer waarschuwt de tablet dat de verbinding niet privé is. Tik op Geavanceerd en daarna op Doorgaan (Chrome of Edge): het is je eigen server, die het certificaat zelf heeft gemaakt.",
+ "If the warning keeps coming back, or a kiosk browser stops on it, use this address instead. No warning, but the forms cross your network unencrypted, so only on the studio's own Wi-Fi:": "Komt de waarschuwing steeds terug, of blijft een kioskbrowser erop hangen, gebruik dan dit adres. Geen waarschuwing, maar de formulieren gaan onversleuteld over je netwerk, dus alleen op de eigen wifi van de studio:",
+ "Give this computer a fixed address in your router (\"DHCP reservation\" or \"static IP\"), or the tablets lose it when the address changes.": "Geef deze computer een vast adres in je router (\"DHCP-reservering\" of \"vast IP\"), anders raken de tablets hem kwijt als het adres verandert."
 }

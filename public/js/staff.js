@@ -271,6 +271,15 @@ async function showStudioAccess() {
     // kiosk tablets: their own password, on top of the studio password
     const addr = document.getElementById('kiosk-address');
     if (addr) addr.textContent = window.location.origin + '/kiosk';
+    // the server's own network addresses: on the server PC itself this page is on localhost, which a tablet cannot open
+    fetch('/api/kiosk/addresses').then((r) => r.ok ? r.json() : null).then((a) => {
+        if (!a) return;
+        const secure = a.https.length ? a.https : a.http;
+        if (addr && secure.length) addr.textContent = secure.join('  or  ');
+        const plain = document.getElementById('kiosk-address-plain');
+        if (plain) plain.textContent = a.http.join('  or  ');
+        show('kiosk-address-plain-row', a.https.length > 0 && a.http.length > 0);
+    }).catch(() => {});
     const kStatus = document.getElementById('kiosk-access-status');
     const kForm = document.getElementById('kiosk-access-form');
     if (kStatus) kStatus.textContent = !on ? 'No studio password is set, so a tablet opens the kiosk page without signing in. Set the studio password to give tablets their own password.'

@@ -423,7 +423,7 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
   The studio password signs in as administrator. Without staff logins everyone who is signed in is an administrator, as in 1.0.5.
 - **HTTPS on the studio network**: a self-made certificate (`https-key.pem`, `https-cert.pem` next to the database) on port 3443, so tablets get the camera and the clipboard. `HTTPS_PORT=0` turns it off.
-- **Kiosk tablets** (optional): `public/kiosk.html` at `/kiosk`. With a studio password, a tablet signs in with the separate kiosk password (scrypt hash in `app_state.kioskAccess`, same five-tries rule) and gets a session at the level `kiosk`, below Front desk: of `/api` it may only call `/api/kiosk/next`, `/api/kiosk/submit`, `GET /api/access` and sign out; other pages redirect to `/kiosk`. Files under `public/` carry no studio data, so it may load them (the form builder runs inside the kiosk page). The waiting forms are kept in memory: a restart drops forms not yet signed. A kiosk sign-in is tied to the tablet name it signed in with (kept in the session), so it only ever receives and completes the form sent to that name. Without a studio password the kiosk page needs no sign-in, like every other page.
+- **Kiosk tablets** (optional): `public/kiosk.html` at `/kiosk`. With a studio password, a tablet signs in with the separate kiosk password (scrypt hash in `app_state.kioskAccess`, same five-tries rule) and gets a session at the level `kiosk`, below Front desk: of `/api` it may only call `/api/kiosk/next`, `/api/kiosk/submit`, `GET /api/access` and sign out; other pages redirect to `/kiosk`. Files under `public/` carry no studio data, so it may load them (the form builder runs inside the kiosk page). The waiting forms are saved with the studio state (`app_state.kioskQueue`) and kiosk sign-ins in `app_state.kioskSessions` (keyed by the SHA-256 of the cookie token, never the token), so a restart keeps both. Staff sign-ins are not saved. Settings shows the addresses a tablet can open from `GET /api/kiosk/addresses` (the server's network addresses, https and http), not the address Settings was opened on. A kiosk sign-in is tied to the tablet name it signed in with (kept in the session), so it only ever receives and completes the form sent to that name. Without a studio password the kiosk page needs no sign-in, like every other page.
 - **Tablet Kiosk PIN** (optional): a short hash in `poli_kiosk_exit_pin`, shared through `/api/app-data`. It keeps a client inside the consent form on a tablet; it is a deterrent, not a security boundary.
 - **Tool pages** are served with `js/clipboard-fallback.js` added, because a tablet on the plain `http://` address has no `navigator.clipboard`.
 - **Repeated submits**: the same form sent again with the same content within 1.5 seconds is dropped, and save buttons outside forms run one at a time, so a double tap cannot create a record twice.
@@ -432,6 +432,11 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 ---
 
 ## Version History
+
+### 1.0.11
+
+- Kiosk tablets stay signed in, and a form waiting on a tablet stays there, when the CRM restarts (an update, a power cut).
+- Settings, Kiosk Tablets shows the server's network address for the tablet (it showed `localhost` when opened on the server itself), what to do about the "not private" warning, a plain `http://` address for a tablet or kiosk browser that keeps stopping on the warning, and a reminder to give the server a fixed address in the router. The guide says the same in 8 languages.
 
 ### 1.0.10
 

@@ -169,7 +169,12 @@ export function installAccess(app, sqlite, getStaff = () => []) {
   const setSetting = (key, value) => sqlite.prepare('INSERT OR REPLACE INTO app_state (key, value, updated_at) VALUES (?, ?, ?)').run(key, String(value), new Date().toISOString());
   // a studio that already had a password or skipped has made its first-start choice
   const chosen = () => !!access || setting('studioAccessChosen') === 'yes';
-  const sessions = new Map();          // token -> { expiry, staffId, level, kiosk }; signing in again after a restart is fine
+  // sha256(token) -> { expiry, staffId, level, kiosk }. Staff sign in again after a restart; kiosk tablets on a
+  // stand do not: their sessions are saved (hashed, so a copy of the database cannot be used to sign in).
+  const sessions = new Map();
+  const keyOf = (token) => crypto.createHash('sha256').update(String(token)).digest('hex');
+  const saveKioskSessions = () => setSetting('kioskSessions', JSON.stringify([...sessions].filter(([, s]) => s.level === 'kiosk' && s.expiry > Date.now())));
+  try { for (const [k, s] of JSON.parse(setting('kioskSessions') || '[]')) if (s.expiry > Date.now()) sessions.set(k, s); } catch (e) { /* unreadable: tablets sign in again */ }
   const logins = () => { try { return JSON.parse(setting('staffLogins') || '{}'); } catch (e) { return {}; } }; // staffId -> { salt, hash, level }
   const saveLogins = (value) => setSetting('staffLogins', JSON.stringify(value));
   // staff logins are on once an administrator has one (and the studio password is set)
@@ -187,7 +192,7 @@ export function installAccess(app, sqlite, getStaff = () => []) {
     const found = (req.headers.cookie || '').split(';').map((c) => c.trim().split('=')).find(([name]) => name === COOKIE);
     return found ? found[1] : '';
   };
-  const session = (req) => { const s = sessions.get(tokenOf(req)); return s && s.expiry > Date.now() ? s : null; };
+  const session = (req) => { const s = sessions.get(keyOf(tokenOf(req))); return s && s.expiry > Date.now() ? s : null; };
   const signedIn = (req) => !!session(req);
   // without staff logins everyone who is in may do everything, as before
   const levelOf = (req) => {
@@ -199,7 +204,8 @@ export function installAccess(app, sqlite, getStaff = () => []) {
   const kioskAccess = () => { try { return JSON.parse(setting('kioskAccess') || 'null'); } catch (e) { return null; } };
   const startSession = (req, res, who = {}) => {
     const token = crypto.randomBytes(32).toString('hex');
-    sessions.set(token, { expiry: Date.now() + SESSION_DAYS * 86400000, staffId: who.staffId || null, level: who.level || 'admin', kiosk: who.kiosk || null });
+    sessions.set(keyOf(token), { expiry: Date.now() + SESSION_DAYS * 86400000, staffId: who.staffId || null, level: who.level || 'admin', kiosk: who.kiosk || null });
+    if (who.level === 'kiosk') saveKioskSessions();
     res.setHeader('Set-Cookie', `${COOKIE}=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${SESSION_DAYS * 86400}${req.secure ? '; Secure' : ''}`);
   };
 
@@ -314,6 +320,7 @@ export function installAccess(app, sqlite, getStaff = () => []) {
     if (!signedIn(req)) return res.status(401).json({ error: 'Sign in first' });   // the gate lets /api/access through
     const password = String((req.body || {}).password || '');
     for (const [t, s] of sessions) if (s.level === 'kiosk') sessions.delete(t);  // tablets sign in again
+    saveKioskSessions();
     if (!password) { sqlite.prepare("DELETE FROM app_state WHERE key = 'kioskAccess'").run(); return res.json({ ok: true, kioskPasswordSet: false }); }
     if (password.length < 6) return res.status(400).json({ error: 'Use at least 6 characters' });
     if (access && matches(password)) return res.status(400).json({ error: 'Use a different password from the studio password' });
@@ -341,7 +348,8 @@ export function installAccess(app, sqlite, getStaff = () => []) {
   });
 
   app.post('/api/access/logout', (req, res) => {
-    sessions.delete(tokenOf(req));
+    sessions.delete(keyOf(tokenOf(req)));
+    saveKioskSessions();
     res.setHeader('Set-Cookie', `${COOKIE}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0`);
     res.json({ ok: true });
   });
@@ -354,6 +362,7 @@ export function installAccess(app, sqlite, getStaff = () => []) {
       access = null;
       write(null);
       sessions.clear();
+      saveKioskSessions();
       return res.json({ ok: true, passwordSet: false });
     }
     if (String(next).length < 8) return res.status(400).json({ error: 'Use at least 8 characters' });
@@ -362,6 +371,7 @@ export function installAccess(app, sqlite, getStaff = () => []) {
     write(access);
     setSetting('studioAccessChosen', 'yes');
     sessions.clear();          // every other device signs in again
+    saveKioskSessions();
     startSession(req, res);    // this one stays in
     res.json({ ok: true, passwordSet: true });
   });

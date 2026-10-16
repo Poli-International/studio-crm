@@ -15,6 +15,16 @@ import selfsigned from 'selfsigned';
 // Apple devices refuse a server certificate that is valid for more than 825 days.
 const VALID_DAYS = 820;
 
+// The address a tablet on the studio Wi-Fi should use: the real network card first. Virtual adapters (WSL,
+// Hyper-V, Docker, VPNs such as Tailscale) are left out, so Settings does not offer four addresses of which one works.
+const VIRTUAL = /vEthernet|WSL|Hyper-V|docker|br-|veth|virbr|vmnet|VMware|VirtualBox|tailscale|zerotier|^zt|utun|tun|tap|wg/i;
+export function studioAddress() {
+  const real = Object.entries(os.networkInterfaces()).filter(([name]) => !VIRTUAL.test(name))
+    .flatMap(([, list]) => list || []).filter((n) => n.family === 'IPv4' && !n.internal).map((n) => n.address);
+  const rank = (ip) => (/^192\.168\./.test(ip) ? 0 : /^10\./.test(ip) ? 1 : /^172\.(1[6-9]|2\d|3[01])\./.test(ip) ? 2 : 3);
+  return real.sort((a, b) => rank(a) - rank(b))[0] || lanAddresses()[0] || null;
+}
+
 export function lanAddresses() {
   return Object.values(os.networkInterfaces()).flat()
     .filter((n) => n && n.family === 'IPv4' && !n.internal)

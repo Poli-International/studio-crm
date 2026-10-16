@@ -1044,10 +1044,18 @@ const kioskQueue = new Map();   // kiosk name -> { id, clientId, clientName, for
 const kioskSeen = new Map();    // kiosk name -> last time it asked for a form
 let nextKioskItemId = 1;
 const kioskName = (v) => String(v || '').trim().slice(0, 40) || 'Kiosk';
+// A tablet signed in with the kiosk password is held to the name it signed in with, whatever name the request
+// gives, so it never sees the client waiting on another tablet. Staff (the desk) may name any tablet.
+const kioskOf = (req, asked) => {
+  const s = req.kioskSession;
+  if (!s) return kioskName(asked);
+  if (!s.kiosk) s.kiosk = kioskName(asked);
+  return s.kiosk;
+};
 
 // The tablet asks every few seconds: "is there a form for me?"
 app.get('/api/kiosk/next', (req, res) => {
-  const name = kioskName(req.query.kiosk);
+  const name = kioskOf(req, req.query.kiosk);
   kioskSeen.set(name, Date.now());
   const item = kioskQueue.get(name);
   res.set('Cache-Control', 'no-store').json({ kiosk: name, item: item ? { id: item.id, clientName: item.clientName, formName: item.formName, language: item.language, schema: item.schema } : null });
@@ -1091,7 +1099,7 @@ app.post('/api/kiosk/cancel', (req, res) => {
 // The client tapped Complete on the tablet: save to the client's record, tell the studio.
 app.post('/api/kiosk/submit', async (req, res) => {
   const b = req.body || {};
-  const name = kioskName(b.kiosk);
+  const name = kioskOf(req, b.kiosk);
   const item = kioskQueue.get(name);
   if (!item || item.id !== Number(b.id)) return res.status(409).json({ error: 'This form was taken back by the studio. Please ask a member of staff.' });
   const r = await saveConsentForm(item.clientId, { formName: item.formName, formCategory: item.formCategory, language: b.language || item.language, schema: item.schema, responses: b.responses || {} });

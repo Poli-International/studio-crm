@@ -7,7 +7,7 @@
 import { startApp, startFreshServer } from './app.mjs';
 import { sleep, launchBrowser } from './cdp.mjs';
 
-const { browser: b, url, httpsPort, stop } = await startApp();
+const { browser: b, url, httpsPort, stop, restart } = await startApp();
 const failures = [];
 const text = (sel) => b.evaluate(`(document.querySelector(${JSON.stringify(sel)}) || {}).innerText || ''`);
 const shown = (id) => b.evaluate(`getComputedStyle(document.getElementById(${JSON.stringify(id)})).display !== 'none'`);
@@ -747,6 +747,8 @@ await flow('Kiosk tablet: signs in with its own password, receives a form from t
     await b.clickText('Set kiosk password');
     await eventually(async () => (await api('/api/access')).kioskPasswordSet, 'the kiosk password was not saved');
     check((await text('#kiosk-address')).endsWith('/kiosk'), 'Settings does not say which address to open on the tablet');
+    // Settings may be open on the server itself (localhost): the address shown must be one a tablet can reach
+    if ((await api('/api/kiosk/addresses')).http.length) await eventually(async () => !/localhost|127\.0\.0\.1/.test(await text('#kiosk-address')), async () => 'Settings shows a tablet an address it cannot reach: ' + await text('#kiosk-address'));
 
     await k.tablet();
     await k.goto(url + 'kiosk');
@@ -808,6 +810,17 @@ await flow('Kiosk tablet: signs in with its own password, receives a form from t
     check(peek.kiosk === 'Front Stand' && !peek.item, 'a kiosk can read the form waiting on another tablet: ' + JSON.stringify(peek).slice(0, 120));
     check((await k.evaluate(`fetch('/api/kiosk/submit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ kiosk: 'Back Stand', id: ${Number(other.id)}, responses: {} }) }).then(r => r.status)`)) === 409, 'a kiosk can complete the form waiting on another tablet');
     check((await api('/api/kiosk/devices')).some((d) => d.kiosk === 'Back Stand' && d.waiting), 'the other tablet lost its form');
+
+    // the CRM restarts (an update, a power cut): the tablet stays signed in and the waiting form is still there
+    await restart();
+    await b.goto(url);
+    await b.evaluate(`fetch('/api/access/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: 'studio-test-password' }) })`);
+    check((await api('/api/kiosk/devices')).some((d) => d.kiosk === 'Back Stand' && d.waiting && d.waiting.clientName === 'Stand Client'), 'a restart dropped the form waiting on a tablet');
+    const after = await k.evaluate(`fetch('/api/kiosk/next?kiosk=Back%20Stand').then(r => r.status + ' ' + r.headers.get('content-type'))`);
+    check(after.startsWith('200'), 'after a restart the tablet is signed out: ' + after);
+    check((await k.evaluate(`fetch('/api/kiosk/next').then(r => r.json())`)).kiosk === 'Front Stand', 'after a restart the tablet lost its own name');
+    await sleep(4000);
+    check(await k.evaluate(`document.getElementById('idle').classList.contains('on') && !document.getElementById('login').classList.contains('on')`), 'after a restart the tablet asks for the kiosk password again');
     await b.evaluate(`fetch('/api/kiosk/cancel', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ kiosk: 'Back Stand' }) })`);
     check(!k.seen.errors.length, 'script error on the kiosk: ' + k.seen.errors[0]);
   } finally {

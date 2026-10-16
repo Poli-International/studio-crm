@@ -6,7 +6,7 @@ import { spawn } from 'child_process';
 import fs from 'fs';
 import { jsPDF } from 'jspdf';
 import { db, safeDbQuery, sqlite } from './src/db/index.js';
-import { startHttps } from './src/https.js';
+import { startHttps, studioAddress } from './src/https.js';
 import { installAccess } from './src/access.js';
 import {
   users as dbUsers,
@@ -1038,7 +1038,7 @@ async function saveConsentForm(clientId, { formName, formCategory, language, sch
  * saved to that client's record and the tablet waits again.
  *
  * Each tablet names itself, so a studio can have several. One form waits per tablet.
- * Kept in memory: a server restart drops forms not yet signed, and the desk sends them again.
+ * The waiting forms are saved with the rest of the studio's state, so a restart keeps them.
  */
 const kioskQueue = new Map();   // kiosk name -> { id, clientId, clientName, formName, formCategory, language, schema, sentAt, sentBy }
 const kioskSeen = new Map();    // kiosk name -> last time it asked for a form
@@ -1052,6 +1052,15 @@ const kioskOf = (req, asked) => {
   if (!s.kiosk) s.kiosk = kioskName(asked);
   return s.kiosk;
 };
+
+// The addresses a tablet can open: Settings shows these, not the address of the PC Settings was opened on
+// (on the server itself that is localhost, which a tablet cannot reach).
+let httpsPortUp = 0;
+app.get('/api/kiosk/addresses', (req, res) => {
+  const ip = studioAddress();
+  if (!ip) return res.json({ https: [], http: [] });
+  res.json({ https: httpsPortUp ? [`https://${ip}:${httpsPortUp}/kiosk`] : [], http: [`http://${ip}:${PORT}/kiosk`] });
+});
 
 // The tablet asks every few seconds: "is there a form for me?"
 app.get('/api/kiosk/next', (req, res) => {
@@ -10721,6 +10730,7 @@ app.post('/api/admin/start-empty', (req, res) => {
   nextActivityId = 1;
   nextMessageId = 1;
   businessConversationsMap = new Map();
+  kioskQueue.clear();   // the forms waiting on tablets were for demo clients
   try { sqlite.exec('DELETE FROM activity_logs; DELETE FROM inventory_logs;'); } catch (e) {}
   studioMeta = { demo: false, clearedAt: new Date().toISOString() };
   res.json({ ok: true, removedKeys });
@@ -10804,7 +10814,12 @@ const PERSISTED = {
   nextActivityId: [() => nextActivityId, (v) => { nextActivityId = v; }],
   nextMessageId: [() => nextMessageId, (v) => { nextMessageId = v; }],
   lastDatabaseSnapshotTimestamp: [() => lastDatabaseSnapshotTimestamp, (v) => { lastDatabaseSnapshotTimestamp = v; }],
-  businessConversationsMap: [() => [...businessConversationsMap], (v) => { businessConversationsMap = new Map(v); }]
+  businessConversationsMap: [() => [...businessConversationsMap], (v) => { businessConversationsMap = new Map(v); }],
+  kioskQueue: [() => [...kioskQueue], (v) => {
+    kioskQueue.clear();
+    for (const [name, item] of v) kioskQueue.set(name, item);
+    nextKioskItemId = Math.max(1, ...[...kioskQueue.values()].map((i) => Number(i.id) + 1));
+  }]
 };
 sqlite.exec('CREATE TABLE IF NOT EXISTS app_state (key TEXT PRIMARY KEY, value TEXT NOT NULL, updated_at TEXT NOT NULL)');
 
@@ -10855,7 +10870,8 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`Open http://localhost:${PORT} in your browser. Keep this window open while you use the CRM.`);
   openBrowser();
   // https for the other devices in the studio; HTTPS_PORT=0 turns it off
-  startHttps(app, process.env.HTTPS_PORT === undefined ? 3443 : Number(process.env.HTTPS_PORT) || 0);
+  const httpsPort = process.env.HTTPS_PORT === undefined ? 3443 : Number(process.env.HTTPS_PORT) || 0;
+  startHttps(app, httpsPort).then((s) => { if (s) httpsPortUp = httpsPort; });
 }).on('error', (e) => {
   if (e.code !== 'EADDRINUSE') throw e;
   // Started twice: the first one is still running, so just show it.

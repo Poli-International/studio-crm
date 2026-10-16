@@ -1781,5 +1781,8 @@
  "expires": "หมดอายุ",
  "supplier": "ผู้จำหน่าย",
  "Shift rota": "ตารางกะงาน",
- "Studio CRM export": "ส่งออกจาก Studio CRM"
+ "Studio CRM export": "ส่งออกจาก Studio CRM",
+ "The first time, the tablet warns that the connection is not private. Tap Advanced, then Proceed (Chrome) or Continue (Edge): it is your own server, the certificate was made by it.": "ครั้งแรก แท็บเล็ตจะเตือนว่าการเชื่อมต่อไม่เป็นส่วนตัว ให้แตะ ขั้นสูง แล้วแตะ ดำเนินการต่อ (Chrome หรือ Edge) นี่คือเซิร์ฟเวอร์ของคุณเอง ใบรับรองนี้สร้างขึ้นโดยเซิร์ฟเวอร์เอง",
+ "If the warning keeps coming back, or a kiosk browser stops on it, use this address instead. No warning, but the forms cross your network unencrypted, so only on the studio's own Wi-Fi:": "หากคำเตือนกลับมาเรื่อยๆ หรือเบราว์เซอร์คีออสหยุดค้างที่หน้านั้น ให้ใช้ที่อยู่นี้แทน จะไม่มีคำเตือน แต่แบบฟอร์มจะส่งผ่านเครือข่ายโดยไม่เข้ารหัส จึงควรใช้เฉพาะ Wi-Fi ของสตูดิโอเท่านั้น:",
+ "Give this computer a fixed address in your router (\"DHCP reservation\" or \"static IP\"), or the tablets lose it when the address changes.": "ตั้งที่อยู่คงที่ให้คอมพิวเตอร์เครื่องนี้ในเราเตอร์ (\"DHCP reservation\" หรือ \"static IP\") ไม่เช่นนั้นแท็บเล็ตจะหาเครื่องไม่เจอเมื่อที่อยู่เปลี่ยน"
 }

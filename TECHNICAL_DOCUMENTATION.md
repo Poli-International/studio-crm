@@ -423,7 +423,7 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
   The studio password signs in as administrator. Without staff logins everyone who is signed in is an administrator, as in 1.0.5.
 - **HTTPS on the studio network**: a self-made certificate (`https-key.pem`, `https-cert.pem` next to the database) on port 3443, so tablets get the camera and the clipboard. `HTTPS_PORT=0` turns it off.
-- **Kiosk tablets** (optional): `public/kiosk.html` at `/kiosk`. With a studio password, a tablet signs in with the separate kiosk password (scrypt hash in `app_state.kioskAccess`, same five-tries rule) and gets a session at the level `kiosk`, below Front desk: of `/api` it may only call `/api/kiosk/next`, `/api/kiosk/submit`, `GET /api/access` and sign out; other pages redirect to `/kiosk`. Files under `public/` carry no studio data, so it may load them (the form builder runs inside the kiosk page). The waiting forms are kept in memory: a restart drops forms not yet signed. A kiosk can see the client name of a form waiting on another kiosk of the same studio. Without a studio password the kiosk page needs no sign-in, like every other page.
+- **Kiosk tablets** (optional): `public/kiosk.html` at `/kiosk`. With a studio password, a tablet signs in with the separate kiosk password (scrypt hash in `app_state.kioskAccess`, same five-tries rule) and gets a session at the level `kiosk`, below Front desk: of `/api` it may only call `/api/kiosk/next`, `/api/kiosk/submit`, `GET /api/access` and sign out; other pages redirect to `/kiosk`. Files under `public/` carry no studio data, so it may load them (the form builder runs inside the kiosk page). The waiting forms are kept in memory: a restart drops forms not yet signed. A kiosk sign-in is tied to the tablet name it signed in with (kept in the session), so it only ever receives and completes the form sent to that name. Without a studio password the kiosk page needs no sign-in, like every other page.
 - **Tablet Kiosk PIN** (optional): a short hash in `poli_kiosk_exit_pin`, shared through `/api/app-data`. It keeps a client inside the consent form on a tablet; it is a deterrent, not a security boundary.
 - **Tool pages** are served with `js/clipboard-fallback.js` added, because a tablet on the plain `http://` address has no `navigator.clipboard`.
 - **Repeated submits**: the same form sent again with the same content within 1.5 seconds is dropped, and save buttons outside forms run one at a time, so a double tap cannot create a record twice.
@@ -432,6 +432,11 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 ---
 
 ## Version History
+
+### 1.0.10
+
+- PDFs in the chosen language: the fixed wording of the PDFs (signed waiver, appointment receipt, healing pipeline, activity log, session durations, inventory manifest, purchase order, and the consent form's header, legal declaration, signature block, footer and page numbers) now follows the language. The CRM's PDFs look their labels up in `public/i18n/<lang>.json` through `pdfLabel()`; the consent form PDF reads `pdf_doc` in the form builder's `i18n.json`. The consent form's signature block grows when the declaration runs to more lines. The schema mapping guide (a technical sheet) stays English.
+- Kiosk privacy: a tablet signed in with the kiosk password is held to its own name, so it cannot ask for, or complete, a form waiting on another tablet.
 
 ### 1.0.9
 

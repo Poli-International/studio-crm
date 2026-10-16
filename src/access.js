@@ -169,7 +169,7 @@ export function installAccess(app, sqlite, getStaff = () => []) {
   const setSetting = (key, value) => sqlite.prepare('INSERT OR REPLACE INTO app_state (key, value, updated_at) VALUES (?, ?, ?)').run(key, String(value), new Date().toISOString());
   // a studio that already had a password or skipped has made its first-start choice
   const chosen = () => !!access || setting('studioAccessChosen') === 'yes';
-  const sessions = new Map();          // token -> { expiry, staffId, level }; signing in again after a restart is fine
+  const sessions = new Map();          // token -> { expiry, staffId, level, kiosk }; signing in again after a restart is fine
   const logins = () => { try { return JSON.parse(setting('staffLogins') || '{}'); } catch (e) { return {}; } }; // staffId -> { salt, hash, level }
   const saveLogins = (value) => setSetting('staffLogins', JSON.stringify(value));
   // staff logins are on once an administrator has one (and the studio password is set)
@@ -199,7 +199,7 @@ export function installAccess(app, sqlite, getStaff = () => []) {
   const kioskAccess = () => { try { return JSON.parse(setting('kioskAccess') || 'null'); } catch (e) { return null; } };
   const startSession = (req, res, who = {}) => {
     const token = crypto.randomBytes(32).toString('hex');
-    sessions.set(token, { expiry: Date.now() + SESSION_DAYS * 86400000, staffId: who.staffId || null, level: who.level || 'admin' });
+    sessions.set(token, { expiry: Date.now() + SESSION_DAYS * 86400000, staffId: who.staffId || null, level: who.level || 'admin', kiosk: who.kiosk || null });
     res.setHeader('Set-Cookie', `${COOKIE}=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${SESSION_DAYS * 86400}${req.secure ? '; Secure' : ''}`);
   };
 
@@ -222,6 +222,7 @@ export function installAccess(app, sqlite, getStaff = () => []) {
     const have = levelOf(req);
     // a kiosk tablet that wanders to a CRM page (the home page, an old bookmark) goes back to its own page
     if (have === 'kiosk' && !req.path.startsWith('/api/') && req.method === 'GET' && (req.path === '/index.html' || !/\.[a-z0-9]+$/i.test(req.path)) && !req.path.startsWith('/tools/') && req.path !== '/kiosk') return res.redirect('/kiosk');
+    if (have === 'kiosk') req.kioskSession = session(req);   // the tablet's own name lives here: see kioskOf() in server.js
     if (LEVELS.indexOf(have) >= LEVELS.indexOf(need)) return next();
     res.status(403).json({ error: `Your level (${LEVEL_NAMES[have]}) cannot do this. Ask an administrator.`, level: have });
   });
@@ -334,7 +335,8 @@ export function installAccess(app, sqlite, getStaff = () => []) {
       return res.status(401).json({ error: entry ? 'Wrong password' : 'No kiosk password is set: an administrator sets one in Settings' });
     }
     failures.delete(who);
-    startSession(req, res, { level: 'kiosk' });
+    // the sign-in belongs to this tablet's name: it cannot then ask for a form waiting on another tablet
+    startSession(req, res, { level: 'kiosk', kiosk: String((req.body || {}).name || '').trim().slice(0, 40) || 'Kiosk' });
     res.json({ ok: true });
   });
 

@@ -588,7 +588,7 @@ function generateClientAppointmentReceiptPDF(a) {
         ['Price', price.toFixed(2)],
         ['Deposit paid', deposit.toFixed(2)],
         ['Balance', (price - deposit).toFixed(2)]
-    ]);
+    ].map(([label, value]) => [pdfLabel(label), value]));
 }
 window.generateClientAppointmentReceiptPDF = generateClientAppointmentReceiptPDF;
 
@@ -1862,15 +1862,15 @@ function downloadPipelinePdf() {
     if (!(window.jspdf && window.jspdf.jsPDF)) { showStudioToast('The PDF library did not load'); return; }
     const doc = new window.jspdf.jsPDF();
     let y = 18;
-    doc.setFontSize(16); doc.text('Healing pipeline', 15, y); y += 7;
-    doc.setFontSize(9); doc.text('Clients by days since their completed session. ' + new Date().toLocaleDateString(), 15, y); y += 10;
+    doc.setFontSize(16); doc.text(pdfLabel('Healing pipeline'), 15, y); y += 7;
+    doc.setFontSize(9); doc.text(pdfLabel('Clients by days since their completed session.') + ' ' + new Date().toLocaleDateString(), 15, y); y += 10;
     for (const g of pipelineGroups) {
         if (y > 270) { doc.addPage(); y = 18; }
-        doc.setFontSize(12); doc.text(g.label + ' (' + g.items.length + ')', 15, y); y += 7;
+        doc.setFontSize(12); doc.text(pdfLabel(g.label) + ' (' + g.items.length + ')', 15, y); y += 7;
         doc.setFontSize(10);
         for (const a of g.items) {
             if (y > 280) { doc.addPage(); y = 18; }
-            doc.text([a.client_name, a.service_type, a.staff_name, new Date(a.datetime).toLocaleDateString(), 'day ' + a.days].filter(Boolean).join('  |  '), 18, y); y += 6;
+            doc.text([a.client_name, a.service_type, a.staff_name, new Date(a.datetime).toLocaleDateString(), pdfLabel('day ' + a.days)].filter(Boolean).join('  |  '), 18, y); y += 6;
         }
         y += 4;
     }
@@ -3060,13 +3060,13 @@ async function downloadWaiverPdf(waiverId) {
     if (!w) { showStudioToast("This waiver could not be loaded"); return; }
     const doc = new window.jspdf.jsPDF();
     let y = 20;
-    doc.setFontSize(16); doc.text("Signed waiver", 15, y); y += 12;
+    doc.setFontSize(16); doc.text(pdfLabel("Signed waiver"), 15, y); y += 12;
     doc.setFontSize(11);
-    for (const [label, value] of [["Client", w.client_name], ["Service", w.service_type], ["Signed", w.signed_at ? new Date(w.signed_at).toLocaleString() : "date not recorded"],
-        ["Age verified", w.age_verified ? "Yes" : "No"], ["Verified by", w.staff_verifier]]) { doc.text(label + ": " + String(value || "-"), 15, y); y += 8; }
-    const disclosures = doc.splitTextToSize("Medical disclosures: " + String(w.medical_disclosures || "-"), 180);
+    for (const [label, value] of [["Client", w.client_name], ["Service", w.service_type], ["Signed", w.signed_at ? new Date(w.signed_at).toLocaleString() : pdfLabel("date not recorded")],
+        ["Age verified", pdfLabel(w.age_verified ? "Yes" : "No")], ["Verified by", w.staff_verifier]]) { doc.text(pdfLabel(label) + ": " + String(value || "-"), 15, y); y += 8; }
+    const disclosures = doc.splitTextToSize(pdfLabel("Medical disclosures") + ": " + String(w.medical_disclosures || "-"), 180);
     doc.text(disclosures, 15, y); y += disclosures.length * 6 + 8;
-    if (typeof w.signature === "string" && w.signature.startsWith("data:image/png")) { doc.text("Signature:", 15, y); try { doc.addImage(w.signature, "PNG", 15, y + 3, 90, 24); } catch (e) {} }
+    if (typeof w.signature === "string" && w.signature.startsWith("data:image/png")) { doc.text(pdfLabel("Signature") + ":", 15, y); try { doc.addImage(w.signature, "PNG", 15, y + 3, 90, 24); } catch (e) {} }
     doc.save("waiver-" + String(w.client_name || "client").replace(/[^a-z0-9]+/gi, "-") + "-" + String(w.signed_at || "").slice(0, 10) + ".pdf");
 }
 window.downloadWaiverPdf = downloadWaiverPdf;
@@ -3826,12 +3826,15 @@ function csvCell(v) {
 function downloadCsv(filename, head, rows) {
     downloadBlobFile(filename, [head, ...rows].map((r) => r.map(csvCell).join(",")).join("\n") + "\n", "text/csv;charset=utf-8;");
 }
+// PDFs are not on the page, so the phrase translator never sees them: look their fixed labels up directly.
+function pdfLabel(en) { return (window.i18nPhrases && window.i18nPhrases.translate(String(en))) || en; }
 function downloadPdfTable(filename, title, head, rows, lines) {
     if (!(window.jspdf && window.jspdf.jsPDF)) { showStudioToast("The PDF library did not load"); return; }
     const doc = new window.jspdf.jsPDF();
     const id = studioIdentity();
+    head = head.map(pdfLabel);
     doc.setFontSize(14);
-    doc.text(title, 14, 18);
+    doc.text(pdfLabel(title), 14, 18);
     doc.setFontSize(9);
     let y = 25;
     [id.name, id.address, new Date().toLocaleString()].concat(lines || []).filter(Boolean).forEach((l) => { doc.text(String(l), 14, y); y += 5; });
@@ -4000,7 +4003,7 @@ function printPOPDF() {
     if (!poState.items.length) { showStudioToast("No items are below their reorder level"); return; }
     const sel = document.getElementById("po-supplier-select");
     const sup = poState.suppliers.find((s) => String(s.id) === (sel ? sel.value : "")) || {};
-    downloadPdfTable(poState.number + ".pdf", "Purchase order " + poState.number, ["item", "SKU", "qty", "unit", "total"],
+    downloadPdfTable(poState.number + ".pdf", pdfLabel("Purchase order") + " " + poState.number, ["item", "SKU", "qty", "unit", "total"],
         poState.items.map((i) => [i.name, i.sku, i.qty, i.unit.toFixed(2), i.total.toFixed(2)]),
         ["To: " + (sup.name || "") + (sup.order_email || sup.email ? " <" + (sup.order_email || sup.email) + ">" : ""),
          "Total: $" + poState.items.reduce((t, i) => t + i.total, 0).toFixed(2)]);

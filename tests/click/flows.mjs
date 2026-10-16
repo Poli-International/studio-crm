@@ -801,6 +801,14 @@ await flow('Kiosk tablet: signs in with its own password, receives a form from t
     await b.clickText('Take back');
     await eventually(async () => k.evaluate(`document.getElementById('idle').classList.contains('on') && !document.getElementById('frame').classList.contains('on')`), 'the kiosk kept a form the desk took back', 10);
     check(!(await b.evaluate(`!!document.getElementById('kiosk-chooser')`)), 'the kiosk chooser stayed open after Take back');
+
+    // a form waiting on another tablet stays hidden from this one, whatever name this tablet asks with
+    const other = await b.evaluate(`fetch('/api/kiosk/send', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ clientId: ${made.id}, kiosk: 'Back Stand', formName: 'Other form', schema: { sections: [] } }) }).then(r => r.json())`);
+    const peek = await k.evaluate(`fetch('/api/kiosk/next?kiosk=Back%20Stand').then(r => r.json())`);
+    check(peek.kiosk === 'Front Stand' && !peek.item, 'a kiosk can read the form waiting on another tablet: ' + JSON.stringify(peek).slice(0, 120));
+    check((await k.evaluate(`fetch('/api/kiosk/submit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ kiosk: 'Back Stand', id: ${Number(other.id)}, responses: {} }) }).then(r => r.status)`)) === 409, 'a kiosk can complete the form waiting on another tablet');
+    check((await api('/api/kiosk/devices')).some((d) => d.kiosk === 'Back Stand' && d.waiting), 'the other tablet lost its form');
+    await b.evaluate(`fetch('/api/kiosk/cancel', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ kiosk: 'Back Stand' }) })`);
     check(!k.seen.errors.length, 'script error on the kiosk: ' + k.seen.errors[0]);
   } finally {
     await k.close().catch(() => {});
@@ -830,6 +838,18 @@ await flow('Thai: the form builder, the consent form on the kiosk and the PDFs s
     // Helvetica has no Thai letters: a PDF with a Thai name must carry a Thai font
     const pdf = await f.evaluate(`(() => { const d = new window.jspdf.jsPDF(); d.text('ลูกค้า: สมชาย ใจดี', 10, 10); return d.output(); })()`);
     check(pdf.includes('/Sarabun'), 'a PDF with Thai text has no Thai font');
+    // the fixed wording of the PDFs follows the language too (it is not on the page, so the page translator never saw it)
+    const pdfText = (w, run) => w.evaluate(`(async () => { const J = window.jspdf.jsPDF, seen = [];
+      window.jspdf.jsPDF = function (...args) { const d = new J(...args), text = d.text;
+        d.text = function (t, ...rest) { seen.push([].concat(t).join(' ')); return text.call(this, t, ...rest); };
+        d.save = function () { return this; }; return d; };
+      try { await (${run})(); } finally { window.jspdf.jsPDF = J; }
+      return seen.join(' | '); })()`);
+    const consent = await pdfText(f, `() => window.PDFGenerator.generateFormPDF(window.FormBuilderApp.currentForm, {}, null)`);
+    check(consent.includes('การรับรองทางกฎหมาย') && consent.includes('หน้า 1 จาก') && !consent.includes('LEGAL CERTIFICATION'), 'the consent form PDF wording is not in Thai: ' + consent.slice(-200));
+    await eventually(async () => (await b.evaluate(`pdfLabel('Signed waiver')`)) !== 'Signed waiver', 'the CRM has no Thai for its PDF labels');
+    const receipt = await pdfText(b, `() => generateClientAppointmentReceiptPDF({ id: 1, client_name: 'สมชาย', estimated_price: 100 })`);
+    check(receipt.includes('ใบเสร็จการนัดหมาย'), 'the receipt PDF title is not in Thai: ' + receipt.slice(0, 160));
   } finally {
     await b.evaluate(`setLanguage('en')`);
   }

@@ -177,6 +177,8 @@
     fetch('/api/kiosk/next?kiosk=' + encodeURIComponent(kiosk), { cache: 'no-store' })
       .then(function (r) { if (r.status === 401 || r.status === 403) { location.reload(); throw new Error('signed out'); } return r.json(); })
       .then(function (d) {
+        // the server holds a signed-in tablet to the name it signed in with
+        if (d.kiosk && d.kiosk !== kiosk) { kiosk = d.kiosk; put('studio_kiosk_name', kiosk); translate(); }
         if (busy) return;
         var item = d.item;
         if (item && (!current || current.id !== item.id)) openForm(item);
@@ -203,7 +205,7 @@
     e.preventDefault();
     var err = document.getElementById('login-error');
     err.textContent = '';
-    fetch('/api/kiosk/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: document.getElementById('login-password').value }) })
+    fetch('/api/kiosk/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: document.getElementById('login-password').value, name: document.getElementById('login-name').value }) })
       .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, b: b }; }); })
       .then(function (res) {
         if (!res.ok) { err.textContent = res.b.error === 'Wrong password' ? w('Wrong password') : (res.b.error || ''); return; }

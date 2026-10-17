@@ -1,24 +1,19 @@
 # Studio CRM
 
-A free studio management app for tattoo and piercing studios, by [Poli International](https://poliinternational.com/tools/). It runs on one computer in your studio; staff use it from a browser on that computer or on any device on the studio network. Your data stays in a file on that computer. Nothing is sent to Poli International.
+**The free studio management app for tattoo and piercing studios.** Clients, consent forms signed on a tablet, appointments and deposits, stock and lots, compliance records, and 31 studio tools, in 8 languages. It runs on one computer in your studio, and your data never leaves it.
 
-## What it does
+[**Download**](#download) · [User guide](docs/USER-GUIDE.md) · [Try the online demo](https://poliinternational.com/tools/studio-crm/) · [Releases](https://github.com/Poli-International/studio-crm/releases)
 
-- **Clients**: contact details, allergies and medical notes, signed waivers, total spent.
-- **Appointments**: single bookings, and an auto scheduler that finds an artist's free slots and books multi-session work.
-- **Digital waivers**: pick the client, confirm the age check, sign on the screen; saved with the signature.
-- **Stock**: quantities, lots, expiry dates, suppliers, low-stock alerts, a camera QR/barcode scanner, purchase orders as PDF.
-- **Gallery**: portfolio photos and flash designs, with sharing to WhatsApp, LINE, X or email.
-- **Money and staff**: tip splits, shift clock in/out, exports (CSV and PDF).
-- **Compliance records**: closing checklist, autoclave cycle log, expiry warnings.
-- **Poli tools built in**: aftercare schedules, consent form builder, gauge converter, price estimator and more.
-- **8 languages**: English, French, Italian, German, Spanish, Dutch, Portuguese, Thai.
+![The Studio CRM dashboard: today's revenue, station capacity, upcoming clients, stock alerts and expiring sterile lots](docs/screenshots/dashboard.webp)
 
-The CRM prepares messages (aftercare emails, reminders, supplier orders) and opens them in your own email, WhatsApp or LINE; it does not send anything by itself.
+- **Free, with nothing to sign up for.** No account, no subscription, no limits on clients or staff.
+- **Your data stays in your studio.** Everything is in one file on your computer. Nothing is sent to Poli International or anyone else.
+- **Made for the front desk.** Staff use it from any browser in the studio: the desk PC, a laptop, a tablet on a stand.
+- **Updates in one click,** and your data is backed up first.
 
-## Install
+## Download
 
-**The easy way (no Node.js to install).** Download the ZIP for your computer, unzip it, and double-click the starter. Your browser opens on the CRM.
+Download the ZIP for your computer, unzip it, and double-click the starter. Your browser opens on the CRM. Node.js is inside: there is nothing else to install.
 
 | Computer | Download | Starter |
 |---|---|---|
@@ -27,7 +22,83 @@ The CRM prepares messages (aftercare emails, reminders, supplier orders) and ope
 | Mac, Intel | [studio-crm-macos-x64.zip](https://github.com/Poli-International/studio-crm/releases/latest/download/studio-crm-macos-x64.zip) | `Start Studio CRM.command` |
 | Linux | [studio-crm-linux-x64.zip](https://github.com/Poli-International/studio-crm/releases/latest/download/studio-crm-linux-x64.zip) | `./start-studio-crm.sh` |
 
-Keep the window that opens while you use the CRM; closing it stops the CRM. On a Mac, the first time, right-click the starter and choose **Open**. Windows may ask you to confirm the first time as well.
+Keep the window that opens while you use the CRM; closing it stops the CRM. On a Mac, the first time, right-click the starter and choose **Open**. A new install opens with a demo studio so you can try every screen; **Start with an empty studio** on the Dashboard clears it.
+
+## What it does
+
+### Clients and their safety profile
+
+Every client with their contact details, allergies and medical history, signed forms, appointments, staff notes, work photos and total spent. Allergies show in red on the client list, so the desk sees them before the client sits down.
+
+![The client list with allergies, signed forms and total spent](docs/screenshots/clients.webp)
+
+![A client's profile: timeline, personal details, medical and sensitivity overview, preferred artist](docs/screenshots/client-profile.webp)
+
+### Consent forms, signed on a tablet
+
+Build your own consent forms, or start from ready-made tattoo, piercing and medical history templates. The desk sends a form to a tablet; the client fills it in, signs with a finger and taps Complete. The form lands on the client's record with every answer, and prints as a laid-out PDF with the signature.
+
+- A **kiosk tablet** can only receive and return forms: it never opens the CRM or sees other clients. Several tablets each get their own forms.
+- **Required questions** must be answered before the client can go on.
+- What the client declares (allergies, conditions, medication) is added to their **medical overview**.
+- Forms in the client's language, with the PDF in that language too.
+
+| | |
+|---|---|
+| ![The form builder: fields, sections, templates and form settings](docs/screenshots/form-builder.webp) | ![A medical history form on the kiosk tablet, step 3 of 7](docs/screenshots/kiosk-form.webp) |
+
+![A completed form on the client's record: every medical answer, as the client gave it](docs/screenshots/consent-answers.webp)
+
+### Appointments, deposits and payments
+
+Book sessions with a price and a deposit, see what is still to pay, plan the staff rota, and record payments. Marking a session as completed offers to record its payment, so each client's total stays right. An auto scheduler finds an artist's free slots for multi-session work.
+
+![The calendar: appointments with price, deposit and amount to pay, and the shift rota](docs/screenshots/calendar.webp)
+
+### Stock, lots and suppliers
+
+Quantities, lot numbers, expiry dates and suppliers, with low-stock and expiry warnings on the dashboard. A camera QR and barcode scanner, printable QR tags, and purchase orders as PDF, ready to send.
+
+![Stock items with lots and expiry dates, and the supplier list](docs/screenshots/inventory.webp)
+
+### Money, worked out from your own records
+
+Payments this month, deposits held, what is still to collect, and sessions completed, all calculated from what the studio entered. Tip splits, artist splits, VAT and tax rates, and exports to CSV and PDF.
+
+![Finance: payments this month, deposits held, still to collect](docs/screenshots/finance.webp)
+
+### Compliance records
+
+Autoclave cycle log, station sanitisation checklist, signed forms and a sterile lot audit, with expired and soon-to-expire lots flagged on the dashboard.
+
+### 31 studio tools built in
+
+The [Poli International tools](https://poliinternational.com/tools/), inside the CRM: consent form builder, aftercare schedules, tattoo price estimator, gauge converter, stencil calculator, autoclave calculator, medication interaction checker, ink mixer, booth rent vs commission, and more.
+
+![The studio tools inside the CRM](docs/screenshots/tools.webp)
+
+### 8 languages
+
+English, French, Italian, German, Spanish, Dutch, Portuguese and Thai: the screens, the user guide, the consent forms and the PDFs. Each person picks their own language.
+
+![The dashboard in Thai](docs/screenshots/thai.webp)
+
+### Security for a shared studio
+
+- A **studio password** keeps other people on your network out (the first start asks for it; you can set it later).
+- **Staff logins** with levels: Front desk, Staff, Administrator, checked on the server.
+- A device that is not used locks itself after 5 to 30 minutes.
+- **Kiosk tablets** sign in with their own password and can do nothing but forms.
+
+### Updates in one click
+
+When a new version is out, the menu says **update available**. **Settings**, **Updates**, **Update now**: the CRM backs up your database, tries the new version on a copy of your data, and only then installs it and restarts. Your data is never moved; if anything goes wrong, nothing changes.
+
+![Settings: kiosk tablets, database backup and updates](docs/screenshots/settings.webp)
+
+The CRM prepares messages (aftercare emails, reminders, supplier orders) and opens them in your own email, WhatsApp or LINE. It does not send anything by itself.
+
+## Other ways to install
 
 **From the source.** Requires [Node.js](https://nodejs.org/) 22 or newer (no compiler or build tools needed).
 
@@ -42,37 +113,39 @@ npm start
 docker compose up -d
 ```
 
-In all three cases, open `http://localhost:3000`. Other devices on the studio network use the computer's address instead of `localhost`, always with `:3000`. The CRM is its own web server: do not put the files behind Apache, nginx or PHP, the pages would load but nothing would save.
-
-A new install starts with demo data so you can try every screen; click **Start with an empty studio** on the Dashboard before entering real clients.
-
-Settings go in a `.env` file (copy `.env.example`): `PORT`, `STUDIO_MANAGER_EMAIL`, `SQLITE_DB_PATH`.
-
-**Updating.** From 1.0.12: **Settings**, **Updates**, **Update now**. The CRM backs up the database, tries the new version on a copy of your data, then installs it and restarts; your `data` folder is never moved. Older versions, once by hand: download the new ZIP, unzip it to a new folder, and copy your `data` folder from the old one into it.
-
-## User guide
-
-In the app under **Docs**, or in [`docs/USER-GUIDE.md`](docs/USER-GUIDE.md) and [`docs/user-guide/`](docs/user-guide/) (FR, IT, DE, ES, NL, PT, TH).
-
-## Backups
-
-All data is in `data/studio_crm.sqlite`. Copy that file to back up the studio. **Back up now** in Settings saves a full copy in `storage/backups/`.
+Then open `http://localhost:3000`. The CRM is its own web server: do not put the files behind Apache, nginx or PHP, the pages would load but nothing would save. Settings go in a `.env` file (copy `.env.example`): `PORT`, `STUDIO_MANAGER_EMAIL`, `SQLITE_DB_PATH`. These copies are updated the way they were installed; one-click updates are for the downloads above. Versions before 1.0.12 update once by hand: download the new ZIP, unzip it to a new folder, and copy your `data` folder from the old one into it.
 
 ## Other devices in the studio
 
-- Computers open `http://THE-COMPUTER:3000`.
-- Tablets and phones that need the camera (the scanner) open `https://THE-COMPUTER:3443`. The certificate is made by the CRM itself, so the browser warns once: choose Advanced, then Continue. Browsers give a page the camera only on `localhost` or over https. `HTTPS_PORT=0` turns https off.
-- To keep other people on the network out, set a **Studio Password**: the first start asks for it (you can skip it and set it later in Settings). Settings can also lock a device that is not used for 5 to 30 minutes, and each staff member can get their own login with a level (Front desk, Staff, Administrator). Forgotten: create an empty file `reset-password.txt` in the `data` folder and restart; it removes the studio password and the staff logins.
+- Computers open `http://THE-COMPUTER:3000`. **Settings**, **Kiosk Tablets** shows the computer's address.
+- Tablets and phones that need the camera (the scanner) open `https://THE-COMPUTER:3443`. The certificate is made by the CRM itself, so the browser warns once: choose **Advanced**, then **Continue**. `HTTPS_PORT=0` turns https off.
+- Give the CRM computer a fixed address in your router ("DHCP reservation" or "static IP"), or the tablets lose it when the address changes.
+- Forgotten the studio password: create an empty file `reset-password.txt` in the `data` folder and restart; it removes the studio password and the staff logins.
+
+## Backups
+
+All data is in `data/studio_crm.sqlite`. Copy that file to back up the studio. **Back up now** in Settings saves a full copy in `storage/backups/`, and every update makes one first.
+
+## User guide
+
+In the app under **Settings**, or in [`docs/USER-GUIDE.md`](docs/USER-GUIDE.md) and [`docs/user-guide/`](docs/user-guide/) (FR, IT, DE, ES, NL, PT, TH).
+
+## Who made it
+
+Studio CRM is made by [Patrick Poli](https://poliinternational.com/), who ran his own tattoo and piercing studio in Bournemouth, UK, and builds it with AI doing much of the coding. It is shaped by studio owners who use it and say what their front desk needs. Ideas and problems: [open an issue](https://github.com/Poli-International/studio-crm/issues) or [contact us](https://poliinternational.com/contact-us/).
+
+The translations were made with AI help and not all have been checked by native speakers yet.
 
 ## Development
 
 ```bash
-npm test           # unit tests
-npm run test:click # real clicks in Chrome or Edge: the daily jobs, then every button
-npm run guide      # rebuild public/guide/<lang>.html from docs/
+npm test                      # unit tests
+npm run test:click            # real clicks in Chrome or Edge: the daily jobs, then every button
+npm run guide                 # rebuild public/guide/<lang>.html from docs/
+node scripts/screenshots.mjs  # retake the screenshots in docs/screenshots
 ```
 
-The click test (`tests/click/`) starts the app on a throwaway database, opens a real browser and uses the mouse. `flows.mjs` does the jobs a studio does every day (add, edit and delete a client, manage staff, export, clock in, import a CSV, fill and sign the tablet form), plus the awkward cases: two quick taps on Save, every screen at phone width. `crawl.mjs` clicks every button it can reach and fails on one that does nothing, throws an error or is covered by something else. `CRAWL_PAGE=tools/<tool>/ node tests/click/crawl.mjs` does the same inside one of the embedded tools, and the release workflow crawls every tool in `public/tools`, one runner each. All of it runs before a release is packed, so a dead button blocks the release. It needs Chrome or Edge on the machine and nothing else.
+The click test (`tests/click/`) starts the app on a throwaway database, opens a real browser and uses the mouse. `flows.mjs` does the jobs a studio does every day (clients, staff, bookings, payments, exports, clock in, CSV import, forms on a kiosk tablet with every kind of answer), plus the awkward cases: two quick taps on Save, every screen at phone width, a restart with a form waiting on a tablet. `crawl.mjs` clicks every button it can reach and fails on one that does nothing, throws an error or is covered by something else; the release workflow does the same inside each of the 31 tools. Before a release is published, each download is unpacked and started on Windows, macOS (Apple chip and Intel) and Linux with no Node.js on the PATH, and updates itself from Settings. A dead button or a failed update blocks the release.
 
 Interface text is translated by `public/js/i18n-phrases.js` from `public/i18n/<lang>.json`, keyed on the exact English text.
 

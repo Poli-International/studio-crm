@@ -1802,5 +1802,22 @@
  "Version {0} is available (you have {1}).": "มีเวอร์ชัน {0} แล้ว (คุณใช้ {1})",
  "This copy was not installed from the ready-to-run download: update it the way it was installed.": "สำเนานี้ไม่ได้ติดตั้งจากไฟล์ดาวน์โหลดแบบพร้อมใช้ ให้อัปเดตด้วยวิธีเดียวกับที่ติดตั้ง",
  "Install the new version now? The CRM restarts by itself in a minute or two; other screens and tablets reconnect.": "ติดตั้งเวอร์ชันใหม่ตอนนี้หรือไม่? CRM จะรีสตาร์ทเองภายในหนึ่งถึงสองนาที หน้าจออื่นและแท็บเล็ตจะเชื่อมต่อใหม่",
- "The update could not start": "ไม่สามารถเริ่มการอัปเดตได้"
+ "The update could not start": "ไม่สามารถเริ่มการอัปเดตได้",
+ "The PDF could not be made: the form builder did not load": "สร้าง PDF ไม่ได้: ตัวสร้างแบบฟอร์มโหลดไม่สำเร็จ",
+ "Payments this month": "การชำระเงินเดือนนี้",
+ "Deposits held": "เงินมัดจำที่ได้รับ",
+ "Still to collect": "ยอดที่ยังต้องเก็บ",
+ "Sessions completed this month": "เซสชันที่เสร็จเดือนนี้",
+ "payment": "รายการชำระ",
+ "payments": "รายการชำระ",
+ "Administrators only": "เฉพาะผู้ดูแลระบบ",
+ "upcoming sessions with a deposit": "เซสชันที่จะมาถึงที่มีมัดจำ",
+ "upcoming sessions": "เซสชันที่จะมาถึง",
+ "this month": "เดือนนี้",
+ "session": "เซสชัน",
+ "sessions": "เซสชัน",
+ "per completed session": "ต่อเซสชันที่เสร็จ",
+ "Billed per hour": "เรียกเก็บต่อชั่วโมง",
+ "across completed sessions": "จากเซสชันที่เสร็จทั้งหมด",
+ "Most hours": "ชั่วโมงมากที่สุด"
 }

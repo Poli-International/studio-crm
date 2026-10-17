@@ -1802,5 +1802,22 @@
  "Version {0} is available (you have {1}).": "È disponibile la versione {0} (avete la {1}).",
  "This copy was not installed from the ready-to-run download: update it the way it was installed.": "Questa copia non è stata installata dal download pronto all'uso: aggiornatela nel modo in cui è stata installata.",
  "Install the new version now? The CRM restarts by itself in a minute or two; other screens and tablets reconnect.": "Installare ora la nuova versione? Il CRM si riavvia da solo in un paio di minuti; gli altri schermi e i tablet si ricollegano.",
- "The update could not start": "Non è stato possibile avviare l'aggiornamento"
+ "The update could not start": "Non è stato possibile avviare l'aggiornamento",
+ "The PDF could not be made: the form builder did not load": "Impossibile creare il PDF: il generatore di moduli non si è caricato",
+ "Payments this month": "Pagamenti questo mese",
+ "Deposits held": "Acconti ricevuti",
+ "Still to collect": "Ancora da incassare",
+ "Sessions completed this month": "Sessioni completate questo mese",
+ "payment": "pagamento",
+ "payments": "pagamenti",
+ "Administrators only": "Solo amministratori",
+ "upcoming sessions with a deposit": "prossime sessioni con acconto",
+ "upcoming sessions": "prossime sessioni",
+ "this month": "questo mese",
+ "session": "sessione",
+ "sessions": "sessioni",
+ "per completed session": "per sessione completata",
+ "Billed per hour": "Fatturato all'ora",
+ "across completed sessions": "sulle sessioni completate",
+ "Most hours": "Più ore"
 }

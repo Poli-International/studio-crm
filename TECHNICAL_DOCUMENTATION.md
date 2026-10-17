@@ -433,6 +433,19 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.13
+
+From Henry's kiosk tests (2026-10-17):
+
+- Required questions on the kiosk: `kioskMissing()` in form-preview.js checks the page on screen. `validateAll()` scans the form behind the kiosk, which is not drawn in kiosk mode, so it found nothing, and the CRM bridge saved on Complete before the kiosk's own check ran. Each page must be complete before Next; Complete checks the last page. Sections whose id starts with `studio_` (the studio's own details: studio name, address, practitioner) are not checked on the kiosk, the client cannot know them.
+- Medical answers: a `medical_section` is an empty marker in a form; its questions come from `MedicalHistorySystem`. The bridge saves the form with those questions filled in (client's language), and `/api/kiosk/submit` takes only the medical questions from the tablet (`withTabletMedicalQuestions`), keeping the form the desk sent. "View answers" shows them under the medical heading (older forms: the answers without a question go under that heading too).
+- Attached photos (a list of `{ name, dataUrl }`) show as pictures in View answers (they showed `[object Object]`).
+- Profile, Waivers: a 🖨️ PDF button on each saved form, the full laid-out PDF from the form builder (`PDFGenerator.generateFormPDF`, run in a hidden form-builder frame) with the client's signature.
+- A signed form adds its allergies, conditions, medication, blood-thinner and pregnancy answers to the client's `allergies` and `medical_history`, and fills an empty `emergency_contact` (`mergeMedicalInto` in src/utils/crm-utils.js). Added, never replacing.
+- The form builder put today's date into any box whose label mentioned a date ("Physician Name, Clinic & Clearance Date"): now only date boxes, or fields whose id is a date.
+- The Clients table is drawn again each time Clients is opened and when a profile is closed (a kiosk form only showed after a page refresh).
+- Completed on an appointment with a price opens "Record a payment", filled in with the client and the price ("Total spent" counts payments, and nothing was recorded). The profile's appointments show the deposit, the balance and the appointment note.
+
 ### 1.0.12
 
 - Updates from inside the CRM (`src/update.js`, `scripts/apply-update.cjs`), for the ready-to-run download only (the folder has `runtime/`; not in Docker or a source checkout, where Settings says to update the way it was installed). `GET /api/admin/update` (administrator) compares `package.json` with the latest GitHub release (`STUDIO_CRM_UPDATE_FEED` overrides the feed; the click tests use it). `POST /api/admin/update` downloads `studio-crm-<os>-<arch>.zip`, checks its SHA-256 against the release asset digest, unpacks it with `fflate` into `.update/new/`, backs up the database to `storage/backups/before-update-to-<version>_<time>.sqlite`, starts the new version on a copy of that backup on a spare port (it must answer within a minute), writes `.update/ready` and exits with code 75.

@@ -329,8 +329,13 @@ export async function launchBrowser() {
     },
     // a phone or tablet screen
     viewport: (width, height) => cdp('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: true }),
+    // a desktop window of an exact size (scripts/screenshots.mjs)
+    size: (width, height, scale = 1) => cdp('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: scale, mobile: false }),
+    // .webp and .png for presentation shots; anything else a light JPEG for debugging
     async screenshot(file) {
-      writeFileSync(file, Buffer.from((await cdp('Page.captureScreenshot', { format: 'jpeg', quality: 60 })).data, 'base64'));
+      const format = /\.webp$/i.test(file) ? 'webp' : /\.png$/i.test(file) ? 'png' : 'jpeg';
+      const opts = format === 'png' ? { format } : { format, quality: format === 'webp' ? 85 : 60 };
+      writeFileSync(file, Buffer.from((await cdp('Page.captureScreenshot', opts)).data, 'base64'));
     },
     async close() {
       ws.close(); proc.kill();

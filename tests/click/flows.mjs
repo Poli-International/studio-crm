@@ -146,17 +146,19 @@ await flow('Staff: add, edit, select and remove a team member', async () => {
 
 await flow('Shift rota: add a shift, export it as CSV and PDF, remove it', async () => {
   await b.clickText('Calendar');
+  // the demo rota has shifts of its own: this one is told apart by its station
   await b.evaluate(`document.getElementById('rota-date').value = new Date().toLocaleDateString('en-CA')`);
+  await b.evaluate(`document.getElementById('rota-station').value = 'Flow Station'`);
   await b.clickText('Add shift');
-  await eventually(async () => (await text('#shift-roster-tbody')).includes('Remove'), 'the shift is not in the rota');
+  await eventually(async () => (await text('#shift-roster-tbody')).includes('Flow Station'), 'the shift is not in the rota');
   for (const [button, file] of [['Download as CSV', 'shift_roster.csv'], ['Export Formatted PDF', 'shift_roster.pdf']]) {
     await b.clickText('Export Shift Roster');
     await b.clickText(button);
     await sleep(1000);
     check(b.seen.downloads.includes(file), `${button} said it exported, but no ${file} was downloaded`);
   }
-  await b.clickText('Remove', '#shift-roster-tbody');
-  await eventually(async () => !(await text('#shift-roster-tbody')).includes('Remove'), 'the shift was not removed');
+  await press('#shift-roster-tbody tr', 'Flow Station', 'Remove');
+  await eventually(async () => !(await text('#shift-roster-tbody')).includes('Flow Station'), 'the shift was not removed');
 });
 
 await flow('Staff shifts: clock in shows on shift, clock out, and the window closes', async () => {
@@ -253,6 +255,20 @@ await flow('Book an appointment for a client picked from the list, then edit it'
   check((await api('/api/appointments')).filter((a) => a.notes === 'Edit check').length === 1, 'Save changes booked a second appointment');
   // the deposit and what is still to pay, at a glance in the list
   await eventually(async () => { const row = await b.evaluate(`[...document.querySelectorAll('.appointment-row')].find(r => r.innerText.includes('Mar 4, 2031'))?.innerText || ''`); return row.includes('75.00') && row.includes('125.00'); }, 'the list does not show the deposit and the amount still to pay');
+  // Henry, 2026-10-17: Completed left "Total spent" unchanged. It offers the payment, filled in with the client and price.
+  const spentBefore = (await api(`/api/clients/${pick.id}/profile`)).stats.totalSpend;
+  await press('.appointment-row', 'Mar 4, 2031', 'Completed');
+  await eventually(async () => shown('record-payment-modal-overlay'), 'Completed does not offer to record the payment');
+  check((await b.evaluate(`document.getElementById('record-payment-amount').value`)) === '200.00', 'the payment is not filled in with the price');
+  check((await b.evaluate(`document.getElementById('record-payment-client').value`)) === pick.id, 'the payment is not filled in with the client');
+  await b.clickText('Save payment', '#record-payment-modal-overlay');
+  await eventually(async () => (await api(`/api/clients/${pick.id}/profile`)).stats.totalSpend === spentBefore + 200, 'the client\'s total spent did not go up');
+  // the profile shows the deposit, the balance and the staff note of each appointment
+  await b.evaluate(`openClientProfileModal(${pick.id})`);
+  await sleep(1200);
+  await b.evaluate(`switchClientProfileTab('appointments')`);
+  await eventually(async () => { const t = await text('#client-profile-modal-body'); return t.includes('Deposit paid: $75.00') && t.includes('Balance: $125.00') && t.includes('Edit check'); }, 'the profile does not show the deposit, balance and note');
+  await b.evaluate(`closeClientProfileModal()`);
 });
 
 await flow('Healing Pipeline lists the clients of completed sessions, with a PDF', async () => {
@@ -622,6 +638,15 @@ await flow('Start with an empty studio, then add the first client, staff member 
   check((await api('/api/inventory/usage-heatmap')).summary.total_weekly_units === 0, 'the usage heatmap shows supplies nobody used');
   check((await api('/api/stations')).every((st) => !st.autoclaveCycle), 'a station shows an autoclave cycle nobody ran');
   check(!(await api('/api/inventory/sync-status')).lastSuccessfulSyncTime, 'the CSV sync reports a run that never happened');
+  // figures typed into the page itself, not only the data: Finance showed "$24,850, 42 completed appointments"
+  // and the duration report "148.5 hrs, Maya Lin 98.4%" in every studio, even an empty one
+  await b.clickText('Finance');
+  await eventually(async () => (await text('#fin-paid')) === '$0.00' && (await text('#fin-deposits')) === '$0.00' && (await text('#fin-due')) === '$0.00' && (await text('#fin-done')) === '0',
+    async () => 'Finance shows money an empty studio never took: ' + [await text('#fin-paid'), await text('#fin-deposits'), await text('#fin-due'), await text('#fin-done')].join(' / '));
+  await b.evaluate(`openSessionDurationReportModal()`);
+  await eventually(async () => (await text('#sd-kpi-total-hours')) === '0.0 h', async () => 'the duration report shows hours nobody worked: ' + await text('#sd-kpi-total-hours'));
+  check((await text('#sd-kpi-top-artist')) === '—', 'the duration report names a top artist with no sessions');
+  await b.evaluate(`closeSessionDurationReportModal()`);
   await b.clickText('Finance');
   for (const [open, body, expected] of [
     ['openDepositLedgerModal()', '#deposit-ledger-modal-body', 'No deposits are recorded'],
@@ -765,6 +790,25 @@ await flow('First start: the CRM asks for a studio password before anything load
   } finally { await fresh.stop(); }
 });
 
+// A client on the kiosk page: types in every box, picks in every list and choice, ticks every box, adds a photo.
+const CLIENT_FILLS_PAGE = `(async () => { const m = document.getElementById('tablet-kiosk-modal');
+  const ev = (el) => { el.dispatchEvent(new Event('input', { bubbles: true })); el.dispatchEvent(new Event('change', { bubbles: true })); };
+  for (const el of m.querySelectorAll('input, textarea, select')) {
+    if (el.type === 'file') {
+      const c = document.createElement('canvas'); c.width = c.height = 8; c.getContext('2d').fillRect(0, 0, 8, 8);
+      const blob = await new Promise((r) => c.toBlob(r, 'image/png'));
+      const dt = new DataTransfer(); dt.items.add(new File([blob], 'arm.png', { type: 'image/png' })); el.files = dt.files; ev(el); continue;
+    }
+    if (!el.offsetParent) continue;
+    if (el.type === 'checkbox') { if (!el.checked) el.click(); }
+    else if (el.type === 'radio') { if (!m.querySelector('input[type=radio][name="' + el.name + '"]:checked')) el.click(); }
+    else if (el.tagName === 'SELECT') { if (el.options.length > 1) { el.selectedIndex = 1; ev(el); } }
+    else if (el.type === 'date') { el.value = '1990-05-04'; ev(el); }
+    else if (el.type === 'email') { el.value = 'client@example.com'; ev(el); }
+    else if (el.type === 'tel') { el.value = '555-0101'; ev(el); }
+    else { el.value = 'Typed ' + (el.name || el.id); ev(el); }
+  } })()`;
+
 await flow('Kiosk tablet: signs in with its own password, receives a form from the desk, the signed form lands on the client', async () => {
   // Henry, 2026-10-15: a tablet on a stand waits; the desk sends a form; the client signs; it returns to waiting
   const k = await launchBrowser();          // the tablet: a second device with its own sign-in
@@ -814,8 +858,11 @@ await flow('Kiosk tablet: signs in with its own password, receives a form from t
     const kf = k.frame('#frame');
     await eventually(async () => kf.evaluate(`!!document.getElementById('tablet-kiosk-modal') && getComputedStyle(document.getElementById('tablet-kiosk-modal')).display !== 'none'`).catch(() => false), 'the form did not open on the kiosk', 20);
     check(!(await kf.evaluate(`!!(document.querySelector('.btn-exit-kiosk') || {}).offsetParent`)), 'the client can leave the form on the kiosk');
-    await kf.evaluate(`(() => { const p = window.ActiveFormPreview; p.fillSampleData(); p.renderKioskStep(); })()`);
-    for (let i = 0; i < 12 && !(await kf.evaluate(`window.ActiveFormPreview.currentKioskStep >= window.ActiveFormPreview.getKioskSections().length - 1`)); i++) await kf.clickText('Next Step', '#tablet-kiosk-modal');
+    // the client fills each page: a page with a required question left empty does not let the client on
+    const fillPage = () => kf.evaluate(CLIENT_FILLS_PAGE);
+    for (let i = 0; i < 12 && !(await kf.evaluate(`window.ActiveFormPreview.currentKioskStep >= window.ActiveFormPreview.getKioskSections().length - 1`)); i++) { await fillPage(); await kf.clickText('Next Step', '#tablet-kiosk-modal'); }
+    check(await kf.evaluate(`window.ActiveFormPreview.currentKioskStep >= window.ActiveFormPreview.getKioskSections().length - 1`), 'the sample answers did not get the client to the last page: ' + await kf.evaluate(`(document.getElementById('kiosk-missing-note') || {}).innerText || 'no note'`));
+    await fillPage();
     await kf.scribble('#tablet-kiosk-modal canvas.signature-pad-canvas');
     check(!(await kf.evaluate(`document.getElementById('tablet-kiosk-modal').innerText`)).includes('PDF'), 'the kiosk promises the client a PDF it never shows');
     await kf.clickText('Complete', '#tablet-kiosk-modal');
@@ -860,6 +907,93 @@ await flow('Kiosk tablet: signs in with its own password, receives a form from t
     await b.evaluate(`fetch('/api/access/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: 'studio-test-password' }) })`).catch(() => {});
     await b.evaluate(`fetch('/api/access/kiosk-password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: '' }) })`).catch(() => {});
     await b.evaluate(`fetch('/api/access/password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ current: 'studio-test-password', next: '' }) })`).catch(() => {});
+  }
+});
+
+await flow('Kiosk: every kind of answer the client gives (medical boxes, yes/no, photo, signature) is kept, shown and printed', async () => {
+  // Henry, 2026-10-17: medical answers missing, a photo shown as [object Object], required questions skipped,
+  // the client's medical overview left empty, no PDF of the completed form
+  const k = await launchBrowser();
+  try {
+    // this tablet, not one an earlier flow left in the list
+    const before = (await api('/api/kiosk/devices')).map((d) => d.kiosk);
+    await k.tablet();
+    await k.goto(url + 'kiosk');
+    await eventually(async () => k.evaluate(`document.getElementById('login').classList.contains('on') || document.getElementById('idle').classList.contains('on')`), 'the kiosk page did not open', 10);
+    await k.goto(url + 'kiosk?name=Side%20Stand');   // the kiosk page takes its name from ?name=
+    if (await k.evaluate(`document.getElementById('login').classList.contains('on')`)) { await k.type('#login-name', 'Side Stand'); await k.clickText('Sign in'); }
+    await eventually(async () => k.evaluate(`document.getElementById('idle').classList.contains('on')`), 'the kiosk does not wait for a form', 10);
+    const made = await b.evaluate(`fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Every Answer' }) }).then(r => r.json())`);
+    // the Medical History form, with a photo question added, as the desk would build it
+    await b.goto(url + 'tools/form-builder/index.html');
+    await eventually(async () => b.evaluate(`!!(window.FormTemplates && window.FormBuilderApp)`), 'the form builder did not load', 20);
+    const schema = await b.evaluate(`(() => { const f = JSON.parse(JSON.stringify(window.FormTemplates.formTemplates.medical_history_intake));
+      f.sections.find((s) => s.id === 'client_identity').fields.push({ id: 'reference_photo', type: 'photo_id', label: 'Reference photo' }); return f; })()`);
+    await b.goto(url);
+    let device;
+    await eventually(async () => { device = (await api('/api/kiosk/devices')).find((d) => d.online && d.kiosk === 'Side Stand'); return !!device; }, 'the desk does not see this tablet: ' + before.join(', '), 10);
+    check(device, 'the desk does not see the kiosk');
+    await b.evaluate(`fetch('/api/kiosk/send', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ clientId: ${made.id}, kiosk: ${JSON.stringify(device && device.kiosk)}, formName: ${JSON.stringify(schema.name)}, schema: ${JSON.stringify(schema)} }) })`);
+    const kf = k.frame('#frame');
+    await eventually(async () => kf.evaluate(`!!document.getElementById('tablet-kiosk-modal') && getComputedStyle(document.getElementById('tablet-kiosk-modal')).display !== 'none'`).catch(() => false), 'the form did not open on the kiosk', 20);
+
+    // a required question left empty keeps the client on the page
+    const page = () => kf.evaluate(`window.ActiveFormPreview.currentKioskStep`);
+    const last = await kf.evaluate(`window.ActiveFormPreview.getKioskSections().length - 1`);
+    let step = 0, stopped = false;
+    // on every page, as a client: type in every box, pick in every list and choice, tick every box, add the photo
+    for (let i = 0; i <= last + 2 && step < last; i++) {
+      if (!stopped && await kf.evaluate(`[...document.querySelectorAll('#tablet-kiosk-modal input[data-required="true"], #tablet-kiosk-modal textarea[data-required="true"]')].some((el) => el.offsetParent && ['text', 'email', 'tel', 'textarea'].includes(el.type) && !el.value)`)) {
+        await kf.clickText('Next Step', '#tablet-kiosk-modal');
+        check((await page()) === step && /Please complete/.test(await kf.evaluate(`document.getElementById('tablet-kiosk-modal').innerText`)), 'the kiosk moved on with a required question empty');
+        stopped = true;
+      }
+      await kf.evaluate(CLIENT_FILLS_PAGE);
+      await sleep(300);
+      await kf.clickText('Next Step', '#tablet-kiosk-modal');
+      step = await page();
+    }
+    check(stopped, 'the form had no required question to test');
+    check(step === last, 'the client could not reach the last page');
+    await kf.evaluate(CLIENT_FILLS_PAGE);
+    await kf.scribble('#tablet-kiosk-modal canvas.signature-pad-canvas');
+    await kf.clickText('Complete', '#tablet-kiosk-modal');
+    await eventually(async () => k.evaluate(`document.getElementById('done').classList.contains('on')`), 'the kiosk did not save the form: ' + await kf.evaluate(`(document.getElementById('kiosk-missing-note') || {}).innerText || ''`).catch(() => ''), 8);
+
+    // everything the client gave is saved
+    const listed = (await api(`/api/clients/${made.id}/profile`)).consent_forms[0];
+    check(listed && listed.signed, 'the form is not saved as signed');
+    const form = await api('/api/consent-forms/' + listed.id);
+    const r = form.responses;
+    check(Array.isArray(r.conditions) && r.conditions.length && Array.isArray(r.allergies) && r.allergies.length, 'the medical boxes were lost: ' + JSON.stringify(Object.keys(r)));
+    check(r.blood_thinners && r.full_name === 'Typed full_name', 'the yes/no or typed answers were lost');
+    // the physician box only shows when clearance is needed; either way it never gets today's date put in it
+    check(!/^\d{4}-\d{2}-\d{2}$/.test(String(r.doctor_details || '')), "today's date was put in the physician name box: " + r.doctor_details);
+    check(Array.isArray(r.reference_photo) && /^data:image/.test((r.reference_photo[0] || {}).dataUrl || ''), 'the photo was not saved');
+    const med = form.schema.sections.find((s) => s.type === 'medical_section');
+    check(med && med.fields && med.fields.some((f) => f.id === 'conditions'), 'the medical questions were not saved with the form');
+
+    // the client's record shows what the client declared
+    const client = (await api(`/api/clients/${made.id}/profile`)).client;
+    check(String(client.allergies).includes(r.allergies[0]) && String(client.medical_history).includes(r.conditions[0]), 'the medical overview did not get the declared allergies and conditions');
+
+    // View answers shows the medical answers, the photo as a picture, nothing as [object Object]
+    await b.evaluate(`openClientProfileModal(${made.id})`);
+    await sleep(1200);
+    await b.evaluate(`switchClientProfileTab('waivers')`);
+    await b.evaluate(`viewClientConsentForm(${listed.id})`);
+    await eventually(async () => (await text('#client-profile-modal-body')).includes(r.conditions[0]), 'View answers does not show the medical conditions');
+    const shown = await text('#client-profile-modal-body');
+    check(!shown.includes('[object Object]'), 'View answers shows [object Object]');
+    check(await b.evaluate(`!!document.querySelector('#client-profile-modal-body img[alt="arm.png"]')`), 'View answers does not show the photo');
+    // the laid-out PDF of the completed form
+    b.reset();
+    await pressOn(`downloadConsentFormPDF(${listed.id})`);
+    await eventually(async () => b.seen.downloads.some((d) => d.endsWith('.pdf')), 'the PDF of the completed form was not made', 25);
+    await b.evaluate(`closeClientProfileModal()`);
+    check(!k.seen.errors.length, 'script error on the kiosk: ' + k.seen.errors[0]);
+  } finally {
+    await k.close().catch(() => {});
   }
 });
 

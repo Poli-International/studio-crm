@@ -168,3 +168,22 @@ describe('Studio CRM Utility Functions Unit Tests', () => {
   });
 
 });
+
+import { mergeMedicalInto } from '../src/utils/crm-utils.js';
+
+// Henry, 2026-10-17: what a client declares on a form also reaches the Medical & Sensitivity Overview,
+// added to what staff entered, never replacing it.
+describe('medical answers onto the client record', () => {
+  it('adds allergies, conditions, medication and warnings, keeps what is there, no duplicates', () => {
+    const c = { allergies: 'Latex', medical_history: 'Asthma' };
+    expect(mergeMedicalInto(c, { allergies: ['latex', 'Nickel'], conditions: ['Diabetes'], medications: 'Insulin', blood_thinners: 'Yes', pregnant: 'No', emergency_contact: 'Mum 555' })).toBe(true);
+    expect(c.allergies).toBe('Latex, Nickel');
+    expect(c.medical_history).toBe('Asthma, Diabetes, Medication: Insulin, Takes blood thinners or aspirin');
+    expect(c.emergency_contact).toBe('Mum 555');
+  });
+  it('changes nothing for a form without medical answers, and keeps an emergency contact already set', () => {
+    const c = { emergency_contact: 'Dad' };
+    expect(mergeMedicalInto(c, { full_name: 'X', emergency_contact: 'Someone else' })).toBe(false);
+    expect(c.emergency_contact).toBe('Dad');
+  });
+});

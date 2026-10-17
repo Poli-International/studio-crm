@@ -9,6 +9,7 @@ import { db, safeDbQuery, sqlite } from './src/db/index.js';
 import { startHttps, studioAddress } from './src/https.js';
 import { installAccess } from './src/access.js';
 import { installUpdate } from './src/update.js';
+import { mergeMedicalInto } from './src/utils/crm-utils.js';
 import {
   users as dbUsers,
   activityLogs as dbActivityLogs,
@@ -559,11 +560,11 @@ const todayAt = (hours, mins = 0, offsetDays = 0) => {
 };
 
 const appointments = [
-  { id: 1, client_id: 1, staff_id: 2, service_type: 'Tattoo - Custom Sleeve', datetime: new Date(Date.now() + 22 * 3600 * 1000).toISOString(), duration_minutes: 180, status: 'scheduled', client_name: 'Alex Rivera', staff_name: 'Jaxon Vance', notes: 'Session 2: Upper arm shading' },
-  { id: 2, client_id: 2, staff_id: 3, service_type: 'Piercing - Helix & Tragus', datetime: new Date(Date.now() + 18 * 3600 * 1000).toISOString(), duration_minutes: 45, status: 'scheduled', client_name: 'Samantha Chen', staff_name: 'Maya Lin', notes: 'Titanium jewelry selected' },
-  { id: 3, client_id: 3, staff_id: 2, service_type: 'Consultation - Japanese Backpiece', datetime: todayAt(11, 30, 2), duration_minutes: 60, status: 'scheduled', client_name: 'Marcus Brody', staff_name: 'Jaxon Vance', notes: 'Bring reference sketches' },
-  { id: 4, client_id: 4, staff_id: 4, service_type: 'Fine-Line Botanical Tattoo', datetime: todayAt(15, 30, 3), duration_minutes: 120, status: 'scheduled', client_name: 'Elena Rostova', staff_name: 'Soren Frost', notes: 'Wildflower bouquet on forearm' },
-  { id: 5, client_id: 1, staff_id: 5, service_type: 'Lip Blush PMU Touch-Up', datetime: todayAt(13, 0, 4), duration_minutes: 90, status: 'scheduled', client_name: 'Alex Rivera', staff_name: 'Chloe Vance', notes: 'PMU touch up under Jaxon supervision' }
+  { id: 1, client_id: 1, staff_id: 2, service_type: 'Tattoo - Custom Sleeve', datetime: new Date(Date.now() + 22 * 3600 * 1000).toISOString(), duration_minutes: 180, estimated_price: 650, deposit_paid: 150, status: 'scheduled', client_name: 'Alex Rivera', staff_name: 'Jaxon Vance', notes: 'Session 2: Upper arm shading' },
+  { id: 2, client_id: 2, staff_id: 3, service_type: 'Piercing - Helix & Tragus', datetime: new Date(Date.now() + 18 * 3600 * 1000).toISOString(), duration_minutes: 45, estimated_price: 95, deposit_paid: 0, status: 'scheduled', client_name: 'Samantha Chen', staff_name: 'Maya Lin', notes: 'Titanium jewelry selected' },
+  { id: 3, client_id: 3, staff_id: 2, service_type: 'Consultation - Japanese Backpiece', datetime: todayAt(11, 30, 2), duration_minutes: 60, estimated_price: 0, deposit_paid: 0, status: 'scheduled', client_name: 'Marcus Brody', staff_name: 'Jaxon Vance', notes: 'Bring reference sketches' },
+  { id: 4, client_id: 4, staff_id: 4, service_type: 'Fine-Line Botanical Tattoo', datetime: todayAt(15, 30, 3), duration_minutes: 120, estimated_price: 280, deposit_paid: 80, status: 'scheduled', client_name: 'Elena Rostova', staff_name: 'Soren Frost', notes: 'Wildflower bouquet on forearm' },
+  { id: 5, client_id: 1, staff_id: 5, service_type: 'Lip Blush PMU Touch-Up', datetime: todayAt(13, 0, 4), duration_minutes: 90, estimated_price: 180, deposit_paid: 50, status: 'scheduled', client_name: 'Alex Rivera', staff_name: 'Chloe Vance', notes: 'PMU touch up under Jaxon supervision' }
 ];
 
 // Recurring 24-Hour Appointment Reminder Background Engine
@@ -884,8 +885,8 @@ const paymentMethods = [
 ];
 
 const financial = [
-  { id: 1, client_id: 1, staff_id: 2, amount: 350.00, method: 'Card', type: 'payment', transaction_date: '2025-01-15', status: 'completed', source: 'in-studio', client_name: 'Alex Rivera' },
-  { id: 2, client_id: 2, staff_id: 3, amount: 65.00, method: 'Cash', type: 'payment', transaction_date: '2025-01-18', status: 'completed', source: 'in-studio', client_name: 'Samantha Chen' }
+  { id: 1, client_id: 1, staff_id: 2, amount: 350.00, method: 'Card', type: 'payment', transaction_date: new Date(Date.now() - 6 * 864e5).toISOString().slice(0, 10), status: 'completed', source: 'in-studio', client_name: 'Alex Rivera' },
+  { id: 2, client_id: 2, staff_id: 3, amount: 65.00, method: 'Cash', type: 'payment', transaction_date: new Date(Date.now() - 2 * 864e5).toISOString().slice(0, 10), status: 'completed', source: 'in-studio', client_name: 'Samantha Chen' }
 ];
 
 const compliance = [
@@ -1031,7 +1032,13 @@ async function saveConsentForm(clientId, { formName, formCategory, language, sch
     return { status: 503, body: { error: 'No database configured, the consent form was not stored.' } };
   }
 
+  mergeMedicalAnswers(clientId, responses || {});
   return { status: 201, body: { ok: true, id: Array.isArray(saved) ? saved[0]?.id : undefined } };
+}
+
+function mergeMedicalAnswers(clientId, responses) {
+  const client = clients.find((c) => c.id === clientId);
+  if (client && mergeMedicalInto(client, responses)) scheduleStateSave();
 }
 
 /**
@@ -1108,12 +1115,25 @@ app.post('/api/kiosk/cancel', (req, res) => {
 });
 
 // The client tapped Complete on the tablet: save to the client's record, tell the studio.
+// The form the desk sent stays the record; only the medical questions the tablet showed (a medical section is
+// an empty marker until the form builder fills it) are taken from the tablet, so every answer has its question.
+function withTabletMedicalQuestions(sent, fromTablet) {
+  if (!sent || !Array.isArray(sent.sections) || !fromTablet || !Array.isArray(fromTablet.sections)) return sent;
+  const copy = JSON.parse(JSON.stringify(sent));
+  for (const sec of copy.sections) {
+    if (sec.type !== 'medical_section' || (sec.fields && sec.fields.length)) continue;
+    const t = fromTablet.sections.find((s) => s && s.id === sec.id && s.type === 'medical_section');
+    if (t && Array.isArray(t.fields)) sec.fields = t.fields.filter((f) => f && typeof f.id === 'string').slice(0, 50);
+  }
+  return copy;
+}
+
 app.post('/api/kiosk/submit', async (req, res) => {
   const b = req.body || {};
   const name = kioskOf(req, b.kiosk);
   const item = kioskQueue.get(name);
   if (!item || item.id !== Number(b.id)) return res.status(409).json({ error: 'This form was taken back by the studio. Please ask a member of staff.' });
-  const r = await saveConsentForm(item.clientId, { formName: item.formName, formCategory: item.formCategory, language: b.language || item.language, schema: item.schema, responses: b.responses || {} });
+  const r = await saveConsentForm(item.clientId, { formName: item.formName, formCategory: item.formCategory, language: b.language || item.language, schema: withTabletMedicalQuestions(item.schema, b.schema), responses: b.responses || {} });
   if (r.status >= 400) return res.status(r.status).json(r.body);
   kioskQueue.delete(name);
   logActivity({ category: 'compliance', action: 'KIOSK_FORM_SIGNED', title: `Form completed on the kiosk: ${item.clientName}`,
@@ -5937,7 +5957,6 @@ app.post('/api/staff/:id/shift', (req, res) => {
 const monthlySchedules = [];
 
 (function initializeMonthlySchedules() {
-  const currentYear = 2026;
   const artists = [
     { id: 2, name: 'Jaxon Vance', station: 'Station 1 - Custom Tattoo', workDays: [1, 3, 5, 6], start: '10:00', end: '18:00', type: 'On-Duty' },
     { id: 3, name: 'Maya Lin', station: 'Station 2 - Piercing Suite', workDays: [2, 4, 6, 0], start: '11:00', end: '19:00', type: 'On-Duty' },
@@ -5946,13 +5965,13 @@ const monthlySchedules = [];
   ];
 
   let schedId = 1;
-  // Generate schedules for July and August 2026
-  [6, 7].forEach(monthIdx => { // 6 = July, 7 = August
-    const daysInMonth = new Date(currentYear, monthIdx + 1, 0).getDate();
-    for (let d = 1; d <= daysInMonth; d++) {
-      const dateObj = new Date(currentYear, monthIdx, d);
+  // The demo rota runs from this week for four weeks (it was fixed to July-August 2026, so it was always empty)
+  const monday = new Date(); monday.setHours(12, 0, 0, 0); monday.setDate(monday.getDate() - ((monday.getDay() + 6) % 7));
+  {
+    for (let d = 0; d < 28; d++) {
+      const dateObj = new Date(monday); dateObj.setDate(monday.getDate() + d);
       const dayOfWeek = dateObj.getDay();
-      const dateStr = `${currentYear}-${String(monthIdx + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+      const dateStr = `${dateObj.getFullYear()}-${String(dateObj.getMonth() + 1).padStart(2, '0')}-${String(dateObj.getDate()).padStart(2, '0')}`;
 
       artists.forEach(a => {
         const isWorking = a.workDays.includes(dayOfWeek);
@@ -5971,7 +5990,7 @@ const monthlySchedules = [];
         }
       });
     }
-  });
+  }
 })();
 
 app.get('/api/staff/monthly-schedule', (req, res) => {

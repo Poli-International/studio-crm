@@ -268,6 +268,9 @@ await flow('Book an appointment for a client picked from the list, then edit it'
   await sleep(1200);
   await b.evaluate(`switchClientProfileTab('appointments')`);
   await eventually(async () => { const t = await text('#client-profile-modal-body'); return t.includes('Deposit paid: $75.00') && t.includes('Balance: $125.00') && t.includes('Edit check'); }, 'the profile does not show the deposit, balance and note');
+  // Henry looked for the appointment's note under Staff Notes: it is there too, saying where it came from
+  await b.evaluate(`switchClientProfileTab('notes')`);
+  await eventually(async () => { const t = await text('#client-profile-modal-body'); return t.includes('Edit check') && t.includes('From appointment'); }, 'the appointment note is not in Staff Notes');
   await b.evaluate(`closeClientProfileModal()`);
 });
 
@@ -936,6 +939,12 @@ await flow('Kiosk: every kind of answer the client gives (medical boxes, yes/no,
     await b.evaluate(`fetch('/api/kiosk/send', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ clientId: ${made.id}, kiosk: ${JSON.stringify(device && device.kiosk)}, formName: ${JSON.stringify(schema.name)}, schema: ${JSON.stringify(schema)} }) })`);
     const kf = k.frame('#frame');
     await eventually(async () => kf.evaluate(`!!document.getElementById('tablet-kiosk-modal') && getComputedStyle(document.getElementById('tablet-kiosk-modal')).display !== 'none'`).catch(() => false), 'the form did not open on the kiosk', 20);
+    // page 1 is the studio's own details: no "required" stars the client would read as skipped questions
+    check(await kf.evaluate(`/^studio_/.test(window.ActiveFormPreview.getKioskSections()[0].id) && !document.querySelector('#tablet-kiosk-modal .required-star')`), 'the studio page on the kiosk shows required stars');
+    // an update while the client fills the form in: the tablet does not reload the form away
+    await k.evaluate(`(window.kioskVersion = '0.0.0', window.__stillHere = true)`);
+    await sleep(4000);
+    check(await k.evaluate(`window.__stillHere === true`), 'an update reloaded the tablet with a client form open');
 
     // a required question left empty keeps the client on the page
     const page = () => kf.evaluate(`window.ActiveFormPreview.currentKioskStep`);
@@ -991,6 +1000,8 @@ await flow('Kiosk: every kind of answer the client gives (medical boxes, yes/no,
     await pressOn(`downloadConsentFormPDF(${listed.id})`);
     await eventually(async () => b.seen.downloads.some((d) => d.endsWith('.pdf')), 'the PDF of the completed form was not made', 25);
     await b.evaluate(`closeClientProfileModal()`);
+    // ...and once it waits again, it reloads itself onto the new version (it was told 0.0.0 above)
+    await eventually(async () => k.evaluate(`document.getElementById('idle').classList.contains('on') && window.__stillHere === undefined`).catch(() => false), 'after an update the waiting tablet kept the old pages', 20);
     check(!k.seen.errors.length, 'script error on the kiosk: ' + k.seen.errors[0]);
   } finally {
     await k.close().catch(() => {});

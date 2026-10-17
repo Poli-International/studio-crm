@@ -179,6 +179,12 @@
       .then(function (d) {
         // the server holds a signed-in tablet to the name it signed in with
         if (d.kiosk && d.kiosk !== kiosk) { kiosk = d.kiosk; put('studio_kiosk_name', kiosk); translate(); }
+        // after an update the tablet still holds the old pages (it stays open for days): it reloads itself,
+        // but only while it waits, never with a client's form open (Henry, 2026-10-17)
+        if (d.version) {
+          if (!window.kioskVersion) window.kioskVersion = d.version;
+          else if (d.version !== window.kioskVersion && !current && !busy) { location.reload(); return; }
+        }
         if (busy) return;
         var item = d.item;
         if (item && (!current || current.id !== item.id)) openForm(item);

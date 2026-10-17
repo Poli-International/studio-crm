@@ -159,7 +159,7 @@
     busy = true;
     var item = current;
     fetch('/api/kiosk/submit', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ kiosk: kiosk, id: item.id, language: e.data.language, responses: e.data.responses || {} }) })
+      body: JSON.stringify({ kiosk: kiosk, id: item.id, language: e.data.language, responses: e.data.responses || {}, schema: e.data.schema }) })
       .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, b: b }; }); })
       .then(function (res) {
         frame.classList.remove('on');

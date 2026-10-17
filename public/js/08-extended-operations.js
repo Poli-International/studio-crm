@@ -377,7 +377,20 @@ async function renderSessionDurationReport() {
     const table = document.getElementById("modal-session-duration-breakdown-table");
     if (!table) return;
     const groups = {};
-    (await sessionDurationRows()).forEach((r) => {
+    const rows = await sessionDurationRows();
+    // the four figures above the table used to be typed into the page (148.5 hrs, Maya Lin 98.4%...): worked out here
+    const hours = rows.reduce((t, r) => t + Number(r[4]), 0), billed = rows.reduce((t, r) => t + Number(r[5]), 0);
+    const byArtist = {};
+    rows.forEach((r) => { byArtist[r[0]] = (byArtist[r[0]] || 0) + Number(r[4]); });
+    const top = Object.entries(byArtist).sort((x, y) => y[1] - x[1])[0];
+    const put = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+    put("sd-kpi-total-hours", hours.toFixed(1) + " h");
+    put("sd-kpi-total-sub", rows.length + " " + pdfLabel(rows.length === 1 ? "session" : "sessions"));
+    put("sd-kpi-avg-duration", rows.length ? Math.round(hours * 60 / rows.length) + " min" : "—");
+    put("sd-kpi-efficiency", hours ? "$" + (billed / hours).toFixed(2) : "—");
+    put("sd-kpi-top-artist", top && top[0] ? top[0] : "—");
+    put("sd-kpi-top-sub", top && top[0] ? top[1].toFixed(1) + " h" : "");
+    rows.forEach((r) => {
         const g = groups[r[1] + "|" + r[0]] = groups[r[1] + "|" + r[0]] || { service: r[1], artist: r[0], n: 0, hours: 0, billed: 0 };
         g.n++; g.hours += Number(r[4]); g.billed += Number(r[5]);
     });

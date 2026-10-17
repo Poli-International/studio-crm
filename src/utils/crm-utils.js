@@ -428,4 +428,26 @@ export function getTop5UsedInventoryItems(activities = [], inventory = []) {
   return results.slice(0, 5);
 }
 
-
+// What the client declares on a form also goes on the client's record (Henry, 2026-10-17: the Medical &
+// Sensitivity Overview stayed "None Reported" after a medical form). Added to what is there, never replacing it:
+// staff remove an item by editing the client.
+export function mergeMedicalInto(client, r) {
+  const list = (v) => (Array.isArray(v) ? v : v ? [v] : []).map((x) => String(x).trim()).filter(Boolean);
+  const add = (current, items) => {
+    const have = String(current || '').split(/[;,]\s*/).map((x) => x.trim()).filter(Boolean);
+    const lower = have.map((x) => x.toLowerCase());
+    for (const x of items) if (!lower.includes(x.toLowerCase())) { have.push(x); lower.push(x.toLowerCase()); }
+    return have.join(', ');
+  };
+  const allergies = list(r.allergies);
+  const history = [...list(r.conditions)];
+  if (r.medications && String(r.medications).trim()) history.push('Medication: ' + String(r.medications).trim());
+  if (r.current_rx && String(r.current_rx).trim()) history.push('Medication: ' + String(r.current_rx).trim());
+  if (r.blood_thinners === 'Yes') history.push('Takes blood thinners or aspirin');
+  if (r.pregnant === 'Yes') history.push('Pregnant or nursing');
+  let changed = false;
+  if (allergies.length) { const v = add(client.allergies, allergies); changed = changed || v !== (client.allergies || ''); client.allergies = v; }
+  if (history.length) { const v = add(client.medical_history, history); changed = changed || v !== (client.medical_history || ''); client.medical_history = v; }
+  if (!client.emergency_contact && r.emergency_contact && String(r.emergency_contact).trim()) { client.emergency_contact = String(r.emergency_contact).trim(); changed = true; }
+  return changed;
+}

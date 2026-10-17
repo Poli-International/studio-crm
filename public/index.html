@@ -934,27 +934,27 @@
               </div>
             </div>
 
-            <!-- Financial Summary Cards -->
+            <!-- Financial Summary Cards: worked out from the studio's own payments and appointments (renderFinanceSummary) -->
             <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:1rem;margin-bottom:1.5rem;">
               <div style="background:#0F172A;padding:1rem;border-radius:12px;border:1px solid #1E293B;">
-                <div style="font-size:0.75rem;color:#9CA3AF;font-weight:700;text-transform:uppercase;">Gross Revenue (MTD)</div>
-                <div style="font-size:1.6rem;font-weight:900;color:#34D399;margin:6px 0 2px 0;">$24,850.00</div>
-                <div style="font-size:0.75rem;color:#6B7280;">42 Completed Appointments</div>
+                <div style="font-size:0.75rem;color:#9CA3AF;font-weight:700;text-transform:uppercase;">Payments this month</div>
+                <div id="fin-paid" style="font-size:1.6rem;font-weight:900;color:#34D399;margin:6px 0 2px 0;">—</div>
+                <div id="fin-paid-sub" style="font-size:0.75rem;color:#6B7280;"></div>
               </div>
               <div style="background:#0F172A;padding:1rem;border-radius:12px;border:1px solid #1E293B;">
-                <div style="font-size:0.75rem;color:#9CA3AF;font-weight:700;text-transform:uppercase;">Deposits in Escrow</div>
-                <div style="font-size:1.6rem;font-weight:900;color:#FBBF24;margin:6px 0 2px 0;">$4,200.00</div>
-                <div style="font-size:0.75rem;color:#6B7280;">28 Upcoming Sessions</div>
+                <div style="font-size:0.75rem;color:#9CA3AF;font-weight:700;text-transform:uppercase;">Deposits held</div>
+                <div id="fin-deposits" style="font-size:1.6rem;font-weight:900;color:#FBBF24;margin:6px 0 2px 0;">—</div>
+                <div id="fin-deposits-sub" style="font-size:0.75rem;color:#6B7280;"></div>
               </div>
               <div style="background:#0F172A;padding:1rem;border-radius:12px;border:1px solid #1E293B;">
-                <div style="font-size:0.75rem;color:#9CA3AF;font-weight:700;text-transform:uppercase;">Artist Payouts (Pending)</div>
-                <div style="font-size:1.6rem;font-weight:900;color:#F472B6;margin:6px 0 2px 0;">$9,450.00</div>
-                <div style="font-size:0.75rem;color:#6B7280;">Weekly Payout Rota Active</div>
+                <div style="font-size:0.75rem;color:#9CA3AF;font-weight:700;text-transform:uppercase;">Still to collect</div>
+                <div id="fin-due" style="font-size:1.6rem;font-weight:900;color:#F472B6;margin:6px 0 2px 0;">—</div>
+                <div id="fin-due-sub" style="font-size:0.75rem;color:#6B7280;"></div>
               </div>
               <div style="background:#0F172A;padding:1rem;border-radius:12px;border:1px solid #1E293B;">
-                <div style="font-size:0.75rem;color:#9CA3AF;font-weight:700;text-transform:uppercase;">Net Studio Margin</div>
-                <div style="font-size:1.6rem;font-weight:900;color:#60A5FA;margin:6px 0 2px 0;">62.4%</div>
-                <div style="font-size:0.75rem;color:#6B7280;">Supply Overhead Deducted</div>
+                <div style="font-size:0.75rem;color:#9CA3AF;font-weight:700;text-transform:uppercase;">Sessions completed this month</div>
+                <div id="fin-done" style="font-size:1.6rem;font-weight:900;color:#60A5FA;margin:6px 0 2px 0;">—</div>
+                <div id="fin-done-sub" style="font-size:0.75rem;color:#6B7280;"></div>
               </div>
             </div>
           </div>
@@ -2253,23 +2253,23 @@ docker compose up -d</pre>
             <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:1rem;margin-bottom:1.5rem;">
                 <div style="background:#111827;border:1px solid #374151;border-radius:10px;padding:1rem;">
                     <div style="font-size:0.75rem;font-weight:700;color:#9CA3AF;text-transform:uppercase;">Total Session Hours</div>
-                    <div id="sd-kpi-total-hours" style="font-size:1.6rem;font-weight:800;color:#38BDF8;margin-top:2px;">148.5 hrs</div>
-                    <div style="font-size:0.725rem;color:#10B981;margin-top:2px;">✓ 42 procedures logged</div>
+                    <div id="sd-kpi-total-hours" style="font-size:1.6rem;font-weight:800;color:#38BDF8;margin-top:2px;">—</div>
+                    <div id="sd-kpi-total-sub" style="font-size:0.725rem;color:#10B981;margin-top:2px;"></div>
                 </div>
                 <div style="background:#111827;border:1px solid #374151;border-radius:10px;padding:1rem;">
                     <div style="font-size:0.75rem;font-weight:700;color:#9CA3AF;text-transform:uppercase;">Avg Procedure Duration</div>
-                    <div id="sd-kpi-avg-duration" style="font-size:1.6rem;font-weight:800;color:#A78BFA;margin-top:2px;">84.2 mins</div>
-                    <div style="font-size:0.725rem;color:#9CA3AF;margin-top:2px;">Target: 90.0 mins</div>
+                    <div id="sd-kpi-avg-duration" style="font-size:1.6rem;font-weight:800;color:#A78BFA;margin-top:2px;">—</div>
+                    <div style="font-size:0.725rem;color:#9CA3AF;margin-top:2px;">per completed session</div>
                 </div>
                 <div style="background:#111827;border:1px solid #374151;border-radius:10px;padding:1rem;">
-                    <div style="font-size:0.75rem;font-weight:700;color:#9CA3AF;text-transform:uppercase;">Overall Efficiency Index</div>
-                    <div id="sd-kpi-efficiency" style="font-size:1.6rem;font-weight:800;color:#10B981;margin-top:2px;">96.4%</div>
-                    <div style="font-size:0.725rem;color:#34D399;margin-top:2px;">Optimal needle time</div>
+                    <div style="font-size:0.75rem;font-weight:700;color:#9CA3AF;text-transform:uppercase;">Billed per hour</div>
+                    <div id="sd-kpi-efficiency" style="font-size:1.6rem;font-weight:800;color:#10B981;margin-top:2px;">—</div>
+                    <div style="font-size:0.725rem;color:#34D399;margin-top:2px;">across completed sessions</div>
                 </div>
                 <div style="background:#111827;border:1px solid #374151;border-radius:10px;padding:1rem;">
-                    <div style="font-size:0.75rem;font-weight:700;color:#9CA3AF;text-transform:uppercase;">Top Efficiency Artist</div>
-                    <div id="sd-kpi-top-artist" style="font-size:1.3rem;font-weight:800;color:#F59E0B;margin-top:2px;">Maya Lin</div>
-                    <div style="font-size:0.725rem;color:#FBBF24;margin-top:2px;">98.4% pace rating</div>
+                    <div style="font-size:0.75rem;font-weight:700;color:#9CA3AF;text-transform:uppercase;">Most hours</div>
+                    <div id="sd-kpi-top-artist" style="font-size:1.3rem;font-weight:800;color:#F59E0B;margin-top:2px;">—</div>
+                    <div id="sd-kpi-top-sub" style="font-size:0.725rem;color:#FBBF24;margin-top:2px;"></div>
                 </div>
             </div>
 

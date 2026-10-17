@@ -63,6 +63,7 @@ window.openClientProfileModal = openClientProfileModal;
 function closeClientProfileModal() {
     forceHideModal('client-profile-modal-overlay');
     currentActiveProfileClient = null;
+    renderClientsTable();   // a form signed on a kiosk meanwhile shows in the counts at once
 }
 
 function confirmDeleteActiveClient() {
@@ -422,6 +423,8 @@ function switchClientProfileTab(tabName) {
                         <div style="font-size:0.8rem;color:#9CA3AF;margin-top:2px;">
                             📅 <strong>${escapeHtml(a.date || (a.datetime ? new Date(a.datetime).toLocaleDateString() : ''))}</strong> &bull; ⏰ ${escapeHtml(a.time || (a.datetime ? new Date(a.datetime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''))} &bull; 🎨 Artist: <strong style="color:#60A5FA;">${escapeHtml(a.staff_name || 'Not recorded')}</strong>
                         </div>
+                        ${Number(a.deposit_paid) > 0 ? `<div class="cp-appt-deposit" style="font-size:0.8rem;color:#FBBF24;margin-top:4px;">${escapeHtml(pdfLabel("Deposit paid"))}: $${Number(a.deposit_paid).toFixed(2)} &bull; ${escapeHtml(pdfLabel("Balance"))}: $${Math.max(0, Number(a.estimated_price || a.price || a.amount || 0) - Number(a.deposit_paid)).toFixed(2)}</div>` : ''}
+                        ${a.notes ? `<div class="cp-appt-note" style="font-size:0.8rem;color:#CBD5E1;margin-top:4px;white-space:pre-wrap;">📝 ${escapeHtml(a.notes)}</div>` : ''}
                     </div>
 
                     <div style="display:flex;align-items:center;gap:10px;">
@@ -451,7 +454,8 @@ function switchClientProfileTab(tabName) {
                         <div style="font-weight:700;font-size:0.95rem;color:#F9FAFB;">📝 ${escapeHtml(f.name || 'Consent form')}</div>
                         <div style="font-size:0.78rem;color:#9CA3AF;margin-top:2px;">Saved ${escapeHtml(String(f.saved_at || ''))} &bull; ${f.signed ? 'signed' : 'not signed'}</div>
                     </div>
-                    <button type="button" onclick="viewClientConsentForm(${Number(f.id)})" style="padding:0.4rem 0.75rem;background:#2563EB;color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">View answers</button>
+                    <span style="display:flex;gap:8px;"><button type="button" onclick="viewClientConsentForm(${Number(f.id)})" style="padding:0.4rem 0.75rem;background:#2563EB;color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">View answers</button>
+                    <button type="button" onclick="downloadConsentFormPDF(${Number(f.id)})" style="padding:0.4rem 0.75rem;background:#1E40AF;color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">🖨️ PDF</button></span>
                 </div>`).join('')}
             </div>` : '';
         if (!waivers || waivers.length === 0) {
@@ -603,9 +607,14 @@ async function viewClientConsentForm(formId) {
         form = await res.json();
     } catch (e) { showStudioToast('Could not open the consent form: the server did not answer'); return; }
     const responses = form.responses || {};
+    const picture = (src, alt) => `<img src="${src}" alt="${escapeHtml(alt)}" style="max-width:320px;max-height:320px;background:#FFF;border-radius:6px;display:block;margin:4px 0 4px auto;">`;
+    const isPicture = (v) => typeof v === 'string' && v.startsWith('data:image');
     const show = (v) => {
-        if (typeof v === 'string' && v.startsWith('data:image')) return `<img src="${v}" alt="Signature or drawing" style="max-width:320px;background:#FFF;border-radius:6px;">`;
-        if (Array.isArray(v)) return escapeHtml(v.join(', '));
+        if (isPicture(v)) return picture(v, 'Signature or drawing');
+        // attached photos are saved as a list of { name, dataUrl } (Henry, 2026-10-17: they showed as [object Object])
+        if (Array.isArray(v) && v.some((p) => p && typeof p === 'object')) return v.map((p) => (p && isPicture(p.dataUrl) ? picture(p.dataUrl, p.name || 'Photo') : escapeHtml(p && p.name || ''))).join('') || 'No answer';
+        if (v && typeof v === 'object' && isPicture(v.dataUrl)) return picture(v.dataUrl, v.name || 'Photo');
+        if (Array.isArray(v)) return v.length ? escapeHtml(v.join(', ')) : escapeHtml(pdfLabel('None'));   // no box ticked
         if (v === true) return 'Yes';
         if (v === false) return 'No';
         return escapeHtml(v == null || v === '' ? 'No answer' : String(v));
@@ -618,13 +627,42 @@ async function viewClientConsentForm(formId) {
         if (rows.length) html += `<div style="background:#1F2937;border:1px solid #374151;border-radius:12px;padding:1rem;margin-bottom:1rem;"><h4 style="margin:0 0 0.5rem 0;font-size:0.95rem;color:#F9FAFB;">${escapeHtml(sec.title || '')}</h4>${rows.join('')}</div>`;
     });
     const rest = Object.keys(responses).filter((k) => !seen.has(k));
-    if (rest.length) html += `<div style="background:#1F2937;border:1px solid #374151;border-radius:12px;padding:1rem;"><h4 style="margin:0 0 0.5rem 0;font-size:0.95rem;color:#F9FAFB;">Other answers</h4>${rest.map((k) => line(k.replace(/_/g, ' '), responses[k])).join('')}</div>`;
+    const medical = ((form.schema && form.schema.sections) || []).find((sec) => sec.type === 'medical_section');
+    const restTitle = medical ? (medical.title || 'Medical History') : 'Other answers';
+    if (rest.length) html += `<div style="background:#1F2937;border:1px solid #374151;border-radius:12px;padding:1rem;"><h4 style="margin:0 0 0.5rem 0;font-size:0.95rem;color:#F9FAFB;">${escapeHtml(restTitle)}</h4>${rest.map((k) => line(k.replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase()), responses[k])).join('')}</div>`;
     bodyEl.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;">
             <div><div style="font-weight:800;font-size:1.05rem;color:#F9FAFB;">📝 ${escapeHtml(form.name || 'Consent form')}</div><div style="font-size:0.78rem;color:#9CA3AF;">Saved ${escapeHtml(String(form.saved_at || ''))}</div></div>
-            <button type="button" onclick="switchClientProfileTab('waivers')" style="padding:0.4rem 0.75rem;background:#374151;color:#F3F4F6;border:none;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;">← Back to waivers</button>
+            <span style="display:flex;gap:8px;"><button type="button" onclick="downloadConsentFormPDF(${Number(form.id)})" style="padding:0.4rem 0.75rem;background:#2563EB;color:#FFF;border:none;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;">🖨️ PDF</button>
+            <button type="button" onclick="switchClientProfileTab('waivers')" style="padding:0.4rem 0.75rem;background:#374151;color:#F3F4F6;border:none;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;">← Back to waivers</button></span>
         </div>` + (html || '<div style="color:#9CA3AF;">This form was saved with no answers.</div>');
 }
 window.viewClientConsentForm = viewClientConsentForm;
+
+// The full laid-out PDF of a saved form, as the form builder prints it (Henry, 2026-10-17). The form builder is
+// loaded once, out of sight, and given the saved form, its answers and the client's signature.
+let consentPdfFrame = null;
+async function downloadConsentFormPDF(formId) {
+    let form;
+    try { const r = await fetch('/api/consent-forms/' + formId); if (!r.ok) throw new Error(); form = await r.json(); }
+    catch (e) { showStudioToast('Could not open the consent form: the server did not answer'); return; }
+    if (!consentPdfFrame) {
+        consentPdfFrame = document.createElement('iframe');
+        consentPdfFrame.setAttribute('aria-hidden', 'true');
+        consentPdfFrame.style.cssText = 'position:fixed;width:900px;height:700px;left:-10000px;top:0;border:0;';
+        consentPdfFrame.src = 'tools/form-builder/index.html';
+        document.body.appendChild(consentPdfFrame);
+    }
+    const ready = () => { try { const w = consentPdfFrame.contentWindow; return w.PDFGenerator && w.i18n && w.i18n.isLoaded && w.jspdf ? w : null; } catch (e) { return null; } };
+    let w = null;
+    for (let i = 0; i < 80 && !(w = ready()); i++) await new Promise((r) => setTimeout(r, 250));
+    if (!w) { showStudioToast('The PDF could not be made: the form builder did not load'); return; }
+    if (form.language && w.i18n.currentLanguage !== form.language) await w.i18n.setLanguage(form.language);
+    const responses = form.responses || {};
+    const sigField = [].concat(...((form.schema && form.schema.sections) || []).map((s) => s.fields || [])).find((f) => f.type === 'signature' && typeof responses[f.id] === 'string' && responses[f.id].startsWith('data:image'));
+    try { await w.PDFGenerator.generateFormPDF(form.schema, responses, sigField ? responses[sigField.id] : null); }
+    catch (e) { showStudioToast('The PDF could not be made: ' + e.message); }
+}
+window.downloadConsentFormPDF = downloadConsentFormPDF;
 
 // 🔒 HANDLE PRIVATE STAFF NOTE SUBMISSION
 async function handleStaffNoteSubmit(event, clientId) {
@@ -1023,11 +1061,13 @@ function renderD3ClientAppointmentTimeline(appointments) {
             .attr('stroke', '#111827')
             .attr('stroke-width', 2);
 
+        // the first and last labels hang inside the track, not off its edge ("ttoo - Custom")
+        const anchor = appts.length === 1 ? 'middle' : i === 0 ? 'start' : i === appts.length - 1 ? 'end' : 'middle';
         // Date text above
         svg.append('text')
             .attr('x', cx)
             .attr('y', cy - 18)
-            .attr('text-anchor', 'middle')
+            .attr('text-anchor', anchor)
             .attr('fill', '#9CA3AF')
             .attr('font-size', '10px')
             .attr('font-weight', '700')
@@ -1037,7 +1077,7 @@ function renderD3ClientAppointmentTimeline(appointments) {
         svg.append('text')
             .attr('x', cx)
             .attr('y', cy + 24)
-            .attr('text-anchor', 'middle')
+            .attr('text-anchor', anchor)
             .attr('fill', '#F3F4F6')
             .attr('font-size', '11px')
             .attr('font-weight', '700')
@@ -2050,7 +2090,7 @@ window.openQuickPortalAccessModal = openQuickPortalAccessModal;
 
 // Record Payment used to open the deposit ledger and say "Payment Recording Terminal ready":
 // nothing could be recorded. A real form now, saved as a transaction (/api/financial).
-async function openQuickRecordPaymentModal() {
+async function openQuickRecordPaymentModal(prefill) {
     let overlay = document.getElementById('record-payment-modal-overlay');
     if (!overlay) {
         overlay = document.createElement('div');
@@ -2085,6 +2125,10 @@ async function openQuickRecordPaymentModal() {
         sel.innerHTML = '<option value="">Walk-in / not on file</option>' + (Array.isArray(clients) ? clients : [])
             .map((c) => `<option value="${Number(c.id)}">${escapeHtml(c.name || '')}</option>`).join('');
     } catch (e) { /* the form still records a walk-in payment */ }
+    if (prefill && typeof prefill === 'object') {
+        if (prefill.clientId) document.getElementById('record-payment-client').value = String(prefill.clientId);
+        if (prefill.amount > 0) document.getElementById('record-payment-amount').value = Number(prefill.amount).toFixed(2);
+    }
     document.getElementById('record-payment-amount').focus();
 }
 
@@ -2101,6 +2145,8 @@ async function saveQuickPayment(event) {
     forceHideModal('record-payment-modal-overlay');
     showStudioToast('Payment recorded: $' + amount.toFixed(2));
     if (typeof renderDashboardKpis === 'function') renderDashboardKpis();
+    renderClientsTable();   // Total spent
+    renderFinanceSummary();
 }
 window.openQuickRecordPaymentModal = openQuickRecordPaymentModal;
 
@@ -2782,6 +2828,31 @@ window.renderClientDirectoryModal = renderClientDirectoryModal;
 // =========================================================================
 // 16. CORE MODAL & FORM HANDLERS IMPLEMENTATION
 // =========================================================================
+
+// --- Finance summary: these four figures used to be typed into the page ($24,850, "42 completed
+// appointments"...) and showed in every studio, even an empty one. Now worked out from the studio's records. ---
+async function renderFinanceSummary() {
+    const el = (id) => document.getElementById(id);
+    if (!el('fin-paid')) return;
+    const get = (u) => fetch(u).then((r) => (r.ok ? r.json() : null), () => null);
+    const [payments, appts] = await Promise.all([get('/api/financial'), get('/api/appointments')]);
+    const month = new Date().toISOString().slice(0, 7);
+    const money = (n) => '$' + n.toFixed(2);
+    const set = (id, value, sub) => { el('fin-' + id).textContent = value; el('fin-' + id + '-sub').textContent = sub; };
+    if (Array.isArray(payments)) {
+        const paid = payments.filter((p) => p.status === 'completed' && p.type !== 'refund' && String(p.transaction_date || '').slice(0, 7) === month);
+        set('paid', money(paid.reduce((t, p) => t + Number(p.amount || 0), 0)), paid.length + ' ' + pdfLabel(paid.length === 1 ? 'payment' : 'payments'));
+    } else set('paid', '—', pdfLabel('Administrators only'));
+    const list = Array.isArray(appts) ? appts : [];
+    const open = list.filter((a) => a.status !== 'completed' && a.status !== 'cancelled');
+    const price = (a) => Number(a.estimated_price || a.price || 0), deposit = (a) => Number(a.deposit_paid || 0);
+    const withDeposit = open.filter((a) => deposit(a) > 0);
+    set('deposits', money(withDeposit.reduce((t, a) => t + deposit(a), 0)), withDeposit.length + ' ' + pdfLabel('upcoming sessions with a deposit'));
+    set('due', money(open.reduce((t, a) => t + Math.max(0, price(a) - deposit(a)), 0)), open.length + ' ' + pdfLabel('upcoming sessions'));
+    const done = list.filter((a) => a.status === 'completed' && String(a.datetime || a.date || '').slice(0, 7) === month);
+    set('done', String(done.length), pdfLabel('this month'));
+}
+window.renderFinanceSummary = renderFinanceSummary;
 
 // --- Clients destination table: rendered from the studio database ---
 async function renderClientsTable() {
@@ -4319,17 +4390,24 @@ document.addEventListener("DOMContentLoaded", renderAppointmentsList);
 // Every screen that shows appointments, after one is booked, completed or removed: the four
 // buttons each refreshed a different part, so a count or a station could show a stale booking.
 function refreshAppointmentViews() {
+    renderFinanceSummary();
     renderAppointmentsList();
     if (typeof renderDashboardKpis === "function") renderDashboardKpis();
     if (typeof renderStationStripAndSessions === "function") renderStationStripAndSessions();
 }
 
 async function setAppointmentStatus(id, status) {
+    let appt = null;
     try {
         const res = await fetch("/api/appointments/" + id + "/status", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status }) });
         if (!res.ok) throw new Error("HTTP " + res.status);
+        appt = await res.json().catch(() => null);
     } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
     refreshAppointmentViews();
+    // Henry, 2026-10-17: "Total spent" did not move when a session was completed. Spent is what was paid, so the
+    // payment is recorded here, filled in with the client and the price; close the window if it was paid already.
+    const price = appt ? Number(appt.estimated_price || appt.price || 0) : 0;
+    if (status === "completed" && appt && appt.id && price > 0) openQuickRecordPaymentModal({ clientId: appt.client_id, amount: price });
 }
 window.setAppointmentStatus = setAppointmentStatus;
 

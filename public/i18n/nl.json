@@ -1802,5 +1802,22 @@
  "Version {0} is available (you have {1}).": "Versie {0} is beschikbaar (u hebt {1}).",
  "This copy was not installed from the ready-to-run download: update it the way it was installed.": "Deze kopie is niet vanaf de kant-en-klare download geïnstalleerd: werk hem bij zoals hij is geïnstalleerd.",
  "Install the new version now? The CRM restarts by itself in a minute or two; other screens and tablets reconnect.": "De nieuwe versie nu installeren? Het CRM start binnen een à twee minuten vanzelf opnieuw; andere schermen en tablets maken weer verbinding.",
- "The update could not start": "De update kon niet starten"
+ "The update could not start": "De update kon niet starten",
+ "The PDF could not be made: the form builder did not load": "De pdf kon niet worden gemaakt: de formulierenbouwer is niet geladen",
+ "Payments this month": "Betalingen deze maand",
+ "Deposits held": "Ontvangen aanbetalingen",
+ "Still to collect": "Nog te ontvangen",
+ "Sessions completed this month": "Afgeronde sessies deze maand",
+ "payment": "betaling",
+ "payments": "betalingen",
+ "Administrators only": "Alleen beheerders",
+ "upcoming sessions with a deposit": "komende sessies met aanbetaling",
+ "upcoming sessions": "komende sessies",
+ "this month": "deze maand",
+ "session": "sessie",
+ "sessions": "sessies",
+ "per completed session": "per afgeronde sessie",
+ "Billed per hour": "Gefactureerd per uur",
+ "across completed sessions": "over afgeronde sessies",
+ "Most hours": "Meeste uren"
 }

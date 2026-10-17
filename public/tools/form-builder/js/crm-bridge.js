@@ -104,6 +104,20 @@
         return read;
     }
 
+    // A medical section is a marker in the form: its questions (allergies, conditions, blood thinners...)
+    // come from MedicalHistorySystem when it is shown. Save them with the form, in the client's language,
+    // so the CRM can show and print every medical answer later (Henry, 2026-10-17: they were missing).
+    function withMedicalQuestions(form) {
+        var copy = JSON.parse(JSON.stringify(form));
+        var mhs = window.MedicalHistorySystem;
+        (copy.sections || []).forEach(function (sec) {
+            if (sec.type === 'medical_section' && (!sec.fields || !sec.fields.length) && mhs && mhs.getMedicalSection) {
+                sec.fields = JSON.parse(JSON.stringify(mhs.getMedicalSection().fields || []));
+            }
+        });
+        return copy;
+    }
+
     function saveToClient(btn) {
         if (!host) return;
         var form = window.FormBuilderApp && window.FormBuilderApp.currentForm;
@@ -116,7 +130,7 @@
             formName: form.name || 'Consent form',
             formCategory: form.category || null,
             language: (window.i18n && window.i18n.currentLanguage) || 'en',
-            schema: form,
+            schema: withMedicalQuestions(form),
             responses: collectResponses()
         }, window.location.origin);
 
@@ -222,7 +236,9 @@
         var app = window.ActiveFormPreview;
         if (!btn || !host || !app) return;
         var lastStep = app.currentKioskStep >= app.getKioskSections().length - 1;
-        if (lastStep && app.validateAll().length === 0) saveToClient(null);
+        // the page on screen is checked (validateAll() sees nothing in kiosk mode, so a form with required
+        // answers missing was saved here before the kiosk's own check ran)
+        if (lastStep && !(app.kioskMissing ? app.kioskMissing() : app.validateAll().length)) saveToClient(null);
     }, true);
 
     // Announce readiness so the parent can hand over the client context.

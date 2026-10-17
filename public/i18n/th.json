@@ -1819,5 +1819,7 @@
  "per completed session": "ต่อเซสชันที่เสร็จ",
  "Billed per hour": "เรียกเก็บต่อชั่วโมง",
  "across completed sessions": "จากเซสชันที่เสร็จทั้งหมด",
- "Most hours": "ชั่วโมงมากที่สุด"
+ "Most hours": "ชั่วโมงมากที่สุด",
+ "Appointment": "การนัดหมาย",
+ "From appointment": "จากการนัดหมาย"
 }

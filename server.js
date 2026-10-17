@@ -1076,7 +1076,7 @@ app.get('/api/kiosk/next', (req, res) => {
   const name = kioskOf(req, req.query.kiosk);
   kioskSeen.set(name, Date.now());
   const item = kioskQueue.get(name);
-  res.set('Cache-Control', 'no-store').json({ kiosk: name, item: item ? { id: item.id, clientName: item.clientName, formName: item.formName, language: item.language, schema: item.schema } : null });
+  res.set('Cache-Control', 'no-store').json({ kiosk: name, version: APP_VERSION, item: item ? { id: item.id, clientName: item.clientName, formName: item.formName, language: item.language, schema: item.schema } : null });
 });
 
 // The tablets seen in the last two minutes, and what waits on each: for the desk's "Send to kiosk".

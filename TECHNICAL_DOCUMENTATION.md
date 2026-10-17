@@ -433,6 +433,14 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.14
+
+From Henry's first 1.0.13 test (2026-10-17 06:18):
+
+- The kiosk tablet reloads itself after an update: `/api/kiosk/next` returns the server `version`; kiosk.html keeps the first one it sees and reloads when it changes, only while waiting (never with a form open). The kiosk page stays open for days and keeps the form builder loaded, so the first form after an update ran on the old code (1.0.12 did not enforce required questions without a PIN).
+- No "required" stars on the studio-details page (`studio_*` sections) on the kiosk: those fields are not asked of the client, and the stars read as required questions the kiosk let the client skip.
+- An appointment's note also shows in the profile's Staff Notes, marked "From appointment: <service>", with the appointment date and no delete button (it belongs to the appointment).
+
 ### 1.0.13
 
 From Henry's kiosk tests (2026-10-17):

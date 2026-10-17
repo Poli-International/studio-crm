@@ -1819,5 +1819,7 @@
  "per completed session": "por sesión completada",
  "Billed per hour": "Facturado por hora",
  "across completed sessions": "en las sesiones completadas",
- "Most hours": "Más horas"
+ "Most hours": "Más horas",
+ "Appointment": "Cita",
+ "From appointment": "De la cita"
 }

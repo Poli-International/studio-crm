@@ -60,6 +60,13 @@ async function openClientProfileModal(clientId) {
 }
 window.openClientProfileModal = openClientProfileModal;
 
+function appointmentNotes(appointments) {
+    return (appointments || []).filter((a) => a && String(a.notes || '').trim()).map((a) => ({
+        fromAppointment: true, id: 'appt-' + a.id, author: a.staff_name || 'Staff Member', author_role: pdfLabel('Appointment'),
+        category: pdfLabel('From appointment') + ': ' + (a.service_type || a.service || ''), note: a.notes,
+        timestamp: a.datetime || a.date || '' }));
+}
+
 function closeClientProfileModal() {
     forceHideModal('client-profile-modal-overlay');
     currentActiveProfileClient = null;
@@ -125,7 +132,7 @@ function renderClientProfileHeader(data) {
     if (countWork) countWork.textContent = (data.tattoo_work || []).length;
 
     const countNotes = document.getElementById('cp-count-notes');
-    if (countNotes) countNotes.textContent = (data.staff_notes || []).length;
+    if (countNotes) countNotes.textContent = (data.staff_notes || []).length + appointmentNotes(data.appointments).length;
 }
 
 function switchClientProfileTab(tabName) {
@@ -151,7 +158,8 @@ function switchClientProfileTab(tabName) {
     const appointments = data.appointments || [];
     const waivers = data.waivers || [];
     const tattoo_work = data.tattoo_work || [];
-    const staffNotes = data.staff_notes || client.staff_notes || [];
+    // an appointment's note shows here too, marked with where it came from (Henry, 2026-10-17: he looked for it here)
+    const staffNotes = (data.staff_notes || client.staff_notes || []).concat(appointmentNotes(appointments));
 
     if (tabName === 'overview') {
         const hasAllergies = client.allergies && client.allergies.toLowerCase() !== 'none' && client.allergies.trim() !== '';
@@ -259,6 +267,7 @@ function switchClientProfileTab(tabName) {
     } else if (tabName === 'notes') {
         // 🔒 PRIVATE STAFF NOTES TAB (CHRONOLOGICAL DISPLAY & PERSISTENCE)
         const sortedNotes = [...staffNotes].sort((a, b) => new Date(a.timestamp || 0) - new Date(b.timestamp || 0));
+        const fromAppointment = (n) => n.fromAppointment;
 
         let notesHtml = `
             <div style="display:flex;flex-direction:column;gap:1.25rem;">
@@ -380,7 +389,7 @@ function switchClientProfileTab(tabName) {
                                 <span style="font-size:0.75rem;color:#9CA3AF;font-family:monospace;">
                                     🕒 ${dateStr} at ${timeStr}
                                 </span>
-                                <button type="button" onclick="confirmDeleteClientStaffNote(${client.id}, '${n.id}', '${escapeHtml((n.note || '').substring(0, 40))}')" style="background:none;border:none;color:#EF4444;font-size:0.85rem;cursor:pointer;padding:2px 6px;" title="Delete Staff Note">&times;</button>
+                                ${fromAppointment(n) ? '' : `<button type="button" onclick="confirmDeleteClientStaffNote(${client.id}, '${n.id}', '${escapeHtml((n.note || '').substring(0, 40))}')" style="background:none;border:none;color:#EF4444;font-size:0.85rem;cursor:pointer;padding:2px 6px;" title="Delete Staff Note">&times;</button>`}
                             </div>
                         </div>
 
@@ -702,7 +711,7 @@ async function handleStaffNoteSubmit(event, clientId) {
                 currentActiveProfileClient.client.staff_notes = data.staff_notes || [];
             }
             const countNotes = document.getElementById('cp-count-notes');
-            if (countNotes) countNotes.textContent = (data.staff_notes || []).length;
+            if (countNotes) countNotes.textContent = (data.staff_notes || []).length + appointmentNotes(currentActiveProfileClient && currentActiveProfileClient.appointments).length;
         }
 
         switchClientProfileTab('notes');
@@ -736,7 +745,7 @@ function confirmDeleteClientStaffNote(clientId, noteId, notePreview) {
                         currentActiveProfileClient.client.staff_notes = data.staff_notes || [];
                     }
                     const countNotes = document.getElementById('cp-count-notes');
-                    if (countNotes) countNotes.textContent = (data.staff_notes || []).length;
+                    if (countNotes) countNotes.textContent = (data.staff_notes || []).length + appointmentNotes(currentActiveProfileClient && currentActiveProfileClient.appointments).length;
                 }
 
                 switchClientProfileTab('notes');
@@ -1262,7 +1271,7 @@ async function logRapidClientProcedureNote(noteText) {
             currentActiveProfileClient.client.staff_notes = data.staff_notes || [];
         }
         const countNotes = document.getElementById('cp-count-notes');
-        if (countNotes) countNotes.textContent = (data.staff_notes || []).length;
+        if (countNotes) countNotes.textContent = (data.staff_notes || []).length + appointmentNotes(currentActiveProfileClient && currentActiveProfileClient.appointments).length;
 
         if (currentProfileActiveTab === 'notes') {
             switchClientProfileTab('notes');

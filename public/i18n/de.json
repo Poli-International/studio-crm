@@ -1819,5 +1819,7 @@
  "per completed session": "pro abgeschlossener Sitzung",
  "Billed per hour": "Pro Stunde berechnet",
  "across completed sessions": "über alle abgeschlossenen Sitzungen",
- "Most hours": "Meiste Stunden"
+ "Most hours": "Meiste Stunden",
+ "Appointment": "Termin",
+ "From appointment": "Aus dem Termin"
 }

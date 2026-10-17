@@ -1821,5 +1821,13 @@
  "across completed sessions": "en las sesiones completadas",
  "Most hours": "Más horas",
  "Appointment": "Cita",
- "From appointment": "De la cita"
+ "From appointment": "De la cita",
+ "Remaining": "Quedan",
+ "Report generated for": "Informe del",
+ "Automatic CSV sync is off.": "La sincronización CSV automática está desactivada.",
+ "Automatic CSV sync is on, but no CSV address is set yet.": "La sincronización CSV automática está activada, pero aún no hay una dirección CSV.",
+ "Automatic CSV sync is on: every {0} minutes.": "La sincronización CSV automática está activada: cada {0} minutos.",
+ "Printable stock labels": "Etiquetas de stock imprimibles",
+ "Stock labels": "Etiquetas de stock",
+ "No stock items yet. Add them in Inventory, then print their labels here.": "Aún no hay artículos en stock. Añádalos en Inventario y luego imprima aquí sus etiquetas."
 }

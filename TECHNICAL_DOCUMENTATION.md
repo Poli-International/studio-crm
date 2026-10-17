@@ -433,6 +433,19 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.15
+
+Content nobody entered, found by opening every screen and all 93 windows of an emptied studio:
+
+- Staff Notes "author": the studio's own staff from `/api/staff` (`fillNoteAuthors`); the list was typed in with the demo staff (Jaxon Vance, Maya Lin, Dr. Elena Rostova...).
+- Low-stock cards on the Inventory screen: the studio's items at or below their reorder level (`renderLowStockGrid`, same rule as the low-stock CSV). Three invented items were typed into the page.
+- The reorder list ("Quick reorder") copied four invented products with real brand names; it now lists the studio's low stock.
+- Stock labels (was "Printable QR Tags"): one text label per stock item (name, SKU, lot, expiry). It printed one invented label with a "barcode" of | characters. Scannable codes need a code generator the CRM does not ship.
+- Settings, automatic CSV sync: the card showed "Background sync is active (every 30 minutes)" and drew the switch on whatever the server's setting; it now shows `/api/sync/status` (`renderSyncSettingsCard`), and the switch is redrawn when changed.
+- Daily summary footer: today's date (it said 2026-07-29).
+- Emptying the studio renames the demo stations to "Station 1-4" and the demo owner "Admin Manager" (admin@studiocrm.com) to "Studio owner" (no email). `logActivity` records "Admin Manager" (written into ~50 routes as the actor) as the studio's owner.
+- The empty-studio click flow checks all of these.
+
 ### 1.0.14
 
 From Henry's first 1.0.13 test (2026-10-17 06:18):

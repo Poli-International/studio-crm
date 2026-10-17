@@ -1821,5 +1821,13 @@
  "across completed sessions": "over afgeronde sessies",
  "Most hours": "Meeste uren",
  "Appointment": "Afspraak",
- "From appointment": "Uit de afspraak"
+ "From appointment": "Uit de afspraak",
+ "Remaining": "Over",
+ "Report generated for": "Rapport voor",
+ "Automatic CSV sync is off.": "Automatische CSV-synchronisatie staat uit.",
+ "Automatic CSV sync is on, but no CSV address is set yet.": "Automatische CSV-synchronisatie staat aan, maar er is nog geen CSV-adres ingesteld.",
+ "Automatic CSV sync is on: every {0} minutes.": "Automatische CSV-synchronisatie staat aan: elke {0} minuten.",
+ "Printable stock labels": "Voorraadlabels afdrukken",
+ "Stock labels": "Voorraadlabels",
+ "No stock items yet. Add them in Inventory, then print their labels here.": "Nog geen voorraadartikelen. Voeg ze toe bij Voorraad en druk hier de labels af."
 }

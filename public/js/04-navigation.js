@@ -15,6 +15,8 @@ function navigateToDestination(destId) {
   // fresh counts each time: a form signed on a kiosk only showed after a page refresh (Henry, 2026-10-17)
   if (destId === 'clients' && typeof window.renderClientsTable === 'function') window.renderClientsTable();
   if (destId === 'finance' && typeof window.renderFinanceSummary === 'function') window.renderFinanceSummary();
+  if ((destId === 'inventory' || destId === 'dashboard') && typeof window.renderLowStockGrid === 'function') window.renderLowStockGrid();
+  if (destId === 'settings' && typeof window.renderSyncSettingsCard === 'function') window.renderSyncSettingsCard();
 
   // Update active status on sidebar nav buttons
   document.querySelectorAll('.sidebar-nav .nav-item').forEach(function(item) {

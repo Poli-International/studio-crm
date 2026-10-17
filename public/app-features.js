@@ -60,6 +60,18 @@ async function openClientProfileModal(clientId) {
 }
 window.openClientProfileModal = openClientProfileModal;
 
+// The studio's own team as note authors. The list was typed in with the demo staff's names (Jaxon Vance,
+// Maya Lin...), so a real studio could not pick its own people.
+async function fillNoteAuthors() {
+    const sel = document.getElementById('sn-author-select');
+    if (!sel) return;
+    let staff = [];
+    try { const r = await fetch('/api/staff'); if (r.ok) staff = await r.json(); } catch (e) { return; }
+    if (!Array.isArray(staff) || !staff.length) return;
+    const role = (r) => String(r || 'staff').replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase());
+    sel.innerHTML = staff.map((p) => `<option value="${escapeHtml(p.name + '|' + role(p.role))}">${escapeHtml(p.name)} (${escapeHtml(pdfLabel(role(p.role)))})</option>`).join('');
+}
+
 function appointmentNotes(appointments) {
     return (appointments || []).filter((a) => a && String(a.notes || '').trim()).map((a) => ({
         fromAppointment: true, id: 'appt-' + a.id, author: a.staff_name || 'Staff Member', author_role: pdfLabel('Appointment'),
@@ -288,12 +300,7 @@ function switchClientProfileTab(tabName) {
                             <div>
                                 <label style="display:block;font-size:0.75rem;color:#9CA3AF;margin-bottom:3px;font-weight:600;">STAFF AUTHOR</label>
                                 <select id="sn-author-select" style="width:100%;padding:0.5rem;background:#111827;border:1px solid #374151;border-radius:6px;color:#FFF;font-size:0.825rem;outline:none;">
-                                    <option value="Admin Manager|Studio Manager">Admin Manager (Studio Manager)</option>
-                                    <option value="Jaxon Vance|Senior Tattoo Artist">Jaxon Vance (Senior Tattoo Artist)</option>
-                                    <option value="Maya Lin|Master Piercer">Maya Lin (Master Piercer)</option>
-                                    <option value="Soren Frost|Fine-Line Artist">Soren Frost (Fine-Line Artist)</option>
-                                    <option value="Chloe Vance|Apprentice">Chloe Vance (Apprentice)</option>
-                                    <option value="Dr. Elena Rostova|Medical Consultant">Dr. Elena Rostova (Medical Consultant)</option>
+                                    <option value="Studio staff|Staff">Studio staff</option>
                                 </select>
                             </div>
                             <div>
@@ -406,6 +413,7 @@ function switchClientProfileTab(tabName) {
         `;
 
         bodyEl.innerHTML = notesHtml;
+        fillNoteAuthors();
 
     } else if (tabName === 'appointments') {
         if (!appointments || appointments.length === 0) {
@@ -2738,6 +2746,9 @@ async function fetchAndRenderDailyStudioSummary() {
     try {
         const [appts, clients, stock] = await Promise.all(['/api/appointments', '/api/clients', '/api/inventory'].map(ledgerJson));
         const today = new Date().toLocaleDateString('en-CA');
+        // the footer said "Report generated for 2026-07-29" whatever the day
+        const stamp = document.getElementById('summary-report-timestamp');
+        if (stamp) stamp.textContent = pdfLabel('Report generated for') + ' ' + today;
         const items = Array.isArray(stock) ? stock : (stock.items || []);
         const card = (label, value) => '<div class="summary-card" style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;"><div style="font-size:0.75rem;color:#94A3B8;">' + label + '</div><div style="font-size:1.3rem;font-weight:800;color:#38BDF8;">' + value + '</div></div>';
         body.innerHTML = '<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));gap:12px;">'
@@ -3620,11 +3631,29 @@ async function toggleSettingsRemoteSync(enabled) {
         const r = await fetch("/api/sync/config", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ enabled: !!enabled }) });
         if (!r.ok) throw new Error();
     } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
-    const box = document.getElementById("settings-remote-sync-toggle");
-    if (box) box.checked = !!enabled;
     showStudioToast(enabled ? "Automatic CSV sync on" : "Automatic CSV sync off");
+    renderSyncSettingsCard();
 }
 window.toggleSettingsRemoteSync = toggleSettingsRemoteSync;
+
+// The card said "Background sync is active (running every 30 minutes)" and drew the switch on, whatever the
+// server's setting; it now shows the server's own state.
+async function renderSyncSettingsCard() {
+    const text = document.getElementById("settings-sync-feedback-text");
+    if (!text) return;
+    let st;
+    try { const r = await fetch("/api/sync/status"); if (!r.ok) return; st = await r.json(); } catch (e) { return; }
+    const on = !!st.enabled, hasSource = !!(st.clientsUrl || st.inventoryUrl);
+    const box = document.getElementById("settings-remote-sync-toggle");
+    if (box) box.checked = on;
+    const slider = document.getElementById("settings-remote-sync-slider"), knob = document.getElementById("settings-remote-sync-knob");
+    if (slider) slider.style.background = on ? "#10B981" : "#475569";
+    if (knob) knob.style.transform = on ? "translateX(22px)" : "translateX(0)";
+    text.textContent = !on ? pdfLabel("Automatic CSV sync is off.")
+        : !hasSource ? pdfLabel("Automatic CSV sync is on, but no CSV address is set yet.")
+        : pdfLabel("Automatic CSV sync is on: every {0} minutes.").replace("{0}", Number(st.intervalMinutes) || 30);
+}
+window.renderSyncSettingsCard = renderSyncSettingsCard;
 function toggleInventoryRemoteSync() {
     const box = document.getElementById("settings-remote-sync-toggle");
     toggleSettingsRemoteSync(!(box ? box.checked : true));
@@ -4074,6 +4103,19 @@ async function updateShiftStatusView() {
 window.updateShiftStatusView = updateShiftStatusView;
 
 // --- Low-stock list ---
+// Dashboard low-stock cards: the studio's own items (three made-up ones were typed into the page)
+async function renderLowStockGrid() {
+    const grid = document.getElementById("dashboard-low-stock-grid");
+    if (!grid) return;
+    let rows = [];
+    try { rows = await lowStockRows(); } catch (e) { return; }
+    grid.innerHTML = rows.length ? rows.map(([, name, , qty, min]) => `<div style="background:#111827;padding:0.75rem;border-radius:8px;border:1px solid rgba(239,68,68,0.3);">
+        <div style="font-weight:700;color:#FFF;font-size:0.82rem;">${escapeHtml(name)}</div>
+        <div style="font-size:0.75rem;color:#F87171;margin-top:2px;">${escapeHtml(pdfLabel("Remaining"))}: ${Number(qty)} | ${escapeHtml(pdfLabel("Reorder at"))}: ${Number(min)}</div></div>`).join("")
+        : `<div style="color:#94A3B8;font-size:0.82rem;">${escapeHtml(pdfLabel("No items are below their reorder level"))}</div>`;
+}
+window.renderLowStockGrid = renderLowStockGrid;
+
 async function lowStockRows() {
     const inv = await fetchJson("/api/inventory");
     const items = Array.isArray(inv) ? inv : (inv.items || []);
@@ -4644,13 +4686,11 @@ function filterClientDirectoryList(query) {
 }
 window.filterClientDirectoryList = filterClientDirectoryList;
 
-function quickReorderLowStockEmail() {
-    const lowStockItems = [
-        { sku: "NDL-KW-3RL", name: "Kwadron 3RL 0.25mm Needles", qty: 3, min: 10, supplier: "Kwadron EU" },
-        { sku: "GLV-NIT-L", name: "Black Nitrile Gloves (L)", qty: 2, min: 8, supplier: "Barber DTS" },
-        { sku: "INK-DYN-BLK", name: "Dynamic Black Pigment 8oz", qty: 1, min: 4, supplier: "Dynamic Color Co." },
-        { sku: "PRF-AFT-50", name: "Protat Aftercare Balm 50ml", qty: 4, min: 15, supplier: "Protat Supplies" }
-    ];
+// The reorder list was four invented products (real brand names) whatever the studio held: now the studio's own
+// items at or below their reorder level, the same rule as the low-stock download.
+async function quickReorderLowStockEmail() {
+    const lowStockItems = (await lowStockRows()).map(([sku, name, , qty, min, supplier]) => ({ sku, name, qty: Number(qty), min: Number(min), supplier }));
+    if (!lowStockItems.length) { showStudioToast("No items are below their reorder level"); return; }
 
     let manifest = "PO REORDER DRAFT - STUDIO INVENTORY\n====================================\n";
     manifest += `Generated: ${new Date().toLocaleString()}\n\n`;

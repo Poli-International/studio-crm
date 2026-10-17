@@ -1821,5 +1821,13 @@
  "across completed sessions": "sulle sessioni completate",
  "Most hours": "Più ore",
  "Appointment": "Appuntamento",
- "From appointment": "Dall'appuntamento"
+ "From appointment": "Dall'appuntamento",
+ "Remaining": "Rimanenti",
+ "Report generated for": "Rapporto del",
+ "Automatic CSV sync is off.": "La sincronizzazione CSV automatica è disattivata.",
+ "Automatic CSV sync is on, but no CSV address is set yet.": "La sincronizzazione CSV automatica è attiva, ma non è ancora impostato un indirizzo CSV.",
+ "Automatic CSV sync is on: every {0} minutes.": "La sincronizzazione CSV automatica è attiva: ogni {0} minuti.",
+ "Printable stock labels": "Etichette di magazzino stampabili",
+ "Stock labels": "Etichette di magazzino",
+ "No stock items yet. Add them in Inventory, then print their labels here.": "Nessun articolo in magazzino. Aggiungeteli in Magazzino, poi stampate qui le etichette."
 }

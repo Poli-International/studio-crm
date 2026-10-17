@@ -433,6 +433,12 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.12
+
+- Updates from inside the CRM (`src/update.js`, `scripts/apply-update.cjs`), for the ready-to-run download only (the folder has `runtime/`; not in Docker or a source checkout, where Settings says to update the way it was installed). `GET /api/admin/update` (administrator) compares `package.json` with the latest GitHub release (`STUDIO_CRM_UPDATE_FEED` overrides the feed; the click tests use it). `POST /api/admin/update` downloads `studio-crm-<os>-<arch>.zip`, checks its SHA-256 against the release asset digest, unpacks it with `fflate` into `.update/new/`, backs up the database to `storage/backups/before-update-to-<version>_<time>.sqlite`, starts the new version on a copy of that backup on a spare port (it must answer within a minute), writes `.update/ready` and exits with code 75.
+- The starters loop on exit code 75: when `.update/ready` exists they copy the new `node` to `.update/` and run the new `scripts/apply-update.cjs`, which renames every top-level program file or folder to `.update/previous/` and the new one in. `data/`, `storage/` and the starters themselves (one is running) are never touched. A failed rename undoes every rename already made. The result is logged in `data/update.log`. `.update/previous/` is kept until the next update.
+- Any failure before the swap (download, checksum, unpack, version, backup, trial start) leaves the installed folder unchanged and the CRM running; Settings shows the reason. Versions before 1.0.12 have no updater: they update once by hand.
+
 ### 1.0.11
 
 - Kiosk tablets stay signed in, and a form waiting on a tablet stays there, when the CRM restarts (an update, a power cut).

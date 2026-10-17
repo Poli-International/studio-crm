@@ -101,7 +101,7 @@
       <!-- Sidebar Footer -->
       <div class="sidebar-footer" style="padding:0.75rem 0.4rem 0.25rem 0.4rem;border-top:1px solid rgba(255,255,255,0.08);font-size:0.72rem;color:#64748B;display:flex;align-items:center;justify-content:space-between;">
         <span>Poli International</span>
-        <span style="background:rgba(56,189,248,0.15);color:#38BDF8;padding:1px 6px;border-radius:6px;font-weight:700;font-size:0.65rem;" id="app-version-label"></span>
+        <span style="background:rgba(56,189,248,0.15);color:#38BDF8;padding:1px 6px;border-radius:6px;font-weight:700;font-size:0.65rem;white-space:nowrap;" id="app-version-label"></span>
       </div>
     </aside>
 
@@ -1480,6 +1480,15 @@
                 <button onclick="triggerInstantDatabaseSnapshot()" style="padding:0.45rem 0.9rem;background:#059669;color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">
                   Back up now
                 </button>
+              </div>
+
+              <!-- Updates: download, check and install a new version from here (src/update.js) -->
+              <div id="update-card" style="background:#0F172A;padding:1.25rem;border-radius:12px;border:1px solid #1E293B;">
+                <h3 style="margin:0 0 6px 0;font-size:1.05rem;font-weight:800;color:#38BDF8;">Updates</h3>
+                <p id="update-status" style="margin:0 0 12px 0;font-size:0.8rem;color:#9CA3AF;">Checking for a new version...</p>
+                <button id="update-now-btn" onclick="startStudioUpdate()" style="display:none;padding:0.45rem 0.9rem;background:#0284C7;color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">Update now</button>
+                <button id="update-check-btn" onclick="checkStudioUpdate(true)" style="padding:0.45rem 0.9rem;background:#1E293B;color:#E2E8F0;border:1px solid #334155;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">Check again</button>
+                <p style="margin:10px 0 0 0;font-size:0.75rem;color:#9CA3AF;">Your data stays where it is and is backed up first. The new version is tried on a copy before it is installed, and the CRM restarts by itself.</p>
               </div>
 
               <!-- Setting 4: Tax & Regional VAT Rates -->

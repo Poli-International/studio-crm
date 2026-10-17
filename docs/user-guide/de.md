@@ -11,7 +11,7 @@ Studio CRM läuft auf einem Computer in Ihrem Studio. Das Personal öffnet es in
 
 Wenn Sie den Quellcode heruntergeladen haben, installieren Sie Node.js 22 oder neuer und führen Sie einmal `npm install` und dann `npm start` aus. Mit Docker: `docker compose up -d`.
 
-Zum Aktualisieren laden Sie das neue ZIP herunter, entpacken es in einen neuen Ordner und kopieren Ihren Ordner `data` aus dem alten Ordner in den neuen.
+**Aktualisieren:** Wenn eine neue Version erscheint, steht unten im Menü neben der Versionsnummer **Update verfügbar**. Öffnen Sie **Einstellungen**, **Updates** und klicken Sie auf **Jetzt aktualisieren** (nur ein Administrator). Das CRM lädt die neue Version herunter, sichert die Datenbank in `storage/backups`, probiert die neue Version an einer Kopie Ihrer Daten aus und installiert sie erst dann; es startet von selbst neu und die Seite lädt neu. Ihre Daten bleiben im Ordner `data` und werden nie verschoben. Geht etwas schief, wird nichts verändert und die alte Version läuft weiter. Die vorige Version bleibt im versteckten Ordner `.update/previous`. Versionen vor 1.0.12 werden einmal von Hand aktualisiert: das neue ZIP herunterladen, in einen neuen Ordner entpacken und den Ordner `data` aus dem alten Ordner hineinkopieren.
 
 Um einen anderen Port zu verwenden, legen Sie `PORT` in einer `.env`-Datei fest (kopieren Sie `.env.example`). Legen Sie dort auch `STUDIO_MANAGER_EMAIL` fest, damit Benachrichtigungen an Sie adressiert werden.
 

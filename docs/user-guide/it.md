@@ -11,7 +11,7 @@ Studio CRM funziona su un solo computer nel vostro studio. Il personale lo apre 
 
 Se avete scaricato il codice sorgente, installate Node.js 22 o più recente, poi eseguite `npm install` una volta e `npm start`. Con Docker: `docker compose up -d`.
 
-Per aggiornare, scaricate il nuovo ZIP, decomprimetelo in una nuova cartella e copiate la vostra cartella `data` dalla vecchia cartella a quella nuova.
+**Aggiornare:** quando esce una nuova versione, il numero di versione in fondo al menu indica **aggiornamento disponibile**. Aprite **Impostazioni**, **Aggiornamenti** e fate clic su **Aggiorna ora** (solo un amministratore). Il CRM scarica la nuova versione, salva una copia del database in `storage/backups`, prova la nuova versione su una copia dei vostri dati e solo allora la installa e si riavvia da solo; la pagina si ricarica. I vostri dati restano nella cartella `data` e non vengono mai spostati. Se qualcosa va storto, non cambia nulla e la vecchia versione continua a funzionare. La versione precedente resta nella cartella nascosta `.update/previous`. Le versioni precedenti alla 1.0.12 si aggiornano a mano una volta: scaricate il nuovo ZIP, decomprimetelo in una nuova cartella e copiate la vostra cartella `data` dalla vecchia cartella alla nuova.
 
 Per usare una porta diversa, impostate `PORT` in un file `.env` (copiate `.env.example`). Impostate anche `STUDIO_MANAGER_EMAIL` lì, in modo che gli avvisi siano indirizzati a voi.
 

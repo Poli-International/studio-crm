@@ -48,7 +48,7 @@ A new install starts with demo data so you can try every screen; click **Start w
 
 Settings go in a `.env` file (copy `.env.example`): `PORT`, `STUDIO_MANAGER_EMAIL`, `SQLITE_DB_PATH`.
 
-**Updating.** Download the new ZIP, unzip it to a new folder, and copy your `data` folder from the old one into it.
+**Updating.** From 1.0.12: **Settings**, **Updates**, **Update now**. The CRM backs up the database, tries the new version on a copy of your data, then installs it and restarts; your `data` folder is never moved. Older versions, once by hand: download the new ZIP, unzip it to a new folder, and copy your `data` folder from the old one into it.
 
 ## User guide
 

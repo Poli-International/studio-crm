@@ -8,6 +8,7 @@ import { jsPDF } from 'jspdf';
 import { db, safeDbQuery, sqlite } from './src/db/index.js';
 import { startHttps, studioAddress } from './src/https.js';
 import { installAccess } from './src/access.js';
+import { installUpdate } from './src/update.js';
 import {
   users as dbUsers,
   activityLogs as dbActivityLogs,
@@ -43,6 +44,7 @@ app.use(express.json({ limit: '15mb' })); // portfolio photos arrive as data URL
 
 // Optional studio password: when one is set, nothing below answers before the device has signed in.
 installAccess(app, sqlite, () => staff);
+installUpdate(app, { root: __dirname, version: APP_VERSION, sqlite, saveAll: () => saveAll() });   // saveAll is defined further down
 
 // Save state after every successful write (persistence block at the end of this file).
 app.use((req, res, next) => {

@@ -17,4 +17,14 @@ if [ ! -f node_modules/better-sqlite3/build/Release/better_sqlite3.node ]; then
   npm install --no-audit --no-fund || { read -r -p "The install failed. Press Enter to close."; exit 1; }
 fi
 
-STUDIO_CRM_OPEN=1 exec "$NODE" server.js
+export STUDIO_CRM_OPEN=1
+while :; do
+  # An update from Settings stops the CRM with code 75: put the new version in place, then start again.
+  if [ -f .update/ready ]; then
+    echo "Installing the update..."
+    cp .update/new/runtime/node .update/node && .update/node .update/new/scripts/apply-update.cjs
+  fi
+  "$NODE" server.js
+  [ $? -eq 75 ] || break
+  export STUDIO_CRM_OPEN=
+done

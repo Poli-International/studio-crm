@@ -6,6 +6,14 @@
 //   node tests/click/flows.mjs
 import { startApp, startFreshServer } from './app.mjs';
 import { sleep, launchBrowser } from './cdp.mjs';
+import http from 'http';
+
+// "GitHub" for the Updates card: a newer version is out
+const feed = http.createServer((req, res) => res.end(JSON.stringify({ tag_name: 'v9.9.9', html_url: 'https://example.invalid/notes',
+  assets: [{ name: 'studio-crm-windows-x64.zip', browser_download_url: 'http://127.0.0.1:9/zip' }] }))).listen(0, '127.0.0.1');
+await new Promise((r) => feed.on('listening', r));
+feed.unref();
+process.env.STUDIO_CRM_UPDATE_FEED = 'http://127.0.0.1:' + feed.address().port + '/';
 
 const { browser: b, url, httpsPort, stop, restart } = await startApp();
 const failures = [];
@@ -531,7 +539,8 @@ await flow('Team board: a message is saved and still there after a reload', asyn
 
 await flow('The sidebar shows the version that is running', async () => {
   const version = (await api('/api/studio-meta')).version;
-  await eventually(async () => (await text('#app-version-label')) === 'v' + version, 'the version label does not match ' + version);
+  // the label may go on with ' · update available' (the test feed always has a newer version)
+  await eventually(async () => (await text('#app-version-label')).split(' ')[0] === 'v' + version, 'the version label does not match ' + version);
 });
 
 await flow('Over https the scanner button starts the camera, and stops it again', async () => {
@@ -550,6 +559,20 @@ await flow('Back up now writes a real copy of the studio database', async () => 
   await eventually(async () => (await b.evaluate('window.__ct.sig.added.join(" ")')).includes('Backup saved in storage/backups'), 'the backup button did not report a saved file');
   const call = await b.evaluate(`window.__ct.sig.fetches.filter(f => f.url.includes('create-snapshot')).map(f => f.status).join()`);
   check(call === '200', 'the backup request failed: ' + call);
+});
+
+await flow('Updates: the menu says an update is out, Settings says what it is, and a copy not from the download is not offered the button', async () => {
+  await b.goto(url);
+  await eventually(async () => /update available/.test(await text('#app-version-label')), async () => 'the menu does not say an update is out: ' + await text('#app-version-label'));
+  await b.evaluate(`document.getElementById('app-version-label').click()`);
+  await eventually(async () => shown('dest-settings'), 'the update notice does not open Settings');
+  await eventually(async () => /Version 9.9.9 is available/.test(await text('#update-status')), async () => 'Settings does not name the new version: ' + await text('#update-status'));
+  // a source checkout (no runtime/ folder) is updated the way it was installed: no button that cannot work
+  check(!(await shown('update-now-btn')), 'Update now is offered where it cannot work');
+  check(/ready-to-run download/.test(await text('#update-status')), 'Settings does not say why there is no Update now button');
+  check((await b.evaluate(`fetch('/api/admin/update', { method: 'POST' }).then(r => r.status)`)) === 400, 'the server starts an update without the ready-to-run download');
+  await pressOn('checkStudioUpdate(true)');
+  await eventually(async () => /9.9.9/.test(await text('#update-status')), 'Check again lost the status');
 });
 
 // Last, because it deletes the demo studio: the first thing a real studio does.

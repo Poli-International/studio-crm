@@ -26,7 +26,18 @@ if not exist "node_modules\better-sqlite3\build\Release\better_sqlite3.node" (
 )
 
 set STUDIO_CRM_OPEN=1
+:run
+rem An update from Settings stops the CRM with code 75: put the new version in place, then start again.
+if exist ".update\ready" (
+  echo Installing the update...
+  copy /y ".update\new\runtime\node.exe" ".update\node.exe" >nul
+  ".update\node.exe" ".update\new\scripts\apply-update.cjs"
+)
 "%NODE%" server.js
+if "%errorlevel%"=="75" (
+  set STUDIO_CRM_OPEN=
+  goto run
+)
 echo.
 echo Studio CRM has stopped.
 pause

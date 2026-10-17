@@ -16,7 +16,7 @@ export async function startApp() {
   const start = async () => {
     const proc = spawn(process.execPath, ['server.js'], {
       cwd: root, stdio: 'ignore',
-      env: { ...process.env, PORT: port, HTTPS_PORT: httpsPort, SQLITE_DB_PATH: path.join(dir, 'studio.sqlite') },
+      env: { STUDIO_CRM_UPDATE_FEED: 'http://127.0.0.1:9/no-feed', ...process.env, PORT: port, HTTPS_PORT: httpsPort, SQLITE_DB_PATH: path.join(dir, 'studio.sqlite') },
     });
     for (let i = 0; ; i++) {
       // any answer will do: with a studio password set, the home page answers 401 (sign in)
@@ -46,7 +46,7 @@ export async function startApp() {
 export async function startFreshServer(port) {
   const dir = mkdtempSync(path.join(os.tmpdir(), 'crm-db-'));
   const server = spawn(process.execPath, ['server.js'], {
-    cwd: root, stdio: 'ignore', env: { ...process.env, PORT: port, HTTPS_PORT: 0, SQLITE_DB_PATH: path.join(dir, 'studio.sqlite') },
+    cwd: root, stdio: 'ignore', env: { STUDIO_CRM_UPDATE_FEED: 'http://127.0.0.1:9/no-feed', ...process.env, PORT: port, HTTPS_PORT: 0, SQLITE_DB_PATH: path.join(dir, 'studio.sqlite') },
   });
   const url = `http://127.0.0.1:${port}/`;
   for (let i = 0; ; i++) {

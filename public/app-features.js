@@ -3412,12 +3412,62 @@ function updateSkinBlendOpacity(value) {
 }
 window.updateSkinBlendOpacity = updateSkinBlendOpacity;
 
+// --- Updates (Settings, Updates; the server side is src/update.js). Only an administrator gets an answer. ---
+const UPDATE_STEPS = { downloading: "Downloading the new version...", unpacking: "Unpacking it...", "backing up": "Backing up your data...",
+    testing: "Trying the new version on a copy of your data...", restarting: "Installing and restarting. This page reloads by itself." };
+async function checkStudioUpdate(force) {
+    let u;
+    try { const r = await fetch("/api/admin/update" + (force ? "?check=1" : "")); if (!r.ok) return; u = await r.json(); } catch (e) { return; }
+    const status = document.getElementById("update-status"), btn = document.getElementById("update-now-btn");
+    const label = document.getElementById("app-version-label");
+    if (label && u.available) {
+        label.textContent = "v" + u.current + " · " + pdfLabel("update available");
+        label.style.cursor = "pointer";
+        label.title = pdfLabel("Version {0} is available").replace("{0}", u.latest);
+        label.onclick = () => navigateToDestination("settings");
+    }
+    if (!status) return;
+    let text;
+    if (UPDATE_STEPS[u.step]) text = pdfLabel(UPDATE_STEPS[u.step]);
+    else if (u.step === "failed") text = pdfLabel("The update stopped, nothing was changed:") + " " + u.error;
+    else if (u.problem) text = pdfLabel(u.problem);
+    else if (!u.available) text = pdfLabel("You have the latest version ({0}).").replace("{0}", u.current);
+    else text = pdfLabel("Version {0} is available (you have {1}).").replace("{0}", u.latest).replace("{1}", u.current) + (u.why ? " " + pdfLabel(u.why) : "");
+    status.textContent = text;
+    if (btn) btn.style.display = u.canUpdate && ["idle", "failed"].includes(u.step) ? "" : "none";
+    return u;
+}
+window.checkStudioUpdate = checkStudioUpdate;
+// these lines carry version numbers, so the page translator cannot match them: write them again in the new language
+window.addEventListener("studioLanguageChanged", async (e) => {
+    // wait until the new language's phrases are in (cached, so this resolves when they are)
+    const lang = e.detail && e.detail.language;
+    if (lang && window.i18nPhrases) await window.i18nPhrases.setLanguage(lang).catch(() => {});
+    checkStudioUpdate(false);
+});
+
+async function startStudioUpdate() {
+    if (!confirm("Install the new version now? The CRM restarts by itself in a minute or two; other screens and tablets reconnect.")) return;
+    const r = await fetch("/api/admin/update", { method: "POST" }).catch(() => null);
+    if (!r || !r.ok) { const e = r ? await r.json().catch(() => ({})) : {}; showStudioToast(e.error || "The update could not start"); return; }
+    const from = (document.getElementById("app-version-label").textContent.match(/v([\d.]+)/) || [])[1];
+    // follow the steps; when the server is back with another version, reload the page
+    const timer = setInterval(async () => {
+        const u = await checkStudioUpdate(false).catch(() => null);
+        if (u && u.step === "failed") { clearInterval(timer); return; }
+        const meta = await fetch("/api/studio-meta").then((x) => (x.ok ? x.json() : null), () => null);
+        if (meta && meta.version && meta.version !== from) { clearInterval(timer); location.reload(); }
+    }, 2000);
+}
+window.startStudioUpdate = startStudioUpdate;
+
 // --- First run: offer to replace the demo data with an empty studio ---
 async function showDemoDataBanner() {
     let meta;
     try { const r = await fetch("/api/studio-meta"); meta = r.ok ? await r.json() : null; } catch (e) { return; }
     const version = document.getElementById("app-version-label");
     if (version && meta && meta.version) version.textContent = "v" + meta.version;
+    checkStudioUpdate(false);
     if (!meta || !meta.demo) return;
     const dash = document.getElementById("dest-dashboard");
     if (!dash || document.getElementById("demo-data-banner")) return;

@@ -11,7 +11,7 @@ Studio CRM draait op één computer in uw studio. Medewerkers openen het in een 
 
 Hebt u de broncode gedownload, installeer dan Node.js 22 of nieuwer, voer één keer `npm install` uit en daarna `npm start`. Met Docker: `docker compose up -d`.
 
-Om bij te werken downloadt u de nieuwe ZIP, pakt u die uit in een nieuwe map en kopieert u uw map `data` van de oude map naar de nieuwe.
+**Bijwerken:** als er een nieuwe versie is, staat bij het versienummer onderaan het menu **update beschikbaar**. Open **Instellingen**, **Updates** en klik op **Nu bijwerken** (alleen een beheerder). Het CRM downloadt de nieuwe versie, maakt een back-up van de database in `storage/backups`, probeert de nieuwe versie op een kopie van uw gegevens en installeert hem pas dan; het start vanzelf opnieuw en de pagina laadt opnieuw. Uw gegevens blijven in de map `data` en worden nooit verplaatst. Gaat er iets mis, dan verandert er niets en blijft de oude versie draaien. De vorige versie blijft in de verborgen map `.update/previous`. Versies vóór 1.0.12 werkt u één keer met de hand bij: download de nieuwe ZIP, pak die uit in een nieuwe map en kopieer uw map `data` van de oude map naar de nieuwe.
 
 Om een andere poort te gebruiken, stelt u `PORT` in een `.env`-bestand in (kopieer `.env.example`). Stel daar ook `STUDIO_MANAGER_EMAIL` in, zodat meldingen aan u worden geadresseerd.
 

@@ -173,6 +173,51 @@ jobs:
           ls -la data
           test -f data/studio_crm.sqlite
 
+      # Settings > Updates on this very build: the same ZIP, marked 9.9.9, is offered as the new release.
+      # The running CRM must download it, try it, swap it in, restart through the starter, and keep the client.
+      - name: Update itself from Settings, keeping the data
+        run: |
+          cd "$RUNNER_TEMP" && mkdir next && cd next
+          if [ "$RUNNER_OS" = "Windows" ]; then 7z x "$GITHUB_WORKSPACE/dist/studio-crm-${{ matrix.name }}.zip" > /dev/null; else unzip -q "$GITHUB_WORKSPACE/dist/studio-crm-${{ matrix.name }}.zip"; fi
+          sed -i.bak 's/"version": "[^"]*"/"version": "9.9.9"/' studio-crm/package.json && rm studio-crm/package.json.bak
+          if [ "$RUNNER_OS" = "Windows" ]; then 7z a -tzip next.zip studio-crm > /dev/null; else zip -qry next.zip studio-crm; fi
+          sha=$( (sha256sum next.zip 2> /dev/null || shasum -a 256 next.zip) | cut -d' ' -f1)
+          echo "{\"tag_name\":\"v9.9.9\",\"assets\":[{\"name\":\"studio-crm-${{ matrix.name }}.zip\",\"browser_download_url\":\"http://127.0.0.1:3999/next.zip\",\"digest\":\"sha256:$sha\"}]}" > feed.json
+          (python3 -m http.server 3999 --bind 127.0.0.1 > /dev/null 2>&1 || python -m http.server 3999 --bind 127.0.0.1 > /dev/null 2>&1) &
+          # a slow runner takes several seconds to start Python: wait until the feed answers
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:3999/feed.json > /dev/null && break; sleep 1; done
+          curl -sf http://127.0.0.1:3999/feed.json > /dev/null
+          # the CRM from the step above still runs; restart it pointed at this feed (the starter keeps running it)
+          cd "$RUNNER_TEMP/unpacked/studio-crm"
+          while command -v node > /dev/null; do
+            NODE_DIR="$(dirname "$(command -v node)")"
+            export PATH="$(echo "$PATH" | tr ':' '\n' | grep -v -x -F "$NODE_DIR" | paste -sd: -)"
+          done
+          # stop only the CRM (the process on port 3000), not the runner's own tools
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            for pid in $(netstat -ano | grep ':3000 ' | grep LISTENING | awk '{print $5}' | sort -u); do taskkill //F //PID "$pid" > /dev/null || true; done
+          else
+            lsof -ti tcp:3000 -s tcp:listen | xargs kill 2> /dev/null || true
+          fi
+          sleep 2
+          export STUDIO_CRM_UPDATE_FEED=http://127.0.0.1:3999/feed.json
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            powershell -NoProfile -Command "& './Start Studio CRM.bat'" < /dev/null > "$RUNNER_TEMP/update.log" 2>&1 &
+          else
+            ./start-studio-crm.sh > "$RUNNER_TEMP/update.log" 2>&1 &
+          fi
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:3000/api/studio-meta > /dev/null && break; sleep 2; done
+          curl -sf http://127.0.0.1:3000/api/admin/update | tee "$RUNNER_TEMP/offer.json"; echo
+          grep -q '"canUpdate":true' "$RUNNER_TEMP/offer.json"
+          curl -sf -X POST http://127.0.0.1:3000/api/admin/update
+          for i in $(seq 1 90); do curl -sf http://127.0.0.1:3000/api/studio-meta 2> /dev/null | grep -q '"version":"9.9.9"' && break; sleep 2; done
+          cat "$RUNNER_TEMP/update.log"
+          curl -sf http://127.0.0.1:3000/api/studio-meta | grep -q '"version":"9.9.9"'
+          curl -sf http://127.0.0.1:3000/api/clients | grep -q "Packaging Test"
+          grep -q "updated .* -> 9.9.9" data/update.log
+          test -f .update/previous/server.js
+          ls storage/backups | grep -q before-update-to-9.9.9
+
       - uses: actions/upload-artifact@v5
         with:
           name: studio-crm-${{ matrix.name }}

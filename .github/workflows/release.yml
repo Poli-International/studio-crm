@@ -184,7 +184,9 @@ jobs:
           sha=$( (sha256sum next.zip 2> /dev/null || shasum -a 256 next.zip) | cut -d' ' -f1)
           echo "{\"tag_name\":\"v9.9.9\",\"assets\":[{\"name\":\"studio-crm-${{ matrix.name }}.zip\",\"browser_download_url\":\"http://127.0.0.1:3999/next.zip\",\"digest\":\"sha256:$sha\"}]}" > feed.json
           (python3 -m http.server 3999 --bind 127.0.0.1 > /dev/null 2>&1 || python -m http.server 3999 --bind 127.0.0.1 > /dev/null 2>&1) &
-          sleep 2
+          # a slow runner takes several seconds to start Python: wait until the feed answers
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:3999/feed.json > /dev/null && break; sleep 1; done
+          curl -sf http://127.0.0.1:3999/feed.json > /dev/null
           # the CRM from the step above still runs; restart it pointed at this feed (the starter keeps running it)
           cd "$RUNNER_TEMP/unpacked/studio-crm"
           while command -v node > /dev/null; do

@@ -7,6 +7,8 @@
 import { startApp, startFreshServer } from './app.mjs';
 import { sleep, launchBrowser } from './cdp.mjs';
 import http from 'http';
+import fs from 'fs';
+import path from 'path';
 
 // "GitHub" for the Updates card: a newer version is out
 const feed = http.createServer((req, res) => res.end(JSON.stringify({ tag_name: 'v9.9.9', html_url: 'https://example.invalid/notes',
@@ -567,10 +569,16 @@ await flow('Updates: the menu says an update is out, Settings says what it is, a
   await b.evaluate(`document.getElementById('app-version-label').click()`);
   await eventually(async () => shown('dest-settings'), 'the update notice does not open Settings');
   await eventually(async () => /Version 9.9.9 is available/.test(await text('#update-status')), async () => 'Settings does not name the new version: ' + await text('#update-status'));
-  // a source checkout (no runtime/ folder) is updated the way it was installed: no button that cannot work
-  check(!(await shown('update-now-btn')), 'Update now is offered where it cannot work');
-  check(/ready-to-run download/.test(await text('#update-status')), 'Settings does not say why there is no Update now button');
-  check((await b.evaluate(`fetch('/api/admin/update', { method: 'POST' }).then(r => r.status)`)) === 400, 'the server starts an update without the ready-to-run download');
+  // the ready-to-run download (runtime/ folder) offers Update now; a source checkout is updated the way it was
+  // installed: no button that cannot work. (The test feed's ZIP does not exist, so nothing is installed here.)
+  const download = fs.existsSync(path.join(process.env.CRM_ROOT || '.', 'runtime'));
+  if (download && process.platform === 'win32') {
+    check(await shown('update-now-btn'), 'the download is not offered Update now');
+  } else if (!download) {
+    check(!(await shown('update-now-btn')), 'Update now is offered where it cannot work');
+    check(/ready-to-run download/.test(await text('#update-status')), 'Settings does not say why there is no Update now button');
+    check((await b.evaluate(`fetch('/api/admin/update', { method: 'POST' }).then(r => r.status)`)) === 400, 'the server starts an update without the ready-to-run download');
+  }
   await pressOn('checkStudioUpdate(true)');
   await eventually(async () => /9.9.9/.test(await text('#update-status')), 'Check again lost the status');
 });

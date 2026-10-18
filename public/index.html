@@ -796,9 +796,7 @@
                   <select id="dashboard-procurement-supplier-filter" aria-label="Supplier" onchange="filterProcurementChartBySupplier(this.value)" style="padding:2px 6px;background:#1E293B;color:#E2E8F0;border:1px solid #374151;border-radius:6px;font-size:0.75rem;">
                     <option value="all">All Suppliers</option>
                   </select>
-                  <div id="inventory-remote-sync-toggle-wrapper" onclick="toggleInventoryRemoteSync()" style="padding:2px 8px;background:#1E293B;color:#34D399;border:1px solid rgba(16,185,129,0.3);border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;">
-                    🔄 Remote Sync Active
-                  </div>
+                  <div id="inventory-remote-sync-toggle-wrapper" onclick="toggleInventoryRemoteSync()" style="padding:2px 8px;background:#1E293B;color:#34D399;border:1px solid rgba(16,185,129,0.3);border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;"></div>
                 </div>
               </div>
               <div id="d3-dashboard-procurement-health-chart" style="width:100%;height:140px;"></div>
@@ -3176,9 +3174,7 @@ docker compose up -d</pre>
                             <div style="flex:1;min-width:240px;">
                                 <div style="font-weight:800;font-size:0.95rem;color:#34D399;display:flex;align-items:center;gap:8px;">
                                     🔄 Background Remote CSV Sync Engine
-                                    <span id="settings-sync-status-badge" style="background:rgba(16,185,129,0.2);color:#34D399;border:1px solid rgba(16,185,129,0.5);padding:2px 8px;border-radius:12px;font-size:0.75rem;font-weight:700;">
-                                        🟢 ACTIVE
-                                    </span>
+                                    <span id="settings-sync-status-badge" style="background:rgba(16,185,129,0.2);color:#34D399;border:1px solid rgba(16,185,129,0.5);padding:2px 8px;border-radius:12px;font-size:0.75rem;font-weight:700;"></span>
                                 </div>
                                 <div style="font-size:0.78rem;color:#9CA3AF;margin-top:2px;">
                                     Continuously poll and synchronize remote supplier catalogs and inventory CSV endpoints automatically in the background.
@@ -3701,9 +3697,7 @@ docker compose up -d</pre>
                 <div id="sync-status-card" style="background:#111827;border:1px solid #374151;border-radius:8px;padding:0.9rem;display:flex;flex-direction:column;gap:0.5rem;">
                     <div style="display:flex;justify-content:space-between;align-items:center;">
                         <span style="font-size:0.8rem;color:#9CA3AF;font-weight:600;">AUTOMATED SYNC STATUS</span>
-                        <span id="sync-badge-status" style="background:rgba(16, 185, 129, 0.2);color:#34D399;border:1px solid rgba(16, 185, 129, 0.4);padding:0.2rem 0.6rem;border-radius:12px;font-size:0.75rem;font-weight:700;">
-                            🟢 Idle / Active
-                        </span>
+                        <span id="sync-badge-status" style="background:rgba(16, 185, 129, 0.2);color:#34D399;border:1px solid rgba(16, 185, 129, 0.4);padding:0.2rem 0.6rem;border-radius:12px;font-size:0.75rem;font-weight:700;"></span>
                     </div>
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;font-size:0.8rem;color:#D1D5DB;">
                         <div>⏱️ <strong>Last Sync:</strong> <span id="sync-last-time">Never</span></div>
@@ -3735,7 +3729,7 @@ docker compose up -d</pre>
                         </div>
                         <div style="margin-top:1.2rem;">
                             <label style="display:flex;align-items:center;gap:8px;font-size:0.825rem;color:#D1D5DB;cursor:pointer;">
-                                <input type="checkbox" id="sync-enabled-cb" checked style="accent-color:#10B981;width:16px;height:16px;" />
+                                <input type="checkbox" id="sync-enabled-cb" style="accent-color:#10B981;width:16px;height:16px;" />
                                 Enable Background Auto-Sync
                             </label>
                         </div>

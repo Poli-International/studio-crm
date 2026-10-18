@@ -433,6 +433,16 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.16
+
+Automatic CSV sync:
+
+- Off on a new install (`SYNC_ENABLED=true` turns it on from `.env`); it was on everywhere, with no address to sync from.
+- Its settings (on/off, both CSV addresses, the interval) are saved in the database (`syncConfig` in `app_state`) and the schedule starts after they are restored. They lived in memory only, so a restart forgot them.
+- The **Remote CSV Auto-Sync** tab of Import Data saves to `/api/sync/config` and shows `/api/sync/status`. Save Config read fields that do not exist and wrote to the browser's storage, so the server never got an address; the status card was fixed text ("Idle / Active", "Never").
+- The Settings badge and the Inventory switch say on or off from the server; both said "ACTIVE" whatever the setting.
+- A sync with no CSV address does not run; it was recorded as a successful run.
+
 ### 1.0.15
 
 Content nobody entered, found by opening every screen and all 93 windows of an emptied studio:

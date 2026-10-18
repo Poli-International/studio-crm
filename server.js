@@ -8763,7 +8763,7 @@ function parseCSVText(csvText) {
 }
 
 const syncState = {
-  enabled: process.env.SYNC_ENABLED !== 'false',
+  enabled: process.env.SYNC_ENABLED === 'true', // off until the studio turns it on
   intervalMinutes: parseInt(process.env.SYNC_INTERVAL_MINUTES || '30', 10) || 30,
   clientsUrl: process.env.SYNC_CLIENTS_CSV_URL || process.env.CLIENT_CSV_URL || process.env.SYNC_CLIENT_CSV_URL || '',
   inventoryUrl: process.env.SYNC_INVENTORY_CSV_URL || process.env.INVENTORY_CSV_URL || process.env.SYNC_INVENTORY_CSV_URL || '',
@@ -8788,6 +8788,11 @@ let syncTimer = null;
 async function runAutomatedCsvSync(triggeredBy = 'Automated Schedule') {
   if (syncState.status === 'syncing') {
     return { status: 'already_running', state: syncState };
+  }
+  // nothing to read is not a sync: it was recorded as a successful run
+  const hasUrl = (u) => !!u && u.trim().startsWith('http');
+  if (!hasUrl(syncState.clientsUrl) && !hasUrl(syncState.inventoryUrl)) {
+    return { success: false, error: 'No CSV address is set', state: syncState };
   }
 
   syncState.status = 'syncing';
@@ -9010,14 +9015,6 @@ app.post('/api/sync/config', (req, res) => {
 
   res.json({ success: true, state: syncState });
 });
-
-// Initialize Automated Sync Engine Scheduler
-resetSyncSchedule();
-if (syncState.enabled && (syncState.clientsUrl || syncState.inventoryUrl)) {
-  setTimeout(() => {
-    runAutomatedCsvSync('Server Initialized Sync');
-  }, 3000);
-}
 
 // Artist Commissions & Financial Splits
 app.get('/api/staff/commissions', (req, res) => {
@@ -10839,6 +10836,8 @@ const PERSISTED = {
   aftercarePipeline: [() => aftercarePipeline],
   autoclaveLogs: [() => autoclaveLogs],
   temporaryPortalLinks: [() => temporaryPortalLinks, (v) => { temporaryPortalLinks = v; }],
+  syncConfig: [() => ({ enabled: syncState.enabled, intervalMinutes: syncState.intervalMinutes, clientsUrl: syncState.clientsUrl, inventoryUrl: syncState.inventoryUrl }),
+    (v) => { Object.assign(syncState, v); }],
   nextActivityId: [() => nextActivityId, (v) => { nextActivityId = v; }],
   nextMessageId: [() => nextMessageId, (v) => { nextMessageId = v; }],
   lastDatabaseSnapshotTimestamp: [() => lastDatabaseSnapshotTimestamp, (v) => { lastDatabaseSnapshotTimestamp = v; }],
@@ -10881,6 +10880,14 @@ function scheduleStateSave() {
   }, 250);
 }
 restoreState();
+
+// The CSV sync starts from the saved settings
+resetSyncSchedule();
+if (syncState.enabled && (syncState.clientsUrl || syncState.inventoryUrl)) {
+  setTimeout(() => {
+    runAutomatedCsvSync('Server Initialized Sync');
+  }, 3000);
+}
 setInterval(scheduleStateSave, 5 * 60 * 1000).unref(); // background jobs change state too
 for (const sig of ['SIGINT', 'SIGTERM']) process.on(sig, () => { try { saveAll(); } catch (e) {} process.exit(0); });
 

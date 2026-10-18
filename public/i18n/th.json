@@ -1829,5 +1829,6 @@
  "Automatic CSV sync is on: every {0} minutes.": "การซิงค์ CSV อัตโนมัติเปิดอยู่: ทุก {0} นาที",
  "Printable stock labels": "ฉลากสินค้าสำหรับพิมพ์",
  "Stock labels": "ฉลากสินค้า",
- "No stock items yet. Add them in Inventory, then print their labels here.": "ยังไม่มีสินค้า เพิ่มสินค้าในสต็อกก่อน แล้วพิมพ์ฉลากที่นี่"
+ "No stock items yet. Add them in Inventory, then print their labels here.": "ยังไม่มีสินค้า เพิ่มสินค้าในสต็อกก่อน แล้วพิมพ์ฉลากที่นี่",
+ "CSV sync settings saved": "บันทึกการตั้งค่าการซิงค์ CSV แล้ว"
 }

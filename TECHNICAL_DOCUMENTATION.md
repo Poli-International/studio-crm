@@ -450,6 +450,7 @@ Backups (`src/backups.js`, Settings > Database Backup):
 Also:
 
 - **Start with an empty studio** clears the CSV sync's run history (its settings stay).
+- Client search in the booking and waiver forms (`handleClientAutocomplete`): each key typed fetched the client list again; on a slow computer the answers for earlier letters came back after the client was picked and cleared the pick, so the booking was saved with no client (seen twice on macOS runners). One request now serves every key, only the last key acts, and it reads the field as it is then. The booking flow reproduces it with a slow client list.
 - `escapeHtml` moved from `js/06-modals-tabs.js` (end of the page) to `app-features.js` (loaded first): on a slow computer an early server answer hit "escapeHtml is not defined" (seen once in the install test on Windows).
 
 ### 1.0.16

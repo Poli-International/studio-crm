@@ -232,12 +232,17 @@ await flow('Book an appointment for a client picked from the list, then edit it'
   await b.goto(url);
   await b.clickText('Calendar');
   await pressOn('openQuickNewAppointmentModal()');
+  // a slow studio computer: the client list answers late, after the client is picked (macOS runners
+  // showed the answers for "Alex R", "Alex Ri"... clearing the pick, so the booking had no client)
+  await b.evaluate(`(() => { const f = window.fetch; let n = 0; window.fetch = (u, o) => String(u).endsWith('/api/clients') ? new Promise((r) => setTimeout(r, 300 + 700 * n++)).then(() => f(u, o)) : f(u, o); })()`);
   await b.type('#new-appt-client', 'Alex Riv');
   await eventually(async () => (await text('#new-appt-client-autocomplete-dropdown')).includes('Alex Rivera'), 'typing a name does not offer the existing client');
   // the suggestion is picked with the mouse, as a person does
   const pick = await b.evaluate(`(() => { const row = [...document.querySelectorAll('#new-appt-client-autocomplete-dropdown [data-id]')].find(r => r.innerText.includes('Alex Rivera')); const r = row.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2, id: row.dataset.id }; })()`);
   await b.evaluate(`document.querySelector('#new-appt-client-autocomplete-dropdown [data-id="${pick.id}"]').dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }))`);
   check((await b.evaluate(`document.getElementById('new-appt-client-id').value`)) === pick.id, 'picking the client did not choose them');
+  await sleep(2500); // every late answer is in
+  check((await b.evaluate(`document.getElementById('new-appt-client-id').value`)) === pick.id, 'a late answer for an earlier letter forgot the client picked');
   await b.evaluate(`(() => { const set = (id, v) => { const el = document.getElementById(id); el.value = v; el.dispatchEvent(new Event('change', { bubbles: true })); }; set('new-appt-date', '2031-03-04'); set('new-appt-time', '11:00'); set('new-appt-notes', 'Edit check'); })()`);
   await b.clickText('Book appointment', '#new-appointment-modal-overlay');
   let appt;

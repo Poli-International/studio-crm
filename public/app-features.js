@@ -3089,26 +3089,35 @@ function renderDrawerFeed() {}
 window.renderDrawerFeed = renderDrawerFeed;
 
 // --- Client autocomplete (waiver + portfolio work forms): sets the hidden client id ---
-let autocompleteClients = null;
+let autocompleteClients = null; // the client list, or the request for it while it loads
+let autocompleteTurn = 0;
 async function handleClientAutocomplete(kind, query) {
     const box = document.getElementById(kind + "-client-autocomplete-dropdown");
     const idField = document.getElementById(kind + "-client-id");
     if (!box) return;
+    // Every key typed calls this. On a slow computer the answers for "Alex R", "Alex Ri"... came
+    // back after the client was picked and cleared the pick, so the booking had no client. Now
+    // one request serves them all, only the last key typed acts, and it reads the box as it is now.
+    const turn = ++autocompleteTurn;
     if (!autocompleteClients) {
-        try { const r = await fetch("/api/clients"); autocompleteClients = r.ok ? await r.json() : []; } catch (e) { autocompleteClients = []; }
+        autocompleteClients = fetch("/api/clients").then((r) => (r.ok ? r.json() : [])).catch(() => []);
     }
+    const clients = await autocompleteClients;
+    if (turn !== autocompleteTurn) return;
+    const input = document.getElementById(kind + "-client-search") || document.getElementById(kind + "-client"); // the booking form names it new-appt-client
+    const now = input ? input.value : query;
     // a different name forgets the client picked before; tapping the field again, or the same
     // name, keeps it (it was cleared on every focus, so a picked waiver client got lost)
-    const picked = idField && autocompleteClients.find((c) => String(c.id) === idField.value);
-    if (idField && !(picked && String(picked.name || "") === String(query || ""))) idField.value = "";
-    const q = String(query || "").toLowerCase().trim();
-    const hits = autocompleteClients.filter((c) => !q || String(c.name || "").toLowerCase().includes(q)).slice(0, 8);
+    const picked = idField && clients.find((c) => String(c.id) === idField.value);
+    if (picked && String(picked.name || "") === String(now || "")) return;
+    if (idField) idField.value = "";
+    const q = String(now || "").toLowerCase().trim();
+    const hits = clients.filter((c) => !q || String(c.name || "").toLowerCase().includes(q)).slice(0, 8);
     box.innerHTML = hits.map((c) => `<div data-id="${Number(c.id)}" style="padding:8px 12px;cursor:pointer;color:#E2E8F0;border-bottom:1px solid #1E293B;">${escapeHtml(c.name || "")}</div>`).join("");
     box.style.display = hits.length ? "block" : "none";
     box.querySelectorAll("[data-id]").forEach((row) => row.addEventListener("mousedown", (e) => {
         e.preventDefault();
         const c = hits.find((x) => String(x.id) === row.dataset.id);
-        const input = document.getElementById(kind + "-client-search") || document.getElementById(kind + "-client"); // the booking form names it new-appt-client
         if (input) input.value = c.name;
         if (idField) idField.value = String(c.id);
         if (kind === "waiver") {

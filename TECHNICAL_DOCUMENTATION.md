@@ -433,6 +433,17 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.18
+
+Clients under 18 and ID checks (`src/consent-age.js`, unit tests):
+
+- The client's age comes with the client (`age` on `GET /api/clients` and the profile), from `dob`. It is shown in the client list (**Under 18**), the profile and the booking form (under the client's name).
+- Under 18 (`GUARDIAN_AGE`), a consent form needs a signature field for a parent or guardian (`isGuardianForm`: a signature whose id or label says guardian or parent). The desk's Save (`POST /api/clients/:id/consent-forms`) and **Send to kiosk** (`POST /api/kiosk/send`) refuse a form without one (409, the reason shown at the desk; it showed only "failed"). A form signed on the tablet is never refused: if the birth date the client wrote makes them under 18, it is saved with `minorWithoutGuardian`, marked red in the profile, the form view and the PDF, and logged (`MINOR_WITHOUT_GUARDIAN`).
+- A birth date written on a form (`dob`, `client_dob`, `date_of_birth`, `birth_date`, `birthdate`, `minor_dob`) fills the client's record when it had none.
+- **Record an ID check** in the profile (`POST /api/clients/:id/id-check`, front desk): the type of ID and at most its last 4 letters or digits (a longer number is refused), the birth date on the ID, who checked and when. Never the whole number or a photo.
+- Each consent form keeps `ageAtSigning` and `idCheck` as they were when it was signed; the form view and the PDF ("Age and ID check" section) show them.
+- An empty allergies/medical field shows "Not recorded: ask the client" (yellow) in the profile and the client list; it showed a green "None Reported" / "None Recorded".
+
 ### 1.0.17
 
 A blank cell stays blank (CSV sync and the stock CSV import):

@@ -57,7 +57,7 @@ Book sessions with a price and a deposit, see what is still to pay, plan the sta
 
 ### Stock, lots and suppliers
 
-Quantities, lot numbers, expiry dates and suppliers, with low-stock and expiry warnings on the dashboard. A camera QR and barcode scanner, printable QR tags, and purchase orders as PDF, ready to send.
+Quantities, lot numbers, expiry dates and suppliers, with low-stock and expiry warnings on the dashboard. A camera QR and barcode scanner, printable stock labels, and purchase orders as PDF, ready to send.
 
 ![Stock items with lots and expiry dates, and the supplier list](docs/screenshots/inventory.webp)
 
@@ -130,11 +130,9 @@ All data is in `data/studio_crm.sqlite`. Copy that file to back up the studio. *
 
 In the app under **Settings**, or in [`docs/USER-GUIDE.md`](docs/USER-GUIDE.md) and [`docs/user-guide/`](docs/user-guide/) (FR, IT, DE, ES, NL, PT, TH).
 
-## Who made it
+## Ideas and problems
 
-Studio CRM is made by [Patrick Poli](https://poliinternational.com/), who ran his own tattoo and piercing studio in Bournemouth, UK, and builds it with AI doing much of the coding. It is shaped by studio owners who use it and say what their front desk needs. Ideas and problems: [open an issue](https://github.com/Poli-International/studio-crm/issues) or [contact us](https://poliinternational.com/contact-us/).
-
-The translations were made with AI help and not all have been checked by native speakers yet.
+Studio CRM is shaped by the studios that use it. [Open an issue](https://github.com/Poli-International/studio-crm/issues) or [contact us](https://poliinternational.com/contact-us/). Not all translations have been checked by native speakers yet: a sentence that reads wrong in your language is worth telling us about too.
 
 ## Development
 

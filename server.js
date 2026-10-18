@@ -147,6 +147,11 @@ const activityLogs = [
 let nextActivityId = 8;
 
 function logActivity({ category, action, title, details, user = 'Admin Manager', badgeColor = 'blue' }) {
+  // "Admin Manager" is the demo owner's name, written into ~50 routes as "who did it": it now names the
+  // studio's own owner (in an emptied studio "Studio owner", until the studio renames them)
+  if (user === 'Admin Manager') {
+    try { user = (staff.find((s) => s.role === 'manager') || {}).name || 'Studio'; } catch (e) { /* the staff list is not built yet */ }
+  }
   const newEntry = {
     id: nextActivityId++,
     timestamp: new Date().toISOString(),
@@ -10743,8 +10748,10 @@ app.post('/api/admin/start-empty', (req, res) => {
   }
   // one manager stays so the studio has someone to start with: the name only, none of the demo person's details
   staff.splice(0, staff.length, ...staff.filter((s) => s.role === 'manager').slice(0, 1)
-    .map((s) => ({ id: s.id, name: s.name, role: s.role, title: s.title, active: true, email: '', phone: '', specialties: [], certifications: [] })));
-  studioStations.forEach((st) => { st.status = 'ready'; st.currentClient = null; st.assignedStaff = ''; st.autoclaveCycle = ''; st.lastSanitized = null; });
+    // the demo owner is "Admin Manager": an empty studio starts with a plain owner for the studio to rename
+    .map((s) => ({ id: s.id, name: s.name === 'Admin Manager' ? 'Studio owner' : s.name, role: s.role, title: s.name === 'Admin Manager' ? 'Owner' : s.title, active: true, email: '', phone: '', specialties: [], certifications: [] })));
+  // the demo stations had names ("VIP Private Suite", "Piercing Suite B"): plain numbers, for the studio to rename
+  studioStations.forEach((st) => { st.name = 'Station ' + st.id; st.type = ''; st.status = 'ready'; st.currentClient = null; st.assignedStaff = ''; st.autoclaveCycle = ''; st.lastSanitized = null; });
   if (studioGeneralSettings.vat_number === 'GB999888777') studioGeneralSettings.vat_number = '';
   const removedKeys = Object.keys(appData).filter((k) => !APP_DATA_KEEP.test(k));
   removedKeys.forEach((k) => delete appData[k]);

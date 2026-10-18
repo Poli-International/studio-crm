@@ -196,18 +196,22 @@ function closeThermalLabelPrinterModal() {
 }
 window.closeThermalLabelPrinterModal = closeThermalLabelPrinterModal;
 
-function renderPrintableQrTagSheet() {
+// One label per stock item: name, SKU, lot and expiry. It printed a single invented label (SKU NDL-3RL-BX50)
+// with a "barcode" drawn in | characters that nothing could scan.
+// ponytail: text labels only; a scannable code needs a code generator the CRM does not ship yet
+async function renderPrintableQrTagSheet() {
     const cont = document.getElementById("printable-tags-container");
-    if (cont) {
-        cont.innerHTML = `
-            <div style="border:2px dashed #000;padding:12px;width:240px;margin:0 auto;text-align:center;font-family:monospace;">
-                <div style="font-weight:bold;font-size:0.9rem;">POLI STUDIO CRM</div>
-                <div style="font-size:0.75rem;">SKU: NDL-3RL-BX50</div>
-                <div style="margin:8px 0;font-size:1.8rem;letter-spacing:4px;">||| | |||| || |</div>
-                <div style="font-size:0.7rem;">Lot: #2026-08 | Exp: 2029-12</div>
-            </div>
-        `;
-    }
+    if (!cont) return;
+    const inv = await fetchJson("/api/inventory");
+    const items = Array.isArray(inv) ? inv : (inv.items || []);
+    cont.innerHTML = items.length
+        ? '<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;">' + items.map((i) => `
+            <div style="border:2px dashed #000;padding:10px 12px;width:220px;text-align:center;font-family:monospace;">
+                <div style="font-weight:bold;font-size:0.85rem;">${escapeHtml(i.name || "")}</div>
+                <div style="font-size:0.75rem;">SKU: ${escapeHtml(i.sku || "-")}</div>
+                <div style="font-size:0.7rem;">${escapeHtml(pdfLabel("lot"))}: ${escapeHtml(i.lot_number || i.lot || "-")} | ${escapeHtml(pdfLabel("expires"))}: ${escapeHtml(String(i.exp_date || i.expiration_date || "-").slice(0, 10))}</div>
+            </div>`).join("") + "</div>"
+        : '<p style="text-align:center;color:#475569;">' + escapeHtml(pdfLabel("No stock items yet. Add them in Inventory, then print their labels here.")) + "</p>";
 }
 window.renderPrintableQrTagSheet = renderPrintableQrTagSheet;
 

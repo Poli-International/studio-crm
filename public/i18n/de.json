@@ -1821,5 +1821,13 @@
  "across completed sessions": "über alle abgeschlossenen Sitzungen",
  "Most hours": "Meiste Stunden",
  "Appointment": "Termin",
- "From appointment": "Aus dem Termin"
+ "From appointment": "Aus dem Termin",
+ "Remaining": "Bestand",
+ "Report generated for": "Bericht für",
+ "Automatic CSV sync is off.": "Automatischer CSV-Abgleich ist aus.",
+ "Automatic CSV sync is on, but no CSV address is set yet.": "Automatischer CSV-Abgleich ist an, aber es ist noch keine CSV-Adresse eingetragen.",
+ "Automatic CSV sync is on: every {0} minutes.": "Automatischer CSV-Abgleich ist an: alle {0} Minuten.",
+ "Printable stock labels": "Lageretiketten drucken",
+ "Stock labels": "Lageretiketten",
+ "No stock items yet. Add them in Inventory, then print their labels here.": "Noch keine Lagerartikel. Fügen Sie sie unter Lager hinzu und drucken Sie dann hier ihre Etiketten."
 }

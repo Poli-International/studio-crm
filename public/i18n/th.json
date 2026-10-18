@@ -1821,5 +1821,13 @@
  "across completed sessions": "จากเซสชันที่เสร็จทั้งหมด",
  "Most hours": "ชั่วโมงมากที่สุด",
  "Appointment": "การนัดหมาย",
- "From appointment": "จากการนัดหมาย"
+ "From appointment": "จากการนัดหมาย",
+ "Remaining": "คงเหลือ",
+ "Report generated for": "รายงานประจำวันที่",
+ "Automatic CSV sync is off.": "การซิงค์ CSV อัตโนมัติปิดอยู่",
+ "Automatic CSV sync is on, but no CSV address is set yet.": "การซิงค์ CSV อัตโนมัติเปิดอยู่ แต่ยังไม่ได้ตั้งที่อยู่ CSV",
+ "Automatic CSV sync is on: every {0} minutes.": "การซิงค์ CSV อัตโนมัติเปิดอยู่: ทุก {0} นาที",
+ "Printable stock labels": "ฉลากสินค้าสำหรับพิมพ์",
+ "Stock labels": "ฉลากสินค้า",
+ "No stock items yet. Add them in Inventory, then print their labels here.": "ยังไม่มีสินค้า เพิ่มสินค้าในสต็อกก่อน แล้วพิมพ์ฉลากที่นี่"
 }

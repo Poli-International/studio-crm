@@ -624,6 +624,16 @@ await flow('Start with an empty studio, then add the first client, staff member 
   await b.clickText('Calendar');
   await b.clickText('Book Appointment');
   check((await b.evaluate(`[...document.getElementById('new-appt-artist').options].map(o => o.textContent).join()`)).includes('First Artist'), 'the first staff member cannot be chosen for an appointment');
+  // a staff note is written by the studio's own people, not the demo's (the list was typed in: Jaxon Vance, Maya Lin...)
+  const firstClient = (await api('/api/clients')).find((c) => c.name === 'First Client');
+  await b.evaluate(`openClientProfileModal(${firstClient.id})`);
+  await sleep(1200);
+  await b.evaluate(`switchClientProfileTab('notes')`);
+  await eventually(async () => { const o = await b.evaluate(`[...document.getElementById('sn-author-select').options].map((x) => x.textContent).join()`); return o.includes('First Artist') && !o.includes('Jaxon'); }, async () => 'the staff note authors are not the studio\'s own staff: ' + await b.evaluate(`[...document.getElementById('sn-author-select').options].map((x) => x.textContent).join()`));
+  await b.evaluate(`closeClientProfileModal()`);
+  await b.goto(url);
+  await b.clickText('Calendar');
+  await b.clickText('Book Appointment');
   await b.type('#new-appt-client', 'First Client');
   await b.evaluate(`document.getElementById('new-appt-date').value = new Date().toLocaleDateString('en-CA')`);
   await b.clickText('Book appointment');
@@ -650,6 +660,21 @@ await flow('Start with an empty studio, then add the first client, staff member 
   await eventually(async () => (await text('#sd-kpi-total-hours')) === '0.0 h', async () => 'the duration report shows hours nobody worked: ' + await text('#sd-kpi-total-hours'));
   check((await text('#sd-kpi-top-artist')) === '—', 'the duration report names a top artist with no sessions');
   await b.evaluate(`closeSessionDurationReportModal()`);
+  // nothing of the demo studio's people or rooms, and the daily summary is for today (it said 2026-07-29)
+  await b.clickText('Dashboard');
+  await sleep(1500);
+  const everything = await b.evaluate(`document.body.innerText`);
+  for (const demo of ['VIP Private Suite', 'Kai Thorne', 'Piercing Suite B', 'Admin Manager', 'Jaxon Vance', 'Maya Lin', 'Bugpin Liner', 'True Black 4oz']) check(!everything.includes(demo), 'an emptied studio still shows ' + demo);
+  // low stock comes from the studio's stock: three invented items were typed into the page, and the reorder
+  // list it copies was four other invented products
+  await b.clickText('Inventory');
+  await eventually(async () => (await text('#dashboard-low-stock-grid')).includes('No items are below'), async () => 'the low-stock cards show items an empty studio does not have: ' + await text('#dashboard-low-stock-grid'));
+  b.reset();
+  await pressOn('quickReorderLowStockEmail()');
+  await eventually(async () => (await b.evaluate('window.__ct.sig.added.join(" ")')).includes('No items are below their reorder level'), 'the reorder list was made with no low stock');
+  await b.evaluate(`openDailyStudioSummaryModal()`);
+  await eventually(async () => (await text('#summary-report-timestamp')).includes(new Date().toLocaleDateString('en-CA')), async () => 'the daily summary is not for today: ' + await text('#summary-report-timestamp'));
+  await b.evaluate(`forceHideModal('daily-summary-modal-overlay')`);
   await b.clickText('Finance');
   for (const [open, body, expected] of [
     ['openDepositLedgerModal()', '#deposit-ledger-modal-body', 'No deposits are recorded'],

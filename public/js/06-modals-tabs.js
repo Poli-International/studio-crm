@@ -70,15 +70,7 @@
     const SSE_BASE_BACKOFF_MS = 1000;
     const SSE_MAX_BACKOFF_MS = 30000;
 
-    function escapeHtml(str) {
-        if (!str) return '';
-        return String(str)
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;');
-    }
+    // escapeHtml is in app-features.js, which loads first
 
     function showUndoToast(msg) {
         let toast = document.getElementById('undo-notification-toast');

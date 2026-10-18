@@ -97,4 +97,4 @@ O ecrã **Ferramentas** abre as ferramentas da Poli International (calendários 
 
 ## Cópias de segurança
 
-Tudo é guardado em `data/studio_crm.sqlite` (ou no caminho definido em `SQLITE_DB_PATH`). Copie esse ficheiro para fazer uma cópia de segurança do estúdio. O botão de snapshot também escreve uma cópia em `storage/backups/`.
+Tudo é guardado em `data/studio_crm.sqlite` (ou no caminho definido em `SQLITE_DB_PATH`). Copie esse ficheiro para fazer uma cópia de segurança do estúdio. O botão de snapshot também escreve uma cópia em `storage/backups/`. O CRM também guarda lá uma cópia todos os dias e mantém os últimos 30 dias. Em **Definições**, **Cópia de Segurança da Base de Dados**, pode copiar também cada cópia para uma segunda pasta (pen USB, outro disco, pasta do Google Drive, OneDrive ou Dropbox), para que um disco avariado ou um computador roubado não leve todas as cópias.

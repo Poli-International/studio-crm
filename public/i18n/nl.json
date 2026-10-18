@@ -1830,5 +1830,17 @@
  "Printable stock labels": "Voorraadlabels afdrukken",
  "Stock labels": "Voorraadlabels",
  "No stock items yet. Add them in Inventory, then print their labels here.": "Nog geen voorraadartikelen. Voeg ze toe bij Voorraad en druk hier de labels af.",
- "CSV sync settings saved": "CSV-synchronisatie-instellingen opgeslagen"
+ "CSV sync settings saved": "CSV-synchronisatie-instellingen opgeslagen",
+ "The CRM saves a full copy of the studio database every day in the storage/backups folder on the computer that runs it, and keeps the last 30 days.": "Het CRM bewaart elke dag een volledige kopie van de studiodatabase in de map storage/backups op de computer waarop het draait, en houdt de laatste 30 dagen.",
+ "Also copy every backup to": "Elke back-up ook kopiëren naar",
+ "A folder on a USB stick, another disk, or a Google Drive, OneDrive or Dropbox folder on this computer, so a dead disk or a stolen computer does not take every copy with it. Leave it empty for none.": "Een map op een USB-stick, een andere schijf of een Google Drive-, OneDrive- of Dropbox-map op deze computer, zodat een kapotte schijf of een gestolen computer niet alle kopieën meeneemt. Laat leeg voor geen.",
+ "Save folder": "Map opslaan",
+ "Second backup folder": "Tweede back-upmap",
+ "Last backup: {0}": "Laatste back-up: {0}",
+ "No backup yet: the first daily backup is made a minute after the CRM starts.": "Nog geen back-up: de eerste dagelijkse back-up wordt een minuut na de start van het CRM gemaakt.",
+ "Daily backups kept: {0} of {1}": "Bewaarde dagelijkse back-ups: {0} van {1}",
+ "The copy to {0} failed: {1}": "De kopie naar {0} is mislukt: {1}",
+ "Last copied to {0}: {1}": "Laatst gekopieerd naar {0}: {1}",
+ "Backups will also be copied to {0}": "Back-ups worden ook gekopieerd naar {0}",
+ "Backups are no longer copied to a second folder": "Back-ups worden niet meer naar een tweede map gekopieerd"
 }

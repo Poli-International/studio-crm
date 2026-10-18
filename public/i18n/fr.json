@@ -1830,5 +1830,17 @@
  "Printable stock labels": "Étiquettes de stock à imprimer",
  "Stock labels": "Étiquettes de stock",
  "No stock items yet. Add them in Inventory, then print their labels here.": "Pas encore d'articles en stock. Ajoutez-les dans Stock, puis imprimez leurs étiquettes ici.",
- "CSV sync settings saved": "Réglages de synchronisation CSV enregistrés"
+ "CSV sync settings saved": "Réglages de synchronisation CSV enregistrés",
+ "The CRM saves a full copy of the studio database every day in the storage/backups folder on the computer that runs it, and keeps the last 30 days.": "Le CRM enregistre chaque jour une copie complète de la base de données du studio dans le dossier storage/backups de l'ordinateur qui le fait tourner, et garde les 30 derniers jours.",
+ "Also copy every backup to": "Copier aussi chaque sauvegarde dans",
+ "A folder on a USB stick, another disk, or a Google Drive, OneDrive or Dropbox folder on this computer, so a dead disk or a stolen computer does not take every copy with it. Leave it empty for none.": "Un dossier sur une clé USB, un autre disque, ou un dossier Google Drive, OneDrive ou Dropbox sur cet ordinateur : un disque en panne ou un ordinateur volé n'emporte pas toutes les copies. Laissez vide pour aucun.",
+ "Save folder": "Enregistrer le dossier",
+ "Second backup folder": "Second dossier de sauvegarde",
+ "Last backup: {0}": "Dernière sauvegarde : {0}",
+ "No backup yet: the first daily backup is made a minute after the CRM starts.": "Aucune sauvegarde pour le moment : la première sauvegarde quotidienne est faite une minute après le démarrage du CRM.",
+ "Daily backups kept: {0} of {1}": "Sauvegardes quotidiennes gardées : {0} sur {1}",
+ "The copy to {0} failed: {1}": "La copie vers {0} a échoué : {1}",
+ "Last copied to {0}: {1}": "Dernière copie dans {0} : {1}",
+ "Backups will also be copied to {0}": "Les sauvegardes seront aussi copiées dans {0}",
+ "Backups are no longer copied to a second folder": "Les sauvegardes ne sont plus copiées dans un second dossier"
 }

@@ -97,4 +97,4 @@ L'écran **Outils** ouvre les outils Poli International (calendriers de soins po
 
 ## Sauvegardes
 
-Tout est stocké dans `data/studio_crm.sqlite` (ou le chemin défini dans `SQLITE_DB_PATH`). Copiez ce fichier pour sauvegarder le studio. Le bouton d'instantané écrit aussi une copie dans `storage/backups/`.
+Tout est stocké dans `data/studio_crm.sqlite` (ou le chemin défini dans `SQLITE_DB_PATH`). Copiez ce fichier pour sauvegarder le studio. Le bouton d'instantané écrit aussi une copie dans `storage/backups/`. Le CRM y enregistre aussi une copie chaque jour et garde les 30 derniers jours. Dans **Paramètres**, **Sauvegarde de la base de données**, vous pouvez aussi copier chaque sauvegarde dans un second dossier (clé USB, autre disque, dossier Google Drive, OneDrive ou Dropbox) : un disque en panne ou un ordinateur volé n'emporte pas toutes les copies.

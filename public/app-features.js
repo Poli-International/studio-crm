@@ -8,6 +8,18 @@ window.oneAtATime = function (fn) {
   };
 };
 
+// Text into HTML. Defined here, the first script to use it: it lived in js/06-modals-tabs.js at the
+// end of the page, so on a slow computer an early answer from the server hit "escapeHtml is not defined".
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 // =========================================================================
 // 👤 CLIENT PROFILE MODAL LOGIC (DATABASE INTEGRATED & STAFF NOTES)
 // =========================================================================
@@ -2818,8 +2830,44 @@ async function triggerInstantDatabaseSnapshot() {
     } catch (e) {
         showStudioToast('Could not save: the server did not answer');
     }
+    renderBackupCard();
 }
 window.triggerInstantDatabaseSnapshot = triggerInstantDatabaseSnapshot;
+
+// Settings, Database Backup: the last backup, how many daily ones are kept, the second folder
+async function renderBackupCard() {
+    const status = document.getElementById('backup-status');
+    if (!status) return;
+    let st;
+    try { const r = await fetch('/api/database/snapshot-status'); if (!r.ok) return; st = await r.json(); } catch (e) { return; }
+    const folder = document.getElementById('backup-copy-folder');
+    if (folder && document.activeElement !== folder) folder.value = st.copyTo || '';
+    const parts = [st.lastSnapshotTimestamp
+        ? pdfLabel('Last backup: {0}').replace('{0}', new Date(st.lastSnapshotTimestamp).toLocaleString())
+        : pdfLabel('No backup yet: the first daily backup is made a minute after the CRM starts.')];
+    parts.push(pdfLabel('Daily backups kept: {0} of {1}').replace('{0}', st.autoBackups || 0).replace('{1}', st.autoBackupsKept || 30));
+    if (st.copyTo) parts.push(st.lastCopyError
+        ? pdfLabel('The copy to {0} failed: {1}').replace('{0}', st.copyTo).replace('{1}', st.lastCopyError)
+        : st.lastCopyTime ? pdfLabel('Last copied to {0}: {1}').replace('{0}', st.copyTo).replace('{1}', new Date(st.lastCopyTime).toLocaleString())
+        : pdfLabel('Backups will also be copied to {0}').replace('{0}', st.copyTo));
+    status.textContent = parts.join(' · ');
+    status.style.color = st.copyTo && st.lastCopyError ? '#FCA5A5' : '#D1D5DB';
+}
+window.renderBackupCard = renderBackupCard;
+
+async function saveBackupFolder(event) {
+    if (event) event.preventDefault();
+    const folder = (document.getElementById('backup-copy-folder') || {}).value || '';
+    let data;
+    try {
+        const r = await fetch('/api/database/backup-folder', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ copyTo: folder.trim() }) });
+        data = await r.json();
+        if (!r.ok) { showStudioToast(data.message || 'Could not save'); return; }
+    } catch (e) { showStudioToast('Could not save: the server did not answer'); return; }
+    showStudioToast(data.copyTo ? pdfLabel('Backups will also be copied to {0}').replace('{0}', data.copyTo) : 'Backups are no longer copied to a second folder');
+    renderBackupCard();
+}
+window.saveBackupFolder = saveBackupFolder;
 
 // =========================================================================
 // 15. ADDITIONAL SINGLE ACTIONS (7)

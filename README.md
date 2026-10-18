@@ -124,7 +124,7 @@ Then open `http://localhost:3000`. The CRM is its own web server: do not put the
 
 ## Backups
 
-All data is in `data/studio_crm.sqlite`. Copy that file to back up the studio. **Back up now** in Settings saves a full copy in `storage/backups/`, and every update makes one first.
+All data is in `data/studio_crm.sqlite`. The CRM saves a full copy in `storage/backups/` every day and keeps the last 30 days; **Back up now** in Settings saves one at any time, and every update makes one first. In **Settings**, **Database Backup**, **Also copy every backup to** a second folder (a USB stick, another disk, or a Google Drive, OneDrive or Dropbox folder) so a dead disk or a stolen computer does not take every copy with it.
 
 ## User guide
 

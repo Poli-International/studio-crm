@@ -1829,5 +1829,6 @@
  "Automatic CSV sync is on: every {0} minutes.": "La sincronización CSV automática está activada: cada {0} minutos.",
  "Printable stock labels": "Etiquetas de stock imprimibles",
  "Stock labels": "Etiquetas de stock",
- "No stock items yet. Add them in Inventory, then print their labels here.": "Aún no hay artículos en stock. Añádalos en Inventario y luego imprima aquí sus etiquetas."
+ "No stock items yet. Add them in Inventory, then print their labels here.": "Aún no hay artículos en stock. Añádalos en Inventario y luego imprima aquí sus etiquetas.",
+ "CSV sync settings saved": "Ajustes de sincronización CSV guardados"
 }

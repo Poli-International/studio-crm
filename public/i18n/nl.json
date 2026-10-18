@@ -1829,5 +1829,6 @@
  "Automatic CSV sync is on: every {0} minutes.": "Automatische CSV-synchronisatie staat aan: elke {0} minuten.",
  "Printable stock labels": "Voorraadlabels afdrukken",
  "Stock labels": "Voorraadlabels",
- "No stock items yet. Add them in Inventory, then print their labels here.": "Nog geen voorraadartikelen. Voeg ze toe bij Voorraad en druk hier de labels af."
+ "No stock items yet. Add them in Inventory, then print their labels here.": "Nog geen voorraadartikelen. Voeg ze toe bij Voorraad en druk hier de labels af.",
+ "CSV sync settings saved": "CSV-synchronisatie-instellingen opgeslagen"
 }

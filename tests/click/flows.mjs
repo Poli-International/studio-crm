@@ -384,6 +384,28 @@ await flow('Import Data: the window closes, and pasted rows become clients', asy
   check(new Set(clients.map((c) => c.id)).size === clients.length, 'two clients share an id after the import');
 });
 
+await flow('CSV auto-sync: off on a new install, its addresses saved on the server, kept after a restart', async () => {
+  // the sync said ACTIVE on every new install, and Save Config kept the addresses in the browser only
+  check((await api('/api/sync/status')).enabled === false, 'a new install starts with the CSV sync on');
+  await b.clickText('Settings');
+  await eventually(async () => (await text('#settings-sync-status-badge')).includes('off'), async () => 'Settings does not say the sync is off: ' + await text('#settings-sync-status-badge'));
+  await b.clickText('Import Data');
+  await b.clickText('Remote CSV Auto-Sync');
+  await eventually(async () => (await text('#sync-badge-status')).includes('off'), async () => 'the sync window does not say the sync is off: ' + await text('#sync-badge-status'));
+  check(!(await b.evaluate(`document.getElementById('sync-enabled-cb').checked`)), 'the sync window shows the sync on');
+  await b.type('#sync-clients-url', 'http://127.0.0.1:9/clients.csv');
+  await b.evaluate(`document.getElementById('sync-enabled-cb').click()`); // a tick box: the click helper presses buttons only
+  await b.clickText('Save Config');
+  await eventually(async () => { const s = await api('/api/sync/status'); return s.enabled && s.clientsUrl === 'http://127.0.0.1:9/clients.csv'; }, async () => 'Save Config did not reach the server: ' + JSON.stringify(await api('/api/sync/status')).slice(0, 160));
+  await restart();
+  await b.goto(url);
+  const after = await api('/api/sync/status');
+  check(after.enabled && after.clientsUrl === 'http://127.0.0.1:9/clients.csv', 'a restart lost the CSV sync settings: ' + JSON.stringify(after).slice(0, 160));
+  await b.clickText('Settings');
+  await eventually(async () => (await text('#settings-sync-status-badge')).includes('on'), 'Settings does not say the sync is on');
+  await b.evaluate(`fetch('/api/sync/config', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ enabled: false, clientsUrl: '' }) })`);
+});
+
 await flow('A Print button opens the print dialog', async () => {
   await b.clickText('Clients');
   await b.clickText('Health Alerts');

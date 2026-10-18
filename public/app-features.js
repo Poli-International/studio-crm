@@ -2511,6 +2511,7 @@ function switchImportTab(tab) {
         if (section) section.style.display = name === tab ? '' : 'none';
     });
     if (tab === 'history' && typeof fetchAndRenderCsvImportHistory === 'function') fetchAndRenderCsvImportHistory();
+    if (tab === 'remote') loadRemoteCsvSyncForm();
 }
 window.switchImportTab = switchImportTab;
 
@@ -3619,6 +3620,7 @@ async function triggerRemoteCsvSync() {
         result = await r.json();
     } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
     const st = (result && result.state) || {};
+    loadRemoteCsvSyncForm();
     if (!st.clientsUrl && !st.inventoryUrl) { showStudioToast("CSV sync did not run: set a CSV address in Settings first"); return; }
     if (!result.success) { showStudioToast("CSV sync failed: check the CSV addresses in Settings"); return; }
     const x = result.stats || {};
@@ -3644,6 +3646,11 @@ async function renderSyncSettingsCard() {
     let st;
     try { const r = await fetch("/api/sync/status"); if (!r.ok) return; st = await r.json(); } catch (e) { return; }
     const on = !!st.enabled, hasSource = !!(st.clientsUrl || st.inventoryUrl);
+    // the Settings badge and the Inventory switch said "ACTIVE" whatever the setting
+    const label = pdfLabel(on ? "Automatic CSV sync on" : "Automatic CSV sync off");
+    const badge = document.getElementById("settings-sync-status-badge"), inv = document.getElementById("inventory-remote-sync-toggle-wrapper");
+    if (badge) { badge.textContent = (on ? "🟢 " : "⚪ ") + label; badge.style.color = on ? "#34D399" : "#94A3B8"; }
+    if (inv) { inv.textContent = "🔄 " + label; inv.style.color = on ? "#34D399" : "#94A3B8"; }
     const box = document.getElementById("settings-remote-sync-toggle");
     if (box) box.checked = on;
     const slider = document.getElementById("settings-remote-sync-slider"), knob = document.getElementById("settings-remote-sync-knob");
@@ -5112,26 +5119,48 @@ async function submitCSVImport(event) {
 }
 window.submitCSVImport = submitCSVImport;
 
-function saveRemoteCsvSyncConfig(event) {
-    if (event) event.preventDefault();
-    const urlInput = document.getElementById("remote-sync-url-input");
-    const intervalSelect = document.getElementById("remote-sync-interval-select");
-    const autoToggle = document.getElementById("remote-sync-auto-toggle");
-
-    const config = {
-        url: urlInput ? urlInput.value.trim() : "",
-        interval: intervalSelect ? intervalSelect.value : "hourly",
-        autoSync: autoToggle ? autoToggle.checked : true,
-        updated_at: new Date().toISOString()
-    };
-
-    try {
-        localStorage.setItem("studio_remote_sync_config", JSON.stringify(config));
-    } catch (e) {}
-
-    if (typeof showStudioToast === "function") {
-        showStudioToast("Remote CSV sync configuration updated");
+// The form read fields that do not exist and kept the result in this browser only, so the
+// server never had an address to sync from; the status card was fixed text. Both use the server now.
+async function loadRemoteCsvSyncForm() {
+    let st;
+    try { const r = await fetch("/api/sync/status"); if (!r.ok) return; st = await r.json(); } catch (e) { return; }
+    const el = (id) => document.getElementById(id);
+    if (el("sync-clients-url")) el("sync-clients-url").value = st.clientsUrl || "";
+    if (el("sync-inventory-url")) el("sync-inventory-url").value = st.inventoryUrl || "";
+    if (el("sync-interval-min")) el("sync-interval-min").value = Number(st.intervalMinutes) || 30;
+    if (el("sync-enabled-cb")) el("sync-enabled-cb").checked = !!st.enabled;
+    const when = (t) => (t ? new Date(t).toLocaleString() : pdfLabel("Never"));
+    if (el("sync-badge-status")) {
+        el("sync-badge-status").textContent = (st.enabled ? "🟢 " : "⚪ ") + pdfLabel(st.enabled ? "Automatic CSV sync on" : "Automatic CSV sync off");
+        el("sync-badge-status").style.color = st.enabled ? "#34D399" : "#94A3B8";
     }
+    if (el("sync-last-time")) el("sync-last-time").textContent = when(st.lastSyncTime);
+    if (el("sync-next-time")) el("sync-next-time").textContent = st.nextSyncTime ? when(st.nextSyncTime) : "—";
+    if (el("sync-count")) el("sync-count").textContent = String(st.syncCount || 0);
+    const x = st.lastStats;
+    if (el("sync-last-stats")) el("sync-last-stats").textContent = x ? String((x.clientsProcessed || 0) + (x.inventoryProcessed || 0)) : pdfLabel("None");
+    const banner = el("sync-error-banner");
+    if (banner) { banner.textContent = st.status === "error" ? st.lastError || "" : ""; banner.style.display = banner.textContent ? "" : "none"; }
+}
+window.loadRemoteCsvSyncForm = loadRemoteCsvSyncForm;
+
+async function saveRemoteCsvSyncConfig(event) {
+    if (event) event.preventDefault();
+    const val = (id) => (document.getElementById(id) || {}).value || "";
+    const box = document.getElementById("sync-enabled-cb");
+    const config = {
+        clientsUrl: val("sync-clients-url").trim(),
+        inventoryUrl: val("sync-inventory-url").trim(),
+        intervalMinutes: Number(val("sync-interval-min")) || 30,
+        enabled: !!(box && box.checked)
+    };
+    try {
+        const r = await fetch("/api/sync/config", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(config) });
+        if (!r.ok) throw new Error();
+    } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
+    showStudioToast("CSV sync settings saved");
+    loadRemoteCsvSyncForm();
+    renderSyncSettingsCard();
 }
 window.saveRemoteCsvSyncConfig = saveRemoteCsvSyncConfig;
 

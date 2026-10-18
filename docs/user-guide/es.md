@@ -97,4 +97,4 @@ La pantalla **Herramientas** abre las herramientas de Poli International (calend
 
 ## Copias de seguridad
 
-Todo se almacena en `data/studio_crm.sqlite` (o en la ruta definida en `SQLITE_DB_PATH`). Copie ese archivo para hacer una copia de seguridad del estudio. El botón de instantánea también escribe una copia en `storage/backups/`.
+Todo se almacena en `data/studio_crm.sqlite` (o en la ruta definida en `SQLITE_DB_PATH`). Copie ese archivo para hacer una copia de seguridad del estudio. El botón de instantánea también escribe una copia en `storage/backups/`. El CRM también guarda allí una copia cada día y conserva los últimos 30 días. En **Ajustes**, **Copia de seguridad de la base de datos**, puede copiar además cada copia en una segunda carpeta (una memoria USB, otro disco o una carpeta de Google Drive, OneDrive o Dropbox), para que un disco averiado o un ordenador robado no se lleve todas las copias.

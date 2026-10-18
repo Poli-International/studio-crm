@@ -9,6 +9,7 @@ import { db, safeDbQuery, sqlite } from './src/db/index.js';
 import { startHttps, studioAddress } from './src/https.js';
 import { installAccess } from './src/access.js';
 import { installUpdate } from './src/update.js';
+import { pruneAutoBackups, AUTO_BACKUP } from './src/backups.js';
 import { mergeMedicalInto } from './src/utils/crm-utils.js';
 import {
   users as dbUsers,
@@ -45,7 +46,7 @@ app.use(express.json({ limit: '15mb' })); // portfolio photos arrive as data URL
 
 // Optional studio password: when one is set, nothing below answers before the device has signed in.
 installAccess(app, sqlite, () => staff);
-installUpdate(app, { root: __dirname, version: APP_VERSION, sqlite, saveAll: () => saveAll() });   // saveAll is defined further down
+installUpdate(app, { root: __dirname, version: APP_VERSION, sqlite, saveAll: () => saveAll(), copyBackup: (f) => copyBackupOut(f) });   // both are defined further down
 
 // Save state after every successful write (persistence block at the end of this file).
 app.use((req, res, next) => {
@@ -3196,53 +3197,10 @@ app.delete('/api/inventory/categories/:id', (req, res) => {
   res.json({ success: true, removed });
 });
 
+// The items as the studio entered them. Every item came back with an invented order history
+// (purchase orders, past prices, a usage rate and a stockout date); no screen used it.
 app.get('/api/inventory', (req, res) => {
-  const apptList = Array.isArray(appointments) ? appointments : (appointments?.appointments || []);
-  const appointmentCount30Days = apptList.length || 42;
-  const volumeFactor = Math.max(0.7, appointmentCount30Days / 30);
-
-  const enriched = inventory.map(item => {
-    const dailyBurn = Number(item.daily_burn) || (item.quantity > 50 ? 3.5 : 1.2);
-    const forecast14dNeeded = Math.ceil(dailyBurn * 14 * volumeFactor);
-    const reorderThreshold = item.reorder_point ?? item.reorder_threshold ?? 10;
-    const isApproachingThreshold = item.quantity <= (reorderThreshold + Math.ceil(forecast14dNeeded * 0.4));
-    const isBelowThreshold = item.quantity <= reorderThreshold;
-    const daysUntilDepletion = dailyBurn > 0 ? Math.round(item.quantity / dailyBurn) : 999;
-    const daysUntilZero = dailyBurn > 0 ? Number((item.quantity / dailyBurn).toFixed(1)) : 999;
-    const isProjectedStockout7d = daysUntilZero <= 7;
-    const stockoutMs = Date.now() + Math.max(0, Math.round(daysUntilZero * 86400000));
-    const projectedStockoutDate = new Date(stockoutMs).toISOString().split('T')[0];
-
-    const unitCost = parseFloat(item.unit_cost || item.price || item.cost) || 15.00;
-    const unitCost30dAgo = item.unit_cost_30d_ago || Number((unitCost * 0.96).toFixed(2));
-    const unitCost90dAgo = item.unit_cost_90d_ago || Number((unitCost * 0.94).toFixed(2));
-    const unitCost1yrAvg = item.unit_cost_1yr_avg || Number((unitCost * 0.98).toFixed(2));
-
-    const defaultOrderHistory = [
-      { date: '2026-07-25', po_number: `PO-2026-0${80 + (item.id % 20)}`, qty: Math.max(20, (reorderThreshold * 2)), unit_cost: unitCost, status: 'Delivered', lead_time_days: item.lead_time_days || 3 },
-      { date: '2026-06-15', po_number: `PO-2026-0${55 + (item.id % 20)}`, qty: Math.max(20, (reorderThreshold * 2)), unit_cost: unitCost30dAgo, status: 'Delivered', lead_time_days: item.lead_time_days || 3 },
-      { date: '2026-04-28', po_number: `PO-2026-0${30 + (item.id % 20)}`, qty: Math.max(20, (reorderThreshold * 2)), unit_cost: unitCost90dAgo, status: 'Delivered', lead_time_days: item.lead_time_days || 4 }
-    ];
-
-    return {
-      ...item,
-      unit_cost: unitCost,
-      unit_cost_30d_ago: unitCost30dAgo,
-      unit_cost_90d_ago: unitCost90dAgo,
-      unit_cost_1yr_avg: unitCost1yrAvg,
-      order_history: item.order_history || defaultOrderHistory,
-      forecast_14d_needed: forecast14dNeeded,
-      appointment_volume_30d: appointmentCount30Days,
-      is_approaching_threshold: isApproachingThreshold,
-      is_below_threshold: isBelowThreshold,
-      days_until_depletion: daysUntilDepletion,
-      days_until_zero: daysUntilZero,
-      is_projected_stockout_7d: isProjectedStockout7d,
-      projected_stockout_date: projectedStockoutDate
-    };
-  });
-
-  res.json(enriched);
+  res.json(inventory);
 });
 app.post('/api/inventory', (req, res) => {
   // the id is the server's: length + 1 repeated an id after a deletion, and the body could set one
@@ -8511,7 +8469,7 @@ app.post('/api/inventory/import-csv', (req, res) => {
 
     const name = (r.name || r.Name || r.item_name || r.title || '').toString().trim();
     const rawSku = (r.sku || r.SKU || '').toString().trim();
-    const rawCategory = (r.category || r.Category || r.item_type || r.type || 'Supplies').toString().trim();
+    const rawCategory = (r.category || r.Category || r.item_type || r.type || '').toString().trim();
     const rawQty = r.quantity !== undefined ? r.quantity : (r.Quantity !== undefined ? r.Quantity : (r.stock !== undefined ? r.stock : (r.qty !== undefined ? r.qty : '')));
     const rawPrice = r.unitcost !== undefined ? r.unitcost : (r.UnitCost !== undefined ? r.UnitCost : (r.unit_cost !== undefined ? r.unit_cost : (r.price !== undefined ? r.price : (r.Price !== undefined ? r.Price : (r.cost !== undefined ? r.cost : '')))));
     const rawReorder = r.reorderpoint !== undefined ? r.reorderpoint : (r.ReorderPoint !== undefined ? r.ReorderPoint : (r.reorder_point !== undefined ? r.reorder_point : (r.reorder_threshold !== undefined ? r.reorder_threshold : (r.min_stock !== undefined ? r.min_stock : ''))));
@@ -8523,9 +8481,10 @@ app.post('/api/inventory/import-csv', (req, res) => {
     }
 
     // 2. Quantity validation
-    let qty = 0;
+    // a blank cell is null: it leaves an existing item's value alone (it set price 15.00, stock 0, reorder 5)
+    let qty = null;
     if (rawQty === '' || rawQty === null || rawQty === undefined) {
-      qty = 0;
+      qty = null;
     } else {
       const parsedQty = Number(rawQty);
       if (isNaN(parsedQty) || parsedQty < 0 || !Number.isInteger(parsedQty)) {
@@ -8536,9 +8495,9 @@ app.post('/api/inventory/import-csv', (req, res) => {
     }
 
     // 3. UnitCost validation
-    let unitPrice = 15.00;
+    let unitPrice = null;
     if (rawPrice === '' || rawPrice === null || rawPrice === undefined) {
-      unitPrice = 15.00;
+      unitPrice = null;
     } else {
       const cleanPriceStr = rawPrice.toString().replace('$', '').trim();
       const parsedPrice = Number(cleanPriceStr);
@@ -8550,9 +8509,9 @@ app.post('/api/inventory/import-csv', (req, res) => {
     }
 
     // 4. ReorderPoint validation
-    let reorderThreshold = 5;
+    let reorderThreshold = null;
     if (rawReorder === '' || rawReorder === null || rawReorder === undefined) {
-      reorderThreshold = 5;
+      reorderThreshold = null;
     } else {
       const parsedReorder = Number(rawReorder);
       if (isNaN(parsedReorder) || parsedReorder < 0 || !Number.isInteger(parsedReorder)) {
@@ -8562,8 +8521,8 @@ app.post('/api/inventory/import-csv', (req, res) => {
       }
     }
 
-    const sku = rawSku || `SKU-${Math.floor(Math.random() * 90000 + 10000)}`;
-    const category = rawCategory || 'Supplies';
+    const sku = rawSku;
+    const category = rawCategory;
 
     if (rowErrors.length > 0) {
       validationErrors.push(...rowErrors);
@@ -8578,17 +8537,13 @@ app.post('/api/inventory/import-csv', (req, res) => {
     );
 
     if (existing) {
-      if (mode === 'add') {
-        existing.quantity = (parseInt(existing.quantity) || 0) + qty;
-      } else {
-        existing.quantity = qty;
-      }
-      existing.price = unitPrice;
-      existing.reorder_point = reorderThreshold;
+      if (qty !== null) existing.quantity = mode === 'add' ? (parseInt(existing.quantity) || 0) + qty : qty;
+      if (unitPrice !== null) existing.price = unitPrice;
+      if (reorderThreshold !== null) existing.reorder_point = reorderThreshold;
       if (supplier) existing.supplier = supplier;
       if (category) existing.item_type = category;
       if (name) existing.name = name;
-      existing.last_restocked = new Date().toISOString().split('T')[0];
+      if (qty !== null) existing.last_restocked = new Date().toISOString().split('T')[0];
       updatedCount++;
       processedRows.push({ ...existing, action: 'updated', row: rowNum });
     } else {
@@ -8596,11 +8551,11 @@ app.post('/api/inventory/import-csv', (req, res) => {
       const createdItem = {
         id: maxId + 1,
         name: name,
-        item_type: category,
-        sku: sku,
-        quantity: qty,
-        reorder_point: reorderThreshold,
-        price: unitPrice,
+        item_type: category || 'Supplies',
+        sku: sku || `SKU-${maxId + 1}`,
+        quantity: qty ?? 0,
+        reorder_point: reorderThreshold ?? 5,
+        price: unitPrice ?? 0,
         supplier: supplier,
         lead_time_days: 3,
         last_restocked: new Date().toISOString().split('T')[0]
@@ -8825,14 +8780,16 @@ async function runAutomatedCsvSync(triggeredBy = 'Automated Schedule') {
         const name = r.name || r.client_name || r.full_name;
         if (!name) return;
 
-        const email = r.email || r.client_email || `${name.toLowerCase().replace(/\s+/g, '.')}@example.com`;
-        const phone = r.phone || r.mobile || r.telephone || '555-0000';
-        const notes = r.notes || r.comments || 'Auto-synced from remote CSV endpoint';
-        const profession = r.profession || r.title || 'Client';
+        // A blank cell stays blank. It was filled with a made-up email and phone, birth date
+        // 1990-01-01 (an adult) and allergies "None": "unknown" shown as "no allergies".
+        const email = r.email || r.client_email || '';
+        const phone = r.phone || r.mobile || r.telephone || '';
+        const notes = r.notes || r.comments || '';
+        const profession = r.profession || r.title || '';
 
-        const existing = clients.find(c => 
-          (c.email && c.email.toLowerCase() === email.toLowerCase()) ||
-          (c.phone && phone !== '555-0000' && c.phone === phone) ||
+        const existing = clients.find(c =>
+          (email && c.email && c.email.toLowerCase() === email.toLowerCase()) ||
+          (phone && c.phone && c.phone === phone) ||
           (c.name && c.name.toLowerCase() === name.toLowerCase())
         );
 
@@ -8843,8 +8800,7 @@ async function runAutomatedCsvSync(triggeredBy = 'Automated Schedule') {
           if (r.profession) existing.profession = r.profession;
           if (r.dob) existing.dob = r.dob;
           if (r.allergies) existing.allergies = r.allergies;
-          if (r.notes) existing.notes = r.notes;
-          existing.lastVisit = new Date().toISOString().split('T')[0];
+          if (r.notes) existing.notes = r.notes; // a sync is not a visit: lastVisit is left alone
           stats.clientsUpdated++;
         } else {
           const maxId = clients.length ? Math.max(...clients.map(c => c.id)) : 0;
@@ -8857,10 +8813,10 @@ async function runAutomatedCsvSync(triggeredBy = 'Automated Schedule') {
             notes,
             assigned_staff_id: null,
             assigned_staff_name: 'Unassigned',
-            dob: r.dob || '1990-01-01',
-            allergies: r.allergies || 'None',
-            medical_history: r.medical_history || 'None',
-            lastVisit: new Date().toISOString().split('T')[0]
+            dob: r.dob || '',
+            allergies: r.allergies || '',
+            medical_history: r.medical_history || '',
+            created_at: new Date().toISOString()
           });
           stats.clientsCreated++;
         }
@@ -8894,22 +8850,25 @@ async function runAutomatedCsvSync(triggeredBy = 'Automated Schedule') {
         const name = r.name || r.item_name || r.title;
         if (!name) return;
 
-        const sku = r.sku || r.item_sku || `SKU-${Math.floor(Math.random() * 9000 + 1000)}`;
-        const quantity = parseInt(r.quantity || r.qty || r.stock || '10', 10);
-        const reorder_point = parseInt(r.reorder_point || r.min_qty || '5', 10);
-        const price = parseFloat(r.price || r.cost || '10.00');
+        // A blank cell changes nothing. A blank quantity set the item's real stock to 10, and a
+        // new item got the price 10.00 and a random SKU.
+        const num = (v, parse) => { const n = parse(v); return v != null && String(v).trim() !== '' && Number.isFinite(n) ? n : null; };
+        const sku = r.sku || r.item_sku || '';
+        const quantity = num(r.quantity ?? r.qty ?? r.stock, (v) => parseInt(v, 10));
+        const reorder_point = num(r.reorder_point ?? r.min_qty, (v) => parseInt(v, 10));
+        const price = num(r.price ?? r.cost, parseFloat);
         const item_type = r.item_type || r.category || 'Supplies';
 
-        const existing = inventory.find(i => 
+        const existing = inventory.find(i =>
           (i.sku && sku && i.sku.toLowerCase() === sku.toLowerCase()) ||
           (i.name && i.name.toLowerCase() === name.toLowerCase())
         );
 
         if (existing) {
-          existing.quantity = quantity;
-          if (r.price) existing.price = price;
-          if (r.reorder_point) existing.reorder_point = reorder_point;
-          if (r.item_type) existing.item_type = item_type;
+          if (quantity !== null) existing.quantity = quantity;
+          if (price !== null) existing.price = price;
+          if (reorder_point !== null) existing.reorder_point = reorder_point;
+          if (r.item_type || r.category) existing.item_type = item_type;
           stats.inventoryUpdated++;
         } else {
           const maxId = inventory.length ? Math.max(...inventory.map(i => i.id)) : 0;
@@ -8917,10 +8876,10 @@ async function runAutomatedCsvSync(triggeredBy = 'Automated Schedule') {
             id: maxId + 1,
             name,
             item_type,
-            sku,
-            quantity,
-            reorder_point,
-            price
+            sku: sku || `SKU-${maxId + 1}`,
+            quantity: quantity ?? 0,
+            reorder_point: reorder_point ?? 5,
+            price: price ?? 0
           });
           stats.inventoryCreated++;
         }
@@ -10611,44 +10570,117 @@ app.get('/api/audit-logs', (req, res) => {
 // ==========================================
 // 💾 DATABASE SNAPSHOT BACKUP & PORTAL LINK APIs
 // ==========================================
-let lastDatabaseSnapshotTimestamp = new Date(Date.now() - (26 * 60 * 60 * 1000)).toISOString(); // Default 26 hours ago to show toast initially
+let lastDatabaseSnapshotTimestamp = null; // null = never backed up (it was set to "26 hours ago")
 let temporaryPortalLinks = [];
+
+// Backups: storage/backups/ on this computer, and the same file copied to a second folder the
+// studio chooses (a USB stick, or a Google Drive / OneDrive / Dropbox folder) so a dead disk or
+// a stolen PC does not take every copy with it. One automatic backup a day, the last 30 kept.
+const BACKUP_DIR = path.join(__dirname, 'storage', 'backups');
+const AUTO_BACKUPS_KEPT = 30;
+let backupConfig = { copyTo: '', lastCopyError: null, lastCopyTime: null };
+
+async function writeBackup(prefix) {
+  saveAll(); // everything in memory is in the file before it is copied
+  fs.mkdirSync(BACKUP_DIR, { recursive: true });
+  const stamp = new Date().toISOString();
+  const filename = `${prefix}_${stamp.replace(/[:.]/g, '-')}.sqlite`;
+  const file = path.join(BACKUP_DIR, filename);
+  await sqlite.backup(file);
+  lastDatabaseSnapshotTimestamp = stamp;
+  const copied = copyBackupOut(file);
+  return { stamp, filename, sizeBytes: fs.statSync(file).size, copied };
+}
+
+// null = no second folder set, true = copied, false = the copy failed (kept in lastCopyError)
+function copyBackupOut(file) {
+  if (!backupConfig.copyTo) return null;
+  try {
+    fs.copyFileSync(file, path.join(backupConfig.copyTo, path.basename(file)));
+    backupConfig.lastCopyError = null;
+    backupConfig.lastCopyTime = new Date().toISOString();
+    return true;
+  } catch (e) {
+    backupConfig.lastCopyError = e.message;
+    return false;
+  } finally {
+    scheduleStateSave();
+  }
+}
+
+async function dailyBackup() {
+  const today = new Date().toLocaleDateString('sv'); // YYYY-MM-DD, the studio's own day
+  let names = [];
+  try { names = fs.readdirSync(BACKUP_DIR); } catch (e) {}
+  if (names.some((n) => n.startsWith(`auto_${today}_`))) return;
+  try {
+    const b = await writeBackup(`auto_${today}`);
+    logActivity({
+      category: 'system', action: 'DATABASE_SNAPSHOT_CREATED', title: 'Daily backup saved',
+      details: `storage/backups/${b.filename}` + (b.copied === false ? ` (the copy to ${backupConfig.copyTo} failed: ${backupConfig.lastCopyError})` : b.copied ? ` and ${backupConfig.copyTo}` : ''),
+      user: 'Studio CRM', badgeColor: b.copied === false ? 'red' : 'green'
+    });
+  } catch (e) {
+    console.error('[backup] the daily backup failed:', e.message);
+    return;
+  }
+  // the oldest daily backups go, in both folders (src/backups.js)
+  pruneAutoBackups(BACKUP_DIR, AUTO_BACKUPS_KEPT);
+  if (backupConfig.copyTo) pruneAutoBackups(backupConfig.copyTo, AUTO_BACKUPS_KEPT);
+}
 
 // GET Database Snapshot Backup Status
 app.get('/api/database/snapshot-status', (req, res) => {
-  const now = Date.now();
-  const snapshotTime = new Date(lastDatabaseSnapshotTimestamp).getTime();
-  const diffHours = (now - snapshotTime) / (1000 * 60 * 60);
-  const isOlderThan24h = diffHours >= 24;
-
+  const diffHours = lastDatabaseSnapshotTimestamp ? (Date.now() - new Date(lastDatabaseSnapshotTimestamp).getTime()) / 3600000 : null;
+  let autoCount = 0;
+  try { autoCount = fs.readdirSync(BACKUP_DIR).filter((n) => AUTO_BACKUP.test(n)).length; } catch (e) {}
   res.json({
     success: true,
     lastSnapshotTimestamp: lastDatabaseSnapshotTimestamp,
-    isOlderThan24h: isOlderThan24h,
-    hoursSinceLastSnapshot: parseFloat(diffHours.toFixed(1))
+    isOlderThan24h: diffHours === null || diffHours >= 24,
+    hoursSinceLastSnapshot: diffHours === null ? null : parseFloat(diffHours.toFixed(1)),
+    autoBackups: autoCount,
+    autoBackupsKept: AUTO_BACKUPS_KEPT,
+    copyTo: backupConfig.copyTo,
+    lastCopyError: backupConfig.lastCopyError,
+    lastCopyTime: backupConfig.lastCopyTime
   });
+});
+
+// POST the second folder backups are copied to ('' = none). It must exist and take a file.
+app.post('/api/database/backup-folder', (req, res) => {
+  const folder = String((req.body && req.body.copyTo) || '').trim();
+  if (folder) {
+    if (!path.isAbsolute(folder)) return res.status(400).json({ success: false, message: 'Give the full path of the folder, for example D:\\Backups or /Volumes/USB/Backups' });
+    try {
+      if (!fs.statSync(folder).isDirectory()) throw new Error('not a folder');
+      const probe = path.join(folder, '.studio-crm-write-test');
+      fs.writeFileSync(probe, 'ok');
+      fs.rmSync(probe, { force: true });
+    } catch (e) {
+      return res.status(400).json({ success: false, message: 'The CRM cannot write to that folder: ' + e.message });
+    }
+  }
+  backupConfig.copyTo = folder;
+  backupConfig.lastCopyError = null;
+  logActivity({ category: 'system', action: 'BACKUP_FOLDER_SET', title: folder ? 'Backups also copied to a second folder' : 'Second backup folder removed', details: folder || '', user: req.body?.user || 'Admin Manager', badgeColor: 'blue' });
+  res.json({ success: true, copyTo: folder });
 });
 
 // POST Back up the studio database: a full copy of the SQLite file in storage/backups/
 app.post('/api/database/create-snapshot', async (req, res) => {
   try {
-    saveAll(); // everything in memory is in the file before it is copied
-    const backupDir = path.join(__dirname, 'storage', 'backups');
-    fs.mkdirSync(backupDir, { recursive: true });
-    const stamp = new Date().toISOString();
-    const filename = `studio_crm_${stamp.replace(/[:.]/g, '-')}.sqlite`;
-    await sqlite.backup(path.join(backupDir, filename));
-    const sizeBytes = fs.statSync(path.join(backupDir, filename)).size;
-    lastDatabaseSnapshotTimestamp = stamp;
+    const b = await writeBackup('studio_crm');
     logActivity({
       category: 'system',
       action: 'DATABASE_SNAPSHOT_CREATED',
       title: 'Database backup saved',
-      details: `storage/backups/${filename} (${Math.round(sizeBytes / 1024)} KB)`,
+      details: `storage/backups/${b.filename} (${Math.round(b.sizeBytes / 1024)} KB)`,
       user: req.body?.user || 'Admin Manager',
       badgeColor: 'green'
     });
-    res.json({ success: true, message: `Backup saved in storage/backups: ${filename} (${Math.round(sizeBytes / 1024)} KB)`, snapshotTimestamp: stamp, filename, sizeBytes });
+    const also = b.copied ? ` and in ${backupConfig.copyTo}` : b.copied === false ? `. The copy to ${backupConfig.copyTo} failed: ${backupConfig.lastCopyError}` : '';
+    res.json({ success: true, message: `Backup saved in storage/backups: ${b.filename} (${Math.round(b.sizeBytes / 1024)} KB)${also}`, snapshotTimestamp: b.stamp, filename: b.filename, sizeBytes: b.sizeBytes, copied: b.copied });
   } catch (err) {
     res.status(500).json({ success: false, message: 'The backup could not be written: ' + err.message });
   }
@@ -10750,6 +10782,9 @@ app.post('/api/admin/start-empty', (req, res) => {
   // the demo stations had names ("VIP Private Suite", "Piercing Suite B"): plain numbers, for the studio to rename
   studioStations.forEach((st) => { st.name = 'Station ' + st.id; st.type = ''; st.status = 'ready'; st.currentClient = null; st.assignedStaff = ''; st.autoclaveCycle = ''; st.lastSanitized = null; });
   if (studioGeneralSettings.vat_number === 'GB999888777') studioGeneralSettings.vat_number = '';
+  // an empty studio has never synced: the run history goes, the studio's own sync settings stay
+  Object.assign(syncState, { lastSyncTime: null, lastSuccessfulSyncTime: null, syncCount: 0, lastError: null });
+  if (syncState.lastStats) Object.keys(syncState.lastStats).forEach((k) => { syncState.lastStats[k] = 0; });
   const removedKeys = Object.keys(appData).filter((k) => !APP_DATA_KEEP.test(k));
   removedKeys.forEach((k) => delete appData[k]);
   nextActivityId = 1;
@@ -10836,6 +10871,7 @@ const PERSISTED = {
   aftercarePipeline: [() => aftercarePipeline],
   autoclaveLogs: [() => autoclaveLogs],
   temporaryPortalLinks: [() => temporaryPortalLinks, (v) => { temporaryPortalLinks = v; }],
+  backupConfig: [() => backupConfig, (v) => { backupConfig = { ...backupConfig, ...v }; }],
   syncConfig: [() => ({ enabled: syncState.enabled, intervalMinutes: syncState.intervalMinutes, clientsUrl: syncState.clientsUrl, inventoryUrl: syncState.inventoryUrl }),
     (v) => { Object.assign(syncState, v); }],
   nextActivityId: [() => nextActivityId, (v) => { nextActivityId = v; }],
@@ -10887,6 +10923,11 @@ if (syncState.enabled && (syncState.clientsUrl || syncState.inventoryUrl)) {
   setTimeout(() => {
     runAutomatedCsvSync('Server Initialized Sync');
   }, 3000);
+}
+// the daily backup: a minute after the start, then checked every hour (not in an update's trial start)
+if (!process.env.STUDIO_CRM_TRIAL) {
+  setTimeout(dailyBackup, 60 * 1000).unref();
+  setInterval(dailyBackup, 60 * 60 * 1000).unref();
 }
 setInterval(scheduleStateSave, 5 * 60 * 1000).unref(); // background jobs change state too
 for (const sig of ['SIGINT', 'SIGTERM']) process.on(sig, () => { try { saveAll(); } catch (e) {} process.exit(0); });

@@ -59,7 +59,7 @@ async function trialStart(newDir, dbCopy) {
   const node = path.join(newDir, 'runtime', process.platform === 'win32' ? 'node.exe' : 'node');
   const proc = spawn(node, ['server.js'], {
     cwd: newDir, stdio: 'ignore',
-    env: { ...process.env, PORT: String(port), HTTPS_PORT: '0', SQLITE_DB_PATH: dbCopy, STUDIO_CRM_OPEN: '' },
+    env: { ...process.env, PORT: String(port), HTTPS_PORT: '0', SQLITE_DB_PATH: dbCopy, STUDIO_CRM_OPEN: '', STUDIO_CRM_TRIAL: '1' },
   });
   let exited = null;
   proc.on('exit', (code) => { exited = code; });
@@ -76,7 +76,7 @@ async function trialStart(newDir, dbCopy) {
   }
 }
 
-export function installUpdate(app, { root, version, sqlite, saveAll, exit = (code) => process.exit(code) }) {
+export function installUpdate(app, { root, version, sqlite, saveAll, copyBackup = () => {}, exit = (code) => process.exit(code) }) {
   const work = path.join(root, '.update');
   let state = { step: 'idle', error: null };
   let latest = null, checkedAt = 0;
@@ -147,6 +147,7 @@ export function installUpdate(app, { root, version, sqlite, saveAll, exit = (cod
     fs.mkdirSync(backups, { recursive: true });
     const backup = path.join(backups, `before-update-to-${rel.version}_${new Date().toISOString().replace(/[:.]/g, '-')}.sqlite`);
     await sqlite.backup(backup);
+    copyBackup(backup); // to the studio's second backup folder, if it has one
 
     state.step = 'testing';
     const trial = path.join(work, 'trial');

@@ -97,4 +97,4 @@ Het scherm **Tools** opent de Poli International-tools (nazorgschema's, generato
 
 ## Backups
 
-Alles wordt opgeslagen in `data/studio_crm.sqlite` (of het pad ingesteld in `SQLITE_DB_PATH`). Kopieer dat bestand om de studio te backuppen. De snapshotknop schrijft ook een kopie naar `storage/backups/`.
+Alles wordt opgeslagen in `data/studio_crm.sqlite` (of het pad ingesteld in `SQLITE_DB_PATH`). Kopieer dat bestand om de studio te backuppen. De snapshotknop schrijft ook een kopie naar `storage/backups/`. Het CRM bewaart daar ook elke dag een kopie en houdt de laatste 30 dagen. In **Instellingen**, **Database-back-up** kunt u elke back-up ook naar een tweede map laten kopiëren (USB-stick, andere schijf, Google Drive-, OneDrive- of Dropbox-map), zodat een kapotte schijf of een gestolen computer niet alle kopieën meeneemt.

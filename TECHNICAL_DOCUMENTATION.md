@@ -433,6 +433,26 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.17
+
+A blank cell stays blank (CSV sync and the stock CSV import):
+
+- Clients from the automatic sync: an empty email, phone, birth date, allergies or medical history stays empty. They were filled with a made-up email and phone "555-0000", birth date 1990-01-01 (an adult, past any under-18 check) and allergies "None" ("unknown" shown as "no allergies"). A sync no longer counts as a visit.
+- Stock: a blank quantity, price, reorder point or category leaves an existing item's value alone. The sync set a blank quantity to 10, the import set a blank price to 15.00, stock to 0 and the reorder point to 5. A new item gets 0 / 0.00 / 5 and `SKU-<id>` (was a random SKU).
+- `GET /api/inventory` returns the items as entered. Each came back with an invented order history (purchase orders, past prices, usage rate, stockout date); no screen used it.
+
+Backups (`src/backups.js`, Settings > Database Backup):
+
+- A daily automatic backup (`auto_<date>_<time>.sqlite` in `storage/backups/`), made a minute after the start and checked every hour; the last 30 are kept. Backups made by hand or before an update are never deleted. Not run in an update's trial start (`STUDIO_CRM_TRIAL`).
+- **Also copy every backup to**: a second folder (USB stick, other disk, synced cloud folder). It must be a full path the CRM can write to (`POST /api/database/backup-folder`, administrators). Daily, manual and before-update backups are copied there; a failed copy is shown on the card and in the activity log.
+- The card shows the last backup, the daily backups kept and the last copy. "Last backup" started at "26 hours ago" on a new install; it is now "no backup yet".
+
+Also:
+
+- **Start with an empty studio** clears the CSV sync's run history (its settings stay).
+- Client search in the booking and waiver forms (`handleClientAutocomplete`): each key typed fetched the client list again; on a slow computer the answers for earlier letters came back after the client was picked and cleared the pick, so the booking was saved with no client (seen twice on macOS runners). One request now serves every key, only the last key acts, and it reads the field as it is then. The booking flow reproduces it with a slow client list.
+- `escapeHtml` moved from `js/06-modals-tabs.js` (end of the page) to `app-features.js` (loaded first): on a slow computer an early server answer hit "escapeHtml is not defined" (seen once in the install test on Windows).
+
 ### 1.0.16
 
 Automatic CSV sync:

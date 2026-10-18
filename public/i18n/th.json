@@ -1830,5 +1830,17 @@
  "Printable stock labels": "ฉลากสินค้าสำหรับพิมพ์",
  "Stock labels": "ฉลากสินค้า",
  "No stock items yet. Add them in Inventory, then print their labels here.": "ยังไม่มีสินค้า เพิ่มสินค้าในสต็อกก่อน แล้วพิมพ์ฉลากที่นี่",
- "CSV sync settings saved": "บันทึกการตั้งค่าการซิงค์ CSV แล้ว"
+ "CSV sync settings saved": "บันทึกการตั้งค่าการซิงค์ CSV แล้ว",
+ "The CRM saves a full copy of the studio database every day in the storage/backups folder on the computer that runs it, and keeps the last 30 days.": "CRM จะบันทึกสำเนาฐานข้อมูลของสตูดิโอทั้งหมดทุกวันในโฟลเดอร์ storage/backups บนคอมพิวเตอร์ที่รัน CRM และเก็บไว้ 30 วันล่าสุด",
+ "Also copy every backup to": "คัดลอกข้อมูลสำรองทุกชุดไปที่",
+ "A folder on a USB stick, another disk, or a Google Drive, OneDrive or Dropbox folder on this computer, so a dead disk or a stolen computer does not take every copy with it. Leave it empty for none.": "โฟลเดอร์ในแฟลชไดรฟ์ USB ดิสก์อื่น หรือโฟลเดอร์ Google Drive, OneDrive หรือ Dropbox บนคอมพิวเตอร์เครื่องนี้ เพื่อไม่ให้ดิสก์เสียหรือคอมพิวเตอร์ถูกขโมยทำให้สำเนาทั้งหมดหายไป เว้นว่างไว้หากไม่ต้องการ",
+ "Save folder": "บันทึกโฟลเดอร์",
+ "Second backup folder": "โฟลเดอร์สำรองที่สอง",
+ "Last backup: {0}": "สำรองข้อมูลล่าสุด: {0}",
+ "No backup yet: the first daily backup is made a minute after the CRM starts.": "ยังไม่มีข้อมูลสำรอง: การสำรองข้อมูลรายวันครั้งแรกจะทำหลังจาก CRM เริ่มทำงานหนึ่งนาที",
+ "Daily backups kept: {0} of {1}": "ข้อมูลสำรองรายวันที่เก็บไว้: {0} จาก {1}",
+ "The copy to {0} failed: {1}": "การคัดลอกไปที่ {0} ล้มเหลว: {1}",
+ "Last copied to {0}: {1}": "คัดลอกไปที่ {0} ล่าสุด: {1}",
+ "Backups will also be copied to {0}": "ข้อมูลสำรองจะถูกคัดลอกไปที่ {0} ด้วย",
+ "Backups are no longer copied to a second folder": "ข้อมูลสำรองจะไม่ถูกคัดลอกไปยังโฟลเดอร์ที่สองอีกต่อไป"
 }

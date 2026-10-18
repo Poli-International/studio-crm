@@ -8,6 +8,7 @@ import { startApp, startFreshServer } from './app.mjs';
 import { sleep, launchBrowser } from './cdp.mjs';
 import http from 'http';
 import fs from 'fs';
+import os from 'os';
 import path from 'path';
 
 // "GitHub" for the Updates card: a newer version is out
@@ -231,12 +232,17 @@ await flow('Book an appointment for a client picked from the list, then edit it'
   await b.goto(url);
   await b.clickText('Calendar');
   await pressOn('openQuickNewAppointmentModal()');
+  // a slow studio computer: the client list answers late, after the client is picked (macOS runners
+  // showed the answers for "Alex R", "Alex Ri"... clearing the pick, so the booking had no client)
+  await b.evaluate(`(() => { const f = window.fetch; let n = 0; window.fetch = (u, o) => String(u).endsWith('/api/clients') ? new Promise((r) => setTimeout(r, 300 + 700 * n++)).then(() => f(u, o)) : f(u, o); })()`);
   await b.type('#new-appt-client', 'Alex Riv');
   await eventually(async () => (await text('#new-appt-client-autocomplete-dropdown')).includes('Alex Rivera'), 'typing a name does not offer the existing client');
   // the suggestion is picked with the mouse, as a person does
   const pick = await b.evaluate(`(() => { const row = [...document.querySelectorAll('#new-appt-client-autocomplete-dropdown [data-id]')].find(r => r.innerText.includes('Alex Rivera')); const r = row.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2, id: row.dataset.id }; })()`);
   await b.evaluate(`document.querySelector('#new-appt-client-autocomplete-dropdown [data-id="${pick.id}"]').dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }))`);
   check((await b.evaluate(`document.getElementById('new-appt-client-id').value`)) === pick.id, 'picking the client did not choose them');
+  await sleep(2500); // every late answer is in
+  check((await b.evaluate(`document.getElementById('new-appt-client-id').value`)) === pick.id, 'a late answer for an earlier letter forgot the client picked');
   await b.evaluate(`(() => { const set = (id, v) => { const el = document.getElementById(id); el.value = v; el.dispatchEvent(new Event('change', { bubbles: true })); }; set('new-appt-date', '2031-03-04'); set('new-appt-time', '11:00'); set('new-appt-notes', 'Edit check'); })()`);
   await b.clickText('Book appointment', '#new-appointment-modal-overlay');
   let appt;
@@ -404,6 +410,59 @@ await flow('CSV auto-sync: off on a new install, its addresses saved on the serv
   await b.clickText('Settings');
   await eventually(async () => (await text('#settings-sync-status-badge')).includes('on'), 'Settings does not say the sync is on');
   await b.evaluate(`fetch('/api/sync/config', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ enabled: false, clientsUrl: '' }) })`);
+});
+
+await flow('CSV: a blank cell is left blank, never filled in or written over an existing value', async () => {
+  // the sync gave a client allergies "None" and birth date 1990-01-01, and a blank quantity set stock to 10;
+  // the stock import set a blank price to 15.00 on an item that had its own
+  const post = (p, body) => b.evaluate(`fetch(${JSON.stringify(p)}, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: ${JSON.stringify(JSON.stringify(body))} }).then(r => r.json())`);
+  await post('/api/inventory/import-csv', { rows: [{ name: 'Blank Cell Ink', quantity: '7', price: '22.50', reorder_point: '3', category: 'Inks' }] });
+  await post('/api/inventory/import-csv', { rows: [{ name: 'Blank Cell Ink', quantity: '', price: '', reorder_point: '', category: '' }] });
+  const ink = (await api('/api/inventory')).find((i) => i.name === 'Blank Cell Ink');
+  check(ink && ink.quantity === 7 && ink.price === 22.5 && ink.reorder_point === 3 && ink.item_type === 'Inks', 'blank cells in the stock import changed the item: ' + JSON.stringify(ink));
+
+  const csv = http.createServer((req, res) => res.end(req.url.includes('clients')
+    ? 'name,email,phone,dob,allergies\nSync Blank Client,,,,\n'
+    : 'name,quantity,price\nBlank Cell Ink,,\n')).listen(0, '127.0.0.1');
+  await new Promise((r) => csv.on('listening', r));
+  const at = 'http://127.0.0.1:' + csv.address().port;
+  try {
+    await post('/api/sync/config', { clientsUrl: at + '/clients.csv', inventoryUrl: at + '/inventory.csv', enabled: false });
+    const run = await post('/api/sync/trigger', {});
+    check(run.success, 'the sync from the test CSV failed: ' + JSON.stringify(run).slice(0, 160));
+    const c = (await api('/api/clients')).find((x) => x.name === 'Sync Blank Client');
+    check(c && !c.dob && !c.allergies && !c.phone && !c.email && !c.medical_history, 'the sync filled in what the CSV left blank: ' + JSON.stringify(c));
+    const after = (await api('/api/inventory')).find((i) => i.name === 'Blank Cell Ink');
+    check(after.quantity === 7 && after.price === 22.5, 'a blank cell in the synced CSV changed the stock: ' + JSON.stringify(after));
+  } finally {
+    await post('/api/sync/config', { clientsUrl: '', inventoryUrl: '', enabled: false });
+    csv.close();
+  }
+});
+
+await flow('Backups: a second folder is checked and saved, Back up now copies the backup there too', async () => {
+  // backups only went to storage/backups on the same disk, and only when someone clicked
+  const second = fs.mkdtempSync(path.join(process.env.RUNNER_TEMP || os.tmpdir(), 'crm-second-backup-'));
+  try {
+    await b.clickText('Settings');
+    await eventually(async () => (await text('#backup-status')).includes('Daily backups kept'), async () => 'the backup card does not say how many daily backups are kept: ' + await text('#backup-status'));
+    await b.type('#backup-copy-folder', 'not/a/full/path');
+    await b.clickText('Save folder');
+    await eventually(async () => (await b.evaluate('window.__ct.sig.added.join(" ")')).includes('full path'), 'a folder that is not a full path was accepted');
+    check(!(await api('/api/database/snapshot-status')).copyTo, 'a folder that is not a full path was saved');
+    await b.evaluate(`document.getElementById('backup-copy-folder').value = ''`);
+    await b.type('#backup-copy-folder', second);
+    await b.clickText('Save folder');
+    await eventually(async () => (await api('/api/database/snapshot-status')).copyTo === second, 'the second backup folder was not saved');
+    await b.clickText('Back up now');
+    await eventually(() => fs.readdirSync(second).some((n) => /^studio_crm_.*\.sqlite$/.test(n)), 'Back up now did not copy the backup to the second folder');
+    await eventually(async () => (await text('#backup-status')).includes('Last copied to'), async () => 'the card does not say the backup was copied: ' + await text('#backup-status'));
+    // the daily backup runs a minute after the start; by now the earlier flows have taken longer than that
+    await eventually(async () => (await api('/api/database/snapshot-status')).autoBackups >= 1, 'no daily backup was made', 75);
+  } finally {
+    await b.evaluate(`fetch('/api/database/backup-folder', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{"copyTo":""}' })`);
+    fs.rmSync(second, { recursive: true, force: true });
+  }
 });
 
 await flow('A Print button opens the print dialog', async () => {

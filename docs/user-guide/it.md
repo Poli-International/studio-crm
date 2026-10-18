@@ -97,4 +97,4 @@ La schermata **Strumenti** apre gli strumenti Poli International (calendari di a
 
 ## Backup
 
-Tutto è memorizzato in `data/studio_crm.sqlite` (o nel percorso impostato in `SQLITE_DB_PATH`). Copiate quel file per fare il backup dello studio. Il pulsante snapshot scrive anche una copia in `storage/backups/`.
+Tutto è memorizzato in `data/studio_crm.sqlite` (o nel percorso impostato in `SQLITE_DB_PATH`). Copiate quel file per fare il backup dello studio. Il pulsante snapshot scrive anche una copia in `storage/backups/`. Il CRM vi salva anche una copia ogni giorno e conserva gli ultimi 30 giorni. In **Impostazioni**, **Backup Database**, potete copiare ogni backup anche in una seconda cartella (chiavetta USB, altro disco, cartella Google Drive, OneDrive o Dropbox), così un disco guasto o un computer rubato non porta via tutte le copie.

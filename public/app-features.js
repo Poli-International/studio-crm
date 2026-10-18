@@ -8,6 +8,18 @@ window.oneAtATime = function (fn) {
   };
 };
 
+// Text into HTML. Defined here, the first script to use it: it lived in js/06-modals-tabs.js at the
+// end of the page, so on a slow computer an early answer from the server hit "escapeHtml is not defined".
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 // =========================================================================
 // 👤 CLIENT PROFILE MODAL LOGIC (DATABASE INTEGRATED & STAFF NOTES)
 // =========================================================================
@@ -2818,8 +2830,44 @@ async function triggerInstantDatabaseSnapshot() {
     } catch (e) {
         showStudioToast('Could not save: the server did not answer');
     }
+    renderBackupCard();
 }
 window.triggerInstantDatabaseSnapshot = triggerInstantDatabaseSnapshot;
+
+// Settings, Database Backup: the last backup, how many daily ones are kept, the second folder
+async function renderBackupCard() {
+    const status = document.getElementById('backup-status');
+    if (!status) return;
+    let st;
+    try { const r = await fetch('/api/database/snapshot-status'); if (!r.ok) return; st = await r.json(); } catch (e) { return; }
+    const folder = document.getElementById('backup-copy-folder');
+    if (folder && document.activeElement !== folder) folder.value = st.copyTo || '';
+    const parts = [st.lastSnapshotTimestamp
+        ? pdfLabel('Last backup: {0}').replace('{0}', new Date(st.lastSnapshotTimestamp).toLocaleString())
+        : pdfLabel('No backup yet: the first daily backup is made a minute after the CRM starts.')];
+    parts.push(pdfLabel('Daily backups kept: {0} of {1}').replace('{0}', st.autoBackups || 0).replace('{1}', st.autoBackupsKept || 30));
+    if (st.copyTo) parts.push(st.lastCopyError
+        ? pdfLabel('The copy to {0} failed: {1}').replace('{0}', st.copyTo).replace('{1}', st.lastCopyError)
+        : st.lastCopyTime ? pdfLabel('Last copied to {0}: {1}').replace('{0}', st.copyTo).replace('{1}', new Date(st.lastCopyTime).toLocaleString())
+        : pdfLabel('Backups will also be copied to {0}').replace('{0}', st.copyTo));
+    status.textContent = parts.join(' · ');
+    status.style.color = st.copyTo && st.lastCopyError ? '#FCA5A5' : '#D1D5DB';
+}
+window.renderBackupCard = renderBackupCard;
+
+async function saveBackupFolder(event) {
+    if (event) event.preventDefault();
+    const folder = (document.getElementById('backup-copy-folder') || {}).value || '';
+    let data;
+    try {
+        const r = await fetch('/api/database/backup-folder', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ copyTo: folder.trim() }) });
+        data = await r.json();
+        if (!r.ok) { showStudioToast(data.message || 'Could not save'); return; }
+    } catch (e) { showStudioToast('Could not save: the server did not answer'); return; }
+    showStudioToast(data.copyTo ? pdfLabel('Backups will also be copied to {0}').replace('{0}', data.copyTo) : 'Backups are no longer copied to a second folder');
+    renderBackupCard();
+}
+window.saveBackupFolder = saveBackupFolder;
 
 // =========================================================================
 // 15. ADDITIONAL SINGLE ACTIONS (7)
@@ -3041,26 +3089,35 @@ function renderDrawerFeed() {}
 window.renderDrawerFeed = renderDrawerFeed;
 
 // --- Client autocomplete (waiver + portfolio work forms): sets the hidden client id ---
-let autocompleteClients = null;
+let autocompleteClients = null; // the client list, or the request for it while it loads
+let autocompleteTurn = 0;
 async function handleClientAutocomplete(kind, query) {
     const box = document.getElementById(kind + "-client-autocomplete-dropdown");
     const idField = document.getElementById(kind + "-client-id");
     if (!box) return;
+    // Every key typed calls this. On a slow computer the answers for "Alex R", "Alex Ri"... came
+    // back after the client was picked and cleared the pick, so the booking had no client. Now
+    // one request serves them all, only the last key typed acts, and it reads the box as it is now.
+    const turn = ++autocompleteTurn;
     if (!autocompleteClients) {
-        try { const r = await fetch("/api/clients"); autocompleteClients = r.ok ? await r.json() : []; } catch (e) { autocompleteClients = []; }
+        autocompleteClients = fetch("/api/clients").then((r) => (r.ok ? r.json() : [])).catch(() => []);
     }
+    const clients = await autocompleteClients;
+    if (turn !== autocompleteTurn) return;
+    const input = document.getElementById(kind + "-client-search") || document.getElementById(kind + "-client"); // the booking form names it new-appt-client
+    const now = input ? input.value : query;
     // a different name forgets the client picked before; tapping the field again, or the same
     // name, keeps it (it was cleared on every focus, so a picked waiver client got lost)
-    const picked = idField && autocompleteClients.find((c) => String(c.id) === idField.value);
-    if (idField && !(picked && String(picked.name || "") === String(query || ""))) idField.value = "";
-    const q = String(query || "").toLowerCase().trim();
-    const hits = autocompleteClients.filter((c) => !q || String(c.name || "").toLowerCase().includes(q)).slice(0, 8);
+    const picked = idField && clients.find((c) => String(c.id) === idField.value);
+    if (picked && String(picked.name || "") === String(now || "")) return;
+    if (idField) idField.value = "";
+    const q = String(now || "").toLowerCase().trim();
+    const hits = clients.filter((c) => !q || String(c.name || "").toLowerCase().includes(q)).slice(0, 8);
     box.innerHTML = hits.map((c) => `<div data-id="${Number(c.id)}" style="padding:8px 12px;cursor:pointer;color:#E2E8F0;border-bottom:1px solid #1E293B;">${escapeHtml(c.name || "")}</div>`).join("");
     box.style.display = hits.length ? "block" : "none";
     box.querySelectorAll("[data-id]").forEach((row) => row.addEventListener("mousedown", (e) => {
         e.preventDefault();
         const c = hits.find((x) => String(x.id) === row.dataset.id);
-        const input = document.getElementById(kind + "-client-search") || document.getElementById(kind + "-client"); // the booking form names it new-appt-client
         if (input) input.value = c.name;
         if (idField) idField.value = String(c.id);
         if (kind === "waiver") {

@@ -1830,5 +1830,17 @@
  "Printable stock labels": "Lageretiketten drucken",
  "Stock labels": "Lageretiketten",
  "No stock items yet. Add them in Inventory, then print their labels here.": "Noch keine Lagerartikel. Fügen Sie sie unter Lager hinzu und drucken Sie dann hier ihre Etiketten.",
- "CSV sync settings saved": "CSV-Synchronisierung gespeichert"
+ "CSV sync settings saved": "CSV-Synchronisierung gespeichert",
+ "The CRM saves a full copy of the studio database every day in the storage/backups folder on the computer that runs it, and keeps the last 30 days.": "Das CRM speichert jeden Tag eine vollständige Kopie der Studio-Datenbank im Ordner storage/backups auf dem Computer, auf dem es läuft, und behält die letzten 30 Tage.",
+ "Also copy every backup to": "Jede Sicherung auch kopieren nach",
+ "A folder on a USB stick, another disk, or a Google Drive, OneDrive or Dropbox folder on this computer, so a dead disk or a stolen computer does not take every copy with it. Leave it empty for none.": "Ein Ordner auf einem USB-Stick, einer anderen Festplatte oder ein Google-Drive-, OneDrive- oder Dropbox-Ordner auf diesem Computer, damit eine defekte Festplatte oder ein gestohlener Computer nicht alle Kopien mitnimmt. Leer lassen für keinen.",
+ "Save folder": "Ordner speichern",
+ "Second backup folder": "Zweiter Sicherungsordner",
+ "Last backup: {0}": "Letzte Sicherung: {0}",
+ "No backup yet: the first daily backup is made a minute after the CRM starts.": "Noch keine Sicherung: Die erste tägliche Sicherung erfolgt eine Minute nach dem Start des CRM.",
+ "Daily backups kept: {0} of {1}": "Aufbewahrte tägliche Sicherungen: {0} von {1}",
+ "The copy to {0} failed: {1}": "Die Kopie nach {0} ist fehlgeschlagen: {1}",
+ "Last copied to {0}: {1}": "Zuletzt kopiert nach {0}: {1}",
+ "Backups will also be copied to {0}": "Sicherungen werden auch nach {0} kopiert",
+ "Backups are no longer copied to a second folder": "Sicherungen werden nicht mehr in einen zweiten Ordner kopiert"
 }

@@ -1461,10 +1461,17 @@
               <!-- Setting 3: Instant Cloud Backup -->
               <div style="background:#0F172A;padding:1.25rem;border-radius:12px;border:1px solid #1E293B;">
                 <h3 style="margin:0 0 6px 0;font-size:1.05rem;font-weight:800;color:#34D399;">Database Backup</h3>
-                <p style="margin:0 0 12px 0;font-size:0.8rem;color:#9CA3AF;">Saves a full copy of the studio database in the storage/backups folder on the computer that runs the CRM.</p>
+                <p style="margin:0 0 8px 0;font-size:0.8rem;color:#9CA3AF;">The CRM saves a full copy of the studio database every day in the storage/backups folder on the computer that runs it, and keeps the last 30 days.</p>
+                <p id="backup-status" style="margin:0 0 12px 0;font-size:0.8rem;color:#D1D5DB;"></p>
                 <button onclick="triggerInstantDatabaseSnapshot()" style="padding:0.45rem 0.9rem;background:#059669;color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">
                   Back up now
                 </button>
+                <form onsubmit="saveBackupFolder(event)" style="margin-top:14px;display:flex;flex-direction:column;gap:6px;">
+                  <label for="backup-copy-folder" style="font-size:0.8rem;color:#D1D5DB;font-weight:700;">Also copy every backup to</label>
+                  <p style="margin:0;font-size:0.75rem;color:#9CA3AF;">A folder on a USB stick, another disk, or a Google Drive, OneDrive or Dropbox folder on this computer, so a dead disk or a stolen computer does not take every copy with it. Leave it empty for none.</p>
+                  <input type="text" id="backup-copy-folder" placeholder="D:\Studio backups" aria-label="Second backup folder" style="padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;">
+                  <div><button type="submit" style="padding:0.45rem 0.9rem;background:#0D9488;color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">Save folder</button></div>
+                </form>
               </div>
 
               <!-- Updates: download, check and install a new version from here (src/update.js) -->

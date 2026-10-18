@@ -1830,5 +1830,17 @@
  "Printable stock labels": "Etichette di magazzino stampabili",
  "Stock labels": "Etichette di magazzino",
  "No stock items yet. Add them in Inventory, then print their labels here.": "Nessun articolo in magazzino. Aggiungeteli in Magazzino, poi stampate qui le etichette.",
- "CSV sync settings saved": "Impostazioni di sincronizzazione CSV salvate"
+ "CSV sync settings saved": "Impostazioni di sincronizzazione CSV salvate",
+ "The CRM saves a full copy of the studio database every day in the storage/backups folder on the computer that runs it, and keeps the last 30 days.": "Il CRM salva ogni giorno una copia completa del database dello studio nella cartella storage/backups del computer su cui gira, e conserva gli ultimi 30 giorni.",
+ "Also copy every backup to": "Copia anche ogni backup in",
+ "A folder on a USB stick, another disk, or a Google Drive, OneDrive or Dropbox folder on this computer, so a dead disk or a stolen computer does not take every copy with it. Leave it empty for none.": "Una cartella su una chiavetta USB, un altro disco o una cartella Google Drive, OneDrive o Dropbox su questo computer, così un disco guasto o un computer rubato non porta via tutte le copie. Lascia vuoto per nessuna.",
+ "Save folder": "Salva cartella",
+ "Second backup folder": "Seconda cartella di backup",
+ "Last backup: {0}": "Ultimo backup: {0}",
+ "No backup yet: the first daily backup is made a minute after the CRM starts.": "Ancora nessun backup: il primo backup giornaliero viene fatto un minuto dopo l'avvio del CRM.",
+ "Daily backups kept: {0} of {1}": "Backup giornalieri conservati: {0} di {1}",
+ "The copy to {0} failed: {1}": "La copia in {0} non è riuscita: {1}",
+ "Last copied to {0}: {1}": "Ultima copia in {0}: {1}",
+ "Backups will also be copied to {0}": "I backup saranno copiati anche in {0}",
+ "Backups are no longer copied to a second folder": "I backup non vengono più copiati in una seconda cartella"
 }

@@ -10,6 +10,7 @@ import { startHttps, studioAddress } from './src/https.js';
 import { installAccess } from './src/access.js';
 import { installUpdate } from './src/update.js';
 import { pruneAutoBackups, AUTO_BACKUP } from './src/backups.js';
+import { GUARDIAN_AGE, ageOn, isGuardianForm, dobFromResponses } from './src/consent-age.js';
 import { mergeMedicalInto } from './src/utils/crm-utils.js';
 import {
   users as dbUsers,
@@ -1008,14 +1009,27 @@ app.post('/api/clients/:id/consent-forms', async (req, res) => {
   res.status(r.status).json(r.body);
 });
 
-// Shared by the form builder's Save and by the kiosk tablet. Answers { status, body }.
-async function saveConsentForm(clientId, { formName, formCategory, language, schema, responses }) {
+// A client under 18 signs only with a parent or guardian (src/consent-age.js).
+const MINOR_NEEDS_GUARDIAN = 'This client is under 18: a parent or legal guardian must sign the form too. Choose a form with a parent or guardian signature, such as the Minor Consent template.';
+const clientAge = (client) => ageOn(client && client.dob);
+
+// Shared by the form builder's Save (from 'desk') and by the kiosk tablet (from 'kiosk'). Answers { status, body }.
+async function saveConsentForm(clientId, { formName, formCategory, language, schema, responses }, from = 'desk') {
   if (!Number.isInteger(clientId) || clientId <= 0) {
     return { status: 400, body: { error: 'A valid client id is required.' } };
   }
   if (!schema || typeof schema !== 'object') {
     return { status: 400, body: { error: 'A form schema is required.' } };
   }
+
+  // the client's age: from their record, or from the birth date they wrote on this form
+  const client = clients.find((c) => c.id === clientId);
+  const formDob = dobFromResponses(responses);
+  const age = ageOn((client && client.dob) || formDob);
+  const withoutGuardian = age !== null && age < GUARDIAN_AGE && !isGuardianForm(schema);
+  // at the desk the form is not saved, so another can be chosen; a form signed on the tablet is kept
+  // (it is never lost) and marked, and the studio is told
+  if (withoutGuardian && from === 'desk') return { status: 409, body: { error: MINOR_NEEDS_GUARDIAN } };
 
   const record = {
     entityType: 'client',
@@ -1024,7 +1038,9 @@ async function saveConsentForm(clientId, { formName, formCategory, language, sch
     description: String(formName || 'Consent form').slice(0, 300),
     fileName: null,
     fileType: 'application/json',
-    content: JSON.stringify({ formCategory: formCategory || null, language: language || 'en', schema, responses: responses || {} }),
+    // the age and the ID check as they were when the form was signed
+    content: JSON.stringify({ formCategory: formCategory || null, language: language || 'en', schema, responses: responses || {},
+      ageAtSigning: age, idCheck: (client && client.id_check) || null, minorWithoutGuardian: withoutGuardian || undefined }),
   };
 
   const saved = await safeDbQuery(
@@ -1039,8 +1055,33 @@ async function saveConsentForm(clientId, { formName, formCategory, language, sch
   }
 
   mergeMedicalAnswers(clientId, responses || {});
-  return { status: 201, body: { ok: true, id: Array.isArray(saved) ? saved[0]?.id : undefined } };
+  if (client && !client.dob && formDob) { client.dob = formDob; scheduleStateSave(); } // the record learns the birth date
+  if (withoutGuardian) {
+    logActivity({ category: 'compliance', action: 'MINOR_WITHOUT_GUARDIAN', title: `Under 18 without a guardian signature: ${client ? client.name : 'client ' + clientId}`,
+      details: `${record.description} was signed on the kiosk by a client aged ${age}, on a form with no parent or guardian signature. Have a parent or guardian sign a Minor Consent form before the procedure.`,
+      user: 'Studio CRM', badgeColor: 'red' });
+  }
+  return { status: 201, body: { ok: true, id: Array.isArray(saved) ? saved[0]?.id : undefined, minorWithoutGuardian: withoutGuardian || undefined } };
 }
+
+// The desk saw the client's ID: the type and at most its last 4 characters, never the whole number or a photo.
+const ID_TYPES = ['Passport', 'Driving licence', 'National ID card', 'Other ID'];
+app.post('/api/clients/:id/id-check', (req, res) => {
+  const client = clients.find((c) => c.id === Number(req.params.id));
+  if (!client) return res.status(404).json({ error: 'Client not found' });
+  const b = req.body || {};
+  const type = ID_TYPES.includes(b.type) ? b.type : null;
+  const last4 = String(b.last4 || '').trim();
+  if (!type) return res.status(400).json({ error: 'Choose the type of ID' });
+  if (!/^[A-Za-z0-9]{1,4}$/.test(last4)) return res.status(400).json({ error: 'Enter only the last 4 letters or digits of the ID, not the whole number' });
+  const dob = String(b.dob || '').trim();
+  if (dob && ageOn(dob) === null) return res.status(400).json({ error: 'The date of birth is not a valid date' });
+  if (dob) client.dob = dob; // the birth date read from the ID
+  client.id_check = { type, last4: last4.toUpperCase(), checked_by: String(b.checked_by || '').slice(0, 80) || 'Front desk', checked_at: new Date().toISOString() };
+  logActivity({ category: 'compliance', action: 'CLIENT_ID_CHECKED', title: `ID checked: ${client.name}`,
+    details: `${type} ending ${client.id_check.last4}` + (dob ? `, born ${dob}` : ''), user: client.id_check.checked_by, badgeColor: 'emerald' });
+  res.json({ ok: true, id_check: client.id_check, dob: client.dob || '', age: clientAge(client) });
+});
 
 function mergeMedicalAnswers(clientId, responses) {
   const client = clients.find((c) => c.id === clientId);
@@ -1102,6 +1143,8 @@ app.post('/api/kiosk/send', (req, res) => {
   const client = clients.find((c) => c.id === clientId);
   if (!client) return res.status(400).json({ error: 'Choose the client first: the signed form is saved to their record.' });
   if (!b.schema || typeof b.schema !== 'object') return res.status(400).json({ error: 'Choose a form first.' });
+  const age = clientAge(client);
+  if (age !== null && age < GUARDIAN_AGE && !isGuardianForm(b.schema)) return res.status(409).json({ error: MINOR_NEEDS_GUARDIAN });
   const name = kioskName(b.kiosk);
   const item = { id: nextKioskItemId++, clientId, clientName: client.name, formName: String(b.formName || 'Consent form').slice(0, 300),
     formCategory: b.formCategory || null, language: String(b.language || 'en').slice(0, 5), schema: b.schema, sentAt: new Date().toISOString(), sentBy: b.sentBy || '' };
@@ -1139,7 +1182,7 @@ app.post('/api/kiosk/submit', async (req, res) => {
   const name = kioskOf(req, b.kiosk);
   const item = kioskQueue.get(name);
   if (!item || item.id !== Number(b.id)) return res.status(409).json({ error: 'This form was taken back by the studio. Please ask a member of staff.' });
-  const r = await saveConsentForm(item.clientId, { formName: item.formName, formCategory: item.formCategory, language: b.language || item.language, schema: withTabletMedicalQuestions(item.schema, b.schema), responses: b.responses || {} });
+  const r = await saveConsentForm(item.clientId, { formName: item.formName, formCategory: item.formCategory, language: b.language || item.language, schema: withTabletMedicalQuestions(item.schema, b.schema), responses: b.responses || {} }, 'kiosk');
   if (r.status >= 400) return res.status(r.status).json(r.body);
   kioskQueue.delete(name);
   logActivity({ category: 'compliance', action: 'KIOSK_FORM_SIGNED', title: `Form completed on the kiosk: ${item.clientName}`,
@@ -1413,7 +1456,7 @@ app.get('/api/clients', (req, res) => {
       const st = staff.find(s => s.id === parseInt(c.assigned_staff_id));
       if (st) c.assigned_staff_name = st.name;
     }
-    return c;
+    return { ...c, age: clientAge(c) };
   });
 
   if (q) {
@@ -1619,10 +1662,12 @@ function clientConsentForms(clientId) {
   try {
     return sqlite.prepare("SELECT id, description, content, uploaded_at FROM documents WHERE entity_type = 'client' AND entity_id = ? AND type = 'consent_form' ORDER BY id DESC").all(clientId)
       .map((row) => {
-        let responses = {};
-        try { responses = JSON.parse(row.content).responses || {}; } catch (e) {}
+        let content = {};
+        try { content = JSON.parse(row.content) || {}; } catch (e) {}
+        const responses = content.responses || {};
         return { id: row.id, name: row.description, saved_at: row.uploaded_at,
-          signed: Object.values(responses).some((v) => typeof v === 'string' && v.startsWith('data:image')) };
+          signed: Object.values(responses).some((v) => typeof v === 'string' && v.startsWith('data:image')),
+          minor_without_guardian: !!content.minorWithoutGuardian };
       });
   } catch (e) { return []; }
 }
@@ -1671,6 +1716,7 @@ app.get(['/api/clients/:id/profile', '/api/clients/:id/full-profile'], (req, res
   res.json({
     client: {
       ...clientObj,
+      age: clientAge(clientObj),
       assigned_staff: assignedStaff || null
     },
     staff_notes: (clientObj.staff_notes || []).slice().sort((a,b) => new Date(b.timestamp || b.createdAt || 0).getTime() - new Date(a.timestamp || a.createdAt || 0).getTime()),

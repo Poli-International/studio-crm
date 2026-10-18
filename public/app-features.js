@@ -112,6 +112,36 @@ function confirmDeleteActiveClient() {
 window.confirmDeleteActiveClient = confirmDeleteActiveClient;
 window.closeClientProfileModal = closeClientProfileModal;
 
+// Age and ID check (src/consent-age.js decides on the server; the age comes with the client)
+function clientAgeBadges(client) {
+    const pill = (bg, fg, text) => `<span style="background:${bg};color:${fg};padding:2px 8px;border-radius:10px;font-weight:800;">${escapeHtml(text)}</span>`;
+    const age = typeof client.age === 'number' ? client.age : null;
+    const ageTag = age === null ? pill('rgba(148,163,184,0.2)', '#CBD5E1', pdfLabel('Age not recorded'))
+        : age < 18 ? pill('rgba(239,68,68,0.25)', '#FCA5A5', pdfLabel('🛡️ Under 18 ({0}): a parent or guardian must sign').replace('{0}', age))
+        : pill('rgba(148,163,184,0.2)', '#E2E8F0', pdfLabel('Age {0}').replace('{0}', age));
+    const id = client.id_check;
+    const idTag = id ? pill('rgba(16,185,129,0.2)', '#6EE7B7', pdfLabel('🪪 ID checked {0}').replace('{0}', new Date(id.checked_at).toLocaleDateString()))
+        : pill('rgba(234,179,8,0.2)', '#FDE047', pdfLabel('🪪 ID not checked'));
+    return ageTag + idTag;
+}
+window.clientAgeBadges = clientAgeBadges;
+
+async function saveClientIdCheck(event, clientId) {
+    if (event) event.preventDefault();
+    const val = (id) => ((document.getElementById(id) || {}).value || '').trim();
+    let data;
+    try {
+        const r = await fetch(`/api/clients/${clientId}/id-check`, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ type: val('cp-id-type'), last4: val('cp-id-last4'), dob: val('cp-id-dob'), checked_by: (document.getElementById('topbar-user-name') || {}).textContent || '' }) });
+        data = await r.json();
+        if (!r.ok) { showStudioToast(data.error || 'Could not save'); return; }
+    } catch (e) { showStudioToast('Could not save: the server did not answer'); return; }
+    showStudioToast('ID check saved');
+    openClientProfileModal(clientId);
+    renderClientsTable();
+}
+window.saveClientIdCheck = saveClientIdCheck;
+
 function renderClientProfileHeader(data) {
     const client = data.client || data;
     const nameEl = document.getElementById('client-profile-name');
@@ -133,6 +163,7 @@ function renderClientProfileHeader(data) {
             ${loyaltyTier ? `<span style="background:rgba(99,102,241,0.2);color:#A5B4FC;padding:2px 8px;border-radius:10px;font-weight:700;">💎 ${escapeHtml(loyaltyTier)}</span>` : ''}
             ${isVip ? '<span style="background:rgba(234,179,8,0.2);color:#FDE047;padding:2px 8px;border-radius:10px;font-weight:800;">⭐ VIP</span>' : ''}
             <span style="background:rgba(16,185,129,0.2);color:#6EE7B7;padding:2px 8px;border-radius:10px;font-weight:700;">💵 Spent: $${totalSpent}</span>
+            ${clientAgeBadges(client)}
         `;
     }
 
@@ -187,6 +218,7 @@ function switchClientProfileTab(tabName) {
 
     if (tabName === 'overview') {
         const hasAllergies = client.allergies && client.allergies.toLowerCase() !== 'none' && client.allergies.trim() !== '';
+        const allergiesKnown = !!(client.allergies && client.allergies.trim()); // nothing recorded is not "none": it was shown green as "None Reported"
         
         bodyEl.innerHTML = `
             <div style="display:flex;flex-direction:column;gap:1.25rem;">
@@ -225,10 +257,33 @@ function switchClientProfileTab(tabName) {
                                 <span style="color:#9CA3AF;">Date of Birth:</span>
                                 <strong style="color:#FFF;">${escapeHtml(client.dob || client.birthdate || 'Not recorded')}</strong>
                             </div>
+                            <div style="display:flex;justify-content:space-between;border-bottom:1px solid #374151;padding-bottom:4px;">
+                                <span style="color:#9CA3AF;">${escapeHtml(pdfLabel('Age'))}:</span>
+                                <strong style="color:${typeof client.age === 'number' && client.age < 18 ? '#FCA5A5' : '#FFF'};">${typeof client.age === 'number' ? client.age : escapeHtml(pdfLabel('Not recorded'))}</strong>
+                            </div>
+                            <div style="display:flex;justify-content:space-between;border-bottom:1px solid #374151;padding-bottom:4px;">
+                                <span style="color:#9CA3AF;">${escapeHtml(pdfLabel('ID check'))}:</span>
+                                <strong style="color:#FFF;text-align:right;">${client.id_check
+                                    ? escapeHtml(pdfLabel('{0} ending {1}, checked by {2} on {3}').replace('{0}', pdfLabel(client.id_check.type)).replace('{1}', client.id_check.last4).replace('{2}', client.id_check.checked_by).replace('{3}', new Date(client.id_check.checked_at).toLocaleString()))
+                                    : escapeHtml(pdfLabel('Not checked yet'))}</strong>
+                            </div>
                             <div style="display:flex;justify-content:space-between;">
                                 <span style="color:#9CA3AF;">Client Since:</span>
                                 <strong style="color:#FFF;">${escapeHtml(client.created_at ? String(client.created_at).slice(0, 10) : 'Not recorded')}</strong>
                             </div>
+                            <form id="cp-id-check-form" onsubmit="saveClientIdCheck(event, ${Number(client.id)})" style="display:flex;flex-direction:column;gap:6px;margin-top:6px;background:#111827;border:1px solid #374151;border-radius:8px;padding:0.75rem;">
+                                <div style="font-size:0.75rem;color:#9CA3AF;text-transform:uppercase;font-weight:700;">${escapeHtml(pdfLabel('Record an ID check'))}</div>
+                                <div style="font-size:0.75rem;color:#9CA3AF;">${escapeHtml(pdfLabel('Only the type of ID and its last 4 letters or digits are kept, never the whole number or a photo.'))}</div>
+                                <select id="cp-id-type" required aria-label="${escapeHtml(pdfLabel('Type of ID'))}" style="padding:7px 10px;background:#1E293B;border:1px solid #475569;border-radius:6px;color:#F8FAFC;">
+                                    <option value="">${escapeHtml(pdfLabel('Type of ID'))}</option>
+                                    ${['Passport', 'Driving licence', 'National ID card', 'Other ID'].map((t) => `<option value="${t}">${escapeHtml(pdfLabel(t))}</option>`).join('')}
+                                </select>
+                                <input id="cp-id-last4" required maxlength="4" pattern="[A-Za-z0-9]{1,4}" placeholder="${escapeHtml(pdfLabel('Last 4 letters or digits'))}" aria-label="${escapeHtml(pdfLabel('Last 4 letters or digits'))}" style="padding:7px 10px;background:#1E293B;border:1px solid #475569;border-radius:6px;color:#F8FAFC;">
+                                <label style="font-size:0.75rem;color:#9CA3AF;">${escapeHtml(pdfLabel('Date of birth on the ID'))}
+                                    <input id="cp-id-dob" type="date" value="${escapeHtml(/^\d{4}-\d{2}-\d{2}$/.test(client.dob || '') ? client.dob : '')}" style="display:block;width:100%;margin-top:3px;padding:7px 10px;background:#1E293B;border:1px solid #475569;border-radius:6px;color:#F8FAFC;box-sizing:border-box;">
+                                </label>
+                                <div><button type="submit" style="padding:0.4rem 0.85rem;background:#0D9488;color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">${escapeHtml(pdfLabel('Save ID check'))}</button></div>
+                            </form>
                         </div>
                     </div>
 
@@ -239,8 +294,8 @@ function switchClientProfileTab(tabName) {
                         <div style="display:flex;flex-direction:column;gap:0.75rem;font-size:0.85rem;">
                             <div style="background:#111827;padding:0.75rem;border-radius:8px;border:1px solid ${hasAllergies ? '#EF4444' : '#374151'};">
                                 <div style="font-size:0.75rem;color:#9CA3AF;text-transform:uppercase;font-weight:700;">Allergies & Sensitivities</div>
-                                <div style="font-weight:700;color:${hasAllergies ? '#EF4444' : '#10B981'};margin-top:2px;">
-                                    ${escapeHtml(client.allergies || 'None Reported')}
+                                <div style="font-weight:700;color:${hasAllergies ? '#EF4444' : allergiesKnown ? '#10B981' : '#FDE047'};margin-top:2px;">
+                                    ${escapeHtml(client.allergies || pdfLabel('Not recorded: ask the client'))}
                                 </div>
                             </div>
 
@@ -482,6 +537,7 @@ function switchClientProfileTab(tabName) {
                     <div>
                         <div style="font-weight:700;font-size:0.95rem;color:#F9FAFB;">📝 ${escapeHtml(f.name || 'Consent form')}</div>
                         <div style="font-size:0.78rem;color:#9CA3AF;margin-top:2px;">Saved ${escapeHtml(String(f.saved_at || ''))} &bull; ${f.signed ? 'signed' : 'not signed'}</div>
+                        ${f.minor_without_guardian ? `<div class="cp-minor-flag" style="font-size:0.78rem;color:#FCA5A5;font-weight:800;margin-top:4px;">${escapeHtml(pdfLabel('🛡️ Signed by a client under 18 without a parent or guardian signature'))}</div>` : ''}
                     </div>
                     <span style="display:flex;gap:8px;"><button type="button" onclick="viewClientConsentForm(${Number(f.id)})" style="padding:0.4rem 0.75rem;background:#2563EB;color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">View answers</button>
                     <button type="button" onclick="downloadConsentFormPDF(${Number(f.id)})" style="padding:0.4rem 0.75rem;background:#1E40AF;color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">🖨️ PDF</button></span>
@@ -655,6 +711,15 @@ async function viewClientConsentForm(formId) {
         const rows = (sec.fields || []).filter((f) => f.id in responses).map((f) => { seen.add(f.id); return line(f.label || f.id, responses[f.id]); });
         if (rows.length) html += `<div style="background:#1F2937;border:1px solid #374151;border-radius:12px;padding:1rem;margin-bottom:1rem;"><h4 style="margin:0 0 0.5rem 0;font-size:0.95rem;color:#F9FAFB;">${escapeHtml(sec.title || '')}</h4>${rows.join('')}</div>`;
     });
+    // the age and the ID check as they were when the form was signed
+    const signedAt = [];
+    if (typeof form.ageAtSigning === 'number') signedAt.push(line(pdfLabel('Age when signed'), String(form.ageAtSigning)));
+    signedAt.push(line(pdfLabel('ID check'), form.idCheck
+        ? pdfLabel('{0} ending {1}, checked by {2} on {3}').replace('{0}', pdfLabel(form.idCheck.type)).replace('{1}', form.idCheck.last4).replace('{2}', form.idCheck.checked_by).replace('{3}', new Date(form.idCheck.checked_at).toLocaleString())
+        : pdfLabel('Not checked when this form was signed')));
+    html = `<div style="background:#1F2937;border:1px solid ${form.minorWithoutGuardian ? '#EF4444' : '#374151'};border-radius:12px;padding:1rem;margin-bottom:1rem;">`
+        + (form.minorWithoutGuardian ? `<div style="color:#FCA5A5;font-weight:800;font-size:0.85rem;margin-bottom:6px;">${escapeHtml(pdfLabel('🛡️ Signed by a client under 18 without a parent or guardian signature'))}</div>` : '')
+        + signedAt.join('') + '</div>' + html;
     const rest = Object.keys(responses).filter((k) => !seen.has(k));
     const medical = ((form.schema && form.schema.sections) || []).find((sec) => sec.type === 'medical_section');
     const restTitle = medical ? (medical.title || 'Medical History') : 'Other answers';
@@ -663,7 +728,7 @@ async function viewClientConsentForm(formId) {
             <div><div style="font-weight:800;font-size:1.05rem;color:#F9FAFB;">📝 ${escapeHtml(form.name || 'Consent form')}</div><div style="font-size:0.78rem;color:#9CA3AF;">Saved ${escapeHtml(String(form.saved_at || ''))}</div></div>
             <span style="display:flex;gap:8px;"><button type="button" onclick="downloadConsentFormPDF(${Number(form.id)})" style="padding:0.4rem 0.75rem;background:#2563EB;color:#FFF;border:none;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;">🖨️ PDF</button>
             <button type="button" onclick="switchClientProfileTab('waivers')" style="padding:0.4rem 0.75rem;background:#374151;color:#F3F4F6;border:none;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;">← Back to waivers</button></span>
-        </div>` + (html || '<div style="color:#9CA3AF;">This form was saved with no answers.</div>');
+        </div>` + html + (Object.keys(responses).length ? '' : '<div style="color:#9CA3AF;">This form was saved with no answers.</div>');
 }
 window.viewClientConsentForm = viewClientConsentForm;
 
@@ -686,9 +751,18 @@ async function downloadConsentFormPDF(formId) {
     for (let i = 0; i < 80 && !(w = ready()); i++) await new Promise((r) => setTimeout(r, 250));
     if (!w) { showStudioToast('The PDF could not be made: the form builder did not load'); return; }
     if (form.language && w.i18n.currentLanguage !== form.language) await w.i18n.setLanguage(form.language);
-    const responses = form.responses || {};
+    // the age and the ID check when it was signed, as a last section of the PDF
+    const id = form.idCheck;
+    const responses = Object.assign({}, form.responses || {}, {
+        _age_when_signed: typeof form.ageAtSigning === 'number' ? String(form.ageAtSigning) : pdfLabel('Not recorded'),
+        _id_check: id ? pdfLabel('{0} ending {1}, checked by {2} on {3}').replace('{0}', pdfLabel(id.type)).replace('{1}', id.last4).replace('{2}', id.checked_by).replace('{3}', new Date(id.checked_at).toLocaleString()) : pdfLabel('Not checked when this form was signed')
+    });
+    if (form.minorWithoutGuardian) responses._minor_flag = pdfLabel('Signed by a client under 18 without a parent or guardian signature'); // no emoji: the PDF font has none
+    const schema = Object.assign({}, form.schema, { sections: ((form.schema && form.schema.sections) || []).concat([{ id: '_signing_record', title: pdfLabel('Age and ID check'),
+        fields: [{ id: '_age_when_signed', type: 'text', label: pdfLabel('Age when signed') }, { id: '_id_check', type: 'text', label: pdfLabel('ID check') }]
+            .concat(form.minorWithoutGuardian ? [{ id: '_minor_flag', type: 'text', label: pdfLabel('Guardian') }] : []) }]) });
     const sigField = [].concat(...((form.schema && form.schema.sections) || []).map((s) => s.fields || [])).find((f) => f.type === 'signature' && typeof responses[f.id] === 'string' && responses[f.id].startsWith('data:image'));
-    try { await w.PDFGenerator.generateFormPDF(form.schema, responses, sigField ? responses[sigField.id] : null); }
+    try { await w.PDFGenerator.generateFormPDF(schema, responses, sigField ? responses[sigField.id] : null); }
     catch (e) { showStudioToast('The PDF could not be made: ' + e.message); }
 }
 window.downloadConsentFormPDF = downloadConsentFormPDF;
@@ -2951,12 +3025,15 @@ async function renderClientsTable() {
             + forms.filter((f) => Number(f.client_id) === Number(c.id) && f.signed).length;
         const spent = payments.filter((p) => p.client_id === c.id && p.status === "completed" && p.type !== "refund").reduce((t, p) => t + Number(p.amount || 0), 0);
         const health = [c.allergies, c.medical_history].filter(flagged).map(escapeHtml).join(", ");
+        // nothing written down is not "none": it showed a green "None Recorded"
+        const healthKnown = [c.allergies, c.medical_history].some((v) => v && String(v).trim());
+        const minor = typeof c.age === "number" && c.age < 18;
         return `<tr class="client-directory-row" style="border-bottom:1px solid #1F2937;">
           <td style="padding:10px;font-weight:700;color:#FFF;"><div style="display:flex;align-items:center;gap:8px;">
             <span style="width:30px;height:30px;border-radius:50%;background:#3B82F6;display:inline-flex;align-items:center;justify-content:center;font-weight:800;">${escapeHtml(initials)}</span>
-            <div><div>${escapeHtml(c.name || "")}</div>${c.is_vip ? '<span style="font-size:0.7rem;background:rgba(234,179,8,0.2);color:#FDE047;padding:1px 6px;border-radius:6px;font-weight:800;">⭐ VIP</span>' : ""}</div></div></td>
+            <div><div>${escapeHtml(c.name || "")}</div>${c.is_vip ? '<span style="font-size:0.7rem;background:rgba(234,179,8,0.2);color:#FDE047;padding:1px 6px;border-radius:6px;font-weight:800;">⭐ VIP</span>' : ""}${minor ? `<span class="client-minor-tag" style="font-size:0.7rem;background:rgba(239,68,68,0.2);color:#FCA5A5;padding:1px 6px;border-radius:6px;font-weight:800;margin-left:4px;">${escapeHtml(pdfLabel("🛡️ Under 18"))}</span>` : ""}</div></div></td>
           <td style="padding:10px;color:#9CA3AF;">${escapeHtml(c.email || "")}<br><span style="font-size:0.75rem;">${escapeHtml(c.phone || "")}</span></td>
-          <td style="padding:10px;">${health ? `<span style="color:#FCA5A5;font-weight:700;">⚠️ ${health}</span>` : '<span style="color:#34D399;font-weight:700;">✅ None Recorded</span>'}</td>
+          <td style="padding:10px;">${health ? `<span style="color:#FCA5A5;font-weight:700;">⚠️ ${health}</span>` : healthKnown ? '<span style="color:#34D399;font-weight:700;">✅ None</span>' : `<span style="color:#FDE047;font-weight:700;">${escapeHtml(pdfLabel("Not recorded: ask the client"))}</span>`}</td>
           <td style="padding:10px;"><span style="background:rgba(16,185,129,0.15);color:#34D399;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:700;">📜 ${signed} Signed</span></td>
           <td style="padding:10px;font-weight:800;color:#34D399;">${money(spent)}</td>
           <td style="padding:10px;text-align:right;">
@@ -3111,6 +3188,7 @@ async function handleClientAutocomplete(kind, query) {
     const picked = idField && clients.find((c) => String(c.id) === idField.value);
     if (picked && String(picked.name || "") === String(now || "")) return;
     if (idField) idField.value = "";
+    if (kind === "new-appt") showBookingAgeNote(null);
     const q = String(now || "").toLowerCase().trim();
     const hits = clients.filter((c) => !q || String(c.name || "").toLowerCase().includes(q)).slice(0, 8);
     box.innerHTML = hits.map((c) => `<div data-id="${Number(c.id)}" style="padding:8px 12px;cursor:pointer;color:#E2E8F0;border-bottom:1px solid #1E293B;">${escapeHtml(c.name || "")}</div>`).join("");
@@ -3120,6 +3198,7 @@ async function handleClientAutocomplete(kind, query) {
         const c = hits.find((x) => String(x.id) === row.dataset.id);
         if (input) input.value = c.name;
         if (idField) idField.value = String(c.id);
+        if (kind === "new-appt") showBookingAgeNote(c);
         if (kind === "waiver") {
             const med = document.getElementById("waiver-medical-input");
             if (med && !med.value) med.value = [c.allergies, c.medical_history].filter((v) => v && !/^(none|n\/a)$/i.test(v)).join("; ");
@@ -3128,6 +3207,22 @@ async function handleClientAutocomplete(kind, query) {
     }));
 }
 window.handleClientAutocomplete = handleClientAutocomplete;
+
+// Under the client's name in the booking form: under 18, age not recorded, or ID not checked
+function showBookingAgeNote(c) {
+    const note = document.getElementById("new-appt-age-note");
+    if (!note) return;
+    const age = c && typeof c.age === "number" ? c.age : null;
+    const text = !c ? ""
+        : age !== null && age < 18 ? pdfLabel("🛡️ Under 18 ({0}): a parent or guardian must come and sign the Minor Consent form").replace("{0}", age)
+        : age === null ? pdfLabel("Age not recorded: check the client's ID")
+        : !c.id_check ? pdfLabel("ID not checked yet")
+        : "";
+    note.textContent = text;
+    note.style.color = age !== null && age < 18 ? "#FCA5A5" : "#FDE047";
+    note.style.display = text ? "block" : "none";
+}
+window.showBookingAgeNote = showBookingAgeNote;
 
 // --- Digital waiver: signature pad + save to the studio database ---
 let waiverSigned = false;
@@ -4554,6 +4649,7 @@ function setAppointmentFormMode(appt) {
     const form = document.querySelector("#new-appointment-modal-overlay form");
     if (form && !appt) form.reset();
     set("new-appt-client-id", appt && appt.client_id ? String(appt.client_id) : "");
+    showBookingAgeNote(null);
     const title = document.getElementById("new-appt-title");
     if (title) title.textContent = appt ? "Edit Appointment" : "Book Appointment";
     const save = document.getElementById("new-appt-save-btn");

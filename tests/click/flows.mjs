@@ -465,6 +465,58 @@ await flow('Backups: a second folder is checked and saved, Back up now copies th
   }
 });
 
+await flow('Under 18: flagged, the ID check is recorded, and a form needs a parent or guardian signature', async () => {
+  const call = (p, body) => b.evaluate(`fetch(${JSON.stringify(p)}, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: ${JSON.stringify(JSON.stringify(body))} }).then(async (r) => ({ status: r.status, body: await r.json() }))`);
+  const born = `${new Date().getFullYear() - 15}-01-02`;
+  const minor = (await call('/api/clients', { name: 'Minor Flow', email: 'minor.flow@example.com', dob: born })).body;
+  const adultForm = { sections: [{ id: 's', fields: [{ id: 'client_sig', type: 'signature', label: 'Client Signature' }] }] };
+  const guardianForm = { sections: [{ id: 's', fields: [{ id: 'client_sig', type: 'signature', label: 'Client Signature' }, { id: 'guardian_sig', type: 'signature', label: 'Parent / Legal Guardian Signature' }] }] };
+
+  // the desk sees it in the client list and the profile, and records the ID check (never the whole number)
+  await b.clickText('Clients');
+  await eventually(async () => (await text('#clients-table-tbody')).includes('Minor Flow'), 'the new client is not listed');
+  check(await b.evaluate(`[...document.querySelectorAll('.client-directory-row')].some(r => r.innerText.includes('Minor Flow') && r.querySelector('.client-minor-tag'))`), 'the client list does not flag the client under 18');
+  await press('.client-directory-row', 'Minor Flow', 'View Profile');
+  await eventually(async () => (await text('#client-profile-tags')).includes('Under 18 (15)'), async () => 'the profile does not say the client is under 18: ' + await text('#client-profile-tags'));
+  check((await text('#client-profile-tags')).includes('ID not checked'), 'the profile does not say the ID is not checked');
+  check((await call(`/api/clients/${minor.id}/id-check`, { type: 'Passport', last4: '123456789' })).status === 400, 'a whole ID number was accepted');
+  await b.evaluate(`document.getElementById('cp-id-type').value = 'Passport'`);
+  await b.type('#cp-id-last4', 'ab12');
+  await b.clickText('Save ID check');
+  await eventually(async () => (await text('#client-profile-modal-body')).includes('ending AB12'), async () => 'the ID check is not on the profile: ' + (await text('#client-profile-modal-body')).slice(0, 300));
+  check((await text('#client-profile-tags')).includes('ID checked'), 'the profile still says the ID is not checked');
+
+  // no form without a guardian signature, from the desk or to the tablet
+  const deskNo = await call(`/api/clients/${minor.id}/consent-forms`, { formName: 'Adult form', schema: adultForm, responses: {} });
+  check(deskNo.status === 409 && /under 18/.test(deskNo.body.error), 'the desk saved a form with no guardian signature for a client under 18: ' + JSON.stringify(deskNo));
+  check((await call('/api/kiosk/send', { kiosk: 'Age Stand', clientId: minor.id, formName: 'Adult form', schema: adultForm })).status === 409, 'a form with no guardian signature was sent to the tablet for a client under 18');
+  const deskYes = await call(`/api/clients/${minor.id}/consent-forms`, { formName: 'Minor Consent', schema: guardianForm, responses: { client_sig: 'data:image/png;base64,AA', guardian_sig: 'data:image/png;base64,AA' } });
+  check(deskYes.status === 201, 'the guardian form was refused: ' + JSON.stringify(deskYes));
+  const saved = await api(`/api/consent-forms/${deskYes.body.id}`);
+  check(saved.ageAtSigning === 15 && saved.idCheck && saved.idCheck.last4 === 'AB12', 'the signed form does not keep the age and the ID check: ' + JSON.stringify({ age: saved.ageAtSigning, id: saved.idCheck }));
+
+  // a client whose age the studio did not know writes a birth date under 18 on the tablet: the form is kept, and flagged
+  const unknown = (await call('/api/clients', { name: 'Unknown Age Flow' })).body;
+  check((await call('/api/kiosk/send', { kiosk: 'Age Stand', clientId: unknown.id, formName: 'Adult form', schema: adultForm })).status === 201, 'a client of unknown age could not be sent a form');
+  const queued = await api('/api/kiosk/next?kiosk=Age%20Stand');
+  const done = await call('/api/kiosk/submit', { kiosk: 'Age Stand', id: queued.item.id, responses: { dob: born, client_sig: 'data:image/png;base64,AA' } });
+  check(done.status === 201, 'the form signed on the tablet was not saved: ' + JSON.stringify(done));
+  const prof = await api(`/api/clients/${unknown.id}/profile`);
+  check(prof.client.dob === born && prof.client.age === 15, 'the birth date written on the form was not kept on the record');
+  check(prof.consent_forms.some((f) => f.minor_without_guardian), 'the form signed by a client under 18 without a guardian is not flagged');
+  check((await api('/api/activity-logs?limit=20')).some((a) => a.action === 'MINOR_WITHOUT_GUARDIAN'), 'the studio is not told a client under 18 signed without a guardian');
+
+  // booking the client says so too
+  await b.goto(url);
+  await b.clickText('Calendar');
+  await pressOn('openQuickNewAppointmentModal()');
+  await b.type('#new-appt-client', 'Minor Fl');
+  await eventually(async () => (await text('#new-appt-client-autocomplete-dropdown')).includes('Minor Flow'), 'the booking form does not offer the client');
+  await b.evaluate(`document.querySelector('#new-appt-client-autocomplete-dropdown [data-id="${minor.id}"]').dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }))`);
+  check((await text('#new-appt-age-note')).includes('Under 18'), 'booking a client under 18 says nothing: ' + await text('#new-appt-age-note'));
+  await b.evaluate(`closeNewAppointmentModal()`);
+});
+
 await flow('A Print button opens the print dialog', async () => {
   await b.clickText('Clients');
   await b.clickText('Health Alerts');

@@ -41,6 +41,7 @@ Build your own consent forms, or start from ready-made tattoo, piercing and medi
 - A **kiosk tablet** can only receive and return forms: it never opens the CRM or sees other clients. Several tablets each get their own forms.
 - **Required questions** must be answered before the client can go on.
 - What the client declares (allergies, conditions, medication) is added to their **medical overview**.
+- **Clients under 18** are flagged from their date of birth, and their forms need a parent or guardian signature. The desk records an **ID check** (the type of ID and its last 4 characters only), and each signed form keeps the age and the ID check.
 - Forms in the client's language, with the PDF in that language too.
 
 | | |

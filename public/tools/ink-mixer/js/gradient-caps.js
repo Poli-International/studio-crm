@@ -330,6 +330,10 @@
       };
     }
 
+    // a new cap size or count shows its formula at once (the sizes were read as medium whatever was chosen: Henry, 2026-10-19)
+    if (capSizeSelect) capSizeSelect.onchange = runGeneration;
+    if (capCountSelect) capCountSelect.onchange = runGeneration;
+
     generateBtn.onclick = function () {
       runGeneration();
       if (typeof window.showNotification === 'function') {

@@ -88,6 +88,34 @@ await flow('View Profile opens the profile, every tab shows, and it closes', asy
   check(!(await shown('client-profile-modal-overlay')), 'the profile cannot be closed');
 });
 
+await flow('Work and photos: a photo taken or chosen on the device is added to the client, and deleted', async () => {
+  // Henry, 2026-10-19: the profile only had a box for an image address
+  const client = await b.evaluate(`fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Photo Flow Client' }) }).then(r => r.json())`);
+  await b.clickText('Clients');
+  await eventually(async () => (await text('#clients-table-tbody')).includes('Photo Flow Client'), 'the client is not listed');
+  await press('.client-directory-row', 'Photo Flow Client', 'View Profile');
+  await b.clickText('Work and photos', '#client-profile-modal-overlay');
+  await eventually(async () => b.evaluate(`!!document.getElementById('tw-photo-input')`), 'there is no photo button in Work and photos');
+  check(!(await b.evaluate(`!!document.getElementById('tw-url-input')`)), 'Work and photos still asks for an image address');
+  await b.clickText('📷 Take or choose a photo', '#client-profile-modal-overlay');
+  // what the camera or the device's pictures hand back
+  await b.evaluate(`(async () => { const c = document.createElement('canvas'); c.width = 40; c.height = 30; const g = c.getContext('2d'); g.fillStyle = '#208040'; g.fillRect(0, 0, 40, 30);
+    const blob = await new Promise((r) => c.toBlob(r, 'image/png')); const dt = new DataTransfer(); dt.items.add(new File([blob], 'stencil.png', { type: 'image/png' }));
+    const input = document.getElementById('tw-photo-input'); input.files = dt.files; input.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+  await eventually(async () => b.evaluate(`!!document.querySelector('#tw-photo-preview img')`), 'the photo chosen is not shown');
+  await b.type('#tw-title-input', 'Flow Stencil Photo');
+  await b.type('#tw-notes-input', 'Flow photo notes');
+  await b.clickText('📸 Add to Client Gallery', '#client-profile-modal-overlay');
+  await eventually(async () => (await text('#client-profile-modal-body')).includes('Flow Stencil Photo'), 'the photo was not added to the client');
+  check(await b.evaluate(`[...document.querySelectorAll('#client-profile-modal-body img')].some(i => i.src.startsWith('data:image/') && i.alt === 'Flow Stencil Photo')`), 'the photo shown is not the one taken');
+  check((await text('#client-profile-modal-body')).includes('Flow photo notes'), 'the notes were not kept');
+  const work = (await api('/api/clients/' + client.id + '/profile')).tattoo_work || [];
+  check(work.some((w) => w.title === 'Flow Stencil Photo' && !w.artist.includes('Jaxon')), 'the photo is credited to a sample artist');
+  await press('.gallery-card-interactive', 'Flow Stencil Photo', 'Delete');
+  await eventually(async () => !(await text('#client-profile-modal-body')).includes('Flow Stencil Photo'), 'Delete did not remove the photo');
+  await b.clickText('×', '#client-profile-modal-overlay');
+});
+
 await flow('Two quick taps on Save make one client, not two', async () => {
   await b.goto(url);
   await b.clickText('Clients');
@@ -564,6 +592,47 @@ await flow('Studio details: saved in Settings, on the consent form and on the fo
   await b.evaluate(`document.getElementById('form-builder-modal').style.display = 'none'`);
 });
 
+await flow('Studio details replace the sample studio in a form saved before 1.0.19', async () => {
+  // Henry, 2026-10-19: forms he had edited before 1.0.19 still showed "Poli International", in the preview and on the tablet
+  const own = JSON.parse((await api('/api/app-data')).poli_studio_profile || '{}');
+  check(own.studioName, 'no studio details are saved');
+  const made = await b.evaluate(`fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Old Draft Flow' }) }).then(r => r.json())`);
+  await b.clickText('Clients');
+  await eventually(async () => (await text('#clients-table-tbody')).includes('Old Draft Flow'), 'the client is not listed');
+  await press('.client-directory-row', 'Old Draft Flow', 'Sign Waiver');
+  const f = b.frame('#form-builder-frame');
+  for (let i = 0; i < 80 && !(await f.evaluate('!!(window.FormBuilderApp && window.FormBuilderApp.currentForm && document.getElementById("template-select"))').catch(() => false)); i++) await sleep(250);
+  await sleep(800);
+  const pick = (id) => f.evaluate(`(() => { const s = document.getElementById('template-select'); s.value = ${JSON.stringify(id)}; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+  await pick('piercing_consent');
+  await sleep(500);
+  // the draft as 1.0.18 saved it: the sample studio typed into the studio fields
+  const old = await f.evaluate(`(() => { const form = JSON.parse(JSON.stringify(window.FormBuilderApp.currentForm)); for (const sec of form.sections) for (const x of sec.fields || []) {
+    if (x.id === 'studio_name') x.value = 'Poli International Body Piercing Studio';
+    if (x.id === 'studio_contact') x.value = '104 Studio Plaza, Suite B | (555) 019-2834 | Permit #PB-8841'; }
+    localStorage.setItem('poli_form_builder_autosave:' + form.id, JSON.stringify({ timestamp: Date.now(), form })); return form; })()`);
+  check(old.sections.some((sec) => (sec.fields || []).some((x) => x.id === 'studio_name')), 'the Piercing form has no studio name field');
+  await pick('tattoo_consent');
+  await sleep(500);
+  await pick('piercing_consent');
+  if (await f.evaluate(`getComputedStyle(document.getElementById('preview-interface')).display === 'none'`)) await f.clickText('Preview Form');
+  const box = (id) => f.evaluate(`(() => { const el = [...document.querySelectorAll('#preview-container .form-preview-interactive')].find(e => (e.dataset.id || e.name) === ${JSON.stringify(id)}); return el ? el.value : 'no ' + ${JSON.stringify(id)} + ' field'; })()`);
+  await eventually(async () => (await box('studio_name')) === own.studioName, async () => 'the old draft still shows: ' + await box('studio_name'));
+  check(!/Studio Plaza/.test(await box('studio_contact')), 'the old draft still shows the sample address');
+  check(!/Poli International/.test(JSON.stringify(await f.evaluate('window.FormBuilderApp.currentForm'))), 'the form being edited still holds the sample studio');
+  // a form sent to a tablet with the sample studio in it (sent from an older desk page) gets the studio's own details
+  const sent = await b.evaluate(`fetch('/api/kiosk/send', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ kiosk: 'Old Draft Stand', clientId: ${made.id}, formName: 'Piercing', schema: ${JSON.stringify(old)} }) }).then(r => r.status)`);
+  check(sent === 201, 'the form could not be sent to the tablet: ' + sent);
+  const fields = (await api('/api/kiosk/next?kiosk=Old%20Draft%20Stand')).item.schema.sections.flatMap((sec) => sec.fields || []);
+  check(fields.some((x) => x.id === 'studio_name' && x.value === own.studioName), 'the tablet still gets the sample studio name: ' + JSON.stringify(fields.find((x) => x.id === 'studio_name')));
+  check(!fields.some((x) => /Studio Plaza/.test(x.value || '')), 'the tablet still gets the sample address');
+  await b.evaluate(`fetch('/api/kiosk/cancel', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{"kiosk":"Old Draft Stand"}' })`);
+  await f.evaluate(`localStorage.removeItem('poli_form_builder_autosave:piercing_consent')`);
+  await pick('tattoo_consent'); // later flows start from the Tattoo form
+  await sleep(800);
+  await b.evaluate(`document.getElementById('form-builder-modal').style.display = 'none'`);
+});
+
 await flow('Stations: added, given a type and a usual artist, offered in the booking form, removed', async () => {
   // Henry, 2026-10-18: always four stations, none could be added or renamed; the booking form listed typed-in ones
   await b.clickText('Settings');
@@ -676,12 +745,28 @@ await flow('Scanner field: in the form builder, its own button text, a page scan
   await b.evaluate(`document.getElementById('form-builder-modal').style.display = 'none'`);
 });
 
-await flow('Ink mixer: the diluent label is the size chosen; the autoclave tool claims no Google Sheets sync', async () => {
+await flow('Ink mixer: the diluent label is the size chosen, cap sizes change the formula, a reference photo shows; the autoclave tool claims no Google Sheets sync', async () => {
   // Henry, 2026-10-18: every container size gave 60 ml, on screen and on the label
   await b.goto(url.replace(/\/$/, '') + '/tools/ink-mixer/');
   await eventually(async () => b.evaluate(`!!document.getElementById('diluentSizeSelect')`), 'the ink mixer did not open');
   await b.evaluate(`(() => { const s = document.getElementById('diluentSizeSelect'); s.value = '240'; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
   check((await b.evaluate(`document.getElementById('diluentOutTotal').innerText`)).includes('240'), 'the diluent formulator ignores the container size: ' + await b.evaluate(`document.getElementById('diluentOutTotal').innerText`));
+  // Henry, 2026-10-19: Gradient Caps gave the same formula for small, medium and large caps
+  const capDrops = async (size) => {
+    await b.evaluate(`(() => { const s = document.getElementById('gradCapSize'); s.value = '${size}'; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+    return b.evaluate(`[...document.querySelectorAll('.gradient-cap-drops')].map(e => e.innerText).join(' / ')`);
+  };
+  await b.clickText('Gradient Caps');
+  const small = await capDrops('cap_9'), large = await capDrops('cap_16');
+  check(small && large && small !== large, 'Gradient Caps gives the same formula for a small and a large cap: ' + small);
+  check((await b.evaluate(`[...document.getElementById('gradCapSize').options].map(o => o.value).join()`)) === 'cap_9,cap_12,cap_16', 'a cap size choice is not one the formula knows');
+  // Henry, 2026-10-19: a photo chosen in Reference Studio showed nothing
+  await b.clickText('Reference Studio');
+  await b.evaluate(`(async () => { const c = document.createElement('canvas'); c.width = 60; c.height = 40; const g = c.getContext('2d'); g.fillStyle = '#c01020'; g.fillRect(0, 0, 30, 40); g.fillStyle = '#103080'; g.fillRect(30, 0, 30, 40);
+    const blob = await new Promise((r) => c.toBlob(r, 'image/png')); const dt = new DataTransfer(); dt.items.add(new File([blob], 'reference.png', { type: 'image/png' }));
+    const input = document.getElementById('refFileInput'); input.files = dt.files; input.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+  await eventually(async () => b.evaluate(`!!document.getElementById('refImageCanvas').offsetParent && document.getElementById('refImageCanvas').width > 0`), 'the reference photo is not shown');
+  await eventually(async () => (await b.evaluate(`document.querySelectorAll('#refPaletteList .send-to-solver-btn').length`)) > 0, 'no colours were taken from the reference photo');
   // it said "Synced with Google Sheets & Firestore" and sent nothing
   await b.goto(url.replace(/\/$/, '') + '/tools/autoclave-calculator/');
   await eventually(async () => b.evaluate(`document.readyState === 'complete' && document.body.innerText.length > 1000`), 'the autoclave tool did not open');
@@ -1055,11 +1140,9 @@ await flow('Staff levels: each person signs in; front desk cannot delete or see 
   await eventually(async () => (await text('#access-status')).startsWith('A password is set'), 'the studio password was not saved');
   const [admin] = await api('/api/staff');
   try {
-    // the administrator gives themself a login, and a new person a front desk login
+    // a new person gets a front desk login, before anyone has an administrator login (Henry, 1.0.20: refused)
     await b.clickText('Staff Login');
     await eventually(async () => (await text('#staff-list-body')).includes(admin.name), 'the staff list is empty');
-    await setLevel(admin.name, 'admin', 'admin-pass-123');
-    await eventually(async () => (await text('#staff-list-body')).includes('Administrator'), 'the administrator level is not shown');
     await b.clickText('Add staff member');
     await b.type('#staff-form-name', 'Desk Flow');
     await b.evaluate(`(() => { const s = document.getElementById('staff-form-level'); s.value = 'front_desk'; })()`);
@@ -1086,6 +1169,16 @@ await flow('Staff levels: each person signs in; front desk cannot delete or see 
     await b.type('#login-password', 'not-their-password');
     await b.clickText('Sign in');
     await eventually(async () => (await text('#error')) === 'Wrong password', 'a wrong password was not refused');
+    // the studio password (first on the list) still signs in as administrator, who gives themself a login
+    await b.type('#login-password', 'studio-test-password');
+    await b.clickText('Sign in');
+    await eventually(async () => b.evaluate(`!!document.getElementById('nav-dest-settings').offsetParent`), 'the studio password no longer signs in as administrator');
+    await eventually(async () => (await text('#topbar-user-name')) === 'Staff Login', async () => 'the top bar still names the person who signed in before: ' + await text('#topbar-user-name'));
+    await pressOn('openStaffLoginModal()');
+    await eventually(async () => (await text('#staff-list-body')).includes(admin.name), 'the staff list is empty');
+    await setLevel(admin.name, 'admin', 'admin-pass-123');
+    await eventually(async () => (await text('#staff-list-body')).includes('Administrator'), 'the administrator level is not shown');
+    await b.evaluate('signOutOfStudio()');
     await signIn(admin.name, 'admin-pass-123');
     await eventually(async () => b.evaluate(`!!document.getElementById('nav-dest-settings').offsetParent`), 'the administrator does not see Settings');
   } finally {

@@ -1937,5 +1937,9 @@
  "Write the first step here.": "เขียนขั้นตอนแรกที่นี่",
  "New sheet added: write its title and steps, then Save sheet": "เพิ่มเอกสารใหม่แล้ว: เขียนชื่อและขั้นตอน แล้วกดบันทึกเอกสาร",
  "Delete this aftercare sheet, in every language? Sheets already given stay on the clients' records.": "ลบเอกสารการดูแลหลังทำนี้ทุกภาษาหรือไม่ เอกสารที่ให้ไปแล้วยังคงอยู่ในประวัติลูกค้า",
- "Aftercare sheet deleted": "ลบเอกสารการดูแลหลังทำแล้ว"
+ "Aftercare sheet deleted": "ลบเอกสารการดูแลหลังทำแล้ว",
+ "Photo": "รูปภาพ",
+ "📷 Take or choose a photo": "📷 ถ่ายหรือเลือกรูป",
+ "On a phone or tablet you can use the camera.": "บนโทรศัพท์หรือแท็บเล็ตใช้กล้องได้",
+ "Take or choose a photo first": "ถ่ายหรือเลือกรูปก่อน"
 }

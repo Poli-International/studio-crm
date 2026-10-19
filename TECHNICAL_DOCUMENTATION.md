@@ -413,7 +413,7 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 - **Waiver integrity**: a waiver will not save without both a client and a signature.
 - **Studio password** (asked for at the first start, can be skipped): scrypt hash in the database, an HttpOnly SameSite=Lax session cookie, five wrong tries then a 30 second wait. An empty `reset-password.txt` in the data folder removes it, and all staff logins, at the next start.
 - **Idle lock** (optional): a device with no pointer, key, touch or wheel input (inside the embedded tools too) for the chosen minutes signs out and reloads to the sign-in page. It runs in the page; the session cookie on the server is what protects the data. The tablet kiosk is excluded.
-- **Staff logins and levels** (optional, on once an administrator has a login): each login is a scrypt hash in `app_state.staffLogins`. `needLevel(method, path)` in `src/access.js` decides the lowest level for every `/api/` request and the server answers 403 below it; hiding Finance and Settings in the sidebar is only a convenience.
+- **Staff logins and levels** (optional, on once anyone has a login; the studio password stays first on the sign-in list and signs in as administrator): each login is a scrypt hash in `app_state.staffLogins`. `needLevel(method, path)` in `src/access.js` decides the lowest level for every `/api/` request and the server answers 403 below it; hiding Finance and Settings in the sidebar is only a convenience.
 
 | Level | May do |
 |---|---|
@@ -432,6 +432,16 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 ---
 
 ## Version History
+
+### 1.0.21
+
+From Henry's emails of 2026-10-19:
+
+- **Staff logins** start with the first one: they waited for an administrator login (`loginsOn` in `src/access.js`), so a studio that gave its staff logins but not itself had a sign-in page with no names, and refused every staff password. The studio password is now first on the sign-in list and still signs in as administrator. Signing in with it after a staff login takes that person's name off the top bar.
+- **Forms saved before 1.0.19** kept the sample studio ("Poli International ...", "104 Studio Plaza", "100 Artisan Boulevard") in their studio fields, and only empty fields were filled. `isSampleStudioValue` (form builder, `form-preview.js`) treats those values as empty: drafts are cleaned when loaded (`getAutoSavedData`), the preview fills them, the server's `fillStudioFields` replaces them on a form sent to a tablet, and the PDF header uses Settings, Studio details instead of a sample studio when a form has no studio field. Also on the website.
+- **Ink mixer**, Gradient Caps: the cap sizes' values (`small`, `medium`, `large`) were not the formula's keys (`cap_9`, `cap_12`, `cap_16`), so every size was medium; a new size or count now redraws the formula. Reference Studio: the photo's area was never shown, so a chosen photo showed nothing. Also on the website.
+- **Work and photos** (client profile): **Take or choose a photo** (the device's pictures, or the camera on a phone or tablet), made smaller like the gallery's photos and kept as a data URL, instead of a box for an image address. `POST /api/clients/:id/tattoo-work` refuses an entry with no photo (it used a stock photo and named a sample artist) and keeps the notes; `DELETE /api/clients/:id/tattoo-work/:workId` was missing, so Delete did nothing.
+- **Release workflow:** a release crawls only the tools changed since the last release tag (all of them when `public/tools/shared` or `tests/click` changed); every tool is crawled on Mondays.
 
 ### 1.0.20
 

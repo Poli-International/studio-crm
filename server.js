@@ -1036,7 +1036,9 @@ function fillStudioFields(schema, client) {
   };
   const copy = JSON.parse(JSON.stringify(schema));
   for (const sec of copy.sections || []) for (const f of (sec && sec.fields) || []) {
-    if (f && f.type !== 'signature' && !f.value) { const v = valueFor(f); if (v) f.value = v; }
+    // a form saved before 1.0.19 holds the sample studio: treated as empty (isSampleStudioValue in form-preview.js)
+    const sample = /Poli International|104 Studio Plaza|100 Artisan Boulevard|poli-studio\.com|poliinternational\.com/i.test(String((f && f.value) || ''));
+    if (f && f.type !== 'signature' && (!f.value || sample)) { const v = valueFor(f); if (v) f.value = v; }
   }
   return copy;
 }
@@ -1813,18 +1815,21 @@ app.post('/api/clients/:id/tattoo-work', (req, res) => {
   const clientId = parseInt(req.params.id, 10);
   const clientObj = clients.find(c => c.id === clientId);
   if (!clientObj) return res.status(404).json({ error: 'Client not found' });
+  // the photo itself (taken or chosen on the device, as a data URL): there was a stock photo when none came
+  if (!req.body.image_url) return res.status(400).json({ error: 'Take or choose a photo first' });
 
   const newWork = {
-    id: clientTattooWork.length + 1,
+    id: clientTattooWork.reduce((m, w) => Math.max(m, Number(w.id) || 0), 0) + 1, // length + 1 repeated an id after a delete
     client_id: clientId,
     client_name: clientObj.name,
     title: req.body.title || 'New Tattoo Session Work',
     category: req.body.category || 'Tattoo Session',
     date: req.body.date || new Date().toISOString().split('T')[0],
-    artist: req.body.artist || clientObj.assigned_staff_name || 'Jaxon Vance',
-    image_url: req.body.image_url || 'https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?w=800&q=80',
-    description: req.body.description || 'Uploaded client tattoo work photo.',
-    tags: Array.isArray(req.body.tags) ? req.body.tags : ['Session Work', 'Custom']
+    artist: req.body.artist || clientObj.assigned_staff_name || '', // it named a sample artist
+    image_url: req.body.image_url,
+    notes: req.body.notes || '',
+    description: req.body.description || '',
+    tags: Array.isArray(req.body.tags) ? req.body.tags : []
   };
 
   clientTattooWork.unshift(newWork);
@@ -1840,6 +1845,15 @@ app.post('/api/clients/:id/tattoo-work', (req, res) => {
 
   const updatedWorkList = clientTattooWork.filter(w => w.client_id === clientId);
   res.status(201).json({ success: true, work: newWork, tattoo_work: updatedWorkList });
+});
+
+// Delete in Work & Photos called this and found nothing here
+app.delete('/api/clients/:id/tattoo-work/:workId', (req, res) => {
+  const clientId = parseInt(req.params.id, 10);
+  const i = clientTattooWork.findIndex((w) => w.client_id === clientId && Number(w.id) === Number(req.params.workId));
+  if (i < 0) return res.status(404).json({ error: 'Photo not found' });
+  clientTattooWork.splice(i, 1);
+  res.json({ success: true, tattoo_work: clientTattooWork.filter((w) => w.client_id === clientId) });
 });
 
 app.get('/api/clients/:id/history', (req, res) => {

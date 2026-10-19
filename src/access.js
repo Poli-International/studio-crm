@@ -123,7 +123,7 @@ const ADMIN_DATA = /^(studio_vat_config|studio_remote_sync_config|studio_schedul
 export function needLevel(method, apiPath) {
   // pages and their files hold no studio data (that is all behind /api); only the CRM itself is closed to a kiosk
   if (!apiPath.startsWith('/api/')) return ['/', '/index.html'].includes(apiPath) ? 'front_desk' : 'kiosk';
-  if (['/api/access', '/api/access/logout', '/api/kiosk/next', '/api/kiosk/submit'].includes(apiPath)) return 'kiosk';
+  if (['/api/access', '/api/access/logout', '/api/kiosk/next', '/api/kiosk/submit', '/api/scanner/scan'].includes(apiPath)) return 'kiosk'; // a tablet's form may scan
   if (['/api/access/login', '/api/access/people'].includes(apiPath)) return 'front_desk';
   const write = method !== 'GET' && method !== 'HEAD';
   if (method === 'DELETE') return 'admin';                                        // deleting anything

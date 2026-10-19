@@ -17,6 +17,7 @@ const feed = http.createServer((req, res) => res.end(JSON.stringify({ tag_name: 
 await new Promise((r) => feed.on('listening', r));
 feed.unref();
 process.env.STUDIO_CRM_UPDATE_FEED = 'http://127.0.0.1:' + feed.address().port + '/';
+process.env.STUDIO_CRM_FAKE_SCANNER = '1'; // a pretend scanner for the form builder's Scanner field (src/scanner.js)
 
 const { browser: b, url, httpsPort, stop, restart } = await startApp();
 const failures = [];
@@ -648,6 +649,31 @@ await flow('Aftercare sheets: every language, edited in Settings, printed in the
   await b.evaluate(`document.getElementById('generic-aftercare-overlay').style.display = 'none'`);
   // the studio's German wording put back, for the flows after this one
   await b.evaluate(`fetch('/api/aftercare/templates/tattoo', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lang: 'de', steps: ${JSON.stringify(tattoo.translations.de.steps)} }) })`);
+});
+
+await flow('Scanner field: in the form builder, its own button text, a page scanned on the CRM computer lands in the form', async () => {
+  // Henry, 2026-10-18: a field that scans from his TWAIN devices, with a button he can name
+  await b.clickText('Clients');
+  await b.clickText('Consent Form Builder');
+  const f = b.frame('#form-builder-frame');
+  for (let i = 0; i < 80 && !(await f.evaluate('!!(window.FormBuilderApp && window.FormBuilderApp.currentForm && document.getElementById("btn-preview"))').catch(() => false)); i++) await sleep(250);
+  await sleep(800);
+  check(await f.evaluate(`window.FormBuilderApp.getAllFieldTypeDefinitions().some(d => d.type === 'scanner')`), 'the form builder does not offer the Scanner field in the CRM');
+  // the field, with the studio's own words on its button
+  const id = await f.evaluate(`(() => { const app = window.FormBuilderApp; const sec = app.currentForm.sections[0]; app.addField('scanner', sec.id); const fld = sec.fields.find(x => x.type === 'scanner'); fld.buttonText = 'PRESS HERE TO SCAN'; return fld.id; })()`);
+  check(id, 'the Scanner field could not be added');
+  await f.clickText('Preview Form');
+  await eventually(async () => f.evaluate(`!!document.querySelector('#preview-container [data-scan-field="${id}"]')`), 'the preview does not show the scan button');
+  check((await f.evaluate(`document.querySelector('#preview-container [data-scan-field="${id}"]').innerText.trim()`)) === 'PRESS HERE TO SCAN', 'the scan button does not show the studio\'s own text');
+  await f.evaluate(`document.querySelector('#preview-container [data-scan-field="${id}"]').click()`);
+  await eventually(async () => f.evaluate(`(() => { const r = window.ActiveFormPreview.responses[${JSON.stringify(id)}]; return Array.isArray(r) && r.length === 1 && /^data:image\\//.test(r[0].dataUrl); })()`), 'the scanned page did not land in the form');
+  check(await f.evaluate(`!!document.querySelector('#photo-gallery-${id} img')`), 'the scanned page is not shown in the form');
+  // the scanner answers the server's own endpoints
+  check((await api('/api/scanner/devices')).some((d) => d.name === 'Test scanner'), 'the CRM does not list the scanner');
+  // put the form back as it was, for the flows after this one
+  await f.clickText('Back to Editor');
+  await f.evaluate(`(() => { const app = window.FormBuilderApp; const sec = app.currentForm.sections[0]; sec.fields = sec.fields.filter(x => x.id !== ${JSON.stringify(id)}); app.renderCanvas && app.renderCanvas(); })()`);
+  await b.evaluate(`document.getElementById('form-builder-modal').style.display = 'none'`);
 });
 
 await flow('Ink mixer: the diluent label is the size chosen; the autoclave tool claims no Google Sheets sync', async () => {

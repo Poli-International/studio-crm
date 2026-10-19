@@ -49,6 +49,8 @@ The first time the CRM starts, it asks you to create the **studio password**. Ev
 
 **Staff logins and levels:** with the studio password set, open the staff list, click **Edit** on a person and choose an **Access level** and a **Login password** (at least 8 characters). From the first login on, the sign-in page asks **Who are you?**: each person picks their name and signs in with their own password. The studio password stays first on that list and still signs in as administrator; give yourself the **Administrator** level too if you want your own login.
 
+**Roles:** in **Settings**, **Roles**, tick what each role may open and change: clients and bookings, stock and suppliers, sterilization and compliance, the shift rota, consent forms and aftercare sheets, money and reports, deleting records. Front desk and Staff are always there and start with what they could do before; **Add role** makes one of your own ("Sterilization", "Apprentice") and **Save roles** keeps the changes. A role without an area does not see its screen, and the CRM refuses its changes there. Only an **Administrator** changes Settings, the team, the logins and the roles. A role someone still has cannot be removed: give them another role first.
+
 - **Front desk**: clients, appointments, waivers, payments, clocking in and out.
 - **Staff**: everything front desk does, plus stock, suppliers, compliance records, aftercare, the rota and the consent form designs.
 - **Administrator**: everything, including deleting records, the money reports, Settings, the team, logins, backups and imports.

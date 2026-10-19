@@ -49,6 +49,8 @@ Na primeira vez que arranca, o CRM pede-lhe que crie a **palavra-passe do estúd
 
 **Acessos e níveis da equipa:** com a palavra-passe do estúdio definida, abra a lista da equipa, clique em **Editar** numa pessoa e escolha um **Nível de acesso** e uma **Palavra-passe de acesso** (pelo menos 8 caracteres). A partir do primeiro acesso, a página de início de sessão pergunta **Who are you?**: cada pessoa escolhe o seu nome e entra com a sua palavra-passe. A palavra-passe do estúdio fica em primeiro nessa lista e continua a entrar como administrador; dê também a si próprio o nível **Administrador** se quiser um acesso seu.
 
+**Funções:** em **Definições**, **Funções**, marque o que cada função pode abrir e alterar: clientes e marcações, stock e fornecedores, esterilização e conformidade, escala de turnos, formulários de consentimento e folhas de cuidados, dinheiro e relatórios, eliminar registos. Recepção e Equipa estão sempre lá e começam com o que podiam fazer antes; **Adicionar função** cria uma sua ("Esterilização", "Aprendiz") e **Guardar as funções** mantém as alterações. Uma função sem uma área não vê o seu ecrã, e o CRM recusa as suas alterações. Só um **Administrador** altera as Definições, a equipa, os acessos e as funções. Uma função que alguém ainda tem não pode ser removida: dê-lhe antes outra função.
+
 - **Recepção**: clientes, marcações, consentimentos, pagamentos, registo de entrada e saída.
 - **Equipa**: tudo o que a recepção faz, mais stock, fornecedores, registos de conformidade, cuidados pós-sessão, escalas e o design dos consentimentos.
 - **Administrador**: tudo, incluindo apagar registos, os relatórios financeiros, as Definições, a equipa, os acessos, as cópias de segurança e as importações.

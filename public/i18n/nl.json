@@ -1941,5 +1941,22 @@
  "Photo": "Foto",
  "📷 Take or choose a photo": "📷 Foto maken of kiezen",
  "On a phone or tablet you can use the camera.": "Op een telefoon of tablet kunt u de camera gebruiken.",
- "Take or choose a photo first": "Maak of kies eerst een foto"
+ "Take or choose a photo first": "Maak of kies eerst een foto",
+ "Roles": "Rollen",
+ "What each role may open and change. Give a person a role in the staff list (Edit, Access level). A role without an area does not see its screen, and the CRM refuses its changes there.": "Wat elke rol mag openen en wijzigen. Geef iemand een rol in de personeelslijst (Bewerken, Toegangsniveau). Een rol zonder een onderdeel ziet dat scherm niet, en het CRM weigert daar zijn wijzigingen.",
+ "➕ Add role": "➕ Rol toevoegen",
+ "Save roles": "Rollen opslaan",
+ "Remove role": "Rol verwijderen",
+ "Roles saved": "Rollen opgeslagen",
+ "Could not save the roles": "De rollen konden niet worden opgeslagen",
+ "Could not save the roles: the server did not answer": "De rollen konden niet worden opgeslagen: de server antwoordde niet",
+ "Clients and bookings": "Klanten en afspraken",
+ "Stock and suppliers": "Voorraad en leveranciers",
+ "Sterilization and compliance": "Sterilisatie en naleving",
+ "Consent forms and aftercare sheets": "Toestemmingsformulieren en nazorgbladen",
+ "Money and reports": "Geld en rapporten",
+ "Delete records": "Gegevens verwijderen",
+ "Everything, and the only role that changes Settings, the team, the logins and the roles": "Alles, en de enige rol die Instellingen, het team, de logins en de rollen wijzigt",
+ "Give every role a name": "Geef elke rol een naam",
+ "Choose one of the roles": "Kies een van de rollen"
 }

@@ -20,21 +20,36 @@ function showActiveStaff() {
 }
 document.addEventListener('DOMContentLoaded', showActiveStaff);
 
-// Who is signed in, and whether staff logins are on (from /api/access).
+// Who is signed in, whether staff logins are on, and this device's role (from /api/access).
 let accessInfo = {};
-const LEVEL_LABEL = { front_desk: 'Front desk', staff: 'Staff', admin: 'Administrator' };
+// the areas a role can be given (src/access.js PERMISSIONS), as Settings, Roles shows them
+const ROLE_AREAS = [['clients', 'Clients and bookings'], ['stock', 'Stock and suppliers'], ['compliance', 'Sterilization and compliance'],
+    ['rota', 'Shift rota'], ['forms', 'Consent forms and aftercare sheets'], ['finance', 'Money and reports'], ['delete', 'Delete records']];
+// the screens a role opens only with an area (Settings: administrators only)
+const SCREEN_NEEDS = { clients: 'clients', calendar: 'clients', inventory: 'stock', compliance: 'compliance', finance: 'finance', settings: 'admin' };
+function screenAllowed(dest) {
+    const need = SCREEN_NEEDS[dest];
+    if (!need || !accessInfo.level || accessInfo.level === 'admin') return true;
+    return need !== 'admin' && !!(accessInfo.role && accessInfo.role.perms.includes(need));
+}
+window.screenAllowed = screenAllowed;
+function roleName(id) {
+    if (id === 'admin') return 'Administrator';
+    const r = (accessInfo.roles || []).find((x) => x.id === id);
+    return r ? r.name : '';
+}
 async function loadAccessInfo() {
     try { accessInfo = await (await fetch('/api/access')).json(); } catch (e) { accessInfo = {}; }
-    // lower levels do not see the money reports and the studio settings (the server refuses them anyway)
+    // a role sees only the screens of its areas (the server refuses the rest anyway)
     document.body.dataset.level = accessInfo.level || 'admin';
-    for (const id of ['nav-dest-finance', 'nav-dest-settings']) {
-        const el = document.getElementById(id);
+    for (const dest of Object.keys(SCREEN_NEEDS)) {
+        const el = document.getElementById('nav-dest-' + dest);
         // the nav styles say display:flex !important, so the hiding needs !important too
-        if (el) el.style.setProperty('display', accessInfo.level && accessInfo.level !== 'admin' ? 'none' : '', 'important');
+        if (el) el.style.setProperty('display', screenAllowed(dest) ? '' : 'none', 'important');
     }
     // signed in with a staff login: that person is at the screen
     if (accessInfo.staffLogins && accessInfo.me) {
-        try { localStorage.setItem('studio_active_staff', JSON.stringify({ id: 0, name: accessInfo.me + ' (' + LEVEL_LABEL[accessInfo.level] + ')' })); } catch (e) { /* private window */ }
+        try { localStorage.setItem('studio_active_staff', JSON.stringify({ id: 0, name: accessInfo.me + ' (' + ((accessInfo.role && accessInfo.role.name) || '') + ')' })); } catch (e) { /* private window */ }
         showActiveStaff();
     } else if (activeStaff() && activeStaff().id === 0) {
         // signed in with the studio password after someone's own login: their name leaves the top bar
@@ -69,7 +84,7 @@ async function renderStaffList() {
         const level = accessInfo.logins && accessInfo.logins[id];
         return `<div class="staff-row" style="padding:12px 14px;background:#1E293B;border:1px solid ${here ? '#10B981' : '#475569'};border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
             <div style="min-width:0;">
-                <div style="font-weight:800;font-size:0.9rem;">${escapeHtml(s.name || '')}${here ? ' <span style="color:#10B981;font-size:0.72rem;">● at the screen</span>' : ''}${level ? ` <span class="staff-level-badge" style="background:#312E81;color:#C7D2FE;border-radius:6px;padding:1px 6px;font-size:0.7rem;">🔑 ${LEVEL_LABEL[level]}</span>` : ''}</div>
+                <div style="font-weight:800;font-size:0.9rem;">${escapeHtml(s.name || '')}${here ? ' <span style="color:#10B981;font-size:0.72rem;">● at the screen</span>' : ''}${level ? ` <span class="staff-level-badge" style="background:#312E81;color:#C7D2FE;border-radius:6px;padding:1px 6px;font-size:0.7rem;">🔑 ${escapeHtml(roleName(level))}</span>` : ''}</div>
                 <div style="font-size:0.75rem;color:#94A3B8;">${details}</div>
             </div>
             <div style="display:flex;gap:6px;">
@@ -120,7 +135,12 @@ function openStaffFormModal(id) {
     const access = document.getElementById('staff-form-access');
     if (access) access.style.display = accessInfo.passwordSet && accessInfo.level === 'admin' ? '' : 'none';
     const levelEl = document.getElementById('staff-form-level');
-    if (levelEl) levelEl.value = (member && accessInfo.logins && accessInfo.logins[member.id]) || '';
+    if (levelEl) {
+        // the studio's roles, Administrator last
+        levelEl.innerHTML = '<option value="">No login</option>' + (accessInfo.roles || []).map((r) => `<option value="${escapeHtml(r.id)}">${escapeHtml(r.name)}</option>`).join('')
+            + '<option value="admin">Administrator</option>';
+        levelEl.value = (member && accessInfo.logins && accessInfo.logins[member.id]) || '';
+    }
     forceShowModal('staff-form-modal-overlay');
 }
 window.openStaffFormModal = openStaffFormModal;
@@ -293,8 +313,64 @@ async function showStudioAccess() {
     show('kiosk-access-remove-btn', !!access.kioskPasswordSet);
     const kSave = document.getElementById('kiosk-access-save-btn');
     if (kSave) kSave.textContent = access.kioskPasswordSet ? 'Change kiosk password' : 'Set kiosk password';
+    showRoles(); // the Roles card comes with the studio password
 }
 document.addEventListener('DOMContentLoaded', showStudioAccess);
+
+// =========================================================================
+// 🧩 ROLES (Settings, administrators): which areas each role may open and change
+// =========================================================================
+let rolesDraft = [];
+function renderRolesCard() {
+    const card = document.getElementById('roles-card');
+    const body = document.getElementById('roles-list');
+    if (!card || !body) return;
+    card.style.display = accessInfo.passwordSet && accessInfo.level === 'admin' ? '' : 'none';
+    if (card.style.display === 'none') return;
+    const box = (r, i, key) => `<label style="display:flex;align-items:center;gap:6px;font-size:0.78rem;color:#CBD5E1;"><input type="checkbox" ${r === null || r.perms.includes(key) ? 'checked' : ''} ${r === null ? 'disabled' : `onchange="toggleRoleArea(${i}, '${key}', this.checked)"`}> ${escapeHtml(ROLE_AREAS.find((a) => a[0] === key)[1])}</label>`;
+    const row = (r, i) => `<div class="role-row" style="padding:12px;background:#1E293B;border:1px solid #475569;border-radius:10px;">
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
+            ${r === null ? '<strong style="font-size:0.9rem;">Administrator</strong><span style="font-size:0.72rem;color:#94A3B8;">Everything, and the only role that changes Settings, the team, the logins and the roles</span>'
+                : r.builtIn ? `<strong style="font-size:0.9rem;">${escapeHtml(r.name)}</strong>`
+                : `<input type="text" value="${escapeHtml(r.name)}" maxlength="40" aria-label="Role name" oninput="renameRole(${i}, this.value)" style="flex:1;min-width:0;padding:6px 10px;background:#0F172A;border:1px solid #475569;border-radius:6px;color:#F8FAFC;font-size:0.85rem;">
+                   <button type="button" onclick="removeRole(${i})" style="flex-shrink:0;white-space:nowrap;padding:6px 10px;background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">Remove role</button>`}
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:4px 12px;">${ROLE_AREAS.map((a) => box(r, i, a[0])).join('')}</div>
+    </div>`;
+    body.innerHTML = rolesDraft.map(row).join('') + row(null, -1);
+}
+async function showRoles() {
+    await loadAccessInfo();
+    rolesDraft = JSON.parse(JSON.stringify(accessInfo.roles || []));
+    renderRolesCard();
+}
+function toggleRoleArea(i, key, on) {
+    const r = rolesDraft[i];
+    r.perms = on ? [...new Set([...r.perms, key])] : r.perms.filter((p) => p !== key);
+}
+window.toggleRoleArea = toggleRoleArea;
+function renameRole(i, name) { rolesDraft[i].name = name; }
+window.renameRole = renameRole;
+function addRole() {
+    rolesDraft.push({ name: 'New role', perms: [] });
+    renderRolesCard();
+    const inputs = document.querySelectorAll('#roles-list input[type="text"]');
+    if (inputs.length) { inputs[inputs.length - 1].focus(); inputs[inputs.length - 1].select(); }
+}
+window.addRole = addRole;
+function removeRole(i) { rolesDraft.splice(i, 1); renderRolesCard(); }
+window.removeRole = removeRole;
+async function saveRoles() {
+    try {
+        const res = await fetch('/api/access/roles', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ roles: rolesDraft }) });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) { showStudioToast(data.error || 'Could not save the roles'); return; }
+        showStudioToast('Roles saved');
+        await showRoles();
+        renderStaffList();
+    } catch (e) { showStudioToast('Could not save the roles: the server did not answer'); }
+}
+window.saveRoles = saveRoles;
 
 // event: the form was submitted (set or change); null: remove
 async function saveKioskPassword(event) {

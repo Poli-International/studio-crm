@@ -413,7 +413,7 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 - **Waiver integrity**: a waiver will not save without both a client and a signature.
 - **Studio password** (asked for at the first start, can be skipped): scrypt hash in the database, an HttpOnly SameSite=Lax session cookie, five wrong tries then a 30 second wait. An empty `reset-password.txt` in the data folder removes it, and all staff logins, at the next start.
 - **Idle lock** (optional): a device with no pointer, key, touch or wheel input (inside the embedded tools too) for the chosen minutes signs out and reloads to the sign-in page. It runs in the page; the session cookie on the server is what protects the data. The tablet kiosk is excluded.
-- **Staff logins and levels** (optional, on once anyone has a login; the studio password stays first on the sign-in list and signs in as administrator): each login is a scrypt hash in `app_state.staffLogins`. `needLevel(method, path)` in `src/access.js` decides the lowest level for every `/api/` request and the server answers 403 below it; hiding Finance and Settings in the sidebar is only a convenience.
+- **Staff logins and levels** (optional, on once anyone has a login; the studio password stays first on the sign-in list and signs in as administrator; what each role may do: see 1.0.22, Roles): each login is a scrypt hash in `app_state.staffLogins`. `needLevel(method, path)` in `src/access.js` decides the lowest level for every `/api/` request and the server answers 403 below it; hiding Finance and Settings in the sidebar is only a convenience.
 
 | Level | May do |
 |---|---|
@@ -432,6 +432,10 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 ---
 
 ## Version History
+
+### 1.0.22
+
+**Roles** (Henry, 2026-10-19: "a checkbox for what each role can access", and roles of the studio's own). `needLevel(method, path)` in `src/access.js` now answers what a request needs: `kiosk`, `any` (any signed-in person), `admin`, or one of the areas in `PERMISSIONS`: `clients` (clients, bookings, waivers, payments taken, aftercare given, sending to a kiosk), `stock`, `compliance`, `rota`, `forms` (consent form designs, aftercare sheets), `finance` (money reports, payment methods, accounting) and `delete`. A role is a name and a set of areas, kept in `app_state.staffRoles`; a staff login's `level` is the role's id. Front desk (`clients`) and Staff (`clients`, `stock`, `compliance`, `rota`, `forms`) are built in, with what they could do before as their default, and keep their names; the studio adds its own (`r_<hex>` ids). Administrator is not a role in the list: it has every area and is the only one that may change settings, the team, the logins, the roles, stations, imports, backups and CSV sync (`/api/sync` writes were open to everyone before). `PUT /api/access/roles` saves the whole list and refuses to remove a role someone still has. `GET /api/access` gives each device its `role` (name and areas) and, to an administrator, the `roles`. The screens follow the areas: Clients and Calendar need `clients`, Stock `stock`, Compliance `compliance`, Finance `finance`, Settings an administrator (`screenAllowed` in `public/js/staff.js`, also used by `navigateToDestination`). Reading data (`GET`) stays open to anyone signed in, except the money reports. Front desk no longer sees the Stock and Compliance screens unless an administrator ticks them.
 
 ### 1.0.21
 

@@ -49,6 +49,8 @@ De eerste keer dat het CRM start, vraagt het u het **studiowachtwoord** aan te m
 
 **Logins en niveaus voor personeel:** met het studiowachtwoord ingesteld opent u de personeelslijst, klikt u bij iemand op **Bewerken** en kiest u een **Toegangsniveau** en een **Loginwachtwoord** (minstens 8 tekens). Vanaf de eerste login vraagt de aanmeldpagina **Who are you?**: iedereen kiest zijn naam en meldt zich aan met een eigen wachtwoord. Het studiowachtwoord staat bovenaan die lijst en meldt nog steeds aan als beheerder; geef uzelf ook het niveau **Beheerder** als u een eigen login wilt.
 
+**Rollen:** vink onder **Instellingen**, **Rollen** aan wat elke rol mag openen en wijzigen: klanten en afspraken, voorraad en leveranciers, sterilisatie en naleving, dienstrooster, toestemmingsformulieren en nazorgbladen, geld en rapporten, gegevens verwijderen. Receptie en Personeel zijn er altijd en beginnen met wat ze eerder mochten; **Rol toevoegen** maakt een eigen rol ("Sterilisatie", "Leerling") en **Rollen opslaan** bewaart de wijzigingen. Een rol zonder een onderdeel ziet dat scherm niet, en het CRM weigert daar zijn wijzigingen. Alleen een **Beheerder** wijzigt Instellingen, het team, de logins en de rollen. Een rol die iemand nog heeft kan niet worden verwijderd: geef die persoon eerst een andere rol.
+
 - **Receptie**: klanten, afspraken, toestemmingsformulieren, betalingen, in- en uitklokken.
 - **Personeel**: alles van de receptie, plus voorraad, leveranciers, compliance-registraties, nazorg, het rooster en het ontwerp van de toestemmingsformulieren.
 - **Beheerder**: alles, ook verwijderen, de financiële overzichten, Instellingen, het team, logins, back-ups en imports.

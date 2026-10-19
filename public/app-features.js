@@ -2308,7 +2308,7 @@ async function openAutoclaveVaultModal() {
         const data = await ledgerJson('/api/compliance/autoclave-logs');
         ledgerList(body, (data.logs || []).map((c) => ledgerRow(
             'Cycle #' + (c.cycle_number || c.id) + (c.autoclave_id ? ' · ' + c.autoclave_id : ''),
-            [c.date_run, c.station, c.temperature_c ? c.temperature_c + ' °C' : '', c.operator].filter(Boolean).join(' · '),
+            [c.date_run, c.station, c.temperature_c != null && c.temperature_c !== '' ? c.temperature_c + ' °C' : '', c.technician || c.operator].filter(Boolean).join(' · '),
             c.spore_test_result || 'result not recorded')), 'No autoclave cycles recorded yet.');
     } catch (e) { body.innerHTML = LEDGER_ERROR; }
 }

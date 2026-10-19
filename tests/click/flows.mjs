@@ -773,6 +773,26 @@ await flow('Ink mixer: the diluent label is the size chosen, cap sizes change th
   check(!/Google Sheets|Firestore/.test(await b.evaluate(`document.body.innerText`)), 'the autoclave tool still offers a Google Sheets sync');
 });
 
+await flow('Autoclave log: keeps only what was entered, never a passing result nobody recorded', async () => {
+  // it filled in 134 °C, 2.1 bar, 18 minutes, spore test PASS and a technician when they were left out
+  const post = (body) => b.evaluate(`fetch('/api/compliance/autoclave-logs', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: ${JSON.stringify(JSON.stringify(body))} }).then(async r => ({ status: r.status, data: await r.json() }))`);
+  check((await post({})).status === 400, 'an empty cycle was saved');
+  const partial = await post({ autoclave_id: 'Flow Autoclave', technician: 'Flow Tech' });
+  check(partial.status === 201, 'a cycle with some details was refused: ' + partial.status);
+  const log = partial.data.log;
+  check(log.spore_test_result === null && log.status === 'NOT_RECORDED', 'a spore test nobody recorded was saved as ' + log.spore_test_result);
+  check(log.temperature_c === null && log.pressure_bar === null && log.duration_minutes === null && log.cycle_number === null, 'figures nobody entered were filled in: ' + JSON.stringify(log));
+  check(log.indicator_strip === null && log.station === '' && log.notes === '', 'details nobody entered were filled in: ' + JSON.stringify(log));
+  const failed = (await post({ autoclave_id: 'Flow Autoclave', spore_test_result: 'fail', temperature_c: '121' })).data.log;
+  check(failed.spore_test_result === 'FAIL' && failed.status === 'QUARANTINE_WARNING' && failed.temperature_c === 121, 'a failed cycle was not kept as failed: ' + JSON.stringify(failed));
+  // the vault shows who ran the cycle (it looked for an "operator" the log never had)
+  await b.clickText('Compliance');
+  await pressOn('openAutoclaveVaultModal()');
+  await eventually(async () => (await text('#autoclave-vault-modal-body')).includes('Flow Tech'), async () => 'the vault does not show the technician: ' + (await text('#autoclave-vault-modal-body')).slice(0, 200));
+  check((await text('#autoclave-vault-modal-body')).includes('result not recorded'), 'the vault does not say the spore test was not recorded');
+  await b.evaluate(`forceHideModal('autoclave-vault-modal-overlay')`);
+});
+
 await flow('A Print button opens the print dialog', async () => {
   await b.clickText('Clients');
   await b.clickText('Health Alerts');

@@ -10497,35 +10497,44 @@ const autoclaveLogs = [
 ];
 
 app.get('/api/compliance/autoclave-logs', (req, res) => {
-  const passCount = autoclaveLogs.filter(l => l.spore_test_result === 'PASS').length;
-  const complianceRate = autoclaveLogs.length > 0 ? Math.round((passCount / autoclaveLogs.length) * 100) : 100;
+  // the rate of the cycles whose spore test was recorded: no cycles is no rate (it said 100%, inspector ready)
+  const tested = autoclaveLogs.filter(l => l.spore_test_result === 'PASS' || l.spore_test_result === 'FAIL');
+  const complianceRate = tested.length > 0 ? Math.round((tested.filter(l => l.spore_test_result === 'PASS').length / tested.length) * 100) : null;
 
   res.json({
     success: true,
     total_runs: autoclaveLogs.length,
     compliance_rate_percent: complianceRate,
-    inspector_ready: complianceRate >= 95,
+    inspector_ready: complianceRate !== null && complianceRate >= 95,
     logs: autoclaveLogs
   });
 });
 
+// A sterilization record holds only what the studio entered: a missing temperature or spore test is
+// "not recorded", never a passing value (it filled in 134 °C, 2.1 bar, 18 min, PASS, a strip that
+// turned black, an autoclave and a technician nobody entered).
 app.post('/api/compliance/autoclave-logs', (req, res) => {
-  const { autoclave_id, station, cycle_number, temperature_c, pressure_bar, duration_minutes, spore_test_result, technician, notes } = req.body;
+  const { autoclave_id, station, cycle_number, temperature_c, pressure_bar, duration_minutes, spore_test_result, indicator_strip, technician, notes } = req.body || {};
+  const text = (v) => String(v ?? '').trim();
+  const num = (v) => (text(v) === '' || !Number.isFinite(Number(v)) ? null : Number(v));
+  const result = ['PASS', 'FAIL'].includes(text(spore_test_result).toUpperCase()) ? text(spore_test_result).toUpperCase() : null;
+  const given = [autoclave_id, station, cycle_number, temperature_c, pressure_bar, duration_minutes, spore_test_result, indicator_strip, technician, notes].some((v) => text(v) !== '');
+  if (!given) return res.status(400).json({ error: 'Enter the details of the cycle' });
 
   const newLog = {
     id: Date.now(),
-    autoclave_id: autoclave_id || 'STATIM-2000-A1',
-    station: station || 'Station #1 (Main Floor)',
-    cycle_number: parseInt(cycle_number) || (1000 + autoclaveLogs.length + 1),
+    autoclave_id: text(autoclave_id),
+    station: text(station),
+    cycle_number: num(cycle_number),
     date_run: new Date().toISOString().replace('T', ' ').substring(0, 16),
-    temperature_c: parseFloat(temperature_c) || 134,
-    pressure_bar: parseFloat(pressure_bar) || 2.1,
-    duration_minutes: parseInt(duration_minutes) || 18,
-    spore_test_result: spore_test_result || 'PASS',
-    indicator_strip: 'TURNED_BLACK',
-    technician: technician || 'Sterilization Officer',
-    status: (spore_test_result || 'PASS') === 'PASS' ? 'VERIFIED_SAFE' : 'QUARANTINE_WARNING',
-    notes: notes || 'Sterilization cycle logged into studio compliance vault.'
+    temperature_c: num(temperature_c),
+    pressure_bar: num(pressure_bar),
+    duration_minutes: num(duration_minutes),
+    spore_test_result: result,
+    indicator_strip: text(indicator_strip) || null,
+    technician: text(technician),
+    status: result === 'PASS' ? 'VERIFIED_SAFE' : result === 'FAIL' ? 'QUARANTINE_WARNING' : 'NOT_RECORDED',
+    notes: text(notes)
   };
 
   autoclaveLogs.unshift(newLog);
@@ -10533,10 +10542,11 @@ app.post('/api/compliance/autoclave-logs', (req, res) => {
   logActivity({
     category: 'compliance',
     action: 'AUTOCLAVE_CYCLE_LOGGED',
-    title: `Autoclave Cycle Logged: ${newLog.autoclave_id} (#${newLog.cycle_number})`,
-    details: `Tech: ${newLog.technician} | Spore Test: ${newLog.spore_test_result} | Temp: ${newLog.temperature_c}°C | Status: ${newLog.status}`,
-    user: newLog.technician,
-    badgeColor: newLog.spore_test_result === 'PASS' ? 'blue' : 'red'
+    title: 'Autoclave cycle logged' + (newLog.autoclave_id ? ': ' + newLog.autoclave_id : '') + (newLog.cycle_number !== null ? ` (#${newLog.cycle_number})` : ''),
+    details: [newLog.technician && 'Tech: ' + newLog.technician, 'Spore test: ' + (newLog.spore_test_result || 'not recorded'),
+      newLog.temperature_c !== null && `Temp: ${newLog.temperature_c}°C`].filter(Boolean).join(' | '),
+    user: newLog.technician || 'Studio',
+    badgeColor: newLog.spore_test_result === 'PASS' ? 'blue' : newLog.spore_test_result === 'FAIL' ? 'red' : 'gray'
   });
 
   res.status(201).json({ success: true, log: newLog });

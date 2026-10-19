@@ -1922,5 +1922,20 @@
  "Print": "Drucken",
  "🖨️ Aftercare sheet": "🖨️ Pflegeblatt",
  "Print an aftercare sheet with no client name": "Ein Pflegeblatt ohne Kundennamen drucken",
- "That appointment was not found": "Dieser Termin wurde nicht gefunden"
+ "That appointment was not found": "Dieser Termin wurde nicht gefunden",
+ "Aftercare sheets": "Pflegeblätter",
+ "The sheets you print for clients. Change any wording, in each language; a language left empty prints the English.": "Die Blätter, die Sie für Kunden drucken. Ändern Sie jeden Text, in jeder Sprache; eine leere Sprache druckt das Englische.",
+ "Short description": "Kurze Beschreibung",
+ "Steps, one per line": "Schritte, einer pro Zeile",
+ "Save sheet": "Blatt speichern",
+ "New sheet": "Neues Blatt",
+ "Delete sheet": "Blatt löschen",
+ "Language of the sheet": "Sprache des Blatts",
+ "Give the sheet a title": "Geben Sie dem Blatt einen Titel",
+ "Aftercare sheet saved": "Pflegeblatt gespeichert",
+ "New aftercare sheet": "Neues Pflegeblatt",
+ "Write the first step here.": "Schreiben Sie hier den ersten Schritt.",
+ "New sheet added: write its title and steps, then Save sheet": "Neues Blatt hinzugefügt: Titel und Schritte schreiben, dann Blatt speichern",
+ "Delete this aftercare sheet, in every language? Sheets already given stay on the clients' records.": "Dieses Pflegeblatt in allen Sprachen löschen? Bereits übergebene Blätter bleiben in den Kundenakten.",
+ "Aftercare sheet deleted": "Pflegeblatt gelöscht"
 }

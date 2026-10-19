@@ -1922,5 +1922,20 @@
  "Print": "พิมพ์",
  "🖨️ Aftercare sheet": "🖨️ เอกสารการดูแลหลังทำ",
  "Print an aftercare sheet with no client name": "พิมพ์เอกสารการดูแลหลังทำโดยไม่มีชื่อลูกค้า",
- "That appointment was not found": "ไม่พบนัดหมายนั้น"
+ "That appointment was not found": "ไม่พบนัดหมายนั้น",
+ "Aftercare sheets": "เอกสารการดูแลหลังทำ",
+ "The sheets you print for clients. Change any wording, in each language; a language left empty prints the English.": "เอกสารที่คุณพิมพ์ให้ลูกค้า แก้ไขข้อความได้ทุกภาษา ภาษาที่เว้นว่างจะพิมพ์เป็นภาษาอังกฤษ",
+ "Short description": "คำอธิบายสั้น ๆ",
+ "Steps, one per line": "ขั้นตอน บรรทัดละหนึ่งขั้น",
+ "Save sheet": "บันทึกเอกสาร",
+ "New sheet": "เอกสารใหม่",
+ "Delete sheet": "ลบเอกสาร",
+ "Language of the sheet": "ภาษาของเอกสาร",
+ "Give the sheet a title": "ตั้งชื่อเอกสาร",
+ "Aftercare sheet saved": "บันทึกเอกสารการดูแลหลังทำแล้ว",
+ "New aftercare sheet": "เอกสารการดูแลหลังทำใหม่",
+ "Write the first step here.": "เขียนขั้นตอนแรกที่นี่",
+ "New sheet added: write its title and steps, then Save sheet": "เพิ่มเอกสารใหม่แล้ว: เขียนชื่อและขั้นตอน แล้วกดบันทึกเอกสาร",
+ "Delete this aftercare sheet, in every language? Sheets already given stay on the clients' records.": "ลบเอกสารการดูแลหลังทำนี้ทุกภาษาหรือไม่ เอกสารที่ให้ไปแล้วยังคงอยู่ในประวัติลูกค้า",
+ "Aftercare sheet deleted": "ลบเอกสารการดูแลหลังทำแล้ว"
 }

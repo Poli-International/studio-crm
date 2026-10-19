@@ -11,6 +11,7 @@ import { installAccess } from './src/access.js';
 import { installUpdate } from './src/update.js';
 import { pruneAutoBackups, AUTO_BACKUP } from './src/backups.js';
 import { GUARDIAN_AGE, ageOn, isGuardianForm, dobFromResponses } from './src/consent-age.js';
+import { AFTERCARE_LANGS, addAftercareTranslations } from './src/aftercare-texts.js';
 import { mergeMedicalInto } from './src/utils/crm-utils.js';
 import {
   users as dbUsers,
@@ -9163,6 +9164,7 @@ app.post('/api/clients/:id/aftercare', (req, res) => {
   if (b.appointment_id && !appt) return res.status(400).json({ error: 'That appointment was not found' });
   const entry = {
     template_id: tpl.id, title: tpl.title,
+    lang: AFTERCARE_LANGS.includes(b.lang) ? b.lang : 'en',
     appointment_id: appt ? appt.id : null,
     procedure: appt ? [appt.service_type || appt.service || '', String(appt.datetime || appt.date || '').slice(0, 10)].filter(Boolean).join(', ') : '',
     given_by: String(b.given_by || '').slice(0, 80) || 'Front desk',
@@ -9214,15 +9216,20 @@ app.patch('/api/aftercare/templates/:id', (req, res) => {
     return res.status(404).json({ error: 'Aftercare template not found' });
   }
 
-  if (req.body.title) template.title = req.body.title.trim();
+  // one language at a time: English is the sheet itself, another language goes in its translations
+  // (Settings, Aftercare sheets); a language left empty prints the English
+  const lang = AFTERCARE_LANGS.includes(req.body.lang) ? req.body.lang : 'en';
+  const target = lang === 'en' ? template : ((template.translations = template.translations || {})[lang] = template.translations[lang] || {});
+  if (req.body.title !== undefined && (String(req.body.title).trim() || lang !== 'en')) target.title = String(req.body.title).trim();
   if (req.body.category) template.category = req.body.category.trim();
-  if (req.body.description !== undefined) template.description = req.body.description.trim();
+  if (req.body.description !== undefined) target.description = String(req.body.description).trim();
   if (req.body.steps !== undefined) {
     const rawSteps = Array.isArray(req.body.steps)
       ? req.body.steps.map(s => String(s).trim()).filter(Boolean)
-      : (req.body.steps ? req.body.steps.split('\n').map(s => s.trim()).filter(Boolean) : []);
-    template.steps = rawSteps;
+      : (req.body.steps ? String(req.body.steps).split('\n').map(s => s.trim()).filter(Boolean) : []);
+    target.steps = rawSteps;
   }
+  if (!template.steps || !template.steps.length) template.steps = ['Follow the studio\'s aftercare advice.'];
 
   logActivity({
     category: 'compliance',
@@ -11047,6 +11054,9 @@ function scheduleStateSave() {
   }, 250);
 }
 restoreState();
+// the built-in aftercare sheets get the languages they lack (a studio's database from before 1.0.19 has
+// English only); a language the studio edited is never replaced
+if (addAftercareTranslations(aftercareTemplates)) scheduleStateSave();
 
 // The CSV sync starts from the saved settings
 resetSyncSchedule();

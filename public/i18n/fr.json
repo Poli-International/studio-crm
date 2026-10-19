@@ -1922,5 +1922,20 @@
  "Print": "Imprimer",
  "🖨️ Aftercare sheet": "🖨️ Fiche de soins",
  "Print an aftercare sheet with no client name": "Imprimer une fiche de soins sans nom de client",
- "That appointment was not found": "Ce rendez-vous est introuvable"
+ "That appointment was not found": "Ce rendez-vous est introuvable",
+ "Aftercare sheets": "Fiches de soins",
+ "The sheets you print for clients. Change any wording, in each language; a language left empty prints the English.": "Les fiches que vous imprimez pour les clients. Modifiez n'importe quel texte, dans chaque langue ; une langue laissée vide imprime l'anglais.",
+ "Short description": "Courte description",
+ "Steps, one per line": "Étapes, une par ligne",
+ "Save sheet": "Enregistrer la fiche",
+ "New sheet": "Nouvelle fiche",
+ "Delete sheet": "Supprimer la fiche",
+ "Language of the sheet": "Langue de la fiche",
+ "Give the sheet a title": "Donnez un titre à la fiche",
+ "Aftercare sheet saved": "Fiche de soins enregistrée",
+ "New aftercare sheet": "Nouvelle fiche de soins",
+ "Write the first step here.": "Écrivez la première étape ici.",
+ "New sheet added: write its title and steps, then Save sheet": "Nouvelle fiche ajoutée : écrivez son titre et ses étapes, puis Enregistrer la fiche",
+ "Delete this aftercare sheet, in every language? Sheets already given stay on the clients' records.": "Supprimer cette fiche de soins, dans toutes les langues ? Les fiches déjà remises restent dans les dossiers des clients.",
+ "Aftercare sheet deleted": "Fiche de soins supprimée"
 }

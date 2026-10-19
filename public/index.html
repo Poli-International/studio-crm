@@ -1486,6 +1486,27 @@
                 </form>
               </div>
 
+              <!-- Aftercare sheets: the studio's own wording, in every language -->
+              <div style="background:#0F172A;padding:1.25rem;border-radius:12px;border:1px solid #1E293B;">
+                <h3 style="margin:0 0 6px 0;font-size:1.05rem;font-weight:800;color:#5EEAD4;">Aftercare sheets</h3>
+                <p style="margin:0 0 12px 0;font-size:0.8rem;color:#9CA3AF;">The sheets you print for clients. Change any wording, in each language; a language left empty prints the English.</p>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
+                  <select id="aftercare-edit-template" onchange="fillAftercareEditor()" aria-label="Aftercare sheet" style="flex:1;min-width:160px;padding:8px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.85rem;"></select>
+                  <select id="aftercare-edit-lang" onchange="fillAftercareEditor()" aria-label="Language of the sheet" style="padding:8px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.85rem;"></select>
+                </div>
+                <form onsubmit="saveAftercareSheet(event)" style="display:flex;flex-direction:column;gap:8px;">
+                  <input type="text" id="aftercare-edit-title" placeholder="Title" aria-label="Title" style="padding:8px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.85rem;">
+                  <textarea id="aftercare-edit-description" rows="2" placeholder="Short description" aria-label="Short description" style="padding:8px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.85rem;"></textarea>
+                  <label for="aftercare-edit-steps" style="font-size:0.75rem;color:#9CA3AF;">Steps, one per line</label>
+                  <textarea id="aftercare-edit-steps" rows="7" aria-label="Steps, one per line" style="padding:8px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.85rem;"></textarea>
+                  <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                    <button type="submit" style="padding:0.45rem 0.9rem;background:#0D9488;color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">Save sheet</button>
+                    <button type="button" onclick="addAftercareSheet()" style="padding:0.45rem 0.9rem;background:#1E293B;color:#5EEAD4;border:1px solid rgba(45,212,191,0.4);border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">New sheet</button>
+                    <button type="button" onclick="deleteAftercareSheet()" style="padding:0.45rem 0.9rem;background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">Delete sheet</button>
+                  </div>
+                </form>
+              </div>
+
               <!-- Setting 3: Instant Cloud Backup -->
               <div style="background:#0F172A;padding:1.25rem;border-radius:12px;border:1px solid #1E293B;">
                 <h3 style="margin:0 0 6px 0;font-size:1.05rem;font-weight:800;color:#34D399;">Database Backup</h3>

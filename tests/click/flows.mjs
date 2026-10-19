@@ -615,6 +615,41 @@ await flow('Aftercare: printed from the profile with the client name, recorded o
   await eventually(async () => b.evaluate(`(() => { const t = document.getElementById('aftercare-print-frame').contentDocument.body.innerText; return /piercing/i.test(t) && !t.includes('Aftercare Flow'); })()`), 'the sheet with no client was not printed');
 });
 
+await flow('Aftercare sheets: every language, edited in Settings, printed in the language chosen', async () => {
+  // Patrick, 2026-10-19: the sheets fully editable, and in all languages
+  const tattoo = (await api('/api/aftercare/templates')).find((t) => t.id === 'tattoo');
+  check(['fr', 'it', 'de', 'es', 'nl', 'pt', 'th'].every((l) => tattoo.translations && tattoo.translations[l] && tattoo.translations[l].steps.length === tattoo.steps.length), 'the tattoo sheet is not in every language');
+  await b.clickText('Settings');
+  await eventually(async () => b.evaluate(`document.getElementById('aftercare-edit-template').options.length > 0`), 'the aftercare sheet editor is empty');
+  await b.evaluate(`(() => { const t = document.getElementById('aftercare-edit-template'); t.value = 'tattoo'; t.dispatchEvent(new Event('change')); const l = document.getElementById('aftercare-edit-lang'); l.value = 'de'; l.dispatchEvent(new Event('change')); })()`);
+  check((await b.evaluate(`document.getElementById('aftercare-edit-title').value`)).includes('Tattoo-Pflege'), 'the editor does not show the German sheet');
+  await b.evaluate(`document.getElementById('aftercare-edit-steps').value = 'Schritt eins vom Studio.\\nSchritt zwei vom Studio.'`);
+  await b.clickText('Save sheet');
+  await eventually(async () => { const t = (await api('/api/aftercare/templates')).find((x) => x.id === 'tattoo'); return t.translations.de.steps[0] === 'Schritt eins vom Studio.' && t.steps.length === 6; }, 'the German steps were not saved, or the English ones changed');
+  // English edited on its own
+  await b.evaluate(`(() => { const l = document.getElementById('aftercare-edit-lang'); l.value = 'en'; l.dispatchEvent(new Event('change')); })()`);
+  check((await b.evaluate(`document.getElementById('aftercare-edit-steps').value.split('\\n').length`)) === 6, 'the editor does not show the English steps');
+  // a new sheet, then deleted
+  const before = (await api('/api/aftercare/templates')).length;
+  await b.clickText('New sheet');
+  await eventually(async () => (await api('/api/aftercare/templates')).length === before + 1, 'no new sheet was added');
+  await b.evaluate(`document.getElementById('aftercare-edit-title').value = 'Branding aftercare'`);
+  await b.clickText('Save sheet');
+  await eventually(async () => (await api('/api/aftercare/templates')).some((t) => t.title === 'Branding aftercare'), 'the new sheet was not saved');
+  await b.clickText('Delete sheet');
+  await eventually(async () => (await api('/api/aftercare/templates')).length === before, 'the sheet was not deleted');
+  // printed in German, with German labels, whatever the screen's language
+  await b.clickText('Clients');
+  await b.clickText('Aftercare sheet');
+  await eventually(async () => b.evaluate(`!!document.getElementById('generic-aftercare-lang')`), 'the aftercare sheet window did not open');
+  await b.evaluate(`(() => { document.getElementById('generic-aftercare-template').value = 'tattoo'; document.getElementById('generic-aftercare-lang').value = 'de'; })()`);
+  await b.clickText('Print', '#generic-aftercare-overlay');
+  await eventually(async () => b.evaluate(`(() => { const t = document.getElementById('aftercare-print-frame').contentDocument.body.innerText; return t.includes('Schritt eins vom Studio.') && t.includes('Datum'); })()`), async () => 'the sheet was not printed in German: ' + await b.evaluate(`document.getElementById('aftercare-print-frame').contentDocument.body.innerText.slice(0, 200)`));
+  await b.evaluate(`document.getElementById('generic-aftercare-overlay').style.display = 'none'`);
+  // the studio's German wording put back, for the flows after this one
+  await b.evaluate(`fetch('/api/aftercare/templates/tattoo', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lang: 'de', steps: ${JSON.stringify(tattoo.translations.de.steps)} }) })`);
+});
+
 await flow('Ink mixer: the diluent label is the size chosen; the autoclave tool claims no Google Sheets sync', async () => {
   // Henry, 2026-10-18: every container size gave 60 ml, on screen and on the label
   await b.goto(url.replace(/\/$/, '') + '/tools/ink-mixer/');

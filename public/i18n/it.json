@@ -1922,5 +1922,20 @@
  "Print": "Stampa",
  "🖨️ Aftercare sheet": "🖨️ Scheda di cura",
  "Print an aftercare sheet with no client name": "Stampa una scheda di cura senza nome del cliente",
- "That appointment was not found": "Appuntamento non trovato"
+ "That appointment was not found": "Appuntamento non trovato",
+ "Aftercare sheets": "Schede di cura",
+ "The sheets you print for clients. Change any wording, in each language; a language left empty prints the English.": "Le schede che stampate per i clienti. Cambiate qualsiasi testo, in ogni lingua; una lingua lasciata vuota stampa l'inglese.",
+ "Short description": "Breve descrizione",
+ "Steps, one per line": "Passaggi, uno per riga",
+ "Save sheet": "Salva la scheda",
+ "New sheet": "Nuova scheda",
+ "Delete sheet": "Elimina la scheda",
+ "Language of the sheet": "Lingua della scheda",
+ "Give the sheet a title": "Date un titolo alla scheda",
+ "Aftercare sheet saved": "Scheda di cura salvata",
+ "New aftercare sheet": "Nuova scheda di cura",
+ "Write the first step here.": "Scrivete qui il primo passaggio.",
+ "New sheet added: write its title and steps, then Save sheet": "Nuova scheda aggiunta: scrivete titolo e passaggi, poi Salva la scheda",
+ "Delete this aftercare sheet, in every language? Sheets already given stay on the clients' records.": "Eliminare questa scheda di cura, in tutte le lingue? Le schede già consegnate restano nelle schede dei clienti.",
+ "Aftercare sheet deleted": "Scheda di cura eliminata"
 }

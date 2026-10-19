@@ -19,6 +19,7 @@ function navigateToDestination(destId) {
   if (destId === 'settings' && typeof window.renderBackupCard === 'function') window.renderBackupCard();
   if (destId === 'settings' && typeof window.renderStudioDetailsCard === 'function') window.renderStudioDetailsCard();
   if (destId === 'settings' && typeof window.renderStationsCard === 'function') window.renderStationsCard();
+  if (destId === 'settings' && typeof window.renderAftercareEditor === 'function') window.renderAftercareEditor();
   if ((destId === 'settings' || destId === 'inventory') && typeof window.renderSyncSettingsCard === 'function') window.renderSyncSettingsCard();
 
   // Update active status on sidebar nav buttons

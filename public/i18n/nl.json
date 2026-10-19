@@ -1922,5 +1922,20 @@
  "Print": "Afdrukken",
  "🖨️ Aftercare sheet": "🖨️ Nazorgblad",
  "Print an aftercare sheet with no client name": "Een nazorgblad zonder klantnaam afdrukken",
- "That appointment was not found": "Die afspraak is niet gevonden"
+ "That appointment was not found": "Die afspraak is niet gevonden",
+ "Aftercare sheets": "Nazorgbladen",
+ "The sheets you print for clients. Change any wording, in each language; a language left empty prints the English.": "De bladen die u voor klanten afdrukt. Wijzig elke tekst, in elke taal; een lege taal drukt het Engels af.",
+ "Short description": "Korte beschrijving",
+ "Steps, one per line": "Stappen, één per regel",
+ "Save sheet": "Blad opslaan",
+ "New sheet": "Nieuw blad",
+ "Delete sheet": "Blad verwijderen",
+ "Language of the sheet": "Taal van het blad",
+ "Give the sheet a title": "Geef het blad een titel",
+ "Aftercare sheet saved": "Nazorgblad opgeslagen",
+ "New aftercare sheet": "Nieuw nazorgblad",
+ "Write the first step here.": "Schrijf hier de eerste stap.",
+ "New sheet added: write its title and steps, then Save sheet": "Nieuw blad toegevoegd: schrijf de titel en stappen, dan Blad opslaan",
+ "Delete this aftercare sheet, in every language? Sheets already given stay on the clients' records.": "Dit nazorgblad in alle talen verwijderen? Al gegeven bladen blijven in de klantdossiers.",
+ "Aftercare sheet deleted": "Nazorgblad verwijderd"
 }

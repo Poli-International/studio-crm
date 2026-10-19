@@ -27,9 +27,13 @@ Choose English, French, Italian, German, Spanish, Dutch, Portuguese or Thai from
 
 Open **Settings** to enter your prices, deposit rule, tax (VAT) rate, touch-up policy and stock thresholds. The price estimator, quotes and invoices read these figures, so set them first. **Export CSV** downloads your price list; edit it and use **Import CSV** to load it back. You can also upload your studio logo; it appears in the top bar.
 
+**Studio details and stations:** in **Settings**, **Studio details**, enter your studio's name, address, phone, email and health permit or licence number: every consent form shows them, on the computer and on the kiosk tablets. In **Stations**, add, rename or remove your stations (a tattoo room, a piercing room, a branding area...), give each a type and a usual artist. The booking form lists your stations, and booking an artist chooses the station they usually work at.
+
 ## Clients
 
 **Clients** lists everyone with their contact details, allergies and medical notes, signed waivers and total spent. Use **New Client** to add one. Search filters the list as you type. **View Profile** opens the full record. In the profile, **Edit client** changes the details and **Delete** removes the client. The profile also lists appointments, staff notes, signed waivers, saved consent forms and photos of the work. To add many clients at once, open **Settings**, **Import Data** and paste a list whose first line is `name,email,phone,allergies,notes`. The **Signed** count includes consent forms signed on the tablet. **Healing Pipeline** lists the clients whose session was marked Completed in the last 90 days, grouped by days since the session, with **View Profile** and **Download PDF**.
+
+**Aftercare:** in a client's profile, under **Aftercare**, choose the sheet (tattoo, piercing, fine line, PMU) and the appointment, then **Print and record aftercare**: the sheet prints with your studio's details and the client's name, and the CRM records which sheet was given, for which appointment, by whom and when. Each appointment shows whether aftercare was given. **🖨️ Aftercare sheet** in Clients prints a sheet with no client name, and records nothing.
 
 ## Staff
 

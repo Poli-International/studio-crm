@@ -205,6 +205,9 @@
       if (sizeSelect.value === 'custom') {
         return Math.max(10, Math.min(1000, parseInt(customMlInput ? customMlInput.value : '100', 10) || 100));
       }
+      // the list's values are millilitres ("240"); they were looked up as "8oz" keys, so every size was 60 ml (Henry, 2026-10-18)
+      const ml = parseInt(sizeSelect.value, 10);
+      if (ml > 0) return ml;
       return BOTTLE_SIZES[sizeSelect.value] ? BOTTLE_SIZES[sizeSelect.value].ml : 60;
     }
 

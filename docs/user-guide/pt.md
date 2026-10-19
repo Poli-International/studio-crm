@@ -27,9 +27,13 @@ Escolha inglês, francês, italiano, alemão, espanhol, neerlandês, português 
 
 Abra **Definições** para introduzir os seus preços, a regra de depósito, a taxa de imposto (IVA), a política de retoques e os limiares de stock. O estimador de preços, os orçamentos e as faturas utilizam estes valores, por isso defina-os primeiro. **Exportar CSV** descarrega a sua lista de preços; edite-a e use **Importar CSV** para a carregar de novo. Também pode carregar o logótipo do seu estúdio; este aparece na barra superior.
 
+**Dados do estúdio e postos:** em **Definições**, **Dados do estúdio**, escreva o nome, a morada, o telefone, o e-mail e o número de licença sanitária do estúdio: cada formulário de consentimento mostra-os, no computador e nos tablets. Em **Postos**, adicione, mude o nome ou remova os seus postos (sala de tatuagem, sala de piercing, área de branding...), e dê a cada um um tipo e um artista habitual. O formulário de marcação lista os seus postos, e marcar um artista escolhe o posto onde costuma trabalhar.
+
 ## Clientes
 
 **Clientes** lista todos com os seus dados de contacto, alergias e notas médicas, consentimentos assinados e total gasto. Use **Novo cliente** para adicionar um. A pesquisa filtra a lista à medida que escreve. **Ver perfil** abre o registo completo. No perfil, **Editar cliente** altera os dados e **Excluir** remove o cliente. O perfil mostra também as marcações, as notas da equipa, os termos assinados, os formulários de consentimento guardados e as fotos dos trabalhos. Para adicionar muitos clientes de uma vez, abra **Definições**, **Import Data** e cole uma lista cuja primeira linha seja `name,email,phone,allergies,notes`. A contagem **Signed** inclui os formulários de consentimento assinados no tablet. **Healing Pipeline** lista os clientes cuja sessão foi marcada como concluída nos últimos 90 dias, agrupados por dias desde a sessão, com **View Profile** e **Download PDF**.
+
+**Cuidados posteriores:** na ficha de um cliente, em **Cuidados posteriores**, escolha a folha (tatuagem, piercing, traço fino, maquilhagem permanente) e a marcação, depois **Imprimir e registar os cuidados**: a folha é impressa com os dados do estúdio e o nome do cliente, e o CRM regista que folha foi entregue, para que marcação, por quem e quando. Cada marcação mostra se os cuidados foram entregues. **🖨️ Folha de cuidados** em Clientes imprime uma folha sem nome de cliente e não regista nada.
 
 ## Equipa
 

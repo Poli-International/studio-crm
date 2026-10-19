@@ -444,6 +444,9 @@
                 <button onclick="openAftercareModal()" style="padding:0.45rem 0.9rem;background:linear-gradient(135deg, #0EA5E9 0%, #0369A1 100%);color:#FFF;border:none;border-radius:8px;font-size:0.82rem;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:6px;" title="Open the Aftercare Schedule Generator">
                   🧴 Aftercare Schedule
                 </button>
+                <button onclick="openGenericAftercareSheet()" style="padding:0.45rem 0.9rem;background:#1E293B;color:#5EEAD4;border:1px solid rgba(45,212,191,0.4);border-radius:8px;font-size:0.82rem;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:6px;" title="Print an aftercare sheet with no client name">
+                  🖨️ Aftercare sheet
+                </button>
                 <button onclick="openClientDirectoryModal()" style="padding:0.45rem 0.9rem;background:#1E293B;color:#FCA5A5;border:1px solid rgba(239,68,68,0.4);border-radius:8px;font-size:0.82rem;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">
                   🚨 Health Alerts
                 </button>
@@ -1455,6 +1458,31 @@
                     <button type="submit" id="kiosk-access-save-btn" style="padding:0.45rem 0.9rem;background:#0D9488;color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">Set kiosk password</button>
                     <button type="button" id="kiosk-access-remove-btn" onclick="saveKioskPassword(null)" style="display:none;padding:0.45rem 0.9rem;background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">Remove kiosk password</button>
                   </div>
+                </form>
+              </div>
+
+              <!-- Studio details: printed on every consent form (they showed sample "Poli International" details) -->
+              <div style="background:#0F172A;padding:1.25rem;border-radius:12px;border:1px solid #1E293B;">
+                <h3 style="margin:0 0 6px 0;font-size:1.05rem;font-weight:800;color:#F472B6;">Studio details</h3>
+                <p style="margin:0 0 12px 0;font-size:0.8rem;color:#9CA3AF;">Printed on every consent form, on the computer and on the kiosk tablets.</p>
+                <form id="studio-details-form" onsubmit="saveStudioDetails(event)" style="display:flex;flex-direction:column;gap:8px;">
+                  <input type="text" id="studio-details-name" placeholder="Studio name" aria-label="Studio name" style="padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;">
+                  <input type="text" id="studio-details-address" placeholder="Address" aria-label="Address" style="padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;">
+                  <input type="tel" id="studio-details-phone" placeholder="Phone" aria-label="Phone" style="padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;">
+                  <input type="email" id="studio-details-email" placeholder="Email" aria-label="Email" style="padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;">
+                  <input type="text" id="studio-details-permit" placeholder="Health permit or licence number" aria-label="Health permit or licence number" style="padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;">
+                  <div><button type="submit" style="padding:0.45rem 0.9rem;background:#DB2777;color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">Save studio details</button></div>
+                </form>
+              </div>
+
+              <!-- Stations: the studio's own rooms and chairs, each with a type and a usual artist -->
+              <div style="background:#0F172A;padding:1.25rem;border-radius:12px;border:1px solid #1E293B;">
+                <h3 style="margin:0 0 6px 0;font-size:1.05rem;font-weight:800;color:#FBBF24;">Stations</h3>
+                <p style="margin:0 0 12px 0;font-size:0.8rem;color:#9CA3AF;">Your rooms and chairs. A station's usual artist is chosen for it when you book that artist.</p>
+                <div id="settings-stations-list" style="display:flex;flex-direction:column;gap:8px;"></div>
+                <form onsubmit="addStudioStation(event)" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;">
+                  <input type="text" id="new-station-name" placeholder="New station name" aria-label="New station name" style="flex:1;min-width:140px;padding:8px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.85rem;">
+                  <button type="submit" style="padding:0.45rem 0.9rem;background:#D97706;color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">Add station</button>
                 </form>
               </div>
 
@@ -5028,7 +5056,7 @@ docker compose up -d</pre>
                 <div style="position:relative;"><label for="new-appt-client" style="display:block;font-size:0.75rem;font-weight:700;color:#94A3B8;margin-bottom:4px;">Client name</label><input type="text" id="new-appt-client" required style="width:100%;padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;box-sizing:border-box;" autocomplete="off" oninput="handleClientAutocomplete('new-appt', this.value)" onfocus="handleClientAutocomplete('new-appt', this.value)"><input type="hidden" id="new-appt-client-id" value=""><div id="new-appt-client-autocomplete-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;max-height:200px;overflow-y:auto;background:#1F2937;border:1px solid #3B82F6;border-radius:6px;z-index:999999;box-shadow:0 10px 25px rgba(0,0,0,0.5);margin-top:2px;"></div><div id="new-appt-age-note" style="display:none;margin-top:5px;font-size:0.75rem;font-weight:700;"></div></div>
                 <div><label for="new-appt-service" style="display:block;font-size:0.75rem;font-weight:700;color:#94A3B8;margin-bottom:4px;">Service</label><select id="new-appt-service" style="width:100%;padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;box-sizing:border-box;"><option value="Custom Tattoo">Custom Tattoo</option><option value="Tattoo Touch-up">Tattoo Touch-up</option><option value="Cover-up">Cover-up</option><option value="Flash Piece">Flash Piece</option><option value="Ear Piercing">Ear Piercing</option><option value="Body Piercing">Body Piercing</option><option value="Jewellery Change">Jewellery Change</option><option value="Consultation">Consultation</option></select></div>
                 <div><label for="new-appt-artist" style="display:block;font-size:0.75rem;font-weight:700;color:#94A3B8;margin-bottom:4px;">Artist</label><select id="new-appt-artist" style="width:100%;padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;box-sizing:border-box;"><option value="Alex Miller">Alex Miller</option><option value="Elena Rostova">Elena Rostova</option><option value="Jordan Wells">Jordan Wells</option><option value="Marcus Chen">Marcus Chen</option></select></div>
-                <div><label for="new-appt-station" style="display:block;font-size:0.75rem;font-weight:700;color:#94A3B8;margin-bottom:4px;">Station</label><select id="new-appt-station" style="width:100%;padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;box-sizing:border-box;"><option value="Station 1">Station 1</option><option value="Station 2">Station 2</option><option value="Station 3">Station 3</option><option value="Piercing Room">Piercing Room</option></select></div>
+                <div><label for="new-appt-station" style="display:block;font-size:0.75rem;font-weight:700;color:#94A3B8;margin-bottom:4px;">Station</label><select id="new-appt-station" style="width:100%;padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;box-sizing:border-box;"><option value="">No station</option></select></div>
                 <div><label for="new-appt-date" style="display:block;font-size:0.75rem;font-weight:700;color:#94A3B8;margin-bottom:4px;">Date</label><input type="date" id="new-appt-date" required style="width:100%;padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;box-sizing:border-box;"></div>
                 <div><label for="new-appt-time" style="display:block;font-size:0.75rem;font-weight:700;color:#94A3B8;margin-bottom:4px;">Time</label><input type="time" id="new-appt-time" value="14:00" style="width:100%;padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;box-sizing:border-box;"></div>
                 <div><label for="new-appt-duration" style="display:block;font-size:0.75rem;font-weight:700;color:#94A3B8;margin-bottom:4px;">Duration, minutes</label><input type="number" id="new-appt-duration" value="120" min="15" step="15" style="width:100%;padding:9px 12px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.875rem;box-sizing:border-box;"></div>

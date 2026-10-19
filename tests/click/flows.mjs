@@ -58,6 +58,11 @@ async function flow(name, fn) {
   }
 }
 
+// The studio's details, as a studio enters them once in Settings: the consent forms' studio fields are
+// required and come from them (they held sample "Poli International" details before 1.0.19)
+await b.goto(url);
+await b.evaluate(`fetch('/api/app-data/poli_studio_profile', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ value: JSON.stringify({ studioName: 'Click Test Studio', studioAddress: '1 Test Street', studioPhone: '555-0100', studioPermit: 'TEST-1' }) }) })`);
+
 await flow('New Client opens the form, saves, and the client is listed', async () => {
   await b.clickText('Clients');
   await b.clickText('New Client');
@@ -515,6 +520,111 @@ await flow('Under 18: flagged, the ID check is recorded, and a form needs a pare
   await b.evaluate(`document.querySelector('#new-appt-client-autocomplete-dropdown [data-id="${minor.id}"]').dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }))`);
   check((await text('#new-appt-age-note')).includes('Under 18'), 'booking a client under 18 says nothing: ' + await text('#new-appt-age-note'));
   await b.evaluate(`closeNewAppointmentModal()`);
+});
+
+await flow('Studio details: saved in Settings, on the consent form and on the form sent to a tablet', async () => {
+  // Henry, 2026-10-18: the forms showed "Poli International Certified Studio, 104 Studio Plaza"
+  await b.clickText('Settings');
+  await b.type('#studio-details-name', 'Flow Ink Studio');
+  await b.type('#studio-details-address', '12 Flow Road');
+  await b.type('#studio-details-phone', '555-0101');
+  await b.clickText('Save studio details');
+  await eventually(async () => JSON.parse((await api('/api/app-data')).poli_studio_profile || '{}').studioName === 'Flow Ink Studio', 'the studio details were not saved on the server');
+  const made = await b.evaluate(`fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Studio Details Flow' }) }).then(r => r.json())`);
+  await b.evaluate(`fetch('/api/appointments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ client_id: ${made.id}, client_name: 'Studio Details Flow', service_type: 'Body Piercing', staff_name: 'Flow Piercer Artist', date: '2031-06-07', time: '10:00', status: 'Confirmed' }) })`);
+  await b.clickText('Clients');
+  await eventually(async () => (await text('#clients-table-tbody')).includes('Studio Details Flow'), 'the client is not listed');
+  await press('.client-directory-row', 'Studio Details Flow', 'Sign Waiver');
+  const f = b.frame('#form-builder-frame');
+  for (let i = 0; i < 80 && !(await f.evaluate('!!(window.FormBuilderApp && window.FormBuilderApp.currentForm && document.getElementById("template-select"))').catch(() => false)); i++) await sleep(250);
+  await sleep(800);
+  const pick = (id) => f.evaluate(`(() => { const s = document.getElementById('template-select'); s.value = ${JSON.stringify(id)}; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+  await pick('minor_consent');
+  if (await f.evaluate(`getComputedStyle(document.getElementById('preview-interface')).display === 'none'`)) await f.clickText('Preview Form');
+  await eventually(async () => (await f.evaluate(`document.getElementById('preview-container').innerText`)).includes('Minor Consent'), 'the preview does not show the form chosen');
+  const studioBox = () => f.evaluate(`(() => { const el = [...document.querySelectorAll('#preview-container .form-preview-interactive')].find(e => (e.dataset.id || e.name) === 'studio_name'); return el ? el.value : 'no studio name field'; })()`);
+  await eventually(async () => (await studioBox()) === 'Flow Ink Studio', async () => 'the form does not show the studio name: ' + await studioBox());
+  check(!(await f.evaluate(`document.getElementById('preview-container').innerText`)).includes('Studio Plaza'), 'the form still shows the sample studio address');
+  // another form chosen while the preview is open is the one shown (it stayed on the first form)
+  await pick('piercing_consent');
+  await eventually(async () => (await f.evaluate(`document.getElementById('preview-container').innerText`)).includes('Piercing Consent'), 'choosing another form in the preview kept the old one');
+  // the tablet cannot read the studio settings: the form sent to it carries them
+  const schema = await f.evaluate(`window.FormBuilderApp.currentForm`);
+  const sent = await b.evaluate(`fetch('/api/kiosk/send', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ kiosk: 'Details Stand', clientId: ${made.id}, formName: 'Piercing', schema: ${JSON.stringify(schema)} }) }).then(r => r.status)`);
+  check(sent === 201, 'the form could not be sent to the tablet: ' + sent);
+  const waiting = await api('/api/kiosk/next?kiosk=Details%20Stand');
+  const fields = waiting.item.schema.sections.flatMap((s) => s.fields || []);
+  check(fields.some((x) => x.id === 'studio_name' && x.value === 'Flow Ink Studio'), 'the form on the tablet does not have the studio name');
+  check(fields.some((x) => x.id === 'studio_contact' && /12 Flow Road/.test(x.value) && /555-0101/.test(x.value)), 'the form on the tablet does not have the studio address and phone');
+  check(fields.some((x) => x.id === 'practitioner_name' && x.value === 'Flow Piercer Artist'), 'the form on the tablet does not have the artist of the client\'s appointment: ' + JSON.stringify(fields.filter((x) => /piercer|practitioner|artist/.test(x.id)).map((x) => [x.id, x.value])));
+  await b.evaluate(`fetch('/api/kiosk/cancel', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{"kiosk":"Details Stand"}' })`);
+  await pick('tattoo_consent'); // the form builder remembers the form chosen: later flows start from the Tattoo form
+  await sleep(800);
+  await b.evaluate(`document.getElementById('form-builder-modal').style.display = 'none'`);
+});
+
+await flow('Stations: added, given a type and a usual artist, offered in the booking form, removed', async () => {
+  // Henry, 2026-10-18: always four stations, none could be added or renamed; the booking form listed typed-in ones
+  await b.clickText('Settings');
+  await b.type('#new-station-name', 'Branding Room');
+  await b.clickText('Add station');
+  await eventually(async () => (await api('/api/stations')).some((s) => s.name === 'Branding Room'), 'the station was not added');
+  const st = (await api('/api/stations')).find((s) => s.name === 'Branding Room');
+  // an artist with no usual station yet (the demo studio has some)
+  const taken = (await api('/api/stations')).map((s) => s.assignedStaff);
+  const artist = (await api('/api/staff')).find((p) => p.role !== 'manager' && !taken.includes(p.name));
+  await eventually(async () => b.evaluate(`!!document.querySelector('.settings-station-row[data-id="${st.id}"]')`), 'the new station is not in the list');
+  await b.evaluate(`(() => { const row = document.querySelector('.settings-station-row[data-id="${st.id}"]'); row.querySelector('.st-type').value = 'Branding'; row.querySelector('.st-artist').value = ${JSON.stringify(artist.name)}; })()`);
+  await pressOn(`saveStudioStation(${st.id})`);
+  await eventually(async () => { const s = (await api('/api/stations')).find((x) => x.id === st.id); return s && s.type === 'Branding' && s.assignedStaff === artist.name; }, 'the station type and usual artist were not saved');
+  await b.clickText('Calendar');
+  await pressOn('openQuickNewAppointmentModal()');
+  await eventually(async () => b.evaluate(`[...document.getElementById('new-appt-station').options].some(o => o.value === 'Branding Room')`), 'the booking form does not list the new station');
+  check(!(await b.evaluate(`[...document.getElementById('new-appt-station').options].some(o => o.value === 'Piercing Room')`)), 'the booking form still lists a typed-in station');
+  await b.evaluate(`(() => { const a = document.getElementById('new-appt-artist'); a.value = ${JSON.stringify(artist.name)}; a.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+  await eventually(async () => (await b.evaluate(`document.getElementById('new-appt-station').value`)) === 'Branding Room', async () => 'booking the artist did not choose their usual station: ' + await b.evaluate(`JSON.stringify({ artist: document.getElementById('new-appt-artist').value, want: ${JSON.stringify(artist.name)}, options: [...document.getElementById('new-appt-artist').options].map(o => o.value), station: document.getElementById('new-appt-station').value })`));
+  await b.evaluate(`closeNewAppointmentModal()`);
+  await b.clickText('Settings');
+  await eventually(async () => b.evaluate(`!!document.querySelector('.settings-station-row[data-id="${st.id}"]')`), 'the station is not listed in Settings');
+  await pressOn(`removeStudioStation(${st.id})`);
+  await eventually(async () => !(await api('/api/stations')).some((s) => s.id === st.id), 'the station was not removed');
+});
+
+await flow('Aftercare: printed from the profile with the client name, recorded on the appointment; a sheet with no client', async () => {
+  // Henry, 2026-10-18: no tattoo aftercare; give it from the client's profile and keep a record of it
+  const made = await b.evaluate(`fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Aftercare Flow' }) }).then(r => r.json())`);
+  const appt = await b.evaluate(`fetch('/api/appointments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ client_id: ${made.id}, client_name: 'Aftercare Flow', service_type: 'Custom Tattoo', date: '2031-05-06', time: '10:00', status: 'Confirmed' }) }).then(r => r.json())`);
+  await b.clickText('Clients');
+  await eventually(async () => (await text('#clients-table-tbody')).includes('Aftercare Flow'), 'the client is not listed');
+  await press('.client-directory-row', 'Aftercare Flow', 'View Profile');
+  await eventually(async () => b.evaluate(`!!document.getElementById('cp-aftercare-card')`), 'the profile has no aftercare section');
+  check((await text('#cp-aftercare-card')).includes('No aftercare recorded'), 'the appointment does not say no aftercare was given');
+  check((await b.evaluate(`document.getElementById('cp-aftercare-template').value`)) === 'tattoo', 'a tattoo appointment does not choose the tattoo sheet');
+  await b.clickText('Print and record aftercare');
+  await eventually(async () => ((await api(`/api/clients/${made.id}/profile`)).client.aftercare_given || []).some((g) => g.template_id === 'tattoo' && String(g.appointment_id) === String((appt.appointment || appt).id)), 'the aftercare was not recorded on the appointment');
+  await eventually(async () => b.evaluate(`(() => { const f = document.getElementById('aftercare-print-frame'); const t = f && f.contentDocument && f.contentDocument.body ? f.contentDocument.body.innerText : ''; return t.includes('Aftercare Flow') && /tattoo/i.test(t); })()`), 'the printed sheet does not have the client name and the tattoo steps');
+  await eventually(async () => (await text('#cp-aftercare-card')).includes('Aftercare given'), 'the profile does not show the aftercare was given');
+  check((await api('/api/activity-logs?limit=20')).some((a) => a.action === 'AFTERCARE_GIVEN'), 'the activity log does not record the aftercare');
+  await b.evaluate(`closeClientProfileModal()`);
+  // a sheet for someone who is not a client: nothing recorded
+  await b.clickText('Clients');
+  await b.clickText('Aftercare sheet');
+  await eventually(async () => b.evaluate(`!!document.getElementById('generic-aftercare-template')`), 'the aftercare sheet window did not open');
+  await b.evaluate(`document.getElementById('generic-aftercare-template').value = 'piercing'`);
+  await b.clickText('Print', '#generic-aftercare-overlay');
+  await eventually(async () => b.evaluate(`(() => { const t = document.getElementById('aftercare-print-frame').contentDocument.body.innerText; return /piercing/i.test(t) && !t.includes('Aftercare Flow'); })()`), 'the sheet with no client was not printed');
+});
+
+await flow('Ink mixer: the diluent label is the size chosen; the autoclave tool claims no Google Sheets sync', async () => {
+  // Henry, 2026-10-18: every container size gave 60 ml, on screen and on the label
+  await b.goto(url.replace(/\/$/, '') + '/tools/ink-mixer/');
+  await eventually(async () => b.evaluate(`!!document.getElementById('diluentSizeSelect')`), 'the ink mixer did not open');
+  await b.evaluate(`(() => { const s = document.getElementById('diluentSizeSelect'); s.value = '240'; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+  check((await b.evaluate(`document.getElementById('diluentOutTotal').innerText`)).includes('240'), 'the diluent formulator ignores the container size: ' + await b.evaluate(`document.getElementById('diluentOutTotal').innerText`));
+  // it said "Synced with Google Sheets & Firestore" and sent nothing
+  await b.goto(url.replace(/\/$/, '') + '/tools/autoclave-calculator/');
+  await eventually(async () => b.evaluate(`document.readyState === 'complete' && document.body.innerText.length > 1000`), 'the autoclave tool did not open');
+  check(!/Google Sheets|Firestore/.test(await b.evaluate(`document.body.innerText`)), 'the autoclave tool still offers a Google Sheets sync');
 });
 
 await flow('A Print button opens the print dialog', async () => {
@@ -1110,7 +1220,8 @@ await flow('Kiosk: every kind of answer the client gives (medical boxes, yes/no,
     let step = 0, stopped = false;
     // on every page, as a client: type in every box, pick in every list and choice, tick every box, add the photo
     for (let i = 0; i <= last + 2 && step < last; i++) {
-      if (!stopped && await kf.evaluate(`[...document.querySelectorAll('#tablet-kiosk-modal input[data-required="true"], #tablet-kiosk-modal textarea[data-required="true"]')].some((el) => el.offsetParent && ['text', 'email', 'tel', 'textarea'].includes(el.type) && !el.value)`)) {
+      // the studio's own page is not the client's to fill (its practitioner box is empty until the studio fills it)
+      if (!stopped && !(await kf.evaluate(`/^studio_/.test((window.ActiveFormPreview.getKioskSections()[window.ActiveFormPreview.currentKioskStep] || {}).id || '')`)) && await kf.evaluate(`[...document.querySelectorAll('#tablet-kiosk-modal input[data-required="true"], #tablet-kiosk-modal textarea[data-required="true"]')].some((el) => el.offsetParent && ['text', 'email', 'tel', 'textarea'].includes(el.type) && !el.value)`)) {
         await kf.clickText('Next Step', '#tablet-kiosk-modal');
         check((await page()) === step && /Please complete/.test(await kf.evaluate(`document.getElementById('tablet-kiosk-modal').innerText`)), 'the kiosk moved on with a required question empty');
         stopped = true;

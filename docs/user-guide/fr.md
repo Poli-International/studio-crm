@@ -27,9 +27,13 @@ Choisissez l'anglais, le français, l'italien, l'allemand, l'espagnol, le néerl
 
 Ouvrez **Réglages** pour saisir vos prix, la règle d'acompte, le taux de taxe (TVA), la politique de retouche et les seuils de stock. L'estimateur de prix, les devis et les factures utilisent ces valeurs, donc définissez-les d'abord. **Exporter CSV** télécharge votre liste de prix ; modifiez-la et utilisez **Importer CSV** pour la recharger. Vous pouvez aussi téléverser le logo de votre studio ; il apparaît dans la barre supérieure.
 
+**Coordonnées du studio et postes :** dans **Paramètres**, **Coordonnées du studio**, saisissez le nom, l'adresse, le téléphone, l'e-mail et le numéro d'autorisation sanitaire ou de licence du studio : chaque formulaire de consentement les affiche, sur l'ordinateur et sur les tablettes. Dans **Postes**, ajoutez, renommez ou retirez vos postes (salle de tatouage, salle de piercing, espace branding...), donnez à chacun un type et un artiste habituel. Le formulaire de rendez-vous liste vos postes, et réserver un artiste choisit le poste où il travaille d'habitude.
+
 ## Clients
 
 **Clients** répertorie tout le monde avec leurs coordonnées, allergies et notes médicales, formulaires de consentement signés et total dépensé. Utilisez **Nouveau client** pour en ajouter un. La recherche filtre la liste au fur et à mesure que vous tapez. **Voir le profil** ouvre le dossier complet. Dans le profil, **Modifier le client** change les coordonnées et **Supprimer** retire le client. Le profil affiche aussi les rendez-vous, les notes du personnel, les décharges signées, les formulaires de consentement enregistrés et les photos des travaux. Pour ajouter plusieurs clients à la fois, ouvrez **Réglages**, **Import Data** et collez une liste dont la première ligne est `name,email,phone,allergies,notes`. Le compteur **Signed** inclut les formulaires de consentement signés sur la tablette. **Healing Pipeline** liste les clients dont la séance a été marquée terminée ces 90 derniers jours, groupés par jours depuis la séance, avec **View Profile** et **Download PDF**.
+
+**Soins après la séance :** dans la fiche d'un client, sous **Soins après la séance**, choisissez la fiche (tatouage, piercing, trait fin, maquillage permanent) et le rendez-vous, puis **Imprimer et enregistrer les soins** : la fiche s'imprime avec les coordonnées du studio et le nom du client, et le CRM enregistre quelle fiche a été remise, pour quel rendez-vous, par qui et quand. Chaque rendez-vous indique si les soins ont été remis. **🖨️ Fiche de soins** dans Clients imprime une fiche sans nom de client, sans rien enregistrer.
 
 ## Personnel
 

@@ -27,9 +27,13 @@ Elija inglés, francés, italiano, alemán, español, neerlandés, portugués o 
 
 Abra **Ajustes** para introducir sus precios, la regla de depósito, el tipo de impuesto (IVA), la política de retoques y los umbrales de stock. El estimador de precios, los presupuestos y las facturas usan estos valores, así que defínalos primero. **Exportar CSV** descarga su lista de precios; edítela y use **Importar CSV** para volver a cargarla. También puede subir el logotipo de su estudio; aparece en la barra superior.
 
+**Datos del estudio y puestos:** en **Ajustes**, **Datos del estudio**, escriba el nombre, la dirección, el teléfono, el correo y el número de permiso sanitario o licencia del estudio: cada formulario de consentimiento los muestra, en el ordenador y en las tabletas. En **Puestos**, añada, cambie el nombre o quite sus puestos (sala de tatuaje, sala de piercing, zona de branding...), y dé a cada uno un tipo y un artista habitual. El formulario de cita lista sus puestos, y al reservar a un artista se elige el puesto donde suele trabajar.
+
 ## Clientes
 
 **Clientes** enumera a todos con sus datos de contacto, alergias y notas médicas, consentimientos firmados y total gastado. Use **Nuevo cliente** para añadir uno. La búsqueda filtra la lista mientras escribe. **Ver perfil** abre el registro completo. En el perfil, **Editar cliente** cambia los datos y **Eliminar** borra al cliente. El perfil también muestra las citas, las notas del personal, los consentimientos firmados, los formularios de consentimiento guardados y las fotos de los trabajos. Para añadir muchos clientes a la vez, abra **Ajustes**, **Import Data** y pegue una lista cuya primera línea sea `name,email,phone,allergies,notes`. El recuento **Signed** incluye los formularios de consentimiento firmados en la tableta. **Healing Pipeline** lista los clientes cuya sesión se marcó como completada en los últimos 90 días, agrupados por días desde la sesión, con **View Profile** y **Download PDF**.
+
+**Cuidados posteriores:** en la ficha de un cliente, en **Cuidados posteriores**, elija la hoja (tatuaje, piercing, línea fina, micropigmentación) y la cita, y luego **Imprimir y registrar los cuidados**: la hoja se imprime con los datos del estudio y el nombre del cliente, y el CRM registra qué hoja se entregó, para qué cita, quién y cuándo. Cada cita muestra si se entregaron los cuidados. **🖨️ Hoja de cuidados** en Clientes imprime una hoja sin nombre de cliente y no registra nada.
 
 ## Personal
 

@@ -1491,9 +1491,6 @@ body.dark-mode .breadcrumb-nav strong {
                             </p>
                         </div>
                         <div class="autoclave__spore-history-actions">
-                            <button type="button" id="btn-sync-spore-sheets" class="autoclave__action-button autoclave__action-button--cloud" title="Sync Spore Tests &amp; Sterilization Logs to Google Sheets" data-i18n="btn.google.sheets.sync" data-i18n-title="title.sync.spore.tests.sterilization">
-                                <span>☁️</span> Google Sheets Sync
-                            </button>
                             <button type="button" id="btn-generate-all-spore-archive-pdf-history" class="autoclave__action-button autoclave__action-button--audit" title="Generate Print-Friendly PDF of Entire Spore Test Archive" data-i18n="btn.archive.all.pdf" data-i18n-title="title.generate.print.friendly.pdf.of">
                                 <span>🗄️</span> Archive All PDF
                             </button>
@@ -1509,43 +1506,6 @@ body.dark-mode .breadcrumb-nav strong {
                             <button type="button" id="load-sample-spore-btn" class="autoclave__action-button" title="Load Standard Sample Compliance Data" data-i18n="btn.sample.data" data-i18n-title="title.load.standard.sample.complianc">
                                 <span>🔄</span> Sample Data
                             </button>
-                        </div>
-                    </div>
-
-                    <!-- ═══════════════════════════════════════════════════════════
-                         CLOUD SYNC STATUS (FIREBASE FIRESTORE & GOOGLE SHEETS)
-                    ═══════════════════════════════════════════════════════════ -->
-                    <div class="autoclave__spore-cloud-sync-card" id="spore-cloud-sync-container">
-                        <div class="autoclave__spore-cloud-sync-content">
-                            <div class="autoclave__spore-cloud-sync-left">
-                                <div class="autoclave__spore-cloud-sync-icon-wrap" id="spore-cloud-sync-icon-wrap">
-                                    <span class="autoclave__spore-cloud-sync-icon" id="spore-cloud-sync-icon">☁️</span>
-                                </div>
-                                <div class="autoclave__spore-cloud-sync-details">
-                                    <div class="autoclave__spore-cloud-sync-title-row">
-                                        <h4 class="autoclave__spore-cloud-sync-title" data-i18n="heading.h4.cloud.sync.status">Cloud Sync Status</h4>
-                                        <span id="spore-cloud-sync-pill" class="autoclave__cloud-pill autoclave__cloud-pill--synced">● Synced with Cloud</span>
-                                    </div>
-                                    <p class="autoclave__spore-cloud-sync-desc" id="spore-cloud-sync-desc" data-i18n="txt.real.time.firestore.google.she">
-                                        Real-time Firestore &amp; Google Sheets synchronization • Maps (Date, Result, Lot, Incubation, Operator, Notes)
-                                    </p>
-                                    <div class="autoclave__spore-cloud-sync-meta">
-                                        <span><strong>Last Synced:</strong> <span id="spore-last-synced-time">Checking Firestore...</span></span>
-                                        <span class="autoclave__meta-sep">•</span>
-                                        <span><strong>Database:</strong> <span id="spore-cloud-backend-label">Firebase Firestore</span></span>
-                                        <span class="autoclave__meta-sep">•</span>
-                                        <span><strong>Destination:</strong> <a href="#" id="spore-cloud-sheet-link" target="_blank" class="autoclave__inline-link">Private Google Sheet ↗</a></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="autoclave__spore-cloud-sync-actions">
-                                <button type="button" id="btn-spore-sync-now" class="autoclave__action-button autoclave__action-button--sync-now" title="Manually push Spore Test records to Google Sheets &amp; Firebase Firestore" data-i18n="btn.sync.now" data-i18n-title="title.manually.push.spore.test.recor">
-                                    <span>⚡</span> Sync Now
-                                </button>
-                                <button type="button" id="btn-spore-sheet-config" class="autoclave__action-button autoclave__action-button--ghost" title="Configure Cloud Sync &amp; Account in Settings" data-i18n="btn.sync.settings" data-i18n-title="title.configure.cloud.sync.account.i">
-                                    <span>⚙️</span> Sync Settings
-                                </button>
-                            </div>
                         </div>
                     </div>
 
@@ -3428,9 +3388,6 @@ body.dark-mode .breadcrumb-nav strong {
                     <button type="button" class="autoclave__settings-tab" data-settings-tab="branding" id="tab-settings-branding" data-i18n="btn.studio.logo.target">
                         <span>🏢</span> Studio Logo &amp; Target
                     </button>
-                    <button type="button" class="autoclave__settings-tab" data-settings-tab="cloud" id="tab-settings-cloud" data-i18n="btn.google.sheets.sync.1">
-                        <span>☁️</span> Google Sheets Sync
-                    </button>
                     <button type="button" class="autoclave__settings-tab" data-settings-tab="digest" id="tab-settings-digest" data-i18n="btn.weekly.digest">
                         <span>📧</span> Weekly Digest
                     </button>
@@ -3824,99 +3781,6 @@ body.dark-mode .breadcrumb-nav strong {
                             <p class="autoclave__notice-text">
                                 <strong>Legal Retention Compliance Notice:</strong> CDC Guidelines and State Environmental Health codes require body art and dental facilities to maintain biological monitoring records on site for at least 3 years. Running this cleanup will never delete records within your 3-year compliance horizon.
                             </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TAB 5: GOOGLE SHEETS & DRIVE CLOUD SYNC -->
-                <div id="settings-panel-cloud" class="autoclave__settings-panel" style="display: none;">
-                    <div class="autoclave__settings-section-desc">
-                        <p>Automatically push your <strong>Spore Test History</strong> and <strong>Sterilization Logs</strong> directly to your private Google Sheet for cloud-backed record retention and statutory audit compliance.</p>
-                    </div>
-
-                    <!-- Cloud Connection Status Card -->
-                    <div class="autoclave__cloud-sync-card">
-                        <div class="autoclave__cloud-header">
-                            <div class="autoclave__cloud-icon-group">
-                                <span class="autoclave__cloud-main-icon">📊</span>
-                                <div>
-                                    <h3 class="autoclave__cloud-title" data-i18n="heading.h3.google.sheets.drive.integratio">Google Sheets &amp; Drive Integration</h3>
-                                    <div class="autoclave__cloud-status-badge" id="google-sync-status-badge">
-                                        <span class="status-indicator-dot"></span>
-                                        <span id="google-sync-status-text">Disconnected</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="google-auth-btn-container">
-                                <button type="button" id="btn-google-auth-connect" class="autoclave__action-button autoclave__action-button--google" data-i18n="btn.connect.google.account">
-                                    <svg class="google-logo-svg" width="18" height="18" viewBox="0 0 24 24">
-                                        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"></path>
-                                        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"></path>
-                                        <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.98 0 12s.45 3.82 1.25 5.42l4.03-3.15z"></path>
-                                        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"></path>
-                                    </svg>
-                                    <span>Connect Google Account</span>
-                                </button>
-                                <button type="button" id="btn-google-auth-disconnect" class="autoclave__action-button autoclave__action-button--cancel" style="display: none;" data-i18n="btn.disconnect.account">
-                                    <span>🔌</span> Disconnect Account
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Connected Account Details (Visible when connected) -->
-                        <div id="google-connected-details" class="autoclave__cloud-connected-box" style="display: none;">
-                            <div class="autoclave__cloud-meta-row">
-                                <span class="autoclave__cloud-meta-label">Connected Google Account:</span>
-                                <strong class="autoclave__cloud-meta-val" id="google-user-email">user@gmail.com</strong>
-                            </div>
-                            <div class="autoclave__cloud-meta-row">
-                                <span class="autoclave__cloud-meta-label">Private Audit Spreadsheet:</span>
-                                <a id="google-sheet-link" href="#" target="_blank" rel="noopener" class="autoclave__sheet-direct-link">
-                                    <span>📑</span> <span id="google-sheet-title">Autoclave Sterilization &amp; Biological Compliance Logs</span> →
-                                </a>
-                            </div>
-                            <div class="autoclave__cloud-meta-row">
-                                <span class="autoclave__cloud-meta-label">Last Successfully Synced:</span>
-                                <span class="autoclave__cloud-meta-val" id="google-last-synced-time">Never</span>
-                            </div>
-
-                            <div class="autoclave__cloud-options">
-                                <label class="autoclave__checkbox-label" data-i18n="label.real.time.auto.sync.automatica">
-                                    <input type="checkbox" id="google-auto-sync-toggle" checked="">
-                                    <span><strong>Real-Time Auto Sync:</strong> Automatically push to Google Sheets whenever a new sterilization cycle or spore test is logged</span>
-                                </label>
-                            </div>
-
-                            <div class="autoclave__cloud-sync-actions">
-                                <button type="button" id="btn-push-google-sheets-now" class="autoclave__action-button autoclave__action-button--save" data-i18n="btn.push.all.records.to.google.she">
-                                    <span id="push-sheets-icon">⚡</span>
-                                    <span id="push-sheets-text">Push All Records to Google Sheets Now</span>
-                                </button>
-                                <button type="button" id="btn-open-live-sheet" class="autoclave__action-button" data-i18n="btn.open.google.sheet.in.new.tab">
-                                    <span>🔗</span> Open Google Sheet in New Tab
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Sheet Content Specification Breakdown -->
-                        <div class="autoclave__cloud-sheets-breakdown">
-                            <h4 class="autoclave__subheading" style="margin-bottom: 8px;" data-i18n="heading.h4.synchronized.spreadsheets.arch">Synchronized Spreadsheets Architecture:</h4>
-                            <div class="autoclave__sheet-spec-grid">
-                                <div class="autoclave__sheet-spec-card">
-                                    <span class="autoclave__sheet-spec-icon">🧪</span>
-                                    <div>
-                                        <strong>Tab 1: Spore Test History</strong>
-                                        <p data-i18n="txt.includes.biological.indicator.">Includes biological indicator test dates, pass/fail lethality outcomes, incubation hours &amp; temps, control vial verification, technician notes, and days interval.</p>
-                                    </div>
-                                </div>
-                                <div class="autoclave__sheet-spec-card">
-                                    <span class="autoclave__sheet-spec-icon">🌡️</span>
-                                    <div>
-                                        <strong>Tab 2: Sterilization Logs</strong>
-                                        <p data-i18n="txt.comprehensive.physical.chemica">Comprehensive physical &amp; chemical cycle verification, lot/batch IDs, chamber serials, exposure &amp; dry durations, and operator signatures.</p>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

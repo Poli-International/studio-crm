@@ -17,6 +17,8 @@ function navigateToDestination(destId) {
   if (destId === 'finance' && typeof window.renderFinanceSummary === 'function') window.renderFinanceSummary();
   if ((destId === 'inventory' || destId === 'dashboard') && typeof window.renderLowStockGrid === 'function') window.renderLowStockGrid();
   if (destId === 'settings' && typeof window.renderBackupCard === 'function') window.renderBackupCard();
+  if (destId === 'settings' && typeof window.renderStudioDetailsCard === 'function') window.renderStudioDetailsCard();
+  if (destId === 'settings' && typeof window.renderStationsCard === 'function') window.renderStationsCard();
   if ((destId === 'settings' || destId === 'inventory') && typeof window.renderSyncSettingsCard === 'function') window.renderSyncSettingsCard();
 
   // Update active status on sidebar nav buttons

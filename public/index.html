@@ -1430,6 +1430,17 @@
                 </div>
               </div>
 
+              <!-- Setting: roles (administrators, with the studio password): the areas each staff role may open and change -->
+              <div id="roles-card" style="display:none;grid-column:1/-1;background:#0F172A;padding:1.25rem;border-radius:12px;border:1px solid #1E293B;">
+                <h3 style="margin:0 0 6px 0;font-size:1.05rem;font-weight:800;color:#FBBF24;">Roles</h3>
+                <p style="margin:0 0 12px 0;font-size:0.8rem;color:#9CA3AF;">What each role may open and change. Give a person a role in the staff list (Edit, Access level). A role without an area does not see its screen, and the CRM refuses its changes there.</p>
+                <div id="roles-list" style="display:flex;flex-direction:column;gap:10px;"></div>
+                <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+                  <button type="button" onclick="addRole()" style="padding:8px 16px;background:transparent;color:#C7D2FE;border:1px solid #6366F1;border-radius:8px;font-weight:700;font-size:0.82rem;cursor:pointer;">➕ Add role</button>
+                  <button type="button" onclick="saveRoles()" style="padding:8px 16px;background:#2563EB;color:#FFF;border:none;border-radius:8px;font-weight:800;font-size:0.82rem;cursor:pointer;">Save roles</button>
+                </div>
+              </div>
+
               <!-- Setting: tablet kiosk PIN (locks the consent form kiosk on a tablet) -->
               <div style="background:#0F172A;padding:1.25rem;border-radius:12px;border:1px solid #1E293B;">
                 <h3 style="margin:0 0 6px 0;font-size:1.05rem;font-weight:800;color:#A78BFA;">Tablet Kiosk PIN</h3>

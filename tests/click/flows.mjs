@@ -1193,6 +1193,71 @@ await flow('Staff levels: each person signs in; front desk cannot delete or see 
   }
 });
 
+await flow('Roles: an administrator makes a role with its own areas; that person sees and changes only those', async () => {
+  // Henry, 2026-10-19: "a checkbox for what each role can access", and roles of the studio's own ("Sterilization")
+  const anon = (p, init) => b.evaluate(`fetch(${JSON.stringify(p)}, ${JSON.stringify(init || {})}).then(r => r.status)`);
+  await b.goto(url);
+  await b.clickText('Settings');
+  await b.type('#access-next', 'studio-test-password');
+  await b.clickText('Set password');
+  await eventually(async () => (await text('#access-status')).startsWith('A password is set'), 'the studio password was not saved');
+  try {
+    await eventually(async () => b.evaluate(`getComputedStyle(document.getElementById('roles-card')).display !== 'none'`), 'the Roles card is not shown to the administrator');
+    check((await text('#roles-list')).includes('Front desk') && (await text('#roles-list')).includes('Administrator'), 'the Roles card does not list the roles');
+    // a new role, Sterilization, with one area; Front desk also gets the stock
+    await b.clickText('➕ Add role');
+    await b.evaluate(`(() => { const inputs = document.querySelectorAll('#roles-list input[type="text"]'); const el = inputs[inputs.length - 1]; el.value = 'Sterilization'; el.dispatchEvent(new Event('input', { bubbles: true })); })()`);
+    const tick = (role, area) => b.evaluate(`(() => { const row = [...document.querySelectorAll('#roles-list .role-row')].find(r => (r.querySelector('strong') || {}).innerText === ${JSON.stringify(role)} || (r.querySelector('input[type="text"]') || {}).value === ${JSON.stringify(role)});
+      const box = [...row.querySelectorAll('label')].find(l => l.innerText.trim() === ${JSON.stringify(area)}).querySelector('input'); box.click(); return box.checked; })()`);
+    check(await tick('Sterilization', 'Sterilization and compliance'), 'the area could not be ticked');
+    check(await tick('Front desk', 'Stock and suppliers'), 'the Front desk area could not be ticked');
+    await b.clickText('Save roles');
+    await eventually(async () => (await api('/api/access')).roles.some((r) => r.name === 'Sterilization' && r.perms.join() === 'compliance'), 'the new role was not saved');
+    check((await api('/api/access')).roles.find((r) => r.id === 'front_desk').perms.includes('stock'), 'the Front desk change was not saved');
+    // the new person gets the role from the staff list
+    await pressOn('openStaffLoginModal()');
+    await b.clickText('Add staff member');
+    await b.type('#staff-form-name', 'Steri Flow');
+    check(await b.evaluate(`[...document.getElementById('staff-form-level').options].some(o => o.text === 'Sterilization')`), 'the staff form does not offer the new role');
+    await b.evaluate(`(() => { const s = document.getElementById('staff-form-level'); s.value = [...s.options].find(o => o.text === 'Sterilization').value; })()`);
+    await b.type('#staff-form-login-password', 'steri-pass-123');
+    await b.clickText('Save staff member');
+    await eventually(async () => (await text('#staff-list-body')).includes('Sterilization'), 'the staff list does not show the role');
+    // a role someone has cannot be removed
+    const roles = (await api('/api/access')).roles.filter((r) => r.name !== 'Sterilization');
+    check((await anon('/api/access/roles', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ roles }) })) === 400, 'a role still given to someone was removed');
+    // signed in as Steri Flow: Compliance yes; Clients, Calendar, Stock, Money, Settings no, and the server agrees
+    await b.evaluate('signOutOfStudio()');
+    await eventually(async () => b.evaluate(`!!document.getElementById('login-who')`), 'the sign-in page is not shown');
+    await eventually(async () => b.evaluate(`[...document.getElementById('login-who').options].some(o => o.text === 'Steri Flow')`), 'Steri Flow is not on the sign-in page');
+    await b.evaluate(`(() => { const s = document.getElementById('login-who'); s.value = [...s.options].find(o => o.text === 'Steri Flow').value; })()`);
+    await b.type('#login-password', 'steri-pass-123');
+    await b.clickText('Sign in');
+    await eventually(async () => b.evaluate(`!!document.getElementById('nav-dest-dashboard')`), 'Steri Flow could not sign in');
+    await eventually(async () => b.evaluate(`!!document.getElementById('nav-dest-compliance').offsetParent`), 'the role does not see Compliance');
+    for (const dest of ['clients', 'calendar', 'inventory', 'finance', 'settings']) {
+      check(!(await b.evaluate(`!!document.getElementById('nav-dest-${dest}').offsetParent`)), `the role still sees ${dest}`);
+    }
+    await b.evaluate(`navigateToDestination('clients')`);
+    check(!(await b.evaluate(`document.getElementById('dest-clients').offsetParent`)), 'a shortcut still opens a screen the role does not have');
+    check((await anon('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Not Allowed' }) })) === 403, 'the role can add a client');
+    check((await anon('/api/inventory', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Not Allowed' }) })) === 403, 'the role can change the stock');
+    check((await anon('/api/financial')) === 403, 'the role can read the money reports');
+    const logged = await anon('/api/compliance/autoclave-logs', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ autoclave_id: 'Flow Autoclave', station: 'Flow Room', cycle_number: 7, temperature_c: 134, pressure_bar: 2.1, duration_minutes: 18, spore_test_result: 'PASS', technician: 'Steri Flow' }) });
+    check(logged >= 200 && logged < 300, 'the role cannot record a sterilization cycle: ' + logged);
+  } finally {
+    // back to a studio without logins, roles or a password, for the flows after this one
+    await b.goto(url);
+    await b.evaluate(`fetch('/api/access/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: 'studio-test-password' }) })`).catch(() => {});
+    for (const p of await b.evaluate(`fetch('/api/staff').then(r => r.json())`).catch(() => [])) {
+      await b.evaluate(`fetch('/api/access/staff-login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ staff_id: ${p.id}, remove: true }) })`).catch(() => {});
+    }
+    await b.evaluate(`fetch('/api/access/roles', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ roles: [{ id: 'front_desk', perms: ['clients'] }, { id: 'staff', perms: ['clients', 'stock', 'compliance', 'rota', 'forms'] }] }) })`).catch(() => {});
+    await b.evaluate(`fetch('/api/access/password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ current: 'studio-test-password', next: '' }) })`).catch(() => {});
+  }
+});
+
 await flow('First start: the CRM asks for a studio password before anything loads', async () => {
   const fresh = await startFreshServer(Number(process.env.CLICK_PORT || 3412) + 7);
   try {

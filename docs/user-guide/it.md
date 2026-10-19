@@ -49,6 +49,8 @@ Al primo avvio il CRM vi chiede di creare la **password dello studio**. Ogni com
 
 **Accessi e livelli del personale:** con la password dello studio impostata, aprite l'elenco del personale, cliccate su **Modifica** per una persona e scegliete un **Livello di accesso** e una **Password di accesso** (almeno 8 caratteri). Dal primo accesso creato, la pagina di accesso chiede **Who are you?**: ognuno sceglie il proprio nome ed entra con la propria password. La password dello studio resta prima in quell'elenco ed entra ancora come amministratore; date anche a voi stessi il livello **Amministratore** se volete un accesso personale.
 
+**Ruoli:** in **Impostazioni**, **Ruoli**, spuntate cosa può aprire e modificare ogni ruolo: clienti e appuntamenti, magazzino e fornitori, sterilizzazione e conformità, turni del personale, moduli di consenso e schede di cura, denaro e report, eliminazione dei record. Reception e Staff ci sono sempre e partono da ciò che potevano fare prima; **Aggiungi ruolo** ne crea uno vostro ("Sterilizzazione", "Apprendista") e **Salva i ruoli** conserva le modifiche. Un ruolo senza un'area non ne vede la schermata, e il CRM rifiuta le sue modifiche. Solo un **Amministratore** modifica le Impostazioni, il team, gli accessi e i ruoli. Un ruolo ancora assegnato a qualcuno non si può rimuovere: dategli prima un altro ruolo.
+
 - **Reception**: clienti, appuntamenti, consensi, pagamenti, timbratura di entrata e uscita.
 - **Staff**: tutto quello della reception, più magazzino, fornitori, registri di conformità, cura post-trattamento, turni e il design dei moduli di consenso.
 - **Amministratore**: tutto, compresa l'eliminazione dei record, i report economici, le Impostazioni, il team, gli accessi, i backup e le importazioni.

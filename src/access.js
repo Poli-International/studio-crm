@@ -114,36 +114,45 @@ document.getElementById('setup-skip').addEventListener('click', function () {
 });
 </script></body></html>`;
 
-// Staff levels, lowest to highest. What each may do is decided in needLevel() below.
+// Roles. Each staff login has a role; a role is a set of the areas below, ticked by an administrator
+// in Settings, Roles (Henry, 2026-10-19). An Administrator may do everything, and is the only role
+// that may change the studio settings, the team, the logins and the roles themselves.
 // 'kiosk' is a tablet signed in with the kiosk password: it only receives forms and sends them back signed.
-const LEVELS = ['kiosk', 'front_desk', 'staff', 'admin'];
-const LEVEL_NAMES = { kiosk: 'Kiosk tablet', front_desk: 'Front desk', staff: 'Staff', admin: 'Administrator' };
+export const PERMISSIONS = ['clients', 'stock', 'compliance', 'rota', 'forms', 'finance', 'delete'];
+// Front desk and Staff are always there (renamed in no language, their areas can be changed); what
+// they could do before roles became editable is their default.
+export const BUILT_IN_ROLES = [
+  { id: 'front_desk', name: 'Front desk', perms: ['clients'] },
+  { id: 'staff', name: 'Staff', perms: ['clients', 'stock', 'compliance', 'rota', 'forms'] },
+];
 // shared data that is studio settings: only an administrator may change it
 const ADMIN_DATA = /^(studio_vat_config|studio_remote_sync_config|studio_scheduled_reports|poli_studio_profile|poli_studio_logo|poli_benchmark_studio_rates_v1|poli_kiosk_exit_pin|poli_pdf_generator_settings|poli_builder_theme_customization)$/;
 
-// The lowest level a request needs. Checked on the server, so hiding a button is not the only guard.
+// What a request needs: 'kiosk' (a kiosk tablet may do it), 'any' (any signed-in person), one of the
+// PERMISSIONS, or 'admin'. Checked on the server, so hiding a button is not the only guard.
 export function needLevel(method, apiPath) {
   // pages and their files hold no studio data (that is all behind /api); only the CRM itself is closed to a kiosk
-  if (!apiPath.startsWith('/api/')) return ['/', '/index.html'].includes(apiPath) ? 'front_desk' : 'kiosk';
+  if (!apiPath.startsWith('/api/')) return ['/', '/index.html'].includes(apiPath) ? 'any' : 'kiosk';
   if (['/api/access', '/api/access/logout', '/api/kiosk/next', '/api/kiosk/submit', '/api/scanner/scan'].includes(apiPath)) return 'kiosk'; // a tablet's form may scan
-  if (['/api/access/login', '/api/access/people'].includes(apiPath)) return 'front_desk';
+  if (['/api/access/login', '/api/access/people'].includes(apiPath)) return 'any';
   const write = method !== 'GET' && method !== 'HEAD';
-  if (method === 'DELETE') return 'admin';                                        // deleting anything
-  if (/^\/api\/(access|admin|database)\//.test(apiPath)) return 'admin';           // password, levels, backups, empty studio
+  if (/^\/api\/(access|admin|database)\//.test(apiPath)) return 'admin';           // password, logins, roles, backups, empty studio
   if (write && /import/.test(apiPath)) return 'admin';                              // CSV imports
   if (write && /^\/api\/(staff|professionals)(\/\d+)?$/.test(apiPath)) return 'admin'; // the team itself
-  if (write && /^\/api\/settings/.test(apiPath)) return 'admin';
+  if (write && /^\/api\/(settings|sync)/.test(apiPath)) return 'admin';             // settings, CSV sync
   if (write && /^\/api\/stations(\/\d+)?$/.test(apiPath)) return 'admin';              // adding, renaming the stations
-  if (!write && /^\/api\/(financial|financials|staff\/commissions)/.test(apiPath)) return 'admin'; // money reports
   const data = apiPath.match(/^\/api\/app-data\/(.+)$/);
-  if (data && write) {
-    const key = decodeURIComponent(data[1]);
-    if (ADMIN_DATA.test(key)) return 'admin';
-    if (/^poli_form_builder_autosave/.test(key)) return 'staff';                   // changing the consent form designs
-  }
-  if (write && /^\/api\/(inventory|compliance|aftercare|sterilization|autoclave)/.test(apiPath)) return 'staff'; // stock, suppliers, compliance
-  if (write && /^\/api\/staff\/(assign-shift|monthly-schedule)/.test(apiPath)) return 'staff'; // the rota
-  return 'front_desk';                                                              // clients, bookings, waivers, payments
+  if (data && write && ADMIN_DATA.test(decodeURIComponent(data[1]))) return 'admin';
+  if (method === 'DELETE') return 'delete';                                       // deleting anything else
+  if (!write && /^\/api\/(financial|financials|staff\/commissions)/.test(apiPath)) return 'finance'; // money reports
+  if (write && /^\/api\/(accounting|financials|financial\/(payment-methods|tip-split))/.test(apiPath)) return 'finance';
+  if (data && write && /^poli_form_builder_autosave/.test(decodeURIComponent(data[1]))) return 'forms'; // the consent form designs
+  if (write && /^\/api\/(aftercare-templates|aftercare\/templates)/.test(apiPath)) return 'forms';      // the aftercare sheets
+  if (write && /^\/api\/inventory/.test(apiPath)) return 'stock';                    // stock, suppliers, orders
+  if (write && /^\/api\/(compliance|sterilization|autoclave|vault)/.test(apiPath)) return 'compliance';
+  if (write && /^\/api\/staff\/(assign-shift|monthly-schedule)/.test(apiPath)) return 'rota';
+  if (write && /^\/api\/(clients|appointments|waivers|disclaimers|financial|receipts|body-maps|consent-forms|client-portal|reminders|aftercare|gallery|flash|kiosk\/(send|cancel))/.test(apiPath)) return 'clients';
+  return 'any';                                                                     // clocking in, messages, the activity log
 }
 
 export function installAccess(app, sqlite, getStaff = () => []) {
@@ -182,6 +191,22 @@ export function installAccess(app, sqlite, getStaff = () => []) {
   const saveLogins = (value) => setSetting('staffLogins', JSON.stringify(value));
   // staff logins are on once anyone has one (and the studio password is set); the studio password stays the administrator's
   const loginsOn = () => !!access && Object.keys(logins()).length > 0;
+  // the roles: the built-in ones with the areas the studio gave them, then the studio's own
+  const roleList = () => {
+    let saved = [];
+    try { saved = JSON.parse(setting('staffRoles') || '[]'); } catch (e) { /* unreadable: the defaults */ }
+    const mine = (id) => saved.find((r) => r.id === id);
+    return [...BUILT_IN_ROLES.map((r) => ({ ...r, builtIn: true, perms: mine(r.id) ? mine(r.id).perms : r.perms })),
+      ...saved.filter((r) => !BUILT_IN_ROLES.some((b) => b.id === r.id))];
+  };
+  const roleOf = (id) => id === 'admin' ? { id: 'admin', name: 'Administrator', perms: PERMISSIONS }
+    : roleList().find((r) => r.id === id) || { id, name: 'No role', perms: [] };
+  const allowed = (role, need) => {
+    if (role === 'admin') return true;
+    if (role === 'kiosk') return need === 'kiosk';
+    if (need === 'kiosk' || need === 'any') return true;
+    return need !== 'admin' && roleOf(role).perms.includes(need);
+  };
   const checkHash = (password, entry) => { const given = hashOf(password, Buffer.from(entry.salt, 'hex')); const stored = Buffer.from(entry.hash, 'hex'); return given.length === stored.length && crypto.timingSafeEqual(given, stored); };
   const failures = new Map();          // address -> { count, until }
 
@@ -232,8 +257,8 @@ export function installAccess(app, sqlite, getStaff = () => []) {
     // a kiosk tablet that wanders to a CRM page (the home page, an old bookmark) goes back to its own page
     if (have === 'kiosk' && !req.path.startsWith('/api/') && req.method === 'GET' && (req.path === '/index.html' || !/\.[a-z0-9]+$/i.test(req.path)) && !req.path.startsWith('/tools/') && req.path !== '/kiosk') return res.redirect('/kiosk');
     if (have === 'kiosk') req.kioskSession = session(req);   // the tablet's own name lives here: see kioskOf() in server.js
-    if (LEVELS.indexOf(have) >= LEVELS.indexOf(need)) return next();
-    res.status(403).json({ error: `Your level (${LEVEL_NAMES[have]}) cannot do this. Ask an administrator.`, level: have });
+    if (allowed(have, need)) return next();
+    res.status(403).json({ error: `Your level (${have === 'kiosk' ? 'Kiosk tablet' : roleOf(have).name}) cannot do this. Ask an administrator.`, level: have });
   });
 
   app.get('/api/access', (req, res) => {
@@ -243,8 +268,11 @@ export function installAccess(app, sqlite, getStaff = () => []) {
     res.json({ passwordSet: !!access, signedIn: !access || signedIn(req), chosen: chosen(),
       idleMinutes: Number(setting('studioIdleMinutes')) || 0,
       staffLogins: loginsOn(), level: levelOf(req), me: me || null, kioskPasswordSet: !!kioskAccess(),
-      // who has a login and at which level: for the staff list, administrators only
-      logins: levelOf(req) === 'admin' ? Object.fromEntries(Object.entries(all).map(([id, l]) => [id, l.level])) : undefined });
+      // this device's role: its name, and the areas it may open (an administrator: all of them)
+      role: levelOf(req) === 'kiosk' ? null : roleOf(levelOf(req)),
+      // who has a login and with which role, and the roles: for the staff list and Settings, administrators only
+      logins: levelOf(req) === 'admin' ? Object.fromEntries(Object.entries(all).map(([id, l]) => [id, l.level])) : undefined,
+      roles: levelOf(req) === 'admin' ? roleList() : undefined });
   });
 
   // The names on the sign-in page (only those with a login).
@@ -269,7 +297,7 @@ export function installAccess(app, sqlite, getStaff = () => []) {
       for (const [t, s] of sessions) if (Number(s.staffId) === Number(person.id)) sessions.delete(t);
       return res.json({ ok: true, staffLogins: loginsOn() });
     }
-    if (!LEVELS.includes(level)) return res.status(400).json({ error: 'Choose Administrator, Staff or Front desk' });
+    if (level !== 'admin' && !roleList().some((r) => r.id === level)) return res.status(400).json({ error: 'Choose one of the roles' });
     if (!all[person.id] && String(password).length < 8) return res.status(400).json({ error: 'Give them a password of at least 8 characters' });
     if (password && String(password).length < 8) return res.status(400).json({ error: 'Use at least 8 characters' });
     const entry = all[person.id] || {};
@@ -280,6 +308,39 @@ export function installAccess(app, sqlite, getStaff = () => []) {
     // a changed level or password: that person signs in again
     for (const [t, s] of sessions) if (Number(s.staffId) === Number(person.id)) sessions.delete(t);
     res.json({ ok: true, staffLogins: loginsOn() });
+  });
+
+  // The roles and their areas (administrators: /api/access/ needs that level). The whole list comes back:
+  // Front desk and Staff always stay; a role someone still has cannot be removed.
+  app.put('/api/access/roles', (req, res) => {
+    if (access && !signedIn(req)) return res.status(401).json({ error: 'Sign in first' });   // the gate lets /api/access through
+    const given = Array.isArray((req.body || {}).roles) ? req.body.roles : null;
+    if (!given) return res.status(400).json({ error: 'No roles were sent' });
+    const before = roleList();
+    const names = new Set(['administrator']);
+    const next = [];
+    for (const r of given) {
+      const builtIn = BUILT_IN_ROLES.find((b) => b.id === r.id);
+      const name = builtIn ? builtIn.name : String(r.name || '').trim().slice(0, 40);
+      if (!name) return res.status(400).json({ error: 'Give every role a name' });
+      if (names.has(name.toLowerCase())) return res.status(400).json({ error: `There are two roles named ${name}` });
+      names.add(name.toLowerCase());
+      const perms = PERMISSIONS.filter((p) => Array.isArray(r.perms) && r.perms.includes(p));
+      const id = builtIn || before.some((b) => b.id === r.id) ? r.id : 'r_' + crypto.randomBytes(4).toString('hex');
+      next.push({ id, name, perms });
+    }
+    for (const b of BUILT_IN_ROLES) if (!next.some((r) => r.id === b.id)) next.unshift({ id: b.id, name: b.name, perms: roleOf(b.id).perms });
+    const all = logins();
+    for (const r of before) {
+      if (next.some((n) => n.id === r.id)) continue;
+      const holder = Object.keys(all).find((id) => all[id].level === r.id);
+      if (holder) {
+        const who = (getStaff().find((p) => String(p.id) === String(holder)) || {}).name || 'someone';
+        return res.status(400).json({ error: `${who} has the role ${r.name}: give them another role first` });
+      }
+    }
+    setSetting('staffRoles', JSON.stringify(next));
+    res.json({ ok: true, roles: roleList() });
   });
 
   // First start: continue without a password (it can be set later in Settings).

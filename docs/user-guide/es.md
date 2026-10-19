@@ -49,6 +49,8 @@ La primera vez que se inicia, el CRM le pide crear la **contraseña del estudio*
 
 **Accesos y niveles del personal:** con la contraseña del estudio establecida, abra la lista del personal, haga clic en **Editar** en una persona y elija un **Nivel de acceso** y una **Contraseña de acceso** (8 caracteres como mínimo). Desde el primer acceso, la página de inicio de sesión pregunta **Who are you?**: cada persona elige su nombre y entra con su propia contraseña. La contraseña del estudio sigue la primera de esa lista y entra como administrador; asígnese también el nivel **Administrador** si quiere su propio acceso.
 
+**Roles:** en **Ajustes**, **Roles**, marque lo que cada rol puede abrir y cambiar: clientes y citas, inventario y proveedores, esterilización y cumplimiento, turnos del personal, formularios de consentimiento y hojas de cuidados, dinero e informes, eliminar registros. Recepción y Personal están siempre y empiezan con lo que podían hacer antes; **Añadir rol** crea uno propio ("Esterilización", "Aprendiz") y **Guardar los roles** conserva los cambios. Un rol sin un área no ve su pantalla, y el CRM rechaza sus cambios allí. Solo un **Administrador** cambia los Ajustes, el equipo, los accesos y los roles. Un rol que alguien todavía tiene no se puede quitar: asígnele antes otro rol.
+
 - **Recepción**: clientes, citas, consentimientos, pagos, fichar entrada y salida.
 - **Personal**: todo lo de recepción, más stock, proveedores, registros de cumplimiento, cuidados posteriores, turnos y el diseño de los consentimientos.
 - **Administrador**: todo, incluido borrar registros, los informes de dinero, Ajustes, el equipo, los accesos, las copias de seguridad y las importaciones.

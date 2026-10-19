@@ -3,6 +3,8 @@
 // =========================================================================
 function navigateToDestination(destId) {
   if (!destId) destId = 'dashboard';
+  // a screen this role does not have (a shortcut on the dashboard, an old link): the dashboard instead
+  if (typeof window.screenAllowed === 'function' && !window.screenAllowed(destId)) destId = 'dashboard';
   
   // Hide all 8 destination views
   document.querySelectorAll('.destination-view').forEach(function(view) {

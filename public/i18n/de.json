@@ -1941,5 +1941,22 @@
  "Photo": "Foto",
  "📷 Take or choose a photo": "📷 Foto aufnehmen oder auswählen",
  "On a phone or tablet you can use the camera.": "Auf einem Telefon oder Tablet können Sie die Kamera benutzen.",
- "Take or choose a photo first": "Zuerst ein Foto aufnehmen oder auswählen"
+ "Take or choose a photo first": "Zuerst ein Foto aufnehmen oder auswählen",
+ "Roles": "Rollen",
+ "What each role may open and change. Give a person a role in the staff list (Edit, Access level). A role without an area does not see its screen, and the CRM refuses its changes there.": "Was jede Rolle öffnen und ändern darf. Geben Sie einer Person in der Personalliste eine Rolle (Bearbeiten, Zugriffsstufe). Eine Rolle ohne einen Bereich sieht dessen Bildschirm nicht, und das CRM lehnt ihre Änderungen dort ab.",
+ "➕ Add role": "➕ Rolle hinzufügen",
+ "Save roles": "Rollen speichern",
+ "Remove role": "Rolle entfernen",
+ "Roles saved": "Rollen gespeichert",
+ "Could not save the roles": "Die Rollen konnten nicht gespeichert werden",
+ "Could not save the roles: the server did not answer": "Die Rollen konnten nicht gespeichert werden: Der Server hat nicht geantwortet",
+ "Clients and bookings": "Kunden und Termine",
+ "Stock and suppliers": "Lager und Lieferanten",
+ "Sterilization and compliance": "Sterilisation und Vorschriften",
+ "Consent forms and aftercare sheets": "Einwilligungsformulare und Pflegeblätter",
+ "Money and reports": "Geld und Berichte",
+ "Delete records": "Einträge löschen",
+ "Everything, and the only role that changes Settings, the team, the logins and the roles": "Alles, und die einzige Rolle, die Einstellungen, Team, Anmeldungen und Rollen ändert",
+ "Give every role a name": "Geben Sie jeder Rolle einen Namen",
+ "Choose one of the roles": "Wählen Sie eine der Rollen"
 }

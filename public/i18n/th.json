@@ -1941,5 +1941,22 @@
  "Photo": "รูปภาพ",
  "📷 Take or choose a photo": "📷 ถ่ายหรือเลือกรูป",
  "On a phone or tablet you can use the camera.": "บนโทรศัพท์หรือแท็บเล็ตใช้กล้องได้",
- "Take or choose a photo first": "ถ่ายหรือเลือกรูปก่อน"
+ "Take or choose a photo first": "ถ่ายหรือเลือกรูปก่อน",
+ "Roles": "บทบาท",
+ "What each role may open and change. Give a person a role in the staff list (Edit, Access level). A role without an area does not see its screen, and the CRM refuses its changes there.": "สิ่งที่แต่ละบทบาทเปิดและแก้ไขได้ กำหนดบทบาทให้แต่ละคนในรายชื่อพนักงาน (แก้ไข, ระดับการเข้าถึง) บทบาทที่ไม่มีส่วนใดจะไม่เห็นหน้าจอของส่วนนั้น และ CRM จะปฏิเสธการแก้ไขในส่วนนั้น",
+ "➕ Add role": "➕ เพิ่มบทบาท",
+ "Save roles": "บันทึกบทบาท",
+ "Remove role": "ลบบทบาท",
+ "Roles saved": "บันทึกบทบาทแล้ว",
+ "Could not save the roles": "บันทึกบทบาทไม่ได้",
+ "Could not save the roles: the server did not answer": "บันทึกบทบาทไม่ได้: เซิร์ฟเวอร์ไม่ตอบสนอง",
+ "Clients and bookings": "ลูกค้าและการจอง",
+ "Stock and suppliers": "สต็อกและผู้จำหน่าย",
+ "Sterilization and compliance": "การฆ่าเชื้อและการปฏิบัติตามข้อกำหนด",
+ "Consent forms and aftercare sheets": "แบบฟอร์มยินยอมและเอกสารการดูแลหลังทำ",
+ "Money and reports": "การเงินและรายงาน",
+ "Delete records": "ลบข้อมูล",
+ "Everything, and the only role that changes Settings, the team, the logins and the roles": "ทุกอย่าง และเป็นบทบาทเดียวที่แก้ไขการตั้งค่า ทีม บัญชีเข้าใช้ และบทบาทได้",
+ "Give every role a name": "ตั้งชื่อให้ทุกบทบาท",
+ "Choose one of the roles": "เลือกบทบาทหนึ่ง"
 }

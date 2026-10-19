@@ -1,6 +1,6 @@
 {
   "name": "studio-crm",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "Professional Studio Management System for Tattoo & Piercing Studios",
   "type": "module",
   "main": "server.js",

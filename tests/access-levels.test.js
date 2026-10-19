@@ -14,6 +14,9 @@ describe('staff levels', () => {
     ['POST', '/api/waivers', 'front_desk'],
     ['POST', '/api/financial', 'front_desk'],
     ['POST', '/api/staff/3/shift', 'front_desk'],
+    ['POST', '/api/stations/2/status', 'front_desk'],
+    ['POST', '/api/clients/4/aftercare', 'front_desk'],
+    ['POST', '/api/clients/4/id-check', 'front_desk'],
     ['PUT', '/api/app-data/client_photo_12', 'front_desk'],
     // staff: stock, suppliers, compliance, the rota, the consent form designs
     ['POST', '/api/inventory', 'staff'],
@@ -34,6 +37,8 @@ describe('staff levels', () => {
     ['POST', '/api/admin/start-empty', 'admin'],
     ['POST', '/api/clients/import-csv', 'admin'],
     ['PUT', '/api/settings', 'admin'],
+    ['POST', '/api/stations', 'admin'],
+    ['PATCH', '/api/stations/3', 'admin'],
     ['PUT', '/api/app-data/poli_studio_profile', 'admin'],
     ['PUT', '/api/app-data/poli_kiosk_exit_pin', 'admin'],
     // signing in and out is for everyone

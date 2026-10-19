@@ -131,6 +131,7 @@ export function needLevel(method, apiPath) {
   if (write && /import/.test(apiPath)) return 'admin';                              // CSV imports
   if (write && /^\/api\/(staff|professionals)(\/\d+)?$/.test(apiPath)) return 'admin'; // the team itself
   if (write && /^\/api\/settings/.test(apiPath)) return 'admin';
+  if (write && /^\/api\/stations(\/\d+)?$/.test(apiPath)) return 'admin';              // adding, renaming the stations
   if (!write && /^\/api\/(financial|financials|staff\/commissions)/.test(apiPath)) return 'admin'; // money reports
   const data = apiPath.match(/^\/api\/app-data\/(.+)$/);
   if (data && write) {

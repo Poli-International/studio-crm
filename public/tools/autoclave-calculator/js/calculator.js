@@ -7619,7 +7619,9 @@ const GoogleSheetsSyncManager = {
     },
 
     isAutoSyncEnabled: function() {
-        return localStorage.getItem(STORAGE_KEYS.GOOGLE_AUTO_SYNC) === 'true';
+        // There is no Google Sheets or Firestore connection: this invented a connected user ("compliance@studio.com")
+        // and a sheet id, then said "synced", and sent nothing. Removed with its buttons (Patrick, 2026-10-19).
+        return false;
     },
 
     setAutoSync: function(enabled) {
@@ -7715,6 +7717,9 @@ const GoogleSheetsSyncManager = {
     },
 
     connectGoogle: function() {
+        // There is no Google Sheets or Firestore connection: this invented a connected user ("compliance@studio.com")
+        // and a sheet id, then said "synced", and sent nothing. Removed with its buttons (Patrick, 2026-10-19).
+        return;
         showToast('Connecting to Google Sheets & Drive API...', 'info', 2000);
 
         // Connect user with OAuth profile
@@ -7812,6 +7817,9 @@ const GoogleSheetsSyncManager = {
     },
 
     pushToGoogleSheetsWithRetry: function(silent = false, maxRetries = 3, baseDelayMs = 1000, callback = null) {
+        // There is no Google Sheets or Firestore connection: this invented a connected user ("compliance@studio.com")
+        // and a sheet id, then said "synced", and sent nothing. Removed with its buttons (Patrick, 2026-10-19).
+        return;
         let attempt = 1;
         const user = this.getConnectedUser();
 
@@ -10686,7 +10694,7 @@ Chamber Serial: ${d.serialNum} | Lead Tech: ${d.operatorName}
    - Autoclave Model: Chamber Serial ${d.serialNum}
 
 4. REGULATORY RETENTION & QUALITY ASSURANCE NOTICE:
-   - All physical parameter records, Class 5 chemical integrators, and biological spore tests are archived in local storage and cloud mirrors.
+   - All physical parameter records, Class 5 chemical integrators, and biological spore tests are kept in this browser on the studio computer.
    - Mandated Health Authority Record Retention Period: 3 Years (36 Months).
 
 =====================================================
@@ -10718,7 +10726,7 @@ https://poliinternational.com
             this.updateScheduleUI();
         }
 
-        showToast(isTest ? `📧 Opening email client with test monthly audit report for ${email}...` : `✓ Monthly Compliance Audit Report dispatched to ${email}!`, 'success', 3500);
+        showToast(isTest ? `📧 Opening email client with test monthly audit report for ${email}...` : `📧 Opening your email program with the monthly audit report for ${email}: check it and press Send there.`, 'success', 3500);
     },
 
     copyMonthlyAuditText: function() {
@@ -11626,6 +11634,9 @@ const SporeCloudSyncManager = {
     },
 
     triggerSyncNow: function() {
+        // There is no Google Sheets or Firestore connection: this invented a connected user ("compliance@studio.com")
+        // and a sheet id, then said "synced", and sent nothing. Removed with its buttons (Patrick, 2026-10-19).
+        return;
         const pill = document.getElementById('spore-cloud-sync-pill');
         const timeEl = document.getElementById('spore-last-synced-time');
         if (pill) {

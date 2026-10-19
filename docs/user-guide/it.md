@@ -27,9 +27,13 @@ Scegliete inglese, francese, italiano, tedesco, spagnolo, olandese, portoghese o
 
 Aprite **Impostazioni** per inserire i vostri prezzi, la regola dell'acconto, l'aliquota fiscale (IVA), la politica dei ritocchi e le soglie di magazzino. Il preventivatore prezzi, i preventivi e le fatture leggono questi valori, quindi impostateli prima. **Esporta CSV** scarica il vostro listino prezzi; modificatelo e usate **Importa CSV** per ricaricarlo. Potete anche caricare il logo del vostro studio; appare nella barra superiore.
 
+**Dati dello studio e postazioni:** in **Impostazioni**, **Dati dello studio**, inserite nome, indirizzo, telefono, e-mail e numero di autorizzazione sanitaria o licenza dello studio: ogni modulo di consenso li mostra, sul computer e sui tablet. In **Postazioni**, aggiungete, rinominate o rimuovete le vostre postazioni (sala tatuaggi, sala piercing, area branding...), date a ciascuna un tipo e un artista abituale. Il modulo di prenotazione elenca le vostre postazioni, e prenotare un artista sceglie la postazione dove lavora di solito.
+
 ## Clienti
 
 **Clienti** elenca tutti con i loro dati di contatto, allergie e note mediche, consensi firmati e totale spesa. Usate **Nuovo cliente** per aggiungerne uno. La ricerca filtra l'elenco mentre digitate. **Visualizza profilo** apre la scheda completa. Nel profilo, **Modifica cliente** cambia i dati e **Elimina** rimuove il cliente. Il profilo mostra anche gli appuntamenti, le note del personale, le liberatorie firmate, i moduli di consenso salvati e le foto dei lavori. Per aggiungere molti clienti insieme, aprite **Impostazioni**, **Import Data** e incollate un elenco la cui prima riga è `name,email,phone,allergies,notes`. Il conteggio **Signed** include i moduli di consenso firmati sul tablet. **Healing Pipeline** elenca i clienti la cui seduta è stata segnata come completata negli ultimi 90 giorni, raggruppati per giorni dalla seduta, con **View Profile** e **Download PDF**.
+
+**Cura successiva:** nella scheda di un cliente, in **Cura successiva**, scegliete la scheda (tatuaggio, piercing, linea sottile, trucco permanente) e l'appuntamento, poi **Stampa e registra la cura**: la scheda si stampa con i dati dello studio e il nome del cliente, e il CRM registra quale scheda è stata consegnata, per quale appuntamento, da chi e quando. Ogni appuntamento mostra se la cura è stata consegnata. **🖨️ Scheda di cura** in Clienti stampa una scheda senza nome del cliente, senza registrare nulla. Ogni scheda si stampa nella lingua scelta accanto. In **Impostazioni**, **Schede di cura**, cambiate titolo, descrizione e passaggi di ogni scheda in ogni lingua, o aggiungete le vostre schede; una lingua lasciata vuota stampa l'inglese.
 
 ## Personale
 

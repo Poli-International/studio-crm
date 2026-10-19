@@ -342,6 +342,7 @@ function switchClientProfileTab(tabName) {
         `;
 
         renderD3ClientAppointmentTimeline(appointments);
+        renderClientAftercareCard(bodyEl.firstElementChild, client, appointments);
 
     } else if (tabName === 'notes') {
         // 🔒 PRIVATE STAFF NOTES TAB (CHRONOLOGICAL DISPLAY & PERSISTENCE)
@@ -1103,6 +1104,247 @@ async function renderD3SupplyUsageHeatmap() {
     }
 }
 window.renderD3SupplyUsageHeatmap = renderD3SupplyUsageHeatmap;
+
+// --- Aftercare sheets (Henry, 2026-10-18) ---
+// A sheet for the client to take home: the studio's details, the client's name, the procedure and the
+// steps of one of the studio's aftercare templates (tattoo, piercing...). Given from the client's profile
+// it is recorded (which sheet, for which appointment, by whom, when); a sheet can also be printed with no
+// client, for someone who got no aftercare elsewhere.
+let aftercareTemplateList = null;
+async function loadAftercareTemplates() {
+    if (!aftercareTemplateList) {
+        try { const r = await fetch("/api/aftercare/templates"); aftercareTemplateList = r.ok ? await r.json() : []; } catch (e) { aftercareTemplateList = []; }
+    }
+    return aftercareTemplateList;
+}
+// the sheet that suits an appointment's service: a piercing service gets the piercing sheet, and so on
+function aftercareTemplateFor(service, list) {
+    const s = String(service || "").toLowerCase();
+    const id = /pierc|jewel/.test(s) ? "piercing" : /pmu|brow|lip|cosmetic/.test(s) ? "pmu" : /tattoo|cover|flash|touch/.test(s) ? "tattoo" : "";
+    return (list.find((t) => t.id === id) || list[0] || {}).id || "";
+}
+
+// The CRM's languages, by their own names, for the language a sheet is printed in
+const AFTERCARE_LANGUAGES = { en: "English", fr: "Français", it: "Italiano", de: "Deutsch", es: "Español", nl: "Nederlands", pt: "Português", th: "ไทย" };
+const uiLanguage = () => (window.i18n && window.i18n.getLanguage && window.i18n.getLanguage()) || "en";
+const languageOptions = (chosen) => Object.entries(AFTERCARE_LANGUAGES).map(([code, name]) => `<option value="${code}" ${code === chosen ? "selected" : ""}>${escapeHtml(name)}</option>`).join("");
+// a sheet's text in a language: that language's version, or the English (as src/aftercare-texts.js)
+function aftercareTextFor(t, lang) {
+    const tr = lang && lang !== "en" && t.translations && t.translations[lang];
+    return {
+        title: (tr && tr.title) || t.title,
+        description: (tr && tr.description !== undefined ? tr.description : t.description) || "",
+        steps: tr && Array.isArray(tr.steps) && tr.steps.length ? tr.steps : t.steps || []
+    };
+}
+// the sheet's own labels in its language, which can differ from the screen's
+const phraseFiles = {};
+async function phrasesIn(lang) {
+    if (lang === "en") return (s) => s;
+    if (!phraseFiles[lang]) phraseFiles[lang] = fetch("i18n/" + lang + ".json").then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
+    const dict = await phraseFiles[lang];
+    return (s) => dict[s] || s;
+}
+
+async function aftercareSheetHtml(tplRaw, clientName, procedure, lang = uiLanguage()) {
+    const tpl = aftercareTextFor(tplRaw, lang);
+    const L = await phrasesIn(lang);
+    const p = readStudioProfile();
+    const contact = [p.studioAddress, p.studioPhone, p.studioEmail].filter(Boolean).join(" · ");
+    const esc = escapeHtml;
+    return `<!doctype html><html lang="${esc(lang)}"><head><meta charset="utf-8"><title>${esc(tpl.title)}</title><style>
+        body{font-family:Arial,Helvetica,sans-serif;color:#111;margin:28px;font-size:13pt;line-height:1.45}
+        h1{font-size:20pt;margin:0 0 4px} .studio{border-bottom:2px solid #111;padding-bottom:8px;margin-bottom:16px}
+        .studio strong{font-size:15pt} .who{margin:0 0 14px} li{margin:0 0 8px} .foot{margin-top:22px;font-size:10.5pt;color:#444;border-top:1px solid #999;padding-top:8px}
+    </style></head><body>
+        ${p.studioName || contact ? `<div class="studio">${p.studioName ? `<strong>${esc(p.studioName)}</strong><br>` : ""}${esc(contact)}</div>` : ""}
+        <h1>${esc(tpl.title)}</h1>
+        <p class="who">${clientName ? `${esc(L("For"))}: <strong>${esc(clientName)}</strong><br>` : ""}${procedure ? `${esc(L("Procedure"))}: ${esc(procedure)}<br>` : ""}${esc(L("Date"))}: ${esc(new Date().toLocaleDateString(lang))}</p>
+        ${tpl.description ? `<p>${esc(tpl.description)}</p>` : ""}
+        <ol>${(tpl.steps || []).map((s) => `<li>${esc(s)}</li>`).join("")}</ol>
+        <p class="foot">${esc(L("Redness, swelling or pain that gets worse, heat, pus or a fever: contact the studio, or a doctor straight away."))}${p.studioPhone ? ` ${esc(p.studioPhone)}` : ""}</p>
+    </body></html>`;
+}
+
+// Only the sheet is printed, from a frame of its own: printing the page would print the CRM around it.
+function printAftercareSheet(html) {
+    let frame = document.getElementById("aftercare-print-frame");
+    if (!frame) {
+        frame = document.createElement("iframe");
+        frame.id = "aftercare-print-frame";
+        frame.setAttribute("aria-hidden", "true");
+        frame.style.cssText = "position:fixed;width:0;height:0;border:0;left:-10000px;top:0;";
+        document.body.appendChild(frame);
+    }
+    frame.srcdoc = html;
+    frame.onload = () => { try { frame.contentWindow.focus(); frame.contentWindow.print(); } catch (e) {} };
+}
+window.printAftercareSheet = printAftercareSheet;
+
+async function renderClientAftercareCard(container, client, appointments) {
+    if (!container) return;
+    const list = await loadAftercareTemplates();
+    const given = client.aftercare_given || [];
+    const appts = (appointments || []).slice().sort((a, b) => String(b.datetime || b.date || "").localeCompare(String(a.datetime || a.date || ""))).slice(0, 6);
+    const when = (iso) => new Date(iso).toLocaleDateString();
+    const apptLine = (a) => {
+        const g = given.find((x) => String(x.appointment_id) === String(a.id));
+        const label = [a.service_type || a.service || "", String(a.datetime || a.date || "").slice(0, 10)].filter(Boolean).join(", ");
+        return `<div class="cp-aftercare-appt" style="display:flex;justify-content:space-between;gap:8px;align-items:center;border-bottom:1px solid #374151;padding:5px 0;font-size:0.82rem;">
+            <span style="color:#E5E7EB;">${escapeHtml(label)}</span>
+            ${g ? `<span style="color:#6EE7B7;font-weight:700;">${escapeHtml(pdfLabel("✅ Aftercare given {0}").replace("{0}", when(g.given_at)))}</span>`
+                : `<span style="color:#FDE047;font-weight:700;">${escapeHtml(pdfLabel("No aftercare recorded"))}</span>`}
+        </div>`;
+    };
+    const card = document.createElement("div");
+    card.id = "cp-aftercare-card";
+    card.style.cssText = "background:#1F2937;border:1px solid #374151;border-radius:12px;padding:1.25rem;";
+    card.innerHTML = `
+        <h4 style="margin:0 0 0.6rem 0;font-size:0.95rem;font-weight:700;color:#F9FAFB;">🩹 ${escapeHtml(pdfLabel("Aftercare"))}</h4>
+        ${appts.length ? appts.map(apptLine).join("") : `<div style="font-size:0.82rem;color:#9CA3AF;">${escapeHtml(pdfLabel("No appointments yet."))}</div>`}
+        <form onsubmit="giveClientAftercare(event, ${Number(client.id)})" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:0.8rem;">
+            <select id="cp-aftercare-template" aria-label="${escapeHtml(pdfLabel("Aftercare sheet"))}" style="padding:7px 10px;background:#111827;border:1px solid #475569;border-radius:6px;color:#F8FAFC;">
+                ${list.map((t) => `<option value="${escapeHtml(t.id)}">${escapeHtml(aftercareTextFor(t, uiLanguage()).title)}</option>`).join("")}
+            </select>
+            <select id="cp-aftercare-lang" aria-label="${escapeHtml(pdfLabel("Language of the sheet"))}" style="padding:7px 10px;background:#111827;border:1px solid #475569;border-radius:6px;color:#F8FAFC;">
+                ${languageOptions(uiLanguage())}
+            </select>
+            <select id="cp-aftercare-appointment" aria-label="${escapeHtml(pdfLabel("For the appointment"))}" style="padding:7px 10px;background:#111827;border:1px solid #475569;border-radius:6px;color:#F8FAFC;">
+                <option value="">${escapeHtml(pdfLabel("No appointment"))}</option>
+                ${appts.map((a) => `<option value="${escapeHtml(String(a.id))}">${escapeHtml([a.service_type || a.service || "", String(a.datetime || a.date || "").slice(0, 10)].filter(Boolean).join(", "))}</option>`).join("")}
+            </select>
+            <button type="submit" style="padding:0.45rem 0.85rem;background:#0D9488;color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">🖨️ ${escapeHtml(pdfLabel("Print and record aftercare"))}</button>
+        </form>
+        ${given.length ? `<div style="margin-top:0.8rem;font-size:0.75rem;color:#9CA3AF;">${given.slice(0, 5).map((g) => escapeHtml(pdfLabel("{0}: {1}, given by {2}").replace("{0}", when(g.given_at)).replace("{1}", g.title).replace("{2}", g.given_by))).join("<br>")}</div>` : ""}`;
+    container.appendChild(card);
+    // the sheet that suits the latest appointment, and that appointment, are chosen already
+    const apptSel = card.querySelector("#cp-aftercare-appointment"), tplSel = card.querySelector("#cp-aftercare-template");
+    const syncTemplate = () => {
+        const a = appts.find((x) => String(x.id) === apptSel.value);
+        if (a) tplSel.value = aftercareTemplateFor(a.service_type || a.service, list) || tplSel.value;
+    };
+    if (appts[0]) { apptSel.value = String(appts[0].id); syncTemplate(); }
+    apptSel.addEventListener("change", syncTemplate);
+}
+window.renderClientAftercareCard = renderClientAftercareCard;
+
+async function giveClientAftercare(event, clientId) {
+    if (event) event.preventDefault();
+    const list = await loadAftercareTemplates();
+    const tpl = list.find((t) => t.id === (document.getElementById("cp-aftercare-template") || {}).value);
+    if (!tpl) { showStudioToast("Choose an aftercare sheet"); return; }
+    const appointmentId = (document.getElementById("cp-aftercare-appointment") || {}).value || "";
+    const lang = (document.getElementById("cp-aftercare-lang") || {}).value || uiLanguage();
+    let data;
+    try {
+        const r = await fetch(`/api/clients/${clientId}/aftercare`, { method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ template_id: tpl.id, appointment_id: appointmentId || null, lang, given_by: (document.getElementById("topbar-user-name") || {}).textContent || "" }) });
+        data = await r.json();
+        if (!r.ok) { showStudioToast(data.error || "Could not save"); return; }
+    } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
+    const client = currentActiveProfileClient && (currentActiveProfileClient.client || currentActiveProfileClient);
+    printAftercareSheet(await aftercareSheetHtml(tpl, client ? client.name : "", data.entry.procedure, lang));
+    showStudioToast("Aftercare recorded: print the sheet for the client");
+    openClientProfileModal(clientId);
+}
+window.giveClientAftercare = giveClientAftercare;
+
+// Settings, Aftercare sheets: the studio's own wording, one language at a time
+async function renderAftercareEditor(selectId) {
+    const sel = document.getElementById("aftercare-edit-template"), langSel = document.getElementById("aftercare-edit-lang");
+    if (!sel || !langSel) return;
+    aftercareTemplateList = null; // fresh: another computer may have changed them
+    const list = await loadAftercareTemplates();
+    const keep = selectId || sel.value;
+    sel.innerHTML = list.map((t) => `<option value="${escapeHtml(t.id)}">${escapeHtml(t.title)}</option>`).join("");
+    if (list.some((t) => t.id === keep)) sel.value = keep;
+    if (!langSel.options.length) langSel.innerHTML = languageOptions(uiLanguage());
+    fillAftercareEditor();
+}
+window.renderAftercareEditor = renderAftercareEditor;
+function fillAftercareEditor() {
+    const t = (aftercareTemplateList || []).find((x) => x.id === (document.getElementById("aftercare-edit-template") || {}).value);
+    const lang = (document.getElementById("aftercare-edit-lang") || {}).value || "en";
+    const set = (id, v, ph) => { const el = document.getElementById(id); if (el) { el.value = v; el.placeholder = ph || ""; } };
+    if (!t) { set("aftercare-edit-title", ""); set("aftercare-edit-description", ""); set("aftercare-edit-steps", ""); return; }
+    // another language shows its own text, and the English underneath as the hint for what to translate
+    const own = lang === "en" ? t : (t.translations && t.translations[lang]) || {};
+    set("aftercare-edit-title", own.title || "", lang === "en" ? pdfLabel("Title") : t.title);
+    set("aftercare-edit-description", own.description || "", lang === "en" ? pdfLabel("Short description") : t.description);
+    set("aftercare-edit-steps", (own.steps || []).join("\n"), lang === "en" ? "" : (t.steps || []).join("\n"));
+}
+window.fillAftercareEditor = fillAftercareEditor;
+async function aftercareRequest(method, url, body) {
+    try {
+        const r = await fetch(url, { method, headers: { "Content-Type": "application/json" }, body: body ? JSON.stringify(body) : undefined });
+        const data = await r.json().catch(() => ({}));
+        if (!r.ok) { showStudioToast(data.error || "Could not save"); return null; }
+        return data;
+    } catch (e) { showStudioToast("Could not save: the server did not answer"); return null; }
+}
+async function saveAftercareSheet(event) {
+    if (event) event.preventDefault();
+    const id = (document.getElementById("aftercare-edit-template") || {}).value;
+    if (!id) return;
+    const val = (x) => (document.getElementById(x) || {}).value || "";
+    const lang = val("aftercare-edit-lang") || "en";
+    if (lang === "en" && !val("aftercare-edit-title").trim()) { showStudioToast("Give the sheet a title"); return; }
+    const done = await aftercareRequest("PATCH", "/api/aftercare/templates/" + encodeURIComponent(id),
+        { lang, title: val("aftercare-edit-title"), description: val("aftercare-edit-description"), steps: val("aftercare-edit-steps") });
+    if (done) { showStudioToast("Aftercare sheet saved"); renderAftercareEditor(id); }
+}
+window.saveAftercareSheet = saveAftercareSheet;
+async function addAftercareSheet() {
+    const list = await aftercareRequest("POST", "/api/aftercare/templates", { title: pdfLabel("New aftercare sheet"), category: "Custom", steps: [pdfLabel("Write the first step here.")] });
+    if (!list) return;
+    const added = list[list.length - 1];
+    const langSel = document.getElementById("aftercare-edit-lang");
+    if (langSel) langSel.value = "en"; // a new sheet is written in English first, then translated
+    showStudioToast("New sheet added: write its title and steps, then Save sheet");
+    renderAftercareEditor(added && added.id);
+}
+window.addAftercareSheet = addAftercareSheet;
+async function deleteAftercareSheet() {
+    const id = (document.getElementById("aftercare-edit-template") || {}).value;
+    if (!id || !window.confirm(pdfLabel("Delete this aftercare sheet, in every language? Sheets already given stay on the clients' records."))) return;
+    if (await aftercareRequest("DELETE", "/api/aftercare/templates/" + encodeURIComponent(id))) { showStudioToast("Aftercare sheet deleted"); renderAftercareEditor(); }
+}
+window.deleteAftercareSheet = deleteAftercareSheet;
+
+// A sheet with no client and nothing recorded: for someone who got no aftercare elsewhere
+async function openGenericAftercareSheet() {
+    const list = await loadAftercareTemplates();
+    let overlay = document.getElementById("generic-aftercare-overlay");
+    if (!overlay) {
+        overlay = document.createElement("div");
+        overlay.id = "generic-aftercare-overlay";
+        overlay.setAttribute("role", "dialog");
+        overlay.setAttribute("aria-modal", "true");
+        overlay.style.cssText = "display:none;position:fixed;inset:0;background:rgba(15,23,42,0.85);z-index:2000020;align-items:center;justify-content:center;";
+        document.body.appendChild(overlay);
+    }
+    overlay.innerHTML = `<div style="background:#0F172A;border:1px solid #334155;border-radius:14px;padding:22px;width:min(94vw,460px);color:#F8FAFC;">
+        <h3 style="margin:0 0 6px;font-size:1.05rem;">🖨️ ${escapeHtml(pdfLabel("Aftercare sheet"))}</h3>
+        <p style="margin:0 0 12px;font-size:0.8rem;color:#9CA3AF;">${escapeHtml(pdfLabel("A sheet with no client name, and nothing recorded. To give aftercare to a client, use their profile."))}</p>
+        <select id="generic-aftercare-template" aria-label="${escapeHtml(pdfLabel("Aftercare sheet"))}" style="width:100%;padding:8px 10px;background:#111827;border:1px solid #475569;border-radius:6px;color:#F8FAFC;margin-bottom:8px;">
+            ${list.map((t) => `<option value="${escapeHtml(t.id)}">${escapeHtml(aftercareTextFor(t, uiLanguage()).title)}</option>`).join("")}
+        </select>
+        <select id="generic-aftercare-lang" aria-label="${escapeHtml(pdfLabel("Language of the sheet"))}" style="width:100%;padding:8px 10px;background:#111827;border:1px solid #475569;border-radius:6px;color:#F8FAFC;margin-bottom:12px;">
+            ${languageOptions(uiLanguage())}
+        </select>
+        <div style="display:flex;gap:8px;justify-content:flex-end;">
+            <button type="button" onclick="document.getElementById('generic-aftercare-overlay').style.display='none'" style="padding:0.45rem 0.9rem;background:#374151;color:#F3F4F6;border:none;border-radius:6px;cursor:pointer;">${escapeHtml(pdfLabel("Close"))}</button>
+            <button type="button" onclick="printGenericAftercareSheet()" style="padding:0.45rem 0.9rem;background:#0D9488;color:#FFF;border:none;border-radius:6px;font-weight:700;cursor:pointer;">🖨️ ${escapeHtml(pdfLabel("Print"))}</button>
+        </div></div>`;
+    overlay.style.display = "flex";
+}
+window.openGenericAftercareSheet = openGenericAftercareSheet;
+async function printGenericAftercareSheet() {
+    const list = await loadAftercareTemplates();
+    const tpl = list.find((t) => t.id === (document.getElementById("generic-aftercare-template") || {}).value);
+    if (tpl) printAftercareSheet(await aftercareSheetHtml(tpl, "", "", (document.getElementById("generic-aftercare-lang") || {}).value || uiLanguage()));
+}
+window.printGenericAftercareSheet = printGenericAftercareSheet;
 
 // D3 Client Appointment Timeline Renderer
 function renderD3ClientAppointmentTimeline(appointments) {
@@ -2908,6 +3150,28 @@ async function triggerInstantDatabaseSnapshot() {
 }
 window.triggerInstantDatabaseSnapshot = triggerInstantDatabaseSnapshot;
 
+// Settings, Studio details: the studio's own name and contact on the consent forms. Merged into
+// poli_studio_profile (shared with the pricing settings and the form builder), not replacing it.
+const STUDIO_DETAIL_FIELDS = { name: "studioName", address: "studioAddress", phone: "studioPhone", email: "studioEmail", permit: "studioPermit" };
+function readStudioProfile() { try { return JSON.parse(localStorage.getItem("poli_studio_profile") || "{}") || {}; } catch (e) { return {}; } }
+function renderStudioDetailsCard() {
+    const p = readStudioProfile();
+    for (const [id, key] of Object.entries(STUDIO_DETAIL_FIELDS)) {
+        const el = document.getElementById("studio-details-" + id);
+        if (el && document.activeElement !== el) el.value = p[key] || "";
+    }
+}
+window.renderStudioDetailsCard = renderStudioDetailsCard;
+function saveStudioDetails(event) {
+    if (event) event.preventDefault();
+    const p = readStudioProfile();
+    for (const [id, key] of Object.entries(STUDIO_DETAIL_FIELDS)) p[key] = ((document.getElementById("studio-details-" + id) || {}).value || "").trim();
+    try { localStorage.setItem("poli_studio_profile", JSON.stringify(p)); } // js/app-data-sync.js saves it on the server
+    catch (e) { showStudioToast("Could not save: browser storage is unavailable"); return; }
+    showStudioToast("Studio details saved");
+}
+window.saveStudioDetails = saveStudioDetails;
+
 // Settings, Database Backup: the last backup, how many daily ones are kept, the second folder
 async function renderBackupCard() {
     const status = document.getElementById('backup-status');
@@ -3053,6 +3317,79 @@ const PEOPLE_SELECTS = {
              byId: ["rota-staff", "shift-staff-select", "gallery-filter-artist", "work-staff-select", "flash-artist-select"] },
     clients: { byName: [], byId: ["gallery-filter-client"] }
 };
+// --- Stations: the studio's own (Settings, Stations), in the booking form too ---
+// The booking form listed typed-in "Station 1, 2, 3, Piercing Room", whatever the studio had.
+let studioStationList = [];
+async function loadStations() {
+    try { const r = await fetch("/api/stations"); studioStationList = r.ok ? await r.json() : []; } catch (e) {}
+    const sel = document.getElementById("new-appt-station");
+    if (sel) {
+        const prev = sel.value;
+        sel.innerHTML = `<option value="">${escapeHtml(pdfLabel("No station"))}</option>` +
+            studioStationList.map((s) => `<option value="${escapeHtml(s.name)}">${escapeHtml(s.name + (s.type ? " (" + s.type + ")" : ""))}</option>`).join("");
+        if ([...sel.options].some((o) => o.value === prev)) sel.value = prev;
+    }
+    return studioStationList;
+}
+window.loadStations = loadStations;
+document.addEventListener("DOMContentLoaded", () => {
+    loadStations();
+    // booking an artist picks the station they usually work at
+    const artist = document.getElementById("new-appt-artist"), station = document.getElementById("new-appt-station");
+    if (artist && station) artist.addEventListener("change", () => {
+        const usual = studioStationList.find((s) => s.assignedStaff && s.assignedStaff === artist.value);
+        if (usual) station.value = usual.name;
+    });
+});
+
+async function renderStationsCard() {
+    const box = document.getElementById("settings-stations-list");
+    if (!box) return;
+    const [stations, staffList] = await Promise.all([loadStations(), fetch("/api/staff").then((r) => (r.ok ? r.json() : [])).catch(() => [])]);
+    const input = (cls, value, label) => `<input type="text" class="${cls}" value="${escapeHtml(value || "")}" placeholder="${escapeHtml(pdfLabel(label))}" aria-label="${escapeHtml(pdfLabel(label))}" style="flex:1;min-width:110px;padding:7px 9px;background:#1E293B;border:1px solid #475569;border-radius:6px;color:#F8FAFC;font-size:0.82rem;">`;
+    box.innerHTML = stations.length ? stations.map((s) => `
+        <div class="settings-station-row" data-id="${Number(s.id)}" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+            ${input("st-name", s.name, "Station name")}
+            ${input("st-type", s.type, "Type: tattoo, piercing, branding...")}
+            <select class="st-artist" aria-label="${escapeHtml(pdfLabel("Usual artist"))}" style="padding:7px 9px;background:#1E293B;border:1px solid #475569;border-radius:6px;color:#F8FAFC;font-size:0.82rem;">
+                <option value="">${escapeHtml(pdfLabel("No usual artist"))}</option>
+                ${(Array.isArray(staffList) ? staffList : []).map((p) => `<option value="${escapeHtml(p.name)}" ${p.name === s.assignedStaff ? "selected" : ""}>${escapeHtml(p.name)}</option>`).join("")}
+            </select>
+            <button type="button" onclick="saveStudioStation(${Number(s.id)})" style="padding:0.4rem 0.75rem;background:#0D9488;color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.78rem;cursor:pointer;">${escapeHtml(pdfLabel("Save"))}</button>
+            <button type="button" onclick="removeStudioStation(${Number(s.id)})" style="padding:0.4rem 0.75rem;background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);border-radius:6px;font-weight:700;font-size:0.78rem;cursor:pointer;">${escapeHtml(pdfLabel("Remove"))}</button>
+        </div>`).join("") : `<div style="font-size:0.8rem;color:#9CA3AF;">${escapeHtml(pdfLabel("No stations yet."))}</div>`;
+}
+window.renderStationsCard = renderStationsCard;
+
+async function stationRequest(method, url, body) {
+    try {
+        const r = await fetch(url, { method, headers: { "Content-Type": "application/json" }, body: body ? JSON.stringify(body) : undefined });
+        const data = await r.json().catch(() => ({}));
+        if (!r.ok) { showStudioToast(data.error || "Could not save"); return false; }
+    } catch (e) { showStudioToast("Could not save: the server did not answer"); return false; }
+    renderStationsCard();
+    return true;
+}
+async function saveStudioStation(id) {
+    const row = document.querySelector(`.settings-station-row[data-id="${Number(id)}"]`);
+    if (!row) return;
+    if (await stationRequest("PATCH", "/api/stations/" + id, { name: row.querySelector(".st-name").value, type: row.querySelector(".st-type").value, assignedStaff: row.querySelector(".st-artist").value })) showStudioToast("Station saved");
+}
+window.saveStudioStation = saveStudioStation;
+async function removeStudioStation(id) {
+    if (!window.confirm(pdfLabel("Remove this station? Appointments already booked keep its name."))) return;
+    if (await stationRequest("DELETE", "/api/stations/" + id)) showStudioToast("Station removed");
+}
+window.removeStudioStation = removeStudioStation;
+async function addStudioStation(event) {
+    if (event) event.preventDefault();
+    const input = document.getElementById("new-station-name");
+    const name = input ? input.value.trim() : "";
+    if (!name) { showStudioToast("Give the station a name"); return; }
+    if (await stationRequest("POST", "/api/stations", { name })) { input.value = ""; showStudioToast("Station added"); }
+}
+window.addStudioStation = addStudioStation;
+
 async function populatePeopleSelects() {
     for (const [kind, groups] of Object.entries(PEOPLE_SELECTS)) {
         let people;
@@ -4645,6 +4982,7 @@ let editingAppointmentId = null;
 function setAppointmentFormMode(appt) {
     editingAppointmentId = appt ? appt.id : null;
     autocompleteClients = null; // clients added since the last booking must be offered too
+    loadStations();             // and stations added in Settings since
     const set = (id, v) => { const el = document.getElementById(id); if (el && v !== undefined && v !== null) el.value = v; };
     const form = document.querySelector("#new-appointment-modal-overlay form");
     if (form && !appt) form.reset();

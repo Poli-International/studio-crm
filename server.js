@@ -11,6 +11,7 @@ import { installAccess } from './src/access.js';
 import { installUpdate } from './src/update.js';
 import { pruneAutoBackups, AUTO_BACKUP } from './src/backups.js';
 import { GUARDIAN_AGE, ageOn, isGuardianForm, dobFromResponses } from './src/consent-age.js';
+import { AFTERCARE_LANGS, addAftercareTranslations } from './src/aftercare-texts.js';
 import { mergeMedicalInto } from './src/utils/crm-utils.js';
 import {
   users as dbUsers,
@@ -1009,6 +1010,36 @@ app.post('/api/clients/:id/consent-forms', async (req, res) => {
   res.status(r.status).json(r.body);
 });
 
+// A form sent to a kiosk tablet gets the studio's own details (Settings, Studio details) in its empty
+// studio fields: the tablet cannot read the studio settings. Same rule as studioFieldValue in the
+// form builder's form-preview.js; the form showed sample "Poli International" details (Henry, 2026-10-18).
+function fillStudioFields(schema, client) {
+  let s = {};
+  try { s = JSON.parse(appData.poli_studio_profile || '{}') || {}; } catch (e) {}
+  const join = (...v) => v.filter(Boolean).join(' | ');
+  // the practitioner: the artist of the client's appointment, the coming one first (it said "Senior Resident Artist")
+  const mine = client ? appointments.filter((a) => Number(a.client_id) === client.id && (a.staff_name || a.artist_name)) : [];
+  const now = new Date().toISOString();
+  const when = (a) => String(a.datetime || a.date || '');
+  const appt = mine.filter((a) => when(a) >= now.slice(0, 10)).sort((a, b) => when(a).localeCompare(when(b)))[0]
+    || mine.sort((a, b) => when(b).localeCompare(when(a)))[0];
+  const artist = appt ? appt.staff_name || appt.artist_name : '';
+  const valueFor = (f) => {
+    const id = String(f.id || '').toLowerCase(), text = id + ' ' + String(f.label || '').toLowerCase();
+    if (/^(practitioner|artist|piercer)_name$/.test(id)) return artist; // by exact id: "artistic_license" is not a name
+    if (!/studio|practice|clinic/.test(text) || /artist|practitioner|piercer/.test(text)) return '';
+    if (/name/.test(text)) return s.studioName || '';
+    if (/permit|licen/.test(id)) return join(s.studioPermit, s.studioAddress);
+    if (/address|contact|phone|location/.test(text)) return join(s.studioAddress, s.studioPhone, s.studioEmail, s.studioPermit);
+    return '';
+  };
+  const copy = JSON.parse(JSON.stringify(schema));
+  for (const sec of copy.sections || []) for (const f of (sec && sec.fields) || []) {
+    if (f && f.type !== 'signature' && !f.value) { const v = valueFor(f); if (v) f.value = v; }
+  }
+  return copy;
+}
+
 // A client under 18 signs only with a parent or guardian (src/consent-age.js).
 const MINOR_NEEDS_GUARDIAN = 'This client is under 18: a parent or legal guardian must sign the form too. Choose a form with a parent or guardian signature, such as the Minor Consent template.';
 const clientAge = (client) => ageOn(client && client.dob);
@@ -1145,6 +1176,7 @@ app.post('/api/kiosk/send', (req, res) => {
   if (!b.schema || typeof b.schema !== 'object') return res.status(400).json({ error: 'Choose a form first.' });
   const age = clientAge(client);
   if (age !== null && age < GUARDIAN_AGE && !isGuardianForm(b.schema)) return res.status(409).json({ error: MINOR_NEEDS_GUARDIAN });
+  b.schema = fillStudioFields(b.schema, client);
   const name = kioskName(b.kiosk);
   const item = { id: nextKioskItemId++, clientId, clientName: client.name, formName: String(b.formName || 'Consent form').slice(0, 300),
     formCategory: b.formCategory || null, language: String(b.language || 'en').slice(0, 5), schema: b.schema, sentAt: new Date().toISOString(), sentBy: b.sentBy || '' };
@@ -9120,6 +9152,30 @@ const sentAftercareLogs = [
 // GET Templates
 app.get('/api/aftercare/templates', (req, res) => res.json(aftercareTemplates));
 
+// The desk gave the client an aftercare sheet (Henry, 2026-10-18): which sheet, for which appointment,
+// by whom and when, kept on the client's record so the studio (or a health inspector) can see it was given.
+app.post('/api/clients/:id/aftercare', (req, res) => {
+  const client = clients.find((c) => c.id === Number(req.params.id));
+  if (!client) return res.status(404).json({ error: 'Client not found' });
+  const b = req.body || {};
+  const tpl = aftercareTemplates.find((t) => t.id === b.template_id);
+  if (!tpl) return res.status(400).json({ error: 'Choose an aftercare sheet' });
+  const appt = b.appointment_id ? appointments.find((a) => String(a.id) === String(b.appointment_id)) : null;
+  if (b.appointment_id && !appt) return res.status(400).json({ error: 'That appointment was not found' });
+  const entry = {
+    template_id: tpl.id, title: tpl.title,
+    lang: AFTERCARE_LANGS.includes(b.lang) ? b.lang : 'en',
+    appointment_id: appt ? appt.id : null,
+    procedure: appt ? [appt.service_type || appt.service || '', String(appt.datetime || appt.date || '').slice(0, 10)].filter(Boolean).join(', ') : '',
+    given_by: String(b.given_by || '').slice(0, 80) || 'Front desk',
+    given_at: new Date().toISOString()
+  };
+  client.aftercare_given = [entry].concat(client.aftercare_given || []).slice(0, 200);
+  logActivity({ category: 'compliance', action: 'AFTERCARE_GIVEN', title: `Aftercare given: ${client.name}`,
+    details: tpl.title + (entry.procedure ? ` (${entry.procedure})` : ''), user: entry.given_by, badgeColor: 'emerald' });
+  res.status(201).json({ ok: true, entry, aftercare_given: client.aftercare_given });
+});
+
 // POST New Template
 app.post('/api/aftercare/templates', (req, res) => {
   const title = (req.body.title || '').trim();
@@ -9160,15 +9216,20 @@ app.patch('/api/aftercare/templates/:id', (req, res) => {
     return res.status(404).json({ error: 'Aftercare template not found' });
   }
 
-  if (req.body.title) template.title = req.body.title.trim();
+  // one language at a time: English is the sheet itself, another language goes in its translations
+  // (Settings, Aftercare sheets); a language left empty prints the English
+  const lang = AFTERCARE_LANGS.includes(req.body.lang) ? req.body.lang : 'en';
+  const target = lang === 'en' ? template : ((template.translations = template.translations || {})[lang] = template.translations[lang] || {});
+  if (req.body.title !== undefined && (String(req.body.title).trim() || lang !== 'en')) target.title = String(req.body.title).trim();
   if (req.body.category) template.category = req.body.category.trim();
-  if (req.body.description !== undefined) template.description = req.body.description.trim();
+  if (req.body.description !== undefined) target.description = String(req.body.description).trim();
   if (req.body.steps !== undefined) {
     const rawSteps = Array.isArray(req.body.steps)
       ? req.body.steps.map(s => String(s).trim()).filter(Boolean)
-      : (req.body.steps ? req.body.steps.split('\n').map(s => s.trim()).filter(Boolean) : []);
-    template.steps = rawSteps;
+      : (req.body.steps ? String(req.body.steps).split('\n').map(s => s.trim()).filter(Boolean) : []);
+    target.steps = rawSteps;
   }
+  if (!template.steps || !template.steps.length) template.steps = ['Follow the studio\'s aftercare advice.'];
 
   logActivity({
     category: 'compliance',
@@ -9630,6 +9691,37 @@ let reminderLogs = [];
 // API Endpoints for Studio Stations
 app.get('/api/stations', (req, res) => {
   res.json(studioStations);
+});
+
+// The studio's own stations (Henry, 2026-10-18: a branding area, piercing, tattoo...): there were always
+// four, with no way to add, rename or remove one. Each can have a type and a usual artist.
+const stationFields = (b, st) => {
+  if (b.name !== undefined) st.name = String(b.name).trim().slice(0, 60) || st.name;
+  if (b.type !== undefined) st.type = String(b.type).trim().slice(0, 40);
+  if (b.assignedStaff !== undefined) st.assignedStaff = String(b.assignedStaff).trim().slice(0, 80);
+  return st;
+};
+app.post('/api/stations', (req, res) => {
+  const name = String((req.body || {}).name || '').trim();
+  if (!name) return res.status(400).json({ error: 'Give the station a name' });
+  const id = studioStations.length ? Math.max(...studioStations.map((s) => Number(s.id) || 0)) + 1 : 1;
+  const st = stationFields(req.body, { id, name, type: '', status: 'ready', currentClient: null, assignedStaff: '', autoclaveCycle: '', lastSanitized: null });
+  studioStations.push(st);
+  logActivity({ category: 'system', action: 'STATION_ADDED', title: `Station added: ${st.name}`, details: st.type || '', user: req.body.user || 'Admin Manager', badgeColor: 'blue' });
+  res.status(201).json(st);
+});
+app.patch('/api/stations/:id', (req, res) => {
+  const st = studioStations.find((s) => s.id === Number(req.params.id));
+  if (!st) return res.status(404).json({ error: 'Station not found' });
+  stationFields(req.body || {}, st);
+  res.json(st);
+});
+app.delete('/api/stations/:id', (req, res) => {
+  const i = studioStations.findIndex((s) => s.id === Number(req.params.id));
+  if (i < 0) return res.status(404).json({ error: 'Station not found' });
+  const [gone] = studioStations.splice(i, 1);
+  logActivity({ category: 'system', action: 'STATION_REMOVED', title: `Station removed: ${gone.name}`, details: '', user: 'Admin Manager', badgeColor: 'amber' });
+  res.json({ ok: true });
 });
 
 app.post('/api/stations/:id/status', (req, res) => {
@@ -10962,6 +11054,9 @@ function scheduleStateSave() {
   }, 250);
 }
 restoreState();
+// the built-in aftercare sheets get the languages they lack (a studio's database from before 1.0.19 has
+// English only); a language the studio edited is never replaced
+if (addAftercareTranslations(aftercareTemplates)) scheduleStateSave();
 
 // The CSV sync starts from the saved settings
 resetSyncSchedule();

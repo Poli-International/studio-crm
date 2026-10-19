@@ -433,6 +433,10 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.20
+
+**Scanner field** (Henry, 2026-10-18: his TWAIN scanners): a field type in the form builder, offered only inside the CRM (`window.POLI_CRM`, set by `crm-bridge.js`), with its own **Button text** ("SCAN NOW" by default). A browser cannot reach a scanner, so the CRM server scans (`src/scanner.js`): on Windows through WIA, built into Windows, which almost every TWAIN scanner also installs a driver for (PowerShell `WIA.DeviceManager`, one page, JPEG); on Linux through SANE (`scanimage`); not yet on macOS. `GET /api/scanner/devices`, `POST /api/scanner/scan` (one scan at a time, two-minute limit; a kiosk tablet may scan for the form it is filling in). The scanner must be plugged into the CRM computer. Scanned pages are kept like the Photo ID field's photos (`[{ name, dataUrl }]`): shown in the form, on the client's record and in the PDF. `STUDIO_CRM_FAKE_SCANNER=1` gives a pretend scanner for the tests. Not tested with a real scanner.
+
 ### 1.0.19
 
 From Henry's emails of 2026-10-18, and Patrick:

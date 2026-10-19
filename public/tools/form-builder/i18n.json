@@ -187,7 +187,8 @@
         "divider": "Divider Line",
         "instructions": "Instructional Text",
         "body_map": "Anatomical Body Map",
-        "photo_id": "Photo ID & Reference Upload"
+        "photo_id": "Photo ID & Reference Upload",
+        "scanner": "Scanner"
       },
       "field_descriptions": {
         "text": "Single-line text input",
@@ -206,7 +207,8 @@
         "header": "Important notice & instructions",
         "signature": "Digital drawing pad",
         "body_map": "Interactive anatomical body & ear diagram for piercing/tattoo site pin marking",
-        "photo_id": "Secure client government photo ID and reference artwork upload with drag-drop"
+        "photo_id": "Secure client government photo ID and reference artwork upload with drag-drop",
+        "scanner": "Scan a page from the scanner on the CRM computer"
       },
       "field_use_cases": {
         "text": "Best for single-line responses like client names, job titles, or short answers.",
@@ -225,7 +227,8 @@
         "header": "Best for prominent alerts, clinical warnings, preparation steps, or studio notices.",
         "signature": "Best for legally binding client drawing pad signature on consent and waivers.",
         "body_map": "Piercing site placement, tattoo location mapping, medical annotations",
-        "photo_id": "Age verification, client government ID check, reference art attachments"
+        "photo_id": "Age verification, client government ID check, reference art attachments",
+        "scanner": "Best for scanning an ID card, a signed paper form or a document with a scanner plugged into the CRM computer."
       },
       "quick_add_title": "Quick add {label} to form",
       "all_standard_included": "All recommended standard fields included!",
@@ -535,7 +538,12 @@
       "bulk_dup_btn": "📋 Duplicate Selected Fields",
       "bulk_del_btn": "🗑️ Delete Selected Fields",
       "bulk_clear_btn": "✕ Clear Selection",
-      "untitled_section": "Untitled Section"
+      "untitled_section": "Untitled Section",
+      "scanner_default_label": "Scanned document",
+      "scanner_default_button": "SCAN NOW",
+      "scanner_default_help": "Place the page on the scanner, then press the button",
+      "scanner_button_text": "Button text",
+      "scanner_button_desc": "The scanner must be plugged into the computer that runs the CRM."
     },
     "preview": {
       "live_view": "👁️ Live Client Interactive View",
@@ -1397,6 +1405,11 @@
       "layout_standard": "Standard",
       "layout_compact": "Compact",
       "client_record": "Client Record"
+    },
+    "scanner": {
+      "scanning": "Scanning... leave the page on the scanner",
+      "failed": "The scan did not work",
+      "page": "Scanned page"
     }
   },
   "fr": {
@@ -1587,7 +1600,8 @@
         "divider": "Ligne de séparation",
         "instructions": "Texte explicatif",
         "body_map": "Carte corporelle anatomique",
-        "photo_id": "Pièce d'identité et référence photo"
+        "photo_id": "Pièce d'identité et référence photo",
+        "scanner": "Scanner"
       },
       "field_descriptions": {
         "text": "Saisie de texte sur une seule ligne",
@@ -1606,7 +1620,8 @@
         "header": "Avis important et instructions",
         "signature": "Zone de dessin numérique",
         "body_map": "Schéma anatomique interactif pour marquer l'emplacement du perçage ou tatouage",
-        "photo_id": "Téléversement sécurisé de pièce d'identité et de visuels de référence"
+        "photo_id": "Téléversement sécurisé de pièce d'identité et de visuels de référence",
+        "scanner": "Numériser une page avec le scanner de l'ordinateur du CRM"
       },
       "field_use_cases": {
         "text": "Idéal pour les réponses d'une ligne comme les noms ou réponses courtes.",
@@ -1625,7 +1640,8 @@
         "header": "Idéal pour les alertes importantes, avertissements ou consignes.",
         "signature": "Idéal pour la signature manuscrite numérique à valeur légale.",
         "body_map": "Emplacement de piercing, cartographie de tatouage, annotations médicales",
-        "photo_id": "Vérification de l'âge, contrôle d'identité légale, photos de référence"
+        "photo_id": "Vérification de l'âge, contrôle d'identité légale, photos de référence",
+        "scanner": "Idéal pour numériser une pièce d'identité, un formulaire papier signé ou un document avec un scanner branché sur l'ordinateur du CRM."
       },
       "quick_add_title": "Ajout rapide de {label} au formulaire",
       "all_standard_included": "Tous les champs standard recommandés sont inclus !",
@@ -1935,7 +1951,12 @@
       "bulk_dup_btn": "📋 Dupliquer les champs sélectionnés",
       "bulk_del_btn": "🗑️ Supprimer les champs sélectionnés",
       "bulk_clear_btn": "✕ Effacer la sélection",
-      "untitled_section": "Section sans titre"
+      "untitled_section": "Section sans titre",
+      "scanner_default_label": "Document numérisé",
+      "scanner_default_button": "NUMÉRISER",
+      "scanner_default_help": "Posez la page sur le scanner, puis appuyez sur le bouton",
+      "scanner_button_text": "Texte du bouton",
+      "scanner_button_desc": "Le scanner doit être branché sur l'ordinateur où tourne le CRM."
     },
     "preview": {
       "live_view": "👁️ Vue interactive du client",
@@ -2797,6 +2818,11 @@
       "layout_standard": "Standard",
       "layout_compact": "Compacte",
       "client_record": "Fiche client"
+    },
+    "scanner": {
+      "scanning": "Numérisation... laissez la page sur le scanner",
+      "failed": "La numérisation n'a pas fonctionné",
+      "page": "Page numérisée"
     }
   },
   "it": {
@@ -2987,7 +3013,8 @@
         "divider": "Linea di separazione",
         "instructions": "Testo informativo",
         "body_map": "Mappa anatomica del corpo",
-        "photo_id": "Documento d'identità e foto di riferimento"
+        "photo_id": "Documento d'identità e foto di riferimento",
+        "scanner": "Scanner"
       },
       "field_descriptions": {
         "text": "Inserimento testo su singola riga",
@@ -3006,7 +3033,8 @@
         "header": "Avviso importante e istruzioni",
         "signature": "Riquadro per firma grafica digitale",
         "body_map": "Diagramma anatomico interattivo per contrassegnare il punto del piercing o tatuaggio",
-        "photo_id": "Caricamento sicuro di documento d'identità e immagini di riferimento"
+        "photo_id": "Caricamento sicuro di documento d'identità e immagini di riferimento",
+        "scanner": "Scansiona una pagina con lo scanner del computer del CRM"
       },
       "field_use_cases": {
         "text": "Ideale per risposte su singola riga come nome del cliente, professione o risposte brevi.",
@@ -3025,7 +3053,8 @@
         "header": "Ideale per avvisi in evidenza, avvertenze cliniche o istruzioni per lo studio.",
         "signature": "Ideale per la firma digitale grafica del cliente con valore legale.",
         "body_map": "Posizionamento piercing, mappatura tatuaggi, annotazioni cliniche",
-        "photo_id": "Verifica dell'età, controllo documento d'identità, allegati di riferimento"
+        "photo_id": "Verifica dell'età, controllo documento d'identità, allegati di riferimento",
+        "scanner": "Ideale per scansionare un documento d'identità, un modulo cartaceo firmato o un documento con uno scanner collegato al computer del CRM."
       },
       "quick_add_title": "Aggiunta rapida di {label} al modulo",
       "all_standard_included": "Tutti i campi standard raccomandati sono inclusi!",
@@ -3335,7 +3364,12 @@
       "bulk_dup_btn": "📋 Duplica Campi Selezionati",
       "bulk_del_btn": "🗑️ Elimina Campi Selezionati",
       "bulk_clear_btn": "✕ Cancella Selezione",
-      "untitled_section": "Sezione senza titolo"
+      "untitled_section": "Sezione senza titolo",
+      "scanner_default_label": "Documento scansionato",
+      "scanner_default_button": "SCANSIONA",
+      "scanner_default_help": "Mettete la pagina sullo scanner, poi premete il pulsante",
+      "scanner_button_text": "Testo del pulsante",
+      "scanner_button_desc": "Lo scanner deve essere collegato al computer su cui gira il CRM."
     },
     "preview": {
       "live_view": "👁️ Vista interattiva del cliente",
@@ -4197,6 +4231,11 @@
       "layout_standard": "Standard",
       "layout_compact": "Compatta",
       "client_record": "Scheda cliente"
+    },
+    "scanner": {
+      "scanning": "Scansione in corso... lasciate la pagina sullo scanner",
+      "failed": "La scansione non è riuscita",
+      "page": "Pagina scansionata"
     }
   },
   "de": {
@@ -4387,7 +4426,8 @@
         "divider": "Trennlinie",
         "instructions": "Hinweistext",
         "body_map": "Anatomische Körperkarte",
-        "photo_id": "Ausweis & Referenzfoto-Upload"
+        "photo_id": "Ausweis & Referenzfoto-Upload",
+        "scanner": "Scanner"
       },
       "field_descriptions": {
         "text": "Einzeilige Texteingabe",
@@ -4406,7 +4446,8 @@
         "header": "Wichtiger Hinweis & Anweisungen",
         "signature": "Digitales Unterschriftenfeld",
         "body_map": "Interaktives anatomisches Diagramm zur Markierung von Piercing- oder Tattoo-Stellen",
-        "photo_id": "Sicherer Upload von Ausweisdokumenten und Referenzbildern per Drag & Drop"
+        "photo_id": "Sicherer Upload von Ausweisdokumenten und Referenzbildern per Drag & Drop",
+        "scanner": "Eine Seite mit dem Scanner am CRM-Computer scannen"
       },
       "field_use_cases": {
         "text": "Ideal für einzeilige Antworten wie Kundennamen oder kurze Angaben.",
@@ -4425,7 +4466,8 @@
         "header": "Ideal für wichtige Hinweise, klinische Warnungen oder Vorgaben.",
         "signature": "Ideal für die rechtsverbindliche digitale Unterschrift des Kunden.",
         "body_map": "Piercing-Platzierung, Tattoo-Lokalisierung, medizinische Anmerkungen",
-        "photo_id": "Altersprüfung, amtlicher Ausweisabgleich, Referenzbild-Anhänge"
+        "photo_id": "Altersprüfung, amtlicher Ausweisabgleich, Referenzbild-Anhänge",
+        "scanner": "Ideal zum Scannen eines Ausweises, eines unterschriebenen Papierformulars oder eines Dokuments mit einem Scanner am CRM-Computer."
       },
       "quick_add_title": "{label} schnell zum Formular hinzufügen",
       "all_standard_included": "Alle empfohlenen Standardfelder sind enthalten!",
@@ -4735,7 +4777,12 @@
       "bulk_dup_btn": "📋 Ausgewählte Felder duplizieren",
       "bulk_del_btn": "🗑️ Ausgewählte Felder löschen",
       "bulk_clear_btn": "✕ Auswahl aufheben",
-      "untitled_section": "Unbenannter Abschnitt"
+      "untitled_section": "Unbenannter Abschnitt",
+      "scanner_default_label": "Gescanntes Dokument",
+      "scanner_default_button": "JETZT SCANNEN",
+      "scanner_default_help": "Legen Sie die Seite auf den Scanner und drücken Sie dann den Knopf",
+      "scanner_button_text": "Text des Knopfs",
+      "scanner_button_desc": "Der Scanner muss an den Computer angeschlossen sein, auf dem das CRM läuft."
     },
     "preview": {
       "live_view": "👁️ Interaktive Kundenansicht",
@@ -5597,6 +5644,11 @@
       "layout_standard": "Standard",
       "layout_compact": "Kompakt",
       "client_record": "Kundenakte"
+    },
+    "scanner": {
+      "scanning": "Wird gescannt... lassen Sie die Seite auf dem Scanner",
+      "failed": "Das Scannen hat nicht funktioniert",
+      "page": "Gescannte Seite"
     }
   },
   "es": {
@@ -5787,7 +5839,8 @@
         "divider": "Línea divisoria",
         "instructions": "Texto de instrucciones",
         "body_map": "Mapa anatómico corporal",
-        "photo_id": "Documento de identidad y foto de referencia"
+        "photo_id": "Documento de identidad y foto de referencia",
+        "scanner": "Escáner"
       },
       "field_descriptions": {
         "text": "Entrada de texto de una sola línea",
@@ -5806,7 +5859,8 @@
         "header": "Aviso importante e instrucciones",
         "signature": "Panel de firma digital",
         "body_map": "Diagrama anatómico interactivo para marcar la ubicación del piercing o tatuaje",
-        "photo_id": "Carga segura de documento de identidad y fotos de referencia con arrastrar y soltar"
+        "photo_id": "Carga segura de documento de identidad y fotos de referencia con arrastrar y soltar",
+        "scanner": "Escanear una página con el escáner del ordenador del CRM"
       },
       "field_use_cases": {
         "text": "Ideal para respuestas de una sola línea como nombres o respuestas cortas.",
@@ -5825,7 +5879,8 @@
         "header": "Ideal para alertas destacadas, advertencias clínicas o avisos.",
         "signature": "Ideal para la firma digital del cliente con valor legal.",
         "body_map": "Ubicación de piercings, mapeo de tatuajes, anotaciones médicas",
-        "photo_id": "Verificación de edad, control de documento oficial, archivos de referencia"
+        "photo_id": "Verificación de edad, control de documento oficial, archivos de referencia",
+        "scanner": "Ideal para escanear un documento de identidad, un formulario en papel firmado o un documento con un escáner conectado al ordenador del CRM."
       },
       "quick_add_title": "Agregar rápidamente {label} al formulario",
       "all_standard_included": "¡Todos los campos estándar recomendados están incluidos!",
@@ -6135,7 +6190,12 @@
       "bulk_dup_btn": "📋 Duplicar Campos Seleccionados",
       "bulk_del_btn": "🗑️ Eliminar Campos Seleccionados",
       "bulk_clear_btn": "✕ Borrar Selección",
-      "untitled_section": "Sección sin título"
+      "untitled_section": "Sección sin título",
+      "scanner_default_label": "Documento escaneado",
+      "scanner_default_button": "ESCANEAR",
+      "scanner_default_help": "Coloque la página en el escáner y pulse el botón",
+      "scanner_button_text": "Texto del botón",
+      "scanner_button_desc": "El escáner debe estar conectado al ordenador donde funciona el CRM."
     },
     "preview": {
       "live_view": "👁️ Vista interactiva del cliente",
@@ -6997,6 +7057,11 @@
       "layout_standard": "Estándar",
       "layout_compact": "Compacto",
       "client_record": "Ficha del cliente"
+    },
+    "scanner": {
+      "scanning": "Escaneando... deje la página en el escáner",
+      "failed": "El escaneo no funcionó",
+      "page": "Página escaneada"
     }
   },
   "nl": {
@@ -7187,7 +7252,8 @@
         "divider": "Scheidingslijn",
         "instructions": "Instructietekst",
         "body_map": "Anatomische lichaamskaart",
-        "photo_id": "Identiteitsbewijs & referentiefoto upload"
+        "photo_id": "Identiteitsbewijs & referentiefoto upload",
+        "scanner": "Scanner"
       },
       "field_descriptions": {
         "text": "Enkele regel tekst",
@@ -7206,7 +7272,8 @@
         "header": "Belangrijke kennisgeving & instructies",
         "signature": "Digitaal tekenveld",
         "body_map": "Interactief anatomisch diagram voor het markeren van piercing- of tattoo-locaties",
-        "photo_id": "Veilige upload van identiteitsbewijs en referentieafbeeldingen via slepen en neerzetten"
+        "photo_id": "Veilige upload van identiteitsbewijs en referentieafbeeldingen via slepen en neerzetten",
+        "scanner": "Een pagina scannen met de scanner van de CRM-computer"
       },
       "field_use_cases": {
         "text": "Ideaal voor antwoorden van één regel zoals namen of korte invoer.",
@@ -7225,7 +7292,8 @@
         "header": "Ideaal voor belangrijke waarschuwingen of studio-instructies.",
         "signature": "Ideaal voor rechtsgeldige digitale handtekeningen van de klant.",
         "body_map": "Piercingplaatsing, tatoeagelocatie, medische annotaties",
-        "photo_id": "Leeftijdsverificatie, controle van identiteitsbewijs, referentiefoto's"
+        "photo_id": "Leeftijdsverificatie, controle van identiteitsbewijs, referentiefoto's",
+        "scanner": "Ideaal om een identiteitsbewijs, een ondertekend papieren formulier of een document te scannen met een scanner aan de CRM-computer."
       },
       "quick_add_title": "Snel {label} toevoegen aan formulier",
       "all_standard_included": "Alle aanbevolen standaardvelden zijn opgenomen!",
@@ -7535,7 +7603,12 @@
       "bulk_dup_btn": "📋 Geselecteerde velden dupliceren",
       "bulk_del_btn": "🗑️ Geselecteerde velden verwijderen",
       "bulk_clear_btn": "✕ Selectie wissen",
-      "untitled_section": "Naamloze sectie"
+      "untitled_section": "Naamloze sectie",
+      "scanner_default_label": "Gescand document",
+      "scanner_default_button": "NU SCANNEN",
+      "scanner_default_help": "Leg de pagina op de scanner en druk dan op de knop",
+      "scanner_button_text": "Tekst van de knop",
+      "scanner_button_desc": "De scanner moet aangesloten zijn op de computer waarop het CRM draait."
     },
     "preview": {
       "live_view": "👁️ Interactieve klantweergave",
@@ -8397,6 +8470,11 @@
       "layout_standard": "Standaard",
       "layout_compact": "Compact",
       "client_record": "Klantdossier"
+    },
+    "scanner": {
+      "scanning": "Bezig met scannen... laat de pagina op de scanner liggen",
+      "failed": "Het scannen is niet gelukt",
+      "page": "Gescande pagina"
     }
   },
   "pt": {
@@ -8587,7 +8665,8 @@
         "divider": "Linha Divisória",
         "instructions": "Texto de Instruções",
         "body_map": "Mapa anatômico corporal",
-        "photo_id": "Documento de identidade e foto de referência"
+        "photo_id": "Documento de identidade e foto de referência",
+        "scanner": "Scanner"
       },
       "field_descriptions": {
         "text": "Entrada de texto em linha única",
@@ -8606,7 +8685,8 @@
         "header": "Aviso importante e instruções",
         "signature": "Painel de assinatura digital",
         "body_map": "Diagrama anatômico interativo para marcar a localização de piercing ou tatuagem",
-        "photo_id": "Upload seguro de documento de identificação e imagens de referência com arrastar e soltar"
+        "photo_id": "Upload seguro de documento de identificação e imagens de referência com arrastar e soltar",
+        "scanner": "Digitalizar uma página com o scanner do computador do CRM"
       },
       "field_use_cases": {
         "text": "Ideal para respostas de uma linha como nomes de clientes ou respostas curtas.",
@@ -8625,7 +8705,8 @@
         "header": "Ideal para alertas importantes, avisos clínicos ou instruções.",
         "signature": "Ideal para a assinatura digital do cliente com validade legal.",
         "body_map": "Posicionamento de piercing, mapeamento de tatuagens, anotações médicas",
-        "photo_id": "Verificação de idade, conferência de documento de identidade, imagens de referência"
+        "photo_id": "Verificação de idade, conferência de documento de identidade, imagens de referência",
+        "scanner": "Ideal para digitalizar um documento de identificação, um formulário em papel assinado ou um documento com um scanner ligado ao computador do CRM."
       },
       "quick_add_title": "Adicionar rapidamente {label} ao formulário",
       "all_standard_included": "Todos os campos padrão recomendados estão incluídos!",
@@ -8935,7 +9016,12 @@
       "bulk_dup_btn": "📋 Duplicar Campos Selecionados",
       "bulk_del_btn": "🗑️ Excluir Campos Selecionados",
       "bulk_clear_btn": "✕ Limpar Seleção",
-      "untitled_section": "Seção sem título"
+      "untitled_section": "Seção sem título",
+      "scanner_default_label": "Documento digitalizado",
+      "scanner_default_button": "DIGITALIZAR",
+      "scanner_default_help": "Coloque a página no scanner e carregue no botão",
+      "scanner_button_text": "Texto do botão",
+      "scanner_button_desc": "O scanner tem de estar ligado ao computador onde o CRM funciona."
     },
     "preview": {
       "live_view": "👁️ Visualização interativa do cliente",
@@ -9797,6 +9883,11 @@
       "layout_standard": "Padrão",
       "layout_compact": "Compacto",
       "client_record": "Ficha do cliente"
+    },
+    "scanner": {
+      "scanning": "A digitalizar... deixe a página no scanner",
+      "failed": "A digitalização não funcionou",
+      "page": "Página digitalizada"
     }
   },
   "th": {
@@ -9987,7 +10078,8 @@
         "divider": "เส้นคั่น",
         "instructions": "ข้อความแนะนำ",
         "body_map": "แผนผังร่างกาย (Body Map)",
-        "photo_id": "Photo ID และอัปโหลดรูปอ้างอิง"
+        "photo_id": "Photo ID และอัปโหลดรูปอ้างอิง",
+        "scanner": "สแกนเนอร์"
       },
       "field_descriptions": {
         "text": "ช่องกรอกข้อความบรรทัดเดียว",
@@ -10006,7 +10098,8 @@
         "header": "ประกาศสำคัญและคำแนะนำ",
         "signature": "พื้นที่ลงลายมือชื่อดิจิทัล",
         "body_map": "แผนผังร่างกายและใบหูแบบโต้ตอบสำหรับปักหมุดตำแหน่งเจาะหรือสัก",
-        "photo_id": "อัปโหลดรูปถ่ายบัตรประชาชนและภาพตัวอย่างงานแบบลากวางที่มีความปลอดภัย"
+        "photo_id": "อัปโหลดรูปถ่ายบัตรประชาชนและภาพตัวอย่างงานแบบลากวางที่มีความปลอดภัย",
+        "scanner": "สแกนเอกสารด้วยสแกนเนอร์ที่ต่อกับคอมพิวเตอร์ของ CRM"
       },
       "field_use_cases": {
         "text": "เหมาะสำหรับคำตอบบรรทัดเดียว เช่น ชื่อลูกค้า อาชีพ หรือคำตอบสั้นๆ",
@@ -10025,7 +10118,8 @@
         "header": "เหมาะสำหรับข้อความแจ้งเตือนที่สำคัญ คำเตือนทางการแพทย์ ขั้นตอนการเตรียมตัว หรือประกาศจากสตูดิโอ",
         "signature": "เหมาะสำหรับการลงลายมือชื่อลูกค้าที่มีผลทางกฎหมายในหนังสือยินยอมและหนังสือสละสิทธิ์",
         "body_map": "การระบุตำแหน่งเจาะ การวางแผนตำแหน่งสัก และการบันทึกข้อมูลทางการแพทย์",
-        "photo_id": "การตรวจสอบอายุ การตรวจสอบบัตรประชาชน และการแนบภาพตัวอย่างงาน"
+        "photo_id": "การตรวจสอบอายุ การตรวจสอบบัตรประชาชน และการแนบภาพตัวอย่างงาน",
+        "scanner": "เหมาะสำหรับสแกนบัตรประจำตัว แบบฟอร์มกระดาษที่ลงนามแล้ว หรือเอกสาร ด้วยสแกนเนอร์ที่ต่อกับคอมพิวเตอร์ของ CRM"
       },
       "quick_add_title": "เพิ่ม {label} ลงในแบบฟอร์มอย่างรวดเร็ว",
       "all_standard_included": "รวมฟิลด์มาตรฐานที่แนะนำทั้งหมดแล้ว!",
@@ -10335,7 +10429,12 @@
       "bulk_dup_btn": "📋 คัดลอกฟิลด์ที่เลือก",
       "bulk_del_btn": "🗑️ ลบฟิลด์ที่เลือก",
       "bulk_clear_btn": "✕ ล้างรายการที่เลือก",
-      "untitled_section": "ส่วนที่ไม่มีชื่อ"
+      "untitled_section": "ส่วนที่ไม่มีชื่อ",
+      "scanner_default_label": "เอกสารที่สแกน",
+      "scanner_default_button": "สแกนเลย",
+      "scanner_default_help": "วางเอกสารบนสแกนเนอร์ แล้วกดปุ่ม",
+      "scanner_button_text": "ข้อความบนปุ่ม",
+      "scanner_button_desc": "ต้องต่อสแกนเนอร์กับคอมพิวเตอร์ที่รัน CRM"
     },
     "preview": {
       "live_view": "👁️ มุมมองโต้ตอบสำหรับลูกค้าแบบเรียลไทม์",
@@ -11197,6 +11296,11 @@
       "layout_standard": "มาตรฐาน",
       "layout_compact": "กะทัดรัด",
       "client_record": "บันทึกลูกค้า"
+    },
+    "scanner": {
+      "scanning": "กำลังสแกน... วางเอกสารไว้บนสแกนเนอร์",
+      "failed": "สแกนไม่สำเร็จ",
+      "page": "หน้าที่สแกน"
     }
   }
 }

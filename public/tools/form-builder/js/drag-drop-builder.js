@@ -2412,11 +2412,19 @@ class FormBuilder {
                 type: 'photo_id', 
                 icon: '🪪', 
                 badgeClass: 'badge-type-contact', 
-                label: t('palette.field_labels.photo_id', 'Photo ID & Reference Upload'), 
+                label: t('palette.field_labels.photo_id', 'Photo ID & Reference Upload'),
                 desc: t('palette.field_descriptions.photo_id', 'Client ID & reference photo upload zone'),
-                useCase: t('palette.field_use_cases.photo_id', 'Best for verifying client government-issued ID and attaching tattoo/piercing reference art.') 
+                useCase: t('palette.field_use_cases.photo_id', 'Best for verifying client government-issued ID and attaching tattoo/piercing reference art.')
             }
-        ];
+        ].concat(window.POLI_CRM ? [{
+            // only inside Studio CRM: the CRM computer does the scanning (src/scanner.js), a browser cannot (Henry, 2026-10-18)
+            type: 'scanner',
+            icon: '📠',
+            badgeClass: 'badge-type-contact',
+            label: t('palette.field_labels.scanner', 'Scanner'),
+            desc: t('palette.field_descriptions.scanner', 'Scan a page from the scanner on the CRM computer'),
+            useCase: t('palette.field_use_cases.scanner', 'Best for scanning an ID card, a signed paper form or a document with a scanner plugged into the CRM computer.')
+        }] : []);
     }
 
     highlightMatch(text, query) {
@@ -2508,7 +2516,7 @@ class FormBuilder {
                 key: 'clinical_media',
                 title: window.i18n ? window.i18n.t('palette.categories.clinical_media', 'Anatomy & Media Upload') : 'Anatomy & Media Upload',
                 icon: '🗺️',
-                types: ['body_map', 'photo_id']
+                types: ['body_map', 'photo_id', 'scanner']
             }
         ];
 
@@ -3957,7 +3965,8 @@ Digital Client Signature,signature,true,Legally binding digital signature attest
             header: '📌',
             signature: '✍️',
             body_map: '🗺️',
-            photo_id: '🪪'
+            photo_id: '🪪',
+            scanner: '📠'
         };
         return icons[type] || '📝';
     }
@@ -4086,6 +4095,13 @@ Digital Client Signature,signature,true,Legally binding digital signature attest
             newField.photoCategory = 'id';
             newField.maxFiles = 3;
             newField.helperText = 'Upload government-issued identification or reference art photos';
+        }
+
+        if (type === 'scanner') {
+            newField.label = t('properties.scanner_default_label', 'Scanned document');
+            newField.buttonText = t('properties.scanner_default_button', 'SCAN NOW');
+            newField.maxFiles = 3;
+            newField.helperText = t('properties.scanner_default_help', 'Place the page on the scanner, then press the button');
         }
 
         let targetSec = null;
@@ -5146,6 +5162,15 @@ Digital Client Signature,signature,true,Legally binding digital signature attest
                     <small style="color:#64748b; font-size:0.75rem; display:block; margin-top:3px;">${t('properties.helper_text_desc', 'Instructional sub-text rendered directly beneath the field label')}</small>
                 </div>
 
+                <!-- Scanner: the button's own words ("SCAN NOW", "Press here to scan"...) -->
+                ${field.type === 'scanner' ? `
+                    <div class="prop-group" data-prop-category="label" data-prop-keywords="scanner button text twain scan">
+                        <label for="prop-scanner-button">${t('properties.scanner_button_text', 'Button text')}</label>
+                        <input type="text" id="prop-scanner-button" class="prop-input" value="${this.escapeHtml(field.buttonText || '')}" placeholder="${t('properties.scanner_default_button', 'SCAN NOW')}">
+                        <small style="color:#64748b; font-size:0.75rem; display:block; margin-top:3px;">${t('properties.scanner_button_desc', 'The scanner must be plugged into the computer that runs the CRM.')}</small>
+                    </div>
+                ` : ''}
+
                 <!-- Textarea Rows (if applicable) -->
                 ${hasRows ? `
                     <div class="prop-group" data-prop-category="layout" data-prop-keywords="rows height size textarea lines dimension">
@@ -5392,6 +5417,17 @@ Digital Client Signature,signature,true,Legally binding digital signature attest
             });
             placeholderInput.addEventListener('change', () => {
                 this.recordState('Change Placeholder');
+                this.renderCanvas();
+                this.selectField(field.id, false);
+            });
+        }
+
+        // Scanner button text
+        const scanButtonInput = document.getElementById('prop-scanner-button');
+        if (scanButtonInput) {
+            scanButtonInput.addEventListener('input', (e) => { field.buttonText = e.target.value; });
+            scanButtonInput.addEventListener('change', () => {
+                this.recordState('Change Scanner Button Text');
                 this.renderCanvas();
                 this.selectField(field.id, false);
             });

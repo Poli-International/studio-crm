@@ -73,6 +73,8 @@ To keep a client inside the form when you step away, set a **Tablet Kiosk PIN** 
 
 **Clients under 18 and ID checks:** the CRM works out each client's age from their date of birth (from the record, the ID check, or a date of birth the client writes on a form). A client under 18 is marked **Under 18** in the client list, the profile and the booking form, and their forms need a parent or guardian signature: the CRM will not save or send a form without one (the **Minor Consent & Legal Guardian Authorization** template has it). If a client writes a date of birth under 18 on the tablet, the signed form is kept but marked in red, and the activity log says so. In the client's profile, **Record an ID check** keeps the type of ID and only its last 4 letters or digits, with who checked it and when; every form signed afterwards shows the age and the ID check, on screen and in the PDF.
 
+**Scanner field:** in the form builder, add a **Scanner** field to a form and give its button your own words. On the form, the button scans a page from the scanner plugged into the computer that runs the CRM, from the desk or from a kiosk tablet; the page is kept with the form like a photo, and printed in its PDF. On Windows it uses the scanning built into Windows (WIA): if the scanner works with the Windows Scan app, it works here. On Linux it uses SANE. Not yet on a Mac.
+
 ## Messages: the CRM prepares, you send
 
 Studio CRM does not send email, SMS or chat messages itself. When you prepare an aftercare email, a reminder or a supplier order, a **Message ready** panel appears. Click **Email**, **WhatsApp** or **LINE** to open it in your own app with the text filled in, then press send there, or click **Copy**.

@@ -43,6 +43,7 @@ Build your own consent forms, or start from ready-made tattoo, piercing and medi
 - What the client declares (allergies, conditions, medication) is added to their **medical overview**.
 - **Clients under 18** are flagged from their date of birth, and their forms need a parent or guardian signature. The desk records an **ID check** (the type of ID and its last 4 characters only), and each signed form keeps the age and the ID check.
 - Your studio's name, address and licence number on every form, set once in **Settings**, **Studio details**.
+- A **Scanner** field: a page from a scanner plugged into the CRM computer (WIA on Windows, which most TWAIN scanners support; SANE on Linux), straight into the form, from the desk or a tablet.
 - **Aftercare sheets** (tattoo, piercing, fine line, PMU, or your own) in your own words and in all eight languages, printed from the client's profile with their name, and recorded: each appointment shows whether aftercare was given.
 - Forms in the client's language, with the PDF in that language too.
 

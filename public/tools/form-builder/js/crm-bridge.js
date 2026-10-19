@@ -22,6 +22,9 @@
 
     if (window.self === window.top) return;   // not embedded, nothing to do
 
+    // Inside Studio CRM: the form builder offers the Scanner field, which the CRM server scans for
+    window.POLI_CRM = true;
+
     var host = null;                          // {clientId, clientName} once known
 
     // The tool's own dictionary is nested and already covers seven languages.

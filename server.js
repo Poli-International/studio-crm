@@ -12,6 +12,7 @@ import { installUpdate } from './src/update.js';
 import { pruneAutoBackups, AUTO_BACKUP } from './src/backups.js';
 import { GUARDIAN_AGE, ageOn, isGuardianForm, dobFromResponses } from './src/consent-age.js';
 import { AFTERCARE_LANGS, addAftercareTranslations } from './src/aftercare-texts.js';
+import { listScanners, scanPage } from './src/scanner.js';
 import { mergeMedicalInto } from './src/utils/crm-utils.js';
 import {
   users as dbUsers,
@@ -1112,6 +1113,24 @@ app.post('/api/clients/:id/id-check', (req, res) => {
   logActivity({ category: 'compliance', action: 'CLIENT_ID_CHECKED', title: `ID checked: ${client.name}`,
     details: `${type} ending ${client.id_check.last4}` + (dob ? `, born ${dob}` : ''), user: client.id_check.checked_by, badgeColor: 'emerald' });
   res.json({ ok: true, id_check: client.id_check, dob: client.dob || '', age: clientAge(client) });
+});
+
+// The form builder's Scanner field (Henry, 2026-10-18): the scanner is on the CRM computer (src/scanner.js).
+// A kiosk tablet may scan too: it only gets the image back, for the form it is filling in.
+let scanning = false; // one scan at a time: a scanner does one page at once
+app.get('/api/scanner/devices', async (req, res) => {
+  try { res.json(await listScanners()); } catch (e) { res.json([]); }
+});
+app.post('/api/scanner/scan', async (req, res) => {
+  if (scanning) return res.status(409).json({ error: 'The scanner is busy with another scan. Try again in a moment.' });
+  scanning = true;
+  try {
+    res.json({ ok: true, dataUrl: await scanPage((req.body || {}).device) });
+  } catch (e) {
+    res.status(e.status || (e.timedOut ? 504 : 500)).json({ error: e.status ? e.message : e.timedOut ? 'The scanner did not answer within two minutes.' : 'The scan did not work: ' + e.message });
+  } finally {
+    scanning = false;
+  }
 });
 
 function mergeMedicalAnswers(clientId, responses) {

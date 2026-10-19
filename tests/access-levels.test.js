@@ -15,6 +15,7 @@ describe('staff levels', () => {
     ['POST', '/api/financial', 'front_desk'],
     ['POST', '/api/staff/3/shift', 'front_desk'],
     ['POST', '/api/stations/2/status', 'front_desk'],
+    ['GET', '/api/scanner/devices', 'front_desk'],
     ['POST', '/api/clients/4/aftercare', 'front_desk'],
     ['POST', '/api/clients/4/id-check', 'front_desk'],
     ['PUT', '/api/app-data/client_photo_12', 'front_desk'],

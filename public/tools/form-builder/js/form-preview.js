@@ -410,6 +410,20 @@ class FormPreview {
                 `;
                 break;
 
+            // Studio CRM only: the CRM computer scans (src/scanner.js); the pages are kept like photos
+            case 'scanner':
+                html += `
+                    <div class="preview-photo-upload-container preview-scanner" id="photo-upload-wrapper-${field.id}">
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px;border:2px dashed #94a3b8;border-radius:10px;text-align:center;">
+                            <div style="font-size:1.8rem;">📠</div>
+                            <button type="button" class="btn-primary btn-scan-now" data-scan-field="${field.id}" onclick="window.ActiveFormPreview.scanInto('${field.id}', this)">${this.escapeHtml(field.buttonText || TP('properties.scanner_default_button', 'SCAN NOW'))}</button>
+                            <div class="photo-upload-subtext" id="scan-status-${field.id}" role="status"></div>
+                        </div>
+                        <div class="photo-preview-gallery" id="photo-gallery-${field.id}" style="display:none;"></div>
+                    </div>
+                `;
+                break;
+
             case 'textarea':
                 const initialText = field.value || '';
                 html += `<textarea ${commonAttrs} rows="${field.rows || 3}" placeholder="${this.escapeHtml(field.placeholder || '')}" class="preview-textarea form-preview-interactive">${this.escapeHtml(initialText)}</textarea>`;
@@ -724,6 +738,37 @@ class FormPreview {
             };
             reader.readAsDataURL(file);
         });
+    }
+
+    // A page from the scanner on the CRM computer, added to the field like an uploaded photo
+    async scanInto(fieldId, btn) {
+        const status = document.getElementById(`scan-status-${fieldId}`);
+        const say = (m) => { if (status) status.textContent = m; };
+        if (btn) btn.disabled = true;
+        say(TP('scanner.scanning', 'Scanning... leave the page on the scanner'));
+        try {
+            const r = await fetch('/api/scanner/scan', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
+            const d = await r.json().catch(() => ({}));
+            if (!r.ok || !d.dataUrl) throw new Error(d.error || TP('scanner.failed', 'The scan did not work'));
+            if (!this.photoUploads[fieldId]) this.photoUploads[fieldId] = [];
+            const n = this.photoUploads[fieldId].length + 1;
+            this.photoUploads[fieldId].push({
+                id: 'scan_' + Date.now() + '_' + n,
+                name: TP('scanner.page', 'Scanned page') + ' ' + n,
+                size: '',
+                type: d.dataUrl.slice(5, d.dataUrl.indexOf(';')),
+                dataUrl: d.dataUrl,
+                timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            });
+            this.responses[fieldId] = this.photoUploads[fieldId];
+            this.renderPhotoGallery(fieldId);
+            this.updateProgress();
+            say('');
+        } catch (e) {
+            say(e.message);
+        } finally {
+            if (btn) btn.disabled = false;
+        }
     }
 
     renderPhotoGallery(fieldId) {

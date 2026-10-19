@@ -246,7 +246,7 @@ const PDFGenerator = {
                         }
 
                         // Feature 3: Photo ID & Reference Art in PDF
-                        if (field.type === 'photo_id') {
+                        if (field.type === 'photo_id' || field.type === 'scanner') { // scanned pages are kept like photos
                             const photoList = responses[field.id];
                             const photos = Array.isArray(photoList) ? photoList : (photoList && photoList.dataUrl ? [photoList] : []);
                             if (photos.length > 0) {

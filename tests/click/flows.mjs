@@ -1297,10 +1297,11 @@ await flow('A Staff login cannot reach Finance: not in the second after a reload
       check((await call(p)) === 403, `Staff can read ${p}`);
     }
     // the screen: from the first paint, no Finance to click before the role is known, and no way in after
-    await b.evaluate('location.reload()');
+    // the page loaded before Maya signed in still thinks it is the administrator's: wait for the new one
+    await b.evaluate('(() => { window.__beforeReload = true; location.reload(); })()');
     let early = null;
-    for (let i = 0; i < 200 && early === null; i++) {
-      early = await b.evaluate(`(() => { const el = document.getElementById('nav-dest-finance'); if (!el) return null; navigateToDestination('finance'); return { menu: !!el.offsetParent, screen: !!document.getElementById('dest-finance').offsetParent }; })()`).catch(() => null);
+    for (let i = 0; i < 400 && early === null; i++) {
+      early = await b.evaluate(`(() => { const el = document.getElementById('nav-dest-finance'); if (!el || window.__beforeReload) return null; navigateToDestination('finance'); return { menu: !!el.offsetParent, screen: !!document.getElementById('dest-finance').offsetParent }; })()`).catch(() => null);
     }
     check(early && !early.menu, 'Finance shows in the menu before the role is known');
     check(early && !early.screen, 'Finance opens before the role is known');

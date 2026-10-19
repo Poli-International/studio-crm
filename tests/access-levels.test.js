@@ -40,6 +40,8 @@ describe('what a request needs', () => {
     ['GET', '/api/financial', 'finance'],
     ['GET', '/api/financials/deposits', 'finance'],
     ['GET', '/api/staff/commissions', 'finance'],
+    ['GET', '/api/accounting/ledger-timeseries', 'finance'],
+    ['GET', '/api/accounting/export/quickbooks', 'finance'],
     ['POST', '/api/financial/payment-methods', 'finance'],
     ['POST', '/api/accounting/sync', 'finance'],
     // deleting

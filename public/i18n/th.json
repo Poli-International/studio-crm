@@ -1958,5 +1958,6 @@
  "Delete records": "ลบข้อมูล",
  "Everything, and the only role that changes Settings, the team, the logins and the roles": "ทุกอย่าง และเป็นบทบาทเดียวที่แก้ไขการตั้งค่า ทีม บัญชีเข้าใช้ และบทบาทได้",
  "Give every role a name": "ตั้งชื่อให้ทุกบทบาท",
- "Choose one of the roles": "เลือกบทบาทหนึ่ง"
+ "Choose one of the roles": "เลือกบทบาทหนึ่ง",
+ "Sign out": "ออกจากระบบ"
 }

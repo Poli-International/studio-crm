@@ -144,7 +144,7 @@ export function needLevel(method, apiPath) {
   const data = apiPath.match(/^\/api\/app-data\/(.+)$/);
   if (data && write && ADMIN_DATA.test(decodeURIComponent(data[1]))) return 'admin';
   if (method === 'DELETE') return 'delete';                                       // deleting anything else
-  if (!write && /^\/api\/(financial|financials|staff\/commissions)/.test(apiPath)) return 'finance'; // money reports
+  if (!write && /^\/api\/(financial|financials|accounting|staff\/commissions)/.test(apiPath)) return 'finance'; // money reports, the ledger and its exports
   if (write && /^\/api\/(accounting|financials|financial\/(payment-methods|tip-split))/.test(apiPath)) return 'finance';
   if (data && write && /^poli_form_builder_autosave/.test(decodeURIComponent(data[1]))) return 'forms'; // the consent form designs
   if (write && /^\/api\/(aftercare-templates|aftercare\/templates)/.test(apiPath)) return 'forms';      // the aftercare sheets

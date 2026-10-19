@@ -258,7 +258,12 @@ export async function launchBrowser() {
       },
       // clicks the first visible button whose label contains the text
       async clickText(text, within = '') {
-        const key = await run(`const s = ${js(within)}; const el = window.__ct.all().find(e => (!s || e.closest(s)) && (e.innerText || e.value || '').includes(${js(text)})); return el ? window.__ct.key(el) : null;`);
+        // up to 2 s for it to appear, as a person would wait: the menu shows its screens once the role is known
+        let key = null;
+        for (let i = 0; i < 20 && !key; i++) {
+          if (i) await sleep(100);
+          key = await run(`const s = ${js(within)}; const el = window.__ct.all().find(e => (!s || e.closest(s)) && (e.innerText || e.value || '').includes(${js(text)})); return el ? window.__ct.key(el) : null;`);
+        }
         if (!key) throw new Error(`No visible button "${text}"${within ? ' in ' + within : ''}`);
         const t = await this.click(key);
         if (!t) throw new Error(`Button "${text}" disappeared`);

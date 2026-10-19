@@ -27,9 +27,12 @@ const ROLE_AREAS = [['clients', 'Clients and bookings'], ['stock', 'Stock and su
     ['rota', 'Shift rota'], ['forms', 'Consent forms and aftercare sheets'], ['finance', 'Money and reports'], ['delete', 'Delete records']];
 // the screens a role opens only with an area (Settings: administrators only)
 const SCREEN_NEEDS = { clients: 'clients', calendar: 'clients', inventory: 'stock', compliance: 'compliance', finance: 'finance', settings: 'admin' };
+let accessLoaded = false;   // until /api/access answers, the role is not known: no screen that needs one
 function screenAllowed(dest) {
     const need = SCREEN_NEEDS[dest];
-    if (!need || !accessInfo.level || accessInfo.level === 'admin') return true;
+    if (!need) return true;
+    if (!accessLoaded) return false;
+    if (!accessInfo.level || accessInfo.level === 'admin') return true;
     return need !== 'admin' && !!(accessInfo.role && accessInfo.role.perms.includes(need));
 }
 window.screenAllowed = screenAllowed;
@@ -40,6 +43,7 @@ function roleName(id) {
 }
 async function loadAccessInfo() {
     try { accessInfo = await (await fetch('/api/access')).json(); } catch (e) { accessInfo = {}; }
+    accessLoaded = true;
     // a role sees only the screens of its areas (the server refuses the rest anyway)
     document.body.dataset.level = accessInfo.level || 'admin';
     for (const dest of Object.keys(SCREEN_NEEDS)) {
@@ -77,6 +81,15 @@ async function renderStaffList() {
     }
     const who = activeStaff();
     const btn = 'padding:6px 10px;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;';
+    // with staff logins, the person at the screen is the one signed in: changing person is Sign out, then
+    // their name and password (Select only changed the name shown: Henry, 2026-10-19). Only an administrator
+    // changes the team.
+    const logins = !!accessInfo.staffLogins;
+    const admin = !accessInfo.level || accessInfo.level === 'admin';
+    const out = document.getElementById('staff-signout-btn');
+    if (out) out.style.display = accessInfo.passwordSet ? '' : 'none';
+    const add = document.getElementById('staff-add-btn');
+    if (add) add.style.display = admin ? '' : 'none';
     body.innerHTML = staffList.map((s) => {
         const id = Number(s.id);
         const here = who && Number(who.id) === id;
@@ -88,9 +101,9 @@ async function renderStaffList() {
                 <div style="font-size:0.75rem;color:#94A3B8;">${details}</div>
             </div>
             <div style="display:flex;gap:6px;">
-                <button type="button" onclick="selectActiveStaff(${id})" style="${btn}background:#10B981;color:#FFF;border:none;">Select</button>
-                <button type="button" onclick="openStaffFormModal(${id})" style="${btn}background:#2563EB;color:#FFF;border:none;">Edit</button>
-                <button type="button" onclick="removeStaffMember(${id})" style="${btn}background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);">Remove</button>
+                ${logins ? '' : `<button type="button" onclick="selectActiveStaff(${id})" style="${btn}background:#10B981;color:#FFF;border:none;">Select</button>`}
+                ${admin ? `<button type="button" onclick="openStaffFormModal(${id})" style="${btn}background:#2563EB;color:#FFF;border:none;">Edit</button>
+                <button type="button" onclick="removeStaffMember(${id})" style="${btn}background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);">Remove</button>` : ''}
             </div>
         </div>`;
     }).join('');
@@ -110,7 +123,7 @@ window.closeStaffLoginModal = closeStaffLoginModal;
 
 function selectActiveStaff(id) {
     const member = staffList.find((s) => Number(s.id) === Number(id));
-    if (!member) return;
+    if (!member || accessInfo.staffLogins) return;   // with logins: sign out, then sign in as that person
     try { localStorage.setItem('studio_active_staff', JSON.stringify({ id: member.id, name: member.name })); } catch (e) { /* private window */ }
     showActiveStaff();
     renderStaffList();

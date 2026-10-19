@@ -1278,6 +1278,53 @@ await flow('Roles: an administrator makes a role with its own areas; that person
   }
 });
 
+await flow('A Staff login cannot reach Finance: not in the second after a reload, not by switching to the administrator', async () => {
+  // Henry, 2026-10-19: Maya (Staff) chose the administrator in Switch Staff User, clicked Finance while it
+  // still showed, read the money records and recorded $150
+  const call = (p, init) => b.evaluate(`fetch(${JSON.stringify(p)}, ${JSON.stringify(init || {})}).then(r => r.status)`);
+  const post = (p, body) => call(p, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+  await b.goto(url);
+  check((await post('/api/access/password', { next: 'studio-test-password' })) === 200, 'the studio password could not be set');
+  const team = await api('/api/staff');
+  const maya = team[0], boss = team[1];
+  try {
+    check((await post('/api/access/staff-login', { staff_id: maya.id, level: 'staff', password: 'maya-pass-123' })) === 200, 'Maya was not given a Staff login');
+    check((await post('/api/access/staff-login', { staff_id: boss.id, level: 'admin', password: 'boss-pass-123' })) === 200, 'the administrator login was not made');
+    await post('/api/access/logout', {});
+    check((await post('/api/access/login', { staff_id: maya.id, password: 'maya-pass-123' })) === 200, 'Maya could not sign in');
+    // the server: the ledger and its exports are money reports too (they were open to every login)
+    for (const p of ['/api/financial', '/api/accounting/ledger-timeseries', '/api/accounting/reconciliation-check', '/api/accounting/export/quickbooks', '/api/accounting/export/sage', '/api/accounting/health', '/api/accounting/config']) {
+      check((await call(p)) === 403, `Staff can read ${p}`);
+    }
+    // the screen: from the first paint, no Finance to click before the role is known, and no way in after
+    await b.evaluate('location.reload()');
+    let early = null;
+    for (let i = 0; i < 200 && early === null; i++) {
+      early = await b.evaluate(`(() => { const el = document.getElementById('nav-dest-finance'); if (!el) return null; navigateToDestination('finance'); return { menu: !!el.offsetParent, screen: !!document.getElementById('dest-finance').offsetParent }; })()`).catch(() => null);
+    }
+    check(early && !early.menu, 'Finance shows in the menu before the role is known');
+    check(early && !early.screen, 'Finance opens before the role is known');
+    await eventually(async () => b.evaluate(`document.body.dataset.level === 'staff'`), 'the role never loaded');
+    await b.evaluate(`navigateToDestination('finance')`);
+    check(!(await b.evaluate(`!!document.getElementById('dest-finance').offsetParent`)), 'Finance opens for Staff');
+    // Switch Staff User: no choosing the administrator without their password; Sign out instead
+    await pressOn('openStaffLoginModal()');
+    await eventually(async () => (await text('#staff-list-body')).includes(boss.name), 'the staff list is empty');
+    check(!(await b.evaluate(`[...document.querySelectorAll('#staff-list-body button')].some(x => ['Select', 'Edit', 'Remove'].includes(x.innerText.trim()))`)), 'Staff can still Select, Edit or Remove a person');
+    check(!(await b.evaluate(`!!document.getElementById('staff-add-btn').offsetParent`)), 'Staff can still add a person');
+    await b.evaluate(`selectActiveStaff(${boss.id})`);
+    check((await text('#topbar-user-name')).includes(maya.name), 'the top bar names someone other than the person signed in: ' + await text('#topbar-user-name'));
+    check(await b.evaluate(`!!document.getElementById('staff-signout-btn').offsetParent`), 'there is no Sign out for Staff');
+    await b.clickText('Sign out', '#staff-login-modal-overlay');
+    await eventually(async () => b.evaluate(`!!document.getElementById('login-who')`), 'Sign out did not bring back the sign-in page');
+  } finally {
+    await b.goto(url);
+    await post('/api/access/login', { password: 'studio-test-password' }).catch(() => {});
+    for (const p of [maya, boss]) await post('/api/access/staff-login', { staff_id: p.id, remove: true }).catch(() => {});
+    await post('/api/access/password', { current: 'studio-test-password', next: '' }).catch(() => {});
+  }
+});
+
 await flow('First start: the CRM asks for a studio password before anything loads', async () => {
   const fresh = await startFreshServer(Number(process.env.CLICK_PORT || 3412) + 7);
   try {

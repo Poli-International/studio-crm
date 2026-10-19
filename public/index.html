@@ -31,6 +31,11 @@
     <script src="./js/01-boot.js"></script>
     <script type="application/ld+json" src="./js/02-schema-webapp.js"></script>
     <script type="application/ld+json" src="./js/03-schema-faq.js"></script>
+<style>
+  /* until this device's role is known (staff.js loadAccessInfo sets data-level), no screen that needs one is offered */
+  body:not([data-level]) #nav-dest-clients, body:not([data-level]) #nav-dest-calendar, body:not([data-level]) #nav-dest-inventory,
+  body:not([data-level]) #nav-dest-compliance, body:not([data-level]) #nav-dest-finance, body:not([data-level]) #nav-dest-settings { display: none !important; }
+</style>
 </head>
 <body>
   <!-- 🧭 PERSISTENT APP CONTAINER (SIDEBAR + MAIN WORKSPACE) -->
@@ -4620,6 +4625,7 @@ docker compose up -d</pre>
         </div>
         <div id="staff-list-body" style="padding:20px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:10px;"></div>
         <div style="padding:14px 20px;background:#1E293B;border-top:1px solid #334155;display:flex;justify-content:flex-end;">
+            <button type="button" id="staff-signout-btn" onclick="signOutOfStudio()" style="display:none;margin-right:8px;padding:10px 16px;background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);border-radius:8px;font-weight:700;font-size:0.85rem;cursor:pointer;">Sign out</button>
             <button type="button" id="staff-add-btn" onclick="openStaffFormModal()" style="padding:10px 20px;background:#2563EB;color:#FFF;border:none;border-radius:8px;font-weight:800;font-size:0.85rem;cursor:pointer;">➕ Add staff member</button>
         </div>
     </div>

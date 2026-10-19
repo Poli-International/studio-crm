@@ -446,6 +446,10 @@
       const img = new Image();
       img.onload = function () {
         loadedImage = img;
+        // the photo's area was never shown: choosing a photo showed nothing (Henry, 2026-10-19). Shown before
+        // the drawing, which sizes the picture to it.
+        const workspace = document.getElementById('refStudioWorkspace');
+        if (workspace) workspace.style.display = '';
         redrawCanvas();
         extractedPalette = extractDominantColors(img, 6);
         renderExtractedPalette();
@@ -475,6 +479,7 @@
         if (e.target.files && e.target.files[0]) {
           handleImageFile(e.target.files[0]);
         }
+        fileInput.value = ''; // the same photo chosen again loads again
       };
     }
 

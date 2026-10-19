@@ -2,8 +2,9 @@
 //
 // Off by default: a studio with one trusted computer needs none. When the
 // owner sets one (Settings), every device must sign in before it sees a page
-// or an /api answer. It is one password for the studio, not one per person:
-// it keeps people on the same network out, it does not limit what staff can do.
+// or an /api answer. On top of it, staff can have their own logins with a level
+// (Settings > Staff): the sign-in page then asks who you are. The studio password
+// keeps working and signs in as administrator.
 import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
@@ -43,7 +44,8 @@ translatePage();
 fetch('/api/access/people').then(function (r) { return r.json(); }).then(function (people) {
   if (!people.length) return;
   var who = document.getElementById('login-who');
-  who.innerHTML = people.map(function (p) { return '<option value="' + p.id + '">' + p.name.replace(/[<>&"]/g, '') + '</option>'; }).join('') + '<option value="">' + L('Studio password') + '</option>';
+  // the studio password first: whoever signed in with it before keeps doing so
+  who.innerHTML = '<option value="">' + L('Studio password') + '</option>' + people.map(function (p) { return '<option value="' + p.id + '">' + p.name.replace(/[<>&"]/g, '') + '</option>'; }).join('');
   document.getElementById('login-who-row').style.display = '';
   document.querySelector('label[for="login-password"]').textContent = L('Your password');
 }).catch(function () {});
@@ -178,8 +180,8 @@ export function installAccess(app, sqlite, getStaff = () => []) {
   try { for (const [k, s] of JSON.parse(setting('kioskSessions') || '[]')) if (s.expiry > Date.now()) sessions.set(k, s); } catch (e) { /* unreadable: tablets sign in again */ }
   const logins = () => { try { return JSON.parse(setting('staffLogins') || '{}'); } catch (e) { return {}; } }; // staffId -> { salt, hash, level }
   const saveLogins = (value) => setSetting('staffLogins', JSON.stringify(value));
-  // staff logins are on once an administrator has one (and the studio password is set)
-  const loginsOn = () => !!access && Object.values(logins()).some((l) => l.level === 'admin');
+  // staff logins are on once anyone has one (and the studio password is set); the studio password stays the administrator's
+  const loginsOn = () => !!access && Object.keys(logins()).length > 0;
   const checkHash = (password, entry) => { const given = hashOf(password, Buffer.from(entry.salt, 'hex')); const stored = Buffer.from(entry.hash, 'hex'); return given.length === stored.length && crypto.timingSafeEqual(given, stored); };
   const failures = new Map();          // address -> { count, until }
 

@@ -1937,5 +1937,9 @@
  "Write the first step here.": "Schrijf hier de eerste stap.",
  "New sheet added: write its title and steps, then Save sheet": "Nieuw blad toegevoegd: schrijf de titel en stappen, dan Blad opslaan",
  "Delete this aftercare sheet, in every language? Sheets already given stay on the clients' records.": "Dit nazorgblad in alle talen verwijderen? Al gegeven bladen blijven in de klantdossiers.",
- "Aftercare sheet deleted": "Nazorgblad verwijderd"
+ "Aftercare sheet deleted": "Nazorgblad verwijderd",
+ "Photo": "Foto",
+ "📷 Take or choose a photo": "📷 Foto maken of kiezen",
+ "On a phone or tablet you can use the camera.": "Op een telefoon of tablet kunt u de camera gebruiken.",
+ "Take or choose a photo first": "Maak of kies eerst een foto"
 }

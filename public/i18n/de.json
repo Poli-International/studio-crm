@@ -1937,5 +1937,9 @@
  "Write the first step here.": "Schreiben Sie hier den ersten Schritt.",
  "New sheet added: write its title and steps, then Save sheet": "Neues Blatt hinzugefügt: Titel und Schritte schreiben, dann Blatt speichern",
  "Delete this aftercare sheet, in every language? Sheets already given stay on the clients' records.": "Dieses Pflegeblatt in allen Sprachen löschen? Bereits übergebene Blätter bleiben in den Kundenakten.",
- "Aftercare sheet deleted": "Pflegeblatt gelöscht"
+ "Aftercare sheet deleted": "Pflegeblatt gelöscht",
+ "Photo": "Foto",
+ "📷 Take or choose a photo": "📷 Foto aufnehmen oder auswählen",
+ "On a phone or tablet you can use the camera.": "Auf einem Telefon oder Tablet können Sie die Kamera benutzen.",
+ "Take or choose a photo first": "Zuerst ein Foto aufnehmen oder auswählen"
 }

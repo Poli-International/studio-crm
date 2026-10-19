@@ -610,8 +610,11 @@ function switchClientProfileTab(tabName) {
                             </select>
                         </div>
                         <div style="grid-column: span 2;">
-                            <label style="font-size:0.75rem;color:#9CA3AF;display:block;margin-bottom:3px;">Photo Image URL</label>
-                            <input type="url" id="tw-url-input" placeholder="assets/studio_crm_logo.jpg" required style="width:100%;padding:0.5rem;background:#111827;border:1px solid #374151;border-radius:6px;color:#FFF;font-size:0.825rem;outline:none;" />
+                            <label for="tw-photo-input" style="font-size:0.75rem;color:#9CA3AF;display:block;margin-bottom:3px;">Photo</label>
+                            <input type="file" id="tw-photo-input" accept="image/*" onchange="handleClientWorkPhotoSelect(event)" style="display:none;" />
+                            <button type="button" onclick="document.getElementById('tw-photo-input').click()" style="padding:0.5rem 1rem;background:#374151;color:#F9FAFB;border:1px solid #4B5563;border-radius:6px;font-weight:700;font-size:0.825rem;cursor:pointer;">📷 Take or choose a photo</button>
+                            <span style="font-size:0.72rem;color:#9CA3AF;margin-left:6px;">On a phone or tablet you can use the camera.</span>
+                            <div id="tw-photo-preview" style="margin-top:6px;"></div>
                         </div>
                         <div style="grid-column: span 2;">
                             <label style="font-size:0.75rem;color:#9CA3AF;display:block;margin-bottom:3px;">Description & Technique Notes</label>
@@ -1430,6 +1433,18 @@ function renderD3ClientAppointmentTimeline(appointments) {
     });
 }
 
+// The photo for the client's Work & Photos: from the camera or the device's pictures, made smaller like the gallery's
+let pendingClientWorkPhoto = '';
+async function handleClientWorkPhotoSelect(event) {
+    const file = event && event.target && event.target.files && event.target.files[0];
+    if (!file) return;
+    try { pendingClientWorkPhoto = await imageFileToDataUrl(file); }
+    catch (e) { showStudioToast('That file could not be read as an image'); return; }
+    const prev = document.getElementById('tw-photo-preview');
+    if (prev) prev.innerHTML = `<img src="${pendingClientWorkPhoto}" alt="" style="max-width:100%;max-height:160px;border-radius:8px;" />`;
+}
+window.handleClientWorkPhotoSelect = handleClientWorkPhotoSelect;
+
 // Tattoo Work Submission
 async function submitClientTattooWork(event, clientId) {
     if (event) event.preventDefault();
@@ -1437,8 +1452,10 @@ async function submitClientTattooWork(event, clientId) {
 
     const title = document.getElementById('tw-title-input')?.value || 'Tattoo Session Work';
     const category = document.getElementById('tw-category-input')?.value || 'Tattoo Session';
-    const image_url = document.getElementById('tw-url-input')?.value || '';
+    // a photo taken or chosen on this device (Henry, 2026-10-19: there was only a box for an image address)
+    const image_url = pendingClientWorkPhoto;
     const notes = document.getElementById('tw-notes-input')?.value || '';
+    if (!image_url) { showStudioToast('Take or choose a photo first'); return; }
 
     try {
         const res = await fetch(`/api/clients/${clientId}/tattoo-work`, {
@@ -1448,6 +1465,7 @@ async function submitClientTattooWork(event, clientId) {
         });
         if (!res.ok) throw new Error('Upload failed');
         const data = await res.json();
+        pendingClientWorkPhoto = '';
         
         if (currentActiveProfileClient) {
             currentActiveProfileClient.tattoo_work = data.tattoo_work || [];

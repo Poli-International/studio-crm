@@ -36,6 +36,10 @@ async function loadAccessInfo() {
     if (accessInfo.staffLogins && accessInfo.me) {
         try { localStorage.setItem('studio_active_staff', JSON.stringify({ id: 0, name: accessInfo.me + ' (' + LEVEL_LABEL[accessInfo.level] + ')' })); } catch (e) { /* private window */ }
         showActiveStaff();
+    } else if (activeStaff() && activeStaff().id === 0) {
+        // signed in with the studio password after someone's own login: their name leaves the top bar
+        try { localStorage.removeItem('studio_active_staff'); } catch (e) { /* private window */ }
+        showActiveStaff();
     }
     return accessInfo;
 }

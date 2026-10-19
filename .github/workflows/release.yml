@@ -2,7 +2,8 @@
 # installed packages inside, so a studio unzips it and double-clicks the starter.
 # Every ZIP is unpacked and started here, without any Node.js on the PATH, before
 # it is published. Runs on pull requests (build and test only) and on a version
-# tag (build, test, publish to the GitHub release).
+# tag (build, test, publish to the GitHub release). Once a week it crawls every
+# embedded tool, without packing anything.
 name: Ready-to-run downloads
 
 on:
@@ -10,6 +11,8 @@ on:
     tags: ['v*']
   pull_request:
   workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 1'   # Mondays: every tool, changed or not
 
 permissions:
   contents: write
@@ -37,8 +40,11 @@ jobs:
           path: click-report.json
           if-no-files-found: ignore
 
-  # The same for every embedded tool, one runner per tool. The list is read from
-  # public/tools, so a new tool is crawled without touching this file.
+  # The same for the embedded tools, one runner per tool. The list is read from
+  # public/tools, so a new tool is crawled without touching this file. A release
+  # crawls only the tools changed since the last release tag (all of them when
+  # public/tools/shared or the crawler changed): the autoclave tool alone takes
+  # about 70 minutes and held every release. The weekly run crawls them all.
   tool-list:
     name: List the tools
     runs-on: ubuntu-latest
@@ -46,12 +52,29 @@ jobs:
       tools: ${{ steps.list.outputs.tools }}
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0   # the tags, to find the last release
       - id: list
-        run: echo "tools=$(ls public/tools | grep -v '^shared$' | jq -Rsc 'split("\n") | map(select(length > 0))')" >> "$GITHUB_OUTPUT"
+        env:
+          EVENT: ${{ github.event_name }}
+        run: |
+          all=$(ls public/tools | grep -v '^shared$')
+          # the release before this one: for a tag, the tag before it; otherwise the last tag in the history
+          if [ "$GITHUB_REF_TYPE" = "tag" ]; then base=$(git describe --tags --abbrev=0 HEAD^ 2> /dev/null || true); else base=$(git describe --tags --abbrev=0 HEAD 2> /dev/null || true); fi
+          if [ "$EVENT" = "schedule" ] || [ "$EVENT" = "workflow_dispatch" ] || [ -z "$base" ]; then
+            tools="$all"
+          elif git diff --quiet "$base" HEAD -- tests/click public/tools/shared; then
+            tools=$(git diff --name-only "$base" HEAD -- public/tools | cut -d/ -f3 | sort -u | grep -x -F "$all" || true)
+          else
+            tools="$all"
+          fi
+          echo "since ${base:-the start}:" $tools
+          echo "tools=$(printf '%s\n' $tools | jq -Rsc 'split("\n") | map(select(length > 0))')" >> "$GITHUB_OUTPUT"
 
   tools:
     name: Tool ${{ matrix.tool }}
     needs: tool-list
+    if: needs.tool-list.outputs.tools != '[]'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -79,6 +102,8 @@ jobs:
   pack:
     name: ${{ matrix.name }}
     needs: [click, tools]
+    # no tool changed: the tool crawl is skipped, not failed (the weekly crawl packs nothing)
+    if: ${{ !cancelled() && github.event_name != 'schedule' && needs.click.result == 'success' && contains(fromJSON('["success","skipped"]'), needs.tools.result) }}
     strategy:
       fail-fast: false
       matrix:
@@ -234,6 +259,7 @@ jobs:
 
   docker:
     name: Docker image builds and saves
+    if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5

@@ -3241,14 +3241,37 @@ async function renderClientDirectoryModal() {
     try {
         const res = await fetch('/api/clients');
         const clients = await res.json();
-        body.innerHTML = '<div style="display:flex;flex-direction:column;gap:8px;max-height:400px;overflow-y:auto;">' +
-            clients.map(c => '<div style="background:#0F172A;padding:10px 14px;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;"><div><strong>' + (c.name || 'Client') + '</strong><div style="font-size:0.8rem;color:#94A3B8;">' + (c.phone || 'No phone') + ' | ' + (c.email || 'No email') + '</div></div><button onclick="openClientProfileModal(' + c.id + ')" style="background:#2563EB;color:#FFF;border:none;padding:6px 12px;border-radius:6px;font-size:0.8rem;cursor:pointer;">View Profile</button></div>').join('') +
-            '</div>';
+        // The search box and both tick boxes used to be ignored, and no health detail was shown:
+        // a "health alerts" list that listed everyone by phone number.
+        const val = (id) => document.getElementById(id);
+        const q = String(val('client-directory-search-input')?.value || '').toLowerCase().trim();
+        const latexOnly = !!val('client-directory-latex-filter')?.checked;
+        const medicalOnly = !!val('client-directory-medical-filter')?.checked;
+        const flagged = (v) => v && !/^(none|n\/a|no)$/i.test(String(v).trim());
+        const rows = clients.map((c) => ({ c, allergy: flagged(c.allergies) ? String(c.allergies) : '', medical: flagged(c.medical_history) ? String(c.medical_history) : '' }))
+            .filter(({ c, allergy, medical }) =>
+                (!q || [c.name, c.phone, c.email, c.allergies, c.medical_history, c.assigned_staff_name].some((v) => String(v || '').toLowerCase().includes(q)))
+                && (!latexOnly || /latex/i.test(allergy))
+                && (!medicalOnly || allergy || medical))
+            .sort((a, b) => Number(!!(b.allergy || b.medical)) - Number(!!(a.allergy || a.medical)));
+        const chip = (text, color) => '<span style="display:inline-block;margin:4px 6px 0 0;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:700;background:' + color + '22;color:' + color + ';border:1px solid ' + color + '55;">' + escapeHtml(text) + '</span>';
+        body.innerHTML = rows.length ? '<div style="display:flex;flex-direction:column;gap:8px;max-height:400px;overflow-y:auto;">' +
+            rows.map(({ c, allergy, medical }) => '<div style="background:#0F172A;padding:10px 14px;border-radius:8px;border:1px solid ' + (allergy || medical ? '#7F1D1D' : '#334155') + ';display:flex;justify-content:space-between;align-items:center;gap:12px;"><div><strong>' + escapeHtml(c.name || 'Client') + '</strong><div style="font-size:0.8rem;color:#94A3B8;">' + escapeHtml(c.phone || 'No phone') + ' | ' + escapeHtml(c.email || 'No email') + (c.assigned_staff_name ? ' | ' + escapeHtml(c.assigned_staff_name) : '') + '</div><div>' +
+                (allergy ? chip('⚠️ Allergy: ' + allergy, '#EF4444') : '') + (medical ? chip('🩺 ' + medical, '#EAB308') : '') +
+                (!allergy && !medical ? '<span style="font-size:0.75rem;color:#64748B;">' + (String(c.allergies || c.medical_history || '').trim() ? 'No allergies or conditions recorded as present' : 'Nothing recorded yet: ask before the session') + '</span>' : '') +
+                '</div></div><button onclick="openClientProfileModal(' + Number(c.id) + ')" style="background:#2563EB;color:#FFF;border:none;padding:6px 12px;border-radius:6px;font-size:0.8rem;cursor:pointer;flex-shrink:0;">View Profile</button></div>').join('') +
+            '</div>' : '<div style="text-align:center;padding:24px;color:#94A3B8;">No client matches this search and these filters.</div>';
     } catch (e) {
         body.innerHTML = '<div style="color:#EF4444;text-align:center;padding:16px;">Failed to load client directory.</div>';
     }
 }
 window.renderClientDirectoryModal = renderClientDirectoryModal;
+
+// The search button said ⌘K on every computer; most studios run Windows.
+document.addEventListener('DOMContentLoaded', () => {
+    const kbd = document.getElementById('topbar-search-kbd');
+    if (kbd && /Mac|iPhone|iPad/i.test(navigator.platform || navigator.userAgent)) kbd.textContent = '⌘K';
+});
 
 // =========================================================================
 // 16. CORE MODAL & FORM HANDLERS IMPLEMENTATION

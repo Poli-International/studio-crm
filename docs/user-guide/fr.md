@@ -105,6 +105,8 @@ La **liste de clôture** enregistre les tâches effectuées, le responsable, le 
 
 L'écran **Outils** ouvre les outils Poli International (calendriers de soins post-acte, créateur de formulaire de consentement, convertisseur de calibre, estimateur de prix et plus) à l'intérieur du CRM.
 
+Le groupe **Vérificateurs de réglementation des encres** compte un vérificateur par région : les États-Unis (MoCRA et Proposition 65 de Californie), l'Europe (REACH) et l'Asie du Sud-Est (Thaïlande, aussi en thaï). Chacun ne répond que pour sa propre région.
+
 ## Sauvegardes
 
 Tout est stocké dans `data/studio_crm.sqlite` (ou le chemin défini dans `SQLITE_DB_PATH`). Copiez ce fichier pour sauvegarder le studio. Le bouton d'instantané écrit aussi une copie dans `storage/backups/`. Le CRM y enregistre aussi une copie chaque jour et garde les 30 derniers jours. Dans **Paramètres**, **Sauvegarde de la base de données**, vous pouvez aussi copier chaque sauvegarde dans un second dossier (clé USB, autre disque, dossier Google Drive, OneDrive ou Dropbox) : un disque en panne ou un ordinateur volé n'emporte pas toutes les copies.

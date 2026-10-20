@@ -1959,5 +1959,13 @@
  "Everything, and the only role that changes Settings, the team, the logins and the roles": "Alles, en de enige rol die Instellingen, het team, de logins en de rollen wijzigt",
  "Give every role a name": "Geef elke rol een naam",
  "Choose one of the roles": "Kies een van de rollen",
- "Sign out": "Afmelden"
+ "Sign out": "Afmelden",
+ "US Tattoo Ink Checker": "Tatoeage-inktchecker (VS)",
+ "Open US Tattoo Ink Checker": "Tatoeage-inktchecker (VS) openen",
+ "USA only: check ink pigments by name, CI or CAS number against MoCRA, FDA colour additive status and California Proposition {0}, with a record to print. Seven languages.": "Alleen VS: controleer inktpigmenten op naam, CI- of CAS-nummer tegen MoCRA, de FDA-status als kleuradditief en California Proposition {0}, met een verslag om af te drukken. Zeven talen.",
+ "Southeast Asia Tattoo Ink Checker": "Tatoeage-inktchecker (Zuidoost-Azië)",
+ "Open Southeast Asia Tattoo Ink Checker": "Tatoeage-inktchecker (Zuidoost-Azië) openen",
+ "Thailand only: check ink pigments by name, CI or CAS number against the Thai list of substances prohibited in cosmetics, each with its Royal Gazette entry, and print a record. Eight languages, Thai included.": "Alleen Thailand: controleer inktpigmenten op naam, CI- of CAS-nummer tegen de Thaise lijst van in cosmetica verboden stoffen, elk met zijn nummer in de Royal Gazette, en druk een verslag af. Acht talen, Thai inbegrepen.",
+ "🧪 Ink regulation checkers: USA, Europe (REACH), Southeast Asia": "🧪 Inktregelgeving-checkers: VS, Europa (REACH), Zuidoost-Azië",
+ "Each checker answers for its own region only: a clear result in one says nothing about the others.": "Elke checker geldt alleen voor zijn eigen regio: een schone uitslag in de ene zegt niets over de andere."
 }

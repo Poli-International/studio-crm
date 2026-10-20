@@ -105,6 +105,8 @@ De **afsluitchecklist** registreert welke taken zijn uitgevoerd, de leidinggeven
 
 Het scherm **Tools** opent de Poli International-tools (nazorgschema's, generator voor toestemmingsformulieren, gauge-omrekenaar, prijsschatter en meer) binnen de CRM.
 
+De groep **Inktregelgeving-checkers** heeft één checker per regio: de VS (MoCRA en California Proposition 65), Europa (REACH) en Zuidoost-Azië (Thailand, ook in het Thai). Elke checker geldt alleen voor zijn eigen regio.
+
 ## Backups
 
 Alles wordt opgeslagen in `data/studio_crm.sqlite` (of het pad ingesteld in `SQLITE_DB_PATH`). Kopieer dat bestand om de studio te backuppen. De snapshotknop schrijft ook een kopie naar `storage/backups/`. Het CRM bewaart daar ook elke dag een kopie en houdt de laatste 30 dagen. In **Instellingen**, **Database-back-up** kunt u elke back-up ook naar een tweede map laten kopiëren (USB-stick, andere schijf, Google Drive-, OneDrive- of Dropbox-map), zodat een kapotte schijf of een gestolen computer niet alle kopieën meeneemt.

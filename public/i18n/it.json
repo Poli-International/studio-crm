@@ -1959,5 +1959,13 @@
  "Everything, and the only role that changes Settings, the team, the logins and the roles": "Tutto, ed è l'unico ruolo che modifica le Impostazioni, il team, gli accessi e i ruoli",
  "Give every role a name": "Date un nome a ogni ruolo",
  "Choose one of the roles": "Scegliete uno dei ruoli",
- "Sign out": "Esci"
+ "Sign out": "Esci",
+ "US Tattoo Ink Checker": "Verifica inchiostri per tatuaggi (USA)",
+ "Open US Tattoo Ink Checker": "Apri la verifica inchiostri per tatuaggi (USA)",
+ "USA only: check ink pigments by name, CI or CAS number against MoCRA, FDA colour additive status and California Proposition {0}, with a record to print. Seven languages.": "Solo USA: verifica i pigmenti di un inchiostro per nome, numero CI o CAS rispetto a MoCRA, allo stato di additivo colorante FDA e alla Proposition {0} della California, con un registro da stampare. Sette lingue.",
+ "Southeast Asia Tattoo Ink Checker": "Verifica inchiostri per tatuaggi (Sud-est asiatico)",
+ "Open Southeast Asia Tattoo Ink Checker": "Apri la verifica inchiostri per tatuaggi (Sud-est asiatico)",
+ "Thailand only: check ink pigments by name, CI or CAS number against the Thai list of substances prohibited in cosmetics, each with its Royal Gazette entry, and print a record. Eight languages, Thai included.": "Solo Thailandia: verifica i pigmenti di un inchiostro per nome, numero CI o CAS rispetto all'elenco thailandese delle sostanze vietate nei cosmetici, ciascuna con la sua voce della Royal Gazette, e stampa un registro. Otto lingue, thailandese compreso.",
+ "🧪 Ink regulation checkers: USA, Europe (REACH), Southeast Asia": "🧪 Verifiche normative sugli inchiostri: USA, Europa (REACH), Sud-est asiatico",
+ "Each checker answers for its own region only: a clear result in one says nothing about the others.": "Ogni verifica vale solo per la propria regione: un risultato pulito in una non dice nulla sulle altre."
 }

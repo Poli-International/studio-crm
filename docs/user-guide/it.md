@@ -105,6 +105,8 @@ La **checklist di chiusura** registra quali attività sono state svolte, il supe
 
 La schermata **Strumenti** apre gli strumenti Poli International (calendari di aftercare, generatore di moduli di consenso, convertitore di calibro, preventivatore prezzi e altro) all'interno del CRM.
 
+Il gruppo **Verifiche normative sugli inchiostri** ha una verifica per regione: USA (MoCRA e Proposition 65 della California), Europa (REACH) e Sud-est asiatico (Thailandia, anche in thailandese). Ognuna vale solo per la propria regione.
+
 ## Backup
 
 Tutto è memorizzato in `data/studio_crm.sqlite` (o nel percorso impostato in `SQLITE_DB_PATH`). Copiate quel file per fare il backup dello studio. Il pulsante snapshot scrive anche una copia in `storage/backups/`. Il CRM vi salva anche una copia ogni giorno e conserva gli ultimi 30 giorni. In **Impostazioni**, **Backup Database**, potete copiare ogni backup anche in una seconda cartella (chiavetta USB, altro disco, cartella Google Drive, OneDrive o Dropbox), così un disco guasto o un computer rubato non porta via tutte le copie.

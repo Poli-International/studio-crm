@@ -251,6 +251,28 @@ await flow('Health Alerts: View Profile opens the profile in front', async () =>
   check(front, 'the profile opened behind the alerts window');
 });
 
+await flow('Health Alerts: the search box, Latex Allergy and Medical Flags narrow the list', async () => {
+  for (const c of [{ name: 'Alertflow Latex', allergies: 'Latex gloves' }, { name: 'Alertflow Heart', allergies: 'None', medical_history: 'Heart condition' }, { name: 'Alertflow Clear', allergies: 'None', medical_history: 'None' }])
+    await b.evaluate(`fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: ${JSON.stringify(JSON.stringify(c))} }).then(r => r.status)`);
+  await b.goto(url);
+  await b.clickText('Clients');
+  await pressOn('openClientDirectoryModal()');
+  const listed = () => b.evaluate(`[...document.querySelectorAll('#client-directory-modal-body strong')].map(s => s.innerText).filter(n => n.startsWith('Alertflow')).sort().join(',')`);
+  const expect = async (want, what) => eventually(async () => (await listed()) === want, async () => what + ': listed ' + (await listed()));
+  await b.type('#client-directory-search-input', 'alertflow');
+  await expect('Alertflow Clear,Alertflow Heart,Alertflow Latex', 'the search lists all three');
+  check(/Allergy: Latex gloves/.test(await text('#client-directory-modal-body')), 'the latex allergy is not shown on the client');
+  await b.evaluate(`document.getElementById('client-directory-latex-filter').click()`);
+  await expect('Alertflow Latex', 'Latex Allergy');
+  await b.evaluate(`document.getElementById('client-directory-latex-filter').click()`);
+  await b.evaluate(`document.getElementById('client-directory-medical-filter').click()`);
+  await expect('Alertflow Heart,Alertflow Latex', 'Medical Flags');
+  await b.type('#client-directory-search-input', 'heart');
+  await expect('Alertflow Heart', 'search plus Medical Flags');
+  await b.type('#client-directory-search-input', 'zzzq');
+  await eventually(async () => /No client matches/.test(await text('#client-directory-modal-body')), 'no "No client matches" for a search that finds nobody');
+});
+
 await flow('Record Payment saves a payment', async () => {
   await b.goto(url);
   await b.clickText('Finance');
@@ -771,6 +793,30 @@ await flow('Ink mixer: the diluent label is the size chosen, cap sizes change th
   await b.goto(url.replace(/\/$/, '') + '/tools/autoclave-calculator/');
   await eventually(async () => b.evaluate(`document.readyState === 'complete' && document.body.innerText.length > 1000`), 'the autoclave tool did not open');
   check(!/Google Sheets|Firestore/.test(await b.evaluate(`document.body.innerText`)), 'the autoclave tool still offers a Google Sheets sync');
+});
+
+await flow('Tools: the USA, Europe and Southeast Asia ink checkers are grouped and each opens; the Thai list flags a banned pigment, not carbon black', async () => {
+  await pressOn("navigateToDestination('tools')");
+  await eventually(async () => /Ink regulation checkers: USA, Europe \(REACH\), Southeast Asia/.test(await text('#ink-regulation-checkers')), 'no Ink regulation checkers group in Tools');
+  for (const [fn, frame] of [['UsTattooInkChecker', 'poli-usinkcheck-frame'], ['ReachSvhcChecker', 'poli-svhccheck-frame'], ['SeaTattooInkChecker', 'poli-seainkcheck-frame']]) {
+    await pressOn(`open${fn}Modal()`);
+    await eventually(async () => b.evaluate(`(() => { const d = document.getElementById('${frame}').contentDocument; return !!d && d.readyState === 'complete' && d.body.innerText.length > 200; })()`), `${fn} did not open`);
+    if (fn === 'SeaTattooInkChecker') {
+      // 2026-10-20: the export flagged carbon black and the iron oxides as "restricted"; they are permitted colours in Thailand
+      const rows = await b.evaluate(`(async () => {
+        const d = document.getElementById('${frame}').contentDocument, w = d.defaultView, ta = d.querySelector('textarea');
+        Object.getOwnPropertyDescriptor(w.HTMLTextAreaElement.prototype, 'value').set.call(ta, 'Pigment Red 53:1 (CI 15585), Carbon Black CI 77266, Iron Oxide CI 77491, Aqua');
+        ta.dispatchEvent(new w.Event('input', { bubbles: true }));
+        await new Promise((r) => setTimeout(r, 200));
+        [...d.querySelectorAll('button')].find((x) => /Screen Against/.test(x.innerText)).click();
+        await new Promise((r) => setTimeout(r, 600));
+        return [...d.querySelectorAll('table tbody tr')].map((r) => r.innerText).join(' | ');
+      })()`);
+      check(/CI 15585/.test(rows) && /399/.test(rows), 'CI 15585 is not flagged with its Royal Gazette entry: ' + rows);
+      check(!/77266|77491/.test(rows), 'a permitted colour is flagged: ' + rows);
+    }
+    await b.evaluate(`close${fn}Modal()`);
+  }
 });
 
 await flow('Autoclave log: keeps only what was entered, never a passing result nobody recorded', async () => {

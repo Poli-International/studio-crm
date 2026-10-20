@@ -37,6 +37,7 @@ const QUIET = [
   /Standard Comparison \(Flat Rent/, // booth rent: the comparison already shown
   /BUTTON \|  \| (📊 Benchmark Table|View Formatted Guide|📏 Curvature Calculator|📐 Standard Stencil Mode|High-Res Print Reference \(4800 x 1600 px|File Backup & JSON|Export Direct Sync Payload) \| $/,
   /BUTTON \| tab_decoder_btn \|/, // ink decoder: the tab it opens on // the tab or mode already shown
+  /BUTTON \|  \| (Pasted SDS \/ Label Screening|Ingredient Screening|All Jurisdictions) \| $/, // SEA and US ink checkers: the tab and the filter they open on
   /BUTTON \|  \| [^|]*Copied/, // a copy button whose label just said so: pressing again copies the same text
   /BUTTON \|  \| 👂 Lobe vs Helix/, // angle guide: the comparison shown when compare mode opens
   /BUTTON \|  \| ❌ /, // ink mixer: picks again the colour already marked out of stock

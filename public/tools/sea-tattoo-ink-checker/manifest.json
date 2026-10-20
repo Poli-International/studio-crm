@@ -1,0 +1,10 @@
+{
+  "short_name": "SEA Ink Checker",
+  "name": "SEA Tattoo Ink Checker",
+  "description": "Country-by-country screening of tattoo ink and cosmetic chemical requirements in Southeast Asia, starting with verified Thailand FDA and MOPH regulations.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "theme_color": "#0c0f17",
+  "background_color": "#0c0f17"
+}

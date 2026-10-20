@@ -105,6 +105,8 @@ A **checklist de fecho** regista quais os itens realizados, o supervisor, o núm
 
 O ecrã **Ferramentas** abre as ferramentas da Poli International (calendários de cuidados pós-procedimento, criador de formulários de consentimento, conversor de calibre, estimador de preços e mais) dentro do CRM.
 
+O grupo **Verificadores de regulamentação de tintas** tem um verificador por região: EUA (MoCRA e Proposição 65 da Califórnia), Europa (REACH) e Sudeste Asiático (Tailândia, também em tailandês). Cada um responde só pela sua região.
+
 ## Cópias de segurança
 
 Tudo é guardado em `data/studio_crm.sqlite` (ou no caminho definido em `SQLITE_DB_PATH`). Copie esse ficheiro para fazer uma cópia de segurança do estúdio. O botão de snapshot também escreve uma cópia em `storage/backups/`. O CRM também guarda lá uma cópia todos os dias e mantém os últimos 30 dias. Em **Definições**, **Cópia de Segurança da Base de Dados**, pode copiar também cada cópia para uma segunda pasta (pen USB, outro disco, pasta do Google Drive, OneDrive ou Dropbox), para que um disco avariado ou um computador roubado não leve todas as cópias.

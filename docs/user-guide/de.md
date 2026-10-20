@@ -105,6 +105,8 @@ Die **Abschluss-Checkliste** erfasst, welche Punkte erledigt wurden, den Verantw
 
 Der Bildschirm **Tools** öffnet die Poli-International-Tools (Nachsorgepläne, Einverständnisformular-Generator, Gauge-Umrechner, Preisschätzer und mehr) innerhalb des CRM.
 
+Die Gruppe **Prüfer für Farbvorschriften** hat einen Prüfer je Region: USA (MoCRA und California Proposition 65), Europa (REACH) und Südostasien (Thailand, auch auf Thai). Jeder gilt nur für seine eigene Region.
+
 ## Backups
 
 Alles wird in `data/studio_crm.sqlite` gespeichert (oder im in `SQLITE_DB_PATH` festgelegten Pfad). Kopieren Sie diese Datei, um das Studio zu sichern. Die Snapshot-Schaltfläche schreibt außerdem eine Kopie nach `storage/backups/`. Das CRM speichert dort außerdem jeden Tag eine Kopie und behält die letzten 30 Tage. Unter **Einstellungen**, **Datenbanksicherung** können Sie jede Sicherung zusätzlich in einen zweiten Ordner kopieren lassen (USB-Stick, andere Festplatte, Google-Drive-, OneDrive- oder Dropbox-Ordner), damit eine defekte Festplatte oder ein gestohlener Computer nicht alle Kopien mitnimmt.

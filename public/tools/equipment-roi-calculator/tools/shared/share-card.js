@@ -171,13 +171,15 @@
       };
     }
 
-    function addButton(label, primary, onClick) {
+    var buttons = [];
+    function addButton(label, primary, onClick, key) {
       var b = document.createElement('button');
       b.type = 'button';
       b.className = 'poli-share__btn' + (primary ? ' poli-share__btn--primary' : '');
       b.textContent = label;
       b.addEventListener('click', onClick);
       row.appendChild(b);
+      buttons.push([b, key]);
       return b;
     }
 
@@ -190,7 +192,7 @@
         navigator
           .share({ title: p.card.t, url: buildShareUrl(cfg.tool, p.payload) })
           .catch(function () { /* user dismissed the sheet */ });
-      });
+      }, 'share.btn_share');
     }
 
     var copyBtnTxt = window.t ? window.t('share.btn_copy') : 'Copy link';
@@ -200,7 +202,7 @@
       copyText(buildShareUrl(cfg.tool, p.payload), function () {
         setStatus(window.t ? window.t('share.copied') : 'Link copied. Anyone who opens it sees this exact result.');
       });
-    });
+    }, 'share.btn_copy');
 
     var downloadBtnTxt = window.t ? window.t('share.btn_download') : 'Download card';
     addButton(downloadBtnTxt, false, function () {
@@ -225,7 +227,16 @@
         .catch(function () {
           setStatus(window.t ? window.t('share.error') : 'Could not build the card right now. Copy the link instead.');
         });
-    });
+    }, 'share.btn_download');
+
+    // The bar is built once, at init. Without this, a language switch leaves it in the language it loaded in.
+    function relabel() {
+      if (!window.t) return;
+      bar.querySelector('.poli-share__title').textContent = window.t('share.title');
+      bar.querySelector('.poli-share__hint').textContent = window.t('share.hint');
+      buttons.forEach(function (pair) { pair[0].textContent = window.t(pair[1]); });
+    }
+    window.addEventListener('languagechange', relabel);
 
     // Restore a shared result from ?r=
     var m = window.location.search.match(/[?&]r=([^&]+)/);

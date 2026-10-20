@@ -4,6 +4,7 @@
  */
 window.i18nDictionaries = window.i18nDictionaries || {};
 window.i18nDictionaries['es'] = {
+  "industrial.diagramLabels": "bola  ←——distancia orificio a orificio——→  bola\n      [      su entrada     ]",
   "anatomy.browse.all": "Ver todas las opciones",
   "anatomy.browse.btn": "Explorar joyería compatible",
   "anatomy.browseCompatible": "Explorar joyas compatibles",

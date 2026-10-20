@@ -2423,6 +2423,18 @@ function initAutoclaveApp() {
         if (typeof updateCalculatedDisplay === 'function') {
             updateCalculatedDisplay();
         }
+        if (typeof SporeDailyAlertManager !== 'undefined' && typeof SporeDailyAlertManager.checkAndRenderAlert === 'function') {
+            SporeDailyAlertManager.checkAndRenderAlert();
+        }
+        if (typeof UnitConverterManager !== 'undefined' && typeof UnitConverterManager.evaluateEquilibrium === 'function') {
+            UnitConverterManager.evaluateEquilibrium();
+        }
+        if (typeof WeeklyDigestManager !== 'undefined' && typeof WeeklyDigestManager.updatePreview === 'function') {
+            WeeklyDigestManager.updatePreview();
+        }
+        if (typeof AnatomyReferenceManager !== 'undefined' && typeof AnatomyReferenceManager.render === 'function') {
+            AnatomyReferenceManager.render();
+        }
         if (typeof ChamberCapacityManager !== 'undefined' && typeof ChamberCapacityManager.updateGauge === 'function') {
             ChamberCapacityManager.updateGauge();
         }
@@ -3659,7 +3671,7 @@ const UnitConverterManager = {
             eqBadge.textContent = '✓ 100% SATURATED STEAM (IDEAL LETHALITY)';
             eqState.className = 'eq-val text-green';
             eqState.textContent = 'Saturated Vapor (Optimal Equilibrium)';
-            eqAdvisory.innerHTML = `<strong>✓ Physical Equilibrium Verified:</strong> Temperature (${tempC.toFixed(1)}°C) and pressure (${curGaugePsi.toFixed(1)} PSI) match the physical saturated steam tables. Steam will condense instantaneously upon cold stainless steel instruments, transferring ~2,166 kJ/kg of latent heat for microbial cell denaturation.`;
+            eqAdvisory.innerHTML = `<strong>✓ ${window.t('Physical Equilibrium Verified:')}</strong> ${window.t('Temperature ({temp}°C) and pressure ({psi} PSI) match the physical saturated steam tables. Steam will condense instantaneously upon cold stainless steel instruments, transferring ~2,166 kJ/kg of latent heat for microbial cell denaturation.', { temp: tempC.toFixed(1), psi: curGaugePsi.toFixed(1) })}`;
         } else if (deltaPsi < -2.5) {
             // Sub-saturated steam (air cold spot risk)
             eqBadge.className = 'steam-eq-badge status-sub-saturated';
@@ -7488,7 +7500,7 @@ const WeeklyDigestManager = {
 
         if (rangeEl) rangeEl.textContent = data.dateRange;
         if (cyclesEl) cyclesEl.textContent = `${data.totalCycles} cycles`;
-        if (goalRateEl) goalRateEl.textContent = `${data.goalRate}% (${data.daysGoalMet}/7 days met)`;
+        if (goalRateEl) goalRateEl.textContent = `${data.goalRate}% (${data.daysGoalMet}/7 ${window.t('days met')})`;
         if (sporeEl) sporeEl.textContent = data.sporeStatusText;
         if (calibEl) calibEl.textContent = data.calibStatusText;
 
@@ -9032,7 +9044,7 @@ const SterilizationLogManager = {
             } else if (this.searchQuery.trim() || this.dateFilterPreset !== 'all') {
                 countEl.textContent = `Showing ${filtered.length} of ${allLogs.length} recorded batches (Filtered)`;
             } else {
-                countEl.textContent = `Showing ${filtered.length} recorded batches`;
+                countEl.textContent = window.t('Showing {count} recorded batches', { count: filtered.length });
             }
         }
 
@@ -9092,7 +9104,7 @@ const SterilizationLogManager = {
             }
 
             const warnChip = isAuditWarning 
-                ? `<br><span class="autoclave__audit-warn-chip" title="Missing required fields: ${auditCheck.missing.join(', ')}">⚠️ Incomplete (${auditCheck.missing.length} missing)</span>` 
+                ? `<br><span class="autoclave__audit-warn-chip" title="Missing required fields: ${auditCheck.missing.join(', ')}">⚠️ ${window.t('Incomplete ({count} missing)', { count: auditCheck.missing.length })}</span>` 
                 : '';
 
             // Generate Mini QR Code SVG for in-table optical scan & click-to-preview
@@ -11984,7 +11996,7 @@ const SporeDailyAlertManager = {
                     pillEl.textContent = '🚨 OVERDUE — ACTION REQUIRED';
                 }
                 if (statusEl) {
-                    statusEl.textContent = `🚨 OVERDUE (${daysOver}d overdue)`;
+                    statusEl.textContent = `🚨 ${window.t('OVERDUE ({days}d overdue)', { days: daysOver })}`;
                     statusEl.style.color = '#EF4444';
                 }
             } else if (hoursRemaining <= 12) {
@@ -12010,7 +12022,7 @@ const SporeDailyAlertManager = {
             }
 
             if (dateEl) dateEl.textContent = formattedDueDate;
-            if (freqEl) freqEl.textContent = `${stateReq.name || 'Standard'} (${freqDays}d cycle)`;
+            if (freqEl) freqEl.textContent = `${window.t(stateReq.name || 'Standard')} (${window.t('{days}d cycle', { days: freqDays })})`;
         } else {
             banner.style.display = 'none';
         }
@@ -15200,7 +15212,7 @@ const AnatomyReferenceManager = {
                     <div class="anatomy-thickness-bar-wrap">
                         <div class="anatomy-thickness-bar-fill" style="width: ${profile.barPct}%;"></div>
                     </div>
-                    <div class="anatomy-stat-sub" style="margin-top: 4px;">Zone: ${profile.category} Tissue</div>
+                    <div class="anatomy-stat-sub" style="margin-top: 4px;">${window.t('Zone: {category} Tissue', { category: window.t(profile.category) })}</div>
                 </div>
 
                 <div class="anatomy-stat-pill">

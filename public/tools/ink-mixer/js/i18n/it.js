@@ -5,6 +5,23 @@
 
 if (typeof window !== "undefined" && window.registerLanguage) {
   window.registerLanguage("it", {
+    "aria": {
+      "breadcrumb": "Percorso di navigazione",
+      "embedOptions": "Apri le opzioni di incorporamento",
+      "darkModeToggle": "Attiva/disattiva modalità scura/chiara",
+      "tabs": "Sezioni dello strumento Miscelatore inchiostri",
+      "targetGoalSwatch": "Campione del colore obiettivo",
+      "predictedMatchSwatch": "Campione della corrispondenza prevista",
+      "predictedMixedColor": "Colore dell'inchiostro miscelato previsto",
+      "componentSwatch": "Campione del componente",
+      "remove": "Rimuovi"
+    },
+    "verdict": {
+      "imperceptible": "Corrispondenza impercettibile (alta fedeltà)",
+      "close": "Corrispondenza stretta (percepibile all'ispezione)",
+      "noticeable": "Variazione evidente (sfumatura utilizzabile)",
+      "significant": "Scostamento significativo (fuori dalla gamma principale)"
+    },
   "breadcrumb": {
     "home": "Home",
     "tools": "Strumenti",
@@ -432,6 +449,7 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "headerTitle": "Assistente tonalità complementare e neutralizzante sottrattiva"
   },
   "qrTransfer": {
+    "byteMeterEmpty": "0 byte / 2,048 max",
     "modalTitle": "Trasferimento formule offline tramite codice QR",
     "modalSubtitle": "Inquadra con la fotocamera di un altro dispositivo per importare la formula senza accesso alla rete né account cloud.",
     "payloadSizeLabel": "Dimensione misurata dei dati:",
@@ -519,6 +537,13 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "tray12": "Griglia completa a 12 capsule"
   },
   "diluentFormulator": {
+    "mlDrops": "{ml} ml ({drops} gocce)",
+    "labelTitle": "Etichetta flacone diluente - Poli International",
+    "vehicleHeading": "VEICOLO DILUENTE PER OMBREGGIATURA",
+    "meta": "Preparato: <strong>{date}</strong> | ID lotto: <strong>{batchId}</strong>",
+    "labelNotes": "Note: {notes}",
+    "warning": "Poli International Tattoo Tools Suite • Conservare in un flacone spremibile pulito e ben chiuso. Praticare una tecnica sterile. Eliminare entro il termine raccomandato dallo studio.",
+    "popupBlocked": "Pop-up bloccato. Consenti i pop-up per stampare le etichette dei flaconi.",
     "title": "Formulatore di Diluente per Sfumature Personalizzato",
     "subtitle": "Formula soluzioni veicolo con acqua sterile, amamelide e glicerina USP per sfumature perfette.",
     "sizeLabel": "Misura Flacone",
@@ -729,6 +754,7 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "formulaArchive": "ARCHIVIO-FORMULA"
   },
   "substitution": {
+    "inkCount": "({count} inchiostri)",
     "title": "🔄 Vista Sostituzione Inchiostri della Formula",
     "subtitle": "Scegli una formula salvata, contrassegna un inchiostro come esaurito e seleziona un sostituto dall'inventario per verificare la differenza di colore CIEDE2000 (ΔE₀₀).",
     "selectRecipe": "Seleziona Formula Salvata",

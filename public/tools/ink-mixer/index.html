@@ -109,7 +109,7 @@ body.dark-mode .breadcrumb-nav strong {
 <!-- every message the mixer shows (saved, copied, errors); it sits above any open window -->
 <div id="messageContainer" class="ink-mixer__message" role="status" aria-live="polite" style="display: none; position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 10001; max-width: min(92vw, 560px); box-shadow: 0 8px 24px rgba(0,0,0,.25);"></div>
 <a href="#main-content" class="skip-link" data-i18n="app.skipLink">Skip to main content</a>
-<nav class="breadcrumb-nav" aria-label="Breadcrumb">
+<nav class="breadcrumb-nav" aria-label="Breadcrumb" data-i18n-attr="aria-label:aria.breadcrumb">
     <a href="//poliinternational.com/" data-i18n="breadcrumb.home">Home</a>
     <span>›</span>
     <a href="//poliinternational.com/tools/" data-i18n="breadcrumb.tools">Tools</a>
@@ -135,7 +135,7 @@ body.dark-mode .breadcrumb-nav strong {
             <div class="lang-switcher">
                 <label for="siteLanguageSelect" class="sr-only" data-i18n="app.language">Language</label>
                 <span class="lang-switcher__icon" aria-hidden="true">🌐</span>
-                <select id="siteLanguageSelect" class="lang-switcher__select" aria-label="Language">
+                <select id="siteLanguageSelect" class="lang-switcher__select" aria-label="Language" data-i18n-attr="aria-label:app.language">
                     <option value="en" data-i18n="languages.en">English (EN)</option>
                     <option value="fr" data-i18n="languages.fr">Français (FR)</option>
                     <option value="it" data-i18n="languages.it">Italiano (IT)</option>
@@ -189,7 +189,7 @@ body.dark-mode .breadcrumb-nav strong {
                 <div class="lang-switcher">
                     <label for="languageSelect" class="sr-only" data-i18n="app.language">Language</label>
                     <span class="lang-switcher__icon" aria-hidden="true">🌐</span>
-                    <select id="languageSelect" class="lang-switcher__select" aria-label="Language">
+                    <select id="languageSelect" class="lang-switcher__select" aria-label="Language" data-i18n-attr="aria-label:app.language">
                     <option value="en" data-i18n="languages.en">English (EN)</option>
                     <option value="fr" data-i18n="languages.fr">Français (FR)</option>
                     <option value="it" data-i18n="languages.it">Italiano (IT)</option>
@@ -201,12 +201,12 @@ body.dark-mode .breadcrumb-nav strong {
                     </select>
                 </div>
 
-                <button id="embedBtn" class="ink-mixer__embed-button" aria-label="Open embed options">
+                <button id="embedBtn" class="ink-mixer__embed-button" aria-label="Open embed options" data-i18n-attr="aria-label:aria.embedOptions">
                     <span class="embed-icon">⚡</span>
                     <span class="embed-text" data-i18n="app.embedBtn">Free Embed</span>
                 </button>
                 
-                <button id="darkModeToggle" class="ink-mixer__dark-mode-toggle" aria-label="Toggle dark/light mode">
+                <button id="darkModeToggle" class="ink-mixer__dark-mode-toggle" aria-label="Toggle dark/light mode" data-i18n-attr="aria-label:aria.darkModeToggle">
                     <span class="dark-mode-icon">◐</span>
                 </button>
             </div>
@@ -220,7 +220,7 @@ body.dark-mode .breadcrumb-nav strong {
             <div class="tool-interface">
 
                 <!-- Tab Navigation -->
-                <div class="ink-mixer__tabs" role="tablist" aria-label="Ink mixer tool sections">
+                <div class="ink-mixer__tabs" role="tablist" aria-label="Ink mixer tool sections" data-i18n-attr="aria-label:aria.tabs">
                     <button class="ink-mixer__tab ink-mixer__tab--active" data-tab="mixer" role="tab" aria-selected="true" aria-controls="tab-mixer" id="tabBtnMixer" data-i18n="tabs.mixer">
                         🎨 Color Mixer &amp; Target Solver
                     </button>
@@ -298,14 +298,14 @@ body.dark-mode .breadcrumb-nav strong {
                         <div id="targetSolverResults" class="target-solver-results" style="display: none; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border-primary);">
                             <div class="target-vs-predicted">
                                 <div class="target-compare-box">
-                                    <div class="target-compare-swatch" id="targetOriginalSwatch" role="img" aria-label="Target Goal Swatch"></div>
+                                    <div class="target-compare-swatch" id="targetOriginalSwatch" role="img" aria-label="Target Goal Swatch" data-i18n-attr="aria-label:aria.targetGoalSwatch"></div>
                                     <span class="target-compare-label" data-i18n="targetSolver.targetGoal">Target Goal</span>
                                     <span id="targetOriginalHexText" class="swatch-text-hex-sm">#000000</span>
                                     <span id="targetOriginalLStarText" class="swatch-text-lstar-sm">L* --</span>
                                 </div>
                                 <div style="font-size: 1.5rem; color: var(--text-secondary);">➔</div>
                                 <div class="target-compare-box">
-                                    <div class="target-compare-swatch" id="targetResultSwatch" role="img" aria-label="Predicted Match Swatch"></div>
+                                    <div class="target-compare-swatch" id="targetResultSwatch" role="img" aria-label="Predicted Match Swatch" data-i18n-attr="aria-label:aria.predictedMatchSwatch"></div>
                                     <span class="target-compare-label" data-i18n="targetSolver.predictedMatch">Predicted Match</span>
                                     <span id="targetResultHexText" class="swatch-text-hex-sm">#000000</span>
                                     <span id="targetResultLStarText" class="swatch-text-lstar-sm">L* --</span>
@@ -421,7 +421,7 @@ body.dark-mode .breadcrumb-nav strong {
                                 <div class="ink-mixer__results-card">
                                     <!-- Color Preview: Large judgeable swatch with exact numerical text metadata -->
                                     <div class="ink-mixer__color-preview">
-                                        <div id="resultColorSwatch" class="ink-mixer__swatch ink-mixer__swatch--large" role="img" aria-label="Predicted Mixed Ink Color"></div>
+                                        <div id="resultColorSwatch" class="ink-mixer__swatch ink-mixer__swatch--large" role="img" aria-label="Predicted Mixed Ink Color" data-i18n-attr="aria-label:aria.predictedMixedColor"></div>
                                         <div class="ink-mixer__swatch-text-block">
                                             <div id="resultColorHexText" class="swatch-text-hex">#000000</div>
                                             <div id="resultColorDescText" class="swatch-text-desc" data-i18n="mixer.predictedBlend">Predicted Blend</div>
@@ -1262,7 +1262,7 @@ body.dark-mode .breadcrumb-nav strong {
                     <div class="qr-meter-box">
                         <div class="qr-meter-header">
                             <span class="qr-meter-label" data-i18n="qrTransfer.payloadSizeLabel">Measured Payload Size:</span>
-                            <span id="qrByteCount" class="qr-meter-val">0 bytes / 2,048 max</span>
+                            <span id="qrByteCount" class="qr-meter-val" data-i18n="qrTransfer.byteMeterEmpty">0 bytes / 2,048 max</span>
                         </div>
                         <div class="qr-meter-track">
                             <div id="qrByteBar" class="qr-meter-bar"></div>

@@ -4,6 +4,7 @@
  */
 window.i18nDictionaries = window.i18nDictionaries || {};
 window.i18nDictionaries['nl'] = {
+  "industrial.diagramLabels": "kogel  ←——gat-tot-gat-afstand——→  kogel\n      [      uw invoer     ]",
   "anatomy.browse.all": "Alle opties bekijken",
   "anatomy.browse.btn": "Compatibele sieraden bekijken",
   "anatomy.browseCompatible": "Compatibele sieraden bekijken",

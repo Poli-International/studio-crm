@@ -4,6 +4,7 @@
  */
 window.i18nDictionaries = window.i18nDictionaries || {};
 window.i18nDictionaries['de'] = {
+  "industrial.diagramLabels": "Kugel  ←——Loch-zu-Loch-Abstand——→  Kugel\n      [      Ihre Eingabe     ]",
   "anatomy.browse.all": "Alle Optionen anzeigen",
   "anatomy.browse.btn": "Passenden Schmuck durchstöbern",
   "anatomy.browseCompatible": "Passenden Schmuck durchsuchen",

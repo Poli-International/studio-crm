@@ -5,6 +5,23 @@
 
 if (typeof window !== "undefined" && window.registerLanguage) {
   window.registerLanguage("th", {
+    "aria": {
+      "breadcrumb": "เส้นทางการนำทาง",
+      "embedOptions": "เปิดตัวเลือกการฝังโค้ด",
+      "darkModeToggle": "สลับโหมดมืด/สว่าง",
+      "tabs": "ส่วนของเครื่องมือผสมหมึก",
+      "targetGoalSwatch": "ตัวอย่างสีเป้าหมาย",
+      "predictedMatchSwatch": "ตัวอย่างการจับคู่ที่คาดการณ์",
+      "predictedMixedColor": "สีหมึกผสมที่คาดการณ์",
+      "componentSwatch": "ตัวอย่างส่วนประกอบ",
+      "remove": "ลบ"
+    },
+    "verdict": {
+      "imperceptible": "การจับคู่ที่มองไม่เห็นความต่าง (ความเที่ยงตรงสูง)",
+      "close": "การจับคู่ใกล้เคียง (รับรู้ได้เมื่อตรวจสอบ)",
+      "noticeable": "ความแตกต่างที่สังเกตได้ (ใช้ได้สำหรับการแรเงา)",
+      "significant": "การเปลี่ยนแปลงที่สำคัญ (อยู่นอกช่วงสีหลัก)"
+    },
   "app": {
     "title": "เครื่องผสมสีหมึกสักระดับมืออาชีพและเครื่องคำนวณสูตร",
     "headerTitle": "เครื่องผสมสีหมึกสักระดับมืออาชีพ",
@@ -405,6 +422,7 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "headerTitle": "ผู้ช่วยการหักล้างสีแบบลบและการทำให้สีเป็นกลาง"
   },
   "qrTransfer": {
+    "byteMeterEmpty": "0 ไบต์ / สูงสุด 2,048",
     "modalTitle": "การถ่ายโอนสูตรด้วย QR Code แบบออฟไลน์",
     "modalSubtitle": "สแกนด้วยกล้องของอุปกรณ์อื่นเพื่อนำเข้าสูตรโดยไม่ต้องเชื่อมต่อเครือข่ายหรือบัญชีคลาวด์",
     "payloadSizeLabel": "ขนาดข้อมูลที่วัดได้:",
@@ -548,6 +566,13 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "tray12": "ถาดกริดเต็ม 12 แคป"
   },
   "diluentFormulator": {
+    "mlDrops": "{ml} ml ({drops} หยด)",
+    "labelTitle": "ฉลากขวดตัวทำละลาย - Poli International",
+    "vehicleHeading": "ตัวพาตัวทำละลายสำหรับการแรเงา",
+    "meta": "เตรียมเมื่อ: <strong>{date}</strong> | รหัสชุด: <strong>{batchId}</strong>",
+    "labelNotes": "หมายเหตุ: {notes}",
+    "warning": "Poli International Tattoo Tools Suite • เก็บในขวดบีบที่สะอาดและปิดสนิท ปฏิบัติตามเทคนิคปลอดเชื้อ ทิ้งภายในระยะเวลาที่สตูดิโอแนะนำ",
+    "popupBlocked": "ป๊อปอัปถูกบล็อก โปรดอนุญาตป๊อปอัปเพื่อพิมพ์ฉลากขวด",
     "title": "เครื่องสร้างตัวนำน้ำยาเจือจางแรเงาแบบกำหนดเอง",
     "subtitle": "สร้างตัวนำน้ำกลั่นปราศจากเชื้อ Witch Hazel และ USP Glycerin สำหรับการผสมวอชสีเทาและสีให้นุ่มเนียน",
     "sizeLabel": "ขนาดภาชนะ",
@@ -729,6 +754,7 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "formulaArchive": "FORMULA-ARCHIVE"
   },
   "substitution": {
+    "inkCount": "({count} หมึก)",
     "title": "🔄 มุมมองการแทนที่หมึกในสูตร",
     "subtitle": "เลือกสูตรที่บันทึกไว้ ทำเครื่องหมายหมึกว่าหมด และเลือกหมึกทดแทนจากคลังเพื่อตรวจสอบความต่างของสี CIEDE2000 (ΔE₀₀)",
     "selectRecipe": "เลือกสูตรที่บันทึกไว้",

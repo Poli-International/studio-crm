@@ -96,6 +96,7 @@ window.I18N_DICTIONARY.es = {
       "promptTitle": "Recordatorio de hidratación",
       "promptBody": "¡Momento de tomar un vaso de agua! La regeneración celular y la eliminación linfática requieren una hidratación epidérmica óptima, especialmente durante la cicatrización de tatuajes y piercings.",
       "drankWaterBtn": "💧 Registrar +1 vaso",
+      "addCupBtn": "+ 1 vaso",
       "snoozeBtn": "Posponer (30 min)",
       "title": "Control diario de hidratación dérmica",
       "subtitle": "Registra tu consumo de agua para respaldar la mitosis epidérmica, la elasticidad de las costras y la resolución linfática del pigmento.",

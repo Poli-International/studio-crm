@@ -5,6 +5,23 @@
 
 if (typeof window !== "undefined" && window.registerLanguage) {
   window.registerLanguage("de", {
+    "aria": {
+      "breadcrumb": "Navigationspfad",
+      "embedOptions": "Einbettungsoptionen öffnen",
+      "darkModeToggle": "Dunkel-/Hellmodus umschalten",
+      "tabs": "Abschnitte des Tintenmischers",
+      "targetGoalSwatch": "Muster der Zielfarbe",
+      "predictedMatchSwatch": "Muster der vorhergesagten Übereinstimmung",
+      "predictedMixedColor": "Vorhergesagte Mischfarbe der Tinte",
+      "componentSwatch": "Muster der Komponente",
+      "remove": "Entfernen"
+    },
+    "verdict": {
+      "imperceptible": "Nicht wahrnehmbare Übereinstimmung (hohe Treue)",
+      "close": "Enge Übereinstimmung (bei genauer Prüfung wahrnehmbar)",
+      "noticeable": "Deutliche Abweichung (für Schattierungen brauchbar)",
+      "significant": "Deutliche Verschiebung (außerhalb des Kernfarbraums)"
+    },
   "breadcrumb": {
     "home": "Startseite",
     "tools": "Werkzeuge",
@@ -432,6 +449,7 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "headerTitle": "Subtraktiver Komplementär- & Neutralisations-Farbtonassistent"
   },
   "qrTransfer": {
+    "byteMeterEmpty": "0 Bytes / 2,048 max",
     "modalTitle": "Offline-QR-Code-Formelübertragung",
     "modalSubtitle": "Mit der Kamera eines anderen Geräts scannen, um die Formel ohne Netzwerkzugriff oder Cloud-Konten zu importieren.",
     "payloadSizeLabel": "Gemessene Datengröße:",
@@ -519,6 +537,13 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "tray12": "12-Kappen Vollraster-Tray"
   },
   "diluentFormulator": {
+    "mlDrops": "{ml} ml ({drops} Tropfen)",
+    "labelTitle": "Etikett Verdünnerflasche - Poli International",
+    "vehicleHeading": "SCHATTIERUNGS-VERDÜNNERTRÄGER",
+    "meta": "Vorbereitet: <strong>{date}</strong> | Chargen-ID: <strong>{batchId}</strong>",
+    "labelNotes": "Hinweise: {notes}",
+    "warning": "Poli International Tattoo Tools Suite • In einer sauberen, verschlossenen Quetschflasche aufbewahren. Steriles Arbeiten einhalten. Innerhalb des vom Studio empfohlenen Zeitraums verwerfen.",
+    "popupBlocked": "Pop-up blockiert. Bitte erlauben Sie Pop-ups, um Flaschenetiketten zu drucken.",
     "title": "Individueller Schattierungs-Verdünner-Formulierer",
     "subtitle": "Trägerlösungen aus sterilem Wasser, Hamamelis und USP-Glycerin für feine Grauwäschen formulieren.",
     "sizeLabel": "Flaschengröße",
@@ -729,6 +754,7 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "formulaArchive": "FORMEL-ARCHIV"
   },
   "substitution": {
+    "inkCount": "({count} Farben)",
     "title": "🔄 Formel-Tintenersetzungsansicht",
     "subtitle": "Wählen Sie ein Rezept, markieren Sie eine Tinte als nicht vorrätig und wählen Sie einen Ersatz aus dem Inventar, um den Farbunterschied CIEDE2000 (ΔE₀₀) zu prüfen.",
     "selectRecipe": "Gespeichertes Rezept auswählen",

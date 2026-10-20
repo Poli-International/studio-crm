@@ -341,6 +341,12 @@
     }
   }
 
+  function renderRecipeOptions() {
+    return getAvailableFormulas().map(f => `
+        <option value="${f.id}">${f.name} ${_t('substitution.inkCount', { count: (f.colors || []).length }, '(' + (f.colors || []).length + ' inks)')}</option>
+      `).join('');
+  }
+
   function initSubstitutionView() {
     const section = document.getElementById('substitutionViewSection');
     if (!section) return;
@@ -349,10 +355,7 @@
     const replacementSelect = document.getElementById('subReplacementSelect');
 
     if (recipeSelect) {
-      const formulas = getAvailableFormulas();
-      recipeSelect.innerHTML = formulas.map(f => `
-        <option value="${f.id}">${f.name} (${(f.colors || []).length} inks)</option>
-      `).join('');
+      recipeSelect.innerHTML = renderRecipeOptions();
 
       recipeSelect.onchange = () => {
         outOfStockIndex = 0;
@@ -379,6 +382,12 @@
   }
 
   window.addEventListener('languageChanged', () => {
+    const recipeSelect = document.getElementById('subRecipeSelect');
+    if (recipeSelect) {
+      const keep = recipeSelect.value;
+      recipeSelect.innerHTML = renderRecipeOptions();
+      if (keep) recipeSelect.value = keep;
+    }
     updateSubstitutionView();
   });
 })();

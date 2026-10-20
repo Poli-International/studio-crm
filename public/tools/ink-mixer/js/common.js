@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
             textarea.select();
             navigator.clipboard.writeText(textarea.value).then(() => {
                 const originalText = copyBtn.innerHTML;
-                copyBtn.innerHTML = '✅ Copied!';
+                copyBtn.innerHTML = '✅ ' + window.t('app.copied');
                 setTimeout(() => copyBtn.innerHTML = originalText, 2000);
             }).catch(() => {
                 // Clipboard API refused (common inside an iframe): the text is

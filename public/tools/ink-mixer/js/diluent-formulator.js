@@ -108,7 +108,7 @@
     const printWindow = window.open('', '_blank', 'width=600,height=500');
     if (!printWindow) {
       if (typeof window.showNotification === 'function') {
-        window.showNotification('Pop-up blocked. Please permit pop-ups to print bottle labels.', 'error');
+        window.showNotification(window.t('diluentFormulator.popupBlocked'), 'error');
       }
       return;
     }
@@ -119,7 +119,7 @@
       <!DOCTYPE html>
       <html>
       <head>
-        <title>Diluent Bottle Label - Poli International</title>
+        <title>${window.t('diluentFormulator.labelTitle')}</title>
         <style>
           body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; padding: 20px; color: #111; }
           .label-box {
@@ -144,35 +144,35 @@
       </head>
       <body>
         <div style="margin-bottom: 14px;">
-          <button onclick="window.print()" style="padding: 8px 16px; cursor: pointer;">🖨️ Print Bottle Label</button>
+          <button onclick="window.print()" style="padding: 8px 16px; cursor: pointer;">🖨️ ${window.t('diluentFormulator.printLabel')}</button>
         </div>
 
         <div class="label-box">
-          <h3>SHADING DILUENT VEHICLE</h3>
+          <h3>${window.t('diluentFormulator.vehicleHeading')}</h3>
           <div class="meta">
             <strong>${recipeName}</strong> (${batchData.totalMl} ml)<br>
-            Prepared: <strong>${today}</strong> | Batch ID: <strong>DIL-${Date.now().toString(36).toUpperCase()}</strong>
+            ${window.t('diluentFormulator.meta', { date: today, batchId: 'DIL-' + Date.now().toString(36).toUpperCase() })}
           </div>
 
           <table class="ing-table">
             <tr>
               <td>Sterile Distilled Water (${batchData.water.percent}%)</td>
-              <td class="qty">${batchData.water.ml} ml (${batchData.water.drops} drops)</td>
+              <td class="qty">${window.t('diluentFormulator.mlDrops', { ml: batchData.water.ml, drops: batchData.water.drops })}</td>
             </tr>
             <tr>
               <td>Distilled Witch Hazel (${batchData.witchHazel.percent}%)</td>
-              <td class="qty">${batchData.witchHazel.ml} ml (${batchData.witchHazel.drops} drops)</td>
+              <td class="qty">${window.t('diluentFormulator.mlDrops', { ml: batchData.witchHazel.ml, drops: batchData.witchHazel.drops })}</td>
             </tr>
             <tr>
               <td>USP Vegetable Glycerin (${batchData.glycerin.percent}%)</td>
-              <td class="qty">${batchData.glycerin.ml} ml (${batchData.glycerin.drops} drops)</td>
+              <td class="qty">${window.t('diluentFormulator.mlDrops', { ml: batchData.glycerin.ml, drops: batchData.glycerin.drops })}</td>
             </tr>
           </table>
 
-          ${batchNotes ? `<div class="notes-text">Notes: ${batchNotes}</div>` : ''}
+          ${batchNotes ? `<div class="notes-text">${window.t('diluentFormulator.labelNotes', { notes: batchNotes })}</div>` : ''}
 
           <div class="warning">
-            Poli International Tattoo Tools Suite • Store in clean sealed squeeze bottle. Practice sterile technique. Discard within recommended studio timeframe.
+            ${window.t('diluentFormulator.warning')}
           </div>
         </div>
       </body>
@@ -223,9 +223,9 @@
 
       const res = calculateDiluentBatch(batchMl, w, h, g);
 
-      if (outputWater) outputWater.textContent = `${res.water.ml} ml (${res.water.drops} drops)`;
-      if (outputWitch) outputWitch.textContent = `${res.witchHazel.ml} ml (${res.witchHazel.drops} drops)`;
-      if (outputGlyc) outputGlyc.textContent = `${res.glycerin.ml} ml (${res.glycerin.drops} drops)`;
+      if (outputWater) outputWater.textContent = window.t('diluentFormulator.mlDrops', { ml: res.water.ml, drops: res.water.drops });
+      if (outputWitch) outputWitch.textContent = window.t('diluentFormulator.mlDrops', { ml: res.witchHazel.ml, drops: res.witchHazel.drops });
+      if (outputGlyc) outputGlyc.textContent = window.t('diluentFormulator.mlDrops', { ml: res.glycerin.ml, drops: res.glycerin.drops });
       if (outputTotal) outputTotal.textContent = `${res.totalMl} ml`;
 
       return res;
@@ -274,6 +274,7 @@
 
     // Initial calculation
     updateCalculations();
+    window.addEventListener('languageChanged', updateCalculations);
   }
 
   // Global exposure

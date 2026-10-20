@@ -21,6 +21,7 @@ window.I18N_DICTIONARY.pt = {
       "promptTitle": "Lembrete de hidratação",
       "promptBody": "Hora de beber um copo d'água! A regeneração celular e a eliminação linfática exigem hidratação epidérmica ideal, especialmente na cicatrização de tatuagens e piercings.",
       "drankWaterBtn": "💧 Registrar +1 copo",
+      "addCupBtn": "+ 1 copo",
       "snoozeBtn": "Adiar (30 min)",
       "title": "Verificação diária de hidratação dérmica",
       "subtitle": "Acompanhe o consumo de água para apoiar a mitose epidérmica, a elasticidade das casquinhas e a resolução linfática de pigmentos.",

@@ -849,7 +849,38 @@ const TRANSLATIONS = {
     draftDoctorNoteBtn: '✉️ Draft Doctor Note',
     viewBriefBtn: '📄 View Artist Brief',
     backToTopBtn: '⬆️ Back to Top',
-    backToMedListBtn: '⬆️ Back to Med List'
+    backToMedListBtn: '⬆️ Back to Med List',
+    "x.share_intake_deep_link_desc": "Generate a deep link containing your pre-selected medications for your artist or pre-arrival review.",
+    "x.and_select_your_medications_to_generate_brief": "and select your medications to generate your custom consultation brief.",
+    "x.copy_artist_checklist": "📋 Copy Artist Checklist",
+    "x.tailored_for_artist_intake": "Tailored for Artist Intake",
+    "x.studio_precautions_checklist": "📋 Studio Precautions & Checklist",
+    "x.question_counter": "Question {n} of {total}",
+    "x.next_question": "Next Question ➔",
+    "x.quiz_score": "Score:",
+    "x.target_hydration_plan": "💧 Target Hydration Plan",
+    "x.blood_sugar_fuel_schedule": "🍌 Blood Sugar & Fuel Schedule",
+    "x.vasovagal_syncope_vitals_analysis": "💫 Vasovagal Syncope & Vitals Analysis",
+    "x.24_hours_before": "24 Hours Before:",
+    "x.2_hours_before": "2 Hours Before:",
+    "x.pre_appointment_meal_label": "Pre-Appointment Meal (1.5–2h pre):",
+    "x.session_glucose_boost": "Session Glucose Boost:",
+    "x.healing_risk": "Healing Risk:",
+    "x.col_medication_brand": "Medication / Brand",
+    "x.col_risk_level": "Risk Level",
+    "x.col_key_procedural_impact": "Key Procedural Impact Badges",
+    "x.col_action_wait_advice": "Action / Wait Advice",
+    "x.summary_disclosed_medications": "Summary of Disclosed Medications ({count})",
+    "x.notice_to_artist_piercer": "Notice to Artist / Piercer:",
+    "x.alert_brief_copied": "Brief copied to clipboard!",
+    "x.alert_select_medication_first": "Please select at least one medication first.",
+    "x.alert_message_copied": "Message copied to clipboard!",
+    "x.alert_invalid_appointment": "Please choose a valid appointment date and time.",
+    "x.alert_notif_unsupported": "Browser notifications are not supported in your browser.",
+    "x.alert_notif_blocked": "Browser notifications are currently blocked in your browser settings. Enable permissions in your browser URL bar.",
+    "x.alert_select_appointment_first": "Please select your scheduled appointment date and time first in the box above.",
+    "x.alert_select_appointment_first_short": "Please select your scheduled appointment date and time first!",
+    "x.alert_no_medications_selected": "No medications selected. Please select your medications in the Interaction Checker first."
   },
   fr: {
     // --- keyed from the markup 2026-09-02, see i18n-new-keys.en.json ---
@@ -1104,7 +1135,38 @@ const TRANSLATIONS = {
     draftDoctorNoteBtn: '✉️ Note pour le médecin',
     viewBriefBtn: '📄 Voir le rapport',
     backToTopBtn: '⬆️ Haut de page',
-    backToMedListBtn: '⬆️ Retour à la liste'
+    backToMedListBtn: '⬆️ Retour à la liste',
+    "x.share_intake_deep_link_desc": "Générez un lien profond contenant vos médicaments présélectionnés pour la relecture par votre artiste ou avant votre arrivée.",
+    "x.and_select_your_medications_to_generate_brief": "et sélectionnez vos médicaments pour générer votre fiche de consultation personnalisée.",
+    "x.copy_artist_checklist": "📋 Copier la liste de contrôle pour l'artiste",
+    "x.tailored_for_artist_intake": "Adapté à l'accueil par l'artiste",
+    "x.studio_precautions_checklist": "📋 Précautions du studio et liste de contrôle",
+    "x.question_counter": "Question {n} sur {total}",
+    "x.next_question": "Question suivante ➔",
+    "x.quiz_score": "Score :",
+    "x.target_hydration_plan": "💧 Plan d'hydratation cible",
+    "x.blood_sugar_fuel_schedule": "🍌 Glycémie et calendrier énergétique",
+    "x.vasovagal_syncope_vitals_analysis": "💫 Syncope vasovagale et analyse des constantes vitales",
+    "x.24_hours_before": "24 heures avant :",
+    "x.2_hours_before": "2 heures avant :",
+    "x.pre_appointment_meal_label": "Repas avant le rendez-vous (1.5–2h avant) :",
+    "x.session_glucose_boost": "Apport de glucose pendant la séance :",
+    "x.healing_risk": "Risque de cicatrisation :",
+    "x.col_medication_brand": "Médicament / Marque",
+    "x.col_risk_level": "Niveau de risque",
+    "x.col_key_procedural_impact": "Principaux indicateurs d'impact sur la procédure",
+    "x.col_action_wait_advice": "Action / Conseil d'attente",
+    "x.summary_disclosed_medications": "Résumé des médicaments déclarés ({count})",
+    "x.notice_to_artist_piercer": "Avis à l'artiste / au perceur :",
+    "x.alert_brief_copied": "Résumé copié dans le presse-papiers !",
+    "x.alert_select_medication_first": "Veuillez d'abord sélectionner au moins un médicament.",
+    "x.alert_message_copied": "Message copié dans le presse-papiers !",
+    "x.alert_invalid_appointment": "Veuillez choisir une date et une heure de rendez-vous valides.",
+    "x.alert_notif_unsupported": "Votre navigateur ne prend pas en charge les notifications du navigateur.",
+    "x.alert_notif_blocked": "Les notifications du navigateur sont actuellement bloquées dans les paramètres de votre navigateur. Autorisez-les dans la barre d'adresse de votre navigateur.",
+    "x.alert_select_appointment_first": "Veuillez d'abord sélectionner la date et l'heure de votre rendez-vous dans la case ci-dessus.",
+    "x.alert_select_appointment_first_short": "Veuillez d'abord sélectionner la date et l'heure de votre rendez-vous !",
+    "x.alert_no_medications_selected": "Aucun médicament sélectionné. Veuillez d'abord sélectionner vos médicaments dans le vérificateur d'interactions."
   },
   it: {
     // --- keyed from the markup 2026-09-02, see i18n-new-keys.en.json ---
@@ -1359,7 +1421,38 @@ const TRANSLATIONS = {
     draftDoctorNoteBtn: '✉️ Bozza per il medico',
     viewBriefBtn: '📄 Vedi Report',
     backToTopBtn: '⬆️ Torna Su',
-    backToMedListBtn: '⬆️ Torna alla Lista'
+    backToMedListBtn: '⬆️ Torna alla Lista',
+    "x.share_intake_deep_link_desc": "Genera un link diretto con i farmaci preselezionati per la revisione del tuo artista o prima dell'arrivo.",
+    "x.and_select_your_medications_to_generate_brief": "e seleziona i tuoi farmaci per generare il tuo riepilogo di consulenza personalizzato.",
+    "x.copy_artist_checklist": "📋 Copia la checklist per l'artista",
+    "x.tailored_for_artist_intake": "Pensato per l'accoglienza dell'artista",
+    "x.studio_precautions_checklist": "📋 Precauzioni dello studio e checklist",
+    "x.question_counter": "Domanda {n} di {total}",
+    "x.next_question": "Domanda successiva ➔",
+    "x.quiz_score": "Punteggio:",
+    "x.target_hydration_plan": "💧 Piano di idratazione mirato",
+    "x.blood_sugar_fuel_schedule": "🍌 Glicemia e programma energetico",
+    "x.vasovagal_syncope_vitals_analysis": "💫 Sincope vasovagale e analisi dei parametri vitali",
+    "x.24_hours_before": "24 ore prima:",
+    "x.2_hours_before": "2 ore prima:",
+    "x.pre_appointment_meal_label": "Pasto prima dell'appuntamento (1.5–2h prima):",
+    "x.session_glucose_boost": "Integrazione di glucosio durante la seduta:",
+    "x.healing_risk": "Rischio di guarigione:",
+    "x.col_medication_brand": "Farmaco / Marchio",
+    "x.col_risk_level": "Livello di rischio",
+    "x.col_key_procedural_impact": "Principali indicatori di impatto sulla procedura",
+    "x.col_action_wait_advice": "Azione / Consiglio sull'attesa",
+    "x.summary_disclosed_medications": "Riepilogo dei farmaci dichiarati ({count})",
+    "x.notice_to_artist_piercer": "Avviso per l'artista / il piercer:",
+    "x.alert_brief_copied": "Riepilogo copiato negli appunti!",
+    "x.alert_select_medication_first": "Seleziona prima almeno un farmaco.",
+    "x.alert_message_copied": "Messaggio copiato negli appunti!",
+    "x.alert_invalid_appointment": "Scegli una data e un orario validi per l'appuntamento.",
+    "x.alert_notif_unsupported": "Il tuo browser non supporta le notifiche del browser.",
+    "x.alert_notif_blocked": "Le notifiche del browser sono attualmente bloccate nelle impostazioni del browser. Attiva le autorizzazioni nella barra degli indirizzi del browser.",
+    "x.alert_select_appointment_first": "Seleziona prima la data e l'ora del tuo appuntamento nella casella sopra.",
+    "x.alert_select_appointment_first_short": "Seleziona prima la data e l'ora del tuo appuntamento!",
+    "x.alert_no_medications_selected": "Nessun farmaco selezionato. Seleziona prima i tuoi farmaci nel verificatore di interazioni."
   },
   es: {
     // --- keyed from the markup 2026-09-02, see i18n-new-keys.en.json ---
@@ -1614,7 +1707,38 @@ const TRANSLATIONS = {
     draftDoctorNoteBtn: '✉️ Nota médica',
     viewBriefBtn: '📄 Ver Informe',
     backToTopBtn: '⬆️ Volver Arriba',
-    backToMedListBtn: '⬆️ Volver a la Lista'
+    backToMedListBtn: '⬆️ Volver a la Lista',
+    "x.share_intake_deep_link_desc": "Genera un enlace profundo con tus medicamentos preseleccionados para la revisión de tu artista o antes de tu llegada.",
+    "x.and_select_your_medications_to_generate_brief": "y selecciona tus medicamentos para generar tu resumen de consulta personalizado.",
+    "x.copy_artist_checklist": "📋 Copiar lista de verificación para el artista",
+    "x.tailored_for_artist_intake": "Adaptado para la admisión del artista",
+    "x.studio_precautions_checklist": "📋 Precauciones del estudio y lista de verificación",
+    "x.question_counter": "Pregunta {n} de {total}",
+    "x.next_question": "Siguiente pregunta ➔",
+    "x.quiz_score": "Puntuación:",
+    "x.target_hydration_plan": "💧 Plan de hidratación objetivo",
+    "x.blood_sugar_fuel_schedule": "🍌 Azúcar en sangre y horario energético",
+    "x.vasovagal_syncope_vitals_analysis": "💫 Síncope vasovagal y análisis de constantes vitales",
+    "x.24_hours_before": "24 horas antes:",
+    "x.2_hours_before": "2 horas antes:",
+    "x.pre_appointment_meal_label": "Comida antes de la cita (1.5–2h antes):",
+    "x.session_glucose_boost": "Aporte de glucosa durante la sesión:",
+    "x.healing_risk": "Riesgo de cicatrización:",
+    "x.col_medication_brand": "Medicamento / Marca",
+    "x.col_risk_level": "Nivel de riesgo",
+    "x.col_key_procedural_impact": "Principales indicadores de impacto en el procedimiento",
+    "x.col_action_wait_advice": "Acción / Consejo de espera",
+    "x.summary_disclosed_medications": "Resumen de los medicamentos declarados ({count})",
+    "x.notice_to_artist_piercer": "Aviso para el artista / perforador:",
+    "x.alert_brief_copied": "¡Resumen copiado al portapapeles!",
+    "x.alert_select_medication_first": "Primero selecciona al menos un medicamento.",
+    "x.alert_message_copied": "¡Mensaje copiado al portapapeles!",
+    "x.alert_invalid_appointment": "Elige una fecha y hora de cita válidas.",
+    "x.alert_notif_unsupported": "Tu navegador no admite notificaciones del navegador.",
+    "x.alert_notif_blocked": "Las notificaciones del navegador están bloqueadas en la configuración de tu navegador. Activa los permisos en la barra de direcciones del navegador.",
+    "x.alert_select_appointment_first": "Primero selecciona la fecha y la hora de tu cita en el recuadro de arriba.",
+    "x.alert_select_appointment_first_short": "¡Primero selecciona la fecha y la hora de tu cita!",
+    "x.alert_no_medications_selected": "No hay medicamentos seleccionados. Primero selecciona tus medicamentos en el verificador de interacciones."
   },
   de: {
     // --- keyed from the markup 2026-09-02, see i18n-new-keys.en.json ---
@@ -1869,7 +1993,38 @@ const TRANSLATIONS = {
     draftDoctorNoteBtn: '✉️ Arzt-Nachricht',
     viewBriefBtn: '📄 Briefing anzeigen',
     backToTopBtn: '⬆️ Nach Oben',
-    backToMedListBtn: '⬆️ Zurück zur Liste'
+    backToMedListBtn: '⬆️ Zurück zur Liste',
+    "x.share_intake_deep_link_desc": "Erstellen Sie einen Deep Link mit Ihren vorausgewählten Medikamenten zur Durchsicht durch Ihren Künstler oder vor Ihrer Ankunft.",
+    "x.and_select_your_medications_to_generate_brief": "und wählen Sie Ihre Medikamente aus, um Ihr individuelles Beratungsdokument zu erstellen.",
+    "x.copy_artist_checklist": "📋 Checkliste für den Künstler kopieren",
+    "x.tailored_for_artist_intake": "Zugeschnitten auf die Aufnahme durch den Künstler",
+    "x.studio_precautions_checklist": "📋 Vorsichtsmaßnahmen im Studio & Checkliste",
+    "x.question_counter": "Frage {n} von {total}",
+    "x.next_question": "Nächste Frage ➔",
+    "x.quiz_score": "Punktzahl:",
+    "x.target_hydration_plan": "💧 Ziel-Hydrationsplan",
+    "x.blood_sugar_fuel_schedule": "🍌 Blutzucker- & Energieplan",
+    "x.vasovagal_syncope_vitals_analysis": "💫 Vasovagale Synkope & Vitalwertanalyse",
+    "x.24_hours_before": "24 Stunden vorher:",
+    "x.2_hours_before": "2 Stunden vorher:",
+    "x.pre_appointment_meal_label": "Mahlzeit vor dem Termin (1.5–2h vorher):",
+    "x.session_glucose_boost": "Glukose-Boost während der Sitzung:",
+    "x.healing_risk": "Heilungsrisiko:",
+    "x.col_medication_brand": "Medikament / Marke",
+    "x.col_risk_level": "Risikostufe",
+    "x.col_key_procedural_impact": "Wichtigste Hinweise zur Auswirkung auf den Eingriff",
+    "x.col_action_wait_advice": "Maßnahme / Hinweis zur Wartezeit",
+    "x.summary_disclosed_medications": "Übersicht der angegebenen Medikamente ({count})",
+    "x.notice_to_artist_piercer": "Hinweis für Tätowierer / Piercer:",
+    "x.alert_brief_copied": "Zusammenfassung in die Zwischenablage kopiert!",
+    "x.alert_select_medication_first": "Bitte wählen Sie zuerst mindestens ein Medikament aus.",
+    "x.alert_message_copied": "Nachricht in die Zwischenablage kopiert!",
+    "x.alert_invalid_appointment": "Bitte wählen Sie ein gültiges Datum und eine gültige Uhrzeit für den Termin.",
+    "x.alert_notif_unsupported": "Browser-Benachrichtigungen werden von Ihrem Browser nicht unterstützt.",
+    "x.alert_notif_blocked": "Browser-Benachrichtigungen sind in Ihren Browsereinstellungen derzeit blockiert. Aktivieren Sie die Berechtigungen in der Adressleiste Ihres Browsers.",
+    "x.alert_select_appointment_first": "Bitte wählen Sie zuerst Datum und Uhrzeit Ihres Termins im Feld oben aus.",
+    "x.alert_select_appointment_first_short": "Bitte wählen Sie zuerst Datum und Uhrzeit Ihres Termins aus!",
+    "x.alert_no_medications_selected": "Keine Medikamente ausgewählt. Bitte wählen Sie zuerst Ihre Medikamente im Wechselwirkungs-Check aus."
   },
   nl: {
     // --- keyed from the markup 2026-09-02, see i18n-new-keys.en.json ---
@@ -2124,7 +2279,38 @@ const TRANSLATIONS = {
     draftDoctorNoteBtn: '✉️ Bericht voor arts',
     viewBriefBtn: '📄 Bekijk Briefing',
     backToTopBtn: '⬆️ Naar Boven',
-    backToMedListBtn: '⬆️ Terug naar Lijst'
+    backToMedListBtn: '⬆️ Terug naar Lijst',
+    "x.share_intake_deep_link_desc": "Genereer een deeplink met je vooraf geselecteerde medicijnen voor de beoordeling door je artiest of vóór aankomst.",
+    "x.and_select_your_medications_to_generate_brief": "en selecteer je medicijnen om je persoonlijke consultatieoverzicht te maken.",
+    "x.copy_artist_checklist": "📋 Checklist voor de artiest kopiëren",
+    "x.tailored_for_artist_intake": "Afgestemd op de intake door de artiest",
+    "x.studio_precautions_checklist": "📋 Voorzorgsmaatregelen studio & checklist",
+    "x.question_counter": "Vraag {n} van {total}",
+    "x.next_question": "Volgende vraag ➔",
+    "x.quiz_score": "Score:",
+    "x.target_hydration_plan": "💧 Doel-hydratatieplan",
+    "x.blood_sugar_fuel_schedule": "🍌 Bloedsuiker- & voedingsschema",
+    "x.vasovagal_syncope_vitals_analysis": "💫 Vasovagale syncope & analyse van vitale functies",
+    "x.24_hours_before": "24 uur van tevoren:",
+    "x.2_hours_before": "2 uur van tevoren:",
+    "x.pre_appointment_meal_label": "Maaltijd voor de afspraak (1.5–2h vooraf):",
+    "x.session_glucose_boost": "Glucoseboost tijdens de sessie:",
+    "x.healing_risk": "Genezingsrisico:",
+    "x.col_medication_brand": "Medicijn / Merk",
+    "x.col_risk_level": "Risiconiveau",
+    "x.col_key_procedural_impact": "Belangrijkste indicatoren voor impact op de behandeling",
+    "x.col_action_wait_advice": "Actie / advies over wachttijd",
+    "x.summary_disclosed_medications": "Overzicht van opgegeven medicijnen ({count})",
+    "x.notice_to_artist_piercer": "Mededeling voor tattoo-artiest / piercer:",
+    "x.alert_brief_copied": "Samenvatting gekopieerd naar het klembord!",
+    "x.alert_select_medication_first": "Selecteer eerst minstens één medicijn.",
+    "x.alert_message_copied": "Bericht gekopieerd naar het klembord!",
+    "x.alert_invalid_appointment": "Kies een geldige datum en tijd voor de afspraak.",
+    "x.alert_notif_unsupported": "Je browser ondersteunt geen browsermeldingen.",
+    "x.alert_notif_blocked": "Browsermeldingen zijn momenteel geblokkeerd in je browserinstellingen. Schakel de rechten in via de adresbalk van je browser.",
+    "x.alert_select_appointment_first": "Selecteer eerst de datum en tijd van je afspraak in het vak hierboven.",
+    "x.alert_select_appointment_first_short": "Selecteer eerst de datum en tijd van je afspraak!",
+    "x.alert_no_medications_selected": "Geen medicijnen geselecteerd. Selecteer eerst je medicijnen in de interactiechecker."
   },
   pt: {
     // --- keyed from the markup 2026-09-02, see i18n-new-keys.en.json ---
@@ -2379,7 +2565,38 @@ const TRANSLATIONS = {
     draftDoctorNoteBtn: '✉️ Nota médica',
     viewBriefBtn: '📄 Ver Relatório',
     backToTopBtn: '⬆️ Voltar ao Topo',
-    backToMedListBtn: '⬆️ Voltar à Lista'
+    backToMedListBtn: '⬆️ Voltar à Lista',
+    "x.share_intake_deep_link_desc": "Gere um link profundo com os seus medicamentos pré-selecionados para revisão pelo seu artista ou antes da chegada.",
+    "x.and_select_your_medications_to_generate_brief": "e selecione os seus medicamentos para gerar o seu resumo de consulta personalizado.",
+    "x.copy_artist_checklist": "📋 Copiar lista de verificação para o artista",
+    "x.tailored_for_artist_intake": "Adaptado para a admissão do artista",
+    "x.studio_precautions_checklist": "📋 Precauções do estúdio e lista de verificação",
+    "x.question_counter": "Pergunta {n} de {total}",
+    "x.next_question": "Próxima pergunta ➔",
+    "x.quiz_score": "Pontuação:",
+    "x.target_hydration_plan": "💧 Plano de hidratação alvo",
+    "x.blood_sugar_fuel_schedule": "🍌 Açúcar no sangue e cronograma energético",
+    "x.vasovagal_syncope_vitals_analysis": "💫 Síncope vasovagal e análise de sinais vitais",
+    "x.24_hours_before": "24 horas antes:",
+    "x.2_hours_before": "2 horas antes:",
+    "x.pre_appointment_meal_label": "Refeição antes da consulta (1.5–2h antes):",
+    "x.session_glucose_boost": "Reforço de glicose durante a sessão:",
+    "x.healing_risk": "Risco de cicatrização:",
+    "x.col_medication_brand": "Medicamento / Marca",
+    "x.col_risk_level": "Nível de risco",
+    "x.col_key_procedural_impact": "Principais indicadores de impacto no procedimento",
+    "x.col_action_wait_advice": "Ação / Orientação sobre a espera",
+    "x.summary_disclosed_medications": "Resumo dos medicamentos declarados ({count})",
+    "x.notice_to_artist_piercer": "Aviso para o artista / perfurador:",
+    "x.alert_brief_copied": "Resumo copiado para a área de transferência!",
+    "x.alert_select_medication_first": "Selecione primeiro pelo menos um medicamento.",
+    "x.alert_message_copied": "Mensagem copiada para a área de transferência!",
+    "x.alert_invalid_appointment": "Escolha uma data e hora válidas para a consulta.",
+    "x.alert_notif_unsupported": "O seu navegador não suporta notificações do navegador.",
+    "x.alert_notif_blocked": "As notificações do navegador estão atualmente bloqueadas nas configurações do seu navegador. Ative as permissões na barra de endereço do navegador.",
+    "x.alert_select_appointment_first": "Selecione primeiro a data e a hora da sua consulta na caixa acima.",
+    "x.alert_select_appointment_first_short": "Selecione primeiro a data e a hora da sua consulta!",
+    "x.alert_no_medications_selected": "Nenhum medicamento selecionado. Selecione primeiro os seus medicamentos no verificador de interações."
   },
   th: {
     // --- Thai, added 2026-10-20 (Thai UI brief) ---
@@ -2631,7 +2848,38 @@ const TRANSLATIONS = {
     "draftDoctorNoteBtn": "✉️ ร่างบันทึกถึงแพทย์",
     "viewBriefBtn": "📄 ดูสรุปสำหรับศิลปิน",
     "backToTopBtn": "⬆️ กลับขึ้นด้านบน",
-    "backToMedListBtn": "⬆️ กลับไปรายการยา"
+    "backToMedListBtn": "⬆️ กลับไปรายการยา",
+    "x.share_intake_deep_link_desc": "สร้างลิงก์ที่มียาที่คุณเลือกไว้ล่วงหน้า เพื่อให้ศิลปินตรวจสอบหรือตรวจทานก่อนมาถึง",
+    "x.and_select_your_medications_to_generate_brief": "และเลือกยาของคุณเพื่อสร้างสรุปสำหรับการปรึกษาที่กำหนดเองของคุณ",
+    "x.copy_artist_checklist": "📋 คัดลอกรายการตรวจสอบสำหรับศิลปิน",
+    "x.tailored_for_artist_intake": "จัดทำสำหรับการรับข้อมูลของศิลปิน",
+    "x.studio_precautions_checklist": "📋 ข้อควรระวังของสตูดิโอและรายการตรวจสอบ",
+    "x.question_counter": "คำถามที่ {n} จาก {total}",
+    "x.next_question": "คำถามถัดไป ➔",
+    "x.quiz_score": "คะแนน:",
+    "x.target_hydration_plan": "💧 แผนการดื่มน้ำเป้าหมาย",
+    "x.blood_sugar_fuel_schedule": "🍌 ตารางน้ำตาลในเลือดและพลังงาน",
+    "x.vasovagal_syncope_vitals_analysis": "💫 Vasovagal Syncope และการวิเคราะห์สัญญาณชีพ",
+    "x.24_hours_before": "ก่อน 24 ชั่วโมง:",
+    "x.2_hours_before": "ก่อน 2 ชั่วโมง:",
+    "x.pre_appointment_meal_label": "มื้ออาหารก่อนนัด (ก่อน 1.5–2h):",
+    "x.session_glucose_boost": "การเพิ่มน้ำตาลกลูโคสระหว่างทำ:",
+    "x.healing_risk": "ความเสี่ยงต่อการหายของแผล:",
+    "x.col_medication_brand": "ยา / ชื่อการค้า",
+    "x.col_risk_level": "ระดับความเสี่ยง",
+    "x.col_key_procedural_impact": "ตัวบ่งชี้ผลกระทบสำคัญต่อหัตถการ",
+    "x.col_action_wait_advice": "การดำเนินการ / คำแนะนำการรอ",
+    "x.summary_disclosed_medications": "สรุปยาที่แจ้งไว้ ({count})",
+    "x.notice_to_artist_piercer": "หมายเหตุถึงศิลปิน / ผู้เจาะ:",
+    "x.alert_brief_copied": "คัดลอกสรุปไปยังคลิปบอร์ดแล้ว!",
+    "x.alert_select_medication_first": "กรุณาเลือกยาอย่างน้อยหนึ่งรายการก่อน",
+    "x.alert_message_copied": "คัดลอกข้อความไปยังคลิปบอร์ดแล้ว!",
+    "x.alert_invalid_appointment": "กรุณาเลือกวันและเวลานัดหมายที่ถูกต้อง",
+    "x.alert_notif_unsupported": "เบราว์เซอร์ของคุณไม่รองรับการแจ้งเตือนของเบราว์เซอร์",
+    "x.alert_notif_blocked": "การแจ้งเตือนของเบราว์เซอร์ถูกบล็อกอยู่ในการตั้งค่าเบราว์เซอร์ของคุณ เปิดสิทธิ์ที่แถบที่อยู่ของเบราว์เซอร์",
+    "x.alert_select_appointment_first": "กรุณาเลือกวันและเวลานัดหมายของคุณในช่องด้านบนก่อน",
+    "x.alert_select_appointment_first_short": "กรุณาเลือกวันและเวลานัดหมายของคุณก่อน!",
+    "x.alert_no_medications_selected": "ยังไม่ได้เลือกยา กรุณาเลือกยาของคุณในตัวตรวจสอบปฏิกิริยาระหว่างยาก่อน"
   }
 };
 
@@ -2773,6 +3021,11 @@ function updateUILanguage(lang) {
 
   renderMedList();
   renderResults();
+  // Text built in JS from dict strings: rebuild it so the new language shows.
+  if (typeof updatePrepCalculator === 'function') updatePrepCalculator();
+  if (typeof updateArtistReadiness === 'function') updateArtistReadiness();
+  if (document.getElementById('brief-content')) updateBriefTab();
+  if (document.getElementById('quiz-body') && !quizAnswered && quizCurrentIndex < QUIZ_QUESTIONS.length) renderQuizQuestion();
 }
 
 function triggerBadgePulse() {
@@ -3111,6 +3364,9 @@ function getFuzzySuggestion(query) {
   return bestMatch;
 }
 
+// Category titles that already have an exact translation in the dictionaries.
+const CAT_LABEL_KEYS = { stimulant: 'filterStimulant', corticosteroid: 'filterCorticosteroid', antibiotic: 'filterAntibiotic' };
+
 function renderMedList() {
   medListEl.innerHTML = '';
   let totalVisible = 0;
@@ -3155,7 +3411,7 @@ function renderMedList() {
             </div>
             <div class="med-risk-bar-container">
               <div class="med-risk-bar-label">
-                <span>Healing Risk:</span>
+                <span>${escHtml(uiText('x.healing_risk', 'Healing Risk:'))}</span>
                 <strong class="risk-label-${escHtml(m.sev)}">${escHtml(riskLabel)}</strong>
               </div>
               <div class="med-risk-bar-track" title="Healing Risk Level: ${escHtml(m.sev)}">
@@ -3168,7 +3424,7 @@ function renderMedList() {
     }).join('');
 
     block.innerHTML = `
-      <div class="med-category-title">${escHtml(cat.label)} <span class="cat-count">(${matchingMeds.length})</span></div>
+      <div class="med-category-title">${escHtml(CAT_LABEL_KEYS[cat.id] ? uiText(CAT_LABEL_KEYS[cat.id], cat.label) : cat.label)} <span class="cat-count">(${matchingMeds.length})</span></div>
       <div class="med-items">${itemsHtml}</div>`;
 
     medListEl.appendChild(block);
@@ -3572,30 +3828,30 @@ function updatePrepCalculator() {
   resultsEl.innerHTML = `
     <div class="calc-result-box">
       <div class="calc-result-title">
-        <span>💧 Target Hydration Plan</span>
+        <span>${uiText('x.target_hydration_plan', '💧 Target Hydration Plan')}</span>
         <span style="font-size:0.75rem; color:var(--primary); font-weight:700;">${totalWaterMl} ml (${totalWaterOz} oz)</span>
       </div>
       <div class="calc-result-desc">
-        • <strong>24 Hours Before:</strong> Drink ~${Math.round(totalWaterMl * 0.6)} ml throughout the day.<br>
-        • <strong>2 Hours Before:</strong> Drink ~${Math.round(totalWaterMl * 0.25)} ml with electrolytes.<br>
+        • <strong>${uiText('x.24_hours_before', '24 Hours Before:')}</strong> Drink ~${Math.round(totalWaterMl * 0.6)} ml throughout the day.<br>
+        • <strong>${uiText('x.2_hours_before', '2 Hours Before:')}</strong> Drink ~${Math.round(totalWaterMl * 0.25)} ml with electrolytes.<br>
         • <strong>During Session:</strong> Sip ~${hourlyMl} ml every 45–60 minutes.
       </div>
     </div>
 
     <div class="calc-result-box">
       <div class="calc-result-title">
-        <span>🍌 Blood Sugar & Fuel Schedule</span>
+        <span>${uiText('x.blood_sugar_fuel_schedule', '🍌 Blood Sugar & Fuel Schedule')}</span>
         <span style="font-size:0.75rem; color:var(--primary); font-weight:700;">Glucose Target</span>
       </div>
       <div class="calc-result-desc">
-        • <strong>Pre-Appointment Meal (1.5–2h pre):</strong> Eat complex carbs + protein (oatmeal, chicken rice bowl, or whole-grain toast).<br>
-        • <strong>Session Glucose Boost:</strong> Consume 15–20g simple carbs (fruit juice, gummy candies, or sports drink) every ${hours >= 4 ? '90 minutes' : '2 hours'} to keep blood sugar >90 mg/dL.
+        • <strong>${uiText('x.pre_appointment_meal_label', 'Pre-Appointment Meal (1.5–2h pre):')}</strong> Eat complex carbs + protein (oatmeal, chicken rice bowl, or whole-grain toast).<br>
+        • <strong>${uiText('x.session_glucose_boost', 'Session Glucose Boost:')}</strong> Consume 15–20g simple carbs (fruit juice, gummy candies, or sports drink) every ${hours >= 4 ? '90 minutes' : '2 hours'} to keep blood sugar >90 mg/dL.
       </div>
     </div>
 
     <div class="calc-result-box">
       <div class="calc-result-title">
-        <span>💫 Vasovagal Syncope & Vitals Analysis</span>
+        <span>${uiText('x.vasovagal_syncope_vitals_analysis', '💫 Vasovagal Syncope & Vitals Analysis')}</span>
         ${riskTag}
       </div>
       <div class="calc-result-desc">
@@ -3658,14 +3914,14 @@ function updateArtistReadiness() {
 
   box.innerHTML = `
     <div class="readiness-checklist-title">
-      <span>📋 Studio Precautions & Checklist</span>
-      <span style="font-size:0.75rem; color:var(--text-muted); font-weight:normal;">Tailored for Artist Intake</span>
+      <span>${uiText('x.studio_precautions_checklist', '📋 Studio Precautions & Checklist')}</span>
+      <span style="font-size:0.75rem; color:var(--text-muted); font-weight:normal;">${uiText('x.tailored_for_artist_intake', 'Tailored for Artist Intake')}</span>
     </div>
     <ul class="readiness-list">
       ${checklistItems.map(item => `<li>${item}</li>`).join('')}
     </ul>
     <div class="readiness-actions">
-      <button class="action-btn secondary" id="copy-readiness-btn" style="font-size:0.78rem; padding:0.4rem 0.8rem;">📋 Copy Artist Checklist</button>
+      <button class="action-btn secondary" id="copy-readiness-btn" style="font-size:0.78rem; padding:0.4rem 0.8rem;">${uiText('x.copy_artist_checklist', '📋 Copy Artist Checklist')}</button>
     </div>
   `;
 
@@ -3675,7 +3931,7 @@ function updateArtistReadiness() {
       const btn = document.getElementById('copy-readiness-btn');
       if (btn) {
         btn.textContent = '✅ Copied!';
-        setTimeout(() => { btn.textContent = '📋 Copy Artist Checklist'; }, 2000);
+        setTimeout(() => { btn.textContent = uiText('x.copy_artist_checklist', '📋 Copy Artist Checklist'); }, 2000);
       }
     });
   });
@@ -3690,7 +3946,7 @@ function updateBriefTab() {
     briefContentEl.innerHTML = `
       <div class="empty-brief-notice">
         <p>⚠️ No medications selected yet.</p>
-        <p><a href="#" id="go-to-checker">Switch to the Interaction Checker</a> and select your medications to generate your custom consultation brief.</p>
+        <p><a href="#" id="go-to-checker">${uiText('x.switch_to_the_interaction_checker', 'Switch to the Interaction Checker')}</a> ${uiText('x.and_select_your_medications_to_generate_brief', 'and select your medications to generate your custom consultation brief.')}</p>
       </div>`;
     briefActionsEl.style.display = 'none';
     return;
@@ -3749,7 +4005,7 @@ function updateBriefTab() {
       </ul>
 
       <div class="brief-footer-note">
-        <em>Notice to Artist / Piercer: This brief is compiled by the client for educational disclosure. It is not a substitute for formal medical clearance from a licensed physician.</em>
+        <em>${escHtml(uiText('x.notice_to_artist_piercer', 'Notice to Artist / Piercer:'))} This brief is compiled by the client for educational disclosure. It is not a substitute for formal medical clearance from a licensed physician.</em>
       </div>
     </div>
   `;
@@ -3786,7 +4042,7 @@ function copyBriefText() {
     btn.innerHTML = '✅ Copied!';
     setTimeout(() => { btn.innerHTML = originalText; }, 2000);
   }).catch(() => {
-    alert('Brief copied to clipboard!');
+    alert(uiText('x.alert_brief_copied', 'Brief copied to clipboard!'));
   });
 }
 
@@ -3794,7 +4050,7 @@ function copyBriefText() {
 function generateBriefPDF() {
   const checked = getSelectedMedIds();
   if (checked.length === 0) {
-    alert('Please select at least one medication first.');
+    alert(uiText('x.alert_select_medication_first', 'Please select at least one medication first.'));
     return;
   }
 
@@ -4062,7 +4318,7 @@ function copyDoctorMessage() {
     copyDocMsgBtn.innerHTML = '✅ Copied to Clipboard!';
     setTimeout(() => { copyDocMsgBtn.innerHTML = '📋 Copy Draft Message'; }, 2000);
   }).catch(() => {
-    alert('Message copied to clipboard!');
+    alert(uiText('x.alert_message_copied', 'Message copied to clipboard!'));
   });
 }
 
@@ -4198,15 +4454,15 @@ function renderQuizQuestion() {
   container.innerHTML = `
     <div class="quiz-q-box">
       <div class="quiz-q-header">
-        <span class="quiz-q-num">Question ${quizCurrentIndex + 1} of ${QUIZ_QUESTIONS.length}</span>
-        <span class="quiz-q-score">Score: ${quizScore}</span>
+        <span class="quiz-q-num">${escHtml(uiText('x.question_counter', 'Question {n} of {total}')).replace('{n}', quizCurrentIndex + 1).replace('{total}', QUIZ_QUESTIONS.length)}</span>
+        <span class="quiz-q-score">${escHtml(uiText('x.quiz_score', 'Score:'))} ${quizScore}</span>
       </div>
       <div class="quiz-q-text">${escHtml(item.q)}</div>
       <div class="quiz-options-list" id="quiz-options-list">
         ${optionsHtml}
       </div>
       <div id="quiz-feedback" style="display:none;"></div>
-      <button class="quiz-next-btn" id="quiz-next-btn" style="display:none;">Next Question ➔</button>
+      <button class="quiz-next-btn" id="quiz-next-btn" style="display:none;">${escHtml(uiText('x.next_question', 'Next Question ➔'))}</button>
     </div>`;
 
   const optionBtns = container.querySelectorAll('.quiz-option-btn');
@@ -4716,15 +4972,15 @@ function generatePrintCoverPage() {
       </div>
     </div>
 
-    <h2 style="font-size:1.1rem; font-weight:800; color:#0f172a; margin-bottom:0.75rem; text-transform:uppercase;">Summary of Disclosed Medications (${checked.length})</h2>
+    <h2 style="font-size:1.1rem; font-weight:800; color:#0f172a; margin-bottom:0.75rem; text-transform:uppercase;">${uiText('x.summary_disclosed_medications', 'Summary of Disclosed Medications ({count})').replace('{count}', checked.length)}</h2>
     
     <table class="cover-meds-table">
       <thead>
         <tr>
-          <th>Medication / Brand</th>
-          <th>Risk Level</th>
-          <th>Key Procedural Impact Badges</th>
-          <th>Action / Wait Advice</th>
+          <th>${uiText('x.col_medication_brand', 'Medication / Brand')}</th>
+          <th>${uiText('x.col_risk_level', 'Risk Level')}</th>
+          <th>${uiText('x.col_key_procedural_impact', 'Key Procedural Impact Badges')}</th>
+          <th>${uiText('x.col_action_wait_advice', 'Action / Wait Advice')}</th>
         </tr>
       </thead>
       <tbody>
@@ -5026,7 +5282,7 @@ function renderRemindersTab() {
 function saveAppointmentDate() {
   const inputEl = document.getElementById('appointment-datetime-input');
   if (!inputEl || !inputEl.value) {
-    alert('Please choose a valid appointment date and time.');
+    alert(uiText('x.alert_invalid_appointment', 'Please choose a valid appointment date and time.'));
     return;
   }
   localStorage.setItem('appointment_datetime', inputEl.value);
@@ -5036,7 +5292,7 @@ function saveAppointmentDate() {
 
 function enableBrowserNotifications() {
   if (!('Notification' in window)) {
-    alert('Browser notifications are not supported in your browser.');
+    alert(uiText('x.alert_notif_unsupported', 'Browser notifications are not supported in your browser.'));
     return;
   }
 
@@ -5057,7 +5313,7 @@ function enableBrowserNotifications() {
       }
     });
   } else {
-    alert('Browser notifications are currently blocked in your browser settings. Enable permissions in your browser URL bar.');
+    alert(uiText('x.alert_notif_blocked', 'Browser notifications are currently blocked in your browser settings. Enable permissions in your browser URL bar.'));
   }
 }
 
@@ -5069,7 +5325,7 @@ function scheduleIndividualAlert(medName) {
 function exportMedIcsEvent(medName, waitText) {
   const inputEl = document.getElementById('appointment-datetime-input');
   if (!inputEl || !inputEl.value) {
-    alert('Please select your scheduled appointment date and time first in the box above.');
+    alert(uiText('x.alert_select_appointment_first', 'Please select your scheduled appointment date and time first in the box above.'));
     return;
   }
 
@@ -5116,7 +5372,7 @@ function exportCalendarEvent() {
   const inputEl = document.getElementById('appointment-datetime-input');
   const checked = getSelectedMedIds();
   if (!inputEl || !inputEl.value) {
-    alert('Please select your scheduled appointment date and time first!');
+    alert(uiText('x.alert_select_appointment_first_short', 'Please select your scheduled appointment date and time first!'));
     return;
   }
 
@@ -5178,11 +5434,11 @@ function exportGoogleCalendarIcs() {
   const checked = getSelectedMedIds();
   
   if (!inputEl || !inputEl.value) {
-    alert('Please select your scheduled appointment date and time first in the box above.');
+    alert(uiText('x.alert_select_appointment_first', 'Please select your scheduled appointment date and time first in the box above.'));
     return;
   }
   if (checked.length === 0) {
-    alert('No medications selected. Please select your medications in the Interaction Checker first.');
+    alert(uiText('x.alert_no_medications_selected', 'No medications selected. Please select your medications in the Interaction Checker first.'));
     return;
   }
 
@@ -5272,7 +5528,7 @@ function openGoogleCalendarWeb() {
   const checked = getSelectedMedIds();
   
   if (!inputEl || !inputEl.value) {
-    alert('Please select your scheduled appointment date and time first in the box above.');
+    alert(uiText('x.alert_select_appointment_first', 'Please select your scheduled appointment date and time first in the box above.'));
     return;
   }
 

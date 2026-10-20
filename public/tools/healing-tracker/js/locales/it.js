@@ -21,6 +21,7 @@ window.I18N_DICTIONARY.it = {
       "promptTitle": "Promemoria idratazione",
       "promptBody": "È ora di bere un bicchiere d'acqua! La rigenerazione cellulare e il drenaggio linfatico richiedono un'idratazione ottimale, fondamentale per la guarigione di tatuaggi e piercing.",
       "drankWaterBtn": "💧 Registra +1 bicchiere",
+      "addCupBtn": "+ 1 bicchiere",
       "snoozeBtn": "Posticipa (30 min)",
       "title": "Controllo idratazione cutanea quotidiana",
       "subtitle": "Monitora l'assunzione di acqua per supportare la mitosi epidermica, l'elasticità delle crosticine e la risoluzione dei pigmenti linfatici.",

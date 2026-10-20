@@ -1084,7 +1084,7 @@
       "error.invalid_caliper": "Por favor, introduza uma espessura medida em milímetros (ex.: 1.25)."
     },
     th: {
-      "meta.title": "Body Piercing Gauge Converter & Size Chart | Poli International",
+      "meta.title": "ตัวแปลงเกจการเจาะร่างกายและตารางขนาด | Poli International",
       "meta.description": "แปลงขนาดเกจ มิลลิเมตร และนิ้วเศษส่วนด้วยภาพอ้างอิงขนาดจริงที่ปรับเทียบแล้ว และการค้นหาย้อนกลับด้วยเวอร์เนียร์",
       "lang.en": "อังกฤษ (EN)",
       "brand.name": "Poli International",
@@ -1099,7 +1099,7 @@
       "nav.trust": "พวกเขาไว้วางใจเรา!",
       "nav.contact": "ติดต่อ",
       "nav.explore_tools": "สำรวจเครื่องมือฟรีทั้งหมดของเรา →",
-      "hero.title": "Body Piercing Gauge Converter & Size Chart",
+      "hero.title": "ตัวแปลงเกจการเจาะร่างกายและตารางขนาด",
       "hero.github": "ดูบน GitHub",
       "hero.subtitle": "การแปลงขนาดแบบตรงตามสเกลจริงระหว่างเกจ มิลลิเมตร และนิ้ว พร้อมการค้นหาย้อนกลับด้วยเวอร์เนียร์และการปรับเทียบด้วยบัตร",
       "hero.lang_select_label": "เลือกภาษา",

@@ -5,6 +5,23 @@
 
 if (typeof window !== "undefined" && window.registerLanguage) {
   window.registerLanguage("nl", {
+    "aria": {
+      "breadcrumb": "Broodkruimelpad",
+      "embedOptions": "Insluitopties openen",
+      "darkModeToggle": "Donkere/lichte modus wisselen",
+      "tabs": "Secties van de inktmengtool",
+      "targetGoalSwatch": "Staal van de doelkleur",
+      "predictedMatchSwatch": "Staal van de voorspelde overeenkomst",
+      "predictedMixedColor": "Voorspelde gemengde inktkleur",
+      "componentSwatch": "Staal van het component",
+      "remove": "Verwijderen"
+    },
+    "verdict": {
+      "imperceptible": "Onwaarneembare overeenkomst (hoge getrouwheid)",
+      "close": "Nauwe overeenkomst (waarneembaar bij inspectie)",
+      "noticeable": "Merkbare variatie (bruikbaar voor schaduw)",
+      "significant": "Duidelijke verschuiving (buiten de kern-gamut)"
+    },
   "breadcrumb": {
     "home": "Home",
     "tools": "Tools",
@@ -432,6 +449,7 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "headerTitle": "Subtractieve complementaire & neutraliserende tintassistent"
   },
   "qrTransfer": {
+    "byteMeterEmpty": "0 bytes / 2,048 max",
     "modalTitle": "Offline QR-code formule-overdracht",
     "modalSubtitle": "Scan met de camera van een ander apparaat om de formule te importeren zonder netwerktoegang of cloudaccounts.",
     "payloadSizeLabel": "Gemeten gegevensgrootte:",
@@ -519,6 +537,13 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "tray12": "12-Doppen Volledige Rooster Tray"
   },
   "diluentFormulator": {
+    "mlDrops": "{ml} ml ({drops} druppels)",
+    "labelTitle": "Etiket diluentfles - Poli International",
+    "vehicleHeading": "SCHADUW-VERDUNNINGSDRAGER",
+    "meta": "Bereid: <strong>{date}</strong> | Batch-ID: <strong>{batchId}</strong>",
+    "labelNotes": "Opmerkingen: {notes}",
+    "warning": "Poli International Tattoo Tools Suite • Bewaar in een schone, goed afgesloten kneepfles. Werk steriel. Gooi weg binnen de door de studio aanbevolen termijn.",
+    "popupBlocked": "Pop-up geblokkeerd. Sta pop-ups toe om flessenetiketten af te drukken.",
     "title": "Formuleerder voor Aangepaste Schaduwverdunners",
     "subtitle": "Formuleer draagoplossingen met steriel water, toverhazelaar en USP-glycerine voor zachte grijswassingen.",
     "sizeLabel": "Flesgrootte",
@@ -729,6 +754,7 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "formulaArchive": "FORMULE-ARCHIEF"
   },
   "substitution": {
+    "inkCount": "({count} inkten)",
     "title": "🔄 Formule Inkt-Substitutieweergave",
     "subtitle": "Kies een opgeslagen recept, markeer een inkt als niet op voorraad en kies een vervanging uit de voorraad om het CIEDE2000 kleurverschil (ΔE₀₀) te controleren.",
     "selectRecipe": "Selecteer Opgeslagen Recept",

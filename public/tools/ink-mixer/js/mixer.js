@@ -352,7 +352,7 @@ function addColorRow(defaultColor = '', defaultParts = 1, defaultBrand = 'Standa
     <div class="ink-mixer__color-control">
       <label class="ink-mixer__label">${labelText}</label>
       <div style="display: flex; align-items: center; gap: 0.5rem;">
-        <span class="row-component-swatch" role="img" aria-label="Component Swatch"></span>
+        <span class="row-component-swatch" role="img" aria-label="${window.t('aria.componentSwatch')}"></span>
         <select class="ink-mixer__select color-select" data-row="${colorRowCount}">
           <option value="">${typeof window.t === 'function' ? window.t('mixer.selectColor') : 'Select Color'}</option>
           ${optionsHtml}
@@ -371,7 +371,7 @@ function addColorRow(defaultColor = '', defaultParts = 1, defaultBrand = 'Standa
       <label class="ink-mixer__label">${partsLabel}</label>
       <input type="number" class="ink-mixer__input parts-input" min="0.1" step="0.1" value="${defaultParts}">
     </div>
-    <button type="button" class="ink-mixer__btn ink-mixer__btn--small ink-mixer__btn--danger remove-color-btn" title="Remove" aria-label="Remove">×</button>
+    <button type="button" class="ink-mixer__btn ink-mixer__btn--small ink-mixer__btn--danger remove-color-btn" title="${window.t('aria.remove')}" aria-label="${window.t('aria.remove')}">×</button>
   `;
 
   DOM.colorSelectors.appendChild(row);
@@ -413,6 +413,10 @@ function updateColorRowLabels() {
   const selectColorText = _t('mixer.selectColor');
 
   rows.forEach((row, index) => {
+    const swatchEl = row.querySelector('.row-component-swatch');
+    if (swatchEl) swatchEl.setAttribute('aria-label', _t('aria.componentSwatch'));
+    const removeEl = row.querySelector('.remove-color-btn');
+    if (removeEl) { removeEl.setAttribute('title', _t('aria.remove')); removeEl.setAttribute('aria-label', _t('aria.remove')); }
     const colorLabel = row.querySelector('.ink-mixer__color-control:not(.ink-mixer__color-control--brand):not(.ink-mixer__color-control--batch):not(.ink-mixer__color-control--parts) .ink-mixer__label');
     if (colorLabel) {
       colorLabel.textContent = _t('mixer.colorLabel', { count: index + 1 });
@@ -2236,7 +2240,7 @@ function openQrTransferModal(payloadData, title = 'Formula Transfer') {
   const maxBytes = 2048;
 
   if (DOM.qrByteCount) {
-    DOM.qrByteCount.textContent = `${byteSize.toLocaleString()} bytes / 2,048 max`;
+    DOM.qrByteCount.textContent = window.t('qrTransfer.byteMeter', { current: byteSize.toLocaleString(), max: '2,048' });
   }
 
   if (DOM.qrByteBar) {

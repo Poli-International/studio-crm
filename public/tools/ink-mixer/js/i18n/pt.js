@@ -5,6 +5,23 @@
 
 if (typeof window !== "undefined" && window.registerLanguage) {
   window.registerLanguage("pt", {
+    "aria": {
+      "breadcrumb": "Trilha de navegação",
+      "embedOptions": "Abrir opções de incorporação",
+      "darkModeToggle": "Alternar modo escuro/claro",
+      "tabs": "Secções da ferramenta Misturador de tintas",
+      "targetGoalSwatch": "Amostra da cor-alvo",
+      "predictedMatchSwatch": "Amostra da correspondência prevista",
+      "predictedMixedColor": "Cor de tinta misturada prevista",
+      "componentSwatch": "Amostra do componente",
+      "remove": "Remover"
+    },
+    "verdict": {
+      "imperceptible": "Correspondência imperceptível (alta fidelidade)",
+      "close": "Correspondência próxima (perceptível ao inspecionar)",
+      "noticeable": "Variação notável (sombreamento utilizável)",
+      "significant": "Desvio significativo (fora da gama principal)"
+    },
   "breadcrumb": {
     "home": "Início",
     "tools": "Ferramentas",
@@ -432,6 +449,7 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "headerTitle": "Assistente de tom complementar e neutralizante subtrativo"
   },
   "qrTransfer": {
+    "byteMeterEmpty": "0 bytes / 2,048 máx.",
     "modalTitle": "Transferência de fórmulas offline via código QR",
     "modalSubtitle": "Escaneie com a câmera de outro dispositivo para importar a fórmula sem acesso à internet nem contas em nuvem.",
     "payloadSizeLabel": "Tamanho medido dos dados:",
@@ -519,6 +537,13 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "tray12": "Grelha completa 12 batoques"
   },
   "diluentFormulator": {
+    "mlDrops": "{ml} ml ({drops} gotas)",
+    "labelTitle": "Rótulo do frasco de diluente - Poli International",
+    "vehicleHeading": "VEÍCULO DILUENTE PARA SOMBREAMENTO",
+    "meta": "Preparado: <strong>{date}</strong> | ID do lote: <strong>{batchId}</strong>",
+    "labelNotes": "Notas: {notes}",
+    "warning": "Poli International Tattoo Tools Suite • Armazenar em frasco apertável limpo e bem fechado. Praticar técnica estéril. Descartar dentro do prazo recomendado pelo estúdio.",
+    "popupBlocked": "Pop-up bloqueado. Permita pop-ups para imprimir os rótulos dos frascos.",
     "title": "Formulador de Veículo Diluente Personalizado",
     "subtitle": "Formule soluções veículo com água estéril, hamamélis e glicerina USP para transições suaves.",
     "sizeLabel": "Tamanho do Frasco",
@@ -729,6 +754,7 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "formulaArchive": "ARQUIVO-FÓRMULA"
   },
   "substitution": {
+    "inkCount": "({count} tintas)",
     "title": "🔄 Visualização de Substituição de Tintas da Fórmula",
     "subtitle": "Escolha uma receita salva, marque uma tinta como esgotada e selecione uma substituta do estoque para verificar a diferença de cor CIEDE2000 (ΔE₀₀).",
     "selectRecipe": "Selecionar Receita Salva",

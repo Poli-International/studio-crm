@@ -286,7 +286,7 @@ body.dark-mode .breadcrumb-nav strong {
                 <div class="coverage__converter-header" style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;" id="converter-toggle-btn">
                     <span class="coverage__converter-title" style="display: flex; align-items: center; gap: 0.5rem; font-weight: 600; font-size: 0.95rem;">
                         <span>🔄</span>
-                        <strong data-i18n="x.quick_unit_converter">Quick Unit Converter</strong> (Square Inches ↔ Square Centimeters)
+                        <strong data-i18n="x.quick_unit_converter">Quick Unit Converter</strong> <span data-i18n="x.unit_converter_pair">(Square Inches ↔ Square Centimeters)</span>
                     </span>
                     <span id="converter-toggle-icon" style="font-size: 0.82rem; color: var(--color-text-secondary);" data-i18n="x.toggle_converter">▼ Toggle Converter</span>
                 </div>
@@ -313,7 +313,7 @@ body.dark-mode .breadcrumb-nav strong {
                     <!-- Ink Density & Needle Configuration Selection -->
                     <div style="margin-top: 0.85rem; padding-top: 0.85rem; border-top: 1px dashed var(--color-border);">
                         <label for="converter-ink-needle-select" style="display: flex; align-items: center; gap: 0.4rem; font-weight: 600; font-size: 0.85rem; margin-bottom: 0.35rem; color: var(--color-text-primary);">
-                            <span>💉</span> Needle Category & Density Preset:
+                            <span>💉</span> <span data-i18n="x.needle_category_density_preset">Needle Category & Density Preset:</span>
                         </label>
                         <select id="converter-ink-needle-select" class="coverage__select" style="width: 100%; font-size: 0.88rem; padding: 0.5rem 0.75rem;">
                             <optgroup label="⭐ Pre-Calculated Style Presets" data-category="preset">
@@ -553,7 +553,7 @@ body.dark-mode .breadcrumb-nav strong {
                             <div id="converter-chart-thresholds-legend" style="display: flex; justify-content: space-between; align-items: center; font-size: 0.68rem; color: #94a3b8; margin-top: 0.35rem; padding: 0.2rem 0.4rem; background: rgba(255, 255, 255, 0.02); border-radius: 4px; flex-wrap: wrap; gap: 0.4rem;">
                                 <span style="display: flex; align-items: center; gap: 3px;">
                                     <span style="display: inline-block; width: 12px; height: 2px; border-top: 2px dashed rgba(16, 185, 129, 0.7);"></span>
-                                    <strong style="color: #10b981;">35%</strong> Light Wash Threshold
+                                    <strong style="color: #10b981;">35%</strong> <span data-i18n="x.light_wash_threshold">Light Wash Threshold</span>
                                 </span>
                                 <span id="converter-chart-avg-legend" style="display: flex; align-items: center; gap: 3px;">
                                     <span style="display: inline-block; width: 12px; height: 2px; border-top: 2px dashed rgba(251, 191, 36, 0.8);"></span>
@@ -561,7 +561,7 @@ body.dark-mode .breadcrumb-nav strong {
                                 </span>
                                 <span style="display: flex; align-items: center; gap: 3px;">
                                     <span style="display: inline-block; width: 12px; height: 2px; border-top: 2px dashed rgba(255, 0, 110, 0.7);"></span>
-                                    <strong style="color: #ff006e;">65%</strong> Heavy Packing Threshold
+                                    <strong style="color: #ff006e;">65%</strong> <span data-i18n="x.heavy_packing_threshold">Heavy Packing Threshold</span>
                                 </span>
                             </div>
                             <!-- Dynamic Historical Deviation Alert Banner -->
@@ -597,7 +597,7 @@ body.dark-mode .breadcrumb-nav strong {
                         <div id="converter-expanded-metadata" class="converter-expanded-panel converter-no-print" style="display: none;">
                             <div style="font-weight: 700; color: #38bdf8; margin-bottom: 0.45rem; display: flex; align-items: center; justify-content: space-between;">
                                 <span style="display: flex; align-items: center; gap: 0.35rem;">
-                                    <span>🩹</span> Clinical Healing & Skin Trauma Profile
+                                    <span>🩹</span> <span data-i18n="x.clinical_healing_trauma_profile">Clinical Healing & Skin Trauma Profile</span>
                                 </span>
                                 <span id="converter-healing-time-badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; padding: 2px 7px; border-radius: 4px; font-weight: 700;" data-i18n="x.est_healing_12_16_days">Est. Healing: ~12–16 days</span>
                             </div>
@@ -677,7 +677,7 @@ body.dark-mode .breadcrumb-nav strong {
                 <div class="coverage__converter-header" style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;" id="comparison-toggle-btn">
                     <span class="coverage__converter-title" style="display: flex; align-items: center; gap: 0.5rem; font-weight: 600; font-size: 0.95rem;">
                         <span>⚖️</span>
-                        <strong data-i18n="x.side_by_side_scenario_comparison">Side-by-Side Scenario Comparison</strong> (Compare Time & Ink Usage)
+                        <strong data-i18n="x.side_by_side_scenario_comparison">Side-by-Side Scenario Comparison</strong> <span data-i18n="x.compare_time_ink_usage">(Compare Time & Ink Usage)</span>
                     </span>
                     <span id="comparison-toggle-icon" style="font-size: 0.82rem; color: var(--color-text-secondary);" data-i18n="x.toggle_comparison_mode">▼ Toggle Comparison Mode</span>
                 </div>
@@ -972,7 +972,7 @@ body.dark-mode .breadcrumb-nav strong {
                         <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-weight: 600; color: var(--color-text-primary); margin-bottom: 0.5rem;">
                             <span id="coverage-progress-status" style="display: flex; align-items: center; gap: 0.4rem;">
                                 <span style="display: inline-block;">⚙️</span>
-                                Simulating skin pass physics & needle penetration...
+                                <span data-i18n="x.simulating_skin_pass_physics">Simulating skin pass physics & needle penetration...</span>
                             </span>
                             <span id="coverage-progress-percent" style="font-family: 'JetBrains Mono', monospace; color: var(--color-neon-pink, #ff006e); font-weight: 800;">0%</span>
                         </div>
@@ -1223,10 +1223,10 @@ body.dark-mode .breadcrumb-nav strong {
                                             <span style="font-size: 0.75rem; background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 2px 6px; border-radius: 4px; font-weight: 600;" id="muscle-stretch-badge" data-i18n="x.low_stretch_risk">Low Stretch Risk</span>
                                         </div>
                                         <div style="color: var(--color-text-secondary);" id="muscle-detail-display">
-                                            <strong data-i18n="x.skin_tension">Skin Tension:</strong> Firm, smooth skin over bicep muscle belly. Easy two-finger stretch.
+                                            <strong data-i18n="x.skin_tension">Skin Tension:</strong> <span data-i18n="x.anatomy_upper_arm_detail">Firm, smooth skin over bicep muscle belly. Easy two-finger stretch.</span>
                                         </div>
                                         <div style="color: var(--color-neon-pink, #ff006e); font-size: 0.78rem;" id="muscle-tip-display">
-                                            💡 <strong data-i18n="x.ergonomic_tip">Ergonomic Tip:</strong> Position armrest at 45° angle to stabilize muscle surface and minimize skin bounce.
+                                            💡 <strong data-i18n="x.ergonomic_tip">Ergonomic Tip:</strong> <span data-i18n="x.anatomy_upper_arm_tip">Position armrest at 45° angle to stabilize muscle surface and minimize skin bounce.</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1344,7 +1344,7 @@ body.dark-mode .breadcrumb-nav strong {
                         <div id="session-goals-container" style="margin-top: 1rem; border-top: 1px dashed var(--color-border, #2e2e4a); padding-top: 0.85rem;">
                             <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.6rem;">
                                 <span style="font-weight: 700; font-size: 0.88rem; color: var(--color-text-primary, #ffffff); display: flex; align-items: center; gap: 0.4rem;">
-                                    <span>🎯</span> Session Target Milestones
+                                    <span>🎯</span> <span data-i18n="x.session_target_milestones">Session Target Milestones</span>
                                 </span>
                                 <div style="display: flex; gap: 0.3rem; flex-wrap: wrap;">
                                     <button type="button" class="preset-goal-btn" data-title="Finish Linework" data-hours="2.0" style="font-size: 0.72rem; background: rgba(6,147,227,0.15); color: #0693e3; border: 1px solid #0693e3; padding: 2px 7px; border-radius: 4px; cursor: pointer;" data-i18n="btn_preset_linework">+ Linework (2h)</button>
@@ -2001,7 +2001,7 @@ body.dark-mode .breadcrumb-nav strong {
                             <div style="background: var(--color-bg-card, #16213e); border: 1px solid var(--color-border, #2e2e4a); border-radius: 12px; padding: 1.25rem;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
                                     <h3 style="font-size: 1rem; font-weight: 700; color: var(--color-text-primary); margin: 0; display: flex; align-items: center; gap: 0.4rem;">
-                                        <span>🏢</span> Studio Stock & Low-Alert Threshold
+                                        <span>🏢</span> <span data-i18n="x.studio_stock_low_alert_threshold">Studio Stock & Low-Alert Threshold</span>
                                     </h3>
                                     <span style="font-size: 0.72rem; color: #10b981; font-weight: 600;" data-i18n="x.live_monitored">Live Monitored</span>
                                 </div>
@@ -2021,7 +2021,7 @@ body.dark-mode .breadcrumb-nav strong {
                                 <div style="background: rgba(239, 68, 68, 0.06); border: 1px dashed rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 0.75rem; margin-top: 0.5rem;">
                                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
                                         <label for="inventory-min-threshold" style="font-size: 0.8rem; font-weight: 700; color: #fca5a5; display: flex; align-items: center; gap: 0.3rem;">
-                                            <span>⚠️</span> Configurable Minimum Threshold:
+                                            <span>⚠️</span> <span data-i18n="x.configurable_minimum_threshold">Configurable Minimum Threshold:</span>
                                         </label>
                                         <span id="threshold-current-label" style="font-size: 0.72rem; font-weight: 700; color: #ef4444; background: rgba(239,68,68,0.2); padding: 1px 6px; border-radius: 4px;">20 mL</span>
                                     </div>
@@ -2039,7 +2039,7 @@ body.dark-mode .breadcrumb-nav strong {
                             <div style="background: var(--color-bg-card, #16213e); border: 1px solid var(--color-border, #2e2e4a); border-radius: 12px; padding: 1.25rem;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
                                     <h3 style="font-size: 1rem; font-weight: 700; color: var(--color-text-primary); margin: 0; display: flex; align-items: center; gap: 0.4rem;">
-                                        <span>🧪</span> Studio Bottle Inventory On-Hand
+                                        <span>🧪</span> <span data-i18n="x.studio_bottle_inventory_on_hand">Studio Bottle Inventory On-Hand</span>
                                     </h3>
                                     <span id="studio-bottles-low-count" style="font-size: 0.72rem; font-weight: 700; color: #ef4444;" data-i18n="x.2_bottles_low">2 Bottles Low</span>
                                 </div>
@@ -2051,7 +2051,7 @@ body.dark-mode .breadcrumb-nav strong {
                             <!-- Appointment Logging Form with Searchable Ink Brand Selection -->
                             <div style="background: var(--color-bg-card, #16213e); border: 1px solid var(--color-border, #2e2e4a); border-radius: 12px; padding: 1.25rem;">
                                 <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                                    <span>📅</span> Add Upcoming Appointment
+                                    <span>📅</span> <span data-i18n="x.add_upcoming_appointment">Add Upcoming Appointment</span>
                                 </h3>
                                 <form id="inventory-appointment-form" style="display: flex; flex-direction: column; gap: 0.85rem;">
                                     <div>
@@ -2254,7 +2254,7 @@ body.dark-mode .breadcrumb-nav strong {
                         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem;">
                             <div>
                                 <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--color-text-primary); margin: 0; display: flex; align-items: center; gap: 0.5rem;">
-                                    <span>📈</span> Historical Pigment Usage (Last 6 Months)
+                                    <span>📈</span> <span data-i18n="x.historical_pigment_usage_6_months">Historical Pigment Usage (Last 6 Months)</span>
                                 </h3>
                                 <p style="font-size: 0.78rem; color: var(--color-text-secondary); margin: 0.2rem 0 0 0;" data-i18n="x.recharts_multi_line_telemetry_tracking_monthly">
                                     Recharts multi-line telemetry tracking monthly volume consumption (mL) across key pigment families to identify fastest-depleting colors for restocking.
@@ -2306,7 +2306,7 @@ body.dark-mode .breadcrumb-nav strong {
                         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem;">
                             <div>
                                 <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--color-text-primary); margin: 0; display: flex; align-items: center; gap: 0.5rem;">
-                                    <span>📊</span> Ink Waste vs. Consumption Telemetry (Monthly Analysis)
+                                    <span>📊</span> <span data-i18n="x.ink_waste_vs_consumption_telemetry">Ink Waste vs. Consumption Telemetry (Monthly Analysis)</span>
                                 </h3>
                                 <p style="font-size: 0.78rem; color: var(--color-text-secondary); margin: 0.2rem 0 0 0;" data-i18n="x.compare_net_pigment_absorbed_into_dermis">
                                     Compare net pigment absorbed into dermis (consumed) vs. cap reservoir discard and rinse waste per month to identify pigment lines with high waste ratios.
@@ -2402,7 +2402,7 @@ body.dark-mode .breadcrumb-nav strong {
                     <div id="dashboard-print-banner" class="print-mode-banner" style="display: none;">
                         <div style="display: flex; align-items: center; gap: 0.5rem;">
                             <span>🖨️</span>
-                            <strong data-i18n="x.high_contrast_b_w_print_layout">High-Contrast B&W Print Layout Active</strong> — Optimized for printer output & PDF generation.
+                            <strong data-i18n="x.high_contrast_b_w_print_layout">High-Contrast B&W Print Layout Active</strong> <span data-i18n="x.print_layout_optimized_note">— Optimized for printer output & PDF generation.</span>
                         </div>
                         <div style="display: flex; gap: 0.5rem;">
                             <button type="button" id="dashboard-trigger-print-btn" style="background: #ffffff; color: #000000; border: none; padding: 4px 12px; border-radius: 4px; font-weight: 700;" data-i18n="btn_print_now">
@@ -2596,13 +2596,13 @@ body.dark-mode .breadcrumb-nav strong {
             <div class="coverage__disclaimer-box coverage__disclaimer-box--warning">
                 <h3 class="coverage__disclaimer-title" data-i18n="x.important_disclaimers">⚠️ Important Disclaimers</h3>
                 <div class="coverage__disclaimer-content">
-                    <p><strong data-i18n="x.coverage_and_time_estimates">Coverage and Time Estimates:</strong> All calculations are based on industry averages and may vary significantly based on individual artist skill, technique, client skin type, design complexity, and other factors. Always use professional judgment and adjust estimates based on your experience.</p>
+                    <p><strong data-i18n="x.coverage_and_time_estimates">Coverage and Time Estimates:</strong> <span data-i18n="x.estimates_sentence_industry_averages">All calculations are based on industry averages and may vary significantly based on individual artist skill, technique, client skin type, design complexity, and other factors. Always use professional judgment and adjust estimates based on your experience.</span></p>
 
-                    <p><strong data-i18n="x.pricing_guidance">Pricing Guidance:</strong> Pricing recommendations are for reference only. Actual pricing should consider your local market, overhead costs, experience level, and business model. This tool does not provide financial advice.</p>
+                    <p><strong data-i18n="x.pricing_guidance">Pricing Guidance:</strong> <span data-i18n="x.pricing_sentence_reference_only">Pricing recommendations are for reference only. Actual pricing should consider your local market, overhead costs, experience level, and business model. This tool does not provide financial advice.</span></p>
 
-                    <p><strong data-i18n="x.ink_consumption_2">Ink Consumption:</strong> Ink estimates include typical waste factors but may vary based on technique, equipment, and artist efficiency.</p>
+                    <p><strong data-i18n="x.ink_consumption_2">Ink Consumption:</strong> <span data-i18n="x.ink_estimates_sentence_waste">Ink estimates include typical waste factors but may vary based on technique, equipment, and artist efficiency.</span></p>
 
-                    <p><strong data-i18n="x.client_safety">Client Safety:</strong> Always prioritize client wellbeing over speed. Some clients may require shorter or longer sessions than estimated. Watch for signs of fatigue, pain, or shock.</p>
+                    <p><strong data-i18n="x.client_safety">Client Safety:</strong> <span data-i18n="x.client_safety_sentence">Always prioritize client wellbeing over speed. Some clients may require shorter or longer sessions than estimated. Watch for signs of fatigue, pain, or shock.</span></p>
                 </div>
             </div>
         </div>
@@ -2665,8 +2665,8 @@ body.dark-mode .breadcrumb-nav strong {
                         Our passion doesn't get much support out there, so let's stick together and build the best tools to help our community thrive!
                     </p>
                     <p class="feedback-callout">
-                        <strong data-i18n="x.your_feedback_matters">Your feedback matters!</strong> Found something useful? Got ideas for improvements? We're all ears!
-                        Help us make this tool even better for everyone in our body art family.
+                        <strong data-i18n="x.your_feedback_matters">Your feedback matters!</strong> <span data-i18n="x.feedback_invite">Found something useful? Got ideas for improvements? We're all ears!
+                        Help us make this tool even better for everyone in our body art family.</span>
                     </p>
                 </div>
 

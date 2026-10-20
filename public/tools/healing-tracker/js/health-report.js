@@ -308,7 +308,7 @@
         '</div>' +
 
         '<div class="report-footer-disclaimer">' +
-          t('healing.healthReport.privacyDisclaimer', 'Privacy notice: Health logs are stored locally in your browser cache and are never transmitted to external servers. Standards cited: ASTM F-136, ASTM F-138, ASTM F-67, BioFlex PP-R random copolymer.') +
+          t('healing.healthReport.privacyDisclaimer', 'Privacy notice: Health logs are stored locally in your browser cache and are never transmitted to external servers. Standards cited: ASTM F-136, ASTM F-138, ASTM F-67, USP Class VI, ISO 10993-6.') +
         '</div>' +
       '</div>';
 

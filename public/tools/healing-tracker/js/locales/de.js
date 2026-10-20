@@ -504,9 +504,9 @@ window.I18N_DICTIONARY.de = {
       "sectionTitle": "3. Häufig gestellte Fragen & klinische Fakten",
       "sectionSubtitle": "Evidenzbasierte fachliche Aufklärung zu Schmuckmaterialien, Lymphflüssigkeit und langfristiger Biokompatibilität.",
       "q1Title": "F: Ist Titan das einzige sichere Material für den Ersteinsatz bei Piercings?",
-      "q1Answer": "Fakt: Nein. Obwohl Titan in Implantatqualität (wie ASTM F-136 oder ISO 5832-3) ein außergewöhnlich gutes, hochgradig inertes Material ist, das für frische Piercings weithin empfohlen wird, ist es keineswegs die einzige sichere Option. Weitere etablierte, biokompatible Materialien für die Erstheilung sind chirurgischer Edelstahl in Implantatqualität (wie ASTM F-138), biokompatibles Niob (ASTM B392), massives 14-Karat- oder 18-Karat-Gold (nickelfrei) sowie medizinisches PP-R-Copolymer (BioFlex®). Sicherer Erstschmuck erfordert nachgewiesene Biokompatibilität, Ungiftigkeit und die Einhaltung strenger Nickelabgabegrenzwerte, nicht die ausschließliche Beschränkung auf ein einziges Material.",
-      "q2Title": "F: Ist BioFlex nur für den vorübergehenden oder kurzzeitigen Einsatz gedacht?",
-      "q2Answer": "Fakt: Nein. BioFlex ist medizinisches PP-R (Polypropylen-Random-Copolymer), ein spritzgegossenes biokompatibles Polymer, das speziell für den dauerhaften Langzeiteinsatz sowie für Ersteinsätze entwickelt wurde. Es ist voll autoklavierbar (dampfsterilisierbar), biologisch inert und hochflexibel, wodurch Gewebetraumata und Druckbelastungen reduziert werden.\n\nHinweis zur Materialunterscheidung: BioFlex ist nicht PTFE (Polytetrafluorethylen). PTFE ist ein aus extrudiertem Stabmaterial mechanisch zerspantes Fluorpolymer mit abweichenden mechanischen und Gewindeeigenschaften; BioFlex ist ein spritzgegossenes monolithisches PP-R-Copolymer. Keines der beiden Materialien ist bei sachgemäßer Anwendung auf das kurzzeitige Tragen beschränkt.",
+      "q1Answer": "Fakt: Nein. Obwohl Titan in Implantatqualität (wie ASTM F-136 oder ISO 5832-3) ein außergewöhnlich gutes, hochgradig inertes Material ist, das für frische Piercings weithin empfohlen wird, ist es keineswegs die einzige sichere Option. Weitere etablierte, biokompatible Materialien für die Erstheilung sind chirurgischer Edelstahl in Implantatqualität (wie ASTM F-138), biokompatibles Niob (ASTM B392), massives 14-Karat- oder 18-Karat-Gold (nickelfrei) sowie BioFlex®-Körperschmuck, ein PP-R-Random-Copolymer, dessen Harz USP Class VI erfüllt. Sicherer Erstschmuck erfordert nachgewiesene Biokompatibilität, Ungiftigkeit und die Einhaltung strenger Nickelabgabegrenzwerte, nicht die ausschließliche Beschränkung auf ein einziges Material.",
+      "q2Title": "F: Ist BioFlex®-Körperschmuck nur für den vorübergehenden oder kurzzeitigen Einsatz gedacht?",
+      "q2Answer": "Fakt: Nein. BioFlex®-Körperschmuck besteht aus PP-R (Polypropylen-Random-Copolymer). Das Harz erfüllt USP Class VI, und BioFlex® wurde nach ISO 10993-6 geprüft. Es ist für das langfristige Tragen ebenso geeignet wie für Ersteinsätze, kann im Autoklaven dampfsterilisiert werden, und seine Flexibilität verringert den Druck auf das Gewebe.\n\nHinweis zur Materialunterscheidung: BioFlex® ist kein PTFE (Polytetrafluorethylen). PTFE ist ein aus Stäben spanend bearbeitetes Fluorpolymer mit abweichenden mechanischen und Gewindeeigenschaften; BioFlex® ist ein spritzgegossenes PP-R-Copolymer. Keines der beiden Materialien ist bei sachgemäßer Anwendung auf das kurzzeitige Tragen beschränkt.",
       "q3Title": "F: Aus meinem Piercing tritt klare oder weißliche Flüssigkeit aus, die Krusten bildet. Ist es infiziert?",
       "q3Answer": "Fakt: Nein. Klare, blass-weißliche oder bernsteinfarbene Flüssigkeit, die zu Krusten eintrocknet, ist Lymphflüssigkeit (Wundsekret) vermischt mit abgestorbenen Zellresten. Die Bildung von Lymphflüssigkeit ist ein vollkommen normaler, gesunder und notwendiger Bestandteil der körpereigenen Wundheilung in allen Heilungsphasen eines Piercings. Es handelt sich nicht um Eiter und nicht um ein Anzeichen einer Infektion.\n\nEchte Infektionszeichen unterscheiden sich deutlich: dicker, undurchsichtiger gelber oder grünlicher Eiter, strahlende Hitze, sich ausbreitende dunkle Rötung, pochende Schmerzen oder Fieber."
     },
@@ -1339,7 +1339,7 @@ window.I18N_DICTIONARY.de = {
         "name": "18 Karat Massivgold (Nickelfrei / EN 1811 konform)"
       },
       "bioflex": {
-        "name": "BioFlex(R) PP-R Copolymer (Medizinischer Polymer)"
+        "name": "BioFlex®-Körperschmuck (PP-R-Random-Copolymer)"
       }
     },
     "locations": {
@@ -1423,7 +1423,7 @@ window.I18N_DICTIONARY.de = {
     "fastenerTips": {
       "title": "Verschluss-Wartungsprotokoll"
     },
-    "bioflexNote": "BioFlex(R)-Körperschmuck besteht aus medizinischem PP-R-Random-Copolymer und ist für das langfristige Tragen geeignet. Prüfen Sie ihn bei jeder Kontrolle und ersetzen Sie ihn, wenn er zerkratzt, verbogen oder verfärbt ist, wie jeden anderen Schmuck.",
+    "bioflexNote": "BioFlex®-Körperschmuck besteht aus einem PP-R-Random-Copolymer und ist für das langfristige Tragen geeignet. Prüfen Sie ihn bei jeder Kontrolle und ersetzen Sie ihn, wenn er zerkratzt, verbogen oder verfärbt ist, wie jeden anderen Schmuck.",
     "standardsFooter": "Zitierte Standards: ASTM F-136, ASTM F-67, EN 1811 (Nickelfreiheit), ISO 10993. Etablierte professionelle Praxis."
   }
 };

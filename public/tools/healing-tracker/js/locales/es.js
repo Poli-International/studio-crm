@@ -579,9 +579,9 @@ window.I18N_DICTIONARY.es = {
       "sectionTitle": "3. Preguntas frecuentes y aclaraciones clínicas",
       "sectionSubtitle": "Aclaraciones clínicas basadas en la evidencia científica sobre materiales, exudado linfático y biocompatibilidad a largo plazo.",
       "q1Title": "P: ¿Es el titanio el único material seguro para las joyas de una perforación inicial?",
-      "q1Answer": "Hecho: No. Aunque el titanio de grado implante (como ASTM F-136 o ISO 5832-3) es un material extraordinario, altamente inerte y ampliamente recomendado para perforaciones recientes, de ninguna manera es la única opción segura. Otros materiales consolidados y biocompatibles adecuados para la cicatrización inicial incluyen el acero quirúrgico de grado implante (como ASTM F-138), el niobio biocompatible (ASTM B392), el oro macizo de 14k o 18k sin níquel y el copolímero aleatorio de PP-R de grado médico (BioFlex®). La seguridad de la joya inicial depende de una biocompatibilidad documentada, ausencia de toxicidad y cumplimiento de estrictos límites de liberación de níquel, no de la limitación exclusiva a un único material.",
-      "q2Title": "P: ¿BioFlex está previsto únicamente para uso temporal o a corto plazo?",
-      "q2Answer": "Hecho: No. BioFlex es PP-R (copolímero aleatorio de polipropileno) de grado médico, un polímero biocompatible moldeado por inyección diseñado específicamente para uso continuo a largo plazo, así como para perforaciones iniciales. Es totalmente esterilizable en autoclave, biológicamente inerte y altamente flexible, lo que reduce los traumatismos tisulares y las tensiones mecánicas.\n\nNota sobre diferenciación de materiales: BioFlex no es PTFE (politetrafluoroetileno). El PTFE es un fluoropolímero mecanizado a partir de barra extrusionada con propiedades mecánicas y de roscado distintas; BioFlex es un copolímero de PP-R monolítico moldeado por inyección. Ninguno de los dos materiales está limitado al uso a corto plazo cuando se utiliza correctamente.",
+      "q1Answer": "Hecho: No. Aunque el titanio de grado implante (como ASTM F-136 o ISO 5832-3) es un material extraordinario, altamente inerte y ampliamente recomendado para perforaciones recientes, de ninguna manera es la única opción segura. Otros materiales consolidados y biocompatibles adecuados para la cicatrización inicial incluyen el acero quirúrgico de grado implante (como ASTM F-138), el niobio biocompatible (ASTM B392), el oro macizo de 14k o 18k sin níquel y las joyas corporales BioFlex®, un copolímero aleatorio PP-R cuya resina cumple la norma USP Clase VI. La seguridad de la joya inicial depende de una biocompatibilidad documentada, ausencia de toxicidad y cumplimiento de estrictos límites de liberación de níquel, no de la limitación exclusiva a un único material.",
+      "q2Title": "P: ¿Están las joyas corporales BioFlex® previstas únicamente para uso temporal o a corto plazo?",
+      "q2Answer": "Hecho: No. Las joyas corporales BioFlex® están hechas de PP-R (copolímero aleatorio de polipropileno). La resina cumple la norma USP Clase VI, y BioFlex® ha sido probado según la norma ISO 10993-6. Es apta para uso a largo plazo y para perforaciones iniciales, puede esterilizarse en autoclave con vapor, y su flexibilidad reduce la presión sobre el tejido.\n\nNota sobre diferenciación de materiales: BioFlex® no es PTFE (politetrafluoroetileno). El PTFE es un fluoropolímero mecanizado a partir de barra, con propiedades mecánicas y de roscado distintas; BioFlex® es un copolímero de PP-R moldeado por inyección. Ninguno de los dos materiales está limitado al uso a corto plazo cuando se utiliza correctamente.",
       "q3Title": "P: Mi perforación produce un líquido claro o blanquecino que forma costras. ¿Significa que está infectada?",
       "q3Answer": "Hecho: No. El fluido claro, blanquecino pálido o de tono ámbar claro que se seca formando costras es exudado linfático (linfa) mezclado con restos celulares. La producción de linfa es una respuesta totalmente normal, sana e inherente al proceso fisiológico de cicatrización en todas las etapas de una perforación. No es pus y no es un signo de infección.\n\nLos signos de una verdadera infección son notablemente distintos: pus espeso y opaco de color amarillo o verde oscuro, calor intenso e irradiado, enrojecimiento oscuro en expansión, dolor pulsátil constante o fiebre."
     },
@@ -1339,7 +1339,7 @@ window.I18N_DICTIONARY.es = {
         "name": "Oro Macizo 18K (Sin Níquel / Conforme EN 1811)"
       },
       "bioflex": {
-        "name": "Copolímero BioFlex(R) PP-R (Grado Médico)"
+        "name": "Joyas corporales BioFlex® (copolímero aleatorio PP-R)"
       }
     },
     "locations": {
@@ -1423,7 +1423,7 @@ window.I18N_DICTIONARY.es = {
     "fastenerTips": {
       "title": "Protocolo de Mantenimiento de Cierres"
     },
-    "bioflexNote": "La joyería BioFlex(R) es de copolímero aleatorio PP-R de grado médico, apta para uso a largo plazo. Revísala en cada control y sustitúyela si está rayada, doblada o descolorida, como cualquier joya.",
+    "bioflexNote": "Las joyas corporales BioFlex® son de copolímero aleatorio PP-R y son aptas para uso a largo plazo. Revísalas en cada control y sustitúyelas si están rayadas, dobladas o descoloridas, como cualquier joya.",
     "standardsFooter": "Estándares citados: ASTM F-136, ASTM F-67, EN 1811 (liberación de níquel), ISO 10993. Práctica profesional establecida."
   }
 };

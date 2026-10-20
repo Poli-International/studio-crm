@@ -128,7 +128,7 @@
         <div style="display:flex;align-items:center;gap:8px;">
           <!-- Control 2: Global Search & Command Palette (1 visible button) -->
           <button id="topbar-search-btn" onclick="openCmdPalette()" title="Command Palette & Search (Cmd+K / Alt+D)" style="padding:4px 9px;background:#1E293B;color:#94A3B8;border:1px solid rgba(255,255,255,0.1);border-radius:6px;font-size:0.75rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">
-            <span>🔍</span> <span>Search</span> <kbd style="font-size:0.65rem;background:#0F172A;padding:1px 4px;border-radius:4px;border:1px solid rgba(255,255,255,0.15);">⌘K</kbd>
+            <span>🔍</span> <span>Search</span> <kbd style="font-size:0.65rem;background:#0F172A;padding:1px 4px;border-radius:4px;border:1px solid rgba(255,255,255,0.15);" id="topbar-search-kbd">Ctrl K</kbd>
           </button>
 
           <!-- Control 3: Current Active Staff User Switcher -->
@@ -493,8 +493,9 @@
             </div>
           </div>
 
-          <!-- Embedded Client Portal Interface View -->
-          <div style="background:#111827;border:1px solid #374151;border-radius:16px;padding:1.25rem;">
+          <!-- Embedded Client Portal Interface View: nothing ever shows tab-portal (no tab button opens it),
+               so the box was a heading over nothing. Hidden; Portal Lookup is the working entry. -->
+          <div id="clients-portal-embed" style="display:none;background:#111827;border:1px solid #374151;border-radius:16px;padding:1.25rem;">
             <h3 style="margin:0 0 1rem 0;font-size:1.1rem;font-weight:800;color:#38BDF8;display:flex;align-items:center;gap:8px;">
               👤 Client Portal Self-Service View
             </h3>
@@ -3152,7 +3153,7 @@ docker compose up -d</pre>
                     <p style="margin:4px 0 0 0;font-size:0.8rem;color:#9CA3AF;">High-visibility medical sensitivity flags, latex/drug allergies, and assigned artist roster</p>
                 </div>
                 <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-                    <input type="text" id="client-directory-search-input" placeholder="Real-time search clients, flags, artists..." style="padding:0.45rem 0.75rem;background:#1F2937;border:1px solid #374151;border-radius:6px;color:#FFF;font-size:0.85rem;outline:none;width:220px;" oninput="renderClientDirectoryModal()" />
+                    <input type="text" id="client-directory-search-input" autocomplete="off" placeholder="Real-time search clients, flags, artists..." style="padding:0.45rem 0.75rem;background:#1F2937;border:1px solid #374151;border-radius:6px;color:#FFF;font-size:0.85rem;outline:none;width:220px;" oninput="renderClientDirectoryModal()" />
                     <label style="display:inline-flex;align-items:center;gap:5px;font-size:0.78rem;color:#FCA5A5;background:rgba(239,68,68,0.15);padding:0.35rem 0.65rem;border:1px solid rgba(239,68,68,0.35);border-radius:6px;cursor:pointer;" title="Filter clients with latex allergy disclosures">
                         <input type="checkbox" id="client-directory-latex-filter" onchange="renderClientDirectoryModal()" style="accent-color:#EF4444;" />
                         ⚠️ Latex Allergy

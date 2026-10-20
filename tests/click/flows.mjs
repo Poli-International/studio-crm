@@ -251,6 +251,28 @@ await flow('Health Alerts: View Profile opens the profile in front', async () =>
   check(front, 'the profile opened behind the alerts window');
 });
 
+await flow('Health Alerts: the search box, Latex Allergy and Medical Flags narrow the list', async () => {
+  for (const c of [{ name: 'Alertflow Latex', allergies: 'Latex gloves' }, { name: 'Alertflow Heart', allergies: 'None', medical_history: 'Heart condition' }, { name: 'Alertflow Clear', allergies: 'None', medical_history: 'None' }])
+    await b.evaluate(`fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: ${JSON.stringify(JSON.stringify(c))} }).then(r => r.status)`);
+  await b.goto(url);
+  await b.clickText('Clients');
+  await pressOn('openClientDirectoryModal()');
+  const listed = () => b.evaluate(`[...document.querySelectorAll('#client-directory-modal-body strong')].map(s => s.innerText).filter(n => n.startsWith('Alertflow')).sort().join(',')`);
+  const expect = async (want, what) => eventually(async () => (await listed()) === want, async () => what + ': listed ' + (await listed()));
+  await b.type('#client-directory-search-input', 'alertflow');
+  await expect('Alertflow Clear,Alertflow Heart,Alertflow Latex', 'the search lists all three');
+  check(/Allergy: Latex gloves/.test(await text('#client-directory-modal-body')), 'the latex allergy is not shown on the client');
+  await b.evaluate(`document.getElementById('client-directory-latex-filter').click()`);
+  await expect('Alertflow Latex', 'Latex Allergy');
+  await b.evaluate(`document.getElementById('client-directory-latex-filter').click()`);
+  await b.evaluate(`document.getElementById('client-directory-medical-filter').click()`);
+  await expect('Alertflow Heart,Alertflow Latex', 'Medical Flags');
+  await b.type('#client-directory-search-input', 'heart');
+  await expect('Alertflow Heart', 'search plus Medical Flags');
+  await b.type('#client-directory-search-input', 'zzzq');
+  await eventually(async () => /No client matches/.test(await text('#client-directory-modal-body')), 'no "No client matches" for a search that finds nobody');
+});
+
 await flow('Record Payment saves a payment', async () => {
   await b.goto(url);
   await b.clickText('Finance');

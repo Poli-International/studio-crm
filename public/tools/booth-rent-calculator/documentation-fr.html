@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta name="robots" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur Loyer de stand vs Commission : documentation | Poli International</title>
+    <meta name="description" content="L'arithmétique du loyer de stand face à la commission, vu des deux côtés de la table.">
+    <link rel="canonical" href="https://poliinternational.com/booth-rent-calculator/">
+    <style>
+        body { background: #0f0f0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; }
+        body.in-iframe .doc-hero h1 { display: none; }
+        * { box-sizing: border-box; }
+        .entry-content { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .doc-hero { background: linear-gradient(135deg, #3B82F6, #8B5CF6); padding: 3rem 2rem; text-align: center; border-radius: 0.75rem; margin-bottom: 2rem; }
+        .doc-hero h1 { font-size: 2.2rem; margin: 0 0 1rem; font-weight: 700; }
+        .doc-hero p { font-size: 1.15rem; color: #E0E7FF; margin: 0; }
+        .doc-hero .v2 { display: inline-block; margin-bottom: 1rem; padding: 0.2rem 0.75rem; border-radius: 999px; background: #10B981; color: #04241a; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; }
+        .doc-section { margin: 2rem 0; padding: 2rem; background: #1a1a1a; border-radius: 0.75rem; border-left: 4px solid #3B82F6; }
+        .doc-section h2 { color: #60A5FA; font-size: 1.7rem; margin: 0 0 1.25rem; font-weight: 600; }
+        .doc-section h3 { color: #A78BFA; font-size: 1.3rem; margin: 1.75rem 0 0.75rem; font-weight: 600; }
+        .doc-section p, .doc-section li { color: #ccc; line-height: 1.75; font-size: 1.02rem; }
+        .doc-section ul, .doc-section ol { padding-left: 1.5rem; }
+        .doc-section li { margin: 0.4rem 0; }
+        .doc-section code { background: #2a2a2a; padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.92em; }
+        .doc-section a { color: #60A5FA; font-weight: 600; }
+        .highlight-box { background: linear-gradient(135deg, #1E3A8A, #4C1D95); padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; border-left: 4px solid #10B981; }
+        .highlight-box p { color: #E0E7FF; margin: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border: 1px solid #333; vertical-align: top; }
+        th { background: #2a2a2a; color: #60A5FA; }
+        td { color: #ccc; }
+    </style>
+</head>
+<body>
+<nav class="doc-langs" aria-label="Langue de la documentation" style="display:flex;flex-wrap:wrap;gap:6px 14px;max-width:900px;margin:12px auto 0;padding:0 16px;font-size:14px;"><a lang="en" href="documentation.html">English</a><span lang="fr">Français</span><a lang="de" href="documentation-de.html">Deutsch</a><a lang="it" href="documentation-it.html">Italiano</a><a lang="es" href="documentation-es.html">Español</a><a lang="nl" href="documentation-nl.html">Nederlands</a><a lang="pt" href="documentation-pt.html">Português</a><a lang="th" href="documentation-th.html">ไทย</a></nav>
+<script>if (window.self !== window.top) document.body.classList.add('in-iframe');</script>
+    <div class="entry-content">
+        <div class="doc-hero">
+            <span class="v2">V2</span>
+            <h1>Calculateur Loyer de stand vs Commission</h1>
+            <p>L'arithmétique du loyer de stand face à la commission, vu des deux côtés de la table.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Vue d'ensemble</h2>
+        <p>Le Calculateur Loyer de stand vs Commission établit l'arithmétique des deux formules standard d'un studio sur le même chiffre d'affaires : un loyer de stand hebdomadaire fixe, ou un pourcentage de commission versé au studio. Il présente le résultat des deux côtés de la table, pour l'artiste et pour le propriétaire du studio, et calcule le chiffre d'affaires mensuel auquel les deux formules coûtent le même montant.</p>
+        <p>Il présente des chiffres, pas des conseils. Il ne dit pas laquelle des deux formules est la meilleure et ne dit rien du statut d'emploi, de la location ni de la fiscalité, qui varient selon les pays.</p>
+        <p>Tout fonctionne dans votre navigateur. Rien de ce que vous saisissez n'est envoyé ailleurs.</p>
+        </div>
+        <div class="doc-section">
+        <h2>1. Comparaison des contrats</h2>
+        <p>Saisissez les paramètres du contrat : loyer de stand par semaine, pourcentage de commission du studio et nombre de semaines travaillées par an. La comparaison affiche côte à côte ce que l'artiste garde et ce que le studio reçoit dans chaque formule.</p>
+        <ul>
+        <li><strong>Chiffre d'affaires mensuel d'équilibre</strong> est le seul chiffre sur lequel repose la décision : en dessous, la commission coûte moins cher à l'artiste ; au-dessus, c'est le loyer de stand qui coûte moins cher.</li>
+        <li><strong>Barème de commission progressif par tranches</strong> applique une part différente au studio sur jusqu'à trois tranches de chiffre d'affaires mensuel et affiche le taux effectif moyen.</li>
+        <li><strong>Modèle hybride (loyer fixe réduit + commission réduite)</strong> combine un loyer de base plus bas avec une part de commission réduite.</li>
+        <li><strong>Commission avec loyer plancher garanti</strong> donne au studio sa commission ou un plancher hebdomadaire minimum, le montant le plus élevé des deux étant retenu.</li>
+        <li><strong>Différenciation clientèle studio / clientèle personnelle</strong> distingue le passage de clients apporté par le studio des rendez-vous que l'artiste amène lui-même.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>2. Matrice multi-offres</h2>
+        <p>Comparez jusqu'à trois offres concurrentes de studios côte à côte, chacune avec son propre loyer, sa commission et ses déductions, pour voir comment elles se classent selon vos propres chiffres.</p>
+        </div>
+        <div class="doc-section">
+        <h2>3. Simulation réaliste</h2>
+        <p>Le meilleur scénario n'est pas souvent celui que vous obtenez. Indiquez les jours travaillés par mois, les rendez-vous par jour, le ticket moyen et le taux d'absence. L'outil calcule trois mois à partir de ces données et affiche l'écart plutôt qu'un seul chiffre :</p>
+        <ul>
+        <li><strong>Mois creux / prudent</strong> : davantage d'annulations (+10 %) et un volume réduit (-15 %).</li>
+        <li><strong>Mois moyen / prévisionnel</strong> : vos jours planifiés avec votre taux d'absence.</li>
+        <li><strong>Mois fort / haute saison</strong> : annulations quasi nulles et demande plus forte (+20 %).</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>4. Trésorerie annuelle</h2>
+        <p>Projection sur 52 semaines avec une demande saisonnière et des congés. Le loyer de stand reste généralement dû pendant votre absence, alors que la commission non ; cette vue montre donc comment les vacances, les conventions et les mois calmes font varier le total annuel de chaque formule.</p>
+        </div>
+        <div class="doc-section">
+        <h2>5. Plan de salle du studio</h2>
+        <p>La vue du propriétaire. Modélisez la liste des postes, les charges commerciales fixes (bail, taxes locales, assurance, personnel) et le taux d'occupation, et voyez combien de postes doivent être occupés pour que le studio couvre ses charges dans chaque formule.</p>
+        </div>
+        <div class="doc-section">
+        <h2>6. Consommables et fournitures</h2>
+        <p>Un montant de loyer ne veut rien dire tant que l'on ne sait pas qui paie quoi. Chaque poste, y compris les fournitures, la blanchisserie et la stérilisation, les frais de carte et les charges, est attribué à l'artiste ou au studio dans chaque formule.</p>
+        <ul>
+        <li>Chiffrez un poste <strong>par mois</strong>, <strong>par prestation</strong> ou en <strong>pourcentage du brut</strong> (frais de carte).</li>
+        <li>Un kit standard de piercing (aiguilles, gants et barrières, préparation de la peau, indicateurs de stérilisation) est inclus et modifiable.</li>
+        <li>Ajoutez vos propres postes avec le générateur de consommables personnalisés.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>7. Courbe de rentabilité</h2>
+        <p>Un graphique des gains nets en fonction du chiffre d'affaires mensuel, avec quatre courbes : l'artiste et le propriétaire, chacun sous loyer de stand et sous commission. Chaque courbe a son propre tracé (plein, tireté, pointillé, tiret-point) afin qu'elle reste lisible en impression noir et blanc. Le point de croisement des courbes est le chiffre d'affaires d'équilibre de la section 1, auquel les deux formules donnent le même résultat.</p>
+        </div>
+        <div class="doc-section">
+        <h2>8. Fiche imprimable</h2>
+        <p>Une synthèse d'une page au format A4 / US Letter du contrat et de ses résultats, que les deux parties peuvent relire. Elle est clairement indiquée comme un calcul, et non comme un accord, un contrat ou un bail.</p>
+        </div>
+        <div class="doc-section">
+        <h2>9. Modèles, partage et export</h2>
+        <ul>
+        <li><strong>Modèles de contrat</strong> enregistrent un contrat dans votre navigateur sous un nom tel que « Offre centre-ville », pour le rouvrir plus tard.</li>
+        <li><strong>Copier le lien partageable</strong> copie une URL qui ouvre ce contrat exact pour la personne à qui vous l'envoyez.</li>
+        <li><strong>Export CSV et JSON</strong> téléchargent le calcul complet pour un tableur ou vos propres archives.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>10. Langues et devise</h2>
+        <p>L'interface est disponible en anglais, français, italien, allemand, espagnol, néerlandais et portugais. Les montants sont mis en forme selon la langue choisie.</p>
+        </div>
+        <div class="doc-section">
+        <h2>11. Avis important</h2>
+        <p>Cet outil effectue uniquement une comparaison arithmétique. Il ne constitue pas un conseil financier, juridique ou fiscal, et ce n'est ni un accord ni un contrat. Les règles relatives à la location de stand, à la qualification du statut d'emploi et à la fiscalité varient selon les pays : demandez l'avis d'un professionnel qualifié avant de signer quoi que ce soit.</p>
+        </div>
+        <div class="doc-section">
+            <h2>Utiliser l'outil</h2>
+            <p><a href="https://poliinternational.com/booth-rent-calculator/" target="_top">Ouvrir le Calculateur Loyer de stand vs Commission</a>. Tout fonctionne dans votre navigateur ; rien de ce que vous saisissez n'est envoyé ailleurs.</p>
+        </div>
+    </div>
+</body>
+</html>

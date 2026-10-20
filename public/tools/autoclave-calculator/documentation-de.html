@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="de">
+<head><meta name="robots" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumentation Sterilisationsrechner für Autoklaven | Poli International</title>
+    <meta name="description" content="Vollständige Anleitung zur Verwendung des Sterilisationsrechners für Autoklaven">
+    <link rel="canonical" href="https://poliinternational.com/autoclave-calculator-documentation/">
+    <style>
+        body {
+            background: #0f0f0f !important;
+            color: #fff !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        /* Hide h1 when in iframe to avoid duplicate headings */
+        body.in-iframe .doc-hero h1 { display: none !important; }
+        body.in-iframe .doc-hero { padding: 2rem 2rem !important; margin-bottom: 1rem !important; }
+        * {
+            box-sizing: border-box;
+        }
+        .entry-content {
+            max-width: 900px !important;
+            margin: 0 auto !important;
+            padding: 2rem 1rem !important;
+        }
+        .doc-hero {
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6) !important;
+            padding: 4rem 2rem !important;
+            text-align: center !important;
+            margin: -2rem -1rem 3rem !important;
+            border-radius: 0 !important;
+        }
+        .doc-hero h1 {
+            font-size: 2.5rem !important;
+            color: #fff !important;
+            margin: 0 0 1rem 0 !important;
+            font-weight: 700 !important;
+        }
+        .doc-hero p {
+            font-size: 1.25rem !important;
+            color: #E0E7FF !important;
+            margin: 0 !important;
+        }
+        .doc-section {
+            margin: 3rem 0 !important;
+            padding: 2rem !important;
+            background: #1a1a1a !important;
+            border-radius: 0.75rem !important;
+            border-left: 4px solid #3B82F6 !important;
+        }
+        .doc-section h2 {
+            color: #3B82F6 !important;
+            font-size: 2rem !important;
+            margin: 0 0 1.5rem 0 !important;
+            font-weight: 600 !important;
+        }
+        .doc-section h3 {
+            color: #8B5CF6 !important;
+            font-size: 1.5rem !important;
+            margin: 2rem 0 1rem 0 !important;
+            font-weight: 600 !important;
+        }
+        .doc-section p {
+            color: #ccc !important;
+            line-height: 1.8 !important;
+            margin-bottom: 1rem !important;
+            font-size: 1.05rem !important;
+        }
+        .doc-section ul {
+            margin: 1rem 0 !important;
+            padding-left: 0 !important;
+            list-style: none !important;
+        }
+        .doc-section ul li {
+            padding: 0.75rem 0 0.75rem 2rem !important;
+            position: relative !important;
+            color: #ccc !important;
+            line-height: 1.6 !important;
+        }
+        .doc-section ul li:before {
+            content: "✓" !important;
+            position: absolute !important;
+            left: 0 !important;
+            color: #10B981 !important;
+            font-weight: bold !important;
+            font-size: 1.2rem !important;
+        }
+        .doc-section a {
+            color: #3B82F6 !important;
+            text-decoration: none !important;
+            font-weight: 600 !important;
+            transition: color 0.2s !important;
+        }
+        .doc-section a:hover {
+            color: #8B5CF6 !important;
+            text-decoration: underline !important;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #1E3A8A, #4C1D95) !important;
+            padding: 1.5rem !important;
+            border-radius: 0.5rem !important;
+            margin: 2rem 0 !important;
+            border-left: 4px solid #10B981 !important;
+        }
+        .highlight-box p {
+            color: #E0E7FF !important;
+            margin-bottom: 0 !important;
+        }
+        .back-link {
+            display: inline-block !important;
+            padding: 0.75rem 1.5rem !important;
+            background: #3B82F6 !important;
+            color: #fff !important;
+            text-decoration: none !important;
+            border-radius: 0.5rem !important;
+            font-weight: 600 !important;
+            margin-top: 2rem !important;
+        }
+        .back-link:hover {
+            background: #8B5CF6 !important;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid #333;
+        }
+        th {
+            background: #2a2a2a;
+            color: #3B82F6;
+        }
+        td {
+            color: #ccc;
+        }
+        code {
+            background: #2a2a2a;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            color: #10B981;
+        }
+    </style>
+</head>
+<body>
+<nav class="doc-langs" aria-label="Sprache der Dokumentation" style="display:flex;flex-wrap:wrap;gap:6px 14px;max-width:900px;margin:12px auto 0;padding:0 16px;font-size:14px;"><a lang="en" href="documentation.html">English</a><a lang="fr" href="documentation-fr.html">Français</a><span lang="de">Deutsch</span><a lang="it" href="documentation-it.html">Italiano</a><a lang="es" href="documentation-es.html">Español</a><a lang="nl" href="documentation-nl.html">Nederlands</a><a lang="pt" href="documentation-pt.html">Português</a><a lang="th" href="documentation-th.html">ไทย</a></nav>
+<script>
+    // Detect if loaded in iframe and add class to hide h1
+    if (window.self !== window.top) {
+        document.body.classList.add('in-iframe');
+    }
+</script>
+    <div class="entry-content">
+        <div class="doc-hero">
+            <h1>Sterilisationsrechner für Autoklaven</h1>
+            <p>Professioneller Rechner für Sterilisationszyklen für Tattoo- und Piercingstudios</p>
+        </div>
+
+        <div class="doc-section">
+            <h2>Überblick</h2>
+            <p>Der <strong>Sterilisationsrechner für Autoklaven</strong> ist ein Präzisionswerkzeug für Tattoo- und Piercing-Fachleute, mit dem sich die richtigen Temperatur-, Druck- und Zeitparameter für verschiedene Autoklaventypen und Beladungskonfigurationen berechnen lassen. Er unterstützt die Einhaltung gesundheitlicher Vorschriften, maximiert die Wirksamkeit der Sterilisation und schont Ihre Geräte.</p>
+        </div>
+
+        <div class="doc-section">
+            <h2>Hauptfunktionen</h2>
+            <ul>
+                <li><strong>Unterstützung mehrerer Autoklaven</strong> - Unterstützt Schwerkraft-Sterilisatoren (Typ N), Vakuum-Sterilisatoren (Typ B) und Chemodampf-Sterilisatoren</li>
+                <li><strong>Optimierung nach Beladungsart</strong> - Berechnet Parameter für verpackte, unverpackte, poröse und hohle Beladungen</li>
+                <li><strong>Zykluszeitrechner</strong> - Liefert die vollständige Zyklusdauer einschließlich Aufheiz-, Einwirk- und Abkühlphase</li>
+                <li><strong>Nachverfolgung der Konformität</strong> - Dokumentiert Sterilisationsparameter für behördliche Nachweise und Aufzeichnungen</li>
+            </ul>
+        </div>
+
+        <div class="doc-section">
+            <h2>So verwenden Sie das Werkzeug</h2>
+            <h3>1. Autoklaventyp auswählen</h3>
+            <p>Wählen Sie Ihr Autoklavenmodell: Schwerkraft-Sterilisator (verbreitet bei kleineren Studios), Vakuum-Sterilisator (am besten für verpackte Instrumente) oder Chemodampf-Sterilisator.</p>
+
+            <h3>2. Beladungsart wählen</h3>
+            <p>Wählen Sie, ob Sie verpackte Instrumente (in Beuteln), unverpackte Instrumente (Flash), poröse Gegenstände (Gaze, Verbände) oder hohle Instrumente (Schläuche) sterilisieren.</p>
+
+            <h3>3. Parameter konfigurieren</h3>
+            <p>Geben Sie Ihre Temperatureinstellung ein und prüfen Sie die berechneten Druck- und Zeitparameter.</p>
+
+            <h3>4. Ergebnisse prüfen</h3>
+            <p>Das Werkzeug zeigt die vollständige Zyklusaufschlüsselung, einschließlich der minimalen Einwirkzeit und der Gesamtdauer des Zyklus.</p>
+        </div>
+
+        <div class="doc-section">
+            <h2>Sterilisationsparameter</h2>
+            <table>
+                <tr>
+                    <th>Autoklaventyp</th>
+                    <th>Temperatur</th>
+                    <th>Druck</th>
+                    <th>Mindestzeit</th>
+                </tr>
+                <tr>
+                    <td>Schwerkraft (Typ N)</td>
+                    <td>121°C (250°F)</td>
+                    <td>15 psi</td>
+                    <td>30 min</td>
+                </tr>
+                <tr>
+                    <td>Vakuum (Typ B)</td>
+                    <td>134°C (273°F)</td>
+                    <td>30 psi</td>
+                    <td>4 min</td>
+                </tr>
+                <tr>
+                    <td>Chemodampf</td>
+                    <td>132°C (270°F)</td>
+                    <td>20 psi</td>
+                    <td>20 min</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="doc-section">
+            <h2>Zuschläge je Beladungsart</h2>
+            <table>
+                <tr>
+                    <th>Beladungsart</th>
+                    <th>Zeitzuschlag</th>
+                    <th>Hinweise</th>
+                </tr>
+                <tr>
+                    <td>Verpackt</td>
+                    <td>+10-15 min</td>
+                    <td>Benötigt längere Zyklen für das Eindringen des Dampfes</td>
+                </tr>
+                <tr>
+                    <td>Unverpackt (Flash)</td>
+                    <td>Standard</td>
+                    <td>Nur für den sofortigen Gebrauch</td>
+                </tr>
+                <tr>
+                    <td>Porös</td>
+                    <td>+15 min</td>
+                    <td>Textilien und Gaze benötigen eine verlängerte Einwirkzeit</td>
+                </tr>
+                <tr>
+                    <td>Hohl</td>
+                    <td>+5 min</td>
+                    <td>Schläuche und Hohlinstrumente</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="doc-section">
+            <h2>Technische Details</h2>
+            <p>Der Rechner verwendet die Standard-Sterilisationsparameter, die nach den Richtlinien von CDC und ASTD festgelegt wurden:</p>
+            <p><code>totalTime = exposureTime + heatUpTime + coolDownTime</code></p>
+            <p><code>exposureTime = baseTime × loadModifier</code></p>
+            <p>Alle Berechnungen folgen den Richtlinien ANSI/AAMI ST79 für die Dampfsterilisation.</p>
+        </div>
+
+                <div class="doc-section">
+            <h2>Praxisbeispiele</h2>
+            <div class="use-case">
+                <h3 style="color: #10B981 !important;">Für Studioinhaber</h3>
+                <p>Standardisieren Sie die technischen Abläufe und Preismodelle Ihres Studios, damit alle Künstlerinnen, Künstler und Gäste einheitlich behandelt werden.</p>
+            </div>
+            <div class="use-case">
+                <h3 style="color: #10B981 !important;">Für Auszubildende</h3>
+                <p>Nutzen Sie diese Werkzeuge als Lernrahmen, um das komplexe Zusammenspiel von Geometrie, Biologie und Verfahrenssicherheit zu verstehen.</p>
+            </div>
+        </div><div class="doc-section">
+            <h2>Häufig gestellte Fragen</h2>
+            <div class="faq-item" style="margin-bottom: 1.5rem;">
+                <p><strong>Was ist „Sattdampf“?</strong></p>
+                <p>Dampf, der bei einem bestimmten Druck seinen Siedepunkt hat. Er ist der einzige Zustand, der Mikroorganismen wirksam abtötet.</p>
+            </div>
+            <div class="faq-item" style="margin-bottom: 1.5rem;">
+                <p><strong>Wie oft sollte ich einen Sporentest durchführen?</strong></p>
+                <p>Die meisten Gesundheitsbehörden verlangen einen biologischen Indikatortest wöchentlich, einige testen jedoch täglich.</p>
+            </div>
+            <div class="faq-item" style="margin-bottom: 1.5rem;">
+                <p><strong>Kann ich Kunststoffinstrumente sterilisieren?</strong></p>
+                <p>Nur, wenn sie als „autoklavierbar“ eingestuft sind (z. B. bestimmte Sorten von Nylon oder Silikon).</p>
+            </div>
+            <div class="faq-item" style="margin-bottom: 1.5rem;">
+                <p><strong>Was ist ein Autoklav der „Klasse B“?</strong></p>
+                <p>Ein Sterilisator der Klasse B verwendet eine Vakuumpumpe, um die Luft zu entfernen, und stellt so eine 100-prozentige Dampfdurchdringung für Hohlinstrumente sicher.</p>
+            </div>
+            <div class="faq-item" style="margin-bottom: 1.5rem;">
+                <p><strong>Wie lange bleiben sterile Beutel sicher?</strong></p>
+                <p>In der Regel 6 Monate bis 1 Jahr, vorausgesetzt, die Siegelnaht ist intakt und der Beutel bleibt trocken.</p>
+            </div>
+        </div>        <div class="doc-section" style="text-align: center; border-left: none !important; background: linear-gradient(135deg, #111, #222) !important;">
+            <h2>Benötigen Sie technische Unterstützung?</h2>
+            <p>Wenn Sie Probleme mit diesem Werkzeug haben oder Unterstützung bei einer individuellen Integration benötigen, hilft Ihnen unser Entwicklungsteam gern weiter.</p>
+            <div style="display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; align-items: center;">
+                <a href="https://poliinternational.com/contact-us/" class="btn-primary" style="padding: 1rem 2.5rem; text-decoration: none; border-radius: 0.5rem; background: #669eff; color: #FFFFFF !important; font-weight: 800; font-size: 1.1rem; border: none;">Kontaktieren Sie uns!</a>
+
+            </div>
+        </div>        <div style="text-align: center; margin-top: 4rem; padding: 2rem; border-top: 1px solid #333; opacity: 0.8;">
+            <p style="font-size: 0.95rem; color: #888; line-height: 1.6;">
+                Technische Norm bereitgestellt von <br/>
+                <a href="https://poliinternational.com/autoclave-calculator/" style="color: #3B82F6; text-decoration: none; font-weight: 800; font-size: 1.2rem; display: block; margin-top: 0.5rem;">Bereitgestellt von Poli International Engineering</a>
+            </p>
+        </div>        <div class="doc-section">
+            <h2>Verwandte Werkzeuge</h2>
+            <p>Entdecken Sie weitere professionelle Werkzeuge aus der Engineering-Suite von Poli International:</p>
+            <ul>
+                <li><a href="/tattoo-price-estimator/">AI Price Estimator</a> - Kosten- und Bildstudio</li>
+                <li><a href="/gauge-converter/">Gauge Converter</a> - Umrechnung Millimeter und AWG</li>
+                <li><a href="/coverage-calculator/">Coverage Calculator</a> - Tintenbedarf und Sitzungsplanung</li>
+            </ul>
+        </div><div style="text-align: center; margin-bottom: 4rem;"><a href="https://poliinternational.com/autoclave-calculator/" class="back-link" style="display: inline-block !important;">← Zum Werkzeug</a></div>
+    </div>
+</body>
+</html>

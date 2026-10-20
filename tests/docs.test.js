@@ -76,19 +76,18 @@ describe('docs', () => {
     expect(missing).toEqual([]);
   });
 
-  it('a tool documentation page is in all eight languages, never half', () => {
-    // Patrick 2026-10-20: every tool in EN FR DE IT ES NL PT TH. Until the Thai pass is done the
-    // older seven-language set and English-only pages are tolerated; any other mix is a half job.
-    // ponytail: drop the two LEGACY entries when the Thai/translation pass lands, so only `all` passes.
+  it('every tool has documentation in all eight languages', () => {
+    // Patrick 2026-10-20: every tool in EN FR DE IT ES NL PT TH, "the same way". A new tool
+    // ships with its documentation in all eight, or this fails.
     const all = ['de', 'es', 'fr', 'it', 'nl', 'pt', 'th'].join();
-    const LEGACY = ['', ['de', 'es', 'fr', 'it', 'nl', 'pt'].join()];
-    const half = [];
+    const short = [];
     for (const t of fs.readdirSync(path.join(ROOT, 'public/tools'))) {
       const dir = path.join(ROOT, 'public/tools', t);
-      if (!fs.existsSync(path.join(dir, 'documentation.html'))) continue;
+      if (t === 'shared' || !fs.statSync(dir).isDirectory()) continue;
+      if (!fs.existsSync(path.join(dir, 'documentation.html'))) { short.push(`${t}: no documentation.html`); continue; }
       const have = fs.readdirSync(dir).map((f) => f.match(/^documentation-([a-z]{2})\.html$/)?.[1]).filter(Boolean).sort().join();
-      if (have !== all && !LEGACY.includes(have)) half.push(`${t}: ${have || 'English only'}`);
+      if (have !== all) short.push(`${t}: ${have || 'English only'}`);
     }
-    expect(half).toEqual([]);
+    expect(short).toEqual([]);
   });
 });

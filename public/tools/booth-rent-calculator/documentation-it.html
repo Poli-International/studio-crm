@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="it">
+<head><meta name="robots" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatore Affitto Postazione vs Commissione: documentazione | Poli International</title>
+    <meta name="description" content="L'aritmetica dell'affitto della postazione rispetto alla commissione, vista da entrambi i lati del tavolo.">
+    <link rel="canonical" href="https://poliinternational.com/booth-rent-calculator/">
+    <style>
+        body { background: #0f0f0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; }
+        body.in-iframe .doc-hero h1 { display: none; }
+        * { box-sizing: border-box; }
+        .entry-content { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .doc-hero { background: linear-gradient(135deg, #3B82F6, #8B5CF6); padding: 3rem 2rem; text-align: center; border-radius: 0.75rem; margin-bottom: 2rem; }
+        .doc-hero h1 { font-size: 2.2rem; margin: 0 0 1rem; font-weight: 700; }
+        .doc-hero p { font-size: 1.15rem; color: #E0E7FF; margin: 0; }
+        .doc-hero .v2 { display: inline-block; margin-bottom: 1rem; padding: 0.2rem 0.75rem; border-radius: 999px; background: #10B981; color: #04241a; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; }
+        .doc-section { margin: 2rem 0; padding: 2rem; background: #1a1a1a; border-radius: 0.75rem; border-left: 4px solid #3B82F6; }
+        .doc-section h2 { color: #60A5FA; font-size: 1.7rem; margin: 0 0 1.25rem; font-weight: 600; }
+        .doc-section h3 { color: #A78BFA; font-size: 1.3rem; margin: 1.75rem 0 0.75rem; font-weight: 600; }
+        .doc-section p, .doc-section li { color: #ccc; line-height: 1.75; font-size: 1.02rem; }
+        .doc-section ul, .doc-section ol { padding-left: 1.5rem; }
+        .doc-section li { margin: 0.4rem 0; }
+        .doc-section code { background: #2a2a2a; padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.92em; }
+        .doc-section a { color: #60A5FA; font-weight: 600; }
+        .highlight-box { background: linear-gradient(135deg, #1E3A8A, #4C1D95); padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; border-left: 4px solid #10B981; }
+        .highlight-box p { color: #E0E7FF; margin: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border: 1px solid #333; vertical-align: top; }
+        th { background: #2a2a2a; color: #60A5FA; }
+        td { color: #ccc; }
+    </style>
+</head>
+<body>
+<nav class="doc-langs" aria-label="Lingua della documentazione" style="display:flex;flex-wrap:wrap;gap:6px 14px;max-width:900px;margin:12px auto 0;padding:0 16px;font-size:14px;"><a lang="en" href="documentation.html">English</a><a lang="fr" href="documentation-fr.html">Français</a><a lang="de" href="documentation-de.html">Deutsch</a><span lang="it">Italiano</span><a lang="es" href="documentation-es.html">Español</a><a lang="nl" href="documentation-nl.html">Nederlands</a><a lang="pt" href="documentation-pt.html">Português</a><a lang="th" href="documentation-th.html">ไทย</a></nav>
+<script>if (window.self !== window.top) document.body.classList.add('in-iframe');</script>
+    <div class="entry-content">
+        <div class="doc-hero">
+            <span class="v2">V2</span>
+            <h1>Calcolatore Affitto Postazione vs Commissione</h1>
+            <p>L'aritmetica dell'affitto della postazione rispetto alla commissione, vista da entrambi i lati del tavolo.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Panoramica</h2>
+        <p>Il Calcolatore Affitto Postazione vs Commissione calcola l'aritmetica delle due formule standard degli studi sullo stesso fatturato: un affitto settimanale fisso per la postazione oppure una commissione percentuale versata allo studio. Mostra il risultato da entrambi i lati del tavolo, per l'artista e per il titolare dello studio, e individua il fatturato mensile al quale le due formule costano lo stesso.</p>
+        <p>Mostra numeri, non consigli. Non dice quale formula sia migliore e non dice nulla su stato occupazionale, locazione o fisco, che variano da paese a paese.</p>
+        <p>Tutto funziona nel tuo browser. Quello che inserisci non viene inviato da nessuna parte.</p>
+        </div>
+        <div class="doc-section">
+        <h2>1. Confronto degli accordi</h2>
+        <p>Inserisci i parametri dell'accordo: affitto settimanale della postazione, percentuale di commissione dello studio e settimane lavorative all'anno. Il confronto mostra, affiancati, cosa trattiene l'artista e cosa riceve lo studio in ciascun modello.</p>
+        <ul>
+        <li><strong>Fatturato Mensile di Pareggio</strong> è il dato su cui si basa la decisione: sotto questo valore la commissione costa meno all'artista; sopra, costa meno l'affitto della postazione.</li>
+        <li><strong>Provvigione a Scaglioni / Scala Progressiva</strong> applica una quota diversa allo studio su fino a tre fasce di fatturato mensile e mostra l'aliquota effettiva media.</li>
+        <li><strong>Modello Ibrido (Affitto Settimanale di Base + Provvigione Ridotta)</strong> combina un affitto base più basso con una quota di commissione ridotta.</li>
+        <li><strong>Garanzia Minima (Provvigione con Minimo Garantito dallo Studio)</strong> dà allo studio la sua commissione oppure un minimo settimanale, a seconda di quale sia più alto.</li>
+        <li><strong>Ripartizione tra Clientela Occasionale e Clientela Personale</strong> separa il passaggio di clienti portato dallo studio dagli appuntamenti che l'artista porta con sé.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>2. Matrice Multi-Offerta</h2>
+        <p>Confronta fino a tre offerte concorrenti di studi affiancate, ciascuna con il proprio affitto, la propria commissione e le proprie detrazioni, per vedere come si classificano sui tuoi numeri.</p>
+        </div>
+        <div class="doc-section">
+        <h2>3. Simulazione Realistica</h2>
+        <p>Il caso migliore raramente è il mese che ti capita davvero. Imposta giorni lavorativi al mese, appuntamenti al giorno, scontrino medio e tasso di assenze. Lo strumento ricava tre mesi da questi dati e mostra la variazione invece di un unico valore:</p>
+        <ul>
+        <li><strong>Mese Prudente / Lento</strong>: più cancellazioni (+10%) e volume più basso (-15%).</li>
+        <li><strong>Mese Realistico / Previsto</strong>: i tuoi giorni programmati con il tuo tasso di assenze.</li>
+        <li><strong>Mese di Punta / Intenso</strong>: cancellazioni quasi nulle e domanda più alta (+20%).</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>4. Flusso di Cassa Annuale</h2>
+        <p>Proiezione su 52 settimane con domanda stagionale e giorni di ferie. L'affitto della postazione di solito resta dovuto mentre sei assente e la commissione no, quindi questa vista mostra come vacanze, convention e mesi tranquilli spostano il totale annuale di ciascun modello.</p>
+        </div>
+        <div class="doc-section">
+        <h2>5. Planimetria dello Studio</h2>
+        <p>La vista del titolare. Modella l'elenco delle postazioni, i costi fissi commerciali (locazione, tasse, assicurazione, personale) e l'occupazione, e scopri quante postazioni devono essere occupate perché lo studio copra i costi in ciascun modello.</p>
+        </div>
+        <div class="doc-section">
+        <h2>6. Materiali di Consumo e Forniture</h2>
+        <p>Una cifra d'affitto non significa nulla finché non si sa chi paga cosa. Ogni voce, comprese forniture, lavanderia e sterilizzazione, commissioni delle carte e utenze, viene assegnata all'artista o allo studio in ciascun modello.</p>
+        <ul>
+        <li>Valorizza una voce <strong>mensilmente</strong>, <strong>per prestazione</strong> oppure come <strong>percentuale del lordo</strong> (commissioni delle carte).</li>
+        <li>Un kit standard per piercing (aghi, guanti e barriere, preparazione della pelle, indicatori di sterilizzazione) è incluso ed è modificabile.</li>
+        <li>Aggiungi le tue voci con il generatore di materiali di consumo personalizzati.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>7. Curva del Punto di Pareggio</h2>
+        <p>Un grafico dei guadagni netti in funzione del fatturato mensile, con quattro linee: artista e titolare, ciascuno con affitto della postazione e con commissione. Ogni linea ha un tratto proprio (continuo, tratteggiato, puntinato, tratto-punto), così resta leggibile anche stampata in bianco e nero. Il punto in cui le linee si incrociano è il fatturato di pareggio della sezione 1, al quale entrambi i modelli danno lo stesso risultato.</p>
+        </div>
+        <div class="doc-section">
+        <h2>8. Foglio Stampabile</h2>
+        <p>Un riepilogo di una pagina in formato A4 / US Letter dell'accordo e dei suoi risultati, che entrambe le parti possono esaminare. È chiaramente indicato come calcolo, non come accordo, contratto o locazione.</p>
+        </div>
+        <div class="doc-section">
+        <h2>9. Preimpostazioni, Condivisione ed Esportazione</h2>
+        <ul>
+        <li><strong>Preimpostazioni Salvate</strong> memorizzano un accordo nel tuo browser con un nome come «Offerta Centro Città», per ricaricarlo in seguito.</li>
+        <li><strong>Condividi il Link dell'Accordo</strong> copia un URL che apre questo accordo esatto per chiunque tu gli invii.</li>
+        <li><strong>Esportazione CSV e JSON</strong> scarica il calcolo completo per un foglio di calcolo o per i tuoi archivi.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>10. Lingue e Valuta</h2>
+        <p>L'interfaccia è disponibile in inglese, francese, italiano, tedesco, spagnolo, olandese e portoghese. Gli importi sono formattati per la lingua selezionata.</p>
+        </div>
+        <div class="doc-section">
+        <h2>11. Avviso Importante</h2>
+        <p>Questo strumento esegue esclusivamente un confronto aritmetico. Non costituisce consulenza finanziaria, legale o fiscale e non è un accordo né un contratto. Le regole sulla locazione di postazioni, sulla classificazione del rapporto di lavoro e sul fisco variano da paese a paese: prima di firmare qualsiasi cosa, rivolgiti a un professionista qualificato.</p>
+        </div>
+        <div class="doc-section">
+            <h2>Usa lo strumento</h2>
+            <p><a href="https://poliinternational.com/booth-rent-calculator/" target="_top">Apri il Calcolatore Affitto Postazione vs Commissione</a>. Tutto funziona nel tuo browser; quello che inserisci non viene inviato da nessuna parte.</p>
+        </div>
+    </div>
+</body>
+</html>

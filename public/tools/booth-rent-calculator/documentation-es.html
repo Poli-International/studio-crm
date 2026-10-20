@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta name="robots" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de alquiler de puesto vs comisión: documentación | Poli International</title>
+    <meta name="description" content="La aritmética del alquiler de puesto frente a la comisión, vista desde ambos lados de la mesa.">
+    <link rel="canonical" href="https://poliinternational.com/booth-rent-calculator/">
+    <style>
+        body { background: #0f0f0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; }
+        body.in-iframe .doc-hero h1 { display: none; }
+        * { box-sizing: border-box; }
+        .entry-content { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .doc-hero { background: linear-gradient(135deg, #3B82F6, #8B5CF6); padding: 3rem 2rem; text-align: center; border-radius: 0.75rem; margin-bottom: 2rem; }
+        .doc-hero h1 { font-size: 2.2rem; margin: 0 0 1rem; font-weight: 700; }
+        .doc-hero p { font-size: 1.15rem; color: #E0E7FF; margin: 0; }
+        .doc-hero .v2 { display: inline-block; margin-bottom: 1rem; padding: 0.2rem 0.75rem; border-radius: 999px; background: #10B981; color: #04241a; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; }
+        .doc-section { margin: 2rem 0; padding: 2rem; background: #1a1a1a; border-radius: 0.75rem; border-left: 4px solid #3B82F6; }
+        .doc-section h2 { color: #60A5FA; font-size: 1.7rem; margin: 0 0 1.25rem; font-weight: 600; }
+        .doc-section h3 { color: #A78BFA; font-size: 1.3rem; margin: 1.75rem 0 0.75rem; font-weight: 600; }
+        .doc-section p, .doc-section li { color: #ccc; line-height: 1.75; font-size: 1.02rem; }
+        .doc-section ul, .doc-section ol { padding-left: 1.5rem; }
+        .doc-section li { margin: 0.4rem 0; }
+        .doc-section code { background: #2a2a2a; padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.92em; }
+        .doc-section a { color: #60A5FA; font-weight: 600; }
+        .highlight-box { background: linear-gradient(135deg, #1E3A8A, #4C1D95); padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; border-left: 4px solid #10B981; }
+        .highlight-box p { color: #E0E7FF; margin: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border: 1px solid #333; vertical-align: top; }
+        th { background: #2a2a2a; color: #60A5FA; }
+        td { color: #ccc; }
+    </style>
+</head>
+<body>
+<nav class="doc-langs" aria-label="Idioma de la documentación" style="display:flex;flex-wrap:wrap;gap:6px 14px;max-width:900px;margin:12px auto 0;padding:0 16px;font-size:14px;"><a lang="en" href="documentation.html">English</a><a lang="fr" href="documentation-fr.html">Français</a><a lang="de" href="documentation-de.html">Deutsch</a><a lang="it" href="documentation-it.html">Italiano</a><span lang="es">Español</span><a lang="nl" href="documentation-nl.html">Nederlands</a><a lang="pt" href="documentation-pt.html">Português</a><a lang="th" href="documentation-th.html">ไทย</a></nav>
+<script>if (window.self !== window.top) document.body.classList.add('in-iframe');</script>
+    <div class="entry-content">
+        <div class="doc-hero">
+            <span class="v2">V2</span>
+            <h1>Calculadora de alquiler de puesto vs comisión</h1>
+            <p>La aritmética del alquiler de puesto frente a la comisión, vista desde ambos lados de la mesa.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Descripción general</h2>
+        <p>La Calculadora de alquiler de puesto vs comisión calcula la aritmética de los dos esquemas habituales de estudio sobre los mismos ingresos: un alquiler semanal fijo por el puesto, o un porcentaje de comisión pagado al estudio. Muestra el resultado desde ambos lados de la mesa, para el artista y para el propietario del estudio, y calcula los ingresos mensuales a partir de los cuales los dos esquemas cuestan lo mismo.</p>
+        <p>Muestra números, no consejos. No dice cuál de los dos esquemas es mejor y no dice nada sobre la situación laboral, el arrendamiento ni los impuestos, que varían según el país.</p>
+        <p>Todo funciona en su navegador. Lo que introduzca no se envía a ningún sitio.</p>
+        </div>
+        <div class="doc-section">
+        <h2>1. Comparación de acuerdos</h2>
+        <p>Introduzca los parámetros del acuerdo: alquiler semanal del puesto, porcentaje de comisión del estudio y semanas de trabajo al año. La comparación muestra, una al lado de otra, lo que se queda el artista y lo que recibe el estudio en cada modelo.</p>
+        <ul>
+        <li><strong>Ingresos mensuales de equilibrio</strong> es la cifra en la que gira la decisión: por debajo, la comisión le cuesta menos al artista; por encima, le cuesta menos el alquiler del puesto.</li>
+        <li><strong>Comisión escalonada / por tramos</strong> aplica un porcentaje distinto para el estudio en hasta tres tramos de ingresos mensuales y muestra el porcentaje efectivo combinado.</li>
+        <li><strong>Modelo híbrido (alquiler semanal base + comisión reducida)</strong> combina un alquiler base más bajo con un porcentaje de comisión reducido.</li>
+        <li><strong>Garantía mínima (comisión con piso garantizado del estudio)</strong> da al estudio su comisión o un mínimo semanal, lo que sea más alto.</li>
+        <li><strong>Reparto entre clientes de paso y clientes propios</strong> separa a los clientes que aporta el estudio de las citas que trae el propio artista.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>2. Matriz de múltiples ofertas</h2>
+        <p>Compare hasta tres ofertas competidoras de estudios una al lado de otra, cada una con su propio alquiler, comisión y deducciones, para ver cómo se clasifican con sus propias cifras.</p>
+        </div>
+        <div class="doc-section">
+        <h2>3. Simulación realista</h2>
+        <p>El mejor escenario rara vez es el mes que le toca. Indique los días de trabajo al mes, las citas por día, el ticket medio y la tasa de cancelaciones sin aviso. La herramienta obtiene tres meses a partir de estos datos y muestra la variación en lugar de una sola cifra:</p>
+        <ul>
+        <li><strong>Mes conservador / flojo</strong>: más cancelaciones (+10 %) y menor volumen (-15 %).</li>
+        <li><strong>Mes realista / esperado</strong>: sus días programados con su tasa de cancelaciones sin aviso.</li>
+        <li><strong>Mes pico / de mucha actividad</strong>: cancelaciones casi nulas y mayor demanda (+20 %).</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>4. Flujo de caja anual</h2>
+        <p>Proyección de 52 semanas con demanda estacional y días libres. El alquiler del puesto suele seguir siendo exigible mientras usted está fuera y la comisión no, así que esta vista muestra cómo las vacaciones, los congresos y los meses tranquilos modifican el total anual de cada modelo.</p>
+        </div>
+        <div class="doc-section">
+        <h2>5. Plano del estudio</h2>
+        <p>La vista del propietario. Modele la plantilla de puestos, los gastos comerciales fijos (alquiler del local, tasas, seguro, personal) y la ocupación, y vea cuántos puestos deben estar ocupados para que el estudio cubra sus gastos en cada modelo.</p>
+        </div>
+        <div class="doc-section">
+        <h2>6. Consumibles y suministros</h2>
+        <p>Una cifra de alquiler no significa nada hasta que se sabe quién paga qué. Cada partida, incluidos los suministros, la lavandería y la esterilización, las comisiones de tarjeta y los servicios, se asigna al artista o al estudio en cada modelo.</p>
+        <ul>
+        <li>Valore una partida <strong>mensualmente</strong>, <strong>por procedimiento</strong> o como <strong>porcentaje del bruto</strong> (comisiones de tarjeta).</li>
+        <li>Un kit estándar de perforación (agujas, guantes y barreras, preparación de la piel, indicadores de esterilización) está incluido y es editable.</li>
+        <li>Añada sus propias partidas con el generador de consumibles personalizados.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>7. Curva de punto de equilibrio</h2>
+        <p>Un gráfico de las ganancias netas frente a los ingresos mensuales, con cuatro líneas: el artista y el propietario, cada uno con alquiler del puesto y con comisión. Cada línea tiene su propio patrón (continuo, discontinuo, punteado, raya-punto), para que siga siendo legible si se imprime en blanco y negro. El punto en que se cruzan las líneas es el ingreso de equilibrio de la sección 1, con el que ambos modelos dan el mismo resultado.</p>
+        </div>
+        <div class="doc-section">
+        <h2>8. Hoja imprimible</h2>
+        <p>Un resumen de una página en formato A4 / US Letter del acuerdo y sus resultados, que ambas partes pueden revisar. Se indica claramente que es un cálculo, no un acuerdo, un contrato ni un arrendamiento.</p>
+        </div>
+        <div class="doc-section">
+        <h2>9. Configuraciones, uso compartido y exportación</h2>
+        <ul>
+        <li><strong>Configuraciones guardadas</strong> almacenan un acuerdo en su propio navegador con un nombre como «Oferta centro de la ciudad», para cargarlo de nuevo más adelante.</li>
+        <li><strong>Compartir enlace del acuerdo</strong> copia una URL que abre este acuerdo exacto para cualquier persona a la que se lo envíe.</li>
+        <li><strong>Exportación CSV y JSON</strong> descarga el cálculo completo para una hoja de cálculo o para sus propios registros.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>10. Idiomas y moneda</h2>
+        <p>La interfaz está disponible en inglés, francés, italiano, alemán, español, neerlandés y portugués. Los importes se dan formato según el idioma seleccionado.</p>
+        </div>
+        <div class="doc-section">
+        <h2>11. Aviso importante</h2>
+        <p>Esta herramienta realiza únicamente una comparación aritmética. No constituye asesoramiento financiero, jurídico ni fiscal, y no es un acuerdo ni un contrato. Las normas sobre alquiler de puestos, clasificación laboral e impuestos varían según el país: consulte a un profesional cualificado antes de firmar nada.</p>
+        </div>
+        <div class="doc-section">
+            <h2>Utilice la herramienta</h2>
+            <p><a href="https://poliinternational.com/booth-rent-calculator/" target="_top">Abrir la Calculadora de alquiler de puesto vs comisión</a>. Todo funciona en su navegador; lo que introduzca no se envía a ningún sitio.</p>
+        </div>
+    </div>
+</body>
+</html>

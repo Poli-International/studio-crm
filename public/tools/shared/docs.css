@@ -1,0 +1,39 @@
+/* Tool documentation: a service manual on paper (Studio CRM design decision 2026-10-20).
+   One sheet for every tool's documentation page; the family is set on <body data-family="...">. */
+:root { --paper: #f6f2ea; --ink: #1d2026; --ink2: #4a4f58; --rule: rgba(0,0,0,.12); --fam: #3b5f8f; --link: #2f6fe0; }
+body[data-family="sterile"] { --fam: #7a5a2c; }
+body[data-family="piercing"] { --fam: #7b4fc9; }
+body[data-family="tattoo"] { --fam: #5b3fd1; }
+body[data-family="health"] { --fam: #3b5f8f; }
+body[data-family="business"] { --fam: #8a5a1c; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #2a2d33; color: var(--ink); font: 16px/1.65 "Satoshi", "Noto Sans Thai", system-ui, -apple-system, "Segoe UI", sans-serif; }
+.manual { max-width: 860px; margin: 24px auto; background: var(--paper); border-radius: 6px 12px 12px 6px; padding: 0 52px 44px 44px;
+  box-shadow: 0 24px 50px -24px rgba(0,0,0,.7); position: relative;
+  background-image: linear-gradient(90deg, rgba(0,0,0,.06), transparent 16px); }
+.manual::before { content: ""; position: absolute; right: -10px; top: 40px; width: 10px; height: 120px; border-radius: 0 6px 6px 0; background: var(--fam); }
+.langs { display: flex; flex-wrap: wrap; gap: 6px; padding: 18px 0 14px; border-bottom: 1.5px solid var(--ink); margin-bottom: 26px; font-size: 13px; }
+.langs span { color: var(--ink2); font-weight: 700; margin-right: 4px; }
+.langs a { color: var(--ink); text-decoration: none; padding: 2px 9px; border-radius: 5px; border: 1px solid var(--rule); }
+.langs a:hover { border-color: var(--ink); }
+.langs a[aria-current="page"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.kicker { font: 600 11px/1 ui-monospace, "JetBrains Mono", Consolas, monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--ink2); }
+h1 { font-size: 30px; line-height: 1.15; letter-spacing: -.02em; margin: 8px 0 8px; }
+.lede { color: var(--ink2); font-size: 17px; margin: 0 0 8px; max-width: 64ch; }
+h2 { font-size: 21px; margin: 34px 0 10px; display: flex; gap: 12px; align-items: baseline; }
+h2 .no { font: 600 12px ui-monospace, "JetBrains Mono", Consolas, monospace; color: #fff; background: var(--fam); padding: 3px 7px; border-radius: 4px; }
+h3 { font-size: 17px; margin: 22px 0 6px; }
+p, li { max-width: 68ch; }
+ol, ul { padding-left: 1.3em; }
+li { margin: 4px 0; }
+strong { font-weight: 800; }
+a { color: var(--link); }
+code { font: 13.5px ui-monospace, "JetBrains Mono", Consolas, monospace; background: rgba(0,0,0,.06); padding: 1px 5px; border-radius: 4px; }
+table { width: 100%; border-collapse: collapse; margin: 10px 0 18px; font-size: 14.5px; }
+th { text-align: left; font: 700 11px ui-monospace, "JetBrains Mono", Consolas, monospace; letter-spacing: .06em; text-transform: uppercase; color: var(--ink2); padding: 8px 10px; border-bottom: 1.5px solid var(--ink); }
+td { padding: 8px 10px; border-top: 1px solid var(--rule); vertical-align: top; }
+.note { border-left: 4px solid var(--fam); background: rgba(0,0,0,.04); padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+.note.warn { border-color: #b3402e; background: rgba(179,64,46,.07); }
+.foot { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--ink2); }
+@media (max-width: 700px) { .manual { margin: 0; border-radius: 0; padding: 0 18px 32px; } .manual::before { display: none; } table { font-size: 13px; } }
+@media print { body { background: #fff; } .manual { box-shadow: none; margin: 0; max-width: none; } .langs, .manual::before { display: none; } }

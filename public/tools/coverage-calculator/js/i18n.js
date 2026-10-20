@@ -260,7 +260,8 @@
         elements.forEach(el => {
             const key = el.getAttribute('data-i18n');
             const translated = t(key);
-            if (!translated) return;
+            // t() returns the key itself while no dictionary has it: keep the page text, never show the key.
+            if (!translated || translated === key) return;
 
             // Handle <input> / <textarea> with data-i18n
             if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
@@ -307,7 +308,7 @@
         placeholderEls.forEach(el => {
             const key = el.getAttribute('data-i18n-placeholder');
             const translated = t(key);
-            if (translated) {
+            if (translated && translated !== key) {
                 el.placeholder = translated;
             }
         });
@@ -317,7 +318,7 @@
         titleEls.forEach(el => {
             const key = el.getAttribute('data-i18n-title');
             const translated = t(key);
-            if (translated) {
+            if (translated && translated !== key) {
                 el.title = translated;
             }
         });
@@ -327,7 +328,7 @@
         ariaEls.forEach(el => {
             const key = el.getAttribute('data-i18n-aria');
             const translated = t(key);
-            if (translated) {
+            if (translated && translated !== key) {
                 el.setAttribute('aria-label', translated);
             }
         });

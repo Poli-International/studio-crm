@@ -138,28 +138,28 @@
       return {
         category: 'imperceptible',
         ratingKey: 'ciede2000.ratings.imperceptible',
-        label: 'Imperceptible Match (High Fidelity)',
+        label: window.t('verdict.imperceptible'),
         badgeClass: 'badge--exact'
       };
     } else if (dE <= 2.0) {
       return {
         category: 'close',
         ratingKey: 'ciede2000.ratings.close',
-        label: 'Close Match (Perceptible on Inspection)',
+        label: window.t('verdict.close'),
         badgeClass: 'badge--close'
       };
     } else if (dE <= 3.5) {
       return {
         category: 'noticeable',
         ratingKey: 'ciede2000.ratings.noticeable',
-        label: 'Noticeable Variation (Usable Shading)',
+        label: window.t('verdict.noticeable'),
         badgeClass: 'badge--usable'
       };
     } else {
       return {
         category: 'significant',
         ratingKey: 'ciede2000.ratings.significant',
-        label: 'Significant Shift (Outside Core Gamut)',
+        label: window.t('verdict.significant'),
         badgeClass: 'badge--shifted'
       };
     }

@@ -8,6 +8,23 @@
 
 const I18N_DICTIONARY = {
   en: {
+    "aria": {
+      "breadcrumb": "Breadcrumb",
+      "embedOptions": "Open embed options",
+      "darkModeToggle": "Toggle dark/light mode",
+      "tabs": "Ink mixer tool sections",
+      "targetGoalSwatch": "Target Goal Swatch",
+      "predictedMatchSwatch": "Predicted Match Swatch",
+      "predictedMixedColor": "Predicted Mixed Ink Color",
+      "componentSwatch": "Component Swatch",
+      "remove": "Remove"
+    },
+    "verdict": {
+      "imperceptible": "Imperceptible Match (High Fidelity)",
+      "close": "Close Match (Perceptible on Inspection)",
+      "noticeable": "Noticeable Variation (Usable Shading)",
+      "significant": "Significant Shift (Outside Core Gamut)"
+    },
   "app": {
     "title": "Professional Tattoo Ink Color Mixer & Formula Calculator",
     "headerTitle": "Professional Tattoo Ink Color Mixer",
@@ -408,6 +425,7 @@ const I18N_DICTIONARY = {
     "headerTitle": "Subtractive Complementary & Neutralising Hue Assistant"
   },
   "qrTransfer": {
+    "byteMeterEmpty": "0 bytes / 2,048 max",
     "modalTitle": "Offline QR Code Formula Transfer",
     "modalSubtitle": "Scan with another device camera to import formula without network access or cloud accounts.",
     "payloadSizeLabel": "Measured Payload Size:",
@@ -551,6 +569,13 @@ const I18N_DICTIONARY = {
     "tray12": "12-Cap Full Grid Tray"
   },
   "diluentFormulator": {
+    "mlDrops": "{ml} ml ({drops} drops)",
+    "labelTitle": "Diluent Bottle Label - Poli International",
+    "vehicleHeading": "SHADING DILUENT VEHICLE",
+    "meta": "Prepared: <strong>{date}</strong> | Batch ID: <strong>{batchId}</strong>",
+    "labelNotes": "Notes: {notes}",
+    "warning": "Poli International Tattoo Tools Suite • Store in clean sealed squeeze bottle. Practice sterile technique. Discard within recommended studio timeframe.",
+    "popupBlocked": "Pop-up blocked. Please permit pop-ups to print bottle labels.",
     "title": "Custom Shading Diluent Vehicle Formulator",
     "subtitle": "Formulate sterile water, witch hazel, and USP glycerin carrier vehicles for smooth gray wash and color blends.",
     "sizeLabel": "Container Size",
@@ -732,6 +757,7 @@ const I18N_DICTIONARY = {
     "formulaArchive": "FORMULA-ARCHIVE"
   },
   "substitution": {
+    "inkCount": "({count} inks)",
     "title": "🔄 Formula Ink Substitution View",
     "subtitle": "Pick a saved recipe, mark an ink as out of stock, and select a replacement from inventory to verify CIEDE2000 color difference (ΔE₀₀).",
     "selectRecipe": "Select Saved Recipe",

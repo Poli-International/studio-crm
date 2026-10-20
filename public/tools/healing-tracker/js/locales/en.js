@@ -21,6 +21,7 @@ window.I18N_DICTIONARY.en = {
       "promptTitle": "Hydration Check-in",
       "promptBody": "Time for a glass of water! Cellular regeneration and lymphatic pigment clearance require optimal epidermal hydration—especially vital during tattoo and piercing healing.",
       "drankWaterBtn": "💧 Log +1 Glass",
+      "addCupBtn": "+ 1 Glass",
       "snoozeBtn": "Snooze (30m)",
       "title": "Daily Dermal Hydration Check-in",
       "subtitle": "Track water intake to support epidermal mitosis, scab elasticity, and lymphatic pigment resolution.",

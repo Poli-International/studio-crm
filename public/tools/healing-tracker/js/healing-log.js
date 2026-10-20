@@ -112,6 +112,9 @@
     };
   }
 
+  // Storage text is built in JS; re-render it when the language changes.
+  window.addEventListener('languageChanged', function () { updateStorageDisplay(); });
+
   function updateStorageDisplay() {
     const est = getStorageEstimate();
     const statusText = window.t

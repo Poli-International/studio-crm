@@ -96,6 +96,7 @@ window.I18N_DICTIONARY.nl = {
       "promptTitle": "Hydratatie-herinnering",
       "promptBody": "Tijd voor een glas water! Celregeneratie en lymfatische pigmentafvoer vereisen een optimale epidermale hydratatie – vooral cruciaal bij tattoo- en piercinggenezing.",
       "drankWaterBtn": "💧 +1 Glas registreren",
+      "addCupBtn": "+ 1 glas",
       "snoozeBtn": "Later (30 min)",
       "title": "Dagelijkse dermale hydratatiecheck",
       "subtitle": "Houd je waterinname bij om epidermale mitose, korstelasticiteit en lymfeafvoer te ondersteunen.",

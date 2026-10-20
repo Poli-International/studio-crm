@@ -4,6 +4,7 @@
  */
 window.i18nDictionaries = window.i18nDictionaries || {};
 window.i18nDictionaries['fr'] = {
+  "industrial.diagramLabels": "bille  ←——écart trou à trou——→  bille\n      [      votre saisie     ]",
   "anatomy.browse.all": "Voir toutes les options",
   "anatomy.browse.btn": "Parcourir les bijoux compatibles",
   "anatomy.browseCompatible": "Parcourir les bijoux compatibles",

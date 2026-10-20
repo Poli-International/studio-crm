@@ -21,6 +21,7 @@ window.I18N_DICTIONARY.fr = {
       "promptTitle": "Rappel d'hydratation",
       "promptBody": "C'est l'heure d'un verre d'eau ! La régénération cellulaire et l'élimination lymphatique exigent une hydratation cutanée optimale, particulièrement cruciale pour la cicatrisation des tatouages et piercings.",
       "drankWaterBtn": "💧 Noter +1 verre",
+      "addCupBtn": "+ 1 verre",
       "snoozeBtn": "Rappeler (30m)",
       "title": "Suivi d'hydratation cutanée quotidienne",
       "subtitle": "Suivez votre consommation d'eau pour favoriser la mitose épidermique, l'élasticité des croûtes et l'évacuation lymphatique des pigments.",

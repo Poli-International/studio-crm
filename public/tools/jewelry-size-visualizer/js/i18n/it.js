@@ -4,6 +4,7 @@
  */
 window.i18nDictionaries = window.i18nDictionaries || {};
 window.i18nDictionaries['it'] = {
+  "industrial.diagramLabels": "pallina  ←——distanza tra i fori——→  pallina\n      [      il valore inserito     ]",
   "anatomy.browse.all": "Mostra tutte le opzioni",
   "anatomy.browse.btn": "Sfoglia gioielli compatibili",
   "anatomy.browseCompatible": "Esplora gioielli compatibili",

@@ -21,6 +21,18 @@ function TP(key, fallback) {
 function T(key, fallback) {
   return (window.I18N && typeof window.I18N.t === 'function') ? window.I18N.t(key, fallback) : fallback;
 }
+function bfKey(en) { return 'x.bf_' + String(en).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, ''); }
+// Needle preset name in the current language. Records and other items keep their own title.
+function npTitle(n) {
+  if (!n) return '';
+  return (typeof n.id === 'string' && n.id.indexOf('needle-') === 0) ? T('x.np_' + n.id.slice(7).toLowerCase(), n.title) : n.title;
+}
+// "Needle: 3RL | Speed: Medium | Pass: 1" in the current language.
+function paramsText(p) {
+  var m = /^Needle: (.+?) \| Speed: (\w+) \| Pass: (\d+)$/.exec(p || '');
+  if (!m) return p;
+  return TP('x.preset_params_line', 'Needle: {0} | Speed: {1} | Pass: {2}', m[1], T('x.speed_' + m[2].toLowerCase(), m[2]), m[3]);
+}
 /* ═══════════════════════════════════════════════════════════
    PROFESSIONAL NEEDLE COVERAGE CALCULATOR
    Complex Databases & Calculation Engine
@@ -1224,8 +1236,8 @@ function displayCoverageResults(data) {
                 <strong>${data.elasticityLabel}</strong>
             </li>
             <li>
-                <span>Best For:</span>
-                <strong>${data.needleData.best_for}</strong>
+                <span>${T('x.best_for_label', 'Best For:')}</span>
+                <strong>${T(bfKey(data.needleData.best_for), data.needleData.best_for)}</strong>
             </li>
             <li>
                 <span>Passes Required:</span>
@@ -2130,7 +2142,7 @@ function renderRecentCalculations() {
     }
 
     if (records.length === 0) {
-        listEl.innerHTML = '<p class="coverage__recent-empty">No saved calculations yet. Perform a calculation below to auto-save your session records.</p>';
+        listEl.innerHTML = '<p class="coverage__recent-empty">' + T('recent_empty', 'No saved calculations yet. Perform a calculation below to auto-save your session records.') + '</p>';
         return;
     }
 
@@ -3154,7 +3166,7 @@ function initializeUnitConverter() {
                     const isCurrent = idx === pointsArr.length - 1;
                     const radius = isCurrent ? 4.5 : 3;
                     dotsHtml += `<circle cx="${p.x}" cy="${p.y}" r="${radius}" class="converter-sparkline-dot" fill="${dotColor}" stroke="${isCurrent ? '#ffffff' : 'rgba(255,255,255,0.7)'}" stroke-width="${isCurrent ? 2 : 1.2}">
-                        <title>Calculation #${idx + 1}: ${p.sat}% Saturation | Needle: ${p.preset} | Density: ~${p.density} mL/in²</title>
+                        <title>${TP('x.calc_point_title', 'Calculation #{0}: {1}% Saturation | Needle: {2} | Density: ~{3} mL/in²', idx + 1, p.sat, T(p.preset, p.preset), p.density)}</title>
                     </circle>`;
                 });
                 sparklineDots.innerHTML = dotsHtml;
@@ -3216,6 +3228,26 @@ function initializeUnitConverter() {
         }
     }
 
+    // A language switch re-renders the widgets whose text is built in JS, so they show the new language.
+    window.addEventListener('languageChanged', function () {
+        var renders = [
+            function () { updateCoveragePerUnit(true); },
+            function () { renderRecentCalculations(); },
+            function () { populateComparisonDropdowns(); },
+            function () { renderComparisonCards(); },
+            function () { renderStudioBottlesTable(); },
+            function () { renderInventoryWasteChart(activeWasteFamily); },
+            function () { renderHistoricalPigmentUsageChart(activePigmentFilter); },
+            function () { renderDashboardStockAlertCenter(); },
+            function () { renderInventoryPlanner(); },
+            function () { renderRecommendedReorderList(); },
+            function () { renderEfficiencyDashboard(); },
+            function () { renderTourStep(); },
+            function () { var bl = document.getElementById('body-location'); if (bl && bl.value) updateAnatomicalCallout(bl.value); }
+        ];
+        renders.forEach(function (fn) { try { fn(); } catch (e) { console.warn('[i18n] re-render failed', e); } });
+    });
+
     function updateCoveragePerUnit(skipPulse = false) {
         if (!inkNeedleSelect || !textEl) return;
         const selectedOpt = inkNeedleSelect.options[inkNeedleSelect.selectedIndex];
@@ -3251,7 +3283,7 @@ function initializeUnitConverter() {
         const saturationPercent = Math.min(100, Math.max(12, Math.round((mlPerSqin / 0.28) * 100)));
 
         // Update Sparkline Trend Chart
-        updateSaturationSparkline(saturationPercent, optName, mlPerSqin);
+        updateSaturationSparkline(saturationPercent, selectedOpt.getAttribute('data-i18n') || optName, mlPerSqin);
 
         // Border-color flash animation on #converter-coverage-results whenever calculation updates
         if (converterResultsBox) {
@@ -3332,7 +3364,7 @@ function initializeUnitConverter() {
                 healingBadge.style.background = 'rgba(16, 185, 129, 0.2)';
                 healingBadge.style.color = '#10b981';
                 healingTimelineText.textContent = T("x.7_to_10_days_rapid_epidermal", "7 to 10 days (Rapid epidermal re-epithelialization & mild flaking)");
-                traumaIndexText.innerHTML = '<span style="color: #10b981;">Low (1.5 / 5)</span> • Superficial Dermal Dwell';
+                traumaIndexText.innerHTML = '<span style="color: #10b981;">' + T('x.trauma_low_superficial', 'Low (1.5 / 5) • Superficial Dermal Dwell') + '</span>';
                 passesRecommendText.textContent = T("x.1_2_single_needle_passes_with", "1–2 single-needle passes with minimal skin distress");
                 aftercareNoteText.textContent = T("x.breathable_film_2_3_days_light", "Breathable film 2–3 days; light moisturization from day 4 onwards.");
             } else if (saturationPercent <= 65) {
@@ -3340,7 +3372,7 @@ function initializeUnitConverter() {
                 healingBadge.style.background = 'rgba(234, 179, 8, 0.2)';
                 healingBadge.style.color = '#fbbf24';
                 healingTimelineText.textContent = T("x.12_to_16_days_standard_full", "12 to 16 days (Standard full-thickness dermal regeneration & moderate peeling)");
-                traumaIndexText.innerHTML = '<span style="color: #eab308;">Moderate (3 / 5)</span> • Mid-Dermis Dwell';
+                traumaIndexText.innerHTML = '<span style="color: #eab308;">' + T('x.moderate_3_5_mid_dermis_dwell', 'Moderate (3 / 5) • Mid-Dermis Dwell') + '</span>';
                 passesRecommendText.textContent = T("x.2_3_feathered_blend_passes", "2–3 feathered blend passes");
                 aftercareNoteText.textContent = T("x.secondskin_3_4_days_unscented_barrier", "SecondSkin 3–4 days; unscented barrier cream/lotion days 5+.");
             } else {
@@ -3348,7 +3380,7 @@ function initializeUnitConverter() {
                 healingBadge.style.background = 'rgba(239, 68, 68, 0.2)';
                 healingBadge.style.color = '#f87171';
                 healingTimelineText.textContent = T("x.18_to_25_days_extended_deep", "18 to 25+ days (Extended deep dermal remodeling, high inflammation response)");
-                traumaIndexText.innerHTML = '<span style="color: #ef4444;">Intense (4.8 / 5)</span> • Dense Multi-Pass Trauma';
+                traumaIndexText.innerHTML = '<span style="color: #ef4444;">' + T('x.trauma_intense_multipass', 'Intense (4.8 / 5) • Dense Multi-Pass Trauma') + '</span>';
                 passesRecommendText.textContent = T("x.3_5_circular_packing_passes_with", "3–5 circular packing passes with skin stretching");
                 aftercareNoteText.textContent = T("x.protective_film_with_exudate_check_avoid", "Protective film with exudate check; avoid over-saturating with heavy ointment.");
             }
@@ -4273,7 +4305,7 @@ function initializeUnitConverter() {
             const saturationPercent = Math.min(100, Math.max(12, Math.round((mlPerSqin / 0.28) * 100)));
 
             let levelText = 'Medium Saturation';
-            let traumaText = 'Moderate (3 / 5) • Mid-Dermis Dwell';
+            let traumaText = T('x.moderate_3_5_mid_dermis_dwell', 'Moderate (3 / 5) • Mid-Dermis Dwell');
             let healingTimeline = '12 to 16 days (Standard full-thickness dermal regeneration)';
             let passesText = '2–3 feathered blend passes with moderate stretching';
             let aftercareText = 'SecondSkin barrier film 3–4 days; unscented hydration lotion days 5+.';
@@ -5150,11 +5182,11 @@ function populateComparisonDropdowns() {
 
     const records = getRecentCalculations();
 
-    let optionsHtml = '<option value="">Select needle or calculation...</option>';
+    let optionsHtml = '<option value="">' + T('x.select_needle_or_calc', 'Select needle or calculation...') + '</option>';
 
     optionsHtml += '<optgroup label="💉 Standard Needle Configurations">';
     NEEDLE_PRESETS_FOR_COMPARISON.forEach(n => {
-        optionsHtml += `<option value="${n.id}">${n.title} (${n.detail})</option>`;
+        optionsHtml += `<option value="${n.id}">${npTitle(n)} (${n.detail})</option>`;
     });
     optionsHtml += '</optgroup>';
 
@@ -5285,54 +5317,54 @@ function renderComparisonCards() {
 
     let narrativeExplanation = '';
     if (isFaster) {
-        narrativeExplanation = `<strong>Scenario B (${itemB.title})</strong> executes the session <strong>${speedMultiplier.toFixed(1)}x faster</strong> than Baseline A, reducing chair time by <strong>${Math.abs(timeDelta).toFixed(1)} hours</strong> (${Math.abs(timeVariancePct).toFixed(1)}% efficiency gain on 20 in²). ` +
-            (isMoreInk ? `Due to increased needle configuration width and fluid delivery, pigment deposit increases by <strong>+${inkVariancePct.toFixed(1)}% (${inkB.toFixed(1)} mL vs ${inkA.toFixed(1)} mL)</strong>.` : `Ink consumption changes by <strong>${inkVariancePct.toFixed(1)}% (${inkB.toFixed(1)} mL vs ${inkA.toFixed(1)} mL)</strong>.`);
+        narrativeExplanation = TP('x.narr_faster_lead', '<strong>Scenario B ({0})</strong> executes the session <strong>{1}x faster</strong> than Baseline A, reducing chair time by <strong>{2} hours</strong> ({3}% efficiency gain on 20 in²). ', npTitle(itemB), speedMultiplier.toFixed(1), Math.abs(timeDelta).toFixed(1), Math.abs(timeVariancePct).toFixed(1)) +
+            (isMoreInk ? TP('x.narr_faster_more_ink', 'Due to increased needle configuration width and fluid delivery, pigment deposit increases by <strong>+{0}% ({1} mL vs {2} mL)</strong>.', inkVariancePct.toFixed(1), inkB.toFixed(1), inkA.toFixed(1)) : TP('x.narr_faster_less_ink', 'Ink consumption changes by <strong>{0}% ({1} mL vs {2} mL)</strong>.', inkVariancePct.toFixed(1), inkB.toFixed(1), inkA.toFixed(1)));
     } else if (isSlower) {
-        narrativeExplanation = `<strong>Scenario B (${itemB.title})</strong> operates with finer precision, requiring <strong>+${timeVariancePct.toFixed(1)}% more chair time</strong> (+${timeDelta.toFixed(1)} hrs on 20 in²). ` +
-            (isLessInk ? `However, ink deposit volume decreases by <strong>${Math.abs(inkVariancePct).toFixed(1)}% (${inkB.toFixed(1)} mL vs ${inkA.toFixed(1)} mL)</strong>, reflecting lower fluid dissipation in fine-gauge needle groupings.` : `Pigment volume requirements adjust to <strong>${inkB.toFixed(1)} mL (${inkVariancePct >= 0 ? '+' : ''}${inkVariancePct.toFixed(1)}%)</strong>.`);
+        narrativeExplanation = TP('x.narr_slower_lead', '<strong>Scenario B ({0})</strong> operates with finer precision, requiring <strong>+{1}% more chair time</strong> (+{2} hrs on 20 in²). ', npTitle(itemB), timeVariancePct.toFixed(1), timeDelta.toFixed(1)) +
+            (isLessInk ? TP('x.narr_slower_less_ink', 'However, ink deposit volume decreases by <strong>{0}% ({1} mL vs {2} mL)</strong>, reflecting lower fluid dissipation in fine-gauge needle groupings.', Math.abs(inkVariancePct).toFixed(1), inkB.toFixed(1), inkA.toFixed(1)) : TP('x.narr_slower_other_ink', 'Pigment volume requirements adjust to <strong>{0} mL ({1}{2}%)</strong>.', inkB.toFixed(1), inkVariancePct >= 0 ? '+' : '', inkVariancePct.toFixed(1)));
     } else {
-        narrativeExplanation = `Both scenarios demonstrate equivalent chair time velocity (${timeA.toFixed(1)} hrs / 20 in²). Pigment consumption variance is <strong>${inkVariancePct.toFixed(1)}%</strong>.`;
+        narrativeExplanation = TP('x.narr_equal', 'Both scenarios demonstrate equivalent chair time velocity ({0} hrs / 20 in²). Pigment consumption variance is <strong>{1}%</strong>.', timeA.toFixed(1), inkVariancePct.toFixed(1));
     }
 
     container.innerHTML = `
         <div class="coverage__compare-card">
-            <div class="coverage__compare-card-title">Scenario A (Baseline)</div>
-            <div style="font-size: 1rem; font-weight: bold; color: var(--color-neon-pink); margin-bottom: 0.5rem;">${itemA.title}</div>
+            <div class="coverage__compare-card-title">${T('x.scenario_a_baseline', 'Scenario A (Baseline)')}</div>
+            <div style="font-size: 1rem; font-weight: bold; color: var(--color-neon-pink); margin-bottom: 0.5rem;">${npTitle(itemA)}</div>
             <div class="coverage__compare-metric">
-                <span>Coverage Rate:</span>
+                <span>${T('x.coverage_rate_label', 'Coverage Rate:')}</span>
                 <strong>${itemA.detail}</strong>
             </div>
             <div class="coverage__compare-metric">
-                <span>Parameters:</span>
-                <span style="font-size: 0.8rem; color: var(--color-text-secondary);">${itemA.params}</span>
+                <span>${T('x.parameters_label', 'Parameters:')}</span>
+                <span style="font-size: 0.8rem; color: var(--color-text-secondary);">${paramsText(itemA.params)}</span>
             </div>
             <div class="coverage__compare-metric">
-                <span>Est. Chair Time (20 in²):</span>
+                <span>${T('x.est_chair_time_20', 'Est. Chair Time (20 in²):')}</span>
                 <span style="font-size: 0.85rem; font-weight: 700; color: var(--color-neon-pink);">${timeA.toFixed(1)} hours</span>
             </div>
             <div class="coverage__compare-metric">
-                <span>Est. Ink Volume (20 in²):</span>
+                <span>${T('x.est_ink_volume_20', 'Est. Ink Volume (20 in²):')}</span>
                 <span style="font-size: 0.85rem; font-weight: 700; color: #a78bfa;">${inkA.toFixed(1)} mL</span>
             </div>
         </div>
 
         <div class="coverage__compare-card">
-            <div class="coverage__compare-card-title">Scenario B (Comparison)</div>
-            <div style="font-size: 1rem; font-weight: bold; color: #0693e3; margin-bottom: 0.5rem;">${itemB.title}</div>
+            <div class="coverage__compare-card-title">${T('x.scenario_b_comparison', 'Scenario B (Comparison)')}</div>
+            <div style="font-size: 1rem; font-weight: bold; color: #0693e3; margin-bottom: 0.5rem;">${npTitle(itemB)}</div>
             <div class="coverage__compare-metric">
-                <span>Coverage Rate:</span>
+                <span>${T('x.coverage_rate_label', 'Coverage Rate:')}</span>
                 <strong>${itemB.detail}</strong>
             </div>
             <div class="coverage__compare-metric">
-                <span>Parameters:</span>
-                <span style="font-size: 0.8rem; color: var(--color-text-secondary);">${itemB.params}</span>
+                <span>${T('x.parameters_label', 'Parameters:')}</span>
+                <span style="font-size: 0.8rem; color: var(--color-text-secondary);">${paramsText(itemB.params)}</span>
             </div>
             <div class="coverage__compare-metric">
-                <span>Est. Chair Time (20 in²):</span>
+                <span>${T('x.est_chair_time_20', 'Est. Chair Time (20 in²):')}</span>
                 <span style="font-size: 0.85rem; font-weight: 700; color: #0693e3;">${timeB.toFixed(1)} hours</span>
             </div>
             <div class="coverage__compare-metric">
-                <span>Est. Ink Volume (20 in²):</span>
+                <span>${T('x.est_ink_volume_20', 'Est. Ink Volume (20 in²):')}</span>
                 <span style="font-size: 0.85rem; font-weight: 700; color: #38bdf8;">${inkB.toFixed(1)} mL</span>
             </div>
         </div>
@@ -5343,7 +5375,7 @@ function renderComparisonCards() {
         <div class="coverage__variance-insight-card">
             <div class="coverage__variance-header">
                 <h4 class="coverage__variance-title">
-                    <span>⚡</span> Variance Insight: Chair Time & Ink Volume Delta
+                    ${T('x.variance_insight_title', '⚡ Variance Insight: Chair Time & Ink Volume Delta')}
                 </h4>
                 <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
                     ${timeBadgeHtml}
@@ -5356,7 +5388,7 @@ function renderComparisonCards() {
                 <div class="coverage__variance-stat-box">
                     <div>
                         <div class="coverage__variance-stat-label">
-                            <span>⏱️ Chair Time Variance</span>
+                            <span>${T('x.chair_time_variance', '⏱️ Chair Time Variance')}</span>
                             ${timeBadgeHtml}
                         </div>
                         <div class="coverage__variance-stat-value" style="color: ${isFaster ? '#10b981' : isSlower ? '#f59e0b' : '#ffffff'};">
@@ -5372,7 +5404,7 @@ function renderComparisonCards() {
                 <div class="coverage__variance-stat-box">
                     <div>
                         <div class="coverage__variance-stat-label">
-                            <span>🚀 Speed Multiplier</span>
+                            <span>${T('x.speed_multiplier', '🚀 Speed Multiplier')}</span>
                             <span class="coverage__variance-pill" style="background: rgba(6,147,227,0.15); color: #0693e3;">Relative</span>
                         </div>
                         <div class="coverage__variance-stat-value" style="color: #38bdf8;">
@@ -5380,7 +5412,7 @@ function renderComparisonCards() {
                         </div>
                     </div>
                     <div style="font-size: 0.73rem; color: var(--color-text-secondary); margin-top: 0.3rem;">
-                        ${rateA.toFixed(1)} in²/hr vs ${rateB.toFixed(1)} in²/hr delivery speed
+                        ${TP('x.speed_delivery_line', '{0} in²/hr vs {1} in²/hr delivery speed', rateA.toFixed(1), rateB.toFixed(1))}
                     </div>
                 </div>
 
@@ -5388,7 +5420,7 @@ function renderComparisonCards() {
                 <div class="coverage__variance-stat-box">
                     <div>
                         <div class="coverage__variance-stat-label">
-                            <span>💧 Ink Volume Variance</span>
+                            <span>${T('x.ink_volume_variance', '💧 Ink Volume Variance')}</span>
                             ${inkBadgeHtml}
                         </div>
                         <div class="coverage__variance-stat-value" style="color: ${isMoreInk ? 'var(--color-neon-pink)' : '#0693e3'};">
@@ -5396,7 +5428,7 @@ function renderComparisonCards() {
                         </div>
                     </div>
                     <div style="font-size: 0.73rem; color: var(--color-text-secondary); margin-top: 0.3rem;">
-                        ${inkA.toFixed(1)} mL (A) vs ${inkB.toFixed(1)} mL (B) • <strong>${Math.abs(inkDelta).toFixed(1)} mL delta</strong>
+                        ${TP('x.ink_volume_delta_line', '{0} mL (A) vs {1} mL (B) • <strong>{2} mL delta</strong>', inkA.toFixed(1), inkB.toFixed(1), Math.abs(inkDelta).toFixed(1))}
                     </div>
                 </div>
 
@@ -5404,7 +5436,7 @@ function renderComparisonCards() {
                 <div class="coverage__variance-stat-box">
                     <div>
                         <div class="coverage__variance-stat-label">
-                            <span>📐 Comparative Benchmark</span>
+                            <span>${T('x.comparative_benchmark', '📐 Comparative Benchmark')}</span>
                             <span class="coverage__variance-pill" style="background: rgba(167,139,250,0.15); color: #c084fc;">Normalized</span>
                         </div>
                         <div class="coverage__variance-stat-value" style="color: #c084fc;">
@@ -5412,7 +5444,7 @@ function renderComparisonCards() {
                         </div>
                     </div>
                     <div style="font-size: 0.73rem; color: var(--color-text-secondary); margin-top: 0.3rem;">
-                        Standardized forearm / bicep session segment
+                        ${T('x.standardized_session_segment', 'Standardized forearm / bicep session segment')}
                     </div>
                 </div>
             </div>
@@ -5550,10 +5582,10 @@ const ANATOMICAL_LOCATION_DATA = {
     },
     'outer-upper-arm': {
         muscle: 'Biceps Brachii & Deltoid',
-        badge: 'Low Stretch Risk',
+        badge: 'Low Stretch Risk', badgeKey: 'x.badge_low_stretch_risk',
         badgeColor: '#10b981',
-        detail: 'Firm, smooth skin over bicep muscle belly. Easy two-finger stretch.',
-        tip: 'Position armrest at 45° angle to stabilize muscle surface and minimize skin bounce.'
+        detail: 'Firm, smooth skin over bicep muscle belly. Easy two-finger stretch.', detailKey: 'x.anatomy_upper_arm_detail',
+        tip: 'Position armrest at 45° angle to stabilize muscle surface and minimize skin bounce.', tipKey: 'x.anatomy_upper_arm_tip'
     },
     'outer-forearm': {
         muscle: 'Brachioradialis & Wrist Extensors',
@@ -5644,15 +5676,15 @@ function updateAnatomicalCallout(locationKey) {
 
     if (nameEl) nameEl.textContent = TP("x.muscle_group", "🦾 Muscle Group: {0}", data.muscle);
     if (badgeEl) {
-        badgeEl.textContent = data.badge;
+        badgeEl.textContent = data.badgeKey ? T(data.badgeKey, data.badge) : data.badge;
         badgeEl.style.backgroundColor = `${data.badgeColor}25`;
         badgeEl.style.color = data.badgeColor;
     }
     if (detailEl) {
-        detailEl.innerHTML = TP("x.skin_tension_2", "<strong>Skin Tension:</strong> {0}", data.detail);
+        detailEl.innerHTML = TP("x.skin_tension_2", "<strong>Skin Tension:</strong> {0}", data.detailKey ? T(data.detailKey, data.detail) : data.detail);
     }
     if (tipEl) {
-        tipEl.innerHTML = TP("x.ergonomic_tip_2", "💡 <strong>Ergonomic Tip:</strong> {0}", data.tip);
+        tipEl.innerHTML = TP("x.ergonomic_tip_2", "💡 <strong>Ergonomic Tip:</strong> {0}", data.tipKey ? T(data.tipKey, data.tip) : data.tip);
     }
 }
 
@@ -6082,7 +6114,7 @@ function getStudioBottles() {
     }
 
     return [
-        { id: 'bot_1', name: 'Pitch Black (Lining)', brand: 'World Famous', category: 'black', currentMl: 14, capacityMl: 120, hex: '#111827' },
+        { id: 'bot_1', name: T('x.pitch_black_lining', 'Pitch Black (Lining)'), brand: 'World Famous', category: 'black', currentMl: 14, capacityMl: 120, hex: '#111827' },
         { id: 'bot_2', name: 'Straight Dark Greywash', brand: 'World Famous', category: 'black', currentMl: 18, capacityMl: 120, hex: '#4b5563' },
         { id: 'bot_3', name: 'Master Dark Red', brand: 'World Famous', category: 'color', currentMl: 28, capacityMl: 30, hex: '#dc2626' },
         { id: 'bot_4', name: 'Hoover Dam Blue', brand: 'World Famous', category: 'color', currentMl: 12, capacityMl: 30, hex: '#2563eb' },
@@ -6176,10 +6208,10 @@ function renderStudioBottlesTable() {
         <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem; text-align: left;">
             <thead>
                 <tr style="border-bottom: 1px solid var(--color-border); color: var(--color-text-secondary); background: rgba(0,0,0,0.2);">
-                    <th style="padding: 0.5rem 0.6rem;">Bottle / Brand</th>
-                    <th style="padding: 0.5rem 0.6rem;">Stock Level</th>
-                    <th style="padding: 0.5rem 0.6rem;">Status</th>
-                    <th style="padding: 0.5rem 0.6rem; text-align: right;">Quick Adjust</th>
+                    <th style="padding: 0.5rem 0.6rem;">${T('x.bottle_brand_header', 'Bottle / Brand')}</th>
+                    <th style="padding: 0.5rem 0.6rem;">${T('x.stock_level_header', 'Stock Level')}</th>
+                    <th style="padding: 0.5rem 0.6rem;">${T('x.status_header', 'Status')}</th>
+                    <th style="padding: 0.5rem 0.6rem; text-align: right;">${T('x.quick_adjust_header', 'Quick Adjust')}</th>
                 </tr>
             </thead>
             <tbody>
@@ -6388,29 +6420,29 @@ function renderInventoryWasteChart(family = 'all') {
         matrixEl.innerHTML = `
             <div style="background: rgba(6, 147, 227, 0.08); border: 1px solid rgba(6, 147, 227, 0.25); border-radius: 8px; padding: 0.6rem 0.85rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
-                    <span style="font-weight: 700; color: #38bdf8; font-size: 0.85rem;">● Lining Blacks & Greys</span>
-                    <span style="font-weight: 800; color: #ffffff; font-size: 0.85rem;">${blacksRatio}% Waste</span>
+                    <span style="font-weight: 700; color: #38bdf8; font-size: 0.85rem;">${T('x.family_lining_greys', '● Lining Blacks & Greys')}</span>
+                    <span style="font-weight: 800; color: #ffffff; font-size: 0.85rem;">${TP('x.pct_waste', '{0}% Waste', blacksRatio)}</span>
                 </div>
                 <div style="font-size: 0.72rem; color: var(--color-text-secondary);">
-                    Consumed: ${blacksC} mL | In-Cap Waste: ${blacksW} mL • Highly Efficient
+                    ${TP('x.consumed_waste_efficient', 'Consumed: {0} mL | In-Cap Waste: {1} mL • Highly Efficient', blacksC, blacksW)}
                 </div>
             </div>
             <div style="background: rgba(255, 0, 110, 0.08); border: 1px solid rgba(255, 0, 110, 0.25); border-radius: 8px; padding: 0.6rem 0.85rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
-                    <span style="font-weight: 700; color: var(--color-neon-pink, #ff006e); font-size: 0.85rem;">● Vivid Color Packing</span>
-                    <span style="font-weight: 800; color: #ef4444; font-size: 0.85rem;">${colorsRatio}% Waste ⚠️</span>
+                    <span style="font-weight: 700; color: var(--color-neon-pink, #ff006e); font-size: 0.85rem;">${T('x.family_vivid_color', '● Vivid Color Packing')}</span>
+                    <span style="font-weight: 800; color: #ef4444; font-size: 0.85rem;">${TP('x.pct_waste_warning', '{0}% Waste ⚠️', colorsRatio)}</span>
                 </div>
                 <div style="font-size: 0.72rem; color: var(--color-text-secondary);">
-                    Consumed: ${colorsC} mL | In-Cap Waste: ${colorsW} mL • Highest ratio; switch to small micro-caps
+                    ${TP('x.consumed_waste_highest', 'Consumed: {0} mL | In-Cap Waste: {1} mL • Highest ratio; switch to small micro-caps', colorsC, colorsW)}
                 </div>
             </div>
             <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; padding: 0.6rem 0.85rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
-                    <span style="font-weight: 700; color: #ffffff; font-size: 0.85rem;">● Whites & Highlights</span>
-                    <span style="font-weight: 800; color: #fbbf24; font-size: 0.85rem;">${whitesRatio}% Waste</span>
+                    <span style="font-weight: 700; color: #ffffff; font-size: 0.85rem;">${T('x.family_whites_highlights', '● Whites & Highlights')}</span>
+                    <span style="font-weight: 800; color: #fbbf24; font-size: 0.85rem;">${TP('x.pct_waste', '{0}% Waste', whitesRatio)}</span>
                 </div>
                 <div style="font-size: 0.72rem; color: var(--color-text-secondary);">
-                    Consumed: ${whitesC} mL | In-Cap Waste: ${whitesW} mL • Moderate drying residue
+                    ${TP('x.consumed_waste_moderate', 'Consumed: {0} mL | In-Cap Waste: {1} mL • Moderate drying residue', whitesC, whitesW)}
                 </div>
             </div>
         `;
@@ -6533,7 +6565,7 @@ function renderHistoricalPigmentUsageChart(family = 'all') {
 
             const lines = [];
             if (family === 'all' || family === 'blacks') {
-                lines.push(React.createElement(Line, { key: 'pb', type: 'monotone', dataKey: 'pitchBlack', name: 'Pitch Black (Lining)', stroke: '#38bdf8', strokeWidth: 3, dot: { r: 4, fill: '#38bdf8' }, activeDot: { r: 7 } }));
+                lines.push(React.createElement(Line, { key: 'pb', type: 'monotone', dataKey: 'pitchBlack', name: T('x.pitch_black_lining', 'Pitch Black (Lining)'), stroke: '#38bdf8', strokeWidth: 3, dot: { r: 4, fill: '#38bdf8' }, activeDot: { r: 7 } }));
                 lines.push(React.createElement(Line, { key: 'gw', type: 'monotone', dataKey: 'greywash', name: 'Straight Dark Greywash', stroke: '#c084fc', strokeWidth: 2.5, strokeDasharray: '4 4', dot: { r: 4, fill: '#c084fc' }, activeDot: { r: 7 } }));
             }
             if (family === 'all' || family === 'colors') {
@@ -6586,7 +6618,7 @@ function renderSvgHistoricalChartFallback(rootEl, family) {
 
     const seriesList = [];
     if (family === 'all' || family === 'blacks') {
-        seriesList.push({ key: 'pitchBlack', name: 'Pitch Black (Lining)', color: '#38bdf8' });
+        seriesList.push({ key: 'pitchBlack', name: T('x.pitch_black_lining', 'Pitch Black (Lining)'), color: '#38bdf8' });
         seriesList.push({ key: 'greywash', name: 'Straight Dark Greywash', color: '#c084fc' });
     }
     if (family === 'all' || family === 'colors') {
@@ -6848,7 +6880,7 @@ function renderDashboardStockAlertCenter() {
                 <div>
                     <div style="font-weight: 800; color: #ffffff; font-size: 0.88rem;">${b.name}</div>
                     <div style="font-size: 0.72rem; color: #fca5a5;">
-                        ${b.brand} • <strong>${b.currentMl} mL remaining</strong> (Deficit: -${(minThreshold - b.currentMl).toFixed(0)} mL below ${minThreshold}mL min)
+                        ${b.brand} • <strong>${TP('x.ml_remaining', '{0} mL remaining', b.currentMl)}</strong> ${TP('x.deficit_below_min', '(Deficit: -{0} mL below {1}mL min)', (minThreshold - b.currentMl).toFixed(0), minThreshold)}
                     </div>
                 </div>
             </div>
@@ -6938,12 +6970,12 @@ function renderInventoryPlanner() {
                     <div class="inventory-alert-icon">🚨</div>
                     <div>
                         <div style="font-weight: 800; font-size: 0.92rem; margin-bottom: 0.2rem; color: #ef4444;">
-                            INSUFFICIENT STOCK WARNING: Total Demand Exceeds Available Inventory!
+                            ${T('x.insufficient_stock_warning', 'INSUFFICIENT STOCK WARNING: Total Demand Exceeds Available Inventory!')}
                         </div>
                         <div style="font-size: 0.82rem; color: #fca5a5;">
-                            ${isBlackShortage ? `• <strong>Black Ink Deficit:</strong> ${blackDeficit.toFixed(0)} mL needed (${totalBlackMl} mL demand vs ${stock.blackMl} mL in stock). ` : ''}
-                            ${isColorShortage ? `• <strong>Color Ink Deficit:</strong> ${colorDeficit.toFixed(0)} mL needed (${totalColorMl} mL demand vs ${stock.colorMl} mL in stock). ` : ''}
-                            Order supplies immediately to prevent session interruptions.
+                            ${isBlackShortage ? `• <strong>${T('x.black_ink_deficit_label', 'Black Ink Deficit:')}</strong> ${TP('x.ink_deficit_detail', '{0} mL needed ({1} mL demand vs {2} mL in stock).', blackDeficit.toFixed(0), totalBlackMl, stock.blackMl)} ` : ''}
+                            ${isColorShortage ? `• <strong>${T('x.color_ink_deficit_label', 'Color Ink Deficit:')}</strong> ${TP('x.ink_deficit_detail', '{0} mL needed ({1} mL demand vs {2} mL in stock).', colorDeficit.toFixed(0), totalColorMl, stock.colorMl)} ` : ''}
+                            ${T('x.order_supplies_immediately', 'Order supplies immediately to prevent session interruptions.')}
                         </div>
                     </div>
                 </div>
@@ -6962,37 +6994,37 @@ function renderInventoryPlanner() {
             <!-- Black Pigment Demand Card -->
             <div class="${isBlackShortage ? 'inventory-card--shortage' : 'inventory-card--adequate'}" style="border-radius: 8px; padding: 0.85rem; text-align: center; transition: all 0.3s ease;">
                 <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--color-text-secondary); margin-bottom: 0.25rem;">
-                    <span>Total Black Pigment</span>
-                    ${isBlackShortage ? '<span class="inventory-badge--shortage">⚠️ SHORTAGE</span>' : '<span style="color: #10b981; font-weight: 700; font-size: 0.7rem;">✓ OK</span>'}
+                    <span>${T('x.total_black_pigment', 'Total Black Pigment')}</span>
+                    ${isBlackShortage ? '<span class="inventory-badge--shortage">' + T('x.shortage_badge', '⚠️ SHORTAGE') + '</span>' : '<span style="color: #10b981; font-weight: 700; font-size: 0.7rem;">' + T('x.in_stock_ok', '✓ OK') + '</span>'}
                 </div>
                 <div style="font-size: 1.35rem; font-weight: 800; color: ${isBlackShortage ? '#ef4444' : '#0693e3'};">
                     ${totalBlackMl} mL
                 </div>
                 <div style="font-size: 0.72rem; margin-top: 4px; color: ${isBlackShortage ? '#fca5a5' : 'var(--color-text-secondary)'};">
                     ${isBlackShortage 
-                        ? `<strong>Stock Shortage: -${blackDeficit.toFixed(0)} mL</strong> (~${blackBottlesNeeded}x 1oz bottles)` 
-                        : `Stock Buffer: +${(stock.blackMl - totalBlackMl).toFixed(0)} mL (${stock.blackMl} mL on hand)`}
+                        ? `<strong>${TP('x.stock_shortage_ml', 'Stock Shortage: -{0} mL', blackDeficit.toFixed(0))}</strong> ${TP('x.bottles_needed_1oz', '(~{0}x 1oz bottles)', blackBottlesNeeded)}` 
+                        : TP('x.stock_buffer_on_hand', 'Stock Buffer: +{0} mL ({1} mL on hand)', (stock.blackMl - totalBlackMl).toFixed(0), stock.blackMl)}
                 </div>
             </div>
 
             <!-- Color Pigment Demand Card -->
             <div class="${isColorShortage ? 'inventory-card--shortage' : 'inventory-card--adequate'}" style="border-radius: 8px; padding: 0.85rem; text-align: center; transition: all 0.3s ease;">
                 <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--color-text-secondary); margin-bottom: 0.25rem;">
-                    <span>Total Color Pigments</span>
-                    ${isColorShortage ? '<span class="inventory-badge--shortage">⚠️ SHORTAGE</span>' : '<span style="color: #10b981; font-weight: 700; font-size: 0.7rem;">✓ OK</span>'}
+                    <span>${T('x.total_color_pigments', 'Total Color Pigments')}</span>
+                    ${isColorShortage ? '<span class="inventory-badge--shortage">' + T('x.shortage_badge', '⚠️ SHORTAGE') + '</span>' : '<span style="color: #10b981; font-weight: 700; font-size: 0.7rem;">' + T('x.in_stock_ok', '✓ OK') + '</span>'}
                 </div>
                 <div style="font-size: 1.35rem; font-weight: 800; color: ${isColorShortage ? '#ef4444' : 'var(--color-neon-pink, #ff006e)'};">
                     ${totalColorMl} mL
                 </div>
                 <div style="font-size: 0.72rem; margin-top: 4px; color: ${isColorShortage ? '#fca5a5' : 'var(--color-text-secondary)'};">
                     ${isColorShortage 
-                        ? `<strong>Stock Shortage: -${colorDeficit.toFixed(0)} mL</strong> (~${colorBottlesNeeded}x 1oz bottles)` 
-                        : `Stock Buffer: +${(stock.colorMl - totalColorMl).toFixed(0)} mL (${stock.colorMl} mL on hand)`}
+                        ? `<strong>${TP('x.stock_shortage_ml', 'Stock Shortage: -{0} mL', colorDeficit.toFixed(0))}</strong> ${TP('x.bottles_needed_1oz', '(~{0}x 1oz bottles)', colorBottlesNeeded)}` 
+                        : TP('x.stock_buffer_on_hand', 'Stock Buffer: +{0} mL ({1} mL on hand)', (stock.colorMl - totalColorMl).toFixed(0), stock.colorMl)}
                 </div>
             </div>
         </div>
         <div style="font-size: 0.82rem; color: var(--color-text-secondary); background: ${hasAnyShortage ? 'rgba(239, 68, 68, 0.08)' : 'rgba(6, 147, 227, 0.08)'}; padding: 0.6rem 0.8rem; border-radius: 6px; border-left: 3px solid ${hasAnyShortage ? '#ef4444' : '#0693e3'};">
-            Total skin surface: <strong>${totalAreaSqIn} sq in</strong> across <strong>${appointments.length} client session(s)</strong>.
+            ${TP('x.total_skin_surface_line', 'Total skin surface: <strong>{0} sq in</strong> across <strong>{1} client session(s)</strong>.', totalAreaSqIn, appointments.length)}
         </div>
     `;
 
@@ -7009,10 +7041,10 @@ function renderInventoryPlanner() {
                     <div class="inventory-alert-icon">⚠️</div>
                     <div>
                         <div style="font-weight: 800; font-size: 0.92rem; margin-bottom: 0.2rem; color: #fbbf24;">
-                            SCHEDULE CONFLICT DETECTED (${conflictingApptCount} overlapping sessions on ${conflictDates.join(', ')})
+                            ${TP('x.schedule_conflict_detected', 'SCHEDULE CONFLICT DETECTED ({0} overlapping sessions on {1})', conflictingApptCount, conflictDates.join(', '))}
                         </div>
                         <div style="font-size: 0.82rem; color: #fcd34d;">
-                            Two or more sessions are scheduled on the same date with conflicting chair time requirements. Please review the highlighted rows below to prevent double-booking.
+                            ${T('x.schedule_conflict_explainer', 'Two or more sessions are scheduled on the same date with conflicting chair time requirements. Please review the highlighted rows below to prevent double-booking.')}
                         </div>
                     </div>
                 </div>
@@ -7027,13 +7059,13 @@ function renderInventoryPlanner() {
         <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;">
             <thead>
                 <tr style="border-bottom: 1px solid var(--color-border); color: var(--color-text-secondary);">
-                    <th style="padding: 0.6rem;">Client / Project</th>
-                    <th style="padding: 0.6rem;">Date & Time Slot</th>
-                    <th style="padding: 0.6rem;">Duration</th>
-                    <th style="padding: 0.6rem;">Area</th>
-                    <th style="padding: 0.6rem;">Black Ink</th>
-                    <th style="padding: 0.6rem;">Color Ink</th>
-                    <th style="padding: 0.6rem; text-align: right;">Action</th>
+                    <th style="padding: 0.6rem;">${T('x.client_project_header_alt', 'Client / Project')}</th>
+                    <th style="padding: 0.6rem;">${T('x.date_time_slot_header', 'Date & Time Slot')}</th>
+                    <th style="padding: 0.6rem;">${T('x.duration_header', 'Duration')}</th>
+                    <th style="padding: 0.6rem;">${T('x.area_header', 'Area')}</th>
+                    <th style="padding: 0.6rem;">${T('x.black_ink_header', 'Black Ink')}</th>
+                    <th style="padding: 0.6rem;">${T('x.color_ink_header', 'Color Ink')}</th>
+                    <th style="padding: 0.6rem; text-align: right;">${T('x.action_header', 'Action')}</th>
                 </tr>
             </thead>
             <tbody>
@@ -7056,7 +7088,7 @@ function renderInventoryPlanner() {
                                 ${hasConflict ? `
                                     <div style="margin-top: 4px;">
                                         <span class="inventory-badge--conflict">
-                                            ⚠️ Conflict with ${conflicts.map(c => `${c.client} (${c.timeRange})`).join(', ')}
+                                            ${TP('x.conflict_with_list', '⚠️ Conflict with {0}', conflicts.map(function (c) { return c.client + ' (' + c.timeRange + ')'; }).join(', '))}
                                         </span>
                                     </div>
                                 ` : ''}
@@ -7181,10 +7213,10 @@ function renderRecommendedReorderList() {
             <div class="reorder-forecast-header">
                 <div>
                     <h3 class="reorder-forecast-title">
-                        <span>📦</span> 30-Day Recommended Reorder Forecast
+                        <span>📦</span> ${T('x.reorder_forecast_title', '30-Day Recommended Reorder Forecast')}
                     </h3>
                     <p style="font-size: 0.78rem; color: var(--color-text-secondary); margin: 0.2rem 0 0 0;">
-                        Predictive inventory depletion model based on <strong>${next30Appts.length} scheduled session(s)</strong> in the next 30 days.
+                        ${TP('x.reorder_model_based_on', 'Predictive inventory depletion model based on <strong>{0} scheduled session(s)</strong> in the next 30 days.', next30Appts.length)}
                     </p>
                 </div>
                 <span class="reorder-badge-safe">✓ ALL PIGMENTS ADEQUATE (30D SAFE)</span>
@@ -7206,16 +7238,16 @@ function renderRecommendedReorderList() {
         <div class="reorder-forecast-header">
             <div>
                 <h3 class="reorder-forecast-title">
-                    <span>📦</span> 30-Day Recommended Reorder Forecast
+                    <span>📦</span> ${T('x.reorder_forecast_title', '30-Day Recommended Reorder Forecast')}
                 </h3>
                 <p style="font-size: 0.78rem; color: var(--color-text-secondary); margin: 0.2rem 0 0 0;">
-                    Predictive inventory depletion model calculated from <strong>${next30Appts.length} scheduled session(s)</strong> in the next 30 days.
+                    ${TP('x.reorder_model_calculated_from', 'Predictive inventory depletion model calculated from <strong>{0} scheduled session(s)</strong> in the next 30 days.', next30Appts.length)}
                 </p>
             </div>
             <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
                 <span class="reorder-badge-urgent">🚨 ${reorderItems.length} PIGMENT${reorderItems.length > 1 ? 'S' : ''} AT RISK</span>
                 <button type="button" onclick="copyReorderManifestText()" class="coverage__export-btn" style="font-size: 0.75rem; padding: 4px 10px;">
-                    📋 Copy Reorder List
+                    ${T('x.copy_reorder_list', '📋 Copy Reorder List')}
                 </button>
             </div>
         </div>
@@ -7223,7 +7255,7 @@ function renderRecommendedReorderList() {
         <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.25); border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
             <div style="font-size: 1.3rem;">⚠️</div>
             <div style="font-size: 0.82rem; color: #fca5a5;">
-                <strong>Attention Artist:</strong> Based on upcoming bookings, ${reorderItems.length} ink line(s) will breach your ${minThreshold} mL safety threshold within 30 days. Place orders now to maintain continuous studio workflow.
+                <strong>${T('x.attention_artist_label', 'Attention Artist:')}</strong> ${TP('x.reorder_breach_warning', 'Based on upcoming bookings, {0} ink line(s) will breach your {1} mL safety threshold within 30 days. Place orders now to maintain continuous studio workflow.', reorderItems.length, minThreshold)}
             </div>
         </div>
 
@@ -7231,13 +7263,13 @@ function renderRecommendedReorderList() {
             <table class="reorder-forecast-table">
                 <thead>
                     <tr>
-                        <th>Pigment Bottle & Line</th>
-                        <th>Current Stock</th>
-                        <th>30D Projected Usage</th>
-                        <th>Projected Balance</th>
-                        <th>Est. Breach Date</th>
-                        <th>Recommended Order</th>
-                        <th style="text-align: right;">Quick Action</th>
+                        <th>${T('x.pigment_bottle_line_header', 'Pigment Bottle & Line')}</th>
+                        <th>${T('x.current_stock_header', 'Current Stock')}</th>
+                        <th>${T('x.30d_projected_usage_header', '30D Projected Usage')}</th>
+                        <th>${T('x.projected_balance_header', 'Projected Balance')}</th>
+                        <th>${T('x.est_breach_date_header', 'Est. Breach Date')}</th>
+                        <th>${T('x.recommended_order_header', 'Recommended Order')}</th>
+                        <th style="text-align: right;">${T('x.quick_action_header', 'Quick Action')}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -7264,24 +7296,24 @@ function renderRecommendedReorderList() {
                                 <span style="font-weight: 800; color: #ef4444;">
                                     ${item.projectedRemaining} mL
                                 </span>
-                                <div style="font-size: 0.68rem; color: #fca5a5;">(-${item.deficitBelowThreshold} mL buffer deficit)</div>
+                                <div style="font-size: 0.68rem; color: #fca5a5;">${TP('x.buffer_deficit_ml', '(-{0} mL buffer deficit)', item.deficitBelowThreshold)}</div>
                             </td>
                             <td>
                                 <div style="font-weight: 700; color: #fbbf24;">
-                                    In ~${item.daysUntilBreach} days
+                                    ${TP('x.in_days', 'In ~{0} days', item.daysUntilBreach)}
                                 </div>
                                 <div style="font-size: 0.68rem; color: var(--color-text-secondary);">${item.breachDateStr}</div>
                             </td>
                             <td>
                                 <div style="background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.3); border-radius: 4px; padding: 3px 6px; display: inline-block;">
                                     <span style="font-weight: 800; color: #34d399; font-size: 0.8rem;">
-                                        Order ${item.bottlesToOrder}x (${item.recommendedVolume} mL)
+                                        ${TP('x.order_bottles_ml', 'Order {0}x ({1} mL)', item.bottlesToOrder, item.recommendedVolume)}
                                     </span>
                                 </div>
                             </td>
                             <td style="text-align: right;">
                                 <button type="button" onclick="quickRestockFromReorder('${item.bottle.id}')" style="background: #10b981; color: #ffffff; border: none; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; cursor: pointer; white-space: nowrap;">
-                                    ⚡ 1-Click Restock
+                                    ${T('x.one_click_restock', '⚡ 1-Click Restock')}
                                 </button>
                             </td>
                         </tr>
@@ -7356,8 +7388,8 @@ function copyReorderManifestText() {
     navigator.clipboard.writeText(text).then(() => {
         showToast({
             type: 'success',
-            title: 'Manifest Copied',
-            message: '30-Day Recommended Reorder manifest copied to clipboard!',
+            title: T('x.manifest_copied_title', 'Manifest Copied'),
+            message: T('x.manifest_copied_message', '30-Day Recommended Reorder manifest copied to clipboard!'),
             duration: 3500
         });
     });
@@ -7522,9 +7554,9 @@ function renderTourStep() {
     const prevBtn = document.getElementById('tour-prev-btn');
     const nextBtn = document.getElementById('tour-next-btn');
 
-    if (titleEl) titleEl.textContent = step.title;
+    if (titleEl) titleEl.textContent = currentTourStep === 0 ? T('x.welcome_to_tattoo_coverage_session_planner', step.title) : step.title;
     if (badgeEl) badgeEl.textContent = step.badge;
-    if (bodyEl) bodyEl.innerHTML = step.body;
+    if (bodyEl) bodyEl.innerHTML = currentTourStep === 0 ? T('x.tour_welcome_body', step.body) : step.body;
 
     if (prevBtn) prevBtn.disabled = currentTourStep === 0;
     if (nextBtn) {
@@ -8036,7 +8068,7 @@ function renderEfficiencyDashboard() {
     // Render Table
     if (tableContainer) {
         if (totalSessions === 0) {
-            tableContainer.innerHTML = '<div style="font-size: 0.88rem; color: var(--color-text-secondary); text-align: center; padding: 1.5rem;">No historical session records found. Finish a session using the Timer widget or click "Load Sample Demo Sessions" above.</div>';
+            tableContainer.innerHTML = '<div style="font-size: 0.88rem; color: var(--color-text-secondary); text-align: center; padding: 1.5rem;">' + TP('x.no_history_records', 'No historical session records found. Finish a session using the Timer widget or click "{0}" above.', T('btn_load_sample_data', 'Load Sample Demo Sessions')) + '</div>';
         } else {
             tableContainer.innerHTML = `
                 <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;">
@@ -8169,11 +8201,11 @@ function renderEfficiencyCharts(logs) {
     const legendEl = document.getElementById('efficiency-accuracy-legend');
     if (legendEl) {
         legendEl.innerHTML = isPrint ? `
-            <span style="color: #111827; font-weight: 800;">● Baseline: ${accurateCount}</span> &nbsp;|&nbsp; 
-            <span style="color: #4b5563; font-weight: 800;">● Outlier: ${outlierCount}</span>
+            <span style="color: #111827; font-weight: 800;">${TP('x.baseline_count', '● Baseline: {0}', accurateCount)}</span> &nbsp;|&nbsp; 
+            <span style="color: #4b5563; font-weight: 800;">${TP('x.outlier_count', '● Outlier: {0}', outlierCount)}</span>
         ` : `
-            <span style="color: #10b981; font-weight: 700;">● Baseline: ${accurateCount}</span> &nbsp;|&nbsp; 
-            <span style="color: #ef4444; font-weight: 700;">● Outlier: ${outlierCount}</span>
+            <span style="color: #10b981; font-weight: 700;">${TP('x.baseline_count', '● Baseline: {0}', accurateCount)}</span> &nbsp;|&nbsp; 
+            <span style="color: #ef4444; font-weight: 700;">${TP('x.outlier_count', '● Outlier: {0}', outlierCount)}</span>
         `;
     }
 }

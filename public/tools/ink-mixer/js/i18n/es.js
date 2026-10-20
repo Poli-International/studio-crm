@@ -5,6 +5,23 @@
 
 if (typeof window !== "undefined" && window.registerLanguage) {
   window.registerLanguage("es", {
+    "aria": {
+      "breadcrumb": "Migas de pan",
+      "embedOptions": "Abrir opciones de inserción",
+      "darkModeToggle": "Alternar modo oscuro/claro",
+      "tabs": "Secciones de la herramienta Mezclador de tintas",
+      "targetGoalSwatch": "Muestra del color objetivo",
+      "predictedMatchSwatch": "Muestra de la coincidencia prevista",
+      "predictedMixedColor": "Color de tinta mezclada previsto",
+      "componentSwatch": "Muestra del componente",
+      "remove": "Quitar"
+    },
+    "verdict": {
+      "imperceptible": "Coincidencia imperceptible (alta fidelidad)",
+      "close": "Coincidencia cercana (perceptible al examinar)",
+      "noticeable": "Variación notable (sombreado utilizable)",
+      "significant": "Desplazamiento importante (fuera de la gama principal)"
+    },
   "breadcrumb": {
     "home": "Inicio",
     "tools": "Herramientas",
@@ -432,6 +449,7 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "headerTitle": "Asistente de tono complementario y neutralizante sustractivo"
   },
   "qrTransfer": {
+    "byteMeterEmpty": "0 bytes / 2,048 máx.",
     "modalTitle": "Transferencia de fórmulas offline mediante código QR",
     "modalSubtitle": "Escanea con la cámara de otro dispositivo para importar la fórmula sin acceso a internet ni cuentas en la nube.",
     "payloadSizeLabel": "Tamaño medido de datos:",
@@ -519,6 +537,13 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "tray12": "Bandeja completa de 12 caps"
   },
   "diluentFormulator": {
+    "mlDrops": "{ml} ml ({drops} gotas)",
+    "labelTitle": "Etiqueta del frasco de diluyente - Poli International",
+    "vehicleHeading": "VEHÍCULO DILUYENTE PARA SOMBREADO",
+    "meta": "Preparado: <strong>{date}</strong> | ID de lote: <strong>{batchId}</strong>",
+    "labelNotes": "Notas: {notes}",
+    "warning": "Poli International Tattoo Tools Suite • Conservar en un frasco exprimible limpio y bien cerrado. Practicar técnica estéril. Desechar dentro del plazo recomendado por el estudio.",
+    "popupBlocked": "Ventana emergente bloqueada. Permita las ventanas emergentes para imprimir las etiquetas de los frascos.",
     "title": "Formulador de Vehículo Diluyente Personalizado",
     "subtitle": "Formule soluciones vehiculares con agua estéril, hamamelis y glicerina USP para sombras suaves.",
     "sizeLabel": "Tamaño del Frasco",
@@ -729,6 +754,7 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "formulaArchive": "ARCHIVO-FÓRMULA"
   },
   "substitution": {
+    "inkCount": "({count} tintas)",
     "title": "🔄 Vista de Sustitución de Tintas de la Fórmula",
     "subtitle": "Elige una receta guardada, marca una tinta como agotada y selecciona un sustituto del inventario para verificar la diferencia de color CIEDE2000 (ΔE₀₀).",
     "selectRecipe": "Seleccionar Receta Guardada",

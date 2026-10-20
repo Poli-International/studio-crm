@@ -21,6 +21,7 @@ window.I18N_DICTIONARY.de = {
       "promptTitle": "Hydratations-Erinnerung",
       "promptBody": "Zeit für ein Glas Wasser! Zellregeneration und lymphatischer Pigmentabtransport erfordern optimale epidermale Hydratation – besonders kritisch bei Tattoo- und Piercing-Heilung.",
       "drankWaterBtn": "💧 +1 Glas erfassen",
+      "addCupBtn": "+ 1 Glas",
       "snoozeBtn": "Schlummern (30 Min.)",
       "title": "Tägliche dermale Hydratationsprüfung",
       "subtitle": "Verfolgen Sie die Wasseraufnahme, um epidermale Mitose, Schorf-Elastizität und lymphatische Pigmentverarbeitung zu unterstützen.",

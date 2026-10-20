@@ -5,6 +5,23 @@
 
 if (typeof window !== "undefined" && window.registerLanguage) {
   window.registerLanguage("fr", {
+    "aria": {
+      "breadcrumb": "Fil d'Ariane",
+      "embedOptions": "Ouvrir les options d'intégration",
+      "darkModeToggle": "Basculer le mode sombre/clair",
+      "tabs": "Sections de l'outil Mélangeur d'encres",
+      "targetGoalSwatch": "Échantillon de la couleur cible",
+      "predictedMatchSwatch": "Échantillon de la correspondance prévue",
+      "predictedMixedColor": "Couleur d'encre mélangée prévue",
+      "componentSwatch": "Échantillon du composant",
+      "remove": "Supprimer"
+    },
+    "verdict": {
+      "imperceptible": "Correspondance imperceptible (haute fidélité)",
+      "close": "Correspondance proche (perceptible à l'examen)",
+      "noticeable": "Variation notable (nuancier utilisable)",
+      "significant": "Décalage important (hors gamme principale)"
+    },
   "breadcrumb": {
     "home": "Accueil",
     "tools": "Outils",
@@ -432,6 +449,7 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "headerTitle": "Assistant de teinte complémentaire et neutralisante soustractive"
   },
   "qrTransfer": {
+    "byteMeterEmpty": "0 octets / 2,048 max",
     "modalTitle": "Transfert d'inventaire par QR Code",
     "modalSubtitle": "Transférez instantanément votre inventaire d'un poste à un autre sans passer par un serveur.",
     "payloadSizeLabel": "Taille mesurée des données :",
@@ -523,6 +541,13 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "tray12": "Grille complète 12 capsules"
   },
   "diluentFormulator": {
+    "mlDrops": "{ml} ml ({drops} gouttes)",
+    "labelTitle": "Étiquette de flacon de diluant - Poli International",
+    "vehicleHeading": "VÉHICULE DILUANT D'OMBRAGE",
+    "meta": "Préparé : <strong>{date}</strong> | Réf. lot : <strong>{batchId}</strong>",
+    "labelNotes": "Remarques : {notes}",
+    "warning": "Poli International Tattoo Tools Suite • Conserver dans un flacon souple propre et hermétiquement fermé. Appliquer une technique stérile. Jeter dans le délai recommandé par le studio.",
+    "popupBlocked": "Fenêtre bloquée. Autorisez les fenêtres pop-up pour imprimer les étiquettes de flacon.",
     "title": "Formulateur de Véhicule Diluant Personnalisé",
     "subtitle": "Formulez des véhicules à base d'eau stérile, d'hamamélis et de glycérine USP pour des fondus parfaits.",
     "sizeLabel": "Taille du Flacon",
@@ -729,6 +754,7 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "formulaArchive": "ARCHIVE-FORMULE"
   },
   "substitution": {
+    "inkCount": "({count} encres)",
     "title": "🔄 Vue de Substitution des Encres de Formule",
     "subtitle": "Choisissez une recette enregistrée, marquez une encre en rupture et sélectionnez un remplacement dans l'inventaire pour vérifier la différence de couleur CIEDE2000 (ΔE₀₀).",
     "selectRecipe": "Sélectionner la Recette Enregistrée",

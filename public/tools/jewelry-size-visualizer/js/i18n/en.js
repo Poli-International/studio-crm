@@ -4,6 +4,7 @@
  */
 window.i18nDictionaries = window.i18nDictionaries || {};
 window.i18nDictionaries['en'] = {
+  "industrial.diagramLabels": "ball  ←——hole-to-hole span——→  ball\n      [      your input     ]",
   "anatomy.browse.all": "View All Options",
   "anatomy.browse.btn": "Browse Compatible Jewelry",
   "anatomy.browseCompatible": "Browse Compatible Jewelry",

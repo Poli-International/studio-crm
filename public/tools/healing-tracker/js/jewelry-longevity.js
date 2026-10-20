@@ -62,13 +62,13 @@
       },
       bioflex: {
         nameKey: 'jewelryLongevity.materials.bioflex.name',
-        fallbackName: 'BioFlex(R) PP-R Copolymer (Medical Grade Polymer)',
+        fallbackName: 'BioFlex® body jewelry (PP-R random copolymer)',
         baseLifespanYears: 1, // Recommended 6-12 month replacement cycle for moving tissue/retainers
-        biocompatibility: 'USP Class VI & ISO 10993 Medical Grade',
+        biocompatibility: 'USP Class VI (resin), tested to ISO 10993-6',
         hardnessHv: 'Flexible polymer (Shore D ~72)',
         corrosionResistance: 'Immune to bodily fluids, oral acid, and sweat',
         finishRetention: 'Long-term wear; replace if scratched, bent or discoloured',
-        standards: ['ISO 10993', 'BioFlex PP-R random copolymer']
+        standards: ['USP Class VI (resin)', 'ISO 10993-6']
       }
     },
 
@@ -461,7 +461,7 @@
             (matKey === 'bioflex' ? (
               '<div class="jewelry-tip-item">' +
                 '<span class="jewelry-tip-icon">✨</span>' +
-                '<div class="jewelry-tip-text">' + t('jewelryLongevity.bioflexNote', 'BioFlex(R) body jewelry is medical-grade PP-R random copolymer, suitable for long-term wear. Inspect it at every check and replace it if it is scratched, bent or discoloured, as you would any jewelry.') + '</div>' +
+                '<div class="jewelry-tip-text">' + t('jewelryLongevity.bioflexNote', 'BioFlex® body jewelry is a PP-R random copolymer and is suitable for long-term wear. Inspect it at every check and replace it if it is scratched, bent or discoloured, as you would any jewelry.') + '</div>' +
               '</div>'
             ) : '') +
           '</div>' +

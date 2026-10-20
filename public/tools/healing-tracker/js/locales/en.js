@@ -504,9 +504,9 @@ window.I18N_DICTIONARY.en = {
       "sectionTitle": "3. Frequently Asked Questions & Clinical Facts",
       "sectionSubtitle": "Evidence-based clinical clarification on materials, lymph weeping, and long-term biocompatibility.",
       "q1Title": "Q: Is titanium the only safe material for initial piercing jewellery?",
-      "q1Answer": "Fact: No. While implant-grade titanium (such as ASTM F-136 or ISO 5832-3) is an exceptional, highly inert material widely recommended for fresh piercings, it is not the only safe option. Other established, biocompatible materials suitable for initial healing include implant-grade surgical steel (such as ASTM F-138), biocompatible niobium (ASTM B392), solid 14k or 18k nickel-free gold, and medical-grade PP-R random copolymer (BioFlex®). Safe initial jewellery requires proven biocompatibility, non-toxicity, and compliance with strict nickel release limits, rather than a single exclusive material.",
-      "q2Title": "Q: Is BioFlex only intended for short-term or temporary wear?",
-      "q2Answer": "Fact: No. BioFlex is medical-grade PP-R (polypropylene random copolymer), an injection-moulded biocompatible polymer engineered for long-term continuous wear as well as initial piercings. It is fully autoclave-steam sterilisable, biologically inert, and highly flexible to reduce tissue trauma.\n\nNote on material distinction: BioFlex is not PTFE (polytetrafluoroethylene). PTFE is a machined fluoropolymer rod material with distinct mechanical and threading properties; BioFlex is an injection-moulded monolithic PP-R copolymer. Neither material is restricted to short-term wear when used appropriately.",
+      "q1Answer": "Fact: No. While implant-grade titanium (such as ASTM F-136 or ISO 5832-3) is an exceptional, highly inert material widely recommended for fresh piercings, it is not the only safe option. Other established, biocompatible materials suitable for initial healing include implant-grade surgical steel (such as ASTM F-138), biocompatible niobium (ASTM B392), solid 14k or 18k nickel-free gold, and BioFlex® body jewelry, a PP-R random copolymer whose resin holds USP Class VI. Safe initial jewellery requires proven biocompatibility, non-toxicity, and compliance with strict nickel release limits, rather than a single exclusive material.",
+      "q2Title": "Q: Is BioFlex® body jewelry only intended for short-term or temporary wear?",
+      "q2Answer": "Fact: No. BioFlex® body jewelry is made from a PP-R (polypropylene random copolymer). The resin holds USP Class VI, and BioFlex® has been tested to ISO 10993-6. It is suitable for long-term wear as well as initial piercings, can be steam sterilised in an autoclave, and its flexibility reduces pressure on the tissue.\n\nNote on material distinction: BioFlex® is not PTFE (polytetrafluoroethylene). PTFE is a fluoropolymer machined from rod, with different mechanical and threading properties; BioFlex® is a moulded PP-R copolymer. Neither material is restricted to short-term wear when used appropriately.",
       "q3Title": "Q: My piercing has clear or whitish crusty fluid. Does this mean it is infected?",
       "q3Answer": "Fact: No. Clear, pale whitish, or straw-coloured fluid that dries into crust (\"crusties\") is lymphatic fluid (lymph) mixed with dead cellular matter. Lymph production is a completely normal, healthy component of the body's wound-healing response across all piercing stages. It is not pus and is not a sign of infection.\n\nSigns of actual infection differ distinctly: thick opaque yellow or dark green pus, hot radiating warmth, spreading dark redness, throbbing pain, or systemic fever."
     },
@@ -3367,7 +3367,7 @@ window.I18N_DICTIONARY.en = {
         "name": "18K Solid Gold (Nickel-Free / EN 1811 Compliant)"
       },
       "bioflex": {
-        "name": "BioFlex(R) PP-R Copolymer (Medical Grade Polymer)"
+        "name": "BioFlex® body jewelry (PP-R random copolymer)"
       }
     },
     "locations": {
@@ -3451,7 +3451,7 @@ window.I18N_DICTIONARY.en = {
     "fastenerTips": {
       "title": "Fastener Maintenance Protocol"
     },
-    "bioflexNote": "BioFlex(R) body jewelry is medical-grade PP-R random copolymer, suitable for long-term wear. Inspect it at every check and replace it if it is scratched, bent or discoloured, as you would any jewelry.",
+    "bioflexNote": "BioFlex® body jewelry is a PP-R random copolymer and is suitable for long-term wear. Inspect it at every check and replace it if it is scratched, bent or discoloured, as you would any jewelry.",
     "standardsFooter": "Cited Metallurgical & Biological Standards: ASTM F-136, ASTM F-67, EN 1811 (nickel-release compliant), ISO 10993. Established professional practice."
   }
 };

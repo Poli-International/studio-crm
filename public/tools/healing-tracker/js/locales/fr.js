@@ -504,9 +504,9 @@ window.I18N_DICTIONARY.fr = {
       "sectionTitle": "3. Foire aux questions et faits cliniques",
       "sectionSubtitle": "Éclairages cliniques fondés sur des données probantes concernant les matériaux, les écoulements lymphatiques et la biocompatibilité à long terme.",
       "q1Title": "Q : Le titane est-il le seul matériau sûr pour un premier bijou de pose ?",
-      "q1Answer": "Fait : Non. Si le titane de grade médical pour implant (comme la norme ASTM F-136 ou ISO 5832-3) est un matériau remarquable, hautement inerte et largement recommandé pour les piercings récents, il n'est pas la seule option sûre. D'autres matériaux biocompatibles reconnus pour une première cicatrisation comprennent l'acier chirurgical de grade implant (comme la norme ASTM F-138), le niobium biocompatible (ASTM B392), l'or massif 14k ou 18k sans nickel, ainsi que le copolymère statistique PP-R de grade médical (BioFlex®). Un premier bijou sûr requiert une biocompatibilité démontrée, une non-toxicité prouvée et le respect strict des limites de libération de nickel, plutôt qu'un unique matériau exclusif.",
-      "q2Title": "Q : Le BioFlex est-il réservé uniquement à un port temporaire ou de courte durée ?",
-      "q2Answer": "Fait : Non. BioFlex est un copolymère statistique de polypropylène (PP-R) de grade médical, un polymère biocompatible moulé par injection conçu pour un port continu à long terme ainsi que pour les piercings initiaux. Il est entièrement stérilisable à la vapeur par autoclave, biologiquement inerte et très flexible, ce qui réduit les traumatismes tissulaires.\n\nPrécision sur la distinction des matériaux : BioFlex n'est pas du PTFE (polytétrafluoroéthylène). Le PTFE est un fluoropolymère usiné à partir de barres extrudées, doté de propriétés mécaniques et de filetage distinctes ; BioFlex est un copolymère PP-R monolithique moulé par injection. Aucun de ces deux matériaux n'est restreint à un port temporaire lorsqu'il est employé correctement.",
+      "q1Answer": "Fait : Non. Bien que le titane de qualité implant (comme la norme ASTM F-136 ou ISO 5832-3) soit un matériau remarquable, hautement inerte et largement recommandé pour les piercings récents, il n'est pas la seule option sûre. D'autres matériaux biocompatibles reconnus pour une première cicatrisation comprennent l'acier chirurgical de grade implant (comme la norme ASTM F-138), le niobium biocompatible (ASTM B392), l'or massif 14k ou 18k sans nickel, ainsi que les bijoux de corps BioFlex®, un copolymère statistique PP-R dont la résine satisfait à l'USP Classe VI. Un premier bijou sûr requiert une biocompatibilité démontrée, une non-toxicité prouvée et le respect strict des limites de libération de nickel, plutôt qu'un unique matériau exclusif.",
+      "q2Title": "Q : Les bijoux de corps BioFlex® sont-ils réservés uniquement à un port temporaire ou de courte durée ?",
+      "q2Answer": "Fait : Non. Les bijoux de corps BioFlex® sont fabriqués à partir d'un PP-R (copolymère statistique de polypropylène). La résine satisfait à l'USP Classe VI, et BioFlex® a été testé selon la norme ISO 10993-6. Il convient à un port à long terme ainsi qu'aux piercings initiaux, peut être stérilisé à la vapeur en autoclave, et sa flexibilité réduit la pression exercée sur le tissu.\n\nPrécision sur la distinction des matériaux : BioFlex® n'est pas du PTFE (polytétrafluoroéthylène). Le PTFE est un fluoropolymère usiné à partir de barre, aux propriétés mécaniques et de filetage différentes ; BioFlex® est un copolymère PP-R moulé. Aucun de ces deux matériaux n'est restreint à un port de courte durée lorsqu'il est employé correctement.",
       "q3Title": "Q : Mon piercing présente un liquide croûteux clair ou blanchâtre. Cela signifie-t-il qu'il est infecté ?",
       "q3Answer": "Fait : Non. Un liquide clair, blanchâtre ou de couleur paille qui sèche en formant de petites croûtes est du liquide lymphatique (lymphe) mêlé de débris cellulaires. La sécrétion de lymphe est une composante normale et saine du processus de cicatrisation à tous les stades du piercing. Ce n'est pas du pus et cela ne traduit en rien une infection.\n\nLes signes d'une infection réelle sont très différents : pus opaque épais jaune ou vert foncé, chaleur vive irradiante, rougeur sombre qui s'étend, douleur pulsatile ou fièvre générale."
     },
@@ -1339,7 +1339,7 @@ window.I18N_DICTIONARY.fr = {
         "name": "Or Massif 18 Carats (Sans Nickel / Conforme EN 1811)"
       },
       "bioflex": {
-        "name": "Copolymère BioFlex(R) PP-R (Polymère Médical)"
+        "name": "Bijoux de corps BioFlex® (copolymère statistique PP-R)"
       }
     },
     "locations": {
@@ -1423,7 +1423,7 @@ window.I18N_DICTIONARY.fr = {
     "fastenerTips": {
       "title": "Protocole d'Entretien des Fermoirs"
     },
-    "bioflexNote": "Les bijoux BioFlex(R) sont en copolymère statistique PP-R de qualité médicale, adaptés au port à long terme. Inspectez-les à chaque contrôle et remplacez-les s'ils sont rayés, tordus ou décolorés, comme n'importe quel bijou.",
+    "bioflexNote": "Les bijoux de corps BioFlex® sont en copolymère statistique PP-R et conviennent au port à long terme. Inspectez-les à chaque contrôle et remplacez-les s'ils sont rayés, tordus ou décolorés, comme n'importe quel bijou.",
     "standardsFooter": "Normes citées : ASTM F-136, ASTM F-67, EN 1811 (libération de nickel), ISO 10993. Pratique professionnelle établie."
   }
 };

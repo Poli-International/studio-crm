@@ -579,9 +579,9 @@ window.I18N_DICTIONARY.nl = {
       "sectionTitle": "3. Veelgestelde vragen & klinische feiten",
       "sectionSubtitle": "Wetenschappelijk onderbouwde klinische toelichting op materialen, wondvocht en biocompatibiliteit op de lange termijn.",
       "q1Title": "Vraag: Is titanium het enige veilige materiaal voor een eerste piercingsieraad?",
-      "q1Answer": "Feit: Nee. Hoewel titanium van implantaatkwaliteit (zoals ASTM F-136 of ISO 5832-3) een uitzonderlijk, zeer inert materiaal is dat algemeen wordt aanbevolen voor verse piercings, is het niet de enige veilige optie. Andere beproefde, biocompatibele materialen die geschikt zijn voor de initiële genezing zijn onder meer chirurgisch staal van implantaatkwaliteit (zoals ASTM F-138), biocompatibel niobium (ASTM B392), massief 14k of 18k nikkelvrij goud en medische kwaliteit PP-R random copolymeer (BioFlex®). Veilige initiële sieraden vereisen bewezen biocompatibiliteit, niet-toxiciteit en naleving van strikte nikkelafgiftelimieten, in plaats van één enkel exclusief materiaal.",
-      "q2Title": "Vraag: Is BioFlex alleen bedoeld voor kortdurend of tijdelijk gebruik?",
-      "q2Answer": "Feit: Nee. BioFlex is PP-R (polypropyleen random copolymeer) van medische kwaliteit, een spuitgegoten biocompatibel polymeer dat is ontworpen voor langdurig continu dragen en voor initiële piercings. Het is volledig autoclaveerbaar met stoomsterilisatie, biologisch inert en zeer flexibel om weefseltrauma te verminderen.\n\nOpmerking over materiaalonderscheid: BioFlex is geen PTFE (polytetrafluoretheen). PTFE is een machinaal bewerkt fluorpolymeer staafmateriaal met afzonderlijke mechanische eigenschappen en schroefdraadgedrag; BioFlex is een spuitgegoten monolithisch PP-R copolymeer. Geen van beide materialen is beperkt tot kortdurend gebruik wanneer ze op de juiste wijze worden toegepast.",
+      "q1Answer": "Feit: Nee. Hoewel titanium van implantaatkwaliteit (zoals ASTM F-136 of ISO 5832-3) een uitzonderlijk, zeer inert materiaal is dat algemeen wordt aanbevolen voor verse piercings, is het niet de enige veilige optie. Andere beproefde, biocompatibele materialen die geschikt zijn voor de initiële genezing zijn onder meer chirurgisch staal van implantaatkwaliteit (zoals ASTM F-138), biocompatibel niobium (ASTM B392), massief 14k of 18k nikkelvrij goud en BioFlex®-lichaamssieraden, een PP-R random copolymeer waarvan de hars voldoet aan USP Klasse VI. Veilige initiële sieraden vereisen bewezen biocompatibiliteit, niet-toxiciteit en naleving van strikte nikkelafgiftelimieten, in plaats van één enkel exclusief materiaal.",
+      "q2Title": "Vraag: Is BioFlex®-lichaamssieraden alleen bedoeld voor kortdurend of tijdelijk gebruik?",
+      "q2Answer": "Feit: Nee. BioFlex®-lichaamssieraden zijn gemaakt van PP-R (polypropyleen random copolymeer). De hars voldoet aan USP Klasse VI en BioFlex® is getest volgens ISO 10993-6. Het is geschikt voor langdurig dragen en voor initiële piercings, kan met stoom in een autoclaaf worden gesteriliseerd, en de flexibiliteit vermindert de druk op het weefsel.\n\nOpmerking over materiaalonderscheid: BioFlex® is geen PTFE (polytetrafluoretheen). PTFE is een uit staven machinaal bewerkt fluorpolymeer met andere mechanische eigenschappen en schroefdraadeigenschappen; BioFlex® is een spuitgegoten PP-R copolymeer. Geen van beide materialen is beperkt tot kortdurend gebruik wanneer ze op de juiste wijze worden toegepast.",
       "q3Title": "Vraag: Uit mijn piercing komt helder of witachtig vocht dat korstjes vormt. Betekent dit dat hij ontstoken is?",
       "q3Answer": "Feit: Nee. Helder, bleekwit of strokleurig vocht dat opdroogt tot korstjes (\"crusties\") is lymfevocht (lymfe) vermengd met dode cellen. De aanmaak van lymfevocht is een volkomen normaal, gezond onderdeel van het wondgenezingsproces van het lichaam in alle fasen van een piercing. Het is geen pus en geen teken van infectie.\n\nSymptomen van een daadwerkelijke infectie verschillen duidelijk: dikke, ondoorzichtige gele of donkergroene pus, hete uitstralende warmte, zich uitbreidende donkere roodheid, kloppende pijn of systemische koorts."
     },
@@ -1339,7 +1339,7 @@ window.I18N_DICTIONARY.nl = {
         "name": "18K Massief Goud (Nikkelvrij / EN 1811 conform)"
       },
       "bioflex": {
-        "name": "BioFlex(R) PP-R Copolymeer (Medisch Polymeer)"
+        "name": "BioFlex®-lichaamssieraden (PP-R random copolymeer)"
       }
     },
     "locations": {
@@ -1423,7 +1423,7 @@ window.I18N_DICTIONARY.nl = {
     "fastenerTips": {
       "title": "Onderhoudsprotocol voor Sluitingen"
     },
-    "bioflexNote": "BioFlex(R)-lichaamssieraden zijn gemaakt van medisch PP-R random copolymeer en geschikt om langdurig te dragen. Controleer ze bij elke controle en vervang ze als ze gekrast, verbogen of verkleurd zijn, zoals elk sieraad.",
+    "bioflexNote": "BioFlex®-lichaamssieraden zijn gemaakt van een PP-R random copolymeer en zijn geschikt om langdurig te dragen. Controleer ze bij elke controle en vervang ze als ze gekrast, verbogen of verkleurd zijn, zoals elk sieraad.",
     "standardsFooter": "Geciteerde normen: ASTM F-136, ASTM F-67, EN 1811 (nikkelafgifte), ISO 10993. Gevestigde professionele praktijk."
   }
 };

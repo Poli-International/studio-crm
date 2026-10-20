@@ -504,9 +504,9 @@ window.I18N_DICTIONARY.pt = {
       "sectionTitle": "3. Perguntas frequentes e esclarecimentos clínicos",
       "sectionSubtitle": "Esclarecimentos clínicos baseados em evidência científica sobre materiais, exsudado linfático e biocompatibilidade a longo prazo.",
       "q1Title": "P: O titânio é o único material seguro para a joia de um piercing inicial?",
-      "q1Answer": "Facto: Não. Embora o titânio de grau implante (como ASTM F-136 ou ISO 5832-3) seja um material extraordinário, altamente inerte e amplamente recomendado para piercings recentes, não é de modo algum a única opção segura. Outros materiais comprovados e biocompatíveis adequados para a cicatrização inicial incluem o aço cirúrgico de grau implante (como ASTM F-138), o nióbio biocompatível (ASTM B392), o ouro maciço de 14k ou 18k sem níquel e o copolímero aleatório de PP-R de grau médico (BioFlex®). A segurança da joia inicial depende de biocompatibilidade documentada, ausência de toxicidade e conformidade com normas rigorosas de libertação de níquel, e não da restrição exclusiva a um único material.",
-      "q2Title": "P: O BioFlex foi concebido apenas para uso temporário ou a curto prazo?",
-      "q2Answer": "Facto: Não. BioFlex é PP-R (copolímero aleatório de polipropileno) de grau médico, um polímero biocompatível moldado por injeção projetado especificamente para uso contínuo a longo prazo, bem como para piercings iniciais. É totalmente esterilizável em autoclave, biologicamente inerte e altamente flexível, o que reduz os traumatismos tecidulares e as tensões mecânicas.\n\nNota de diferenciação de materiais: BioFlex não é PTFE (politetrafluoroetileno). O PTFE é um fluoropolímero maquinado a partir de barra extrudida com propriedades mecânicas e de rosca distintas; BioFlex é um copolímero de PP-R monolítico moldado por injeção. Nenhum dos dois materiais está limitado ao uso a curto prazo quando utilizado corretamente.",
+      "q1Answer": "Facto: Não. Embora o titânio de grau implante (como ASTM F-136 ou ISO 5832-3) seja um material extraordinário, altamente inerte e amplamente recomendado para piercings recentes, não é de modo algum a única opção segura. Outros materiais comprovados e biocompatíveis adequados para a cicatrização inicial incluem o aço cirúrgico de grau implante (como ASTM F-138), o nióbio biocompatível (ASTM B392), o ouro maciço de 14k ou 18k sem níquel e as joias corporais BioFlex®, um copolímero aleatório de PP-R cuja resina atende à USP Classe VI. A segurança da joia inicial depende de biocompatibilidade documentada, ausência de toxicidade e conformidade com normas rigorosas de libertação de níquel, e não da restrição exclusiva a um único material.",
+      "q2Title": "P: As joias corporais BioFlex® foram concebidas apenas para uso temporário ou a curto prazo?",
+      "q2Answer": "Facto: Não. As joias corporais BioFlex® são feitas de PP-R (copolímero aleatório de polipropileno). A resina atende à USP Classe VI, e o BioFlex® foi testado segundo a norma ISO 10993-6. É adequado ao uso contínuo de longa duração, bem como para piercings iniciais, pode ser esterilizado a vapor em autoclave, e a sua flexibilidade reduz a pressão sobre o tecido.\n\nNota de diferenciação de materiais: o BioFlex® não é PTFE (politetrafluoroetileno). O PTFE é um fluoropolímero usinado a partir de barra, com propriedades mecânicas e de rosca distintas; o BioFlex® é um copolímero de PP-R moldado por injeção. Nenhum dos dois materiais está limitado ao uso a curto prazo quando utilizado corretamente.",
       "q3Title": "P: O meu piercing produz um líquido claro ou esbranquiçado que seca formando crostas. Significa que está infetado?",
       "q3Answer": "Facto: Não. O fluido claro, esbranquiçado pálido ou de tom âmbar claro que seca formando crostas é exsudado linfático (linfa) misturado com resíduos celulares. A produção de linfa é uma resposta completamente normal, saudável e inerente ao processo fisiológico de cicatrização em todas as fases de um piercing. Não é pus e não é um sinal de infeção.\n\nOs sinais de uma verdadeira infeção são visivelmente distintos: pus espesso e opaco de cor amarela ou verde escura, calor intenso e irradiado, vermelhidão escura em expansão, dor latejante contínua ou febre."
     },
@@ -1339,7 +1339,7 @@ window.I18N_DICTIONARY.pt = {
         "name": "Ouro Maciço 18K (Sem Níquel / Conforme EN 1811)"
       },
       "bioflex": {
-        "name": "Copolímero BioFlex(R) PP-R (Polímero Médico)"
+        "name": "Joias corporais BioFlex® (copolímero aleatório PP-R)"
       }
     },
     "locations": {
@@ -1423,7 +1423,7 @@ window.I18N_DICTIONARY.pt = {
     "fastenerTips": {
       "title": "Protocolo de Manutenção de Fechos"
     },
-    "bioflexNote": "As joias BioFlex(R) são de copolímero aleatório PP-R de grau médico, adequadas ao uso a longo prazo. Verifique-as em cada revisão e substitua-as se estiverem riscadas, tortas ou descoloridas, como qualquer joia.",
+    "bioflexNote": "As joias corporais BioFlex® são de copolímero aleatório PP-R e são adequadas ao uso a longo prazo. Verifique-as em cada revisão e substitua-as se estiverem riscadas, tortas ou descoloridas, como qualquer joia.",
     "standardsFooter": "Normas citadas: ASTM F-136, ASTM F-67, EN 1811 (liberação de níquel), ISO 10993. Prática profissional estabelecida."
   }
 };

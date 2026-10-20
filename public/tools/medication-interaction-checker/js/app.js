@@ -2086,7 +2086,7 @@ const TRANSLATIONS = {
     geoFindStudio: '🎨 Studio in de buurt zoeken',
     geoFindDoctor: '🩺 Arts in de buurt zoeken',
     geoFindPharmacy: '💊 Dichtstbijzijnde apotheek',
-    geoFindHospital: '🏥 Dichtstbijzijnde ziekenhuis',
+    geoFindHospital: '🏥 Dichtstbijzijnd ziekenhuis',
     geoNote: 'Deze links openen Google Maps en zoeken in de taal van het land waar je bent. Dat levert in het buitenland veel meer op dan een Engelse zoekopdracht. Je locatie bereikt ons nooit: naar Google gaat alleen een zoekwoord. Wijzig hierboven de taal als de detectie ernaast zit.',
     emergHeadSub: 'Directe stap-voor-stap handelingsgidsen voor studiomedewerkers bij complicaties tijdens een sessie.',
     emergCallLabel: 'Bel eerst de hulpdiensten:',

@@ -211,7 +211,7 @@ window.i18nDictionaries['nl'] = {
   "common.healed": "Genezen (Verkleind)",
   "common.inches": "inch",
   "common.initialJewelry": "Initiële Sieraden",
-  "common.langTooltip": "Beschikbare talen: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL)",
+  "common.langTooltip": "Beschikbare talen: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL), ไทย (TH)",
   "common.language": "Taal",
   "common.length": "Lengte",
   "common.loading": "Laden...",

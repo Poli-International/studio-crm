@@ -702,7 +702,8 @@ const I18N_DICTIONARY = {
     "de": "Deutsch (DE)",
     "es": "Español (ES)",
     "nl": "Nederlands (NL)",
-    "pt": "Português (PT)"
+    "pt": "Português (PT)",
+    "th": "ไทย (TH)"
   },
   "printCard": {
     "brandLogo": "POLI INTERNATIONAL TATTOO TOOLS",
@@ -804,7 +805,7 @@ function registerLanguage(langCode, translations) {
 }
 
 function setLanguage(langCode) {
-  const supported = ["en", "fr", "it", "de", "es", "nl", "pt"];
+  const supported = ["en", "fr", "it", "de", "es", "nl", "pt", "th"];
   if (supported.includes(langCode)) {
     currentLanguage = langCode;
     try {
@@ -876,7 +877,7 @@ window.I18N_DICTIONARY = I18N_DICTIONARY;
 function initLanguage() {
   try {
     const saved = localStorage.getItem("poli_ink_mixer_lang");
-    if (saved && ["en", "fr", "it", "de", "es", "nl", "pt"].includes(saved)) {
+    if (saved && ["en", "fr", "it", "de", "es", "nl", "pt", "th"].includes(saved)) {
       currentLanguage = saved;
     }
   } catch (e) {}

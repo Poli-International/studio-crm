@@ -211,7 +211,7 @@ window.i18nDictionaries['en'] = {
   "common.healed": "Downsize Healed",
   "common.inches": "inches",
   "common.initialJewelry": "Initial Jewelry",
-  "common.langTooltip": "Available languages: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL)",
+  "common.langTooltip": "Available languages: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL), ไทย (TH)",
   "common.language": "Language",
   "common.length": "Length",
   "common.loading": "Loading...",

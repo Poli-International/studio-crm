@@ -211,7 +211,7 @@ window.i18nDictionaries['it'] = {
   "common.healed": "Guarito (Accorciato)",
   "common.inches": "pollici",
   "common.initialJewelry": "Gioiello Iniziale",
-  "common.langTooltip": "Lingue disponibili: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL)",
+  "common.langTooltip": "Lingue disponibili: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL), ไทย (TH)",
   "common.language": "Lingua",
   "common.length": "Lunghezza",
   "common.loading": "Caricamento...",

@@ -11,7 +11,7 @@
     'use strict';
 
     const STORAGE_KEY = 'autoclave_app_language';
-    const SUPPORTED_LANGUAGES = ['en', 'fr', 'it', 'de', 'es', 'nl', 'pt'];
+    const SUPPORTED_LANGUAGES = ['en', 'fr', 'it', 'de', 'es', 'nl', 'pt', 'th'];
     const DEFAULT_LANGUAGE = 'en';
 
     const dictionaries = {};

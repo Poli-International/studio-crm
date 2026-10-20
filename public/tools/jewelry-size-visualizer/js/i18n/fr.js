@@ -211,7 +211,7 @@ window.i18nDictionaries['fr'] = {
   "common.healed": "Cicatrisé (Réduit)",
   "common.inches": "pouces",
   "common.initialJewelry": "Bijou Initial",
-  "common.langTooltip": "Langues disponibles : English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL)",
+  "common.langTooltip": "Langues disponibles : English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL), ไทย (TH)",
   "common.language": "Langue",
   "common.length": "Longueur",
   "common.loading": "Chargement...",

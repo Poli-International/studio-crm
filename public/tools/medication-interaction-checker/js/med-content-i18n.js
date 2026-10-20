@@ -71,6 +71,11 @@ const MED_CONTENT_I18N = {
       piercing: "Risco elevado de tonturas, náuseas e desmaio durante ou após o procedimento. Problemas de consentimento informado em caso de consumo agudo de estupefacientes em dose alta.",
       wait: "Não compareça a uma sessão sob efeito agudo de analgésicos estupefacientes. Se faz tratamento analgésico prescrito de longa duração, peça a concordância do seu médico assistente.",
     },
+    th: {
+      tattoo: "มีผลต่อการรับรู้ความเจ็บปวดและการตอบสนองของระบบประสาทส่วนกลาง ทำให้ง่วงซึม ความดันโลหิตลดลง คลื่นไส้ และเพิ่มความเสี่ยงต่อภาวะ vasovagal syncope (การเป็นลม) สตูดิโอมืออาชีพส่วนใหญ่จะปฏิเสธลูกค้าที่อยู่ภายใต้ฤทธิ์ยาเสพติดให้โทษ",
+      piercing: "มีความเสี่ยงสูงต่ออาการเวียนศีรษะ คลื่นไส้ และเป็นลมระหว่างหรือหลังหัตถการ มีปัญหาเรื่องการให้ความยินยอมเมื่อรับยาเสพติดให้โทษขนาดสูงเฉียบพลัน",
+      wait: "อย่ามาในนัดขณะอยู่ภายใต้ฤทธิ์ยาแก้ปวดเสพติดให้โทษเฉียบพลัน หากใช้ยาแก้ปวดที่แพทย์สั่งเป็นระยะยาว ให้ขอความเห็นชอบจากแพทย์",
+    },
   },
   epinephrine_numbing: {
     fr: {
@@ -102,6 +107,11 @@ const MED_CONTENT_I18N = {
       tattoo: "A epinefrina provoca uma forte vasoconstrição (estreitamento dos vasos) que reduz a hemorragia. Quando o efeito passa, surge uma hiperemia reativa grave: dilatação vascular rápida, hemorragia intensa e exsudado plasmático abundante no momento exato em que a tinta fresca deveria fixar-se.",
       piercing: "Embranquece a pele durante a marcação, dificultando um alinhamento preciso. Após o procedimento surgem hemorragia de rebote e latejamento intenso.",
       wait: "Evite anestésicos vasoconstritores, salvo se administrados diretamente por um profissional de saúde ou aprovados pelo seu body piercer.",
+    },
+    th: {
+      tattoo: "เอพิเนฟรินทำให้หลอดเลือดหดตัวอย่างรุนแรง (หลอดเลือดแคบลง) ช่วยลดการเลือดออก เมื่อฤทธิ์หมดไป จะเกิด \"rebound hyperemia\" รุนแรง คือหลอดเลือดขยายตัวอย่างรวดเร็ว เลือดออกมาก และพลาสมาซึมออกมามาก ทำให้หมึกใหม่เกาะติดไม่ดี",
+      piercing: "ทำให้ผิวซีดระหว่างการทำเครื่องหมาย ทำให้จัดตำแหน่งได้ยาก เลือดกลับออกมาและปวดตุบๆ รุนแรงหลังหัตถการ",
+      wait: "หลีกเลี่ยงยาชาที่ทำให้หลอดเลือดหดตัว เว้นแต่จะให้โดยบุคลากรทางการแพทย์โดยตรงหรือศิลปินของคุณอนุมัติ",
     },
   },
   warfarin: {
@@ -135,6 +145,11 @@ const MED_CONTENT_I18N = {
       piercing: "Hemorragia excessiva durante o piercing e fase de cicatrização prolongada. Qualquer hematoma num piercing recente atrasa nitidamente a formação da fístula.",
       wait: "Fale de uma suspensão ou de uma terapia ponte com o seu médico assistente: nunca interrompa o tratamento sem parecer médico.",
     },
+    th: {
+      tattoo: "เลือดออกมากระหว่างการสัก น้ำเหลืองซึมนานทำให้หมึกเกาะไม่ดี ความเข้มของสีและความคมชัดของเส้นได้รับผลกระทบ สตูดิโอมืออาชีพส่วนใหญ่ต้องการการรับรองทางการแพทย์หรือปฏิเสธลูกค้าที่รับยาต้านการแข็งตัวของเลือดขนาดรักษาอยู่",
+      piercing: "เลือดออกมากระหว่างการเจาะและระยะหายนาน ก้อนเลือดคั่ง (hematoma) ที่บริเวณเจาะใหม่ทำให้การเกิดทางเจาะ (fistula) ช้าลงอย่างมาก",
+      wait: "ปรึกษาแพทย์ผู้สั่งยาเกี่ยวกับการหยุดยาหรือการสลับยาชั่วคราว อย่าหยุดยาโดยไม่ได้รับคำแนะนำทางการแพทย์",
+    },
   },
   apixaban: {
     fr: {
@@ -166,6 +181,11 @@ const MED_CONTENT_I18N = {
       tattoo: "Mesmo perfil hemorrágico da varfarina. Os anticoagulantes orais diretos (ACOD) têm uma semivida mais curta, mas os seus efeitos continuam relevantes em procedimentos que atravessam a pele.",
       piercing: "Hemorragias e equimoses aumentadas no local do piercing. A pressão da joia sobre um hematoma aumenta o risco de rejeição.",
       wait: "Semivida de 8 a 12 horas: fale de uma pausa acompanhada com o seu médico. Não interrompa o tratamento sem aval médico.",
+    },
+    th: {
+      tattoo: "มีแนวโน้มการเลือดออกเหมือนวาร์ฟาริน ยาต้านการแข็งตัวของเลือดชนิดรับประทานแบบออกฤทธิ์ตรง (DOACs) มีค่าครึ่งชีวิตสั้นกว่า แต่ผลยังคงมีนัยสำคัญระหว่างหัตถการที่ทำให้ผิวเป็นแผล",
+      piercing: "เลือดออกและช้ำที่บริเวณที่เจาะเพิ่มขึ้น แรงกดจากเครื่องประดับบนก้อนเลือดคั่งทำให้เสี่ยงต่อการปฏิเสธการเจาะมากขึ้น",
+      wait: "ครึ่งชีวิต 8–12 ชั่วโมง ปรึกษาแพทย์เกี่ยวกับการหยุดยาชั่วคราวภายใต้การดูแล อย่าหยุดยาโดยไม่ได้รับอนุมัติทางการแพทย์",
     },
   },
   clopidogrel: {
@@ -199,6 +219,11 @@ const MED_CONTENT_I18N = {
       piercing: "Risco hemorrágico importante. A formação de um hematoma no local do piercing é uma preocupação real.",
       wait: "Nunca suspenda o clopidogrel sem o aval do seu cardiologista: é prescrito para proteção cardíaca.",
     },
+    th: {
+      tattoo: "ยับยั้งเกล็ดเลือดอย่างมาก มีแนวโน้มการเลือดออกคล้ายแอสไพริน แต่มักใช้ร่วมกับยาต้านการแข็งตัวของเลือดอื่น สตูดิโอส่วนใหญ่จะขอการรับรองทางการแพทย์",
+      piercing: "มีความเสี่ยงเลือดออกสูง การเกิดก้อนเลือดคั่งที่บริเวณเจาะเป็นความกังวลจริง",
+      wait: "อย่าหยุดโคลพิโดเกรลโดยไม่ได้รับความเห็นชอบจากแพทย์โรคหัวใจ เพราะยาถูกสั่งเพื่อปกป้องหัวใจ",
+    },
   },
   heparin: {
     fr: {
@@ -230,6 +255,11 @@ const MED_CONTENT_I18N = {
       tattoo: "A heparina de baixo peso molecular injetável provoca uma anticoagulação forte. Risco hemorrágico muito elevado ao atravessar a pele. Uma tatuagem não urgente deve ser adiada.",
       piercing: "Risco hemorrágico elevado e formação de hematomas. Adie qualquer piercing não urgente durante um tratamento com HBPM em dose terapêutica.",
       wait: "Consulte o seu médico assistente. Nunca falhe uma dose sem supervisão médica.",
+    },
+    th: {
+      tattoo: "เฮปารินน้ำหนักโมเลกุลต่ำชนิดฉีดทำให้การแข็งตัวของเลือดถูกยับยั้งอย่างรุนแรง มีความเสี่ยงเลือดออกสูงมากระหว่างการเจาะผิวหนัง ควรเลื่อนการสักที่ไม่จำเป็นออกไป",
+      piercing: "มีความเสี่ยงเลือดออกสูงและเกิดก้อนเลือดคั่ง ควรเลื่อนการเจาะที่ไม่จำเป็นออกไปในขณะที่ใช้ LMWH ขนาดรักษา",
+      wait: "ปรึกษาแพทย์ผู้สั่งยา อย่าขาดยาโดยไม่มีการดูแลทางการแพทย์",
     },
   },
   isotretinoin: {
@@ -263,6 +293,11 @@ const MED_CONTENT_I18N = {
       piercing: "A pele é frágil e cicatriza lentamente. A formação da fístula fica muito comprometida. Risco elevado de cicatriz hipertrófica ou de rejeição do piercing.",
       wait: "Recomendação profissional habitual: aguardar 6 a 12 meses após o fim do tratamento com isotretinoína antes de qualquer tatuagem ou piercing novo.",
     },
+    th: {
+      tattoo: "Isotretinoin เปลี่ยนแปลงการผลัดเซลล์ของชั้นหนังกำพร้าอย่างพื้นฐาน ทำให้ผิวบางลง และยับยั้งการผลิตไขมัน (sebum) การสักระหว่างการรักษาทำให้เกิดแผลเป็นรุนแรง หมึกหลุดร่วงอย่างคาดเดาไม่ได้ และการหายของแผลบกพร่อง เป็นข้อห้ามสากล",
+      piercing: "ผิวบอบบางและหายช้า การเกิดทางเจาะ (fistula) ถูกขัดขวางอย่างรุนแรง มีความเสี่ยงสูงต่อแผลเป็นนูนหนาหรือการปฏิเสธการเจาะ",
+      wait: "แนวทางมาตรฐานของผู้ประกอบวิชาชีพ: รอ 6–12 เดือนหลังสิ้นสุดการรักษาด้วย isotretinoin ก่อนสักหรือเจาะใหม่",
+    },
   },
   methotrexate: {
     fr: {
@@ -294,6 +329,11 @@ const MED_CONTENT_I18N = {
       tattoo: "A imunossupressão acentuada torna imprevisível a cicatrização de uma tatuagem: risco infecioso aumentado, fase inflamatória alterada e possibilidade de infeção cutânea oportunista. Aval médico indispensável.",
       piercing: "Risco infecioso elevado. Os piercings não urgentes durante um tratamento com metotrexato são fortemente desaconselhados sem o aval do especialista.",
       wait: "Fale com o seu reumatologista ou dermatologista antes de marcar. Não interrompa o tratamento sem parecer médico.",
+    },
+    th: {
+      tattoo: "การกดภูมิคุ้มกันอย่างรุนแรงทำให้การหายของรอยสักคาดเดาไม่ได้ เพิ่มความเสี่ยงติดเชื้อ การอักเสบระยะแรกบกพร่อง และอาจเกิดการติดเชื้อผิวฉวยโอกาส ต้องได้รับการรับรองทางการแพทย์",
+      piercing: "มีความเสี่ยงติดเชื้อสูง ไม่แนะนำอย่างยิ่งให้เจาะที่ไม่จำเป็นระหว่างการรักษาด้วย methotrexate หากไม่ได้รับความเห็นชอบจากผู้เชี่ยวชาญ",
+      wait: "ปรึกษาแพทย์โรคข้อหรือแพทย์โรคผิวหนังก่อนจองนัด อย่าหยุดยาโดยไม่ได้รับคำแนะนำจากแพทย์",
     },
   },
   biologics: {
@@ -327,6 +367,11 @@ const MED_CONTENT_I18N = {
       piercing: "Risco elevado de infeção. Os piercings não urgentes devem ser discutidos com o seu médico assistente.",
       wait: "Não interromper o tratamento. Planear as sessões em função dos ciclos de injeção após consulta com um especialista.",
     },
+    th: {
+      tattoo: "ยาชีววัตถุ (biologics) กดวิถีภูมิคุ้มกันเฉพาะ (TNF-alpha, IL-17/23) ความเสี่ยงติดเชื้อแบคทีเรียที่ผิวและการปิดแผลที่ล่าช้าสูงขึ้นอย่างมีนัยสำคัญ",
+      piercing: "มีความเสี่ยงติดเชื้อสูง ควรหารือเรื่องการเจาะที่ไม่จำเป็นกับผู้เชี่ยวชาญที่สั่งยา",
+      wait: "อย่าขัดจังหวะการรักษาด้วยยาชีววัตถุ นัดรับบริการตามรอบการฉีดหลังปรึกษาผู้เชี่ยวชาญ",
+    },
   },
   ciclosporin: {
     fr: {
@@ -358,6 +403,11 @@ const MED_CONTENT_I18N = {
       tattoo: "Imunossupressores sistémicos usados em transplantação e em doenças autoimunes graves. Enfraquecer o sistema imunitário aumenta o risco infecioso em geral, e é essa a razão da prudência. O efeito na cicatrização de uma tatuagem não foi estudado: considere esta ficha uma precaução e não um dado medido.",
       piercing: "É preferível adiar qualquer piercing não urgente durante um tratamento ativo, até ao parecer do seu especialista. Trata-se de uma precaução, não de um risco medido.",
       wait: "Obtenha o aval da equipa de transplantação ou do seu especialista.",
+    },
+    th: {
+      tattoo: "ยากดภูมิคุ้มกันชนิดทั่วร่างกายที่ใช้ในการปลูกถ่ายอวัยวะและโรคภูมิต้านตนเองรุนแรง การกดระบบภูมิคุ้มกันโดยทั่วไปเพิ่มความเสี่ยงติดเชื้อ และนั่นคือเหตุผลที่ต้องระวังในที่นี้ ผลต่อการหายของรอยสักโดยเฉพาะยังไม่มีการศึกษา จึงควรถือรายการนี้เป็นข้อควรระวังเชิงป้องกัน ไม่ใช่หลักฐานที่ได้จากการวัดผล",
+      piercing: "ควรเลื่อนการเจาะที่ไม่จำเป็นระหว่างการรักษาที่กำลังดำเนินอยู่ จนกว่าผู้เชี่ยวชาญจะให้ความเห็น นี่คือข้อควรระวัง ไม่ใช่ความเสี่ยงที่วัดได้",
+      wait: "ขอการรับรองจากทีมปลูกถ่ายอวัยวะหรือผู้เชี่ยวชาญ",
     },
   },
   alcohol: {
@@ -391,6 +441,11 @@ const MED_CONTENT_I18N = {
       piercing: "Mais hemorragias e exsudado prolongado. A desidratação aumenta o risco de desmaio.",
       wait: "NÃO consuma álcool nas 24 a 48 horas antes ou depois do procedimento.",
     },
+    th: {
+      tattoo: "แอลกอฮอล์ส่งผลต่อการทำงานของเกล็ดเลือดและการแข็งตัวของเลือด กดการหลั่งวาโซเพรสซิน (ซึ่งทำให้ร่างกายขาดน้ำ) และอาจทำให้ระดับน้ำตาลในเลือดลดลง ข้อกังวลในทางปฏิบัติคือเลือดออกและการซึมมากขึ้นระหว่างการทำ และเกณฑ์ความเจ็บปวดที่ต่ำลงเมื่อเมาค้าง ผลต่อการคงอยู่ของหมึกยังไม่มีการศึกษา จึงควรระวังข้อกล่าวอ้างว่าหมึก 'ถูกดันออก'",
+      piercing: "เลือดออกมากขึ้นและการซึมที่นานขึ้น การขาดน้ำเพิ่มความเสี่ยงเป็นลม",
+      wait: "ห้ามดื่มแอลกอฮอล์ 24–48 ชั่วโมงก่อนหรือหลังหัตถการ",
+    },
   },
   recreational_stimulants: {
     fr: {
@@ -422,6 +477,11 @@ const MED_CONTENT_I18N = {
       tattoo: "Os estimulantes aumentam a atividade simpática: tensão arterial elevada, taquicardia e tremores estão bem documentados. Isso dificulta ficar imóvel durante uma sessão e aumenta o que está em jogo se algo correr mal. Não se sabe se os estimulantes alteram o resultado de uma tatuagem: aqui a prudência diz respeito ao seu estado cardiovascular durante o procedimento, não à tinta.",
       piercing: "Os body piercers recusam normalmente trabalhar numa pessoa sob efeito. Ficar imóvel e dar um consentimento informado contam ambos, e nenhum deles é fiável nesse estado.",
       wait: "Não se submeta a qualquer modificação corporal com estimulantes recreativos ativos no organismo.",
+    },
+    th: {
+      tattoo: "ยากระตุ้นเพิ่มกิจกรรมของระบบประสาทซิมพาเทติก ความดันโลหิตสูง หัวใจเต้นเร็ว และอาการสั่นเป็นที่ทราบกันดี ทำให้ผู้รับบริการไม่เหมาะที่จะนั่งนิ่งตลอดการทำ และเพิ่มความเสี่ยงหากเกิดสิ่งผิดปกติ ยังไม่มีการศึกษาว่ายากระตุ้นเปลี่ยนผลลัพธ์ของรอยสักหรือไม่ ดังนั้นข้อกังวลที่นี่คือสภาวะหัวใจและหลอดเลือดของคุณระหว่างหัตถการ ไม่ใช่หมึก",
+      piercing: "ผู้เจาะโดยทั่วไปจะปฏิเสธการทำให้ผู้ที่อยู่ภายใต้ฤทธิ์ การนั่งนิ่งและการให้ความยินยอมโดยได้รับข้อมูลมีความสำคัญทั้งคู่ และทั้งสองอย่างไม่น่าเชื่อถือในสภาวะนั้น",
+      wait: "อย่าเข้ารับหัตถการดัดแปลงร่างกายใดๆ ขณะที่ยากระตุ้นเพื่อการพักผ่อนยังอยู่ในร่างกายของคุณ",
     },
   },
   ibuprofen: {
@@ -455,6 +515,11 @@ const MED_CONTENT_I18N = {
       piercing: "Aumenta a hemorragia local e as equimoses iniciais no local do piercing. Não é uma contraindicação absoluta, mas pode prolongar o exsudado durante a perfuração dos tecidos.",
       wait: "Evite AINE não prescritos nas 24 a 48 horas anteriores a uma sessão. O paracetamol é uma alternativa mais segura se o seu médico concordar.",
     },
+    th: {
+      tattoo: "ยับยั้งเอนไซม์ COX-1/2 ทำให้การรวมตัวของเกล็ดเลือดลดลง การรับประทานไอบูโพรเฟนก่อนนัดทำให้เลือดออกระหว่างหัตถการและน้ำเหลือง (พลาสมา) ซึมมากขึ้น และสะเก็ดที่ตามมาจะหนาขึ้น ยังไม่มีการศึกษาว่าสิ่งนี้ส่งผลต่อการคงอยู่ของหมึกโดยตรงหรือไม่ พาราเซตามอล/อะเซตามิโนเฟนเป็นตัวเลือกที่ดีกว่าก่อนนัด",
+      piercing: "เพิ่มการเลือดออกเฉพาะที่และรอยช้ำในระยะแรกบริเวณที่เจาะ ไม่ใช่ข้อห้ามเด็ดขาด แต่อาจทำให้น้ำเหลืองซึมนานระหว่างการเจาะเนื้อเยื่อ",
+      wait: "หลีกเลี่ยงการรับประทาน NSAIDs ที่ไม่ได้รับการสั่งจากแพทย์ 24–48 ชั่วโมงก่อนนัด พาราเซตามอลเป็นทางเลือกที่ปลอดภัยกว่าหากแพทย์ของคุณอนุมัติ",
+    },
   },
   naproxen: {
     fr: {
@@ -486,6 +551,11 @@ const MED_CONTENT_I18N = {
       tattoo: "AINE de ação prolongada com um efeito antiagregante importante que dura até 24 a 36 horas. Risco acrescido de hemorragia prolongada e formação de crostas. Tal como com outros AINE, o efeito na fixação da tinta não foi estudado.",
       piercing: "Hemorragia aumentada e formação de hematomas localizados em piercings recentes.",
       wait: "Evite-o 48 horas antes do procedimento se o tomar ocasionalmente para a dor. Se for prescrito, consulte o seu médico antes de suspender.",
+    },
+    th: {
+      tattoo: "NSAID ที่ออกฤทธิ์นานกว่า มีผลยับยั้งเกล็ดเลือดอย่างมาก อยู่ได้นานถึง 24–36 ชั่วโมง เพิ่มความเสี่ยงเลือดออกนานและการเกิดสะเก็ด เช่นเดียวกับ NSAIDs ชนิดอื่น ผลต่อการคงอยู่ของหมึกโดยตรงยังไม่มีการศึกษา",
+      piercing: "เลือดออกมากขึ้นและเกิดก้อนเลือดคั่งเฉพาะที่บริเวณที่เจาะใหม่",
+      wait: "หลีกเลี่ยง 48 ชั่วโมงก่อนหัตถการหากรับประทานเพื่อแก้ปวดเป็นครั้งคราว หากแพทย์สั่งยานี้ ให้ปรึกษาแพทย์ก่อนหยุดยา",
     },
   },
   paracetamol: {
@@ -519,6 +589,11 @@ const MED_CONTENT_I18N = {
       piercing: "Analgésico de venda livre ideal para o inchaço ou a dor após um piercing, pois não favorece hemorragia nem equimoses.",
       wait: "Não é necessária qualquer espera antes do procedimento. Respeite as doses diárias recomendadas.",
     },
+    th: {
+      tattoo: "ไม่ยับยั้งการทำงานของเกล็ดเลือดและไม่ทำให้เลือดออกมากขึ้น เป็นยาแก้ปวดที่ปลอดภัยและเป็นตัวเลือกแรกสำหรับความตึงเครียดทางใจก่อนหัตถการหรืออาการเจ็บหลังหัตถการ เมื่อรับประทานในขนาดการรักษา",
+      piercing: "ยาแก้ปวดที่หาซื้อได้เองซึ่งเหมาะที่สุดสำหรับอาการบวมหรือเจ็บหลังการเจาะ เพราะไม่ทำให้เลือดออกหรือช้ำมากขึ้น",
+      wait: "ไม่ต้องหยุดยาก่อนหัตถการ ใช้ให้อยู่ในขนาดต่อวันที่แนะนำ",
+    },
   },
   lidocaine_cream: {
     fr: {
@@ -550,6 +625,11 @@ const MED_CONTENT_I18N = {
       tattoo: "Altera a textura da pele provocando edema localizado e uma densidade esponjosa e borrachuda. Pode dificultar uma penetração limpa da agulha e a precisão das linhas. Quando o creme deixa de atuar a meio da sessão, pode surgir um choque de dor súbito. Os cremes muito concentrados não regulamentados apresentam risco de toxicidade.",
       piercing: "Os cremes anestésicos apenas adormecem a epiderme superficial, não a cartilagem nem o tecido subcutâneo atravessados. Podem provocar embranquecimento e inchaço localizados.",
       wait: "Informe sempre o seu profissional antes de aplicar um creme anestésico. Muitos estúdios proíbem a aplicação pelo cliente, pelo risco de queimadura química e de alteração da pele.",
+    },
+    th: {
+      tattoo: "เปลี่ยนเนื้อผิวโดยทำให้เกิดอาการบวมเฉพาะที่ (edema) และผิวนุ่มยืดหยุ่นคล้ายยาง อาจขัดขวางการแทงเข็มที่สะอาดและความแม่นยำของเส้น เมื่อครีมหมดฤทธิ์ระหว่างนัด อาจเกิดอาการปวดรุนแรงฉับพลัน ครีมความเข้มข้นสูงที่ไม่ได้รับการควบคุมมีความเสี่ยงเป็นพิษ",
+      piercing: "ครีมทาเฉพาะที่ทำให้ชาเฉพาะชั้นผิวบนสุดเท่านั้น ไม่ได้ชาถึงกระดูกอ่อนหรือเนื้อเยื่อใต้ผิวที่ถูกเจาะ อาจทำให้ผิวเฉพาะที่ซีดและบวม",
+      wait: "แจ้งศิลปินของคุณทุกครั้งก่อนทาครีมชา สตูดิโอหลายแห่งห้ามลูกค้าทาครีมชาเอง เนื่องจากความเสี่ยงต่อการไหม้จากสารเคมีและการเปลี่ยนเนื้อผิว",
     },
   },
   aspirin: {
@@ -583,6 +663,11 @@ const MED_CONTENT_I18N = {
       piercing: "Mais equimoses e pequenas hemorragias. Em dose baixa não costuma ser contraindicação, mas informe o seu body piercer.",
       wait: "A aspirina inibe as plaquetas de forma irreversível: o efeito persiste 7 a 10 dias após a última dose. Avalie com o seu médico uma pausa temporária, se se justificar.",
     },
+    th: {
+      tattoo: "แอสไพรินขนาดต่ำทำให้เลือดออกระหว่างหัตถการเพิ่มขึ้นและช้ำเล็กน้อย โดยทั่วไปไม่ได้ขัดขวางการสัก แต่ควรแจ้งศิลปินให้ปรับเทคนิคการเช็ด",
+      piercing: "รอยช้ำและเลือดออกเล็กน้อยเพิ่มขึ้น ไม่ใช่ข้อห้ามเด็ดขาดโดยปกติในขนาดต่ำ แต่ควรแจ้งผู้เจาะ",
+      wait: "แอสไพรินยับยั้งเกล็ดเลือดอย่างถาวร ผลอยู่นาน 7–10 วันหลังโดสสุดท้าย หากเหมาะสม ให้ปรึกษาแพทย์เรื่องการหยุดยาชั่วคราว",
+    },
   },
   tretinoin: {
     fr: {
@@ -614,6 +699,11 @@ const MED_CONTENT_I18N = {
       tattoo: "Os retinoides tópicos aplicados na zona a tatuar adelgaçam as camadas superiores da pele e aumentam a sensibilidade. Suspenda a aplicação na zona 2 a 4 semanas antes. A absorção sistémica por via cutânea é mínima.",
       piercing: "Evite aplicar retinoides tópicos sobre um piercing recente ou perto dele durante a cicatrização, para prevenir irritação química.",
       wait: "Suspenda a tretinoína tópica na zona específica 2 a 4 semanas antes da tatuagem.",
+    },
+    th: {
+      tattoo: "เรตินอยด์ชนิดทาที่บริเวณที่สักทำให้ชั้นผิวด้านบนบางลงและไวต่อการระคายเคืองมากขึ้น ให้หยุดทาที่บริเวณเป้าหมาย 2–4 สัปดาห์ก่อนนัด การดูดซึมเข้าสู่ร่างกายจากการทาแทบไม่มี",
+      piercing: "หลีกเลี่ยงการทาเรตินอยด์ชนิดทาบนหรือใกล้บริเวณที่เจาะใหม่ระหว่างการหาย เพื่อป้องกันการระคายเคืองจากสารเคมี",
+      wait: "หยุดการทาเรตินอยด์ชนิดทาที่บริเวณนั้น 2–4 สัปดาห์ก่อนสัก",
     },
   },
   adapalene: {
@@ -647,6 +737,11 @@ const MED_CONTENT_I18N = {
       piercing: "Mantenha-o afastado de piercings recentes para prevenir irritação grave ou atraso da epitelização.",
       wait: "Suspenda a aplicação tópica na zona 2 semanas antes do procedimento.",
     },
+    th: {
+      tattoo: "เรตินอยด์ชนิดทาที่ทำให้ผิวบริเวณนั้นไวต่อการระคายและลอกเป็นขุย ให้หยุดทาที่บริเวณเป้าหมายก่อนสัก",
+      piercing: "ควรห่างจากบริเวณที่เจาะใหม่เพื่อป้องกันการระคายเคืองรุนแรงหรือการสร้างเยื่อบุผิวช้า",
+      wait: "หยุดทาที่บริเวณเป้าหมาย 2 สัปดาห์ก่อนหัตถการ",
+    },
   },
   tetracyclines: {
     fr: {
@@ -678,6 +773,11 @@ const MED_CONTENT_I18N = {
       tattoo: "Provocam uma fotossensibilidade importante: a exposição aos UV de uma tatuagem recente durante o tratamento pode desencadear reações alérgicas dolorosas e desvanecimento da tinta. A minociclina pode, raramente, causar uma pigmentação cutânea cinzento-azulada.",
       piercing: "Nenhuma interação direta com a cicatrização, mas proteja do sol o piercing recente.",
       wait: "Evite a exposição ao sol ou aos UV na zona enquanto tomar tetraciclinas.",
+    },
+    th: {
+      tattoo: "ทำให้ไวต่อแสงอย่างมาก การโดนรังสียูวีบนรอยสักใหม่ระหว่างการรักษาอาจกระตุ้นให้เกิดปฏิกิริยาภูมิแพ้ที่เจ็บปวดและหมึกซีดจาง มิโนไซคลินอาจทำให้ผิวมีสีเทาอมฟ้าได้น้อยมาก",
+      piercing: "ไม่มีปฏิกิริยาโดยตรงต่อการหาย แต่ควรปกป้องบริเวณที่เจาะใหม่จากแสงแดด",
+      wait: "หลีกเลี่ยงแสงแดดและรังสียูวีบริเวณเป้าหมายขณะรับประทานเตตราไซคลิน",
     },
   },
   antivirals_herpes: {
@@ -711,6 +811,11 @@ const MED_CONTENT_I18N = {
       piercing: "Os piercings no lábio ou na boca podem desencadear surtos de herpes em pessoas portadoras do HSV. Um antiviral preventivo evita lesões herpéticas dolorosas num piercing recente.",
       wait: "Inicie o antiviral preventivo 2 dias antes de uma tatuagem nos lábios ou de um piercing oral, conforme indicação do seu médico.",
     },
+    th: {
+      tattoo: "สำคัญสำหรับการสักริมฝีปากและการสักถาวรเพื่อความงาม: การทำลิปบลัชถาวรอาจกระตุ้นให้เริมที่ปาก (HSV-1) กำเริบอย่างรุนแรง แนะนำอย่างยิ่งให้รับยาต้านไวรัสป้องกันก่อนการสักริมฝีปาก",
+      piercing: "การเจาะริมฝีปากหรือในช่องปากอาจกระตุ้นให้เริมที่ปากกำเริบในลูกค้าที่มีเชื้อ HSV การรับยาต้านไวรัสป้องกันช่วยป้องกันแผลเริมที่เจ็บปวดบนการเจาะใหม่",
+      wait: "เริ่มยาต้านไวรัสป้องกัน 2 วันก่อนการสักริมฝีปากหรือการเจาะในช่องปาก ตามที่แพทย์สั่ง",
+    },
   },
   xanax: {
     fr: {
@@ -742,6 +847,11 @@ const MED_CONTENT_I18N = {
       tattoo: "Provoca depressão do sistema nervoso central, sonolência e descida da tensão arterial. Associado à dor ou à ansiedade, pode desencadear quedas bruscas de tensão ou desmaios. Informe o seu tatuador.",
       piercing: "Aumenta o risco de síncope vasovagal (desmaio) após o procedimento. Fique sentado ou deitado durante 15 minutos após o piercing.",
       wait: "Informe o profissional se o tomou antes da sessão por ansiedade. Não conduza para ir à consulta nem para regressar se estiver sedado.",
+    },
+    th: {
+      tattoo: "ทำให้ระบบประสาทส่วนกลางถูกกด ง่วงซึม และความดันโลหิตลดลง เมื่อรวมกับความเจ็บปวดหรือความวิตกกังวล อาจทำให้ความดันโลหิตลดลงฉับพลันหรือเป็นลมได้ แจ้งศิลปินของคุณ",
+      piercing: "เพิ่มความเสี่ยงต่อภาวะ vasovagal syncope (การเป็นลม) หลังหัตถการ ควรนั่งหรือเอนตัวไว้ 15 นาทีหลังการเจาะ",
+      wait: "แจ้งศิลปินหากรับประทานก่อนหัตถการเพื่อคลายความวิตกกังวล อย่าขับรถมาหรือกลับจากนัดหมายหากมีอาการง่วงซึม",
     },
   },
   propranolol: {
@@ -775,6 +885,11 @@ const MED_CONTENT_I18N = {
       piercing: "Maior risco de desmaio durante a inserção rápida da agulha. O body piercer deve realizar o procedimento com o cliente deitado.",
       wait: "Nunca interrompa medicação cardíaca prescrita. Informe o seu tatuador ou body piercer para que adapte a sua posição.",
     },
+    th: {
+      tattoo: "ลดอัตราการเต้นของหัวใจและลดการตอบสนองต่อความเครียดด้วยเอพิเนฟรินตามปกติ ระหว่างการทำนานหรือเมื่อเจ็บปวด ลูกค้ามีความเสี่ยงสูงขึ้นต่อความดันโลหิตต่ำเมื่อเปลี่ยนท่าและการเป็นลมจาก vasovagal",
+      piercing: "มีความเสี่ยงเป็นลมสูงขึ้นระหว่างการสอดเข็มอย่างรวดเร็ว ผู้เจาะควรทำหัตถการขณะที่ลูกค้านอนอยู่",
+      wait: "อย่าข้ามยาหัวใจที่แพทย์สั่ง แจ้งศิลปิน/ผู้เจาะเพื่อให้จัดท่านั่งได้เหมาะสม",
+    },
   },
   hydroxyzine: {
     fr: {
@@ -806,6 +921,11 @@ const MED_CONTENT_I18N = {
       tattoo: "Usado para ansiedade ligeira ou urticária. Provoca sonolência ligeira e boca seca. Interação direta mínima com a tatuagem.",
       piercing: "Efeito sedativo ligeiro. Mantenha-se hidratado durante a sessão.",
       wait: "Não é necessário qualquer período de suspensão.",
+    },
+    th: {
+      tattoo: "ใช้สำหรับความวิตกกังวลเล็กน้อยหรือลมพิษ ทำให้ง่วงเล็กน้อยและปากแห้ง มีปฏิกิริยาโดยตรงกับการสักน้อยมาก",
+      piercing: "มีผลทำให้สงบเล็กน้อย ดื่มน้ำให้เพียงพอระหว่างการรับบริการ",
+      wait: "ไม่ต้องหยุดยา",
     },
   },
   birth_control: {
@@ -839,6 +959,11 @@ const MED_CONTENT_I18N = {
       piercing: "Progestativos ou estrogénios podem causar ligeira retenção de líquidos ou maior sensibilidade ao inchaço localizado.",
       wait: "Não é necessária qualquer alteração antes do procedimento.",
     },
+    th: {
+      tattoo: "ยาคุมกำเนิดที่มีเอสโตรเจนเพิ่มความเสี่ยงต่อการมีเม็ดสีผิวเข้มขึ้นพื้นฐาน (ฝ้า) เล็กน้อยเมื่อโดนแดดระหว่างการหาย มีผลต่อการสักน้อยมาก",
+      piercing: "โปรเจสตินหรือเอสโตรเจนอาจทำให้คั่งน้ำเล็กน้อยหรือไวต่อการบวมเฉพาะที่",
+      wait: "ไม่จำเป็นต้องเปลี่ยนยาก่อนหัตถการ",
+    },
   },
   hrt_testosterone: {
     fr: {
@@ -870,6 +995,11 @@ const MED_CONTENT_I18N = {
       tattoo: "A terapia com testosterona pode aumentar a oleosidade e a espessura da pele e o hematócrito (densidade dos glóbulos vermelhos), o que pode tornar o sangue ligeiramente mais espesso durante a sessão. Em geral é segura para tatuar.",
       piercing: "A testosterona pode espessar a pele e aumentar a produção de sebo junto a piercings faciais ou corporais. Mantenha uma boa higiene.",
       wait: "Não é necessária qualquer alteração antes do procedimento. Mantenha as doses habituais da sua terapia hormonal.",
+    },
+    th: {
+      tattoo: "การบำบัดด้วยเทสโทสเตอโรนอาจเพิ่มความมันและความหนาของผิว และเพิ่มฮีมาโทคริต (ความหนาแน่นของเม็ดเลือดแดง) ทำให้เลือดข้นขึ้นเล็กน้อยระหว่างการทำ โดยทั่วไปปลอดภัยสำหรับการสัก",
+      piercing: "เทสโทสเตอโรนอาจทำให้ผิวหนาขึ้นและไขมันผิวเพิ่มขึ้นใกล้บริเวณที่เจาะบนใบหน้าหรือร่างกาย รักษาความสะอาดให้ดี",
+      wait: "ไม่จำเป็นต้องเปลี่ยนยาก่อนหัตถการ ให้ใช้ HRT ตามขนาดปกติที่แพทย์กำหนดต่อไป",
     },
   },
   hrt_estrogen: {
@@ -903,6 +1033,11 @@ const MED_CONTENT_I18N = {
       piercing: "A espironolactona aumenta a diurese e desidrata ligeiramente os tecidos: beba mais líquidos antes do piercing.",
       wait: "Não é necessária qualquer alteração antes do procedimento. Mantenha-se bem hidratado.",
     },
+    th: {
+      tattoo: "การบำบัดด้วยเอสโตรเจนทำให้ชั้นหนังแท้บางลงเล็กน้อยตามเวลาและทำให้ผิวนุ่มขึ้น สไปโรโนแลกโทนมีฤทธิ์ขับปัสสาวะและลดความดันโลหิตเล็กน้อย จึงควรดื่มน้ำให้เพียงพอ",
+      piercing: "สไปโรโนแลกโทนทำให้ปัสสาวะบ่อยขึ้นและทำให้เนื้อเยื่อขาดน้ำเล็กน้อย ควรดื่มน้ำเพิ่มก่อนการเจาะ",
+      wait: "ไม่จำเป็นต้องเปลี่ยนยาก่อนหัตถการ ดื่มน้ำให้เพียงพอ",
+    },
   },
   adhd_stimulants: {
     fr: {
@@ -934,6 +1069,11 @@ const MED_CONTENT_I18N = {
       tattoo: "Os estimulantes aumentam a frequência cardíaca, a tensão arterial e a ativação do sistema nervoso central. Podem deixar a pessoa agitada, reduzir a tolerância à dor em sessões longas e agravar a desidratação. A glicemia desce mais depressa.",
       piercing: "Maior tensão nervosa e rigidez muscular durante o piercing. Maior risco de tontura repentina quando a adrenalina desce.",
       wait: "Faça uma refeição completa e beba muita água antes da marcação. Informe o seu profissional.",
+    },
+    th: {
+      tattoo: "ยากระตุ้นเพิ่มอัตราการเต้นของหัวใจ ความดันโลหิต และการกระตุ้นระบบประสาทส่วนกลาง อาจทำให้ลูกค้ากระสับกระส่าย ลดความทนต่อความเจ็บปวดระหว่างการทำนาน และเพิ่มภาวะขาดน้ำ ระดับน้ำตาลในเลือดลดลงเร็วขึ้น",
+      piercing: "ความตึงเครียดทางใจและกล้ามเนื้อเกร็งสูงขึ้นระหว่างการเจาะ มีความเสี่ยงเวียนศีรษะฉับพลันเพิ่มขึ้นเมื่อระดับอะดรีนาลินลดลง",
+      wait: "ตรวจสอบว่าคุณทานอาหารมื้อหนักและดื่มน้ำมากเพียงพอก่อนนัด แจ้งศิลปินของคุณ",
     },
   },
   cannabis: {
@@ -967,6 +1107,11 @@ const MED_CONTENT_I18N = {
       piercing: "Aumenta o risco de síncope vasovagal ou de pânico repentino durante a inserção da joia. Altera a perceção da dor de forma imprevisível.",
       wait: "Evite fumar ou consumir comestíveis com THC nas 12 a 24 horas anteriores à marcação.",
     },
+    th: {
+      tattoo: "THC เพิ่มอัตราการเต้นของหัวใจขณะพัก ทำให้หลอดเลือดขยายตัว (เพิ่มการซึมของน้ำเหลือง) และอาจเพิ่มความวิตกกังวลหรือความหวาดระแวงอย่างมากระหว่างที่ผิวถูกเจาะ ศิลปินหลายคนจะปฏิเสธลูกค้าที่อยู่ภายใต้ฤทธิ์เฉียบพลัน",
+      piercing: "เพิ่มความเสี่ยงต่อภาวะ vasovagal syncope หรืออาการตื่นตระหนกฉับพลันระหว่างการสอดเครื่องประดับ และเปลี่ยนการรับรู้ความเจ็บปวดอย่างคาดไม่ถึง",
+      wait: "หลีกเลี่ยงการสูบหรือรับประทาน THC แบบอาหาร 12–24 ชั่วโมงก่อนนัด",
+    },
   },
   nicotine: {
     fr: {
@@ -998,6 +1143,11 @@ const MED_CONTENT_I18N = {
       tattoo: "A nicotina é um potente vasoconstritor da microcirculação. Estreita os capilares, reduz o fornecimento de sangue oxigenado à ferida recente da tatuagem e atrasa o encerramento da derme.",
       piercing: "Atrasa bastante a formação da fístula, sobretudo em piercings orais, de cartilagem da orelha e do mamilo.",
       wait: "Evite vaporizar ou fumar muito imediatamente antes da sessão e durante a fase inicial de cicatrização.",
+    },
+    th: {
+      tattoo: "นิโคตินเป็นสารที่ทำให้หลอดเลือดขนาดเล็กหดตัวอย่างรุนแรง ทำให้เส้นเลือดฝอยหดตัว ลดการส่งเลือดที่มีออกซิเจนไปยังแผลสักใหม่ และทำให้แผลในชั้นหนังแท้ปิดช้าลง",
+      piercing: "ทำให้การเกิดทางเจาะ (fistula) ช้าลงอย่างมาก โดยเฉพาะการเจาะในช่องปาก กระดูกอ่อนหู และหัวนม",
+      wait: "หลีกเลี่ยงการสูบบุหรี่หรือการสูบไอระเหยหนักทันทีก่อนและระหว่างระยะหายในช่วงแรก",
     },
   },
   glp1_agonists: {
@@ -1031,6 +1181,11 @@ const MED_CONTENT_I18N = {
       piercing: "Maior risco de náuseas, tonturas ou desmaio durante o piercing se a glicemia descer.",
       wait: "Faça uma refeição ligeira e de fácil digestão 1 a 2 horas antes da sessão e leve uma bebida açucarada (sumo, refrigerante) para manter a glicemia.",
     },
+    th: {
+      tattoo: "ยากลุ่ม GLP-1 ทำให้การระบายของกระเพาะอาหารช้าลงและเปลี่ยนการควบคุมระดับน้ำตาลในเลือด ลูกค้าที่รับการสักนานมีความเสี่ยงต่อภาวะน้ำตาลในเลือดต่ำฉับพลัน คลื่นไส้ และการเป็นลมจาก vasovagal หากรับประทานพลังงานไม่เพียงพอ",
+      piercing: "มีความเสี่ยงคลื่นไส้ เวียนศีรษะ หรือเป็นลมระหว่างการเจาะเพิ่มขึ้นหากระดับน้ำตาลในเลือดลดลง",
+      wait: "รับประทานอาหารมื้อเล็กที่ย่อยง่ายประมาณ 1–2 ชั่วโมงก่อนรับบริการ และนำเครื่องดื่มที่มีน้ำตาล (น้ำผลไม้ น้ำอัดลม) ไปด้วยเพื่อรักษาระดับกลูโคส",
+    },
   },
   insulin: {
     fr: {
@@ -1062,6 +1217,11 @@ const MED_CONTENT_I18N = {
       tattoo: "A diabetes prejudica a microcirculação e a cicatrização. Uma resposta imunitária mais fraca aumenta o risco de infeção e atrasa a queda das crostas. Uma diabetes bem controlada tem risco baixo; mal controlada aumenta o risco de infeção.",
       piercing: "Maior risco de infeção e formação mais lenta da fístula se a diabetes estiver mal controlada. Os piercings dos membros inferiores (por exemplo, nos tornozelos) cicatrizam muito lentamente em pessoas diabéticas.",
       wait: "Certifique-se de que a glicemia está estável antes da sessão. Leve pastilhas de glicose ou um lanche.",
+    },
+    th: {
+      tattoo: "เบาหวานทำให้การไหลเวียนของหลอดเลือดฝอยและการหายของแผลลดลง การตอบสนองของภูมิคุ้มกันที่แย่ลงเพิ่มความเสี่ยงติดเชื้อและทำให้สะเก็ดหายช้าลง เบาหวานที่ควบคุมได้ดีมีความเสี่ยงต่ำ ส่วนที่ควบคุมไม่ดีจะเพิ่มความเสี่ยงติดเชื้อ",
+      piercing: "เบาหวานที่ควบคุมไม่ดีทำให้เสี่ยงติดเชื้อสูงขึ้นและการเกิดทางเจาะช้าลง การเจาะบริเวณปลายแขนปลายขา (เช่น ข้อเท้า) หายช้ามากในลูกค้าที่เป็นเบาหวาน",
+      wait: "ตรวจสอบให้แน่ใจว่าระดับน้ำตาลในเลือดคงที่ก่อนรับบริการ นำยาเม็ดกลูโคสหรือของว่างไปด้วย",
     },
   },
   prednisone: {
@@ -1095,6 +1255,11 @@ const MED_CONTENT_I18N = {
       piercing: "A imunossupressão aumenta bastante o risco de infeção durante a cicatrização do piercing. A formação da fístula fica atrasada.",
       wait: "Ciclos curtos (menos de 2 semanas): aguarde o fim do ciclo. Corticoterapia prolongada: obtenha autorização do seu médico assistente.",
     },
+    th: {
+      tattoo: "สเตียรอยด์ชนิดทั่วร่างกายกดการตอบสนองของภูมิคุ้มกันที่จำเป็นต่อการหายของแผลอย่างถูกต้อง เพิ่มความเสี่ยงติดเชื้อและเปลี่ยนระยะการอักเสบ ผิวเปราะบางเมื่อใช้ขนาดยาต่อเนื่อง",
+      piercing: "การกดภูมิคุ้มกันเพิ่มความเสี่ยงติดเชื้อระหว่างการหายของการเจาะอย่างมาก การเกิดทางเจาะล่าช้า",
+      wait: "คอร์สสั้น (น้อยกว่า 2 สัปดาห์): รอจนคอร์สสิ้นสุด การรักษาด้วยสเตียรอยด์ระยะยาว: ขอการรับรองจากแพทย์",
+    },
   },
   inhaled_steroids: {
     fr: {
@@ -1126,6 +1291,11 @@ const MED_CONTENT_I18N = {
       tattoo: "Os corticoides inalados têm impacto sistémico mínimo. Os corticoides tópicos aplicados na zona da tatuagem adelgaçam a pele e devem ser suspensos 2 semanas antes.",
       piercing: "Risco normal, salvo se for aplicado um corticoide tópico diretamente na zona do piercing.",
       wait: "Suspenda os corticoides tópicos na zona prevista 2 semanas antes do procedimento.",
+    },
+    th: {
+      tattoo: "สเตียรอยด์ชนิดสูดพ่นมีผลต่อร่างกายทั้งระบบน้อยมาก สเตียรอยด์ชนิดทาที่บริเวณที่สักทำให้ผิวบางลงและควรหยุดใช้ 2 สัปดาห์ก่อนนัด",
+      piercing: "ความเสี่ยงอยู่ในระดับมาตรฐาน เว้นแต่จะทาสเตียรอยด์ชนิดทาลงบนบริเวณที่เจาะโดยตรง",
+      wait: "หยุดสเตียรอยด์ชนิดทาที่บริเวณเป้าหมาย 2 สัปดาห์ก่อนหัตถการ",
     },
   },
   fish_oil: {
@@ -1159,6 +1329,11 @@ const MED_CONTENT_I18N = {
       piercing: "Hemorragia e hematomas iniciais ligeiramente aumentados.",
       wait: "Pondere suspender as doses elevadas de óleo de peixe 5 a 7 dias antes da sessão, com a aprovação do seu médico.",
     },
+    th: {
+      tattoo: "ขนาดสูง (มากกว่า 2000 มก./วัน) ยับยั้งการรวมตัวของเกล็ดเลือดเล็กน้อยและทำให้เลือดเจือจาง มักทำให้น้ำเหลืองซึมมากขึ้นระหว่างการสัก",
+      piercing: "เลือดออกและรอยช้ำระยะแรกเพิ่มขึ้นเล็กน้อย",
+      wait: "พิจารณาหยุดน้ำมันปลาขนาดสูง 5–7 วันก่อนนัด หากแพทย์ของคุณอนุมัติ",
+    },
   },
   vitamin_e: {
     fr: {
@@ -1190,6 +1365,11 @@ const MED_CONTENT_I18N = {
       tattoo: "A vitamina E antagoniza os fatores de coagulação dependentes da vitamina K. Em doses elevadas aumenta a hemorragia e os hematomas durante a tatuagem.",
       piercing: "Hematomas mais marcados na zona do piercing.",
       wait: "Suspenda os suplementos de vitamina E em dose elevada 7 dias antes do procedimento.",
+    },
+    th: {
+      tattoo: "วิตามินอีต่อต้านปัจจัยการแข็งตัวของเลือดที่ขึ้นกับวิตามินเค ขนาดสูงทำให้เลือดออกและรอยช้ำระหว่างการสักเพิ่มขึ้น",
+      piercing: "รอยช้ำที่บริเวณเจาะเพิ่มขึ้น",
+      wait: "หยุดอาหารเสริมวิตามินอีขนาดสูง 7 วันก่อนหัตถการ",
     },
   },
   ginkgo_stjohns: {
@@ -1223,6 +1403,11 @@ const MED_CONTENT_I18N = {
       piercing: "Maior risco de hemorragia com o ginkgo; fotossensibilidade com o hipericão.",
       wait: "Suspenda estes suplementos à base de plantas 7 a 10 dias antes do procedimento.",
     },
+    th: {
+      tattoo: "แปะก๊วยยับยั้ง PAF (platelet-activating factor) และทำให้เลือดออกระหว่างหัตถการมากเกินไป เซนต์จอห์นเวิร์ตกระตุ้นเอนไซม์ในตับและเพิ่มความไวต่อแสง",
+      piercing: "เลือดออกเพิ่มขึ้นจากแปะก๊วย และความไวต่อแสงจากเซนต์จอห์นเวิร์ต",
+      wait: "หยุดสมุนไพรเสริม 7–10 วันก่อนหัตถการ",
+    },
   },
   turmeric_garlic: {
     fr: {
@@ -1254,6 +1439,11 @@ const MED_CONTENT_I18N = {
       tattoo: "A curcumina e os extratos de alho em dose elevada têm efeito antiagregante plaquetário. Podem causar hemorragia e exsudação de plasma bastante maiores.",
       piercing: "Ligeiro aumento da hemorragia durante a perfuração do tecido.",
       wait: "Suspenda os extratos concentrados 5 a 7 dias antes do procedimento. O alho e a curcuma usados na cozinha são totalmente seguros.",
+    },
+    th: {
+      tattoo: "สารสกัดขมิ้นชัน (เคอร์คิวมิน) และกระเทียมขนาดสูงมีผลต่อเกล็ดเลือด อาจทำให้เลือดออกเพิ่มและน้ำเหลืองซึมเห็นได้ชัด",
+      piercing: "เลือดออกเพิ่มขึ้นเล็กน้อยระหว่างการเจาะเนื้อเยื่อ",
+      wait: "หยุดสารสกัดความเข้มข้นสูง 5–7 วันก่อนหัตถการ กระเทียมและขมิ้นที่ใช้ปรุงอาหารปลอดภัยโดยสมบูรณ์",
     },
   },
 };

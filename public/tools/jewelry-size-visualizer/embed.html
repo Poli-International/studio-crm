@@ -36,7 +36,7 @@
   "name": "Body Jewelry Size Visualizer",
   "url": "https://poliinternational.com/jewelry-size-visualizer/",
   "description": "Visualize how different jewelry sizes look on the body",
-  "inLanguage": ["en", "fr", "de", "es", "it", "nl", "pt"],
+  "inLanguage": ["en", "fr", "de", "es", "it", "nl", "pt", "th"],
     "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
   "browserRequirements": "Requires JavaScript. Requires HTML5.",
@@ -236,7 +236,7 @@ body.dark-mode .breadcrumb-nav strong {
                 <a href="https://poliinternational.com/contact-us/" class="site-nav__link" data-i18n="nav.contact">CONTACT</a>
             </nav>
             <div class="lang-selector-wrapper">
-                <label for="lang-select" style="font-size: 0.9rem; color: var(--text-secondary); cursor: pointer;" title="Available languages: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL)" data-i18n-title="common.langTooltip">🌐</label>
+                <label for="lang-select" style="font-size: 0.9rem; color: var(--text-secondary); cursor: pointer;" title="Available languages: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL), ไทย (TH)" data-i18n-title="common.langTooltip">🌐</label>
                 <select id="lang-select" class="lang-select" aria-label="Select Language" data-i18n-aria-label="common.language" onchange="if(window.i18n) window.i18n.setLocale(this.value)">
                     <option value="en" selected>English</option>
                     <option value="de">Deutsch</option>
@@ -245,6 +245,7 @@ body.dark-mode .breadcrumb-nav strong {
                     <option value="it">Italiano</option>
                     <option value="pt">Português</option>
                     <option value="nl">Nederlands</option>
+<option value="th">ไทย</option>
                 </select>
             </div>
         </div>
@@ -296,8 +297,8 @@ body.dark-mode .breadcrumb-nav strong {
 
                 <!-- Dedicated Language Switcher -->
                 <div class="lang-switcher-container" id="tool-lang-container">
-                    <label for="tool-lang-select" class="lang-switcher-label" id="tool-lang-label" title="Available languages: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL)" data-i18n-title="common.langTooltip">
-                        <span class="lang-switcher-icon" id="lang-switcher-icon" aria-hidden="true" title="Available languages: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL)" data-i18n-title="common.langTooltip">🌐</span>
+                    <label for="tool-lang-select" class="lang-switcher-label" id="tool-lang-label" title="Available languages: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL), ไทย (TH)" data-i18n-title="common.langTooltip">
+                        <span class="lang-switcher-icon" id="lang-switcher-icon" aria-hidden="true" title="Available languages: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL), ไทย (TH)" data-i18n-title="common.langTooltip">🌐</span>
                         <span class="lang-label-text" data-i18n="common.language">Language</span>:
                     </label>
                     <select id="tool-lang-select" class="lang-select" aria-label="Select Language" data-i18n-aria-label="common.language">
@@ -308,6 +309,7 @@ body.dark-mode .breadcrumb-nav strong {
                         <option value="it">Italiano (IT)</option>
                         <option value="pt">Português (PT)</option>
                         <option value="nl">Nederlands (NL)</option>
+<option value="th">ไทย (TH)</option>
                     </select>
                     <!-- Quick Pill buttons for 1-click switching on desktop -->
                     <div class="lang-pills-group" role="group" aria-label="Quick language switch">
@@ -318,6 +320,7 @@ body.dark-mode .breadcrumb-nav strong {
                         <button type="button" class="lang-btn" data-lang="it" title="Italiano" aria-pressed="false">IT</button>
                         <button type="button" class="lang-btn" data-lang="pt" title="Português" aria-pressed="false">PT</button>
                         <button type="button" class="lang-btn" data-lang="nl" title="Nederlands" aria-pressed="false">NL</button>
+<button type="button" class="lang-btn" data-lang="th" title="ไทย" aria-pressed="false">TH</button>
                     </div>
                 </div>
 
@@ -1540,7 +1543,7 @@ ball  ←——hole-to-hole span——→  ball
 
 <div class="footer__bottom">
                 <div class="footer__lang">
-                    <label for="footer-lang-select" class="footer__lang-label" title="Available languages: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL)" data-i18n-title="common.langTooltip">
+                    <label for="footer-lang-select" class="footer__lang-label" title="Available languages: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL), ไทย (TH)" data-i18n-title="common.langTooltip">
                         <span aria-hidden="true">🌐</span>
                         <span data-i18n="common.language">Language</span>:
                     </label>
@@ -1552,6 +1555,7 @@ ball  ←——hole-to-hole span——→  ball
                         <option value="it">Italiano</option>
                         <option value="pt">Português</option>
                         <option value="nl">Nederlands</option>
+<option value="th">ไทย</option>
                     </select>
                 </div>
                 <p><span data-i18n="footer.copyright">&copy; 2025 Poli International Co. All rights reserved.</span> | <a href="https://poliinternational.com/privacy/" target="_top" data-i18n="footer.privacy">Privacy Policy</a></p>
@@ -1567,6 +1571,7 @@ ball  ←——hole-to-hole span——→  ball
     <script src="/tools/jewelry-size-visualizer/js/i18n/it.js"></script>
     <script src="/tools/jewelry-size-visualizer/js/i18n/pt.js"></script>
     <script src="/tools/jewelry-size-visualizer/js/i18n/nl.js"></script>
+    <script src="/tools/jewelry-size-visualizer/js/i18n/th.js"></script>
     <script src="/tools/jewelry-size-visualizer/js/i18n.js"></script>
     <script src="/tools/jewelry-size-visualizer/js/database.js"></script>
     <script src="/tools/jewelry-size-visualizer/js/calibration.js"></script>

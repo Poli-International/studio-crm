@@ -211,7 +211,7 @@ window.i18nDictionaries['es'] = {
   "common.healed": "Cicatrizado (Ajustado)",
   "common.inches": "pulgadas",
   "common.initialJewelry": "Joyería Inicial",
-  "common.langTooltip": "Idiomas disponibles: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL)",
+  "common.langTooltip": "Idiomas disponibles: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL), ไทย (TH)",
   "common.language": "Idioma",
   "common.length": "Longitud",
   "common.loading": "Cargando...",

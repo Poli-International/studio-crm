@@ -699,7 +699,8 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "de": "Deutsch (DE)",
     "es": "Español (ES)",
     "nl": "Nederlands (NL)",
-    "pt": "Português (PT)"
+    "pt": "Português (PT)",
+    "th": "ไทย (TH)"
   },
   "printCard": {
     "brandLogo": "POLI INTERNATIONAL TATTOO TOOLS",

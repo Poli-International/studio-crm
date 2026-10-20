@@ -1739,6 +1739,7 @@ window.i18n.translations["en"] = {
   "common.lang_pt": "Português (PT)",
   "common.lang_ru": "Русский (RU)",
   "common.lang_nl": "Nederlands (NL)",
+  "common.lang_th": "ไทย (TH)",
   "common.user_guide": "User Guide",
   "common.technical_docs": "Technical Documentation",
   "common.contributing": "Contributing Guidelines",

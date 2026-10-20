@@ -236,7 +236,7 @@ window.localISODate = function (d) {
 
   window.setLanguage = function(lang) {
     if (!lang) return;
-    var supportedLanguages = ['en', 'fr', 'de', 'it', 'es', 'nl', 'pt'];
+    var supportedLanguages = ['en', 'fr', 'de', 'it', 'es', 'nl', 'pt', 'th'];
     if (supportedLanguages.indexOf(lang) !== -1 && window.I18N_DICTIONARY && window.I18N_DICTIONARY[lang]) {
       currentLang = lang;
     } else {
@@ -290,7 +290,7 @@ window.localISODate = function (d) {
   });
 
   function initLanguage() {
-    var supportedLanguages = ['en', 'fr', 'de', 'it', 'es', 'nl', 'pt'];
+    var supportedLanguages = ['en', 'fr', 'de', 'it', 'es', 'nl', 'pt', 'th'];
     var preferredLang = null;
 
     try {

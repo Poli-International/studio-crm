@@ -9,7 +9,8 @@ const DICTIONARIES = {
   de: window.I18N_DE,
   es: window.I18N_ES,
   nl: window.I18N_NL,
-  pt: window.I18N_PT
+  pt: window.I18N_PT,
+  th: window.I18N_TH
 };
 
 function getActiveLanguage() {

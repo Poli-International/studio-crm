@@ -27,7 +27,9 @@ const RISK_I18N = {
     es: { label: "Riesgo de sangrado", explain: "Los AINE y los anticoagulantes inhiben la agregación plaquetaria (factores de coagulación) o fluidifican la sangre, lo que impide que se forme rápidamente una costra al perforar la piel." },
     de: { label: "Blutungsrisiko", explain: "NSAR und Blutverdünner hemmen die Blutplättchenaggregation (Gerinnungsfaktoren) oder verdünnen das Blut, sodass sich beim Durchstechen der Haut nicht schnell genug Schorf bildet." },
     nl: { label: "Bloedingsrisico", explain: "NSAID's en bloedverdunners remmen de klontering van bloedplaatjes (stollingsfactoren) of verdunnen het bloed, waardoor er bij het doorprikken van de huid niet snel een korstje ontstaat." },
-    pt: { label: "Risco de hemorragia", explain: "Os AINE e os anticoagulantes inibem a agregação plaquetária (fatores de coagulação) ou tornam o sangue mais fluido, impedindo a formação rápida de crosta durante a perfuração da pele." }
+    pt: { label: "Risco de hemorragia", explain: "Os AINE e os anticoagulantes inibem a agregação plaquetária (fatores de coagulação) ou tornam o sangue mais fluido, impedindo a formação rápida de crosta durante a perfuração da pele." },
+    th: { label: "ความเสี่ยงเลือดออก", explain: "NSAIDs และยาต้านการแข็งตัวของเลือดยับยั้งการรวมตัวของเกล็ดเลือด (ปัจจัยการแข็งตัวของเลือด) หรือทำให้เลือดเจือจาง ทำให้สะเก็ดไม่เกิดอย่างรวดเร็วระหว่างการเจาะผิวหนัง" }
+
   },
   "Bradycardia": {
     en: { label: "Bradycardia", explain: "Beta-blockers slow heart rate, preventing normal cardiac response to pain and triggering dizziness." },
@@ -36,7 +38,9 @@ const RISK_I18N = {
     es: { label: "Bradicardia", explain: "Los betabloqueantes ralentizan la frecuencia cardíaca, impiden la respuesta normal del corazón al dolor y provocan mareos." },
     de: { label: "Bradykardie", explain: "Betablocker verlangsamen den Herzschlag, verhindern die normale Reaktion des Herzens auf Schmerz und lösen Schwindel aus." },
     nl: { label: "Bradycardie", explain: "Bètablokkers vertragen de hartslag, verhinderen de normale reactie van het hart op pijn en veroorzaken duizeligheid." },
-    pt: { label: "Bradicardia", explain: "Os betabloqueantes abrandam o ritmo cardíaco, impedem a resposta normal do coração à dor e provocam tonturas." }
+    pt: { label: "Bradicardia", explain: "Os betabloqueantes abrandam o ritmo cardíaco, impedem a resposta normal do coração à dor e provocam tonturas." },
+    th: { label: "หัวใจเต้นช้า", explain: "ยาเบต้าบล็อกเกอร์ทำให้อัตราการเต้นของหัวใจช้าลง ขัดขวางการตอบสนองปกติของหัวใจต่อความเจ็บปวด และทำให้เวียนศีรษะ" }
+
   },
   "Cardiac Stress": {
     en: { label: "Cardiac Stress", explain: "Stimulants raise sympathetic activity, elevating blood pressure and heart rate, which makes sitting still through a long painful session far riskier." },
@@ -45,7 +49,9 @@ const RISK_I18N = {
     es: { label: "Estrés cardíaco", explain: "Los estimulantes aumentan la actividad simpática y elevan la tensión arterial y la frecuencia cardíaca: aguantar quieto una sesión larga y dolorosa resulta mucho más arriesgado." },
     de: { label: "Belastung des Herzens", explain: "Stimulanzien erhöhen die sympathische Aktivität und damit Blutdruck und Herzfrequenz: eine lange, schmerzhafte Sitzung stillzuhalten wird deutlich riskanter." },
     nl: { label: "Belasting van het hart", explain: "Stimulerende middelen verhogen de sympathische activiteit en daarmee bloeddruk en hartslag: een lange, pijnlijke sessie stilzitten wordt een stuk riskanter." },
-    pt: { label: "Stress cardíaco", explain: "Os estimulantes aumentam a atividade simpática, elevando a tensão arterial e o ritmo cardíaco: aguentar imóvel uma sessão longa e dolorosa torna-se bastante mais arriscado." }
+    pt: { label: "Stress cardíaco", explain: "Os estimulantes aumentam a atividade simpática, elevando a tensão arterial e o ritmo cardíaco: aguentar imóvel uma sessão longa e dolorosa torna-se bastante mais arriscado." },
+    th: { label: "ความเครียดต่อหัวใจ", explain: "ยากระตุ้นเพิ่มกิจกรรมของระบบประสาทซิมพาเทติก ทำให้ความดันโลหิตและอัตราการเต้นของหัวใจสูงขึ้น ทำให้การนั่งนิ่งผ่านการทำที่ยาวนานและเจ็บปวดมีความเสี่ยงมากขึ้นมาก" }
+
   },
   "Dehydration Sensitivity": {
     en: { label: "Dehydration Sensitivity", explain: "Diuretic effects increase fluid loss, requiring double the normal water intake to prevent blood pressure drops." },
@@ -54,7 +60,9 @@ const RISK_I18N = {
     es: { label: "Sensibilidad a la deshidratación", explain: "El efecto diurético aumenta la pérdida de líquidos y obliga a beber el doble de agua de lo habitual para evitar bajadas de tensión." },
     de: { label: "Empfindlich gegenüber Austrocknung", explain: "Die harntreibende Wirkung erhöht den Flüssigkeitsverlust, sodass doppelt so viel Wasser nötig ist, um einen Blutdruckabfall zu vermeiden." },
     nl: { label: "Gevoelig voor uitdroging", explain: "Het vochtafdrijvende effect vergroot het vochtverlies, zodat je twee keer zoveel water moet drinken om een bloeddrukdaling te voorkomen." },
-    pt: { label: "Sensibilidade à desidratação", explain: "O efeito diurético aumenta a perda de líquidos e obriga a beber o dobro da água habitual para evitar quedas de tensão." }
+    pt: { label: "Sensibilidade à desidratação", explain: "O efeito diurético aumenta a perda de líquidos e obriga a beber o dobro da água habitual para evitar quedas de tensão." },
+    th: { label: "ความไวต่อการขาดน้ำ", explain: "ฤทธิ์ขับปัสสาวะเพิ่มการสูญเสียของเหลว จึงต้องดื่มน้ำเป็นสองเท่าของปกติเพื่อป้องกันความดันโลหิตตก" }
+
   },
   "Delayed Healing": {
     en: { label: "Delayed Healing", explain: "Anticoagulants and steroids slow down fibrin formation and cell proliferation required for wound closure." },
@@ -63,7 +71,9 @@ const RISK_I18N = {
     es: { label: "Cicatrización retardada", explain: "Los anticoagulantes y los corticoides ralentizan la formación de fibrina y la proliferación celular necesarias para que la herida cierre." },
     de: { label: "Verzögerte Heilung", explain: "Gerinnungshemmer und Kortikoide verlangsamen die Fibrinbildung und die Zellteilung, die für den Wundverschluss nötig sind." },
     nl: { label: "Vertraagde genezing", explain: "Antistollingsmiddelen en corticosteroïden vertragen de vorming van fibrine en de celdeling die nodig zijn om de wond te sluiten." },
-    pt: { label: "Cicatrização retardada", explain: "Os anticoagulantes e os corticoides abrandam a formação de fibrina e a proliferação celular necessárias ao encerramento da ferida." }
+    pt: { label: "Cicatrização retardada", explain: "Os anticoagulantes e os corticoides abrandam a formação de fibrina e a proliferação celular necessárias ao encerramento da ferida." },
+    th: { label: "การหายที่ล่าช้า", explain: "ยาต้านการแข็งตัวของเลือดและสเตียรอยด์ทำให้การสร้างไฟบรินและการแบ่งตัวของเซลล์ที่จำเป็นต่อการปิดแผลช้าลง" }
+
   },
   "Drowsiness": {
     en: { label: "Drowsiness", explain: "Antihistamines cause central sedation, making you sleepy during long procedures." },
@@ -72,7 +82,9 @@ const RISK_I18N = {
     es: { label: "Somnolencia", explain: "Los antihistamínicos provocan sedación central y dan sueño durante las sesiones largas." },
     de: { label: "Schläfrigkeit", explain: "Antihistaminika wirken zentral dämpfend und machen während langer Sitzungen müde." },
     nl: { label: "Slaperigheid", explain: "Antihistaminica werken kalmerend op het centraal zenuwstelsel en maken je slaperig tijdens lange sessies." },
-    pt: { label: "Sonolência", explain: "Os anti-histamínicos provocam sedação central e dão sono durante as sessões longas." }
+    pt: { label: "Sonolência", explain: "Os anti-histamínicos provocam sedação central e dão sono durante as sessões longas." },
+    th: { label: "ความง่วงซึม", explain: "ยาแก้แพ้ทำให้ระบบประสาทส่วนกลางถูกกด ทำให้ง่วงระหว่างหัตถการที่ยาวนาน" }
+
   },
   "Fainting Risk": {
     en: { label: "Fainting Risk", explain: "Vasovagal syncope occurs when pain, stress, or medications trigger a sudden reflex drop in heart rate and blood pressure." },
@@ -81,7 +93,9 @@ const RISK_I18N = {
     es: { label: "Riesgo de desmayo", explain: "El síncope vasovagal aparece cuando el dolor, el estrés o un medicamento desencadenan una caída refleja y repentina de la frecuencia cardíaca y la tensión arterial." },
     de: { label: "Ohnmachtsrisiko", explain: "Eine vasovagale Synkope entsteht, wenn Schmerz, Stress oder ein Medikament einen plötzlichen Reflexabfall von Herzfrequenz und Blutdruck auslösen." },
     nl: { label: "Risico op flauwvallen", explain: "Een vasovagale collaps ontstaat wanneer pijn, stress of een medicijn een plotselinge reflexmatige daling van hartslag en bloeddruk uitlokt." },
-    pt: { label: "Risco de desmaio", explain: "A síncope vasovagal surge quando a dor, o stress ou um medicamento desencadeiam uma queda reflexa e súbita do ritmo cardíaco e da tensão arterial." }
+    pt: { label: "Risco de desmaio", explain: "A síncope vasovagal surge quando a dor, o stress ou um medicamento desencadeiam uma queda reflexa e súbita do ritmo cardíaco e da tensão arterial." },
+    th: { label: "ความเสี่ยงเป็นลม", explain: "ภาวะ vasovagal syncope เกิดขึ้นเมื่อความเจ็บปวด ความเครียด หรือยาทำให้อัตราการเต้นของหัวใจและความดันโลหิตตกฉับพลันจากปฏิกิริยาสะท้อน" }
+
   },
   "Fragile Skin": {
     en: { label: "Fragile Skin", explain: "Dermal layers are thinned, making skin easily torn by friction or adhesive bandage removal." },
@@ -90,7 +104,9 @@ const RISK_I18N = {
     es: { label: "Piel frágil", explain: "Las capas de la dermis están adelgazadas: la piel se desgarra con facilidad por el roce o al retirar un apósito adhesivo." },
     de: { label: "Empfindliche Haut", explain: "Die Hautschichten sind ausgedünnt: die Haut reißt leicht durch Reibung oder beim Abziehen eines Pflasters." },
     nl: { label: "Kwetsbare huid", explain: "De huidlagen zijn dunner geworden: de huid scheurt gemakkelijk door wrijving of bij het verwijderen van een pleister." },
-    pt: { label: "Pele frágil", explain: "As camadas da derme estão mais finas: a pele rasga-se facilmente com o atrito ou ao retirar um penso adesivo." }
+    pt: { label: "Pele frágil", explain: "As camadas da derme estão mais finas: a pele rasga-se facilmente com o atrito ou ao retirar um penso adesivo." },
+    th: { label: "ผิวบอบบาง", explain: "ชั้นหนังแท้บางลง ทำให้ผิวฉีกขาดได้ง่ายจากแรงเสียดสีหรือการลอกพลาสเตอร์แผลแบบแปะ" }
+
   },
   "Healing Delay": {
     en: { label: "Healing Delay", explain: "Impaired skin cell turnover delays epithelialization of fresh tattoo ink or piercing fistula walls." },
@@ -99,7 +115,9 @@ const RISK_I18N = {
     es: { label: "Retraso en la cicatrización", explain: "La renovación de las células cutáneas está frenada y retrasa la epitelización de un tatuaje reciente o de las paredes del canal de un piercing." },
     de: { label: "Heilungsverzögerung", explain: "Die Erneuerung der Hautzellen ist gebremst und verzögert die Epithelisierung eines frischen Tattoos oder der Kanalwände eines Piercings." },
     nl: { label: "Genezingsvertraging", explain: "De vernieuwing van huidcellen is geremd en vertraagt het dichtgroeien van een verse tatoeage of van de wand van een piercingkanaal." },
-    pt: { label: "Atraso na cicatrização", explain: "A renovação das células da pele está travada e atrasa a epitelização de uma tatuagem recente ou das paredes do canal de um piercing." }
+    pt: { label: "Atraso na cicatrização", explain: "A renovação das células da pele está travada e atrasa a epitelização de uma tatuagem recente ou das paredes do canal de um piercing." },
+    th: { label: "การหายล่าช้า", explain: "การผลัดเซลล์ผิวที่บกพร่องทำให้การสร้างเยื่อบุผิวของหมึกสักใหม่หรือผนังทางเจาะช้าลง" }
+
   },
   "Heart Rate Increase": {
     en: { label: "Heart Rate Increase", explain: "Stimulants raise baseline heart rate and sympathetic arousal, increasing jitteriness and pain sensitivity." },
@@ -108,7 +126,9 @@ const RISK_I18N = {
     es: { label: "Aumento de la frecuencia cardíaca", explain: "Los estimulantes elevan la frecuencia cardíaca basal y la activación simpática, lo que aumenta el nerviosismo y la sensibilidad al dolor." },
     de: { label: "Erhöhte Herzfrequenz", explain: "Stimulanzien erhöhen den Ruhepuls und die sympathische Erregung, was Nervosität und Schmerzempfindlichkeit steigert." },
     nl: { label: "Verhoogde hartslag", explain: "Stimulerende middelen verhogen de rusthartslag en de sympathische prikkeling, wat onrust en pijngevoeligheid vergroot." },
-    pt: { label: "Aumento da frequência cardíaca", explain: "Os estimulantes elevam o ritmo cardíaco de base e a ativação simpática, aumentando o nervosismo e a sensibilidade à dor." }
+    pt: { label: "Aumento da frequência cardíaca", explain: "Os estimulantes elevam o ritmo cardíaco de base e a ativação simpática, aumentando o nervosismo e a sensibilidade à dor." },
+    th: { label: "อัตราการเต้นของหัวใจเพิ่มขึ้น", explain: "ยากระตุ้นเพิ่มอัตราการเต้นของหัวใจขณะพักและการกระตุ้นซิมพาเทติก ทำให้กระสับกระส่ายและไวต่อความเจ็บปวดมากขึ้น" }
+
   },
   "Heightened Sensitivity": {
     en: { label: "Heightened Sensitivity", explain: "THC alters pain perception unpredictably, so skin puncture can feel sharper than expected and anxiety can escalate mid-session." },
@@ -117,7 +137,9 @@ const RISK_I18N = {
     es: { label: "Sensibilidad aumentada", explain: "El THC altera la percepción del dolor de forma impredecible: la perforación puede notarse más intensa de lo previsto y la ansiedad puede aumentar en plena sesión." },
     de: { label: "Erhöhte Empfindlichkeit", explain: "THC verändert die Schmerzwahrnehmung unvorhersehbar: der Stich kann sich stärker anfühlen als erwartet und die Angst kann mitten in der Sitzung zunehmen." },
     nl: { label: "Verhoogde gevoeligheid", explain: "THC verandert de pijnbeleving onvoorspelbaar: het prikken kan heftiger aanvoelen dan verwacht en de angst kan halverwege de sessie oplopen." },
-    pt: { label: "Sensibilidade acrescida", explain: "O THC altera a perceção da dor de forma imprevisível: a perfuração pode parecer mais intensa do que o esperado e a ansiedade pode subir a meio da sessão." }
+    pt: { label: "Sensibilidade acrescida", explain: "O THC altera a perceção da dor de forma imprevisível: a perfuração pode parecer mais intensa do que o esperado e a ansiedade pode subir a meio da sessão." },
+    th: { label: "ความไวที่เพิ่มขึ้น", explain: "THC เปลี่ยนการรับรู้ความเจ็บปวดอย่างคาดเดาไม่ได้ ทำให้การเจาะผิวอาจรู้สึกแหลมคมกว่าที่คาด และความวิตกกังวลอาจเพิ่มขึ้นระหว่างการทำ" }
+
   },
   "High Bleeding Risk": {
     en: { label: "High Bleeding Risk", explain: "Strong anticoagulants severely inhibit clotting cascades, causing steady arterial or capillary bleeding during skin puncture." },
@@ -126,7 +148,9 @@ const RISK_I18N = {
     es: { label: "Riesgo de sangrado alto", explain: "Los anticoagulantes potentes inhiben gravemente la cascada de coagulación y provocan un sangrado arterial o capilar continuo al puncionar la piel." },
     de: { label: "Hohes Blutungsrisiko", explain: "Starke Gerinnungshemmer blockieren die Gerinnungskaskade massiv und verursachen beim Durchstechen der Haut eine anhaltende arterielle oder kapillare Blutung." },
     nl: { label: "Hoog bloedingsrisico", explain: "Sterke antistollingsmiddelen remmen de stollingscascade fors en veroorzaken bij het doorprikken van de huid een aanhoudende slagaderlijke of haarvatbloeding." },
-    pt: { label: "Risco de hemorragia elevado", explain: "Os anticoagulantes potentes inibem fortemente a cascata de coagulação e provocam uma hemorragia arterial ou capilar contínua durante a punção da pele." }
+    pt: { label: "Risco de hemorragia elevado", explain: "Os anticoagulantes potentes inibem fortemente a cascata de coagulação e provocam uma hemorragia arterial ou capilar contínua durante a punção da pele." },
+    th: { label: "ความเสี่ยงเลือดออกสูง", explain: "ยาต้านการแข็งตัวของเลือดชนิดแรงยับยั้งลำดับการแข็งตัวของเลือดอย่างรุนแรง ทำให้เลือดแดงหรือเลือดจากหลอดเลือดฝอยไหลต่อเนื่องระหว่างการเจาะผิวหนัง" }
+
   },
   "High Infection Risk": {
     en: { label: "High Infection Risk", explain: "Immunosuppressive medications significantly impair bacterial defense, making sterile aftercare critical." },
@@ -135,7 +159,9 @@ const RISK_I18N = {
     es: { label: "Riesgo de infección alto", explain: "Los inmunosupresores reducen notablemente las defensas frente a las bacterias: unos cuidados estériles se vuelven imprescindibles." },
     de: { label: "Hohes Infektionsrisiko", explain: "Immunsuppressiva schwächen die Abwehr gegen Bakterien deutlich, sodass eine sterile Nachsorge unverzichtbar wird." },
     nl: { label: "Hoog infectierisico", explain: "Afweeronderdrukkende medicijnen verzwakken de verdediging tegen bacteriën aanzienlijk, waardoor steriele nazorg onmisbaar wordt." },
-    pt: { label: "Risco de infeção elevado", explain: "Os imunossupressores reduzem bastante as defesas contra as bactérias, tornando indispensáveis cuidados estéreis." }
+    pt: { label: "Risco de infeção elevado", explain: "Os imunossupressores reduzem bastante as defesas contra as bactérias, tornando indispensáveis cuidados estéreis." },
+    th: { label: "ความเสี่ยงติดเชื้อสูง", explain: "ยากดภูมิคุ้มกันทำให้การป้องกันแบคทีเรียลดลงอย่างมีนัยสำคัญ ทำให้การดูแลหลังทำที่ปลอดเชื้อมีความสำคัญอย่างยิ่ง" }
+
   },
   "Hypoglycemia Risk": {
     en: { label: "Hypoglycemia Risk", explain: "GLP-1 drugs delay stomach emptying and drop blood glucose, causing sudden nausea or weakness if sugar levels drop." },
@@ -144,7 +170,9 @@ const RISK_I18N = {
     es: { label: "Riesgo de hipoglucemia", explain: "Los fármacos GLP-1 retrasan el vaciado gástrico y bajan la glucemia, lo que puede causar náuseas o debilidad repentinas si el azúcar cae." },
     de: { label: "Risiko einer Unterzuckerung", explain: "GLP-1-Medikamente verzögern die Magenentleerung und senken den Blutzucker, was bei einem Zuckerabfall plötzliche Übelkeit oder Schwäche auslösen kann." },
     nl: { label: "Risico op lage bloedsuiker", explain: "GLP-1-medicijnen vertragen de maaglediging en verlagen de bloedsuiker, wat plotselinge misselijkheid of zwakte kan geven als de suiker wegzakt." },
-    pt: { label: "Risco de hipoglicemia", explain: "Os fármacos GLP-1 atrasam o esvaziamento gástrico e baixam a glicemia, podendo causar náuseas ou fraqueza súbitas se o açúcar descer." }
+    pt: { label: "Risco de hipoglicemia", explain: "Os fármacos GLP-1 atrasam o esvaziamento gástrico e baixam a glicemia, podendo causar náuseas ou fraqueza súbitas se o açúcar descer." },
+    th: { label: "ความเสี่ยงน้ำตาลในเลือดต่ำ", explain: "ยากลุ่ม GLP-1 ทำให้กระเพาะอาหารว่างช้าลงและทำให้ระดับน้ำตาลในเลือดลดลง ทำให้เกิดคลื่นไส้หรืออ่อนแรงฉับพลันหากระดับน้ำตาลลดลง" }
+
   },
   "Infection Risk": {
     en: { label: "Infection Risk", explain: "Suppressed immune response reduces white blood cell activity, increasing vulnerability to bacterial skin infection." },
@@ -153,7 +181,9 @@ const RISK_I18N = {
     es: { label: "Riesgo de infección", explain: "Una respuesta inmunitaria disminuida reduce la actividad de los glóbulos blancos y aumenta la vulnerabilidad a las infecciones cutáneas bacterianas." },
     de: { label: "Infektionsrisiko", explain: "Eine gedämpfte Immunantwort verringert die Aktivität der weißen Blutkörperchen und erhöht die Anfälligkeit für bakterielle Hautinfektionen." },
     nl: { label: "Infectierisico", explain: "Een onderdrukte afweerreactie verlaagt de activiteit van de witte bloedcellen en vergroot de kans op een bacteriële huidinfectie." },
-    pt: { label: "Risco de infeção", explain: "Uma resposta imunitária diminuída reduz a atividade dos glóbulos brancos e aumenta a vulnerabilidade a infeções cutâneas bacterianas." }
+    pt: { label: "Risco de infeção", explain: "Uma resposta imunitária diminuída reduz a atividade dos glóbulos brancos e aumenta a vulnerabilidade a infeções cutâneas bacterianas." },
+    th: { label: "ความเสี่ยงการติดเชื้อ", explain: "การตอบสนองของภูมิคุ้มกันที่ถูกกดลดกิจกรรมของเม็ดเลือดขาว เพิ่มความเปราะบางต่อการติดเชื้อแบคทีเรียที่ผิวหนัง" }
+
   },
   "Ink Staining Risk": {
     en: { label: "Ink Staining Risk", explain: "Minocycline can deposit in skin tissue and rarely produce blue-grey pigmentation, changing how healed tattoo ink reads." },
@@ -162,7 +192,9 @@ const RISK_I18N = {
     es: { label: "Riesgo de alteración de la tinta", explain: "La minociclina puede depositarse en el tejido cutáneo y provocar, en raras ocasiones, una pigmentación gris azulada que altera el aspecto de la tinta ya curada." },
     de: { label: "Risiko einer Farbveränderung", explain: "Minocyclin kann sich im Hautgewebe ablagern und in seltenen Fällen eine blaugraue Pigmentierung erzeugen, die den Farbeindruck des abgeheilten Tattoos verändert." },
     nl: { label: "Risico op inktverkleuring", explain: "Minocycline kan zich in het huidweefsel afzetten en zelden een blauwgrijze pigmentatie geven, waardoor de genezen inkt er anders uitziet." },
-    pt: { label: "Risco de alteração da tinta", explain: "A minociclina pode depositar-se no tecido cutâneo e provocar, raramente, uma pigmentação cinzento-azulada que altera o aspeto da tinta já cicatrizada." }
+    pt: { label: "Risco de alteração da tinta", explain: "A minociclina pode depositar-se no tecido cutâneo e provocar, raramente, uma pigmentação cinzento-azulada que altera o aspeto da tinta já cicatrizada." },
+    th: { label: "ความเสี่ยงหมึกเปลี่ยนสี", explain: "มิโนไซคลินสะสมในเนื้อเยื่อผิวหนังและนาน ๆ ครั้งอาจทำให้เกิดสีเทาอมฟ้า ทำให้รอยสักที่หายแล้วดูต่างไป" }
+
   },
   "Low Blood Pressure": {
     en: { label: "Low Blood Pressure", explain: "Sedatives and anti-anxiety drugs lower vascular tone, increasing fainting risk upon standing or pain stimulation." },
@@ -171,7 +203,9 @@ const RISK_I18N = {
     es: { label: "Tensión arterial baja", explain: "Los sedantes y ansiolíticos bajan el tono vascular, lo que aumenta el riesgo de desmayo al ponerse de pie o ante el estímulo doloroso." },
     de: { label: "Niedriger Blutdruck", explain: "Beruhigungs- und Angstmittel senken den Gefäßtonus und erhöhen damit das Ohnmachtsrisiko beim Aufstehen oder bei Schmerzreizen." },
     nl: { label: "Lage bloeddruk", explain: "Kalmerings- en angstremmende middelen verlagen de vaatspanning, wat de kans op flauwvallen bij opstaan of bij pijnprikkels vergroot." },
-    pt: { label: "Tensão arterial baixa", explain: "Os sedativos e ansiolíticos baixam o tónus vascular, aumentando o risco de desmaio ao levantar ou perante o estímulo doloroso." }
+    pt: { label: "Tensão arterial baixa", explain: "Os sedativos e ansiolíticos baixam o tónus vascular, aumentando o risco de desmaio ao levantar ou perante o estímulo doloroso." },
+    th: { label: "ความดันโลหิตต่ำ", explain: "ยากล่อมประสาทและยาคลายกังวลลดโทนของหลอดเลือด ทำให้เสี่ยงเป็นลมเพิ่มขึ้นเมื่อลุกขึ้นยืนหรือเมื่อถูกกระตุ้นด้วยความเจ็บปวด" }
+
   },
   "Mild Bleeding Risk": {
     en: { label: "Mild Bleeding Risk", explain: "Slight decrease in platelet stickiness or minor blood thinning leading to mild extra oozing." },
@@ -180,7 +214,9 @@ const RISK_I18N = {
     es: { label: "Riesgo de sangrado leve", explain: "Ligera disminución de la adhesividad de las plaquetas o fluidificación moderada de la sangre, con una exudación algo más abundante." },
     de: { label: "Leichtes Blutungsrisiko", explain: "Leicht verringerte Klebrigkeit der Blutplättchen oder geringe Blutverdünnung, mit etwas stärkerem Nässen." },
     nl: { label: "Licht bloedingsrisico", explain: "Licht verminderde plakkerigheid van de bloedplaatjes of lichte bloedverdunning, met wat meer vochtafscheiding." },
-    pt: { label: "Risco de hemorragia ligeiro", explain: "Ligeira diminuição da adesividade das plaquetas ou fluidificação moderada do sangue, com uma exsudação um pouco mais abundante." }
+    pt: { label: "Risco de hemorragia ligeiro", explain: "Ligeira diminuição da adesividade das plaquetas ou fluidificação moderada do sangue, com uma exsudação um pouco mais abundante." },
+    th: { label: "ความเสี่ยงเลือดออกเล็กน้อย", explain: "ความเหนียวของเกล็ดเลือดลดลงเล็กน้อยหรือเลือดเจือจางเล็กน้อย ทำให้น้ำเหลืองซึมเพิ่มขึ้นเล็กน้อย" }
+
   },
   "Minor Pigmentation Risk": {
     en: { label: "Minor Pigmentation Risk", explain: "Hormonal fluctuations sensitize melanocytes, increasing melasma risk when exposed to sun during healing." },
@@ -189,7 +225,9 @@ const RISK_I18N = {
     es: { label: "Riesgo de pigmentación leve", explain: "Las oscilaciones hormonales sensibilizan los melanocitos y aumentan el riesgo de melasma si hay exposición al sol durante la cicatrización." },
     de: { label: "Geringes Pigmentierungsrisiko", explain: "Hormonschwankungen sensibilisieren die Melanozyten und erhöhen das Melasma-Risiko, wenn die Haut während der Heilung Sonne abbekommt." },
     nl: { label: "Licht pigmentatierisico", explain: "Hormoonschommelingen maken de pigmentcellen gevoeliger en vergroten de kans op melasma bij zonlicht tijdens de genezing." },
-    pt: { label: "Risco de pigmentação ligeiro", explain: "As oscilações hormonais sensibilizam os melanócitos e aumentam o risco de melasma em caso de exposição ao sol durante a cicatrização." }
+    pt: { label: "Risco de pigmentação ligeiro", explain: "As oscilações hormonais sensibilizam os melanócitos e aumentam o risco de melasma em caso de exposição ao sol durante a cicatrização." },
+    th: { label: "ความเสี่ยงการเปลี่ยนสีผิวเล็กน้อย", explain: "การเปลี่ยนแปลงของฮอร์โมนทำให้เม็ดสีผิว (melanocytes) ไวขึ้น เพิ่มความเสี่ยงฝ้าเมื่อโดนแสงแดดระหว่างการหาย" }
+
   },
   "No Extra Bleeding": {
     en: { label: "No Extra Bleeding", explain: "Does not affect blood clotting or vascular constriction." },
@@ -198,7 +236,9 @@ const RISK_I18N = {
     es: { label: "Sin sangrado adicional", explain: "No afecta ni a la coagulación de la sangre ni a la constricción de los vasos." },
     de: { label: "Keine zusätzliche Blutung", explain: "Beeinflusst weder die Blutgerinnung noch die Gefäßverengung." },
     nl: { label: "Geen extra bloeding", explain: "Heeft geen invloed op de bloedstolling of op het samentrekken van de bloedvaten." },
-    pt: { label: "Sem hemorragia adicional", explain: "Não afeta a coagulação do sangue nem a constrição dos vasos." }
+    pt: { label: "Sem hemorragia adicional", explain: "Não afeta a coagulação do sangue nem a constrição dos vasos." },
+    th: { label: "ไม่เพิ่มการเลือดออก", explain: "ไม่กระทบการแข็งตัวของเลือดหรือการหดตัวของหลอดเลือด" }
+
   },
   "Outbreak Prevention": {
     en: { label: "Outbreak Prevention", explain: "Lip trauma triggers dormant HSV-1 herpes cold sores; prophylactic antivirals suppress viral replication." },
@@ -207,7 +247,9 @@ const RISK_I18N = {
     es: { label: "Prevención de brotes", explain: "Un traumatismo en el labio despierta el herpes labial HSV-1 latente; un antiviral preventivo bloquea la replicación del virus." },
     de: { label: "Vorbeugung eines Ausbruchs", explain: "Eine Verletzung der Lippe weckt schlummernde HSV-1-Lippenherpes; ein vorbeugendes Virostatikum unterdrückt die Virusvermehrung." },
     nl: { label: "Preventie van een uitbraak", explain: "Een beschadiging van de lip wekt sluimerende HSV-1-koortslip; een antiviraal middel vooraf remt de vermenigvuldiging van het virus." },
-    pt: { label: "Prevenção de surtos", explain: "Um traumatismo no lábio desperta o herpes labial HSV-1 latente; um antiviral preventivo bloqueia a replicação do vírus." }
+    pt: { label: "Prevenção de surtos", explain: "Um traumatismo no lábio desperta o herpes labial HSV-1 latente; um antiviral preventivo bloqueia a replicação do vírus." },
+    th: { label: "การป้องกันการกำเริบ", explain: "การกระทบกระแทกที่ริมฝีปากกระตุ้นให้เริมที่ปาก HSV-1 ที่แฝงอยู่กำเริบ ยาต้านไวรัสป้องกันจะกดการเพิ่มจำนวนของไวรัส" }
+
   },
   "Photosensitivity": {
     en: { label: "Photosensitivity", explain: "Certain drugs make skin cells absorb UV rays rapidly, causing severe sunburn-like allergic reactions on fresh tattoos." },
@@ -216,7 +258,9 @@ const RISK_I18N = {
     es: { label: "Fotosensibilidad", explain: "Algunos medicamentos hacen que las células de la piel absorban los rayos UV muy deprisa, lo que provoca sobre un tatuaje reciente reacciones alérgicas parecidas a una quemadura solar grave." },
     de: { label: "Lichtempfindlichkeit", explain: "Manche Medikamente lassen Hautzellen UV-Strahlen sehr schnell aufnehmen, was auf einem frischen Tattoo allergische Reaktionen wie ein schwerer Sonnenbrand auslöst." },
     nl: { label: "Lichtgevoeligheid", explain: "Sommige medicijnen laten huidcellen uv-straling zeer snel opnemen, wat op een verse tatoeage allergische reacties geeft die op ernstige zonnebrand lijken." },
-    pt: { label: "Fotossensibilidade", explain: "Alguns medicamentos fazem as células da pele absorver os raios UV muito depressa, provocando numa tatuagem recente reações alérgicas semelhantes a uma queimadura solar grave." }
+    pt: { label: "Fotossensibilidade", explain: "Alguns medicamentos fazem as células da pele absorver os raios UV muito depressa, provocando numa tatuagem recente reações alérgicas semelhantes a uma queimadura solar grave." },
+    th: { label: "ไวต่อแสง", explain: "ยาบางชนิดทำให้เซลล์ผิวดูดซับรังสียูวีอย่างรวดเร็ว ก่อให้เกิดปฏิกิริยาภูมิแพ้คล้ายผิวไหม้แดดรุนแรงบนรอยสักใหม่" }
+
   },
   "Plasma Oozing": {
     en: { label: "Plasma Oozing", explain: "When blood clotting is delayed, blood vessel walls leak clear plasma onto skin, diluting tattoo ink and pushing pigment out of dermal layers." },
@@ -225,7 +269,9 @@ const RISK_I18N = {
     es: { label: "Exudación de plasma", explain: "Cuando la coagulación se retrasa, la pared de los vasos deja rezumar plasma transparente sobre la piel, que diluye la tinta y empuja el pigmento fuera de la dermis." },
     de: { label: "Austritt von Wundwasser", explain: "Ist die Gerinnung verzögert, tritt aus den Gefäßwänden klares Wundwasser auf die Haut, das die Farbe verdünnt und Pigment aus der Lederhaut drückt." },
     nl: { label: "Lekkend wondvocht", explain: "Als de stolling vertraagd is, lekt er uit de vaatwanden helder wondvocht op de huid, dat de inkt verdunt en pigment uit de lederhuid duwt." },
-    pt: { label: "Exsudação de plasma", explain: "Quando a coagulação está atrasada, a parede dos vasos deixa escorrer plasma transparente sobre a pele, que dilui a tinta e empurra o pigmento para fora da derme." }
+    pt: { label: "Exsudação de plasma", explain: "Quando a coagulação está atrasada, a parede dos vasos deixa escorrer plasma transparente sobre a pele, que dilui a tinta e empurra o pigmento para fora da derme." },
+    th: { label: "น้ำเหลืองซึม", explain: "เมื่อการแข็งตัวของเลือดล่าช้า ผนังหลอดเลือดจะรั่วพลาสมาใสลงบนผิว ทำให้หมึกสักจางลงและดันเม็ดสีออกจากชั้นหนังแท้" }
+
   },
   "Rebound Bleeding": {
     en: { label: "Rebound Bleeding", explain: "Epinephrine temporarily shrinks blood vessels. When it wears off, blood vessels dilate rapidly (rebound hyperemia), producing heavy bleeding." },
@@ -234,7 +280,9 @@ const RISK_I18N = {
     es: { label: "Sangrado de rebote", explain: "La adrenalina estrecha los vasos temporalmente. Cuando su efecto desaparece, los vasos se dilatan de golpe (hiperemia de rebote) y el sangrado se vuelve abundante." },
     de: { label: "Rebound-Blutung", explain: "Adrenalin verengt die Gefäße vorübergehend. Lässt die Wirkung nach, weiten sie sich schlagartig (Rebound-Hyperämie) und es blutet stark." },
     nl: { label: "Rebound-bloeding", explain: "Adrenaline vernauwt de vaten tijdelijk. Als de werking wegebt, zetten ze zich razendsnel uit (rebound-hyperemie) en gaat het hevig bloeden." },
-    pt: { label: "Hemorragia de rebound", explain: "A adrenalina aperta temporariamente os vasos. Quando o efeito passa, os vasos dilatam-se de repente (hiperemia de rebound) e a hemorragia torna-se abundante." }
+    pt: { label: "Hemorragia de rebound", explain: "A adrenalina aperta temporariamente os vasos. Quando o efeito passa, os vasos dilatam-se de repente (hiperemia de rebound) e a hemorragia torna-se abundante." },
+    th: { label: "เลือดออกกลับมา", explain: "เอพิเนฟรินทำให้หลอดเลือดหดตัวชั่วคราว เมื่อฤทธิ์หมดไป หลอดเลือดจะขยายตัวอย่างรวดเร็ว (rebound hyperemia) ทำให้เลือดออกมาก" }
+
   },
   "Rebound Shock": {
     en: { label: "Rebound Shock", explain: "When topical numbing wears off mid-session, pain receptors suddenly flood the brain without gradual adaptation, causing intense pain shock." },
@@ -243,7 +291,9 @@ const RISK_I18N = {
     es: { label: "Choque de rebote", explain: "Cuando el anestésico tópico deja de actuar a mitad de sesión, los receptores del dolor inundan el cerebro de golpe, sin adaptación gradual, con un choque doloroso intenso." },
     de: { label: "Rebound-Schock", explain: "Lässt die örtliche Betäubung mitten in der Sitzung nach, überfluten die Schmerzrezeptoren das Gehirn schlagartig, ohne allmähliche Gewöhnung, und lösen einen heftigen Schmerzschock aus." },
     nl: { label: "Rebound-schok", explain: "Als de plaatselijke verdoving halverwege uitwerkt, overspoelen de pijnreceptoren de hersenen in één keer, zonder geleidelijke gewenning, met een heftige pijnschok tot gevolg." },
-    pt: { label: "Choque de rebound", explain: "Quando o anestésico tópico deixa de atuar a meio da sessão, os recetores da dor inundam o cérebro de uma só vez, sem adaptação gradual, provocando um choque doloroso intenso." }
+    pt: { label: "Choque de rebound", explain: "Quando o anestésico tópico deixa de atuar a meio da sessão, os recetores da dor inundam o cérebro de uma só vez, sem adaptação gradual, provocando um choque doloroso intenso." },
+    th: { label: "อาการช็อกกลับมา", explain: "เมื่อยาชาเฉพาะที่หมดฤทธิ์ระหว่างการทำ ตัวรับความเจ็บปวดจะส่งสัญญาณเข้าสมองพร้อมกันโดยไม่มีการปรับตัวค่อยเป็นค่อยไป ทำให้เกิดอาการช็อกจากความเจ็บปวดรุนแรง" }
+
   },
   "Safe Analgesic": {
     en: { label: "Safe Analgesic", explain: "Acetaminophen/Paracetamol works on central nervous system pain receptors without inhibiting platelet aggregation." },
@@ -252,7 +302,9 @@ const RISK_I18N = {
     es: { label: "Analgésico seguro", explain: "El paracetamol (acetaminofén) actúa sobre los receptores del dolor del sistema nervioso central sin inhibir la agregación plaquetaria." },
     de: { label: "Unbedenkliches Schmerzmittel", explain: "Paracetamol (Acetaminophen) wirkt auf die Schmerzrezeptoren des zentralen Nervensystems, ohne die Blutplättchenaggregation zu hemmen." },
     nl: { label: "Veilige pijnstiller", explain: "Paracetamol (acetaminofen) werkt op de pijnreceptoren van het centraal zenuwstelsel zonder de klontering van bloedplaatjes te remmen." },
-    pt: { label: "Analgésico seguro", explain: "O paracetamol (acetaminofeno) atua sobre os recetores da dor do sistema nervoso central sem inibir a agregação plaquetária." }
+    pt: { label: "Analgésico seguro", explain: "O paracetamol (acetaminofeno) atua sobre os recetores da dor do sistema nervoso central sem inibir a agregação plaquetária." },
+    th: { label: "ยาแก้ปวดที่ปลอดภัย", explain: "อะเซตามิโนเฟน/พาราเซตามอลออกฤทธิ์กับตัวรับความเจ็บปวดในระบบประสาทส่วนกลางโดยไม่ยับยั้งการรวมตัวของเกล็ดเลือด" }
+
   },
   "Sedation Risk": {
     en: { label: "Sedation Risk", explain: "Central nervous system depressants reduce alertness, lowering blood pressure and raising risk of lightheadedness or nausea." },
@@ -261,7 +313,9 @@ const RISK_I18N = {
     es: { label: "Riesgo de sedación", explain: "Los depresores del sistema nervioso central reducen el estado de alerta, bajan la tensión arterial y aumentan el riesgo de mareo o náuseas." },
     de: { label: "Sedierungsrisiko", explain: "Dämpfende Mittel für das zentrale Nervensystem verringern die Wachheit, senken den Blutdruck und erhöhen das Risiko von Schwindel oder Übelkeit." },
     nl: { label: "Risico op sufheid", explain: "Middelen die het centraal zenuwstelsel dempen verlagen de alertheid en de bloeddruk en vergroten de kans op licht worden in het hoofd of misselijkheid." },
-    pt: { label: "Risco de sedação", explain: "Os depressores do sistema nervoso central reduzem o estado de alerta, baixam a tensão arterial e aumentam o risco de tonturas ou náuseas." }
+    pt: { label: "Risco de sedação", explain: "Os depressores do sistema nervoso central reduzem o estado de alerta, baixam a tensão arterial e aumentam o risco de tonturas ou náuseas." },
+    th: { label: "ความเสี่ยงการกดประสาท", explain: "ยากดระบบประสาทส่วนกลางลดความตื่นตัว ลดความดันโลหิต และเพิ่มความเสี่ยงต่อการเวียนศีรษะหรือคลื่นไส้" }
+
   },
   "Severe Dehydration": {
     en: { label: "Severe Dehydration", explain: "Alcohol suppresses vasopressin, so fluid leaves the body faster than it is replaced, lowering blood volume and raising fainting risk." },
@@ -270,7 +324,9 @@ const RISK_I18N = {
     es: { label: "Deshidratación grave", explain: "El alcohol inhibe la vasopresina: el líquido sale del cuerpo más rápido de lo que se repone, lo que baja el volumen sanguíneo y aumenta el riesgo de desmayo." },
     de: { label: "Starke Austrocknung", explain: "Alkohol hemmt das Vasopressin: Flüssigkeit verlässt den Körper schneller, als sie ersetzt wird, das Blutvolumen sinkt und das Ohnmachtsrisiko steigt." },
     nl: { label: "Ernstige uitdroging", explain: "Alcohol remt vasopressine: er gaat sneller vocht uit het lichaam dan er wordt aangevuld, waardoor het bloedvolume daalt en de kans op flauwvallen stijgt." },
-    pt: { label: "Desidratação grave", explain: "O álcool inibe a vasopressina: o líquido sai do corpo mais depressa do que é reposto, o que baixa o volume sanguíneo e aumenta o risco de desmaio." }
+    pt: { label: "Desidratação grave", explain: "O álcool inibe a vasopressina: o líquido sai do corpo mais depressa do que é reposto, o que baixa o volume sanguíneo e aumenta o risco de desmaio." },
+    th: { label: "ภาวะขาดน้ำรุนแรง", explain: "แอลกอฮอล์กดการหลั่งวาโซเพรสซิน ทำให้ของเหลวออกจากร่างกายเร็วกว่าที่ได้รับทดแทน ปริมาตรเลือดลดลงและเพิ่มความเสี่ยงเป็นลม" }
+
   },
   "Severe Scarring": {
     en: { label: "Severe Scarring", explain: "Isotretinoin (Accutane) suppresses sebum and alters skin cell regeneration, causing fragile skin to form keloid or hypertrophic scars." },
@@ -279,7 +335,9 @@ const RISK_I18N = {
     es: { label: "Cicatrices graves", explain: "La isotretinoína (Accutane) suprime el sebo y altera la regeneración celular: la piel, frágil, forma cicatrices queloides o hipertróficas." },
     de: { label: "Starke Narbenbildung", explain: "Isotretinoin (Accutane) unterdrückt den Talg und verändert die Zellerneuerung: die brüchige Haut bildet Keloide oder hypertrophe Narben." },
     nl: { label: "Ernstige littekenvorming", explain: "Isotretinoïne (Accutane) onderdrukt de talg en verandert de celvernieuwing: de kwetsbare huid vormt keloïde of hypertrofische littekens." },
-    pt: { label: "Cicatrizes graves", explain: "A isotretinoína (Accutane) suprime o sebo e altera a regeneração celular: a pele, frágil, forma cicatrizes queloides ou hipertróficas." }
+    pt: { label: "Cicatrizes graves", explain: "A isotretinoína (Accutane) suprime o sebo e altera a regeneração celular: a pele, frágil, forma cicatrizes queloides ou hipertróficas." },
+    th: { label: "แผลเป็นรุนแรง", explain: "Isotretinoin (Accutane) กดการสร้างไขมันผิวและเปลี่ยนการสร้างเซลล์ผิวใหม่ ทำให้ผิวที่บอบบางเกิดแผลเป็นคีลอยด์หรือแผลเป็นนูนหนา" }
+
   },
   "Severe Vasoconstriction": {
     en: { label: "Severe Vasoconstriction", explain: "Stimulants narrow blood vessels sharply, blanching the skin and restricting blood flow to the area being worked on." },
@@ -288,7 +346,9 @@ const RISK_I18N = {
     es: { label: "Vasoconstricción grave", explain: "Los estimulantes estrechan mucho los vasos sanguíneos, blanquean la piel y limitan el riego de la zona sobre la que se trabaja." },
     de: { label: "Starke Gefäßverengung", explain: "Stimulanzien verengen die Blutgefäße stark, lassen die Haut abblassen und drosseln die Durchblutung der bearbeiteten Stelle." },
     nl: { label: "Sterke vaatvernauwing", explain: "Stimulerende middelen vernauwen de bloedvaten sterk, laten de huid verbleken en beperken de doorbloeding van het bewerkte gebied." },
-    pt: { label: "Vasoconstrição grave", explain: "Os estimulantes apertam fortemente os vasos sanguíneos, fazem a pele empalidecer e limitam a irrigação da zona trabalhada." }
+    pt: { label: "Vasoconstrição grave", explain: "Os estimulantes apertam fortemente os vasos sanguíneos, fazem a pele empalidecer e limitam a irrigação da zona trabalhada." },
+    th: { label: "หลอดเลือดหดตัวรุนแรง", explain: "ยากระตุ้นทำให้หลอดเลือดแคบลงอย่างรุนแรง ทำให้ผิวซีดและจำกัดการไหลเวียนเลือดในบริเวณที่ทำ" }
+
   },
   "Skin Fragility at Site": {
     en: { label: "Skin Fragility at Site", explain: "Topical corticosteroids thin local dermal collagen fibers." },
@@ -297,7 +357,9 @@ const RISK_I18N = {
     es: { label: "Fragilidad cutánea en la zona", explain: "Los corticoides tópicos adelgazan las fibras de colágeno de la dermis en el punto donde se aplican." },
     de: { label: "Empfindliche Haut an der Stelle", explain: "Örtlich aufgetragene Kortikoide dünnen die Kollagenfasern der Lederhaut genau dort aus, wo sie aufgetragen werden." },
     nl: { label: "Kwetsbare huid op de plek", explain: "Corticosteroïdzalf maakt de collageenvezels van de lederhuid dunner op precies de plek waar hij wordt aangebracht." },
-    pt: { label: "Fragilidade cutânea na zona", explain: "Os corticoides tópicos afinam as fibras de colagénio da derme no ponto exato onde são aplicados." }
+    pt: { label: "Fragilidade cutânea na zona", explain: "Os corticoides tópicos afinam as fibras de colagénio da derme no ponto exato onde são aplicados." },
+    th: { label: "ผิวบอบบางบริเวณนั้น", explain: "สเตียรอยด์ชนิดทาทำให้เส้นใยคอลลาเจนในชั้นหนังแท้บริเวณที่ทาบางลง" }
+
   },
   "Skin Sensitivity": {
     en: { label: "Skin Sensitivity", explain: "Accelerated exfoliation makes skin hyper-reactive to needle friction and aftercare products." },
@@ -306,7 +368,9 @@ const RISK_I18N = {
     es: { label: "Sensibilidad cutánea", explain: "Una exfoliación acelerada vuelve la piel hiperreactiva al roce de la aguja y a los productos de cuidado." },
     de: { label: "Hautempfindlichkeit", explain: "Beschleunigte Abschuppung macht die Haut überempfindlich gegenüber der Reibung der Nadel und gegenüber Pflegeprodukten." },
     nl: { label: "Huidgevoeligheid", explain: "Versnelde vervelling maakt de huid overgevoelig voor de wrijving van de naald en voor verzorgingsproducten." },
-    pt: { label: "Sensibilidade cutânea", explain: "Uma esfoliação acelerada torna a pele hiper-reativa ao atrito da agulha e aos produtos de cuidado." }
+    pt: { label: "Sensibilidade cutânea", explain: "Uma esfoliação acelerada torna a pele hiper-reativa ao atrito da agulha e aos produtos de cuidado." },
+    th: { label: "ความไวของผิว", explain: "การผลัดเซลล์ที่เร่งขึ้นทำให้ผิวไวต่อแรงเสียดสีจากเข็มและผลิตภัณฑ์ดูแลหลังทำมากเกินไป" }
+
   },
   "Skin Texture Alteration": {
     en: { label: "Skin Texture Alteration", explain: "Topical anesthetics cause localized edema (fluid swelling in skin cells), making skin rubbery and harder for needles to deposit ink evenly." },
@@ -315,7 +379,9 @@ const RISK_I18N = {
     es: { label: "Alteración de la textura de la piel", explain: "Los anestésicos tópicos provocan un edema localizado (hinchazón de las células por acumulación de líquido) que vuelve la piel gomosa y dificulta depositar la tinta de forma uniforme." },
     de: { label: "Veränderte Hautbeschaffenheit", explain: "Örtliche Betäubungsmittel erzeugen ein lokales Ödem (Flüssigkeitsschwellung in den Hautzellen), das die Haut gummiartig macht und ein gleichmäßiges Einbringen der Farbe erschwert." },
     nl: { label: "Veranderde huidstructuur", explain: "Verdovende zalf veroorzaakt plaatselijk oedeem (vochtophoping in de huidcellen), waardoor de huid rubberachtig wordt en de inkt zich lastiger gelijkmatig laat aanbrengen." },
-    pt: { label: "Alteração da textura da pele", explain: "Os anestésicos tópicos provocam um edema localizado (inchaço das células por acumulação de líquido) que torna a pele emborrachada e dificulta depositar a tinta de forma uniforme." }
+    pt: { label: "Alteração da textura da pele", explain: "Os anestésicos tópicos provocam um edema localizado (inchaço das células por acumulação de líquido) que torna a pele emborrachada e dificulta depositar a tinta de forma uniforme." },
+    th: { label: "การเปลี่ยนแปลงเนื้อผิว", explain: "ยาชาเฉพาะที่ทำให้เกิดอาการบวมเฉพาะที่ (การคั่งของของเหลวในเซลล์ผิว) ทำให้ผิวคล้ายยางและเข็มฝากหมึกได้สม่ำเสมอยากขึ้น" }
+
   },
   "Slightly Thicker Blood": {
     en: { label: "Slightly Thicker Blood", explain: "Testosterone increases red blood cell count (hematocrit), making blood slightly denser during heavy linework." },
@@ -324,7 +390,9 @@ const RISK_I18N = {
     es: { label: "Sangre ligeramente más espesa", explain: "La testosterona aumenta el número de glóbulos rojos (hematocrito) y hace la sangre algo más densa durante los trazos marcados." },
     de: { label: "Etwas dickeres Blut", explain: "Testosteron erhöht die Zahl der roten Blutkörperchen (Hämatokrit) und macht das Blut bei kräftigen Linien etwas dickflüssiger." },
     nl: { label: "Iets dikker bloed", explain: "Testosteron verhoogt het aantal rode bloedcellen (hematocriet), waardoor het bloed bij stevig lijnwerk iets dikker is." },
-    pt: { label: "Sangue ligeiramente mais espesso", explain: "A testosterona aumenta o número de glóbulos vermelhos (hematócrito) e torna o sangue ligeiramente mais denso durante os traços carregados." }
+    pt: { label: "Sangue ligeiramente mais espesso", explain: "A testosterona aumenta o número de glóbulos vermelhos (hematócrito) e torna o sangue ligeiramente mais denso durante os traços carregados." },
+    th: { label: "เลือดข้นขึ้นเล็กน้อย", explain: "เทสโทสเตอโรนเพิ่มจำนวนเม็ดเลือดแดง (ฮีมาโทคริต) ทำให้เลือดข้นขึ้นเล็กน้อยระหว่างการลงเส้นหนัก" }
+
   },
   "Vasoconstriction": {
     en: { label: "Vasoconstriction", explain: "Narrowing of blood vessels blanches skin, making alignment difficult and temporarily restricting blood flow." },
@@ -333,7 +401,9 @@ const RISK_I18N = {
     es: { label: "Vasoconstricción", explain: "El estrechamiento de los vasos blanquea la piel, dificulta la alineación y limita temporalmente el flujo sanguíneo." },
     de: { label: "Gefäßverengung", explain: "Verengte Gefäße lassen die Haut abblassen, erschweren das Ausrichten und drosseln vorübergehend die Durchblutung." },
     nl: { label: "Vaatvernauwing", explain: "Vernauwde bloedvaten laten de huid verbleken, maken uitlijnen lastig en beperken tijdelijk de doorbloeding." },
-    pt: { label: "Vasoconstrição", explain: "O aperto dos vasos faz a pele empalidecer, dificulta o alinhamento e limita temporariamente o fluxo sanguíneo." }
+    pt: { label: "Vasoconstrição", explain: "O aperto dos vasos faz a pele empalidecer, dificulta o alinhamento e limita temporariamente o fluxo sanguíneo." },
+    th: { label: "หลอดเลือดหดตัว", explain: "การหดตัวของหลอดเลือดทำให้ผิวซีด การจัดแนวยากขึ้น และจำกัดการไหลเวียนเลือดชั่วคราว" }
+
   },
   "Vasodilation": {
     en: { label: "Vasodilation", explain: "THC widens blood vessels, increasing blood flow to the skin and the clear plasma that weeps from a fresh tattoo." },
@@ -342,7 +412,9 @@ const RISK_I18N = {
     es: { label: "Vasodilatación", explain: "El THC dilata los vasos sanguíneos, lo que aumenta el riego de la piel y el plasma transparente que rezuma de un tatuaje reciente." },
     de: { label: "Gefäßerweiterung", explain: "THC weitet die Blutgefäße, steigert die Durchblutung der Haut und das klare Wundwasser, das aus einem frischen Tattoo tritt." },
     nl: { label: "Vaatverwijding", explain: "THC verwijdt de bloedvaten, waardoor de huid meer doorbloed raakt en er meer helder wondvocht uit een verse tatoeage lekt." },
-    pt: { label: "Vasodilatação", explain: "O THC dilata os vasos sanguíneos, aumentando a irrigação da pele e o plasma transparente que escorre de uma tatuagem recente." }
+    pt: { label: "Vasodilatação", explain: "O THC dilata os vasos sanguíneos, aumentando a irrigação da pele e o plasma transparente que escorre de uma tatuagem recente." },
+    th: { label: "หลอดเลือดขยายตัว", explain: "THC ทำให้หลอดเลือดขยายตัว เพิ่มการไหลเวียนเลือดไปยังผิวและน้ำเหลืองใสที่ซึมออกจากรอยสักใหม่" }
+
   }
 };
 

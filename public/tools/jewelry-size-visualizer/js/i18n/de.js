@@ -211,7 +211,7 @@ window.i18nDictionaries['de'] = {
   "common.healed": "Geheilt (Gekürzt)",
   "common.inches": "Zoll",
   "common.initialJewelry": "Erstschmuck",
-  "common.langTooltip": "Verfügbare Sprachen: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL)",
+  "common.langTooltip": "Verfügbare Sprachen: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL), ไทย (TH)",
   "common.language": "Sprache",
   "common.length": "Länge",
   "common.loading": "Laden...",

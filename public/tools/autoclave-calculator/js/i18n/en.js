@@ -1389,7 +1389,7 @@
     "Studio &amp; Audio Settings (Press G)": "Studio &amp; Audio Settings (Press G)",
     "Studio / Facility Name": "Studio / Facility Name",
     "Studio / Facility Name:": "Studio / Facility Name:",
-    "Studio Crm": "Studio Crm",
+    "Studio CRM": "Studio CRM",
     "Studio Efficiency Tip: Streamlining your administrative tasks allows you to focus more on your art. Our tools are designed with a studio-first mentality, ensuring high performance, data privacy, and professional-grade accuracy.": "Studio Efficiency Tip: Streamlining your administrative tasks allows you to focus more on your art. Our tools are designed with a studio-first mentality, ensuring high performance, data privacy, and professional-grade accuracy.",
     "Studio Logo": "Studio Logo",
     "Studio Logo & Target": "Studio Logo & Target",
@@ -2956,6 +2956,6 @@
     "header.dailyTarget": "Daily Target",
     "header.settings": "Settings",
     "header.shortcuts": "Shortcuts",
-    "opt.bioflex.body.jewelry": "BioFlex® body jewellery"
+    "opt.bioflex.body.jewelry": "BioFlex® body jewelry"
 });
 })();

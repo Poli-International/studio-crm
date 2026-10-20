@@ -1389,7 +1389,7 @@
     "Studio &amp; Audio Settings (Press G)": "Studio &amp; Audio Instellingen (Press G)",
     "Studio / Facility Name": "Studio- / Locatienaam",
     "Studio / Facility Name:": "Studio- / Locatienaam:",
-    "Studio Crm": "Studio CRM",
+    "Studio CRM": "Studio CRM",
     "Studio Efficiency Tip: Streamlining your administrative tasks allows you to focus more on your art. Our tools are designed with a studio-first mentality, ensuring high performance, data privacy, and professional-grade accuracy.": "Studio-efficiëntietip: door uw administratieve taken te stroomlijnen kunt u zich meer richten op uw kunst. Onze tools zijn ontworpen met een studio-eerst mentaliteit, met hoge prestaties, gegevensprivacy en professionele nauwkeurigheid.",
     "Studio Logo": "Studiologo",
     "Studio Logo & Target": "Studiologo en doel",

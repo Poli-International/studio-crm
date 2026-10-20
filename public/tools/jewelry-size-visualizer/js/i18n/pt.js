@@ -211,7 +211,7 @@ window.i18nDictionaries['pt'] = {
   "common.healed": "Cicatrizado (Reduzido)",
   "common.inches": "polegadas",
   "common.initialJewelry": "Joia Inicial",
-  "common.langTooltip": "Idiomas disponíveis: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL)",
+  "common.langTooltip": "Idiomas disponíveis: English (EN), Deutsch (DE), Français (FR), Español (ES), Italiano (IT), Português (PT), Nederlands (NL), ไทย (TH)",
   "common.language": "Idioma",
   "common.length": "Comprimento",
   "common.loading": "Carregando...",

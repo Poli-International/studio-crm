@@ -9,6 +9,7 @@
  *   🇪🇸 Español (es)
  *   🇳🇱 Nederlands (nl)
  *   🇵🇹 Português (pt)
+ *   🇹🇭 ไทย (th)
  * ═══════════════════════════════════════════════════════════
  */
 
@@ -22,7 +23,8 @@
         'de': { code: 'de', name: 'Deutsch', flag: '🇩🇪', label: '🇩🇪 Deutsch' },
         'es': { code: 'es', name: 'Español', flag: '🇪🇸', label: '🇪🇸 Español' },
         'nl': { code: 'nl', name: 'Nederlands', flag: '🇳🇱', label: '🇳🇱 Nederlands' },
-        'pt': { code: 'pt', name: 'Português', flag: '🇵🇹', label: '🇵🇹 Português' }
+        'pt': { code: 'pt', name: 'Português', flag: '🇵🇹', label: '🇵🇹 Português' },
+        'th': { code: 'th', name: 'ไทย', flag: '🇹🇭', label: '🇹🇭 ไทย' }
     };
 
     const STORAGE_KEY = 'coverage-app-lang';

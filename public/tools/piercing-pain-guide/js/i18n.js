@@ -1,6 +1,6 @@
 // ═══════════════════════════════════════════════════════════════
 // I18N.JS - Internationalization Engine for Piercing Pain Guide V2
-// Synchronous key lookup, 7-language selector, DOM hydration, and redraw events.
+// Synchronous key lookup, 8-language selector, DOM hydration, and redraw events.
 // ═══════════════════════════════════════════════════════════════
 
 (function() {
@@ -13,7 +13,8 @@
     fr: 'Français',
     it: 'Italiano',
     nl: 'Nederlands',
-    pt: 'Português'
+    pt: 'Português',
+    th: 'ไทย'
   };
 
   const STORAGE_KEY = 'poli_tools_language';

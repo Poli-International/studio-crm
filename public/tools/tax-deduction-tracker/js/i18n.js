@@ -1,7 +1,7 @@
 /* ==========================================================================
    Tattoo Artist Tax Deduction Tracker: Internationalisation Engine
    Poli International Studio Tools
-   Supports 7 Languages: en, fr, it, de, es, nl, pt
+   Supports 8 Languages: en, fr, it, de, es, nl, pt, th
    Pure client-side zero-dependency localization engine
    ========================================================================== */
 
@@ -13,7 +13,7 @@
 
   try {
     const saved = localStorage.getItem('poli-tax-lang');
-    if (saved && (saved === 'en' || saved === 'fr' || saved === 'it' || saved === 'de' || saved === 'es' || saved === 'nl' || saved === 'pt')) {
+    if (saved && (saved === 'en' || saved === 'fr' || saved === 'it' || saved === 'de' || saved === 'es' || saved === 'nl' || saved === 'pt' || saved === 'th')) {
       currentLang = saved;
     }
   } catch (e) {

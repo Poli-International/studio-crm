@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+<head><meta name="robots" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standmiete vs. Provision Rechner: Dokumentation | Poli International</title>
+    <meta name="description" content="Die Rechnung von Standmiete gegen Provision, von beiden Seiten des Tisches betrachtet.">
+    <link rel="canonical" href="https://poliinternational.com/booth-rent-calculator/">
+    <style>
+        body { background: #0f0f0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; }
+        body.in-iframe .doc-hero h1 { display: none; }
+        * { box-sizing: border-box; }
+        .entry-content { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .doc-hero { background: linear-gradient(135deg, #3B82F6, #8B5CF6); padding: 3rem 2rem; text-align: center; border-radius: 0.75rem; margin-bottom: 2rem; }
+        .doc-hero h1 { font-size: 2.2rem; margin: 0 0 1rem; font-weight: 700; }
+        .doc-hero p { font-size: 1.15rem; color: #E0E7FF; margin: 0; }
+        .doc-hero .v2 { display: inline-block; margin-bottom: 1rem; padding: 0.2rem 0.75rem; border-radius: 999px; background: #10B981; color: #04241a; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; }
+        .doc-section { margin: 2rem 0; padding: 2rem; background: #1a1a1a; border-radius: 0.75rem; border-left: 4px solid #3B82F6; }
+        .doc-section h2 { color: #60A5FA; font-size: 1.7rem; margin: 0 0 1.25rem; font-weight: 600; }
+        .doc-section h3 { color: #A78BFA; font-size: 1.3rem; margin: 1.75rem 0 0.75rem; font-weight: 600; }
+        .doc-section p, .doc-section li { color: #ccc; line-height: 1.75; font-size: 1.02rem; }
+        .doc-section ul, .doc-section ol { padding-left: 1.5rem; }
+        .doc-section li { margin: 0.4rem 0; }
+        .doc-section code { background: #2a2a2a; padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.92em; }
+        .doc-section a { color: #60A5FA; font-weight: 600; }
+        .highlight-box { background: linear-gradient(135deg, #1E3A8A, #4C1D95); padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; border-left: 4px solid #10B981; }
+        .highlight-box p { color: #E0E7FF; margin: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border: 1px solid #333; vertical-align: top; }
+        th { background: #2a2a2a; color: #60A5FA; }
+        td { color: #ccc; }
+    </style>
+</head>
+<body>
+<nav class="doc-langs" aria-label="Sprache der Dokumentation" style="display:flex;flex-wrap:wrap;gap:6px 14px;max-width:900px;margin:12px auto 0;padding:0 16px;font-size:14px;"><a lang="en" href="documentation.html">English</a><a lang="fr" href="documentation-fr.html">Français</a><span lang="de">Deutsch</span><a lang="it" href="documentation-it.html">Italiano</a><a lang="es" href="documentation-es.html">Español</a><a lang="nl" href="documentation-nl.html">Nederlands</a><a lang="pt" href="documentation-pt.html">Português</a><a lang="th" href="documentation-th.html">ไทย</a></nav>
+<script>if (window.self !== window.top) document.body.classList.add('in-iframe');</script>
+    <div class="entry-content">
+        <div class="doc-hero">
+            <span class="v2">V2</span>
+            <h1>Standmiete vs. Provision Rechner</h1>
+            <p>Die Rechnung von Standmiete gegen Provision, von beiden Seiten des Tisches betrachtet.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Überblick</h2>
+        <p>Der Standmiete vs. Provision Rechner berechnet die Rechnung der beiden üblichen Studio-Modelle auf denselben Umsatz: eine feste wöchentliche Standmiete oder eine prozentuale Provision, die an das Studio gezahlt wird. Er zeigt das Ergebnis von beiden Seiten des Tisches, für die Künstlerin bzw. den Künstler und für die Studioinhaberin bzw. den Studioinhaber, und ermittelt den monatlichen Umsatz, bei dem beide Modelle gleich viel kosten.</p>
+        <p>Er zeigt Zahlen, keine Empfehlungen. Er sagt nicht, welches Modell besser ist, und er sagt nichts zu Beschäftigungsstatus, Mietrecht oder Steuern, die von Land zu Land verschieden sind.</p>
+        <p>Alles läuft in Ihrem Browser. Was Sie eingeben, wird nirgendwohin gesendet.</p>
+        </div>
+        <div class="doc-section">
+        <h2>1. Vertragsvergleich</h2>
+        <p>Geben Sie die Vertragsparameter ein: Standmiete pro Woche, den Provisionssatz des Studios und die Arbeitswochen pro Jahr. Der Vergleich zeigt nebeneinander, was die Künstlerin bzw. der Künstler und was das Studio in jedem Modell erhält.</p>
+        <ul>
+        <li><strong>Monatsumsatz an der Gewinnschwelle</strong> ist die eine Zahl, auf die es bei der Entscheidung ankommt: darunter kostet die Provision die Künstlerin bzw. den Künstler weniger; darüber kostet die Standmiete weniger.</li>
+        <li><strong>Gestaffelte Provision / Sliding-Scale</strong> wendet auf bis zu drei Umsatzstufen pro Monat einen unterschiedlichen Studioanteil an und zeigt den gemischten effektiven Satz.</li>
+        <li><strong>Hybrid (Miete + Provision)</strong> kombiniert eine niedrigere Grundmiete mit einem reduzierten Provisionsanteil.</li>
+        <li><strong>Mindestgarantie</strong> gibt dem Studio seine Provision oder einen wöchentlichen Mindestbetrag, je nachdem, welcher Betrag höher ist.</li>
+        <li><strong>Laufkundschaft vs. eigene Kunden</strong> trennt die vom Studio vermittelte Laufkundschaft von Terminen, die die Künstlerin bzw. der Künstler selbst mitbringt.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>2. Mehrfachangebots-Matrix</h2>
+        <p>Vergleichen Sie bis zu drei konkurrierende Studioangebote nebeneinander, jedes mit eigener Miete, eigener Provision und eigenen Abzügen, damit Sie sehen, wie sie anhand Ihrer eigenen Zahlen abschneiden.</p>
+        </div>
+        <div class="doc-section">
+        <h2>3. Realistische Simulation</h2>
+        <p>Der beste Fall ist selten der Monat, den Sie tatsächlich erleben. Legen Sie Arbeitstage pro Monat, Termine pro Tag, durchschnittlichen Umsatz pro Termin und Ausfallquote fest. Das Werkzeug leitet daraus drei Monate ab und zeigt die Spanne statt einer einzigen Zahl:</p>
+        <ul>
+        <li><strong>Konservativer / schwacher Monat</strong>: mehr Absagen (+10 %) und geringeres Volumen (-15 %).</li>
+        <li><strong>Realistischer / erwarteter Monat</strong>: Ihre geplanten Tage mit Ihrer Ausfallquote.</li>
+        <li><strong>Starker / geschäftiger Monat</strong>: nahezu keine Absagen und höhere Nachfrage (+20 %).</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>4. Jährlicher Cashflow</h2>
+        <p>Projektion über 52 Wochen mit saisonaler Nachfrage und freien Zeiten. Die Standmiete bleibt während Ihrer Abwesenheit meist fällig, die Provision nicht. Diese Ansicht zeigt daher, wie Urlaub, Messen und ruhige Monate die Jahressumme jedes Modells verschieben.</p>
+        </div>
+        <div class="doc-section">
+        <h2>5. Studio-Raumplanung</h2>
+        <p>Die Sicht der Studioinhaberin bzw. des Studioinhabers. Modellieren Sie die Stationsbesetzung, die festen gewerblichen Kosten (Miete, Abgaben, Versicherung, Personal) und die Auslastung und sehen Sie, wie viele Stationen belegt sein müssen, damit das Studio in jedem Modell seine Kosten deckt.</p>
+        </div>
+        <div class="doc-section">
+        <h2>6. Verbrauchsmaterial und Zubehör</h2>
+        <p>Eine Mietangabe sagt wenig, solange nicht klar ist, wer was bezahlt. Jede Position, einschließlich Verbrauchsmaterial, Wäscheservice und Sterilisation, Kartengebühren und Nebenkosten, wird in jedem Modell der Künstlerin bzw. dem Künstler oder dem Studio zugeordnet.</p>
+        <ul>
+        <li>Eine Position <strong>monatlich</strong>, <strong>pro Behandlung</strong> oder als <strong>Prozentsatz des Bruttoumsatzes</strong> (Kartengebühren) bepreisen.</li>
+        <li>Ein Standard-Piercing-Set (Nadeln, Handschuhe und Barrieren, Hautvorbereitung, Sterilisationsindikatoren) ist enthalten und bearbeitbar.</li>
+        <li>Eigene Positionen fügen Sie mit dem Generator für individuelle Verbrauchsmaterialien hinzu.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>7. Gewinnschwellen-Kurve</h2>
+        <p>Ein Diagramm der Nettoeinnahmen gegen den monatlichen Umsatz mit vier Linien: Künstlerin bzw. Künstler und Inhaberin bzw. Inhaber, jeweils bei Standmiete und bei Provision. Jede Linie hat ein eigenes Muster (durchgezogen, gestrichelt, gepunktet, Strich-Punkt), damit sie auch im Schwarzweißdruck lesbar bleibt. Dort, wo sich die Linien kreuzen, liegt der Gewinnschwellen-Umsatz aus Abschnitt 1, bei dem beide Modelle dasselbe Ergebnis liefern.</p>
+        </div>
+        <div class="doc-section">
+        <h2>8. Druckbares Formblatt</h2>
+        <p>Eine einseitige Zusammenfassung des Vertrags und seiner Ergebnisse im Format A4 / US Letter, die beide Seiten prüfen können. Sie ist eindeutig als Berechnung gekennzeichnet, nicht als Vereinbarung, Vertrag oder Mietvertrag.</p>
+        </div>
+        <div class="doc-section">
+        <h2>9. Vorlagen, Teilen und Export</h2>
+        <ul>
+        <li><strong>Gespeicherte Vorlagen</strong> speichern einen Vertrag in Ihrem eigenen Browser unter einem Namen wie „Angebot Innenstadt“, um ihn später erneut zu laden.</li>
+        <li><strong>Deal-Link teilen</strong> kopiert eine URL, die genau diesen Vertrag für jede Person öffnet, der Sie sie senden.</li>
+        <li><strong>CSV- und JSON-Export</strong> lädt die vollständige Berechnung für eine Tabellenkalkulation oder Ihre eigenen Unterlagen herunter.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>10. Sprachen und Währung</h2>
+        <p>Die Oberfläche ist auf Englisch, Französisch, Italienisch, Deutsch, Spanisch, Niederländisch und Portugiesisch verfügbar. Beträge werden entsprechend der gewählten Sprache formatiert.</p>
+        </div>
+        <div class="doc-section">
+        <h2>11. Wichtiger Hinweis</h2>
+        <p>Dieses Werkzeug führt ausschließlich einen rechnerischen Vergleich durch. Es ist keine finanzielle, rechtliche oder steuerliche Beratung und weder eine Vereinbarung noch ein Vertrag. Die Regeln zur Standmiete, zur Einstufung des Beschäftigungsstatus und zur Besteuerung unterscheiden sich von Land zu Land: Holen Sie vor jeder Unterschrift qualifizierten fachlichen Rat ein.</p>
+        </div>
+        <div class="doc-section">
+            <h2>Das Werkzeug verwenden</h2>
+            <p><a href="https://poliinternational.com/booth-rent-calculator/" target="_top">Standmiete vs. Provision Rechner öffnen</a>. Alles läuft in Ihrem Browser; was Sie eingeben, wird nirgendwohin gesendet.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head><meta name="robots" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Aluguer de Posto vs Comissão: documentação | Poli International</title>
+    <meta name="description" content="A aritmética do aluguer de posto face à comissão, vista dos dois lados da mesa.">
+    <link rel="canonical" href="https://poliinternational.com/booth-rent-calculator/">
+    <style>
+        body { background: #0f0f0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; }
+        body.in-iframe .doc-hero h1 { display: none; }
+        * { box-sizing: border-box; }
+        .entry-content { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .doc-hero { background: linear-gradient(135deg, #3B82F6, #8B5CF6); padding: 3rem 2rem; text-align: center; border-radius: 0.75rem; margin-bottom: 2rem; }
+        .doc-hero h1 { font-size: 2.2rem; margin: 0 0 1rem; font-weight: 700; }
+        .doc-hero p { font-size: 1.15rem; color: #E0E7FF; margin: 0; }
+        .doc-hero .v2 { display: inline-block; margin-bottom: 1rem; padding: 0.2rem 0.75rem; border-radius: 999px; background: #10B981; color: #04241a; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; }
+        .doc-section { margin: 2rem 0; padding: 2rem; background: #1a1a1a; border-radius: 0.75rem; border-left: 4px solid #3B82F6; }
+        .doc-section h2 { color: #60A5FA; font-size: 1.7rem; margin: 0 0 1.25rem; font-weight: 600; }
+        .doc-section h3 { color: #A78BFA; font-size: 1.3rem; margin: 1.75rem 0 0.75rem; font-weight: 600; }
+        .doc-section p, .doc-section li { color: #ccc; line-height: 1.75; font-size: 1.02rem; }
+        .doc-section ul, .doc-section ol { padding-left: 1.5rem; }
+        .doc-section li { margin: 0.4rem 0; }
+        .doc-section code { background: #2a2a2a; padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.92em; }
+        .doc-section a { color: #60A5FA; font-weight: 600; }
+        .highlight-box { background: linear-gradient(135deg, #1E3A8A, #4C1D95); padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; border-left: 4px solid #10B981; }
+        .highlight-box p { color: #E0E7FF; margin: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border: 1px solid #333; vertical-align: top; }
+        th { background: #2a2a2a; color: #60A5FA; }
+        td { color: #ccc; }
+    </style>
+</head>
+<body>
+<nav class="doc-langs" aria-label="Idioma da documentação" style="display:flex;flex-wrap:wrap;gap:6px 14px;max-width:900px;margin:12px auto 0;padding:0 16px;font-size:14px;"><a lang="en" href="documentation.html">English</a><a lang="fr" href="documentation-fr.html">Français</a><a lang="de" href="documentation-de.html">Deutsch</a><a lang="it" href="documentation-it.html">Italiano</a><a lang="es" href="documentation-es.html">Español</a><a lang="nl" href="documentation-nl.html">Nederlands</a><span lang="pt">Português</span><a lang="th" href="documentation-th.html">ไทย</a></nav>
+<script>if (window.self !== window.top) document.body.classList.add('in-iframe');</script>
+    <div class="entry-content">
+        <div class="doc-hero">
+            <span class="v2">V2</span>
+            <h1>Calculadora de Aluguer de Posto vs Comissão</h1>
+            <p>A aritmética do aluguer de posto face à comissão, vista dos dois lados da mesa.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Visão geral</h2>
+        <p>A Calculadora de Aluguer de Posto vs Comissão calcula a aritmética dos dois acordos habituais em estúdio sobre o mesmo volume de receita: um aluguer semanal fixo pelo posto, ou uma percentagem de comissão paga ao estúdio. Mostra o resultado dos dois lados da mesa, para o artista e para o proprietário do estúdio, e encontra o volume de receita mensal a partir do qual os dois custam o mesmo.</p>
+        <p>Mostra números, não aconselha. Não diz qual dos acordos é melhor e não diz nada sobre estatuto laboral, arrendamento ou impostos, que variam de país para país.</p>
+        <p>Tudo funciona no seu navegador. Nada do que introduz é enviado para lado nenhum.</p>
+        </div>
+        <div class="doc-section">
+        <h2>1. Comparação de contratos</h2>
+        <p>Introduza os parâmetros do contrato: aluguer semanal do posto, percentagem de comissão do estúdio e semanas de trabalho por ano. A comparação mostra, lado a lado, o que o artista fica e o que o estúdio recebe em cada modelo.</p>
+        <ul>
+        <li><strong>Receita Mensal de Ponto de Equilíbrio</strong> é o valor de que depende a decisão: abaixo dele, a comissão custa menos ao artista; acima, custa menos o aluguer do posto.</li>
+        <li><strong>Comissão em Escalões / Escala Progressiva</strong> aplica uma parte diferente ao estúdio em até três escalões de receita mensal e mostra a taxa efetiva combinada.</li>
+        <li><strong>Modelo Híbrido (Aluguer Semanal Base + Comissão Reduzida)</strong> combina um aluguer base mais baixo com uma parte de comissão reduzida.</li>
+        <li><strong>Garantia Mínima (Comissão com Piso Garantido do Estúdio)</strong> dá ao estúdio a sua comissão ou um mínimo semanal, consoante o que for mais alto.</li>
+        <li><strong>Divisão entre Clientes de Passagem e Clientes Próprios</strong> separa o movimento de clientes trazido pelo estúdio das marcações que o próprio artista traz.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>2. Matriz de Múltiplas Propostas</h2>
+        <p>Compare até três propostas concorrentes de estúdios lado a lado, cada uma com o seu aluguer, a sua comissão e as suas deduções, para ver como se classificam com os seus próprios números.</p>
+        </div>
+        <div class="doc-section">
+        <h2>3. Simulação Realista</h2>
+        <p>O melhor cenário raramente é o mês que realmente acontece. Defina os dias de trabalho por mês, as marcações por dia, o valor médio por atendimento e a taxa de faltas. A ferramenta calcula três meses a partir destes dados e mostra a variação em vez de um único valor:</p>
+        <ul>
+        <li><strong>Mês Conservador / Fraco</strong>: mais cancelamentos (+10 %) e menos volume (-15 %).</li>
+        <li><strong>Mês Realista / Esperado</strong>: os seus dias agendados com a sua taxa de faltas.</li>
+        <li><strong>Mês de Pico / Movimentado</strong>: cancelamentos quase nulos e maior procura (+20 %).</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>4. Fluxo de Caixa Anual</h2>
+        <p>Projeção de 52 semanas com procura sazonal e folgas. O aluguer do posto costuma continuar a ser devido enquanto está ausente e a comissão não, por isso esta vista mostra como férias, convenções e meses calmos alteram o total anual de cada modelo.</p>
+        </div>
+        <div class="doc-section">
+        <h2>5. Planta do Estúdio</h2>
+        <p>A vista do proprietário. Modele a escala dos postos, os custos comerciais fixos (renda, taxas, seguro, pessoal) e a ocupação, e veja quantos postos têm de estar ocupados para que o estúdio cubra as suas despesas em cada modelo.</p>
+        </div>
+        <div class="doc-section">
+        <h2>6. Consumíveis e Material</h2>
+        <p>Um valor de aluguer não significa nada enquanto não se souber quem paga o quê. Cada item, incluindo material, lavandaria e esterilização, taxas de cartão e serviços públicos, é atribuído ao artista ou ao estúdio em cada modelo.</p>
+        <ul>
+        <li>Preço de um item <strong>mensal</strong>, <strong>por procedimento</strong> ou como <strong>percentagem do bruto</strong> (taxas de cartão).</li>
+        <li>Um kit padrão de piercing (agulhas, luvas e barreiras, preparação da pele, indicadores de esterilização) está incluído e pode ser editado.</li>
+        <li>Acrescente os seus próprios itens com o construtor de consumíveis personalizados.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>7. Curva de Ponto de Equilíbrio</h2>
+        <p>Um gráfico dos ganhos líquidos em função da receita mensal, com quatro linhas: o artista e o proprietário, cada um com aluguer do posto e com comissão. Cada linha tem o seu próprio padrão (contínua, tracejada, pontilhada, traço-ponto), para continuar legível se for impressa a preto e branco. O ponto em que as linhas se cruzam é a receita de equilíbrio da secção 1, em que os dois modelos dão o mesmo resultado.</p>
+        </div>
+        <div class="doc-section">
+        <h2>8. Folha para Impressão</h2>
+        <p>Um resumo de uma página, em formato A4 / US Letter, do contrato e dos seus resultados, que as duas partes podem rever. Está claramente identificado como um cálculo, e não como um acordo, contrato ou arrendamento.</p>
+        </div>
+        <div class="doc-section">
+        <h2>9. Predefinições, partilha e exportação</h2>
+        <ul>
+        <li><strong>Predefinições Guardadas</strong> guardam um contrato no seu próprio navegador com um nome como «Proposta Centro da Cidade», para o carregar de novo mais tarde.</li>
+        <li><strong>Partilhar Link do Contrato</strong> copia um URL que abre este contrato exato para quem o enviar.</li>
+        <li><strong>Exportação CSV e JSON</strong> transfere o cálculo completo para uma folha de cálculo ou para os seus próprios registos.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>10. Idiomas e moeda</h2>
+        <p>A interface está disponível em inglês, francês, italiano, alemão, espanhol, neerlandês e português. Os valores são formatados de acordo com o idioma selecionado.</p>
+        </div>
+        <div class="doc-section">
+        <h2>11. Aviso importante</h2>
+        <p>Esta ferramenta faz apenas uma comparação aritmética. Não constitui aconselhamento financeiro, jurídico ou fiscal, nem é um acordo ou contrato. As regras sobre aluguer de postos, classificação do vínculo laboral e impostos variam de país para país: procure aconselhamento profissional qualificado antes de assinar qualquer documento.</p>
+        </div>
+        <div class="doc-section">
+            <h2>Utilizar a ferramenta</h2>
+            <p><a href="https://poliinternational.com/booth-rent-calculator/" target="_top">Abrir a Calculadora de Aluguer de Posto vs Comissão</a>. Tudo funciona no seu navegador; nada do que introduz é enviado para lado nenhum.</p>
+        </div>
+    </div>
+</body>
+</html>

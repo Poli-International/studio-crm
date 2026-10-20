@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="it">
+<head><meta name="robots" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatore di sterilizzazione per autoclave: documentazione | Poli International</title>
+    <meta name="description" content="Guida completa all'uso del Calcolatore di sterilizzazione per autoclave">
+    <link rel="canonical" href="https://poliinternational.com/autoclave-calculator-documentation/">
+    <style>
+        body {
+            background: #0f0f0f !important;
+            color: #fff !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        /* Hide h1 when in iframe to avoid duplicate headings */
+        body.in-iframe .doc-hero h1 { display: none !important; }
+        body.in-iframe .doc-hero { padding: 2rem 2rem !important; margin-bottom: 1rem !important; }
+        * {
+            box-sizing: border-box;
+        }
+        .entry-content {
+            max-width: 900px !important;
+            margin: 0 auto !important;
+            padding: 2rem 1rem !important;
+        }
+        .doc-hero {
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6) !important;
+            padding: 4rem 2rem !important;
+            text-align: center !important;
+            margin: -2rem -1rem 3rem !important;
+            border-radius: 0 !important;
+        }
+        .doc-hero h1 {
+            font-size: 2.5rem !important;
+            color: #fff !important;
+            margin: 0 0 1rem 0 !important;
+            font-weight: 700 !important;
+        }
+        .doc-hero p {
+            font-size: 1.25rem !important;
+            color: #E0E7FF !important;
+            margin: 0 !important;
+        }
+        .doc-section {
+            margin: 3rem 0 !important;
+            padding: 2rem !important;
+            background: #1a1a1a !important;
+            border-radius: 0.75rem !important;
+            border-left: 4px solid #3B82F6 !important;
+        }
+        .doc-section h2 {
+            color: #3B82F6 !important;
+            font-size: 2rem !important;
+            margin: 0 0 1.5rem 0 !important;
+            font-weight: 600 !important;
+        }
+        .doc-section h3 {
+            color: #8B5CF6 !important;
+            font-size: 1.5rem !important;
+            margin: 2rem 0 1rem 0 !important;
+            font-weight: 600 !important;
+        }
+        .doc-section p {
+            color: #ccc !important;
+            line-height: 1.8 !important;
+            margin-bottom: 1rem !important;
+            font-size: 1.05rem !important;
+        }
+        .doc-section ul {
+            margin: 1rem 0 !important;
+            padding-left: 0 !important;
+            list-style: none !important;
+        }
+        .doc-section ul li {
+            padding: 0.75rem 0 0.75rem 2rem !important;
+            position: relative !important;
+            color: #ccc !important;
+            line-height: 1.6 !important;
+        }
+        .doc-section ul li:before {
+            content: "✓" !important;
+            position: absolute !important;
+            left: 0 !important;
+            color: #10B981 !important;
+            font-weight: bold !important;
+            font-size: 1.2rem !important;
+        }
+        .doc-section a {
+            color: #3B82F6 !important;
+            text-decoration: none !important;
+            font-weight: 600 !important;
+            transition: color 0.2s !important;
+        }
+        .doc-section a:hover {
+            color: #8B5CF6 !important;
+            text-decoration: underline !important;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #1E3A8A, #4C1D95) !important;
+            padding: 1.5rem !important;
+            border-radius: 0.5rem !important;
+            margin: 2rem 0 !important;
+            border-left: 4px solid #10B981 !important;
+        }
+        .highlight-box p {
+            color: #E0E7FF !important;
+            margin-bottom: 0 !important;
+        }
+        .back-link {
+            display: inline-block !important;
+            padding: 0.75rem 1.5rem !important;
+            background: #3B82F6 !important;
+            color: #fff !important;
+            text-decoration: none !important;
+            border-radius: 0.5rem !important;
+            font-weight: 600 !important;
+            margin-top: 2rem !important;
+        }
+        .back-link:hover {
+            background: #8B5CF6 !important;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid #333;
+        }
+        th {
+            background: #2a2a2a;
+            color: #3B82F6;
+        }
+        td {
+            color: #ccc;
+        }
+        code {
+            background: #2a2a2a;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            color: #10B981;
+        }
+    </style>
+</head>
+<body>
+<nav class="doc-langs" aria-label="Lingua della documentazione" style="display:flex;flex-wrap:wrap;gap:6px 14px;max-width:900px;margin:12px auto 0;padding:0 16px;font-size:14px;"><a lang="en" href="documentation.html">English</a><a lang="fr" href="documentation-fr.html">Français</a><a lang="de" href="documentation-de.html">Deutsch</a><span lang="it">Italiano</span><a lang="es" href="documentation-es.html">Español</a><a lang="nl" href="documentation-nl.html">Nederlands</a><a lang="pt" href="documentation-pt.html">Português</a><a lang="th" href="documentation-th.html">ไทย</a></nav>
+<script>
+    // Detect if loaded in iframe and add class to hide h1
+    if (window.self !== window.top) {
+        document.body.classList.add('in-iframe');
+    }
+</script>
+    <div class="entry-content">
+        <div class="doc-hero">
+            <h1>Calcolatore di sterilizzazione per autoclave</h1>
+            <p>Calcolatore professionale dei cicli di sterilizzazione per studi di tatuaggio e piercing</p>
+        </div>
+
+        <div class="doc-section">
+            <h2>Panoramica</h2>
+            <p>Il <strong>Calcolatore di sterilizzazione per autoclave</strong> è uno strumento di precisione pensato per i professionisti del tatuaggio e del piercing, che calcola i corretti parametri di temperatura, pressione e tempo per diversi tipi di autoclave e configurazioni di carico. Aiuta a rispettare le normative sanitarie, massimizza l'efficacia della sterilizzazione e protegge le attrezzature.</p>
+        </div>
+
+        <div class="doc-section">
+            <h2>Caratteristiche principali</h2>
+            <ul>
+                <li><strong>Supporto per più autoclavi</strong> - Supporta sterilizzatori a gravità (tipo N), a pre-vuoto (tipo B) e a vapore chimico</li>
+                <li><strong>Ottimizzazione del tipo di carico</strong> - Calcola i parametri per carichi confezionati, non confezionati, porosi e cavi</li>
+                <li><strong>Calcolatore del tempo di ciclo</strong> - Fornisce la durata completa del ciclo, comprese le fasi di riscaldamento, esposizione e raffreddamento</li>
+                <li><strong>Tracciamento della conformità</strong> - Documenta i parametri di sterilizzazione per la conformità normativa e la tenuta dei registri</li>
+            </ul>
+        </div>
+
+        <div class="doc-section">
+            <h2>Come usarlo</h2>
+            <h3>1. Selezionare il tipo di autoclave</h3>
+            <p>Scegli il modello di autoclave: a gravità (comune negli studi più piccoli), a pre-vuoto (il migliore per gli strumenti confezionati) oppure a vapore chimico.</p>
+
+            <h3>2. Scegliere il tipo di carico</h3>
+            <p>Indica se stai sterilizzando strumenti confezionati (in buste), strumenti non confezionati (flash), articoli porosi (garze, bende) o strumenti cavi (tubi).</p>
+
+            <h3>3. Configurare i parametri</h3>
+            <p>Inserisci l'impostazione di temperatura e verifica i parametri di pressione e tempo calcolati.</p>
+
+            <h3>4. Controllare i risultati</h3>
+            <p>Lo strumento mostra il dettaglio completo del ciclo, inclusi il tempo minimo di esposizione e la durata totale del ciclo.</p>
+        </div>
+
+        <div class="doc-section">
+            <h2>Parametri di sterilizzazione</h2>
+            <table>
+                <tr>
+                    <th>Tipo di autoclave</th>
+                    <th>Temperatura</th>
+                    <th>Pressione</th>
+                    <th>Tempo minimo</th>
+                </tr>
+                <tr>
+                    <td>A gravità (tipo N)</td>
+                    <td>121°C (250°F)</td>
+                    <td>15 psi</td>
+                    <td>30 min</td>
+                </tr>
+                <tr>
+                    <td>A pre-vuoto (tipo B)</td>
+                    <td>134°C (273°F)</td>
+                    <td>30 psi</td>
+                    <td>4 min</td>
+                </tr>
+                <tr>
+                    <td>Vapore chimico</td>
+                    <td>132°C (270°F)</td>
+                    <td>20 psi</td>
+                    <td>20 min</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="doc-section">
+            <h2>Modificatori per tipo di carico</h2>
+            <table>
+                <tr>
+                    <th>Tipo di carico</th>
+                    <th>Modificatore di tempo</th>
+                    <th>Note</th>
+                </tr>
+                <tr>
+                    <td>Confezionato</td>
+                    <td>+10-15 min</td>
+                    <td>Richiede cicli più lunghi per la penetrazione del vapore</td>
+                </tr>
+                <tr>
+                    <td>Non confezionato (flash)</td>
+                    <td>Standard</td>
+                    <td>Solo per uso immediato</td>
+                </tr>
+                <tr>
+                    <td>Poroso</td>
+                    <td>+15 min</td>
+                    <td>Biancheria e garze richiedono un'esposizione prolungata</td>
+                </tr>
+                <tr>
+                    <td>Cavo</td>
+                    <td>+5 min</td>
+                    <td>Tubi e strumenti cavi</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="doc-section">
+            <h2>Dettagli tecnici</h2>
+            <p>Il calcolatore utilizza i parametri di sterilizzazione standard stabiliti dalle linee guida di CDC e ASTD:</p>
+            <p><code>totalTime = exposureTime + heatUpTime + coolDownTime</code></p>
+            <p><code>exposureTime = baseTime × loadModifier</code></p>
+            <p>Tutti i calcoli seguono le linee guida ANSI/AAMI ST79 per la sterilizzazione a vapore.</p>
+        </div>
+
+                <div class="doc-section">
+            <h2>Casi d'uso pratici</h2>
+            <div class="use-case">
+                <h3 style="color: #10B981 !important;">Per i titolari di studio</h3>
+                <p>Standardizza i protocolli tecnici e i modelli di prezzo del tuo studio per garantire coerenza tra tutti gli artisti e i residenti.</p>
+            </div>
+            <div class="use-case">
+                <h3 style="color: #10B981 !important;">Per gli apprendisti</h3>
+                <p>Usa questi strumenti come schema didattico per comprendere la complessa relazione tra geometria, biologia e sicurezza delle procedure.</p>
+            </div>
+        </div><div class="doc-section">
+            <h2>Domande frequenti</h2>
+            <div class="faq-item" style="margin-bottom: 1.5rem;">
+                <p><strong>Che cos'è il «vapore saturo»?</strong></p>
+                <p>Vapore che si trova al proprio punto di ebollizione per una determinata pressione. È l'unico stato che uccide efficacemente i microrganismi.</p>
+            </div>
+            <div class="faq-item" style="margin-bottom: 1.5rem;">
+                <p><strong>Con quale frequenza devo eseguire un test sulle spore?</strong></p>
+                <p>La maggior parte delle autorità sanitarie richiede un test con indicatore biologico una volta alla settimana, anche se alcune lo eseguono ogni giorno.</p>
+            </div>
+            <div class="faq-item" style="margin-bottom: 1.5rem;">
+                <p><strong>Posso sterilizzare strumenti in plastica?</strong></p>
+                <p>Solo se sono classificati come «autoclavabili» (ad esempio alcune qualità di nylon o silicone).</p>
+            </div>
+            <div class="faq-item" style="margin-bottom: 1.5rem;">
+                <p><strong>Che cos'è un'autoclave «Classe B»?</strong></p>
+                <p>Uno sterilizzatore di Classe B usa una pompa a vuoto per rimuovere l'aria, garantendo una penetrazione del vapore del 100% negli strumenti cavi.</p>
+            </div>
+            <div class="faq-item" style="margin-bottom: 1.5rem;">
+                <p><strong>Per quanto tempo restano sterili le buste?</strong></p>
+                <p>In genere da 6 mesi a 1 anno, purché la saldatura sia integra e la busta sia tenuta asciutta.</p>
+            </div>
+        </div>        <div class="doc-section" style="text-align: center; border-left: none !important; background: linear-gradient(135deg, #111, #222) !important;">
+            <h2>Hai bisogno di assistenza tecnica?</h2>
+            <p>Se riscontri problemi con questo strumento o hai bisogno di assistenza per un'integrazione personalizzata, il nostro team di ingegneria è a disposizione.</p>
+            <div style="display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; align-items: center;">
+                <a href="https://poliinternational.com/contact-us/" class="btn-primary" style="padding: 1rem 2.5rem; text-decoration: none; border-radius: 0.5rem; background: #669eff; color: #FFFFFF !important; font-weight: 800; font-size: 1.1rem; border: none;">Contattaci!</a>
+
+            </div>
+        </div>        <div style="text-align: center; margin-top: 4rem; padding: 2rem; border-top: 1px solid #333; opacity: 0.8;">
+            <p style="font-size: 0.95rem; color: #888; line-height: 1.6;">
+                Norma tecnica fornita da <br/>
+                <a href="https://poliinternational.com/autoclave-calculator/" style="color: #3B82F6; text-decoration: none; font-weight: 800; font-size: 1.2rem; display: block; margin-top: 0.5rem;">Realizzato da Poli International Engineering</a>
+            </p>
+        </div>        <div class="doc-section">
+            <h2>Strumenti correlati</h2>
+            <p>Scopri altri strumenti professionali della suite di ingegneria Poli International:</p>
+            <ul>
+                <li><a href="/tattoo-price-estimator/">AI Price Estimator</a> - Costi e studio immagini</li>
+                <li><a href="/gauge-converter/">Gauge Converter</a> - Conversione millimetri e AWG</li>
+                <li><a href="/coverage-calculator/">Coverage Calculator</a> - Inchiostro e pianificazione delle sedute</li>
+            </ul>
+        </div><div style="text-align: center; margin-bottom: 4rem;"><a href="https://poliinternational.com/autoclave-calculator/" class="back-link" style="display: inline-block !important;">← Vai allo strumento</a></div>
+    </div>
+</body>
+</html>

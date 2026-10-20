@@ -95,4 +95,7 @@ try {
   await go('dashboard'); await top();
   await shoot(b, 'thai');
   await b.evaluate(`setLanguage('en')`);
+  // tests/docs.test.js fails while these pictures show an older design than package.json "uiDesign"
+  const uiDesign = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8')).uiDesign;
+  fs.writeFileSync(path.join(out, 'manifest.json'), JSON.stringify({ uiDesign, takenWith: version }, null, 2) + '\n');
 } finally { await k.close().catch(() => {}); await stop(); }

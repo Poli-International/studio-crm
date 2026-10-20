@@ -34,15 +34,24 @@ const CSS = `body{margin:0;padding:24px;background:#0F172A;color:#E2E8F0;font:15
 main{max-width:760px;margin:0 auto}h1{font-size:1.6rem;color:#F8FAFC}h2{font-size:1.15rem;color:#38BDF8;margin-top:1.8em}
 code{background:#1E293B;padding:1px 5px;border-radius:4px;font-size:0.9em}strong{color:#F8FAFC}li{margin:4px 0}`;
 
-fs.mkdirSync(OUT, { recursive: true });
-let built = 0;
-for (const lang of LANGS) {
-  const src = lang === 'en' ? path.join(ROOT, 'docs', 'USER-GUIDE.md') : path.join(ROOT, 'docs', 'user-guide', `${lang}.md`);
-  if (!fs.existsSync(src)) { console.warn('missing', path.relative(ROOT, src)); continue; }
-  const { title, body } = toHtml(fs.readFileSync(src, 'utf8'));
-  fs.writeFileSync(path.join(OUT, `${lang}.html`),
-    `<!DOCTYPE html>\n<html lang="${lang}">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n` +
-    `<meta name="robots" content="noindex">\n<title>${esc(title)}</title>\n<style>${CSS}</style>\n</head>\n<body>\n<main>\n${body}\n</main>\n</body>\n</html>\n`);
-  built++;
+const sourceOf = (lang) => (lang === 'en' ? path.join(ROOT, 'docs', 'USER-GUIDE.md') : path.join(ROOT, 'docs', 'user-guide', `${lang}.md`));
+
+function page(lang) {
+  const { title, body } = toHtml(fs.readFileSync(sourceOf(lang), 'utf8'));
+  return `<!DOCTYPE html>\n<html lang="${lang}">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n` +
+    `<meta name="robots" content="noindex">\n<title>${esc(title)}</title>\n<style>${CSS}</style>\n</head>\n<body>\n<main>\n${body}\n</main>\n</body>\n</html>\n`;
 }
-console.log(`built ${built} guide pages in public/guide/`);
+
+// tests/docs.test.js checks the committed pages against page(), so an edited guide that was not rebuilt fails.
+module.exports = { LANGS, sourceOf, page };
+
+if (require.main === module) {
+  fs.mkdirSync(OUT, { recursive: true });
+  let built = 0;
+  for (const lang of LANGS) {
+    if (!fs.existsSync(sourceOf(lang))) { console.warn('missing', path.relative(ROOT, sourceOf(lang))); continue; }
+    fs.writeFileSync(path.join(OUT, `${lang}.html`), page(lang));
+    built++;
+  }
+  console.log(`built ${built} guide pages in public/guide/`);
+}

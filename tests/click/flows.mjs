@@ -795,6 +795,30 @@ await flow('Ink mixer: the diluent label is the size chosen, cap sizes change th
   check(!/Google Sheets|Firestore/.test(await b.evaluate(`document.body.innerText`)), 'the autoclave tool still offers a Google Sheets sync');
 });
 
+await flow('Tools: the USA, Europe and Southeast Asia ink checkers are grouped and each opens; the Thai list flags a banned pigment, not carbon black', async () => {
+  await pressOn("navigateToDestination('tools')");
+  await eventually(async () => /Ink regulation checkers: USA, Europe \(REACH\), Southeast Asia/.test(await text('#ink-regulation-checkers')), 'no Ink regulation checkers group in Tools');
+  for (const [fn, frame] of [['UsTattooInkChecker', 'poli-usinkcheck-frame'], ['ReachSvhcChecker', 'poli-svhccheck-frame'], ['SeaTattooInkChecker', 'poli-seainkcheck-frame']]) {
+    await pressOn(`open${fn}Modal()`);
+    await eventually(async () => b.evaluate(`(() => { const d = document.getElementById('${frame}').contentDocument; return !!d && d.readyState === 'complete' && d.body.innerText.length > 200; })()`), `${fn} did not open`);
+    if (fn === 'SeaTattooInkChecker') {
+      // 2026-10-20: the export flagged carbon black and the iron oxides as "restricted"; they are permitted colours in Thailand
+      const rows = await b.evaluate(`(async () => {
+        const d = document.getElementById('${frame}').contentDocument, w = d.defaultView, ta = d.querySelector('textarea');
+        Object.getOwnPropertyDescriptor(w.HTMLTextAreaElement.prototype, 'value').set.call(ta, 'Pigment Red 53:1 (CI 15585), Carbon Black CI 77266, Iron Oxide CI 77491, Aqua');
+        ta.dispatchEvent(new w.Event('input', { bubbles: true }));
+        await new Promise((r) => setTimeout(r, 200));
+        [...d.querySelectorAll('button')].find((x) => /Screen Against/.test(x.innerText)).click();
+        await new Promise((r) => setTimeout(r, 600));
+        return [...d.querySelectorAll('table tbody tr')].map((r) => r.innerText).join(' | ');
+      })()`);
+      check(/CI 15585/.test(rows) && /399/.test(rows), 'CI 15585 is not flagged with its Royal Gazette entry: ' + rows);
+      check(!/77266|77491/.test(rows), 'a permitted colour is flagged: ' + rows);
+    }
+    await b.evaluate(`close${fn}Modal()`);
+  }
+});
+
 await flow('Autoclave log: keeps only what was entered, never a passing result nobody recorded', async () => {
   // it filled in 134 °C, 2.1 bar, 18 minutes, spore test PASS and a technician when they were left out
   const post = (body) => b.evaluate(`fetch('/api/compliance/autoclave-logs', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: ${JSON.stringify(JSON.stringify(body))} }).then(async r => ({ status: r.status, data: await r.json() }))`);

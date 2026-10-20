@@ -105,6 +105,8 @@ The **closing checklist** records which items were done, the supervisor, the aut
 
 The **Tools** screen opens the Poli International tools (aftercare schedules, consent form builder, gauge converter, price estimator and more) inside the CRM.
 
+The **Ink regulation checkers** group has one checker for each region: the USA (MoCRA and California Proposition 65), Europe (REACH) and Southeast Asia (Thailand, in Thai too). Each answers for its own region only.
+
 ## Backups
 
 Everything is stored in `data/studio_crm.sqlite` (or the path set in `SQLITE_DB_PATH`). Copy that file to back up the studio. **Back up now** in **Settings** also writes a copy to `storage/backups/`. The CRM also saves a copy there every day and keeps the last 30 days. In **Settings**, **Database Backup**, **Also copy every backup to** a second folder (a USB stick, another disk, or a Google Drive, OneDrive or Dropbox folder) so a dead disk or a stolen computer does not take every copy with it.

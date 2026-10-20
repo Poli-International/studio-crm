@@ -1959,5 +1959,13 @@
  "Everything, and the only role that changes Settings, the team, the logins and the roles": "ทุกอย่าง และเป็นบทบาทเดียวที่แก้ไขการตั้งค่า ทีม บัญชีเข้าใช้ และบทบาทได้",
  "Give every role a name": "ตั้งชื่อให้ทุกบทบาท",
  "Choose one of the roles": "เลือกบทบาทหนึ่ง",
- "Sign out": "ออกจากระบบ"
+ "Sign out": "ออกจากระบบ",
+ "US Tattoo Ink Checker": "เครื่องมือตรวจหมึกสัก (สหรัฐอเมริกา)",
+ "Open US Tattoo Ink Checker": "เปิดเครื่องมือตรวจหมึกสัก (สหรัฐอเมริกา)",
+ "USA only: check ink pigments by name, CI or CAS number against MoCRA, FDA colour additive status and California Proposition {0}, with a record to print. Seven languages.": "เฉพาะสหรัฐอเมริกา: ตรวจเม็ดสีของหมึกตามชื่อ หมายเลข CI หรือ CAS เทียบกับ MoCRA สถานะสารเติมแต่งสีของ FDA และ California Proposition {0} พร้อมบันทึกสำหรับพิมพ์ เจ็ดภาษา",
+ "Southeast Asia Tattoo Ink Checker": "เครื่องมือตรวจหมึกสัก (เอเชียตะวันออกเฉียงใต้)",
+ "Open Southeast Asia Tattoo Ink Checker": "เปิดเครื่องมือตรวจหมึกสัก (เอเชียตะวันออกเฉียงใต้)",
+ "Thailand only: check ink pigments by name, CI or CAS number against the Thai list of substances prohibited in cosmetics, each with its Royal Gazette entry, and print a record. Eight languages, Thai included.": "เฉพาะประเทศไทย: ตรวจเม็ดสีของหมึกตามชื่อ หมายเลข CI หรือ CAS เทียบกับบัญชีวัตถุที่ห้ามใช้ในเครื่องสำอางของไทย แต่ละรายการมีลำดับในราชกิจจานุเบกษา และพิมพ์บันทึกได้ แปดภาษา รวมภาษาไทย",
+ "🧪 Ink regulation checkers: USA, Europe (REACH), Southeast Asia": "🧪 เครื่องมือตรวจกฎระเบียบหมึกสัก: สหรัฐอเมริกา ยุโรป (REACH) เอเชียตะวันออกเฉียงใต้",
+ "Each checker answers for its own region only: a clear result in one says nothing about the others.": "เครื่องมือแต่ละตัวตอบได้เฉพาะภูมิภาคของตนเท่านั้น ผลที่ไม่พบสารในเครื่องมือหนึ่งไม่ได้บอกอะไรเกี่ยวกับภูมิภาคอื่น"
 }

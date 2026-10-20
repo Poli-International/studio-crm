@@ -105,6 +105,8 @@ La **lista de cierre** registra qué tareas se hicieron, el supervisor, el núme
 
 La pantalla **Herramientas** abre las herramientas de Poli International (calendarios de cuidados posteriores, creador de formularios de consentimiento, convertidor de calibre, estimador de precios y más) dentro del CRM.
 
+El grupo **Comprobadores de normativa de tintas** tiene un comprobador por región: EE. UU. (MoCRA y Proposición 65 de California), Europa (REACH) y Sudeste Asiático (Tailandia, también en tailandés). Cada uno responde solo por su propia región.
+
 ## Copias de seguridad
 
 Todo se almacena en `data/studio_crm.sqlite` (o en la ruta definida en `SQLITE_DB_PATH`). Copie ese archivo para hacer una copia de seguridad del estudio. El botón de instantánea también escribe una copia en `storage/backups/`. El CRM también guarda allí una copia cada día y conserva los últimos 30 días. En **Ajustes**, **Copia de seguridad de la base de datos**, puede copiar además cada copia en una segunda carpeta (una memoria USB, otro disco o una carpeta de Google Drive, OneDrive o Dropbox), para que un disco averiado o un ordenador robado no se lleve todas las copias.

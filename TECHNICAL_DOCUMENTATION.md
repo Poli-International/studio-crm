@@ -433,6 +433,14 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.25
+
+- **Health Alerts** (Clients, Henry's screenshots of 2026-10-15): `renderClientDirectoryModal` (`public/app-features.js`) ignored the search box and both tick boxes and showed no health detail. The search now runs as you type (name, phone, email, allergy, condition, artist), **Latex Allergy** shows the latex allergies, **Medical Flags** anyone with an allergy or a condition, flagged clients first with their allergy and condition, names escaped, and "No client matches" when nothing does. A value of "none", "n/a" or "no" is not a flag.
+- The **Client Portal Self-Service View** box on the Clients screen was a heading over nothing (no button ever shows `#tab-portal`): hidden (`#clients-portal-embed`); its markup stays because the portal scripts look up its ids. **Portal Lookup** is the way in.
+- The top bar's search button said ⌘K on every computer: now **Ctrl K**, ⌘K on a Mac.
+- **Ink regulation checkers** (Tools): one group, `#ink-regulation-checkers`, with the **US Tattoo Ink Checker** (new in the CRM, the website's build), the **REACH SVHC Pigment Checker** and the new **Southeast Asia Tattoo Ink Checker** (Thailand; eight languages, Thai included), each copied byte-identical from the website and opened in a window, as the other tools. The group's cards are not numbered `<!-- Tool N -->`, so `integrate-tool.js` adds later tools before it.
+- The Southeast Asia checker's data was checked on 2026-10-20 against the Royal Gazette text of the MOPH Notification on substances prohibited in cosmetics B.E. 2559 (Vol. 133, Special Part 114 Ng): 23 substances kept, each cited with its entry number; formaldehyde, MIT, BIT and six colours that are on the permitted colour list (MOPH Notification B.E. 2564) removed. It screens against the cosmetics list as the nearest national reference, since no Thai list for tattoo ink was found, and says so.
+
 ### 1.0.24
 
 **A Staff login reached Finance** (Henry, 2026-10-19: Maya, Staff, chose the administrator in Switch Staff User, clicked Finance in the second it showed, read the money records and recorded $150). Four faults:

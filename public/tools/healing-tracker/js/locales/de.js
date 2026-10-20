@@ -2,7 +2,7 @@ window.I18N_DICTIONARY = window.I18N_DICTIONARY || {};
 window.I18N_DICTIONARY.de = {
   "app": {
     "title": "Tattoo- und Piercing-Heilungsverlauf & Haltbarkeits-Suite",
-    "subtitle": "Verfolge deinen täglichen Heilungsverlauf, vergleiche Meilenstein-Fotos, erkenne Symptomtrends und berechne die langfristige Haltbarkeit bis zum Nachstechen."
+    "subtitle": "Verfolgen Sie Ihren täglichen Heilungsverlauf, vergleichen Sie Meilenstein-Fotos, erkennen Sie Symptomtrends und berechnen Sie die langfristige Haltbarkeit bis zum Nachstechen."
   },
   "nav": {
     "healingTracker": "🩹 Heilungsverlauf",
@@ -193,8 +193,8 @@ window.I18N_DICTIONARY.de = {
       "recordedOn": "Erfasst am {date}"
     },
     "setup": {
-      "title": "Richte deinen Heilungsverlauf ein",
-      "subtitle": "Wähle Art der Prozedur, Platzierung und Datum aus, um einen individuellen Heilungsplan zu erstellen und Einträge zu protokollieren.",
+      "title": "Richten Sie Ihren Heilungsverlauf ein",
+      "subtitle": "Wählen Sie Art der Prozedur, Platzierung und Datum aus, um einen individuellen Heilungsplan zu erstellen und Einträge zu protokollieren.",
       "procedureType": "Art der Prozedur",
       "selectType": "-- Art auswählen --",
       "piercing": "Piercing",
@@ -210,7 +210,7 @@ window.I18N_DICTIONARY.de = {
       "pieceName": "Eigener Name / Notiz (Optional)",
       "pieceNamePlaceholder": "z. B. Conch links, Unterarm-Dolch",
       "baselinePhotoPrompt": "Ausgangsfoto Tag 0 (Empfohlen)",
-      "baselinePhotoHelp": "Lade direkt nach dem Termin ein Ausgangsfoto von Tag 0 hoch. So hast du während des gesamten Heilungsprozesses einen klaren Vergleichspunkt.",
+      "baselinePhotoHelp": "Laden Sie direkt nach dem Termin ein Ausgangsfoto von Tag 0 hoch. So haben Sie während des gesamten Heilungsprozesses einen klaren Vergleichspunkt.",
       "uploadPhoto": "📷 Ausgangsfoto auswählen",
       "changePhoto": "Foto ändern",
       "startTracking": "Heilungsverlauf starten",
@@ -357,7 +357,7 @@ window.I18N_DICTIONARY.de = {
     },
     "log": {
       "title": "Tägliches Heilungstagebuch",
-      "subtitle": "Dokumentiere deine täglichen Beobachtungen, verfolge Trends und halte Meilenstein-Fotos fest.",
+      "subtitle": "Dokumentieren Sie Ihre täglichen Beobachtungen, verfolgen Sie Trends und halten Sie Meilenstein-Fotos fest.",
       "addNewEntry": "➕ Heutigen Eintrag protokollieren",
       "entryDate": "Datum des Eintrags",
       "photoUpload": "📷 Foto zum Eintrag (Optional)",
@@ -379,16 +379,16 @@ window.I18N_DICTIONARY.de = {
       "notesPlaceholder": "z. B. Schwellung nach Kochsalzbad deutlich zurückgegangen; fühlt sich gut an.",
       "saveEntry": "Eintrag speichern",
       "cancel": "Abbrechen",
-      "noEntries": "Noch keine täglichen Einträge vorhanden. Tippe auf 'Heutigen Eintrag protokollieren', um deinen ersten Meilenstein festzuhalten.",
+      "noEntries": "Noch keine täglichen Einträge vorhanden. Tippen Sie auf 'Heutigen Eintrag protokollieren', um Ihren ersten Meilenstein festzuhalten.",
       "dayNumber": "Tag {day}",
       "recordedOn": "Protokolliert am {date}",
       "deleteEntry": "Löschen",
-      "confirmDelete": "Möchtest du diesen Tagebucheintrag wirklich löschen?"
+      "confirmDelete": "Möchten Sie diesen Tagebucheintrag wirklich löschen?"
     },
     "whatChanged": {
       "title": "⚡ Was hat sich seit dem letzten Eintrag geändert?",
-      "prompt": "Deine Symptome deuten auf eine stärkere Reizung im Vergleich zum letzten Eintrag hin. Ist kürzlich eines der folgenden Ereignisse aufgetreten?",
-      "help": "Das Erfassen der wahrscheinlichen Ursache hilft dir und deinem Piercer oder Tätowierer, Auslöser von Reizungen zu verstehen. Wir erfassen die Ursache rein dokumentarisch; wir stellen keine medizinischen Diagnosen.",
+      "prompt": "Ihre Symptome deuten auf eine stärkere Reizung im Vergleich zum letzten Eintrag hin. Ist kürzlich eines der folgenden Ereignisse aufgetreten?",
+      "help": "Das Erfassen der wahrscheinlichen Ursache hilft Ihnen und Ihrem Piercer oder Tätowierer, Auslöser von Reizungen zu verstehen. Wir erfassen die Ursache rein dokumentarisch; wir stellen keine medizinischen Diagnosen.",
       "knocked_it": "Angestoßen / an Kleidung oder Haaren hängengeblieben",
       "slept_on_it": "Darauf geschlafen / anhaltender Druck",
       "new_jewellery": "Neuen Schmuck eingesetzt oder gewechselt",
@@ -401,7 +401,7 @@ window.I18N_DICTIONARY.de = {
     },
     "trends": {
       "title": "Symptomverlauf im Zeitverlauf",
-      "subtitle": "Visualisierung von Rötung, Schwellung, Druckempfindlichkeit und Wundsekret über deine protokollierten Einträge.",
+      "subtitle": "Visualisierung von Rötung, Schwellung, Druckempfindlichkeit und Wundsekret über Ihre protokollierten Einträge.",
       "noData": "Erfasse mindestens 2 Einträge, um Verlaufskurven und Trendanalysen anzuzeigen.",
       "rednessLabel": "Rötung",
       "swellingLabel": "Schwellung",
@@ -415,8 +415,8 @@ window.I18N_DICTIONARY.de = {
     },
     "reversal": {
       "title": "⚠️ Anhaltende Trendumkehr erkannt",
-      "message": "Deine Symptome hatten sich von Tag {startDay} bis Tag {peakDay} verbessert, sind nun jedoch über {count} aufeinanderfolgende Einträge hinweg angestiegen (Tage {days}).",
-      "recommendation": "Da dies eine mehrtägige Trendumkehr und keine bloße Tagesschwankung darstellt, kontaktiere bitte deinen Piercer oder Tätowierer für eine persönliche Kontrolle im Studio.",
+      "message": "Ihre Symptome hatten sich von Tag {startDay} bis Tag {peakDay} verbessert, sind nun jedoch über {count} aufeinanderfolgende Einträge hinweg angestiegen (Tage {days}).",
+      "recommendation": "Da dies eine mehrtägige Trendumkehr und keine bloße Tagesschwankung darstellt, kontaktieren Sie bitte Ihren Piercer oder Tätowierer für eine persönliche Kontrolle im Studio.",
       "ruleJustification": "Hinweis: Eine einmalige Reizung kann durch kurzes Hängenbleiben entstehen; ein kontinuierlicher Anstieg über 3 Einträge hinweg rechtfertigt jedoch eine fachliche Begutachtung im Studio."
     },
     "photoComparison": {
@@ -425,7 +425,7 @@ window.I18N_DICTIONARY.de = {
       "selectBefore": "Früheres Foto wählen (z. B. Tag 0 / Ausgangsfoto)",
       "selectAfter": "Späteres Foto wählen (z. B. Tag 21)",
       "noPhotos": "Es werden mindestens zwei Einträge mit Foto (oder ein Ausgangsfoto plus ein Eintrag mit Foto) für den Vergleich benötigt.",
-      "sliderHelp": "Ziehe den Schieberegler horizontal, um den Heilungsverlauf zwischen beiden Daten visuell zu vergleichen.",
+      "sliderHelp": "Ziehen Sie den Schieberegler horizontal, um den Heilungsverlauf zwischen beiden Daten visuell zu vergleichen.",
       "dayA": "Foto A: Tag {day} ({date})",
       "dayB": "Foto B: Tag {day} ({date})",
       "baselineBadge": "Ausgangsfoto Tag 0"
@@ -464,19 +464,19 @@ window.I18N_DICTIONARY.de = {
     },
     "backup": {
       "title": "Datensicherung, Export & Wiederherstellung",
-      "subtitle": "Deine Heilungsdokumentation und Fotos werden vollständig lokal in deinem Browser gespeichert. Exportiere eine Sicherungsdatei, um Daten zwischen Smartphone und Desktop zu übertragen oder abzusichern.",
+      "subtitle": "Ihre Heilungsdokumentation und Fotos werden vollständig lokal in Ihrem Browser gespeichert. Exportieren Sie eine Sicherungsdatei, um Daten zwischen Smartphone und Desktop zu übertragen oder abzusichern.",
       "exportBtn": "📥 Vollständiges JSON-Backup exportieren",
       "importBtn": "📤 Aus JSON-Backup wiederherstellen",
-      "exportHelp": "Erstellt eine eigenständige JSON-Datei mit all deinen Einträgen, Protokollen und Meilenstein-Fotos in Originalauflösung.",
-      "importHelp": "Wähle eine zuvor exportierte JSON-Backup-Datei aus, um deine Dokumentation wiederherzustellen.",
+      "exportHelp": "Erstellt eine eigenständige JSON-Datei mit all Ihren Einträgen, Protokollen und Meilenstein-Fotos in Originalauflösung.",
+      "importHelp": "Wählen Sie eine zuvor exportierte JSON-Backup-Datei aus, um Ihre Dokumentation wiederherzustellen.",
       "exportSuccess": "Backup erfolgreich exportiert ({count} Einträge, {entries} Protokolle).",
       "importSuccess": "Erfolgreich wiederhergestellt: {count} Einträge und {entries} Protokolle.",
-      "importError": "Ungültiges Backup-Dateiformat. Bitte stelle sicher, dass du ein gültiges JSON-Backup aus diesem Tool auswählst.",
-      "replaceNotice": "⚠️ Import-Optionen: Du kannst zwischen Vollständigem Ersetzen (überschreibt aktuelle Daten) oder Zusammenführen (behält bestehende Daten und ergänzt neue) wählen.",
-      "confirmReplace": "Das Wiederherstellen dieses Backups ersetzt alle vorhandenen Einträge und Protokolle in diesem Browser vollständig. Nicht gespeicherte Daten werden überschrieben.\n\nMöchtest du fortfahren?",
-      "validationFailed": "Validierung des Backups fehlgeschlagen: {reason}\n\nEs wurden keine Änderungen an deinen Daten vorgenommen.",
+      "importError": "Ungültiges Backup-Dateiformat. Bitte stellen Sie sicher, dass Sie ein gültiges JSON-Backup aus diesem Tool auswählen.",
+      "replaceNotice": "⚠️ Import-Optionen: Sie können zwischen Vollständigem Ersetzen (überschreibt aktuelle Daten) oder Zusammenführen (behält bestehende Daten und ergänzt neue) wählen.",
+      "confirmReplace": "Das Wiederherstellen dieses Backups ersetzt alle vorhandenen Einträge und Protokolle in diesem Browser vollständig. Nicht gespeicherte Daten werden überschrieben.\n\nMöchten Sie fortfahren?",
+      "validationFailed": "Validierung des Backups fehlgeschlagen: {reason}\n\nEs wurden keine Änderungen an Ihren Daten vorgenommen.",
       "chooseModeTitle": "📥 Import-Methode wählen",
-      "chooseModeDesc": "Das Backup enthält {count} Eintrag/Einträge und {entries} Protokoll(e). Bitte wähle, wie du fortfahren möchtest:",
+      "chooseModeDesc": "Das Backup enthält {count} Eintrag/Einträge und {entries} Protokoll(e). Bitte wählen Sie, wie Sie fortfahren möchten:",
       "replaceOptionTitle": "Option A: Vollständiges Ersetzen (Überschreiben)",
       "replaceOptionDesc": "Löscht das aktuelle Protokoll vollständig und ersetzt alle Einträge durch dieses Backup. Vorhandene Daten in diesem Browser werden überschrieben.",
       "replaceBtn": "Aktuelle Daten ersetzen",
@@ -489,16 +489,16 @@ window.I18N_DICTIONARY.de = {
     "storage": {
       "status": "Speicher: {used} belegt / {remaining} frei (~Platz für {fits} weitere Fotos bei {avg} Durchschnittsgröße)",
       "lowWarning": "⚠️ Lokaler Speicher wird knapp ({remaining} verbleibend).",
-      "dropOldestPrompt": "Schaffe Platz, indem du ältere Fotos entfernst, während klinische Protokolle, Symptombewertungen und Trendkurven zu 100% erhalten bleiben.",
+      "dropOldestPrompt": "Schaffen Sie Platz, indem Sie ältere Fotos entfernen, während klinische Protokolle, Symptombewertungen und Trendkurven zu 100% erhalten bleiben.",
       "dropOldestBtn": "🧹 Älteste Fotos entfernen",
       "noPhotosToDrop": "Keine gespeicherten Fotos zum Entfernen vorhanden. Der gesamte Speicherplatz wird von Textprotokollen genutzt.",
       "confirmDropPrompt": "Die {count} ältesten Foto(s) löschen, um ca. {freed} Speicherplatz freizugeben?\n\nWICHTIG: Alle Dokumentationseinträge, Symptombewertungen (Rötung, Schwellung usw.), Notizen und Trendkurven bleiben zu 100% ERHALTEN. Nur die Bilddateien werden entfernt.",
       "droppedSuccess": "{count} älteste(s) Foto(s) erfolgreich gelöscht, ca. {freed} freigegeben. Alle Symptombewertungen und Protokolleinträge blieben erhalten.",
-      "exceedsStorage": "Speichern nicht möglich: Dieses Foto ({size}) übersteigt den verbleibenden Browserspeicher ({remaining}).\n\nBitte lösche zuerst ältere Fotos, um Speicherplatz freizugeben."
+      "exceedsStorage": "Speichern nicht möglich: Dieses Foto ({size}) übersteigt den verbleibenden Browserspeicher ({remaining}).\n\nBitte löschen Sie zuerst ältere Fotos, um Speicherplatz freizugeben."
     },
     "photo": {
       "compressionInfo": "Foto komprimiert: {orig} → {comp} ({reduction}% Reduktion). EXIF-Metadaten & GPS-Standort entfernt.",
-      "exceedsStorageWarning": "⚠️ Speicherwarnung: Dieses Foto ({size}) übersteigt den verfügbaren Speicherplatz ({remaining}). Bitte lösche ältere Fotos vor dem Speichern."
+      "exceedsStorageWarning": "⚠️ Speicherwarnung: Dieses Foto ({size}) übersteigt den verfügbaren Speicherplatz ({remaining}). Bitte löschen Sie ältere Fotos vor dem Speichern."
     },
     "faq": {
       "sectionTitle": "3. Häufig gestellte Fragen & klinische Fakten",
@@ -511,11 +511,11 @@ window.I18N_DICTIONARY.de = {
       "q3Answer": "Fakt: Nein. Klare, blass-weißliche oder bernsteinfarbene Flüssigkeit, die zu Krusten eintrocknet, ist Lymphflüssigkeit (Wundsekret) vermischt mit abgestorbenen Zellresten. Die Bildung von Lymphflüssigkeit ist ein vollkommen normaler, gesunder und notwendiger Bestandteil der körpereigenen Wundheilung in allen Heilungsphasen eines Piercings. Es handelt sich nicht um Eiter und nicht um ein Anzeichen einer Infektion.\n\nEchte Infektionszeichen unterscheiden sich deutlich: dicker, undurchsichtiger gelber oder grünlicher Eiter, strahlende Hitze, sich ausbreitende dunkle Rötung, pochende Schmerzen oder Fieber."
     },
     "timeline": {
-      "title": "Dein Heilungs-Zeitplan"
+      "title": "Ihr Heilungs-Zeitplan"
     },
     "symptoms": {
-      "title": "Prüfe deine aktuellen Symptome",
-      "subtitle": "Wähle alle Symptome aus, die du derzeit bemerkst:",
+      "title": "Prüfen Sie Ihre aktuellen Symptome",
+      "subtitle": "Wählen Sie alle Symptome aus, die Sie derzeit bemerken:",
       "mildRedness": "Leichte Rötung",
       "slightSwelling": "Leichte Schwellung",
       "clearDischarge": "Klares / helles Wundsekret",
@@ -533,11 +533,11 @@ window.I18N_DICTIONARY.de = {
       "bleeding": "Anhaltende Blutung",
       "assessBtn": "Symptome auswerten",
       "normalTitle": "Normale Heilungsphase",
-      "normalMsg": "Diese Symptome sind typisch für den Heilungsverlauf. Setze deine vom Studio empfohlene Pflegeroutine fort.",
+      "normalMsg": "Diese Symptome sind typisch für den Heilungsverlauf. Setzen Sie Ihre vom Studio empfohlene Pflegeroutine fort.",
       "monitorTitle": "Genau beobachten",
-      "monitorMsg": "Diese Symptome sollten genau beobachtet werden. Wenn sie sich verschlimmern oder nach 24-48 Stunden nicht bessern, kontaktiere dein Studio.",
+      "monitorMsg": "Diese Symptome sollten genau beobachtet werden. Wenn sie sich verschlimmern oder nach 24-48 Stunden nicht bessern, kontaktieren Sie Ihr Studio.",
       "concerningTitle": "Besorgniserregende Symptome",
-      "concerningMsg": "Diese Symptome erfordern umgehend professionelle medizinische Aufmerksamkeit. Kontaktiere sofort deinen Piercer/Tätowierer oder einen Arzt."
+      "concerningMsg": "Diese Symptome erfordern umgehend professionelle medizinische Aufmerksamkeit. Kontaktieren Sie sofort Ihren Piercer/Tätowierer oder einen Arzt."
     },
     "checklist": {
       "title": "Heutige Pflege-Checkliste",
@@ -567,7 +567,7 @@ window.I18N_DICTIONARY.de = {
       "item4": "Atemnot oder Engegefühl in der Brust",
       "item5": "Schwere allergische Reaktion (Nesselsucht, Schwellung von Gesicht/Hals)",
       "item6": "Anzeichen einer schweren Infektion (grünlicher Eiter, extreme Schwellung)",
-      "note": "Wenn du eines dieser Symptome bemerkst, wende dich sofort an einen Arzt oder suche die Notaufnahme auf.",
+      "note": "Wenn Sie eines dieser Symptome bemerken, wenden Sie sich sofort an einen Arzt oder suchen Sie die Notaufnahme auf.",
       "medicalDisclaimer": "Die Beurteilung basiert auf etablierter Fachpraxis. Wenden Sie sich bei schweren Symptomen an medizinisches Fachpersonal oder Ihren Piercer/Tätowierer.",
       "protocolFever": "→ Hohes Fieber (>38,3 °C / 101 °F)",
       "protocolStreaks": "→ Ausbreitende rote Streifen von der Wunde",
@@ -734,18 +734,18 @@ window.I18N_DICTIONARY.de = {
     }
   },
   "tracker": {
-    "errorSelectTypeAndDate": "Bitte wähle Art der Prozedur und Datum aus",
-    "errorValidDate": "Bitte gib ein gültiges Prozedurdatum ein.",
-    "errorSelectPiercingLoc": "Bitte wähle die Piercing-Position aus",
-    "errorSelectTattooSize": "Bitte wähle die Tattoo-Größe aus",
-    "errorSelectOneSymptom": "Bitte wähle mindestens ein Symptom aus",
+    "errorSelectTypeAndDate": "Bitte wählen Sie Art der Prozedur und Datum aus",
+    "errorValidDate": "Bitte geben Sie ein gültiges Prozedurdatum ein.",
+    "errorSelectPiercingLoc": "Bitte wählen Sie die Piercing-Position aus",
+    "errorSelectTattooSize": "Bitte wählen Sie die Tattoo-Größe aus",
+    "errorSelectOneSymptom": "Bitte wählen Sie mindestens ein Symptom aus",
     "severityConcerning": "Besorgniserregend",
     "severityMonitor": "Genau beobachten",
     "severityNormal": "Normal",
-    "msgConcerning": "⚠️ Diese Symptome erfordern fachliche Aufmerksamkeit. Kontaktiere umgehend deinen Piercer/Tätowierer oder einen Arzt.",
+    "msgConcerning": "⚠️ Diese Symptome erfordern fachliche Aufmerksamkeit. Kontaktieren Sie umgehend Ihren Piercer/Tätowierer oder einen Arzt.",
     "solutionConcerningTitle": "💎 Fachliche Empfehlung:",
-    "solutionConcerningBody": "Während du medizinischen Rat einholst, frage deinen Piercer nach Poli International Healing Discs. Sie können helfen, weitere Reizungen zu verhindern und während der Erholung antimikrobiellen Schutz zu bieten.",
-    "msgMonitor": "👀 Diese Symptome sollten beobachtet werden. Wenn sie sich verschlimmern oder nach 24-48 Stunden nicht bessern, kontaktiere dein Studio.",
+    "solutionConcerningBody": "Während Sie medizinischen Rat einholen, fragen Sie Ihren Piercer nach Poli International Healing Discs. Sie können helfen, weitere Reizungen zu verhindern und während der Erholung antimikrobiellen Schutz zu bieten.",
+    "msgMonitor": "👀 Diese Symptome sollten beobachtet werden. Wenn sie sich verschlimmern oder nach 24-48 Stunden nicht bessern, kontaktieren Sie Ihr Studio.",
     "solutionMonitorTitle": "💎 Lösung:",
     "solutionMonitorIntro": "Diese Symptome deuten oft auf Metallreizungen oder bakterielle Ablagerungen hin. Poli International Healing Discs können helfen durch:",
     "solutionMonitorBenefit1": "Vermeidung von direktem Metall-Haut-Kontakt, der Reizungen verursacht",
@@ -753,7 +753,7 @@ window.I18N_DICTIONARY.de = {
     "solutionMonitorBenefit3": "Verhinderung der weiteren Bildung von Reizbläschen oder Reizungen",
     "solutionMonitorBenefit4": "Schaffung einer schützenden Barriere während der Heilung",
     "solutionMonitorOutro": "Viele Piercer empfehlen Healing Discs speziell bei diesen Symptomen.",
-    "msgNormal": "✅ Diese Symptome sind typisch für den Heilungsverlauf. Setze deine Studio-Pflegeroutine fort.",
+    "msgNormal": "✅ Diese Symptome sind typisch für den Heilungsverlauf. Setzen Sie Ihre Studio-Pflegeroutine fort.",
     "solutionNormalTitle": "💎 Künftigen Problemen vorbeugen:",
     "solutionNormalBody": "Selbst bei normaler Heilung können Poli International Healing Discs Reizbläschen, Wucherungen und Infektionen vorbeugen, bevor sie entstehen. Empfohlen für alle Knorpel-, Bauchnabel- und Surface-Piercings.",
     "piercingTitle": "{name}-Piercing",
@@ -763,7 +763,7 @@ window.I18N_DICTIONARY.de = {
     "typicalSurfaceHealing": "Typische oberflächliche Heilung: {time}",
     "healingDiscRecTitle": "Healing-Disc-Empfehlung für {name}",
     "healingDiscRecFooter": "Poli International Healing Discs kombinieren Elastomer in medizinischer Qualität mit antimikrobieller Silberionen-Technologie, um Reizungen, Wucherungen und Infektionen vorzubeugen und Metall-Haut-Kontakt zu vermeiden.",
-    "whatToExpect": "Was dich erwartet:",
+    "whatToExpect": "Was Sie erwartet:",
     "careInstructions": "Pflegehinweise:",
     "checklist": {
       "piercing1": "2x täglich mit sterilem Kochsalzspray reinigen",
@@ -788,8 +788,8 @@ window.I18N_DICTIONARY.de = {
       "lastTouchUpLabel": "Datum des letzten Nachstechens",
       "lastTouchUpHelp": "Datum der letzten Nachstich-Sitzung",
       "neverTouchedUp": "Noch nie nachgestochen (Original-Tinte)",
-      "title": "Berechne deinen Nachstech-Zeitplan",
-      "subtitle": "Gib Tattoo-Stil, Farbpigmente, Platzierung und Pflegegewohnheiten ein, um zu berechnen, wann ein Nachstechen empfohlen wird.",
+      "title": "Berechnen Sie Ihren Nachstech-Zeitplan",
+      "subtitle": "Geben Sie Tattoo-Stil, Farbpigmente, Platzierung und Pflegegewohnheiten ein, um zu berechnen, wann ein Nachstechen empfohlen wird.",
       "ageLabel": "Alter des Tattoos",
       "ageHelp": "Wie viele Jahre ist das Stechen des Tattoos her?",
       "styleLabel": "Tattoo-Stil",
@@ -798,7 +798,7 @@ window.I18N_DICTIONARY.de = {
       "locationLabel": "Körperstelle",
       "locationHelp": "Hautreibung und Sonneneinstrahlung variieren je nach Körperstelle",
       "colorsLabel": "Vorhandene Farbpigmente",
-      "colorsHelp": "Wähle alle im Tattoo vorkommenden Farben aus",
+      "colorsHelp": "Wählen Sie alle im Tattoo vorkommenden Farben aus",
       "sunLabel": "Sonneneinstrahlung",
       "careLabel": "Hautpflege-Routine",
       "careHelp": "Disziplin bei Feuchtigkeitspflege & Sonnenschutz",
@@ -878,7 +878,7 @@ window.I18N_DICTIONARY.de = {
       "poor": "Unzureichend: Kaum Pflege, selten bis nie LSF"
     },
     "results": {
-      "title": "Ergebnisse deines Nachstech-Zeitplans",
+      "title": "Ergebnisse Ihres Nachstech-Zeitplans",
       "currentAge": "Aktuelles Alter",
       "touchUpIn": "Nachstechen in",
       "longevityElapsed": "Haltbarkeit verstrichen",
@@ -888,12 +888,12 @@ window.I18N_DICTIONARY.de = {
     "fading": {
       "title": "Visuelle Verblassungs-Prognose im Zeitverlauf",
       "subtitle": "Visuelles Modell für Farbsättigung, Kontrasterhalt und den Einfluss der Pflege im Laufe der Jahre.",
-      "info": "📊 Führe den Nachstech-Rechner in Schritt 1 aus, um dein individuelles Mehrjahres-Diagramm zu generieren.",
+      "info": "📊 Führen Sie den Nachstech-Rechner in Schritt 1 aus, um Ihr individuelles Mehrjahres-Diagramm zu generieren.",
       "progressionTitle": "Verlauf nach Jahren",
       "careComparisonTitle": "Vergleich der Pflegeroutinen"
     },
     "maintenance": {
-      "title": "Umfassender Langzeit-Pflegeplan für dein Tattoo",
+      "title": "Umfassender Langzeit-Pflegeplan für Ihr Tattoo",
       "subtitle": "Wesentliche Maßnahmen zum Schutz der Farbintensität und zur Vermeidung vorzeitigen Farbverlaufs.",
       "dailyTitle": "Tägliche Routine",
       "daily1": "Mit parfümfreier Feuchtigkeitslotion auf Wasserbasis pflegen.",
@@ -915,7 +915,7 @@ window.I18N_DICTIONARY.de = {
     },
     "sunCalc": {
       "title": "☀️ Rechner für Sonneneinfluss",
-      "subtitle": "Berechne, wie direkte wöchentliche UV-Strahlung das Verblassen beschleunigt.",
+      "subtitle": "Berechnen Sie, wie direkte wöchentliche UV-Strahlung das Verblassen beschleunigt.",
       "hoursLabel": "Stunden direkter Sonneneinstrahlung pro Woche",
       "spfLabel": "Sonnenschutz-Zuverlässigkeit",
       "calculateBtn": "☀️ Einfluss berechnen",
@@ -924,7 +924,7 @@ window.I18N_DICTIONARY.de = {
     },
     "cost": {
       "title": "Kostenplaner für lebenslange Pflege",
-      "subtitle": "Plane langfristige Investitionen fürs Nachstechen und sieh, wie sorgfältige Pflege über 30 Jahre bares Geld spart.",
+      "subtitle": "Planen Sie langfristige Investitionen fürs Nachstechen und sehen Sie, wie sorgfältige Pflege über 30 Jahre bares Geld spart.",
       "initialCostLabel": "Ursprüngliche Kosten des Tattoos",
       "frequencyLabel": "Geschätztes Nachstech-Intervall",
       "submitBtn": "💰 30-Jahre-Prognose berechnen",
@@ -944,8 +944,8 @@ window.I18N_DICTIONARY.de = {
       "defaultTouchUpsOver30": "0 Nachstechen über 30 Jahre"
     },
     "readiness": {
-      "title": "Ist dein Tattoo bereit zum Nachstechen?",
-      "subtitle": "Bewerte den aktuellen Kontrast, die Pigmentdichte, das Verlaufen von Linien und den Erhalt von Details.",
+      "title": "Ist Ihr Tattoo bereit zum Nachstechen?",
+      "subtitle": "Bewerten Sie den aktuellen Kontrast, die Pigmentdichte, das Verlaufen von Linien und den Erhalt von Details.",
       "fadingLevelLabel": "Grad des Farbverlusts",
       "fadingSlight": "Leicht: Kaum merkliches Nachlassen der Farbfrische",
       "fadingModerate": "Moderat: Deutlicher Verlust an Farbsättigung",
@@ -969,7 +969,7 @@ window.I18N_DICTIONARY.de = {
       "attentionTitle": "Bereiche zur Beobachtung",
       "actionTitle": "Empfohlener nächster Schritt"
     },
-    "selectColorsPrompt": "Wähle Farben aus, um die spezifische Verblassungs-Reihenfolge zu sehen.",
+    "selectColorsPrompt": "Wählen Sie Farben aus, um die spezifische Verblassungs-Reihenfolge zu sehen.",
     "approxYears": "~{years} Jahre",
     "yearLabel": "Jahr {year}",
     "currentAgeBadge": "📍 Aktuelles Alter",
@@ -983,8 +983,8 @@ window.I18N_DICTIONARY.de = {
     "poorCareTouchUpsText": "{count} Nachstich-Termine über 30 Jahre",
     "savingsText": "💰 Spare {amount}!",
     "extraCostText": "Zusätzliche {amount} an Kosten",
-    "budgetRecText": "Lege monatlich {amount} in einem separaten Tattoo-Pflegebudget zurück, um auf Nachstich-Termine vorbereitet zu sein. So bleibt die Pflege planbar und bezahlbar!",
-    "noIssuesDetected": "Keine auffälligen Probleme festgestellt: Dein Tattoo altert hervorragend!",
+    "budgetRecText": "Legen Sie monatlich {amount} in einem separaten Tattoo-Pflegebudget zurück, um auf Nachstich-Termine vorbereitet zu sein. So bleibt die Pflege planbar und bezahlbar!",
+    "noIssuesDetected": "Keine auffälligen Probleme festgestellt: Ihr Tattoo altert hervorragend!",
     "calculator": {
       "yearsUnit": "Jahre"
     },
@@ -994,7 +994,7 @@ window.I18N_DICTIONARY.de = {
   },
   "embed": {
     "title": "Dieses Tool einbetten",
-    "description": "Kopiere den folgenden Code, um die vollständige Suite auf deiner Studio-Website einzubetten:",
+    "description": "Kopieren Sie den folgenden Code, um die vollständige Suite auf Ihrer Studio-Website einzubetten:",
     "copyBtn": "📋 Code kopieren",
     "modalTitle": "🎁 Dieses Tool KOSTENLOS nutzen",
     "copyEmbedCode": "📋 Einbettungscode kopieren"
@@ -1154,11 +1154,11 @@ window.I18N_DICTIONARY.de = {
     "urgencyLevels": {
       "no_rush": {
         "level": "Sieht super aus!",
-        "message": "Dein Tattoo ist in hervorragendem Zustand. Behalte deine sorgfältige Pflegeroutine bei!"
+        "message": "Ihr Tattoo ist in hervorragendem Zustand. Behalten Sie Ihre sorgfältige Pflegeroutine bei!"
       },
       "plan_ahead": {
         "level": "Vorausschauend planen",
-        "message": "Plane in den nächsten Jahren einen Nachstich ein. Vereinbare ein Beratungsgespräch mit deinem Tätowierer."
+        "message": "Planen Sie in den nächsten Jahren einen Nachstich ein. Vereinbaren Sie ein Beratungsgespräch mit Ihrem Tätowierer."
       },
       "schedule_soon": {
         "level": "Bald einplanen",
@@ -1166,7 +1166,7 @@ window.I18N_DICTIONARY.de = {
       },
       "overdue": {
         "level": "Überfällig",
-        "message": "Dein Tattoo ist für ein Nachstechen überfällig. Es kann bereits deutlich verblasst sein."
+        "message": "Ihr Tattoo ist für ein Nachstechen überfällig. Es kann bereits deutlich verblasst sein."
       }
     }
   },

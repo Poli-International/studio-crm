@@ -253,9 +253,9 @@ if (typeof window !== "undefined" && window.registerLanguage) {
     "importJson": "📥 JSON importieren",
     "exportJson": "📤 JSON exportieren",
     "downloadCsv": "📊 CSV herunterladen",
-    "noSavedFormulas": "Noch keine Formeln gespeichert. Erstelle deine erste Formel im Farbton-Mischer-Tab!",
+    "noSavedFormulas": "Noch keine Formeln gespeichert. Erstellen Sie Ihre erste Formel im Farbton-Mischer-Tab!",
     "benchmarkTitle": "Studio-Referenzformeln",
-    "benchmarkSubtitle": "Klicke auf eine Formel, um sie in den Mischer zu laden und für deine Flaschencharge zu kalibrieren.",
+    "benchmarkSubtitle": "Klicken Sie auf eine Formel, um sie in den Mischer zu laden und für Ihre Flaschencharge zu kalibrieren.",
     "skinToneBases": "Hautton-Basen"
   },
   "grayWash": {

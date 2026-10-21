@@ -105,6 +105,8 @@ De **afsluitchecklist** registreert welke taken zijn uitgevoerd, de leidinggeven
 
 Het scherm **Tools** opent de Poli International-tools (nazorgschema's, generator voor toestemmingsformulieren, gauge-omrekenaar, prijsschatter en meer) binnen de CRM.
 
+Elke toolkaart heeft bovenaan een gekleurde band, en het venster van de tool dezelfde band in de titelbalk, zodat u de familie in één oogopslag herkent: gestreepte indicatortape voor sterilisatie en naleving, de kleuren van geanodiseerd titanium voor piercing en sieraden, stencilpaars voor tattoo en inkt, formulierlijnen voor klanten en gezondheid, en kasboekpapier voor de studiozaken.
+
 De groep **Inktregelgeving-checkers** heeft één checker per regio: de VS (MoCRA en California Proposition 65), Europa (REACH) en Zuidoost-Azië (Thailand, ook in het Thai). Elke checker geldt alleen voor zijn eigen regio.
 
 ## Backups

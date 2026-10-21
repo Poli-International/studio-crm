@@ -105,6 +105,8 @@ La **checklist di chiusura** registra quali attività sono state svolte, il supe
 
 La schermata **Strumenti** apre gli strumenti Poli International (calendari di aftercare, generatore di moduli di consenso, convertitore di calibro, preventivatore prezzi e altro) all'interno del CRM.
 
+Ogni scheda strumento ha una fascia colorata in alto, e la finestra dello strumento la stessa fascia nella barra del titolo, così la famiglia si riconosce a colpo d'occhio: nastro indicatore a strisce per sterilizzazione e conformità, i colori del titanio anodizzato per piercing e gioielli, viola stencil per tatuaggio e inchiostro, righe da modulo per clienti e salute, carta da registro per la gestione dello studio.
+
 Il gruppo **Verifiche normative sugli inchiostri** ha una verifica per regione: USA (MoCRA e Proposition 65 della California), Europa (REACH) e Sud-est asiatico (Thailandia, anche in thailandese). Ognuna vale solo per la propria regione.
 
 ## Backup

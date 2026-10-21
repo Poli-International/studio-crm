@@ -433,6 +433,14 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.26
+
+**Anodised Titanium**, the new look of the whole CRM (uiDesign 3; phases A to C, PRs #37, #38, #39):
+- Colours: graphite base, one blue accent, status colours taken from real anodising (bronze, purple, blue, gold, rose, green); health alerts stay a clear red. Tokens `--ti-*` in `public/css/04-titanium.css`, written as `var(--ti-x, #original)` so prints, PDFs and the kiosk keep paper colours. Satoshi and JetBrains Mono bundled. Dark only: the theme switch in the top bar and its keyboard shortcut are gone.
+- Icons: the emojis in the CRM screens are one drawn SVG sprite (87 icons; tattoo machine, cartridge, needle, captive ring, autoclave pouch, gloves, consent sheet and pen among them); status dots are CSS dots. Text that cannot hold an icon (toasts, dialogs, options, PDF labels) lost its emoji and kept its words; the phrase dictionaries in 7 languages and `i18n.json` changed with it, so translations still match.
+- Tool families: each tool card and each tool window's title bar carries its family (Sterile Field, Anodised Titanium, Stencil, Consent Paper, Front Desk Ledger). The tool files in `public/tools/` are unchanged and keep their own look on the website.
+- Guides (8 languages): a paragraph on the tool families; the Aftercare sheet button named without its emoji. Screenshots retaken.
+
 ### 1.0.25
 
 - **Health Alerts** (Clients, Henry's screenshots of 2026-10-15): `renderClientDirectoryModal` (`public/app-features.js`) ignored the search box and both tick boxes and showed no health detail. The search now runs as you type (name, phone, email, allergy, condition, artist), **Latex Allergy** shows the latex allergies, **Medical Flags** anyone with an allergy or a condition, flagged clients first with their allergy and condition, names escaped, and "No client matches" when nothing does. A value of "none", "n/a" or "no" is not a flag.

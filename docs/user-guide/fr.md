@@ -105,6 +105,8 @@ La **liste de clôture** enregistre les tâches effectuées, le responsable, le 
 
 L'écran **Outils** ouvre les outils Poli International (calendriers de soins post-acte, créateur de formulaire de consentement, convertisseur de calibre, estimateur de prix et plus) à l'intérieur du CRM.
 
+Chaque carte d'outil porte une bande de couleur en haut, et la fenêtre de l'outil la même bande sur sa barre de titre, pour reconnaître sa famille d'un coup d'œil : ruban indicateur rayé pour la stérilisation et la conformité, couleurs du titane anodisé pour le piercing et les bijoux, violet de stencil pour le tatouage et l'encre, lignes de formulaire pour les clients et la santé, papier de registre pour la gestion du studio.
+
 Le groupe **Vérificateurs de réglementation des encres** compte un vérificateur par région : les États-Unis (MoCRA et Proposition 65 de Californie), l'Europe (REACH) et l'Asie du Sud-Est (Thaïlande, aussi en thaï). Chacun ne répond que pour sa propre région.
 
 ## Sauvegardes

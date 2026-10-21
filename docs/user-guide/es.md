@@ -105,6 +105,8 @@ La **lista de cierre** registra qué tareas se hicieron, el supervisor, el núme
 
 La pantalla **Herramientas** abre las herramientas de Poli International (calendarios de cuidados posteriores, creador de formularios de consentimiento, convertidor de calibre, estimador de precios y más) dentro del CRM.
 
+Cada tarjeta de herramienta lleva una banda de color en la parte superior, y la ventana de la herramienta la misma banda en su barra de título, para reconocer su familia de un vistazo: cinta indicadora a rayas para esterilización y cumplimiento, los colores del titanio anodizado para piercing y joyería, violeta de stencil para tatuaje y tinta, líneas de formulario para clientes y salud, y papel de libro contable para la gestión del estudio.
+
 El grupo **Comprobadores de normativa de tintas** tiene un comprobador por región: EE. UU. (MoCRA y Proposición 65 de California), Europa (REACH) y Sudeste Asiático (Tailandia, también en tailandés). Cada uno responde solo por su propia región.
 
 ## Copias de seguridad

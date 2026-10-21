@@ -105,6 +105,8 @@ The **closing checklist** records which items were done, the supervisor, the aut
 
 The **Tools** screen opens the Poli International tools (aftercare schedules, consent form builder, gauge converter, price estimator and more) inside the CRM.
 
+Each tool card has a coloured band along its top, and the tool's window the same band on its title bar, so you can tell its family at a glance: striped indicator tape for sterilisation and compliance, the anodised colours for piercing and jewelry, stencil violet for tattoo and ink, form lines for clients and health, and ledger paper for the studio business.
+
 The **Ink regulation checkers** group has one checker for each region: the USA (MoCRA and California Proposition 65), Europe (REACH) and Southeast Asia (Thailand, in Thai too). Each answers for its own region only.
 
 ## Backups

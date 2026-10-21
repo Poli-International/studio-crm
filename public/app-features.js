@@ -34,7 +34,7 @@ async function openClientProfileModal(clientId) {
     const bodyEl = document.getElementById('client-profile-modal-body');
     if (bodyEl) {
         bodyEl.innerHTML = `
-            <div style="text-align:center;padding:3rem;color:#818CF8;font-size:0.95rem;font-weight:600;">
+            <div style="text-align:center;padding:3rem;color:var(--ti-blue-ink, #818CF8);font-size:0.95rem;font-weight:600;">
                 <div style="font-size:2rem;margin-bottom:8px;display:inline-block;">⚡</div>
                 <div>Fetching complete client record, appointment history, waivers & tattoo artwork...</div>
             </div>
@@ -65,7 +65,7 @@ async function openClientProfileModal(clientId) {
             switchClientProfileTab('overview');
         } catch (e2) {
             if (bodyEl) {
-                bodyEl.innerHTML = `<div style="text-align:center;padding:3rem;color:#EF4444;">Failed to load client profile details.</div>`;
+                bodyEl.innerHTML = `<div style="text-align:center;padding:3rem;color:var(--ti-alert, #EF4444);">Failed to load client profile details.</div>`;
             }
         }
     }
@@ -160,9 +160,9 @@ function renderClientProfileHeader(data) {
         tagsEl.innerHTML = `
             <span>📧 ${escapeHtml(email)}</span>
             <span>📞 ${escapeHtml(phone)}</span>
-            ${loyaltyTier ? `<span style="background:rgba(99,102,241,0.2);color:#A5B4FC;padding:2px 8px;border-radius:10px;font-weight:700;">💎 ${escapeHtml(loyaltyTier)}</span>` : ''}
-            ${isVip ? '<span style="background:rgba(234,179,8,0.2);color:#FDE047;padding:2px 8px;border-radius:10px;font-weight:800;">⭐ VIP</span>' : ''}
-            <span style="background:rgba(16,185,129,0.2);color:#6EE7B7;padding:2px 8px;border-radius:10px;font-weight:700;">💵 Spent: $${totalSpent}</span>
+            ${loyaltyTier ? `<span style="background:rgba(99,102,241,0.2);color:var(--ti-blue-ink, #A5B4FC);padding:2px 8px;border-radius:10px;font-weight:700;">💎 ${escapeHtml(loyaltyTier)}</span>` : ''}
+            ${isVip ? '<span style="background:rgba(234,179,8,0.2);color:var(--ti-gold-ink, #FDE047);padding:2px 8px;border-radius:10px;font-weight:800;">⭐ VIP</span>' : ''}
+            <span style="background:rgba(16,185,129,0.2);color:var(--ti-green-ink, #6EE7B7);padding:2px 8px;border-radius:10px;font-weight:700;">💵 Spent: $${totalSpent}</span>
             ${clientAgeBadges(client)}
         `;
     }
@@ -173,7 +173,7 @@ function renderClientProfileHeader(data) {
             avatarEl.innerHTML = `<img src="${savedPhoto}" alt="${escapeHtml(client.name || '')}" style="width:100%;height:100%;object-fit:cover;" />`;
         } else {
             const initials = (client.name || 'CP').split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-            avatarEl.innerHTML = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.5rem;color:#818CF8;">${initials}</div>`;
+            avatarEl.innerHTML = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.5rem;color:var(--ti-blue-ink, #818CF8);">${initials}</div>`;
         }
     }
 
@@ -224,113 +224,113 @@ function switchClientProfileTab(tabName) {
             <div style="display:flex;flex-direction:column;gap:1.25rem;">
                 
                 <!-- D3 Procedure & Appointment History Timeline Widget -->
-                <div style="background:#1F2937;border:1px solid #374151;border-radius:12px;padding:1.25rem;">
+                <div style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:12px;padding:1.25rem;">
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
-                        <h4 style="margin:0;font-size:0.95rem;font-weight:700;color:#F9FAFB;display:flex;align-items:center;gap:6px;">
+                        <h4 style="margin:0;font-size:0.95rem;font-weight:700;color:var(--ti-text, #F9FAFB);display:flex;align-items:center;gap:6px;">
                             📈 Procedure & Session Progression Timeline
                         </h4>
-                        <span style="font-size:0.75rem;color:#818CF8;font-weight:700;">D3 Interactive Node Track</span>
+                        <span style="font-size:0.75rem;color:var(--ti-blue-ink, #818CF8);font-weight:700;">D3 Interactive Node Track</span>
                     </div>
                     <div id="d3-client-appointment-timeline" style="width:100%;min-height:120px;display:flex;align-items:center;justify-content:center;overflow-x:auto;"></div>
                 </div>
 
                 <!-- Client Demographics & Health Profile -->
                 <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(280px, 100%), 1fr));gap:1rem;">
-                    <div style="background:#1F2937;border:1px solid #374151;border-radius:12px;padding:1.25rem;">
-                        <h4 style="margin:0 0 0.85rem 0;font-size:0.95rem;font-weight:700;color:#F9FAFB;display:flex;align-items:center;gap:6px;">
+                    <div style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:12px;padding:1.25rem;">
+                        <h4 style="margin:0 0 0.85rem 0;font-size:0.95rem;font-weight:700;color:var(--ti-text, #F9FAFB);display:flex;align-items:center;gap:6px;">
                             👤 Personal Information
                         </h4>
                         <div style="display:flex;flex-direction:column;gap:0.6rem;font-size:0.85rem;">
-                            <div style="display:flex;justify-content:space-between;border-bottom:1px solid #374151;padding-bottom:4px;">
-                                <span style="color:#9CA3AF;">Full Name:</span>
+                            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--ti-line, #374151);padding-bottom:4px;">
+                                <span style="color:var(--ti-muted, #9CA3AF);">Full Name:</span>
                                 <strong style="color:#FFF;">${escapeHtml(client.name || 'N/A')}</strong>
                             </div>
-                            <div style="display:flex;justify-content:space-between;border-bottom:1px solid #374151;padding-bottom:4px;">
-                                <span style="color:#9CA3AF;">Email:</span>
+                            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--ti-line, #374151);padding-bottom:4px;">
+                                <span style="color:var(--ti-muted, #9CA3AF);">Email:</span>
                                 <strong style="color:#FFF;">${escapeHtml(client.email || 'N/A')}</strong>
                             </div>
-                            <div style="display:flex;justify-content:space-between;border-bottom:1px solid #374151;padding-bottom:4px;">
-                                <span style="color:#9CA3AF;">Phone:</span>
+                            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--ti-line, #374151);padding-bottom:4px;">
+                                <span style="color:var(--ti-muted, #9CA3AF);">Phone:</span>
                                 <strong style="color:#FFF;">${escapeHtml(client.phone || 'N/A')}</strong>
                             </div>
-                            <div style="display:flex;justify-content:space-between;border-bottom:1px solid #374151;padding-bottom:4px;">
-                                <span style="color:#9CA3AF;">Date of Birth:</span>
+                            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--ti-line, #374151);padding-bottom:4px;">
+                                <span style="color:var(--ti-muted, #9CA3AF);">Date of Birth:</span>
                                 <strong style="color:#FFF;">${escapeHtml(client.dob || client.birthdate || 'Not recorded')}</strong>
                             </div>
-                            <div style="display:flex;justify-content:space-between;border-bottom:1px solid #374151;padding-bottom:4px;">
-                                <span style="color:#9CA3AF;">${escapeHtml(pdfLabel('Age'))}:</span>
+                            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--ti-line, #374151);padding-bottom:4px;">
+                                <span style="color:var(--ti-muted, #9CA3AF);">${escapeHtml(pdfLabel('Age'))}:</span>
                                 <strong style="color:${typeof client.age === 'number' && client.age < 18 ? '#FCA5A5' : '#FFF'};">${typeof client.age === 'number' ? client.age : escapeHtml(pdfLabel('Not recorded'))}</strong>
                             </div>
-                            <div style="display:flex;justify-content:space-between;border-bottom:1px solid #374151;padding-bottom:4px;">
-                                <span style="color:#9CA3AF;">${escapeHtml(pdfLabel('ID check'))}:</span>
+                            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--ti-line, #374151);padding-bottom:4px;">
+                                <span style="color:var(--ti-muted, #9CA3AF);">${escapeHtml(pdfLabel('ID check'))}:</span>
                                 <strong style="color:#FFF;text-align:right;">${client.id_check
                                     ? escapeHtml(pdfLabel('{0} ending {1}, checked by {2} on {3}').replace('{0}', pdfLabel(client.id_check.type)).replace('{1}', client.id_check.last4).replace('{2}', client.id_check.checked_by).replace('{3}', new Date(client.id_check.checked_at).toLocaleString()))
                                     : escapeHtml(pdfLabel('Not checked yet'))}</strong>
                             </div>
                             <div style="display:flex;justify-content:space-between;">
-                                <span style="color:#9CA3AF;">Client Since:</span>
+                                <span style="color:var(--ti-muted, #9CA3AF);">Client Since:</span>
                                 <strong style="color:#FFF;">${escapeHtml(client.created_at ? String(client.created_at).slice(0, 10) : 'Not recorded')}</strong>
                             </div>
-                            <form id="cp-id-check-form" onsubmit="saveClientIdCheck(event, ${Number(client.id)})" style="display:flex;flex-direction:column;gap:6px;margin-top:6px;background:#111827;border:1px solid #374151;border-radius:8px;padding:0.75rem;">
-                                <div style="font-size:0.75rem;color:#9CA3AF;text-transform:uppercase;font-weight:700;">${escapeHtml(pdfLabel('Record an ID check'))}</div>
-                                <div style="font-size:0.75rem;color:#9CA3AF;">${escapeHtml(pdfLabel('Only the type of ID and its last 4 letters or digits are kept, never the whole number or a photo.'))}</div>
-                                <select id="cp-id-type" required aria-label="${escapeHtml(pdfLabel('Type of ID'))}" style="padding:7px 10px;background:#1E293B;border:1px solid #475569;border-radius:6px;color:#F8FAFC;">
+                            <form id="cp-id-check-form" onsubmit="saveClientIdCheck(event, ${Number(client.id)})" style="display:flex;flex-direction:column;gap:6px;margin-top:6px;background:var(--ti-panel, #111827);border:1px solid var(--ti-line, #374151);border-radius:8px;padding:0.75rem;">
+                                <div style="font-size:0.75rem;color:var(--ti-muted, #9CA3AF);text-transform:uppercase;font-weight:700;">${escapeHtml(pdfLabel('Record an ID check'))}</div>
+                                <div style="font-size:0.75rem;color:var(--ti-muted, #9CA3AF);">${escapeHtml(pdfLabel('Only the type of ID and its last 4 letters or digits are kept, never the whole number or a photo.'))}</div>
+                                <select id="cp-id-type" required aria-label="${escapeHtml(pdfLabel('Type of ID'))}" style="padding:7px 10px;background:var(--ti-panel2, #1E293B);border:1px solid var(--ti-line2, #475569);border-radius:6px;color:var(--ti-text, #F8FAFC);">
                                     <option value="">${escapeHtml(pdfLabel('Type of ID'))}</option>
                                     ${['Passport', 'Driving licence', 'National ID card', 'Other ID'].map((t) => `<option value="${t}">${escapeHtml(pdfLabel(t))}</option>`).join('')}
                                 </select>
-                                <input id="cp-id-last4" required maxlength="4" pattern="[A-Za-z0-9]{1,4}" placeholder="${escapeHtml(pdfLabel('Last 4 letters or digits'))}" aria-label="${escapeHtml(pdfLabel('Last 4 letters or digits'))}" style="padding:7px 10px;background:#1E293B;border:1px solid #475569;border-radius:6px;color:#F8FAFC;">
-                                <label style="font-size:0.75rem;color:#9CA3AF;">${escapeHtml(pdfLabel('Date of birth on the ID'))}
-                                    <input id="cp-id-dob" type="date" value="${escapeHtml(/^\d{4}-\d{2}-\d{2}$/.test(client.dob || '') ? client.dob : '')}" style="display:block;width:100%;margin-top:3px;padding:7px 10px;background:#1E293B;border:1px solid #475569;border-radius:6px;color:#F8FAFC;box-sizing:border-box;">
+                                <input id="cp-id-last4" required maxlength="4" pattern="[A-Za-z0-9]{1,4}" placeholder="${escapeHtml(pdfLabel('Last 4 letters or digits'))}" aria-label="${escapeHtml(pdfLabel('Last 4 letters or digits'))}" style="padding:7px 10px;background:var(--ti-panel2, #1E293B);border:1px solid var(--ti-line2, #475569);border-radius:6px;color:var(--ti-text, #F8FAFC);">
+                                <label style="font-size:0.75rem;color:var(--ti-muted, #9CA3AF);">${escapeHtml(pdfLabel('Date of birth on the ID'))}
+                                    <input id="cp-id-dob" type="date" value="${escapeHtml(/^\d{4}-\d{2}-\d{2}$/.test(client.dob || '') ? client.dob : '')}" style="display:block;width:100%;margin-top:3px;padding:7px 10px;background:var(--ti-panel2, #1E293B);border:1px solid var(--ti-line2, #475569);border-radius:6px;color:var(--ti-text, #F8FAFC);box-sizing:border-box;">
                                 </label>
-                                <div><button type="submit" style="padding:0.4rem 0.85rem;background:#0D9488;color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">${escapeHtml(pdfLabel('Save ID check'))}</button></div>
+                                <div><button type="submit" style="padding:0.4rem 0.85rem;background:var(--ti-blue-deep, #0D9488);color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">${escapeHtml(pdfLabel('Save ID check'))}</button></div>
                             </form>
                         </div>
                     </div>
 
-                    <div style="background:#1F2937;border:1px solid #374151;border-radius:12px;padding:1.25rem;">
-                        <h4 style="margin:0 0 0.85rem 0;font-size:0.95rem;font-weight:700;color:#F9FAFB;display:flex;align-items:center;gap:6px;">
+                    <div style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:12px;padding:1.25rem;">
+                        <h4 style="margin:0 0 0.85rem 0;font-size:0.95rem;font-weight:700;color:var(--ti-text, #F9FAFB);display:flex;align-items:center;gap:6px;">
                             🏥 Medical & Sensitivity Overview
                         </h4>
                         <div style="display:flex;flex-direction:column;gap:0.75rem;font-size:0.85rem;">
-                            <div style="background:#111827;padding:0.75rem;border-radius:8px;border:1px solid ${hasAllergies ? '#EF4444' : '#374151'};">
-                                <div style="font-size:0.75rem;color:#9CA3AF;text-transform:uppercase;font-weight:700;">Allergies & Sensitivities</div>
+                            <div style="background:var(--ti-panel, #111827);padding:0.75rem;border-radius:8px;border:1px solid ${hasAllergies ? '#EF4444' : '#374151'};">
+                                <div style="font-size:0.75rem;color:var(--ti-muted, #9CA3AF);text-transform:uppercase;font-weight:700;">Allergies & Sensitivities</div>
                                 <div style="font-weight:700;color:${hasAllergies ? '#EF4444' : allergiesKnown ? '#10B981' : '#FDE047'};margin-top:2px;">
                                     ${escapeHtml(client.allergies || pdfLabel('Not recorded: ask the client'))}
                                 </div>
                             </div>
 
-                            <div style="background:#111827;padding:0.75rem;border-radius:8px;border:1px solid #374151;">
-                                <div style="font-size:0.75rem;color:#9CA3AF;text-transform:uppercase;font-weight:700;">Medical History / Sensitivities</div>
-                                <div style="font-weight:600;color:#F3F4F6;margin-top:2px;">
+                            <div style="background:var(--ti-panel, #111827);padding:0.75rem;border-radius:8px;border:1px solid var(--ti-line, #374151);">
+                                <div style="font-size:0.75rem;color:var(--ti-muted, #9CA3AF);text-transform:uppercase;font-weight:700;">Medical History / Sensitivities</div>
+                                <div style="font-weight:600;color:var(--ti-text, #F3F4F6);margin-top:2px;">
                                     ${escapeHtml(client.medical_history || 'None Reported')}
                                 </div>
                             </div>
 
-                            <div style="background:#111827;padding:0.75rem;border-radius:8px;border:1px solid #374151;">
-                                <div style="font-size:0.75rem;color:#9CA3AF;text-transform:uppercase;font-weight:700;">Emergency Contact</div>
-                                <div style="font-weight:600;color:#F3F4F6;margin-top:2px;">
+                            <div style="background:var(--ti-panel, #111827);padding:0.75rem;border-radius:8px;border:1px solid var(--ti-line, #374151);">
+                                <div style="font-size:0.75rem;color:var(--ti-muted, #9CA3AF);text-transform:uppercase;font-weight:700;">Emergency Contact</div>
+                                <div style="font-weight:600;color:var(--ti-text, #F3F4F6);margin-top:2px;">
                                     ${escapeHtml(client.emergency_contact || 'Not recorded')}
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div style="background:#1F2937;border:1px solid #374151;border-radius:12px;padding:1.25rem;">
-                        <h4 style="margin:0 0 0.85rem 0;font-size:0.95rem;font-weight:700;color:#F9FAFB;display:flex;align-items:center;gap:6px;">
+                    <div style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:12px;padding:1.25rem;">
+                        <h4 style="margin:0 0 0.85rem 0;font-size:0.95rem;font-weight:700;color:var(--ti-text, #F9FAFB);display:flex;align-items:center;gap:6px;">
                             🎨 Studio Preferences & Artist Notes
                         </h4>
 
                         <div style="display:flex;flex-direction:column;gap:0.75rem;font-size:0.85rem;">
-                            <div style="background:#111827;padding:0.75rem;border-radius:8px;border:1px solid #374151;">
-                                <div style="font-size:0.75rem;color:#9CA3AF;text-transform:uppercase;font-weight:700;">Preferred Tattoo / Piercing Style</div>
-                                <div style="font-weight:600;color:#818CF8;margin-top:2px;">
+                            <div style="background:var(--ti-panel, #111827);padding:0.75rem;border-radius:8px;border:1px solid var(--ti-line, #374151);">
+                                <div style="font-size:0.75rem;color:var(--ti-muted, #9CA3AF);text-transform:uppercase;font-weight:700;">Preferred Tattoo / Piercing Style</div>
+                                <div style="font-weight:600;color:var(--ti-blue-ink, #818CF8);margin-top:2px;">
                                     ${escapeHtml(client.preferred_style || 'Not recorded')}
                                 </div>
                             </div>
 
-                            <div style="background:#111827;padding:0.75rem;border-radius:8px;border:1px solid #374151;">
-                                <div style="font-size:0.75rem;color:#9CA3AF;text-transform:uppercase;font-weight:700;">Preferred Artist</div>
-                                <div style="font-weight:600;color:#F3F4F6;margin-top:2px;">
+                            <div style="background:var(--ti-panel, #111827);padding:0.75rem;border-radius:8px;border:1px solid var(--ti-line, #374151);">
+                                <div style="font-size:0.75rem;color:var(--ti-muted, #9CA3AF);text-transform:uppercase;font-weight:700;">Preferred Artist</div>
+                                <div style="font-weight:600;color:var(--ti-text, #F3F4F6);margin-top:2px;">
                                     ${escapeHtml(client.preferred_artist || client.assigned_staff_name || 'Not recorded')}
                                 </div>
                             </div>
@@ -353,12 +353,12 @@ function switchClientProfileTab(tabName) {
             <div style="display:flex;flex-direction:column;gap:1.25rem;">
                 
                 <!-- Add New Private Staff Note Form -->
-                <div style="background:#1F2937;border:1px solid #4F46E5;border-radius:12px;padding:1.25rem;box-shadow:0 4px 15px rgba(79,70,229,0.15);">
+                <div style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-purple, #4F46E5);border-radius:12px;padding:1.25rem;box-shadow:0 4px 15px rgba(79,70,229,0.15);">
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.85rem;">
-                        <h4 style="margin:0;font-size:0.95rem;font-weight:800;color:#A5B4FC;display:flex;align-items:center;gap:6px;">
+                        <h4 style="margin:0;font-size:0.95rem;font-weight:800;color:var(--ti-blue-ink, #A5B4FC);display:flex;align-items:center;gap:6px;">
                             🔒 Add Private Staff-Only Note
                         </h4>
-                        <span style="font-size:0.72rem;background:rgba(99,102,241,0.2);color:#818CF8;border:1px solid #6366F1;padding:2px 8px;border-radius:12px;font-weight:700;">
+                        <span style="font-size:0.72rem;background:rgba(99,102,241,0.2);color:var(--ti-blue-ink, #818CF8);border:1px solid var(--ti-purple-ink, #6366F1);padding:2px 8px;border-radius:12px;font-weight:700;">
                             CONFIDENTIAL • STAFF ONLY
                         </span>
                     </div>
@@ -366,14 +366,14 @@ function switchClientProfileTab(tabName) {
                     <form onsubmit="handleStaffNoteSubmit(event, ${client.id})" style="display:flex;flex-direction:column;gap:0.75rem;">
                         <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:0.75rem;">
                             <div>
-                                <label style="display:block;font-size:0.75rem;color:#9CA3AF;margin-bottom:3px;font-weight:600;">STAFF AUTHOR</label>
-                                <select id="sn-author-select" style="width:100%;padding:0.5rem;background:#111827;border:1px solid #374151;border-radius:6px;color:#FFF;font-size:0.825rem;outline:none;">
+                                <label style="display:block;font-size:0.75rem;color:var(--ti-muted, #9CA3AF);margin-bottom:3px;font-weight:600;">STAFF AUTHOR</label>
+                                <select id="sn-author-select" style="width:100%;padding:0.5rem;background:var(--ti-panel, #111827);border:1px solid var(--ti-line, #374151);border-radius:6px;color:#FFF;font-size:0.825rem;outline:none;">
                                     <option value="Studio staff|Staff">Studio staff</option>
                                 </select>
                             </div>
                             <div>
-                                <label style="display:block;font-size:0.75rem;color:#9CA3AF;margin-bottom:3px;font-weight:600;">NOTE CATEGORY</label>
-                                <select id="sn-category-select" style="width:100%;padding:0.5rem;background:#111827;border:1px solid #374151;border-radius:6px;color:#FFF;font-size:0.825rem;outline:none;">
+                                <label style="display:block;font-size:0.75rem;color:var(--ti-muted, #9CA3AF);margin-bottom:3px;font-weight:600;">NOTE CATEGORY</label>
+                                <select id="sn-category-select" style="width:100%;padding:0.5rem;background:var(--ti-panel, #111827);border:1px solid var(--ti-line, #374151);border-radius:6px;color:#FFF;font-size:0.825rem;outline:none;">
                                     <option value="Procedure Observation">🎨 Procedure Observation</option>
                                     <option value="Skin Sensitivity">🩸 Skin & Pigment Sensitivity</option>
                                     <option value="Client Preference">💡 Client Preference / Quirk</option>
@@ -387,22 +387,22 @@ function switchClientProfileTab(tabName) {
 
                         <div>
                             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-                                <label style="display:block;font-size:0.75rem;color:#9CA3AF;font-weight:600;margin:0;">NOTE DETAILS</label>
-                                <button type="button" id="btn-dictate-sn-note" onclick="toggleVoiceDictation('sn-note-text', this)" class="dictate-speech-btn" style="padding:0.25rem 0.6rem;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.4);border-radius:6px;color:#A5B4FC;font-size:0.75rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all 0.2s;" title="Dictate procedure notes hands-free with Web Speech API during tattoo session">
+                                <label style="display:block;font-size:0.75rem;color:var(--ti-muted, #9CA3AF);font-weight:600;margin:0;">NOTE DETAILS</label>
+                                <button type="button" id="btn-dictate-sn-note" onclick="toggleVoiceDictation('sn-note-text', this)" class="dictate-speech-btn" style="padding:0.25rem 0.6rem;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.4);border-radius:6px;color:var(--ti-blue-ink, #A5B4FC);font-size:0.75rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all 0.2s;" title="Dictate procedure notes hands-free with Web Speech API during tattoo session">
                                     <span class="dictate-mic-icon">🎙️</span>
                                     <span class="dictate-btn-label">Voice-to-Text (Web Speech API)</span>
                                 </button>
                             </div>
                             <!-- Speech API Live Recording Indicator Box -->
-                            <div id="voice-dictate-indicator-sn-note-text" style="display:none;align-items:center;gap:8px;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.4);padding:0.35rem 0.65rem;border-radius:6px;font-size:0.75rem;color:#FCA5A5;margin-bottom:6px;">
-                                <span class="dictate-pulse-dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#EF4444;"></span>
+                            <div id="voice-dictate-indicator-sn-note-text" style="display:none;align-items:center;gap:8px;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.4);padding:0.35rem 0.65rem;border-radius:6px;font-size:0.75rem;color:var(--ti-alert-ink, #FCA5A5);margin-bottom:6px;">
+                                <span class="dictate-pulse-dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ti-alert, #EF4444);"></span>
                                 <span id="voice-dictate-preview-sn-note-text">Listening... Speak procedure notes clearly.</span>
                             </div>
-                            <textarea id="sn-note-text" placeholder="Record confidential artist feedback, skin texture notes, needle preferences, or consultation details (or use hands-free dictation)..." required rows="3" style="width:100%;padding:0.6rem;background:#111827;border:1px solid #374151;border-radius:6px;color:#FFF;font-size:0.85rem;line-height:1.4;outline:none;resize:vertical;"></textarea>
+                            <textarea id="sn-note-text" placeholder="Record confidential artist feedback, skin texture notes, needle preferences, or consultation details (or use hands-free dictation)..." required rows="3" style="width:100%;padding:0.6rem;background:var(--ti-panel, #111827);border:1px solid var(--ti-line, #374151);border-radius:6px;color:#FFF;font-size:0.85rem;line-height:1.4;outline:none;resize:vertical;"></textarea>
                         </div>
 
                         <div style="display:flex;justify-content:flex-end;">
-                            <button type="submit" style="padding:0.55rem 1.25rem;background:linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);color:#FFF;border:none;border-radius:8px;font-weight:800;font-size:0.85rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(99,102,241,0.35);">
+                            <button type="submit" style="padding:0.55rem 1.25rem;background:linear-gradient(135deg, var(--ti-purple, #6366F1) 0%, var(--ti-purple, #4F46E5) 100%);color:#FFF;border:none;border-radius:8px;font-weight:800;font-size:0.85rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(99,102,241,0.35);">
                                 💾 Save Staff Note
                             </button>
                         </div>
@@ -411,18 +411,18 @@ function switchClientProfileTab(tabName) {
 
                 <!-- Chronological Notes List -->
                 <div>
-                    <div style="font-size:0.85rem;font-weight:700;color:#9CA3AF;margin-bottom:0.75rem;display:flex;align-items:center;justify-content:space-between;">
+                    <div style="font-size:0.85rem;font-weight:700;color:var(--ti-muted, #9CA3AF);margin-bottom:0.75rem;display:flex;align-items:center;justify-content:space-between;">
                         <span>Chronological Staff Notes Log (${sortedNotes.length}):</span>
-                        <span style="font-size:0.75rem;color:#64748B;">Oldest &rarr; Most Recent</span>
+                        <span style="font-size:0.75rem;color:var(--ti-faint, #64748B);">Oldest &rarr; Most Recent</span>
                     </div>
         `;
 
         if (!sortedNotes.length) {
             notesHtml += `
-                <div style="text-align:center;padding:2.5rem;background:#1F2937;border:1px dashed #374151;border-radius:12px;color:#9CA3AF;">
+                <div style="text-align:center;padding:2.5rem;background:var(--ti-panel2, #1F2937);border:1px dashed var(--ti-line, #374151);border-radius:12px;color:var(--ti-muted, #9CA3AF);">
                     <div style="font-size:2rem;margin-bottom:6px;">🔒</div>
-                    <div style="font-weight:700;color:#E5E7EB;font-size:0.95rem;">No Private Staff Notes Recorded Yet</div>
-                    <div style="font-size:0.8rem;margin-top:4px;color:#9CA3AF;">Use the form above to log observations, skin sensitivities, or booking notes.</div>
+                    <div style="font-weight:700;color:var(--ti-text, #E5E7EB);font-size:0.95rem;">No Private Staff Notes Recorded Yet</div>
+                    <div style="font-size:0.8rem;margin-top:4px;color:var(--ti-muted, #9CA3AF);">Use the form above to log observations, skin sensitivities, or booking notes.</div>
                 </div>
             `;
         } else {
@@ -446,13 +446,13 @@ function switchClientProfileTab(tabName) {
                 const catColor = n.category === 'Skin Sensitivity' ? '#EF4444' : (n.category === 'Procedure Observation' ? '#8B5CF6' : (n.category === 'Consultation & Deposit' ? '#10B981' : '#38BDF8'));
 
                 notesHtml += `
-                    <div style="background:#1F2937;border:1px solid #374151;border-left:4px solid ${catColor};border-radius:10px;padding:1rem;display:flex;flex-direction:column;gap:0.5rem;position:relative;">
+                    <div style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-left:4px solid ${catColor};border-radius:10px;padding:1rem;display:flex;flex-direction:column;gap:0.5rem;position:relative;">
                         <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
                             <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-                                <span style="background:#111827;color:#F3F4F6;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:800;border:1px solid #374151;">
+                                <span style="background:var(--ti-panel, #111827);color:var(--ti-text, #F3F4F6);padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:800;border:1px solid var(--ti-line, #374151);">
                                     👤 ${escapeHtml(n.author || 'Staff Member')}
                                 </span>
-                                <span style="font-size:0.72rem;color:#9CA3AF;">
+                                <span style="font-size:0.72rem;color:var(--ti-muted, #9CA3AF);">
                                     (${escapeHtml(n.author_role || 'Staff')})
                                 </span>
                                 <span style="background:${catColor}20;color:${catColor};border:1px solid ${catColor}50;padding:1px 8px;border-radius:12px;font-size:0.7rem;font-weight:700;">
@@ -461,14 +461,14 @@ function switchClientProfileTab(tabName) {
                             </div>
                             
                             <div style="display:flex;align-items:center;gap:8px;">
-                                <span style="font-size:0.75rem;color:#9CA3AF;font-family:monospace;">
+                                <span style="font-size:0.75rem;color:var(--ti-muted, #9CA3AF);font-family:monospace;">
                                     🕒 ${dateStr} at ${timeStr}
                                 </span>
-                                ${fromAppointment(n) ? '' : `<button type="button" onclick="confirmDeleteClientStaffNote(${client.id}, '${n.id}', '${escapeHtml((n.note || '').substring(0, 40))}')" style="background:none;border:none;color:#EF4444;font-size:0.85rem;cursor:pointer;padding:2px 6px;" title="Delete Staff Note">&times;</button>`}
+                                ${fromAppointment(n) ? '' : `<button type="button" onclick="confirmDeleteClientStaffNote(${client.id}, '${n.id}', '${escapeHtml((n.note || '').substring(0, 40))}')" style="background:none;border:none;color:var(--ti-alert, #EF4444);font-size:0.85rem;cursor:pointer;padding:2px 6px;" title="Delete Staff Note">&times;</button>`}
                             </div>
                         </div>
 
-                        <p style="margin:0;font-size:0.875rem;color:#E5E7EB;line-height:1.5;white-space:pre-wrap;">${escapeHtml(n.note || '')}</p>
+                        <p style="margin:0;font-size:0.875rem;color:var(--ti-text, #E5E7EB);line-height:1.5;white-space:pre-wrap;">${escapeHtml(n.note || '')}</p>
                     </div>
                 `;
             });
@@ -486,7 +486,7 @@ function switchClientProfileTab(tabName) {
     } else if (tabName === 'appointments') {
         if (!appointments || appointments.length === 0) {
             bodyEl.innerHTML = `
-                <div style="text-align:center;padding:3rem;background:#1F2937;border:1px dashed #374151;border-radius:12px;color:#9CA3AF;">
+                <div style="text-align:center;padding:3rem;background:var(--ti-panel2, #1F2937);border:1px dashed var(--ti-line, #374151);border-radius:12px;color:var(--ti-muted, #9CA3AF);">
                     <div style="font-size:2rem;margin-bottom:8px;">📅</div>
                     <div>No past appointments found for this client.</div>
                 </div>
@@ -496,28 +496,28 @@ function switchClientProfileTab(tabName) {
 
         let apptHtml = `
             <div style="display:flex;flex-direction:column;gap:0.75rem;">
-                <div style="font-size:0.825rem;color:#9CA3AF;margin-bottom:4px;">Verified Procedure Appointments & Sessions:</div>
+                <div style="font-size:0.825rem;color:var(--ti-muted, #9CA3AF);margin-bottom:4px;">Verified Procedure Appointments & Sessions:</div>
         `;
 
         appointments.forEach(a => {
             const statusColor = a.status === 'CONFIRMED' || a.status === 'COMPLETED' ? '#10B981' : (a.status === 'CANCELLED' ? '#EF4444' : '#F59E0B');
             apptHtml += `
-                <div style="background:#1F2937;border:1px solid #374151;border-radius:10px;padding:1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">
+                <div style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:10px;padding:1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">
                     <div>
-                        <div style="font-weight:700;font-size:0.95rem;color:#F9FAFB;">${escapeHtml(a.service_type || a.service || 'Appointment')}</div>
-                        <div style="font-size:0.8rem;color:#9CA3AF;margin-top:2px;">
-                            📅 <strong>${escapeHtml(a.date || (a.datetime ? new Date(a.datetime).toLocaleDateString() : ''))}</strong> &bull; ⏰ ${escapeHtml(a.time || (a.datetime ? new Date(a.datetime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''))} &bull; 🎨 Artist: <strong style="color:#60A5FA;">${escapeHtml(a.staff_name || 'Not recorded')}</strong>
+                        <div style="font-weight:700;font-size:0.95rem;color:var(--ti-text, #F9FAFB);">${escapeHtml(a.service_type || a.service || 'Appointment')}</div>
+                        <div style="font-size:0.8rem;color:var(--ti-muted, #9CA3AF);margin-top:2px;">
+                            📅 <strong>${escapeHtml(a.date || (a.datetime ? new Date(a.datetime).toLocaleDateString() : ''))}</strong> &bull; ⏰ ${escapeHtml(a.time || (a.datetime ? new Date(a.datetime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''))} &bull; 🎨 Artist: <strong style="color:var(--ti-blue-ink, #60A5FA);">${escapeHtml(a.staff_name || 'Not recorded')}</strong>
                         </div>
-                        ${Number(a.deposit_paid) > 0 ? `<div class="cp-appt-deposit" style="font-size:0.8rem;color:#FBBF24;margin-top:4px;">${escapeHtml(pdfLabel("Deposit paid"))}: $${Number(a.deposit_paid).toFixed(2)} &bull; ${escapeHtml(pdfLabel("Balance"))}: $${Math.max(0, Number(a.estimated_price || a.price || a.amount || 0) - Number(a.deposit_paid)).toFixed(2)}</div>` : ''}
-                        ${a.notes ? `<div class="cp-appt-note" style="font-size:0.8rem;color:#CBD5E1;margin-top:4px;white-space:pre-wrap;">📝 ${escapeHtml(a.notes)}</div>` : ''}
+                        ${Number(a.deposit_paid) > 0 ? `<div class="cp-appt-deposit" style="font-size:0.8rem;color:var(--ti-gold, #FBBF24);margin-top:4px;">${escapeHtml(pdfLabel("Deposit paid"))}: $${Number(a.deposit_paid).toFixed(2)} &bull; ${escapeHtml(pdfLabel("Balance"))}: $${Math.max(0, Number(a.estimated_price || a.price || a.amount || 0) - Number(a.deposit_paid)).toFixed(2)}</div>` : ''}
+                        ${a.notes ? `<div class="cp-appt-note" style="font-size:0.8rem;color:var(--ti-text2, #CBD5E1);margin-top:4px;white-space:pre-wrap;">📝 ${escapeHtml(a.notes)}</div>` : ''}
                     </div>
 
                     <div style="display:flex;align-items:center;gap:10px;">
-                        <span style="font-weight:800;font-size:1.05rem;color:#10B981;">$${Number(a.estimated_price || a.price || a.amount || 0).toFixed(2)}</span>
+                        <span style="font-weight:800;font-size:1.05rem;color:var(--ti-green, #10B981);">$${Number(a.estimated_price || a.price || a.amount || 0).toFixed(2)}</span>
                         <span style="background:${statusColor}20;color:${statusColor};border:1px solid ${statusColor}50;padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:800;">
                             ${escapeHtml(a.status || '')}
                         </span>
-                        <button type="button" onclick="generateClientAppointmentReceiptPDF(${JSON.stringify(a).replace(/"/g, '&quot;')}, ${client ? JSON.stringify(client).replace(/"/g, '&quot;') : 'null'})" style="padding:0.4rem 0.75rem;background:linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(59,130,246,0.3);" title="Generate formal printable PDF receipt with Tax/VAT breakdown and artist gratuity">
+                        <button type="button" onclick="generateClientAppointmentReceiptPDF(${JSON.stringify(a).replace(/"/g, '&quot;')}, ${client ? JSON.stringify(client).replace(/"/g, '&quot;') : 'null'})" style="padding:0.4rem 0.75rem;background:linear-gradient(135deg, var(--ti-blue, #3B82F6) 0%, var(--ti-blue, #1D4ED8) 100%);color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(59,130,246,0.3);" title="Generate formal printable PDF receipt with Tax/VAT breakdown and artist gratuity">
                             🖨️ Receipt PDF
                         </button>
                     </div>
@@ -532,24 +532,24 @@ function switchClientProfileTab(tabName) {
         const forms = data.consent_forms || [];
         const formsHtml = forms.length ? `
             <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:1.25rem;">
-                <div style="font-size:0.825rem;color:#9CA3AF;margin-bottom:4px;">Consent forms saved from the form builder:</div>
+                <div style="font-size:0.825rem;color:var(--ti-muted, #9CA3AF);margin-bottom:4px;">Consent forms saved from the form builder:</div>
                 ${forms.map(f => `
-                <div class="cp-consent-form-row" style="background:#1F2937;border:1px solid #374151;border-radius:10px;padding:1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">
+                <div class="cp-consent-form-row" style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:10px;padding:1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">
                     <div>
-                        <div style="font-weight:700;font-size:0.95rem;color:#F9FAFB;">📝 ${escapeHtml(f.name || 'Consent form')}</div>
-                        <div style="font-size:0.78rem;color:#9CA3AF;margin-top:2px;">Saved ${escapeHtml(String(f.saved_at || ''))} &bull; ${f.signed ? 'signed' : 'not signed'}</div>
-                        ${f.minor_without_guardian ? `<div class="cp-minor-flag" style="font-size:0.78rem;color:#FCA5A5;font-weight:800;margin-top:4px;">${escapeHtml(pdfLabel('🛡️ Signed by a client under 18 without a parent or guardian signature'))}</div>` : ''}
+                        <div style="font-weight:700;font-size:0.95rem;color:var(--ti-text, #F9FAFB);">📝 ${escapeHtml(f.name || 'Consent form')}</div>
+                        <div style="font-size:0.78rem;color:var(--ti-muted, #9CA3AF);margin-top:2px;">Saved ${escapeHtml(String(f.saved_at || ''))} &bull; ${f.signed ? 'signed' : 'not signed'}</div>
+                        ${f.minor_without_guardian ? `<div class="cp-minor-flag" style="font-size:0.78rem;color:var(--ti-alert-ink, #FCA5A5);font-weight:800;margin-top:4px;">${escapeHtml(pdfLabel('🛡️ Signed by a client under 18 without a parent or guardian signature'))}</div>` : ''}
                     </div>
-                    <span style="display:flex;gap:8px;"><button type="button" onclick="viewClientConsentForm(${Number(f.id)})" style="padding:0.4rem 0.75rem;background:#2563EB;color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">View answers</button>
-                    <button type="button" onclick="downloadConsentFormPDF(${Number(f.id)})" style="padding:0.4rem 0.75rem;background:#1E40AF;color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">🖨️ PDF</button></span>
+                    <span style="display:flex;gap:8px;"><button type="button" onclick="viewClientConsentForm(${Number(f.id)})" style="padding:0.4rem 0.75rem;background:var(--ti-blue, #2563EB);color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">View answers</button>
+                    <button type="button" onclick="downloadConsentFormPDF(${Number(f.id)})" style="padding:0.4rem 0.75rem;background:var(--ti-blue, #1E40AF);color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">🖨️ PDF</button></span>
                 </div>`).join('')}
             </div>` : '';
         if (!waivers || waivers.length === 0) {
             bodyEl.innerHTML = formsHtml + `
-                <div style="text-align:center;padding:3rem;background:#1F2937;border:1px dashed #374151;border-radius:12px;color:#9CA3AF;">
+                <div style="text-align:center;padding:3rem;background:var(--ti-panel2, #1F2937);border:1px dashed var(--ti-line, #374151);border-radius:12px;color:var(--ti-muted, #9CA3AF);">
                     <div style="font-size:2rem;margin-bottom:8px;">📜</div>
                     <div>No signed liability waivers recorded for this client.</div>
-                    <button type="button" onclick="openWaiverModal(${client.id})" style="margin-top:12px;padding:0.5rem 1rem;background:#10B981;color:#FFF;border:none;border-radius:6px;font-weight:700;cursor:pointer;">✍️ Open Digital Signature Pad</button>
+                    <button type="button" onclick="openWaiverModal(${client.id})" style="margin-top:12px;padding:0.5rem 1rem;background:var(--ti-green, #10B981);color:#FFF;border:none;border-radius:6px;font-weight:700;cursor:pointer;">✍️ Open Digital Signature Pad</button>
                 </div>
             `;
             return;
@@ -557,29 +557,29 @@ function switchClientProfileTab(tabName) {
 
         let waiverHtml = `
             <div style="display:flex;flex-direction:column;gap:0.75rem;">
-                <div style="font-size:0.825rem;color:#9CA3AF;margin-bottom:4px;">Verified Legal Liability & Medical Disclosure Waivers:</div>
+                <div style="font-size:0.825rem;color:var(--ti-muted, #9CA3AF);margin-bottom:4px;">Verified Legal Liability & Medical Disclosure Waivers:</div>
         `;
 
         waivers.forEach(w => {
             waiverHtml += `
-                <div style="background:#1F2937;border:1px solid #374151;border-radius:10px;padding:1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">
+                <div style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:10px;padding:1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">
                     <div style="display:flex;align-items:center;gap:12px;">
-                        <div style="width:42px;height:42px;border-radius:8px;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:#34D399;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">
+                        <div style="width:42px;height:42px;border-radius:8px;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:var(--ti-green, #34D399);display:flex;align-items:center;justify-content:center;font-size:1.2rem;">
                             📜
                         </div>
                         <div>
-                            <div style="font-weight:700;font-size:0.95rem;color:#F9FAFB;">${escapeHtml(w.title || 'Digital Liability & Health Waiver')}</div>
-                            <div style="font-size:0.78rem;color:#9CA3AF;margin-top:2px;">
-                                Signed on <strong>${escapeHtml(w.date_signed || w.signed_at || 'date not recorded')}</strong> &bull; IP: <code style="color:#A7F3D0;">${escapeHtml(w.ip_address || 'not recorded')}</code>
+                            <div style="font-weight:700;font-size:0.95rem;color:var(--ti-text, #F9FAFB);">${escapeHtml(w.title || 'Digital Liability & Health Waiver')}</div>
+                            <div style="font-size:0.78rem;color:var(--ti-muted, #9CA3AF);margin-top:2px;">
+                                Signed on <strong>${escapeHtml(w.date_signed || w.signed_at || 'date not recorded')}</strong> &bull; IP: <code style="color:var(--ti-green-ink, #A7F3D0);">${escapeHtml(w.ip_address || 'not recorded')}</code>
                             </div>
                         </div>
                     </div>
 
                     <div style="display:flex;align-items:center;gap:8px;">
-                        <span style="background:rgba(16,185,129,0.2);color:#34D399;border:1px solid #10B981;padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:800;">
+                        <span style="background:rgba(16,185,129,0.2);color:var(--ti-green, #34D399);border:1px solid var(--ti-green, #10B981);padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:800;">
                             ✅ VERIFIED & SIGNED
                         </span>
-                        <button type="button" onclick="viewWaiverRecord(${Number(w.id)})" style="padding:0.4rem 0.75rem;background:#374151;color:#F3F4F6;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">View waiver</button>
+                        <button type="button" onclick="viewWaiverRecord(${Number(w.id)})" style="padding:0.4rem 0.75rem;background:var(--ti-line, #374151);color:var(--ti-text, #F3F4F6);border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">View waiver</button>
                     </div>
                 </div>
             `;
@@ -591,18 +591,18 @@ function switchClientProfileTab(tabName) {
     } else if (tabName === 'tattoo-work') {
         let workHtml = `
             <div>
-                <div style="background:#1F2937;border:1px solid #374151;border-radius:12px;padding:1.25rem;margin-bottom:1.25rem;">
-                    <h4 style="margin:0 0 0.75rem 0;font-size:0.95rem;font-weight:700;color:#F9FAFB;display:flex;align-items:center;gap:6px;">
+                <div style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:12px;padding:1.25rem;margin-bottom:1.25rem;">
+                    <h4 style="margin:0 0 0.75rem 0;font-size:0.95rem;font-weight:700;color:var(--ti-text, #F9FAFB);display:flex;align-items:center;gap:6px;">
                         🖼️ Upload Tattoo Session Work / Portfolio Photo
                     </h4>
                     <form onsubmit="submitClientTattooWork(event, ${client.id})" style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
                         <div>
-                            <label style="font-size:0.75rem;color:#9CA3AF;display:block;margin-bottom:3px;">Session Title / Name</label>
-                            <input type="text" id="tw-title-input" placeholder="e.g. Japanese Dragon Upper Arm Line Work" required style="width:100%;padding:0.5rem;background:#111827;border:1px solid #374151;border-radius:6px;color:#FFF;font-size:0.825rem;outline:none;" />
+                            <label style="font-size:0.75rem;color:var(--ti-muted, #9CA3AF);display:block;margin-bottom:3px;">Session Title / Name</label>
+                            <input type="text" id="tw-title-input" placeholder="e.g. Japanese Dragon Upper Arm Line Work" required style="width:100%;padding:0.5rem;background:var(--ti-panel, #111827);border:1px solid var(--ti-line, #374151);border-radius:6px;color:#FFF;font-size:0.825rem;outline:none;" />
                         </div>
                         <div>
-                            <label style="font-size:0.75rem;color:#9CA3AF;display:block;margin-bottom:3px;">Category</label>
-                            <select id="tw-category-input" style="width:100%;padding:0.5rem;background:#111827;border:1px solid #374151;border-radius:6px;color:#FFF;font-size:0.825rem;outline:none;">
+                            <label style="font-size:0.75rem;color:var(--ti-muted, #9CA3AF);display:block;margin-bottom:3px;">Category</label>
+                            <select id="tw-category-input" style="width:100%;padding:0.5rem;background:var(--ti-panel, #111827);border:1px solid var(--ti-line, #374151);border-radius:6px;color:#FFF;font-size:0.825rem;outline:none;">
                                 <option value="Tattoo Session">Tattoo Session Work</option>
                                 <option value="Stencil Design">Stencil & Skin Prep</option>
                                 <option value="Piercing Session">Piercing Curation</option>
@@ -610,28 +610,28 @@ function switchClientProfileTab(tabName) {
                             </select>
                         </div>
                         <div style="grid-column: span 2;">
-                            <label for="tw-photo-input" style="font-size:0.75rem;color:#9CA3AF;display:block;margin-bottom:3px;">Photo</label>
+                            <label for="tw-photo-input" style="font-size:0.75rem;color:var(--ti-muted, #9CA3AF);display:block;margin-bottom:3px;">Photo</label>
                             <input type="file" id="tw-photo-input" accept="image/*" onchange="handleClientWorkPhotoSelect(event)" style="display:none;" />
-                            <button type="button" onclick="document.getElementById('tw-photo-input').click()" style="padding:0.5rem 1rem;background:#374151;color:#F9FAFB;border:1px solid #4B5563;border-radius:6px;font-weight:700;font-size:0.825rem;cursor:pointer;">📷 Take or choose a photo</button>
-                            <span style="font-size:0.72rem;color:#9CA3AF;margin-left:6px;">On a phone or tablet you can use the camera.</span>
+                            <button type="button" onclick="document.getElementById('tw-photo-input').click()" style="padding:0.5rem 1rem;background:var(--ti-line, #374151);color:var(--ti-text, #F9FAFB);border:1px solid var(--ti-line2, #4B5563);border-radius:6px;font-weight:700;font-size:0.825rem;cursor:pointer;">📷 Take or choose a photo</button>
+                            <span style="font-size:0.72rem;color:var(--ti-muted, #9CA3AF);margin-left:6px;">On a phone or tablet you can use the camera.</span>
                             <div id="tw-photo-preview" style="margin-top:6px;"></div>
                         </div>
                         <div style="grid-column: span 2;">
-                            <label style="font-size:0.75rem;color:#9CA3AF;display:block;margin-bottom:3px;">Description & Technique Notes</label>
-                            <input type="text" id="tw-notes-input" placeholder="e.g. Dynamic Black Ink, 3RL and 7M1 needles, 3.5 hour total session time." style="width:100%;padding:0.5rem;background:#111827;border:1px solid #374151;border-radius:6px;color:#FFF;font-size:0.825rem;outline:none;" />
+                            <label style="font-size:0.75rem;color:var(--ti-muted, #9CA3AF);display:block;margin-bottom:3px;">Description & Technique Notes</label>
+                            <input type="text" id="tw-notes-input" placeholder="e.g. Dynamic Black Ink, 3RL and 7M1 needles, 3.5 hour total session time." style="width:100%;padding:0.5rem;background:var(--ti-panel, #111827);border:1px solid var(--ti-line, #374151);border-radius:6px;color:#FFF;font-size:0.825rem;outline:none;" />
                         </div>
                         <div style="grid-column: span 2;display:flex;justify-content:flex-end;">
-                            <button type="submit" style="padding:0.5rem 1.25rem;background:#3B82F6;color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.85rem;cursor:pointer;">📸 Add to Client Gallery</button>
+                            <button type="submit" style="padding:0.5rem 1.25rem;background:var(--ti-blue, #3B82F6);color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.85rem;cursor:pointer;">📸 Add to Client Gallery</button>
                         </div>
                     </form>
                 </div>
 
-                <div style="font-size:0.85rem;font-weight:700;color:#9CA3AF;margin-bottom:0.75rem;">Session Work Archive:</div>
+                <div style="font-size:0.85rem;font-weight:700;color:var(--ti-muted, #9CA3AF);margin-bottom:0.75rem;">Session Work Archive:</div>
         `;
 
         if (!tattoo_work || tattoo_work.length === 0) {
             workHtml += `
-                <div style="text-align:center;padding:2.5rem;background:#1F2937;border:1px dashed #374151;border-radius:12px;color:#9CA3AF;">
+                <div style="text-align:center;padding:2.5rem;background:var(--ti-panel2, #1F2937);border:1px dashed var(--ti-line, #374151);border-radius:12px;color:var(--ti-muted, #9CA3AF);">
                     <div style="font-size:2rem;margin-bottom:6px;">🖼️</div>
                     <div>No artwork or photos uploaded for this client yet.</div>
                 </div>
@@ -640,20 +640,20 @@ function switchClientProfileTab(tabName) {
             workHtml += `<div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));gap:1rem;">`;
             tattoo_work.forEach(w => {
                 workHtml += `
-                    <div class="gallery-card-interactive" style="background:#1F2937;border:1px solid #374151;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;">
-                        <div style="height:150px;background:#111827;overflow:hidden;position:relative;">
+                    <div class="gallery-card-interactive" style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;">
+                        <div style="height:150px;background:var(--ti-panel, #111827);overflow:hidden;position:relative;">
                             <img src="${escapeHtml(w.image_url)}" alt="${escapeHtml(w.title)}" style="width:100%;height:100%;object-fit:cover;" onerror="this.src='assets/studio_crm_logo.jpg'" />
-                            <span style="position:absolute;top:6px;right:6px;background:rgba(0,0,0,0.7);color:#F3F4F6;padding:2px 6px;border-radius:4px;font-size:0.7rem;font-weight:700;">${escapeHtml(w.category || 'Tattoo')}</span>
+                            <span style="position:absolute;top:6px;right:6px;background:rgba(0,0,0,0.7);color:var(--ti-text, #F3F4F6);padding:2px 6px;border-radius:4px;font-size:0.7rem;font-weight:700;">${escapeHtml(w.category || 'Tattoo')}</span>
                         </div>
                         <div style="padding:0.75rem;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
                             <div>
-                                <div style="font-weight:700;font-size:0.85rem;color:#F9FAFB;margin-bottom:2px;">${escapeHtml(w.title)}</div>
-                                <div style="font-size:0.75rem;color:#9CA3AF;margin-bottom:4px;">📅 ${escapeHtml(w.date || (w.created_at ? String(w.created_at).slice(0, 10) : ''))}</div>
-                                <div style="font-size:0.75rem;color:#D1D5DB;line-height:1.3;">${escapeHtml(w.notes || '')}</div>
+                                <div style="font-weight:700;font-size:0.85rem;color:var(--ti-text, #F9FAFB);margin-bottom:2px;">${escapeHtml(w.title)}</div>
+                                <div style="font-size:0.75rem;color:var(--ti-muted, #9CA3AF);margin-bottom:4px;">📅 ${escapeHtml(w.date || (w.created_at ? String(w.created_at).slice(0, 10) : ''))}</div>
+                                <div style="font-size:0.75rem;color:var(--ti-text2, #D1D5DB);line-height:1.3;">${escapeHtml(w.notes || '')}</div>
                             </div>
                             <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center;">
-                                <button type="button" onclick="openLightboxModal('${w.image_url}', '${escapeHtml(w.title)}', '${escapeHtml(w.notes)}')" style="padding:2px 8px;background:#374151;color:#60A5FA;border:none;border-radius:4px;font-size:0.72rem;cursor:pointer;font-weight:600;">🔍 Zoom</button>
-                                <button type="button" onclick="deleteClientTattooWork(${client.id}, ${w.id})" style="background:none;border:none;color:#EF4444;font-size:0.75rem;cursor:pointer;">Delete</button>
+                                <button type="button" onclick="openLightboxModal('${w.image_url}', '${escapeHtml(w.title)}', '${escapeHtml(w.notes)}')" style="padding:2px 8px;background:var(--ti-line, #374151);color:var(--ti-blue-ink, #60A5FA);border:none;border-radius:4px;font-size:0.72rem;cursor:pointer;font-weight:600;">🔍 Zoom</button>
+                                <button type="button" onclick="deleteClientTattooWork(${client.id}, ${w.id})" style="background:none;border:none;color:var(--ti-alert, #EF4444);font-size:0.75rem;cursor:pointer;">Delete</button>
                             </div>
                         </div>
                     </div>
@@ -708,12 +708,12 @@ async function viewClientConsentForm(formId) {
         if (v === false) return 'No';
         return escapeHtml(v == null || v === '' ? 'No answer' : String(v));
     };
-    const line = (label, v) => `<div style="display:flex;justify-content:space-between;gap:1rem;border-bottom:1px solid #374151;padding:6px 0;font-size:0.85rem;"><span style="color:#9CA3AF;">${escapeHtml(label)}</span><strong style="color:#FFF;text-align:right;">${show(v)}</strong></div>`;
+    const line = (label, v) => `<div style="display:flex;justify-content:space-between;gap:1rem;border-bottom:1px solid var(--ti-line, #374151);padding:6px 0;font-size:0.85rem;"><span style="color:var(--ti-muted, #9CA3AF);">${escapeHtml(label)}</span><strong style="color:#FFF;text-align:right;">${show(v)}</strong></div>`;
     const seen = new Set();
     let html = '';
     ((form.schema && form.schema.sections) || []).forEach((sec) => {
         const rows = (sec.fields || []).filter((f) => f.id in responses).map((f) => { seen.add(f.id); return line(f.label || f.id, responses[f.id]); });
-        if (rows.length) html += `<div style="background:#1F2937;border:1px solid #374151;border-radius:12px;padding:1rem;margin-bottom:1rem;"><h4 style="margin:0 0 0.5rem 0;font-size:0.95rem;color:#F9FAFB;">${escapeHtml(sec.title || '')}</h4>${rows.join('')}</div>`;
+        if (rows.length) html += `<div style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:12px;padding:1rem;margin-bottom:1rem;"><h4 style="margin:0 0 0.5rem 0;font-size:0.95rem;color:var(--ti-text, #F9FAFB);">${escapeHtml(sec.title || '')}</h4>${rows.join('')}</div>`;
     });
     // the age and the ID check as they were when the form was signed
     const signedAt = [];
@@ -721,18 +721,18 @@ async function viewClientConsentForm(formId) {
     signedAt.push(line(pdfLabel('ID check'), form.idCheck
         ? pdfLabel('{0} ending {1}, checked by {2} on {3}').replace('{0}', pdfLabel(form.idCheck.type)).replace('{1}', form.idCheck.last4).replace('{2}', form.idCheck.checked_by).replace('{3}', new Date(form.idCheck.checked_at).toLocaleString())
         : pdfLabel('Not checked when this form was signed')));
-    html = `<div style="background:#1F2937;border:1px solid ${form.minorWithoutGuardian ? '#EF4444' : '#374151'};border-radius:12px;padding:1rem;margin-bottom:1rem;">`
-        + (form.minorWithoutGuardian ? `<div style="color:#FCA5A5;font-weight:800;font-size:0.85rem;margin-bottom:6px;">${escapeHtml(pdfLabel('🛡️ Signed by a client under 18 without a parent or guardian signature'))}</div>` : '')
+    html = `<div style="background:var(--ti-panel2, #1F2937);border:1px solid ${form.minorWithoutGuardian ? '#EF4444' : '#374151'};border-radius:12px;padding:1rem;margin-bottom:1rem;">`
+        + (form.minorWithoutGuardian ? `<div style="color:var(--ti-alert-ink, #FCA5A5);font-weight:800;font-size:0.85rem;margin-bottom:6px;">${escapeHtml(pdfLabel('🛡️ Signed by a client under 18 without a parent or guardian signature'))}</div>` : '')
         + signedAt.join('') + '</div>' + html;
     const rest = Object.keys(responses).filter((k) => !seen.has(k));
     const medical = ((form.schema && form.schema.sections) || []).find((sec) => sec.type === 'medical_section');
     const restTitle = medical ? (medical.title || 'Medical History') : 'Other answers';
-    if (rest.length) html += `<div style="background:#1F2937;border:1px solid #374151;border-radius:12px;padding:1rem;"><h4 style="margin:0 0 0.5rem 0;font-size:0.95rem;color:#F9FAFB;">${escapeHtml(restTitle)}</h4>${rest.map((k) => line(k.replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase()), responses[k])).join('')}</div>`;
+    if (rest.length) html += `<div style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:12px;padding:1rem;"><h4 style="margin:0 0 0.5rem 0;font-size:0.95rem;color:var(--ti-text, #F9FAFB);">${escapeHtml(restTitle)}</h4>${rest.map((k) => line(k.replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase()), responses[k])).join('')}</div>`;
     bodyEl.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;">
-            <div><div style="font-weight:800;font-size:1.05rem;color:#F9FAFB;">📝 ${escapeHtml(form.name || 'Consent form')}</div><div style="font-size:0.78rem;color:#9CA3AF;">Saved ${escapeHtml(String(form.saved_at || ''))}</div></div>
-            <span style="display:flex;gap:8px;"><button type="button" onclick="downloadConsentFormPDF(${Number(form.id)})" style="padding:0.4rem 0.75rem;background:#2563EB;color:#FFF;border:none;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;">🖨️ PDF</button>
-            <button type="button" onclick="switchClientProfileTab('waivers')" style="padding:0.4rem 0.75rem;background:#374151;color:#F3F4F6;border:none;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;">← Back to waivers</button></span>
-        </div>` + html + (Object.keys(responses).length ? '' : '<div style="color:#9CA3AF;">This form was saved with no answers.</div>');
+            <div><div style="font-weight:800;font-size:1.05rem;color:var(--ti-text, #F9FAFB);">📝 ${escapeHtml(form.name || 'Consent form')}</div><div style="font-size:0.78rem;color:var(--ti-muted, #9CA3AF);">Saved ${escapeHtml(String(form.saved_at || ''))}</div></div>
+            <span style="display:flex;gap:8px;"><button type="button" onclick="downloadConsentFormPDF(${Number(form.id)})" style="padding:0.4rem 0.75rem;background:var(--ti-blue, #2563EB);color:#FFF;border:none;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;">🖨️ PDF</button>
+            <button type="button" onclick="switchClientProfileTab('waivers')" style="padding:0.4rem 0.75rem;background:var(--ti-line, #374151);color:var(--ti-text, #F3F4F6);border:none;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;">← Back to waivers</button></span>
+        </div>` + html + (Object.keys(responses).length ? '' : '<div style="color:var(--ti-muted, #9CA3AF);">This form was saved with no answers.</div>');
 }
 window.viewClientConsentForm = viewClientConsentForm;
 
@@ -943,7 +943,7 @@ async function renderD3SupplyUsageHeatmap() {
     if (!container || !window.d3) return;
 
     container.innerHTML = `
-        <div style="display:flex;align-items:center;justify-content:center;height:320px;color:#F472B6;font-weight:700;font-size:0.9rem;">
+        <div style="display:flex;align-items:center;justify-content:center;height:320px;color:var(--ti-rose-ink, #F472B6);font-weight:700;font-size:0.9rem;">
             ⚡ Computing 7-day supply consumption density matrix...
         </div>
     `;
@@ -1052,10 +1052,10 @@ async function renderD3SupplyUsageHeatmap() {
 
                 tooltip.style('display', 'block')
                     .html(`
-                        <div style="font-weight:800;color:#F472B6;font-size:0.85rem;margin-bottom:4px;">
+                        <div style="font-weight:800;color:var(--ti-rose-ink, #F472B6);font-size:0.85rem;margin-bottom:4px;">
                             🔥 ${d.day} &bull; ${d.shift}
                         </div>
-                        <div style="font-size:0.75rem;color:#9CA3AF;margin-bottom:6px;">
+                        <div style="font-size:0.75rem;color:var(--ti-muted, #9CA3AF);margin-bottom:6px;">
                             ⏰ Shift Hours: ${d.shift_hours || 'Procedure Block'}
                         </div>
                         <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
@@ -1064,13 +1064,13 @@ async function renderD3SupplyUsageHeatmap() {
                         </div>
                         <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
                             <span>Client Procedures:</span>
-                            <strong style="color:#60A5FA;">${d.procedures_count || 3} sessions</strong>
+                            <strong style="color:var(--ti-blue-ink, #60A5FA);">${d.procedures_count || 3} sessions</strong>
                         </div>
                         <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
                             <span>Top Consumed SKU:</span>
-                            <strong style="color:#34D399;">${d.top_supply || 'Needles & Ink'}</strong>
+                            <strong style="color:var(--ti-green, #34D399);">${d.top_supply || 'Needles & Ink'}</strong>
                         </div>
-                        <div style="background:#0F172A;padding:4px 6px;border-radius:4px;margin-top:4px;font-size:0.7rem;color:#FBBF24;">
+                        <div style="background:var(--ti-bg2, #0F172A);padding:4px 6px;border-radius:4px;margin-top:4px;font-size:0.7rem;color:var(--ti-gold, #FBBF24);">
                             ${d.risk_level === 'CRITICAL' ? '🚨 Peak Procedure Load: Pre-stage supply trays!' : '✅ Sufficient buffer stock on hand.'}
                         </div>
                     `);
@@ -1103,7 +1103,7 @@ async function renderD3SupplyUsageHeatmap() {
 
     } catch (err) {
         console.error('Error rendering D3 supply usage heatmap:', err);
-        container.innerHTML = `<div style="text-align:center;padding:2rem;color:#EF4444;">Failed to load supply usage heatmap data.</div>`;
+        container.innerHTML = `<div style="text-align:center;padding:2rem;color:var(--ti-alert, #EF4444);">Failed to load supply usage heatmap data.</div>`;
     }
 }
 window.renderD3SupplyUsageHeatmap = renderD3SupplyUsageHeatmap;
@@ -1193,32 +1193,32 @@ async function renderClientAftercareCard(container, client, appointments) {
     const apptLine = (a) => {
         const g = given.find((x) => String(x.appointment_id) === String(a.id));
         const label = [a.service_type || a.service || "", String(a.datetime || a.date || "").slice(0, 10)].filter(Boolean).join(", ");
-        return `<div class="cp-aftercare-appt" style="display:flex;justify-content:space-between;gap:8px;align-items:center;border-bottom:1px solid #374151;padding:5px 0;font-size:0.82rem;">
-            <span style="color:#E5E7EB;">${escapeHtml(label)}</span>
-            ${g ? `<span style="color:#6EE7B7;font-weight:700;">${escapeHtml(pdfLabel("✅ Aftercare given {0}").replace("{0}", when(g.given_at)))}</span>`
-                : `<span style="color:#FDE047;font-weight:700;">${escapeHtml(pdfLabel("No aftercare recorded"))}</span>`}
+        return `<div class="cp-aftercare-appt" style="display:flex;justify-content:space-between;gap:8px;align-items:center;border-bottom:1px solid var(--ti-line, #374151);padding:5px 0;font-size:0.82rem;">
+            <span style="color:var(--ti-text, #E5E7EB);">${escapeHtml(label)}</span>
+            ${g ? `<span style="color:var(--ti-green-ink, #6EE7B7);font-weight:700;">${escapeHtml(pdfLabel("✅ Aftercare given {0}").replace("{0}", when(g.given_at)))}</span>`
+                : `<span style="color:var(--ti-gold-ink, #FDE047);font-weight:700;">${escapeHtml(pdfLabel("No aftercare recorded"))}</span>`}
         </div>`;
     };
     const card = document.createElement("div");
     card.id = "cp-aftercare-card";
-    card.style.cssText = "background:#1F2937;border:1px solid #374151;border-radius:12px;padding:1.25rem;";
+    card.style.cssText = "background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:12px;padding:1.25rem;";
     card.innerHTML = `
-        <h4 style="margin:0 0 0.6rem 0;font-size:0.95rem;font-weight:700;color:#F9FAFB;">🩹 ${escapeHtml(pdfLabel("Aftercare"))}</h4>
-        ${appts.length ? appts.map(apptLine).join("") : `<div style="font-size:0.82rem;color:#9CA3AF;">${escapeHtml(pdfLabel("No appointments yet."))}</div>`}
+        <h4 style="margin:0 0 0.6rem 0;font-size:0.95rem;font-weight:700;color:var(--ti-text, #F9FAFB);">🩹 ${escapeHtml(pdfLabel("Aftercare"))}</h4>
+        ${appts.length ? appts.map(apptLine).join("") : `<div style="font-size:0.82rem;color:var(--ti-muted, #9CA3AF);">${escapeHtml(pdfLabel("No appointments yet."))}</div>`}
         <form onsubmit="giveClientAftercare(event, ${Number(client.id)})" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:0.8rem;">
-            <select id="cp-aftercare-template" aria-label="${escapeHtml(pdfLabel("Aftercare sheet"))}" style="padding:7px 10px;background:#111827;border:1px solid #475569;border-radius:6px;color:#F8FAFC;">
+            <select id="cp-aftercare-template" aria-label="${escapeHtml(pdfLabel("Aftercare sheet"))}" style="padding:7px 10px;background:var(--ti-panel, #111827);border:1px solid var(--ti-line2, #475569);border-radius:6px;color:var(--ti-text, #F8FAFC);">
                 ${list.map((t) => `<option value="${escapeHtml(t.id)}">${escapeHtml(aftercareTextFor(t, uiLanguage()).title)}</option>`).join("")}
             </select>
-            <select id="cp-aftercare-lang" aria-label="${escapeHtml(pdfLabel("Language of the sheet"))}" style="padding:7px 10px;background:#111827;border:1px solid #475569;border-radius:6px;color:#F8FAFC;">
+            <select id="cp-aftercare-lang" aria-label="${escapeHtml(pdfLabel("Language of the sheet"))}" style="padding:7px 10px;background:var(--ti-panel, #111827);border:1px solid var(--ti-line2, #475569);border-radius:6px;color:var(--ti-text, #F8FAFC);">
                 ${languageOptions(uiLanguage())}
             </select>
-            <select id="cp-aftercare-appointment" aria-label="${escapeHtml(pdfLabel("For the appointment"))}" style="padding:7px 10px;background:#111827;border:1px solid #475569;border-radius:6px;color:#F8FAFC;">
+            <select id="cp-aftercare-appointment" aria-label="${escapeHtml(pdfLabel("For the appointment"))}" style="padding:7px 10px;background:var(--ti-panel, #111827);border:1px solid var(--ti-line2, #475569);border-radius:6px;color:var(--ti-text, #F8FAFC);">
                 <option value="">${escapeHtml(pdfLabel("No appointment"))}</option>
                 ${appts.map((a) => `<option value="${escapeHtml(String(a.id))}">${escapeHtml([a.service_type || a.service || "", String(a.datetime || a.date || "").slice(0, 10)].filter(Boolean).join(", "))}</option>`).join("")}
             </select>
-            <button type="submit" style="padding:0.45rem 0.85rem;background:#0D9488;color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">🖨️ ${escapeHtml(pdfLabel("Print and record aftercare"))}</button>
+            <button type="submit" style="padding:0.45rem 0.85rem;background:var(--ti-blue-deep, #0D9488);color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">🖨️ ${escapeHtml(pdfLabel("Print and record aftercare"))}</button>
         </form>
-        ${given.length ? `<div style="margin-top:0.8rem;font-size:0.75rem;color:#9CA3AF;">${given.slice(0, 5).map((g) => escapeHtml(pdfLabel("{0}: {1}, given by {2}").replace("{0}", when(g.given_at)).replace("{1}", g.title).replace("{2}", g.given_by))).join("<br>")}</div>` : ""}`;
+        ${given.length ? `<div style="margin-top:0.8rem;font-size:0.75rem;color:var(--ti-muted, #9CA3AF);">${given.slice(0, 5).map((g) => escapeHtml(pdfLabel("{0}: {1}, given by {2}").replace("{0}", when(g.given_at)).replace("{1}", g.title).replace("{2}", g.given_by))).join("<br>")}</div>` : ""}`;
     container.appendChild(card);
     // the sheet that suits the latest appointment, and that appointment, are chosen already
     const apptSel = card.querySelector("#cp-aftercare-appointment"), tplSel = card.querySelector("#cp-aftercare-template");
@@ -1326,18 +1326,18 @@ async function openGenericAftercareSheet() {
         overlay.style.cssText = "display:none;position:fixed;inset:0;background:rgba(15,23,42,0.85);z-index:2000020;align-items:center;justify-content:center;";
         document.body.appendChild(overlay);
     }
-    overlay.innerHTML = `<div style="background:#0F172A;border:1px solid #334155;border-radius:14px;padding:22px;width:min(94vw,460px);color:#F8FAFC;">
+    overlay.innerHTML = `<div style="background:var(--ti-bg2, #0F172A);border:1px solid var(--ti-line, #334155);border-radius:14px;padding:22px;width:min(94vw,460px);color:var(--ti-text, #F8FAFC);">
         <h3 style="margin:0 0 6px;font-size:1.05rem;">🖨️ ${escapeHtml(pdfLabel("Aftercare sheet"))}</h3>
-        <p style="margin:0 0 12px;font-size:0.8rem;color:#9CA3AF;">${escapeHtml(pdfLabel("A sheet with no client name, and nothing recorded. To give aftercare to a client, use their profile."))}</p>
-        <select id="generic-aftercare-template" aria-label="${escapeHtml(pdfLabel("Aftercare sheet"))}" style="width:100%;padding:8px 10px;background:#111827;border:1px solid #475569;border-radius:6px;color:#F8FAFC;margin-bottom:8px;">
+        <p style="margin:0 0 12px;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">${escapeHtml(pdfLabel("A sheet with no client name, and nothing recorded. To give aftercare to a client, use their profile."))}</p>
+        <select id="generic-aftercare-template" aria-label="${escapeHtml(pdfLabel("Aftercare sheet"))}" style="width:100%;padding:8px 10px;background:var(--ti-panel, #111827);border:1px solid var(--ti-line2, #475569);border-radius:6px;color:var(--ti-text, #F8FAFC);margin-bottom:8px;">
             ${list.map((t) => `<option value="${escapeHtml(t.id)}">${escapeHtml(aftercareTextFor(t, uiLanguage()).title)}</option>`).join("")}
         </select>
-        <select id="generic-aftercare-lang" aria-label="${escapeHtml(pdfLabel("Language of the sheet"))}" style="width:100%;padding:8px 10px;background:#111827;border:1px solid #475569;border-radius:6px;color:#F8FAFC;margin-bottom:12px;">
+        <select id="generic-aftercare-lang" aria-label="${escapeHtml(pdfLabel("Language of the sheet"))}" style="width:100%;padding:8px 10px;background:var(--ti-panel, #111827);border:1px solid var(--ti-line2, #475569);border-radius:6px;color:var(--ti-text, #F8FAFC);margin-bottom:12px;">
             ${languageOptions(uiLanguage())}
         </select>
         <div style="display:flex;gap:8px;justify-content:flex-end;">
-            <button type="button" onclick="document.getElementById('generic-aftercare-overlay').style.display='none'" style="padding:0.45rem 0.9rem;background:#374151;color:#F3F4F6;border:none;border-radius:6px;cursor:pointer;">${escapeHtml(pdfLabel("Close"))}</button>
-            <button type="button" onclick="printGenericAftercareSheet()" style="padding:0.45rem 0.9rem;background:#0D9488;color:#FFF;border:none;border-radius:6px;font-weight:700;cursor:pointer;">🖨️ ${escapeHtml(pdfLabel("Print"))}</button>
+            <button type="button" onclick="document.getElementById('generic-aftercare-overlay').style.display='none'" style="padding:0.45rem 0.9rem;background:var(--ti-line, #374151);color:var(--ti-text, #F3F4F6);border:none;border-radius:6px;cursor:pointer;">${escapeHtml(pdfLabel("Close"))}</button>
+            <button type="button" onclick="printGenericAftercareSheet()" style="padding:0.45rem 0.9rem;background:var(--ti-blue-deep, #0D9488);color:#FFF;border:none;border-radius:6px;font-weight:700;cursor:pointer;">🖨️ ${escapeHtml(pdfLabel("Print"))}</button>
         </div></div>`;
     overlay.style.display = "flex";
 }
@@ -1358,7 +1358,7 @@ function renderD3ClientAppointmentTimeline(appointments) {
     const appts = appointments || [];
 
     if (!appts.length) {
-        container.innerHTML = `<div style="text-align:center;padding:1rem;color:#9CA3AF;font-size:0.8rem;">No past or upcoming appointment nodes logged.</div>`;
+        container.innerHTML = `<div style="text-align:center;padding:1rem;color:var(--ti-muted, #9CA3AF);font-size:0.8rem;">No past or upcoming appointment nodes logged.</div>`;
         return;
     }
 
@@ -1710,12 +1710,6 @@ class StudioKeyboardShortcutManager {
             }
         }, 'Open Automated Appointment Scheduler');
 
-        this.register('Alt+T', () => {
-            if (typeof toggleGlobalDarkMode === 'function') {
-                toggleGlobalDarkMode();
-                this.showToast('🌓 Alt + T: Toggled Theme Mode');
-            }
-        }, 'Toggle Dark/Light Theme');
 
         this.register('Alt+D', () => {
             const invSearch = document.getElementById('inventory-search-input');
@@ -1801,7 +1795,7 @@ class StudioKeyboardShortcutManager {
             if (!toast) {
                 toast = document.createElement('div');
                 toast.id = 'studio-shortcut-toast';
-                toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1E293B;color:#F8FAFC;border:1px solid #38BDF8;padding:8px 16px;border-radius:20px;font-size:0.82rem;font-weight:700;box-shadow:0 10px 25px rgba(0,0,0,0.5);z-index:9999999;pointer-events:none;transition:opacity 0.3s;opacity:0;display:flex;align-items:center;gap:8px;';
+                toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ti-panel2, #1E293B);color:var(--ti-text, #F8FAFC);border:1px solid var(--ti-blue, #38BDF8);padding:8px 16px;border-radius:20px;font-size:0.82rem;font-weight:700;box-shadow:0 10px 25px rgba(0,0,0,0.5);z-index:9999999;pointer-events:none;transition:opacity 0.3s;opacity:0;display:flex;align-items:center;gap:8px;';
                 document.body.appendChild(toast);
             }
             toast.textContent = message;
@@ -1855,17 +1849,17 @@ async function fetchAndDisplayInventoryCsvSyncStatus() {
                         relText = `${diffHr}h ago`;
                     }
 
-                    timestampEl.innerHTML = `<span style="color:#38BDF8;font-weight:700;">${dateStr}${timeStr ? ' at ' + timeStr : ''}</span> <span style="color:#94A3B8;font-size:0.75rem;font-weight:600;">(${relText})</span>`;
+                    timestampEl.innerHTML = `<span style="color:var(--ti-blue, #38BDF8);font-weight:700;">${dateStr}${timeStr ? ' at ' + timeStr : ''}</span> <span style="color:var(--ti-muted, #94A3B8);font-size:0.75rem;font-weight:600;">(${relText})</span>`;
                     try {
                         timestampEl.title = `Exact Sync Time: ${dateObj.toISOString()}`;
                     } catch (e) {
                         timestampEl.title = `Exact Sync Time: ${dateStr}`;
                     }
                 } else {
-                    timestampEl.innerHTML = `<span style="color:#FBBF24;">No successful sync recorded yet</span>`;
+                    timestampEl.innerHTML = `<span style="color:var(--ti-gold, #FBBF24);">No successful sync recorded yet</span>`;
                 }
             } else {
-                timestampEl.innerHTML = `<span style="color:#FBBF24;">No successful sync recorded yet</span>`;
+                timestampEl.innerHTML = `<span style="color:var(--ti-gold, #FBBF24);">No successful sync recorded yet</span>`;
             }
         }
 
@@ -1911,7 +1905,7 @@ async function fetchAndDisplayInventoryCsvSyncStatus() {
     } catch (err) {
         console.warn('Sync status fetch warning:', err);
         if (timestampEl) {
-            timestampEl.innerHTML = `<span style="color:#94A3B8;">Status checked recently</span>`;
+            timestampEl.innerHTML = `<span style="color:var(--ti-muted, #94A3B8);">Status checked recently</span>`;
         }
     }
 }
@@ -1967,15 +1961,15 @@ async function fetchAndRenderSterileAuditDashboardWidget() {
             if (expiredCount > 0) {
                 previewContainer.style.background = 'rgba(239, 68, 68, 0.15)';
                 previewContainer.style.borderColor = 'rgba(239, 68, 68, 0.45)';
-                alertMsgEl.innerHTML = `<strong style="color:#EF4444;">🚨 IMMEDIATE COMPLIANCE RISK:</strong> ${expiredCount} expired sterile item(s) found! (${warningItems.slice(0, 2).join('; ')})`;
+                alertMsgEl.innerHTML = `<strong style="color:var(--ti-alert, #EF4444);">🚨 IMMEDIATE COMPLIANCE RISK:</strong> ${expiredCount} expired sterile item(s) found! (${warningItems.slice(0, 2).join('; ')})`;
             } else if (expiringSoonCount > 0) {
                 previewContainer.style.background = 'rgba(245, 158, 11, 0.15)';
                 previewContainer.style.borderColor = 'rgba(245, 158, 11, 0.45)';
-                alertMsgEl.innerHTML = `<strong style="color:#FBBF24;">⚠️ UPCOMING EXPIRATIONS:</strong> ${expiringSoonCount} item(s) expiring within 30 days. (${warningItems.slice(0, 2).join('; ')})`;
+                alertMsgEl.innerHTML = `<strong style="color:var(--ti-gold, #FBBF24);">⚠️ UPCOMING EXPIRATIONS:</strong> ${expiringSoonCount} item(s) expiring within 30 days. (${warningItems.slice(0, 2).join('; ')})`;
             } else {
                 previewContainer.style.background = 'rgba(16, 185, 129, 0.12)';
                 previewContainer.style.borderColor = 'rgba(16, 185, 129, 0.35)';
-                alertMsgEl.innerHTML = `<span style="color:#34D399;font-weight:700;">✅ No expired lots:</span> no needle cartridges, pigments or disposables in stock are past their expiry date.`;
+                alertMsgEl.innerHTML = `<span style="color:var(--ti-green, #34D399);font-weight:700;">✅ No expired lots:</span> no needle cartridges, pigments or disposables in stock are past their expiry date.`;
             }
         }
 
@@ -2078,22 +2072,22 @@ let editingInventoryId = null;
 async function renderInventoryItems() {
     const tbody = document.getElementById("inventory-items-tbody");
     if (!tbody) return;
-    try { inventoryItems = await ledgerJson("/api/inventory"); } catch (e) { tbody.innerHTML = '<tr><td colspan="10" style="padding:10px;color:#FCA5A5;">Could not load: the server did not answer</td></tr>'; return; }
+    try { inventoryItems = await ledgerJson("/api/inventory"); } catch (e) { tbody.innerHTML = '<tr><td colspan="10" style="padding:10px;color:var(--ti-alert-ink, #FCA5A5);">Could not load: the server did not answer</td></tr>'; return; }
     inventoryItems = Array.isArray(inventoryItems) ? inventoryItems : (inventoryItems.items || []);
     const q = ((document.getElementById("inventory-items-search") || {}).value || "").toLowerCase().trim();
     const shown = inventoryItems.filter((i) => !q || [i.name, i.sku, i.supplier, i.category, i.item_type].some((v) => String(v || "").toLowerCase().includes(q)))
         .sort((a, b) => String(a.name || "").localeCompare(String(b.name || "")));
     if (!shown.length) {
-        tbody.innerHTML = '<tr><td colspan="10" style="padding:10px;color:#94A3B8;">' + (q ? "No item matches." : "No stock items yet. Add the first one with + Add item.") + '</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="10" style="padding:10px;color:var(--ti-muted, #94A3B8);">' + (q ? "No item matches." : "No stock items yet. Add the first one with + Add item.") + '</td></tr>';
         return;
     }
     const cell = (v, style) => '<td style="padding:8px;' + (style || "") + '">' + escapeHtml(String(v == null ? "" : v)) + '</td>';
     tbody.innerHTML = shown.map((i) => {
         const low = Number(i.quantity) <= Number(i.reorder_point ?? 10);
-        return '<tr class="inventory-item-row" style="border-bottom:1px solid #1E293B;">' + cell(i.name, "font-weight:700;color:#FFF;") + cell(i.category || i.item_type) + cell(i.sku)
-            + cell(i.quantity, low ? "color:#FCA5A5;font-weight:800;" : "") + cell(i.reorder_point) + cell(i.price != null && i.price !== "" ? Number(i.price).toFixed(2) : "")
+        return '<tr class="inventory-item-row" style="border-bottom:1px solid var(--ti-panel2, #1E293B);">' + cell(i.name, "font-weight:700;color:#FFF;") + cell(i.category || i.item_type) + cell(i.sku)
+            + cell(i.quantity, low ? "color:var(--ti-alert-ink, #FCA5A5);font-weight:800;" : "") + cell(i.reorder_point) + cell(i.price != null && i.price !== "" ? Number(i.price).toFixed(2) : "")
             + cell(i.lot_number) + cell(i.exp_date) + cell(i.supplier)
-            + '<td style="padding:8px;text-align:right;"><button type="button" onclick="openInventoryItemForm(' + Number(i.id) + ')" style="padding:4px 8px;border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;background:#334155;color:#E2E8F0;border:1px solid #475569;">Edit</button></td></tr>';
+            + '<td style="padding:8px;text-align:right;"><button type="button" onclick="openInventoryItemForm(' + Number(i.id) + ')" style="padding:4px 8px;border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;background:var(--ti-line, #334155);color:var(--ti-text, #E2E8F0);border:1px solid var(--ti-line2, #475569);">Edit</button></td></tr>';
     }).join("");
 }
 window.renderInventoryItems = renderInventoryItems;
@@ -2110,14 +2104,14 @@ function openInventoryItemForm(id) {
         overlay.setAttribute("aria-modal", "true");
         overlay.setAttribute("aria-labelledby", "inventory-item-title");
         overlay.style.cssText = "display:none;position:fixed;inset:0;background:rgba(15,23,42,0.85);z-index:2000000;align-items:center;justify-content:center;";
-        const field = "width:100%;box-sizing:border-box;padding:8px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.9rem;";
-        overlay.innerHTML = '<form id="inventory-item-form" style="background:#0F172A;border:1px solid #334155;border-radius:14px;padding:20px;width:min(94vw,520px);max-height:90vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px;color:#F8FAFC;">'
+        const field = "width:100%;box-sizing:border-box;padding:8px 10px;background:var(--ti-panel2, #1E293B);border:1px solid var(--ti-line2, #475569);border-radius:8px;color:var(--ti-text, #F8FAFC);font-size:0.9rem;";
+        overlay.innerHTML = '<form id="inventory-item-form" style="background:var(--ti-bg2, #0F172A);border:1px solid var(--ti-line, #334155);border-radius:14px;padding:20px;width:min(94vw,520px);max-height:90vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px;color:var(--ti-text, #F8FAFC);">'
             + '<h3 id="inventory-item-title" style="grid-column:1/-1;margin:0;font-size:1.1rem;"></h3>'
-            + INVENTORY_FIELDS.map(([key, label, type, required]) => '<label style="font-size:0.8rem;color:#94A3B8;' + (key === "name" || key === "supplier" ? "grid-column:1/-1;" : "") + '">' + label
+            + INVENTORY_FIELDS.map(([key, label, type, required]) => '<label style="font-size:0.8rem;color:var(--ti-muted, #94A3B8);' + (key === "name" || key === "supplier" ? "grid-column:1/-1;" : "") + '">' + label
                 + '<input id="inventory-item-' + key + '" type="' + type + '"' + (type === "number" ? ' min="0" step="any"' : "") + (required ? " required" : "") + ' style="' + field + '"></label>').join("")
             + '<div style="grid-column:1/-1;display:flex;gap:10px;justify-content:flex-end;margin-top:4px;">'
-            + '<button type="button" onclick="forceHideModal(\'inventory-item-modal-overlay\')" style="padding:9px 16px;background:transparent;color:#94A3B8;border:1px solid #475569;border-radius:8px;cursor:pointer;">Cancel</button>'
-            + '<button type="submit" id="inventory-item-save-btn" style="padding:9px 16px;background:#10B981;color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;"></button></div></form>';
+            + '<button type="button" onclick="forceHideModal(\'inventory-item-modal-overlay\')" style="padding:9px 16px;background:transparent;color:var(--ti-muted, #94A3B8);border:1px solid var(--ti-line2, #475569);border-radius:8px;cursor:pointer;">Cancel</button>'
+            + '<button type="submit" id="inventory-item-save-btn" style="padding:9px 16px;background:var(--ti-green, #10B981);color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;"></button></div></form>';
         document.body.appendChild(overlay);
         overlay.querySelector("form").addEventListener("submit", saveInventoryItem);
     }
@@ -2164,14 +2158,14 @@ let editingSupplierId = null;
 async function renderSupplierList() {
     const tbody = document.getElementById("suppliers-tbody");
     if (!tbody) return;
-    try { supplierList = await ledgerJson("/api/inventory/suppliers"); } catch (e) { tbody.innerHTML = '<tr><td colspan="7" style="padding:10px;color:#FCA5A5;">Could not load: the server did not answer</td></tr>'; return; }
+    try { supplierList = await ledgerJson("/api/inventory/suppliers"); } catch (e) { tbody.innerHTML = '<tr><td colspan="7" style="padding:10px;color:var(--ti-alert-ink, #FCA5A5);">Could not load: the server did not answer</td></tr>'; return; }
     supplierList = Array.isArray(supplierList) ? supplierList : [];
-    if (!supplierList.length) { tbody.innerHTML = '<tr><td colspan="7" style="padding:10px;color:#94A3B8;">No suppliers yet. Add the first one with + Add supplier.</td></tr>'; return; }
+    if (!supplierList.length) { tbody.innerHTML = '<tr><td colspan="7" style="padding:10px;color:var(--ti-muted, #94A3B8);">No suppliers yet. Add the first one with + Add supplier.</td></tr>'; return; }
     const cell = (v, style) => '<td style="padding:8px;' + (style || "") + '">' + escapeHtml(String(v == null ? "" : v)) + '</td>';
-    tbody.innerHTML = supplierList.slice().sort((a, b) => String(a.name).localeCompare(String(b.name))).map((sp) => '<tr class="supplier-row" style="border-bottom:1px solid #1E293B;">'
+    tbody.innerHTML = supplierList.slice().sort((a, b) => String(a.name).localeCompare(String(b.name))).map((sp) => '<tr class="supplier-row" style="border-bottom:1px solid var(--ti-panel2, #1E293B);">'
         + cell(sp.name, "font-weight:700;color:#FFF;") + cell(sp.contact_person) + cell(sp.phone) + cell(sp.order_email || sp.email)
         + cell(sp.lead_time_days ? sp.lead_time_days + " days" : "") + cell(sp.item_count)
-        + '<td style="padding:8px;text-align:right;"><button type="button" onclick="openSupplierForm(' + Number(sp.id) + ')" style="padding:4px 8px;border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;background:#334155;color:#E2E8F0;border:1px solid #475569;">Edit</button></td></tr>').join("");
+        + '<td style="padding:8px;text-align:right;"><button type="button" onclick="openSupplierForm(' + Number(sp.id) + ')" style="padding:4px 8px;border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;background:var(--ti-line, #334155);color:var(--ti-text, #E2E8F0);border:1px solid var(--ti-line2, #475569);">Edit</button></td></tr>').join("");
 }
 window.renderSupplierList = renderSupplierList;
 document.addEventListener("DOMContentLoaded", renderSupplierList);
@@ -2187,14 +2181,14 @@ function openSupplierForm(id) {
         overlay.setAttribute("aria-modal", "true");
         overlay.setAttribute("aria-labelledby", "supplier-form-title");
         overlay.style.cssText = "display:none;position:fixed;inset:0;background:rgba(15,23,42,0.85);z-index:2000000;align-items:center;justify-content:center;";
-        const field = "width:100%;box-sizing:border-box;padding:8px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.9rem;";
-        overlay.innerHTML = '<form id="supplier-form" style="background:#0F172A;border:1px solid #334155;border-radius:14px;padding:20px;width:min(94vw,520px);max-height:90vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px;color:#F8FAFC;">'
+        const field = "width:100%;box-sizing:border-box;padding:8px 10px;background:var(--ti-panel2, #1E293B);border:1px solid var(--ti-line2, #475569);border-radius:8px;color:var(--ti-text, #F8FAFC);font-size:0.9rem;";
+        overlay.innerHTML = '<form id="supplier-form" style="background:var(--ti-bg2, #0F172A);border:1px solid var(--ti-line, #334155);border-radius:14px;padding:20px;width:min(94vw,520px);max-height:90vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px;color:var(--ti-text, #F8FAFC);">'
             + '<h3 id="supplier-form-title" style="grid-column:1/-1;margin:0;font-size:1.1rem;"></h3>'
-            + SUPPLIER_FIELDS.map(([key, label, type, required]) => '<label style="font-size:0.8rem;color:#94A3B8;' + (["name", "order_email", "notes"].includes(key) ? "grid-column:1/-1;" : "") + '">' + label
+            + SUPPLIER_FIELDS.map(([key, label, type, required]) => '<label style="font-size:0.8rem;color:var(--ti-muted, #94A3B8);' + (["name", "order_email", "notes"].includes(key) ? "grid-column:1/-1;" : "") + '">' + label
                 + '<input id="supplier-' + key + '" type="' + type + '"' + (type === "number" ? ' min="0" step="1"' : "") + (required ? " required" : "") + ' style="' + field + '"></label>').join("")
             + '<div style="grid-column:1/-1;display:flex;gap:10px;justify-content:flex-end;margin-top:4px;">'
-            + '<button type="button" onclick="forceHideModal(\'supplier-modal-overlay\')" style="padding:9px 16px;background:transparent;color:#94A3B8;border:1px solid #475569;border-radius:8px;cursor:pointer;">Cancel</button>'
-            + '<button type="submit" id="supplier-save-btn" style="padding:9px 16px;background:#10B981;color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;"></button></div></form>';
+            + '<button type="button" onclick="forceHideModal(\'supplier-modal-overlay\')" style="padding:9px 16px;background:transparent;color:var(--ti-muted, #94A3B8);border:1px solid var(--ti-line2, #475569);border-radius:8px;cursor:pointer;">Cancel</button>'
+            + '<button type="submit" id="supplier-save-btn" style="padding:9px 16px;background:var(--ti-green, #10B981);color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;"></button></div></form>';
         document.body.appendChild(overlay);
         overlay.querySelector("form").addEventListener("submit", saveSupplier);
     }
@@ -2238,7 +2232,7 @@ async function openAftercarePipelineModal() {
     forceShowModal('aftercare-pipeline-modal-overlay');
     const body = document.getElementById('aftercare-pipeline-modal-body');
     if (!body) return;
-    body.innerHTML = '<div style="text-align:center;padding:24px;color:#94A3B8;">Loading...</div>';
+    body.innerHTML = '<div style="text-align:center;padding:24px;color:var(--ti-muted, #94A3B8);">Loading...</div>';
     let appts;
     try { appts = await ledgerJson('/api/appointments'); } catch (e) { body.innerHTML = LEDGER_ERROR; return; }
     const today = new Date(); today.setHours(0, 0, 0, 0);
@@ -2247,17 +2241,17 @@ async function openAftercarePipelineModal() {
     pipelineGroups = PIPELINE_GROUPS.map((g) => ({ label: g.label, items: done.filter((a) => days(a) >= g.from && days(a) <= g.to)
         .sort((a, b) => new Date(b.datetime) - new Date(a.datetime)).map((a) => Object.assign({ days: days(a) }, a)) }));
     if (!done.length) {
-        body.innerHTML = '<div style="text-align:center;padding:20px;color:#94A3B8;">No sessions completed in the last 90 days. Mark an appointment as Completed in the Calendar and the client appears here.</div>';
+        body.innerHTML = '<div style="text-align:center;padding:20px;color:var(--ti-muted, #94A3B8);">No sessions completed in the last 90 days. Mark an appointment as Completed in the Calendar and the client appears here.</div>';
         return;
     }
-    const btn = 'padding:4px 8px;border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;background:#334155;color:#E2E8F0;border:1px solid #475569;';
-    body.innerHTML = '<div style="display:flex;justify-content:flex-end;margin-bottom:10px;"><button type="button" onclick="downloadPipelinePdf()" style="' + btn + 'background:#2563EB;color:#FFF;border:none;">⬇ Download PDF</button></div>'
-        + pipelineGroups.map((g) => '<div class="pipeline-group" style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;margin-bottom:10px;">'
-            + '<div style="display:flex;justify-content:space-between;font-weight:800;margin-bottom:6px;"><span>' + escapeHtml(g.label) + '</span><span style="color:#38BDF8;">' + g.items.length + '</span></div>'
-            + (g.items.length ? g.items.map((a) => '<div class="pipeline-client" style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-top:1px solid #1E293B;">'
-                + '<div><strong>' + escapeHtml(a.client_name || '') + '</strong><div style="font-size:0.78rem;color:#94A3B8;">' + escapeHtml([a.service_type, a.staff_name, new Date(a.datetime).toLocaleDateString(), 'day ' + a.days].filter(Boolean).join(' · ')) + '</div></div>'
+    const btn = 'padding:4px 8px;border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;background:var(--ti-line, #334155);color:var(--ti-text, #E2E8F0);border:1px solid var(--ti-line2, #475569);';
+    body.innerHTML = '<div style="display:flex;justify-content:flex-end;margin-bottom:10px;"><button type="button" onclick="downloadPipelinePdf()" style="' + btn + 'background:var(--ti-blue, #2563EB);color:#FFF;border:none;">⬇ Download PDF</button></div>'
+        + pipelineGroups.map((g) => '<div class="pipeline-group" style="background:var(--ti-bg2, #0F172A);padding:12px;border-radius:8px;border:1px solid var(--ti-line, #334155);margin-bottom:10px;">'
+            + '<div style="display:flex;justify-content:space-between;font-weight:800;margin-bottom:6px;"><span>' + escapeHtml(g.label) + '</span><span style="color:var(--ti-blue, #38BDF8);">' + g.items.length + '</span></div>'
+            + (g.items.length ? g.items.map((a) => '<div class="pipeline-client" style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-top:1px solid var(--ti-panel2, #1E293B);">'
+                + '<div><strong>' + escapeHtml(a.client_name || '') + '</strong><div style="font-size:0.78rem;color:var(--ti-muted, #94A3B8);">' + escapeHtml([a.service_type, a.staff_name, new Date(a.datetime).toLocaleDateString(), 'day ' + a.days].filter(Boolean).join(' · ')) + '</div></div>'
                 + (a.client_id ? '<button type="button" onclick="forceHideModal(\'aftercare-pipeline-modal-overlay\'); openClientProfileModal(' + Number(a.client_id) + ')" style="' + btn + '">View Profile</button>' : '')
-                + '</div>').join('') : '<div style="font-size:0.8rem;color:#64748B;">Nobody in this group.</div>')
+                + '</div>').join('') : '<div style="font-size:0.8rem;color:var(--ti-faint, #64748B);">Nobody in this group.</div>')
             + '</div>').join('');
 }
 
@@ -2284,15 +2278,15 @@ window.openAftercarePipelineModal = openAftercarePipelineModal;
 
 // One line of a ledger window: what on the left, how much on the right.
 function ledgerRow(title, detail, amount) {
-    return '<div class="ledger-row" style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;display:flex;justify-content:space-between;align-items:center;gap:12px;">'
-        + '<div><strong>' + escapeHtml(String(title)) + '</strong><div style="font-size:0.8rem;color:#94A3B8;">' + escapeHtml(String(detail || '')) + '</div></div>'
-        + '<div style="font-weight:800;color:#34D399;white-space:nowrap;">' + escapeHtml(String(amount == null ? '' : amount)) + '</div></div>';
+    return '<div class="ledger-row" style="background:var(--ti-bg2, #0F172A);padding:12px;border-radius:8px;border:1px solid var(--ti-line, #334155);display:flex;justify-content:space-between;align-items:center;gap:12px;">'
+        + '<div><strong>' + escapeHtml(String(title)) + '</strong><div style="font-size:0.8rem;color:var(--ti-muted, #94A3B8);">' + escapeHtml(String(detail || '')) + '</div></div>'
+        + '<div style="font-weight:800;color:var(--ti-green, #34D399);white-space:nowrap;">' + escapeHtml(String(amount == null ? '' : amount)) + '</div></div>';
 }
 function ledgerList(body, rows, emptyText) {
     body.innerHTML = rows.length ? '<div style="display:flex;flex-direction:column;gap:10px;">' + rows.join('') + '</div>'
-        : '<div style="text-align:center;padding:20px;color:#94A3B8;">' + escapeHtml(emptyText) + '</div>';
+        : '<div style="text-align:center;padding:20px;color:var(--ti-muted, #94A3B8);">' + escapeHtml(emptyText) + '</div>';
 }
-const LEDGER_ERROR = '<div style="text-align:center;padding:20px;color:#FCA5A5;">Could not load: the server did not answer</div>';
+const LEDGER_ERROR = '<div style="text-align:center;padding:20px;color:var(--ti-alert-ink, #FCA5A5);">Could not load: the server did not answer</div>';
 async function ledgerJson(url) {
     const res = await fetch(url);
     if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -2353,8 +2347,8 @@ async function filterCmdPaletteResults() {
     const q = (input ? input.value : '').toLowerCase().trim();
     const hits = items.filter((i) => !q || i.label.toLowerCase().includes(q)).slice(0, 12);
     box.innerHTML = hits.length ? hits.map((i, n) =>
-        `<button type="button" data-cmd="${n}" style="display:block;width:100%;text-align:left;padding:10px 16px;background:none;border:none;border-bottom:1px solid #1E293B;color:#E2E8F0;font-size:0.9rem;cursor:pointer;">${escapeHtml(i.label)}</button>`).join('')
-        : '<div style="padding:14px 16px;color:#94A3B8;">No matches</div>';
+        `<button type="button" data-cmd="${n}" style="display:block;width:100%;text-align:left;padding:10px 16px;background:none;border:none;border-bottom:1px solid var(--ti-panel2, #1E293B);color:var(--ti-text, #E2E8F0);font-size:0.9rem;cursor:pointer;">${escapeHtml(i.label)}</button>`).join('')
+        : '<div style="padding:14px 16px;color:var(--ti-muted, #94A3B8);">No matches</div>';
     const runHit = (i) => { forceHideModal('cmd-palette-modal'); try { new Function(i.run)(); } catch (e) {} };
     box.querySelectorAll('[data-cmd]').forEach((b) => b.addEventListener('click', () => runHit(hits[b.dataset.cmd])));
     if (input) input.onkeydown = (e) => { if (e.key === 'Enter' && hits[0]) { e.preventDefault(); runHit(hits[0]); } };
@@ -2462,19 +2456,19 @@ async function openQuickRecordPaymentModal(prefill) {
         overlay.setAttribute('aria-modal', 'true');
         overlay.setAttribute('aria-labelledby', 'record-payment-title');
         overlay.style.cssText = 'display:none;position:fixed;inset:0;background:rgba(15,23,42,0.85);z-index:2000000;align-items:center;justify-content:center;';
-        const field = 'width:100%;box-sizing:border-box;padding:9px 10px;background:#1E293B;border:1px solid #475569;border-radius:8px;color:#F8FAFC;font-size:0.95rem;';
+        const field = 'width:100%;box-sizing:border-box;padding:9px 10px;background:var(--ti-panel2, #1E293B);border:1px solid var(--ti-line2, #475569);border-radius:8px;color:var(--ti-text, #F8FAFC);font-size:0.95rem;';
         overlay.innerHTML = `
-            <form id="record-payment-form" style="background:#0F172A;border:1px solid #334155;border-radius:14px;padding:22px;width:min(92vw,420px);display:flex;flex-direction:column;gap:12px;color:#F8FAFC;">
+            <form id="record-payment-form" style="background:var(--ti-bg2, #0F172A);border:1px solid var(--ti-line, #334155);border-radius:14px;padding:22px;width:min(92vw,420px);display:flex;flex-direction:column;gap:12px;color:var(--ti-text, #F8FAFC);">
                 <h3 id="record-payment-title" style="margin:0;font-size:1.1rem;">💵 Record a payment</h3>
-                <label style="font-size:0.8rem;color:#94A3B8;">Client
+                <label style="font-size:0.8rem;color:var(--ti-muted, #94A3B8);">Client
                     <select id="record-payment-client" style="${field}"><option value="">Walk-in / not on file</option></select></label>
-                <label style="font-size:0.8rem;color:#94A3B8;">Amount
+                <label style="font-size:0.8rem;color:var(--ti-muted, #94A3B8);">Amount
                     <input id="record-payment-amount" type="number" min="0.01" step="0.01" required style="${field}" /></label>
-                <label style="font-size:0.8rem;color:#94A3B8;">Paid by
+                <label style="font-size:0.8rem;color:var(--ti-muted, #94A3B8);">Paid by
                     <select id="record-payment-method" style="${field}"><option>Cash</option><option>Card</option><option>Bank transfer</option><option>Other</option></select></label>
                 <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:4px;">
-                    <button type="button" onclick="forceHideModal('record-payment-modal-overlay')" style="padding:9px 16px;background:transparent;color:#94A3B8;border:1px solid #475569;border-radius:8px;cursor:pointer;">Cancel</button>
-                    <button type="submit" style="padding:9px 16px;background:#10B981;color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;">Save payment</button>
+                    <button type="button" onclick="forceHideModal('record-payment-modal-overlay')" style="padding:9px 16px;background:transparent;color:var(--ti-muted, #94A3B8);border:1px solid var(--ti-line2, #475569);border-radius:8px;cursor:pointer;">Cancel</button>
+                    <button type="submit" style="padding:9px 16px;background:var(--ti-green, #10B981);color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;">Save payment</button>
                 </div>
             </form>`;
         document.body.appendChild(overlay);
@@ -2723,19 +2717,6 @@ function toggleClientPortalTheme() {
 window.toggleClientPortalTheme = toggleClientPortalTheme;
 
 
-function toggleGlobalDarkMode() {
-    const isDark = document.body.classList.contains('dark-mode');
-    if (isDark) {
-        document.body.classList.remove('dark-mode');
-        document.body.classList.add('light-mode');
-        document.documentElement.setAttribute('data-theme', 'light');
-    } else {
-        document.body.classList.remove('light-mode');
-        document.body.classList.add('dark-mode');
-        document.documentElement.setAttribute('data-theme', 'dark');
-    }
-}
-window.toggleGlobalDarkMode = toggleGlobalDarkMode;
 
 
 function togglePortalSidebar() {
@@ -3051,10 +3032,10 @@ async function fetchAndRenderCsvImportHistory() {
     if (!box) return;
     let hist = [];
     try { const r = await fetch('/api/inventory/import-history'); hist = r.ok ? ((await r.json()).history || []) : []; } catch (e) {}
-    box.innerHTML = hist.length ? hist.map((h) => `<div style="background:#111827;border:1px solid #374151;border-radius:8px;padding:10px 12px;font-size:0.8rem;color:#D1D5DB;">
-        <div style="font-weight:700;color:#F9FAFB;" data-no-phrase>${escapeHtml(h.batchName || h.filename || h.source || '')}</div>
+    box.innerHTML = hist.length ? hist.map((h) => `<div style="background:var(--ti-panel, #111827);border:1px solid var(--ti-line, #374151);border-radius:8px;padding:10px 12px;font-size:0.8rem;color:var(--ti-text2, #D1D5DB);">
+        <div style="font-weight:700;color:var(--ti-text, #F9FAFB);" data-no-phrase>${escapeHtml(h.batchName || h.filename || h.source || '')}</div>
         <div>${escapeHtml(String(h.recordsImported != null ? h.recordsImported : 0))} rows · ${escapeHtml(h.timestamp ? new Date(h.timestamp).toLocaleString() : '')}</div></div>`).join('')
-        : '<div style="text-align:center;padding:2rem 1rem;color:#9CA3AF;font-size:0.85rem;">No imports yet.</div>';
+        : '<div style="text-align:center;padding:2rem 1rem;color:var(--ti-muted, #9CA3AF);font-size:0.85rem;">No imports yet.</div>';
 }
 window.fetchAndRenderCsvImportHistory = fetchAndRenderCsvImportHistory;
 
@@ -3071,7 +3052,7 @@ window.dismissBackupWarningToast = dismissBackupWarningToast;
 function executeClearAllActivityLogs() {
     closeClearAllConfirmModal();
     const feed = document.getElementById('drawer-feed-list');
-    if (feed) feed.innerHTML = '<div style="padding:20px;text-align:center;color:#94A3B8;">Activity feed cleared.</div>';
+    if (feed) feed.innerHTML = '<div style="padding:20px;text-align:center;color:var(--ti-muted, #94A3B8);">Activity feed cleared.</div>';
     showStudioToast('Activity logs cleared');
 }
 window.executeClearAllActivityLogs = executeClearAllActivityLogs;
@@ -3097,7 +3078,7 @@ async function fetchAndRenderDailyStudioSummary() {
         const stamp = document.getElementById('summary-report-timestamp');
         if (stamp) stamp.textContent = pdfLabel('Report generated for') + ' ' + today;
         const items = Array.isArray(stock) ? stock : (stock.items || []);
-        const card = (label, value) => '<div class="summary-card" style="background:#0F172A;padding:12px;border-radius:8px;border:1px solid #334155;"><div style="font-size:0.75rem;color:#94A3B8;">' + label + '</div><div style="font-size:1.3rem;font-weight:800;color:#38BDF8;">' + value + '</div></div>';
+        const card = (label, value) => '<div class="summary-card" style="background:var(--ti-bg2, #0F172A);padding:12px;border-radius:8px;border:1px solid var(--ti-line, #334155);"><div style="font-size:0.75rem;color:var(--ti-muted, #94A3B8);">' + label + '</div><div style="font-size:1.3rem;font-weight:800;color:var(--ti-blue, #38BDF8);">' + value + '</div></div>';
         body.innerHTML = '<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));gap:12px;">'
             + card('Appointments today', appts.filter((a) => a.datetime && new Date(a.datetime).toLocaleDateString('en-CA') === today).length)
             + card('Clients on file', clients.length)
@@ -3237,7 +3218,7 @@ window.addNewCategoryThresholdFromSettings = addNewCategoryThresholdFromSettings
 async function renderClientDirectoryModal() {
     const body = document.getElementById('client-directory-modal-body');
     if (!body) return;
-    body.innerHTML = '<div style="text-align:center;padding:24px;color:#94A3B8;">Loading client directory...</div>';
+    body.innerHTML = '<div style="text-align:center;padding:24px;color:var(--ti-muted, #94A3B8);">Loading client directory...</div>';
     try {
         const res = await fetch('/api/clients');
         const clients = await res.json();
@@ -3256,13 +3237,13 @@ async function renderClientDirectoryModal() {
             .sort((a, b) => Number(!!(b.allergy || b.medical)) - Number(!!(a.allergy || a.medical)));
         const chip = (text, color) => '<span style="display:inline-block;margin:4px 6px 0 0;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:700;background:' + color + '22;color:' + color + ';border:1px solid ' + color + '55;">' + escapeHtml(text) + '</span>';
         body.innerHTML = rows.length ? '<div style="display:flex;flex-direction:column;gap:8px;max-height:400px;overflow-y:auto;">' +
-            rows.map(({ c, allergy, medical }) => '<div style="background:#0F172A;padding:10px 14px;border-radius:8px;border:1px solid ' + (allergy || medical ? '#7F1D1D' : '#334155') + ';display:flex;justify-content:space-between;align-items:center;gap:12px;"><div><strong>' + escapeHtml(c.name || 'Client') + '</strong><div style="font-size:0.8rem;color:#94A3B8;">' + escapeHtml(c.phone || 'No phone') + ' | ' + escapeHtml(c.email || 'No email') + (c.assigned_staff_name ? ' | ' + escapeHtml(c.assigned_staff_name) : '') + '</div><div>' +
+            rows.map(({ c, allergy, medical }) => '<div style="background:var(--ti-bg2, #0F172A);padding:10px 14px;border-radius:8px;border:1px solid ' + (allergy || medical ? '#7F1D1D' : '#334155') + ';display:flex;justify-content:space-between;align-items:center;gap:12px;"><div><strong>' + escapeHtml(c.name || 'Client') + '</strong><div style="font-size:0.8rem;color:var(--ti-muted, #94A3B8);">' + escapeHtml(c.phone || 'No phone') + ' | ' + escapeHtml(c.email || 'No email') + (c.assigned_staff_name ? ' | ' + escapeHtml(c.assigned_staff_name) : '') + '</div><div>' +
                 (allergy ? chip('⚠️ Allergy: ' + allergy, '#EF4444') : '') + (medical ? chip('🩺 ' + medical, '#EAB308') : '') +
-                (!allergy && !medical ? '<span style="font-size:0.75rem;color:#64748B;">' + (String(c.allergies || c.medical_history || '').trim() ? 'No allergies or conditions recorded as present' : 'Nothing recorded yet: ask before the session') + '</span>' : '') +
-                '</div></div><button onclick="openClientProfileModal(' + Number(c.id) + ')" style="background:#2563EB;color:#FFF;border:none;padding:6px 12px;border-radius:6px;font-size:0.8rem;cursor:pointer;flex-shrink:0;">View Profile</button></div>').join('') +
-            '</div>' : '<div style="text-align:center;padding:24px;color:#94A3B8;">No client matches this search and these filters.</div>';
+                (!allergy && !medical ? '<span style="font-size:0.75rem;color:var(--ti-faint, #64748B);">' + (String(c.allergies || c.medical_history || '').trim() ? 'No allergies or conditions recorded as present' : 'Nothing recorded yet: ask before the session') + '</span>' : '') +
+                '</div></div><button onclick="openClientProfileModal(' + Number(c.id) + ')" style="background:var(--ti-blue, #2563EB);color:#FFF;border:none;padding:6px 12px;border-radius:6px;font-size:0.8rem;cursor:pointer;flex-shrink:0;">View Profile</button></div>').join('') +
+            '</div>' : '<div style="text-align:center;padding:24px;color:var(--ti-muted, #94A3B8);">No client matches this search and these filters.</div>';
     } catch (e) {
-        body.innerHTML = '<div style="color:#EF4444;text-align:center;padding:16px;">Failed to load client directory.</div>';
+        body.innerHTML = '<div style="color:var(--ti-alert, #EF4444);text-align:center;padding:16px;">Failed to load client directory.</div>';
     }
 }
 window.renderClientDirectoryModal = renderClientDirectoryModal;
@@ -3314,11 +3295,11 @@ async function renderClientsTable() {
         payments = Array.isArray(f) ? f : [];
         forms = Array.isArray(cf) ? cf : [];
     } catch (e) {
-        tbody.innerHTML = '<tr><td colspan="6" style="padding:16px;color:#EF4444;text-align:center;">Could not load clients: the server did not answer</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6" style="padding:16px;color:var(--ti-alert, #EF4444);text-align:center;">Could not load clients: the server did not answer</td></tr>';
         return;
     }
     if (!clients.length) {
-        tbody.innerHTML = '<tr><td colspan="6" style="padding:16px;color:#94A3B8;text-align:center;">No clients yet. Add your first client with New Client.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6" style="padding:16px;color:var(--ti-muted, #94A3B8);text-align:center;">No clients yet. Add your first client with New Client.</td></tr>';
         return;
     }
     const money = (n) => "$" + Number(n || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -3333,17 +3314,17 @@ async function renderClientsTable() {
         // nothing written down is not "none": it showed a green "None Recorded"
         const healthKnown = [c.allergies, c.medical_history].some((v) => v && String(v).trim());
         const minor = typeof c.age === "number" && c.age < 18;
-        return `<tr class="client-directory-row" style="border-bottom:1px solid #1F2937;">
+        return `<tr class="client-directory-row" style="border-bottom:1px solid var(--ti-panel2, #1F2937);">
           <td style="padding:10px;font-weight:700;color:#FFF;"><div style="display:flex;align-items:center;gap:8px;">
-            <span style="width:30px;height:30px;border-radius:50%;background:#3B82F6;display:inline-flex;align-items:center;justify-content:center;font-weight:800;">${escapeHtml(initials)}</span>
-            <div><div>${escapeHtml(c.name || "")}</div>${c.is_vip ? '<span style="font-size:0.7rem;background:rgba(234,179,8,0.2);color:#FDE047;padding:1px 6px;border-radius:6px;font-weight:800;">⭐ VIP</span>' : ""}${minor ? `<span class="client-minor-tag" style="font-size:0.7rem;background:rgba(239,68,68,0.2);color:#FCA5A5;padding:1px 6px;border-radius:6px;font-weight:800;margin-left:4px;">${escapeHtml(pdfLabel("🛡️ Under 18"))}</span>` : ""}</div></div></td>
-          <td style="padding:10px;color:#9CA3AF;">${escapeHtml(c.email || "")}<br><span style="font-size:0.75rem;">${escapeHtml(c.phone || "")}</span></td>
-          <td style="padding:10px;">${health ? `<span style="color:#FCA5A5;font-weight:700;">⚠️ ${health}</span>` : healthKnown ? '<span style="color:#34D399;font-weight:700;">✅ None</span>' : `<span style="color:#FDE047;font-weight:700;">${escapeHtml(pdfLabel("Not recorded: ask the client"))}</span>`}</td>
-          <td style="padding:10px;"><span style="background:rgba(16,185,129,0.15);color:#34D399;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:700;">📜 ${signed} Signed</span></td>
-          <td style="padding:10px;font-weight:800;color:#34D399;">${money(spent)}</td>
+            <span style="width:30px;height:30px;border-radius:50%;background:var(--ti-blue, #3B82F6);display:inline-flex;align-items:center;justify-content:center;font-weight:800;">${escapeHtml(initials)}</span>
+            <div><div>${escapeHtml(c.name || "")}</div>${c.is_vip ? '<span style="font-size:0.7rem;background:rgba(234,179,8,0.2);color:var(--ti-gold-ink, #FDE047);padding:1px 6px;border-radius:6px;font-weight:800;">⭐ VIP</span>' : ""}${minor ? `<span class="client-minor-tag" style="font-size:0.7rem;background:rgba(239,68,68,0.2);color:var(--ti-alert-ink, #FCA5A5);padding:1px 6px;border-radius:6px;font-weight:800;margin-left:4px;">${escapeHtml(pdfLabel("🛡️ Under 18"))}</span>` : ""}</div></div></td>
+          <td style="padding:10px;color:var(--ti-muted, #9CA3AF);">${escapeHtml(c.email || "")}<br><span style="font-size:0.75rem;">${escapeHtml(c.phone || "")}</span></td>
+          <td style="padding:10px;">${health ? `<span style="color:var(--ti-alert-ink, #FCA5A5);font-weight:700;">⚠️ ${health}</span>` : healthKnown ? '<span style="color:var(--ti-green, #34D399);font-weight:700;">✅ None</span>' : `<span style="color:var(--ti-gold-ink, #FDE047);font-weight:700;">${escapeHtml(pdfLabel("Not recorded: ask the client"))}</span>`}</td>
+          <td style="padding:10px;"><span style="background:rgba(16,185,129,0.15);color:var(--ti-green, #34D399);padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:700;">📜 ${signed} Signed</span></td>
+          <td style="padding:10px;font-weight:800;color:var(--ti-green, #34D399);">${money(spent)}</td>
           <td style="padding:10px;text-align:right;">
-            <button onclick="openClientProfileModal(${Number(c.id)})" style="padding:4px 8px;background:#3B82F6;color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">View Profile</button>
-            <button onclick="openFormBuilderModal(${Number(c.id)}, ${escapeHtml(JSON.stringify(String(c.name || "")))})" style="padding:4px 8px;background:#8B5CF6;color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;margin-left:4px;">Sign Waiver</button>
+            <button onclick="openClientProfileModal(${Number(c.id)})" style="padding:4px 8px;background:var(--ti-blue, #3B82F6);color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">View Profile</button>
+            <button onclick="openFormBuilderModal(${Number(c.id)}, ${escapeHtml(JSON.stringify(String(c.name || "")))})" style="padding:4px 8px;background:var(--ti-purple, #8B5CF6);color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;margin-left:4px;">Sign Waiver</button>
           </td></tr>`;
     }).join("");
     const q = document.getElementById("clients-main-search");
@@ -3387,18 +3368,18 @@ async function renderStationsCard() {
     const box = document.getElementById("settings-stations-list");
     if (!box) return;
     const [stations, staffList] = await Promise.all([loadStations(), fetch("/api/staff").then((r) => (r.ok ? r.json() : [])).catch(() => [])]);
-    const input = (cls, value, label) => `<input type="text" class="${cls}" value="${escapeHtml(value || "")}" placeholder="${escapeHtml(pdfLabel(label))}" aria-label="${escapeHtml(pdfLabel(label))}" style="flex:1;min-width:110px;padding:7px 9px;background:#1E293B;border:1px solid #475569;border-radius:6px;color:#F8FAFC;font-size:0.82rem;">`;
+    const input = (cls, value, label) => `<input type="text" class="${cls}" value="${escapeHtml(value || "")}" placeholder="${escapeHtml(pdfLabel(label))}" aria-label="${escapeHtml(pdfLabel(label))}" style="flex:1;min-width:110px;padding:7px 9px;background:var(--ti-panel2, #1E293B);border:1px solid var(--ti-line2, #475569);border-radius:6px;color:var(--ti-text, #F8FAFC);font-size:0.82rem;">`;
     box.innerHTML = stations.length ? stations.map((s) => `
         <div class="settings-station-row" data-id="${Number(s.id)}" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
             ${input("st-name", s.name, "Station name")}
             ${input("st-type", s.type, "Type: tattoo, piercing, branding...")}
-            <select class="st-artist" aria-label="${escapeHtml(pdfLabel("Usual artist"))}" style="padding:7px 9px;background:#1E293B;border:1px solid #475569;border-radius:6px;color:#F8FAFC;font-size:0.82rem;">
+            <select class="st-artist" aria-label="${escapeHtml(pdfLabel("Usual artist"))}" style="padding:7px 9px;background:var(--ti-panel2, #1E293B);border:1px solid var(--ti-line2, #475569);border-radius:6px;color:var(--ti-text, #F8FAFC);font-size:0.82rem;">
                 <option value="">${escapeHtml(pdfLabel("No usual artist"))}</option>
                 ${(Array.isArray(staffList) ? staffList : []).map((p) => `<option value="${escapeHtml(p.name)}" ${p.name === s.assignedStaff ? "selected" : ""}>${escapeHtml(p.name)}</option>`).join("")}
             </select>
-            <button type="button" onclick="saveStudioStation(${Number(s.id)})" style="padding:0.4rem 0.75rem;background:#0D9488;color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.78rem;cursor:pointer;">${escapeHtml(pdfLabel("Save"))}</button>
-            <button type="button" onclick="removeStudioStation(${Number(s.id)})" style="padding:0.4rem 0.75rem;background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);border-radius:6px;font-weight:700;font-size:0.78rem;cursor:pointer;">${escapeHtml(pdfLabel("Remove"))}</button>
-        </div>`).join("") : `<div style="font-size:0.8rem;color:#9CA3AF;">${escapeHtml(pdfLabel("No stations yet."))}</div>`;
+            <button type="button" onclick="saveStudioStation(${Number(s.id)})" style="padding:0.4rem 0.75rem;background:var(--ti-blue-deep, #0D9488);color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.78rem;cursor:pointer;">${escapeHtml(pdfLabel("Save"))}</button>
+            <button type="button" onclick="removeStudioStation(${Number(s.id)})" style="padding:0.4rem 0.75rem;background:transparent;color:var(--ti-alert-ink, #FCA5A5);border:1px solid rgba(239,68,68,0.5);border-radius:6px;font-weight:700;font-size:0.78rem;cursor:pointer;">${escapeHtml(pdfLabel("Remove"))}</button>
+        </div>`).join("") : `<div style="font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">${escapeHtml(pdfLabel("No stations yet."))}</div>`;
 }
 window.renderStationsCard = renderStationsCard;
 
@@ -3519,8 +3500,8 @@ async function renderStationStripAndSessions() {
         body.innerHTML = done.length ? done.map((a) => {
             const hrs = Number(a.duration_minutes || 0) / 60;
             const price = Number(a.estimated_price || a.price || 0);
-            return `<tr style="border-bottom:1px solid #1E293B;"><td style="padding:8px;font-weight:700;">${escapeHtml(a.staff_name || "")}</td><td style="padding:8px;">${escapeHtml(a.service_type || "")}</td><td style="padding:8px;">${escapeHtml(a.client_name || "")}</td><td style="padding:8px;">${hrs.toFixed(1)} h</td><td style="padding:8px;">$${price.toFixed(2)}</td><td style="padding:8px;">${hrs ? "$" + (price / hrs).toFixed(2) + "/h" : "-"}</td></tr>`;
-        }).join("") : '<tr><td colspan="6" style="padding:8px;color:#94A3B8;">No completed sessions yet.</td></tr>';
+            return `<tr style="border-bottom:1px solid var(--ti-panel2, #1E293B);"><td style="padding:8px;font-weight:700;">${escapeHtml(a.staff_name || "")}</td><td style="padding:8px;">${escapeHtml(a.service_type || "")}</td><td style="padding:8px;">${escapeHtml(a.client_name || "")}</td><td style="padding:8px;">${hrs.toFixed(1)} h</td><td style="padding:8px;">$${price.toFixed(2)}</td><td style="padding:8px;">${hrs ? "$" + (price / hrs).toFixed(2) + "/h" : "-"}</td></tr>`;
+        }).join("") : '<tr><td colspan="6" style="padding:8px;color:var(--ti-muted, #94A3B8);">No completed sessions yet.</td></tr>';
     }
 }
 window.renderStationStripAndSessions = renderStationStripAndSessions;
@@ -3532,11 +3513,11 @@ function renderActivityFeed() {
     if (!list || typeof allActivities === "undefined") return;
     const cat = typeof currentCategoryFilter === "undefined" ? "all" : currentCategoryFilter;
     const rows = allActivities.filter((a) => cat === "all" || a.category === cat).slice(0, 100);
-    list.innerHTML = rows.length ? rows.map((a) => `<div class="activity-stream-item" data-category="${escapeHtml(a.category || "")}" style="display:flex;gap:10px;align-items:flex-start;background:#1F2937;border:1px solid #374151;border-radius:10px;padding:10px 12px;">
-        <div style="flex:1;min-width:0;"><div style="font-weight:700;color:#F9FAFB;font-size:0.88rem;">${escapeHtml(a.title || "")}</div>
-        <div style="color:#9CA3AF;font-size:0.8rem;margin-top:2px;">${escapeHtml(a.details || "")}</div></div>
-        <div style="color:#6B7280;font-size:0.72rem;white-space:nowrap;text-align:right;">${escapeHtml(a.user || "")}<br>${a.timestamp ? escapeHtml(new Date(a.timestamp).toLocaleString()) : ""}</div></div>`).join("")
-        : '<div style="padding:16px;color:#94A3B8;text-align:center;">No activity yet.</div>';
+    list.innerHTML = rows.length ? rows.map((a) => `<div class="activity-stream-item" data-category="${escapeHtml(a.category || "")}" style="display:flex;gap:10px;align-items:flex-start;background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:10px;padding:10px 12px;">
+        <div style="flex:1;min-width:0;"><div style="font-weight:700;color:var(--ti-text, #F9FAFB);font-size:0.88rem;">${escapeHtml(a.title || "")}</div>
+        <div style="color:var(--ti-muted, #9CA3AF);font-size:0.8rem;margin-top:2px;">${escapeHtml(a.details || "")}</div></div>
+        <div style="color:var(--ti-faint, #6B7280);font-size:0.72rem;white-space:nowrap;text-align:right;">${escapeHtml(a.user || "")}<br>${a.timestamp ? escapeHtml(new Date(a.timestamp).toLocaleString()) : ""}</div></div>`).join("")
+        : '<div style="padding:16px;color:var(--ti-muted, #94A3B8);text-align:center;">No activity yet.</div>';
 }
 window.renderActivityFeed = renderActivityFeed;
 // The drawer holds quick notes, not a feed; callers in js/06 expect this to exist.
@@ -3569,7 +3550,7 @@ async function handleClientAutocomplete(kind, query) {
     if (kind === "new-appt") showBookingAgeNote(null);
     const q = String(now || "").toLowerCase().trim();
     const hits = clients.filter((c) => !q || String(c.name || "").toLowerCase().includes(q)).slice(0, 8);
-    box.innerHTML = hits.map((c) => `<div data-id="${Number(c.id)}" style="padding:8px 12px;cursor:pointer;color:#E2E8F0;border-bottom:1px solid #1E293B;">${escapeHtml(c.name || "")}</div>`).join("");
+    box.innerHTML = hits.map((c) => `<div data-id="${Number(c.id)}" style="padding:8px 12px;cursor:pointer;color:var(--ti-text, #E2E8F0);border-bottom:1px solid var(--ti-panel2, #1E293B);">${escapeHtml(c.name || "")}</div>`).join("");
     box.style.display = hits.length ? "block" : "none";
     box.querySelectorAll("[data-id]").forEach((row) => row.addEventListener("mousedown", (e) => {
         e.preventDefault();
@@ -3658,18 +3639,18 @@ async function viewWaiverRecord(waiverId) {
         document.body.appendChild(overlay);
     }
     const when = w.signed_at ? new Date(w.signed_at).toLocaleString() : "date not recorded";
-    const line = (label, value) => `<div style="display:flex;gap:10px;padding:6px 0;border-bottom:1px solid #1E293B;"><span style="width:150px;color:#94A3B8;flex-shrink:0;">${label}</span><span>${escapeHtml(String(value || "-"))}</span></div>`;
+    const line = (label, value) => `<div style="display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--ti-panel2, #1E293B);"><span style="width:150px;color:var(--ti-muted, #94A3B8);flex-shrink:0;">${label}</span><span>${escapeHtml(String(value || "-"))}</span></div>`;
     const signature = typeof w.signature === "string" && w.signature.startsWith("data:image/") ? w.signature : "";
     overlay.innerHTML = `
-        <div style="background:#0F172A;border:1px solid #334155;border-radius:14px;padding:22px;width:min(94vw,560px);max-height:90vh;overflow:auto;color:#F8FAFC;font-size:0.9rem;">
+        <div style="background:var(--ti-bg2, #0F172A);border:1px solid var(--ti-line, #334155);border-radius:14px;padding:22px;width:min(94vw,560px);max-height:90vh;overflow:auto;color:var(--ti-text, #F8FAFC);font-size:0.9rem;">
             <h3 style="margin:0 0 12px;font-size:1.1rem;">📜 Signed waiver</h3>
             ${line("Client", w.client_name)}${line("Service", w.service_type)}${line("Signed", when)}
             ${line("Age verified", w.age_verified ? "Yes" : "No")}${line("Medical disclosures", w.medical_disclosures)}${line("Verified by", w.staff_verifier)}
-            <div style="margin-top:12px;color:#94A3B8;">Signature</div>
+            <div style="margin-top:12px;color:var(--ti-muted, #94A3B8);">Signature</div>
             ${signature ? `<img src="${signature}" alt="Client signature" style="display:block;margin-top:6px;max-width:100%;background:#FFF;border-radius:8px;" />` : `<div style="margin-top:6px;">No signature was captured.</div>`}
             <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px;">
-                <button type="button" onclick="downloadWaiverPdf(${Number(w.id)})" style="padding:9px 16px;background:#2563EB;color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;">⬇ Download PDF</button>
-                <button type="button" onclick="forceHideModal('waiver-record-modal-overlay')" style="padding:9px 16px;background:transparent;color:#94A3B8;border:1px solid #475569;border-radius:8px;cursor:pointer;">Close</button>
+                <button type="button" onclick="downloadWaiverPdf(${Number(w.id)})" style="padding:9px 16px;background:var(--ti-blue, #2563EB);color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;">⬇ Download PDF</button>
+                <button type="button" onclick="forceHideModal('waiver-record-modal-overlay')" style="padding:9px 16px;background:transparent;color:var(--ti-muted, #94A3B8);border:1px solid var(--ti-line2, #475569);border-radius:8px;cursor:pointer;">Close</button>
             </div>
         </div>`;
     forceShowModal("waiver-record-modal-overlay");
@@ -3798,15 +3779,15 @@ function switchGalleryTab(tab) {
 window.switchGalleryTab = switchGalleryTab;
 
 function galleryCard(img, title, lines, buttons) {
-    return `<div style="background:#111827;border:1px solid #374151;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;">
-        <img src="${escapeHtml(img || "")}" alt="${escapeHtml(title)}" style="width:100%;height:200px;object-fit:cover;background:#0F172A;cursor:zoom-in;" data-lightbox="1" />
+    return `<div style="background:var(--ti-panel, #111827);border:1px solid var(--ti-line, #374151);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;">
+        <img src="${escapeHtml(img || "")}" alt="${escapeHtml(title)}" style="width:100%;height:200px;object-fit:cover;background:var(--ti-bg2, #0F172A);cursor:zoom-in;" data-lightbox="1" />
         <div style="padding:12px;display:flex;flex-direction:column;gap:4px;flex:1;">
-          <div style="font-weight:800;color:#F9FAFB;">${escapeHtml(title)}</div>
-          ${lines.map((l) => `<div style="font-size:0.8rem;color:#9CA3AF;">${escapeHtml(l)}</div>`).join("")}
+          <div style="font-weight:800;color:var(--ti-text, #F9FAFB);">${escapeHtml(title)}</div>
+          ${lines.map((l) => `<div style="font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">${escapeHtml(l)}</div>`).join("")}
           <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:8px;">${buttons}</div>
         </div></div>`;
 }
-const galleryBtn = (label, attr) => `<button type="button" ${attr} style="padding:5px 10px;background:#1E293B;color:#38BDF8;border:1px solid #334155;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">${label}</button>`;
+const galleryBtn = (label, attr) => `<button type="button" ${attr} style="padding:5px 10px;background:var(--ti-panel2, #1E293B);color:var(--ti-blue, #38BDF8);border:1px solid var(--ti-line, #334155);border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">${label}</button>`;
 
 function bindGalleryGrid(grid, items, captionOf) {
     grid.querySelectorAll("[data-lightbox]").forEach((img, i) =>
@@ -3829,7 +3810,7 @@ function renderGalleryGrid() {
     grid.innerHTML = items.length ? items.map((w, i) => galleryCard(w.image_url, w.service_type || "",
         [(w.client_name || "") + " · " + (w.staff_name || ""), (w.session_date || "") + (w.session_duration_hours ? " · " + w.session_duration_hours + " h" : ""), w.notes || ""],
         galleryBtn("📤 Share", `data-share="${i}"`))).join("")
-        : '<div style="padding:24px;color:#94A3B8;">No portfolio works yet. Add one with Upload Work.</div>';
+        : '<div style="padding:24px;color:var(--ti-muted, #94A3B8);">No portfolio works yet. Add one with Upload Work.</div>';
     bindGalleryGrid(grid, items, (w) => (w.service_type || "") + " · " + (w.client_name || ""));
 }
 window.renderGalleryGrid = renderGalleryGrid;
@@ -3849,7 +3830,7 @@ function renderFlashGrid() {
          f.status === "claimed" ? "Claimed by " + (f.claimed_by_client_name || "") : "Available"],
         galleryBtn("📤 Share", `data-share="${i}"`) + galleryBtn("🎨 Skin Tone Preview", `data-skin="${i}"`) +
         (f.status === "claimed" ? "" : galleryBtn("✅ Claim", `data-claim="${i}"`)))).join("")
-        : '<div style="padding:24px;color:#94A3B8;">No flash designs yet.</div>';
+        : '<div style="padding:24px;color:var(--ti-muted, #94A3B8);">No flash designs yet.</div>';
     bindGalleryGrid(grid, items, (f) => f.title || "");
     grid.querySelectorAll("[data-skin]").forEach((b) => b.addEventListener("click", () => openSkinToneVisualizerModal(items[Number(b.dataset.skin)])));
     grid.querySelectorAll("[data-claim]").forEach((b) => b.addEventListener("click", () => claimFlashDesign(items[Number(b.dataset.claim)])));
@@ -4095,9 +4076,9 @@ async function showDemoDataBanner() {
     if (!dash || document.getElementById("demo-data-banner")) return;
     const bar = document.createElement("div");
     bar.id = "demo-data-banner";
-    bar.style.cssText = "display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#1E3A8A;border:1px solid #3B82F6;color:#DBEAFE;border-radius:12px;padding:12px 16px;margin-bottom:1rem;";
+    bar.style.cssText = "display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--ti-blue-deep, #1E3A8A);border:1px solid var(--ti-blue, #3B82F6);color:var(--ti-blue-ink, #DBEAFE);border-radius:12px;padding:12px 16px;margin-bottom:1rem;";
     bar.innerHTML = '<span>You are looking at demo data. Clear it before you enter real clients.</span>' +
-        '<button type="button" id="demo-data-clear-btn" style="padding:8px 14px;background:#F8FAFC;color:#1E3A8A;border:none;border-radius:8px;font-weight:800;cursor:pointer;">Start with an empty studio</button>';
+        '<button type="button" id="demo-data-clear-btn" style="padding:8px 14px;background:var(--ti-text, #F8FAFC);color:var(--ti-blue-deep, #1E3A8A);border:none;border-radius:8px;font-weight:800;cursor:pointer;">Start with an empty studio</button>';
     dash.prepend(bar);
     document.getElementById("demo-data-clear-btn").addEventListener("click", startEmptyStudio);
 }
@@ -4295,8 +4276,8 @@ async function openAutoSchedulerModal() {
     const get = (u) => fetch(u).then((r) => (r.ok ? r.json() : [])).catch(() => []);
     const [clients, staff] = await Promise.all([get("/api/clients"), get("/api/staff")]);
     const opt = (list, label) => list.map((x) => `<option value="${Number(x.id)}">${escapeHtml(label(x))}</option>`).join("");
-    const field = "width:100%;background:#1E293B;color:#FFF;border:1px solid #475569;border-radius:6px;padding:8px;margin-bottom:10px;";
-    const lab = "font-size:0.75rem;color:#94A3B8;";
+    const field = "width:100%;background:var(--ti-panel2, #1E293B);color:#FFF;border:1px solid var(--ti-line2, #475569);border-radius:6px;padding:8px;margin-bottom:10px;";
+    const lab = "font-size:0.75rem;color:var(--ti-muted, #94A3B8);";
     body.innerHTML = `<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
       <div>
         <label style="${lab}">Client</label><select id="sched-client" style="${field}">${opt(clients, (c) => c.name)}</select>
@@ -4308,9 +4289,9 @@ async function openAutoSchedulerModal() {
           <div><label style="${lab}">Sessions</label><input type="number" id="sched-sessions" min="1" max="6" value="1" style="${field}" /></div>
         </div>
         <label style="${lab}">Weeks between sessions</label><input type="number" id="sched-gap" min="1" max="12" value="3" style="${field}" />
-        <button type="button" id="sched-find" style="padding:8px 14px;background:#2563EB;color:#FFF;border:none;border-radius:8px;font-weight:700;cursor:pointer;">Find free slots</button>
+        <button type="button" id="sched-find" style="padding:8px 14px;background:var(--ti-blue, #2563EB);color:#FFF;border:none;border-radius:8px;font-weight:700;cursor:pointer;">Find free slots</button>
       </div>
-      <div id="sched-slots" style="background:#090D16;border:1px solid #334155;border-radius:10px;padding:14px;font-size:0.8rem;color:#94A3B8;">Choose the artist and date, then Find free slots.</div>
+      <div id="sched-slots" style="background:var(--ti-bg, #090D16);border:1px solid var(--ti-line, #334155);border-radius:10px;padding:14px;font-size:0.8rem;color:var(--ti-muted, #94A3B8);">Choose the artist and date, then Find free slots.</div>
     </div>`;
     document.getElementById("sched-find").addEventListener("click", findSchedulerSlots);
 }
@@ -4328,7 +4309,7 @@ async function findSchedulerSlots() {
     schedState.slots = ((data.artists || [])[0] || {}).available_slots || [];
     schedState.picked = null;
     box.innerHTML = schedState.slots.length ? schedState.slots.map((s, i) =>
-        `<label style="display:flex;gap:8px;align-items:center;background:#1E293B;padding:6px 10px;border-radius:6px;border:1px solid #334155;margin-bottom:6px;cursor:pointer;color:#E2E8F0;">
+        `<label style="display:flex;gap:8px;align-items:center;background:var(--ti-panel2, #1E293B);padding:6px 10px;border-radius:6px;border:1px solid var(--ti-line, #334155);margin-bottom:6px;cursor:pointer;color:var(--ti-text, #E2E8F0);">
            <input type="radio" name="sched-slot" value="${i}" /> ${escapeHtml(s.displayTime || s.time)} · ${escapeHtml(s.station || "")}</label>`).join("")
         : "No free slot that day.";
     box.querySelectorAll('input[name="sched-slot"]').forEach((r) => r.addEventListener("change", () => { schedState.picked = schedState.slots[Number(r.value)]; }));
@@ -4424,7 +4405,7 @@ async function handleScannedCode(code) {
     } else if (client) {
         set("recent-scan-modal-title", client.name);
         if (body) body.innerHTML = `<div data-no-phrase>${escapeHtml(client.email || "")} ${escapeHtml(client.phone || "")}</div>` +
-            `<button type="button" onclick="closeRecentScanProfileModal();openClientProfileModal(${Number(client.id)})" style="margin-top:8px;padding:6px 12px;background:#2563EB;color:#FFF;border:none;border-radius:6px;cursor:pointer;">View Profile</button>`;
+            `<button type="button" onclick="closeRecentScanProfileModal();openClientProfileModal(${Number(client.id)})" style="margin-top:8px;padding:6px 12px;background:var(--ti-blue, #2563EB);color:#FFF;border:none;border-radius:6px;cursor:pointer;">View Profile</button>`;
     } else {
         set("recent-scan-modal-title", "No match for this code");
         if (body) body.innerHTML = "<div>It is not a stock SKU, a lot number or a client code.</div>";
@@ -4436,14 +4417,14 @@ window.handleScannedCode = handleScannedCode;
 function renderQrHistory() {
     let hist = [];
     try { hist = JSON.parse(localStorage.getItem(QR_HISTORY_KEY) || "[]"); } catch (e) {}
-    const row = (h) => `<div style="display:flex;justify-content:space-between;gap:8px;padding:6px 8px;border-bottom:1px solid #1F2937;font-size:0.78rem;">
-        <span><span data-no-phrase style="color:#E5E7EB;">${escapeHtml(h.code)}</span>${h.label ? ` · ${escapeHtml(h.label)}` : ""}</span>
-        <span style="color:#6B7280;white-space:nowrap;">${escapeHtml(new Date(h.at).toLocaleTimeString())}</span></div>`;
+    const row = (h) => `<div style="display:flex;justify-content:space-between;gap:8px;padding:6px 8px;border-bottom:1px solid var(--ti-panel2, #1F2937);font-size:0.78rem;">
+        <span><span data-no-phrase style="color:var(--ti-text, #E5E7EB);">${escapeHtml(h.code)}</span>${h.label ? ` · ${escapeHtml(h.label)}` : ""}</span>
+        <span style="color:var(--ti-faint, #6B7280);white-space:nowrap;">${escapeHtml(new Date(h.at).toLocaleTimeString())}</span></div>`;
     const scans = document.getElementById("qr-recent-scans-list");
     const errors = document.getElementById("qr-error-logs-list");
     const misses = hist.filter((h) => !h.match);
-    if (scans) scans.innerHTML = hist.length ? hist.map(row).join("") : '<div style="padding:8px;color:#6B7280;font-size:0.78rem;">No scans yet.</div>';
-    if (errors) errors.innerHTML = misses.length ? misses.map(row).join("") : '<div style="padding:8px;color:#6B7280;font-size:0.78rem;">No unmatched codes.</div>';
+    if (scans) scans.innerHTML = hist.length ? hist.map(row).join("") : '<div style="padding:8px;color:var(--ti-faint, #6B7280);font-size:0.78rem;">No scans yet.</div>';
+    if (errors) errors.innerHTML = misses.length ? misses.map(row).join("") : '<div style="padding:8px;color:var(--ti-faint, #6B7280);font-size:0.78rem;">No unmatched codes.</div>';
     const badge = document.getElementById("qr-error-count-badge");
     if (badge) { badge.textContent = String(misses.length); badge.style.display = misses.length ? "inline-block" : "none"; }
 }
@@ -4646,10 +4627,10 @@ async function renderLowStockGrid() {
     if (!grid) return;
     let rows = [];
     try { rows = await lowStockRows(); } catch (e) { return; }
-    grid.innerHTML = rows.length ? rows.map(([, name, , qty, min]) => `<div style="background:#111827;padding:0.75rem;border-radius:8px;border:1px solid rgba(239,68,68,0.3);">
+    grid.innerHTML = rows.length ? rows.map(([, name, , qty, min]) => `<div style="background:var(--ti-panel, #111827);padding:0.75rem;border-radius:8px;border:1px solid rgba(239,68,68,0.3);">
         <div style="font-weight:700;color:#FFF;font-size:0.82rem;">${escapeHtml(name)}</div>
-        <div style="font-size:0.75rem;color:#F87171;margin-top:2px;">${escapeHtml(pdfLabel("Remaining"))}: ${Number(qty)} | ${escapeHtml(pdfLabel("Reorder at"))}: ${Number(min)}</div></div>`).join("")
-        : `<div style="color:#94A3B8;font-size:0.82rem;">${escapeHtml(pdfLabel("No items are below their reorder level"))}</div>`;
+        <div style="font-size:0.75rem;color:var(--ti-alert-ink, #F87171);margin-top:2px;">${escapeHtml(pdfLabel("Remaining"))}: ${Number(qty)} | ${escapeHtml(pdfLabel("Reorder at"))}: ${Number(min)}</div></div>`).join("")
+        : `<div style="color:var(--ti-muted, #94A3B8);font-size:0.82rem;">${escapeHtml(pdfLabel("No items are below their reorder level"))}</div>`;
 }
 window.renderLowStockGrid = renderLowStockGrid;
 
@@ -4700,8 +4681,8 @@ function onPOSupplierChange() {
     });
     const table = document.getElementById("po-items-table");
     if (table) table.innerHTML = poState.items.length ? poState.items.map((i) =>
-        `<div style="display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid #1F2937;font-size:0.8rem;"><span data-no-phrase>${escapeHtml(i.name)} ${i.sku ? "(" + escapeHtml(i.sku) + ")" : ""}</span><span>${i.qty} × $${i.unit.toFixed(2)}</span></div>`).join("")
-        : '<div style="padding:8px;color:#94A3B8;">No items are below their reorder level</div>';
+        `<div style="display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--ti-panel2, #1F2937);font-size:0.8rem;"><span data-no-phrase>${escapeHtml(i.name)} ${i.sku ? "(" + escapeHtml(i.sku) + ")" : ""}</span><span>${i.qty} × $${i.unit.toFixed(2)}</span></div>`).join("")
+        : '<div style="padding:8px;color:var(--ti-muted, #94A3B8);">No items are below their reorder level</div>';
     const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
     set("po-items-count-badge", poState.items.length + " Items");
     set("po-total-units", String(poState.items.reduce((t, i) => t + i.qty, 0)));
@@ -4785,7 +4766,7 @@ async function renderD3SessionDurationChart() {
     const by = {};
     rows.forEach((r) => { (by[r[1]] = by[r[1]] || []).push(Number(r[4])); });
     const labels = Object.keys(by);
-    if (!labels.length) { el.innerHTML = '<div style="padding:12px;color:#94A3B8;font-size:0.8rem;">No completed sessions yet.</div>'; return; }
+    if (!labels.length) { el.innerHTML = '<div style="padding:12px;color:var(--ti-muted, #94A3B8);font-size:0.8rem;">No completed sessions yet.</div>'; return; }
     drawBarChart(el, labels, labels.map((l) => by[l].reduce((a, b) => a + b, 0) / by[l].length));
 }
 window.renderD3SessionDurationChart = renderD3SessionDurationChart;
@@ -4944,7 +4925,7 @@ async function renderAppointmentsList() {
     } catch (e) { /* shown as an empty list */ }
     appts = (Array.isArray(appts) ? appts : []).filter((a) => a && a.datetime);
     if (!appts.length) {
-        tbody.innerHTML = '<tr><td colspan="9" style="padding:10px;color:#94A3B8;">No appointments yet. Book the first one with Book Appointment.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="9" style="padding:10px;color:var(--ti-muted, #94A3B8);">No appointments yet. Book the first one with Book Appointment.</td></tr>';
         return;
     }
     const startOfToday = new Date(); startOfToday.setHours(0, 0, 0, 0);
@@ -4955,7 +4936,7 @@ async function renderAppointmentsList() {
     const btn = "padding:4px 8px;border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;";
     const row = (a) => {
         const open = a.status !== "completed" && a.status !== "cancelled";
-        return `<tr class="appointment-row" style="border-bottom:1px solid #1E293B;">`
+        return `<tr class="appointment-row" style="border-bottom:1px solid var(--ti-panel2, #1E293B);">`
             + cell(new Date(a.datetime).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }), "font-weight:700;color:#FFF;")
             + cell(a.client_name || a.client) + cell(a.service_type) + cell(a.staff_name || a.artist_name)
             + cell(Number(a.estimated_price || a.price || 0).toFixed(2))
@@ -4965,12 +4946,12 @@ async function renderAppointmentsList() {
             + cell(Math.max(0, Number(a.estimated_price || a.price || 0) - Number(a.deposit_paid || 0)).toFixed(2), "font-weight:700;")
             + cell(a.status || "scheduled")
             + `<td style="padding:8px;text-align:right;white-space:nowrap;">`
-            + `<button type="button" onclick="openEditAppointment(${Number(a.id)})" style="${btn}background:#334155;color:#E2E8F0;border:1px solid #475569;">Edit</button> `
-            + (open ? `<button type="button" onclick="setAppointmentStatus(${Number(a.id)}, 'completed')" style="${btn}background:#10B981;color:#FFF;border:none;">Completed</button> ` : "")
-            + `<button type="button" onclick="removeAppointment(${Number(a.id)})" style="${btn}background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);">Remove</button></td></tr>`;
+            + `<button type="button" onclick="openEditAppointment(${Number(a.id)})" style="${btn}background:var(--ti-line, #334155);color:var(--ti-text, #E2E8F0);border:1px solid var(--ti-line2, #475569);">Edit</button> `
+            + (open ? `<button type="button" onclick="setAppointmentStatus(${Number(a.id)}, 'completed')" style="${btn}background:var(--ti-green, #10B981);color:#FFF;border:none;">Completed</button> ` : "")
+            + `<button type="button" onclick="removeAppointment(${Number(a.id)})" style="${btn}background:transparent;color:var(--ti-alert-ink, #FCA5A5);border:1px solid rgba(239,68,68,0.5);">Remove</button></td></tr>`;
     };
     tbody.innerHTML = coming.map(row).join("")
-        + (earlier.length ? '<tr><td colspan="9" style="padding:10px 8px 4px;color:#94A3B8;font-size:0.75rem;font-weight:700;">Earlier</td></tr>' + earlier.map(row).join("") : "");
+        + (earlier.length ? '<tr><td colspan="9" style="padding:10px 8px 4px;color:var(--ti-muted, #94A3B8);font-size:0.75rem;font-weight:700;">Earlier</td></tr>' + earlier.map(row).join("") : "");
 }
 window.renderAppointmentsList = renderAppointmentsList;
 document.addEventListener("DOMContentLoaded", renderAppointmentsList);
@@ -5366,7 +5347,7 @@ function addPortalPinnedNote(event) {
     const container = document.getElementById("portal-pinned-notes-list") || document.getElementById("portal-notes-container");
     if (container) {
         const el = document.createElement("div");
-        el.style.cssText = "background:#1E293B;padding:10px 14px;border-radius:8px;border:1px solid #334155;color:#F8FAFC;font-size:0.85rem;margin-bottom:8px;";
+        el.style.cssText = "background:var(--ti-panel2, #1E293B);padding:10px 14px;border-radius:8px;border:1px solid var(--ti-line, #334155);color:var(--ti-text, #F8FAFC);font-size:0.85rem;margin-bottom:8px;";
         el.innerHTML = `<strong>📌 ${escapeHtml(noteObj.author)} (${escapeHtml(noteObj.timestamp)}):</strong> ${escapeHtml(noteObj.text)}`;
         container.prepend(el);
     }
@@ -5399,8 +5380,8 @@ function addQuickNote(event) {
         const el = document.createElement("div");
         el.className = "activity-stream-item";
         el.setAttribute("data-category", "notes");
-        el.style.cssText = "background:#1F2937;padding:10px 14px;border-radius:8px;border:1px solid #374151;color:#F9FAFB;margin-bottom:8px;font-size:0.85rem;";
-        el.innerHTML = `<div style="display:flex;justify-content:space-between;color:#9CA3AF;font-size:0.75rem;"><span>📝 Quick Note</span><span>Just now</span></div><div style="margin-top:4px;color:#FFF;">${escapeHtml(text)}</div>`;
+        el.style.cssText = "background:var(--ti-panel2, #1F2937);padding:10px 14px;border-radius:8px;border:1px solid var(--ti-line, #374151);color:var(--ti-text, #F9FAFB);margin-bottom:8px;font-size:0.85rem;";
+        el.innerHTML = `<div style="display:flex;justify-content:space-between;color:var(--ti-muted, #9CA3AF);font-size:0.75rem;"><span>📝 Quick Note</span><span>Just now</span></div><div style="margin-top:4px;color:#FFF;">${escapeHtml(text)}</div>`;
         feed.prepend(el);
     }
     input.value = "";
@@ -5520,7 +5501,7 @@ function addCustomMessengerMacro(event) {
         const btn = document.createElement("button");
         btn.type = "button";
         btn.onclick = () => { if (typeof insertMessengerMacro === "function") insertMessengerMacro(cleanText); };
-        btn.style.cssText = "padding:4px 10px;background:#334155;color:#F8FAFC;border:none;border-radius:6px;font-size:0.75rem;cursor:pointer;";
+        btn.style.cssText = "padding:4px 10px;background:var(--ti-line, #334155);color:var(--ti-text, #F8FAFC);border:none;border-radius:6px;font-size:0.75rem;cursor:pointer;";
         btn.textContent = cleanText;
         container.appendChild(btn);
     }

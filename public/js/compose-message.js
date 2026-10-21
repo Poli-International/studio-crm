@@ -36,7 +36,7 @@
     ];
     var panel = document.createElement('div');
     panel.id = 'compose-message-panel';
-    panel.style.cssText = 'position:fixed;right:20px;bottom:20px;z-index:2147483000;width:340px;max-width:calc(100vw - 40px);background:#0F172A;border:1px solid #38BDF8;border-radius:12px;padding:14px;color:#E2E8F0;box-shadow:0 12px 40px rgba(0,0,0,0.5);font-size:0.85rem;';
+    panel.style.cssText = 'position:fixed;right:20px;bottom:20px;z-index:2147483000;width:340px;max-width:calc(100vw - 40px);background:var(--ti-bg2, #0F172A);border:1px solid var(--ti-blue, #38BDF8);border-radius:12px;padding:14px;color:var(--ti-text, #E2E8F0);box-shadow:0 12px 40px rgba(0,0,0,0.5);font-size:0.85rem;';
     var head = document.createElement('div');
     head.style.cssText = 'display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;';
     head.innerHTML = '<strong>Message ready</strong>';
@@ -44,12 +44,12 @@
     close.type = 'button';
     close.textContent = '×';
     close.setAttribute('aria-label', 'Close');
-    close.style.cssText = 'background:none;border:none;color:#94A3B8;font-size:1.3rem;cursor:pointer;';
+    close.style.cssText = 'background:none;border:none;color:var(--ti-muted, #94A3B8);font-size:1.3rem;cursor:pointer;';
     close.onclick = function () { panel.remove(); };
     head.appendChild(close);
     panel.appendChild(head);
     var note = document.createElement('div');
-    note.style.cssText = 'color:#94A3B8;margin-bottom:8px;';
+    note.style.cssText = 'color:var(--ti-muted, #94A3B8);margin-bottom:8px;';
     note.textContent = 'The CRM does not send messages. Open it in your own app and press send.';
     panel.appendChild(note);
     var who = document.createElement('div');
@@ -65,13 +65,13 @@
       a.target = '_blank';
       a.rel = 'noopener';
       a.textContent = l[0];
-      a.style.cssText = 'padding:6px 10px;background:#1E293B;border:1px solid #334155;border-radius:6px;color:#38BDF8;text-decoration:none;font-weight:700;';
+      a.style.cssText = 'padding:6px 10px;background:var(--ti-panel2, #1E293B);border:1px solid var(--ti-line, #334155);border-radius:6px;color:var(--ti-blue, #38BDF8);text-decoration:none;font-weight:700;';
       row.appendChild(a);
     });
     var copy = document.createElement('button');
     copy.type = 'button';
     copy.textContent = '📋 Copy';
-    copy.style.cssText = 'padding:6px 10px;background:#1E293B;border:1px solid #334155;border-radius:6px;color:#38BDF8;font-weight:700;cursor:pointer;';
+    copy.style.cssText = 'padding:6px 10px;background:var(--ti-panel2, #1E293B);border:1px solid var(--ti-line, #334155);border-radius:6px;color:var(--ti-blue, #38BDF8);font-weight:700;cursor:pointer;';
     copy.onclick = function () {
       (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(function () {
         copy.textContent = '✅ Copied';

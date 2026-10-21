@@ -7,15 +7,15 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
     .inventory-modal-grid-container {
         display: grid !important;
         grid-template-rows: auto 1fr !important;
-        background: #111827 !important;
-        border: 1px solid #374151 !important;
+        background: var(--ti-panel, #111827) !important;
+        border: 1px solid var(--ti-line, #374151) !important;
         border-radius: 16px !important;
         width: 100% !important;
         max-width: 1050px !important;
         max-height: 92vh !important;
         box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7) !important;
         overflow: hidden !important;
-        color: #F9FAFB !important;
+        color: var(--ti-text, #F9FAFB) !important;
     }
 
     .inventory-modal-grid-header {
@@ -24,8 +24,8 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         align-items: center !important;
         gap: 12px !important;
         padding: 1.15rem 1.4rem !important;
-        background: #1F2937 !important;
-        border-bottom: 1px solid #374151 !important;
+        background: var(--ti-panel2, #1F2937) !important;
+        border-bottom: 1px solid var(--ti-line, #374151) !important;
     }
 
     .inventory-modal-header-actions-grid {
@@ -48,8 +48,8 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         grid-template-columns: 1fr auto !important;
         gap: 1.25rem !important;
         align-items: center !important;
-        background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%) !important;
-        border: 1px solid #38BDF8 !important;
+        background: linear-gradient(135deg, var(--ti-panel2, #1E293B) 0%, var(--ti-bg2, #0F172A) 100%) !important;
+        border: 1px solid var(--ti-blue, #38BDF8) !important;
         border-radius: 12px !important;
         padding: 1rem 1.25rem !important;
         box-shadow: 0 4px 15px rgba(56,189,248,0.15) !important;
@@ -67,8 +67,8 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         grid-template-columns: auto 1fr auto !important;
         gap: 12px !important;
         align-items: center !important;
-        background: #1E293B !important;
-        border: 1px solid #334155 !important;
+        background: var(--ti-panel2, #1E293B) !important;
+        border: 1px solid var(--ti-line, #334155) !important;
         border-radius: 10px !important;
         padding: 0.75rem 1rem !important;
     }
@@ -105,7 +105,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         .inventory-val-metrics-grid > div {
             border-left: none !important;
             padding-left: 0 !important;
-            border-top: 1px solid #334155 !important;
+            border-top: 1px solid var(--ti-line, #334155) !important;
             padding-top: 0.5rem !important;
         }
     }
@@ -178,7 +178,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         height: 100% !important;
         overflow-y: auto !important;
         padding: 1.5rem !important;
-        background-color: var(--bg-body, #0B0F17) !important;
+        background-color: var(--bg-body, var(--ti-bg, #0B0F17)) !important;
     }
 
     .sidebar, aside.sidebar {
@@ -186,7 +186,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         min-width: 250px !important;
         height: 100% !important;
         max-height: 100% !important;
-        background-color: #1f2937 !important;
+        background-color: var(--ti-panel2, #1f2937) !important;
         color: #fff !important;
         display: flex !important;
         flex-direction: column !important;
@@ -200,7 +200,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         padding: 0.5rem 0.75rem !important;
         margin-bottom: 0.75rem !important;
         font-weight: 700 !important;
-        border-bottom: 1px solid #374151 !important;
+        border-bottom: 1px solid var(--ti-line, #374151) !important;
     }
 
     /* Hide floating feed button globally across all viewports (moved to top header) */
@@ -240,7 +240,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
     .portfolio-gallery-item:hover {
         transform: translateY(-5px) scale(1.025) !important;
         box-shadow: 0 16px 30px -6px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(99, 102, 241, 0.45) !important;
-        border-color: #6366F1 !important;
+        border-color: var(--ti-purple-ink, #6366F1) !important;
         z-index: 10;
     }
 
@@ -326,7 +326,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         align-items: center !important;
         gap: 0.75rem !important;
         padding: 0.55rem 0.85rem !important;
-        color: #d1d5db !important;
+        color: var(--ti-text2, #d1d5db) !important;
         text-decoration: none !important;
         border-radius: 6px !important;
         font-size: 0.85rem !important;
@@ -335,7 +335,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
 
     .sidebar .bottom-menu, aside.sidebar .bottom-menu {
         margin-top: auto !important;
-        border-top: 1px solid #374151 !important;
+        border-top: 1px solid var(--ti-line, #374151) !important;
         padding-top: 0.75rem !important;
         flex-shrink: 0 !important;
     }
@@ -418,9 +418,9 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
     aside.sidebar a.active,
     aside.sidebar .active {
         background-color: rgba(99, 102, 241, 0.25) !important;
-        color: #A5B4FC !important;
+        color: var(--ti-blue-ink, #A5B4FC) !important;
         box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25) !important;
-        border-left: 3px solid #818CF8 !important;
+        border-left: 3px solid var(--ti-blue-ink, #818CF8) !important;
     }
 
     /* Active Navigation Hover: Color Lightening & Subtle Shadow Effect */
@@ -433,7 +433,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
     aside.sidebar a.active:hover,
     aside.sidebar .active:hover {
         background-color: rgba(129, 140, 248, 0.38) !important;
-        color: #DBEAFE !important;
+        color: var(--ti-blue-ink, #DBEAFE) !important;
         box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45), 0 0 14px rgba(165, 180, 252, 0.35) !important;
         filter: brightness(1.18) !important;
         transform: translateX(3px) !important;
@@ -447,7 +447,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
     aside.sidebar .nav-link:hover,
     aside.sidebar a:hover {
         background-color: rgba(255, 255, 255, 0.09) !important;
-        color: #F9FAFB !important;
+        color: var(--ti-text, #F9FAFB) !important;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
         filter: brightness(1.12) !important;
     }
@@ -458,7 +458,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         align-items: center;
         justify-content: space-between;
         padding: 0.65rem 1rem;
-        background: #0f172a;
+        background: var(--ti-bg2, #0f172a);
         border-bottom: 1px solid rgba(139, 92, 246, 0.3);
         position: sticky;
         top: 0;
@@ -688,11 +688,11 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
     @keyframes lowStockPulse {
         0%, 100% {
             background-color: rgba(239, 68, 68, 0.14) !important;
-            box-shadow: inset 4px 0 0 #EF4444;
+            box-shadow: inset 4px 0 0 var(--ti-alert, #EF4444);
         }
         50% {
             background-color: rgba(239, 68, 68, 0.32) !important;
-            box-shadow: inset 4px 0 0 #EF4444, 0 0 16px rgba(239, 68, 68, 0.35);
+            box-shadow: inset 4px 0 0 var(--ti-alert, #EF4444), 0 0 16px rgba(239, 68, 68, 0.35);
         }
     }
     @keyframes lowStockBadgePulse {
@@ -704,12 +704,12 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         50% {
             transform: scale(1.05);
             box-shadow: 0 0 10px 2px rgba(239, 68, 68, 0.65);
-            border-color: #EF4444;
+            border-color: var(--ti-alert, #EF4444);
         }
     }
     .low-stock-pulse-row {
         animation: lowStockPulse 2.4s ease-in-out infinite !important;
-        border-left: 4px solid #EF4444 !important;
+        border-left: 4px solid var(--ti-alert, #EF4444) !important;
         position: relative;
     }
     .low-stock-pulse-row:hover {
@@ -728,7 +728,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
     }
     .approaching-stock-row {
         background-color: rgba(245, 158, 11, 0.08) !important;
-        border-left: 4px solid #F59E0B !important;
+        border-left: 4px solid var(--ti-gold, #F59E0B) !important;
     }
 
     /* ⚡ REAL-TIME STOCK CELL TRANSITION ANIMATIONS (RESTOCK / USAGE) */
@@ -793,24 +793,24 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         }
         15% {
             box-shadow: 0 0 28px rgba(16, 185, 129, 0.95), 0 0 14px rgba(52, 211, 153, 0.9);
-            border-color: #10B981;
+            border-color: var(--ti-green, #10B981);
             transform: scale(1.025);
             background-color: rgba(6, 78, 59, 0.55) !important;
         }
         35% {
             box-shadow: 0 0 12px rgba(16, 185, 129, 0.5);
-            border-color: #34D399;
+            border-color: var(--ti-green, #34D399);
             transform: scale(1.008);
         }
         60% {
             box-shadow: 0 0 26px rgba(52, 211, 153, 0.95), 0 0 16px rgba(16, 185, 129, 0.85);
-            border-color: #10B981;
+            border-color: var(--ti-green, #10B981);
             transform: scale(1.02);
             background-color: rgba(6, 78, 59, 0.45) !important;
         }
         80% {
             box-shadow: 0 0 14px rgba(16, 185, 129, 0.6);
-            border-color: #34D399;
+            border-color: var(--ti-green, #34D399);
             transform: scale(1.005);
         }
     }
@@ -824,24 +824,24 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         }
         15% {
             box-shadow: 0 0 28px rgba(245, 158, 11, 0.95), 0 0 14px rgba(251, 191, 36, 0.9);
-            border-color: #F59E0B;
+            border-color: var(--ti-gold, #F59E0B);
             transform: scale(1.025);
             background-color: rgba(120, 53, 15, 0.55) !important;
         }
         35% {
             box-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
-            border-color: #FBBF24;
+            border-color: var(--ti-gold, #FBBF24);
             transform: scale(1.008);
         }
         60% {
             box-shadow: 0 0 26px rgba(251, 191, 36, 0.95), 0 0 16px rgba(245, 158, 11, 0.85);
-            border-color: #F59E0B;
+            border-color: var(--ti-gold, #F59E0B);
             transform: scale(1.02);
             background-color: rgba(120, 53, 15, 0.45) !important;
         }
         80% {
             box-shadow: 0 0 14px rgba(245, 158, 11, 0.6);
-            border-color: #FBBF24;
+            border-color: var(--ti-gold, #FBBF24);
             transform: scale(1.005);
         }
     }
@@ -855,24 +855,24 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         }
         15% {
             box-shadow: 0 0 30px rgba(239, 68, 68, 0.98), 0 0 16px rgba(248, 113, 113, 0.95);
-            border-color: #EF4444;
+            border-color: var(--ti-alert, #EF4444);
             transform: scale(1.028);
             background-color: rgba(127, 29, 29, 0.6) !important;
         }
         35% {
             box-shadow: 0 0 14px rgba(239, 68, 68, 0.6);
-            border-color: #F87171;
+            border-color: var(--ti-alert-ink, #F87171);
             transform: scale(1.01);
         }
         60% {
             box-shadow: 0 0 28px rgba(248, 113, 113, 0.98), 0 0 18px rgba(239, 68, 68, 0.9);
-            border-color: #EF4444;
+            border-color: var(--ti-alert, #EF4444);
             transform: scale(1.022);
             background-color: rgba(127, 29, 29, 0.5) !important;
         }
         80% {
             box-shadow: 0 0 15px rgba(239, 68, 68, 0.65);
-            border-color: #F87171;
+            border-color: var(--ti-alert-ink, #F87171);
             transform: scale(1.006);
         }
     }
@@ -904,7 +904,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
     .supplier-cards-grid > div:hover {
         transform: translateY(-4px);
         box-shadow: 0 14px 28px -6px rgba(0, 0, 0, 0.65), 0 0 16px rgba(16, 185, 129, 0.25) !important;
-        border-color: #10B981 !important;
+        border-color: var(--ti-green, #10B981) !important;
     }
 
     .supplier-cards-grid > div .supplier-hidden-metadata {
@@ -925,50 +925,50 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
     /* 🛡️ CLIENT SELF-SERVICE PORTAL DEDICATED LIGHT THEME & STYLING */
     /* ======================================================== */
     #tab-portal.portal-light-theme {
-        background: #F8FAFC !important;
-        color: #0F172A !important;
+        background: var(--ti-text, #F8FAFC) !important;
+        color: var(--ti-bg2, #0F172A) !important;
     }
     #tab-portal.portal-light-theme .portal-header-card {
-        background: linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 100%) !important;
-        border-color: #CBD5E1 !important;
+        background: linear-gradient(135deg, #FFFFFF 0%, var(--ti-text, #F1F5F9) 100%) !important;
+        border-color: var(--ti-text2, #CBD5E1) !important;
         box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important;
     }
     #tab-portal.portal-light-theme #portal-view-container {
         background: #FFFFFF !important;
-        border-color: #E2E8F0 !important;
-        color: #0F172A !important;
+        border-color: var(--ti-text, #E2E8F0) !important;
+        color: var(--ti-bg2, #0F172A) !important;
         box-shadow: 0 4px 12px rgba(0,0,0,0.04) !important;
     }
     #tab-portal.portal-light-theme #portal-sidebar {
-        background: #F8FAFC !important;
-        border-color: #E2E8F0 !important;
-        color: #0F172A !important;
+        background: var(--ti-text, #F8FAFC) !important;
+        border-color: var(--ti-text, #E2E8F0) !important;
+        color: var(--ti-bg2, #0F172A) !important;
         box-shadow: 0 4px 12px rgba(0,0,0,0.04) !important;
     }
     #tab-portal.portal-light-theme h2, 
     #tab-portal.portal-light-theme h3, 
     #tab-portal.portal-light-theme h4,
     #tab-portal.portal-light-theme strong {
-        color: #0F172A !important;
+        color: var(--ti-bg2, #0F172A) !important;
     }
     #tab-portal.portal-light-theme p, 
     #tab-portal.portal-light-theme span.portal-text-subtle {
-        color: #475569 !important;
+        color: var(--ti-line2, #475569) !important;
     }
     #tab-portal.portal-light-theme .portal-card-item {
-        background: #F1F5F9 !important;
-        border-color: #E2E8F0 !important;
-        color: #0F172A !important;
+        background: var(--ti-text, #F1F5F9) !important;
+        border-color: var(--ti-text, #E2E8F0) !important;
+        color: var(--ti-bg2, #0F172A) !important;
     }
     #tab-portal.portal-light-theme #portal-session-control {
-        background: #F1F5F9 !important;
-        border-color: #CBD5E1 !important;
+        background: var(--ti-text, #F1F5F9) !important;
+        border-color: var(--ti-text2, #CBD5E1) !important;
     }
     #tab-portal.portal-light-theme #portal-quick-search-input,
     #tab-portal.portal-light-theme #portal-pin-note-input {
         background: #FFFFFF !important;
-        border-color: #CBD5E1 !important;
-        color: #0F172A !important;
+        border-color: var(--ti-text2, #CBD5E1) !important;
+        color: var(--ti-bg2, #0F172A) !important;
     }
 
     /* Subtle & High-End Entrance Animation for All Modal Windows & Overlays */
@@ -1039,9 +1039,9 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
 
     .mic-recording-active {
         animation: micPulseRing 1.5s infinite !important;
-        background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%) !important;
+        background: linear-gradient(135deg, var(--ti-alert, #EF4444) 0%, var(--ti-alert, #DC2626) 100%) !important;
         color: #FFFFFF !important;
-        border-color: #F87171 !important;
+        border-color: var(--ti-alert-ink, #F87171) !important;
     }
 
     /* Base Modal Overlay Targeting with Transforms */
@@ -1238,7 +1238,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         #aftercare-modal > div {
             background: #ffffff !important;
             color: #000000 !important;
-            border: 1px solid #111827 !important;
+            border: 1px solid var(--ti-panel, #111827) !important;
             box-shadow: none !important;
             max-width: 100% !important;
             width: 100% !important;
@@ -1249,7 +1249,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
 
         /* High contrast dark text and removal of ambient dark-mode effects */
         h1, h2, h3, h4, h5, h6, span, p, label, div, td, th, strong {
-            color: #111827 !important;
+            color: var(--ti-panel, #111827) !important;
             text-shadow: none !important;
             filter: none !important;
         }
@@ -1264,23 +1264,23 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         }
 
         th, td {
-            border: 1px solid #d1d5db !important;
+            border: 1px solid var(--ti-text2, #d1d5db) !important;
             padding: 6pt 10pt !important;
-            color: #111827 !important;
+            color: var(--ti-panel, #111827) !important;
             text-align: left !important;
             font-size: 10pt !important;
         }
 
         th {
-            background-color: #f3f4f6 !important;
+            background-color: var(--ti-text, #f3f4f6) !important;
             font-weight: 700 !important;
         }
 
         /* Clean printable form inputs */
         input, select, textarea {
-            border: 1px solid #9ca3af !important;
-            background: #f9fafb !important;
-            color: #111827 !important;
+            border: 1px solid var(--ti-muted, #9ca3af) !important;
+            background: var(--ti-text, #f9fafb) !important;
+            color: var(--ti-panel, #111827) !important;
             box-shadow: none !important;
             padding: 4pt 8pt !important;
         }
@@ -1294,10 +1294,10 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
             font-size: 11pt;
             font-weight: 800;
             letter-spacing: 1px;
-            border-bottom: 2px solid #111827;
+            border-bottom: 2px solid var(--ti-panel, #111827);
             padding-bottom: 6px;
             margin-bottom: 15px;
-            color: #111827;
+            color: var(--ti-panel, #111827);
             text-transform: uppercase;
         }
     }
@@ -1359,9 +1359,9 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
     }
     /* FullCalendar Studio Dark Theme Overrides */
     .fc {
-        color: #F3F4F6 !important;
+        color: var(--ti-text, #F3F4F6) !important;
         font-family: inherit !important;
-        background: #111827 !important;
+        background: var(--ti-panel, #111827) !important;
         border-radius: 12px !important;
         padding: 1rem !important;
     }
@@ -1372,51 +1372,51 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
     .fc-timegrid-slots table,
     .fc-timegrid-cols table,
     .fc-scrollgrid-sync-table {
-        border-color: #374151 !important;
+        border-color: var(--ti-line, #374151) !important;
     }
     .fc-timegrid-slot {
         height: 2.8em !important;
-        border-bottom: 1px solid #1F2937 !important;
+        border-bottom: 1px solid var(--ti-panel2, #1F2937) !important;
     }
     .fc-timegrid-slot-lane {
-        background-color: #111827 !important;
+        background-color: var(--ti-panel, #111827) !important;
     }
     .fc-timegrid-slot-label {
-        color: #9CA3AF !important;
+        color: var(--ti-muted, #9CA3AF) !important;
         font-size: 0.8rem !important;
         font-weight: 500 !important;
-        border-color: #374151 !important;
+        border-color: var(--ti-line, #374151) !important;
     }
     .fc-timegrid-axis {
-        border-color: #374151 !important;
+        border-color: var(--ti-line, #374151) !important;
     }
     .fc-timegrid-col {
-        background-color: #111827 !important;
-        border-color: #374151 !important;
+        background-color: var(--ti-panel, #111827) !important;
+        border-color: var(--ti-line, #374151) !important;
     }
     .fc-timegrid-col-frame {
         min-height: 100% !important;
     }
     .fc-col-header-cell {
-        background-color: #1F2937 !important;
-        border-color: #374151 !important;
+        background-color: var(--ti-panel2, #1F2937) !important;
+        border-color: var(--ti-line, #374151) !important;
         padding: 10px 0 !important;
     }
     .fc-col-header-cell-cushion {
-        color: #F3F4F6 !important;
+        color: var(--ti-text, #F3F4F6) !important;
         font-weight: 700 !important;
         font-size: 0.875rem !important;
         text-decoration: none !important;
     }
     .fc-toolbar-title {
-        color: #F9FAFB !important;
+        color: var(--ti-text, #F9FAFB) !important;
         font-size: 1.35rem !important;
         font-weight: 700 !important;
     }
     .fc-button-primary {
-        background-color: #1F2937 !important;
-        border: 1px solid #374151 !important;
-        color: #F3F4F6 !important;
+        background-color: var(--ti-panel2, #1F2937) !important;
+        border: 1px solid var(--ti-line, #374151) !important;
+        color: var(--ti-text, #F3F4F6) !important;
         font-weight: 600 !important;
         text-transform: capitalize !important;
         border-radius: 8px !important;
@@ -1424,13 +1424,13 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         box-shadow: none !important;
     }
     .fc-button-primary:hover {
-        background-color: #374151 !important;
-        border-color: #4B5563 !important;
+        background-color: var(--ti-line, #374151) !important;
+        border-color: var(--ti-line2, #4B5563) !important;
     }
     .fc-button-primary:not(:disabled).fc-button-active, 
     .fc-button-primary:not(:disabled):active {
-        background-color: #2563EB !important;
-        border-color: #3B82F6 !important;
+        background-color: var(--ti-blue, #2563EB) !important;
+        border-color: var(--ti-blue, #3B82F6) !important;
         color: #FFFFFF !important;
     }
     .fc-day-today {
@@ -1451,7 +1451,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         font-size: 0.85rem !important;
     }
     .fc-theme-standard .fc-list-day-cushion {
-        background-color: #1F2937 !important;
+        background-color: var(--ti-panel2, #1F2937) !important;
     }
 
     /* Futuristic Tech Art Studio Modal Keyframe Animations */

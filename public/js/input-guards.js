@@ -128,8 +128,8 @@ var InputGuards = (function () {
     var style = document.createElement('style');
     style.id = 'poli-input-guards-css';
     style.textContent =
-      '.poli-err-card{background:#451a1a;border-left:4px solid #ef4444;color:#fca5a5;padding:0.75rem 1rem;border-radius:6px;margin-bottom:1rem;font-size:0.95rem;}' +
-      '.poli-warn-card{background:#453a1a;border-left:4px solid #f59e0b;color:#fcd34d;padding:0.75rem 1rem;border-radius:6px;margin-bottom:1rem;font-size:0.95rem;}';
+      '.poli-err-card{background:var(--ti-alert-deep, #451a1a);border-left:4px solid var(--ti-alert, #ef4444);color:var(--ti-alert-ink, #fca5a5);padding:0.75rem 1rem;border-radius:6px;margin-bottom:1rem;font-size:0.95rem;}' +
+      '.poli-warn-card{background:var(--ti-gold-deep, #453a1a);border-left:4px solid var(--ti-gold, #f59e0b);color:var(--ti-gold-ink, #fcd34d);padding:0.75rem 1rem;border-radius:6px;margin-bottom:1rem;font-size:0.95rem;}';
     document.head.appendChild(style);
   }
 

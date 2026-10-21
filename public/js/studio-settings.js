@@ -207,7 +207,7 @@
       el.innerHTML = '';
       Object.keys(section).forEach(function (key) {
         var wrap = document.createElement('label');
-        wrap.style.cssText = 'display:flex;flex-direction:column;gap:3px;font-size:0.72rem;color:#9CA3AF;';
+        wrap.style.cssText = 'display:flex;flex-direction:column;gap:3px;font-size:0.72rem;color:var(--ti-muted, #9CA3AF);';
         var span = document.createElement('span');
         span.textContent = label(key);
         var input = document.createElement('input');
@@ -217,8 +217,8 @@
         input.value = section[key];
         input.dataset.settingsGroup = pair[1];
         input.dataset.settingsKey = key;
-        input.style.cssText = 'padding:6px 8px;background:#0F172A;border:1px solid #374151;' +
-          'border-radius:6px;color:#F9FAFB;font-size:0.85rem;width:100%;box-sizing:border-box;';
+        input.style.cssText = 'padding:6px 8px;background:var(--ti-bg2, #0F172A);border:1px solid var(--ti-line, #374151);' +
+          'border-radius:6px;color:var(--ti-text, #F9FAFB);font-size:0.85rem;width:100%;box-sizing:border-box;';
         wrap.appendChild(span);
         wrap.appendChild(input);
         el.appendChild(wrap);
@@ -326,8 +326,8 @@
     if (!form) return;
     var b = document.createElement('div');
     b.id = id;
-    b.style.cssText = 'padding:10px 12px;background:#78350F;border:1px solid #B45309;' +
-      'border-radius:8px;color:#FDE68A;font-size:0.8rem;line-height:1.45;';
+    b.style.cssText = 'padding:10px 12px;background:var(--ti-bronze-deep, #78350F);border:1px solid var(--ti-bronze, #B45309);' +
+      'border-radius:8px;color:var(--ti-gold-ink, #FDE68A);font-size:0.8rem;line-height:1.45;';
     b.textContent = 'These are example figures so the tools have something to work with. ' +
       'They are not a recommendation about what to charge. Set your own rates and save, ' +
       'and every quote, invoice and estimate in the CRM will use them.';

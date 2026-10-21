@@ -245,7 +245,7 @@ function getLStarFromHex(hex) {
   if (window.hexToRgb && window.rgbToLab) {
     const rgb = window.hexToRgb(hex);
     const lab = window.rgbToLab(rgb.r, rgb.g, rgb.b);
-    return Math.round(lab.L);
+    return Math.round(lab.l);
   }
   let c = hex.replace('#', '');
   if (c.length === 3) c = c.split('').map(x => x + x).join('');
@@ -927,6 +927,7 @@ function runTargetSolver() {
       // Scale to 5ml default
       const scale = window.scaleFormulaMeasurements ? window.scaleFormulaMeasurements(result.bestMix, 5, 'ml') : null;
 
+      window.__lastTargetSolve = { targetHex, availableInks };
       displayTargetResults(targetHex, result, scale);
     } finally {
       if (DOM.solveTargetBtn) {
@@ -946,8 +947,8 @@ function displayTargetResults(targetHex, result, scale) {
 
   if (DOM.targetOriginalSwatch) {
     DOM.targetOriginalSwatch.style.backgroundColor = targetHex;
-    DOM.targetOriginalSwatch.title = `Target: ${targetHex.toUpperCase()} • L* ${targetLStar}`;
-    DOM.targetOriginalSwatch.setAttribute('aria-label', `Target Goal Swatch: ${targetHex.toUpperCase()}, L* ${targetLStar}`);
+    DOM.targetOriginalSwatch.title = window.t('live.swatchTarget', { hex: targetHex.toUpperCase(), l: targetLStar });
+    DOM.targetOriginalSwatch.setAttribute('aria-label', window.t('live.swatchTargetAria', { hex: targetHex.toUpperCase(), l: targetLStar }));
   }
   if (DOM.targetOriginalHexText) {
     DOM.targetOriginalHexText.textContent = targetHex.toUpperCase();
@@ -958,8 +959,8 @@ function displayTargetResults(targetHex, result, scale) {
 
   if (DOM.targetResultSwatch) {
     DOM.targetResultSwatch.style.backgroundColor = result.predictedHex;
-    DOM.targetResultSwatch.title = `Predicted Mix: ${result.predictedHex.toUpperCase()} • L* ${predLStar}`;
-    DOM.targetResultSwatch.setAttribute('aria-label', `Predicted Ink Match: ${result.predictedHex.toUpperCase()}, L* ${predLStar}`);
+    DOM.targetResultSwatch.title = window.t('live.swatchPred', { hex: result.predictedHex.toUpperCase(), l: predLStar });
+    DOM.targetResultSwatch.setAttribute('aria-label', window.t('live.swatchPredAria', { hex: result.predictedHex.toUpperCase(), l: predLStar }));
     // Trigger CSS pulse animation via animate-pulse class with clean reset
     DOM.targetResultSwatch.classList.remove('animate-pulse', 'swatch-pulse');
     void DOM.targetResultSwatch.offsetWidth; // Force reflow to reset animation
@@ -980,7 +981,7 @@ function displayTargetResults(targetHex, result, scale) {
       ? `<span class="target-de00-badge ${rating ? rating.badgeClass : ''}">ΔE₀₀: <strong>${result.deltaE00}</strong></span>`
       : '';
     const gamutBadge = result.gamut
-      ? `<span class="target-gamut-badge ${result.gamut.inGamut ? 'gamut-in' : 'gamut-out'}">${result.gamut.inGamut ? '✓ In Gamut' : '⚠️ Gamut Boundary Shift'}</span>`
+      ? `<span class="target-gamut-badge ${result.gamut.inGamut ? 'gamut-in' : 'gamut-out'}">${result.gamut.inGamut ? window.t('live.gamutIn') : window.t('live.gamutOut')}</span>`
       : '';
     DOM.targetMatchQuality.innerHTML = `
       <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
@@ -994,7 +995,7 @@ function displayTargetResults(targetHex, result, scale) {
     DOM.targetHonestAssessment.textContent = result.honestAssessment || '';
   }
   if (DOM.targetRatioString) {
-    DOM.targetRatioString.textContent = `Ratio: ${result.ratioString}`;
+    DOM.targetRatioString.textContent = window.t('live.ratioLine', { ratio: result.ratioString });
   }
 
   if (DOM.targetMeasurementsBody && scale) {
@@ -1014,9 +1015,9 @@ function displayTargetResults(targetHex, result, scale) {
           <td><strong>${m.shadeName}</strong></td>
           <td><span class="ink-mixer__tbl-brand">${m.brand}</span></td>
           <td><strong>${m.parts}</strong> <span style="font-size: 0.8rem; color: var(--text-tertiary);">(${m.percentage}%)</span></td>
-          <td>${capDrops} drops (${capMl} ml)</td>
-          <td>${mix5Drops} drops (${mix5Ml} ml)</td>
-          <td>${bottleDrops} drops (${bottleMl} ml)</td>
+          <td>${window.t('live.nDropsMl', { n: capDrops, ml: capMl })}</td>
+          <td>${window.t('live.nDropsMl', { n: mix5Drops, ml: mix5Ml })}</td>
+          <td>${window.t('live.nDropsMl', { n: bottleDrops, ml: bottleMl })}</td>
         </tr>
       `;
     }).join('');
@@ -1202,6 +1203,57 @@ function initGrayWashSeries() {
   updateCustomWash();
 }
 
+function _tl(k, p) { return typeof window.t === 'function' ? window.t(k, p) : k; }
+
+function getLocalizedSysName(key) {
+  if (key === 'system_4cap' || key === '4cap') return _tl('grayWash.system4capName');
+  if (key === 'system_3cap' || key === '3cap') return _tl('grayWash.system3capName');
+  if (key === 'system_5cap' || key === '5cap') return _tl('grayWash.system5capName');
+  return GRAY_WASH_SYSTEMS[key]?.name || 'Gray Wash';
+}
+
+function getLocalizedContainerName(key) {
+  if (key === 'caps_large' || key === 'cap16') return _tl('grayWash.containerCap16');
+  if (key === 'caps_medium' || key === 'cap12') return _tl('grayWash.containerCap12');
+  if (key === 'caps_small' || key === 'cap9') return _tl('grayWash.containerCap9');
+  if (key === 'bottle_1oz') return _tl('grayWash.containerBottle1oz');
+  if (key === 'bottle_2oz') return _tl('grayWash.containerBottle2oz');
+  if (key === 'bottle_4oz') return _tl('grayWash.containerBottle4oz');
+  return CONTAINER_SIZES[key]?.name || 'Cap';
+}
+
+function getLocalizedDiluentName(key) {
+  if (key === 'balanced_blend' || key === 'water_witch') return _tl('grayWash.balancedBlendName');
+  if (key === 'distilled') return _tl('grayWash.pureDistilledName');
+  if (key === 'witch_hazel') return _tl('grayWash.witchHazelName');
+  if (key === 'glycerin') return _tl('grayWash.glycerinDilutionName');
+  return DILUENT_FORMULATIONS[key]?.name || 'Diluent';
+}
+
+function getLocalizedComponentName(name) {
+  const l = (name || '').toLowerCase();
+  if (l.includes('distilled')) return _tl('grayWash.distilledWaterName');
+  if (l.includes('witch hazel')) return _tl('grayWash.witchHazelName');
+  if (l.includes('glycerin')) return _tl('grayWash.glycerinName');
+  return name;
+}
+
+function getLocalizedCapName(capIndex, sKey) {
+  if (sKey === 'system_4cap' || sKey === '4cap') {
+    const keys = ['grayWash.whisperWash', 'grayWash.lightWash', 'grayWash.midToneWash', 'grayWash.solidBlack'];
+    return _tl(keys[capIndex] || `Cap ${capIndex + 1}`);
+  }
+  if (sKey === 'system_3cap' || sKey === '3cap') {
+    const keys = ['grayWash.cap3LightWash', 'grayWash.cap3MediumWash', 'grayWash.cap3SolidBlack'];
+    return _tl(keys[capIndex] || `Cap ${capIndex + 1}`);
+  }
+  if (sKey === 'system_5cap' || sKey === '5cap') {
+    const keys = ['grayWash.cap5MicroTone', 'grayWash.cap5LightWash', 'grayWash.cap5MidWash', 'grayWash.cap5DarkWash', 'grayWash.cap5SolidBlack'];
+    return _tl(keys[capIndex] || `Cap ${capIndex + 1}`);
+  }
+  return `Cap ${capIndex + 1}`;
+}
+
 function renderGrayWashLadder() {
   const grid = document.getElementById('washLadderGrid');
   if (!grid) return;
@@ -1220,54 +1272,6 @@ function renderGrayWashLadder() {
 
   const _t = (k, p) => (typeof window.t === 'function' ? window.t(k, p) : k);
 
-  function getLocalizedSysName(key) {
-    if (key === 'system_4cap' || key === '4cap') return _t('grayWash.system4capName');
-    if (key === 'system_3cap' || key === '3cap') return _t('grayWash.system3capName');
-    if (key === 'system_5cap' || key === '5cap') return _t('grayWash.system5capName');
-    return GRAY_WASH_SYSTEMS[key]?.name || 'Gray Wash';
-  }
-
-  function getLocalizedContainerName(key) {
-    if (key === 'caps_large' || key === 'cap16') return _t('grayWash.containerCap16');
-    if (key === 'caps_medium' || key === 'cap12') return _t('grayWash.containerCap12');
-    if (key === 'caps_small' || key === 'cap9') return _t('grayWash.containerCap9');
-    if (key === 'bottle_1oz') return _t('grayWash.containerBottle1oz');
-    if (key === 'bottle_2oz') return _t('grayWash.containerBottle2oz');
-    if (key === 'bottle_4oz') return _t('grayWash.containerBottle4oz');
-    return CONTAINER_SIZES[key]?.name || 'Cap';
-  }
-
-  function getLocalizedDiluentName(key) {
-    if (key === 'balanced_blend' || key === 'water_witch') return _t('grayWash.balancedBlendName');
-    if (key === 'distilled') return _t('grayWash.pureDistilledName');
-    if (key === 'witch_hazel') return _t('grayWash.witchHazelName');
-    if (key === 'glycerin') return _t('grayWash.glycerinDilutionName');
-    return DILUENT_FORMULATIONS[key]?.name || 'Diluent';
-  }
-
-  function getLocalizedComponentName(name) {
-    const l = (name || '').toLowerCase();
-    if (l.includes('distilled')) return _t('grayWash.distilledWaterName');
-    if (l.includes('witch hazel')) return _t('grayWash.witchHazelName');
-    if (l.includes('glycerin')) return _t('grayWash.glycerinName');
-    return name;
-  }
-
-  function getLocalizedCapName(capIndex, sKey) {
-    if (sKey === 'system_4cap' || sKey === '4cap') {
-      const keys = ['grayWash.whisperWash', 'grayWash.lightWash', 'grayWash.midToneWash', 'grayWash.solidBlack'];
-      return _t(keys[capIndex] || `Cap ${capIndex + 1}`);
-    }
-    if (sKey === 'system_3cap' || sKey === '3cap') {
-      const keys = ['grayWash.cap3LightWash', 'grayWash.cap3MediumWash', 'grayWash.cap3SolidBlack'];
-      return _t(keys[capIndex] || `Cap ${capIndex + 1}`);
-    }
-    if (sKey === 'system_5cap' || sKey === '5cap') {
-      const keys = ['grayWash.cap5MicroTone', 'grayWash.cap5LightWash', 'grayWash.cap5MidWash', 'grayWash.cap5DarkWash', 'grayWash.cap5SolidBlack'];
-      return _t(keys[capIndex] || `Cap ${capIndex + 1}`);
-    }
-    return `Cap ${capIndex + 1}`;
-  }
 
   const localizedSysName = getLocalizedSysName(sysKey);
   const localizedContainerName = getLocalizedContainerName(capSizeKey);
@@ -1900,8 +1904,8 @@ function renderCapTraySheet() {
     const container = CONTAINER_SIZES[capSizeKey] || CONTAINER_SIZES['caps_large'];
     const diluent = DILUENT_FORMULATIONS[diluentKey] || DILUENT_FORMULATIONS['balanced_blend'];
 
-    title = `Gray Wash Station Tray: ${system.name}`;
-    subtitle = `Container: ${container.name} (${container.ml} ml) • Diluent: ${diluent.name}`;
+    title = window.t('live.trayTitleGray', { name: getLocalizedSysName(sysKey) });
+    subtitle = window.t('live.traySubtitleGray', { container: getLocalizedContainerName(capSizeKey), volume: container.ml, diluent: getLocalizedDiluentName(diluentKey) });
 
     wells = system.caps.map((cap, idx) => {
       const blackFraction = cap.pct / 100;
@@ -1909,9 +1913,9 @@ function renderCapTraySheet() {
       const diluentDrops = Math.max(0, container.drops - exactDrops);
       return {
         num: idx + 1,
-        title: cap.name,
+        title: getLocalizedCapName(idx, sysKey),
         density: `${cap.pct}% Density`,
-        recipe: `${exactDrops} drops Black + ${diluentDrops} drops Diluent`,
+        recipe: window.t('grayWash.customRecipeLine', { blackDrops: exactDrops, blackUnit: window.t('grayWash.dropsBlack'), diluentDrops: diluentDrops, diluentUnit: window.t('grayWash.dropsDiluent') }),
         note: 'Dispense in order'
       };
     });
@@ -1920,28 +1924,28 @@ function renderCapTraySheet() {
       const nextIdx = wells.length + 1;
       wells.push({
         num: nextIdx,
-        title: `Well #${nextIdx} (Water / Rinse)`,
+        title: window.t('capTray.waterRinseWell', { index: nextIdx }),
         density: 'Rinse / Diluent',
-        recipe: `${container.drops} drops Pure Distilled Water`,
+        recipe: window.t('live.trayRecipeWater', { n: container.drops }),
         note: 'Needle Rinse Well'
       });
     }
   } else {
     // Mixer source
     if (currentMixResult && currentMixResult.colors.length > 0) {
-      title = `Color Mixer Tray: ${currentMixResult.colors.map(c => c.shadeName || c.color).join(' & ')}`;
-      subtitle = `Ratio: ${currentMixResult.ratioString} • Total Volume: ${currentMixResult.totalVolume} ${currentMixResult.unit}`;
+      title = window.t('capTray.mixerTrayTitle', { colors: currentMixResult.colors.map(c => c.shadeName || c.color).join(' & ') });
+      subtitle = window.t('live.trayRatioSubtitle', { ratio: currentMixResult.ratioString, volume: currentMixResult.totalVolume, unit: currentMixResult.unit });
       wells = currentMixResult.colors.map((c, idx) => ({
         num: idx + 1,
         title: `${c.shadeName || c.color}`,
         density: `${c.percentage || Math.round((c.parts / currentMixResult.scale.totalParts) * 100)}% of Mix`,
-        recipe: `${c.drops || c.parts} drops (${c.brand || 'Standard'})`,
-        note: c.batchNumber ? `Lot #${c.batchNumber}` : 'Base Ink'
+        recipe: window.t('live.trayDropsBrand', { n: c.drops || c.parts, brand: c.brand || 'Standard' }),
+        note: c.batchNumber ? window.t('live.lotShort', { n: c.batchNumber }) : 'Base Ink'
       }));
 
       wells.push({
         num: wells.length + 1,
-        title: 'Mixed Blend Result',
+        title: window.t('capTray.mixedBlendResult'),
         density: '100% Blended Recipe',
         recipe: `${currentMixResult.ratioString}`,
         note: 'Final Homogenized Blend'
@@ -1951,21 +1955,21 @@ function renderCapTraySheet() {
         const nextIdx = wells.length + 1;
         wells.push({
           num: nextIdx,
-          title: `Well #${nextIdx} (Rinse / Diluent)`,
+          title: window.t('capTray.rinseDiluentWell', { index: nextIdx }),
           density: 'Blank Station Well',
-          recipe: 'Rinse or Carrier',
+          recipe: window.t('live.trayRecipeRinse'),
           note: 'Auxiliary'
         });
       }
     } else {
-      title = 'Custom Artist Station Tray';
-      subtitle = 'Configure wells in Color Mixer or Gray Wash Ladder';
+      title = window.t('capTray.customStationTitle');
+      subtitle = window.t('capTray.configureWellsSubtitle');
       for (let i = 1; i <= maxWells; i++) {
         wells.push({
           num: i,
-          title: `Well #${i}`,
+          title: window.t('capTray.customWell', { index: i }),
           density: 'Custom Ink / Wash',
-          recipe: 'Enter drops manual',
+          recipe: window.t('live.trayRecipeCustom'),
           note: 'Record Lot #'
         });
       }
@@ -2002,8 +2006,8 @@ function renderCapTraySheet() {
       </div>
 
       <div class="tray-sheet-footer">
-        <span>Poli International Professional Studio Tools • High Contrast Print Sheet</span>
-        <span>Dispense sequentially from lightest tone to darkest shade</span>
+        <span>${window.t('live.trayFooterBrand')}</span>
+        <span>${window.t('live.trayFooterNote')}</span>
       </div>
     </div>
   `;
@@ -2419,6 +2423,11 @@ if (document.readyState === 'loading') {
 
 window.addEventListener('languageChanged', () => {
   updateColorRowLabels();
+  if (window.__lastTargetSolve && DOM.targetSolverResults && DOM.targetSolverResults.style.display !== 'none' && typeof window.solveMixForTarget === 'function') {
+    const s = window.__lastTargetSolve;
+    const r = window.solveMixForTarget(s.targetHex, s.availableInks);
+    if (r && r.success) displayTargetResults(s.targetHex, r, window.scaleFormulaMeasurements ? window.scaleFormulaMeasurements(r.bestMix, 5, 'ml') : null);
+  }
   if (currentMixResult) {
     calculateMix();
   }

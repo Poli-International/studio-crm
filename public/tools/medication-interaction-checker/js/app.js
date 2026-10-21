@@ -875,6 +875,41 @@ const TRANSLATIONS = {
     "x.alert_brief_copied": "Brief copied to clipboard!",
     "x.alert_select_medication_first": "Please select at least one medication first.",
     "x.alert_message_copied": "Message copied to clipboard!",
+    "x.alert_copy_failed": "Copy failed. Please select the text and copy it manually.",
+    "x.cp_copied": "✅ Copied!",
+    "x.cp_copied_clipboard": "✅ Copied to Clipboard!",
+    "x.cp_copy_draft": "📋 Copy Draft Message",
+    "x.cp_checklist_title": "ARTIST SAFETY CHECKLIST:",
+    "x.cp_brief_title": "=== TATTOO & PIERCING MEDICATION CONSULTATION BRIEF ===",
+    "x.cp_date": "Date: {date}",
+    "x.cp_selected_meds": "Selected Medications ({count}):",
+    "x.cp_risk": "[Risk: {sev}]",
+    "x.cp_risks": "Risks: {list}",
+    "x.cp_tattoo": "Tattoo: {text}",
+    "x.cp_piercing": "Piercing: {text}",
+    "x.cp_action": "Action: {text}",
+    "x.cp_generated": "Generated via Poli International Medication Reference.",
+    "x.cp_link_copied": "📲 Shareable intake deep link copied to clipboard!",
+    "x.cp_default_doctor": "Dr. [Doctor Name]",
+    "x.cp_default_patient": "[Your Name]",
+    "x.cp_default_proc": "[Tattoo / Piercing Procedure]",
+    "x.cp_default_date": "[Appointment Date]",
+    "x.cp_default_meds": "• [List of medications currently taking]",
+    "x.cp_eg_brand": "(e.g., {brand})",
+    "x.cp_default_risk": "Requires procedural awareness and precautions.",
+    "x.cp_letter_dear": "Dear {name},",
+    "x.cp_letter_intro": "I hope this message finds you well.",
+    "x.cp_letter_reach": "I am reaching out to inform you that I have an upcoming {proc} scheduled for {date}.",
+    "x.cp_letter_because": "Because body modification procedures involve localized skin puncture and mild trauma, I want to ensure my current medication routine is safe. I am currently taking the following medication(s):",
+    "x.cp_letter_advise": "Could you please advise if:",
+    "x.cp_letter_q1": "1. It is safe for me to proceed with this procedure while taking these medications.",
+    "x.cp_letter_q2": "2. I should temporarily adjust or pause any of these medications prior to or after the appointment.",
+    "x.cp_letter_q3": "3. You have any specific precautions or medical guidance I should share with my tattoo artist or piercer.",
+    "x.cp_letter_thanks": "Thank you very much for your time and guidance.",
+    "x.cp_letter_sincerely": "Sincerely,",
+    "x.cp_mail_subject": "Medical Inquiry regarding upcoming {proc} procedure",
+    "x.cp_default_proc_short": "Tattoo/Piercing",
+    "x.cp_default_doctor_short": "Doctor",
     "x.alert_invalid_appointment": "Please choose a valid appointment date and time.",
     "x.alert_notif_unsupported": "Browser notifications are not supported in your browser.",
     "x.alert_notif_blocked": "Browser notifications are currently blocked in your browser settings. Enable permissions in your browser URL bar.",
@@ -1161,6 +1196,41 @@ const TRANSLATIONS = {
     "x.alert_brief_copied": "Résumé copié dans le presse-papiers !",
     "x.alert_select_medication_first": "Veuillez d'abord sélectionner au moins un médicament.",
     "x.alert_message_copied": "Message copié dans le presse-papiers !",
+    "x.alert_copy_failed": "La copie a échoué. Veuillez sélectionner le texte et le copier manuellement.",
+    "x.cp_copied": "✅ Copié !",
+    "x.cp_copied_clipboard": "✅ Copié dans le presse-papiers !",
+    "x.cp_copy_draft": "📋 Copier le brouillon du message",
+    "x.cp_checklist_title": "LISTE DE CONTRÔLE DE SÉCURITÉ POUR L'ARTISTE :",
+    "x.cp_brief_title": "=== RÉSUMÉ DE CONSULTATION SUR LES MÉDICAMENTS POUR TATOUAGE ET PIERCING ===",
+    "x.cp_date": "Date : {date}",
+    "x.cp_selected_meds": "Médicaments sélectionnés ({count}) :",
+    "x.cp_risk": "[Risque : {sev}]",
+    "x.cp_risks": "Risques : {list}",
+    "x.cp_tattoo": "Tatouage : {text}",
+    "x.cp_piercing": "Piercing : {text}",
+    "x.cp_action": "Action : {text}",
+    "x.cp_generated": "Généré via la référence des médicaments de Poli International.",
+    "x.cp_link_copied": "📲 Lien d'accueil partageable copié dans le presse-papiers !",
+    "x.cp_default_doctor": "Dr [Nom du médecin]",
+    "x.cp_default_patient": "[Votre nom]",
+    "x.cp_default_proc": "[Tatouage / Piercing]",
+    "x.cp_default_date": "[Date du rendez-vous]",
+    "x.cp_default_meds": "• [Liste des médicaments actuellement pris]",
+    "x.cp_eg_brand": "(p. ex. {brand})",
+    "x.cp_default_risk": "Nécessite vigilance et précautions lors de l'intervention.",
+    "x.cp_letter_dear": "Bonjour {name},",
+    "x.cp_letter_intro": "J'espère que ce message vous trouve en bonne santé.",
+    "x.cp_letter_reach": "Je vous écris pour vous informer que j'ai prévu {proc} le {date}.",
+    "x.cp_letter_because": "Comme les procédures de modification corporelle impliquent une perforation cutanée localisée et un traumatisme léger, je souhaite m'assurer que mon traitement actuel est compatible. Je prends actuellement le ou les médicaments suivants :",
+    "x.cp_letter_advise": "Pourriez-vous m'indiquer si :",
+    "x.cp_letter_q1": "1. Il est sans danger pour moi de réaliser cette intervention tout en prenant ces médicaments.",
+    "x.cp_letter_q2": "2. Je dois ajuster ou suspendre temporairement l'un de ces médicaments avant ou après le rendez-vous.",
+    "x.cp_letter_q3": "3. Vous avez des précautions particulières ou des conseils médicaux à transmettre à mon tatoueur ou perceur.",
+    "x.cp_letter_thanks": "Je vous remercie beaucoup pour votre temps et vos conseils.",
+    "x.cp_letter_sincerely": "Cordialement,",
+    "x.cp_mail_subject": "Demande médicale concernant l'intervention à venir : {proc}",
+    "x.cp_default_proc_short": "Tatouage/Piercing",
+    "x.cp_default_doctor_short": "Docteur",
     "x.alert_invalid_appointment": "Veuillez choisir une date et une heure de rendez-vous valides.",
     "x.alert_notif_unsupported": "Votre navigateur ne prend pas en charge les notifications du navigateur.",
     "x.alert_notif_blocked": "Les notifications du navigateur sont actuellement bloquées dans les paramètres de votre navigateur. Autorisez-les dans la barre d'adresse de votre navigateur.",
@@ -1447,6 +1517,41 @@ const TRANSLATIONS = {
     "x.alert_brief_copied": "Riepilogo copiato negli appunti!",
     "x.alert_select_medication_first": "Seleziona prima almeno un farmaco.",
     "x.alert_message_copied": "Messaggio copiato negli appunti!",
+    "x.alert_copy_failed": "Copia non riuscita. Seleziona il testo e copialo manualmente.",
+    "x.cp_copied": "✅ Copiato!",
+    "x.cp_copied_clipboard": "✅ Copiato negli appunti!",
+    "x.cp_copy_draft": "📋 Copia la bozza del messaggio",
+    "x.cp_checklist_title": "CHECKLIST DI SICUREZZA PER L'ARTISTA:",
+    "x.cp_brief_title": "=== RIEPILOGO DI CONSULTAZIONE SUI FARMACI PER TATUAGGI E PIERCING ===",
+    "x.cp_date": "Data: {date}",
+    "x.cp_selected_meds": "Farmaci selezionati ({count}):",
+    "x.cp_risk": "[Rischio: {sev}]",
+    "x.cp_risks": "Rischi: {list}",
+    "x.cp_tattoo": "Tatuaggio: {text}",
+    "x.cp_piercing": "Piercing: {text}",
+    "x.cp_action": "Azione: {text}",
+    "x.cp_generated": "Generato tramite il riferimento sui farmaci di Poli International.",
+    "x.cp_link_copied": "📲 Link di accoglienza condivisibile copiato negli appunti!",
+    "x.cp_default_doctor": "Dott. [Nome del medico]",
+    "x.cp_default_patient": "[Il tuo nome]",
+    "x.cp_default_proc": "[Tatuaggio / Piercing]",
+    "x.cp_default_date": "[Data dell'appuntamento]",
+    "x.cp_default_meds": "• [Elenco dei farmaci attualmente assunti]",
+    "x.cp_eg_brand": "(ad es. {brand})",
+    "x.cp_default_risk": "Richiede attenzione e precauzioni durante la procedura.",
+    "x.cp_letter_dear": "Gentile {name},",
+    "x.cp_letter_intro": "Spero che questo messaggio la trovi bene.",
+    "x.cp_letter_reach": "Le scrivo per informarla che ho in programma {proc} il {date}.",
+    "x.cp_letter_because": "Poiché le procedure di modificazione corporea comportano una puntura cutanea localizzata e un lieve trauma, desidero assicurarmi che la mia terapia attuale sia sicura. Attualmente assumo i seguenti farmaci:",
+    "x.cp_letter_advise": "Potrebbe indicarmi se:",
+    "x.cp_letter_q1": "1. È sicuro per me sottopormi a questa procedura mentre assumo questi farmaci.",
+    "x.cp_letter_q2": "2. Devo modificare o sospendere temporaneamente uno qualsiasi di questi farmaci prima o dopo l'appuntamento.",
+    "x.cp_letter_q3": "3. Ha precauzioni specifiche o indicazioni mediche da comunicare al mio tatuatore o piercer.",
+    "x.cp_letter_thanks": "La ringrazio molto per il tempo e i consigli.",
+    "x.cp_letter_sincerely": "Cordiali saluti,",
+    "x.cp_mail_subject": "Richiesta medica relativa alla procedura in programma: {proc}",
+    "x.cp_default_proc_short": "Tatuaggio/Piercing",
+    "x.cp_default_doctor_short": "Dottore",
     "x.alert_invalid_appointment": "Scegli una data e un orario validi per l'appuntamento.",
     "x.alert_notif_unsupported": "Il tuo browser non supporta le notifiche del browser.",
     "x.alert_notif_blocked": "Le notifiche del browser sono attualmente bloccate nelle impostazioni del browser. Attiva le autorizzazioni nella barra degli indirizzi del browser.",
@@ -1733,6 +1838,41 @@ const TRANSLATIONS = {
     "x.alert_brief_copied": "¡Resumen copiado al portapapeles!",
     "x.alert_select_medication_first": "Primero selecciona al menos un medicamento.",
     "x.alert_message_copied": "¡Mensaje copiado al portapapeles!",
+    "x.alert_copy_failed": "La copia falló. Selecciona el texto y cópialo manualmente.",
+    "x.cp_copied": "✅ ¡Copiado!",
+    "x.cp_copied_clipboard": "✅ ¡Copiado al portapapeles!",
+    "x.cp_copy_draft": "📋 Copiar el borrador del mensaje",
+    "x.cp_checklist_title": "LISTA DE VERIFICACIÓN DE SEGURIDAD PARA EL ARTISTA:",
+    "x.cp_brief_title": "=== RESUMEN DE CONSULTA SOBRE MEDICAMENTOS PARA TATUAJES Y PIERCINGS ===",
+    "x.cp_date": "Fecha: {date}",
+    "x.cp_selected_meds": "Medicamentos seleccionados ({count}):",
+    "x.cp_risk": "[Riesgo: {sev}]",
+    "x.cp_risks": "Riesgos: {list}",
+    "x.cp_tattoo": "Tatuaje: {text}",
+    "x.cp_piercing": "Piercing: {text}",
+    "x.cp_action": "Acción: {text}",
+    "x.cp_generated": "Generado mediante la referencia de medicamentos de Poli International.",
+    "x.cp_link_copied": "📲 ¡Enlace de admisión compartible copiado al portapapeles!",
+    "x.cp_default_doctor": "Dr. [Nombre del médico]",
+    "x.cp_default_patient": "[Tu nombre]",
+    "x.cp_default_proc": "[Tatuaje / Piercing]",
+    "x.cp_default_date": "[Fecha de la cita]",
+    "x.cp_default_meds": "• [Lista de medicamentos que toma actualmente]",
+    "x.cp_eg_brand": "(p. ej., {brand})",
+    "x.cp_default_risk": "Requiere atención y precauciones durante el procedimiento.",
+    "x.cp_letter_dear": "Estimado/a {name}:",
+    "x.cp_letter_intro": "Espero que este mensaje le encuentre bien.",
+    "x.cp_letter_reach": "Le escribo para informarle de que tengo programado {proc} el {date}.",
+    "x.cp_letter_because": "Dado que los procedimientos de modificación corporal implican una punción cutánea localizada y un traumatismo leve, quiero asegurarme de que mi medicación actual sea segura. Actualmente tomo los siguientes medicamentos:",
+    "x.cp_letter_advise": "¿Podría indicarme si:",
+    "x.cp_letter_q1": "1. Es seguro para mí realizar este procedimiento mientras tomo estos medicamentos.",
+    "x.cp_letter_q2": "2. Debo ajustar o suspender temporalmente alguno de estos medicamentos antes o después de la cita.",
+    "x.cp_letter_q3": "3. Tiene alguna precaución específica u orientación médica que deba compartir con mi tatuador o piercer.",
+    "x.cp_letter_thanks": "Muchas gracias por su tiempo y orientación.",
+    "x.cp_letter_sincerely": "Atentamente,",
+    "x.cp_mail_subject": "Consulta médica sobre el procedimiento próximo: {proc}",
+    "x.cp_default_proc_short": "Tatuaje/Piercing",
+    "x.cp_default_doctor_short": "Doctor",
     "x.alert_invalid_appointment": "Elige una fecha y hora de cita válidas.",
     "x.alert_notif_unsupported": "Tu navegador no admite notificaciones del navegador.",
     "x.alert_notif_blocked": "Las notificaciones del navegador están bloqueadas en la configuración de tu navegador. Activa los permisos en la barra de direcciones del navegador.",
@@ -2019,6 +2159,41 @@ const TRANSLATIONS = {
     "x.alert_brief_copied": "Zusammenfassung in die Zwischenablage kopiert!",
     "x.alert_select_medication_first": "Bitte wählen Sie zuerst mindestens ein Medikament aus.",
     "x.alert_message_copied": "Nachricht in die Zwischenablage kopiert!",
+    "x.alert_copy_failed": "Kopieren fehlgeschlagen. Bitte markieren Sie den Text und kopieren Sie ihn manuell.",
+    "x.cp_copied": "✅ Kopiert!",
+    "x.cp_copied_clipboard": "✅ In die Zwischenablage kopiert!",
+    "x.cp_copy_draft": "📋 Nachrichtenentwurf kopieren",
+    "x.cp_checklist_title": "SICHERHEITS-CHECKLISTE FÜR DEN KÜNSTLER:",
+    "x.cp_brief_title": "=== MEDIKAMENTEN-BERATUNGSZUSAMMENFASSUNG FÜR TATTOO UND PIERCING ===",
+    "x.cp_date": "Datum: {date}",
+    "x.cp_selected_meds": "Ausgewählte Medikamente ({count}):",
+    "x.cp_risk": "[Risiko: {sev}]",
+    "x.cp_risks": "Risiken: {list}",
+    "x.cp_tattoo": "Tattoo: {text}",
+    "x.cp_piercing": "Piercing: {text}",
+    "x.cp_action": "Maßnahme: {text}",
+    "x.cp_generated": "Erstellt über die Medikamentenreferenz von Poli International.",
+    "x.cp_link_copied": "📲 Teilbarer Aufnahme-Link in die Zwischenablage kopiert!",
+    "x.cp_default_doctor": "Dr. [Name des Arztes]",
+    "x.cp_default_patient": "[Ihr Name]",
+    "x.cp_default_proc": "[Tattoo / Piercing-Eingriff]",
+    "x.cp_default_date": "[Termin]",
+    "x.cp_default_meds": "• [Liste der aktuell eingenommenen Medikamente]",
+    "x.cp_eg_brand": "(z. B. {brand})",
+    "x.cp_default_risk": "Erfordert Aufmerksamkeit und Vorsichtsmaßnahmen beim Eingriff.",
+    "x.cp_letter_dear": "Sehr geehrte/r {name},",
+    "x.cp_letter_intro": "Ich hoffe, diese Nachricht erreicht Sie wohlauf.",
+    "x.cp_letter_reach": "Ich schreibe Ihnen, um Sie darüber zu informieren, dass für den {date} ein Termin für {proc} ansteht.",
+    "x.cp_letter_because": "Da Körpermodifikationen mit einer lokalen Hautperforation und leichten Verletzungen einhergehen, möchte ich sicherstellen, dass meine aktuelle Medikation unbedenklich ist. Ich nehme derzeit folgende Medikamente ein:",
+    "x.cp_letter_advise": "Könnten Sie mir bitte mitteilen, ob:",
+    "x.cp_letter_q1": "1. Es für mich unbedenklich ist, den Eingriff durchführen zu lassen, während ich diese Medikamente einnehme.",
+    "x.cp_letter_q2": "2. Ich eines dieser Medikamente vor oder nach dem Termin vorübergehend anpassen oder pausieren sollte.",
+    "x.cp_letter_q3": "3. Sie besondere Vorsichtsmaßnahmen oder ärztliche Hinweise haben, die ich meinem Tätowierer oder Piercer mitteilen sollte.",
+    "x.cp_letter_thanks": "Vielen Dank für Ihre Zeit und Ihre Hinweise.",
+    "x.cp_letter_sincerely": "Mit freundlichen Grüßen",
+    "x.cp_mail_subject": "Medizinische Anfrage zum bevorstehenden Eingriff: {proc}",
+    "x.cp_default_proc_short": "Tattoo/Piercing",
+    "x.cp_default_doctor_short": "Arzt",
     "x.alert_invalid_appointment": "Bitte wählen Sie ein gültiges Datum und eine gültige Uhrzeit für den Termin.",
     "x.alert_notif_unsupported": "Browser-Benachrichtigungen werden von Ihrem Browser nicht unterstützt.",
     "x.alert_notif_blocked": "Browser-Benachrichtigungen sind in Ihren Browsereinstellungen derzeit blockiert. Aktivieren Sie die Berechtigungen in der Adressleiste Ihres Browsers.",
@@ -2305,6 +2480,41 @@ const TRANSLATIONS = {
     "x.alert_brief_copied": "Samenvatting gekopieerd naar het klembord!",
     "x.alert_select_medication_first": "Selecteer eerst minstens één medicijn.",
     "x.alert_message_copied": "Bericht gekopieerd naar het klembord!",
+    "x.alert_copy_failed": "Kopiëren mislukt. Selecteer de tekst en kopieer deze handmatig.",
+    "x.cp_copied": "✅ Gekopieerd!",
+    "x.cp_copied_clipboard": "✅ Gekopieerd naar het klembord!",
+    "x.cp_copy_draft": "📋 Conceptbericht kopiëren",
+    "x.cp_checklist_title": "VEILIGHEIDSCHECKLIST VOOR DE ARTIEST:",
+    "x.cp_brief_title": "=== SAMENVATTING MEDICATIECONSULT VOOR TATOEAGE EN PIERCING ===",
+    "x.cp_date": "Datum: {date}",
+    "x.cp_selected_meds": "Geselecteerde medicijnen ({count}):",
+    "x.cp_risk": "[Risico: {sev}]",
+    "x.cp_risks": "Risico's: {list}",
+    "x.cp_tattoo": "Tatoeage: {text}",
+    "x.cp_piercing": "Piercing: {text}",
+    "x.cp_action": "Actie: {text}",
+    "x.cp_generated": "Gegenereerd via de medicatiereferentie van Poli International.",
+    "x.cp_link_copied": "📲 Deelbare intakelink gekopieerd naar het klembord!",
+    "x.cp_default_doctor": "Dr. [Naam van de arts]",
+    "x.cp_default_patient": "[Uw naam]",
+    "x.cp_default_proc": "[Tatoeage / Piercing]",
+    "x.cp_default_date": "[Afspraakdatum]",
+    "x.cp_default_meds": "• [Lijst van medicijnen die u momenteel gebruikt]",
+    "x.cp_eg_brand": "(bijv. {brand})",
+    "x.cp_default_risk": "Vereist aandacht en voorzorgsmaatregelen tijdens de ingreep.",
+    "x.cp_letter_dear": "Geachte {name},",
+    "x.cp_letter_intro": "Ik hoop dat het goed met u gaat.",
+    "x.cp_letter_reach": "Ik neem contact met u op om u te laten weten dat ik op {date} een afspraak heb voor {proc}.",
+    "x.cp_letter_because": "Omdat bodymodificatieprocedures een plaatselijke huidpunctie en lichte verwonding met zich meebrengen, wil ik er zeker van zijn dat mijn huidige medicatie veilig is. Ik gebruik momenteel de volgende medicijnen:",
+    "x.cp_letter_advise": "Kunt u mij laten weten of:",
+    "x.cp_letter_q1": "1. Het veilig is voor mij om deze ingreep te laten uitvoeren terwijl ik deze medicijnen gebruik.",
+    "x.cp_letter_q2": "2. Ik een van deze medicijnen tijdelijk moet aanpassen of onderbreken vóór of na de afspraak.",
+    "x.cp_letter_q3": "3. U specifieke voorzorgsmaatregelen of medisch advies heeft dat ik met mijn tatoeëerder of piercer moet delen.",
+    "x.cp_letter_thanks": "Hartelijk dank voor uw tijd en advies.",
+    "x.cp_letter_sincerely": "Met vriendelijke groet,",
+    "x.cp_mail_subject": "Medische vraag over de aanstaande ingreep: {proc}",
+    "x.cp_default_proc_short": "Tatoeage/Piercing",
+    "x.cp_default_doctor_short": "Arts",
     "x.alert_invalid_appointment": "Kies een geldige datum en tijd voor de afspraak.",
     "x.alert_notif_unsupported": "Je browser ondersteunt geen browsermeldingen.",
     "x.alert_notif_blocked": "Browsermeldingen zijn momenteel geblokkeerd in je browserinstellingen. Schakel de rechten in via de adresbalk van je browser.",
@@ -2591,6 +2801,41 @@ const TRANSLATIONS = {
     "x.alert_brief_copied": "Resumo copiado para a área de transferência!",
     "x.alert_select_medication_first": "Selecione primeiro pelo menos um medicamento.",
     "x.alert_message_copied": "Mensagem copiada para a área de transferência!",
+    "x.alert_copy_failed": "A cópia falhou. Selecione o texto e copie-o manualmente.",
+    "x.cp_copied": "✅ Copiado!",
+    "x.cp_copied_clipboard": "✅ Copiado para a área de transferência!",
+    "x.cp_copy_draft": "📋 Copiar o rascunho da mensagem",
+    "x.cp_checklist_title": "LISTA DE VERIFICAÇÃO DE SEGURANÇA PARA O ARTISTA:",
+    "x.cp_brief_title": "=== RESUMO DE CONSULTA SOBRE MEDICAMENTOS PARA TATUAGEM E PIERCING ===",
+    "x.cp_date": "Data: {date}",
+    "x.cp_selected_meds": "Medicamentos selecionados ({count}):",
+    "x.cp_risk": "[Risco: {sev}]",
+    "x.cp_risks": "Riscos: {list}",
+    "x.cp_tattoo": "Tatuagem: {text}",
+    "x.cp_piercing": "Piercing: {text}",
+    "x.cp_action": "Ação: {text}",
+    "x.cp_generated": "Gerado através da referência de medicamentos da Poli International.",
+    "x.cp_link_copied": "📲 Ligação de admissão partilhável copiada para a área de transferência!",
+    "x.cp_default_doctor": "Dr. [Nome do médico]",
+    "x.cp_default_patient": "[O seu nome]",
+    "x.cp_default_proc": "[Tatuagem / Piercing]",
+    "x.cp_default_date": "[Data da marcação]",
+    "x.cp_default_meds": "• [Lista dos medicamentos que toma atualmente]",
+    "x.cp_eg_brand": "(p. ex., {brand})",
+    "x.cp_default_risk": "Requer atenção e precauções durante o procedimento.",
+    "x.cp_letter_dear": "Caro/a {name},",
+    "x.cp_letter_intro": "Espero que esta mensagem o/a encontre bem.",
+    "x.cp_letter_reach": "Escrevo para o/a informar de que tenho agendado {proc} para {date}.",
+    "x.cp_letter_because": "Como os procedimentos de modificação corporal envolvem uma punção cutânea localizada e um trauma ligeiro, quero garantir que a minha medicação atual é segura. Atualmente tomo os seguintes medicamentos:",
+    "x.cp_letter_advise": "Poderia indicar-me se:",
+    "x.cp_letter_q1": "1. É seguro para mim realizar este procedimento enquanto tomo estes medicamentos.",
+    "x.cp_letter_q2": "2. Devo ajustar ou suspender temporariamente algum destes medicamentos antes ou depois da marcação.",
+    "x.cp_letter_q3": "3. Tem alguma precaução específica ou orientação médica que eu deva partilhar com o meu tatuador ou piercer.",
+    "x.cp_letter_thanks": "Muito obrigado/a pelo seu tempo e orientação.",
+    "x.cp_letter_sincerely": "Com os melhores cumprimentos,",
+    "x.cp_mail_subject": "Pedido médico sobre o procedimento agendado: {proc}",
+    "x.cp_default_proc_short": "Tatuagem/Piercing",
+    "x.cp_default_doctor_short": "Médico",
     "x.alert_invalid_appointment": "Escolha uma data e hora válidas para a consulta.",
     "x.alert_notif_unsupported": "O seu navegador não suporta notificações do navegador.",
     "x.alert_notif_blocked": "As notificações do navegador estão atualmente bloqueadas nas configurações do seu navegador. Ative as permissões na barra de endereço do navegador.",
@@ -2874,6 +3119,41 @@ const TRANSLATIONS = {
     "x.alert_brief_copied": "คัดลอกสรุปไปยังคลิปบอร์ดแล้ว!",
     "x.alert_select_medication_first": "กรุณาเลือกยาอย่างน้อยหนึ่งรายการก่อน",
     "x.alert_message_copied": "คัดลอกข้อความไปยังคลิปบอร์ดแล้ว!",
+    "x.alert_copy_failed": "คัดลอกไม่สำเร็จ โปรดเลือกข้อความแล้วคัดลอกด้วยตนเอง",
+    "x.cp_copied": "✅ คัดลอกแล้ว!",
+    "x.cp_copied_clipboard": "✅ คัดลอกไปยังคลิปบอร์ดแล้ว!",
+    "x.cp_copy_draft": "📋 คัดลอกร่างข้อความ",
+    "x.cp_checklist_title": "รายการตรวจสอบความปลอดภัยสำหรับช่างสัก/ช่างเจาะ:",
+    "x.cp_brief_title": "=== สรุปการปรึกษาเรื่องยาสำหรับการสักและการเจาะ ===",
+    "x.cp_date": "วันที่: {date}",
+    "x.cp_selected_meds": "ยาที่เลือก ({count}):",
+    "x.cp_risk": "[ความเสี่ยง: {sev}]",
+    "x.cp_risks": "ความเสี่ยง: {list}",
+    "x.cp_tattoo": "การสัก: {text}",
+    "x.cp_piercing": "การเจาะ: {text}",
+    "x.cp_action": "การดำเนินการ: {text}",
+    "x.cp_generated": "สร้างจากข้อมูลอ้างอิงเรื่องยาของ Poli International",
+    "x.cp_link_copied": "📲 คัดลอกลิงก์แบบฟอร์มรับเข้าที่แชร์ได้ไปยังคลิปบอร์ดแล้ว!",
+    "x.cp_default_doctor": "แพทย์ [ชื่อแพทย์]",
+    "x.cp_default_patient": "[ชื่อของคุณ]",
+    "x.cp_default_proc": "[การสัก / การเจาะ]",
+    "x.cp_default_date": "[วันนัดหมาย]",
+    "x.cp_default_meds": "• [รายการยาที่ใช้อยู่ในปัจจุบัน]",
+    "x.cp_eg_brand": "(เช่น {brand})",
+    "x.cp_default_risk": "ต้องระมัดระวังและเตรียมการป้องกันระหว่างหัตถการ",
+    "x.cp_letter_dear": "เรียน {name}",
+    "x.cp_letter_intro": "หวังว่าท่านสบายดี",
+    "x.cp_letter_reach": "ดิฉัน/ผมขอแจ้งให้ทราบว่ามีนัดหมาย {proc} ในวันที่ {date}",
+    "x.cp_letter_because": "เนื่องจากหัตถการแต่งแต้มร่างกายมีการเจาะผิวหนังเฉพาะที่และการบาดเจ็บเล็กน้อย ดิฉัน/ผมจึงต้องการแน่ใจว่ายาที่ใช้อยู่ในปัจจุบันปลอดภัย ขณะนี้ใช้ยาดังต่อไปนี้:",
+    "x.cp_letter_advise": "ช่วยแนะนำได้หรือไม่ว่า:",
+    "x.cp_letter_q1": "1. การทำหัตถการนี้ขณะใช้ยาเหล่านี้ปลอดภัยสำหรับดิฉัน/ผมหรือไม่",
+    "x.cp_letter_q2": "2. ควรปรับหรือหยุดยาเหล่านี้ชั่วคราวก่อนหรือหลังนัดหมายหรือไม่",
+    "x.cp_letter_q3": "3. มีข้อควรระวังหรือคำแนะนำทางการแพทย์เฉพาะที่ควรแจ้งช่างสักหรือช่างเจาะของดิฉัน/ผมหรือไม่",
+    "x.cp_letter_thanks": "ขอบคุณมากสำหรับเวลาและคำแนะนำของท่าน",
+    "x.cp_letter_sincerely": "ด้วยความเคารพ",
+    "x.cp_mail_subject": "สอบถามทางการแพทย์เกี่ยวกับหัตถการที่จะมาถึง: {proc}",
+    "x.cp_default_proc_short": "การสัก/การเจาะ",
+    "x.cp_default_doctor_short": "แพทย์",
     "x.alert_invalid_appointment": "กรุณาเลือกวันและเวลานัดหมายที่ถูกต้อง",
     "x.alert_notif_unsupported": "เบราว์เซอร์ของคุณไม่รองรับการแจ้งเตือนของเบราว์เซอร์",
     "x.alert_notif_blocked": "การแจ้งเตือนของเบราว์เซอร์ถูกบล็อกอยู่ในการตั้งค่าเบราว์เซอร์ของคุณ เปิดสิทธิ์ที่แถบที่อยู่ของเบราว์เซอร์",
@@ -2925,6 +3205,11 @@ const RISK_EXPLANATIONS = {
 function uiText(key, fallback) {
   var d = (typeof TRANSLATIONS !== 'undefined' && (TRANSLATIONS[currentLang] || TRANSLATIONS.en)) || {};
   return d[key] || fallback;
+}
+
+// uiText with {placeholder} substitution
+function uiFmt(key, fallback, params) {
+  return String(uiText(key, fallback)).replace(/\{(\w+)\}/g, function (m, k) { return params && k in params ? params[k] : m; });
 }
 
 function renderRiskBadgeHtml(rb) {
@@ -3927,12 +4212,14 @@ function updateArtistReadiness() {
 
   document.getElementById('copy-readiness-btn')?.addEventListener('click', () => {
     const text = checklistItems.map(i => i.replace(/<[^>]*>/g, '')).join('\n• ');
-    navigator.clipboard.writeText('ARTIST SAFETY CHECKLIST:\n• ' + text).then(() => {
+    navigator.clipboard.writeText(uiText('x.cp_checklist_title', 'ARTIST SAFETY CHECKLIST:') + '\n• ' + text).then(() => {
       const btn = document.getElementById('copy-readiness-btn');
       if (btn) {
-        btn.textContent = '✅ Copied!';
+        btn.textContent = uiText('x.cp_copied', '✅ Copied!');
         setTimeout(() => { btn.textContent = uiText('x.copy_artist_checklist', '📋 Copy Artist Checklist'); }, 2000);
       }
+    }).catch(() => {
+      alert(uiText('x.alert_copy_failed', 'Copy failed. Please select the text and copy it manually.'));
     });
   });
 }
@@ -4016,33 +4303,41 @@ function updateBriefTab() {
   renderHealingJourneyTimeline();
 }
 
+// Plain-text risk badge in the reader's language (same lookup as renderRiskBadgeHtml)
+function riskBadgePlain(rb) {
+  const emoji = rb.slice(0, rb.length - rb.replace(/^[^\p{L}\p{N}]*/u, '').length);
+  const clean = rb.slice(emoji.length).trim();
+  const label = (typeof riskText === 'function' && riskText(clean, 'label')) || clean;
+  return (emoji + label).trim();
+}
+
 function copyBriefText() {
   const checked = getSelectedMedIds();
   if (checked.length === 0) return;
 
-  let text = `=== TATTOO & PIERCING MEDICATION CONSULTATION BRIEF ===\n`;
-  text += `Date: ${new Date().toLocaleDateString()}\n\n`;
-  text += `Selected Medications (${checked.length}):\n`;
+  let text = uiText('x.cp_brief_title', '=== TATTOO & PIERCING MEDICATION CONSULTATION BRIEF ===') + `\n`;
+  text += uiFmt('x.cp_date', 'Date: {date}', { date: new Date().toLocaleDateString() }) + `\n\n`;
+  text += uiFmt('x.cp_selected_meds', 'Selected Medications ({count}):', { count: checked.length }) + `\n`;
 
   checked.forEach(id => {
     const m = medMap[id];
-    text += `- ${m.name} (${m.sub}) [Risk: ${m.sev.toUpperCase()}]\n`;
-    text += `  Risks: ${(m.riskBadges || []).join(', ')}\n`;
-    text += `  Tattoo: ${m.tattoo}\n`;
-    text += `  Piercing: ${m.piercing}\n`;
-    if (m.wait) text += `  Action: ${m.wait}\n`;
+    text += `- ${m.name} (${m.sub}) ` + uiFmt('x.cp_risk', '[Risk: {sev}]', { sev: m.sev.toUpperCase() }) + `\n`;
+    text += '  ' + uiFmt('x.cp_risks', 'Risks: {list}', { list: (m.riskBadges || []).map(riskBadgePlain).join(', ') }) + `\n`;
+    text += '  ' + uiFmt('x.cp_tattoo', 'Tattoo: {text}', { text: medText(m, 'tattoo') }) + `\n`;
+    text += '  ' + uiFmt('x.cp_piercing', 'Piercing: {text}', { text: medText(m, 'piercing') }) + `\n`;
+    if (m.wait) text += '  ' + uiFmt('x.cp_action', 'Action: {text}', { text: medText(m, 'wait') }) + `\n`;
     text += `\n`;
   });
 
-  text += `Generated via Poli International Medication Reference.\n`;
+  text += uiText('x.cp_generated', 'Generated via Poli International Medication Reference.') + `\n`;
 
   navigator.clipboard.writeText(text).then(() => {
     const btn = document.getElementById('copy-brief-btn');
     const originalText = btn.innerHTML;
-    btn.innerHTML = '✅ Copied!';
+    btn.innerHTML = uiText('x.cp_copied', '✅ Copied!');
     setTimeout(() => { btn.innerHTML = originalText; }, 2000);
   }).catch(() => {
-    alert(uiText('x.alert_brief_copied', 'Brief copied to clipboard!'));
+    alert(uiText('x.alert_copy_failed', 'Copy failed. Please select the text and copy it manually.'));
   });
 }
 
@@ -4261,10 +4556,10 @@ function getLocalizedBrands(med, lang) {
 }
 
 function updateDoctorMessageDraft() {
-  const docName     = docNameInput.value.trim() || 'Dr. [Doctor Name]';
-  const patientName = patientNameInput.value.trim() || '[Your Name]';
-  const procType    = procTypeInput.value.trim() || '[Tattoo / Piercing Procedure]';
-  const procDate    = procDateInput.value ? new Date(procDateInput.value).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '[Appointment Date]';
+  const docName     = docNameInput.value.trim() || uiText('x.cp_default_doctor', 'Dr. [Doctor Name]');
+  const patientName = patientNameInput.value.trim() || uiText('x.cp_default_patient', '[Your Name]');
+  const procType    = procTypeInput.value.trim() || uiText('x.cp_default_proc', '[Tattoo / Piercing Procedure]');
+  const procDate    = procDateInput.value ? new Date(procDateInput.value).toLocaleDateString(currentLang === 'en' ? 'en-US' : currentLang, { year: 'numeric', month: 'long', day: 'numeric' }) : uiText('x.cp_default_date', '[Appointment Date]');
 
   const checked = getSelectedMedIds();
   let medListFormatted = '';
@@ -4273,39 +4568,50 @@ function updateDoctorMessageDraft() {
     medListFormatted = checked.map(id => {
       const m = medMap[id];
       const localizedBrand = getLocalizedBrands(m, currentLang);
-      const brandSuffix = localizedBrand && localizedBrand !== m.name ? ` (e.g., ${localizedBrand})` : '';
+      const brandSuffix = localizedBrand && localizedBrand !== m.name ? ' ' + uiFmt('x.cp_eg_brand', '(e.g., {brand})', { brand: localizedBrand }) : '';
 
-      let riskSummary = 'Requires procedural awareness and precautions.';
+      let riskSummary = uiText('x.cp_default_risk', 'Requires procedural awareness and precautions.');
       if (m.tattoo) {
-        const sentence = m.tattoo.split('.')[0].trim();
+        const sentence = medText(m, 'tattoo').split('.')[0].trim();
         if (sentence) riskSummary = sentence + '.';
       }
 
       return `• ${m.name}${brandSuffix}: ${riskSummary}`;
     }).join('\n\n');
   } else {
-    medListFormatted = '• [List of medications currently taking]';
+    medListFormatted = uiText('x.cp_default_meds', '• [List of medications currently taking]');
   }
 
-  const draftText = `Dear ${docName},
+  const draftText = uiFmt('x.cp_letter_dear', 'Dear {name},', { name: docName }) + `
 
-I hope this message finds you well.
+` +
+    uiText('x.cp_letter_intro', 'I hope this message finds you well.') + `
 
-I am reaching out to inform you that I have an upcoming ${procType} scheduled for ${procDate}. 
+` +
+    uiFmt('x.cp_letter_reach', 'I am reaching out to inform you that I have an upcoming {proc} scheduled for {date}.', { proc: procType, date: procDate }) + ` 
 
-Because body modification procedures involve localized skin puncture and mild trauma, I want to ensure my current medication routine is safe. I am currently taking the following medication(s):
+` +
+    uiText('x.cp_letter_because', 'Because body modification procedures involve localized skin puncture and mild trauma, I want to ensure my current medication routine is safe. I am currently taking the following medication(s):') + `
 
-${medListFormatted}
+` +
+    medListFormatted + `
 
-Could you please advise if:
-1. It is safe for me to proceed with this procedure while taking these medications.
-2. I should temporarily adjust or pause any of these medications prior to or after the appointment.
-3. You have any specific precautions or medical guidance I should share with my tattoo artist or piercer.
+` +
+    uiText('x.cp_letter_advise', 'Could you please advise if:') + `
+` +
+    uiText('x.cp_letter_q1', '1. It is safe for me to proceed with this procedure while taking these medications.') + `
+` +
+    uiText('x.cp_letter_q2', '2. I should temporarily adjust or pause any of these medications prior to or after the appointment.') + `
+` +
+    uiText('x.cp_letter_q3', '3. You have any specific precautions or medical guidance I should share with my tattoo artist or piercer.') + `
 
-Thank you very much for your time and guidance.
+` +
+    uiText('x.cp_letter_thanks', 'Thank you very much for your time and guidance.') + `
 
-Sincerely,
-${patientName}`;
+` +
+    uiText('x.cp_letter_sincerely', 'Sincerely,') + `
+` +
+    patientName;
 
   if (modalDraftArea) {
     modalDraftArea.value = draftText;
@@ -4315,16 +4621,17 @@ ${patientName}`;
 function copyDoctorMessage() {
   if (!modalDraftArea.value) return;
   navigator.clipboard.writeText(modalDraftArea.value).then(() => {
-    copyDocMsgBtn.innerHTML = '✅ Copied to Clipboard!';
-    setTimeout(() => { copyDocMsgBtn.innerHTML = '📋 Copy Draft Message'; }, 2000);
+    const originalLabel = copyDocMsgBtn.innerHTML;
+    copyDocMsgBtn.innerHTML = uiText('x.cp_copied_clipboard', '✅ Copied to Clipboard!');
+    setTimeout(() => { copyDocMsgBtn.innerHTML = originalLabel; }, 2000);
   }).catch(() => {
-    alert(uiText('x.alert_message_copied', 'Message copied to clipboard!'));
+    alert(uiText('x.alert_copy_failed', 'Copy failed. Please select the text and copy it manually.'));
   });
 }
 
 function openDoctorEmailClient() {
-  const docName  = docNameInput.value.trim() || 'Doctor';
-  const subject  = encodeURIComponent(`Medical Inquiry regarding upcoming ${procTypeInput.value.trim() || 'Tattoo/Piercing'} procedure`);
+  const docName  = docNameInput.value.trim() || uiText('x.cp_default_doctor_short', 'Doctor');
+  const subject  = encodeURIComponent(uiFmt('x.cp_mail_subject', 'Medical Inquiry regarding upcoming {proc} procedure', { proc: procTypeInput.value.trim() || uiText('x.cp_default_proc_short', 'Tattoo/Piercing') }));
   const bodyText = encodeURIComponent(modalDraftArea.value);
   window.location.href = `mailto:?subject=${subject}&body=${bodyText}`;
 }
@@ -5128,14 +5435,12 @@ function copyShareableDeepLink() {
   const link = generateShareableDeepLink();
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(link).then(() => {
-      showToast('📲 Shareable intake deep link copied to clipboard!');
+      showToast(uiText('x.cp_link_copied', '📲 Shareable intake deep link copied to clipboard!'));
     }).catch(() => {
-      fallbackCopyText(link);
-      showToast('📲 Shareable intake deep link copied to clipboard!');
+      showToast(fallbackCopyText(link) ? uiText('x.cp_link_copied', '📲 Shareable intake deep link copied to clipboard!') : uiText('x.alert_copy_failed', 'Copy failed. Please select the text and copy it manually.'));
     });
   } else {
-    fallbackCopyText(link);
-    showToast('📲 Shareable intake deep link copied to clipboard!');
+    showToast(fallbackCopyText(link) ? uiText('x.cp_link_copied', '📲 Shareable intake deep link copied to clipboard!') : uiText('x.alert_copy_failed', 'Copy failed. Please select the text and copy it manually.'));
   }
 }
 
@@ -5144,8 +5449,10 @@ function fallbackCopyText(text) {
   temp.value = text;
   document.body.appendChild(temp);
   temp.select();
-  document.execCommand('copy');
+  let ok = false;
+  try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
   document.body.removeChild(temp);
+  return ok;
 }
 
 function initDeepLinkFromUrl() {

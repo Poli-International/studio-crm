@@ -1008,7 +1008,7 @@ function renderWatchlistItems() {
           ${item.reason ? `<em>${escHtml(item.reason)}</em>` : ''}
         </span>
       </div>
-      <button type="button" class="watchlist-del-btn" data-wl-id="${item.id}">Remove</button>
+      <button type="button" class="watchlist-del-btn" data-wl-id="${item.id}">${escHtml(t('watchlist.remove'))}</button>
     `;
     const delBtn = card.querySelector('.watchlist-del-btn');
     if (delBtn) {
@@ -1102,10 +1102,10 @@ Studio Quality & Compliance Management`;
     navigator.clipboard.writeText(letterText).then(() => {
       showToast(t('letter.copied_toast'));
     }).catch(() => {
-      prompt('Copy letter text below:', letterText);
+      prompt(t('letter.copy_prompt'), letterText);
     });
   } else {
-    prompt('Copy letter text below:', letterText);
+    prompt(t('letter.copy_prompt'), letterText);
   }
 }
 

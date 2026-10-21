@@ -180,7 +180,7 @@
     const printWindow = window.open('', '_blank', 'width=800,height=600');
     if (!printWindow) {
       if (typeof window.showNotification === 'function') {
-        window.showNotification('Pop-up blocked. Please permit pop-ups to print tray guides.', 'error');
+        window.showNotification(window.t('live.gcPopup'), 'error');
       }
       return;
     }
@@ -194,8 +194,8 @@
             <span>${c.stepTone}</span>
           </div>
         </td>
-        <td class="cap-cell-right-bold">${c.originDrops} drops</td>
-        <td class="cap-cell-right">${c.destDrops} drops</td>
+        <td class="cap-cell-right-bold">${window.t('live.nDrops', { n: c.originDrops })}</td>
+        <td class="cap-cell-right">${window.t('live.nDrops', { n: c.destDrops })}</td>
         <td class="cap-cell-ratio">${c.ratioPercent}%</td>
       </tr>
     `).join('');
@@ -204,7 +204,7 @@
       <!DOCTYPE html>
       <html>
       <head>
-        <title>Workstation Cap Tray Guide - Poli International</title>
+        <title>${window.t('live.gcDocTitle')}</title>
         <style>
           body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; padding: 20px; color: #111; }
           h2 { margin-top: 0; margin-bottom: 4px; }
@@ -226,25 +226,22 @@
       <body>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
           <div>
-            <h2>🎨 Workstation Gradient Cap Tray Guide</h2>
+            <h2>${window.t('live.gcHeading')}</h2>
             <div class="meta">
-              Ladder: <strong>${options.originName}</strong> → <strong>${options.destName}</strong> | 
-              Caps: <strong>${caps.length}</strong> | 
-              Cap Size: <strong>${caps[0].volumeMl} ml</strong> | 
-              Calibrated: <strong>${getDropsPerMl()} drops/ml</strong>
+              ${window.t('live.gcMeta', { origin: options.originName, dest: options.destName, caps: caps.length, size: caps[0].volumeMl, dpm: getDropsPerMl() })}
             </div>
           </div>
-          <button onclick="window.print()" style="padding: 8px 14px; font-size: 0.9rem; cursor: pointer;">🖨️ Print Guide</button>
+          <button onclick="window.print()" style="padding: 8px 14px; font-size: 0.9rem; cursor: pointer;">${window.t('live.gcPrint')}</button>
         </div>
 
         <table>
           <thead>
             <tr>
-              <th style="text-align: center; width: 60px;">Cap</th>
-              <th>Tone / Gradation</th>
+              <th style="text-align: center; width: 60px;">${window.t('live.gcColCap')}</th>
+              <th>${window.t('live.gcColTone')}</th>
               <th style="text-align: right;">${options.originName}</th>
               <th style="text-align: right;">${options.destName}</th>
-              <th style="text-align: right;">Density</th>
+              <th style="text-align: right;">${window.t('live.gcColDensity')}</th>
             </tr>
           </thead>
           <tbody>
@@ -253,7 +250,7 @@
         </table>
 
         <div class="footer">
-          Poli International Tattoo Tools Suite • Subtractive Ink Formulation • Keep this sheet beside workstation barrier tray.
+          ${window.t('live.gcFooter')}
         </div>
       </body>
       </html>

@@ -142,7 +142,7 @@
       renderDisplay();
 
       if (typeof window.showNotification === 'function') {
-        window.showNotification(`Drop calibration updated: ${calibrationData.dropsPerMl} drops/ml`, 'success');
+        window.showNotification(typeof window.t === 'function' ? window.t('live.calibUpdated', { n: calibrationData.dropsPerMl }) : `Drop calibration updated: ${calibrationData.dropsPerMl} drops/ml`, 'success');
       }
     };
 

@@ -363,11 +363,11 @@
                     <footer class="fit-card-footer">
                         <div class="fit-card-sign-col">
                             <div class="fit-card-sign-line"></div>
-                            <span class="fit-card-sign-label">Piercer Verification</span>
+                            <span class="fit-card-sign-label">${tr('fitCard.signPiercer', 'Piercer Verification')}</span>
                         </div>
                         <div class="fit-card-sign-col">
                             <div class="fit-card-sign-line"></div>
-                            <span class="fit-card-sign-label">Client Acknowledgment</span>
+                            <span class="fit-card-sign-label">${tr('fitCard.signClient', 'Client Acknowledgment')}</span>
                         </div>
                     </footer>
                 </div>

@@ -15,6 +15,9 @@
     return val;
   }
 
+  function lbl(prefix, v) { return t(K + prefix + v, v); }
+  var K = 'healing.healthReport.';
+
   var HealthReport = {
     currentReportData: null,
 
@@ -190,9 +193,9 @@
       if (actionsBar) actionsBar.style.display = 'flex';
 
       // Build Report HTML
-      var trajectoryLabel = (data.trajectory === 'improving') ? '📉 Favorable (Decreasing Discomfort)' :
-                            (data.trajectory === 'escalating') ? '⚠️ Elevated Discomfort (Close Monitoring Advised)' :
-                            '➡️ Stable Recovery Course';
+      var trajectoryLabel = (data.trajectory === 'improving') ? t(K + 'rep_trajImproving', '📉 Favorable (Decreasing Discomfort)') :
+                            (data.trajectory === 'escalating') ? t(K + 'rep_trajEscalating', '⚠️ Elevated Discomfort (Close Monitoring Advised)') :
+                            t(K + 'rep_trajStable', '➡️ Stable Recovery Course');
 
       var html = 
         '<div class="health-report-document">' +
@@ -236,28 +239,28 @@
           '<div class="report-section">' +
             '<h4 class="report-section-title">' + t('healing.healthReport.clientSection', '1. Procedure & Placement Summary') + '</h4>' +
             '<div class="report-grid-2">' +
-              '<div><strong>' + t('healing.healthReport.procedureLabel', 'Procedure Type') + ':</strong> ' + (data.procedureType === 'piercing' ? 'Body Piercing' : 'Tattoo Art') + '</div>' +
+              '<div><strong>' + t('healing.healthReport.procedureLabel', 'Procedure Type') + ':</strong> ' + (data.procedureType === 'piercing' ? t(K + 'rep_procBody', 'Body Piercing') : t(K + 'rep_procTattoo', 'Tattoo Art')) + '</div>' +
               '<div><strong>' + t('healing.healthReport.placementLabel', 'Anatomical Placement') + ':</strong> ' + data.placement + '</div>' +
               '<div><strong>' + t('healing.healthReport.dateLabel', 'Procedure Date') + ':</strong> ' + data.procedureDate + '</div>' +
-              '<div><strong>' + t('healing.healthReport.recoveryDaysLabel', 'Elapsed Recovery') + ':</strong> ' + data.elapsedDays + ' Days</div>' +
+              '<div><strong>' + t('healing.healthReport.recoveryDaysLabel', 'Elapsed Recovery') + ':</strong> ' + t(K + 'rep_daysN', '{n} Days', { n: data.elapsedDays }) + '</div>' +
             '</div>' +
           '</div>' +
 
           '<div class="report-section">' +
             '<h4 class="report-section-title">' + t('healing.healthReport.statusSection', '2. Clinical Status & Symptom Trajectory') + '</h4>' +
             '<div class="report-grid-2">' +
-              '<div><strong>Trajectory:</strong> ' + trajectoryLabel + '</div>' +
-              '<div><strong>Highest Recorded Severity:</strong> ' + data.highestSeverity.toUpperCase() + '</div>' +
+              '<div><strong>' + t(K + 'rep_trajectory', 'Trajectory') + ':</strong> ' + trajectoryLabel + '</div>' +
+              '<div><strong>' + t(K + 'rep_highestSeverity', 'Highest Recorded Severity') + ':</strong> ' + lbl('sev_', data.highestSeverity).toUpperCase() + '</div>' +
             '</div>' +
             '<div class="report-metrics-table">' +
               '<table class="report-table">' +
                 '<thead>' +
-                  '<tr><th>Symptom Indicator</th><th>Peak Rating</th><th>Current Rating</th></tr>' +
+                  '<tr><th>' + t(K + 'rep_thSymptom', 'Symptom Indicator') + '</th><th>' + t(K + 'rep_thPeak', 'Peak Rating') + '</th><th>' + t(K + 'rep_thCurrent', 'Current Rating') + '</th></tr>' +
                 '</thead>' +
                 '<tbody>' +
-                  '<tr><td>Redness / Erythema</td><td>' + data.peakRedness + ' / 3</td><td>' + data.currentRedness + ' / 3</td></tr>' +
-                  '<tr><td>Swelling / Edema</td><td>' + data.peakSwelling + ' / 3</td><td>' + data.currentSwelling + ' / 3</td></tr>' +
-                  '<tr><td>Pain / Tenderness</td><td>' + data.peakPain + ' / 3</td><td>' + data.currentPain + ' / 3</td></tr>' +
+                  '<tr><td>' + t(K + 'rep_rowRedness', 'Redness / Erythema') + '</td><td>' + data.peakRedness + ' / 3</td><td>' + data.currentRedness + ' / 3</td></tr>' +
+                  '<tr><td>' + t(K + 'rep_rowSwelling', 'Swelling / Edema') + '</td><td>' + data.peakSwelling + ' / 3</td><td>' + data.currentSwelling + ' / 3</td></tr>' +
+                  '<tr><td>' + t(K + 'rep_rowPain', 'Pain / Tenderness') + '</td><td>' + data.peakPain + ' / 3</td><td>' + data.currentPain + ' / 3</td></tr>' +
                 '</tbody>' +
               '</table>' +
             '</div>' +
@@ -268,27 +271,27 @@
         var a = data.allergyAssessment;
         html += 
           '<div class="report-section">' +
-            '<h4 class="report-section-title">3. Product Allergy &amp; Contact Sensitivity Screening</h4>' +
+            '<h4 class="report-section-title">' + t(K + 'rep_allergySection', 'Product Allergy &amp; Contact Sensitivity Screening') + '</h4>' +
             '<div class="report-grid-2">' +
-              '<div><strong>Screened Product:</strong> ' + a.productType + '</div>' +
-              '<div><strong>Evaluated Risk Level:</strong> ' + a.riskLevel.toUpperCase() + '</div>' +
+              '<div><strong>' + t(K + 'rep_screenedProduct', 'Screened Product') + ':</strong> ' + a.productType + '</div>' +
+              '<div><strong>' + t(K + 'rep_riskLevel', 'Evaluated Risk Level') + ':</strong> ' + lbl('risk_', a.riskLevel).toUpperCase() + '</div>' +
             '</div>' +
-            '<p class="report-note">Risk factors identified: ' + a.factorsCount + '. Follow recommended 24-48h intact patch test protocol before applying any scented or emollient products to broken epidermal barrier.</p>' +
+            '<p class="report-note">' + t(K + 'rep_riskNote', 'Risk factors identified: {count}. Follow recommended 24-48h intact patch test protocol before applying any scented or emollient products to broken epidermal barrier.', { count: a.factorsCount }) + '</p>' +
           '</div>';
       }
 
       // Recent Milestones
       html += 
         '<div class="report-section">' +
-          '<h4 class="report-section-title">' + t('healing.healthReport.milestonesSection', '4. Logged Healing Milestones & Entries') + ' (' + data.entriesCount + ' Total)</h4>' +
+          '<h4 class="report-section-title">' + t('healing.healthReport.milestonesSection', '4. Logged Healing Milestones & Entries') + ' (' + t(K + 'rep_totalN', '{n} Total', { n: data.entriesCount }) + ')</h4>' +
           '<div class="report-entries-summary">';
 
       data.entries.slice(-5).reverse().forEach(function(e) {
         html += 
           '<div class="report-entry-row">' +
-            '<div class="report-entry-date"><strong>' + e.date + '</strong> (Day ' + (typeof e.dayOffset === 'number' ? e.dayOffset : '?') + ')</div>' +
+            '<div class="report-entry-date"><strong>' + e.date + '</strong> (' + t(K + 'rep_dayN', 'Day {n}', { n: (typeof e.dayOffset === 'number' ? e.dayOffset : '?') }) + ')</div>' +
             '<div class="report-entry-scores">P:' + (e.painLevel || 0) + ' S:' + (e.swellingLevel || 0) + ' R:' + (e.rednessLevel || 0) + '</div>' +
-            '<div class="report-entry-note">' + (e.notes ? ('"' + e.notes + '"') : 'No notes entered') + '</div>' +
+            '<div class="report-entry-note">' + (e.notes ? ('"' + e.notes + '"') : t(K + 'rep_noNotes', 'No notes entered')) + '</div>' +
           '</div>';
       });
 
@@ -301,8 +304,8 @@
           '<div class="report-studio-space">' +
             '<p class="report-placeholder-text">' + t('healing.healthReport.studioNotesPlaceholder', 'Space for studio piercer, tattoo artist, or medical professional assessment during in-person check-in...') + '</p>' +
             '<div class="report-signature-line">' +
-              '<span>Studio Artist / Piercer Signature: _______________________</span>' +
-              '<span>Date: ____________</span>' +
+              '<span>' + t(K + 'rep_signature', 'Studio Artist / Piercer Signature') + ': _______________________</span>' +
+              '<span>' + t(K + 'rep_dateLine', 'Date') + ': ____________</span>' +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -325,69 +328,67 @@
 
       var lines = [
         '==================================================================',
-        'POLI INTERNATIONAL - HEALING HEALTH REPORT',
-        'Generated: ' + data.generatedAt,
+        t(K + 'txt_title', 'POLI INTERNATIONAL - HEALING HEALTH REPORT'),
+        t(K + 'txt_generated', 'Generated') + ': ' + data.generatedAt,
         '=================================================================='
       ];
 
       if (data.symptomTrendAlert) {
         var alt = data.symptomTrendAlert;
-        var sName = alt.symptomType === 'both' ? 'Redness and Swelling' : (alt.symptomType === 'swelling' ? 'Swelling (Edema)' : 'Redness (Erythema)');
+        var sName = alt.symptomType === 'both' ? t('healing.symptomTrendAlert.symptomBoth', 'Redness and Swelling') : (alt.symptomType === 'swelling' ? t('healing.symptomTrendAlert.symptomSwelling', 'Swelling (Edema)') : t('healing.symptomTrendAlert.symptomRedness', 'Redness (Erythema)'));
         var pStr = alt.dates.map(function(d, idx) {
           return d + ' (R:' + alt.rednessScores[idx] + ', S:' + alt.swellingScores[idx] + ')';
         }).join(' -> ');
 
         lines.push('');
-        lines.push('*** WARNING: SYMPTOM TREND ALERT - CONSECUTIVE WORSENING DETECTED ***');
-        lines.push('Escalating Symptom: ' + sName);
-        lines.push('3-Day Trajectory:   ' + pStr);
-        lines.push('RECOMMENDATION:     Escalating severity over 3 consecutive entries exceeds');
-        lines.push('                    standard healing trajectories. Contact your studio');
-        lines.push('                    professional or dermatologist for in-person evaluation.');
+        lines.push('*** ' + t(K + 'trendAlertTitle', 'SYMPTOM TREND ALERT: WORSENING CONSECUTIVE TRAJECTORY') + ' ***');
+        lines.push(t(K + 'txt_escSymptom', 'Escalating Symptom') + ': ' + sName);
+        lines.push(t(K + 'txt_trajectory3', '3-Day Trajectory') + ': ' + pStr);
+        lines.push(t(K + 'recommendationLabel', 'Clinical Recommendation:').toUpperCase() + ' ' + t(K + 'recommendationText', 'Escalating severity over 3 consecutive entries exceeds standard healing trajectories. Contact your studio professional or dermatologist for in-person evaluation.'));
         lines.push('*********************************************************************');
       }
 
       lines.push('');
-      lines.push('1. PROCEDURE & PLACEMENT SUMMARY');
+      lines.push('1. ' + t(K + 'clientSection', 'Procedure & Placement Summary').toUpperCase());
       lines.push('------------------------------------------------------------------');
-      lines.push('Procedure Type:      ' + (data.procedureType === 'piercing' ? 'Body Piercing' : 'Tattoo Art'));
-      lines.push('Anatomical Location: ' + data.placement);
-      lines.push('Procedure Date:      ' + data.procedureDate);
-      lines.push('Elapsed Recovery:    ' + data.elapsedDays + ' Days');
+      lines.push(t(K + 'procedureLabel', 'Procedure Type') + ': ' + (data.procedureType === 'piercing' ? t(K + 'rep_procBody', 'Body Piercing') : t(K + 'rep_procTattoo', 'Tattoo Art')));
+      lines.push(t(K + 'placementLabel', 'Anatomical Placement') + ': ' + data.placement);
+      lines.push(t(K + 'dateLabel', 'Procedure Date') + ': ' + data.procedureDate);
+      lines.push(t(K + 'recoveryDaysLabel', 'Elapsed Recovery') + ': ' + t(K + 'rep_daysN', '{n} Days', { n: data.elapsedDays }));
       lines.push('');
-      lines.push('2. SYMPTOM TRAJECTORY & CLINICAL METRICS');
+      lines.push('2. ' + t(K + 'trajectorySection', 'Symptom Trajectory & Trends').toUpperCase());
       lines.push('------------------------------------------------------------------');
-      lines.push('Recovery Trajectory: ' + data.trajectory.toUpperCase());
-      lines.push('Highest Severity:    ' + data.highestSeverity.toUpperCase());
-      lines.push('Peak Levels:         Redness: ' + data.peakRedness + '/3 | Swelling: ' + data.peakSwelling + '/3 | Pain: ' + data.peakPain + '/3');
-      lines.push('Current Levels:      Redness: ' + data.currentRedness + '/3 | Swelling: ' + data.currentSwelling + '/3 | Pain: ' + data.currentPain + '/3');
+      lines.push(t(K + 'rep_trajectory', 'Trajectory') + ': ' + t(K + 'traj_' + data.trajectory, data.trajectory).toUpperCase());
+      lines.push(t(K + 'rep_highestSeverity', 'Highest Recorded Severity') + ': ' + lbl('sev_', data.highestSeverity).toUpperCase());
+      lines.push(t(K + 'txt_peak', 'Peak Levels') + ': ' + t(K + 'lbl_redness', 'Redness') + ': ' + data.peakRedness + '/3 | ' + t(K + 'lbl_swelling', 'Swelling') + ': ' + data.peakSwelling + '/3 | ' + t(K + 'lbl_pain', 'Pain') + ': ' + data.peakPain + '/3');
+      lines.push(t(K + 'txt_current', 'Current Levels') + ': ' + t(K + 'lbl_redness', 'Redness') + ': ' + data.currentRedness + '/3 | ' + t(K + 'lbl_swelling', 'Swelling') + ': ' + data.currentSwelling + '/3 | ' + t(K + 'lbl_pain', 'Pain') + ': ' + data.currentPain + '/3');
       lines.push('');
 
       if (data.allergyAssessment) {
-        lines.push('3. PRODUCT ALLERGY & SENSITIVITY SCREENING');
+        lines.push('3. ' + t(K + 'rep_allergySection', 'Product Allergy & Contact Sensitivity Screening').replace(/&amp;/g, '&').toUpperCase());
         lines.push('------------------------------------------------------------------');
-        lines.push('Product Screened:    ' + data.allergyAssessment.productType);
-        lines.push('Evaluated Risk:      ' + data.allergyAssessment.riskLevel.toUpperCase());
-        lines.push('Risk Factors Count:  ' + data.allergyAssessment.factorsCount);
+        lines.push(t(K + 'rep_screenedProduct', 'Screened Product') + ': ' + data.allergyAssessment.productType);
+        lines.push(t(K + 'rep_riskLevel', 'Evaluated Risk Level') + ': ' + lbl('risk_', data.allergyAssessment.riskLevel).toUpperCase());
+        lines.push(t(K + 'txt_factorsCount', 'Risk Factors Count') + ': ' + data.allergyAssessment.factorsCount);
         lines.push('');
       }
 
-      lines.push('4. RECENT LOGGED ENTRIES (' + data.entriesCount + ' TOTAL)');
+      lines.push('4. ' + t(K + 'milestonesSection', 'Logged Healing Milestones & Entries').toUpperCase() + ' (' + t(K + 'rep_totalN', '{n} Total', { n: data.entriesCount }).toUpperCase() + ')');
       lines.push('------------------------------------------------------------------');
       data.entries.slice(-5).reverse().forEach(function(e) {
-        lines.push('• ' + e.date + ' (Day ' + (typeof e.dayOffset === 'number' ? e.dayOffset : '?') + ') | P:' + (e.painLevel || 0) + ' S:' + (e.swellingLevel || 0) + ' R:' + (e.rednessLevel || 0) + ' | Note: ' + (e.notes || 'None'));
+        lines.push('• ' + e.date + ' (' + t(K + 'rep_dayN', 'Day {n}', { n: (typeof e.dayOffset === 'number' ? e.dayOffset : '?') }) + ') | P:' + (e.painLevel || 0) + ' S:' + (e.swellingLevel || 0) + ' R:' + (e.rednessLevel || 0) + ' | ' + t(K + 'txt_note', 'Note') + ': ' + (e.notes || t(K + 'rep_noNotes', 'No notes entered')));
       });
       lines.push('');
 
-      lines.push('5. PROFESSIONAL CHECK-IN & STUDIO NOTES');
+      lines.push('5. ' + t(K + 'studioNotesSection', 'Studio Review & Professional Check-In Notes').toUpperCase());
       lines.push('------------------------------------------------------------------');
-      lines.push('Space for piercer / tattoo artist evaluation:');
+      lines.push(t(K + 'txt_space', 'Space for piercer / tattoo artist evaluation:'));
       lines.push('[                                                                ]');
       lines.push('[                                                                ]');
-      lines.push('Professional Signature: _____________________  Date: ____________');
+      lines.push(t(K + 'txt_signature', 'Professional Signature') + ': _____________________  ' + t(K + 'rep_dateLine', 'Date') + ': ____________');
       lines.push('');
       lines.push('------------------------------------------------------------------');
-      lines.push('Privacy Notice: Stored locally in browser cache; zero remote transmission.');
+      lines.push(t(K + 'txt_privacy', 'Privacy Notice: Stored locally in browser cache; zero remote transmission.'));
       lines.push('Poli International Professional Tools | Established Professional Practice');
       lines.push('==================================================================');
 

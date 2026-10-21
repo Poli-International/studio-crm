@@ -808,7 +808,7 @@ function showResult(r, customPath = null) {
       <div class="ticket-header-title">${ticketHeader}</div>
       <div class="ticket-meta">
         <span>${dateLabel}: <strong>${localDateStr}</strong></span>
-        <span>Poli International Machine Diagnostics</span>
+        <span>Poli International ${t('ticket.machine_diag')}</span>
       </div>
     </div>
 
@@ -843,9 +843,9 @@ function showResult(r, customPath = null) {
           <div class="tech-signoff-title">${techNotesLabel}</div>
           <div class="tech-notes-area"></div>
           <div class="tech-signoff-grid">
-            <div class="tech-field"><span>Technician:</span></div>
+            <div class="tech-field"><span>${t('ticket.technician')}:</span></div>
             <div class="tech-field"><span>${techSigLabel}:</span></div>
-            <div class="tech-field"><span>Machine Model / S/N:</span></div>
+            <div class="tech-field"><span>${t('ticket.machine_sn')}:</span></div>
             <div class="tech-field"><span>${t('ticket.confidence_label')}: ${confTag}</span></div>
           </div>
         </div>
@@ -949,7 +949,7 @@ function initCalculator() {
     }
     const duty = (closure / period) * 100;
     dutyResultVal.textContent = `${duty.toFixed(1)}%`;
-    dutyFormulaVal.textContent = `Duty Cycle (%) = (${closure.toFixed(1)} ms / ${period.toFixed(1)} ms) × 100 = ${duty.toFixed(2)}%`;
+    dutyFormulaVal.textContent = getTranslateFn()('calc.duty_formula', { closure: closure.toFixed(1), period: period.toFixed(1), duty: duty.toFixed(2) });
   }
 
   if (dutyClosure && dutyPeriod) {
@@ -973,7 +973,7 @@ function initCalculator() {
     }
     const hz = 1000 / period;
     speedResultVal.textContent = `${hz.toFixed(1)} Hz`;
-    speedFormulaVal.textContent = `Speed (Hz) = 1000 / ${period.toFixed(1)} ms = ${hz.toFixed(2)} Hz`;
+    speedFormulaVal.textContent = getTranslateFn()('calc.speed_formula', { period: period.toFixed(1), hz: hz.toFixed(2) });
   }
 
   if (speedPeriod) {
@@ -1013,7 +1013,7 @@ function initCalculator() {
     resVal.textContent = `${roundTripR.toFixed(4)} Ω`;
     dropVal.textContent = `${vDrop.toFixed(3)} V`;
     loadVal.textContent = `${vMachine.toFixed(3)} V`;
-    formulaVal.textContent = `Resistance = 2 × ${length.toFixed(1)} ft × ${rPerFt} Ω/ft = ${roundTripR.toFixed(4)} Ω; Voltage Drop = ${current.toFixed(2)} A × ${roundTripR.toFixed(4)} Ω = ${vDrop.toFixed(3)} V; Machine Voltage = ${psuV.toFixed(2)} V - ${vDrop.toFixed(3)} V = ${vMachine.toFixed(3)} V`;
+    formulaVal.textContent = getTranslateFn()('calc.vdrop_formula', { len: length.toFixed(1), r: rPerFt, rt: roundTripR.toFixed(4), i: current.toFixed(2), vd: vDrop.toFixed(3), psu: psuV.toFixed(2), vm: vMachine.toFixed(3) });
   }
 
   if (gaugeSelect && lengthInput && currentInput && psuInput) {
@@ -1240,42 +1240,49 @@ const SEARCH_INDEX = [
   },
   {
     code: 'OVERLOAD / HIGH CURRENT',
+    codeKey: 'search.code.overload',
     keywords: 'overload current high trip bms protect shutdown short coils heat draw',
     nodeId: 'wb_load',
     resultKey: 'result.wb_overload_prot',
   },
   {
     code: 'MOTOR STALL / BIND',
+    codeKey: 'search.code.stall',
     keywords: 'stall motor seized swashplate cam membrane torque resistance jumpstart',
     nodeId: 'wb_jumpstart',
     resultKey: 'result.wb_jumpstart_membrane',
   },
   {
     code: 'SLEEP / CUT-OFF',
+    codeKey: 'search.code.sleep',
     keywords: 'sleep cutoff battery charge dead wake bms lithium 3.7v 4.2v usb-c',
     nodeId: 'wb_sleep',
     resultKey: 'result.wb_cell_cutoff',
   },
   {
     code: 'RF / PAIRING',
+    codeKey: 'search.code.rf',
     keywords: 'rf pedal wireless pairing sync unpair bluetooth footswitch switch contact',
     nodeId: 'wb_rf',
     resultKey: 'result.wb_rf_pairing',
   },
   {
     code: 'VOLTAGE DROP / SAG',
+    codeKey: 'search.code.vdrop',
     keywords: 'voltage drop sag gauge resistance awg cord length clip-cord internal cell',
     nodeId: 'voltage_issue',
     resultKey: 'result.wb_internal_res',
   },
   {
     code: 'CHATTER / SPUTTER',
+    codeKey: 'search.code.chatter',
     keywords: 'chatter bounce spark contact screw spring fatigue intermittent flutter',
     nodeId: 'speed_erratic',
     resultKey: 'result.spring_fatigue',
   },
   {
     code: 'ARCING / CRACKLE',
+    codeKey: 'search.code.arcing',
     keywords: 'arcing capacitor burnt smell crackle smoke spark capacitor breakdown',
     nodeId: 'noise_arc',
     resultKey: 'result.capacitor_failing',
@@ -1312,7 +1319,7 @@ function initSearch() {
       if (codeMatches || textMatches) {
         hits.push({
           type: 'code',
-          badge: item.code,
+          badge: item.codeKey ? t(item.codeKey) : item.code,
           title: verdict,
           sub: sub,
           action: () => {
@@ -1342,7 +1349,7 @@ function initSearch() {
           if (v.toLowerCase().includes(q) || s.toLowerCase().includes(q)) {
             hits.push({
               type: 'result',
-              badge: opt.result.level.toUpperCase(),
+              badge: t('search.level.' + opt.result.level),
               title: v,
               sub: s,
               action: () => {
@@ -1357,9 +1364,9 @@ function initSearch() {
       if (matchedInNode && nodeId !== 'start') {
         hits.push({
           type: 'question',
-          badge: 'DIAGNOSTIC STEP',
+          badge: t('search.diag_step'),
           title: qText,
-          sub: `Question in diagnostic tree: ${nodeId.replace(/_/g, ' ')}`,
+          sub: t('search.diag_tree', { node: nodeId.replace(/_/g, ' ') }),
           action: () => {
             switchTab('wizard');
             render(nodeId);
@@ -1598,6 +1605,7 @@ function initLanguage() {
       }
       document.documentElement.lang = chosen;
       applyStaticTranslations();
+      refreshCalcFormulas();
       stopAllAudio();
       renderEscalationGrid(activeEscalationFilter);
       if (currentResult) {
@@ -1607,6 +1615,14 @@ function initLanguage() {
       }
     });
   }
+}
+
+// Re-run the calculators so their formula lines follow the active language.
+function refreshCalcFormulas() {
+  ['duty-closure-input', 'speed-period-input', 'vdrop-length-input'].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.dispatchEvent(new Event('input'));
+  });
 }
 
 let initialized = false;
@@ -1622,6 +1638,7 @@ function init() {
   renderEscalationGrid('all');
   initSearch();
   render('start');
+  refreshCalcFormulas();
 }
 
 if (document.readyState === 'complete' || document.readyState === 'interactive') {

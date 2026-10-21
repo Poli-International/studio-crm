@@ -35,7 +35,7 @@
         chip.classList.add('active');
       }
       chip.setAttribute('data-piercing-key', key);
-      chip.setAttribute('title', `Switch to ${data.name} (${data.category || 'Piercing'})`);
+      chip.setAttribute('title', (window.translate ? window.translate('ui.recent_switch_title', { name: data.name, category: data.category || 'Piercing' }, 'Switch to {name} ({category})') : 'Switch to ' + data.name + ' (' + (data.category || 'Piercing') + ')'));
       chip.innerHTML = `<span class="recent-chip-icon">📍</span> <span class="recent-chip-name">${data.name}</span>`;
 
       chip.addEventListener('click', function () {
@@ -108,11 +108,11 @@
     options.forEach(function (opt) {
       var isSelected = (opt.id === activeOptId);
       var badge = opt.isInitialStandard
-        ? '<span class="jewelry-pill-badge initial">Initial Std</span>'
-        : '<span class="jewelry-pill-badge healed">Healed Alt</span>';
+        ? '<span class="jewelry-pill-badge initial">' + (window.translate ? window.translate('jewelry.badge_initial', null, 'Initial Std') : 'Initial Std') + '</span>'
+        : '<span class="jewelry-pill-badge healed">' + (window.translate ? window.translate('jewelry.badge_healed', null, 'Healed Alt') : 'Healed Alt') + '</span>';
 
       html += `
-        <button type="button" class="jewelry-option-pill ${isSelected ? 'active' : ''}" data-jewelry-id="${opt.id}" aria-label="Select ${opt.name}">
+        <button type="button" class="jewelry-option-pill ${isSelected ? 'active' : ''}" data-jewelry-id="${opt.id}" aria-label="${window.translate ? window.translate('jewelry.select_aria', { name: opt.name }, 'Select {name}') : 'Select ' + opt.name}">
           <span class="pill-name">${opt.name}</span>
           ${badge}
         </button>

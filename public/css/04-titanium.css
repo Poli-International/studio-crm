@@ -138,6 +138,53 @@ table tbody tr:hover td:first-child { box-shadow: inset 3px 0 0 var(--ti-blue); 
 .ti-dot-purple { --dot: var(--ti-purple); }
 .ti-dot-grey { --dot: var(--ti-faint); }
 
+/* ---------- tool families (Patrick, 2026-10-20): each tool card and each tool window's title bar
+   carries its family's material. The tool files are shared with the website and keep their own look. */
+[data-family="sterile"], :is(#poli-autoclave-modal, #poli-materialcert-modal, #poli-bbptraining-modal, #poli-sharpstracker-modal, #poli-inspectready-modal) {
+  --fam-ink: #2a2420; --fam-acc: #cdbf96; --fam-acc-ink: #e2d8bf; --fam-on: #2a2420;
+  --fam-tex: repeating-linear-gradient(-45deg, #2a2420 0 6px, transparent 6px 14px) 0 100% / 100% 6px no-repeat, linear-gradient(#efe9da, #e2d8bf);
+}
+[data-family="pierce"], :is(#poli-gaugeconv-modal, #poli-angleguide-modal, #poli-genitalsuit-modal, #poli-nickelrelease-modal, #poli-earstretch-modal, #poli-painguide-modal, #poli-sizeviz-modal) {
+  --fam-ink: #fff; --fam-shadow: 0 1px 2px rgba(0,0,0,.5); --fam-acc: var(--ti-sweep); --fam-acc-ink: #b9a0ee; --fam-on: #fff;
+  --fam-tex: linear-gradient(115deg, #b0793d, #7b4fc9 28%, #2f6fe0 50%, #d9b23a 72%, #d76f98 88%, #3fa774) 0 0 / 220% 100%;
+}
+[data-family="tattoo"], :is(#poli-coverage-modal, #poli-stencil-modal, #poli-inkmixer-modal, #poli-inkdecoder-modal, #poli-needleselector-modal, #poli-fontpreview-modal, #poli-psutrouble-modal, #poli-maintlog-modal, #poli-usinkcheck-modal, #poli-svhccheck-modal, #poli-seainkcheck-modal) {
+  --fam-ink: #2b1f6b; --fam-acc: #6a4cff; --fam-acc-ink: #b3a4ff; --fam-on: #fff;
+  --fam-tex: linear-gradient(transparent calc(100% - 2px), #6a4cff 0) 0 0 / 100% 100% no-repeat, linear-gradient(#f6f1ff, #e9e1ff);
+}
+[data-family="health"], :is(#form-builder-modal, #poli-aftercare-modal, #poli-medication-modal, #poli-healingtracker-modal, #poli-patchtest-modal) {
+  --fam-ink: #1d3557; --fam-acc: #4f7cac; --fam-acc-ink: #9cbde0; --fam-on: #fff;
+  --fam-tex: linear-gradient(transparent calc(100% - 2px), #4f7cac 0), repeating-linear-gradient(0deg, rgba(29,53,87,.28) 0 1px, transparent 1px 5px), #f5f8fc;
+}
+[data-family="business"], :is(#poli-price-estimator-modal, #poli-taxtracker-modal, #poli-boothrent-modal, #poli-pricingbench-modal, #poli-equipmentroi-modal) {
+  --fam-ink: #2c2414; --fam-acc: #b0793d; --fam-acc-ink: #dcab73; --fam-on: #fff;
+  --fam-tex: linear-gradient(90deg, transparent 22px, rgba(160,40,40,.6) 22px 23.5px, transparent 23.5px), repeating-linear-gradient(0deg, rgba(44,36,20,.14) 0 1px, transparent 1px 6px), #f4ecd8;
+}
+
+/* the card: a band of its material along the top; hover lifts the card and moves the material */
+#dest-tools [data-family] {
+  position: relative; overflow: hidden; padding-top: calc(1.25rem + 12px) !important;
+  transition: transform .4s var(--ti-ease), box-shadow .4s var(--ti-ease), border-color .4s;
+}
+#dest-tools [data-family]::before {
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 12px; background: var(--fam-tex);
+  transition: background-position 1s var(--ti-ease);
+}
+#dest-tools [data-family]:hover { transform: translateY(-4px) rotate(-.3deg); box-shadow: 0 22px 44px -22px rgba(0,0,0,.85); border-color: var(--ti-line2) !important; }
+#dest-tools [data-family] h3 { color: var(--fam-acc-ink) !important; }
+#dest-tools [data-family] button { background: var(--fam-acc) !important; color: var(--fam-on) !important; }
+#dest-tools [data-family="pierce"] button { text-shadow: 0 1px 2px rgba(0,0,0,.45); }
+#dest-tools [data-family="sterile"]:hover::before { background-position: 28px 100%, 0 0; }
+#dest-tools [data-family="pierce"]:hover::before { background-position: 100% 0; }
+#dest-tools [data-family="business"]:hover::before { background-position: 0 0, 0 -6px, 0 0; }
+
+/* the tool window: its title bar is the material, the words in the family's ink
+   (every #poli-*-modal and #form-builder-modal has a family above) */
+:is(#form-builder-modal, [id^="poli-"][id$="-modal"]) > div > div:first-child { background: var(--fam-tex); }
+:is(#form-builder-modal, [id^="poli-"][id$="-modal"]) > div > div:first-child > :is(strong, span) {
+  color: var(--fam-ink) !important; text-shadow: var(--fam-shadow, none);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }

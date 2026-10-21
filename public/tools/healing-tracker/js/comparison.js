@@ -138,18 +138,18 @@
       let symptomsMarkup = '';
       if (item.symptoms) {
         const chips = [];
-        if (item.symptoms.redness > 0) chips.push(`Redness: ${item.symptoms.redness}/3`);
-        if (item.symptoms.swelling > 0) chips.push(`Swelling: ${item.symptoms.swelling}/3`);
-        if (item.symptoms.pain > 0) chips.push(`Pain: ${item.symptoms.pain}/3`);
-        if (item.symptoms.discharge && item.symptoms.discharge !== 'none') chips.push(`Discharge: ${item.symptoms.discharge}`);
+        if (item.symptoms.redness > 0) chips.push(tr('healing.gallery.chipRedness', 'Redness: {n}/3', { n: item.symptoms.redness }));
+        if (item.symptoms.swelling > 0) chips.push(tr('healing.gallery.chipSwelling', 'Swelling: {n}/3', { n: item.symptoms.swelling }));
+        if (item.symptoms.pain > 0) chips.push(tr('healing.gallery.chipPain', 'Pain: {n}/3', { n: item.symptoms.pain }));
+        if (item.symptoms.discharge && item.symptoms.discharge !== 'none') chips.push(tr('healing.gallery.chipDischarge', 'Discharge: {v}', { v: item.symptoms.discharge }));
         
         if (chips.length > 0) {
           symptomsMarkup = chips.map(c => `<span class="milestone-symptom-chip">${escapeHtml(c)}</span>`).join('');
         } else {
-          symptomsMarkup = `<span class="milestone-symptom-chip milestone-symptom-chip--calm">No Symptoms</span>`;
+          symptomsMarkup = `<span class="milestone-symptom-chip milestone-symptom-chip--calm">${escapeHtml(tr('healing.gallery.noSymptoms', 'No Symptoms'))}</span>`;
         }
       } else if (item.isBaseline) {
-        symptomsMarkup = `<span class="milestone-symptom-chip milestone-symptom-chip--baseline">Baseline Pre-Heal</span>`;
+        symptomsMarkup = `<span class="milestone-symptom-chip milestone-symptom-chip--baseline">${escapeHtml(tr('healing.gallery.baselineShort', 'Baseline Pre-Heal'))}</span>`;
       }
 
       const notesExcerpt = item.notes
@@ -388,18 +388,18 @@
     if (symptomsEl) {
       if (item.symptoms) {
         const chips = [];
-        if (item.symptoms.redness > 0) chips.push(`Redness: ${item.symptoms.redness}/3`);
-        if (item.symptoms.swelling > 0) chips.push(`Swelling: ${item.symptoms.swelling}/3`);
-        if (item.symptoms.pain > 0) chips.push(`Pain: ${item.symptoms.pain}/3`);
-        if (item.symptoms.discharge && item.symptoms.discharge !== 'none') chips.push(`Discharge: ${item.symptoms.discharge}`);
+        if (item.symptoms.redness > 0) chips.push(tr('healing.gallery.chipRedness', 'Redness: {n}/3', { n: item.symptoms.redness }));
+        if (item.symptoms.swelling > 0) chips.push(tr('healing.gallery.chipSwelling', 'Swelling: {n}/3', { n: item.symptoms.swelling }));
+        if (item.symptoms.pain > 0) chips.push(tr('healing.gallery.chipPain', 'Pain: {n}/3', { n: item.symptoms.pain }));
+        if (item.symptoms.discharge && item.symptoms.discharge !== 'none') chips.push(tr('healing.gallery.chipDischarge', 'Discharge: {v}', { v: item.symptoms.discharge }));
         
         if (chips.length > 0) {
           symptomsEl.innerHTML = chips.map(c => `<span class="milestone-symptom-chip">${escapeHtml(c)}</span>`).join('');
         } else {
-          symptomsEl.innerHTML = `<span class="milestone-symptom-chip milestone-symptom-chip--calm">No Symptoms Reported</span>`;
+          symptomsEl.innerHTML = `<span class="milestone-symptom-chip milestone-symptom-chip--calm">${escapeHtml(tr('healing.gallery.noSymptomsReported', 'No Symptoms Reported'))}</span>`;
         }
       } else if (item.isBaseline) {
-        symptomsEl.innerHTML = `<span class="milestone-symptom-chip milestone-symptom-chip--baseline">Baseline (Pre-Healing Initial State)</span>`;
+        symptomsEl.innerHTML = `<span class="milestone-symptom-chip milestone-symptom-chip--baseline">${escapeHtml(tr('healing.gallery.baselineLong', 'Baseline (Pre-Healing Initial State)'))}</span>`;
       } else {
         symptomsEl.innerHTML = '';
       }

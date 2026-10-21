@@ -32,7 +32,7 @@
     if (installBtn) {
       installBtn.addEventListener('click', function() {
         if (!deferredPrompt) {
-          alert('To install on iOS Safari: Tap Share -> Add to Home Screen.');
+          alert((window.t && window.t('healing.storage.iosInstall')) || 'To install on iOS Safari: Tap Share -> Add to Home Screen.');
           return;
         }
         deferredPrompt.prompt();

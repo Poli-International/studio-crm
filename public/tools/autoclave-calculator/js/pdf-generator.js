@@ -4,6 +4,11 @@
  * Handles studio logo embedding, calibration certificates, and QA audit exports.
  */
 
+// i18n helpers: __tx = plain text, T = HTML-safe text (keys are the English strings, see js/i18n/*.js)
+const __tx = (s, p) => (typeof window !== 'undefined' && typeof window.t === 'function' ? window.t(s, p) : String(s).replace(/\{(\w+)\}/g, (m, k) => (p && k in p ? p[k] : m)));
+const __loc = () => { const l = (typeof document !== 'undefined' && document.documentElement.lang) || 'en'; return l === 'en' ? 'en-US' : l; };
+const T = (s, p) => __tx(s, p).replace(/&(?!(?:nbsp|amp|lt|gt|rarr);)/g, '&amp;').replace(/</g, '&lt;');
+
 const PDFGenerator = {
     /**
      * Retrieve studio profile config from localStorage
@@ -17,7 +22,7 @@ const PDFGenerator = {
         }
         return {
             studioName: 'POLI INTERNATIONAL STUDIO',
-            address: 'Infection Control & Sterilization Division',
+            address: __tx('Infection Control & Sterilization Division'),
             operatorName: '',
             autoclaveSerial: '',
             certDate: localStorage.getItem('autoclave_calibration_date') || '',
@@ -95,7 +100,7 @@ const PDFGenerator = {
             return `
                 <div class="print-document-header ${fontClass}" style="${dividerStyle} padding-bottom: 14px; margin-bottom: 16px; text-align: center;">
                     <h1 class="print-studio-name" style="font-size: 16px; margin: 0 0 2px 0; color: var(--text-primary);">${profile.studioName || 'POLI INTERNATIONAL • CLINICAL STERILIZATION'}</h1>
-                    <p class="print-studio-address" style="font-size: 11px; color: var(--text-secondary); margin: 0 0 8px 0;">${profile.address || 'Quality Assurance & Infection Control Standard Operating Procedure'}</p>
+                    <p class="print-studio-address" style="font-size: 11px; color: var(--text-secondary); margin: 0 0 8px 0;">${profile.address || __tx('Quality Assurance & Infection Control Standard Operating Procedure')}</p>
                     <h2 class="print-doc-title" style="font-size: 15px; margin: 0 0 2px 0; color: var(--color-success);">${title}</h2>
                     <p class="print-doc-subtitle" style="font-size: 11px; color: var(--text-secondary); margin: 0;">${subtitle}</p>
                 </div>
@@ -107,7 +112,7 @@ const PDFGenerator = {
                 <div class="print-document-header ${fontClass}" style="${dividerStyle} padding-bottom: 14px; margin-bottom: 16px; text-align: center;">
                     <div style="margin-bottom: 8px;">${logoHtml}</div>
                     <h1 class="print-studio-name" style="font-size: 16px; margin: 0 0 2px 0; color: var(--text-primary);">${profile.studioName || 'POLI INTERNATIONAL • CLINICAL STERILIZATION'}</h1>
-                    <p class="print-studio-address" style="font-size: 11px; color: var(--text-secondary); margin: 0 0 8px 0;">${profile.address || 'Quality Assurance & Infection Control Standard Operating Procedure'}</p>
+                    <p class="print-studio-address" style="font-size: 11px; color: var(--text-secondary); margin: 0 0 8px 0;">${profile.address || __tx('Quality Assurance & Infection Control Standard Operating Procedure')}</p>
                     <h2 class="print-doc-title" style="font-size: 15px; margin: 0 0 2px 0; color: var(--color-success);">${title}</h2>
                     <p class="print-doc-subtitle" style="font-size: 11px; color: var(--text-secondary); margin: 0;">${subtitle}</p>
                 </div>
@@ -119,7 +124,7 @@ const PDFGenerator = {
                 <div class="print-document-header ${fontClass}" style="${dividerStyle} padding: 12px; margin-bottom: 16px; background: var(--bg-tertiary); border-radius: 6px; text-align: center;">
                     <div style="margin-bottom: 6px;">${logoHtml}</div>
                     <h1 class="print-studio-name" style="font-size: 16px; margin: 0 0 2px 0; color: var(--text-primary);">${profile.studioName || 'POLI INTERNATIONAL • CLINICAL STERILIZATION'}</h1>
-                    <p class="print-studio-address" style="font-size: 11px; color: var(--text-secondary); margin: 0 0 6px 0;">${profile.address || 'Quality Assurance & Infection Control Standard Operating Procedure'}</p>
+                    <p class="print-studio-address" style="font-size: 11px; color: var(--text-secondary); margin: 0 0 6px 0;">${profile.address || __tx('Quality Assurance & Infection Control Standard Operating Procedure')}</p>
                     <h2 class="print-doc-title" style="font-size: 15px; margin: 0 0 2px 0; color: var(--color-success);">${title}</h2>
                     <p class="print-doc-subtitle" style="font-size: 11px; color: var(--text-secondary); margin: 0;">${subtitle}</p>
                 </div>
@@ -131,7 +136,7 @@ const PDFGenerator = {
                 <div class="print-document-header ${fontClass}" style="${dividerStyle} padding-bottom: 14px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
                     <div class="print-header-text" style="flex: 1;">
                         <h1 class="print-studio-name" style="font-size: 16px; margin: 0 0 2px 0; color: var(--text-primary);">${profile.studioName || 'POLI INTERNATIONAL • CLINICAL STERILIZATION'}</h1>
-                        <p class="print-studio-address" style="font-size: 11px; color: var(--text-secondary); margin: 0 0 6px 0;">${profile.address || 'Quality Assurance & Infection Control Standard Operating Procedure'}</p>
+                        <p class="print-studio-address" style="font-size: 11px; color: var(--text-secondary); margin: 0 0 6px 0;">${profile.address || __tx('Quality Assurance & Infection Control Standard Operating Procedure')}</p>
                         <h2 class="print-doc-title" style="font-size: 15px; margin: 0 0 2px 0; color: var(--color-success);">${title}</h2>
                         <p class="print-doc-subtitle" style="font-size: 11px; color: var(--text-secondary); margin: 0;">${subtitle}</p>
                     </div>
@@ -149,7 +154,7 @@ const PDFGenerator = {
                     ${logoHtml}
                     <div class="print-header-text">
                         <h1 class="print-studio-name" style="font-size: 16px; margin: 0 0 2px 0; color: var(--text-primary);">${profile.studioName || 'POLI INTERNATIONAL • CLINICAL STERILIZATION'}</h1>
-                        <p class="print-studio-address" style="font-size: 11px; color: var(--text-secondary); margin: 0;">${profile.address || 'Quality Assurance & Infection Control Standard Operating Procedure'}</p>
+                        <p class="print-studio-address" style="font-size: 11px; color: var(--text-secondary); margin: 0;">${profile.address || __tx('Quality Assurance & Infection Control Standard Operating Procedure')}</p>
                     </div>
                 </div>
                 <div class="print-header-right" style="text-align: right;">
@@ -166,7 +171,7 @@ const PDFGenerator = {
     generateCycleLogHtml: function(calcData) {
         const profile = this.getStudioProfile();
         const now = new Date();
-        const dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+        const dateStr = now.toLocaleDateString(__loc(), { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
         const autoLot = 'LOT-' + now.getFullYear() + String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0') + '-' + String(Math.floor(Math.random()*900 + 100));
         const loadNum = calcData?.batchNumber || calcData?.batchId || autoLot;
 
@@ -175,48 +180,48 @@ const PDFGenerator = {
         const exposure = calcData?.parameters?.exposureTime ? `${calcData.parameters.exposureTime} min` : '4 min';
         const dry = calcData?.parameters?.dryTime ? `${calcData.parameters.dryTime} min` : '20 min';
         const total = calcData?.parameters?.totalCycle ? `${calcData.parameters.totalCycle} min` : '35 min';
-        const loadType = calcData?.loadType ? (calcData.loadType.charAt(0).toUpperCase() + calcData.loadType.slice(1)) : 'Wrapped Instruments';
+        const loadType = calcData?.loadType ? (calcData.loadType.charAt(0).toUpperCase() + calcData.loadType.slice(1)) : __tx('Wrapped Instruments');
         const autoclaveName = calcData?.autoclaveType ? calcData.autoclaveType.toUpperCase() : 'PRE-VACUUM (CLASS B)';
 
         const calibrationDate = localStorage.getItem('autoclave_calibration_date');
-        let calibStatusText = 'Not Documented';
+        let calibStatusText = __tx('Not Documented');
         if (calibrationDate) {
             const calDate = new Date(calibrationDate);
             const daysSince = Math.floor((now - calDate)/(1000*60*60*24));
             if (daysSince >= 365) {
-                calibStatusText = `⚠️ Overdue (${daysSince}d since cert on ${calDate.toLocaleDateString()})`;
+                calibStatusText = __tx('⚠️ Overdue ({d}d since cert on {date})', { d: daysSince, date: calDate.toLocaleDateString() });
             } else {
-                calibStatusText = `✓ Valid (${365 - daysSince}d remaining | Cert: ${calDate.toLocaleDateString()})`;
+                calibStatusText = __tx('✓ Valid ({d}d remaining | Cert: {date})', { d: 365 - daysSince, date: calDate.toLocaleDateString() });
             }
         }
 
         return `
             <div class="print-document-sheet">
-                ${this.renderDocumentHeader('STERILIZATION CYCLE VERIFICATION LOG', 'Physical & Chemical Parameter Release Record')}
+                ${this.renderDocumentHeader(__tx('STERILIZATION CYCLE VERIFICATION LOG'), __tx('Physical & Chemical Parameter Release Record'))}
 
                 <div class="print-meta-grid">
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Date &amp; Time:</span>
+                        <span class="print-meta-label">${T("Date & Time:")}</span>
                         <span class="print-meta-value">${dateStr}</span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Cycle / Batch #:</span>
+                        <span class="print-meta-label">${T("Cycle / Batch #:")}</span>
                         <span class="print-meta-value"><strong>${loadNum}</strong></span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Autoclave Class:</span>
+                        <span class="print-meta-label">${T("Autoclave Class:")}</span>
                         <span class="print-meta-value">${autoclaveName}</span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Chamber Serial ID:</span>
+                        <span class="print-meta-label">${T("Chamber Serial ID:")}</span>
                         <span class="print-meta-value">${profile.autoclaveSerial || 'CHAMBER-01-SN4892'}</span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Certified Technician:</span>
+                        <span class="print-meta-label">${T("Certified Technician:")}</span>
                         <span class="print-meta-value">${profile.operatorName || 'Lead Sterilization Tech'}</span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Annual Calibration:</span>
+                        <span class="print-meta-label">${T("Annual Calibration:")}</span>
                         <span class="print-meta-value">${calibStatusText}</span>
                     </div>
                 </div>
@@ -224,12 +229,12 @@ const PDFGenerator = {
                 <table class="print-table">
                     <thead>
                         <tr>
-                            <th>Target Temp</th>
-                            <th>Target Pressure</th>
-                            <th>Exposure Plateau</th>
-                            <th>Dry Cycle</th>
-                            <th>Total Run Time</th>
-                            <th>Load Classification</th>
+                            <th>${T("Target Temp")}</th>
+                            <th>${T("Target Pressure")}</th>
+                            <th>${T("Exposure Plateau")}</th>
+                            <th>${T("Dry Cycle")}</th>
+                            <th>${T("Total Run Time")}</th>
+                            <th>${T("Load Classification")}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -244,37 +249,37 @@ const PDFGenerator = {
                     </tbody>
                 </table>
 
-                <div class="print-checklist-title">8-Point Clinical Release Verification Checklist</div>
+                <div class="print-checklist-title">${T("8-Point Clinical Release Verification Checklist")}</div>
                 <ul class="print-checklist">
-                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>1. Pre-Clean &amp; Ultrasonic:</strong> Instruments scrubbed, enzymatically rinsed, and 100% dry prior to packaging.</span></li>
-                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>2. Pouch Integrity:</strong> Medical-grade autoclave pouches inspected; self-seals intact without tears or creases.</span></li>
-                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>3. Internal Chemical Integrator:</strong> Class 4/5/6 multiparameter integrator placed in center of pack.</span></li>
-                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>4. External Process Indicator:</strong> External color change ink verified after completed cycle.</span></li>
-                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>5. Distilled Water &amp; Gasket:</strong> Water purity verified; silicone door gasket clean with airtight seal.</span></li>
-                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>6. Physical Parameters Sustained:</strong> Digital display logged full plateau temp &amp; pressure continuously.</span></li>
-                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>7. Dry Pack Release:</strong> Zero wet packs detected; items fully cooled before handling or storage.</span></li>
-                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>8. Biological Spore Test:</strong> Autoclave has a valid passing biological spore test within mandated frequency.</span></li>
+                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>${T("1. Pre-Clean & Ultrasonic:")}</strong> ${T("Instruments scrubbed, enzymatically rinsed, and 100% dry prior to packaging.")}</span></li>
+                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>${T("2. Pouch Integrity:")}</strong> ${T("Medical-grade autoclave pouches inspected; self-seals intact without tears or creases.")}</span></li>
+                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>${T("3. Internal Chemical Integrator:")}</strong> ${T("Class 4/5/6 multiparameter integrator placed in center of pack.")}</span></li>
+                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>${T("4. External Process Indicator:")}</strong> ${T("External color change ink verified after completed cycle.")}</span></li>
+                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>${T("5. Distilled Water & Gasket:")}</strong> ${T("Water purity verified; silicone door gasket clean with airtight seal.")}</span></li>
+                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>${T("6. Physical Parameters Sustained:")}</strong> ${T("Digital display logged full plateau temp & pressure continuously.")}</span></li>
+                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>${T("7. Dry Pack Release:")}</strong> ${T("Zero wet packs detected; items fully cooled before handling or storage.")}</span></li>
+                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>${T("8. Biological Spore Test:")}</strong> ${T("Autoclave has a valid passing biological spore test within mandated frequency.")}</span></li>
                 </ul>
 
                 <div class="print-signoff-box">
                     <div class="print-signoff-grid">
                         <div>
-                            <strong>Authorized Operator Signature:</strong>
+                            <strong>${T("Authorized Operator Signature:")}</strong>
                             <div class="print-sign-line"></div>
-                            <span style="font-size: 10px; color: var(--text-secondary);">Sign to verify all physical and chemical parameters met</span>
+                            <span style="font-size: 10px; color: var(--text-secondary);">${T("Sign to verify all physical and chemical parameters met")}</span>
                         </div>
                         <div>
-                            <strong>Load Release Decision:</strong>
+                            <strong>${T("Load Release Decision:")}</strong>
                             <div style="margin-top: 8px;">
-                                <span class="print-checkbox">✓</span> <strong>PASSED &amp; RELEASED</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                                <span class="print-checkbox"></span> <strong>FAILED / QUARANTINE</strong>
+                                <span class="print-checkbox">✓</span> <strong>${T("PASSED & RELEASED")}</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="print-checkbox"></span> <strong>${T("FAILED / QUARANTINE")}</strong>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="print-footer-note">
-                    Official Infection Control Record • Retain on studio file for minimum 3 years or per local health authority regulations.
+                    ${T("Official Infection Control Record • Retain on studio file for minimum 3 years or per local health authority regulations.")}
                 </div>
             </div>
         `;
@@ -286,8 +291,8 @@ const PDFGenerator = {
     generateMonthlyAuditReportHtml: function(cycleLogs, sporeHistory, stateData, customStartDate = null, customEndDate = null) {
         const profile = this.getStudioProfile();
         const now = new Date();
-        const dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-        const monthYearStr = now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        const dateStr = now.toLocaleDateString(__loc(), { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+        const monthYearStr = now.toLocaleDateString(__loc(), { month: 'long', year: 'numeric' });
 
         let startDateObj = null;
         let endDateObj = null;
@@ -296,13 +301,13 @@ const PDFGenerator = {
         if (customStartDate || customEndDate) {
             startDateObj = customStartDate ? new Date(customStartDate + 'T00:00:00') : new Date('2020-01-01');
             endDateObj = customEndDate ? new Date(customEndDate + 'T23:59:59') : new Date();
-            const fromFormatted = startDateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-            const toFormatted = endDateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-            reportingPeriodStr = `Custom Period (${fromFormatted} – ${toFormatted})`;
+            const fromFormatted = startDateObj.toLocaleDateString(__loc(), { year: 'numeric', month: 'short', day: 'numeric' });
+            const toFormatted = endDateObj.toLocaleDateString(__loc(), { year: 'numeric', month: 'short', day: 'numeric' });
+            reportingPeriodStr = __tx('Custom Period ({from} – {to})', { from: fromFormatted, to: toFormatted });
         } else {
             startDateObj = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
             endDateObj = now;
-            reportingPeriodStr = `Past 30 Days (${startDateObj.toLocaleDateString()} – ${now.toLocaleDateString()})`;
+            reportingPeriodStr = __tx('Past 30 Days ({from} – {to})', { from: startDateObj.toLocaleDateString(), to: now.toLocaleDateString() });
         }
 
         // Filter cycle logs by date range
@@ -321,7 +326,7 @@ const PDFGenerator = {
         const calibrationDate = localStorage.getItem('autoclave_calibration_date');
         const calibTech = localStorage.getItem('autoclave_calibration_tech') || profile.certTechnician || 'Apex Biomedical Services Inc.';
         const calibDecal = localStorage.getItem('autoclave_calibration_decal') || profile.certNumber || 'CERT-2025-QA981';
-        let calibStatusText = 'Valid & Certified';
+        let calibStatusText = __tx('Valid & Certified');
         let calibBadgeColor = 'var(--color-success)';
         let daysSinceCalib = 0;
         let calibFormattedDate = 'N/A';
@@ -329,16 +334,16 @@ const PDFGenerator = {
         if (calibrationDate) {
             const calDate = new Date(calibrationDate);
             daysSinceCalib = Math.floor((now - calDate) / (1000 * 60 * 60 * 24));
-            calibFormattedDate = calDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+            calibFormattedDate = calDate.toLocaleDateString(__loc(), { year: 'numeric', month: 'short', day: 'numeric' });
             if (daysSinceCalib >= 365) {
-                calibStatusText = `OVERDUE (${daysSinceCalib} days since certification)`;
+                calibStatusText = __tx('OVERDUE ({n} days since certification)', { n: daysSinceCalib });
                 calibBadgeColor = 'var(--color-danger)';
             } else {
-                calibStatusText = `ACTIVE & VALID (${365 - daysSinceCalib} days remaining)`;
+                calibStatusText = __tx('ACTIVE & VALID ({n} days remaining)', { n: 365 - daysSinceCalib });
                 calibBadgeColor = 'var(--color-success)';
             }
         } else {
-            calibStatusText = 'PENDING DOCUMENTATION';
+            calibStatusText = __tx('PENDING DOCUMENTATION');
             calibBadgeColor = 'var(--color-warning)';
         }
 
@@ -354,7 +359,7 @@ const PDFGenerator = {
         // Render Cycle Logs Rows
         let cycleRowsHtml = '';
         if (cycles.length === 0) {
-            cycleRowsHtml = `<tr><td colspan="8" style="text-align:center; padding: 14px; color: var(--text-secondary);">No sterilization cycles recorded in the last 30 days.</td></tr>`;
+            cycleRowsHtml = `<tr><td colspan="8" style="text-align:center; padding: 14px; color: var(--text-secondary);">${T("No sterilization cycles recorded in the last 30 days.")}</td></tr>`;
         } else {
             cycles.forEach(c => {
                 const cDate = c.date || (c.timestamp ? new Date(c.timestamp).toISOString().split('T')[0] : 'N/A');
@@ -366,7 +371,7 @@ const PDFGenerator = {
                 const exposure = c.parameters?.exposureTime ? `${c.parameters.exposureTime}m` : (c.exposureTime ? `${c.exposureTime}m` : '4m');
                 const dry = c.parameters?.dryTime ? `${c.parameters.dryTime}m` : (c.dryTime ? `${c.dryTime}m` : '20m');
                 const total = c.parameters?.totalCycle ? `${c.parameters.totalCycle}m` : (c.totalCycle ? `${c.totalCycle}m` : '35m');
-                const op = c.operator || profile.operatorName || 'Studio Tech';
+                const op = c.operator || profile.operatorName || __tx('Studio Tech');
 
                 cycleRowsHtml += `
                     <tr>
@@ -377,7 +382,7 @@ const PDFGenerator = {
                         <td>${temp} / ${pressure}</td>
                         <td>${exposure} / ${dry} (Tot: ${total})</td>
                         <td>${op}</td>
-                        <td><span style="color: var(--color-success); font-weight: bold;">✓ RELEASED</span></td>
+                        <td><span style="color: var(--color-success); font-weight: bold;">${T("✓ RELEASED")}</span></td>
                     </tr>
                 `;
             });
@@ -386,15 +391,15 @@ const PDFGenerator = {
         // Render Spore Test Rows
         let sporeRowsHtml = '';
         if (spores.length === 0) {
-            sporeRowsHtml = `<tr><td colspan="7" style="text-align:center; padding: 14px; color: var(--text-secondary);">No biological spore tests logged in the last 30 days.</td></tr>`;
+            sporeRowsHtml = `<tr><td colspan="7" style="text-align:center; padding: 14px; color: var(--text-secondary);">${T("No biological spore tests logged in the last 30 days.")}</td></tr>`;
         } else {
             spores.forEach((s, idx) => {
                 const isPass = s.result === 'pass' || s.result === 'Passed' || s.result === 'Negative';
                 const badgeStyle = isPass
                     ? 'background: var(--color-success); color: var(--bg-primary);'
                     : 'background: var(--color-danger); color: var(--bg-primary);';
-                const resultText = isPass ? '✓ NEGATIVE (PASS)' : '⚠️ POSITIVE (FAIL)';
-                const gapText = s.gapDays !== undefined && s.gapDays !== null ? `${s.gapDays} days` : (idx === 0 ? 'Baseline' : '--');
+                const resultText = isPass ? __tx('✓ NEGATIVE (PASS)') : __tx('⚠️ POSITIVE (FAIL)');
+                const gapText = s.gapDays !== undefined && s.gapDays !== null ? __tx('{n} days', { n: s.gapDays }) : (idx === 0 ? __tx('Baseline') : '--');
 
                 sporeRowsHtml += `
                     <tr>
@@ -403,8 +408,8 @@ const PDFGenerator = {
                         <td><code>${s.lotNumber || 'BI-LOT-9921'}</code></td>
                         <td><span style="display:inline-block; padding: 3px 8px; border-radius: 4px; font-weight: 800; font-size: 10px; ${badgeStyle}">${resultText}</span></td>
                         <td>${s.incubationHours ? `${s.incubationHours}h @ ${s.incubationTemp || 56}°C` : '24h Standard'}</td>
-                        <td>${s.operator || profile.operatorName || 'Studio Tech'}</td>
-                        <td>${s.notes || 'Unprocessed control vial verified positive.'}</td>
+                        <td>${s.operator || profile.operatorName || __tx('Studio Tech')}</td>
+                        <td>${s.notes || __tx('Unprocessed control vial verified positive.')}</td>
                     </tr>
                 `;
             });
@@ -413,31 +418,31 @@ const PDFGenerator = {
         return `
             <div class="print-document-sheet print-monthly-audit">
                 <!-- PAGE 1: EXECUTIVE AUDIT SUMMARY & FACILITY COMPLIANCE -->
-                ${this.renderDocumentHeader('STERILIZATION & SPORE COMPLIANCE AUDIT REPORT', `Official Health Inspector Compliance Record • ${reportingPeriodStr}`)}
+                ${this.renderDocumentHeader(__tx('STERILIZATION & SPORE COMPLIANCE AUDIT REPORT'), __tx('Official Health Inspector Compliance Record • {period}', { period: reportingPeriodStr }))}
 
                 <div class="print-meta-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 12px;">
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Inspection Date:</span>
+                        <span class="print-meta-label">${T("Inspection Date:")}</span>
                         <span class="print-meta-value">${dateStr}</span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Reporting Period:</span>
+                        <span class="print-meta-label">${T("Reporting Period:")}</span>
                         <span class="print-meta-value">${reportingPeriodStr}</span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Jurisdiction Mandate:</span>
+                        <span class="print-meta-label">${T("Jurisdiction Mandate:")}</span>
                         <span class="print-meta-value">${stateData?.name || 'CDC / State Board Standards'} (${(stateData?.frequency || 'Weekly').toUpperCase()})</span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Facility / Studio:</span>
+                        <span class="print-meta-label">${T("Facility / Studio:")}</span>
                         <span class="print-meta-value"><strong>${profile.studioName || 'Poli International Tattoo & Piercing Arts'}</strong></span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Lead Operator:</span>
-                        <span class="print-meta-value">${profile.operatorName || 'Lead Sterilization Technician'}</span>
+                        <span class="print-meta-label">${T("Lead Operator:")}</span>
+                        <span class="print-meta-value">${profile.operatorName || __tx('Lead Sterilization Technician')}</span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Chamber Serial ID:</span>
+                        <span class="print-meta-label">${T("Chamber Serial ID:")}</span>
                         <span class="print-meta-value">${profile.autoclaveSerial || 'CHAMBER-01-SN4892'}</span>
                     </div>
                 </div>
@@ -445,48 +450,48 @@ const PDFGenerator = {
                 <!-- 30-Day Executive Metric Cards -->
                 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 14px;">
                     <div style="background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 6px; padding: 8px 10px; text-align: center;">
-                        <span style="font-size: 10px; color: var(--text-secondary); text-transform: uppercase; font-weight: 700; display: block;">30-Day Cycles</span>
-                        <strong style="font-size: 18px; color: var(--text-primary);">${totalCycles} Batches</strong>
-                        <span style="font-size: 9.5px; color: var(--color-success); display: block;">100% Parameter Pass</span>
+                        <span style="font-size: 10px; color: var(--text-secondary); text-transform: uppercase; font-weight: 700; display: block;">${T("30-Day Cycles")}</span>
+                        <strong style="font-size: 18px; color: var(--text-primary);">${T('{n} Batches', { n: totalCycles })}</strong>
+                        <span style="font-size: 9.5px; color: var(--color-success); display: block;">${T("100% Parameter Pass")}</span>
                     </div>
                     <div style="background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 6px; padding: 8px 10px; text-align: center;">
-                        <span style="font-size: 10px; color: var(--text-secondary); text-transform: uppercase; font-weight: 700; display: block;">Biological Tests</span>
-                        <strong style="font-size: 18px; color: var(--text-primary);">${totalSpores} Tests</strong>
-                        <span style="font-size: 9.5px; color: var(--color-success); display: block;">${sporePassRate}% Spore Lethality</span>
+                        <span style="font-size: 10px; color: var(--text-secondary); text-transform: uppercase; font-weight: 700; display: block;">${T("Biological Tests")}</span>
+                        <strong style="font-size: 18px; color: var(--text-primary);">${T('{n} Tests', { n: totalSpores })}</strong>
+                        <span style="font-size: 9.5px; color: var(--color-success); display: block;">${T('{n}% Spore Lethality', { n: sporePassRate })}</span>
                     </div>
                     <div style="background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 6px; padding: 8px 10px; text-align: center;">
-                        <span style="font-size: 10px; color: var(--text-secondary); text-transform: uppercase; font-weight: 700; display: block;">Annual Calibration</span>
+                        <span style="font-size: 10px; color: var(--text-secondary); text-transform: uppercase; font-weight: 700; display: block;">${T("Annual Calibration")}</span>
                         <strong style="font-size: 13px; color: ${calibBadgeColor}; display: block; margin: 4px 0 2px 0;">${calibStatusText}</strong>
-                        <span style="font-size: 9.5px; color: var(--text-secondary); display: block;">Decal: ${calibDecal}</span>
+                        <span style="font-size: 9.5px; color: var(--text-secondary); display: block;">${T('Decal: {decal}', { decal: calibDecal })}</span>
                     </div>
                     <div style="background: var(--bg-secondary); border: 1.5px solid var(--color-success); border-radius: 6px; padding: 8px 10px; text-align: center;">
-                        <span style="font-size: 10px; color: var(--color-success); text-transform: uppercase; font-weight: 700; display: block;">Overall Rating</span>
-                        <strong style="font-size: 12px; color: var(--color-success); display: block; margin: 4px 0 2px 0;">COMPLIANT</strong>
-                        <span style="font-size: 9.5px; color: var(--color-success); display: block;">State Standards Met</span>
+                        <span style="font-size: 10px; color: var(--color-success); text-transform: uppercase; font-weight: 700; display: block;">${T("Overall Rating")}</span>
+                        <strong style="font-size: 12px; color: var(--color-success); display: block; margin: 4px 0 2px 0;">${T("COMPLIANT")}</strong>
+                        <span style="font-size: 9.5px; color: var(--color-success); display: block;">${T("State Standards Met")}</span>
                     </div>
                 </div>
 
                 <!-- Annual Calibration & Biomedical Service Attestation -->
                 <div style="background: var(--bg-secondary); border-left: 4px solid var(--color-success); padding: 8px 12px; border-radius: 4px; margin-bottom: 14px; font-size: 10.5px;">
-                    <strong>🛡️ Equipment Calibration Attestation:</strong> This autoclave is under active annual preventive maintenance and biomedical temperature/pressure calibration per manufacturer guidelines and local health authority mandates. Last certified on <strong>${calibFormattedDate}</strong> by <strong>${calibTech}</strong> (Certificate/Decal #${calibDecal}).
+                    <strong>${T("🛡️ Equipment Calibration Attestation:")}</strong> ${T("This autoclave is under active annual preventive maintenance and biomedical temperature/pressure calibration per manufacturer guidelines and local health authority mandates. Last certified on")} <strong>${calibFormattedDate}</strong> ${T("by")} <strong>${calibTech}</strong> ${T('(Certificate/Decal #{decal}).', { decal: calibDecal })}
                 </div>
 
                 <!-- SECTION 1: 30-DAY STERILIZATION CYCLES LOG TABLE -->
                 <div class="print-checklist-title" style="display: flex; justify-content: space-between; align-items: center;">
-                    <span>1. 30-Day Physical Sterilization Cycle &amp; Batch Release Log</span>
-                    <span style="font-size: 10px; font-weight: 600; color: var(--text-secondary);">Showing ${totalCycles} recorded cycles</span>
+                    <span>${T("1. 30-Day Physical Sterilization Cycle & Batch Release Log")}</span>
+                    <span style="font-size: 10px; font-weight: 600; color: var(--text-secondary);">${T('Showing {n} recorded cycles', { n: totalCycles })}</span>
                 </div>
                 <table class="print-table" style="margin-bottom: 14px;">
                     <thead>
                         <tr>
-                            <th>Date</th>
-                            <th>Batch / Lot #</th>
-                            <th>Autoclave Type</th>
-                            <th>Load Type &amp; Size</th>
-                            <th>Target Parameters</th>
-                            <th>Exposure / Dry Time</th>
-                            <th>Operator</th>
-                            <th>Release</th>
+                            <th>${T("Date")}</th>
+                            <th>${T("Batch / Lot #")}</th>
+                            <th>${T("Autoclave Type")}</th>
+                            <th>${T("Load Type & Size")}</th>
+                            <th>${T("Target Parameters")}</th>
+                            <th>${T("Exposure / Dry Time")}</th>
+                            <th>${T("Operator")}</th>
+                            <th>${T("Release")}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -496,19 +501,19 @@ const PDFGenerator = {
 
                 <!-- SECTION 2: 30-DAY BIOLOGICAL INDICATOR SPORE TEST AUDIT LOG -->
                 <div class="print-checklist-title" style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px;">
-                    <span>2. 30-Day Biological Indicator (Spore Test) Audit Log</span>
-                    <span style="font-size: 10px; font-weight: 600; color: var(--text-secondary);">Showing ${totalSpores} recorded spore tests</span>
+                    <span>${T("2. 30-Day Biological Indicator (Spore Test) Audit Log")}</span>
+                    <span style="font-size: 10px; font-weight: 600; color: var(--text-secondary);">${T('Showing {n} recorded spore tests', { n: totalSpores })}</span>
                 </div>
                 <table class="print-table" style="margin-bottom: 14px;">
                     <thead>
                         <tr>
-                            <th>Test Date</th>
-                            <th>Interval</th>
-                            <th>BI Indicator Lot #</th>
-                            <th>Biological Result</th>
-                            <th>Incubation Duration</th>
-                            <th>Testing Tech</th>
-                            <th>Incubation &amp; Laboratory Notes</th>
+                            <th>${T("Test Date")}</th>
+                            <th>${T("Interval")}</th>
+                            <th>${T("BI Indicator Lot #")}</th>
+                            <th>${T("Biological Result")}</th>
+                            <th>${T("Incubation Duration")}</th>
+                            <th>${T("Testing Tech")}</th>
+                            <th>${T("Incubation & Laboratory Notes")}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -517,32 +522,32 @@ const PDFGenerator = {
                 </table>
 
                 <!-- SECTION 3: OFFICIAL INSPECTION SIGNOFF & COMPLIANCE ENDORSEMENT -->
-                <div class="print-checklist-title">3. Official Health Department &amp; Studio QA Release Sign-Off</div>
+                <div class="print-checklist-title">${T("3. Official Health Department & Studio QA Release Sign-Off")}</div>
                 <div class="print-signoff-box" style="margin-bottom: 8px;">
                     <p style="font-size: 10px; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.4;">
-                        I hereby certify that all autoclave sterilization cycles, physical parameters (temperature, pressure, exposure time, drying duration), chemical integration verifications, and biological spore tests listed above have been executed in strict adherence to CDC, OSHA, and local State Health Department regulations.
+                        ${T("I hereby certify that all autoclave sterilization cycles, physical parameters (temperature, pressure, exposure time, drying duration), chemical integration verifications, and biological spore tests listed above have been executed in strict adherence to CDC, OSHA, and local State Health Department regulations.")}
                     </p>
                     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
                         <div>
-                            <strong style="font-size: 10.5px;">Lead Sterilization Technician:</strong>
+                            <strong style="font-size: 10.5px;">${T("Lead Sterilization Technician:")}</strong>
                             <div class="print-sign-line"></div>
-                            <span style="font-size: 9.5px; color: var(--text-secondary);">Print Name &amp; Signature</span>
+                            <span style="font-size: 9.5px; color: var(--text-secondary);">${T("Print Name & Signature")}</span>
                         </div>
                         <div>
-                            <strong style="font-size: 10.5px;">Studio Safety Officer / Owner:</strong>
+                            <strong style="font-size: 10.5px;">${T("Studio Safety Officer / Owner:")}</strong>
                             <div class="print-sign-line"></div>
-                            <span style="font-size: 9.5px; color: var(--text-secondary);">Print Name &amp; Signature</span>
+                            <span style="font-size: 9.5px; color: var(--text-secondary);">${T("Print Name & Signature")}</span>
                         </div>
                         <div>
-                            <strong style="font-size: 10.5px;">Health Department Inspector:</strong>
+                            <strong style="font-size: 10.5px;">${T("Health Department Inspector:")}</strong>
                             <div class="print-sign-line"></div>
-                            <span style="font-size: 9.5px; color: var(--text-secondary);">Official Health Officer Sign-Off &amp; Date</span>
+                            <span style="font-size: 9.5px; color: var(--text-secondary);">${T("Official Health Officer Sign-Off & Date")}</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="print-footer-note">
-                    Official Infection Control Document • Generated by Poli International Autoclave Compliance System • Retain on studio premises for a minimum of 3 years.
+                    ${T("Official Infection Control Document • Generated by Poli International Autoclave Compliance System • Retain on studio premises for a minimum of 3 years.")}
                 </div>
             </div>
         `;
@@ -554,25 +559,25 @@ const PDFGenerator = {
     generateSporeReportHtml: function(historyData, stateData) {
         const profile = this.getStudioProfile();
         const now = new Date();
-        const dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        const dateStr = now.toLocaleDateString(__loc(), { year: 'numeric', month: 'long', day: 'numeric' });
 
         const history = historyData || [];
         let rowsHtml = '';
 
         if (history.length === 0) {
-            rowsHtml = `<tr><td colspan="6" style="text-align:center; padding: 16px; color: var(--text-secondary);">No historical spore tests logged yet.</td></tr>`;
+            rowsHtml = `<tr><td colspan="6" style="text-align:center; padding: 16px; color: var(--text-secondary);">${T("No historical spore tests logged yet.")}</td></tr>`;
         } else {
             history.forEach(item => {
                 const badgeColor = item.result === 'Passed' || item.result === 'Negative' ? 'var(--color-success)' : 'var(--color-danger)';
                 const statusBadge = `<span style="display:inline-block; padding: 2px 8px; border-radius: 4px; font-weight: bold; color: white; background: ${badgeColor}; font-size: 11px;">${item.result}</span>`;
-                const techNotes = item.notes || item.technicianNotes || 'Routine biological lethality verification; negative at readout.';
+                const techNotes = item.notes || item.technicianNotes || __tx('Routine biological lethality verification; negative at readout.');
                 rowsHtml += `
                     <tr>
                         <td><strong>${item.date}</strong></td>
                         <td>${item.gapDays !== undefined ? item.gapDays + ' days' : '--'}</td>
                         <td>${item.lotNumber || 'BI-LOT-982'}</td>
                         <td>${statusBadge}</td>
-                        <td>${item.technician || item.operator || profile.operatorName || 'Operator'}</td>
+                        <td>${item.technician || item.operator || profile.operatorName || __tx('Operator')}</td>
                         <td>${techNotes}</td>
                     </tr>
                 `;
@@ -580,54 +585,54 @@ const PDFGenerator = {
         }
 
         const calibrationDate = localStorage.getItem('autoclave_calibration_date');
-        let calibInfo = 'Not Configured';
+        let calibInfo = __tx('Not Configured');
         if (calibrationDate) {
             const calDate = new Date(calibrationDate);
             const daysSince = Math.floor((now - calDate)/(1000*60*60*24));
-            calibInfo = daysSince >= 365 ? `⚠️ Overdue (${daysSince}d ago)` : `✓ Certified (${365 - daysSince}d left)`;
+            calibInfo = daysSince >= 365 ? __tx('⚠️ Overdue ({n}d ago)', { n: daysSince }) : __tx('✓ Certified ({n}d left)', { n: 365 - daysSince });
         }
 
         return `
             <div class="print-document-sheet">
-                ${this.renderDocumentHeader('BIOLOGICAL MONITORING COMPLIANCE REPORT', 'Historical Spore Testing & Annual Autoclave Calibration Audit')}
+                ${this.renderDocumentHeader(__tx('BIOLOGICAL MONITORING COMPLIANCE REPORT'), __tx('Historical Spore Testing & Annual Autoclave Calibration Audit'))}
 
                 <div class="print-meta-grid">
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Audit Date:</span>
+                        <span class="print-meta-label">${T("Audit Date:")}</span>
                         <span class="print-meta-value">${dateStr}</span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Jurisdiction / State:</span>
+                        <span class="print-meta-label">${T("Jurisdiction / State:")}</span>
                         <span class="print-meta-value"><strong>${stateData?.name || 'CDC / State Standard'}</strong></span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Mandated Frequency:</span>
+                        <span class="print-meta-label">${T("Mandated Frequency:")}</span>
                         <span class="print-meta-value">${stateData?.frequency ? stateData.frequency.toUpperCase() : 'WEEKLY'}</span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Autoclave Serial #:</span>
+                        <span class="print-meta-label">${T("Autoclave Serial #:")}</span>
                         <span class="print-meta-value">${profile.autoclaveSerial || 'CHAMBER-01'}</span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Annual Calibration:</span>
+                        <span class="print-meta-label">${T("Annual Calibration:")}</span>
                         <span class="print-meta-value"><strong>${calibInfo}</strong></span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Total Tests Logged:</span>
-                        <span class="print-meta-value">${history.length} Certified Runs</span>
+                        <span class="print-meta-label">${T("Total Tests Logged:")}</span>
+                        <span class="print-meta-value">${T('{n} Certified Runs', { n: history.length })}</span>
                     </div>
                 </div>
 
-                <div class="print-checklist-title">Biological Indicator Test History (Time Gap &amp; Lethality Verification)</div>
+                <div class="print-checklist-title">${T("Biological Indicator Test History (Time Gap & Lethality Verification)")}</div>
                 <table class="print-table">
                     <thead>
                         <tr>
-                            <th>Test Date</th>
-                            <th>Time Gap</th>
-                            <th>BI Indicator Lot #</th>
-                            <th>Biological Result</th>
-                            <th>Technician</th>
-                            <th>Technician Notes &amp; Observations</th>
+                            <th>${T("Test Date")}</th>
+                            <th>${T("Time Gap")}</th>
+                            <th>${T("BI Indicator Lot #")}</th>
+                            <th>${T("Biological Result")}</th>
+                            <th>${T("Technician")}</th>
+                            <th>${T("Technician Notes & Observations")}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -638,13 +643,13 @@ const PDFGenerator = {
                 <div class="print-signoff-box" style="margin-top: 18px;">
                     <div class="print-signoff-grid">
                         <div>
-                            <strong>QA Officer / Studio Lead Signature:</strong>
+                            <strong>${T("QA Officer / Studio Lead Signature:")}</strong>
                             <div class="print-sign-line"></div>
                         </div>
                         <div>
-                            <strong>Compliance Certification:</strong>
+                            <strong>${T("Compliance Certification:")}</strong>
                             <div style="margin-top: 8px;">
-                                <span class="print-checkbox">✓</span> <strong>COMPLIANT WITH HEALTH DEPT STANDARDS</strong>
+                                <span class="print-checkbox">✓</span> <strong>${T("COMPLIANT WITH HEALTH DEPT STANDARDS")}</strong>
                             </div>
                         </div>
                     </div>
@@ -660,7 +665,7 @@ const PDFGenerator = {
     generateAllSporeArchivePdfHtml: function(historyData, stateData) {
         const profile = this.getStudioProfile();
         const now = new Date();
-        const dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        const dateStr = now.toLocaleDateString(__loc(), { year: 'numeric', month: 'long', day: 'numeric' });
 
         const history = (historyData && historyData.length > 0) 
             ? [...historyData].sort((a, b) => new Date(b.date) - new Date(a.date))
@@ -678,7 +683,7 @@ const PDFGenerator = {
         }
 
         const calibrationDate = localStorage.getItem('autoclave_calibration_date');
-        let calibInfo = 'Not Configured';
+        let calibInfo = __tx('Not Configured');
         if (calibrationDate) {
             const calDate = new Date(calibrationDate);
             const daysSince = Math.floor((now - calDate) / (1000 * 60 * 60 * 24));
@@ -687,7 +692,7 @@ const PDFGenerator = {
 
         let rowsHtml = '';
         if (history.length === 0) {
-            rowsHtml = `<tr><td colspan="7" style="text-align:center; padding: 20px; color: var(--text-secondary);">No biological spore test records stored in local browser database.</td></tr>`;
+            rowsHtml = `<tr><td colspan="7" style="text-align:center; padding: 20px; color: var(--text-secondary);">${T("No biological spore test records stored in local browser database.")}</td></tr>`;
         } else {
             history.forEach((item, index) => {
                 const isPass = item.result === 'Passed' || item.result === 'Negative';
@@ -697,12 +702,12 @@ const PDFGenerator = {
                 let gapDisplay = '--';
                 if (item.gapDays !== undefined) {
                     const gapColor = item.gapDays <= 7 ? 'var(--color-success)' : (item.gapDays <= 10 ? '#B45309' : 'var(--color-danger)');
-                    gapDisplay = `<span style="font-weight:700; color: ${gapColor};">${item.gapDays}d</span>`;
+                    gapDisplay = `<span style="font-weight:700; color: ${gapColor};">${__tx('{n}d', { n: item.gapDays })}</span>`;
                 }
 
-                const techNotes = item.technicianNotes || item.notes || 'Routine biological lethality verification; negative at readout.';
+                const techNotes = item.technicianNotes || item.notes || __tx('Routine biological lethality verification; negative at readout.');
                 const incubation = item.incubationType || '24h In-Office';
-                const techName = item.technician || item.operator || profile.operatorName || 'Operator';
+                const techName = item.technician || item.operator || profile.operatorName || __tx('Operator');
                 const lotNum = item.lotNumber || 'BI-LOT-982';
 
                 rowsHtml += `
@@ -721,56 +726,56 @@ const PDFGenerator = {
 
         return `
             <div class="print-document-sheet">
-                ${this.renderDocumentHeader('COMPLETE BIOLOGICAL MONITORING ARCHIVE', 'Official Historical Spore Test Verification Ledger & Compliance Certification')}
+                ${this.renderDocumentHeader(__tx('COMPLETE BIOLOGICAL MONITORING ARCHIVE'), __tx('Official Historical Spore Test Verification Ledger & Compliance Certification'))}
 
                 <div class="print-meta-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 12px;">
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Archive Generated:</span>
+                        <span class="print-meta-label">${T("Archive Generated:")}</span>
                         <span class="print-meta-value">${dateStr}</span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Date Range:</span>
+                        <span class="print-meta-label">${T("Date Range:")}</span>
                         <span class="print-meta-value">${oldestDate} &rarr; ${newestDate}</span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Total Tests Logged:</span>
-                        <span class="print-meta-value"><strong>${totalTests} Certified Runs</strong></span>
+                        <span class="print-meta-label">${T("Total Tests Logged:")}</span>
+                        <span class="print-meta-value"><strong>${T('{n} Certified Runs', { n: totalTests })}</strong></span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Sterility Pass Rate:</span>
-                        <span class="print-meta-value" style="color: var(--color-success);"><strong>${passRate}% Negative</strong></span>
+                        <span class="print-meta-label">${T("Sterility Pass Rate:")}</span>
+                        <span class="print-meta-value" style="color: var(--color-success);"><strong>${T('{n}% Negative', { n: passRate })}</strong></span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Autoclave Chamber ID:</span>
+                        <span class="print-meta-label">${T("Autoclave Chamber ID:")}</span>
                         <span class="print-meta-value">${profile.autoclaveSerial || 'CHAMBER-01 • SN-984210'}</span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Facility Jurisdiction:</span>
+                        <span class="print-meta-label">${T("Facility Jurisdiction:")}</span>
                         <span class="print-meta-value">${stateData?.name || 'CDC Guidelines (Weekly)'}</span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Annual Calibration:</span>
+                        <span class="print-meta-label">${T("Annual Calibration:")}</span>
                         <span class="print-meta-value"><strong>${calibInfo}</strong></span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Statutory Record Retention:</span>
-                        <span class="print-meta-value">3-Year Compliance Lock</span>
+                        <span class="print-meta-label">${T("Statutory Record Retention:")}</span>
+                        <span class="print-meta-value">${T("3-Year Compliance Lock")}</span>
                     </div>
                 </div>
 
                 <div class="print-checklist-title" style="margin-top: 10px;">
-                    Comprehensive Biological Indicator Test Log (${totalTests} Total Historical Entries)
+                    ${T('Comprehensive Biological Indicator Test Log ({n} Total Historical Entries)', { n: totalTests })}
                 </div>
                 <table class="print-table" style="font-size: 10px; margin-bottom: 14px;">
                     <thead>
                         <tr style="background: var(--bg-secondary);">
-                            <th style="width: 12%;">Test Date</th>
-                            <th style="width: 8%; text-align: center;">Interval</th>
-                            <th style="width: 12%; text-align: center;">BI Result</th>
-                            <th style="width: 15%;">Lot Number</th>
-                            <th style="width: 15%;">Incubation Spec</th>
-                            <th style="width: 14%;">Technician</th>
-                            <th style="width: 24%;">Technician Notes &amp; Observations</th>
+                            <th style="width: 12%;">${T("Test Date")}</th>
+                            <th style="width: 8%; text-align: center;">${T("Interval")}</th>
+                            <th style="width: 12%; text-align: center;">${T("BI Result")}</th>
+                            <th style="width: 15%;">${T("Lot Number")}</th>
+                            <th style="width: 15%;">${T("Incubation Spec")}</th>
+                            <th style="width: 14%;">${T("Technician")}</th>
+                            <th style="width: 24%;">${T("Technician Notes & Observations")}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -781,26 +786,26 @@ const PDFGenerator = {
                 <div class="print-signoff-box" style="margin-top: 14px;">
                     <div class="print-signoff-grid" style="grid-template-columns: 1.2fr 1fr;">
                         <div>
-                            <strong>QA Director / Responsible Biomedical Officer Sign-Off:</strong>
+                            <strong>${T("QA Director / Responsible Biomedical Officer Sign-Off:")}</strong>
                             <div class="print-sign-line" style="margin-top: 6px;"></div>
                             <div style="font-size: 9.5px; color: var(--text-secondary); margin-top: 4px;">
-                                Name / Title: ____________________________________ Date: ${dateStr}
+                                ${T('Name / Title: ____________________________________ Date: {date}', { date: dateStr })}
                             </div>
                         </div>
                         <div>
-                            <strong>Regulatory &amp; Health Inspector Verification:</strong>
+                            <strong>${T("Regulatory & Health Inspector Verification:")}</strong>
                             <div style="margin-top: 6px; font-size: 10.5px;">
-                                <span class="print-checkbox">✓</span> <strong>COMPLETE HISTORICAL ARCHIVE CERTIFIED</strong>
+                                <span class="print-checkbox">✓</span> <strong>${T("COMPLETE HISTORICAL ARCHIVE CERTIFIED")}</strong>
                             </div>
                             <div style="font-size: 9.5px; color: var(--text-secondary); margin-top: 4px;">
-                                Verified compliant with 3-Year statutory biological monitoring audit requirements.
+                                ${T("Verified compliant with 3-Year statutory biological monitoring audit requirements.")}
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="print-footer-note" style="margin-top: 8px;">
-                    Generated by Autoclave Sterilization &amp; Biological Monitoring Compliance System • Permanent Historical Record
+                    ${T("Generated by Autoclave Sterilization & Biological Monitoring Compliance System • Permanent Historical Record")}
                 </div>
             </div>
         `;
@@ -828,12 +833,12 @@ const PDFGenerator = {
             const html = this.generateAllSporeArchivePdfHtml(history, stateData);
             this.printDocument(html);
             if (typeof showToast === 'function') {
-                showToast('✓ Complete Spore Test Archive PDF ready for print/export!', 'success', 2800);
+                showToast(__tx('✓ Complete Spore Test Archive PDF ready for print/export!'), 'success', 2800);
             }
         } catch (err) {
             console.error('Error generating complete spore archive PDF:', err);
             if (typeof showToast === 'function') {
-                showToast('Could not generate archive PDF: ' + err.message, 'error', 3500);
+                showToast(__tx('Could not generate archive PDF: {error}', { error: err.message }), 'error', 3500);
             }
         }
     },
@@ -846,9 +851,9 @@ const PDFGenerator = {
             studioName = 'POLI STUDIO',
             batchId = 'BATCH-RUN',
             date = new Date().toISOString().split('T')[0],
-            contents = 'Piercing Clamps & Forceps',
-            expiryText = 'Event-Related',
-            operator = 'Studio Technician',
+            contents = __tx('Piercing Clamps & Forceps'),
+            expiryText = __tx('Event-Related'),
+            operator = __tx('Studio Technician'),
             autoclave = 'Class B Pre-Vac',
             integratorPassed = true,
             qrSvg = '',
@@ -860,23 +865,23 @@ const PDFGenerator = {
             <div class="pouch-print-sticker">
                 <div class="pouch-print-header">
                     <span class="pouch-print-studio">${studioName}</span>
-                    <span class="pouch-print-badge">STERILE</span>
+                    <span class="pouch-print-badge">${T("STERILE")}</span>
                 </div>
                 <div class="pouch-print-body">
                     <div class="pouch-print-details">
-                        <div class="pouch-print-row"><span class="pouch-print-label">LOT:</span> <strong class="pouch-print-batch">${batchId}</strong></div>
-                        <div class="pouch-print-row"><span class="pouch-print-label">DATE:</span> <span>${date}</span></div>
-                        <div class="pouch-print-row"><span class="pouch-print-label">ITEM:</span> <span class="pouch-print-item">${contents}</span></div>
-                        <div class="pouch-print-row"><span class="pouch-print-label">EXP:</span> <span>${expiryText}</span></div>
-                        <div class="pouch-print-row"><span class="pouch-print-label">TECH:</span> <span>${operator}</span></div>
+                        <div class="pouch-print-row"><span class="pouch-print-label">${T("LOT:")}</span> <strong class="pouch-print-batch">${batchId}</strong></div>
+                        <div class="pouch-print-row"><span class="pouch-print-label">${T("DATE:")}</span> <span>${date}</span></div>
+                        <div class="pouch-print-row"><span class="pouch-print-label">${T("ITEM:")}</span> <span class="pouch-print-item">${contents}</span></div>
+                        <div class="pouch-print-row"><span class="pouch-print-label">${T("EXP:")}</span> <span>${expiryText}</span></div>
+                        <div class="pouch-print-row"><span class="pouch-print-label">${T("TECH:")}</span> <span>${operator}</span></div>
                     </div>
                     <div class="pouch-print-qr-wrap">
                         <div class="pouch-print-qr-svg">${qrSvg}</div>
-                        <span class="pouch-print-qr-sub">SCAN LOT</span>
+                        <span class="pouch-print-qr-sub">${T("SCAN LOT")}</span>
                     </div>
                 </div>
                 <div class="pouch-print-footer">
-                    <span>CI Class 5: <strong>${integratorPassed ? '✓ PASS' : '⚠️ FAIL'}</strong></span>
+                    <span>${T("CI Class 5:")} <strong>${integratorPassed ? T('✓ PASS') : T('⚠️ FAIL')}</strong></span>
                     <span>${autoclave}</span>
                 </div>
             </div>
@@ -900,37 +905,37 @@ const PDFGenerator = {
                 <div class="pouch-print-sticker" style="flex: 1; border: none; border-radius: 0; border-right: 1.5px dashed var(--text-secondary);">
                     <div class="pouch-print-header">
                         <span class="pouch-print-studio">${studioName}</span>
-                        <span class="pouch-print-badge">POUCH SEAL</span>
+                        <span class="pouch-print-badge">${T("POUCH SEAL")}</span>
                     </div>
                     <div class="pouch-print-body">
                         <div class="pouch-print-details">
-                            <div class="pouch-print-row"><span class="pouch-print-label">LOT:</span> <strong class="pouch-print-batch">${batchId}</strong></div>
-                            <div class="pouch-print-row"><span class="pouch-print-label">DATE:</span> <span>${date}</span></div>
-                            <div class="pouch-print-row"><span class="pouch-print-label">ITEM:</span> <span class="pouch-print-item">${contents}</span></div>
-                            <div class="pouch-print-row"><span class="pouch-print-label">EXP:</span> <span>${expiryText}</span></div>
+                            <div class="pouch-print-row"><span class="pouch-print-label">${T("LOT:")}</span> <strong class="pouch-print-batch">${batchId}</strong></div>
+                            <div class="pouch-print-row"><span class="pouch-print-label">${T("DATE:")}</span> <span>${date}</span></div>
+                            <div class="pouch-print-row"><span class="pouch-print-label">${T("ITEM:")}</span> <span class="pouch-print-item">${contents}</span></div>
+                            <div class="pouch-print-row"><span class="pouch-print-label">${T("EXP:")}</span> <span>${expiryText}</span></div>
                         </div>
                         <div class="pouch-print-qr-wrap">
                             <div class="pouch-print-qr-svg">${qrSvg}</div>
                         </div>
                     </div>
                     <div class="pouch-print-footer">
-                        <span>CI Class 5: <strong>${integratorPassed ? '✓ PASS' : '⚠️ FAIL'}</strong></span>
+                        <span>${T("CI Class 5:")} <strong>${integratorPassed ? T('✓ PASS') : T('⚠️ FAIL')}</strong></span>
                         <span>${autoclave}</span>
                     </div>
                 </div>
                 <div class="pouch-print-sticker" style="flex: 0.9; border: none; border-radius: 0; background: var(--bg-secondary);">
                     <div class="pouch-print-header">
-                        <span style="font-size: 8px; font-weight: 800; color: var(--color-primary);">CLIENT CHART STUB</span>
-                        <span style="font-size: 6.5px; font-weight: 700; color: var(--text-secondary);">PEEL &amp; AFFIX</span>
+                        <span style="font-size: 8px; font-weight: 800; color: var(--color-primary);">${T("CLIENT CHART STUB")}</span>
+                        <span style="font-size: 6.5px; font-weight: 700; color: var(--text-secondary);">${T("PEEL & AFFIX")}</span>
                     </div>
                     <div class="pouch-print-details" style="margin-top: 4px;">
-                        <div class="pouch-print-row"><span class="pouch-print-label">LOT:</span> <strong>${batchId}</strong></div>
-                        <div class="pouch-print-row"><span class="pouch-print-label">STERIL:</span> <span>${date}</span></div>
-                        <div class="pouch-print-row"><span class="pouch-print-label">PROCEDURE:</span> <span>___________</span></div>
-                        <div class="pouch-print-row"><span class="pouch-print-label">PIERCER:</span> <span>${operator}</span></div>
+                        <div class="pouch-print-row"><span class="pouch-print-label">${T("LOT:")}</span> <strong>${batchId}</strong></div>
+                        <div class="pouch-print-row"><span class="pouch-print-label">${T("STERIL:")}</span> <span>${date}</span></div>
+                        <div class="pouch-print-row"><span class="pouch-print-label">${T("PROCEDURE:")}</span> <span>___________</span></div>
+                        <div class="pouch-print-row"><span class="pouch-print-label">${T("PIERCER:")}</span> <span>${operator}</span></div>
                     </div>
                     <div class="pouch-print-footer" style="margin-top: 6px;">
-                        <span style="font-size: 6.5px; color: var(--text-secondary);">Attach to Client Consent Form</span>
+                        <span style="font-size: 6.5px; color: var(--text-secondary);">${T("Attach to Client Consent Form")}</span>
                     </div>
                 </div>
             </div>
@@ -956,7 +961,7 @@ const PDFGenerator = {
             <!DOCTYPE html>
             <html>
             <head>
-                <title>Sterilization Pouch Labels - ${batchId}</title>
+                <title>${T('Sterilization Pouch Labels - {batch}', { batch: batchId })}</title>
                 <style>
                     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; color: var(--text-primary); }
                     ${(isThermalSingle || isCompact) ? `
@@ -1117,7 +1122,7 @@ const PDFGenerator = {
     generateConcatenatedBatchReportsHtml: function(selectedLogs) {
         const profile = this.getStudioProfile();
         const now = new Date();
-        const dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+        const dateStr = now.toLocaleDateString(__loc(), { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
         const batches = (selectedLogs && selectedLogs.length > 0) ? selectedLogs : [];
         const totalBatches = batches.length;
 
@@ -1126,7 +1131,7 @@ const PDFGenerator = {
         const releasedCount = batches.filter(b => (b.signOffStatus || 'released').toLowerCase() === 'released').length;
 
         const calibrationDate = localStorage.getItem('autoclave_calibration_date');
-        let calibInfo = 'Not Configured';
+        let calibInfo = __tx('Not Configured');
         if (calibrationDate) {
             const calDate = new Date(calibrationDate);
             const daysSince = Math.floor((now - calDate) / (1000 * 60 * 60 * 24));
@@ -1145,8 +1150,8 @@ const PDFGenerator = {
             const exposure = b.exposureTime ? `${b.exposureTime} min` : '4 min';
             const dry = b.dryTime ? `${b.dryTime} min` : '20 min';
             const total = b.totalCycle ? `${b.totalCycle} min` : '35 min';
-            const op = b.operator || profile.operatorName || 'Studio Technician';
-            const notes = b.technicianNotes || b.notes || 'Routine autoclave cycle executed per established professional piercing practice.';
+            const op = b.operator || profile.operatorName || __tx('Studio Technician');
+            const notes = b.technicianNotes || b.notes || __tx('Routine autoclave cycle executed per established professional piercing practice.');
             const isIntegratorPass = b.integratorPassed !== false;
             const signOffStatus = (b.signOffStatus || 'released').toUpperCase();
             const signOffColor = signOffStatus === 'RELEASED' ? 'var(--color-success)' : (signOffStatus === 'QUARANTINED' ? 'var(--color-danger)' : 'var(--color-warning)');
@@ -1183,32 +1188,32 @@ const PDFGenerator = {
                             ${qrSvg ? `<div style="width: 44px; height: 44px; flex-shrink: 0; background: var(--bg-primary); border: 1px solid var(--border-primary); border-radius: 4px; padding: 2px;">${qrSvg}</div>` : ''}
                             <div>
                                 <div style="font-size: 13px; font-weight: 800; color: var(--text-primary);">
-                                    Batch: <span style="font-family: monospace; color: var(--color-primary);">${batchId}</span>
+                                    ${T("Batch:")} <span style="font-family: monospace; color: var(--color-primary);">${batchId}</span>
                                 </div>
-                                <div style="font-size: 10.5px; color: var(--text-secondary);">${bDate}${bTime} • ${autoType} • Load: ${loadInfo}</div>
+                                <div style="font-size: 10.5px; color: var(--text-secondary);">${bDate}${bTime} • ${autoType} • ${T('Load: {load}', { load: loadInfo })}</div>
                             </div>
                         </div>
                         <div style="text-align: right;">
                             <span style="display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 10.5px; font-weight: 700; background: ${signOffColor === 'var(--color-success)' ? 'rgba(0, 200, 127, 0.15)' : 'rgba(239, 68, 68, 0.15)'}; color: ${signOffColor};">
                                 ● ${signOffStatus}
                             </span>
-                            <div style="font-size: 10px; color: var(--text-secondary); margin-top: 3px;">Sign-Off: <strong>${op}</strong></div>
+                            <div style="font-size: 10px; color: var(--text-secondary); margin-top: 3px;">${T("Sign-Off:")} <strong>${op}</strong></div>
                         </div>
                     </div>
 
                     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px 10px; background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 4px; padding: 8px 10px; font-size: 10.5px; margin-bottom: 8px;">
-                        <div><span style="color:var(--text-secondary);">Temperature:</span> <strong>${temp}</strong></div>
-                        <div><span style="color:var(--text-secondary);">Pressure:</span> <strong>${press}</strong></div>
-                        <div><span style="color:var(--text-secondary);">Exposure Time:</span> <strong>${exposure}</strong></div>
-                        <div><span style="color:var(--text-secondary);">Dry Time:</span> <strong>${dry}</strong></div>
-                        <div><span style="color:var(--text-secondary);">Total Duration:</span> <strong>${total}</strong></div>
-                        <div><span style="color:var(--text-secondary);">Chamber ID:</span> <strong>${b.serialNumber || profile.autoclaveSerial || 'CHAMBER-01'}</strong></div>
-                        <div><span style="color:var(--text-secondary);">Class 5 Integrator:</span> <strong style="color: ${isIntegratorPass ? 'var(--color-success)' : 'var(--color-danger)'};">${isIntegratorPass ? '✓ PASSED' : '⚠️ FAILED'}</strong></div>
-                        <div><span style="color:var(--text-secondary);">Wet Pack Check:</span> <strong>✓ 0% Moisture (Dry)</strong></div>
+                        <div><span style="color:var(--text-secondary);">${T("Temperature:")}</span> <strong>${temp}</strong></div>
+                        <div><span style="color:var(--text-secondary);">${T("Pressure:")}</span> <strong>${press}</strong></div>
+                        <div><span style="color:var(--text-secondary);">${T("Exposure Time:")}</span> <strong>${exposure}</strong></div>
+                        <div><span style="color:var(--text-secondary);">${T("Dry Time:")}</span> <strong>${dry}</strong></div>
+                        <div><span style="color:var(--text-secondary);">${T("Total Duration:")}</span> <strong>${total}</strong></div>
+                        <div><span style="color:var(--text-secondary);">${T("Chamber ID:")}</span> <strong>${b.serialNumber || profile.autoclaveSerial || 'CHAMBER-01'}</strong></div>
+                        <div><span style="color:var(--text-secondary);">${T("Class 5 Integrator:")}</span> <strong style="color: ${isIntegratorPass ? 'var(--color-success)' : 'var(--color-danger)'};">${isIntegratorPass ? '✓ PASSED' : '⚠️ FAILED'}</strong></div>
+                        <div><span style="color:var(--text-secondary);">${T("Wet Pack Check:")}</span> <strong>${T("✓ 0% Moisture (Dry)")}</strong></div>
                     </div>
 
                     <div style="font-size: 10px; color: var(--text-secondary); line-height: 1.35;">
-                        <strong>Technician Notes &amp; Observations:</strong> ${notes}
+                        <strong>${T("Technician Notes & Observations:")}</strong> ${notes}
                     </div>
                 </div>
             `;
@@ -1216,38 +1221,38 @@ const PDFGenerator = {
 
         return `
             <div class="print-document-sheet">
-                ${this.renderDocumentHeader('CONCATENATED STERILIZATION BATCH AUDIT REPORT', 'Official Physical Cycle Release & Parameter Verification Dossier')}
+                ${this.renderDocumentHeader(__tx('CONCATENATED STERILIZATION BATCH AUDIT REPORT'), __tx('Official Physical Cycle Release & Parameter Verification Dossier'))}
 
                 <div class="print-meta-grid">
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Audit Generated:</span>
+                        <span class="print-meta-label">${T("Audit Generated:")}</span>
                         <span class="print-meta-value">${dateStr}</span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Total Batches Selected:</span>
-                        <span class="print-meta-value"><strong>${totalBatches} Batch Records</strong></span>
+                        <span class="print-meta-label">${T("Total Batches Selected:")}</span>
+                        <span class="print-meta-value"><strong>${T('{n} Batch Records', { n: totalBatches })}</strong></span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Batch Release Status:</span>
-                        <span class="print-meta-value" style="color: var(--color-success);"><strong>${releasedCount} of ${totalBatches} Released</strong></span>
+                        <span class="print-meta-label">${T("Batch Release Status:")}</span>
+                        <span class="print-meta-value" style="color: var(--color-success);"><strong>${T('{a} of {b} Released', { a: releasedCount, b: totalBatches })}</strong></span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Chemical Integrator Rate:</span>
-                        <span class="print-meta-value" style="color: var(--color-success);"><strong>${passRate}% Verified Pass</strong></span>
+                        <span class="print-meta-label">${T("Chemical Integrator Rate:")}</span>
+                        <span class="print-meta-value" style="color: var(--color-success);"><strong>${T('{n}% Verified Pass', { n: passRate })}</strong></span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Lead Operator:</span>
+                        <span class="print-meta-label">${T("Lead Operator:")}</span>
                         <span class="print-meta-value">${profile.operatorName || 'Studio Sterilization Technician'}</span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Equipment Calibration:</span>
+                        <span class="print-meta-label">${T("Equipment Calibration:")}</span>
                         <span class="print-meta-value"><strong>${calibInfo}</strong></span>
                     </div>
                 </div>
 
                 <div class="print-checklist-title" style="margin-top: 6px; margin-bottom: 8px; display: flex; justify-content: space-between;">
-                    <span>Selected Sterilization Batch Dossier Logs (${totalBatches} Runs)</span>
-                    <span style="font-size: 10px; font-weight: normal; color: var(--text-secondary);">Audit Retention Standard: 3-Year Physical Verification</span>
+                    <span>${T('Selected Sterilization Batch Dossier Logs ({n} Runs)', { n: totalBatches })}</span>
+                    <span style="font-size: 10px; font-weight: normal; color: var(--text-secondary);">${T("Audit Retention Standard: 3-Year Physical Verification")}</span>
                 </div>
 
                 ${batchCardsHtml}
@@ -1255,26 +1260,26 @@ const PDFGenerator = {
                 <div class="print-signoff-box" style="margin-top: 14px; page-break-inside: avoid;">
                     <div class="print-signoff-grid" style="grid-template-columns: 1.2fr 1fr;">
                         <div>
-                            <strong>Lead Sterilization Technician / QA Sign-Off:</strong>
+                            <strong>${T("Lead Sterilization Technician / QA Sign-Off:")}</strong>
                             <div class="print-sign-line" style="margin-top: 6px;"></div>
                             <div style="font-size: 9.5px; color: var(--text-secondary); margin-top: 4px;">
-                                Name: ____________________________________ Date: ${dateStr}
+                                ${T('Name: ____________________________________ Date: {date}', { date: dateStr })}
                             </div>
                         </div>
                         <div>
-                            <strong>Health Department &amp; Audit Endorsement:</strong>
+                            <strong>${T("Health Department & Audit Endorsement:")}</strong>
                             <div style="margin-top: 6px; font-size: 10.5px;">
-                                <span class="print-checkbox">✓</span> <strong>BATCHES VERIFIED &amp; COMPLIANT</strong>
+                                <span class="print-checkbox">✓</span> <strong>${T("BATCHES VERIFIED & COMPLIANT")}</strong>
                             </div>
                             <div style="font-size: 9.5px; color: var(--text-secondary); margin-top: 4px;">
-                                Verified compliant with CDC, OSHA, and established professional piercing practice.
+                                ${T("Verified compliant with CDC, OSHA, and established professional piercing practice.")}
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="print-footer-note" style="margin-top: 8px;">
-                    Generated by Autoclave Sterilization &amp; Biological Monitoring Compliance System • Physical Batch Audit Record
+                    ${T("Generated by Autoclave Sterilization & Biological Monitoring Compliance System • Physical Batch Audit Record")}
                 </div>
             </div>
         `;
@@ -1290,19 +1295,19 @@ const PDFGenerator = {
         try {
             if (!selectedLogs || selectedLogs.length === 0) {
                 if (typeof showToast === 'function') {
-                    showToast('⚠️ Please select one or more batch records using the checkboxes first.', 'warning', 3000);
+                    showToast(__tx('⚠️ Please select one or more batch records using the checkboxes first.'), 'warning', 3000);
                 }
                 return;
             }
             const html = this.generateConcatenatedBatchReportsHtml(selectedLogs);
             this.printDocument(html);
             if (typeof showToast === 'function') {
-                showToast(`✓ Concatenated PDF report generated for ${selectedLogs.length} selected batch(es)!`, 'success', 2800);
+                showToast(__tx('✓ Concatenated PDF report generated for {n} selected batch(es)!', { n: selectedLogs.length }), 'success', 2800);
             }
         } catch (err) {
             console.error('Error generating concatenated batch PDF:', err);
             if (typeof showToast === 'function') {
-                showToast('Could not generate batch PDF: ' + err.message, 'error', 3500);
+                showToast(__tx('Could not generate batch PDF: {error}', { error: err.message }), 'error', 3500);
             }
         }
     },
@@ -1313,7 +1318,7 @@ const PDFGenerator = {
     generateQuarterlyInspectorDossierHtml: function(quarter, year, customStart, customEnd, allLogs, allSporeTests, allMaintLogs) {
         const profile = this.getStudioProfile();
         const now = new Date();
-        const dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        const dateStr = now.toLocaleDateString(__loc(), { year: 'numeric', month: 'short', day: 'numeric' });
 
         // Filter logs by date range
         let startDate, endDate;
@@ -1366,10 +1371,10 @@ const PDFGenerator = {
         // Render batch log table rows
         let batchRowsHtml = '';
         if (logs.length === 0) {
-            batchRowsHtml = `<tr><td colspan="7" style="text-align: center; color: var(--text-secondary); padding: 12px;">No sterilization cycles recorded in this quarter period.</td></tr>`;
+            batchRowsHtml = `<tr><td colspan="7" style="text-align: center; color: var(--text-secondary); padding: 12px;">${T("No sterilization cycles recorded in this quarter period.")}</td></tr>`;
         } else {
             batchRowsHtml = logs.slice(0, 30).map(l => {
-                const bDate = new Date(l.date || l.timestamp).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                const bDate = new Date(l.date || l.timestamp).toLocaleDateString(__loc(), { month: 'short', day: 'numeric' });
                 const bLot = l.batchNumber || l.batchId || 'LOT-' + (l.id || '00');
                 const bType = l.loadType || 'Wrapped Inst.';
                 const bTemp = l.temperature ? `${l.temperature}°F` : '270°F';
@@ -1385,7 +1390,7 @@ const PDFGenerator = {
                         <td>${bType}</td>
                         <td>${bTemp} / ${bPress}</td>
                         <td>${bTime}</td>
-                        <td>${l.operator || profile.operatorName || 'Lead Tech'}</td>
+                        <td>${l.operator || profile.operatorName || __tx('Lead Tech')}</td>
                         <td style="color: ${statusColor}; font-weight: 700;">✓ ${bStatus}</td>
                     </tr>
                 `;
@@ -1395,10 +1400,10 @@ const PDFGenerator = {
         // Render biological spore test rows
         let sporeRowsHtml = '';
         if (spores.length === 0) {
-            sporeRowsHtml = `<tr><td colspan="5" style="text-align: center; color: var(--text-secondary); padding: 10px;">No biological spore tests filed during this quarterly audit timeframe.</td></tr>`;
+            sporeRowsHtml = `<tr><td colspan="5" style="text-align: center; color: var(--text-secondary); padding: 10px;">${T("No biological spore tests filed during this quarterly audit timeframe.")}</td></tr>`;
         } else {
             sporeRowsHtml = spores.map(s => {
-                const sDate = new Date(s.date || s.testDate || s.timestamp).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                const sDate = new Date(s.date || s.testDate || s.timestamp).toLocaleDateString(__loc(), { month: 'short', day: 'numeric' });
                 const sLot = s.biLotNumber || s.lotNumber || 'BI-LOT-4410';
                 const sType = s.organism || 'G. stearothermophilus (10^6)';
                 const sResult = (s.result || s.status || 'NEGATIVE (PASS)').toUpperCase();
@@ -1418,17 +1423,17 @@ const PDFGenerator = {
         // Render maintenance rows
         let maintRowsHtml = '';
         if (maints.length === 0) {
-            maintRowsHtml = `<tr><td colspan="5" style="text-align: center; color: var(--text-secondary); padding: 8px;">Standard routine preventive maintenance on schedule.</td></tr>`;
+            maintRowsHtml = `<tr><td colspan="5" style="text-align: center; color: var(--text-secondary); padding: 8px;">${T("Standard routine preventive maintenance on schedule.")}</td></tr>`;
         } else {
             maintRowsHtml = maints.map(m => {
-                const mDate = new Date(m.date || m.timestamp).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                const mDate = new Date(m.date || m.timestamp).toLocaleDateString(__loc(), { month: 'short', day: 'numeric' });
                 return `
                     <tr>
                         <td><strong>${mDate}</strong></td>
                         <td>${m.unit || 'Midmark M11'}</td>
                         <td><strong>${m.procedure || m.task}</strong></td>
                         <td>${m.hours ? m.hours + ' hrs' : 'N/A'}</td>
-                        <td>${m.tech || 'Staff Tech'}</td>
+                        <td>${m.tech || __tx('Staff Tech')}</td>
                     </tr>
                 `;
             }).join('');
@@ -1436,55 +1441,55 @@ const PDFGenerator = {
 
         return `
             <div class="print-document-sheet dossier-page-sheet">
-                ${this.renderDocumentHeader('QUARTERLY HEALTH INSPECTOR AUDIT DOSSIER', `Official Comprehensive Sterilization & Spore Monitoring Record • ${quarter} ${year}`)}
+                ${this.renderDocumentHeader(__tx('QUARTERLY HEALTH INSPECTOR AUDIT DOSSIER'), __tx('Official Comprehensive Sterilization & Spore Monitoring Record • {quarter} {year}', { quarter: quarter, year: year }))}
 
                 <div class="dossier-executive-grid">
                     <div class="dossier-kpi-item">
-                        <span class="dossier-kpi-lbl">Audit Period:</span>
+                        <span class="dossier-kpi-lbl">${T("Audit Period:")}</span>
                         <strong class="dossier-kpi-val">${quarter} ${year}</strong>
                     </div>
                     <div class="dossier-kpi-item">
-                        <span class="dossier-kpi-lbl">Total Batches:</span>
-                        <strong class="dossier-kpi-val">${totalRuns} Cycles</strong>
+                        <span class="dossier-kpi-lbl">${T("Total Batches:")}</span>
+                        <strong class="dossier-kpi-val">${T('{n} Cycles', { n: totalRuns })}</strong>
                     </div>
                     <div class="dossier-kpi-item">
-                        <span class="dossier-kpi-lbl">Physical Release Rate:</span>
-                        <strong class="dossier-kpi-val" style="color: var(--color-success);">${releaseRate}% PASS</strong>
+                        <span class="dossier-kpi-lbl">${T("Physical Release Rate:")}</span>
+                        <strong class="dossier-kpi-val" style="color: var(--color-success);">${T('{n}% PASS', { n: releaseRate })}</strong>
                     </div>
                     <div class="dossier-kpi-item">
-                        <span class="dossier-kpi-lbl">Spore Compliance:</span>
-                        <strong class="dossier-kpi-val" style="color: var(--color-success);">${sporeRate}% PASS (${totalSpores} Tests)</strong>
+                        <span class="dossier-kpi-lbl">${T("Spore Compliance:")}</span>
+                        <strong class="dossier-kpi-val" style="color: var(--color-success);">${T('{n}% PASS ({m} Tests)', { n: sporeRate, m: totalSpores })}</strong>
                     </div>
                 </div>
 
                 <div class="print-meta-grid" style="margin-bottom: 12px; grid-template-columns: repeat(3, 1fr);">
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Primary Autoclave:</span>
+                        <span class="print-meta-label">${T("Primary Autoclave:")}</span>
                         <span class="print-meta-value">${profile.autoclaveSerial || 'Midmark M11 (#MM-8472)'}</span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Biomedical Calibration:</span>
+                        <span class="print-meta-label">${T("Biomedical Calibration:")}</span>
                         <span class="print-meta-value" style="color: var(--color-success);">✓ ${calibNum} (${calibTech})</span>
                     </div>
                     <div class="print-meta-item">
-                        <span class="print-meta-label">Lead Operator:</span>
+                        <span class="print-meta-label">${T("Lead Operator:")}</span>
                         <span class="print-meta-value">${profile.operatorName || 'Studio Sterilization Director'}</span>
                     </div>
                 </div>
 
                 <!-- Section 1: Biological Spore Tests -->
                 <div class="dossier-section-heading">
-                    <span>1. Biological Indicator (Spore) Testing Ledger</span>
-                    <span style="font-size: 10px; font-weight: normal; color: var(--text-secondary);">Weekly Verification Protocol (ANSI/AAMI ST79)</span>
+                    <span>${T("1. Biological Indicator (Spore) Testing Ledger")}</span>
+                    <span style="font-size: 10px; font-weight: normal; color: var(--text-secondary);">${T("Weekly Verification Protocol (ANSI/AAMI ST79)")}</span>
                 </div>
                 <table class="dossier-table">
                     <thead>
                         <tr>
-                            <th>Test Date</th>
-                            <th>BI Lot Number</th>
-                            <th>Challenge Microorganism</th>
-                            <th>Incubation Param</th>
-                            <th>Spore Result</th>
+                            <th>${T("Test Date")}</th>
+                            <th>${T("BI Lot Number")}</th>
+                            <th>${T("Challenge Microorganism")}</th>
+                            <th>${T("Incubation Param")}</th>
+                            <th>${T("Spore Result")}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -1494,19 +1499,19 @@ const PDFGenerator = {
 
                 <!-- Section 2: Physical & Chemical Sterilization Batches -->
                 <div class="dossier-section-heading" style="margin-top: 14px;">
-                    <span>2. Physical Cycle Parameter Release Record (${totalRuns} Batches Logged)</span>
-                    <span style="font-size: 10px; font-weight: normal; color: var(--text-secondary);">Retained for 3-Year Health Authority Review</span>
+                    <span>${T('2. Physical Cycle Parameter Release Record ({n} Batches Logged)', { n: totalRuns })}</span>
+                    <span style="font-size: 10px; font-weight: normal; color: var(--text-secondary);">${T("Retained for 3-Year Health Authority Review")}</span>
                 </div>
                 <table class="dossier-table">
                     <thead>
                         <tr>
-                            <th>Date</th>
-                            <th>Batch ID / LOT #</th>
-                            <th>Load Content</th>
-                            <th>Temp / Press</th>
-                            <th>Plateau</th>
-                            <th>Technician</th>
-                            <th>Parametric Release</th>
+                            <th>${T("Date")}</th>
+                            <th>${T("Batch ID / LOT #")}</th>
+                            <th>${T("Load Content")}</th>
+                            <th>${T("Temp / Press")}</th>
+                            <th>${T("Plateau")}</th>
+                            <th>${T("Technician")}</th>
+                            <th>${T("Parametric Release")}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -1516,17 +1521,17 @@ const PDFGenerator = {
 
                 <!-- Section 3: Preventive Maintenance Summary -->
                 <div class="dossier-section-heading" style="margin-top: 14px;">
-                    <span>3. Preventive Maintenance &amp; Equipment Health Ledger</span>
-                    <span style="font-size: 10px; font-weight: normal; color: var(--text-secondary);">Descaling, Gasket Inspection &amp; Calibration Logs</span>
+                    <span>${T("3. Preventive Maintenance & Equipment Health Ledger")}</span>
+                    <span style="font-size: 10px; font-weight: normal; color: var(--text-secondary);">${T("Descaling, Gasket Inspection & Calibration Logs")}</span>
                 </div>
                 <table class="dossier-table">
                     <thead>
                         <tr>
-                            <th>Date</th>
-                            <th>Chamber Unit</th>
-                            <th>Maintenance Procedure</th>
-                            <th>Running Hours</th>
-                            <th>Technician / Service Provider</th>
+                            <th>${T("Date")}</th>
+                            <th>${T("Chamber Unit")}</th>
+                            <th>${T("Maintenance Procedure")}</th>
+                            <th>${T("Running Hours")}</th>
+                            <th>${T("Technician / Service Provider")}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -1537,23 +1542,23 @@ const PDFGenerator = {
                 <!-- Section 4: Dual Sign-off & Health Authority Endorsement Block -->
                 <div class="dossier-signoff-block" style="page-break-inside: avoid;">
                     <div>
-                        <strong style="font-size: 11px;">Studio Quality Assurance &amp; Piercing Director:</strong>
+                        <strong style="font-size: 11px;">${T("Studio Quality Assurance & Piercing Director:")}</strong>
                         <div class="signoff-line"></div>
-                        <div class="signoff-label">Signature: ____________________________________ Date: ${dateStr}</div>
-                        <p style="font-size: 9px; color: var(--text-secondary); margin-top: 3px;">I hereby certify that all biological spore tests and daily physical parameter releases were conducted in full compliance with CDC, OSHA, and established professional piercing practice.</p>
+                        <div class="signoff-label">${T('Signature: ____________________________________ Date: {date}', { date: dateStr })}</div>
+                        <p style="font-size: 9px; color: var(--text-secondary); margin-top: 3px;">${T("I hereby certify that all biological spore tests and daily physical parameter releases were conducted in full compliance with CDC, OSHA, and established professional piercing practice.")}</p>
                     </div>
                     <div>
-                        <strong style="font-size: 11px;">Public Health Official / Environmental Health Inspector:</strong>
+                        <strong style="font-size: 11px;">${T("Public Health Official / Environmental Health Inspector:")}</strong>
                         <div class="signoff-line"></div>
-                        <div class="signoff-label">Inspector Name &amp; Badge #: ____________________________________</div>
+                        <div class="signoff-label">${T("Inspector Name & Badge #: ____________________________________")}</div>
                         <div style="font-size: 10px; margin-top: 5px; color: var(--color-success); font-weight: bold;">
-                            [ &nbsp; ] APPROVED &amp; COMPLIANT &nbsp;&nbsp;&nbsp;&nbsp; [ &nbsp; ] RE-INSPECTION REQUIRED
+                            ${T("[ &nbsp; ] APPROVED & COMPLIANT &nbsp;&nbsp;&nbsp;&nbsp; [ &nbsp; ] RE-INSPECTION REQUIRED")}
                         </div>
                     </div>
                 </div>
 
                 <div class="print-footer-note" style="margin-top: 12px;">
-                    Confidential Health &amp; Safety Compliance Record • Autoclave Sterilization &amp; Biological Monitoring Portal
+                    ${T("Confidential Health & Safety Compliance Record • Autoclave Sterilization & Biological Monitoring Portal")}
                 </div>
             </div>
         `;
@@ -1567,12 +1572,12 @@ const PDFGenerator = {
             const html = this.generateQuarterlyInspectorDossierHtml(quarter, year, customStart, customEnd, logs, spores, maints);
             this.printDocument(html);
             if (typeof showToast === 'function') {
-                showToast(`✓ Printing Quarterly Inspector Dossier (${quarter} ${year})...`, 'success', 3000);
+                showToast(__tx('✓ Printing Quarterly Inspector Dossier ({quarter} {year})...', { quarter: quarter, year: year }), 'success', 3000);
             }
         } catch (err) {
             console.error('Error generating inspector dossier printout:', err);
             if (typeof showToast === 'function') {
-                showToast('Error generating dossier PDF: ' + err.message, 'error', 3500);
+                showToast(__tx('Error generating dossier PDF: {error}', { error: err.message }), 'error', 3500);
             }
         }
     },
@@ -1584,8 +1589,8 @@ const PDFGenerator = {
         const studio = this.getStudioProfile();
         const lot = pkgData?.lotNumber || 'LOT-' + new Date().toISOString().slice(0,10).replace(/-/g,'') + '-01';
         const sterilDate = pkgData?.sterilDate || new Date().toISOString().slice(0,10);
-        const contents = pkgData?.contents || 'Piercing Clamps & Tapers';
-        const expiry = pkgData?.expiry || 'Event-Related (ST79)';
+        const contents = pkgData?.contents || __tx('Piercing Clamps & Tapers');
+        const expiry = pkgData?.expiry || __tx('Event-Related (ST79)');
 
         // Generate QR code for label
         let qrDataUrl = '';
@@ -1604,20 +1609,20 @@ const PDFGenerator = {
             <div style="width: 2.8in; height: 1.8in; padding: 6px; border: 1.5px solid var(--border-primary); font-family: Arial, sans-serif; font-size: 8pt; display: flex; flex-direction: column; justify-content: space-between;">
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid var(--border-primary); padding-bottom: 2px;">
                     <strong style="font-size: 8.5pt;">${studio.studioName || 'POLI INTERNATIONAL'}</strong>
-                    <span style="background: var(--text-primary); color: var(--bg-primary); font-size: 7pt; font-weight: bold; padding: 1px 4px; border-radius: 2px;">STERILE</span>
+                    <span style="background: var(--text-primary); color: var(--bg-primary); font-size: 7pt; font-weight: bold; padding: 1px 4px; border-radius: 2px;">${T("STERILE")}</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center; gap: 4px; margin: 3px 0;">
                     <div>
-                        <div><strong>LOT:</strong> ${lot}</div>
-                        <div><strong>DATE:</strong> ${sterilDate}</div>
-                        <div><strong>ITEMS:</strong> ${contents}</div>
-                        <div><strong>EXP:</strong> <span style="color: var(--color-success); font-weight: bold;">${expiry}</span></div>
+                        <div><strong>${T("LOT:")}</strong> ${lot}</div>
+                        <div><strong>${T("DATE:")}</strong> ${sterilDate}</div>
+                        <div><strong>${T("ITEMS:")}</strong> ${contents}</div>
+                        <div><strong>${T("EXP:")}</strong> <span style="color: var(--color-success); font-weight: bold;">${expiry}</span></div>
                     </div>
                     ${qrDataUrl ? `<img src="${qrDataUrl}" style="width: 50px; height: 50px; flex-shrink: 0;" alt="LOT QR" />` : ''}
                 </div>
                 <div style="border-top: 1px solid var(--border-primary); padding-top: 2px; display: flex; justify-content: space-between; font-size: 6.5pt; color: var(--text-primary);">
-                    <span>CI Class 5: <strong>✓ PASS</strong></span>
-                    <span>ANSI/AAMI ST79 Compliant</span>
+                    <span>${T("CI Class 5:")} <strong>${T("✓ PASS")}</strong></span>
+                    <span>${T("ANSI/AAMI ST79 Compliant")}</span>
                 </div>
             </div>
         `;
@@ -1663,7 +1668,7 @@ const PDFGenerator = {
 
             // 3. HTML Printable Audit Dossier
             const dossierHtml = this.generateQuarterlyInspectorDossierHtml('Q3', '2026', null, null, logs, sporeLogs, maintLogs);
-            folder.file('Quarterly_Inspector_Submission_Dossier.html', `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Quarterly Sterilization Dossier</title><style>body{font-family:Arial,sans-serif;padding:20px;}</style></head><body>${dossierHtml}</body></html>`);
+            folder.file('Quarterly_Inspector_Submission_Dossier.html', `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${T("Quarterly Sterilization Dossier")}</title><style>body{font-family:Arial,sans-serif;padding:20px;}</style></head><body>${dossierHtml}</body></html>`);
 
             // Generate ZIP file and trigger browser download
             zip.generateAsync({ type: 'blob' }).then(function(content) {
@@ -1677,14 +1682,14 @@ const PDFGenerator = {
                 document.body.removeChild(a);
 
                 if (typeof showToast === 'function') {
-                    showToast(`✓ All audit records bundled into ${folderName}.zip!`, 'success', 3500);
+                    showToast(__tx('✓ All audit records bundled into {name}.zip!', { name: folderName }), 'success', 3500);
                 }
             });
 
         } catch (err) {
             console.error('Error generating ZIP export:', err);
             if (typeof showToast === 'function') {
-                showToast('Failed to generate ZIP archive: ' + err.message, 'error', 3500);
+                showToast(__tx('Failed to generate ZIP archive: {error}', { error: err.message }), 'error', 3500);
             }
         }
     },
@@ -1700,8 +1705,8 @@ const PDFGenerator = {
         let endMs = customEnd ? new Date(customEnd).getTime() : Date.now();
         let startMs = customStart ? new Date(customStart).getTime() : (endMs - 7 * 24 * 60 * 60 * 1000);
 
-        const startDateStr = new Date(startMs).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        const endDateStr = new Date(endMs).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        const startDateStr = new Date(startMs).toLocaleDateString(__loc(), { month: 'short', day: 'numeric', year: 'numeric' });
+        const endDateStr = new Date(endMs).toLocaleDateString(__loc(), { month: 'short', day: 'numeric', year: 'numeric' });
 
         // Filter cycle logs for past 7 days
         const rawLogs = allLogs || (typeof SterilizationLogManager !== 'undefined' ? SterilizationLogManager.logs : []);
@@ -1725,14 +1730,14 @@ const PDFGenerator = {
 
         // Check weekly spore test
         const latestSpore = spores.length > 0 ? spores[0] : null;
-        let sporeStatusHtml = '<span style="color: var(--text-secondary);">No Spore Run in Period</span>';
+        let sporeStatusHtml = `<span style="color: var(--text-secondary);">${T('No Spore Run in Period')}</span>`;
         if (latestSpore) {
             if (latestSpore.result === 'pass' || latestSpore.result === 'negative') {
-                sporeStatusHtml = `<span style="color: var(--color-success); font-weight: 700;">✓ PASS (Negative / No Growth - Lot #${latestSpore.lotNumber || 'ST-79'})</span>`;
+                sporeStatusHtml = `<span style="color: var(--color-success); font-weight: 700;">${T('✓ PASS (Negative / No Growth - Lot #{lot})', { lot: latestSpore.lotNumber || 'ST-79' })}</span>`;
             } else if (latestSpore.result === 'fail' || latestSpore.result === 'positive') {
-                sporeStatusHtml = `<span style="color: var(--color-danger); font-weight: 700;">⚠️ FAIL (Positive Spore Growth - Immediate Quarantine)</span>`;
+                sporeStatusHtml = `<span style="color: var(--color-danger); font-weight: 700;">${T("⚠️ FAIL (Positive Spore Growth - Immediate Quarantine)")}</span>`;
             } else {
-                sporeStatusHtml = `<span style="color: var(--color-warning); font-weight: 700;">⏳ Incubation Pending (${latestSpore.incubatorTime || 'In Progress'})</span>`;
+                sporeStatusHtml = `<span style="color: var(--color-warning); font-weight: 700;">${T('⏳ Incubation Pending ({status})', { status: __tx(latestSpore.incubatorTime || 'In Progress') })}</span>`;
             }
         }
 
@@ -1743,7 +1748,7 @@ const PDFGenerator = {
             const d = new Date(startMs + i * 86400000);
             const key = d.toISOString().split('T')[0];
             dayMap[key] = {
-                dateFormatted: d.toLocaleDateString('en-US', { weekday: 'short', month: 'numeric', day: 'numeric' }),
+                dateFormatted: d.toLocaleDateString(__loc(), { weekday: 'short', month: 'numeric', day: 'numeric' }),
                 count: 0,
                 pouches: 0,
                 operators: new Set(),
@@ -1763,15 +1768,15 @@ const PDFGenerator = {
 
         const dailyRowsHtml = Object.keys(dayMap).map(k => {
             const d = dayMap[k];
-            const ops = Array.from(d.operators).join(', ') || profile.operatorName || 'Technician';
+            const ops = Array.from(d.operators).join(', ') || profile.operatorName || __tx('Technician');
             return `
                 <tr>
                     <td style="font-weight: 600; padding: 6px 8px;">${d.dateFormatted}</td>
-                    <td style="text-align: center; padding: 6px 8px; font-weight: 700;">${d.count} ${d.count === 1 ? 'cycle' : 'cycles'}</td>
-                    <td style="text-align: center; padding: 6px 8px;">${d.pouches} items</td>
+                    <td style="text-align: center; padding: 6px 8px; font-weight: 700;">${d.count === 1 ? T('{n} cycle', { n: d.count }) : T('{n} cycles', { n: d.count })}</td>
+                    <td style="text-align: center; padding: 6px 8px;">${T('{n} items', { n: d.pouches })}</td>
                     <td style="padding: 6px 8px;">${ops}</td>
                     <td style="text-align: center; padding: 6px 8px; color: ${d.count > 0 ? 'var(--color-success)' : 'var(--text-secondary)'}; font-weight: bold;">
-                        ${d.count > 0 ? '✓ 100% Release' : '—'}
+                        ${d.count > 0 ? T('✓ 100% Release') : '—'}
                     </td>
                 </tr>
             `;
@@ -1780,13 +1785,13 @@ const PDFGenerator = {
         // Batch table rows
         const batchRowsHtml = logs.length > 0 ? logs.map((log, idx) => {
             const dt = new Date(log.timestamp || log.date || 0);
-            const dateFmt = dt.toLocaleDateString('en-US', { month: 'numeric', day: 'numeric' }) + ' ' + dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const dateFmt = dt.toLocaleDateString(__loc(), { month: 'numeric', day: 'numeric' }) + ' ' + dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             const batchNum = log.batchNumber || log.id || `BAT-${idx + 101}`;
             const autoType = log.autoclaveType || 'Pre-Vacuum (Class B)';
             const loadDesc = `${log.loadType || 'Wrapped'} (${log.loadSize || 'Med'})`;
             const params = `${log.temperature || '132°C / 270°F'} • ${log.pressure || '27 PSI'}`;
             const timeDesc = `${log.exposureTime || 4}m exp / ${log.dryTime || 20}m dry`;
-            const oper = log.operator || profile.operatorName || 'Tech';
+            const oper = log.operator || profile.operatorName || __tx('Tech');
             const isReleased = log.released !== false && log.integratorResult !== 'fail';
 
             return `
@@ -1800,14 +1805,14 @@ const PDFGenerator = {
                     <td style="padding: 5px 6px;">${oper}</td>
                     <td style="padding: 5px 6px; text-align: center;">
                         <span style="display: inline-block; padding: 2px 6px; border-radius: 3px; font-weight: bold; font-size: 9.5px; background: ${isReleased ? '#DEF7EC' : '#FDE8E8'}; color: ${isReleased ? '#03543F' : '#9B1C1C'};">
-                            ${isReleased ? '✓ PASS / RELEASED' : '⚠️ QUARANTINE'}
+                            ${isReleased ? __tx('✓ PASS / RELEASED') : __tx('⚠️ QUARANTINE')}
                         </span>
                     </td>
                 </tr>
             `;
         }).join('') : `
             <tr>
-                <td colspan="8" style="text-align: center; padding: 16px; color: var(--text-secondary);">No sterilization batches logged during this 7-day period.</td>
+                <td colspan="8" style="text-align: center; padding: 16px; color: var(--text-secondary);">${T("No sterilization batches logged during this 7-day period.")}</td>
             </tr>
         `;
 
@@ -1822,60 +1827,60 @@ const PDFGenerator = {
                         <div>
                             <div class="print-studio-name" style="font-size: 16px; font-weight: 800; color: var(--text-primary);">${profile.studioName || 'PROFESSIONAL STERILIZATION STUDIO'}</div>
                             <div class="print-studio-address" style="font-size: 10.5px; color: var(--text-secondary);">${profile.address || 'Infection Control & Quality Assurance Division'}</div>
-                            <div style="font-size: 9.5px; color: var(--color-primary); font-weight: 600; margin-top: 2px;">ANSI/AAMI ST79 &amp; ISO 11140-1 Audit Compliance</div>
+                            <div style="font-size: 9.5px; color: var(--color-primary); font-weight: 600; margin-top: 2px;">${T("ANSI/AAMI ST79 & ISO 11140-1 Audit Compliance")}</div>
                         </div>
                     </div>
                     <div class="print-header-right" style="text-align: right;">
-                        <div class="print-doc-title" style="font-size: 14px; font-weight: 800; color: var(--color-success); text-transform: uppercase;">WEEKLY STERILIZATION AUDIT REPORT</div>
-                        <div class="print-doc-subtitle" style="font-size: 10.5px; color: var(--text-primary); font-weight: 700;">${startDateStr} — ${endDateStr} (7-Day Aggregate)</div>
-                        <div style="font-size: 9px; color: var(--text-secondary); margin-top: 2px;">Report Generated: ${new Date().toLocaleString()}</div>
+                        <div class="print-doc-title" style="font-size: 14px; font-weight: 800; color: var(--color-success); text-transform: uppercase;">${T("WEEKLY STERILIZATION AUDIT REPORT")}</div>
+                        <div class="print-doc-subtitle" style="font-size: 10.5px; color: var(--text-primary); font-weight: 700;">${T('{range} (7-Day Aggregate)', { range: startDateStr + ' — ' + endDateStr })}</div>
+                        <div style="font-size: 9px; color: var(--text-secondary); margin-top: 2px;">${T('Report Generated: {time}', { time: new Date().toLocaleString() })}</div>
                     </div>
                 </div>
 
                 <!-- 7-Day Performance Metric Dashboard -->
                 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px;">
                     <div style="background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 6px; padding: 8px 10px; text-align: center;">
-                        <div style="font-size: 9.5px; color: var(--text-secondary); font-weight: 700; text-transform: uppercase;">Total Cycles Run</div>
-                        <div style="font-size: 18px; font-weight: 800; color: var(--color-primary); margin-top: 2px;">${totalBatches} <span style="font-size: 11px; font-weight: 600; color: var(--text-secondary);">Batches</span></div>
+                        <div style="font-size: 9.5px; color: var(--text-secondary); font-weight: 700; text-transform: uppercase;">${T("Total Cycles Run")}</div>
+                        <div style="font-size: 18px; font-weight: 800; color: var(--color-primary); margin-top: 2px;">${totalBatches} <span style="font-size: 11px; font-weight: 600; color: var(--text-secondary);">${T("Batches")}</span></div>
                     </div>
                     <div style="background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 6px; padding: 8px 10px; text-align: center;">
-                        <div style="font-size: 9.5px; color: var(--text-secondary); font-weight: 700; text-transform: uppercase;">Released / Pass Rate</div>
+                        <div style="font-size: 9.5px; color: var(--text-secondary); font-weight: 700; text-transform: uppercase;">${T("Released / Pass Rate")}</div>
                         <div style="font-size: 18px; font-weight: 800; color: var(--color-success); margin-top: 2px;">${passRate}% <span style="font-size: 11px; font-weight: 600; color: var(--color-success);">(${releasedBatches}/${totalBatches})</span></div>
                     </div>
                     <div style="background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 6px; padding: 8px 10px; text-align: center;">
-                        <div style="font-size: 9.5px; color: var(--text-secondary); font-weight: 700; text-transform: uppercase;">Pouched Items Processed</div>
-                        <div style="font-size: 18px; font-weight: 800; color: var(--text-primary); margin-top: 2px;">${totalPouches} <span style="font-size: 11px; font-weight: 600; color: var(--text-secondary);">Instruments</span></div>
+                        <div style="font-size: 9.5px; color: var(--text-secondary); font-weight: 700; text-transform: uppercase;">${T("Pouched Items Processed")}</div>
+                        <div style="font-size: 18px; font-weight: 800; color: var(--text-primary); margin-top: 2px;">${totalPouches} <span style="font-size: 11px; font-weight: 600; color: var(--text-secondary);">${T("Instruments")}</span></div>
                     </div>
                     <div style="background: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 6px; padding: 8px 10px; text-align: center;">
-                        <div style="font-size: 9.5px; color: var(--text-secondary); font-weight: 700; text-transform: uppercase;">Quarantined / Aborted</div>
-                        <div style="font-size: 18px; font-weight: 800; color: ${failedBatches > 0 ? 'var(--color-danger)' : 'var(--color-success)'}; margin-top: 2px;">${failedBatches} <span style="font-size: 11px; font-weight: 600; color: var(--text-secondary);">Runs</span></div>
+                        <div style="font-size: 9.5px; color: var(--text-secondary); font-weight: 700; text-transform: uppercase;">${T("Quarantined / Aborted")}</div>
+                        <div style="font-size: 18px; font-weight: 800; color: ${failedBatches > 0 ? 'var(--color-danger)' : 'var(--color-success)'}; margin-top: 2px;">${failedBatches} <span style="font-size: 11px; font-weight: 600; color: var(--text-secondary);">${T("Runs")}</span></div>
                     </div>
                 </div>
 
                 <!-- Studio & Hardware Metadata Grid -->
                 <div class="print-meta-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px 12px; background: var(--bg-tertiary); border: 1px solid var(--border-primary); border-radius: 6px; padding: 8px 12px; margin-bottom: 12px; font-size: 10px;">
-                    <div><span class="print-meta-label" style="color: var(--text-secondary); font-weight: 600;">Autoclave Unit:</span> <span style="font-weight: 700;">${profile.autoclaveSerial || 'Midmark M11 UltraClave (#MM-8472)'}</span></div>
-                    <div><span class="print-meta-label" style="color: var(--text-secondary); font-weight: 600;">Calibration Status:</span> <span style="font-weight: 700; color: var(--color-success);">✓ Certified Biomedical</span></div>
-                    <div><span class="print-meta-label" style="color: var(--text-secondary); font-weight: 600;">Lead Operator:</span> <span style="font-weight: 700;">${profile.operatorName || 'Qualified Professional Piercer'}</span></div>
-                    <div><span class="print-meta-label" style="color: var(--text-secondary); font-weight: 600;">Weekly Spore Verification:</span> ${sporeStatusHtml}</div>
-                    <div><span class="print-meta-label" style="color: var(--text-secondary); font-weight: 600;">Chemical Indicator:</span> <span style="font-weight: 700;">ISO 11140-1 Class 5 Integrator</span></div>
-                    <div><span class="print-meta-label" style="color: var(--text-secondary); font-weight: 600;">Water Purity:</span> <span style="font-weight: 700;">&lt;15 ppm TDS Distilled Steam</span></div>
+                    <div><span class="print-meta-label" style="color: var(--text-secondary); font-weight: 600;">${T("Autoclave Unit:")}</span> <span style="font-weight: 700;">${profile.autoclaveSerial || 'Midmark M11 UltraClave (#MM-8472)'}</span></div>
+                    <div><span class="print-meta-label" style="color: var(--text-secondary); font-weight: 600;">${T("Calibration Status:")}</span> <span style="font-weight: 700; color: var(--color-success);">${T("✓ Certified Biomedical")}</span></div>
+                    <div><span class="print-meta-label" style="color: var(--text-secondary); font-weight: 600;">${T("Lead Operator:")}</span> <span style="font-weight: 700;">${profile.operatorName || 'Qualified Professional Piercer'}</span></div>
+                    <div><span class="print-meta-label" style="color: var(--text-secondary); font-weight: 600;">${T("Weekly Spore Verification:")}</span> ${sporeStatusHtml}</div>
+                    <div><span class="print-meta-label" style="color: var(--text-secondary); font-weight: 600;">${T("Chemical Indicator:")}</span> <span style="font-weight: 700;">${T("ISO 11140-1 Class 5 Integrator")}</span></div>
+                    <div><span class="print-meta-label" style="color: var(--text-secondary); font-weight: 600;">${T("Water Purity:")}</span> <span style="font-weight: 700;">${T("<15 ppm TDS Distilled Steam")}</span></div>
                 </div>
 
                 <!-- Section: Daily Schedule Breakdown -->
                 <div style="margin-bottom: 12px;">
                     <div style="font-size: 11px; font-weight: 800; color: var(--text-primary); text-transform: uppercase; border-bottom: 1.5px solid var(--border-primary); padding-bottom: 3px; margin-bottom: 6px; display: flex; justify-content: space-between;">
-                        <span>1. Daily Sterilization Throughput (Past 7 Days)</span>
-                        <span style="font-weight: 600; color: var(--text-secondary); text-transform: none; font-size: 9.5px;">Week Schedule</span>
+                        <span>${T("1. Daily Sterilization Throughput (Past 7 Days)")}</span>
+                        <span style="font-weight: 600; color: var(--text-secondary); text-transform: none; font-size: 9.5px;">${T("Week Schedule")}</span>
                     </div>
                     <table class="print-table" style="width: 100%; border-collapse: collapse; font-size: 10px;">
                         <thead>
                             <tr style="background: var(--bg-tertiary); color: var(--text-primary);">
-                                <th style="padding: 5px 8px; border: 1px solid var(--border-primary);">Date</th>
-                                <th style="padding: 5px 8px; border: 1px solid var(--border-primary); text-align: center;">Completed Cycles</th>
-                                <th style="padding: 5px 8px; border: 1px solid var(--border-primary); text-align: center;">Estimated Items Processed</th>
-                                <th style="padding: 5px 8px; border: 1px solid var(--border-primary);">Operating Technicians</th>
-                                <th style="padding: 5px 8px; border: 1px solid var(--border-primary); text-align: center;">Release Compliance</th>
+                                <th style="padding: 5px 8px; border: 1px solid var(--border-primary);">${T("Date")}</th>
+                                <th style="padding: 5px 8px; border: 1px solid var(--border-primary); text-align: center;">${T("Completed Cycles")}</th>
+                                <th style="padding: 5px 8px; border: 1px solid var(--border-primary); text-align: center;">${T("Estimated Items Processed")}</th>
+                                <th style="padding: 5px 8px; border: 1px solid var(--border-primary);">${T("Operating Technicians")}</th>
+                                <th style="padding: 5px 8px; border: 1px solid var(--border-primary); text-align: center;">${T("Release Compliance")}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1887,20 +1892,20 @@ const PDFGenerator = {
                 <!-- Section: Comprehensive 7-Day Batch Log Manifest -->
                 <div style="margin-bottom: 12px;">
                     <div style="font-size: 11px; font-weight: 800; color: var(--text-primary); text-transform: uppercase; border-bottom: 1.5px solid var(--border-primary); padding-bottom: 3px; margin-bottom: 6px; display: flex; justify-content: space-between;">
-                        <span>2. Physical Cycle Parameter Logs &amp; Class 5 Integrators</span>
-                        <span style="font-weight: 600; color: var(--color-primary); text-transform: none; font-size: 9.5px;">${logs.length} Total Records</span>
+                        <span>${T("2. Physical Cycle Parameter Logs & Class 5 Integrators")}</span>
+                        <span style="font-weight: 600; color: var(--color-primary); text-transform: none; font-size: 9.5px;">${T('{n} Total Records', { n: logs.length })}</span>
                     </div>
                     <table class="print-table" style="width: 100%; border-collapse: collapse; font-size: 9.5px;">
                         <thead>
                             <tr style="background: var(--bg-tertiary); color: var(--text-primary);">
-                                <th style="padding: 4px 6px; border: 1px solid var(--border-primary);">Batch #</th>
-                                <th style="padding: 4px 6px; border: 1px solid var(--border-primary);">Date &amp; Time</th>
-                                <th style="padding: 4px 6px; border: 1px solid var(--border-primary);">Autoclave Type</th>
-                                <th style="padding: 4px 6px; border: 1px solid var(--border-primary);">Load Type</th>
-                                <th style="padding: 4px 6px; border: 1px solid var(--border-primary);">Temp &amp; Pressure</th>
-                                <th style="padding: 4px 6px; border: 1px solid var(--border-primary);">Exposure / Dry</th>
-                                <th style="padding: 4px 6px; border: 1px solid var(--border-primary);">Technician</th>
-                                <th style="padding: 4px 6px; border: 1px solid var(--border-primary); text-align: center;">Release Status</th>
+                                <th style="padding: 4px 6px; border: 1px solid var(--border-primary);">${T("Batch #")}</th>
+                                <th style="padding: 4px 6px; border: 1px solid var(--border-primary);">${T("Date & Time")}</th>
+                                <th style="padding: 4px 6px; border: 1px solid var(--border-primary);">${T("Autoclave Type")}</th>
+                                <th style="padding: 4px 6px; border: 1px solid var(--border-primary);">${T("Load Type")}</th>
+                                <th style="padding: 4px 6px; border: 1px solid var(--border-primary);">${T("Temp & Pressure")}</th>
+                                <th style="padding: 4px 6px; border: 1px solid var(--border-primary);">${T("Exposure / Dry")}</th>
+                                <th style="padding: 4px 6px; border: 1px solid var(--border-primary);">${T("Technician")}</th>
+                                <th style="padding: 4px 6px; border: 1px solid var(--border-primary); text-align: center;">${T("Release Status")}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1911,26 +1916,26 @@ const PDFGenerator = {
 
                 <!-- Section: Quality Assurance & Legal Sign-off -->
                 <div class="print-signoff-box" style="border: 1.5px solid var(--border-primary); border-radius: 6px; padding: 10px 14px; margin-top: 10px; background: var(--bg-primary); font-size: 10px; page-break-inside: avoid;">
-                    <div style="font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">QUALITY ASSURANCE CERTIFICATION &amp; BATCH RELEASE ATTESTATION</div>
+                    <div style="font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">${T("QUALITY ASSURANCE CERTIFICATION & BATCH RELEASE ATTESTATION")}</div>
                     <p style="font-size: 9.5px; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.35;">
-                        I hereby attest that all sterilization cycles cataloged in this 7-day report were processed in accordance with ANSI/AAMI ST79 comprehensive guidelines for steam sterilization, ISO 11140-1 chemical integrator monitoring, and manufacturer specifications. Physical time, temperature, and pressure parameters were observed on-spec prior to package release.
+                        ${T("I hereby attest that all sterilization cycles cataloged in this 7-day report were processed in accordance with ANSI/AAMI ST79 comprehensive guidelines for steam sterilization, ISO 11140-1 chemical integrator monitoring, and manufacturer specifications. Physical time, temperature, and pressure parameters were observed on-spec prior to package release.")}
                     </p>
                     <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; align-items: flex-end;">
                         <div>
-                            <div style="font-size: 9px; color: var(--text-secondary);">Lead Piercer / Sterilization Tech Signature:</div>
+                            <div style="font-size: 9px; color: var(--text-secondary);">${T("Lead Piercer / Sterilization Tech Signature:")}</div>
                             <div class="print-sign-line" style="border-bottom: 1.5px solid var(--border-primary); height: 22px; margin: 4px 0 2px 0;"></div>
-                            <div style="font-size: 8.5px; color: var(--text-secondary);">Print Name &amp; Title: ${profile.operatorName || 'Qualified Professional Piercer'} • Date: _________________</div>
+                            <div style="font-size: 8.5px; color: var(--text-secondary);">${T('Print Name & Title: {name} • Date: _________________', { name: profile.operatorName || __tx('Qualified Professional Piercer') })}</div>
                         </div>
                         <div>
-                            <div style="font-size: 9px; color: var(--text-secondary);">Infection Control Director / Studio Owner:</div>
+                            <div style="font-size: 9px; color: var(--text-secondary);">${T("Infection Control Director / Studio Owner:")}</div>
                             <div class="print-sign-line" style="border-bottom: 1.5px solid var(--border-primary); height: 22px; margin: 4px 0 2px 0;"></div>
-                            <div style="font-size: 8.5px; color: var(--text-secondary);">Verification Signature • Date: _________________</div>
+                            <div style="font-size: 8.5px; color: var(--text-secondary);">${T("Verification Signature • Date: _________________")}</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="print-footer-note" style="text-align: center; font-size: 8.5px; color: var(--text-secondary); margin-top: 8px;">
-                    Generated by Autoclave Sterilization &amp; Quality Management System • Retain with Studio Health &amp; Safety Compliance Files for a minimum of 3 years.
+                    ${T("Generated by Autoclave Sterilization & Quality Management System • Retain with Studio Health & Safety Compliance Files for a minimum of 3 years.")}
                 </div>
             </div>
         `;
@@ -1944,12 +1949,12 @@ const PDFGenerator = {
             const html = this.generateWeeklySummaryReportHtml(allLogs, allSpores, allMaints);
             this.printDocument(html);
             if (typeof showToast === 'function') {
-                showToast('✓ Weekly 7-Day Sterilization Audit Summary report sent to printer / PDF!', 'success', 3200);
+                showToast(__tx('✓ Weekly 7-Day Sterilization Audit Summary report sent to printer / PDF!'), 'success', 3200);
             }
         } catch (err) {
             console.error('Error generating weekly summary PDF:', err);
             if (typeof showToast === 'function') {
-                showToast('Could not generate weekly summary PDF: ' + err.message, 'error', 3500);
+                showToast(__tx('Could not generate weekly summary PDF: {error}', { error: err.message }), 'error', 3500);
             }
         }
     },
@@ -1970,7 +1975,7 @@ const PDFGenerator = {
             <!DOCTYPE html>
             <html>
             <head>
-                <title>Sterilization Log - Print Document</title>
+                <title>${T("Sterilization Log - Print Document")}</title>
                 <style>
                     @page { size: letter portrait; margin: 12mm 15mm; }
                     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; color: var(--text-primary); }

@@ -284,32 +284,32 @@ const ClinicalMatricesModule = {
                     <div>
                         <span class="matrix-badge matrix-badge--primary">${m.badge}</span>
                         <h4 class="matrix-card__title">${m.alloy}</h4>
-                        <span class="matrix-card__subtitle">Standard: <strong>${m.standard}</strong></span>
+                        <span class="matrix-card__subtitle">${tr('matrices.lbl.standard', 'Standard:')} <strong>${m.standard}</strong></span>
                     </div>
                 </div>
                 <div class="matrix-card__grid">
                     <div class="matrix-spec">
-                        <span class="matrix-spec__label">Alloy Composition</span>
+                        <span class="matrix-spec__label">${tr('matrices.lbl.composition', 'Alloy Composition')}</span>
                         <span class="matrix-spec__value">${m.composition}</span>
                     </div>
                     <div class="matrix-spec">
-                        <span class="matrix-spec__label">Nickel Release</span>
+                        <span class="matrix-spec__label">${tr('matrices.lbl.nickel', 'Nickel Release')}</span>
                         <span class="matrix-spec__value matrix-spec__value--highlight">${m.nickelContent}</span>
                     </div>
                     <div class="matrix-spec">
-                        <span class="matrix-spec__label">Biocompatibility Rating</span>
+                        <span class="matrix-spec__label">${tr('matrices.lbl.bio', 'Biocompatibility Rating')}</span>
                         <span class="matrix-spec__value">${m.biocompatibility}</span>
                     </div>
                     <div class="matrix-spec">
-                        <span class="matrix-spec__label">Surface Finish Requirement</span>
+                        <span class="matrix-spec__label">${tr('matrices.lbl.finish', 'Surface Finish Requirement')}</span>
                         <span class="matrix-spec__value">${m.surfaceFinish}</span>
                     </div>
                     <div class="matrix-spec">
-                        <span class="matrix-spec__label">Autoclave / Sterilization</span>
+                        <span class="matrix-spec__label">${tr('matrices.lbl.steril', 'Autoclave / Sterilization')}</span>
                         <span class="matrix-spec__value">${m.sterilization}</span>
                     </div>
                     <div class="matrix-spec">
-                        <span class="matrix-spec__label">MRI & Diagnostic Safety</span>
+                        <span class="matrix-spec__label">${tr('matrices.lbl.mri', 'MRI & Diagnostic Safety')}</span>
                         <span class="matrix-spec__value">${m.mriCompatibility}</span>
                     </div>
                 </div>
@@ -317,11 +317,11 @@ const ClinicalMatricesModule = {
                     <div class="matrix-clinical-status">
                         <span class="matrix-icon">⚕️</span>
                         <div>
-                            <strong>Clinical Protocol Status:</strong> ${m.clinicalStatus}
+                            <strong>${tr('matrices.lbl.clinical', 'Clinical Protocol Status:')}</strong> ${m.clinicalStatus}
                         </div>
                     </div>
                     <p class="matrix-healthcare-notes">
-                        <strong>Healthcare Provider Guidance:</strong> ${m.healthcareNotes}
+                        <strong>${tr('matrices.lbl.guidance', 'Healthcare Provider Guidance:')}</strong> ${m.healthcareNotes}
                     </p>
                 </div>
             </div>

@@ -1143,7 +1143,7 @@
         const importModal = document.getElementById('importChoiceModal');
         const summaryEl = document.getElementById('importFileSummary');
         if (summaryEl) {
-          summaryEl.textContent = `Valid Backup File: ${parsed.pieces.length} piece(s) and ${totalEntries} entry(s).`;
+          summaryEl.textContent = (window.t ? window.t('healing.storage.backupValid', { pieces: parsed.pieces.length, entries: totalEntries }) : '') || `Valid Backup File: ${parsed.pieces.length} piece(s) and ${totalEntries} entry(s).`;
         }
 
         if (importModal) {

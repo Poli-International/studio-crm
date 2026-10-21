@@ -630,18 +630,18 @@ function solveMixForTarget(targetInput, availableInks, options = {}) {
   const lumDiff = Math.abs(targetLum - predLum);
 
   if (dE00Val < 1.0) {
-    matchQuality = `High-Fidelity Match (ΔE₀₀: ${dE00Val})`;
-    honestAssessment = `Minimal perceptual variance (CIEDE2000 ΔE₀₀: ${dE00Val}, ΔE76: ${dEVal}). High-fidelity match achievable using your on-hand bottles.`;
+    matchQuality = window.t('live.matchHigh', { de00: dE00Val });
+    honestAssessment = window.t('live.assessHigh', { de00: dE00Val, de76: dEVal });
   } else if (dE00Val < 2.0) {
-    matchQuality = `Close Approximation (ΔE₀₀: ${dE00Val})`;
-    honestAssessment = `Close visual approximation (CIEDE2000 ΔE₀₀: ${dE00Val}, ΔE76: ${dEVal}). Slight hue or chroma variance; comfortably within standard tattoo pigment healing tolerance.`;
+    matchQuality = window.t('live.matchClose', { de00: dE00Val });
+    honestAssessment = window.t('live.assessClose', { de00: dE00Val, de76: dEVal });
   } else if (dE00Val < 3.5) {
-    matchQuality = `Noticeable Variance (ΔE₀₀: ${dE00Val})`;
-    const toneNote = predLum > targetLum + 10 ? 'lighter' : (predLum < targetLum - 10 ? 'darker' : 'slightly shifted in saturation');
-    honestAssessment = `Noticeable deviation (CIEDE2000 ΔE₀₀: ${dE00Val}, ΔE76: ${dEVal}). The achievable mix is ${toneNote} than your target. Your on-hand inventory lacks a dedicated pigment to hit this exact saturation point.`;
+    matchQuality = window.t('live.matchNoticeable', { de00: dE00Val });
+    const assessKey = predLum > targetLum + 10 ? 'live.assessLighter' : (predLum < targetLum - 10 ? 'live.assessDarker' : 'live.assessShifted');
+    honestAssessment = window.t(assessKey, { de00: dE00Val, de76: dEVal });
   } else {
-    matchQuality = `Significant Gamut Shift (ΔE₀₀: ${dE00Val})`;
-    honestAssessment = `Significant gamut discrepancy (CIEDE2000 ΔE₀₀: ${dE00Val}, ΔE76: ${dEVal}). This target shade lies outside the achievable subtractive range of your currently on-hand bottles. Showing the closest available compromise.`;
+    matchQuality = window.t('live.matchSignificant', { de00: dE00Val });
+    honestAssessment = window.t('live.assessSignificant', { de00: dE00Val, de76: dEVal });
   }
 
   return {

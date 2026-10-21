@@ -794,15 +794,15 @@
       function buildPillHtml(targetContainer) {
         if (!targetContainer) return;
         if (options.length === 0) {
-          targetContainer.innerHTML = '<span class="text-muted">Standard initial jewelry configuration</span>';
+          targetContainer.innerHTML = '<span class="text-muted">' + tr('jewelry.default_config', null, 'Standard initial jewelry configuration') + '</span>';
           return;
         }
         var html = '';
         options.forEach(function (opt) {
           var isSelected = (curOpt && curOpt.id === opt.id);
-          var badge = opt.isInitialStandard ? '<span class="jewelry-pill-badge initial">Initial Std</span>' : '<span class="jewelry-pill-badge healed">Healed Alt</span>';
+          var badge = opt.isInitialStandard ? '<span class="jewelry-pill-badge initial">' + tr('jewelry.badge_initial', null, 'Initial Std') + '</span>' : '<span class="jewelry-pill-badge healed">' + tr('jewelry.badge_healed', null, 'Healed Alt') + '</span>';
           html += `
-            <button type="button" class="jewelry-option-pill ${isSelected ? 'active' : ''}" data-jewelry-id="${opt.id}" aria-label="Select ${opt.name}">
+            <button type="button" class="jewelry-option-pill ${isSelected ? 'active' : ''}" data-jewelry-id="${opt.id}" aria-label="${tr('jewelry.select_aria', { name: opt.name }, 'Select {name}')}">
               <span class="pill-name">${opt.name}</span>
               ${badge}
             </button>
@@ -832,7 +832,7 @@
         if (jewelryLength) jewelryLength.textContent = curOpt.length;
         if (downsizeTime) downsizeTime.textContent = curOpt.downsize;
         if (jewelryOptionDescBox) {
-          jewelryOptionDescBox.innerHTML = `<strong>Clinical Rationale:</strong> ${curOpt.description}`;
+          jewelryOptionDescBox.innerHTML = `<strong>${tr('jewelry.desc_clinical_rationale', null, 'Clinical Rationale')}:</strong> ${curOpt.description}`;
         }
       } else {
         var prefs = getStudioPreferences();
@@ -843,9 +843,9 @@
         if (downsizeTime) downsizeTime.textContent = data.downsizeTime;
         if (jewelryOptionDescBox) {
           if (pref && pref.notes) {
-            jewelryOptionDescBox.innerHTML = `<strong>Studio House Standard:</strong> ${pref.notes}`;
+            jewelryOptionDescBox.innerHTML = `<strong>${tr('jewelry.desc_house', null, 'Studio House Standard')}:</strong> ${pref.notes}`;
           } else {
-            jewelryOptionDescBox.innerHTML = `<strong>Clinical Standard:</strong> ${data.jewelryType}`;
+            jewelryOptionDescBox.innerHTML = `<strong>${tr('jewelry.desc_clinical_std', null, 'Clinical Standard')}:</strong> ${data.jewelryType}`;
           }
         }
       }
@@ -988,10 +988,10 @@
           if (symStatusText) symStatusText.textContent = tr('ui.symmetrical_angle_difference_delta_height_offset', { delta: delta, offset: offset.toFixed(1) }, 'Symmetrical: angle difference {delta}°, height offset {offset} mm.');
         } else if (Math.abs(offset) >= 1.5) {
           symStatusBanner.className = 'v2-status-banner v2-status-banner--danger';
-          if (symStatusText) symStatusText.textContent = `Significant Step Height Offset (${offset > 0 ? '+' : ''}${offset.toFixed(1)}mm)! Unbalanced optical level across datum plane.`;
+          if (symStatusText) symStatusText.textContent = tr('ui.sym_step_offset', { offset: (offset > 0 ? '+' : '') + offset.toFixed(1) }, 'Significant Step Height Offset ({offset} mm)! Unbalanced optical level across datum plane.');
         } else {
           symStatusBanner.className = 'v2-status-banner v2-status-banner--warning';
-          if (symStatusText) symStatusText.textContent = `Angular Divergence Delta of ${delta}° detected. Asymmetric hang will be noticeable on resting posture.`;
+          if (symStatusText) symStatusText.textContent = tr('ui.sym_angular_delta', { delta: delta }, 'Angular Divergence Delta of {delta}° detected. Asymmetric hang will be noticeable on resting posture.');
         }
       }
     }
@@ -1029,7 +1029,7 @@
 
       if (printDate) printDate.textContent = dateStr;
       if (printCategory) printCategory.textContent = (data.category || 'CLINICAL PIERCING PROTOCOL').toUpperCase();
-      if (printTitle) printTitle.textContent = `${data.name} Specification & Placement Protocol`;
+      if (printTitle) printTitle.textContent = tr('print.title_spec', { name: data.name }, '{name} Specification & Placement Protocol');
       if (printHouseBadge) {
         var house = getStudioPreferences()[activePiercingKey];
         printHouseBadge.textContent = house ? tr('print.house_standard', { gauge: house.gauge }, 'House Standard: {gauge}') : tr('print.global_baseline', null, 'Protocol: Standard Global Clinical Baseline');
@@ -1053,7 +1053,7 @@
       var printHeroDownsizeSub = document.getElementById('printHeroDownsizeSub');
 
       if (printHeroAngle) printHeroAngle.textContent = data.optimalAngle || '90°';
-      if (printHeroAngleSub) printHeroAngleSub.textContent = `Normal (${data.angleTolerance || '±2°'})`;
+      if (printHeroAngleSub) printHeroAngleSub.textContent = tr('print.angle_normal', { tol: data.angleTolerance || '±2°' }, 'Normal ({tol})');
       if (printHeroDepth) printHeroDepth.textContent = `${metrics.channelDepth} mm`;
       if (printHeroDepthSub) printHeroDepthSub.textContent = window.translate ? window.translate('guide.full_tissue_thickness', null, 'Full Tissue Thickness') : 'Full Tissue Thickness';
       if (printHeroPost) printHeroPost.textContent = curOpt ? curOpt.length : data.jewelryLength;
@@ -1070,10 +1070,10 @@
 
       // Fill Technical Specifications
       if (printAngle) printAngle.textContent = `${data.optimalAngle} (${data.angleTolerance || '±2°'})`;
-      if (printDepth) printDepth.textContent = `${metrics.channelDepth} mm (Traverse full tissue thickness)`;
+      if (printDepth) printDepth.textContent = tr('print.depth_traverse', { depth: metrics.channelDepth }, '{depth} mm (Traverse full tissue thickness)');
       if (printThickness) {
         var tRange = data.tissueThicknessRange || [4.0, 8.0, 5.0];
-        printThickness.textContent = `${tRange[0]} - ${tRange[1]} mm (Typical: ${tRange[2]} mm | Sized: ${metrics.measuredThickness} mm)`;
+        printThickness.textContent = tr('print.thickness_detail', { min: tRange[0], max: tRange[1], typ: tRange[2], sized: metrics.measuredThickness }, '{min} - {max} mm (Typical: {typ} mm | Sized: {sized} mm)');
       }
       if (printJewelry) {
         var jName = curOpt ? curOpt.name : data.jewelryType;
@@ -1087,10 +1087,10 @@
 
       // Fill Anatomical Clearance & Guidance
       if (printClearance) {
-        printClearance.innerHTML = `<strong>Clearance Rationale:</strong> ${data.whyThisAngle} <br><strong>Off-Axis Hazard:</strong> ${data.badAngleConsequence}`;
+        printClearance.innerHTML = `<strong>${tr('print.clearance_rationale', null, 'Clearance Rationale')}:</strong> ${data.whyThisAngle} <br><strong>${tr('print.off_axis_hazard', null, 'Off-Axis Hazard')}:</strong> ${data.badAngleConsequence}`;
       }
       if (printTechniqueSummary) {
-        printTechniqueSummary.innerHTML = `<strong>Technique Guidance:</strong> Stabilize tissue plane with sterile ring-closing forceps or freehand technique. Ensure needle axis maintains strict 90° normal vector through both epidermal boundaries. Verify exit mark visualization prior to needle advancement.`;
+        printTechniqueSummary.innerHTML = `<strong>${tr('print.technique_label', null, 'Technique Guidance')}:</strong> ${tr('print.technique_text', null, 'Stabilize tissue plane with sterile ring-closing forceps or freehand technique. Ensure needle axis maintains strict 90° normal vector through both epidermal boundaries. Verify exit mark visualization prior to needle advancement.')}`;
       }
 
       // Fill Refusal Criteria
@@ -1332,7 +1332,7 @@
       if (toggleFineTuneBtn) {
         toggleFineTuneBtn.classList.remove('active');
         toggleFineTuneBtn.setAttribute('aria-pressed', 'false');
-        toggleFineTuneBtn.innerHTML = '🔬 Fine-Tune (0.1mm)';
+        toggleFineTuneBtn.innerHTML = tr('common.fine_tune_0_1mm', null, '🔬 Fine-Tune (0.1mm)');
       }
 
       // Reset symmetry controls to clinical defaults
@@ -1381,7 +1381,7 @@
       // Visual feedback on Reset All button
       if (resetAllBtn) {
         var origHtml = resetAllBtn.innerHTML;
-        resetAllBtn.innerHTML = '<span class="reset-icon">✅</span> <span class="reset-text">Reset Done</span>';
+        resetAllBtn.innerHTML = '<span class="reset-icon">✅</span> <span class="reset-text">' + tr('ui.reset_done', null, 'Reset Done') + '</span>';
         setTimeout(function () {
           resetAllBtn.innerHTML = origHtml;
         }, 1500);
@@ -2043,24 +2043,24 @@
         var data = piercingData[activePiercingKey] || piercingData['earlobe'];
         var metrics = calculateChannelMetrics(activePiercingKey, currentMeasuredThickness, currentVisualizerAngle);
 
-        var summary = `POLI INTERNATIONAL - CLINICAL PIERCING SPECIFICATION
-Placement: ${data.name} (${data.category || 'Body Piercing'})
-Optimal Angle: ${data.optimalAngle} (${data.angleTolerance || '±2°'})
-Measured Tissue Thickness: ${formatMm(metrics.measuredThickness, true)}
-Resulting Channel Depth: ${formatMm(metrics.channelDepth, true)}
-Initial Gauge Standard: ${data.jewelryGauge}
-Tissue Type: ${data.tissueType}
-Healing Timeline: ${data.healingTime}
-Downsize Milestone: ${data.downsizeTime}
-Anatomical Rationale: ${data.whyThisAngle}
-Clinical Risk of Off-Angle: ${data.badAngleConsequence}
-Jewelry length and fit: https://poliinternational.com/jewelry-size-visualizer/
+        var summary = `POLI INTERNATIONAL - ${tr('summary.title', null, 'CLINICAL PIERCING SPECIFICATION')}
+${tr('summary.placement', null, 'Placement')}: ${data.name} (${data.category || 'Body Piercing'})
+${tr('common.optimal_angle', null, 'Optimal Angle:')} ${data.optimalAngle} (${data.angleTolerance || '±2°'})
+${tr('print.row_thickness', null, 'Measured Tissue Thickness:')} ${formatMm(metrics.measuredThickness, true)}
+${tr('visualizer.resulting_channel_depth', null, 'Resulting Channel Depth')}: ${formatMm(metrics.channelDepth, true)}
+${tr('common.initial_gauge', null, 'Initial Gauge:')} ${data.jewelryGauge}
+${tr('common.tissue_type', null, 'Tissue Type:')} ${data.tissueType}
+${tr('common.healing_timeline', null, 'Healing Timeline:')} ${data.healingTime}
+${tr('common.downsize_milestone', null, 'Downsize Milestone:')} ${data.downsizeTime}
+${tr('summary.rationale', null, 'Anatomical Rationale')}: ${data.whyThisAngle}
+${tr('summary.risk', null, 'Clinical Risk of Off-Angle')}: ${data.badAngleConsequence}
+${tr('summary.jewelry_fit', null, 'Jewelry length and fit')}: https://poliinternational.com/jewelry-size-visualizer/
 Reference: Poli International Piercing Angle & Depth Guide`;
 
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(summary).then(function () {
             var orig = copySummaryBtn.innerHTML;
-            copySummaryBtn.innerHTML = '✅ Copied to Clipboard!';
+            copySummaryBtn.innerHTML = '✅ ' + tr('common.btn_copied', null, 'Copied to Clipboard!');
             setTimeout(function () { copySummaryBtn.innerHTML = orig; }, 2000);
           });
         }

@@ -4093,7 +4093,7 @@ function applyTheme(theme) {
 
     const toggleButtons = document.querySelectorAll('#dark-mode-toggle');
     toggleButtons.forEach(btn => {
-        btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+        btn.setAttribute('aria-label', (window.t || String)(theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'));
     });
 
     try {
@@ -7283,7 +7283,7 @@ const DailyGoalManager = {
         }
 
         if (indicatorBtn) {
-            const titleMsg = `Daily Sterilization Goal: ${completed} of ${goal} cycles logged today (${percent}%). Click to adjust target in settings.`;
+            const titleMsg = (window.t || String)('Daily Sterilization Goal: {completed} of {goal} cycles logged today ({percent}%). Click to adjust target in settings.', { completed: completed, goal: goal, percent: percent });
             indicatorBtn.setAttribute('title', titleMsg);
             indicatorBtn.setAttribute('aria-label', titleMsg);
         }
@@ -11729,17 +11729,17 @@ const ComplianceStatusManager = {
             if (isAllSystemsGo) {
                 indicator.classList.add('autoclave__status-indicator--go');
                 statusText.textContent = 'All Systems Go';
-                indicator.setAttribute('title', "All Systems Go: Today's spore test is logged (PASS) and annual calibration is valid.");
-                indicator.setAttribute('aria-label', "All Systems Go: Fully compliant");
+                indicator.setAttribute('title', (window.t || String)("All Systems Go: Today's spore test is logged (PASS) and annual calibration is valid."));
+                indicator.setAttribute('aria-label', (window.t || String)("All Systems Go: Fully compliant"));
             } else {
                 indicator.classList.add('autoclave__status-indicator--action-needed');
                 statusText.textContent = 'Compliance Action Needed';
 
                 const missingReasons = [];
-                if (!hasTodaySporeTest) missingReasons.push("Today's spore test not logged");
-                if (!isCalibrationValid) missingReasons.push("Annual calibration expired/missing");
-                indicator.setAttribute('title', `Compliance Action Needed: ${missingReasons.join(' & ')}. Click for details.`);
-                indicator.setAttribute('aria-label', `Compliance Action Needed: ${missingReasons.join(' & ')}`);
+                if (!hasTodaySporeTest) missingReasons.push((window.t || String)("Today's spore test not logged"));
+                if (!isCalibrationValid) missingReasons.push((window.t || String)("Annual calibration expired/missing"));
+                indicator.setAttribute('title', (window.t || String)('Compliance Action Needed: {reasons}. Click for details.', { reasons: missingReasons.join(' & ') }));
+                indicator.setAttribute('aria-label', (window.t || String)('Compliance Action Needed: {reasons}', { reasons: missingReasons.join(' & ') }));
             }
         }
 
@@ -13993,7 +13993,7 @@ const VoiceAnnouncerManager = {
 
         if (headerToggle) {
             headerToggle.classList.toggle('active', enabled);
-            headerToggle.title = enabled ? 'Hands-Free Voice Announcements & Commands: ACTIVE (Click to mute)' : 'Hands-Free Voice Announcements: MUTED (Click to activate)';
+            headerToggle.title = (window.t || String)(enabled ? 'Hands-Free Voice Announcements & Commands: ACTIVE (Click to mute)' : 'Hands-Free Voice Announcements: MUTED (Click to activate)');
         }
         if (settingsToggle) {
             settingsToggle.checked = enabled;

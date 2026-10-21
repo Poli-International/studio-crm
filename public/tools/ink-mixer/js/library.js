@@ -133,24 +133,24 @@ const FormulaLibrary = {
     };
 
     const rows = [];
-    rows.push(['FORMULA METADATA']);
-    rows.push(['Formula Name', escapeCsv(formula.name || 'Custom Mix')]);
-    rows.push(['Ratio Formula', escapeCsv(formula.ratio || 'Custom')]);
-    rows.push(['Target Volume', escapeCsv(`${totalVol} ${unit}`)]);
-    rows.push(['Primary Brand', escapeCsv(formula.primaryBrand || 'Standard')]);
-    rows.push(['Resulting Color (Hex)', escapeCsv(formula.resultingColor || '#808080')]);
-    rows.push(['Date Recorded', escapeCsv(formula.createdAt ? new Date(formula.createdAt).toLocaleDateString() : new Date().toLocaleDateString())]);
-    rows.push(['Artist Notes', escapeCsv(formula.notes || '')]);
+    rows.push([window.t('live.csvMeta')]);
+    rows.push([window.t('live.csvFormulaName'), escapeCsv(formula.name || 'Custom Mix')]);
+    rows.push([window.t('live.csvRatio'), escapeCsv(formula.ratio || 'Custom')]);
+    rows.push([window.t('live.csvTargetVolume'), escapeCsv(`${totalVol} ${unit}`)]);
+    rows.push([window.t('live.csvPrimaryBrand'), escapeCsv(formula.primaryBrand || 'Standard')]);
+    rows.push([window.t('live.csvResultingColor'), escapeCsv(formula.resultingColor || '#808080')]);
+    rows.push([window.t('live.csvDateRecorded'), escapeCsv(formula.createdAt ? new Date(formula.createdAt).toLocaleDateString() : new Date().toLocaleDateString())]);
+    rows.push([window.t('live.csvArtistNotes'), escapeCsv(formula.notes || '')]);
     rows.push([]);
-    rows.push(['PIGMENT VOLUMETRIC MEASUREMENTS & BATCH BREAKDOWN']);
+    rows.push([window.t('live.csvBreakdownTitle')]);
     rows.push([
-      'Pigment / Shade',
-      'Manufacturer Brand',
-      'Batch / Lot #',
-      'Ratio Parts',
-      'Percentage (%)',
-      'Volume (ml)',
-      'Dispensing Drops'
+      window.t('live.csvColPigment'),
+      window.t('live.csvColBrand'),
+      window.t('live.csvColLot'),
+      window.t('live.csvColParts'),
+      window.t('live.csvColPct'),
+      window.t('live.csvColVolume'),
+      window.t('live.csvColDrops')
     ]);
 
     colors.forEach((c, idx) => {
@@ -195,21 +195,21 @@ const FormulaLibrary = {
     };
     const rows = [];
     rows.push([
-      'Formula Name',
-      'Ratio Formula',
-      'Target Volume',
-      'Unit',
-      'Primary Brand',
-      'Resulting Hex',
-      'Pigment Breakdown (Parts / Brand / Batch)',
-      'Artist Notes',
-      'Tags',
-      'Date Recorded'
+      window.t('live.csvFormulaName'),
+      window.t('live.csvRatio'),
+      window.t('live.csvTargetVolume'),
+      window.t('live.csvAllUnit'),
+      window.t('live.csvPrimaryBrand'),
+      window.t('live.csvAllHex'),
+      window.t('live.csvAllBreakdown'),
+      window.t('live.csvArtistNotes'),
+      window.t('live.csvAllTags'),
+      window.t('live.csvDateRecorded')
     ]);
     formulas.forEach(f => {
       const colorsStr = (f.colors || []).map(c => {
         const brandStr = c.brand && c.brand !== 'Standard' ? ` [${c.brand}]` : '';
-        const batchStr = c.batchNumber ? ` (Lot #${c.batchNumber})` : '';
+        const batchStr = c.batchNumber ? ` (${window.t('live.lotShort', { n: c.batchNumber })})` : '';
         return `${c.parts} ${c.shadeName || c.color}${brandStr}${batchStr}`;
       }).join(' + ');
       rows.push([
@@ -273,27 +273,27 @@ const FormulaLibrary = {
     const scale5ml = window.scaleFormulaMeasurements ? window.scaleFormulaMeasurements(formula.colors, 5, 'ml') : null;
 
     let text = `==============================\n`;
-    text += `TATTOO INK FORMULA: ${formula.name.toUpperCase()}\n`;
+    text += window.t('live.textTitle', { name: formula.name.toUpperCase() }) + '\n';
     text += `==============================\n`;
-    text += `Ratio: ${formula.ratio}\n`;
-    text += `Primary Brand: ${formula.primaryBrand || 'Standard'}\n`;
-    if (formula.notes) text += `Notes: ${formula.notes}\n`;
+    text += window.t('live.ratioLine', { ratio: formula.ratio }) + '\n';
+    text += window.t('live.textBrand', { brand: formula.primaryBrand || 'Standard' }) + '\n';
+    if (formula.notes) text += window.t('live.textNotes', { notes: formula.notes }) + '\n';
     text += `------------------------------\n`;
-    text += `SINGLE CAP RECIPE (#16 Large Cap / 2ml):\n`;
+    text += window.t('live.textSingleCap') + '\n';
     if (scale1Cap) {
       scale1Cap.measurements.forEach(m => {
-        text += `  • ${m.shadeName} (${m.brand}): ${m.drops} drops (${m.ml} ml / ${m.percentage}%)\n`;
+        text += `  • ${m.shadeName} (${m.brand}): ${window.t('live.nDrops', { n: m.drops })} (${m.ml} ml / ${m.percentage}%)\n`;
       });
     }
     text += `------------------------------\n`;
-    text += `STANDARD MIX (5 ml Dispenser):\n`;
+    text += window.t('live.textStdMix') + '\n';
     if (scale5ml) {
       scale5ml.measurements.forEach(m => {
-        text += `  • ${m.shadeName} (${m.brand}): ${m.drops} drops (${m.ml} ml)\n`;
+        text += `  • ${m.shadeName} (${m.brand}): ${window.t('live.nDropsMl', { n: m.drops, ml: m.ml })}\n`;
       });
     }
     text += `==============================\n`;
-    text += `Generated with Poli International Tattoo Tools Suite\n`;
+    text += window.t('live.textGenerated') + '\n';
 
     navigator.clipboard.writeText(text).then(() => {
       if (typeof window.showMessage === 'function') {
@@ -379,10 +379,10 @@ function renderFormulaCard(formula) {
   colors.className = 'ink-mixer__formula-colors';
   const colorNames = (formula.colors || []).map(c => {
     const brandStr = c.brand && c.brand !== 'Standard' ? ` [${c.brand}]` : '';
-    const batchStr = c.batchNumber ? ` (Lot #${c.batchNumber})` : '';
+    const batchStr = c.batchNumber ? ` (${window.t('live.lotShort', { n: c.batchNumber })})` : '';
     return `${c.parts} ${c.shadeName || c.color}${brandStr}${batchStr}`;
   }).join(' + ');
-  colors.textContent = colorNames || 'No colors recorded';
+  colors.textContent = colorNames || window.t('live.noColors');
 
   details.appendChild(headerRow);
   details.appendChild(ratio);
@@ -426,7 +426,7 @@ function renderFormulaCard(formula) {
   const csvBtn = document.createElement('button');
   csvBtn.className = 'ink-mixer__btn ink-mixer__btn--small ink-mixer__btn--outline';
   csvBtn.textContent = typeof window.t === 'function' ? window.t('library.downloadCsvBtn') : 'Download CSV';
-  csvBtn.title = 'Download formatted CSV for inventory software';
+  csvBtn.title = window.t('live.csvBtnTitle');
   csvBtn.onclick = () => FormulaLibrary.exportFormulaToCSV(formula);
 
   const deleteBtn = document.createElement('button');
@@ -574,12 +574,13 @@ function printFormulaCard(formula) {
     const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
     const lightness = Math.round(lum * 100);
     const lStar = lum > 0.008856 ? Math.round(116 * Math.cbrt(lum) - 16) : Math.round(903.3 * lum);
-    let greyscale = 'Mid-Tone';
-    if (lightness < 15) greyscale = 'Deep Black';
-    else if (lightness < 35) greyscale = 'Dark Tone';
-    else if (lightness < 65) greyscale = 'Medium Tone';
-    else if (lightness < 85) greyscale = 'Light Tint';
-    else greyscale = 'Highlight / White';
+    const tk = (k) => (typeof window.t === 'function' ? window.t(k) : k);
+    let greyscale = tk('tones.mediumMidtone');
+    if (lightness < 15) greyscale = tk('tones.deepCoreShadow');
+    else if (lightness < 35) greyscale = tk('tones.darkShadowTone');
+    else if (lightness < 65) greyscale = tk('tones.mediumMidtone');
+    else if (lightness < 85) greyscale = tk('tones.lightTintWash');
+    else greyscale = tk('tones.highKeyHighlight');
     return { lStar, lightness, greyscale };
   }
 
@@ -596,8 +597,8 @@ function printFormulaCard(formula) {
   content.innerHTML = `
     <div class="print-card">
       <div class="print-card__header">
-        <div class="print-card__brand-logo">POLI INTERNATIONAL TATTOO TOOLS</div>
-        <div class="print-card__date">STUDIO FORMULA ARCHIVE SHEET • ${dateStr}</div>
+        <div class="print-card__brand-logo">${_t('printCard.brandLogo')}</div>
+        <div class="print-card__date">${_t('printCard.archiveSheetHeader', { date: dateStr })}</div>
       </div>
 
       <div class="print-card__meta-bar">
@@ -618,34 +619,34 @@ function printFormulaCard(formula) {
       <div class="print-card__title-row">
         <div class="print-card__title-col">
           <h2 class="print-card__title">${formula.name}</h2>
-          <div class="print-card__ratio">${_t('printCard.formulaRatioLabel')}: ${formula.ratio}</div>
+          <div class="print-card__ratio">${_t('printCard.formulaRatio', { ratio: formula.ratio })}</div>
         </div>
         <div class="print-card__swatch-col">
           <div class="print-card__swatch-main" style="background-color: ${formula.resultingColor || '#808080'};"></div>
           <span class="print-card__swatch-hex">${(formula.resultingColor || '#808080').toUpperCase()}</span>
-          <span class="print-card__swatch-lstar">L* ${mainColorVals.lStar} (${mainColorVals.lightness}% Lightness)</span>
+          <span class="print-card__swatch-lstar">L* ${mainColorVals.lStar} (${_t('live.lightnessPct', { pct: mainColorVals.lightness })})</span>
         </div>
       </div>
 
       <div class="print-card__section">
-        <h4 class="print-card__subhead">${_t('printCard.batchTraceability')}</h4>
+        <h4 class="print-card__subhead">${_t('printCard.volumetricSection')}</h4>
         <table class="print-card__table">
           <thead>
             <tr>
-              <th>${_t('printCard.pigmentComponent')}</th>
-              <th>${_t('printCard.brandLot')}</th>
-              <th>${_t('printCard.partsRatio')}</th>
-              <th>1 Cap (#16 / 2ml)</th>
-              <th>5 ml Mix</th>
-              <th>30 ml Bottle (1 oz)</th>
+              <th>${_t('printCard.colPigment')}</th>
+              <th>${_t('printCard.colBrandBatch')}</th>
+              <th>${_t('printCard.colParts')}</th>
+              <th>${_t('printCard.col1Cap')}</th>
+              <th>${_t('printCard.col5ml')}</th>
+              <th>${_t('printCard.col30ml')}</th>
             </tr>
           </thead>
           <tbody>
             ${(formula.colors || []).map((c, i) => {
-              const capDrops = scale1Cap && scale1Cap.measurements[i] ? `${scale1Cap.measurements[i].drops} drops` : '-';
-              const ml5Drops = scale5ml && scale5ml.measurements[i] ? `${scale5ml.measurements[i].drops} drops (${scale5ml.measurements[i].ml}ml)` : '-';
-              const ml30Drops = scale30ml && scale30ml.measurements[i] ? `${scale30ml.measurements[i].drops} drops (${scale30ml.measurements[i].ml}ml)` : '-';
-              const batchText = c.batchNumber ? `Lot #${c.batchNumber}` : _t('printCard.lotNotLogged');
+              const capDrops = scale1Cap && scale1Cap.measurements[i] ? _t('live.nDrops', { n: scale1Cap.measurements[i].drops }) : '-';
+              const ml5Drops = scale5ml && scale5ml.measurements[i] ? _t('live.nDropsMl', { n: scale5ml.measurements[i].drops, ml: scale5ml.measurements[i].ml }) : '-';
+              const ml30Drops = scale30ml && scale30ml.measurements[i] ? _t('live.nDropsMl', { n: scale30ml.measurements[i].drops, ml: scale30ml.measurements[i].ml }) : '-';
+              const batchText = c.batchNumber ? _t('live.lotShort', { n: c.batchNumber }) : _t('printCard.lotNotLogged');
               return `
                 <tr>
                   <td><strong>${c.shadeName || c.color}</strong></td>

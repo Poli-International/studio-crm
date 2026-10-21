@@ -322,8 +322,8 @@ const CurvedBarbellCalculator = {
             <div class="cbb-result-container">
                 <div class="cbb-result-header">
                     <div class="cbb-result-header-text">
-                        <h3 class="cbb-result-title">${this.escapeHtml(preset.name)} Barbell Length Recommendations</h3>
-                        <p class="cbb-result-subtitle">Measured tissue span: <strong>${span} mm</strong> &bull; Gauge: <strong>${this.escapeHtml(preset.gauge)}</strong></p>
+                        <h3 class="cbb-result-title">${tr('curved.res.title', '{name} Barbell Length Recommendations', { name: this.escapeHtml(preset.name) })}</h3>
+                        <p class="cbb-result-subtitle">${tr('curved.res.subtitle', 'Measured tissue span: <strong>{span} mm</strong> &bull; Gauge: <strong>{gauge}</strong>', { span: span, gauge: this.escapeHtml(preset.gauge) })}</p>
                     </div>
                     ${statusBadge}
                 </div>
@@ -333,31 +333,31 @@ const CurvedBarbellCalculator = {
                     <!-- Fresh Card -->
                     <div class="fresh-card">
                         <div class="stage-badge stage-badge--fresh">
-                            <span>Fresh Piercing (Initial)</span>
+                            <span>${tr('curved.res.freshBadge', 'Fresh Piercing (Initial)')}</span>
                         </div>
                         <div class="stage-hero-length">
                             <span class="stage-hero-val">${fresh.bestFit}</span>
                             <span class="stage-hero-unit">mm</span>
                         </div>
-                        <div class="stage-sub-label">Nearest standard internal length</div>
+                        <div class="stage-sub-label">${tr('curved.res.nearest', 'Nearest standard internal length')}</div>
 
                         <div class="stage-breakdown">
                             <div class="stage-calc-row">
-                                <span>Tissue Span:</span>
+                                <span>${tr('curved.res.tissueSpan', 'Tissue Span:')}</span>
                                 <strong>${span} mm</strong>
                             </div>
                             <div class="stage-calc-row">
-                                <span>Swelling Clearance:</span>
+                                <span>${tr('curved.res.swellClear', 'Swelling Clearance:')}</span>
                                 <strong>+${fresh.clearance} mm</strong>
                             </div>
                             <div class="stage-calc-row stage-calc-row--total">
-                                <span>Minimum Required:</span>
+                                <span>${tr('curved.res.minReq', 'Minimum Required:')}</span>
                                 <strong>${fresh.recommended.toFixed(1)} mm</strong>
                             </div>
                             ${fresh.nextUp ? `
                                 <div class="stage-alt-row">
-                                    <span>Next size up:</span>
-                                    <strong>${fresh.nextUp} mm</strong> (extra comfort margin)
+                                    <span>${tr('curved.res.nextUp', 'Next size up:')}</span>
+                                    <strong>${fresh.nextUp} mm</strong> ${tr('curved.res.extraMargin', '(extra comfort margin)')}
                                 </div>
                             ` : ''}
                         </div>
@@ -366,31 +366,31 @@ const CurvedBarbellCalculator = {
                     <!-- Healed Card -->
                     <div class="healed-card">
                         <div class="stage-badge stage-badge--healed">
-                            <span>Healed Piercing (Downsized)</span>
+                            <span>${tr('curved.res.healedBadge', 'Healed Piercing (Downsized)')}</span>
                         </div>
                         <div class="stage-hero-length">
                             <span class="stage-hero-val">${healed.bestFit}</span>
                             <span class="stage-hero-unit">mm</span>
                         </div>
-                        <div class="stage-sub-label">Target downsized internal length</div>
+                        <div class="stage-sub-label">${tr('curved.res.targetDown', 'Target downsized internal length')}</div>
 
                         <div class="stage-breakdown">
                             <div class="stage-calc-row">
-                                <span>Tissue Span:</span>
+                                <span>${tr('curved.res.tissueSpan', 'Tissue Span:')}</span>
                                 <strong>${span} mm</strong>
                             </div>
                             <div class="stage-calc-row">
-                                <span>Snug Clearance:</span>
+                                <span>${tr('curved.res.snugClear', 'Snug Clearance:')}</span>
                                 <strong>+${healed.clearance} mm</strong>
                             </div>
                             <div class="stage-calc-row stage-calc-row--total">
-                                <span>Minimum Required:</span>
+                                <span>${tr('curved.res.minReq', 'Minimum Required:')}</span>
                                 <strong>${healed.recommended.toFixed(1)} mm</strong>
                             </div>
                             ${healed.nextUp ? `
                                 <div class="stage-alt-row">
-                                    <span>Next size up:</span>
-                                    <strong>${healed.nextUp} mm</strong> (comfort fit)
+                                    <span>${tr('curved.res.nextUp', 'Next size up:')}</span>
+                                    <strong>${healed.nextUp} mm</strong> ${tr('curved.res.comfortFit', '(comfort fit)')}
                                 </div>
                             ` : ''}
                         </div>
@@ -400,9 +400,9 @@ const CurvedBarbellCalculator = {
                 <!-- Downsizing Notice -->
                 <div class="downsizing-notice-callout">
                     <div class="downsizing-notice-content">
-                        <strong>Initial jewelry is longer to allow for swelling and is shortened once the piercing has healed.</strong>
+                        <strong>${tr('curved.res.downsizeNotice', 'Initial jewelry is longer to allow for swelling and is shortened once the piercing has healed.')}</strong>
                         <p class="downsizing-notice-link-row">
-                            For healing schedules and downsize timing, see the
+                            ${tr('curved.res.downsizeLink', 'For healing schedules and downsize timing, see the')}
                             <a href="https://poliinternational.com/aftercare-schedule-generator/" target="_top" class="downsizing-external-link">
                                 Aftercare Schedule Generator &rarr;
                             </a>
@@ -415,32 +415,32 @@ const CurvedBarbellCalculator = {
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 0.75rem;">
                         <span style="font-size: 1.25rem;">⚠️</span>
                         <strong style="color: var(--color-error); font-size: 1rem;">
-                            Clinical Warning: Why Any Barbell Under ${fresh.recommended.toFixed(1)} mm Will Fail on a Fresh Piercing
+                            ${tr('curved.res.warnTitle', 'Clinical Warning: Why Any Barbell Under {len} mm Will Fail on a Fresh Piercing', { len: fresh.recommended.toFixed(1) })}
                         </strong>
                     </div>
                     <p style="margin: 0 0 0.75rem 0; font-size: 0.9rem; line-height: 1.5; color: var(--text-primary);">
-                        If a barbell shorter than <strong>${fresh.recommended.toFixed(1)} mm</strong> is inserted into this ${span} mm tissue span, the following biological complications occur:
+                        ${tr('curved.res.warnIntro', 'If a barbell shorter than <strong>{len} mm</strong> is inserted into this {span} mm tissue span, the following biological complications occur:', { len: fresh.recommended.toFixed(1), span: span })}
                     </p>
                     <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.875rem; line-height: 1.6; color: var(--text-secondary);">
-                        <li><strong>Tissue Compression:</strong> The end balls clamp flush against entry and exit wounds with no relief margin.</li>
-                        <li><strong>Capillary Ischemia &amp; Necrosis:</strong> Unrelieved mechanical pressure halts local microvascular circulation, suffocating tissue and leading to localized tissue death (necrosis).</li>
-                        <li><strong>Jewellery Embedding:</strong> Normal post-piercing inflammatory edema forces the end balls into the skin, requiring urgent surgical incision to remove.</li>
-                        <li><strong>Migration &amp; Rejection:</strong> Persistent inward tension causes the barbell to track forward through the cartilage or skin, causing permanent scarring and loss of the piercing.</li>
+                        <li>${tr('curved.res.warn1', '<strong>Tissue Compression:</strong> The end balls clamp flush against entry and exit wounds with no relief margin.')}</li>
+                        <li>${tr('curved.res.warn2', '<strong>Capillary Ischemia &amp; Necrosis:</strong> Unrelieved mechanical pressure halts local microvascular circulation, suffocating tissue and leading to localized tissue death (necrosis).')}</li>
+                        <li>${tr('curved.res.warn3', '<strong>Jewellery Embedding:</strong> Normal post-piercing inflammatory edema forces the end balls into the skin, requiring urgent surgical incision to remove.')}</li>
+                        <li>${tr('curved.res.warn4', '<strong>Migration &amp; Rejection:</strong> Persistent inward tension causes the barbell to track forward through the cartilage or skin, causing permanent scarring and loss of the piercing.')}</li>
                     </ul>
                 </div>
 
                 <!-- Full Mathematical Working Section -->
                 <div class="working-box">
-                    <h4 class="working-box-title">Calculation Working &amp; Formulas</h4>
+                    <h4 class="working-box-title">${tr('curved.res.workTitle', 'Calculation Working &amp; Formulas')}</h4>
                     <p class="working-formula-line">
-                        <strong>Formula:</strong> Recommended Length = Measured Tissue Span + Stage Clearance
+                        ${tr('curved.res.formula', '<strong>Formula:</strong> Recommended Length = Measured Tissue Span + Stage Clearance')}
                     </p>
                     <ul class="working-list">
                         <li>
-                            <strong>Fresh Working:</strong> ${span} mm span + ${fresh.clearance} mm swelling clearance = <strong>${fresh.recommended.toFixed(1)} mm</strong> minimum &rarr; Standard size: <strong>${fresh.bestFit} mm</strong>.
+                            ${tr('curved.res.workFresh', '<strong>Fresh Working:</strong> {span} mm span + {c} mm swelling clearance = <strong>{rec} mm</strong> minimum &rarr; Standard size: <strong>{best} mm</strong>.', { span: span, c: fresh.clearance, rec: fresh.recommended.toFixed(1), best: fresh.bestFit })}
                         </li>
                         <li>
-                            <strong>Healed Working:</strong> ${span} mm span + ${healed.clearance} mm healed clearance = <strong>${healed.recommended.toFixed(1)} mm</strong> minimum &rarr; Standard size: <strong>${healed.bestFit} mm</strong>.
+                            ${tr('curved.res.workHealed', '<strong>Healed Working:</strong> {span} mm span + {c} mm healed clearance = <strong>{rec} mm</strong> minimum &rarr; Standard size: <strong>{best} mm</strong>.', { span: span, c: healed.clearance, rec: healed.recommended.toFixed(1), best: healed.bestFit })}
                         </li>
                     </ul>
                 </div>
@@ -448,10 +448,10 @@ const CurvedBarbellCalculator = {
                 <!-- Pure Inline SVG True-Scale Diagram -->
                 <div class="cbb-diagram-section">
                     <div class="cbb-diagram-header">
-                        <span class="cbb-diagram-title">Calibrated 1:1 Vector Diagram</span>
+                        <span class="cbb-diagram-title">${tr('curved.res.diagTitle', 'Calibrated 1:1 Vector Diagram')}</span>
                         <span class="cbb-diagram-legend">
-                            <span class="legend-pill legend-pill--shaft">Shaft (${fresh.bestFit}mm Fresh / ${healed.bestFit}mm Healed)</span>
-                            <span class="legend-pill legend-pill--tissue">Tissue (${span}mm)</span>
+                            <span class="legend-pill legend-pill--shaft">${tr('curved.res.legendShaft', 'Shaft ({fresh}mm Fresh / {healed}mm Healed)', { fresh: fresh.bestFit, healed: healed.bestFit })}</span>
+                            <span class="legend-pill legend-pill--tissue">${tr('curved.res.legendTissue', 'Tissue ({span}mm)', { span: span })}</span>
                         </span>
                     </div>
                     <div class="cbb-svg-container" id="cbb-svg-viewport"></div>
@@ -460,13 +460,13 @@ const CurvedBarbellCalculator = {
                 <!-- Action Controls: Requirement E & F -->
                 <div class="cbb-action-buttons" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1.5rem;">
                     <button type="button" class="btn btn--primary" id="cbb-copy-summary-btn">
-                        📋 Copy Size Summary (Plain Text)
+                        ${tr('curved.res.btnCopy', '📋 Copy Size Summary (Plain Text)')}
                     </button>
                     <button type="button" class="btn btn--secondary" id="cbb-to-collection-btn">
-                        💎 Save to My Jewellery Collection
+                        ${tr('curved.res.btnSave', '💎 Save to My Jewellery Collection')}
                     </button>
                     <button type="button" class="btn btn--secondary" id="cbb-to-fitcard-btn">
-                        🖨️ Transfer to Printable Fit Card
+                        ${tr('curved.res.btnFit', '🖨️ Transfer to Printable Fit Card')}
                     </button>
                 </div>
             </div>
@@ -511,11 +511,11 @@ const CurvedBarbellCalculator = {
 
         const isCalibrated = (typeof AppState !== 'undefined' && AppState.isCalibrated);
         const scaleNotice = isCalibrated
-            ? 'Scale: 1:1 Calibrated Screen Scale'
-            : 'Scale: Approximate (Bank card calibration required)';
+            ? tr('curved.res.scaleCal', 'Scale: 1:1 Calibrated Screen Scale')
+            : tr('curved.res.scaleApprox', 'Scale: Approximate (Bank card calibration required)');
 
         container.innerHTML = `
-            <svg width="${widthPx}" height="${heightPx}" viewBox="0 0 ${widthPx} ${heightPx}" xmlns="http://www.w3.org/2000/svg" class="cbb-inline-svg" role="img" aria-label="${preset.name} curved barbell 1:1 scale diagram">
+            <svg width="${widthPx}" height="${heightPx}" viewBox="0 0 ${widthPx} ${heightPx}" xmlns="http://www.w3.org/2000/svg" class="cbb-inline-svg" role="img" aria-label="${tr('curved.res.svgAria', '{name} curved barbell 1:1 scale diagram', { name: preset.name })}">
                 <defs>
                     <linearGradient id="barbellGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                         <stop offset="0%" stop-color="#cbd5e1" />
@@ -547,19 +547,19 @@ const CurvedBarbellCalculator = {
 
                 <line x1="${tissueLeft}" y1="${centerY + 45}" x2="${tissueRight}" y2="${centerY + 45}" stroke="#b76e79" stroke-width="1.5" marker-start="url(#arrowMStart)" marker-end="url(#arrowM)" />
                 <text x="${centerX}" y="${centerY + 62}" text-anchor="middle" font-size="12" font-family="sans-serif" font-weight="600" fill="#881337">
-                    Tissue Span: ${span} mm
+                    ${tr('curved.res.svgSpan', 'Tissue Span: {span} mm', { span: span })}
                 </text>
 
                 <line x1="${leftX}" y1="${centerY - 45}" x2="${rightX}" y2="${centerY - 45}" stroke="#475569" stroke-width="1.5" marker-start="url(#arrowMStart)" marker-end="url(#arrowM)" />
                 <text x="${centerX}" y="${centerY - 52}" text-anchor="middle" font-size="12" font-family="sans-serif" font-weight="600" fill="#1e293b">
-                    Fresh: ${fresh.bestFit} mm (Healed: ${healed.bestFit} mm)
+                    ${tr('curved.res.svgFresh', 'Fresh: {fresh} mm (Healed: {healed} mm)', { fresh: fresh.bestFit, healed: healed.bestFit })}
                 </text>
 
                 <text x="14" y="${heightPx - 14}" font-size="11" font-family="sans-serif" fill="#64748b">
                     ${scaleNotice}
                 </text>
                 <text x="${widthPx - 14}" y="${heightPx - 14}" text-anchor="end" font-size="11" font-family="sans-serif" fill="#64748b">
-                    Gauge: ${preset.gauge}
+                    ${tr('curved.res.svgGauge', 'Gauge: {gauge}', { gauge: preset.gauge })}
                 </text>
             </svg>
         `;
@@ -571,7 +571,7 @@ const CurvedBarbellCalculator = {
         if (copySummaryBtn) {
             copySummaryBtn.addEventListener('click', () => {
                 const date = this.getLocalDateString();
-                const text = `Placement: ${calc.preset.name} | Gauge: ${calc.preset.gauge} | Fresh Length: ${calc.fresh.bestFit} mm | Healed Length: ${calc.healed.bestFit} mm | Measured Span: ${calc.span} mm | Date: ${date}`;
+                const text = tr('curved.res.copyText', 'Placement: {placement} | Gauge: {gauge} | Fresh Length: {fresh} mm | Healed Length: {healed} mm | Measured Span: {span} mm | Date: {date}', { placement: calc.preset.name, gauge: calc.preset.gauge, fresh: calc.fresh.bestFit, healed: calc.healed.bestFit, span: calc.span, date: date });
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     navigator.clipboard.writeText(text).then(() => {
                         const orig = copySummaryBtn.textContent;
@@ -579,7 +579,7 @@ const CurvedBarbellCalculator = {
                         setTimeout(() => { copySummaryBtn.textContent = orig; }, 2500);
                     });
                 } else if (typeof JewelleryCollectionModule !== 'undefined') {
-                    JewelleryCollectionModule.copyToClipboard(text, '✓ Size summary copied!');
+                    JewelleryCollectionModule.copyToClipboard(text, tr('curved.res.copied', '✓ Size summary copied!'));
                 }
             });
         }
@@ -608,12 +608,12 @@ const CurvedBarbellCalculator = {
                 if (typeof window.FitCardModule !== 'undefined') {
                     window.FitCardModule.setData({
                         placement: `${calc.preset.name} (${calc.preset.desc})`,
-                        measurement: `${calc.span} mm tissue span`,
+                        measurement: tr('curved.res.fcMeasurement', '{span} mm tissue span', { span: calc.span }),
                         gauge: calc.preset.gauge,
-                        freshLength: `${calc.fresh.bestFit} mm (initial post)`,
-                        healedLength: `${calc.healed.bestFit} mm (downsized target)`,
+                        freshLength: tr('curved.res.fcFresh', '{n} mm (initial post)', { n: calc.fresh.bestFit }),
+                        healedLength: tr('curved.res.fcHealed', '{n} mm (downsized target)', { n: calc.healed.bestFit }),
                         ballSize: calc.preset.gaugeVal === '14g' ? '4 mm' : '3 mm',
-                        notes: `Swelling clearance: +${calc.fresh.clearance} mm. Healed clearance: +${calc.healed.clearance} mm.`
+                        notes: tr('curved.res.fcNotes', 'Swelling clearance: +{a} mm. Healed clearance: +{b} mm.', { a: calc.fresh.clearance, b: calc.healed.clearance })
                     });
 
                     if (typeof window.switchTab === 'function') {

@@ -212,8 +212,8 @@ const IndustrialBarbellCalculator = {
             <div class="cbb-result-container">
                 <div class="cbb-result-header">
                     <div class="cbb-result-header-text">
-                        <h3 class="cbb-result-title">Industrial Barbell Length Recommendations</h3>
-                        <p class="cbb-result-subtitle">Hole-to-Hole Distance: <strong>${res.dist} mm</strong> &bull; Ball Diameter: <strong>${res.ball}</strong> &bull; Standard 14g (1.6 mm)</p>
+                        <h3 class="cbb-result-title">${tr('industrial.res.title', 'Industrial Barbell Length Recommendations')}</h3>
+                        <p class="cbb-result-subtitle">${tr('industrial.res.subtitle', 'Hole-to-Hole Distance: <strong>{dist} mm</strong> &bull; Ball Diameter: <strong>{ball}</strong> &bull; Standard 14g (1.6 mm)', { dist: res.dist, ball: res.ball })}</p>
                     </div>
                     ${statusBadge}
                 </div>
@@ -223,35 +223,35 @@ const IndustrialBarbellCalculator = {
                     <!-- Fresh Card -->
                     <div class="fresh-card">
                         <div class="stage-badge stage-badge--fresh">
-                            <span>Fresh Industrial (Initial)</span>
+                            <span>${tr('industrial.res.freshBadge', 'Fresh Industrial (Initial)')}</span>
                         </div>
                         <div class="stage-hero-length">
                             <span class="stage-hero-val">${res.fresh.bestFit}</span>
                             <span class="stage-hero-unit">mm</span>
                         </div>
-                        <div class="stage-sub-label">Nearest standard internal length</div>
+                        <div class="stage-sub-label">${tr('curved.res.nearest', 'Nearest standard internal length')}</div>
 
                         <div class="stage-breakdown">
                             <div class="stage-calc-row">
-                                <span>Hole-to-Hole Span:</span>
+                                <span>${tr('industrial.res.holeSpan', 'Hole-to-Hole Span:')}</span>
                                 <strong>${res.dist} mm</strong>
                             </div>
                             <div class="stage-calc-row">
-                                <span>Ball Protrusion (${res.ball} balls):</span>
+                                <span>${tr('industrial.res.ballProt', 'Ball Protrusion ({ball} balls):', { ball: res.ball })}</span>
                                 <strong>+${res.protrusion} mm</strong>
                             </div>
                             <div class="stage-calc-row">
-                                <span>Swelling Clearance:</span>
+                                <span>${tr('curved.res.swellClear', 'Swelling Clearance:')}</span>
                                 <strong>+${res.fresh.clearance} mm</strong>
                             </div>
                             <div class="stage-calc-row stage-calc-row--total">
-                                <span>Minimum Required:</span>
+                                <span>${tr('curved.res.minReq', 'Minimum Required:')}</span>
                                 <strong>${res.fresh.minRequired.toFixed(1)} mm</strong>
                             </div>
                             ${res.fresh.nextUp ? `
                                 <div class="stage-alt-row">
-                                    <span>Next size up:</span>
-                                    <strong>${res.fresh.nextUp} mm</strong> (extra comfort margin)
+                                    <span>${tr('curved.res.nextUp', 'Next size up:')}</span>
+                                    <strong>${res.fresh.nextUp} mm</strong> ${tr('curved.res.extraMargin', '(extra comfort margin)')}
                                 </div>
                             ` : ''}
                         </div>
@@ -260,35 +260,35 @@ const IndustrialBarbellCalculator = {
                     <!-- Healed Card -->
                     <div class="healed-card">
                         <div class="stage-badge stage-badge--healed">
-                            <span>Healed Industrial (Downsized)</span>
+                            <span>${tr('industrial.res.healedBadge', 'Healed Industrial (Downsized)')}</span>
                         </div>
                         <div class="stage-hero-length">
                             <span class="stage-hero-val">${res.healed.bestFit}</span>
                             <span class="stage-hero-unit">mm</span>
                         </div>
-                        <div class="stage-sub-label">Target downsized internal length</div>
+                        <div class="stage-sub-label">${tr('curved.res.targetDown', 'Target downsized internal length')}</div>
 
                         <div class="stage-breakdown">
                             <div class="stage-calc-row">
-                                <span>Hole-to-Hole Span:</span>
+                                <span>${tr('industrial.res.holeSpan', 'Hole-to-Hole Span:')}</span>
                                 <strong>${res.dist} mm</strong>
                             </div>
                             <div class="stage-calc-row">
-                                <span>Ball Protrusion (${res.ball} balls):</span>
+                                <span>${tr('industrial.res.ballProt', 'Ball Protrusion ({ball} balls):', { ball: res.ball })}</span>
                                 <strong>+${res.protrusion} mm</strong>
                             </div>
                             <div class="stage-calc-row">
-                                <span>Snug Clearance:</span>
+                                <span>${tr('curved.res.snugClear', 'Snug Clearance:')}</span>
                                 <strong>+${res.healed.clearance} mm</strong>
                             </div>
                             <div class="stage-calc-row stage-calc-row--total">
-                                <span>Minimum Required:</span>
+                                <span>${tr('curved.res.minReq', 'Minimum Required:')}</span>
                                 <strong>${res.healed.minRequired.toFixed(1)} mm</strong>
                             </div>
                             ${res.healed.nextUp ? `
                                 <div class="stage-alt-row">
-                                    <span>Next size up:</span>
-                                    <strong>${res.healed.nextUp} mm</strong> (comfort fit)
+                                    <span>${tr('curved.res.nextUp', 'Next size up:')}</span>
+                                    <strong>${res.healed.nextUp} mm</strong> ${tr('curved.res.comfortFit', '(comfort fit)')}
                                 </div>
                             ` : ''}
                         </div>
@@ -298,9 +298,9 @@ const IndustrialBarbellCalculator = {
                 <!-- Downsizing Disclosure -->
                 <div class="downsizing-notice-callout">
                     <div class="downsizing-notice-content">
-                        <strong>Initial jewelry is longer to allow for swelling and is shortened once the piercing has healed.</strong>
+                        <strong>${tr('curved.res.downsizeNotice', 'Initial jewelry is longer to allow for swelling and is shortened once the piercing has healed.')}</strong>
                         <p class="downsizing-notice-link-row">
-                            For healing schedules and downsize reviews, see the
+                            ${tr('industrial.res.downsizeLink', 'For healing schedules and downsize reviews, see the')}
                             <a href="https://poliinternational.com/aftercare-schedule-generator/" target="_top" class="downsizing-external-link">
                                 Aftercare Schedule Generator &rarr;
                             </a>
@@ -313,35 +313,35 @@ const IndustrialBarbellCalculator = {
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 0.75rem;">
                         <span style="font-size: 1.25rem;">⚠️</span>
                         <strong style="color: var(--color-error); font-size: 1rem;">
-                            Clinical Warning: Why Any Industrial Barbell Under ${res.fresh.minRequired.toFixed(1)} mm Will Fail
+                            ${tr('industrial.res.warnTitle', 'Clinical Warning: Why Any Industrial Barbell Under {len} mm Will Fail', { len: res.fresh.minRequired.toFixed(1) })}
                         </strong>
                     </div>
                     <p style="margin: 0 0 0.75rem 0; font-size: 0.9rem; line-height: 1.5; color: var(--text-primary);">
-                        An industrial piercing connects two distinct cartilage ridges with one continuous rigid shaft. If the barbell length is shorter than <strong>${res.fresh.minRequired.toFixed(1)} mm</strong>:
+                        ${tr('industrial.res.warnIntro', 'An industrial piercing connects two distinct cartilage ridges with one continuous rigid shaft. If the barbell length is shorter than <strong>{len} mm</strong>:', { len: res.fresh.minRequired.toFixed(1) })}
                     </p>
                     <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.875rem; line-height: 1.6; color: var(--text-secondary);">
-                        <li><strong>Cartilage Compression &amp; Inward Bowing:</strong> The rigid bar pulls both helix rims toward each other under high shear tension, permanently warping ear cartilage shape.</li>
-                        <li><strong>Hypertrophic Scar Tissue &amp; Bumps:</strong> Continuous mechanical deflection across both channels produces stubborn inflammatory granulomas and hypertrophic scarring at both puncture margins.</li>
-                        <li><strong>Margin Cutting (Cheese-Wiring):</strong> The 14g steel or titanium shaft cuts directly into the inner rim margin like a wire through cheese.</li>
-                        <li><strong>Canal Tearing &amp; Rejection:</strong> Even minor incidental contact or pillow contact will tear through the compressed cartilage channel.</li>
+                        <li>${tr('industrial.res.warn1', '<strong>Cartilage Compression &amp; Inward Bowing:</strong> The rigid bar pulls both helix rims toward each other under high shear tension, permanently warping ear cartilage shape.')}</li>
+                        <li>${tr('industrial.res.warn2', '<strong>Hypertrophic Scar Tissue &amp; Bumps:</strong> Continuous mechanical deflection across both channels produces stubborn inflammatory granulomas and hypertrophic scarring at both puncture margins.')}</li>
+                        <li>${tr('industrial.res.warn3', '<strong>Margin Cutting (Cheese-Wiring):</strong> The 14g steel or titanium shaft cuts directly into the inner rim margin like a wire through cheese.')}</li>
+                        <li>${tr('industrial.res.warn4', '<strong>Canal Tearing &amp; Rejection:</strong> Even minor incidental contact or pillow contact will tear through the compressed cartilage channel.')}</li>
                     </ul>
                 </div>
 
                 <!-- Full Mathematical Working Section -->
                 <div class="working-box">
-                    <h4 class="working-box-title">Calculation Working &amp; Formulas</h4>
+                    <h4 class="working-box-title">${tr('curved.res.workTitle', 'Calculation Working &amp; Formulas')}</h4>
                     <p class="working-formula-line">
-                        <strong>Formula:</strong> Length = Hole-to-Hole Distance + Ball Protrusion Allowance + Stage Clearance
+                        ${tr('industrial.res.formula', '<strong>Formula:</strong> Length = Hole-to-Hole Distance + Ball Protrusion Allowance + Stage Clearance')}
                     </p>
                     <ul class="working-list">
                         <li>
-                            <strong>Fresh Working:</strong> ${res.dist} mm hole-to-hole + ${res.protrusion} mm ball protrusion + ${res.fresh.clearance} mm swelling clearance = <strong>${res.fresh.minRequired.toFixed(1)} mm</strong> minimum &rarr; Standard size: <strong>${res.fresh.bestFit} mm</strong>.
+                            ${tr('industrial.res.workFresh', '<strong>Fresh Working:</strong> {dist} mm hole-to-hole + {prot} mm ball protrusion + {c} mm swelling clearance = <strong>{rec} mm</strong> minimum &rarr; Standard size: <strong>{best} mm</strong>.', { dist: res.dist, prot: res.protrusion, c: res.fresh.clearance, rec: res.fresh.minRequired.toFixed(1), best: res.fresh.bestFit })}
                         </li>
                         <li>
-                            <strong>Healed Working:</strong> ${res.dist} mm hole-to-hole + ${res.protrusion} mm ball protrusion + ${res.healed.clearance} mm healed clearance = <strong>${res.healed.minRequired.toFixed(1)} mm</strong> minimum &rarr; Standard size: <strong>${res.healed.bestFit} mm</strong>.
+                            ${tr('industrial.res.workHealed', '<strong>Healed Working:</strong> {dist} mm hole-to-hole + {prot} mm ball protrusion + {c} mm healed clearance = <strong>{rec} mm</strong> minimum &rarr; Standard size: <strong>{best} mm</strong>.', { dist: res.dist, prot: res.protrusion, c: res.healed.clearance, rec: res.healed.minRequired.toFixed(1), best: res.healed.bestFit })}
                         </li>
                         <li>
-                            <strong>Ball Protrusion Standard:</strong> 3mm balls = +3mm, 4mm balls = +4mm, 5mm balls = +5mm allowance across both ends.
+                            ${tr('industrial.res.ballStd', '<strong>Ball Protrusion Standard:</strong> 3mm balls = +3mm, 4mm balls = +4mm, 5mm balls = +5mm allowance across both ends.')}
                         </li>
                     </ul>
                 </div>
@@ -349,10 +349,10 @@ const IndustrialBarbellCalculator = {
                 <!-- Pure Inline SVG True-Scale Diagram -->
                 <div class="cbb-diagram-section">
                     <div class="cbb-diagram-header">
-                        <span class="cbb-diagram-title">Calibrated 1:1 Vector Diagram</span>
+                        <span class="cbb-diagram-title">${tr('curved.res.diagTitle', 'Calibrated 1:1 Vector Diagram')}</span>
                         <span class="cbb-diagram-legend">
-                            <span class="legend-pill legend-pill--shaft">Barbell (${res.fresh.bestFit}mm Fresh / ${res.healed.bestFit}mm Healed)</span>
-                            <span class="legend-pill legend-pill--tissue">Span (${res.dist}mm)</span>
+                            <span class="legend-pill legend-pill--shaft">${tr('industrial.res.legendBarbell', 'Barbell ({fresh}mm Fresh / {healed}mm Healed)', { fresh: res.fresh.bestFit, healed: res.healed.bestFit })}</span>
+                            <span class="legend-pill legend-pill--tissue">${tr('industrial.res.legendSpan', 'Span ({dist}mm)', { dist: res.dist })}</span>
                         </span>
                     </div>
                     <div class="cbb-svg-container" id="ibb-svg-viewport"></div>
@@ -361,13 +361,13 @@ const IndustrialBarbellCalculator = {
                 <!-- Action Controls: Requirement E & F -->
                 <div class="cbb-action-buttons" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1.5rem;">
                     <button type="button" class="btn btn--primary" id="ibb-copy-summary-btn">
-                        📋 Copy Size Summary (Plain Text)
+                        ${tr('curved.res.btnCopy', '📋 Copy Size Summary (Plain Text)')}
                     </button>
                     <button type="button" class="btn btn--secondary" id="ibb-to-collection-btn">
-                        💎 Save to My Jewellery Collection
+                        ${tr('curved.res.btnSave', '💎 Save to My Jewellery Collection')}
                     </button>
                     <button type="button" class="btn btn--secondary" id="ibb-to-fitcard-btn">
-                        🖨️ Transfer to Printable Fit Card
+                        ${tr('curved.res.btnFit', '🖨️ Transfer to Printable Fit Card')}
                     </button>
                 </div>
             </div>
@@ -406,11 +406,11 @@ const IndustrialBarbellCalculator = {
 
         const isCalibrated = (typeof AppState !== 'undefined' && AppState.isCalibrated);
         const scaleNotice = isCalibrated
-            ? 'Scale: 1:1 Calibrated Screen Scale'
-            : 'Scale: Approximate (Bank card calibration required)';
+            ? tr('curved.res.scaleCal', 'Scale: 1:1 Calibrated Screen Scale')
+            : tr('curved.res.scaleApprox', 'Scale: Approximate (Bank card calibration required)');
 
         container.innerHTML = `
-            <svg width="${widthPx}" height="${heightPx}" viewBox="0 0 ${widthPx} ${heightPx}" xmlns="http://www.w3.org/2000/svg" class="ibb-inline-svg" role="img" aria-label="Industrial Barbell 1:1 scale diagram">
+            <svg width="${widthPx}" height="${heightPx}" viewBox="0 0 ${widthPx} ${heightPx}" xmlns="http://www.w3.org/2000/svg" class="ibb-inline-svg" role="img" aria-label="${tr('industrial.res.svgAria', 'Industrial Barbell 1:1 scale diagram')}">
                 <defs>
                     <linearGradient id="ibbShaftGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                         <stop offset="0%" stop-color="#cbd5e1" />
@@ -442,7 +442,7 @@ const IndustrialBarbellCalculator = {
 
                 <line x1="${hole1X}" y1="${centerY + 45}" x2="${hole2X}" y2="${centerY + 45}" stroke="#b76e79" stroke-width="1.5" marker-start="url(#ibbArrMStart)" marker-end="url(#ibbArrM)" />
                 <text x="${centerX}" y="${centerY + 62}" text-anchor="middle" font-size="12" font-family="sans-serif" font-weight="600" fill="#881337">
-                    Hole-to-Hole Distance: ${res.dist} mm
+                    ${tr('industrial.res.svgDist', 'Hole-to-Hole Distance: {dist} mm', { dist: res.dist })}
                 </text>
 
                 <line x1="${startX}" y1="${centerY - 45}" x2="${endX}" y2="${centerY - 45}" stroke="#475569" stroke-width="1.5" marker-start="url(#ibbArrMStart)" marker-end="url(#ibbArrM)" />
@@ -466,7 +466,7 @@ const IndustrialBarbellCalculator = {
         if (copySummaryBtn) {
             copySummaryBtn.addEventListener('click', () => {
                 const date = this.getLocalDateString();
-                const text = `Placement: Industrial Barbell | Gauge: 14g (1.6 mm) | Fresh Length: ${res.fresh.bestFit} mm | Healed Length: ${res.healed.bestFit} mm | Measured Span: ${res.dist} mm | Date: ${date}`;
+                const text = tr('industrial.res.copyText', 'Placement: Industrial Barbell | Gauge: 14g (1.6 mm) | Fresh Length: {fresh} mm | Healed Length: {healed} mm | Measured Span: {span} mm | Date: {date}', { fresh: res.fresh.bestFit, healed: res.healed.bestFit, span: res.dist, date: date });
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     navigator.clipboard.writeText(text).then(() => {
                         const orig = copySummaryBtn.textContent;
@@ -474,7 +474,7 @@ const IndustrialBarbellCalculator = {
                         setTimeout(() => { copySummaryBtn.textContent = orig; }, 2500);
                     });
                 } else if (typeof JewelleryCollectionModule !== 'undefined') {
-                    JewelleryCollectionModule.copyToClipboard(text, '✓ Size summary copied!');
+                    JewelleryCollectionModule.copyToClipboard(text, tr('curved.res.copied', '✓ Size summary copied!'));
                 }
             });
         }
@@ -486,7 +486,7 @@ const IndustrialBarbellCalculator = {
                 if (typeof JewelleryCollectionModule !== 'undefined') {
                     JewelleryCollectionModule.addPiece({
                         placement: 'Industrial (Scaffold)',
-                        name: 'Straight Scaffold Barbell',
+                        name: tr('industrial.res.itemName', 'Straight Scaffold Barbell'),
                         gauge: '14g (1.6 mm)',
                         length: `${res.fresh.bestFit} mm`,
                         ballSize: res.ball,
@@ -502,13 +502,13 @@ const IndustrialBarbellCalculator = {
             toFitCardBtn.addEventListener('click', () => {
                 if (typeof window.FitCardModule !== 'undefined') {
                     window.FitCardModule.setData({
-                        placement: 'Industrial (Scaffold Barbell)',
-                        measurement: `${res.dist} mm hole-to-hole cartilage distance`,
+                        placement: tr('industrial.res.fcPlacement', 'Industrial (Scaffold Barbell)'),
+                        measurement: tr('industrial.res.fcMeasurement', '{dist} mm hole-to-hole cartilage distance', { dist: res.dist }),
                         gauge: '14g (1.6 mm)',
-                        freshLength: `${res.fresh.bestFit} mm (initial post)`,
-                        healedLength: `${res.healed.bestFit} mm (downsized target)`,
-                        ballSize: `${res.ball} threaded balls`,
-                        notes: `Ball protrusion allowance: +${res.protrusion} mm. Swelling clearance: +${res.fresh.clearance} mm.`
+                        freshLength: tr('curved.res.fcFresh', '{n} mm (initial post)', { n: res.fresh.bestFit }),
+                        healedLength: tr('curved.res.fcHealed', '{n} mm (downsized target)', { n: res.healed.bestFit }),
+                        ballSize: tr('industrial.res.fcBall', '{ball} threaded balls', { ball: res.ball }),
+                        notes: tr('industrial.res.fcNotes', 'Ball protrusion allowance: +{prot} mm. Swelling clearance: +{c} mm.', { prot: res.protrusion, c: res.fresh.clearance })
                     });
 
                     if (typeof window.switchTab === 'function') {

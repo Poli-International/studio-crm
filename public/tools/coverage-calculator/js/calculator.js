@@ -2256,7 +2256,7 @@ function openMultiSessionPlanningModal() {
 
     if (selected.length === 0) {
         if (typeof showToastNotification === 'function') {
-            showToastNotification('⚠️ Please select at least one calculation from Recent History first.');
+            showToastNotification(T('x.ms_pick_first', '⚠️ Please select at least one calculation from Recent History first.'));
         }
         return;
     }
@@ -2361,24 +2361,24 @@ function openMultiSessionPlanningModal() {
     if (metricsGrid) {
         metricsGrid.innerHTML = `
             <div style="background: var(--color-bg-card, #16213e); border: 1px solid var(--color-border, #2e2e4a); border-radius: 8px; padding: 0.75rem 1rem;">
-                <div style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase;">Total Project Area</div>
+                <div style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase;">${T('x.ms_total_area', 'Total Project Area')}</div>
                 <div style="font-size: 1.2rem; font-weight: 800; color: #38bdf8; margin-top: 2px;">${totalAreaSqin.toFixed(1)} sq in</div>
-                <div style="font-size: 0.72rem; color: #64748b;">${totalAreaSqcm} cm² total</div>
+                <div style="font-size: 0.72rem; color: #64748b;">${TP('x.ms_cm2_total', '{0} cm² total', totalAreaSqcm)}</div>
             </div>
             <div style="background: var(--color-bg-card, #16213e); border: 1px solid var(--color-border, #2e2e4a); border-radius: 8px; padding: 0.75rem 1rem;">
-                <div style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase;">Total Chair Time</div>
+                <div style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase;">${T('x.ms_total_chair', 'Total Chair Time')}</div>
                 <div style="font-size: 1.2rem; font-weight: 800; color: var(--color-neon-pink, #ff006e); margin-top: 2px;">${totalHoursFixed} hrs</div>
-                <div style="font-size: 0.72rem; color: #64748b;">~${totalMins} minutes in chair</div>
+                <div style="font-size: 0.72rem; color: #64748b;">${TP('x.ms_minutes_in_chair', '~{0} minutes in chair', totalMins)}</div>
             </div>
             <div style="background: var(--color-bg-card, #16213e); border: 1px solid var(--color-border, #2e2e4a); border-radius: 8px; padding: 0.75rem 1rem;">
-                <div style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase;">Combined Ink Needed</div>
+                <div style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase;">${T('x.ms_combined_ink', 'Combined Ink Needed')}</div>
                 <div style="font-size: 1.2rem; font-weight: 800; color: #10b981; margin-top: 2px;">${totalInkMl.toFixed(1)} mL</div>
-                <div style="font-size: 0.72rem; color: #64748b;">~${totalCaps} caps (${totalFloz} fl oz)</div>
+                <div style="font-size: 0.72rem; color: #64748b;">${TP('x.ms_caps_floz', '~{0} caps ({1} fl oz)', totalCaps, totalFloz)}</div>
             </div>
             <div style="background: var(--color-bg-card, #16213e); border: 1px solid var(--color-border, #2e2e4a); border-radius: 8px; padding: 0.75rem 1rem;">
-                <div style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase;">Est. Project Value</div>
+                <div style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase;">${T('x.ms_est_value', 'Est. Project Value')}</div>
                 <div style="font-size: 1.2rem; font-weight: 800; color: #fbbf24; margin-top: 2px;">$${estFeeMin} – $${estFeeMax}</div>
-                <div style="font-size: 0.72rem; color: #64748b;">Rec. Deposit: $${recommendedDeposit}</div>
+                <div style="font-size: 0.72rem; color: #64748b;">${TP('x.ms_rec_deposit', 'Rec. Deposit: ${0}', recommendedDeposit)}</div>
             </div>
         `;
     }
@@ -2387,7 +2387,7 @@ function openMultiSessionPlanningModal() {
     if (tableBody) {
         tableBody.innerHTML = selected.map((item, idx) => {
             const sessionNum = idx + 1;
-            const needle = item.needleType || (item.params && item.params.preset) || 'Custom Grouping';
+            const needle = item.needleType || (item.params && item.params.preset) || T('x.ms_custom_grouping', 'Custom Grouping');
             
             let areaStr = '15.0 sq in';
             if (item.coverageArea && item.coverageArea !== 'N/A') {
@@ -2420,7 +2420,7 @@ function openMultiSessionPlanningModal() {
 
             return `
                 <tr>
-                    <td style="font-weight: 700; color: #38bdf8;">Session ${sessionNum}</td>
+                    <td style="font-weight: 700; color: #38bdf8;">${TP('x.ms_session_n', 'Session {0}', sessionNum)}</td>
                     <td>
                         <div style="font-weight: 600; color: #f8fafc;">${item.title}</div>
                         <div style="font-size: 0.72rem; color: #64748b;">${item.dateStr}</div>
@@ -2439,20 +2439,20 @@ function openMultiSessionPlanningModal() {
     if (clinicalBox) {
         clinicalBox.innerHTML = `
             <div style="font-weight: 700; color: #38bdf8; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.4rem;">
-                <span>🩺</span> Clinical Multi-Session Spacing & Dermal Recovery Plan
+                <span>🩺</span> ${T('x.ms_clinical_title', 'Clinical Multi-Session Spacing & Dermal Recovery Plan')}
             </div>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.6rem; margin-top: 0.4rem;">
                 <div>
-                    <strong style="color: #f8fafc;">• Recommended Spacing Interval:</strong>
-                    <div style="color: #cbd5e1;">Allow <strong>2 to 3 weeks (14–21 days)</strong> between sessions for complete epidermal re-epithelialization and dermal recovery.</div>
+                    <strong style="color: #f8fafc;">${T('x.ms_spacing_h', '• Recommended Spacing Interval:')}</strong>
+                    <div style="color: #cbd5e1;">${T('x.ms_spacing_t', 'Allow <strong>2 to 3 weeks (14–21 days)</strong> between sessions for complete epidermal re-epithelialization and dermal recovery.')}</div>
                 </div>
                 <div>
-                    <strong style="color: #f8fafc;">• Execution Sequencing Strategy:</strong>
-                    <div style="color: #cbd5e1;">Session 1: Linework & Structural Framework → Session 2: Midtone Grey Washes → Session 3: Heavy Color Packing & Solid Black.</div>
+                    <strong style="color: #f8fafc;">${T('x.ms_seq_h', '• Execution Sequencing Strategy:')}</strong>
+                    <div style="color: #cbd5e1;">${T('x.ms_seq_t', 'Session 1: Linework & Structural Framework → Session 2: Midtone Grey Washes → Session 3: Heavy Color Packing & Solid Black.')}</div>
                 </div>
                 <div>
-                    <strong style="color: #f8fafc;">• Client Prep & Bio-Buffer:</strong>
-                    <div style="color: #cbd5e1;">Schedule 20-min bio-breaks every 2 hours for hydration and pain threshold reset across ${totalHoursFixed} planned hours.</div>
+                    <strong style="color: #f8fafc;">${T('x.ms_prep_h', '• Client Prep & Bio-Buffer:')}</strong>
+                    <div style="color: #cbd5e1;">${TP('x.ms_prep_t', 'Schedule 20-min bio-breaks every 2 hours for hydration and pain threshold reset across {0} planned hours.', totalHoursFixed)}</div>
                 </div>
             </div>
         `;
@@ -2473,33 +2473,33 @@ function openMultiSessionPlanningModal() {
     const copyBtn = document.getElementById('multi-session-copy-btn');
     if (copyBtn) {
         copyBtn.onclick = function() {
-            let md = `# POLI INTERNATIONAL - MULTI-SESSION TATTOO PROJECT PLAN\n`;
-            md += `Generated: ${new Date().toLocaleString()}\n`;
-            md += `Sessions Count: ${sessionCount}\n`;
-            md += `Total Coverage: ${totalAreaSqin.toFixed(1)} sq in (${totalAreaSqcm} cm²)\n`;
-            md += `Total Chair Time: ${totalHoursFixed} hrs (~${totalMins} mins)\n`;
-            md += `Total Ink Volume: ${totalInkMl.toFixed(1)} mL (~${totalCaps} caps)\n`;
-            md += `Est. Fee Range: $${estFeeMin} – $${estFeeMax} (Deposit: $${recommendedDeposit})\n\n`;
-            md += `## Session Breakdown:\n`;
+            let md = T('x.ms_md_title', '# POLI INTERNATIONAL - MULTI-SESSION TATTOO PROJECT PLAN') + `\n`;
+            md += TP('x.ms_md_generated', 'Generated: {0}', new Date().toLocaleString()) + `\n`;
+            md += TP('x.ms_md_count', 'Sessions Count: {0}', sessionCount) + `\n`;
+            md += TP('x.ms_md_cov', 'Total Coverage: {0} sq in ({1} cm²)', totalAreaSqin.toFixed(1), totalAreaSqcm) + `\n`;
+            md += TP('x.ms_md_chair', 'Total Chair Time: {0} hrs (~{1} mins)', totalHoursFixed, totalMins) + `\n`;
+            md += TP('x.ms_md_ink', 'Total Ink Volume: {0} mL (~{1} caps)', totalInkMl.toFixed(1), totalCaps) + `\n`;
+            md += TP('x.ms_md_fee', 'Est. Fee Range: ${0} – ${1} (Deposit: ${2})', estFeeMin, estFeeMax, recommendedDeposit) + `\n\n`;
+            md += T('x.ms_md_breakdown', '## Session Breakdown:') + `\n`;
             selected.forEach((item, idx) => {
-                md += `### Session ${idx + 1}: ${item.title}\n`;
-                md += `- Date: ${item.dateStr}\n`;
-                md += `- Needle / Technique: ${item.needleType || 'Standard'}\n`;
-                md += `- Area: ${item.coverageArea || 'N/A'}\n`;
-                md += `- Duration: ${item.sessionHours || 'N/A'}\n`;
-                md += `- Ink: ${item.estimatedInk || 'N/A'}\n\n`;
+                md += TP('x.ms_md_session', '### Session {0}: {1}', idx + 1, item.title) + `\n`;
+                md += TP('x.ms_md_date', '- Date: {0}', item.dateStr) + `\n`;
+                md += TP('x.ms_md_needle', '- Needle / Technique: {0}', item.needleType || T('x.ms_standard', 'Standard')) + `\n`;
+                md += TP('x.ms_md_area', '- Area: {0}', item.coverageArea || 'N/A') + `\n`;
+                md += TP('x.ms_md_duration', '- Duration: {0}', item.sessionHours || 'N/A') + `\n`;
+                md += TP('x.ms_md_ink_line', '- Ink: {0}', item.estimatedInk || 'N/A') + `\n\n`;
             });
-            md += `## Clinical Recovery:\n`;
-            md += `- Session Interval: 2–3 weeks between appointments for full healing.\n`;
+            md += T('x.ms_md_recovery', '## Clinical Recovery:') + `\n`;
+            md += T('x.ms_md_interval', '- Session Interval: 2–3 weeks between appointments for full healing.') + `\n`;
 
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(md).then(() => {
                     if (typeof showToastNotification === 'function') {
-                        showToastNotification('📋 <strong>Copied</strong>: Multi-session markdown project summary copied to clipboard!');
+                        showToastNotification(T('x.ms_copied_toast', '📋 <strong>Copied</strong>: Multi-session markdown project summary copied to clipboard!'));
                     }
                 });
             } else {
-                alert('Plan copied to clipboard!');
+                alert(T('x.ms_alert_copied', 'Plan copied to clipboard!'));
             }
         };
     }
@@ -2508,9 +2508,9 @@ function openMultiSessionPlanningModal() {
     const csvBtn = document.getElementById('multi-session-csv-btn');
     if (csvBtn) {
         csvBtn.onclick = function() {
-            let csv = 'Session Number,Date,Calculation Title,Needle Configuration,Area,Duration,Ink Required,Trauma & Saturation\n';
+            let csv = T('x.ms_csv_header', 'Session Number,Date,Calculation Title,Needle Configuration,Area,Duration,Ink Required,Trauma & Saturation') + '\n';
             selected.forEach((item, idx) => {
-                const num = `Session ${idx + 1}`;
+                const num = TP('x.ms_session_n', 'Session {0}', idx + 1);
                 const date = `"${item.dateStr || ''}"`;
                 const title = `"${(item.title || '').replace(/"/g, '""')}"`;
                 const needle = `"${(item.needleType || 'Standard Setup').replace(/"/g, '""')}"`;
@@ -2532,7 +2532,7 @@ function openMultiSessionPlanningModal() {
             URL.revokeObjectURL(url);
 
             if (typeof showToastNotification === 'function') {
-                showToastNotification('📊 <strong>Exported CSV</strong>: Multi-session project spreadsheet downloaded.');
+                showToastNotification(T('x.ms_csv_toast', '📊 <strong>Exported CSV</strong>: Multi-session project spreadsheet downloaded.'));
             }
         };
     }
@@ -2669,15 +2669,15 @@ function openMultiSessionPlanningModal() {
 function exportCalculationsCSV() {
     const records = getRecentCalculations();
     if (!records || records.length === 0) {
-        alert('No calculation records saved yet to export.');
+        alert(T('x.hist_csv_none', 'No calculation records saved yet to export.'));
         return;
     }
 
     // Required structured columns: Date, Needle Type, Session Hours, Coverage Area, Estimated Ink Usage
-    let csv = 'Date,Needle Type,Session Hours,Coverage Area (sq in),Estimated Ink Usage (mL),Calculation Type,Title,Result Summary,Parameters\n';
+    let csv = T('x.hist_csv_header', 'Date,Needle Type,Session Hours,Coverage Area (sq in),Estimated Ink Usage (mL),Calculation Type,Title,Result Summary,Parameters') + '\n';
     records.forEach(r => {
         const date = `"${r.dateStr || ''}"`;
-        const needle = `"${(r.needleType || (r.type === 'coverage' ? r.title.replace('Coverage: ', '') : 'Standard Setup')).replace(/"/g, '""')}"`;
+        const needle = `"${(r.needleType || (r.type === 'coverage' ? r.title.replace('Coverage: ', '') : T('x.hist_csv_standard', 'Standard Setup'))).replace(/"/g, '""')}"`;
         const sessionHours = `"${(r.sessionHours || 'N/A').toString().replace(/"/g, '""')}"`;
         const coverageArea = `"${(r.coverageArea || 'N/A').toString().replace(/"/g, '""')}"`;
         const estimatedInk = `"${(r.estimatedInk || 'N/A').toString().replace(/"/g, '""')}"`;
@@ -3015,7 +3015,7 @@ function initializeUnitConverter() {
                     data: {
                         labels: labels,
                         datasets: [{
-                            label: 'Saturation %',
+                            label: T('x.ch_sat_pct', 'Saturation %'),
                             data: dataValues,
                             borderColor: '#0693e3',
                             backgroundColor: gradient || 'rgba(6, 147, 227, 0.15)',
@@ -3060,7 +3060,7 @@ function initializeUnitConverter() {
                                     title: function(items) {
                                         const idx = items[0].dataIndex;
                                         const item = history[idx];
-                                        return `Calculation #${idx + 1}: ${item.preset || 'Needle Preset'} (${item.time || 'Logged'})`;
+                                        return TP('x.ch_calc_title', 'Calculation #{0}: {1} ({2})', idx + 1, item.preset || T('x.ch_needle_preset', 'Needle Preset'), item.time || T('x.ch_logged', 'Logged'));
                                     },
                                     label: function(context) {
                                         const idx = context.dataIndex;
@@ -3068,18 +3068,18 @@ function initializeUnitConverter() {
                                         const density = densities[idx];
                                         const densitySqcm = (parseFloat(density) / 6.4516).toFixed(3);
                                         const sat = context.parsed.y;
-                                        let level = 'Medium Saturation';
-                                        if (sat <= 35) level = 'Light Wash / Fine Line';
-                                        else if (sat > 65) level = 'Heavy Solid Packing';
+                                        let level = T('x.ch_lvl_med', 'Medium Saturation');
+                                        if (sat <= 35) level = T('x.ch_lvl_light', 'Light Wash / Fine Line');
+                                        else if (sat > 65) level = T('x.ch_lvl_heavy', 'Heavy Solid Packing');
 
                                         const devVsAvg = sat - historicalAvg;
                                         const devText = devVsAvg >= 0 ? `+${devVsAvg}%` : `${devVsAvg}%`;
 
                                         return [
-                                            `🎯 Needle Configuration: ${item.preset || 'Standard Preset'}`,
-                                            `💧 Specific Ink Density: ~${density} mL/in² (${densitySqcm} mL/cm²)`,
-                                            `📊 Saturation Ratio: ${sat}% (${level})`,
-                                            `📈 Studio Deviation: ${devText} vs Historical Average (${historicalAvg}%)`
+                                            TP('x.ch_needle_cfg', '🎯 Needle Configuration: {0}', item.preset || T('x.ch_std_preset', 'Standard Preset')),
+                                            TP('x.ch_density', '💧 Specific Ink Density: ~{0} mL/in² ({1} mL/cm²)', density, densitySqcm),
+                                            TP('x.ch_sat_ratio', '📊 Saturation Ratio: {0}% ({1})', sat, level),
+                                            TP('x.ch_dev', '📈 Studio Deviation: {0} vs Historical Average ({1}%)', devText, historicalAvg)
                                         ];
                                     }
                                 }
@@ -3335,6 +3335,8 @@ function initializeUnitConverter() {
         // Update '?' Range Tooltip with numerical min-max range
         if (rangeTooltipContent) {
             const rangeInfo = NEEDLE_RANGES[presetKey] || { min: (mlPerSqin * 0.75).toFixed(2), max: (mlPerSqin * 1.25).toFixed(2), desc: optName };
+            const rangeDesc = NEEDLE_RANGES[presetKey] ? T('x.nprange_' + String(presetKey).toLowerCase(), rangeInfo.desc) : rangeInfo.desc;
+            const rangeLbl = T('x.range_label', 'Range:');
             const minMl = rangeInfo.min;
             const maxMl = rangeInfo.max;
             const minCm = (minMl / 6.4516).toFixed(3);
@@ -3344,14 +3346,14 @@ function initializeUnitConverter() {
 
             if (currentVolUnit === 'floz') {
                 rangeTooltipContent.innerHTML = `
-                    <div style="font-weight: 700; color: #fbbf24; margin-bottom: 0.2rem;">${rangeInfo.desc}</div>
-                    <strong>Range:</strong> ${minFloz} – ${maxFloz} fl oz/sq in<br>
+                    <div style="font-weight: 700; color: #fbbf24; margin-bottom: 0.2rem;">${rangeDesc}</div>
+                    <strong>${rangeLbl}</strong> ${minFloz} – ${maxFloz} fl oz/sq in<br>
                     <span style="color: #94a3b8; font-size: 0.7rem;">(${minMl} – ${maxMl} mL/sq in • ${minCm} – ${maxCm} mL/cm²)</span>
                 `;
             } else {
                 rangeTooltipContent.innerHTML = `
-                    <div style="font-weight: 700; color: #fbbf24; margin-bottom: 0.2rem;">${rangeInfo.desc}</div>
-                    <strong>Range:</strong> ${minMl} – ${maxMl} mL/sq in<br>
+                    <div style="font-weight: 700; color: #fbbf24; margin-bottom: 0.2rem;">${rangeDesc}</div>
+                    <strong>${rangeLbl}</strong> ${minMl} – ${maxMl} mL/sq in<br>
                     <span style="color: #94a3b8; font-size: 0.7rem;">(${minCm} – ${maxCm} mL/cm² • ${minFloz} – ${maxFloz} fl oz/in²)</span>
                 `;
             }
@@ -3406,7 +3408,7 @@ function initializeUnitConverter() {
 
         // Update Dynamic Tooltip Explanation for Needle Configuration Physics
         if (tooltipDesc) {
-            tooltipDesc.innerHTML = NEEDLE_TOOLTIP_PHYSICS[presetKey] || TP("x.delivers_ml_in_saturation_at_in", "<strong>{0}:</strong> Delivers ~{1} mL/in² ({2}% saturation) at {3} in²/hr.", optName, mlPerSqin, saturationPercent, rate);
+            tooltipDesc.innerHTML = NEEDLE_TOOLTIP_PHYSICS[presetKey] ? T('x.nptip_' + String(presetKey).toLowerCase(), NEEDLE_TOOLTIP_PHYSICS[presetKey]) : TP("x.delivers_ml_in_saturation_at_in", "<strong>{0}:</strong> Delivers ~{1} mL/in² ({2}% saturation) at {3} in²/hr.", optName, mlPerSqin, saturationPercent, rate);
         }
 
         if (badgeEl) {
@@ -4730,20 +4732,20 @@ function updateSessionTimelineChart(data) {
     sessionChartInstance = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: Array.from({ length: data.sessionsNeeded }, (_, i) => `Session ${i + 1}`),
+            labels: Array.from({ length: data.sessionsNeeded }, (_, i) => TP('x.ms_session_n', 'Session {0}', i + 1)),
             datasets: [
                 {
-                    label: 'Active Tattoo Time (hrs)',
+                    label: T('x.ch_active', 'Active Tattoo Time (hrs)'),
                     data: Array(data.sessionsNeeded).fill((activeTattooTime / data.sessionsNeeded).toFixed(1)),
                     backgroundColor: '#ff006e'
                 },
                 {
-                    label: 'Client Breaks (hrs)',
+                    label: T('x.ch_breaks', 'Client Breaks (hrs)'),
                     data: Array(data.sessionsNeeded).fill((breakDuration / data.sessionsNeeded).toFixed(1)),
                     backgroundColor: '#0693e3'
                 },
                 {
-                    label: 'Setup & Prep Buffer (hrs)',
+                    label: T('x.ch_setup', 'Setup & Prep Buffer (hrs)'),
                     data: Array(data.sessionsNeeded).fill((setupBuffer / data.sessionsNeeded).toFixed(1)),
                     backgroundColor: '#7000ff'
                 }
@@ -4754,7 +4756,7 @@ function updateSessionTimelineChart(data) {
             maintainAspectRatio: false,
             scales: {
                 x: { stacked: true, grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#a0a0a0' } },
-                y: { stacked: true, grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#a0a0a0' }, title: { display: true, text: 'Hours', color: '#a0a0a0' } }
+                y: { stacked: true, grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#a0a0a0' }, title: { display: true, text: T('x.ch_hours', 'Hours'), color: '#a0a0a0' } }
             },
             plugins: {
                 legend: { labels: { color: '#ffffff' } },
@@ -4895,6 +4897,7 @@ function exportResultTXT(type) {
         text += TP("x.per_square_inch_n", "Per Square Inch: {0}\\n", document.getElementById('pricing-per-sqin').textContent);
     }
 
+    text = text.replace(/\\n/g, '\n'); // the translated lines end in a literal backslash-n
     text += `\n---\nPowered by Poli International (https://poliinternational.com)`;
 
     const blob = new Blob([text], { type: 'text/plain;charset=utf-8;' });
@@ -5299,20 +5302,20 @@ function renderComparisonCards() {
 
     let timeBadgeHtml = '';
     if (isFaster) {
-        timeBadgeHtml = `<span class="coverage__variance-delta-badge coverage__variance-delta-badge--faster">⚡ ${Math.abs(timeVariancePct).toFixed(1)}% FASTER</span>`;
+        timeBadgeHtml = `<span class="coverage__variance-delta-badge coverage__variance-delta-badge--faster">${TP('x.cmp_pct_faster', '⚡ {0}% FASTER', Math.abs(timeVariancePct).toFixed(1))}</span>`;
     } else if (isSlower) {
-        timeBadgeHtml = `<span class="coverage__variance-delta-badge coverage__variance-delta-badge--slower">⏳ +${Math.abs(timeVariancePct).toFixed(1)}% SLOWER</span>`;
+        timeBadgeHtml = `<span class="coverage__variance-delta-badge coverage__variance-delta-badge--slower">${TP('x.cmp_pct_slower', '⏳ +{0}% SLOWER', Math.abs(timeVariancePct).toFixed(1))}</span>`;
     } else {
-        timeBadgeHtml = `<span class="coverage__variance-delta-badge" style="background: rgba(255,255,255,0.1); color: #ffffff;">IDENTICAL SPEED</span>`;
+        timeBadgeHtml = `<span class="coverage__variance-delta-badge" style="background: rgba(255,255,255,0.1); color: #ffffff;">${T('x.cmp_identical_speed', 'IDENTICAL SPEED')}</span>`;
     }
 
     let inkBadgeHtml = '';
     if (isMoreInk) {
-        inkBadgeHtml = `<span class="coverage__variance-delta-badge coverage__variance-delta-badge--higher">🧪 +${Math.abs(inkVariancePct).toFixed(1)}% INK VOLUME</span>`;
+        inkBadgeHtml = `<span class="coverage__variance-delta-badge coverage__variance-delta-badge--higher">${TP('x.cmp_pct_more_ink', '🧪 +{0}% INK VOLUME', Math.abs(inkVariancePct).toFixed(1))}</span>`;
     } else if (isLessInk) {
-        inkBadgeHtml = `<span class="coverage__variance-delta-badge coverage__variance-delta-badge--lower">💧 -${Math.abs(inkVariancePct).toFixed(1)}% INK VOLUME</span>`;
+        inkBadgeHtml = `<span class="coverage__variance-delta-badge coverage__variance-delta-badge--lower">${TP('x.cmp_pct_less_ink', '💧 -{0}% INK VOLUME', Math.abs(inkVariancePct).toFixed(1))}</span>`;
     } else {
-        inkBadgeHtml = `<span class="coverage__variance-delta-badge" style="background: rgba(255,255,255,0.1); color: #ffffff;">EQUAL VOLUME</span>`;
+        inkBadgeHtml = `<span class="coverage__variance-delta-badge" style="background: rgba(255,255,255,0.1); color: #ffffff;">${T('x.cmp_equal_volume', 'EQUAL VOLUME')}</span>`;
     }
 
     let narrativeExplanation = '';
@@ -5340,7 +5343,7 @@ function renderComparisonCards() {
             </div>
             <div class="coverage__compare-metric">
                 <span>${T('x.est_chair_time_20', 'Est. Chair Time (20 in²):')}</span>
-                <span style="font-size: 0.85rem; font-weight: 700; color: var(--color-neon-pink);">${timeA.toFixed(1)} hours</span>
+                <span style="font-size: 0.85rem; font-weight: 700; color: var(--color-neon-pink);">${TP('x.hours', '{0} hours', timeA.toFixed(1))}</span>
             </div>
             <div class="coverage__compare-metric">
                 <span>${T('x.est_ink_volume_20', 'Est. Ink Volume (20 in²):')}</span>
@@ -5361,7 +5364,7 @@ function renderComparisonCards() {
             </div>
             <div class="coverage__compare-metric">
                 <span>${T('x.est_chair_time_20', 'Est. Chair Time (20 in²):')}</span>
-                <span style="font-size: 0.85rem; font-weight: 700; color: #0693e3;">${timeB.toFixed(1)} hours</span>
+                <span style="font-size: 0.85rem; font-weight: 700; color: #0693e3;">${TP('x.hours', '{0} hours', timeB.toFixed(1))}</span>
             </div>
             <div class="coverage__compare-metric">
                 <span>${T('x.est_ink_volume_20', 'Est. Ink Volume (20 in²):')}</span>
@@ -5396,7 +5399,7 @@ function renderComparisonCards() {
                         </div>
                     </div>
                     <div style="font-size: 0.73rem; color: var(--color-text-secondary); margin-top: 0.3rem;">
-                        ${timeA.toFixed(1)}h (A) vs ${timeB.toFixed(1)}h (B) • <strong>${Math.abs(timeDelta).toFixed(1)}h ${isFaster ? 'saved' : 'added'}</strong>
+                        ${timeA.toFixed(1)}h (A) vs ${timeB.toFixed(1)}h (B) • <strong>${isFaster ? TP('x.cmp_h_saved', '{0}h saved', Math.abs(timeDelta).toFixed(1)) : TP('x.cmp_h_added', '{0}h added', Math.abs(timeDelta).toFixed(1))}</strong>
                     </div>
                 </div>
 
@@ -5405,7 +5408,7 @@ function renderComparisonCards() {
                     <div>
                         <div class="coverage__variance-stat-label">
                             <span>${T('x.speed_multiplier', '🚀 Speed Multiplier')}</span>
-                            <span class="coverage__variance-pill" style="background: rgba(6,147,227,0.15); color: #0693e3;">Relative</span>
+                            <span class="coverage__variance-pill" style="background: rgba(6,147,227,0.15); color: #0693e3;">${T('x.cmp_relative', 'Relative')}</span>
                         </div>
                         <div class="coverage__variance-stat-value" style="color: #38bdf8;">
                             ${speedMultiplier.toFixed(2)}x
@@ -5437,7 +5440,7 @@ function renderComparisonCards() {
                     <div>
                         <div class="coverage__variance-stat-label">
                             <span>${T('x.comparative_benchmark', '📐 Comparative Benchmark')}</span>
-                            <span class="coverage__variance-pill" style="background: rgba(167,139,250,0.15); color: #c084fc;">Normalized</span>
+                            <span class="coverage__variance-pill" style="background: rgba(167,139,250,0.15); color: #c084fc;">${T('x.cmp_normalized', 'Normalized')}</span>
                         </div>
                         <div class="coverage__variance-stat-value" style="color: #c084fc;">
                             20 in²
@@ -5561,7 +5564,7 @@ const ANATOMICAL_LOCATION_DATA = {
     },
     'shoulder': {
         muscle: 'Anterior & Lateral Deltoid',
-        badge: 'Low Stretch Risk',
+        badge: 'Low Stretch Risk', badgeKey: 'x.badge_low_stretch_risk',
         badgeColor: '#10b981',
         detail: 'Firm, smooth muscle cap over shoulder joint. Easy skin stretch with single hand.',
         tip: 'Elevate armrest to 60° to open deltoid muscle plane for uniform ink saturation.'
@@ -5674,17 +5677,18 @@ function updateAnatomicalCallout(locationKey) {
 
     const data = ANATOMICAL_LOCATION_DATA[locationKey] || ANATOMICAL_LOCATION_DATA['outer-upper-arm'];
 
-    if (nameEl) nameEl.textContent = TP("x.muscle_group", "🦾 Muscle Group: {0}", data.muscle);
+    var ak = 'x.anat_' + String(ANATOMICAL_LOCATION_DATA[locationKey] ? locationKey : 'outer-upper-arm').replace(/-/g, '_');
+    if (nameEl) nameEl.textContent = TP("x.muscle_group", "🦾 Muscle Group: {0}", T(ak + '_muscle', data.muscle));
     if (badgeEl) {
-        badgeEl.textContent = data.badgeKey ? T(data.badgeKey, data.badge) : data.badge;
+        badgeEl.textContent = T(data.badgeKey || ('x.anat_badge_' + String(data.badge).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '')), data.badge);
         badgeEl.style.backgroundColor = `${data.badgeColor}25`;
         badgeEl.style.color = data.badgeColor;
     }
     if (detailEl) {
-        detailEl.innerHTML = TP("x.skin_tension_2", "<strong>Skin Tension:</strong> {0}", data.detailKey ? T(data.detailKey, data.detail) : data.detail);
+        detailEl.innerHTML = TP("x.skin_tension_2", "<strong>Skin Tension:</strong> {0}", T(data.detailKey || (ak + '_detail'), data.detail));
     }
     if (tipEl) {
-        tipEl.innerHTML = TP("x.ergonomic_tip_2", "💡 <strong>Ergonomic Tip:</strong> {0}", data.tipKey ? T(data.tipKey, data.tip) : data.tip);
+        tipEl.innerHTML = TP("x.ergonomic_tip_2", "💡 <strong>Ergonomic Tip:</strong> {0}", T(data.tipKey || (ak + '_tip'), data.tip));
     }
 }
 
@@ -6456,7 +6460,7 @@ function renderInventoryWasteChart(family = 'all') {
             labels: labels,
             datasets: [
                 {
-                    label: 'Net Dermal Consumed (mL)',
+                    label: T('x.ch_consumed', 'Net Dermal Consumed (mL)'),
                     data: consumedSeries,
                     backgroundColor: '#0693e3',
                     borderColor: '#0693e3',
@@ -6466,7 +6470,7 @@ function renderInventoryWasteChart(family = 'all') {
                     categoryPercentage: 0.8
                 },
                 {
-                    label: 'In-Cap Waste & Residue (mL)',
+                    label: T('x.ch_waste', 'In-Cap Waste & Residue (mL)'),
                     data: wasteSeries,
                     backgroundColor: 'rgba(255, 0, 110, 0.85)',
                     borderColor: '#ff006e',
@@ -6498,7 +6502,7 @@ function renderInventoryWasteChart(family = 'all') {
                             const c = items.find(i => i.datasetIndex === 0)?.raw || 0;
                             const w = items.find(i => i.datasetIndex === 1)?.raw || 0;
                             const r = (c + w) > 0 ? ((w / (c + w)) * 100).toFixed(1) : 0;
-                            return `\nMonthly Waste Ratio: ${r}%`;
+                            return '\n' + TP('x.ch_waste_ratio', 'Monthly Waste Ratio: {0}%', r);
                         }
                     }
                 }
@@ -6513,7 +6517,7 @@ function renderInventoryWasteChart(family = 'all') {
                     grid: { color: 'rgba(255, 255, 255, 0.05)' },
                     title: {
                         display: true,
-                        text: 'Volume (mL)',
+                        text: T('x.ch_volume', 'Volume (mL)'),
                         color: '#9ca3af',
                         font: { size: 11 }
                     }
@@ -7355,9 +7359,9 @@ function copyReorderManifestText() {
     const colorBottles = bottles.filter(b => b.category === 'color');
 
     let text = `=====================================================\n`;
-    text += `30-DAY RECOMMENDED INK REORDER MANIFEST\n`;
-    text += `Generated: ${new Date().toLocaleString()}\n`;
-    text += `Safety Threshold: ${minThreshold} mL | Upcoming Sessions: ${next30Appts.length}\n`;
+    text += T('x.rm_title', '30-DAY RECOMMENDED INK REORDER MANIFEST') + `\n`;
+    text += TP('x.ms_md_generated', 'Generated: {0}', new Date().toLocaleString()) + `\n`;
+    text += TP('x.rm_threshold', 'Safety Threshold: {0} mL | Upcoming Sessions: {1}', minThreshold, next30Appts.length) + `\n`;
     text += `=====================================================\n\n`;
 
     let itemsCount = 0;
@@ -7372,15 +7376,15 @@ function copyReorderManifestText() {
             itemsCount++;
             const deficit = Math.max(0, minThreshold - projectedRemaining);
             const orderQty = Math.max(1, Math.ceil(deficit / (b.capacityMl || 30)));
-            text += `[ITEM ${itemsCount}] ${b.name} (${b.brand})\n`;
-            text += `  - Current Stock: ${b.currentMl} mL | 30D Usage: ${Math.round(projectedUsage)} mL\n`;
-            text += `  - Projected Balance: ${Math.round(projectedRemaining)} mL (Deficit: -${Math.round(deficit)} mL)\n`;
-            text += `  - RECOMMENDED ORDER: ${orderQty}x ${b.capacityMl} mL bottle (${orderQty * b.capacityMl} mL total)\n\n`;
+            text += TP('x.rm_item', '[ITEM {0}] {1} ({2})', itemsCount, b.name, b.brand) + `\n`;
+            text += TP('x.rm_stock', '  - Current Stock: {0} mL | 30D Usage: {1} mL', b.currentMl, Math.round(projectedUsage)) + `\n`;
+            text += TP('x.rm_balance', '  - Projected Balance: {0} mL (Deficit: -{1} mL)', Math.round(projectedRemaining), Math.round(deficit)) + `\n`;
+            text += TP('x.rm_order', '  - RECOMMENDED ORDER: {0}x {1} mL bottle ({2} mL total)', orderQty, b.capacityMl, orderQty * b.capacityMl) + `\n\n`;
         }
     });
 
     if (itemsCount === 0) {
-        text += `No reorders required. All registered studio inks are within safe operational limits.\n`;
+        text += T('x.rm_none', 'No reorders required. All registered studio inks are within safe operational limits.') + `\n`;
     }
 
     text += `=====================================================\n`;
@@ -7400,7 +7404,7 @@ function exportSupplierReorderList() {
     const stock = getStudioStockLevels();
 
     if (appointments.length === 0) {
-        alert('No upcoming appointments scheduled to generate reorder manifest.');
+        alert(T('x.sr_none', 'No upcoming appointments scheduled to generate reorder manifest.'));
         return;
     }
 
@@ -7414,31 +7418,31 @@ function exportSupplierReorderList() {
     const blackDeficit = Math.max(0, totalBlackMl - stock.blackMl);
     const colorDeficit = Math.max(0, totalColorMl - stock.colorMl);
 
-    const manifestText = `=====================================================
-TATTOO STUDIO SUPPLIER REORDER & INVENTORY MANIFEST
-Generated: ${new Date().toLocaleString()}
-=====================================================
-
-STUDIO ON-HAND INVENTORY:
-- Black Pigment Available: ${stock.blackMl} mL
-- Color Pigments Available: ${stock.colorMl} mL
-
-AGGREGATED UPCOMING DEMAND:
-- Lining / Outlining Black Ink: ${totalBlackMl} mL (~${Math.ceil(totalBlackMl / 30)}x 1oz bottles)
-- Color & Shading Pigments: ${totalColorMl} mL (~${Math.ceil(totalColorMl / 30)}x 1oz bottles)
-
-NET REORDER REQUIREMENTS (STOCK DEFICIT):
-- Black Ink To Order: ${blackDeficit > 0 ? `${blackDeficit} mL (${Math.ceil(blackDeficit / 30)}x 1oz bottles) [URGENT RESTOCK]` : '0 mL (Sufficient Stock Buffer)'}
-- Color Pigments To Order: ${colorDeficit > 0 ? `${colorDeficit} mL (${Math.ceil(colorDeficit / 30)}x 1oz bottles) [URGENT RESTOCK]` : '0 mL (Sufficient Stock Buffer)'}
-
-UPCOMING BOOKINGS SCHEDULE BREAKDOWN:
-${appointments.map((a, i) => `${i + 1}. [${a.date} | ${a.startTime || '10:00'} (${a.duration || 3.5}h)] ${a.client}
-   - Area: ${a.area} sq in | Technique: ${a.technique}
-   - Black Demand: ${a.blackMl} mL | Color Demand: ${a.colorMl} mL`).join('\n\n')}
-
-=====================================================
-Powered by Tattoo Coverage & Session Planner Suite
-=====================================================`;
+    const urgentTxt = (ml) => TP('x.sr_urgent', '{0} mL ({1}x 1oz bottles) [URGENT RESTOCK]', ml, Math.ceil(ml / 30));
+    const sufficientTxt = T('x.sr_sufficient', '0 mL (Sufficient Stock Buffer)');
+    const bar = '=====================================================';
+    const manifestText = [
+        bar,
+        T('x.sr_title', 'TATTOO STUDIO SUPPLIER REORDER & INVENTORY MANIFEST'),
+        TP('x.ms_md_generated', 'Generated: {0}', new Date().toLocaleString()),
+        bar, '',
+        T('x.sr_onhand', 'STUDIO ON-HAND INVENTORY:'),
+        TP('x.sr_black_avail', '- Black Pigment Available: {0} mL', stock.blackMl),
+        TP('x.sr_color_avail', '- Color Pigments Available: {0} mL', stock.colorMl), '',
+        T('x.sr_demand', 'AGGREGATED UPCOMING DEMAND:'),
+        TP('x.sr_lining', '- Lining / Outlining Black Ink: {0} mL (~{1}x 1oz bottles)', totalBlackMl, Math.ceil(totalBlackMl / 30)),
+        TP('x.sr_shading', '- Color & Shading Pigments: {0} mL (~{1}x 1oz bottles)', totalColorMl, Math.ceil(totalColorMl / 30)), '',
+        T('x.sr_net', 'NET REORDER REQUIREMENTS (STOCK DEFICIT):'),
+        TP('x.sr_black_order', '- Black Ink To Order: {0}', blackDeficit > 0 ? urgentTxt(blackDeficit) : sufficientTxt),
+        TP('x.sr_color_order', '- Color Pigments To Order: {0}', colorDeficit > 0 ? urgentTxt(colorDeficit) : sufficientTxt), '',
+        T('x.sr_schedule', 'UPCOMING BOOKINGS SCHEDULE BREAKDOWN:'),
+        appointments.map((a, i) => TP('x.sr_booking', '{0}. [{1} | {2} ({3}h)] {4}', i + 1, a.date, a.startTime || '10:00', a.duration || 3.5, a.client) + '\n' +
+            TP('x.sr_area', '   - Area: {0} sq in | Technique: {1}', a.area, a.technique) + '\n' +
+            TP('x.sr_demand_line', '   - Black Demand: {0} mL | Color Demand: {1} mL', a.blackMl, a.colorMl)).join('\n\n'), '',
+        bar,
+        T('x.sr_footer', 'Powered by Tattoo Coverage & Session Planner Suite'),
+        bar
+    ].join('\n');
 
     const blob = new Blob([manifestText], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
@@ -7554,9 +7558,10 @@ function renderTourStep() {
     const prevBtn = document.getElementById('tour-prev-btn');
     const nextBtn = document.getElementById('tour-next-btn');
 
-    if (titleEl) titleEl.textContent = currentTourStep === 0 ? T('x.welcome_to_tattoo_coverage_session_planner', step.title) : step.title;
-    if (badgeEl) badgeEl.textContent = step.badge;
-    if (bodyEl) bodyEl.innerHTML = currentTourStep === 0 ? T('x.tour_welcome_body', step.body) : step.body;
+    var n = currentTourStep + 1;
+    if (titleEl) titleEl.textContent = currentTourStep === 0 ? T('x.welcome_to_tattoo_coverage_session_planner', step.title) : T('x.tour_s' + n + '_title', step.title);
+    if (badgeEl) badgeEl.textContent = TP('x.tour_step_badge', 'Step {0} of {1}', n, TOUR_STEPS.length);
+    if (bodyEl) bodyEl.innerHTML = currentTourStep === 0 ? T('x.tour_welcome_body', step.body) : T('x.tour_s' + n + '_body', step.body);
 
     if (prevBtn) prevBtn.disabled = currentTourStep === 0;
     if (nextBtn) {
@@ -8120,7 +8125,7 @@ function renderEfficiencyCharts(logs) {
     if (efficiencyVarianceChart) efficiencyVarianceChart.destroy();
     if (efficiencyAccuracyChart) efficiencyAccuracyChart.destroy();
 
-    const labels = logs.length > 0 ? logs.map((l, i) => l.date || `Session #${i+1}`) : ['Session #1', 'Session #2', 'Session #3', 'Session #4'];
+    const labels = logs.length > 0 ? logs.map((l, i) => l.date || TP('x.ch_session_hash', 'Session #{0}', i+1)) : [1, 2, 3, 4].map(n => TP('x.ch_session_hash', 'Session #{0}', n));
     const estimatedData = logs.length > 0 ? logs.map(l => l.estimatedTime) : [4.0, 5.0, 3.5, 6.0];
     const actualData = logs.length > 0 ? logs.map(l => l.actualTime) : [3.8, 5.2, 3.4, 5.8];
 
@@ -8139,7 +8144,7 @@ function renderEfficiencyCharts(logs) {
             labels: labels,
             datasets: [
                 {
-                    label: 'Estimated Chair Hours',
+                    label: T('x.ch_est_hours', 'Estimated Chair Hours'),
                     data: estimatedData,
                     borderColor: estColor,
                     backgroundColor: estBg,
@@ -8149,7 +8154,7 @@ function renderEfficiencyCharts(logs) {
                     fill: true
                 },
                 {
-                    label: 'Actual Chair Hours',
+                    label: T('x.ch_act_hours', 'Actual Chair Hours'),
                     data: actualData,
                     borderColor: actColor,
                     backgroundColor: actBg,
@@ -8167,7 +8172,7 @@ function renderEfficiencyCharts(logs) {
             },
             scales: {
                 x: { ticks: { color: textColor }, grid: { color: gridColor } },
-                y: { ticks: { color: textColor }, grid: { color: gridColor }, title: { display: true, text: 'Hours', color: textColor, font: { weight: isPrint ? 'bold' : 'normal' } } }
+                y: { ticks: { color: textColor }, grid: { color: gridColor }, title: { display: true, text: T('x.ch_hours', 'Hours'), color: textColor, font: { weight: isPrint ? 'bold' : 'normal' } } }
             }
         }
     });
@@ -8180,7 +8185,7 @@ function renderEfficiencyCharts(logs) {
     efficiencyAccuracyChart = new Chart(accCanvas, {
         type: 'doughnut',
         data: {
-            labels: ['Accurate Baseline', 'Outlier Events'],
+            labels: [T('x.ch_accurate', 'Accurate Baseline'), T('x.ch_outlier', 'Outlier Events')],
             datasets: [{
                 data: [accurateCount, outlierCount],
                 backgroundColor: donutBg,
@@ -8398,6 +8403,13 @@ function renderInkOptimizationSuggestions(data) {
         };
     }
 
+    // The four recommendation texts go through the dictionary; the needle product names in the titles stay.
+    const nrIdx = data.technique === 'lining' ? 1 : (data.technique === 'light-shading' || data.technique === 'medium-shading') ? 2 : data.technique === 'color-blending' ? 3 : 0;
+    needleRec.badge = T('x.io_needle_badge', needleRec.badge);
+    needleRec.type = T('x.io_n' + nrIdx + '_type', needleRec.type);
+    needleRec.desc = T('x.io_n' + nrIdx + '_desc', needleRec.desc);
+    needleRec.benefit = T('x.io_n' + nrIdx + '_benefit', needleRec.benefit);
+
     // Cumulative potential savings
     const totalPotentialSavingsMl = passSavingsMl + wasteReductionMl + (data.totalInk * 0.12);
     const totalPotentialSavingsPct = Math.min(55, Math.round((totalPotentialSavingsMl / data.totalInk) * 100));
@@ -8407,25 +8419,25 @@ function renderInkOptimizationSuggestions(data) {
     container.innerHTML = `
         <div class="ink-opt-header">
             <h4 class="ink-opt-title">
-                <span>💡</span> Smart Needle & Technique Optimization Suggestions
+                <span>💡</span> ${T('x.io_title', 'Smart Needle & Technique Optimization Suggestions')}
             </h4>
             <span style="font-size: 0.75rem; background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); padding: 3px 10px; border-radius: 20px; font-weight: 700;">
-                Save up to ${totalPotentialSavingsPct}% Ink Volume
+                ${TP('x.io_save_up', 'Save up to {0}% Ink Volume', totalPotentialSavingsPct)}
             </span>
         </div>
 
         <div class="ink-opt-summary-strip">
             <div class="ink-opt-summary-pill ink-opt-summary-pill--savings">
-                <span class="ink-opt-pill-label">Potential Ink Saved</span>
+                <span class="ink-opt-pill-label">${T('x.io_pill_saved', 'Potential Ink Saved')}</span>
                 <span class="ink-opt-pill-value" style="color: #10b981;">-${totalPotentialSavingsMl.toFixed(1)} mL (-${totalPotentialSavingsPct}%)</span>
             </div>
             <div class="ink-opt-summary-pill">
-                <span class="ink-opt-pill-label">Bottle Cost Savings</span>
-                <span class="ink-opt-pill-value" style="color: #0693e3;">-$${totalPotentialSavingsCost.toFixed(2)} / session</span>
+                <span class="ink-opt-pill-label">${T('x.io_pill_cost', 'Bottle Cost Savings')}</span>
+                <span class="ink-opt-pill-value" style="color: #0693e3;">${TP('x.io_per_session', '-${0} / session', totalPotentialSavingsCost.toFixed(2))}</span>
             </div>
             <div class="ink-opt-summary-pill ink-opt-summary-pill--skin">
-                <span class="ink-opt-pill-label">Skin Trauma Reduction</span>
-                <span class="ink-opt-pill-value" style="color: #ff006e;">${hasPassOptimization ? '-33% Cycle Passes' : 'Optimal Glide'}</span>
+                <span class="ink-opt-pill-label">${T('x.io_pill_skin', 'Skin Trauma Reduction')}</span>
+                <span class="ink-opt-pill-value" style="color: #ff006e;">${hasPassOptimization ? T('x.io_cycle', '-33% Cycle Passes') : T('x.io_glide', 'Optimal Glide')}</span>
             </div>
         </div>
 
@@ -8440,7 +8452,7 @@ function renderInkOptimizationSuggestions(data) {
                 <div>
                     <div class="ink-opt-item-savings-line">✨ ${needleRec.benefit}</div>
                     <button type="button" class="ink-opt-apply-btn" onclick="applyInkOptimization('needle', '${data.technique}', '${needleRec.title}')">
-                        <span>⚡</span> Recommended Setup: ${needleRec.type}
+                        <span>⚡</span> ${TP('x.io_recommended', 'Recommended Setup: {0}', needleRec.type)}
                     </button>
                 </div>
             </div>
@@ -8448,26 +8460,26 @@ function renderInkOptimizationSuggestions(data) {
             <!-- 2. Pass Count & Technique Adjustment -->
             <div class="ink-opt-item">
                 <div>
-                    <span class="ink-opt-item-badge ink-opt-item-badge--technique">🔁 Technique & Passes</span>
+                    <span class="ink-opt-item-badge ink-opt-item-badge--technique">🔁 ${T('x.io_tech_badge', 'Technique & Passes')}</span>
                     <h5 class="ink-opt-item-title">
-                        ${hasPassOptimization ? `Consolidate from ${currentPasses} Passes → ${optPasses} Passes` : `Optimal Single-Pass Dynamic (${currentPasses} Pass)`}
+                        ${hasPassOptimization ? TP('x.io_consolidate', 'Consolidate from {0} Passes → {1} Passes', currentPasses, optPasses) : TP('x.io_single_opt', 'Optimal Single-Pass Dynamic ({0} Pass)', currentPasses)}
                     </h5>
                     <p class="ink-opt-item-desc">
                         ${hasPassOptimization 
-                            ? `By utilizing a slightly longer stroke throw (3.8mm–4.0mm) and consistent 45° hand angle, you achieve rich saturation in ${optPasses} passes, saving ${passSavingsMl.toFixed(1)} mL of excess pigment and minimizing skin redness.`
-                            : `Your current ${currentPasses}-pass setup is already highly tuned. Maintain steady machine voltage and pendulum hand speed to prevent ink wipe waste.`}
+                            ? TP('x.io_pass_desc_a', 'By utilizing a slightly longer stroke throw (3.8mm–4.0mm) and consistent 45° hand angle, you achieve rich saturation in {0} passes, saving {1} mL of excess pigment and minimizing skin redness.', optPasses, passSavingsMl.toFixed(1))
+                            : TP('x.io_pass_desc_b', 'Your current {0}-pass setup is already highly tuned. Maintain steady machine voltage and pendulum hand speed to prevent ink wipe waste.', currentPasses)}
                     </p>
                 </div>
                 <div>
                     <div class="ink-opt-item-savings-line">
-                        ${hasPassOptimization ? `💰 Saves ~$${passSavingsCost.toFixed(2)} (${passSavingsMl.toFixed(1)} mL) per session` : `✓ Optimal Pass Count`}
+                        ${hasPassOptimization ? TP('x.io_saves', '💰 Saves ~${0} ({1} mL) per session', passSavingsCost.toFixed(2), passSavingsMl.toFixed(1)) : T('x.io_opt_pass', '✓ Optimal Pass Count')}
                     </div>
                     ${hasPassOptimization ? `
                     <button type="button" class="ink-opt-apply-btn" onclick="applyInkOptimization('passes', ${optPasses}, '${optPasses} Passes')">
-                        <span>⚡</span> Apply ${optPasses} Passes Reduction
+                        <span>⚡</span> ${TP('x.io_apply_passes', 'Apply {0} Passes Reduction', optPasses)}
                     </button>` : `
                     <button type="button" class="ink-opt-apply-btn" style="opacity: 0.8; pointer-events: none;">
-                        <span>✓</span> Already at Peak Pass Efficiency
+                        <span>✓</span> ${T('x.io_peak_pass', 'Already at Peak Pass Efficiency')}
                     </button>`}
                 </div>
             </div>
@@ -8475,26 +8487,26 @@ function renderInkOptimizationSuggestions(data) {
             <!-- 3. Staging & Waste Factor Optimization -->
             <div class="ink-opt-item">
                 <div>
-                    <span class="ink-opt-item-badge ink-opt-item-badge--waste">♻️ Cap Staging & Anti-Waste</span>
+                    <span class="ink-opt-item-badge ink-opt-item-badge--waste">♻️ ${T('x.io_waste_badge', 'Cap Staging & Anti-Waste')}</span>
                     <h5 class="ink-opt-item-title">
-                        ${hasWasteOptimization ? `Switch to Micro-Cap Staging (Low 1.2x Waste)` : `Low Waste Multiplier (1.2x Active)`}
+                        ${hasWasteOptimization ? T('x.io_switch_micro', 'Switch to Micro-Cap Staging (Low 1.2x Waste)') : T('x.io_low_active', 'Low Waste Multiplier (1.2x Active)')}
                     </h5>
                     <p class="ink-opt-item-desc">
                         ${hasWasteOptimization 
-                            ? `Pour ink progressively in 1.5 mL #9 micro-caps instead of 5 mL deep wells. Use silicone membrane anti-spit cartridges to stop needle splatter, reducing waste factor from ${data.wasteFactor.toUpperCase()} down to Low.`
-                            : `Great practice! Micro-caps and membrane cartridges keep ink residue in check with minimal wasted pigment.`}
+                            ? TP('x.io_waste_desc_a', 'Pour ink progressively in 1.5 mL #9 micro-caps instead of 5 mL deep wells. Use silicone membrane anti-spit cartridges to stop needle splatter, reducing waste factor from {0} down to Low.', data.wasteFactor.toUpperCase())
+                            : T('x.io_waste_desc_b', 'Great practice! Micro-caps and membrane cartridges keep ink residue in check with minimal wasted pigment.')}
                     </p>
                 </div>
                 <div>
                     <div class="ink-opt-item-savings-line">
-                        ${hasWasteOptimization ? `💧 Recovers ~${wasteReductionMl.toFixed(1)} mL ($${wasteReductionCost.toFixed(2)}) from cap residue` : `✓ Optimal Cap Staging`}
+                        ${hasWasteOptimization ? TP('x.io_recovers', '💧 Recovers ~{0} mL (${1}) from cap residue', wasteReductionMl.toFixed(1), wasteReductionCost.toFixed(2)) : T('x.io_opt_cap', '✓ Optimal Cap Staging')}
                     </div>
                     ${hasWasteOptimization ? `
                     <button type="button" class="ink-opt-apply-btn" onclick="applyInkOptimization('waste', 'low', 'Low Waste (1.2x)')">
-                        <span>⚡</span> Apply Low-Waste Cap Staging
+                        <span>⚡</span> ${T('x.io_apply_low', 'Apply Low-Waste Cap Staging')}
                     </button>` : `
                     <button type="button" class="ink-opt-apply-btn" style="opacity: 0.8; pointer-events: none;">
-                        <span>✓</span> Low Waste Staging Active
+                        <span>✓</span> ${T('x.io_low_active_btn', 'Low Waste Staging Active')}
                     </button>`}
                 </div>
             </div>
@@ -8502,16 +8514,19 @@ function renderInkOptimizationSuggestions(data) {
 
         <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--color-border, #2e2e4a); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
             <span style="font-size: 0.8rem; color: var(--color-text-secondary);">
-                Applying suggestions recalculates ink volume, caps needed, and bottle cost estimates instantly.
+                ${T('x.io_footer', 'Applying suggestions recalculates ink volume, caps needed, and bottle cost estimates instantly.')}
             </span>
             <button type="button" class="ink-opt-apply-btn" style="width: auto; padding: 0.5rem 1.25rem; background: linear-gradient(135deg, #0693e3 0%, #0073b7 100%); color: #ffffff; border: none; font-weight: 800;" onclick="applyAllInkOptimizations({ passes: ${optPasses}, waste: 'low' })">
-                <span>⚡</span> Apply All Recommended Optimizations (-${totalPotentialSavingsPct}%)
+                <span>⚡</span> ${TP('x.io_apply_all', 'Apply All Recommended Optimizations (-{0}%)', totalPotentialSavingsPct)}
             </button>
         </div>
     `;
 }
 
 function applyInkOptimization(field, value, label) {
+    // the label arrives as English from the inline onclick; the two generated ones are rebuilt here so they follow the language
+    if (field === 'passes') label = TP('x.io_n_passes', '{0} Passes', value);
+    else if (field === 'waste') label = T('x.io_low_waste_lbl', 'Low Waste (1.2x)');
     if (field === 'passes') {
         const passInput = document.getElementById('ink-passes');
         if (passInput) passInput.value = value;
@@ -8520,7 +8535,7 @@ function applyInkOptimization(field, value, label) {
         if (wasteSelect) wasteSelect.value = value;
     } else if (field === 'needle') {
         // Show informative notification for needle setup
-        showBrowserToast(`🎯 Setup applied: ${label}`, 'success');
+        showBrowserToast(TP('x.io_toast_setup', '🎯 Setup applied: {0}', label), 'success');
         return;
     }
 
@@ -8534,7 +8549,7 @@ function applyInkOptimization(field, value, label) {
             if (submitBtn) submitBtn.click();
         }
     }
-    showBrowserToast(`⚡ Applied optimization: ${label}`, 'success');
+    showBrowserToast(TP('x.io_toast_opt', '⚡ Applied optimization: {0}', label), 'success');
 }
 
 function applyAllInkOptimizations(opts) {
@@ -8556,7 +8571,7 @@ function applyAllInkOptimizations(opts) {
             if (submitBtn) submitBtn.click();
         }
     }
-    showBrowserToast('⚡ Applied all recommended needle & pass optimizations!', 'success');
+    showBrowserToast(T('x.io_toast_all', '⚡ Applied all recommended needle & pass optimizations!'), 'success');
 }
 
 /* ═══════════════════════════════════════════════════════════

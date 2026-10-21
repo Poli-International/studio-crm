@@ -105,6 +105,8 @@ A **checklist de fecho** regista quais os itens realizados, o supervisor, o núm
 
 O ecrã **Ferramentas** abre as ferramentas da Poli International (calendários de cuidados pós-procedimento, criador de formulários de consentimento, conversor de calibre, estimador de preços e mais) dentro do CRM.
 
+Cada cartão de ferramenta tem uma faixa colorida no topo, e a janela da ferramenta a mesma faixa na barra de título, para reconhecer a família à primeira vista: fita indicadora às riscas para esterilização e conformidade, as cores do titânio anodizado para piercing e joalharia, violeta de stencil para tatuagem e tinta, linhas de formulário para clientes e saúde, e papel de livro-razão para a gestão do estúdio.
+
 O grupo **Verificadores de regulamentação de tintas** tem um verificador por região: EUA (MoCRA e Proposição 65 da Califórnia), Europa (REACH) e Sudeste Asiático (Tailândia, também em tailandês). Cada um responde só pela sua região.
 
 ## Cópias de segurança

@@ -105,6 +105,8 @@ Die **Abschluss-Checkliste** erfasst, welche Punkte erledigt wurden, den Verantw
 
 Der Bildschirm **Werkzeuge** öffnet die Poli-International-Tools (Nachsorgepläne, Einverständnisformular-Generator, Gauge-Umrechner, Preisschätzer und mehr) innerhalb des CRM.
 
+Jede Werkzeugkarte hat oben ein farbiges Band, und das Fenster des Werkzeugs trägt dasselbe Band in seiner Titelleiste, sodass Sie die Familie auf einen Blick erkennen: gestreiftes Indikatorband für Sterilisation und Compliance, die Farben von eloxiertem Titan für Piercing und Schmuck, Stencil-Violett für Tattoo und Farbe, Formularlinien für Kunden und Gesundheit, Kassenbuchpapier für das Studiogeschäft.
+
 Die Gruppe **Prüfer für Farbvorschriften** hat einen Prüfer je Region: USA (MoCRA und California Proposition 65), Europa (REACH) und Südostasien (Thailand, auch auf Thai). Jeder gilt nur für seine eigene Region.
 
 ## Backups

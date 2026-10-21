@@ -1,5 +1,5 @@
 // =========================================================================
-// 👥 STAFF: the team list (add, edit, remove) and who is at the screen
+// STAFF: the team list (add, edit, remove) and who is at the screen
 // =========================================================================
 // "At the screen" is a name shown in the top bar, so the team can see whose turn
 // it is on a shared PC. It is not a login: the optional studio password (below,
@@ -97,7 +97,7 @@ async function renderStaffList() {
         const level = accessInfo.logins && accessInfo.logins[id];
         return `<div class="staff-row" style="padding:12px 14px;background:var(--ti-panel2, #1E293B);border:1px solid ${here ? '#10B981' : '#475569'};border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
             <div style="min-width:0;">
-                <div style="font-weight:800;font-size:0.9rem;">${escapeHtml(s.name || '')}${here ? ' <span style="color:var(--ti-green, #10B981);font-size:0.72rem;">● at the screen</span>' : ''}${level ? ` <span class="staff-level-badge" style="background:var(--ti-purple-deep, #312E81);color:var(--ti-blue-ink, #C7D2FE);border-radius:6px;padding:1px 6px;font-size:0.7rem;">🔑 ${escapeHtml(roleName(level))}</span>` : ''}</div>
+                <div style="font-weight:800;font-size:0.9rem;">${escapeHtml(s.name || '')}${here ? ' <span style="color:var(--ti-green, #10B981);font-size:0.72rem;">● at the screen</span>' : ''}${level ? ` <span class="staff-level-badge" style="background:var(--ti-purple-deep, #312E81);color:var(--ti-blue-ink, #C7D2FE);border-radius:6px;padding:1px 6px;font-size:0.7rem;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-key></use></svg> ${escapeHtml(roleName(level))}</span>` : ''}</div>
                 <div style="font-size:0.75rem;color:var(--ti-muted, #94A3B8);">${details}</div>
             </div>
             <div style="display:flex;gap:6px;">
@@ -239,7 +239,7 @@ async function removeStaffMember(id) {
 window.removeStaffMember = removeStaffMember;
 
 // =========================================================================
-// 📅 SHIFT ROTA: who works when, from this week on
+// SHIFT ROTA: who works when, from this week on
 // =========================================================================
 async function renderMonthlyShiftSchedule() {
     const body = document.getElementById('shift-roster-tbody');
@@ -285,7 +285,7 @@ async function removeRotaShift(id) {
 window.removeRotaShift = removeRotaShift;
 
 // =========================================================================
-// 🔒 STUDIO PASSWORD (Settings): optional, one for the whole studio
+// STUDIO PASSWORD (Settings): optional, one for the whole studio
 // =========================================================================
 async function showStudioAccess() {
     const status = document.getElementById('access-status');
@@ -331,7 +331,7 @@ async function showStudioAccess() {
 document.addEventListener('DOMContentLoaded', showStudioAccess);
 
 // =========================================================================
-// 🧩 ROLES (Settings, administrators): which areas each role may open and change
+// ROLES (Settings, administrators): which areas each role may open and change
 // =========================================================================
 let rolesDraft = [];
 function renderRolesCard() {
@@ -403,7 +403,7 @@ async function saveKioskPassword(event) {
 window.saveKioskPassword = saveKioskPassword;
 
 // =========================================================================
-// ⏱️ IDLE LOCK (Settings, with the studio password): a device left unused signs out
+// IDLE LOCK (Settings, with the studio password): a device left unused signs out
 // =========================================================================
 // Use anywhere counts, inside the embedded tools and the form builder too. The tablet kiosk is
 // never locked: it has its own PIN, and a client filling in a long form is not "idle".
@@ -455,7 +455,7 @@ async function saveIdleLock(minutes) {
 window.saveIdleLock = saveIdleLock;
 
 // =========================================================================
-// 🔒 TABLET KIOSK PIN (Settings): asked to leave the consent form kiosk on a tablet
+// TABLET KIOSK PIN (Settings): asked to leave the consent form kiosk on a tablet
 // =========================================================================
 // Stored as a short hash in poli_kiosk_exit_pin, which app-data-sync shares with every device.
 // ponytail: a deterrent for a client left alone with the tablet, not a security boundary

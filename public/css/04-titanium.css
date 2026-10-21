@@ -120,6 +120,24 @@ table tbody tr:hover td:first-child { box-shadow: inset 3px 0 0 var(--ti-blue); 
 .destination-view.active, .destination-view[style*="block"] { animation: ti-rise .45s var(--ti-ease) both; }
 @keyframes ti-rise { from { opacity: 0; transform: translateY(8px); } }
 
+/* ---------- drawn icons (sprite at the top of index.html) and status dots ---------- */
+.ti-i {
+  width: 1.15em !important; height: 1.15em !important; max-width: none !important; /* older rules size every svg */
+  vertical-align: -0.2em; flex: none; overflow: visible;
+  fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+}
+.sidebar-nav .nav-item .nav-icon .ti-i, #topbar-dest-icon .ti-i { width: 18px !important; height: 18px !important; }
+[class^="ti-dot-"] {
+  display: inline-block; width: .6em; height: .6em; border-radius: 50%; vertical-align: .05em;
+  background: var(--dot); box-shadow: 0 0 0 .18em color-mix(in srgb, var(--dot) 25%, transparent);
+}
+.ti-dot-green { --dot: var(--ti-green); }
+.ti-dot-red { --dot: var(--ti-alert); }
+.ti-dot-gold { --dot: var(--ti-gold); }
+.ti-dot-blue { --dot: var(--ti-blue); }
+.ti-dot-purple { --dot: var(--ti-purple); }
+.ti-dot-grey { --dot: var(--ti-faint); }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }

@@ -281,7 +281,7 @@ window.addEventListener("keydown", function(e) {
 });
 
 // =========================================================================
-// 🚀 STUDIO CRM WORKSPACE HANDLERS & CORE OPERATIONAL EXPORTS
+// STUDIO CRM WORKSPACE HANDLERS & CORE OPERATIONAL EXPORTS
 // =========================================================================
 
 function toggleActivityDrawer() {
@@ -402,7 +402,7 @@ function openMessengerMacroModal() {
 window.openMessengerMacroModal = openMessengerMacroModal;
 
 // =========================================================================
-// 🎯 EXTENDED STUDIO OPERATIONS HANDLERS & MODAL UTILITIES
+// EXTENDED STUDIO OPERATIONS HANDLERS & MODAL UTILITIES
 // =========================================================================
 
 function showToastNotification(msg) {

@@ -2,7 +2,7 @@
 body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans Thai', sans-serif; }
 
 /* ======================================================== */
-    /* 📦 INVENTORY MANAGEMENT MODAL CSS GRID LAYOUT SYSTEM */
+    /* INVENTORY MANAGEMENT MODAL CSS GRID LAYOUT SYSTEM */
     /* ======================================================== */
     .inventory-modal-grid-container {
         display: grid !important;
@@ -138,7 +138,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
     }
 
     /* ======================================================== */
-    /* 📱 COMPREHENSIVE MOBILE RESPONSIVE ENGINE (PHONE & TABLET) */
+    /* COMPREHENSIVE MOBILE RESPONSIVE ENGINE (PHONE & TABLET) */
     /* ======================================================== */
 
     *, *::before, *::after {
@@ -220,7 +220,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         padding-top: 0.25rem !important;
     }
 
-    /* 📉 COMPACT CRM-WIDE BUTTON & DASHBOARD STAT CARD HEIGHT REDUCTIONS */
+    /* COMPACT CRM-WIDE BUTTON & DASHBOARD STAT CARD HEIGHT REDUCTIONS */
     .stats-grid,
     .stats-grid[data-v-211779b2] {
         display: grid !important;
@@ -230,7 +230,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         margin-top: 0 !important;
     }
 
-    /* 🖼️ PORTFOLIO GALLERY CARD HOVER ANIMATIONS */
+    /* PORTFOLIO GALLERY CARD HOVER ANIMATIONS */
     .gallery-card-interactive,
     .portfolio-gallery-item {
         transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s ease, border-color 0.25s ease !important;
@@ -656,7 +656,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         }
     }
 
-    /* 📈 SMOOTH INVENTORY TABLE ROW EXPANSION TRANSITION WITH EASE-IN-OUT HEIGHT */
+    /* SMOOTH INVENTORY TABLE ROW EXPANSION TRANSITION WITH EASE-IN-OUT HEIGHT */
     @keyframes expandInventoryRowHeight {
         0% {
             max-height: 0px;
@@ -684,7 +684,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         transition: max-height 0.35s ease-in-out, opacity 0.25s ease-in-out;
     }
 
-    /* 🚨 INVENTORY LOW-STOCK REAL-TIME VISUAL PULSE & CAMERA SCANNER STYLES */
+    /* INVENTORY LOW-STOCK REAL-TIME VISUAL PULSE & CAMERA SCANNER STYLES */
     @keyframes lowStockPulse {
         0%, 100% {
             background-color: rgba(239, 68, 68, 0.14) !important;
@@ -731,7 +731,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         border-left: 4px solid var(--ti-gold, #F59E0B) !important;
     }
 
-    /* ⚡ REAL-TIME STOCK CELL TRANSITION ANIMATIONS (RESTOCK / USAGE) */
+    /* REAL-TIME STOCK CELL TRANSITION ANIMATIONS (RESTOCK / USAGE) */
     @keyframes stockFlashGreenKeyframes {
         0% {
             background-color: rgba(16, 185, 129, 0.75) !important;
@@ -782,9 +782,9 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
     }
 
     /* ======================================================== */
-    /* 🏢 SUPPLIER CARDS ENHANCED MULTI-COLOR FLICKER & HOVER EXPANSION */
+    /* SUPPLIER CARDS ENHANCED MULTI-COLOR FLICKER & HOVER EXPANSION */
     /* ======================================================== */
-    /* 🟢 Green / On-Time Flicker Animation */
+    /* Green / On-Time Flicker Animation */
     @keyframes supplierCardFlickerOnTimeKeyframes {
         0%, 100% {
             box-shadow: 0 0 0 rgba(16, 185, 129, 0);
@@ -815,7 +815,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         }
     }
 
-    /* 🟡 Amber / Approaching Risk Flicker Animation */
+    /* Amber / Approaching Risk Flicker Animation */
     @keyframes supplierCardFlickerRiskKeyframes {
         0%, 100% {
             box-shadow: 0 0 0 rgba(245, 158, 11, 0);
@@ -846,7 +846,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         }
     }
 
-    /* 🔴 Red / Delayed Flicker Animation */
+    /* Red / Delayed Flicker Animation */
     @keyframes supplierCardFlickerDelayedKeyframes {
         0%, 100% {
             box-shadow: 0 0 0 rgba(239, 68, 68, 0);
@@ -922,7 +922,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
     }
 
     /* ======================================================== */
-    /* 🛡️ CLIENT SELF-SERVICE PORTAL DEDICATED LIGHT THEME & STYLING */
+    /* CLIENT SELF-SERVICE PORTAL DEDICATED LIGHT THEME & STYLING */
     /* ======================================================== */
     #tab-portal.portal-light-theme {
         background: var(--ti-text, #F8FAFC) !important;
@@ -978,7 +978,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
     }
 
     /* ======================================================== */
-    /* 🌟 ULTRA-PREMIUM STAGGERED MODAL ENTRANCE ANIMATIONS     */
+    /* ULTRA-PREMIUM STAGGERED MODAL ENTRANCE ANIMATIONS     */
     /* ======================================================== */
     @keyframes crmModalOverlayFadeIn {
         0% {
@@ -1181,7 +1181,7 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
     .data-table tbody tr:nth-child(10), table tbody tr:nth-child(10) { animation-delay: 0.29s; }
 
     /* ========================================================
-       🖨️ DEDICATED PRINT STYLESHEET FOR STUDIO DOCUMENTS
+       DEDICATED PRINT STYLESHEET FOR STUDIO DOCUMENTS
        (Purchase Orders, Deposit Receipts, Aftercare Guides)
        ======================================================== */
     @media print {

@@ -21,7 +21,7 @@ function escapeHtml(str) {
 }
 
 // =========================================================================
-// 👤 CLIENT PROFILE MODAL LOGIC (DATABASE INTEGRATED & STAFF NOTES)
+// CLIENT PROFILE MODAL LOGIC (DATABASE INTEGRATED & STAFF NOTES)
 // =========================================================================
 let currentActiveProfileClient = null;
 let currentProfileActiveTab = 'overview';
@@ -35,7 +35,7 @@ async function openClientProfileModal(clientId) {
     if (bodyEl) {
         bodyEl.innerHTML = `
             <div style="text-align:center;padding:3rem;color:var(--ti-blue-ink, #818CF8);font-size:0.95rem;font-weight:600;">
-                <div style="font-size:2rem;margin-bottom:8px;display:inline-block;">⚡</div>
+                <div style="font-size:2rem;margin-bottom:8px;display:inline-block;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-bolt></use></svg></div>
                 <div>Fetching complete client record, appointment history, waivers & tattoo artwork...</div>
             </div>
         `;
@@ -117,11 +117,11 @@ function clientAgeBadges(client) {
     const pill = (bg, fg, text) => `<span style="background:${bg};color:${fg};padding:2px 8px;border-radius:10px;font-weight:800;">${escapeHtml(text)}</span>`;
     const age = typeof client.age === 'number' ? client.age : null;
     const ageTag = age === null ? pill('rgba(148,163,184,0.2)', '#CBD5E1', pdfLabel('Age not recorded'))
-        : age < 18 ? pill('rgba(239,68,68,0.25)', '#FCA5A5', pdfLabel('🛡️ Under 18 ({0}): a parent or guardian must sign').replace('{0}', age))
+        : age < 18 ? pill('rgba(239,68,68,0.25)', '#FCA5A5', pdfLabel('Under 18 ({0}): a parent or guardian must sign').replace('{0}', age))
         : pill('rgba(148,163,184,0.2)', '#E2E8F0', pdfLabel('Age {0}').replace('{0}', age));
     const id = client.id_check;
-    const idTag = id ? pill('rgba(16,185,129,0.2)', '#6EE7B7', pdfLabel('🪪 ID checked {0}').replace('{0}', new Date(id.checked_at).toLocaleDateString()))
-        : pill('rgba(234,179,8,0.2)', '#FDE047', pdfLabel('🪪 ID not checked'));
+    const idTag = id ? pill('rgba(16,185,129,0.2)', '#6EE7B7', pdfLabel('ID checked {0}').replace('{0}', new Date(id.checked_at).toLocaleDateString()))
+        : pill('rgba(234,179,8,0.2)', '#FDE047', pdfLabel('ID not checked'));
     return ageTag + idTag;
 }
 window.clientAgeBadges = clientAgeBadges;
@@ -158,11 +158,11 @@ function renderClientProfileHeader(data) {
         const totalSpent = Number((data.stats && data.stats.totalSpend) || 0).toFixed(2);
 
         tagsEl.innerHTML = `
-            <span>📧 ${escapeHtml(email)}</span>
-            <span>📞 ${escapeHtml(phone)}</span>
-            ${loyaltyTier ? `<span style="background:rgba(99,102,241,0.2);color:var(--ti-blue-ink, #A5B4FC);padding:2px 8px;border-radius:10px;font-weight:700;">💎 ${escapeHtml(loyaltyTier)}</span>` : ''}
-            ${isVip ? '<span style="background:rgba(234,179,8,0.2);color:var(--ti-gold-ink, #FDE047);padding:2px 8px;border-radius:10px;font-weight:800;">⭐ VIP</span>' : ''}
-            <span style="background:rgba(16,185,129,0.2);color:var(--ti-green-ink, #6EE7B7);padding:2px 8px;border-radius:10px;font-weight:700;">💵 Spent: $${totalSpent}</span>
+            <span><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-mail></use></svg> ${escapeHtml(email)}</span>
+            <span><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-phone></use></svg> ${escapeHtml(phone)}</span>
+            ${loyaltyTier ? `<span style="background:rgba(99,102,241,0.2);color:var(--ti-blue-ink, #A5B4FC);padding:2px 8px;border-radius:10px;font-weight:700;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-ring></use></svg> ${escapeHtml(loyaltyTier)}</span>` : ''}
+            ${isVip ? '<span style="background:rgba(234,179,8,0.2);color:var(--ti-gold-ink, #FDE047);padding:2px 8px;border-radius:10px;font-weight:800;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-star></use></svg> VIP</span>' : ''}
+            <span style="background:rgba(16,185,129,0.2);color:var(--ti-green-ink, #6EE7B7);padding:2px 8px;border-radius:10px;font-weight:700;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-cash></use></svg> Spent: $${totalSpent}</span>
             ${clientAgeBadges(client)}
         `;
     }
@@ -227,7 +227,7 @@ function switchClientProfileTab(tabName) {
                 <div style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:12px;padding:1.25rem;">
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
                         <h4 style="margin:0;font-size:0.95rem;font-weight:700;color:var(--ti-text, #F9FAFB);display:flex;align-items:center;gap:6px;">
-                            📈 Procedure & Session Progression Timeline
+                            <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-trend-up></use></svg> Procedure & Session Progression Timeline
                         </h4>
                         <span style="font-size:0.75rem;color:var(--ti-blue-ink, #818CF8);font-weight:700;">D3 Interactive Node Track</span>
                     </div>
@@ -238,7 +238,7 @@ function switchClientProfileTab(tabName) {
                 <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(280px, 100%), 1fr));gap:1rem;">
                     <div style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:12px;padding:1.25rem;">
                         <h4 style="margin:0 0 0.85rem 0;font-size:0.95rem;font-weight:700;color:var(--ti-text, #F9FAFB);display:flex;align-items:center;gap:6px;">
-                            👤 Personal Information
+                            <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-user></use></svg> Personal Information
                         </h4>
                         <div style="display:flex;flex-direction:column;gap:0.6rem;font-size:0.85rem;">
                             <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--ti-line, #374151);padding-bottom:4px;">
@@ -289,7 +289,7 @@ function switchClientProfileTab(tabName) {
 
                     <div style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:12px;padding:1.25rem;">
                         <h4 style="margin:0 0 0.85rem 0;font-size:0.95rem;font-weight:700;color:var(--ti-text, #F9FAFB);display:flex;align-items:center;gap:6px;">
-                            🏥 Medical & Sensitivity Overview
+                            <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-health></use></svg> Medical & Sensitivity Overview
                         </h4>
                         <div style="display:flex;flex-direction:column;gap:0.75rem;font-size:0.85rem;">
                             <div style="background:var(--ti-panel, #111827);padding:0.75rem;border-radius:8px;border:1px solid ${hasAllergies ? '#EF4444' : '#374151'};">
@@ -317,7 +317,7 @@ function switchClientProfileTab(tabName) {
 
                     <div style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:12px;padding:1.25rem;">
                         <h4 style="margin:0 0 0.85rem 0;font-size:0.95rem;font-weight:700;color:var(--ti-text, #F9FAFB);display:flex;align-items:center;gap:6px;">
-                            🎨 Studio Preferences & Artist Notes
+                            <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-machine></use></svg> Studio Preferences & Artist Notes
                         </h4>
 
                         <div style="display:flex;flex-direction:column;gap:0.75rem;font-size:0.85rem;">
@@ -345,7 +345,7 @@ function switchClientProfileTab(tabName) {
         renderClientAftercareCard(bodyEl.firstElementChild, client, appointments);
 
     } else if (tabName === 'notes') {
-        // 🔒 PRIVATE STAFF NOTES TAB (CHRONOLOGICAL DISPLAY & PERSISTENCE)
+        // PRIVATE STAFF NOTES TAB (CHRONOLOGICAL DISPLAY & PERSISTENCE)
         const sortedNotes = [...staffNotes].sort((a, b) => new Date(a.timestamp || 0) - new Date(b.timestamp || 0));
         const fromAppointment = (n) => n.fromAppointment;
 
@@ -356,7 +356,7 @@ function switchClientProfileTab(tabName) {
                 <div style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-purple, #4F46E5);border-radius:12px;padding:1.25rem;box-shadow:0 4px 15px rgba(79,70,229,0.15);">
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.85rem;">
                         <h4 style="margin:0;font-size:0.95rem;font-weight:800;color:var(--ti-blue-ink, #A5B4FC);display:flex;align-items:center;gap:6px;">
-                            🔒 Add Private Staff-Only Note
+                            <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-lock></use></svg> Add Private Staff-Only Note
                         </h4>
                         <span style="font-size:0.72rem;background:rgba(99,102,241,0.2);color:var(--ti-blue-ink, #818CF8);border:1px solid var(--ti-purple-ink, #6366F1);padding:2px 8px;border-radius:12px;font-weight:700;">
                             CONFIDENTIAL • STAFF ONLY
@@ -374,13 +374,13 @@ function switchClientProfileTab(tabName) {
                             <div>
                                 <label style="display:block;font-size:0.75rem;color:var(--ti-muted, #9CA3AF);margin-bottom:3px;font-weight:600;">NOTE CATEGORY</label>
                                 <select id="sn-category-select" style="width:100%;padding:0.5rem;background:var(--ti-panel, #111827);border:1px solid var(--ti-line, #374151);border-radius:6px;color:#FFF;font-size:0.825rem;outline:none;">
-                                    <option value="Procedure Observation">🎨 Procedure Observation</option>
-                                    <option value="Skin Sensitivity">🩸 Skin & Pigment Sensitivity</option>
-                                    <option value="Client Preference">💡 Client Preference / Quirk</option>
-                                    <option value="Consultation & Deposit">💵 Consultation & Deposit</option>
-                                    <option value="Aftercare & Healing">🩹 Aftercare & Healing</option>
-                                    <option value="Sanitation & Safety">🧪 Sanitation & Safety</option>
-                                    <option value="General Staff Note">📝 General Staff Note</option>
+                                    <option value="Procedure Observation">Procedure Observation</option>
+                                    <option value="Skin Sensitivity">Skin & Pigment Sensitivity</option>
+                                    <option value="Client Preference">Client Preference / Quirk</option>
+                                    <option value="Consultation & Deposit">Consultation & Deposit</option>
+                                    <option value="Aftercare & Healing">Aftercare & Healing</option>
+                                    <option value="Sanitation & Safety">Sanitation & Safety</option>
+                                    <option value="General Staff Note">General Staff Note</option>
                                 </select>
                             </div>
                         </div>
@@ -389,7 +389,7 @@ function switchClientProfileTab(tabName) {
                             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
                                 <label style="display:block;font-size:0.75rem;color:var(--ti-muted, #9CA3AF);font-weight:600;margin:0;">NOTE DETAILS</label>
                                 <button type="button" id="btn-dictate-sn-note" onclick="toggleVoiceDictation('sn-note-text', this)" class="dictate-speech-btn" style="padding:0.25rem 0.6rem;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.4);border-radius:6px;color:var(--ti-blue-ink, #A5B4FC);font-size:0.75rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all 0.2s;" title="Dictate procedure notes hands-free with Web Speech API during tattoo session">
-                                    <span class="dictate-mic-icon">🎙️</span>
+                                    <span class="dictate-mic-icon"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-mic></use></svg></span>
                                     <span class="dictate-btn-label">Voice-to-Text (Web Speech API)</span>
                                 </button>
                             </div>
@@ -403,7 +403,7 @@ function switchClientProfileTab(tabName) {
 
                         <div style="display:flex;justify-content:flex-end;">
                             <button type="submit" style="padding:0.55rem 1.25rem;background:linear-gradient(135deg, var(--ti-purple, #6366F1) 0%, var(--ti-purple, #4F46E5) 100%);color:#FFF;border:none;border-radius:8px;font-weight:800;font-size:0.85rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(99,102,241,0.35);">
-                                💾 Save Staff Note
+                                <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-save></use></svg> Save Staff Note
                             </button>
                         </div>
                     </form>
@@ -420,7 +420,7 @@ function switchClientProfileTab(tabName) {
         if (!sortedNotes.length) {
             notesHtml += `
                 <div style="text-align:center;padding:2.5rem;background:var(--ti-panel2, #1F2937);border:1px dashed var(--ti-line, #374151);border-radius:12px;color:var(--ti-muted, #9CA3AF);">
-                    <div style="font-size:2rem;margin-bottom:6px;">🔒</div>
+                    <div style="font-size:2rem;margin-bottom:6px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-lock></use></svg></div>
                     <div style="font-weight:700;color:var(--ti-text, #E5E7EB);font-size:0.95rem;">No Private Staff Notes Recorded Yet</div>
                     <div style="font-size:0.8rem;margin-top:4px;color:var(--ti-muted, #9CA3AF);">Use the form above to log observations, skin sensitivities, or booking notes.</div>
                 </div>
@@ -450,7 +450,7 @@ function switchClientProfileTab(tabName) {
                         <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
                             <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
                                 <span style="background:var(--ti-panel, #111827);color:var(--ti-text, #F3F4F6);padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:800;border:1px solid var(--ti-line, #374151);">
-                                    👤 ${escapeHtml(n.author || 'Staff Member')}
+                                    <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-user></use></svg> ${escapeHtml(n.author || 'Staff Member')}
                                 </span>
                                 <span style="font-size:0.72rem;color:var(--ti-muted, #9CA3AF);">
                                     (${escapeHtml(n.author_role || 'Staff')})
@@ -462,7 +462,7 @@ function switchClientProfileTab(tabName) {
                             
                             <div style="display:flex;align-items:center;gap:8px;">
                                 <span style="font-size:0.75rem;color:var(--ti-muted, #9CA3AF);font-family:monospace;">
-                                    🕒 ${dateStr} at ${timeStr}
+                                    <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-clock></use></svg> ${dateStr} at ${timeStr}
                                 </span>
                                 ${fromAppointment(n) ? '' : `<button type="button" onclick="confirmDeleteClientStaffNote(${client.id}, '${n.id}', '${escapeHtml((n.note || '').substring(0, 40))}')" style="background:none;border:none;color:var(--ti-alert, #EF4444);font-size:0.85rem;cursor:pointer;padding:2px 6px;" title="Delete Staff Note">&times;</button>`}
                             </div>
@@ -487,7 +487,7 @@ function switchClientProfileTab(tabName) {
         if (!appointments || appointments.length === 0) {
             bodyEl.innerHTML = `
                 <div style="text-align:center;padding:3rem;background:var(--ti-panel2, #1F2937);border:1px dashed var(--ti-line, #374151);border-radius:12px;color:var(--ti-muted, #9CA3AF);">
-                    <div style="font-size:2rem;margin-bottom:8px;">📅</div>
+                    <div style="font-size:2rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-calendar></use></svg></div>
                     <div>No past appointments found for this client.</div>
                 </div>
             `;
@@ -506,10 +506,10 @@ function switchClientProfileTab(tabName) {
                     <div>
                         <div style="font-weight:700;font-size:0.95rem;color:var(--ti-text, #F9FAFB);">${escapeHtml(a.service_type || a.service || 'Appointment')}</div>
                         <div style="font-size:0.8rem;color:var(--ti-muted, #9CA3AF);margin-top:2px;">
-                            📅 <strong>${escapeHtml(a.date || (a.datetime ? new Date(a.datetime).toLocaleDateString() : ''))}</strong> &bull; ⏰ ${escapeHtml(a.time || (a.datetime ? new Date(a.datetime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''))} &bull; 🎨 Artist: <strong style="color:var(--ti-blue-ink, #60A5FA);">${escapeHtml(a.staff_name || 'Not recorded')}</strong>
+                            <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-calendar></use></svg> <strong>${escapeHtml(a.date || (a.datetime ? new Date(a.datetime).toLocaleDateString() : ''))}</strong> &bull; ${escapeHtml(a.time || (a.datetime ? new Date(a.datetime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''))} &bull; Artist: <strong style="color:var(--ti-blue-ink, #60A5FA);">${escapeHtml(a.staff_name || 'Not recorded')}</strong>
                         </div>
                         ${Number(a.deposit_paid) > 0 ? `<div class="cp-appt-deposit" style="font-size:0.8rem;color:var(--ti-gold, #FBBF24);margin-top:4px;">${escapeHtml(pdfLabel("Deposit paid"))}: $${Number(a.deposit_paid).toFixed(2)} &bull; ${escapeHtml(pdfLabel("Balance"))}: $${Math.max(0, Number(a.estimated_price || a.price || a.amount || 0) - Number(a.deposit_paid)).toFixed(2)}</div>` : ''}
-                        ${a.notes ? `<div class="cp-appt-note" style="font-size:0.8rem;color:var(--ti-text2, #CBD5E1);margin-top:4px;white-space:pre-wrap;">📝 ${escapeHtml(a.notes)}</div>` : ''}
+                        ${a.notes ? `<div class="cp-appt-note" style="font-size:0.8rem;color:var(--ti-text2, #CBD5E1);margin-top:4px;white-space:pre-wrap;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-note></use></svg> ${escapeHtml(a.notes)}</div>` : ''}
                     </div>
 
                     <div style="display:flex;align-items:center;gap:10px;">
@@ -518,7 +518,7 @@ function switchClientProfileTab(tabName) {
                             ${escapeHtml(a.status || '')}
                         </span>
                         <button type="button" onclick="generateClientAppointmentReceiptPDF(${JSON.stringify(a).replace(/"/g, '&quot;')}, ${client ? JSON.stringify(client).replace(/"/g, '&quot;') : 'null'})" style="padding:0.4rem 0.75rem;background:linear-gradient(135deg, var(--ti-blue, #3B82F6) 0%, var(--ti-blue, #1D4ED8) 100%);color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(59,130,246,0.3);" title="Generate formal printable PDF receipt with Tax/VAT breakdown and artist gratuity">
-                            🖨️ Receipt PDF
+                            <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-print></use></svg> Receipt PDF
                         </button>
                     </div>
                 </div>
@@ -536,20 +536,20 @@ function switchClientProfileTab(tabName) {
                 ${forms.map(f => `
                 <div class="cp-consent-form-row" style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:10px;padding:1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">
                     <div>
-                        <div style="font-weight:700;font-size:0.95rem;color:var(--ti-text, #F9FAFB);">📝 ${escapeHtml(f.name || 'Consent form')}</div>
+                        <div style="font-weight:700;font-size:0.95rem;color:var(--ti-text, #F9FAFB);"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-note></use></svg> ${escapeHtml(f.name || 'Consent form')}</div>
                         <div style="font-size:0.78rem;color:var(--ti-muted, #9CA3AF);margin-top:2px;">Saved ${escapeHtml(String(f.saved_at || ''))} &bull; ${f.signed ? 'signed' : 'not signed'}</div>
-                        ${f.minor_without_guardian ? `<div class="cp-minor-flag" style="font-size:0.78rem;color:var(--ti-alert-ink, #FCA5A5);font-weight:800;margin-top:4px;">${escapeHtml(pdfLabel('🛡️ Signed by a client under 18 without a parent or guardian signature'))}</div>` : ''}
+                        ${f.minor_without_guardian ? `<div class="cp-minor-flag" style="font-size:0.78rem;color:var(--ti-alert-ink, #FCA5A5);font-weight:800;margin-top:4px;">${escapeHtml(pdfLabel('Signed by a client under 18 without a parent or guardian signature'))}</div>` : ''}
                     </div>
                     <span style="display:flex;gap:8px;"><button type="button" onclick="viewClientConsentForm(${Number(f.id)})" style="padding:0.4rem 0.75rem;background:var(--ti-blue, #2563EB);color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">View answers</button>
-                    <button type="button" onclick="downloadConsentFormPDF(${Number(f.id)})" style="padding:0.4rem 0.75rem;background:var(--ti-blue, #1E40AF);color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">🖨️ PDF</button></span>
+                    <button type="button" onclick="downloadConsentFormPDF(${Number(f.id)})" style="padding:0.4rem 0.75rem;background:var(--ti-blue, #1E40AF);color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-print></use></svg> PDF</button></span>
                 </div>`).join('')}
             </div>` : '';
         if (!waivers || waivers.length === 0) {
             bodyEl.innerHTML = formsHtml + `
                 <div style="text-align:center;padding:3rem;background:var(--ti-panel2, #1F2937);border:1px dashed var(--ti-line, #374151);border-radius:12px;color:var(--ti-muted, #9CA3AF);">
-                    <div style="font-size:2rem;margin-bottom:8px;">📜</div>
+                    <div style="font-size:2rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-consent></use></svg></div>
                     <div>No signed liability waivers recorded for this client.</div>
-                    <button type="button" onclick="openWaiverModal(${client.id})" style="margin-top:12px;padding:0.5rem 1rem;background:var(--ti-green, #10B981);color:#FFF;border:none;border-radius:6px;font-weight:700;cursor:pointer;">✍️ Open Digital Signature Pad</button>
+                    <button type="button" onclick="openWaiverModal(${client.id})" style="margin-top:12px;padding:0.5rem 1rem;background:var(--ti-green, #10B981);color:#FFF;border:none;border-radius:6px;font-weight:700;cursor:pointer;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-pen></use></svg> Open Digital Signature Pad</button>
                 </div>
             `;
             return;
@@ -565,7 +565,7 @@ function switchClientProfileTab(tabName) {
                 <div style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:10px;padding:1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">
                     <div style="display:flex;align-items:center;gap:12px;">
                         <div style="width:42px;height:42px;border-radius:8px;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:var(--ti-green, #34D399);display:flex;align-items:center;justify-content:center;font-size:1.2rem;">
-                            📜
+                            <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-consent></use></svg>
                         </div>
                         <div>
                             <div style="font-weight:700;font-size:0.95rem;color:var(--ti-text, #F9FAFB);">${escapeHtml(w.title || 'Digital Liability & Health Waiver')}</div>
@@ -577,7 +577,7 @@ function switchClientProfileTab(tabName) {
 
                     <div style="display:flex;align-items:center;gap:8px;">
                         <span style="background:rgba(16,185,129,0.2);color:var(--ti-green, #34D399);border:1px solid var(--ti-green, #10B981);padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:800;">
-                            ✅ VERIFIED & SIGNED
+                            <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-check></use></svg> VERIFIED & SIGNED
                         </span>
                         <button type="button" onclick="viewWaiverRecord(${Number(w.id)})" style="padding:0.4rem 0.75rem;background:var(--ti-line, #374151);color:var(--ti-text, #F3F4F6);border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">View waiver</button>
                     </div>
@@ -593,7 +593,7 @@ function switchClientProfileTab(tabName) {
             <div>
                 <div style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:12px;padding:1.25rem;margin-bottom:1.25rem;">
                     <h4 style="margin:0 0 0.75rem 0;font-size:0.95rem;font-weight:700;color:var(--ti-text, #F9FAFB);display:flex;align-items:center;gap:6px;">
-                        🖼️ Upload Tattoo Session Work / Portfolio Photo
+                        <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-image></use></svg> Upload Tattoo Session Work / Portfolio Photo
                     </h4>
                     <form onsubmit="submitClientTattooWork(event, ${client.id})" style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
                         <div>
@@ -612,7 +612,7 @@ function switchClientProfileTab(tabName) {
                         <div style="grid-column: span 2;">
                             <label for="tw-photo-input" style="font-size:0.75rem;color:var(--ti-muted, #9CA3AF);display:block;margin-bottom:3px;">Photo</label>
                             <input type="file" id="tw-photo-input" accept="image/*" onchange="handleClientWorkPhotoSelect(event)" style="display:none;" />
-                            <button type="button" onclick="document.getElementById('tw-photo-input').click()" style="padding:0.5rem 1rem;background:var(--ti-line, #374151);color:var(--ti-text, #F9FAFB);border:1px solid var(--ti-line2, #4B5563);border-radius:6px;font-weight:700;font-size:0.825rem;cursor:pointer;">📷 Take or choose a photo</button>
+                            <button type="button" onclick="document.getElementById('tw-photo-input').click()" style="padding:0.5rem 1rem;background:var(--ti-line, #374151);color:var(--ti-text, #F9FAFB);border:1px solid var(--ti-line2, #4B5563);border-radius:6px;font-weight:700;font-size:0.825rem;cursor:pointer;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-camera></use></svg> Take or choose a photo</button>
                             <span style="font-size:0.72rem;color:var(--ti-muted, #9CA3AF);margin-left:6px;">On a phone or tablet you can use the camera.</span>
                             <div id="tw-photo-preview" style="margin-top:6px;"></div>
                         </div>
@@ -621,7 +621,7 @@ function switchClientProfileTab(tabName) {
                             <input type="text" id="tw-notes-input" placeholder="e.g. Dynamic Black Ink, 3RL and 7M1 needles, 3.5 hour total session time." style="width:100%;padding:0.5rem;background:var(--ti-panel, #111827);border:1px solid var(--ti-line, #374151);border-radius:6px;color:#FFF;font-size:0.825rem;outline:none;" />
                         </div>
                         <div style="grid-column: span 2;display:flex;justify-content:flex-end;">
-                            <button type="submit" style="padding:0.5rem 1.25rem;background:var(--ti-blue, #3B82F6);color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.85rem;cursor:pointer;">📸 Add to Client Gallery</button>
+                            <button type="submit" style="padding:0.5rem 1.25rem;background:var(--ti-blue, #3B82F6);color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.85rem;cursor:pointer;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-camera></use></svg> Add to Client Gallery</button>
                         </div>
                     </form>
                 </div>
@@ -632,7 +632,7 @@ function switchClientProfileTab(tabName) {
         if (!tattoo_work || tattoo_work.length === 0) {
             workHtml += `
                 <div style="text-align:center;padding:2.5rem;background:var(--ti-panel2, #1F2937);border:1px dashed var(--ti-line, #374151);border-radius:12px;color:var(--ti-muted, #9CA3AF);">
-                    <div style="font-size:2rem;margin-bottom:6px;">🖼️</div>
+                    <div style="font-size:2rem;margin-bottom:6px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-image></use></svg></div>
                     <div>No artwork or photos uploaded for this client yet.</div>
                 </div>
             `;
@@ -648,11 +648,11 @@ function switchClientProfileTab(tabName) {
                         <div style="padding:0.75rem;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
                             <div>
                                 <div style="font-weight:700;font-size:0.85rem;color:var(--ti-text, #F9FAFB);margin-bottom:2px;">${escapeHtml(w.title)}</div>
-                                <div style="font-size:0.75rem;color:var(--ti-muted, #9CA3AF);margin-bottom:4px;">📅 ${escapeHtml(w.date || (w.created_at ? String(w.created_at).slice(0, 10) : ''))}</div>
+                                <div style="font-size:0.75rem;color:var(--ti-muted, #9CA3AF);margin-bottom:4px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-calendar></use></svg> ${escapeHtml(w.date || (w.created_at ? String(w.created_at).slice(0, 10) : ''))}</div>
                                 <div style="font-size:0.75rem;color:var(--ti-text2, #D1D5DB);line-height:1.3;">${escapeHtml(w.notes || '')}</div>
                             </div>
                             <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center;">
-                                <button type="button" onclick="openLightboxModal('${w.image_url}', '${escapeHtml(w.title)}', '${escapeHtml(w.notes)}')" style="padding:2px 8px;background:var(--ti-line, #374151);color:var(--ti-blue-ink, #60A5FA);border:none;border-radius:4px;font-size:0.72rem;cursor:pointer;font-weight:600;">🔍 Zoom</button>
+                                <button type="button" onclick="openLightboxModal('${w.image_url}', '${escapeHtml(w.title)}', '${escapeHtml(w.notes)}')" style="padding:2px 8px;background:var(--ti-line, #374151);color:var(--ti-blue-ink, #60A5FA);border:none;border-radius:4px;font-size:0.72rem;cursor:pointer;font-weight:600;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-search></use></svg> Zoom</button>
                                 <button type="button" onclick="deleteClientTattooWork(${client.id}, ${w.id})" style="background:none;border:none;color:var(--ti-alert, #EF4444);font-size:0.75rem;cursor:pointer;">Delete</button>
                             </div>
                         </div>
@@ -722,15 +722,15 @@ async function viewClientConsentForm(formId) {
         ? pdfLabel('{0} ending {1}, checked by {2} on {3}').replace('{0}', pdfLabel(form.idCheck.type)).replace('{1}', form.idCheck.last4).replace('{2}', form.idCheck.checked_by).replace('{3}', new Date(form.idCheck.checked_at).toLocaleString())
         : pdfLabel('Not checked when this form was signed')));
     html = `<div style="background:var(--ti-panel2, #1F2937);border:1px solid ${form.minorWithoutGuardian ? '#EF4444' : '#374151'};border-radius:12px;padding:1rem;margin-bottom:1rem;">`
-        + (form.minorWithoutGuardian ? `<div style="color:var(--ti-alert-ink, #FCA5A5);font-weight:800;font-size:0.85rem;margin-bottom:6px;">${escapeHtml(pdfLabel('🛡️ Signed by a client under 18 without a parent or guardian signature'))}</div>` : '')
+        + (form.minorWithoutGuardian ? `<div style="color:var(--ti-alert-ink, #FCA5A5);font-weight:800;font-size:0.85rem;margin-bottom:6px;">${escapeHtml(pdfLabel('Signed by a client under 18 without a parent or guardian signature'))}</div>` : '')
         + signedAt.join('') + '</div>' + html;
     const rest = Object.keys(responses).filter((k) => !seen.has(k));
     const medical = ((form.schema && form.schema.sections) || []).find((sec) => sec.type === 'medical_section');
     const restTitle = medical ? (medical.title || 'Medical History') : 'Other answers';
     if (rest.length) html += `<div style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:12px;padding:1rem;"><h4 style="margin:0 0 0.5rem 0;font-size:0.95rem;color:var(--ti-text, #F9FAFB);">${escapeHtml(restTitle)}</h4>${rest.map((k) => line(k.replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase()), responses[k])).join('')}</div>`;
     bodyEl.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;">
-            <div><div style="font-weight:800;font-size:1.05rem;color:var(--ti-text, #F9FAFB);">📝 ${escapeHtml(form.name || 'Consent form')}</div><div style="font-size:0.78rem;color:var(--ti-muted, #9CA3AF);">Saved ${escapeHtml(String(form.saved_at || ''))}</div></div>
-            <span style="display:flex;gap:8px;"><button type="button" onclick="downloadConsentFormPDF(${Number(form.id)})" style="padding:0.4rem 0.75rem;background:var(--ti-blue, #2563EB);color:#FFF;border:none;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;">🖨️ PDF</button>
+            <div><div style="font-weight:800;font-size:1.05rem;color:var(--ti-text, #F9FAFB);"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-note></use></svg> ${escapeHtml(form.name || 'Consent form')}</div><div style="font-size:0.78rem;color:var(--ti-muted, #9CA3AF);">Saved ${escapeHtml(String(form.saved_at || ''))}</div></div>
+            <span style="display:flex;gap:8px;"><button type="button" onclick="downloadConsentFormPDF(${Number(form.id)})" style="padding:0.4rem 0.75rem;background:var(--ti-blue, #2563EB);color:#FFF;border:none;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-print></use></svg> PDF</button>
             <button type="button" onclick="switchClientProfileTab('waivers')" style="padding:0.4rem 0.75rem;background:var(--ti-line, #374151);color:var(--ti-text, #F3F4F6);border:none;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;">← Back to waivers</button></span>
         </div>` + html + (Object.keys(responses).length ? '' : '<div style="color:var(--ti-muted, #9CA3AF);">This form was saved with no answers.</div>');
 }
@@ -771,7 +771,7 @@ async function downloadConsentFormPDF(formId) {
 }
 window.downloadConsentFormPDF = downloadConsentFormPDF;
 
-// 🔒 HANDLE PRIVATE STAFF NOTE SUBMISSION
+// HANDLE PRIVATE STAFF NOTE SUBMISSION
 async function handleStaffNoteSubmit(event, clientId) {
     if (event) event.preventDefault();
     if (!clientId) return;
@@ -814,7 +814,7 @@ async function handleStaffNoteSubmit(event, clientId) {
 
         switchClientProfileTab('notes');
         if (typeof showUndoToast === 'function') {
-            showUndoToast('🔒 Saved confidential staff note to client record.');
+            showUndoToast('Saved confidential staff note to client record.');
         }
     } catch (err) {
         console.error('Error saving staff note:', err);
@@ -823,14 +823,14 @@ async function handleStaffNoteSubmit(event, clientId) {
 }
 window.handleStaffNoteSubmit = handleStaffNoteSubmit;
 
-// 🔒 CONFIRM & DELETE CLIENT STAFF NOTE
+// CONFIRM & DELETE CLIENT STAFF NOTE
 function confirmDeleteClientStaffNote(clientId, noteId, notePreview) {
     openDeletionConfirmModal({
         title: 'Delete Staff Note',
         message: 'Are you sure you want to permanently delete this confidential staff note?',
         itemName: `Staff Note: "${notePreview || 'Note Entry'}"`,
         itemDetails: `Client ID #${clientId} • Note ID ${noteId}`,
-        confirmBtnText: '🗑️ Delete Note',
+        confirmBtnText: 'Delete Note',
         onConfirm: async () => {
             try {
                 const res = await fetch(`/api/clients/${clientId}/staff-notes/${noteId}`, { method: 'DELETE' });
@@ -848,7 +848,7 @@ function confirmDeleteClientStaffNote(clientId, noteId, notePreview) {
 
                 switchClientProfileTab('notes');
                 if (typeof showUndoToast === 'function') {
-                    showUndoToast('🗑️ Removed private staff note.');
+                    showUndoToast('Removed private staff note.');
                 }
             } catch (err) {
                 console.error('Error deleting staff note:', err);
@@ -860,7 +860,7 @@ function confirmDeleteClientStaffNote(clientId, noteId, notePreview) {
 window.confirmDeleteClientStaffNote = confirmDeleteClientStaffNote;
 
 // =========================================================================
-// 🗑️ CENTRALIZED DATA DELETION CONFIRMATION MODAL CONTROLLER
+// CENTRALIZED DATA DELETION CONFIRMATION MODAL CONTROLLER
 // =========================================================================
 let currentPendingDeletionCallback = null;
 
@@ -887,7 +887,7 @@ function openDeletionConfirmModal({ title, message, itemName, itemDetails, confi
 
     const execBtn = document.getElementById('btn-del-confirm-execute');
     if (execBtn) {
-        execBtn.textContent = confirmBtnText || '🗑️ Confirm Deletion';
+        execBtn.textContent = confirmBtnText || 'Confirm Deletion';
         currentPendingDeletionCallback = onConfirm;
         execBtn.onclick = async () => {
             closeDeletionConfirmModal();
@@ -918,7 +918,7 @@ window.closeDeletionConfirmModal = closeDeletionConfirmModal;
 // Inventory Category Deletion Confirmation
 
 // =========================================================================
-// 🔥 D3.JS SUPPLY USAGE DENSITY HEATMAP (BY DAY OF WEEK & PROCEDURE SHIFT)
+// D3.JS SUPPLY USAGE DENSITY HEATMAP (BY DAY OF WEEK & PROCEDURE SHIFT)
 // =========================================================================
 let cachedSupplyUsageHeatmapData = null;
 
@@ -933,7 +933,7 @@ async function refreshSupplyUsageHeatmap() {
     cachedSupplyUsageHeatmapData = null;
     await renderD3SupplyUsageHeatmap();
     if (typeof showUndoToast === 'function') {
-        showUndoToast('🔄 Refreshed weekly supply usage density calculations.');
+        showUndoToast('Refreshed weekly supply usage density calculations.');
     }
 }
 window.refreshSupplyUsageHeatmap = refreshSupplyUsageHeatmap;
@@ -944,7 +944,7 @@ async function renderD3SupplyUsageHeatmap() {
 
     container.innerHTML = `
         <div style="display:flex;align-items:center;justify-content:center;height:320px;color:var(--ti-rose-ink, #F472B6);font-weight:700;font-size:0.9rem;">
-            ⚡ Computing 7-day supply consumption density matrix...
+            <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-bolt></use></svg> Computing 7-day supply consumption density matrix...
         </div>
     `;
 
@@ -1053,10 +1053,10 @@ async function renderD3SupplyUsageHeatmap() {
                 tooltip.style('display', 'block')
                     .html(`
                         <div style="font-weight:800;color:var(--ti-rose-ink, #F472B6);font-size:0.85rem;margin-bottom:4px;">
-                            🔥 ${d.day} &bull; ${d.shift}
+                            <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-flame></use></svg> ${d.day} &bull; ${d.shift}
                         </div>
                         <div style="font-size:0.75rem;color:var(--ti-muted, #9CA3AF);margin-bottom:6px;">
-                            ⏰ Shift Hours: ${d.shift_hours || 'Procedure Block'}
+                            <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-clock></use></svg> Shift Hours: ${d.shift_hours || 'Procedure Block'}
                         </div>
                         <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
                             <span>Supply Units Burned:</span>
@@ -1071,7 +1071,7 @@ async function renderD3SupplyUsageHeatmap() {
                             <strong style="color:var(--ti-green, #34D399);">${d.top_supply || 'Needles & Ink'}</strong>
                         </div>
                         <div style="background:var(--ti-bg2, #0F172A);padding:4px 6px;border-radius:4px;margin-top:4px;font-size:0.7rem;color:var(--ti-gold, #FBBF24);">
-                            ${d.risk_level === 'CRITICAL' ? '🚨 Peak Procedure Load: Pre-stage supply trays!' : '✅ Sufficient buffer stock on hand.'}
+                            ${d.risk_level === 'CRITICAL' ? 'Peak Procedure Load: Pre-stage supply trays!' : 'Sufficient buffer stock on hand.'}
                         </div>
                     `);
             })
@@ -1195,7 +1195,7 @@ async function renderClientAftercareCard(container, client, appointments) {
         const label = [a.service_type || a.service || "", String(a.datetime || a.date || "").slice(0, 10)].filter(Boolean).join(", ");
         return `<div class="cp-aftercare-appt" style="display:flex;justify-content:space-between;gap:8px;align-items:center;border-bottom:1px solid var(--ti-line, #374151);padding:5px 0;font-size:0.82rem;">
             <span style="color:var(--ti-text, #E5E7EB);">${escapeHtml(label)}</span>
-            ${g ? `<span style="color:var(--ti-green-ink, #6EE7B7);font-weight:700;">${escapeHtml(pdfLabel("✅ Aftercare given {0}").replace("{0}", when(g.given_at)))}</span>`
+            ${g ? `<span style="color:var(--ti-green-ink, #6EE7B7);font-weight:700;">${escapeHtml(pdfLabel("Aftercare given {0}").replace("{0}", when(g.given_at)))}</span>`
                 : `<span style="color:var(--ti-gold-ink, #FDE047);font-weight:700;">${escapeHtml(pdfLabel("No aftercare recorded"))}</span>`}
         </div>`;
     };
@@ -1203,7 +1203,7 @@ async function renderClientAftercareCard(container, client, appointments) {
     card.id = "cp-aftercare-card";
     card.style.cssText = "background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:12px;padding:1.25rem;";
     card.innerHTML = `
-        <h4 style="margin:0 0 0.6rem 0;font-size:0.95rem;font-weight:700;color:var(--ti-text, #F9FAFB);">🩹 ${escapeHtml(pdfLabel("Aftercare"))}</h4>
+        <h4 style="margin:0 0 0.6rem 0;font-size:0.95rem;font-weight:700;color:var(--ti-text, #F9FAFB);"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-bandage></use></svg> ${escapeHtml(pdfLabel("Aftercare"))}</h4>
         ${appts.length ? appts.map(apptLine).join("") : `<div style="font-size:0.82rem;color:var(--ti-muted, #9CA3AF);">${escapeHtml(pdfLabel("No appointments yet."))}</div>`}
         <form onsubmit="giveClientAftercare(event, ${Number(client.id)})" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:0.8rem;">
             <select id="cp-aftercare-template" aria-label="${escapeHtml(pdfLabel("Aftercare sheet"))}" style="padding:7px 10px;background:var(--ti-panel, #111827);border:1px solid var(--ti-line2, #475569);border-radius:6px;color:var(--ti-text, #F8FAFC);">
@@ -1216,7 +1216,7 @@ async function renderClientAftercareCard(container, client, appointments) {
                 <option value="">${escapeHtml(pdfLabel("No appointment"))}</option>
                 ${appts.map((a) => `<option value="${escapeHtml(String(a.id))}">${escapeHtml([a.service_type || a.service || "", String(a.datetime || a.date || "").slice(0, 10)].filter(Boolean).join(", "))}</option>`).join("")}
             </select>
-            <button type="submit" style="padding:0.45rem 0.85rem;background:var(--ti-blue-deep, #0D9488);color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;">🖨️ ${escapeHtml(pdfLabel("Print and record aftercare"))}</button>
+            <button type="submit" style="padding:0.45rem 0.85rem;background:var(--ti-blue-deep, #0D9488);color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-print></use></svg> ${escapeHtml(pdfLabel("Print and record aftercare"))}</button>
         </form>
         ${given.length ? `<div style="margin-top:0.8rem;font-size:0.75rem;color:var(--ti-muted, #9CA3AF);">${given.slice(0, 5).map((g) => escapeHtml(pdfLabel("{0}: {1}, given by {2}").replace("{0}", when(g.given_at)).replace("{1}", g.title).replace("{2}", g.given_by))).join("<br>")}</div>` : ""}`;
     container.appendChild(card);
@@ -1327,7 +1327,7 @@ async function openGenericAftercareSheet() {
         document.body.appendChild(overlay);
     }
     overlay.innerHTML = `<div style="background:var(--ti-bg2, #0F172A);border:1px solid var(--ti-line, #334155);border-radius:14px;padding:22px;width:min(94vw,460px);color:var(--ti-text, #F8FAFC);">
-        <h3 style="margin:0 0 6px;font-size:1.05rem;">🖨️ ${escapeHtml(pdfLabel("Aftercare sheet"))}</h3>
+        <h3 style="margin:0 0 6px;font-size:1.05rem;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-print></use></svg> ${escapeHtml(pdfLabel("Aftercare sheet"))}</h3>
         <p style="margin:0 0 12px;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">${escapeHtml(pdfLabel("A sheet with no client name, and nothing recorded. To give aftercare to a client, use their profile."))}</p>
         <select id="generic-aftercare-template" aria-label="${escapeHtml(pdfLabel("Aftercare sheet"))}" style="width:100%;padding:8px 10px;background:var(--ti-panel, #111827);border:1px solid var(--ti-line2, #475569);border-radius:6px;color:var(--ti-text, #F8FAFC);margin-bottom:8px;">
             ${list.map((t) => `<option value="${escapeHtml(t.id)}">${escapeHtml(aftercareTextFor(t, uiLanguage()).title)}</option>`).join("")}
@@ -1337,7 +1337,7 @@ async function openGenericAftercareSheet() {
         </select>
         <div style="display:flex;gap:8px;justify-content:flex-end;">
             <button type="button" onclick="document.getElementById('generic-aftercare-overlay').style.display='none'" style="padding:0.45rem 0.9rem;background:var(--ti-line, #374151);color:var(--ti-text, #F3F4F6);border:none;border-radius:6px;cursor:pointer;">${escapeHtml(pdfLabel("Close"))}</button>
-            <button type="button" onclick="printGenericAftercareSheet()" style="padding:0.45rem 0.9rem;background:var(--ti-blue-deep, #0D9488);color:#FFF;border:none;border-radius:6px;font-weight:700;cursor:pointer;">🖨️ ${escapeHtml(pdfLabel("Print"))}</button>
+            <button type="button" onclick="printGenericAftercareSheet()" style="padding:0.45rem 0.9rem;background:var(--ti-blue-deep, #0D9488);color:#FFF;border:none;border-radius:6px;font-weight:700;cursor:pointer;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-print></use></svg> ${escapeHtml(pdfLabel("Print"))}</button>
         </div></div>`;
     overlay.style.display = "flex";
 }
@@ -1475,7 +1475,7 @@ async function submitClientTattooWork(event, clientId) {
 
         switchClientProfileTab('tattoo-work');
         if (typeof showUndoToast === 'function') {
-            showUndoToast('📸 Added artwork to client portfolio.');
+            showUndoToast('Added artwork to client portfolio.');
         }
     } catch (err) {
         console.error('Error adding tattoo work:', err);
@@ -1491,7 +1491,7 @@ async function deleteClientTattooWork(clientId, workId) {
         message: 'Are you sure you want to delete this artwork photo from the client portfolio?',
         itemName: 'Client Artwork Photo',
         itemDetails: `Client ID #${clientId} • Artwork #${workId}`,
-        confirmBtnText: '🗑️ Delete Photo',
+        confirmBtnText: 'Delete Photo',
         onConfirm: async () => {
             try {
                 const res = await fetch(`/api/clients/${clientId}/tattoo-work/${workId}`, { method: 'DELETE' });
@@ -1586,9 +1586,9 @@ async function captureAndSaveClientProfilePhoto(clientId, photoDataUrl) {
     }
 
     if (typeof showUndoToast === 'function') {
-        showUndoToast('📷 Captured and saved client profile photo successfully!');
+        showUndoToast('Captured and saved client profile photo successfully!');
     } else if (typeof showToast === 'function') {
-        showToast('📷 Client profile photo captured and saved!', 'success');
+        showToast('Client profile photo captured and saved!', 'success');
     }
 }
 window.captureAndSaveClientProfilePhoto = captureAndSaveClientProfilePhoto;
@@ -1632,7 +1632,7 @@ async function logRapidClientProcedureNote(noteText) {
         }
 
         if (typeof showUndoToast === 'function') {
-            showUndoToast('⚡ Rapid procedure note recorded in client history!');
+            showUndoToast('Rapid procedure note recorded in client history!');
         }
     } catch (e) {
         console.error('Rapid note log error:', e);
@@ -1642,7 +1642,7 @@ window.logRapidClientProcedureNote = logRapidClientProcedureNote;
 
 
 // =========================================================================
-// ⌨️ GLOBAL KEYBOARD SHORTCUT MANAGER (ALT + O FOR STERILE AUDIT)
+// GLOBAL KEYBOARD SHORTCUT MANAGER (ALT + O FOR STERILE AUDIT)
 // =========================================================================
 class StudioKeyboardShortcutManager {
     constructor() {
@@ -1659,21 +1659,21 @@ class StudioKeyboardShortcutManager {
         this.register('Alt+O', () => {
             if (typeof openSterileAuditModal === 'function') {
                 openSterileAuditModal();
-                this.showToast('🧪 Alt + O: Opened Sterile Medical Audit');
+                this.showToast('Alt + O: Opened Sterile Medical Audit');
             }
         }, 'Open Sterile Medical Audit & Expiration Vault');
 
         this.register('Alt+C', () => {
             if (typeof openClientDirectoryModal === 'function') {
                 openClientDirectoryModal();
-                this.showToast('👤 Alt + C: Opened Client Directory & Health Alerts');
+                this.showToast('Alt + C: Opened Client Directory & Health Alerts');
             }
         }, 'Open Client Directory & Health Alerts');
 
         this.register('Alt+N', () => {
             if (typeof openQuickLogModal === 'function') {
                 openQuickLogModal();
-                this.showToast('📝 Alt + N: Opened Quick Event Logger');
+                this.showToast('Alt + N: Opened Quick Event Logger');
             }
         }, 'Quick Log Event');
 
@@ -1686,27 +1686,27 @@ class StudioKeyboardShortcutManager {
                 if (typeof openInventoryCameraScannerModal === 'function') openInventoryCameraScannerModal();
                 else if (typeof openQrScannerModal === 'function') openQrScannerModal();
             }
-            this.showToast('📷 Alt + S: Toggled Inventory Camera Scanner');
+            this.showToast('Alt + S: Toggled Inventory Camera Scanner');
         }, 'Toggle Inventory Camera Scanner');
 
         this.register('Alt+I', () => {
             if (typeof openImportModal === 'function') {
                 openImportModal();
-                this.showToast('📄 Alt + I: Opened CSV Import Modal');
+                this.showToast('Alt + I: Opened CSV Import Modal');
             }
         }, 'Open CSV Import / Auto-Sync');
 
         this.register('Alt+E', () => {
             if (typeof openQuickTableExportModal === 'function') {
                 openQuickTableExportModal();
-                this.showToast('📊 Alt + E: Opened Table Export Modal');
+                this.showToast('Alt + E: Opened Table Export Modal');
             }
         }, 'Export Data (PDF / CSV)');
 
         this.register('Alt+A', () => {
             if (typeof openAutoSchedulerModal === 'function') {
                 openAutoSchedulerModal();
-                this.showToast('📅 Alt + A: Opened Appointment Scheduler');
+                this.showToast('Alt + A: Opened Appointment Scheduler');
             }
         }, 'Open Automated Appointment Scheduler');
 
@@ -1730,7 +1730,7 @@ class StudioKeyboardShortcutManager {
                 feedSearch.focus();
                 feedSearch.select();
             }
-            this.showToast('🔍 Alt + D: Focused Search Bar');
+            this.showToast('Alt + D: Focused Search Bar');
         }, 'Focus Active Search Bar');
 
         // Global Keydown Listener
@@ -1813,7 +1813,7 @@ const globalShortcutManager = new StudioKeyboardShortcutManager();
 window.GlobalKeyboardShortcutManager = globalShortcutManager;
 
 // =========================================================================
-// 🔄 INVENTORY CSV SYNC STATUS & TIMESTAMP MANAGER
+// INVENTORY CSV SYNC STATUS & TIMESTAMP MANAGER
 // =========================================================================
 async function fetchAndDisplayInventoryCsvSyncStatus() {
     const statusTextEl = document.getElementById('inv-sync-status-text');
@@ -1877,28 +1877,28 @@ async function fetchAndDisplayInventoryCsvSyncStatus() {
                 statusBadgeEl.style.background = 'rgba(245, 158, 11, 0.2)';
                 statusBadgeEl.style.borderColor = 'rgba(245, 158, 11, 0.5)';
                 statusBadgeEl.style.color = '#FBBF24';
-                statusTextEl.innerHTML = '🟡 Syncing in background...';
+                statusTextEl.innerHTML = 'Syncing in background...';
             } else if (isError) {
                 statusBadgeEl.style.background = 'rgba(239, 68, 68, 0.2)';
                 statusBadgeEl.style.borderColor = 'rgba(239, 68, 68, 0.5)';
                 statusBadgeEl.style.color = '#F87171';
-                statusTextEl.innerHTML = '🔴 Sync Error';
+                statusTextEl.innerHTML = 'Sync Error';
                 statusBadgeEl.title = state.lastError || 'CSV sync failed';
             } else if (isDisabled) {
                 statusBadgeEl.style.background = 'rgba(107, 114, 128, 0.2)';
                 statusBadgeEl.style.borderColor = 'rgba(107, 114, 128, 0.5)';
                 statusBadgeEl.style.color = '#9CA3AF';
-                statusTextEl.innerHTML = '⚪ Sync Paused';
+                statusTextEl.innerHTML = 'Sync Paused';
             } else {
                 statusBadgeEl.style.background = 'rgba(16, 185, 129, 0.2)';
                 statusBadgeEl.style.borderColor = 'rgba(16, 185, 129, 0.5)';
                 statusBadgeEl.style.color = '#34D399';
-                statusTextEl.innerHTML = '🟢 Synced & Connected';
+                statusTextEl.innerHTML = 'Synced & Connected';
             }
         }
 
         if (toggleIndicator) {
-            toggleIndicator.textContent = isDisabled ? '⚪ Paused' : (isSyncing ? '🟡 Syncing' : '🟢 Active');
+            toggleIndicator.textContent = isDisabled ? 'Paused' : (isSyncing ? 'Syncing' : 'Active');
         }
 
         return state;
@@ -1921,7 +1921,7 @@ setInterval(() => {
 }, 45000);
 
 // =========================================================================
-// 🧪 STERILE MEDICAL AUDIT DASHBOARD WARNING SUMMARY WIDGET
+// STERILE MEDICAL AUDIT DASHBOARD WARNING SUMMARY WIDGET
 // =========================================================================
 async function fetchAndRenderSterileAuditDashboardWidget() {
     const expiredEl = document.getElementById('sterile-widget-expired-count');
@@ -1944,10 +1944,10 @@ async function fetchAndRenderSterileAuditDashboardWidget() {
         audit.forEach(item => {
             if (item.exp_status === 'EXPIRED') {
                 expiredCount++;
-                warningItems.push(`🚨 ${item.name} (${item.lot_number || 'No Lot'}) - EXPIRED`);
+                warningItems.push(`${item.name} (${item.lot_number || 'No Lot'}) - EXPIRED`);
             } else if (item.exp_status === 'EXPIRING_SOON') {
                 expiringSoonCount++;
-                warningItems.push(`⚠️ ${item.name} (${item.lot_number || 'No Lot'}) - ${item.days_until_exp}d left`);
+                warningItems.push(`${item.name} (${item.lot_number || 'No Lot'}) - ${item.days_until_exp}d left`);
             } else {
                 compliantCount++;
             }
@@ -1961,15 +1961,15 @@ async function fetchAndRenderSterileAuditDashboardWidget() {
             if (expiredCount > 0) {
                 previewContainer.style.background = 'rgba(239, 68, 68, 0.15)';
                 previewContainer.style.borderColor = 'rgba(239, 68, 68, 0.45)';
-                alertMsgEl.innerHTML = `<strong style="color:var(--ti-alert, #EF4444);">🚨 IMMEDIATE COMPLIANCE RISK:</strong> ${expiredCount} expired sterile item(s) found! (${warningItems.slice(0, 2).join('; ')})`;
+                alertMsgEl.innerHTML = `<strong style="color:var(--ti-alert, #EF4444);"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-siren></use></svg> IMMEDIATE COMPLIANCE RISK:</strong> ${expiredCount} expired sterile item(s) found! (${warningItems.slice(0, 2).join('; ')})`;
             } else if (expiringSoonCount > 0) {
                 previewContainer.style.background = 'rgba(245, 158, 11, 0.15)';
                 previewContainer.style.borderColor = 'rgba(245, 158, 11, 0.45)';
-                alertMsgEl.innerHTML = `<strong style="color:var(--ti-gold, #FBBF24);">⚠️ UPCOMING EXPIRATIONS:</strong> ${expiringSoonCount} item(s) expiring within 30 days. (${warningItems.slice(0, 2).join('; ')})`;
+                alertMsgEl.innerHTML = `<strong style="color:var(--ti-gold, #FBBF24);"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-warn></use></svg> UPCOMING EXPIRATIONS:</strong> ${expiringSoonCount} item(s) expiring within 30 days. (${warningItems.slice(0, 2).join('; ')})`;
             } else {
                 previewContainer.style.background = 'rgba(16, 185, 129, 0.12)';
                 previewContainer.style.borderColor = 'rgba(16, 185, 129, 0.35)';
-                alertMsgEl.innerHTML = `<span style="color:var(--ti-green, #34D399);font-weight:700;">✅ No expired lots:</span> no needle cartridges, pigments or disposables in stock are past their expiry date.`;
+                alertMsgEl.innerHTML = `<span style="color:var(--ti-green, #34D399);font-weight:700;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-check></use></svg> No expired lots:</span> no needle cartridges, pigments or disposables in stock are past their expiry date.`;
             }
         }
 
@@ -1993,7 +1993,7 @@ if (document.readyState === 'loading') {
 
 
 // =========================================================================
-// 🚀 FULLY WIRED BUTTON HANDLERS & MODAL CONTROLLERS (ALL 175 FUNCTIONS)
+// FULLY WIRED BUTTON HANDLERS & MODAL CONTROLLERS (ALL 175 FUNCTIONS)
 // =========================================================================
 
 // --- Helper Functions ---
@@ -2245,7 +2245,7 @@ async function openAftercarePipelineModal() {
         return;
     }
     const btn = 'padding:4px 8px;border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;background:var(--ti-line, #334155);color:var(--ti-text, #E2E8F0);border:1px solid var(--ti-line2, #475569);';
-    body.innerHTML = '<div style="display:flex;justify-content:flex-end;margin-bottom:10px;"><button type="button" onclick="downloadPipelinePdf()" style="' + btn + 'background:var(--ti-blue, #2563EB);color:#FFF;border:none;">⬇ Download PDF</button></div>'
+    body.innerHTML = '<div style="display:flex;justify-content:flex-end;margin-bottom:10px;"><button type="button" onclick="downloadPipelinePdf()" style="' + btn + 'background:var(--ti-blue, #2563EB);color:#FFF;border:none;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-download></use></svg> Download PDF</button></div>'
         + pipelineGroups.map((g) => '<div class="pipeline-group" style="background:var(--ti-bg2, #0F172A);padding:12px;border-radius:8px;border:1px solid var(--ti-line, #334155);margin-bottom:10px;">'
             + '<div style="display:flex;justify-content:space-between;font-weight:800;margin-bottom:6px;"><span>' + escapeHtml(g.label) + '</span><span style="color:var(--ti-blue, #38BDF8);">' + g.items.length + '</span></div>'
             + (g.items.length ? g.items.map((a) => '<div class="pipeline-client" style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-top:1px solid var(--ti-panel2, #1E293B);">'
@@ -2343,7 +2343,7 @@ async function filterCmdPaletteResults() {
         if (label && run) items.push({ label, run });
     });
     (Array.isArray(cmdPaletteClients) ? cmdPaletteClients : []).forEach((c) =>
-        items.push({ label: '👤 ' + c.name, run: 'openClientProfileModal(' + Number(c.id) + ')' }));
+        items.push({ label: '' + c.name, run: 'openClientProfileModal(' + Number(c.id) + ')' }));
     const q = (input ? input.value : '').toLowerCase().trim();
     const hits = items.filter((i) => !q || i.label.toLowerCase().includes(q)).slice(0, 12);
     box.innerHTML = hits.length ? hits.map((i, n) =>
@@ -2459,7 +2459,7 @@ async function openQuickRecordPaymentModal(prefill) {
         const field = 'width:100%;box-sizing:border-box;padding:9px 10px;background:var(--ti-panel2, #1E293B);border:1px solid var(--ti-line2, #475569);border-radius:8px;color:var(--ti-text, #F8FAFC);font-size:0.95rem;';
         overlay.innerHTML = `
             <form id="record-payment-form" style="background:var(--ti-bg2, #0F172A);border:1px solid var(--ti-line, #334155);border-radius:14px;padding:22px;width:min(92vw,420px);display:flex;flex-direction:column;gap:12px;color:var(--ti-text, #F8FAFC);">
-                <h3 id="record-payment-title" style="margin:0;font-size:1.1rem;">💵 Record a payment</h3>
+                <h3 id="record-payment-title" style="margin:0;font-size:1.1rem;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-cash></use></svg> Record a payment</h3>
                 <label style="font-size:0.8rem;color:var(--ti-muted, #94A3B8);">Client
                     <select id="record-payment-client" style="${field}"><option value="">Walk-in / not on file</option></select></label>
                 <label style="font-size:0.8rem;color:var(--ti-muted, #94A3B8);">Amount
@@ -2762,7 +2762,7 @@ function toggleSessionTimer() {
             sessionTimerSeconds++;
             if (display) display.textContent = formatTimer(sessionTimerSeconds);
         }, 1000);
-        if (btn) btn.textContent = '⏸ Pause Session';
+        if (btn) btn.textContent = 'Pause Session';
         showStudioToast('Session timer active');
     }
 }
@@ -3238,7 +3238,7 @@ async function renderClientDirectoryModal() {
         const chip = (text, color) => '<span style="display:inline-block;margin:4px 6px 0 0;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:700;background:' + color + '22;color:' + color + ';border:1px solid ' + color + '55;">' + escapeHtml(text) + '</span>';
         body.innerHTML = rows.length ? '<div style="display:flex;flex-direction:column;gap:8px;max-height:400px;overflow-y:auto;">' +
             rows.map(({ c, allergy, medical }) => '<div style="background:var(--ti-bg2, #0F172A);padding:10px 14px;border-radius:8px;border:1px solid ' + (allergy || medical ? '#7F1D1D' : '#334155') + ';display:flex;justify-content:space-between;align-items:center;gap:12px;"><div><strong>' + escapeHtml(c.name || 'Client') + '</strong><div style="font-size:0.8rem;color:var(--ti-muted, #94A3B8);">' + escapeHtml(c.phone || 'No phone') + ' | ' + escapeHtml(c.email || 'No email') + (c.assigned_staff_name ? ' | ' + escapeHtml(c.assigned_staff_name) : '') + '</div><div>' +
-                (allergy ? chip('⚠️ Allergy: ' + allergy, '#EF4444') : '') + (medical ? chip('🩺 ' + medical, '#EAB308') : '') +
+                (allergy ? chip('Allergy: ' + allergy, '#EF4444') : '') + (medical ? chip('' + medical, '#EAB308') : '') +
                 (!allergy && !medical ? '<span style="font-size:0.75rem;color:var(--ti-faint, #64748B);">' + (String(c.allergies || c.medical_history || '').trim() ? 'No allergies or conditions recorded as present' : 'Nothing recorded yet: ask before the session') + '</span>' : '') +
                 '</div></div><button onclick="openClientProfileModal(' + Number(c.id) + ')" style="background:var(--ti-blue, #2563EB);color:#FFF;border:none;padding:6px 12px;border-radius:6px;font-size:0.8rem;cursor:pointer;flex-shrink:0;">View Profile</button></div>').join('') +
             '</div>' : '<div style="text-align:center;padding:24px;color:var(--ti-muted, #94A3B8);">No client matches this search and these filters.</div>';
@@ -3317,10 +3317,10 @@ async function renderClientsTable() {
         return `<tr class="client-directory-row" style="border-bottom:1px solid var(--ti-panel2, #1F2937);">
           <td style="padding:10px;font-weight:700;color:#FFF;"><div style="display:flex;align-items:center;gap:8px;">
             <span style="width:30px;height:30px;border-radius:50%;background:var(--ti-blue, #3B82F6);display:inline-flex;align-items:center;justify-content:center;font-weight:800;">${escapeHtml(initials)}</span>
-            <div><div>${escapeHtml(c.name || "")}</div>${c.is_vip ? '<span style="font-size:0.7rem;background:rgba(234,179,8,0.2);color:var(--ti-gold-ink, #FDE047);padding:1px 6px;border-radius:6px;font-weight:800;">⭐ VIP</span>' : ""}${minor ? `<span class="client-minor-tag" style="font-size:0.7rem;background:rgba(239,68,68,0.2);color:var(--ti-alert-ink, #FCA5A5);padding:1px 6px;border-radius:6px;font-weight:800;margin-left:4px;">${escapeHtml(pdfLabel("🛡️ Under 18"))}</span>` : ""}</div></div></td>
+            <div><div>${escapeHtml(c.name || "")}</div>${c.is_vip ? '<span style="font-size:0.7rem;background:rgba(234,179,8,0.2);color:var(--ti-gold-ink, #FDE047);padding:1px 6px;border-radius:6px;font-weight:800;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-star></use></svg> VIP</span>' : ""}${minor ? `<span class="client-minor-tag" style="font-size:0.7rem;background:rgba(239,68,68,0.2);color:var(--ti-alert-ink, #FCA5A5);padding:1px 6px;border-radius:6px;font-weight:800;margin-left:4px;">${escapeHtml(pdfLabel("Under 18"))}</span>` : ""}</div></div></td>
           <td style="padding:10px;color:var(--ti-muted, #9CA3AF);">${escapeHtml(c.email || "")}<br><span style="font-size:0.75rem;">${escapeHtml(c.phone || "")}</span></td>
-          <td style="padding:10px;">${health ? `<span style="color:var(--ti-alert-ink, #FCA5A5);font-weight:700;">⚠️ ${health}</span>` : healthKnown ? '<span style="color:var(--ti-green, #34D399);font-weight:700;">✅ None</span>' : `<span style="color:var(--ti-gold-ink, #FDE047);font-weight:700;">${escapeHtml(pdfLabel("Not recorded: ask the client"))}</span>`}</td>
-          <td style="padding:10px;"><span style="background:rgba(16,185,129,0.15);color:var(--ti-green, #34D399);padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:700;">📜 ${signed} Signed</span></td>
+          <td style="padding:10px;">${health ? `<span style="color:var(--ti-alert-ink, #FCA5A5);font-weight:700;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-warn></use></svg> ${health}</span>` : healthKnown ? '<span style="color:var(--ti-green, #34D399);font-weight:700;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-check></use></svg> None</span>' : `<span style="color:var(--ti-gold-ink, #FDE047);font-weight:700;">${escapeHtml(pdfLabel("Not recorded: ask the client"))}</span>`}</td>
+          <td style="padding:10px;"><span style="background:rgba(16,185,129,0.15);color:var(--ti-green, #34D399);padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:700;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-consent></use></svg> ${signed} Signed</span></td>
           <td style="padding:10px;font-weight:800;color:var(--ti-green, #34D399);">${money(spent)}</td>
           <td style="padding:10px;text-align:right;">
             <button onclick="openClientProfileModal(${Number(c.id)})" style="padding:4px 8px;background:var(--ti-blue, #3B82F6);color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">View Profile</button>
@@ -3487,9 +3487,9 @@ async function renderStationStripAndSessions() {
     const [stations, appts] = await Promise.all([get("/api/stations"), get("/api/appointments")]);
     const strip = document.getElementById("station-floor-strip");
     if (strip && Array.isArray(stations)) {
-        const look = { in_use: ["🟢", "16,185,129", "#34D399", "In session"], ready: ["🔵", "56,189,248", "#38BDF8", "Ready"], sanitizing: ["🟡", "245,158,11", "#FBBF24", "Sanitizing"] };
+        const look = { in_use: ["<i class=ti-dot-green></i>", "16,185,129", "#34D399", "In session"], ready: ["<i class=ti-dot-blue></i>", "56,189,248", "#38BDF8", "Ready"], sanitizing: ["<i class=ti-dot-gold></i>", "245,158,11", "#FBBF24", "Sanitizing"] };
         strip.innerHTML = stations.map((st) => {
-            const [dot, rgb, color, label] = look[st.status] || ["⚪", "148,163,184", "#94A3B8", String(st.status || "")];
+            const [dot, rgb, color, label] = look[st.status] || ["<i class=ti-dot-grey></i>", "148,163,184", "#94A3B8", String(st.status || "")];
             const who = st.status === "in_use" && st.assignedStaff ? ": " + st.assignedStaff : "";
             return `<span style="padding:4px 10px;background:rgba(${rgb},0.15);color:${color};border:1px solid rgba(${rgb},0.3);border-radius:8px;font-size:0.78rem;font-weight:700;">${dot} ${escapeHtml(st.name || "")}${escapeHtml(who)} (<span>${escapeHtml(label)}</span>)</span>`;
         }).join("");
@@ -3573,7 +3573,7 @@ function showBookingAgeNote(c) {
     if (!note) return;
     const age = c && typeof c.age === "number" ? c.age : null;
     const text = !c ? ""
-        : age !== null && age < 18 ? pdfLabel("🛡️ Under 18 ({0}): a parent or guardian must come and sign the Minor Consent form").replace("{0}", age)
+        : age !== null && age < 18 ? pdfLabel("Under 18 ({0}): a parent or guardian must come and sign the Minor Consent form").replace("{0}", age)
         : age === null ? pdfLabel("Age not recorded: check the client's ID")
         : !c.id_check ? pdfLabel("ID not checked yet")
         : "";
@@ -3643,13 +3643,13 @@ async function viewWaiverRecord(waiverId) {
     const signature = typeof w.signature === "string" && w.signature.startsWith("data:image/") ? w.signature : "";
     overlay.innerHTML = `
         <div style="background:var(--ti-bg2, #0F172A);border:1px solid var(--ti-line, #334155);border-radius:14px;padding:22px;width:min(94vw,560px);max-height:90vh;overflow:auto;color:var(--ti-text, #F8FAFC);font-size:0.9rem;">
-            <h3 style="margin:0 0 12px;font-size:1.1rem;">📜 Signed waiver</h3>
+            <h3 style="margin:0 0 12px;font-size:1.1rem;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-consent></use></svg> Signed waiver</h3>
             ${line("Client", w.client_name)}${line("Service", w.service_type)}${line("Signed", when)}
             ${line("Age verified", w.age_verified ? "Yes" : "No")}${line("Medical disclosures", w.medical_disclosures)}${line("Verified by", w.staff_verifier)}
             <div style="margin-top:12px;color:var(--ti-muted, #94A3B8);">Signature</div>
             ${signature ? `<img src="${signature}" alt="Client signature" style="display:block;margin-top:6px;max-width:100%;background:#FFF;border-radius:8px;" />` : `<div style="margin-top:6px;">No signature was captured.</div>`}
             <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px;">
-                <button type="button" onclick="downloadWaiverPdf(${Number(w.id)})" style="padding:9px 16px;background:var(--ti-blue, #2563EB);color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;">⬇ Download PDF</button>
+                <button type="button" onclick="downloadWaiverPdf(${Number(w.id)})" style="padding:9px 16px;background:var(--ti-blue, #2563EB);color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-download></use></svg> Download PDF</button>
                 <button type="button" onclick="forceHideModal('waiver-record-modal-overlay')" style="padding:9px 16px;background:transparent;color:var(--ti-muted, #94A3B8);border:1px solid var(--ti-line2, #475569);border-radius:8px;cursor:pointer;">Close</button>
             </div>
         </div>`;
@@ -3809,7 +3809,7 @@ function renderGalleryGrid() {
     if (badge) badge.textContent = items.length + " Items";
     grid.innerHTML = items.length ? items.map((w, i) => galleryCard(w.image_url, w.service_type || "",
         [(w.client_name || "") + " · " + (w.staff_name || ""), (w.session_date || "") + (w.session_duration_hours ? " · " + w.session_duration_hours + " h" : ""), w.notes || ""],
-        galleryBtn("📤 Share", `data-share="${i}"`))).join("")
+        galleryBtn("Share", `data-share="${i}"`))).join("")
         : '<div style="padding:24px;color:var(--ti-muted, #94A3B8);">No portfolio works yet. Add one with Upload Work.</div>';
     bindGalleryGrid(grid, items, (w) => (w.service_type || "") + " · " + (w.client_name || ""));
 }
@@ -3828,8 +3828,8 @@ function renderFlashGrid() {
     grid.innerHTML = items.length ? items.map((f, i) => galleryCard(f.image_url, f.title || "",
         [(f.category || "") + " · " + (f.artist_name || ""), "$" + Number(f.price || 0).toFixed(2) + " · $" + Number(f.deposit || 0).toFixed(2) + " deposit",
          f.status === "claimed" ? "Claimed by " + (f.claimed_by_client_name || "") : "Available"],
-        galleryBtn("📤 Share", `data-share="${i}"`) + galleryBtn("🎨 Skin Tone Preview", `data-skin="${i}"`) +
-        (f.status === "claimed" ? "" : galleryBtn("✅ Claim", `data-claim="${i}"`)))).join("")
+        galleryBtn("Share", `data-share="${i}"`) + galleryBtn("Skin Tone Preview", `data-skin="${i}"`) +
+        (f.status === "claimed" ? "" : galleryBtn("Claim", `data-claim="${i}"`)))).join("")
         : '<div style="padding:24px;color:var(--ti-muted, #94A3B8);">No flash designs yet.</div>';
     bindGalleryGrid(grid, items, (f) => f.title || "");
     grid.querySelectorAll("[data-skin]").forEach((b) => b.addEventListener("click", () => openSkinToneVisualizerModal(items[Number(b.dataset.skin)])));
@@ -4160,8 +4160,8 @@ async function renderSyncSettingsCard() {
     // the Settings badge and the Inventory switch said "ACTIVE" whatever the setting
     const label = pdfLabel(on ? "Automatic CSV sync on" : "Automatic CSV sync off");
     const badge = document.getElementById("settings-sync-status-badge"), inv = document.getElementById("inventory-remote-sync-toggle-wrapper");
-    if (badge) { badge.textContent = (on ? "🟢 " : "⚪ ") + label; badge.style.color = on ? "#34D399" : "#94A3B8"; }
-    if (inv) { inv.textContent = "🔄 " + label; inv.style.color = on ? "#34D399" : "#94A3B8"; }
+    if (badge) { badge.textContent = (on ? "" : "") + label; badge.style.color = on ? "#34D399" : "#94A3B8"; }
+    if (inv) { inv.textContent = "" + label; inv.style.color = on ? "#34D399" : "#94A3B8"; }
     const box = document.getElementById("settings-remote-sync-toggle");
     if (box) box.checked = on;
     const slider = document.getElementById("settings-remote-sync-slider"), knob = document.getElementById("settings-remote-sync-knob");
@@ -4616,7 +4616,7 @@ async function updateShiftStatusView() {
     const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
     set("shift-status-text", open ? "On shift since " + new Date(open.clock_in).toLocaleTimeString() : "Off shift");
     set("shift-weekly-hours", hours.toFixed(1) + " h");
-    set("shift-toggle-btn", open ? "🔴 Clock out" : "🟢 Clock in");
+    set("shift-toggle-btn", open ? "Clock out" : "Clock in");
 }
 window.updateShiftStatusView = updateShiftStatusView;
 
@@ -5348,7 +5348,7 @@ function addPortalPinnedNote(event) {
     if (container) {
         const el = document.createElement("div");
         el.style.cssText = "background:var(--ti-panel2, #1E293B);padding:10px 14px;border-radius:8px;border:1px solid var(--ti-line, #334155);color:var(--ti-text, #F8FAFC);font-size:0.85rem;margin-bottom:8px;";
-        el.innerHTML = `<strong>📌 ${escapeHtml(noteObj.author)} (${escapeHtml(noteObj.timestamp)}):</strong> ${escapeHtml(noteObj.text)}`;
+        el.innerHTML = `<strong><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-pin></use></svg> ${escapeHtml(noteObj.author)} (${escapeHtml(noteObj.timestamp)}):</strong> ${escapeHtml(noteObj.text)}`;
         container.prepend(el);
     }
     input.value = "";
@@ -5381,7 +5381,7 @@ function addQuickNote(event) {
         el.className = "activity-stream-item";
         el.setAttribute("data-category", "notes");
         el.style.cssText = "background:var(--ti-panel2, #1F2937);padding:10px 14px;border-radius:8px;border:1px solid var(--ti-line, #374151);color:var(--ti-text, #F9FAFB);margin-bottom:8px;font-size:0.85rem;";
-        el.innerHTML = `<div style="display:flex;justify-content:space-between;color:var(--ti-muted, #9CA3AF);font-size:0.75rem;"><span>📝 Quick Note</span><span>Just now</span></div><div style="margin-top:4px;color:#FFF;">${escapeHtml(text)}</div>`;
+        el.innerHTML = `<div style="display:flex;justify-content:space-between;color:var(--ti-muted, #9CA3AF);font-size:0.75rem;"><span><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-note></use></svg> Quick Note</span><span>Just now</span></div><div style="margin-top:4px;color:#FFF;">${escapeHtml(text)}</div>`;
         feed.prepend(el);
     }
     input.value = "";
@@ -5644,7 +5644,7 @@ async function loadRemoteCsvSyncForm() {
     if (el("sync-enabled-cb")) el("sync-enabled-cb").checked = !!st.enabled;
     const when = (t) => (t ? new Date(t).toLocaleString() : pdfLabel("Never"));
     if (el("sync-badge-status")) {
-        el("sync-badge-status").textContent = (st.enabled ? "🟢 " : "⚪ ") + pdfLabel(st.enabled ? "Automatic CSV sync on" : "Automatic CSV sync off");
+        el("sync-badge-status").textContent = (st.enabled ? "" : "") + pdfLabel(st.enabled ? "Automatic CSV sync on" : "Automatic CSV sync off");
         el("sync-badge-status").style.color = st.enabled ? "#34D399" : "#94A3B8";
     }
     if (el("sync-last-time")) el("sync-last-time").textContent = when(st.lastSyncTime);

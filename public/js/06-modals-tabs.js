@@ -98,7 +98,7 @@
         const btn = event && event.currentTarget ? event.currentTarget : document.querySelector(`.undo-btn[data-undo-id="${id}"]`);
         if (btn) {
             btn.disabled = true;
-            btn.innerHTML = '⏳ Undoing...';
+            btn.innerHTML = 'Undoing...';
             btn.style.opacity = '0.6';
         }
 
@@ -178,13 +178,13 @@
                 btn.style.background = 'rgba(16, 185, 129, 0.15)';
                 btn.style.color = '#34D399';
                 btn.style.borderColor = 'rgba(16, 185, 129, 0.3)';
-                btn.innerHTML = '🔔 Audio Alerts: ON';
+                btn.innerHTML = 'Audio Alerts: ON';
                 btn.title = 'Audio notifications enabled for incoming activities. Click to mute.';
             } else {
                 btn.style.background = 'rgba(239, 68, 68, 0.15)';
                 btn.style.color = '#F87171';
                 btn.style.borderColor = 'rgba(239, 68, 68, 0.3)';
-                btn.innerHTML = '🔕 Audio Alerts: OFF';
+                btn.innerHTML = 'Audio Alerts: OFF';
                 btn.title = 'Audio notifications muted. Click to enable.';
             }
         });
@@ -271,13 +271,13 @@
 
     function getCategoryEmoji(cat) {
         switch(cat) {
-            case 'appointment': return '📅';
-            case 'inventory': return '📦';
-            case 'client': return '👤';
-            case 'financial': return '💳';
-            case 'compliance': return '🛡️';
-            case 'staff': return '👥';
-            default: return '⚡';
+            case 'appointment': return '<svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-calendar></use></svg>';
+            case 'inventory': return '<svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-box></use></svg>';
+            case 'client': return '<svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-user></use></svg>';
+            case 'financial': return '<svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-card></use></svg>';
+            case 'compliance': return '<svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-shield></use></svg>';
+            case 'staff': return '<svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-users></use></svg>';
+            default: return '<svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-bolt></use></svg>';
         }
     }
 
@@ -346,7 +346,7 @@
             if (freshQueue.length !== queue.length) {
                 const prunedCount = queue.length - freshQueue.length;
                 savePendingQueue(freshQueue);
-                showSyncQueueToast(`🧹 <strong>Queue Maintenance:</strong> Pruned ${prunedCount} stale offline log(s) older than 24h.`);
+                showSyncQueueToast(`<strong>Queue Maintenance:</strong> Pruned ${prunedCount} stale offline log(s) older than 24h.`);
                 if (typeof renderActivityFeed === 'function') renderActivityFeed();
                 if (typeof renderD3ActivityChart === 'function') renderD3ActivityChart();
             }
@@ -384,7 +384,7 @@
         if (typeof renderDrawerFeed === 'function') renderDrawerFeed();
         if (typeof renderD3ActivityChart === 'function') renderD3ActivityChart();
 
-        showSyncQueueToast(`⚡ <strong>Saved Offline!</strong> Queue count: ${queue.length} log(s). Auto-syncing when online.`);
+        showSyncQueueToast(`<strong>Saved Offline!</strong> Queue count: ${queue.length} log(s). Auto-syncing when online.`);
         return pendingEntry;
     }
 
@@ -404,14 +404,14 @@
             indicator.title = `Syncing ${count} pending offline log(s) to server...`;
             indicator.innerHTML = `
                 <span style="display:inline-block;width:10px;height:10px;border:2px solid var(--ti-blue-ink, #60A5FA);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;"></span>
-                <span>🔄 Syncing (${count})...</span>
+                <span><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-refresh></use></svg> Syncing (${count})...</span>
             `;
         } else if (!isOnline || count > 0) {
             indicator.className = '';
             indicator.style.background = 'rgba(245, 158, 11, 0.2)';
             indicator.style.borderColor = 'rgba(245, 158, 11, 0.45)';
             indicator.style.color = '#FBBF24';
-            const label = !isOnline ? `⚡ Offline (${count} Pending)` : `⚡ Pending Sync (${count})`;
+            const label = !isOnline ? `Offline (${count} Pending)` : `Pending Sync (${count})`;
             indicator.title = !isOnline ? `App is offline. ${count} item(s) pending sync.` : `Online. ${count} item(s) in queue. Click to trigger bulk push.`;
             indicator.innerHTML = `
                 <span style="width:8px;height:8px;border-radius:50%;background:var(--ti-gold, #F59E0B);display:inline-block;box-shadow:0 0 6px rgba(245, 158, 11, 0.7);"></span>
@@ -425,7 +425,7 @@
             indicator.title = 'Online. All activity logs synced with server.';
             indicator.innerHTML = `
                 <span class="pulse-dot" style="width:8px;height:8px;border-radius:50%;background:var(--ti-green, #10B981);display:inline-block;"></span>
-                <span>🟢 Cloud Synced</span>
+                <span><i class=ti-dot-green></i> Cloud Synced</span>
             `;
         }
     }
@@ -433,20 +433,20 @@
     function retrySinglePendingLog(logId, event) {
         if (event) event.stopPropagation();
         if (!navigator.onLine) {
-            showSyncQueueToast('⚠️ <strong>Network Offline:</strong> Reconnect internet to retry sync.', true);
+            showSyncQueueToast('<strong>Network Offline:</strong> Reconnect internet to retry sync.', true);
             return;
         }
 
         const queue = getPendingQueue();
         const itemIndex = queue.findIndex(q => q.id === logId);
         if (itemIndex === -1) {
-            showSyncQueueToast('ℹ️ Log entry already synced or not found in queue.');
+            showSyncQueueToast('Log entry already synced or not found in queue.');
             fetchActivityLogs();
             return;
         }
 
         const item = queue[itemIndex];
-        showSyncQueueToast(`🔄 <strong>Retrying Log Sync...</strong> Processing "${escapeHtml(item.title)}".`, false);
+        showSyncQueueToast(`<strong>Retrying Log Sync...</strong> Processing "${escapeHtml(item.title)}".`, false);
 
         fetch('/api/activity-logs', {
             method: 'POST',
@@ -467,7 +467,7 @@
         .then(() => {
             const updatedQueue = getPendingQueue().filter(q => q.id !== logId);
             savePendingQueue(updatedQueue);
-            showSyncQueueToast(`🟢 <strong>Synced Successfully!</strong> "${escapeHtml(item.title)}" recorded to cloud API.`);
+            showSyncQueueToast(`<strong>Synced Successfully!</strong> "${escapeHtml(item.title)}" recorded to cloud API.`);
             fetchActivityLogs();
             updateSyncStatusIndicatorUI();
         })
@@ -480,7 +480,7 @@
                 currentQueue[idx].syncErrorMsg = err.message || 'API request failed';
                 savePendingQueue(currentQueue);
             }
-            showSyncQueueToast(`❌ <strong>Sync Failed:</strong> ${escapeHtml(err.message || 'Server error')}. Click 'Retry' on the entry to attempt again.`, true);
+            showSyncQueueToast(`<strong>Sync Failed:</strong> ${escapeHtml(err.message || 'Server error')}. Click 'Retry' on the entry to attempt again.`, true);
             if (typeof renderActivityFeed === 'function') renderActivityFeed();
             updateSyncStatusIndicatorUI();
         });
@@ -541,7 +541,7 @@
                         });
                         savePendingQueue(latestQueue);
 
-                        showSyncQueueToast(`⚠️ <strong>Sync Collision:</strong> Offline entry collided with server state. Opening Conflict Resolver...`, true);
+                        showSyncQueueToast(`<strong>Sync Collision:</strong> Offline entry collided with server state. Opening Conflict Resolver...`, true);
                         if (conflicts.length > 0 && conflicts[0].localEntry) {
                             openConflictResolutionModal(conflicts[0].localEntry, conflicts[0].serverEntry || conflicts[0].localEntry, conflicts[0].localEntry.id);
                         }
@@ -592,13 +592,13 @@
         isSyncingBulk = false;
 
         if (totalSyncedCount > 0 && !encounteredError) {
-            showSyncQueueToast(`🟢 <strong>Bulk Sync Complete!</strong> Pushed ${totalSyncedCount} offline activity log(s) in batch-retry chunks of ${BATCH_SIZE}.`);
+            showSyncQueueToast(`<strong>Bulk Sync Complete!</strong> Pushed ${totalSyncedCount} offline activity log(s) in batch-retry chunks of ${BATCH_SIZE}.`);
             fetchActivityLogs();
         } else if (totalSyncedCount > 0 && encounteredError) {
-            showSyncQueueToast(`⚠️ <strong>Partial Sync (${totalSyncedCount} synced):</strong> Batch retry stopped due to error: ${escapeHtml(lastErrorMessage)}. Remaining entries queued for retry.`, true);
+            showSyncQueueToast(`<strong>Partial Sync (${totalSyncedCount} synced):</strong> Batch retry stopped due to error: ${escapeHtml(lastErrorMessage)}. Remaining entries queued for retry.`, true);
             fetchActivityLogs();
         } else if (encounteredError) {
-            showSyncQueueToast(`❌ <strong>Sync Failed:</strong> ${escapeHtml(lastErrorMessage)}. Entries highlighted for retry.`, true);
+            showSyncQueueToast(`<strong>Sync Failed:</strong> ${escapeHtml(lastErrorMessage)}. Entries highlighted for retry.`, true);
         }
 
         if (typeof renderActivityFeed === 'function') renderActivityFeed();
@@ -607,13 +607,13 @@
 
     function triggerManualSync() {
         if (!navigator.onLine) {
-            showSyncQueueToast('⚠️ <strong>Network Offline:</strong> Reconnect internet to trigger bulk push.', true);
+            showSyncQueueToast('<strong>Network Offline:</strong> Reconnect internet to trigger bulk push.', true);
             return;
         }
         const queue = getPendingQueue();
         if (queue.length === 0) {
             fetchActivityLogs();
-            showSyncQueueToast('🟢 <strong>Activity Stream Refreshed:</strong> Queue clean and in sync!');
+            showSyncQueueToast('<strong>Activity Stream Refreshed:</strong> Queue clean and in sync!');
             return;
         }
         flushPendingLogsQueue();
@@ -653,7 +653,7 @@
         if (showRetryBtn && (pendingCount > 0 || !navigator.onLine)) {
             retryBtnHtml = `
                 <button onclick="triggerManualSync()" style="background:var(--ti-blue, #3B82F6);color:#FFF;border:none;padding:5px 12px;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;box-shadow:0 2px 6px rgba(59,130,246,0.4);transition:all 0.15s ease;" onmouseover="this.style.background='#2563EB'" onmouseout="this.style.background='#3B82F6'" title="Click to trigger forced server synchronization">
-                    🔄 Retry Sync
+                    <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-refresh></use></svg> Retry Sync
                 </button>
             `;
         }
@@ -676,13 +676,13 @@
 
     window.addEventListener('online', () => {
         updateSyncStatusIndicatorUI();
-        showSyncQueueToast('🟢 <strong>Network Connection Restored!</strong> Triggering automatic bulk sync...');
+        showSyncQueueToast('<strong>Network Connection Restored!</strong> Triggering automatic bulk sync...');
         flushPendingLogsQueue();
     });
 
     window.addEventListener('offline', () => {
         updateSyncStatusIndicatorUI();
-        showSyncQueueToast('⚡ <strong>Working Offline:</strong> Custom logs will be queued locally.');
+        showSyncQueueToast('<strong>Working Offline:</strong> Custom logs will be queued locally.');
     });
 
     setInterval(() => {
@@ -956,8 +956,8 @@
         const btn = document.getElementById('chart-multi-range-btn');
         if (btn) {
             btn.innerHTML = chartMultiRangeMode 
-                ? '☑️ Multi-Range Mode (+Shift)' 
-                : '🔲 Single Range Mode';
+                ? 'Multi-Range Mode (+Shift)' 
+                : 'Single Range Mode';
             btn.style.background = chartMultiRangeMode ? 'rgba(139, 92, 246, 0.35)' : 'rgba(139, 92, 246, 0.15)';
             btn.style.borderColor = chartMultiRangeMode ? '#A78BFA' : 'rgba(139, 92, 246, 0.35)';
         }
@@ -992,7 +992,7 @@
         chartDateRangeFilters.forEach(r => {
             html += `
                 <div style="font-size:0.75rem;color:var(--ti-gold, #FBBF24);font-weight:700;background:rgba(245, 158, 11, 0.18);padding:3px 9px;border-radius:16px;border:1px solid rgba(245, 158, 11, 0.4);display:inline-flex;align-items:center;gap:5px;">
-                    <span>📅 ${escapeHtml(r.label)}</span>
+                    <span><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-calendar></use></svg> ${escapeHtml(r.label)}</span>
                     <button onclick="removeChartDateFilter('${r.id}')" style="background:none;border:none;color:var(--ti-gold, #FBBF24);cursor:pointer;font-weight:bold;padding:0 2px;font-size:0.9rem;line-height:1;" title="Remove this date range">&times;</button>
                 </div>
             `;

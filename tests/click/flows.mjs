@@ -97,7 +97,7 @@ await flow('Work and photos: a photo taken or chosen on the device is added to t
   await b.clickText('Work and photos', '#client-profile-modal-overlay');
   await eventually(async () => b.evaluate(`!!document.getElementById('tw-photo-input')`), 'there is no photo button in Work and photos');
   check(!(await b.evaluate(`!!document.getElementById('tw-url-input')`)), 'Work and photos still asks for an image address');
-  await b.clickText('📷 Take or choose a photo', '#client-profile-modal-overlay');
+  await b.clickText('Take or choose a photo', '#client-profile-modal-overlay');
   // what the camera or the device's pictures hand back
   await b.evaluate(`(async () => { const c = document.createElement('canvas'); c.width = 40; c.height = 30; const g = c.getContext('2d'); g.fillStyle = '#208040'; g.fillRect(0, 0, 40, 30);
     const blob = await new Promise((r) => c.toBlob(r, 'image/png')); const dt = new DataTransfer(); dt.items.add(new File([blob], 'stencil.png', { type: 'image/png' }));
@@ -105,7 +105,7 @@ await flow('Work and photos: a photo taken or chosen on the device is added to t
   await eventually(async () => b.evaluate(`!!document.querySelector('#tw-photo-preview img')`), 'the photo chosen is not shown');
   await b.type('#tw-title-input', 'Flow Stencil Photo');
   await b.type('#tw-notes-input', 'Flow photo notes');
-  await b.clickText('📸 Add to Client Gallery', '#client-profile-modal-overlay');
+  await b.clickText('Add to Client Gallery', '#client-profile-modal-overlay');
   await eventually(async () => (await text('#client-profile-modal-body')).includes('Flow Stencil Photo'), 'the photo was not added to the client');
   check(await b.evaluate(`[...document.querySelectorAll('#client-profile-modal-body img')].some(i => i.src.startsWith('data:image/') && i.alt === 'Flow Stencil Photo')`), 'the photo shown is not the one taken');
   check((await text('#client-profile-modal-body')).includes('Flow photo notes'), 'the notes were not kept');
@@ -1271,7 +1271,7 @@ await flow('Roles: an administrator makes a role with its own areas; that person
     await eventually(async () => b.evaluate(`getComputedStyle(document.getElementById('roles-card')).display !== 'none'`), 'the Roles card is not shown to the administrator');
     check((await text('#roles-list')).includes('Front desk') && (await text('#roles-list')).includes('Administrator'), 'the Roles card does not list the roles');
     // a new role, Sterilization, with one area; Front desk also gets the stock
-    await b.clickText('➕ Add role');
+    await b.clickText('Add role');
     await b.evaluate(`(() => { const inputs = document.querySelectorAll('#roles-list input[type="text"]'); const el = inputs[inputs.length - 1]; el.value = 'Sterilization'; el.dispatchEvent(new Event('input', { bubbles: true })); })()`);
     const tick = (role, area) => b.evaluate(`(() => { const row = [...document.querySelectorAll('#roles-list .role-row')].find(r => (r.querySelector('strong') || {}).innerText === ${JSON.stringify(role)} || (r.querySelector('input[type="text"]') || {}).value === ${JSON.stringify(role)});
       const box = [...row.querySelectorAll('label')].find(l => l.innerText.trim() === ${JSON.stringify(area)}).querySelector('input'); box.click(); return box.checked; })()`);

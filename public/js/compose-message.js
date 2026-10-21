@@ -30,9 +30,9 @@
     var text = (c.subject ? c.subject + '\n\n' : '') + c.body;
     var t = encodeURIComponent(text);
     var links = [
-      ['✉️ Email', 'mailto:' + encodeURIComponent(c.to_email || '') + '?subject=' + encodeURIComponent(c.subject || '') + '&body=' + encodeURIComponent(c.body)],
-      ['💬 WhatsApp', 'https://wa.me/' + digits(c.to_phone) + '?text=' + t],
-      ['🟢 LINE', 'https://line.me/R/share?text=' + t]
+      ['Email', 'mailto:' + encodeURIComponent(c.to_email || '') + '?subject=' + encodeURIComponent(c.subject || '') + '&body=' + encodeURIComponent(c.body)],
+      ['WhatsApp', 'https://wa.me/' + digits(c.to_phone) + '?text=' + t],
+      ['LINE', 'https://line.me/R/share?text=' + t]
     ];
     var panel = document.createElement('div');
     panel.id = 'compose-message-panel';
@@ -70,11 +70,11 @@
     });
     var copy = document.createElement('button');
     copy.type = 'button';
-    copy.textContent = '📋 Copy';
+    copy.textContent = 'Copy';
     copy.style.cssText = 'padding:6px 10px;background:var(--ti-panel2, #1E293B);border:1px solid var(--ti-line, #334155);border-radius:6px;color:var(--ti-blue, #38BDF8);font-weight:700;cursor:pointer;';
     copy.onclick = function () {
       (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(function () {
-        copy.textContent = '✅ Copied';
+        copy.textContent = 'Copied';
       }).catch(function () {});
     };
     row.appendChild(copy);

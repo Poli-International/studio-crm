@@ -1,5 +1,5 @@
 // =========================================================================
-// 🧭 PERSISTENT SIDEBAR & DESTINATION NAVIGATION ENGINE
+// PERSISTENT SIDEBAR & DESTINATION NAVIGATION ENGINE
 // =========================================================================
 function navigateToDestination(destId) {
   if (!destId) destId = 'dashboard';
@@ -44,20 +44,20 @@ function navigateToDestination(destId) {
 
   // Update topbar destination title and icon
   const titles = {
-    dashboard: { title: 'Dashboard', icon: '📊' },
-    clients: { title: 'Clients', icon: '👥' },
-    calendar: { title: 'Calendar', icon: '📅' },
-    inventory: { title: 'Inventory', icon: '📦' },
-    compliance: { title: 'Compliance', icon: '🛡️' },
-    finance: { title: 'Finance', icon: '💰' },
-    tools: { title: 'Tools', icon: '🛠️' },
-    settings: { title: 'Settings', icon: '⚙️' }
+    dashboard: { title: 'Dashboard', icon: '<svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-chart></use></svg>' },
+    clients: { title: 'Clients', icon: '<svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-users></use></svg>' },
+    calendar: { title: 'Calendar', icon: '<svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-calendar></use></svg>' },
+    inventory: { title: 'Inventory', icon: '<svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-box></use></svg>' },
+    compliance: { title: 'Compliance', icon: '<svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-shield></use></svg>' },
+    finance: { title: 'Finance', icon: '<svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-cash></use></svg>' },
+    tools: { title: 'Tools', icon: '<svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-wrench></use></svg>' },
+    settings: { title: 'Settings', icon: '<svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-gear></use></svg>' }
   };
-  const info = titles[destId] || { title: destId, icon: '📌' };
+  const info = titles[destId] || { title: destId, icon: '<svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-pin></use></svg>' };
   const titleEl = document.getElementById('topbar-dest-title');
   const iconEl = document.getElementById('topbar-dest-icon');
   if (titleEl) titleEl.textContent = info.title;
-  if (iconEl) iconEl.textContent = info.icon;
+  if (iconEl) iconEl.innerHTML = info.icon; // a drawn icon from the sprite in index.html
 
   // Auto-close sidebar on mobile viewports (< 900px)
   if (window.innerWidth <= 900) {

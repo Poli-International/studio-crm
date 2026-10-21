@@ -143,7 +143,7 @@
 
     var result = buildPatch(readRates(), readRegion(), S.get(), S.currencies);
     var panel = el('div', 'position:absolute;top:3.2rem;right:1rem;z-index:5;width:min(380px,90vw);' +
-      'background:#111827;border:1px solid #374151;border-radius:10px;padding:1rem;color:#e5e7eb;' +
+      'background:var(--ti-panel, #111827);border:1px solid var(--ti-line, #374151);border-radius:10px;padding:1rem;color:var(--ti-text, #e5e7eb);' +
       'font-size:0.85rem;box-shadow:0 10px 30px rgba(0,0,0,0.5);');
     panel.id = PANEL;
     panel.setAttribute('role', 'dialog');
@@ -152,34 +152,34 @@
     panel.appendChild(el('strong', 'display:block;font-size:0.95rem;margin-bottom:0.5rem;color:#fff;', 'Save to Studio Settings'));
 
     if (result.empty) {
-      panel.appendChild(el('p', 'margin:0 0 0.75rem;color:#9ca3af;',
+      panel.appendChild(el('p', 'margin:0 0 0.75rem;color:var(--ti-muted, #9ca3af);',
         'Nothing to save yet. Enter your hourly rate, minimums or deposit in "Your Rates" first, or they already match your settings.'));
     } else {
-      panel.appendChild(el('p', 'margin:0 0 0.5rem;color:#9ca3af;', 'These studio settings will change:'));
+      panel.appendChild(el('p', 'margin:0 0 0.5rem;color:var(--ti-muted, #9ca3af);', 'These studio settings will change:'));
       var table = el('table', 'width:100%;border-collapse:collapse;margin-bottom:0.6rem;');
       result.changes.forEach(function (c) {
-        var tr = el('tr', 'border-top:1px solid #1f2937;');
-        tr.appendChild(el('td', 'padding:0.3rem 0;color:#d1d5db;', c.label));
-        tr.appendChild(el('td', 'padding:0.3rem 0;text-align:right;color:#6b7280;text-decoration:line-through;', String(c.from)));
-        tr.appendChild(el('td', 'padding:0.3rem 0 0.3rem 0.6rem;text-align:right;color:#34d399;font-weight:700;', String(c.to)));
+        var tr = el('tr', 'border-top:1px solid var(--ti-panel2, #1f2937);');
+        tr.appendChild(el('td', 'padding:0.3rem 0;color:var(--ti-text2, #d1d5db);', c.label));
+        tr.appendChild(el('td', 'padding:0.3rem 0;text-align:right;color:var(--ti-faint, #6b7280);text-decoration:line-through;', String(c.from)));
+        tr.appendChild(el('td', 'padding:0.3rem 0 0.3rem 0.6rem;text-align:right;color:var(--ti-green, #34d399);font-weight:700;', String(c.to)));
         table.appendChild(tr);
       });
       panel.appendChild(table);
-      panel.appendChild(el('p', 'margin:0 0 0.6rem;color:#9ca3af;font-size:0.8rem;',
+      panel.appendChild(el('p', 'margin:0 0 0.6rem;color:var(--ti-muted, #9ca3af);font-size:0.8rem;',
         'Your decision, saved to your studio database on this machine. Quotes and deposits in the CRM will use these figures.'));
     }
     if (result.currencyNote) {
-      panel.appendChild(el('p', 'margin:0 0 0.6rem;padding:0.5rem;border-radius:6px;background:#422006;color:#fbbf24;font-size:0.8rem;', result.currencyNote));
+      panel.appendChild(el('p', 'margin:0 0 0.6rem;padding:0.5rem;border-radius:6px;background:var(--ti-bronze-deep, #422006);color:var(--ti-gold, #fbbf24);font-size:0.8rem;', result.currencyNote));
     }
 
     var row = el('div', 'display:flex;gap:0.5rem;justify-content:flex-end;');
-    var cancel = el('button', 'padding:0.4rem 0.8rem;background:#1f2937;color:#e5e7eb;border:1px solid #374151;border-radius:6px;cursor:pointer;', 'Cancel');
+    var cancel = el('button', 'padding:0.4rem 0.8rem;background:var(--ti-panel2, #1f2937);color:var(--ti-text, #e5e7eb);border:1px solid var(--ti-line, #374151);border-radius:6px;cursor:pointer;', 'Cancel');
     cancel.type = 'button';
     cancel.addEventListener('click', closePanel);
     row.appendChild(cancel);
 
     if (!result.empty) {
-      var confirm = el('button', 'padding:0.4rem 0.8rem;background:#059669;color:#fff;border:none;border-radius:6px;font-weight:700;cursor:pointer;', 'Save to settings');
+      var confirm = el('button', 'padding:0.4rem 0.8rem;background:var(--ti-green-deep, #059669);color:#fff;border:none;border-radius:6px;font-weight:700;cursor:pointer;', 'Save to settings');
       confirm.type = 'button';
       confirm.addEventListener('click', function () {
         var r = S.save(result.patch);
@@ -204,7 +204,7 @@
   function addButton() {
     var status = document.getElementById('poli-pricingbench-status');
     if (!status || document.getElementById(BAR_BTN)) return;
-    var btn = el('button', 'padding:0.4rem 0.9rem;background:#2563eb;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:700;font-size:0.85rem;',
+    var btn = el('button', 'padding:0.4rem 0.9rem;background:var(--ti-blue, #2563eb);color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:700;font-size:0.85rem;',
       'Save my numbers to Studio Settings');
     btn.id = BAR_BTN;
     btn.type = 'button';

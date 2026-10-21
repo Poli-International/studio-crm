@@ -72,11 +72,11 @@ async function renderStaffList() {
         if (!res.ok) throw new Error('HTTP ' + res.status);
         staffList = await res.json();
     } catch (e) {
-        body.innerHTML = '<div style="padding:16px;color:#EF4444;text-align:center;">Could not load the team: the server did not answer</div>';
+        body.innerHTML = '<div style="padding:16px;color:var(--ti-alert, #EF4444);text-align:center;">Could not load the team: the server did not answer</div>';
         return;
     }
     if (!staffList.length) {
-        body.innerHTML = '<div style="padding:16px;color:#94A3B8;text-align:center;">No staff yet. Add your first team member.</div>';
+        body.innerHTML = '<div style="padding:16px;color:var(--ti-muted, #94A3B8);text-align:center;">No staff yet. Add your first team member.</div>';
         return;
     }
     const who = activeStaff();
@@ -95,15 +95,15 @@ async function renderStaffList() {
         const here = who && Number(who.id) === id;
         const details = [s.title, s.email, s.phone].filter(Boolean).map(escapeHtml).join(' · ');
         const level = accessInfo.logins && accessInfo.logins[id];
-        return `<div class="staff-row" style="padding:12px 14px;background:#1E293B;border:1px solid ${here ? '#10B981' : '#475569'};border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+        return `<div class="staff-row" style="padding:12px 14px;background:var(--ti-panel2, #1E293B);border:1px solid ${here ? '#10B981' : '#475569'};border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
             <div style="min-width:0;">
-                <div style="font-weight:800;font-size:0.9rem;">${escapeHtml(s.name || '')}${here ? ' <span style="color:#10B981;font-size:0.72rem;">● at the screen</span>' : ''}${level ? ` <span class="staff-level-badge" style="background:#312E81;color:#C7D2FE;border-radius:6px;padding:1px 6px;font-size:0.7rem;">🔑 ${escapeHtml(roleName(level))}</span>` : ''}</div>
-                <div style="font-size:0.75rem;color:#94A3B8;">${details}</div>
+                <div style="font-weight:800;font-size:0.9rem;">${escapeHtml(s.name || '')}${here ? ' <span style="color:var(--ti-green, #10B981);font-size:0.72rem;">● at the screen</span>' : ''}${level ? ` <span class="staff-level-badge" style="background:var(--ti-purple-deep, #312E81);color:var(--ti-blue-ink, #C7D2FE);border-radius:6px;padding:1px 6px;font-size:0.7rem;">🔑 ${escapeHtml(roleName(level))}</span>` : ''}</div>
+                <div style="font-size:0.75rem;color:var(--ti-muted, #94A3B8);">${details}</div>
             </div>
             <div style="display:flex;gap:6px;">
-                ${logins ? '' : `<button type="button" onclick="selectActiveStaff(${id})" style="${btn}background:#10B981;color:#FFF;border:none;">Select</button>`}
-                ${admin ? `<button type="button" onclick="openStaffFormModal(${id})" style="${btn}background:#2563EB;color:#FFF;border:none;">Edit</button>
-                <button type="button" onclick="removeStaffMember(${id})" style="${btn}background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);">Remove</button>` : ''}
+                ${logins ? '' : `<button type="button" onclick="selectActiveStaff(${id})" style="${btn}background:var(--ti-green, #10B981);color:#FFF;border:none;">Select</button>`}
+                ${admin ? `<button type="button" onclick="openStaffFormModal(${id})" style="${btn}background:var(--ti-blue, #2563EB);color:#FFF;border:none;">Edit</button>
+                <button type="button" onclick="removeStaffMember(${id})" style="${btn}background:transparent;color:var(--ti-alert-ink, #FCA5A5);border:1px solid rgba(239,68,68,0.5);">Remove</button>` : ''}
             </div>
         </div>`;
     }).join('');
@@ -255,9 +255,9 @@ async function renderMonthlyShiftSchedule() {
     const list = (Array.isArray(shifts) ? shifts : []).filter((x) => x.date >= from)
         .sort((a, b) => (a.date + a.start_time).localeCompare(b.date + b.start_time));
     const cell = (v) => '<td style="padding:8px;">' + escapeHtml(String(v || '')) + '</td>';
-    body.innerHTML = list.length ? list.map((x) => '<tr style="border-bottom:1px solid #1E293B;">' + cell(x.staff_name) + cell(x.date) + cell(x.start_time) + cell(x.end_time) + cell(x.station)
-        + `<td style="padding:8px;text-align:right;"><button type="button" onclick="removeRotaShift(${Number(x.id)})" style="padding:4px 8px;background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;">Remove</button></td></tr>`).join('')
-        : '<tr><td colspan="6" style="padding:10px;color:#94A3B8;">No shifts planned from this week on. Add the first one above.</td></tr>';
+    body.innerHTML = list.length ? list.map((x) => '<tr style="border-bottom:1px solid var(--ti-panel2, #1E293B);">' + cell(x.staff_name) + cell(x.date) + cell(x.start_time) + cell(x.end_time) + cell(x.station)
+        + `<td style="padding:8px;text-align:right;"><button type="button" onclick="removeRotaShift(${Number(x.id)})" style="padding:4px 8px;background:transparent;color:var(--ti-alert-ink, #FCA5A5);border:1px solid rgba(239,68,68,0.5);border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;">Remove</button></td></tr>`).join('')
+        : '<tr><td colspan="6" style="padding:10px;color:var(--ti-muted, #94A3B8);">No shifts planned from this week on. Add the first one above.</td></tr>';
 }
 window.renderMonthlyShiftSchedule = renderMonthlyShiftSchedule;
 
@@ -340,13 +340,13 @@ function renderRolesCard() {
     if (!card || !body) return;
     card.style.display = accessInfo.passwordSet && accessInfo.level === 'admin' ? '' : 'none';
     if (card.style.display === 'none') return;
-    const box = (r, i, key) => `<label style="display:flex;align-items:center;gap:6px;font-size:0.78rem;color:#CBD5E1;"><input type="checkbox" ${r === null || r.perms.includes(key) ? 'checked' : ''} ${r === null ? 'disabled' : `onchange="toggleRoleArea(${i}, '${key}', this.checked)"`}> ${escapeHtml(ROLE_AREAS.find((a) => a[0] === key)[1])}</label>`;
-    const row = (r, i) => `<div class="role-row" style="padding:12px;background:#1E293B;border:1px solid #475569;border-radius:10px;">
+    const box = (r, i, key) => `<label style="display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--ti-text2, #CBD5E1);"><input type="checkbox" ${r === null || r.perms.includes(key) ? 'checked' : ''} ${r === null ? 'disabled' : `onchange="toggleRoleArea(${i}, '${key}', this.checked)"`}> ${escapeHtml(ROLE_AREAS.find((a) => a[0] === key)[1])}</label>`;
+    const row = (r, i) => `<div class="role-row" style="padding:12px;background:var(--ti-panel2, #1E293B);border:1px solid var(--ti-line2, #475569);border-radius:10px;">
         <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
-            ${r === null ? '<strong style="font-size:0.9rem;">Administrator</strong><span style="font-size:0.72rem;color:#94A3B8;">Everything, and the only role that changes Settings, the team, the logins and the roles</span>'
+            ${r === null ? '<strong style="font-size:0.9rem;">Administrator</strong><span style="font-size:0.72rem;color:var(--ti-muted, #94A3B8);">Everything, and the only role that changes Settings, the team, the logins and the roles</span>'
                 : r.builtIn ? `<strong style="font-size:0.9rem;">${escapeHtml(r.name)}</strong>`
-                : `<input type="text" value="${escapeHtml(r.name)}" maxlength="40" aria-label="Role name" oninput="renameRole(${i}, this.value)" style="flex:1;min-width:0;padding:6px 10px;background:#0F172A;border:1px solid #475569;border-radius:6px;color:#F8FAFC;font-size:0.85rem;">
-                   <button type="button" onclick="removeRole(${i})" style="flex-shrink:0;white-space:nowrap;padding:6px 10px;background:transparent;color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">Remove role</button>`}
+                : `<input type="text" value="${escapeHtml(r.name)}" maxlength="40" aria-label="Role name" oninput="renameRole(${i}, this.value)" style="flex:1;min-width:0;padding:6px 10px;background:var(--ti-bg2, #0F172A);border:1px solid var(--ti-line2, #475569);border-radius:6px;color:var(--ti-text, #F8FAFC);font-size:0.85rem;">
+                   <button type="button" onclick="removeRole(${i})" style="flex-shrink:0;white-space:nowrap;padding:6px 10px;background:transparent;color:var(--ti-alert-ink, #FCA5A5);border:1px solid rgba(239,68,68,0.5);border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">Remove role</button>`}
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:4px 12px;">${ROLE_AREAS.map((a) => box(r, i, a[0])).join('')}</div>
     </div>`;

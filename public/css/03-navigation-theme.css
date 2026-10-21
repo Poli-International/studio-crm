@@ -3,7 +3,7 @@
     width: 240px !important;
     min-width: 240px !important;
     height: 100vh !important;
-    background: #0F172A !important;
+    background: var(--ti-bg2, #0F172A) !important;
     border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
     display: flex !important;
     flex-direction: column !important;
@@ -21,7 +21,7 @@
     border-radius: 8px !important;
     border: none !important;
     background: transparent !important;
-    color: #94A3B8 !important;
+    color: var(--ti-muted, #94A3B8) !important;
     font-size: 0.85rem !important;
     font-weight: 700 !important;
     cursor: pointer !important;
@@ -31,10 +31,10 @@
   }
   .sidebar-nav .nav-item:hover {
     background: rgba(255, 255, 255, 0.05) !important;
-    color: #F8FAFC !important;
+    color: var(--ti-text, #F8FAFC) !important;
   }
   .sidebar-nav .nav-item.active {
-    background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
+    background: linear-gradient(135deg, var(--ti-blue, #2563EB) 0%, var(--ti-blue, #1D4ED8) 100%) !important;
     color: #FFFFFF !important;
     font-weight: 800 !important;
     box-shadow: 0 3px 10px rgba(37, 99, 235, 0.3) !important;

@@ -36,7 +36,7 @@ function navigateToDestination(destId) {
   const activeNavItem = document.getElementById('nav-dest-' + destId);
   if (activeNavItem) {
     activeNavItem.classList.add('active');
-    activeNavItem.style.background = 'linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)';
+    activeNavItem.style.background = 'linear-gradient(135deg, var(--ti-blue, #2563EB) 0%, var(--ti-blue, #1D4ED8) 100%)';
     activeNavItem.style.color = '#FFFFFF';
     activeNavItem.style.fontWeight = '800';
     activeNavItem.style.boxShadow = '0 3px 10px rgba(37,99,235,0.3)';

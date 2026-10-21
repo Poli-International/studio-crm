@@ -92,7 +92,6 @@ The UI is a persistent two-pane layout: a left sidebar with **exactly 8 destinat
 2. Global search / command palette (`#topbar-search-btn`, opens via `openCmdPalette()`)
 3. Current active staff switcher (`#topbar-user-btn`, opens via `openStaffLoginModal()`)
 4. Language selector (`#global-studio-language-select`, calls `switchStudioLanguage(value)`)
-5. Theme toggle (`#navbar-theme-toggle-btn`, calls `toggleGlobalDarkMode()`)
 6. Cloud sync status badge (`#navbar-sync-badge`, calls `triggerNavbarSync()`)
 
 **Dashboard widgets:**
@@ -277,7 +276,6 @@ The live activity stream has no server in the demo. `window.EventSource` is repl
 | `openCmdPalette()` | none | Opens the command palette and search (Cmd+K / Alt+D). |
 | `openStaffLoginModal()` | none | Opens the staff switcher. |
 | `switchStudioLanguage(lang)` | `lang` (`en` \| `fr` \| `it` \| `de` \| `es` \| `nl` \| `pt` \| `th`) | Changes the interface language. |
-| `toggleGlobalDarkMode()` | none | Toggles dark / light theme (Alt+T). |
 | `triggerNavbarSync()` | none | Triggers cloud and local sync. |
 | `triggerInstantDatabaseSnapshot()` | none | Runs an instant cloud snapshot backup. |
 | `dismissBackupWarningToast()` | none | Hides the backup warning toast. |
@@ -378,7 +376,7 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 ## Customization
 
 - **Language**: eight interface languages are selectable from the top bar (`en`, `fr`, `it`, `de`, `es`, `nl`, `pt`, `th`). Translations live in `i18n.js` and `js/i18n-phrases.js`. Localised user guides ship in `guide/`.
-- **Theme**: dark / light toggle via `toggleGlobalDarkMode()`. Base colours are defined as CSS custom properties (for example `--bg-body`).
+- **Theme**: Anodised Titanium, dark only (since uiDesign 2). Colours are `--ti-*` custom properties in `public/css/04-titanium.css`; markup and scripts write them as `var(--ti-x, #original)` so print windows, PDFs and the kiosk, which do not load that sheet, keep their paper colours. Fonts (Satoshi, JetBrains Mono) are bundled in `public/fonts/`.
 - **Branding**: the sidebar logo is `assets/studio_crm_logo.jpg`; the studio's own logo can be uploaded in Settings and appears in the top bar.
 - **Studio settings**: prices, deposit rule, tax (VAT) rate, touch-up policy and stock thresholds are entered in Settings. The price estimator, quotes and invoices read these values. A price list can be exported to CSV, edited, and imported back.
 - **Demo data reset**: a new install opens with demo clients, appointments, stock and staff. "Start with an empty studio" on the Dashboard deletes the demo records while keeping the service list, categories, templates, stations and settings. This cannot be undone.
@@ -630,7 +628,7 @@ From Henry's kiosk tests (2026-10-17):
 
 - Initial documented release. Sidebar footer displays `v2.5`.
 - Eight destinations: Dashboard, Clients, Calendar, Inventory, Compliance, Finance, Tools, Settings.
-- Six global top-bar controls: mobile menu, command palette search, staff switcher, language selector, theme toggle, sync status.
+- Five global top-bar controls: mobile menu, command palette search, staff switcher, language selector, sync status.
 - Client profiles with overview, private staff notes, appointments and waivers tabs.
 - D3 procedure and session progression timeline.
 - Digital waiver signature pad.

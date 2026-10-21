@@ -7,10 +7,10 @@ async function renderTeamMessages() {
     const list = await fetchJson("/api/messages");
     const sentAt = (m) => new Date(m.timestamp || m.created_at || 0).getTime();
     const messages = (Array.isArray(list) ? list : []).slice().sort((x, y) => sentAt(x) - sentAt(y)); // oldest first, newest at the bottom
-    stream.innerHTML = messages.length ? messages.map((m) => `<div class="mboard-message" style="background:#1E293B;border:1px solid #334155;border-radius:8px;padding:8px 12px;font-size:0.8rem;color:#F8FAFC;">
-            <strong style="color:#38BDF8;">${escapeHtml(m.author || "Staff")}:</strong> ${escapeHtml(m.text || "")}
-            <span style="font-size:0.7rem;color:#64748B;float:right;">${escapeHtml(sentAt(m) ? new Date(sentAt(m)).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }) : "")}</span>
-        </div>`).join("") : '<div style="color:#94A3B8;font-size:0.8rem;">No messages yet.</div>';
+    stream.innerHTML = messages.length ? messages.map((m) => `<div class="mboard-message" style="background:var(--ti-panel2, #1E293B);border:1px solid var(--ti-line, #334155);border-radius:8px;padding:8px 12px;font-size:0.8rem;color:var(--ti-text, #F8FAFC);">
+            <strong style="color:var(--ti-blue, #38BDF8);">${escapeHtml(m.author || "Staff")}:</strong> ${escapeHtml(m.text || "")}
+            <span style="font-size:0.7rem;color:var(--ti-faint, #64748B);float:right;">${escapeHtml(sentAt(m) ? new Date(sentAt(m)).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }) : "")}</span>
+        </div>`).join("") : '<div style="color:var(--ti-muted, #94A3B8);font-size:0.8rem;">No messages yet.</div>';
     stream.scrollTop = stream.scrollHeight;
 }
 window.renderTeamMessages = renderTeamMessages;
@@ -211,7 +211,7 @@ async function renderPrintableQrTagSheet() {
                 <div style="font-size:0.75rem;">SKU: ${escapeHtml(i.sku || "-")}</div>
                 <div style="font-size:0.7rem;">${escapeHtml(pdfLabel("lot"))}: ${escapeHtml(i.lot_number || i.lot || "-")} | ${escapeHtml(pdfLabel("expires"))}: ${escapeHtml(String(i.exp_date || i.expiration_date || "-").slice(0, 10))}</div>
             </div>`).join("") + "</div>"
-        : '<p style="text-align:center;color:#475569;">' + escapeHtml(pdfLabel("No stock items yet. Add them in Inventory, then print their labels here.")) + "</p>";
+        : '<p style="text-align:center;color:var(--ti-line2, #475569);">' + escapeHtml(pdfLabel("No stock items yet. Add them in Inventory, then print their labels here.")) + "</p>";
 }
 window.renderPrintableQrTagSheet = renderPrintableQrTagSheet;
 
@@ -222,7 +222,7 @@ let inventorySearchDebounceTimer = null;
 function renderD3InventoryTrendChart() {
     const cont = document.getElementById("d3-inventory-trend-chart");
     if (cont) {
-        cont.innerHTML = "<div style='color:#38BDF8;'>D3 30-day stockout risk trend chart active</div>";
+        cont.innerHTML = "<div style='color:var(--ti-blue, #38BDF8);'>D3 30-day stockout risk trend chart active</div>";
     }
 }
 window.renderD3InventoryTrendChart = renderD3InventoryTrendChart;
@@ -234,20 +234,6 @@ function toggleClientQuickActionsMenu() {
 window.toggleClientQuickActionsMenu = toggleClientQuickActionsMenu;
 
 
-function toggleGlobalDarkMode() {
-    const body = document.body;
-    const isDark = body.classList.contains("dark-mode");
-    if (isDark) {
-        body.classList.remove("dark-mode");
-        body.classList.add("light-mode");
-        document.documentElement.setAttribute("data-theme", "light");
-    } else {
-        body.classList.remove("light-mode");
-        body.classList.add("dark-mode");
-        document.documentElement.setAttribute("data-theme", "dark");
-    }
-}
-window.toggleGlobalDarkMode = toggleGlobalDarkMode;
 
 // Other Missing Function Stubs
 
@@ -275,9 +261,6 @@ window.addEventListener("keydown", function(e) {
             e.preventDefault();
             const input = document.getElementById("inventory-search-input") || document.getElementById("activity-search-input");
             if (input) input.focus();
-        } else if (e.key.toLowerCase() === 't') {
-            e.preventDefault();
-            toggleGlobalDarkMode();
         } else if (e.key.toLowerCase() === 'c') {
             e.preventDefault();
             openClientDirectoryModal();
@@ -320,7 +303,7 @@ function switchToStaffDashboardMode() {
     const staffBtn = document.getElementById("mode-btn-staff");
     const clientBtn = document.getElementById("mode-btn-client");
     if (staffBtn) {
-        staffBtn.style.background = "linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%)";
+        staffBtn.style.background = "linear-gradient(135deg, var(--ti-purple, #7C3AED) 0%, var(--ti-purple, #6D28D9) 100%)";
         staffBtn.style.color = "#FFFFFF";
         staffBtn.style.boxShadow = "0 2px 6px rgba(124,58,237,0.4)";
     }
@@ -341,7 +324,7 @@ function switchToStaffDashboardMode() {
     if (toolTab) {
         document.querySelectorAll(".tool-tab").forEach(t => t.classList.remove("active"));
         toolTab.classList.add("active");
-        toolTab.style.background = "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)";
+        toolTab.style.background = "linear-gradient(135deg, var(--ti-blue, #3B82F6) 0%, var(--ti-blue, #1D4ED8) 100%)";
         toolTab.style.color = "#FFFFFF";
     }
     const tabContent = document.getElementById("tab-tool");
@@ -403,7 +386,7 @@ async function renderSessionDurationReport() {
     const list = Object.values(groups);
     table.querySelector("tbody").innerHTML = list.length
         ? list.map((g) => "<tr>" + cell(g.service) + cell(g.artist) + cell(g.n) + cell((g.hours / g.n).toFixed(1)) + cell(g.billed.toFixed(2)) + "</tr>").join("")
-        : '<tr><td colspan="5" style="padding:8px;color:#94A3B8;">No completed sessions yet. Mark an appointment as completed and it appears here.</td></tr>';
+        : '<tr><td colspan="5" style="padding:8px;color:var(--ti-muted, #94A3B8);">No completed sessions yet. Mark an appointment as completed and it appears here.</td></tr>';
 }
 window.renderSessionDurationReport = renderSessionDurationReport;
 window.openSessionDurationReportModal = openSessionDurationReportModal;
@@ -428,7 +411,7 @@ function showToastNotification(msg) {
     if (!toast) {
         toast = document.createElement("div");
         toast.id = "studio-global-toast-notification";
-        toast.style.cssText = "position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1E293B;color:#F8FAFC;border:1px solid #3B82F6;border-radius:8px;padding:10px 20px;font-size:0.85rem;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,0.5);z-index:9999999;transition:all 0.3s ease;display:none;";
+        toast.style.cssText = "position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ti-panel2, #1E293B);color:var(--ti-text, #F8FAFC);border:1px solid var(--ti-blue, #3B82F6);border-radius:8px;padding:10px 20px;font-size:0.85rem;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,0.5);z-index:9999999;transition:all 0.3s ease;display:none;";
         document.body.appendChild(toast);
     }
     toast.textContent = msg;

@@ -7,7 +7,7 @@
                 t.style.color = '#D1D5DB';
             });
             tab.classList.add('active');
-            tab.style.background = 'linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)';
+            tab.style.background = 'linear-gradient(135deg, var(--ti-blue, #2563EB) 0%, var(--ti-blue, #1D4ED8) 100%)';
             tab.style.color = '#FFFFFF';
             const tabName = tab.dataset.tab;
             if (tabName) {
@@ -77,7 +77,7 @@
         if (!toast) {
             toast = document.createElement('div');
             toast.id = 'undo-notification-toast';
-            toast.style.cssText = 'position:fixed;bottom:24px;right:24px;background:#10B981;color:#FFFFFF;padding:10px 18px;border-radius:10px;font-weight:600;font-size:0.9rem;box-shadow:0 10px 25px rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;gap:8px;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);opacity:0;transform:translateY(20px);pointer-events:none;';
+            toast.style.cssText = 'position:fixed;bottom:24px;right:24px;background:var(--ti-green, #10B981);color:#FFFFFF;padding:10px 18px;border-radius:10px;font-weight:600;font-size:0.9rem;box-shadow:0 10px 25px rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;gap:8px;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);opacity:0;transform:translateY(20px);pointer-events:none;';
             document.body.appendChild(toast);
         }
         toast.textContent = msg;
@@ -403,7 +403,7 @@
             indicator.style.color = '#60A5FA';
             indicator.title = `Syncing ${count} pending offline log(s) to server...`;
             indicator.innerHTML = `
-                <span style="display:inline-block;width:10px;height:10px;border:2px solid #60A5FA;border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;"></span>
+                <span style="display:inline-block;width:10px;height:10px;border:2px solid var(--ti-blue-ink, #60A5FA);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;"></span>
                 <span>🔄 Syncing (${count})...</span>
             `;
         } else if (!isOnline || count > 0) {
@@ -414,7 +414,7 @@
             const label = !isOnline ? `⚡ Offline (${count} Pending)` : `⚡ Pending Sync (${count})`;
             indicator.title = !isOnline ? `App is offline. ${count} item(s) pending sync.` : `Online. ${count} item(s) in queue. Click to trigger bulk push.`;
             indicator.innerHTML = `
-                <span style="width:8px;height:8px;border-radius:50%;background:#F59E0B;display:inline-block;box-shadow:0 0 6px rgba(245, 158, 11, 0.7);"></span>
+                <span style="width:8px;height:8px;border-radius:50%;background:var(--ti-gold, #F59E0B);display:inline-block;box-shadow:0 0 6px rgba(245, 158, 11, 0.7);"></span>
                 <span>${label}</span>
             `;
         } else {
@@ -424,7 +424,7 @@
             indicator.style.color = '#34D399';
             indicator.title = 'Online. All activity logs synced with server.';
             indicator.innerHTML = `
-                <span class="pulse-dot" style="width:8px;height:8px;border-radius:50%;background:#10B981;display:inline-block;"></span>
+                <span class="pulse-dot" style="width:8px;height:8px;border-radius:50%;background:var(--ti-green, #10B981);display:inline-block;"></span>
                 <span>🟢 Cloud Synced</span>
             `;
         }
@@ -644,7 +644,7 @@
         if (!toast) {
             toast = document.createElement('div');
             toast.id = 'sync-queue-toast';
-            toast.style.cssText = 'position:fixed;bottom:24px;right:24px;background:#1E293B;color:#F8FAFC;border:1px solid #3B82F6;border-radius:10px;padding:12px 18px;font-size:0.88rem;font-weight:600;box-shadow:0 10px 25px rgba(0,0,0,0.4);z-index:999999;display:flex;align-items:center;gap:12px;transition:all 0.3s cubic-bezier(0.16, 1, 0.3, 1);transform:translateY(100px);opacity:0;pointer-events:none;flex-wrap:wrap;max-width:90vw;';
+            toast.style.cssText = 'position:fixed;bottom:24px;right:24px;background:var(--ti-panel2, #1E293B);color:var(--ti-text, #F8FAFC);border:1px solid var(--ti-blue, #3B82F6);border-radius:10px;padding:12px 18px;font-size:0.88rem;font-weight:600;box-shadow:0 10px 25px rgba(0,0,0,0.4);z-index:999999;display:flex;align-items:center;gap:12px;transition:all 0.3s cubic-bezier(0.16, 1, 0.3, 1);transform:translateY(100px);opacity:0;pointer-events:none;flex-wrap:wrap;max-width:90vw;';
             document.body.appendChild(toast);
         }
 
@@ -652,7 +652,7 @@
         let retryBtnHtml = '';
         if (showRetryBtn && (pendingCount > 0 || !navigator.onLine)) {
             retryBtnHtml = `
-                <button onclick="triggerManualSync()" style="background:#3B82F6;color:#FFF;border:none;padding:5px 12px;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;box-shadow:0 2px 6px rgba(59,130,246,0.4);transition:all 0.15s ease;" onmouseover="this.style.background='#2563EB'" onmouseout="this.style.background='#3B82F6'" title="Click to trigger forced server synchronization">
+                <button onclick="triggerManualSync()" style="background:var(--ti-blue, #3B82F6);color:#FFF;border:none;padding:5px 12px;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;box-shadow:0 2px 6px rgba(59,130,246,0.4);transition:all 0.15s ease;" onmouseover="this.style.background='#2563EB'" onmouseout="this.style.background='#3B82F6'" title="Click to trigger forced server synchronization">
                     🔄 Retry Sync
                 </button>
             `;
@@ -857,7 +857,7 @@
 
         const pill = document.getElementById('live-status-pill');
         if (pill) {
-            pill.innerHTML = `<span style="width:8px;height:8px;border-radius:50%;background:#F59E0B;display:inline-block;margin-right:6px;"></span> RECONNECTING IN ${seconds}s (#${sseReconnectAttempts})`;
+            pill.innerHTML = `<span style="width:8px;height:8px;border-radius:50%;background:var(--ti-gold, #F59E0B);display:inline-block;margin-right:6px;"></span> RECONNECTING IN ${seconds}s (#${sseReconnectAttempts})`;
             pill.style.background = 'rgba(245, 158, 11, 0.15)';
             pill.style.color = '#FBBF24';
         }
@@ -929,7 +929,7 @@
                 if (!sub) {
                     sub = document.createElement('div');
                     sub.className = 'sidebar-dashboard-date-subtitle';
-                    sub.style.cssText = 'font-size:0.75rem; color:#94A3B8; font-weight:600; margin-top:4px; letter-spacing:0.01em;';
+                    sub.style.cssText = 'font-size:0.75rem; color:var(--ti-muted, #94A3B8); font-weight:600; margin-top:4px; letter-spacing:0.01em;';
                     logo.appendChild(sub);
                 }
                 if (sub.textContent !== dashboardText) {
@@ -991,16 +991,16 @@
         let html = '';
         chartDateRangeFilters.forEach(r => {
             html += `
-                <div style="font-size:0.75rem;color:#FBBF24;font-weight:700;background:rgba(245, 158, 11, 0.18);padding:3px 9px;border-radius:16px;border:1px solid rgba(245, 158, 11, 0.4);display:inline-flex;align-items:center;gap:5px;">
+                <div style="font-size:0.75rem;color:var(--ti-gold, #FBBF24);font-weight:700;background:rgba(245, 158, 11, 0.18);padding:3px 9px;border-radius:16px;border:1px solid rgba(245, 158, 11, 0.4);display:inline-flex;align-items:center;gap:5px;">
                     <span>📅 ${escapeHtml(r.label)}</span>
-                    <button onclick="removeChartDateFilter('${r.id}')" style="background:none;border:none;color:#FBBF24;cursor:pointer;font-weight:bold;padding:0 2px;font-size:0.9rem;line-height:1;" title="Remove this date range">&times;</button>
+                    <button onclick="removeChartDateFilter('${r.id}')" style="background:none;border:none;color:var(--ti-gold, #FBBF24);cursor:pointer;font-weight:bold;padding:0 2px;font-size:0.9rem;line-height:1;" title="Remove this date range">&times;</button>
                 </div>
             `;
         });
 
         if (chartDateRangeFilters.length > 1) {
             html += `
-                <button onclick="clearChartDateFilter()" style="font-size:0.75rem;color:#EF4444;background:rgba(239, 68, 68, 0.15);padding:3px 8px;border-radius:12px;border:1px solid rgba(239, 68, 68, 0.3);cursor:pointer;font-weight:700;" title="Clear all selected date ranges">
+                <button onclick="clearChartDateFilter()" style="font-size:0.75rem;color:var(--ti-alert, #EF4444);background:rgba(239, 68, 68, 0.15);padding:3px 8px;border-radius:12px;border:1px solid rgba(239, 68, 68, 0.3);cursor:pointer;font-weight:700;" title="Clear all selected date ranges">
                     Clear All (${chartDateRangeFilters.length})
                 </button>
             `;

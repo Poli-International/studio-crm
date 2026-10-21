@@ -25,16 +25,9 @@
     // Immediate anti-flicker theme initialization on page load
     (function() {
         try {
-            var saved = localStorage.getItem('studio_crm_theme');
-            if (!saved) {
-                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-                saved = prefersDark ? 'dark' : 'light';
-            }
-            var isLight = saved === 'light';
-            var themeClass = isLight ? 'light-mode' : 'dark-mode';
-            var dataTheme = isLight ? 'light' : 'dark';
-            document.documentElement.classList.add(themeClass);
-            document.documentElement.setAttribute('data-theme', dataTheme);
+            // Anodised Titanium is dark only (Patrick, 2026-10-20); prints, PDFs and the kiosk stay light.
+            document.documentElement.classList.add('dark-mode');
+            document.documentElement.setAttribute('data-theme', 'dark');
         } catch (e) {}
     })();
 

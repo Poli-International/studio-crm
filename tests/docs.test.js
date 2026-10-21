@@ -63,7 +63,7 @@ describe('docs', () => {
     const bad = [];
     for (const e of entries) {
       const re = new RegExp(e.pattern, 'i');
-      for (const f of docs) if (!(e.allowIn || []).includes(f) && re.test(read(f))) bad.push(`${f}: "${e.pattern}" (${e.why})`);
+      for (const f of docs) if (!(e.allowIn || []).includes(f) && !(e.crmOnly && f.startsWith('public/tools/')) && re.test(read(f))) bad.push(`${f}: "${e.pattern}" (${e.why})`);
     }
     expect(bad).toEqual([]);
   });

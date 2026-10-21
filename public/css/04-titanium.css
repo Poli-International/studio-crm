@@ -1,0 +1,131 @@
+/* Anodised Titanium (Patrick, 2026-10-20). Dark only; prints, PDFs and the kiosk stay on paper.
+   Graphite base, one blue accent, the status scale taken from real anodising colours.
+   Health alerts stay a clear red: an allergy must never look decorative.
+   Colours across the app read var(--ti-*, #original); the fallback is what print windows and the
+   kiosk use, where this sheet is not loaded. */
+
+@font-face { font-family: "Satoshi"; src: url("../fonts/satoshi-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Satoshi"; src: url("../fonts/satoshi-500.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Satoshi"; src: url("../fonts/satoshi-700.woff2") format("woff2"); font-weight: 600 700; font-display: swap; }
+@font-face { font-family: "Satoshi"; src: url("../fonts/satoshi-900.woff2") format("woff2"); font-weight: 800 900; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("../fonts/jetbrains-mono-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("../fonts/jetbrains-mono-600.woff2") format("woff2"); font-weight: 600 700; font-display: swap; }
+
+@property --ti-ang { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+
+:root, html, body, html.dark-mode, body.dark-mode {
+  /* graphite */
+  --ti-bg: #0d0f12; --ti-bg2: #121519; --ti-panel: #161a1f; --ti-panel2: #1c2128; --ti-panel3: #232932;
+  --ti-line: #262c34; --ti-line2: #343c46;
+  --ti-faint: #5c6570; --ti-muted: #919aa5; --ti-text2: #c4cad2; --ti-text: #eef0f3;
+  /* anodising scale: base, -deep (fills behind text), -ink (text on dark) */
+  --ti-blue: #3d7bf0;   --ti-blue-deep: #1d3f86;   --ti-blue-ink: #8fb4ff;
+  --ti-purple: #7b4fc9; --ti-purple-deep: #432a73; --ti-purple-ink: #b9a0ee;
+  --ti-bronze: #b0793d; --ti-bronze-deep: #6e4a24; --ti-bronze-ink: #dcab73;
+  --ti-gold: #d9b23a;   --ti-gold-deep: #7d6418;   --ti-gold-ink: #ecd27a;
+  --ti-green: #3fa774;  --ti-green-deep: #1f5c3e;  --ti-green-ink: #7fd1a5;
+  --ti-rose: #d76f98;   --ti-rose-deep: #7a3552;   --ti-rose-ink: #f0a6c3;
+  --ti-alert: #e5484d;  --ti-alert-deep: #7f1d22;  --ti-alert-ink: #ff8a8d;
+  --ti-accent: var(--ti-blue);
+  --ti-sweep: linear-gradient(115deg, #b0793d, #7b4fc9 22%, #2f6fe0 44%, #d9b23a 64%, #d76f98 82%, #3fa774);
+  --ti-ring: conic-gradient(from var(--ti-ang), #b0793d, #7b4fc9, #2f6fe0, #d9b23a, #d76f98, #3fa774, #b0793d);
+  --ti-ease: cubic-bezier(.2,.8,.2,1);
+  --ti-font: "Satoshi", "Noto Sans Thai", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ti-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", monospace;
+
+  /* the older variables the app still reads */
+  --bg-body: var(--ti-bg) !important; --bg-card: var(--ti-panel) !important;
+  --text-main: var(--ti-text) !important; --text-muted: var(--ti-muted) !important;
+  --gray-100: var(--ti-panel2) !important; --gray-200: var(--ti-line) !important;
+  color-scheme: dark;
+}
+
+html, body {
+  background-color: var(--ti-bg) !important;
+  background-image:
+    radial-gradient(1200px 500px at 85% -10%, rgba(123,79,201,.10), transparent 60%),
+    radial-gradient(900px 400px at -10% 110%, rgba(47,111,224,.08), transparent 60%),
+    linear-gradient(180deg, #0f1215, #0b0d10) !important;
+  background-size: auto !important;
+  background-attachment: fixed !important;
+  color: var(--ti-text);
+}
+body, button, input, select, textarea { font-family: var(--ti-font) !important; }
+code, kbd, pre, samp, .mono, time { font-family: var(--ti-mono) !important; }
+body { font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; }
+
+/* ---------- surfaces ---------- */
+.card, .stat-card, .tech-studio-card {
+  background: var(--ti-panel) !important;
+  border: 1px solid var(--ti-line) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,.03) inset, 0 10px 30px -18px rgba(0,0,0,.7) !important;
+}
+.stat-card { position: relative; }
+.sidebar, aside.sidebar { background: linear-gradient(180deg, #111418, #0c0e11) !important; border-right: 1px solid var(--ti-line) !important; }
+
+input, select, textarea { background-color: var(--ti-bg2); border-color: var(--ti-line2); color: var(--ti-text); }
+input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible, [role="button"]:focus-visible {
+  outline: 2px solid var(--ti-blue-ink) !important; outline-offset: 2px;
+}
+::selection { background: color-mix(in srgb, var(--ti-blue) 45%, transparent); }
+
+* { scrollbar-color: var(--ti-line2) transparent; scrollbar-width: thin; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--ti-line2); border-radius: 10px; border: 2px solid var(--ti-bg); }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* ---------- navigation: the active item carries an anodised bar ---------- */
+.sidebar .nav-item, aside.sidebar .nav-item { position: relative; transition: color .2s, background-color .2s, padding-left .25s var(--ti-ease) !important; }
+.sidebar .nav-item.active, aside.sidebar .nav-item.active {
+  background: color-mix(in srgb, var(--ti-blue) 16%, var(--ti-panel)) !important;
+  color: var(--ti-text) !important; box-shadow: none !important;
+}
+.sidebar .nav-item.active::before, aside.sidebar .nav-item.active::before {
+  content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; border-radius: 3px;
+  background: var(--ti-sweep); background-size: 100% 300%;
+  animation: ti-grow .35s var(--ti-ease), ti-pan 6s ease-in-out infinite alternate;
+}
+.sidebar .nav-item:hover, aside.sidebar .nav-item:hover { padding-left: 1.05rem !important; }
+.sidebar .nav-item .nav-icon { transition: transform .3s var(--ti-ease); }
+.sidebar .nav-item:hover .nav-icon { transform: translateX(2px) scale(1.08); }
+@keyframes ti-grow { from { transform: scaleY(0); } }
+@keyframes ti-pan { to { background-position: 0 100%; } }
+
+/* ---------- motion layer: small and useful ---------- */
+.card, .stat-card { transition: transform .35s var(--ti-ease), box-shadow .35s var(--ti-ease), border-color .35s !important; }
+.stat-card:hover, .stats-grid > .card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px -18px rgba(0,0,0,.75) !important; border-color: var(--ti-line2) !important;
+}
+.stat-card::after {
+  content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; pointer-events: none;
+  background: var(--ti-ring);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity: 0; transition: opacity .4s;
+}
+.stat-card:hover::after { opacity: .9; animation: ti-spin 4s linear infinite; }
+@keyframes ti-spin { to { --ti-ang: 360deg; } }
+
+button:not(:disabled), .btn, [role="button"] { transition: transform .15s var(--ti-ease), filter .2s, box-shadow .25s, background-color .25s, border-color .25s; }
+button:not(:disabled):hover, .btn:hover, [role="button"]:hover { transform: translateY(-1px); filter: brightness(1.08); }
+button:not(:disabled):active, .btn:active, [role="button"]:active { transform: translateY(0) scale(.97); }
+.sidebar .nav-item:hover, .sidebar .nav-item:active { transform: none; filter: none; }
+
+table tbody tr { transition: background-color .2s; }
+table tbody tr:hover { background: color-mix(in srgb, var(--ti-blue) 7%, transparent) !important; }
+table tbody tr td:first-child { transition: box-shadow .3s var(--ti-ease); }
+table tbody tr:hover td:first-child { box-shadow: inset 3px 0 0 var(--ti-blue); }
+
+.destination-view.active, .destination-view[style*="block"] { animation: ti-rise .45s var(--ti-ease) both; }
+@keyframes ti-rise { from { opacity: 0; transform: translateY(8px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
+
+/* paper stays paper */
+@media print {
+  html, body { background: #fff !important; color: #111 !important; }
+  .card, .stat-card { background: #fff !important; box-shadow: none !important; border-color: #ccc !important; }
+}

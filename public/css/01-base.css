@@ -1517,3 +1517,10 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
 
 
     
+
+/* A tablet's browser counts the screen behind its address bar and toolbar in vh, so a window sized
+   in vh and fixed in place ends under the toolbar, its Save buttons out of reach (Henry, 2026-10-20:
+   the sanitization log stopped at the timestamp). dvh is the height actually shown; browsers
+   without it keep the vh in the inline style. */
+div[id$="-modal-overlay"][style*="height:100vh"], div[id$="-modal"][style*="height:100vh"] { height: 100dvh !important; }
+div[id$="-modal-overlay"] > div[style*="max-height:90vh"], div[id$="-modal"] > div[style*="max-height:90vh"] { max-height: 90dvh !important; }

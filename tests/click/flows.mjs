@@ -262,6 +262,8 @@ await flow('A waiver signed in the profile can be read back and downloaded', asy
   check((await b.evaluate(`document.getElementById('waiver-client-search').value`)) === 'Waiver Flow', 'the signing window does not know which client it is for');
   await b.type('#waiver-service-input', 'Helix piercing');
   await b.scribble('#waiver-sig-canvas');
+  // Henry, 2026-10-20: "nothing gets written". The ink is dark: on the dark pad it was invisible.
+  check(await b.evaluate(`getComputedStyle(document.getElementById('waiver-sig-canvas')).backgroundColor === 'rgb(255, 255, 255)'`), 'the signature pad is not white, so the dark ink cannot be seen');
   await b.clickText('Sign & Log Waiver', '#waiver-modal');
   await eventually(async () => (await api('/api/waivers')).some((w) => w.client_name === 'Waiver Flow' && w.signature), 'the waiver was not saved');
   await b.goto(url);

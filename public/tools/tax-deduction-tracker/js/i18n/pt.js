@@ -17,7 +17,7 @@
     'print.generated_prefix': 'Gerado em:',
     'print.signature': 'Assinatura do artista ou estúdio: _____________________________________',
     'print.date': 'Data: ________________________',
-    'header.badge': '🧾 Registo de Deduções Fiscais V2',
+    'header.badge': 'Registo de Deduções Fiscais V2',
     'header.title': 'Registo de deduções fiscais para tatuadores',
     'header.subtitle': 'Registe as suas despesas profissionais ao longo do ano em categorias reconhecidas pelo seu contabilista. Registo rápido por item, referências de faturas e recibos, diário de deslocações e categorias personalizáveis. Todos os dados permanecem no seu navegador.',
     'toolbar.year': 'Ano fiscal / civil:',

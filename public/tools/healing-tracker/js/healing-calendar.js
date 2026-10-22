@@ -306,7 +306,7 @@
       var titleGroup = document.createElement('div');
       var dateHeading = document.createElement('h4');
       dateHeading.className = 'calendar-details-date';
-      dateHeading.textContent = '📅 ' + this.selectedDateStr;
+      dateHeading.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-calendar></use></svg> ' + this.selectedDateStr;
 
       var subHeading = document.createElement('span');
       subHeading.className = 'calendar-details-subtitle';

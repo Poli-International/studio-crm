@@ -4,7 +4,7 @@
  */
 window.I18N_DE = {
   header: {
-    badge: "🔧 Maschinenwartung",
+    badge: "Maschinenwartung",
     lang_label: "Sprache",
     lang_aria: "Sprache auswählen",
     title: "Maschinen-Wartungsprotokoll",

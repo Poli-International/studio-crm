@@ -2,27 +2,27 @@ const TREE = {
   start: {
     q: 'tree.start.q',
     opts: [
-      { icon: '🔌', text: 'tree.start.opt.no_start.text', sub: 'tree.start.opt.no_start.sub', next: 'no_start' },
-      { icon: '📊', text: 'tree.start.opt.voltage_issue.text', sub: 'tree.start.opt.voltage_issue.sub', next: 'voltage_issue' },
-      { icon: '⚡', text: 'tree.start.opt.speed_issue.text', sub: 'tree.start.opt.speed_issue.sub', next: 'speed_issue' },
-      { icon: '🔊', text: 'tree.start.opt.noise_issue.text', sub: 'tree.start.opt.noise_issue.sub', next: 'noise_issue' },
-      { icon: '🔗', text: 'tree.start.opt.connection_issue.text', sub: 'tree.start.opt.connection_issue.sub', next: 'connection_issue' },
-      { icon: '🌡️', text: 'tree.start.opt.overheat.text', sub: 'tree.start.opt.overheat.sub', next: 'overheat' },
-      { icon: '🔋', text: 'tree.start.opt.wireless_battery.text', sub: 'tree.start.opt.wireless_battery.sub', next: 'wireless_battery' },
+      { icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-plug></use></svg>', text: 'tree.start.opt.no_start.text', sub: 'tree.start.opt.no_start.sub', next: 'no_start' },
+      { icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-chart></use></svg>', text: 'tree.start.opt.voltage_issue.text', sub: 'tree.start.opt.voltage_issue.sub', next: 'voltage_issue' },
+      { icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bolt></use></svg>', text: 'tree.start.opt.speed_issue.text', sub: 'tree.start.opt.speed_issue.sub', next: 'speed_issue' },
+      { icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-speaker></use></svg>', text: 'tree.start.opt.noise_issue.text', sub: 'tree.start.opt.noise_issue.sub', next: 'noise_issue' },
+      { icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-link></use></svg>', text: 'tree.start.opt.connection_issue.text', sub: 'tree.start.opt.connection_issue.sub', next: 'connection_issue' },
+      { icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-thermo></use></svg>', text: 'tree.start.opt.overheat.text', sub: 'tree.start.opt.overheat.sub', next: 'overheat' },
+      { icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-battery></use></svg>', text: 'tree.start.opt.wireless_battery.text', sub: 'tree.start.opt.wireless_battery.sub', next: 'wireless_battery' },
     ],
   },
   no_start: {
     q: 'tree.no_start.q',
     opts: [
-      { icon: '⚫', text: 'tree.no_start.opt.dead.text', next: 'no_start_dead' },
-      { icon: '🟢', text: 'tree.no_start.opt.psu_ok.text', next: 'no_start_psu_ok' },
+      { icon: '<svg class=ti-i width=.7em height=.7em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-dot-grey></use></svg>', text: 'tree.no_start.opt.dead.text', next: 'no_start_dead' },
+      { icon: '<svg class=ti-i width=.7em height=.7em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-dot-green></use></svg>', text: 'tree.no_start.opt.psu_ok.text', next: 'no_start_psu_ok' },
       {
-        icon: '🔴',
+        icon: '<svg class=ti-i width=.7em height=.7em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-dot-red></use></svg>',
         text: 'tree.no_start.opt.error_light.text',
         next: null,
         result: {
           level: 'service',
-          icon: '⚠️',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg>',
           verdict: 'result.psu_error.verdict',
           sub: 'result.psu_error.sub',
           actions: [
@@ -39,12 +39,12 @@ const TREE = {
     q: 'tree.no_start_dead.q',
     opts: [
       {
-        icon: '✅',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>',
         text: 'tree.no_start_dead.opt.yes.text',
         next: null,
         result: {
           level: 'stop',
-          icon: '🛑',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-ban></use></svg>',
           verdict: 'result.psu_internal_fault.verdict',
           sub: 'result.psu_internal_fault.sub',
           actions: [
@@ -56,12 +56,12 @@ const TREE = {
         },
       },
       {
-        icon: '❌',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-x></use></svg>',
         text: 'tree.no_start_dead.opt.no.text',
         next: null,
         result: {
           level: 'ok',
-          icon: '✅',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>',
           verdict: 'result.connection_not_fault.verdict',
           sub: 'result.connection_not_fault.sub',
           actions: [
@@ -77,14 +77,14 @@ const TREE = {
   no_start_psu_ok: {
     q: 'tree.no_start_psu_ok.q',
     opts: [
-      { icon: '🦶', text: 'tree.no_start_psu_ok.opt.yes.text', next: 'foot_pedal' },
+      { icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-stop></use></svg>', text: 'tree.no_start_psu_ok.opt.yes.text', next: 'foot_pedal' },
       {
-        icon: '🔌',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-plug></use></svg>',
         text: 'tree.no_start_psu_ok.opt.no.text',
         next: null,
         result: {
           level: 'check',
-          icon: '🔍',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg>',
           verdict: 'result.check_rca_machine.verdict',
           sub: 'result.check_rca_machine.sub',
           actions: [
@@ -102,12 +102,12 @@ const TREE = {
     q: 'tree.foot_pedal.q',
     opts: [
       {
-        icon: '✅',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>',
         text: 'tree.foot_pedal.opt.yes.text',
         next: null,
         result: {
           level: 'check',
-          icon: '🔍',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg>',
           verdict: 'result.foot_pedal_fault.verdict',
           sub: 'result.foot_pedal_fault.sub',
           actions: [
@@ -119,12 +119,12 @@ const TREE = {
         },
       },
       {
-        icon: '❌',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-x></use></svg>',
         text: 'tree.foot_pedal.opt.no.text',
         next: null,
         result: {
           level: 'service',
-          icon: '🔧',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-wrench></use></svg>',
           verdict: 'result.machine_chain_fault.verdict',
           sub: 'result.machine_chain_fault.sub',
           actions: [
@@ -142,12 +142,12 @@ const TREE = {
     q: 'tree.voltage_issue.q',
     opts: [
       {
-        icon: '📈',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-trend-up></use></svg>',
         text: 'tree.voltage_issue.opt.bouncing.text',
         next: null,
         result: {
           level: 'service',
-          icon: '🔧',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-wrench></use></svg>',
           verdict: 'result.psu_calibration.verdict',
           sub: 'result.psu_calibration.sub',
           actions: [
@@ -158,19 +158,19 @@ const TREE = {
           ],
         },
       },
-      { icon: '➡️', text: 'tree.voltage_issue.opt.steady.text', next: 'voltage_connection' },
+      { icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-arrow></use></svg>', text: 'tree.voltage_issue.opt.steady.text', next: 'voltage_connection' },
     ],
   },
   voltage_connection: {
     q: 'tree.voltage_connection.q',
     opts: [
       {
-        icon: '🔌',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-plug></use></svg>',
         text: 'tree.voltage_connection.opt.loose.text',
         next: null,
         result: {
           level: 'check',
-          icon: '🔍',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg>',
           verdict: 'result.loose_rca.verdict',
           sub: 'result.loose_rca.sub',
           actions: [
@@ -182,12 +182,12 @@ const TREE = {
         },
       },
       {
-        icon: '✅',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>',
         text: 'tree.voltage_connection.opt.secure.text',
         next: null,
         result: {
           level: 'check',
-          icon: '🔍',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg>',
           verdict: 'result.check_drive.verdict',
           sub: 'result.check_drive.sub',
           actions: [
@@ -204,20 +204,20 @@ const TREE = {
   speed_issue: {
     q: 'tree.speed_issue.q',
     opts: [
-      { icon: '🐇', text: 'tree.speed_issue.opt.faster.text', next: 'too_fast' },
-      { icon: '🐢', text: 'tree.speed_issue.opt.slower.text', next: 'too_slow' },
+      { icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-trend-up></use></svg>', text: 'tree.speed_issue.opt.faster.text', next: 'too_fast' },
+      { icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-trend-down></use></svg>', text: 'tree.speed_issue.opt.slower.text', next: 'too_slow' },
     ],
   },
   too_fast: {
     q: 'tree.too_fast.q',
     opts: [
       {
-        icon: '🖊️',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-pen></use></svg>',
         text: 'tree.too_fast.opt.rotary.text',
         next: null,
         result: {
           level: 'check',
-          icon: '🔍',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg>',
           verdict: 'result.rotary_fast.verdict',
           sub: 'result.rotary_fast.sub',
           actions: [
@@ -230,12 +230,12 @@ const TREE = {
         },
       },
       {
-        icon: '⚡',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bolt></use></svg>',
         text: 'tree.too_fast.opt.coil.text',
         next: null,
         result: {
           level: 'check',
-          icon: '🔍',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg>',
           verdict: 'result.coil_fast.verdict',
           sub: 'result.coil_fast.sub',
           actions: [
@@ -253,12 +253,12 @@ const TREE = {
     q: 'tree.too_slow.q',
     opts: [
       {
-        icon: '🖊️',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-pen></use></svg>',
         text: 'tree.too_slow.opt.rotary.text',
         next: null,
         result: {
           level: 'service',
-          icon: '🔧',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-wrench></use></svg>',
           verdict: 'result.rotary_slow.verdict',
           sub: 'result.rotary_slow.sub',
           actions: [
@@ -271,12 +271,12 @@ const TREE = {
         },
       },
       {
-        icon: '⚡',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bolt></use></svg>',
         text: 'tree.too_slow.opt.coil.text',
         next: null,
         result: {
           level: 'check',
-          icon: '🔍',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg>',
           verdict: 'result.coil_slow.verdict',
           sub: 'result.coil_slow.sub',
           actions: [
@@ -294,12 +294,12 @@ const TREE = {
     q: 'tree.noise_issue.q',
     opts: [
       {
-        icon: '🔩',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-wrench></use></svg>',
         text: 'tree.noise_issue.opt.rattle.text',
         next: null,
         result: {
           level: 'check',
-          icon: '🔍',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg>',
           verdict: 'result.rattle.verdict',
           sub: 'result.rattle.sub',
           actions: [
@@ -312,12 +312,12 @@ const TREE = {
         },
       },
       {
-        icon: '⚙️',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-gear></use></svg>',
         text: 'tree.noise_issue.opt.grinding.text',
         next: null,
         result: {
           level: 'stop',
-          icon: '🛑',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-ban></use></svg>',
           verdict: 'result.grinding.verdict',
           sub: 'result.grinding.sub',
           actions: [
@@ -329,12 +329,12 @@ const TREE = {
         },
       },
       {
-        icon: '📢',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-speaker></use></svg>',
         text: 'tree.noise_issue.opt.buzz.text',
         next: null,
         result: {
           level: 'check',
-          icon: '🔍',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg>',
           verdict: 'result.buzz.verdict',
           sub: 'result.buzz.sub',
           actions: [
@@ -346,12 +346,12 @@ const TREE = {
         },
       },
       {
-        icon: '🎵',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-music></use></svg>',
         text: 'tree.noise_issue.opt.whine.text',
         next: null,
         result: {
           level: 'service',
-          icon: '🔧',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-wrench></use></svg>',
           verdict: 'result.whine.verdict',
           sub: 'result.whine.sub',
           actions: [
@@ -368,12 +368,12 @@ const TREE = {
     q: 'tree.connection_issue.q',
     opts: [
       {
-        icon: '🔁',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-refresh></use></svg>',
         text: 'tree.connection_issue.opt.all.text',
         next: null,
         result: {
           level: 'service',
-          icon: '🔧',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-wrench></use></svg>',
           verdict: 'result.socket_fault.verdict',
           sub: 'result.socket_fault.sub',
           actions: [
@@ -390,7 +390,7 @@ const TREE = {
         next: null,
         result: {
           level: 'ok',
-          icon: '✅',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>',
           verdict: 'result.cable_fault.verdict',
           sub: 'result.cable_fault.sub',
           actions: [
@@ -402,12 +402,12 @@ const TREE = {
         },
       },
       {
-        icon: '❓',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-question></use></svg>',
         text: 'tree.connection_issue.opt.unsure.text',
         next: null,
         result: {
           level: 'check',
-          icon: '🔍',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg>',
           verdict: 'result.test_known_cable.verdict',
           sub: 'result.test_known_cable.sub',
           actions: [
@@ -424,12 +424,12 @@ const TREE = {
     q: 'tree.overheat.q',
     opts: [
       {
-        icon: '⏱️',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clock></use></svg>',
         text: 'tree.overheat.opt.fast.text',
         next: null,
         result: {
           level: 'service',
-          icon: '🔧',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-wrench></use></svg>',
           verdict: 'result.overheat_fast.verdict',
           sub: 'result.overheat_fast.sub',
           actions: [
@@ -442,12 +442,12 @@ const TREE = {
         },
       },
       {
-        icon: '🕐',
+        icon: '',
         text: 'tree.overheat.opt.normal.text',
         next: null,
         result: {
           level: 'ok',
-          icon: '✅',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>',
           verdict: 'result.overheat_normal.verdict',
           sub: 'result.overheat_normal.sub',
           actions: [
@@ -463,22 +463,22 @@ const TREE = {
   wireless_battery: {
     q: 'tree.wb.q',
     opts: [
-      { icon: '⚙️', text: 'tree.wb.opt.torque.text', sub: 'tree.wb.opt.torque.sub', next: 'wb_jumpstart' },
-      { icon: '🔌', text: 'tree.wb.opt.power.text', sub: 'tree.wb.opt.power.sub', next: 'wb_sleep' },
-      { icon: '📶', text: 'tree.wb.opt.rf.text', sub: 'tree.wb.opt.rf.sub', next: 'wb_rf' },
-      { icon: '📉', text: 'tree.wb.opt.sag.text', sub: 'tree.wb.opt.sag.sub', next: 'wb_load' },
+      { icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-gear></use></svg>', text: 'tree.wb.opt.torque.text', sub: 'tree.wb.opt.torque.sub', next: 'wb_jumpstart' },
+      { icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-plug></use></svg>', text: 'tree.wb.opt.power.text', sub: 'tree.wb.opt.power.sub', next: 'wb_sleep' },
+      { icon: '', text: 'tree.wb.opt.rf.text', sub: 'tree.wb.opt.rf.sub', next: 'wb_rf' },
+      { icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-trend-down></use></svg>', text: 'tree.wb.opt.sag.text', sub: 'tree.wb.opt.sag.sub', next: 'wb_load' },
     ],
   },
   wb_jumpstart: {
     q: 'tree.wb_jumpstart.q',
     opts: [
       {
-        icon: '🔄',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-refresh></use></svg>',
         text: 'tree.wb_jumpstart.opt.membrane.text',
         next: null,
         result: {
           level: 'service',
-          icon: '⚡',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bolt></use></svg>',
           verdict: 'result.wb_jumpstart_membrane.verdict',
           sub: 'result.wb_jumpstart_membrane.sub',
           actions: [
@@ -490,12 +490,12 @@ const TREE = {
         },
       },
       {
-        icon: '🛑',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-ban></use></svg>',
         text: 'tree.wb_jumpstart.opt.seized.text',
         next: null,
         result: {
           level: 'stop',
-          icon: '🔧',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-wrench></use></svg>',
           verdict: 'result.wb_motor_internal.verdict',
           sub: 'result.wb_motor_internal.sub',
           actions: [
@@ -512,12 +512,12 @@ const TREE = {
     q: 'tree.wb_sleep.q',
     opts: [
       {
-        icon: '🔋',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-battery></use></svg>',
         text: 'tree.wb_sleep.opt.recharges.text',
         next: null,
         result: {
           level: 'ok',
-          icon: '✅',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>',
           verdict: 'result.wb_cell_cutoff.verdict',
           sub: 'result.wb_cell_cutoff.sub',
           actions: [
@@ -529,12 +529,12 @@ const TREE = {
         },
       },
       {
-        icon: '⚠️',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg>',
         text: 'tree.wb_sleep.opt.wake.text',
         next: null,
         result: {
           level: 'service',
-          icon: '🔄',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-refresh></use></svg>',
           verdict: 'result.wb_dead_cell.verdict',
           sub: 'result.wb_dead_cell.sub',
           actions: [
@@ -546,12 +546,12 @@ const TREE = {
         },
       },
       {
-        icon: '🔥',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-flame></use></svg>',
         text: 'tree.wb_sleep.opt.no_charge.text',
         next: null,
         result: {
           level: 'stop',
-          icon: '🛑',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-ban></use></svg>',
           verdict: 'result.wb_charge_fault.verdict',
           sub: 'result.wb_charge_fault.sub',
           actions: [
@@ -568,12 +568,12 @@ const TREE = {
     q: 'tree.wb_rf.q',
     opts: [
       {
-        icon: '📶',
+        icon: '',
         text: 'tree.wb_rf.opt.near.text',
         next: null,
         result: {
           level: 'check',
-          icon: '🔍',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg>',
           verdict: 'result.wb_rf_range.verdict',
           sub: 'result.wb_rf_range.sub',
           actions: [
@@ -585,12 +585,12 @@ const TREE = {
         },
       },
       {
-        icon: '🔗',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-link></use></svg>',
         text: 'tree.wb_rf.opt.none.text',
         next: null,
         result: {
           level: 'service',
-          icon: '🔧',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-wrench></use></svg>',
           verdict: 'result.wb_rf_pairing.verdict',
           sub: 'result.wb_rf_pairing.sub',
           actions: [
@@ -607,12 +607,12 @@ const TREE = {
     q: 'tree.wb_load.q',
     opts: [
       {
-        icon: '📉',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-trend-down></use></svg>',
         text: 'tree.wb_load.opt.voltage_drop.text',
         next: null,
         result: {
           level: 'service',
-          icon: '🔍',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg>',
           verdict: 'result.wb_internal_res.verdict',
           sub: 'result.wb_internal_res.sub',
           actions: [
@@ -624,12 +624,12 @@ const TREE = {
         },
       },
       {
-        icon: '🛑',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-ban></use></svg>',
         text: 'tree.wb_load.opt.overload_shut.text',
         next: null,
         result: {
           level: 'stop',
-          icon: '⚠️',
+          icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg>',
           verdict: 'result.wb_overload_prot.verdict',
           sub: 'result.wb_overload_prot.sub',
           actions: [
@@ -787,7 +787,7 @@ function showResult(r, customPath = null) {
             <li class="trail-step">
               <span class="trail-step-text">${t(step.choice)}</span>
               <span class="trail-meter-badge ${step.meterConfirmed ? 'badge-meter-yes' : 'badge-meter-no'}">
-                ${step.meterConfirmed ? `✓ ${meterBadgeYes}` : `👁️ ${meterBadgeNo}`}
+                ${step.meterConfirmed ? `${meterBadgeYes}` : `${meterBadgeNo}`}
               </span>
             </li>`).join('')}
         </ul>
@@ -797,7 +797,7 @@ function showResult(r, customPath = null) {
   const isEscalation = r.level === 'stop' || r.level === 'service';
   const escalationBannerHtml = isEscalation ? `
     <div class="escalation-quick-banner level-${r.level}" id="escalation-quick-banner">
-      <span class="escalation-quick-icon" aria-hidden="true">${r.level === 'stop' ? '🛑' : '⚠️'}</span>
+      <span class="escalation-quick-icon" aria-hidden="true">${r.level === 'stop' ? '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-ban></use></svg>' : '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg>'}</span>
       <span class="escalation-quick-text">${t('escalation.view_summary_link')}</span>
       <button type="button" class="escalation-quick-btn" id="escalation-quick-btn">${t('nav.tab_escalation')}</button>
     </div>` : '';
@@ -825,7 +825,7 @@ function showResult(r, customPath = null) {
         <!-- Confidence-Limited vs Bench-Confirmed Badge Card -->
         <div class="confidence-badge-card ${isBenchConfirmed ? 'status-confirmed' : 'status-limited'}" id="confidence-badge-card">
           <div class="confidence-badge-header">
-            <span class="confidence-badge-icon" aria-hidden="true">${isBenchConfirmed ? '🔬' : '⚠️'}</span>
+            <span class="confidence-badge-icon" aria-hidden="true">${isBenchConfirmed ? '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-flask></use></svg>' : '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg>'}</span>
             <span class="confidence-badge-title">${confTitle}</span>
             <span class="confidence-badge-tag">${confTag}</span>
           </div>
@@ -854,11 +854,11 @@ function showResult(r, customPath = null) {
 
     <div class="ticket-actions-row" id="ticket-actions-row">
       <button type="button" class="ticket-btn" id="print-ticket-btn">
-        <span aria-hidden="true">🖨️</span>
+        <span aria-hidden="true"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-print></use></svg></span>
         <span>${printLabel}</span>
       </button>
       <a href="https://poliinternational.com/machine-maintenance-logbook/" target="_top" class="logbook-btn" id="logbook-link" rel="noopener noreferrer">
-        <span aria-hidden="true">📋</span>
+        <span aria-hidden="true"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clipboard></use></svg></span>
         <span>${logbookLabel}</span>
       </a>
       <button type="button" class="restart-btn" id="restart-btn">${restartLabel}</button>
@@ -1527,7 +1527,7 @@ function renderEscalationGrid(filter = activeEscalationFilter) {
 
       <div class="escalation-card-footer">
         <button type="button" class="escalation-jump-btn" data-idx="${idx}">
-          <span aria-hidden="true">🎯</span>
+          <span aria-hidden="true"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-target></use></svg></span>
           <span>${jumpLabel}</span>
         </button>
       </div>

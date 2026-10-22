@@ -193,9 +193,9 @@
       if (actionsBar) actionsBar.style.display = 'flex';
 
       // Build Report HTML
-      var trajectoryLabel = (data.trajectory === 'improving') ? t(K + 'rep_trajImproving', '📉 Favorable (Decreasing Discomfort)') :
-                            (data.trajectory === 'escalating') ? t(K + 'rep_trajEscalating', '⚠️ Elevated Discomfort (Close Monitoring Advised)') :
-                            t(K + 'rep_trajStable', '➡️ Stable Recovery Course');
+      var trajectoryLabel = (data.trajectory === 'improving') ? t(K + 'rep_trajImproving', 'Favorable (Decreasing Discomfort)') :
+                            (data.trajectory === 'escalating') ? t(K + 'rep_trajEscalating', 'Elevated Discomfort (Close Monitoring Advised)') :
+                            t(K + 'rep_trajStable', 'Stable Recovery Course');
 
       var html = 
         '<div class="health-report-document">' +
@@ -215,13 +215,13 @@
 
         var pStr = alertInfo.dates.map(function(d, idx) {
           return d + ' (R:' + alertInfo.rednessScores[idx] + ', S:' + alertInfo.swellingScores[idx] + ')';
-        }).join(' ➔ ');
+        }).join(' → ');
 
         html += 
           '<div class="report-section report-section--trend-alert">' +
             '<div class="symptom-trend-emergency-banner">' +
               '<div class="symptom-trend-alert-header">' +
-                '<span class="symptom-trend-alert-badge">' + t('healing.symptomTrendAlert.badge', '⚠️ SYMPTOM TREND ALERT') + '</span>' +
+                '<span class="symptom-trend-alert-badge">' + t('healing.symptomTrendAlert.badge', 'SYMPTOM TREND ALERT') + '</span>' +
                 '<h4 class="symptom-trend-alert-title">' + t('healing.healthReport.trendAlertTitle', 'SYMPTOM TREND ALERT: WORSENING CONSECUTIVE TRAJECTORY') + '</h4>' +
               '</div>' +
               '<p class="symptom-trend-alert-desc">' +

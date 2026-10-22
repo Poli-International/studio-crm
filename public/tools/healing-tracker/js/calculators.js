@@ -229,13 +229,13 @@ const TattooCalculators = {
 
     let recommendation = '';
     if (fadingAcceleration > 50) {
-      recommendation = '🚨 Critical: Your tattoo is fading significantly faster than normal. SPF 50+ daily protection is strongly recommended!';
+      recommendation = 'Critical: Your tattoo is fading significantly faster than normal. SPF 50+ daily protection is strongly recommended!';
     } else if (fadingAcceleration > 30) {
-      recommendation = '⚠️ Warning: Noticeable fading acceleration detected. Start using broad-spectrum SPF 50+ regularly.';
+      recommendation = 'Warning: Noticeable fading acceleration detected. Start using broad-spectrum SPF 50+ regularly.';
     } else if (fadingAcceleration > 15) {
-      recommendation = '📊 Moderate: Some fading acceleration. Consider applying SPF more consistently when exposed.';
+      recommendation = 'Moderate: Some fading acceleration. Consider applying SPF more consistently when exposed.';
     } else {
-      recommendation = '✅ Good: Your sun protection routine is actively preserving your tattoo pigments!';
+      recommendation = 'Good: Your sun protection routine is actively preserving your tattoo pigments!';
     }
 
     return {
@@ -331,7 +331,7 @@ const TattooCalculators = {
       status = {
         level: 'Needs Touch-Up Now',
         statusClass: 'status-overdue',
-        icon: '🚨',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-siren></use></svg>',
         message: 'Your tattoo is showing significant pigment and detail wear. A touch-up is recommended to restore saturation and line definition.',
         action: 'Schedule a consultation with your tattoo artist in the coming weeks.'
       };
@@ -339,7 +339,7 @@ const TattooCalculators = {
       status = {
         level: 'Touch-Up Recommended',
         statusClass: 'status-soon',
-        icon: '⏰',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clock></use></svg>',
         message: 'Your tattoo is showing moderate wear. A touch-up in the next 3–6 months will refresh its vibrancy.',
         action: 'Start planning your touch-up session with your artist.'
       };
@@ -347,7 +347,7 @@ const TattooCalculators = {
       status = {
         level: 'Monitor Closely',
         statusClass: 'status-plan',
-        icon: '👀',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-eye></use></svg>',
         message: 'Your tattoo is starting to show early subtle wear. Keep up your hydration and SPF routine.',
         action: 'Take comparison photos in consistent lighting and reassess in 6 months.'
       };
@@ -355,7 +355,7 @@ const TattooCalculators = {
       status = {
         level: 'Still Looking Great!',
         statusClass: 'status-great',
-        icon: '✅',
+        icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>',
         message: 'Your tattoo is in strong condition with solid contrast. No touch-up needed at this time.',
         action: 'Maintain your current daily moisturizing and SPF 50+ care routine!'
       };

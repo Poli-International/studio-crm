@@ -308,7 +308,7 @@
                 if (previewSummary) {
                   previewSummary.innerHTML = `
                     <div style="padding: 0.75rem; border-radius: var(--border-radius); background: var(--bg-secondary); border: 1px solid var(--border-primary);">
-                      🔒 <strong>${_t('studioVault.encryptedVaultDetected')}</strong><br>
+                      <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-lock></use></svg> <strong>${_t('studioVault.encryptedVaultDetected')}</strong><br>
                       <span style="font-size: 0.85rem; color: var(--text-secondary);">${_t('studioVault.enterPassphraseToRestore')}</span>
                     </div>
                   `;
@@ -320,19 +320,19 @@
                 if (previewSummary) {
                   previewSummary.innerHTML = `
                     <div style="padding: 0.75rem; border-radius: var(--border-radius); background: var(--bg-secondary); border: 1px solid var(--border-primary);">
-                      📄 <strong>${_t('studioVault.standardBackupVerified')}</strong><br>
+                      <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-doc></use></svg> <strong>${_t('studioVault.standardBackupVerified')}</strong><br>
                       <span style="font-size: 0.85rem; color: var(--text-secondary);">${_t('studioVault.backupContentsFound', { fCount, iCount })}</span>
                     </div>
                   `;
                 }
               } else {
                 if (previewSummary) {
-                  previewSummary.innerHTML = `<span style="color: var(--accent-error);">⚠️ ${_t('studioVault.unrecognizedFormat')}</span>`;
+                  previewSummary.innerHTML = `<span style="color: var(--accent-error);"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> ${_t('studioVault.unrecognizedFormat')}</span>`;
                 }
               }
             } catch (err) {
               if (previewSummary) {
-                previewSummary.innerHTML = `<span style="color: var(--accent-error);">⚠️ ${_t('studioVault.unableToParseJson')}</span>`;
+                previewSummary.innerHTML = `<span style="color: var(--accent-error);"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> ${_t('studioVault.unableToParseJson')}</span>`;
               }
             }
           };
@@ -378,7 +378,7 @@
             }
 
             if (previewSummary) {
-              previewSummary.innerHTML = `<span style="color: var(--accent-success);">✅ ${_t('studioVault.restoreComplete')}</span>`;
+              previewSummary.innerHTML = `<span style="color: var(--accent-success);"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> ${_t('studioVault.restoreComplete')}</span>`;
             }
 
             setTimeout(() => {

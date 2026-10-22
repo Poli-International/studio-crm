@@ -4,7 +4,7 @@
  */
 window.I18N_ES = {
   header: {
-    badge: "🔧 Mantenimiento de máquinas",
+    badge: "Mantenimiento de máquinas",
     lang_label: "Idioma",
     lang_aria: "Seleccionar idioma",
     title: "Registro de Mantenimiento de Máquinas",

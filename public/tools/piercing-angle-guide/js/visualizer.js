@@ -332,11 +332,11 @@
     var tissuePatId = 'tiss_' + Math.floor(Math.random() * 100000);
 
     var badgeText = isOptimal
-      ? tr('visualizer.badge_optimal', null, '✔ ANGLE: 90° (PERP)')
-      : tr('visualizer.badge_tilted', { angle: angle, sign: dev > 0 ? '+' : '-', dev: absDev }, '⚠ ANGLE: ' + angle + '° (' + (dev > 0 ? '+' : '') + dev + '°)');
+      ? tr('visualizer.badge_optimal', null, 'ANGLE: 90° (PERP)')
+      : tr('visualizer.badge_tilted', { angle: angle, sign: dev > 0 ? '+' : '-', dev: absDev }, 'ANGLE: ' + angle + '° (' + (dev > 0 ? '+' : '') + dev + '°)');
     var channelText = isOptimal
-      ? tr('visualizer.channel_straight', { depth: channelDepthMm }, '✔ CHANNEL: ' + channelDepthMm + ' mm, straight through')
-      : tr('visualizer.channel_tilted', { depth: channelDepthMm, elong: channelElongation }, '⚠ CHANNEL: ' + channelDepthMm + ' mm (+' + channelElongation + ' mm longer than the tissue)');
+      ? tr('visualizer.channel_straight', { depth: channelDepthMm }, 'CHANNEL: ' + channelDepthMm + ' mm, straight through')
+      : tr('visualizer.channel_tilted', { depth: channelDepthMm, elong: channelElongation }, 'CHANNEL: ' + channelDepthMm + ' mm (+' + channelElongation + ' mm longer than the tissue)');
     var discText = isOptimal
       ? tr('visualizer.discs_flat', null, 'Both discs sit flat on the skin')
       : tr('visualizer.discs_tilted_legend', null, '▼ disc edge presses into the skin    ○ disc edge lifts off');
@@ -493,9 +493,9 @@
         <!-- Greyscale-Distinguishable Failure Indicator -->
         ${!isOptimal ? `
           <polygon points="${cx - dx},${cy - dy} ${cx - dx - pDx},${cy - dy - pDy} ${entryX},60" fill="url(#${hatchId})" stroke="${strokeColor}" stroke-width="1" />
-          <text x="140" y="176" fill="${strokeColor}" font-size="10" font-weight="bold" text-anchor="middle">${window.translate ? window.translate('visualizer.diagram_off_axis', { angle: angle }, `⚠ OFF-AXIS (${angle}°): FOCAL EDGE COMPRESSION`) : `⚠ OFF-AXIS (${angle}°): FOCAL EDGE COMPRESSION`}</text>
+          <text x="140" y="176" fill="${strokeColor}" font-size="10" font-weight="bold" text-anchor="middle">${window.translate ? window.translate('visualizer.diagram_off_axis', { angle: angle }, `OFF-AXIS (${angle}°): FOCAL EDGE COMPRESSION`) : `OFF-AXIS (${angle}°): FOCAL EDGE COMPRESSION`}</text>
         ` : `
-          <text x="140" y="176" fill="${strokeColor}" font-size="10" font-weight="bold" text-anchor="middle">${window.translate ? window.translate('visualizer.optimal_90_flush', null, '✔ OPTIMAL 90°: UNIFORM DERMAL FLUSH') : '✔ OPTIMAL 90°: UNIFORM DERMAL FLUSH'}</text>
+          <text x="140" y="176" fill="${strokeColor}" font-size="10" font-weight="bold" text-anchor="middle">${window.translate ? window.translate('visualizer.optimal_90_flush', null, 'OPTIMAL 90°: UNIFORM DERMAL FLUSH') : 'OPTIMAL 90°: UNIFORM DERMAL FLUSH'}</text>
         `}
       </svg>
     `;
@@ -555,7 +555,7 @@
 
         <!-- Bilateral Status Callout -->
         <text x="160" y="200" fill="${statusColor}" font-size="11" font-weight="bold" text-anchor="middle">
-          ${isSymmetric ? (window.translate ? window.translate('visualizer.symmetrical_alignment', null, '✅ Symmetrical Bilateral Alignment') : '✅ Symmetrical Bilateral Alignment') : (window.translate ? window.translate('visualizer.angular_delta_offset', { delta: angleDelta.toFixed(1), offset: offset }, `⚠️ Angular Delta: ${angleDelta.toFixed(1)}° | Offset: ${offset}mm`) : `⚠️ Angular Delta: ${angleDelta.toFixed(1)}° | Offset: ${offset}mm`)}
+          ${isSymmetric ? (window.translate ? window.translate('visualizer.symmetrical_alignment', null, 'Symmetrical Bilateral Alignment') : 'Symmetrical Bilateral Alignment') : (window.translate ? window.translate('visualizer.angular_delta_offset', { delta: angleDelta.toFixed(1), offset: offset }, `Angular Delta: ${angleDelta.toFixed(1)}° | Offset: ${offset}mm`) : `Angular Delta: ${angleDelta.toFixed(1)}° | Offset: ${offset}mm`)}
         </text>
       </svg>
     `;

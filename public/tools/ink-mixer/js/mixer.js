@@ -527,7 +527,7 @@ function calculateMix() {
         : `Inter-Brand Pigment Notice: You are blending inks from different manufacturers (${brandNames}). Pigment concentration, particle grind sizes, and surfactant bases differ across brands. Variations in viscosity may affect dispersion stability and healed color uniformity. Test on practice skin first.`;
       
       DOM.brandMismatchBanner.innerHTML = `
-        <span style="font-size: 1.3rem; flex-shrink: 0;" aria-hidden="true">⚠️</span>
+        <span style="font-size: 1.3rem; flex-shrink: 0;" aria-hidden="true"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg></span>
         <div class="mismatch-text">${mismatchMsg}</div>
       `;
     } else {
@@ -1493,7 +1493,7 @@ function copyGrayWashSeries() {
   const diluent = DILUENT_FORMULATIONS[diluentKey] || DILUENT_FORMULATIONS['balanced_blend'];
   const _t = typeof window.t === 'function' ? window.t : (k) => 'Full Gray Wash Series recipe copied to clipboard!';
 
-  let text = `🌫️ ${system.name.toUpperCase()}\n`;
+  let text = `${system.name.toUpperCase()}\n`;
   text += `Container: ${container.name} (${container.ml} ml, ~${container.drops} drops)\n`;
   text += `Diluent: ${diluent.name} (${diluent.desc})\n\n`;
 
@@ -1804,7 +1804,7 @@ function refreshInventoryUI() {
   }
 
   if (items.length === 0) {
-    container.innerHTML = `<p class="ink-mixer__empty-state">No inks in inventory yet. Click "+ Add Bottle" or "⚡ Load Starter Palette" to record your studio inventory.</p>`;
+    container.innerHTML = `<p class="ink-mixer__empty-state">No inks in inventory yet. Click "+ Add Bottle" or "Load Starter Palette" to record your studio inventory.</p>`;
     return;
   }
 
@@ -2113,7 +2113,7 @@ function runNeutralizerAssistant(unwantedHex) {
         <strong style="font-size: 0.85rem; display: block; color: var(--text-primary);">${undertoneTitle}</strong>
         <span style="font-size: 0.75rem; color: var(--text-secondary);">${unwantedHex}</span>
       </div>
-      <div style="font-size: 1.5rem; color: var(--color-blue); font-weight: 700;">➔</div>
+      <div style="font-size: 1.5rem; color: var(--color-blue); font-weight: 700;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-arrow></use></svg></div>
       <div style="text-align: center;">
         <div style="width: 56px; height: 56px; border-radius: 50%; background-color: ${neutralHex}; margin: 0 auto 0.4rem; border: 2px solid var(--border-secondary);"></div>
         <strong style="font-size: 0.85rem; display: block; color: var(--text-primary);">${pigmentClassCaps} ${_t('neutralizing.neutralizerSwatch')}</strong>
@@ -2257,7 +2257,7 @@ function openQrTransferModal(payloadData, title = 'Formula Transfer') {
     if (DOM.qrCodeContainer) {
       DOM.qrCodeContainer.innerHTML = `
         <div style="padding: 1.5rem; color: var(--text-secondary); font-size: 0.85rem; text-align: center;">
-          <div style="font-size: 2rem; margin-bottom: 0.5rem;" aria-hidden="true">⚠️</div>
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;" aria-hidden="true"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg></div>
           <strong>QR Payload Exceeds Scannability Limit</strong>
           <p style="margin: 0.5rem 0 0;">The dataset (${byteSize} bytes) exceeds standard 2,048-byte optical scannability. Choose a single formula to transfer via QR, or export the full database as a JSON file.</p>
         </div>

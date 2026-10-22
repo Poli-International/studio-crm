@@ -81,7 +81,7 @@
   <script src="/js/input-guards.js"></script>
   <link rel="stylesheet" href="/tools/shared/print.css" media="print">
   <link rel="stylesheet" href="/tools/shared/a11y.css">
-  <script type="module" crossorigin src="/tools/tattoo-font-previewer/assets/index-B6h0Acxr.js"></script>
+  <script type="module" crossorigin src="/tools/tattoo-font-previewer/assets/index-4xlkbTp8.js"></script>
   <link rel="stylesheet" crossorigin href="/tools/tattoo-font-previewer/assets/index-DuE1SxM6.css">
 </head>
 <body class="dark-mode">
@@ -143,10 +143,10 @@
         navigator.clipboard.writeText(textarea.value).then(function() {
           var btn = document.getElementById('tabCopyBtn');
           if (btn) {
-            var oldText = btn.textContent;
+            var oldText = btn.innerHTML;
             btn.textContent = (window.t ? window.t('tab.copied') : 'Copied!');
             setTimeout(function() {
-              btn.textContent = oldText;
+              btn.innerHTML = oldText;
             }, 2000);
           }
         }).catch(function() {

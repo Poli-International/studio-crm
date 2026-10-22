@@ -418,7 +418,14 @@
       ctx.fillStyle = colors.textSecondary;
       ctx.font = '32px sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText('📷', x + w / 2, y + h / 2 - 10);
+      const cx = x + w / 2, cy = y + h / 2 - 20;
+      ctx.strokeStyle = colors.textSecondary;
+      ctx.lineWidth = 2;
+      ctx.strokeRect(cx - 16, cy - 9, 32, 22);
+      ctx.strokeRect(cx - 6, cy - 14, 12, 5);
+      ctx.beginPath();
+      ctx.arc(cx, cy + 2, 6, 0, Math.PI * 2);
+      ctx.stroke();
 
       ctx.font = 'bold 13px sans-serif';
       ctx.fillText(label, x + w / 2, y + h / 2 + 25);

@@ -121,7 +121,7 @@
         btn.style.marginBottom = '0.5rem';
         const colorName = c.shadeName || c.color;
         const brand = c.brand ? ` (${c.brand})` : '';
-        btn.innerHTML = (outOfStockIndex === idx ? '❌ ' : '') + `<strong>${colorName}${brand}</strong>: ${c.parts} ${_t('substitution.parts', {}, 'parts')}`;
+        btn.innerHTML = (outOfStockIndex === idx ? '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-x></use></svg> ' : '') + `<strong>${colorName}${brand}</strong>: ${c.parts} ${_t('substitution.parts', {}, 'parts')}`;
         btn.onclick = () => {
           outOfStockIndex = idx;
           updateSubstitutionView();
@@ -224,7 +224,7 @@
           <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem;">
             ${selectedFormula.colors.map((c, idx) => `
               <li style="padding: 0.35rem 0; border-bottom: 1px solid var(--border-secondary); display: flex; justify-content: space-between; align-items: center; ${idx === outOfStockIndex ? 'text-decoration: line-through; color: var(--color-red, #dc2626); font-weight: 600;' : 'color: var(--text-primary);'}">
-                <span>${idx === outOfStockIndex ? '❌ ' : ''}${c.shadeName || c.color} ${c.brand ? `(${c.brand})` : ''}</span>
+                <span>${idx === outOfStockIndex ? '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-x></use></svg> ' : ''}${c.shadeName || c.color} ${c.brand ? `(${c.brand})` : ''}</span>
                 <strong>${c.parts} ${_t('substitution.parts', {}, 'parts')}</strong>
               </li>
             `).join('')}
@@ -249,7 +249,7 @@
           <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem;">
             ${substitutedColors.map((c, idx) => `
               <li style="padding: 0.35rem 0; border-bottom: 1px solid var(--border-secondary); display: flex; justify-content: space-between; align-items: center; ${idx === outOfStockIndex ? 'color: var(--color-blue, #2563eb); font-weight: 700;' : 'color: var(--text-primary);'}">
-                <span>${idx === outOfStockIndex ? '🔄 ' : ''}${c.shadeName || c.color} ${c.brand ? `(${c.brand})` : ''}</span>
+                <span>${idx === outOfStockIndex ? '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-refresh></use></svg> ' : ''}${c.shadeName || c.color} ${c.brand ? `(${c.brand})` : ''}</span>
                 <strong>${c.parts} ${_t('substitution.parts', {}, 'parts')}</strong>
               </li>
             `).join('')}
@@ -259,7 +259,7 @@
 
       <!-- Swatch Screen Notice -->
       <div style="margin-top: 0.75rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-tertiary);">
-        <span>ℹ️</span>
+        <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-info></use></svg></span>
         <span>${_t('substitution.screenIndicative', {}, 'Screen colour is indicative only on an uncalibrated screen')}</span>
       </div>
 
@@ -288,10 +288,10 @@
 
         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
           <button type="button" id="subLoadInMixerBtn" class="ink-mixer__btn ink-mixer__btn--secondary ink-mixer__btn--small">
-            🎨 ${_t('substitution.loadInMixer', {}, 'Load in Mixer')}
+            <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-machine></use></svg> ${_t('substitution.loadInMixer', {}, 'Load in Mixer')}
           </button>
           <button type="button" id="subSaveAsNewBtn" class="ink-mixer__btn ink-mixer__btn--primary ink-mixer__btn--small">
-            💾 ${_t('substitution.saveAsNew', {}, 'Save Substituted Recipe')}
+            <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-save></use></svg> ${_t('substitution.saveAsNew', {}, 'Save Substituted Recipe')}
           </button>
         </div>
       </div>

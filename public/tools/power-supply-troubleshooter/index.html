@@ -28,7 +28,7 @@
 
   <header class="tool-header" id="tool-header">
     <div class="tool-header-top" id="tool-header-top">
-      <div class="tool-header__badge" id="tool-header-badge" data-i18n="app.badge">⚡ Machine Diagnostics</div>
+      <div class="tool-header__badge" id="tool-header-badge"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-bolt></use></svg><span data-i18n="app.badge" style="color:inherit">Machine Diagnostics</span></div>
       <div class="lang-selector-wrap" id="lang-selector-wrap">
         <select id="lang-select" class="lang-select" aria-label="Select Language">
           <option value="en">English</option>
@@ -48,7 +48,7 @@
 
   <div class="search-section" id="search-section">
     <div class="search-input-wrap" id="search-input-wrap">
-      <span class="search-icon" id="search-icon" aria-hidden="true">🔍</span>
+      <span class="search-icon" id="search-icon" aria-hidden="true"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg></span>
       <input type="search" id="symptom-search" class="symptom-search" placeholder="Search symptoms, error codes (E-1, OVERLOAD, etc.)..." aria-label="Search symptoms and error codes" autocomplete="off" spellcheck="false" data-i18n-placeholder="search.placeholder">
       <button type="button" id="search-clear-btn" class="search-clear-btn" aria-label="Clear search" hidden>×</button>
     </div>
@@ -166,7 +166,7 @@
           <!-- Sound 1: Clean Coil Hum -->
           <div class="audio-card" id="audio-card-coil">
             <div class="audio-card-head" id="audio-head-coil">
-              <span class="audio-icon" aria-hidden="true">🔊</span>
+              <span class="audio-icon" aria-hidden="true"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-speaker></use></svg></span>
               <div>
                 <h3 class="audio-card-title" id="audio-title-coil" data-i18n="audio.coil_hum.title">Clean Coil Hum</h3>
                 <p class="audio-card-desc" id="audio-desc-coil" data-i18n="audio.coil_hum.desc">A steady, continuous hum with stable fundamental harmonics, indicating clean armature travel and solid contact closure.</p>
@@ -183,7 +183,7 @@
           <!-- Sound 2: Contact Screw Chatter -->
           <div class="audio-card" id="audio-card-chatter">
             <div class="audio-card-head" id="audio-head-chatter">
-              <span class="audio-icon" aria-hidden="true">⚡</span>
+              <span class="audio-icon" aria-hidden="true"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bolt></use></svg></span>
               <div>
                 <h3 class="audio-card-title" id="audio-title-chatter" data-i18n="audio.chatter.title">Contact Screw Chatter</h3>
                 <p class="audio-card-desc" id="audio-desc-chatter" data-i18n="audio.chatter.desc">A stuttering, sputtering hum with flutter and intermittent dropouts, indicative of tired springs, contact bounce, or fouled contact faces.</p>
@@ -200,7 +200,7 @@
           <!-- Sound 3: Electrical Arcing / Capacitor Breakdown -->
           <div class="audio-card" id="audio-card-arcing">
             <div class="audio-card-head" id="audio-head-arcing">
-              <span class="audio-icon" aria-hidden="true">💥</span>
+              <span class="audio-icon" aria-hidden="true"></span>
               <div>
                 <h3 class="audio-card-title" id="audio-title-arcing" data-i18n="audio.arcing.title">Electrical Arcing / Crackle</h3>
                 <p class="audio-card-desc" id="audio-desc-arcing" data-i18n="audio.arcing.desc">Sharp snapping and electrical sizzling superimposed on the hum, caused by point arcing or failing capacitor breakdown.</p>
@@ -217,7 +217,7 @@
           <!-- Sound 4: Dry Motor Bearing Friction -->
           <div class="audio-card" id="audio-card-bearing">
             <div class="audio-card-head" id="audio-head-bearing">
-              <span class="audio-icon" aria-hidden="true">⚙️</span>
+              <span class="audio-icon" aria-hidden="true"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-gear></use></svg></span>
               <div>
                 <h3 class="audio-card-title" id="audio-title-bearing" data-i18n="audio.bearing.title">Dry Motor Bearing Friction</h3>
                 <p class="audio-card-desc" id="audio-desc-bearing" data-i18n="audio.bearing.desc">High-frequency mechanical whine and scraping friction over the rotary motor hum, characteristic of unlubricated bearings or swashplate binding.</p>

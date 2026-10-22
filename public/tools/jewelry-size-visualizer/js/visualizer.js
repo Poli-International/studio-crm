@@ -46,7 +46,7 @@ const Visualizer = {
         // Load initial gallery (popular items only)
         this.loadGallery();
 
-        console.log('👁️ Visualizer module initialized');
+        console.log('Visualizer module initialized');
     },
 
     /**
@@ -148,7 +148,7 @@ const Visualizer = {
      */
     loadGallery() {
         if (!this.galleryContainer) {
-            console.error('❌ Gallery container not found');
+            console.error('Gallery container not found');
             return;
         }
 
@@ -189,7 +189,7 @@ const Visualizer = {
                 }
 
                 if (!jewelry || jewelry.length === 0) {
-                    console.warn('⚠️ No jewelry items returned from database');
+                    console.warn('No jewelry items returned from database');
                     this.galleryContainer.innerHTML = `
                         <div class="gallery-loading">
                             <p style="color: var(--text-tertiary);">No jewelry found. Please check the database.</p>
@@ -203,9 +203,9 @@ const Visualizer = {
                 // Display first page
                 this.displayGallery();
 
-                console.log(`📦 Loaded ${jewelry.length} jewelry items with filters:`, this.currentFilters);
+                console.log(`Loaded ${jewelry.length} jewelry items with filters:`, this.currentFilters);
             } catch (error) {
-                console.error('❌ Error loading gallery:', error);
+                console.error('Error loading gallery:', error);
                 this.galleryContainer.innerHTML = `
                     <div class="gallery-loading">
                         <p style="color: var(--color-error);">Error loading jewelry: ${error.message}</p>
@@ -220,17 +220,17 @@ const Visualizer = {
      * Display jewelry cards in gallery with pagination
      */
     displayGallery() {
-        console.log('📦 displayGallery called');
+        console.log('displayGallery called');
         console.log('   Gallery container:', this.galleryContainer ? 'Found' : 'NOT FOUND');
         console.log('   All items:', this.allItems.length);
 
         if (!this.galleryContainer) {
-            console.error('❌ Gallery container not found!');
+            console.error('Gallery container not found!');
             return;
         }
 
         if (this.allItems.length === 0) {
-            console.warn('⚠️ No items to display');
+            console.warn('No items to display');
             const emptyMsg = window.i18n ? window.i18n.t('visualizer.emptyFiltered') : 'No jewelry found matching your filters. Try adjusting your selection.';
             this.galleryContainer.innerHTML = `
                 <div class="gallery-loading">
@@ -279,7 +279,7 @@ const Visualizer = {
         }
 
         this.galleryContainer.innerHTML = html;
-        console.log('✅ Gallery HTML updated');
+        console.log('Gallery HTML updated');
 
         // Add click handlers to cards
         this.galleryContainer.querySelectorAll('.jewelry-card').forEach(card => {
@@ -425,7 +425,7 @@ const Visualizer = {
             this.detailView.style.display = 'flex';
         }
 
-        console.log('🔍 Opened detail view for:', item.name);
+        console.log('Opened detail view for:', item.name);
     },
 
     /**
@@ -531,7 +531,7 @@ const Visualizer = {
             opacity: 1
         });
 
-        console.log(`🎨 Rendered ${item.name} at 1:1 scale (${canvasSize}px canvas)`);
+        console.log(`Rendered ${item.name} at 1:1 scale (${canvasSize}px canvas)`);
     },
 
     /**
@@ -577,7 +577,7 @@ const Visualizer = {
             TryOnModule.setJewelry(this.currentJewelry);
         }
 
-        console.log('📸 Opening try-on for:', this.currentJewelry.name);
+        console.log('Opening try-on for:', this.currentJewelry.name);
     },
 
     /**
@@ -608,7 +608,7 @@ const Visualizer = {
             ComparisonModule.updateComparison();
         }
 
-        console.log('⚖️ Added to comparison:', this.currentJewelry.name);
+        console.log('Added to comparison:', this.currentJewelry.name);
     },
 
     /**
@@ -636,7 +636,7 @@ const Visualizer = {
         // Show success message
         this.showSaveSuccess();
 
-        console.log('💾 Saved to collection:', this.currentJewelry.name);
+        console.log('Saved to collection:', this.currentJewelry.name);
     },
 
     /**
@@ -647,7 +647,7 @@ const Visualizer = {
         if (!saveBtn) return;
 
         const originalText = saveBtn.innerHTML;
-        saveBtn.innerHTML = window.i18n ? window.i18n.t('visualizer.toastSaved') : '✓ Saved!';
+        saveBtn.innerHTML = window.i18n ? window.i18n.t('visualizer.toastSaved') : 'Saved!';
         saveBtn.disabled = true;
 
         setTimeout(() => {

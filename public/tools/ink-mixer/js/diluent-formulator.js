@@ -144,7 +144,7 @@
       </head>
       <body>
         <div style="margin-bottom: 14px;">
-          <button onclick="window.print()" style="padding: 8px 16px; cursor: pointer;">🖨️ ${window.t('diluentFormulator.printLabel')}</button>
+          <button onclick="window.print()" style="padding: 8px 16px; cursor: pointer;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-print></use></svg> ${window.t('diluentFormulator.printLabel')}</button>
         </div>
 
         <div class="label-box">

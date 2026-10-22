@@ -40,7 +40,7 @@ const CalibrationSystem = {
 
         // Initialize display state
         this.updateAllHonestyBadges();
-        console.log('📏 Calibration System initialized. Source of truth:', AppState?.pxPerMM || 'uncalibrated', 'px/mm');
+        console.log('Calibration System initialized. Source of truth:', AppState?.pxPerMM || 'uncalibrated', 'px/mm');
     },
 
     /**
@@ -85,7 +85,7 @@ const CalibrationSystem = {
                             AppState.pixelsPerInch = data.pxPerMM * 25.4;
                         }
                         this.currentCalibration = data;
-                        console.warn('⚠️ Screen calibration is stale:', this.staleReason);
+                        console.warn('Screen calibration is stale:', this.staleReason);
                         return false;
                     }
 
@@ -98,7 +98,7 @@ const CalibrationSystem = {
                         AppState.pxPerMM = data.pxPerMM;
                         AppState.pixelsPerInch = data.pxPerMM * 25.4;
                     }
-                    console.log(`✅ Active 1:1 calibration loaded: ${data.pxPerMM.toFixed(2)} px/mm via ${data.method} (${data.date})`);
+                    console.log(`Active 1:1 calibration loaded: ${data.pxPerMM.toFixed(2)} px/mm via ${data.method} (${data.date})`);
                     return true;
                 }
             }
@@ -243,30 +243,30 @@ const CalibrationSystem = {
             banner.className = 'calibration-banner calibration-banner--stale';
             banner.style.display = 'block';
             if (bannerText) {
-                bannerText.innerHTML = tr('cal.bannerStale', '<strong>⚠️ Calibration out of date:</strong> {reason}. The preview is no longer at true scale.', { reason: this.staleReason });
+                bannerText.innerHTML = tr('cal.bannerStale', '<strong><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> Calibration out of date:</strong> {reason}. The preview is no longer at true scale.', { reason: this.staleReason });
             }
             if (bannerBtn) {
-                bannerBtn.textContent = tr('cal.btnRedo', '🔄 Redo calibration');
+                bannerBtn.textContent = tr('cal.btnRedo', 'Redo calibration');
                 bannerBtn.onclick = () => this.openModal();
             }
         } else if (AppState && AppState.isCalibrated && this.currentCalibration) {
             banner.className = 'calibration-banner calibration-banner--calibrated';
             banner.style.display = 'block';
             if (bannerText) {
-                bannerText.innerHTML = tr('cal.bannerCalibrated', '<strong>✅ Calibrated 1:1:</strong> scale <strong>{scale} px/mm</strong>, set with <em>{method}</em> on {date}.', { scale: this.currentCalibration.pxPerMM.toFixed(2), method: this.methodText(this.currentCalibration.method), date: this.currentCalibration.date });
+                bannerText.innerHTML = tr('cal.bannerCalibrated', '<strong><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Calibrated 1:1:</strong> scale <strong>{scale} px/mm</strong>, set with <em>{method}</em> on {date}.', { scale: this.currentCalibration.pxPerMM.toFixed(2), method: this.methodText(this.currentCalibration.method), date: this.currentCalibration.date });
             }
             if (bannerBtn) {
-                bannerBtn.textContent = tr('cal.btnRedo', '🔄 Redo calibration');
+                bannerBtn.textContent = tr('cal.btnRedo', 'Redo calibration');
                 bannerBtn.onclick = () => this.openModal();
             }
         } else {
             banner.className = 'calibration-banner';
             banner.style.display = 'block';
             if (bannerText) {
-                bannerText.innerHTML = tr('cal.bannerApprox', '<strong>⚠️ Approximate preview:</strong> the display is not calibrated. Calibrate against an 85.60 mm bank card for true 1:1 scale.');
+                bannerText.innerHTML = tr('cal.bannerApprox', '<strong><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> Approximate preview:</strong> the display is not calibrated. Calibrate against an 85.60 mm bank card for true 1:1 scale.');
             }
             if (bannerBtn) {
-                bannerBtn.textContent = tr('cal.btnCalibrate', '📏 Calibrate display');
+                bannerBtn.textContent = tr('cal.btnCalibrate', 'Calibrate display');
                 bannerBtn.onclick = () => this.openModal();
             }
         }
@@ -276,15 +276,15 @@ const CalibrationSystem = {
         if (indicator) {
             if (this.isStale) {
                 indicator.className = 'scale-status-badge scale-status-badge--approx';
-                indicator.textContent = tr('cal.indStale', '⚠️ Calibration out of date: click to redo');
+                indicator.textContent = tr('cal.indStale', 'Calibration out of date: click to redo');
                 indicator.title = this.staleReason;
             } else if (AppState && AppState.isCalibrated && this.currentCalibration) {
                 indicator.className = 'scale-status-badge scale-status-badge--calibrated';
-                indicator.textContent = tr('cal.indOk', '✅ Calibrated ({scale} px/mm • {method})', { scale: this.currentCalibration.pxPerMM.toFixed(2), method: this.methodText(this.currentCalibration.method) });
+                indicator.textContent = tr('cal.indOk', 'Calibrated ({scale} px/mm • {method})', { scale: this.currentCalibration.pxPerMM.toFixed(2), method: this.methodText(this.currentCalibration.method) });
                 indicator.title = tr('cal.indOkTitle', 'Calibrated on {date}. Click to redo.', { date: this.currentCalibration.date });
             } else {
                 indicator.className = 'scale-status-badge scale-status-badge--approx';
-                indicator.textContent = tr('cal.indNone', '⚠️ Not calibrated (approximate): click to calibrate');
+                indicator.textContent = tr('cal.indNone', 'Not calibrated (approximate): click to calibrate');
                 indicator.title = tr('cal.uncalTitle', 'The screen is not calibrated. Click to calibrate against an 85.60 mm bank card.');
             }
         }

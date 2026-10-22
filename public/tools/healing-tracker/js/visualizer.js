@@ -161,25 +161,25 @@
       const vEnd = last[sym.key] || 0;
       const diff = vEnd - vStart;
 
-      let icon = '➡️';
+      let icon = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-arrow></use></svg>';
       let text = '';
 
       if (diff < 0) {
-        icon = '📉';
+        icon = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-trend-down></use></svg>';
         if (vEnd === 0) {
           text = `${sym.name} has completely resolved over the last ${daysElapsed} days.`;
         } else {
           text = `${sym.name} decreased by ${Math.abs(diff)} level(s) since Day ${first.dayOffset}, indicating positive cellular repair.`;
         }
       } else if (diff > 0) {
-        icon = '📈';
+        icon = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-trend-up></use></svg>';
         text = `${sym.name} increased by ${diff} level(s) between Day ${first.dayOffset} and Day ${last.dayOffset}.`;
       } else {
         if (vEnd === 0) {
-          icon = '✅';
+          icon = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>';
           text = `${sym.name} remained completely absent throughout this monitoring window.`;
         } else {
-          icon = '➡️';
+          icon = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-arrow></use></svg>';
           text = `${sym.name} remained constant at level ${vEnd}/3 across ${daysElapsed} days.`;
         }
       }
@@ -259,7 +259,7 @@
       alertBox.className = 'direction-change-alert-card';
       alertBox.innerHTML = `
         <div class="direction-change-alert__header">
-          <span class="direction-change-alert__icon">⚠️</span>
+          <span class="direction-change-alert__icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg></span>
           <strong>${(window.t && window.t('healing.reversalAlert.title')) || 'Clinical Alert: Symptom Trend Reversal Detected'}</strong>
         </div>
         <p class="direction-change-alert__message">${formattedMsg}</p>

@@ -394,9 +394,9 @@ const TROUBLESHOOTING_DATABASE = {
         ]
     },
     'failed-spore': {
-        title: '🚨 FAILED SPORE TEST - CRITICAL',
+        title: 'FAILED SPORE TEST - CRITICAL',
         steps: [
-            '⚠️ STOP: Do not use autoclave until resolved',
+            'STOP: Do not use autoclave until resolved',
             'Re-run spore test immediately to confirm failure',
             'If second test fails: Quarantine all items sterilized since last passing test',
             'Check autoclave reached correct temperature (use recording thermometer)',
@@ -698,7 +698,7 @@ function renderCustomPresetOptions() {
         keys.forEach(key => {
             const opt = document.createElement('option');
             opt.value = `custom_${key}`;
-            opt.textContent = `★ ${customPresets[key].name || key}`;
+            opt.textContent = `${customPresets[key].name || key}`;
             customGroup.appendChild(opt);
         });
     }
@@ -792,7 +792,7 @@ function handleSaveCurrentPreset() {
         if (deleteBtn) deleteBtn.style.display = 'inline-flex';
     }
 
-    alert(`✓ Custom preset "${presetName.trim()}" saved successfully!`);
+    alert(`Custom preset "${presetName.trim()}" saved successfully!`);
 }
 
 function handleDeleteSelectedPreset() {
@@ -969,7 +969,7 @@ const CycleTimer = {
 
         if (statusBadge) {
             statusBadge.className = 'autoclave__timer-status-badge status-paused';
-            statusBadge.textContent = '❚❚ Paused';
+            statusBadge.textContent = 'Paused';
         }
 
         this.updateDisplay();
@@ -1047,13 +1047,13 @@ const CycleTimer = {
 
         if (startBtn) {
             startBtn.style.display = 'inline-flex';
-            startBtn.innerHTML = '<span>🔄</span> Restart';
+            startBtn.innerHTML = '<span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-refresh></use></svg></span> Restart';
         }
         if (pauseBtn) pauseBtn.style.display = 'none';
 
         if (statusBadge) {
             statusBadge.className = 'autoclave__timer-status-badge status-complete';
-            statusBadge.textContent = '✓ Cycle Complete';
+            statusBadge.textContent = 'Cycle Complete';
         }
 
         if (clockEl) clockEl.classList.add('pulsing');
@@ -1134,7 +1134,7 @@ const CycleTimer = {
             [step1, step2, step3, step4].forEach(s => s.classList.add('completed'));
             if (trackFill) trackFill.style.width = '100%';
             if (telemetryPhaseTitle) {
-                telemetryPhaseTitle.innerHTML = '<strong>✓ Cycle Completed:</strong> Sterilization &amp; Vacuum Dry Complete';
+                telemetryPhaseTitle.innerHTML = '<strong><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Cycle Completed:</strong> Sterilization &amp; Vacuum Dry Complete';
             }
             return;
         }
@@ -1228,8 +1228,8 @@ const ResultsCelebrationManager = {
             ribbon.id = 'results-success-ribbon';
             ribbon.className = 'results-success-ribbon';
             ribbon.innerHTML = `
-                <span>✨ STERILIZATION CYCLE COMPLETE • FULLY VERIFIED &amp; COMPLIANT</span>
-                <button type="button" class="results-success-ribbon-close" aria-label="Close celebration banner" title="Dismiss">✕</button>
+                <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-spark></use></svg> STERILIZATION CYCLE COMPLETE • FULLY VERIFIED &amp; COMPLIANT</span>
+                <button type="button" class="results-success-ribbon-close" aria-label="Close celebration banner" title="Dismiss"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-x></use></svg></button>
             `;
             resultsCard.insertBefore(ribbon, resultsCard.firstChild);
             ribbon.querySelector('.results-success-ribbon-close')?.addEventListener('click', () => {
@@ -1354,12 +1354,12 @@ const ChamberCapacityManager = {
     },
 
     itemSpecs: {
-        forceps: { mass: 85, vol: 140, name: 'Forceps / Clamps', icon: '🛠️' },
-        needles: { mass: 18, vol: 45, name: 'Needles & Tapers', icon: '💉' },
-        jewelry: { mass: 25, vol: 60, name: 'Implant Jewelry', icon: '💎' },
-        cassettes: { mass: 450, vol: 850, name: 'Cassettes / Trays', icon: '📦' },
-        textiles: { mass: 160, vol: 650, name: 'Porous Drapes / Gauze', icon: '🧻' },
-        glassware: { mass: 280, vol: 500, name: 'Glassware & Beakers', icon: '🧪' }
+        forceps: { mass: 85, vol: 140, name: 'Forceps / Clamps', icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-wrench></use></svg>' },
+        needles: { mass: 18, vol: 45, name: 'Needles & Tapers', icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-cartridge></use></svg>' },
+        jewelry: { mass: 25, vol: 60, name: 'Implant Jewelry', icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-ring></use></svg>' },
+        cassettes: { mass: 450, vol: 850, name: 'Cassettes / Trays', icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-box></use></svg>' },
+        textiles: { mass: 160, vol: 650, name: 'Porous Drapes / Gauze', icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-box></use></svg>' },
+        glassware: { mass: 280, vol: 500, name: 'Glassware & Beakers', icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-flask></use></svg>' }
     },
 
     init: function() {
@@ -1452,7 +1452,7 @@ const ChamberCapacityManager = {
 
         this.updateGauge();
         if (typeof showToast === 'function') {
-            showToast('⚖️ Load auto-balanced into 2 safe cycles. Current run capacity reduced to safe optimal range.', 'success', 3500);
+            showToast('Load auto-balanced into 2 safe cycles. Current run capacity reduced to safe optimal range.', 'success', 3500);
         }
     },
 
@@ -1610,18 +1610,18 @@ const ChamberCapacityManager = {
         if (isOverload) {
             if (badgeEl) {
                 badgeEl.className = 'capacity-gauge-badge badge-overload';
-                badgeEl.innerHTML = `⚠️ ${t('OVERLOAD WARNING')} (${densityPercent}% • ${totalMassKg.toFixed(1)}kg)`;
+                badgeEl.innerHTML = `${t('OVERLOAD WARNING')} (${densityPercent}% • ${totalMassKg.toFixed(1)}kg)`;
             }
             if (circEl) {
                 circEl.className = 'capacity-stat-val text-red';
-                circEl.textContent = `⛔ ${t('Severe Cold Spot Hazard')}`;
+                circEl.textContent = `${t('Severe Cold Spot Hazard')}`;
             }
             if (calloutEl) {
                 calloutEl.className = 'capacity-guidance-callout callout-overload';
             }
-            if (guidanceIcon) guidanceIcon.textContent = '⚠️';
+            if (guidanceIcon) guidanceIcon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg>';
             if (guidanceEl) {
-                guidanceEl.innerHTML = `<strong>⚠️ ${t('CRITICAL OVERLOAD HAZARD')}:</strong> ${t('Total load')} (${totalMassKg.toFixed(2)} kg / ${densityPercent}% vol) ${t('exceeds maximum validated heat-penetration thresholds for')} ${chamberDesc}. ${t('Steam cannot displace central air pockets, causing sterilization failure.')} <strong>${t('Split into 2 cycles.')}</strong>`;
+                guidanceEl.innerHTML = `<strong><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> ${t('CRITICAL OVERLOAD HAZARD')}:</strong> ${t('Total load')} (${totalMassKg.toFixed(2)} kg / ${densityPercent}% vol) ${t('exceeds maximum validated heat-penetration thresholds for')} ${chamberDesc}. ${t('Steam cannot displace central air pockets, causing sterilization failure.')} <strong>${t('Split into 2 cycles.')}</strong>`;
             }
             if (overloadActions) overloadActions.style.display = 'flex';
         } else if (isBorderline) {
@@ -1636,7 +1636,7 @@ const ChamberCapacityManager = {
             if (calloutEl) {
                 calloutEl.className = 'capacity-guidance-callout';
             }
-            if (guidanceIcon) guidanceIcon.textContent = '⚡';
+            if (guidanceIcon) guidanceIcon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bolt></use></svg>';
             if (guidanceEl) {
                 guidanceEl.innerHTML = `<strong>${t('Borderline Capacity')}:</strong> ${t('Load is near upper threshold')} (${densityPercent}%). ${t('Ensure pouches stand strictly on edge in the rack with 0.25" steam clearance between all packs.')}`;
             }
@@ -1653,7 +1653,7 @@ const ChamberCapacityManager = {
             if (calloutEl) {
                 calloutEl.className = 'capacity-guidance-callout';
             }
-            if (guidanceIcon) guidanceIcon.textContent = '💡';
+            if (guidanceIcon) guidanceIcon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bulb></use></svg>';
             if (guidanceEl) {
                 guidanceEl.textContent = t('Light load allows rapid steam displacement. Batching more packs per run increases clinic sterilization energy efficiency.');
             }
@@ -1671,7 +1671,7 @@ const ChamberCapacityManager = {
             if (calloutEl) {
                 calloutEl.className = 'capacity-guidance-callout';
             }
-            if (guidanceIcon) guidanceIcon.textContent = '✓';
+            if (guidanceIcon) guidanceIcon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>';
             if (guidanceEl) {
                 guidanceEl.textContent = t('Optimal load allows turbulent steam penetration around all pouches without thermal cold spots. Ensure pouches stand on edge in rack.');
             }
@@ -1693,7 +1693,7 @@ const ChamberCapacityManager = {
                 }
             });
             if (slotIcons.length === 0) {
-                slotIcons = wrapping === 'wrapped' ? ['👝', '👝', '👝', '👝'] : ['🛠️', '🛠️', '🛠️', '🛠️'];
+                slotIcons = wrapping === 'wrapped' ? ['<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-pouch></use></svg>', '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-pouch></use></svg>', '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-pouch></use></svg>', '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-pouch></use></svg>'] : ['<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-wrench></use></svg>', '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-wrench></use></svg>', '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-wrench></use></svg>', '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-wrench></use></svg>'];
             }
 
             let html = '';
@@ -1709,8 +1709,8 @@ const ChamberCapacityManager = {
                         statusClass = 'slot-optimal';
                     }
                 }
-                const icon = isOccupied ? (slotIcons[i % slotIcons.length] || '👝') : '';
-                html += `<div class="visual-rack-slot ${statusClass}" title="Chamber Slot ${i+1}: ${isOccupied ? 'Occupied Position (' + icon + ')' : 'Free Steam Channel'}">${icon}</div>`;
+                const icon = isOccupied ? (slotIcons[i % slotIcons.length] || '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-pouch></use></svg>') : '';
+                html += `<div class="visual-rack-slot ${statusClass}" title="Chamber Slot ${i+1}: ${isOccupied ? 'Occupied Position' : 'Free Steam Channel'}">${icon}</div>`;
             }
             interiorEl.innerHTML = html;
         }
@@ -1845,7 +1845,7 @@ const BiologicalIncubatorManager = {
 
         this.updateDisplay();
         if (isUserClick) {
-            showToast(`⏱️ Biological incubation timer started for ${this.durationHours} hours (56°C).`, 'success', 3000);
+            showToast(`Biological incubation timer started for ${this.durationHours} hours (56°C).`, 'success', 3000);
         }
     },
 
@@ -1919,12 +1919,12 @@ const BiologicalIncubatorManager = {
         const pauseBtn = document.getElementById('btn-pause-bi-incubation');
         if (startBtn) {
             startBtn.style.display = 'inline-flex';
-            startBtn.innerHTML = '<span>🔄</span> Restart';
+            startBtn.innerHTML = '<span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-refresh></use></svg></span> Restart';
         }
         if (pauseBtn) pauseBtn.style.display = 'none';
 
         this.updateDisplay();
-        showToast('🧪 Biological indicator incubation period completed! Please inspect vial medium color.', 'success', 6000);
+        showToast('Biological indicator incubation period completed! Please inspect vial medium color.', 'success', 6000);
     },
 
     updateDisplay: function() {
@@ -1948,7 +1948,7 @@ const BiologicalIncubatorManager = {
 
         if (subtextEl) {
             if (this.remainingSeconds === 0) {
-                subtextEl.innerHTML = '<strong class="text-green font-bold">✓ Incubation Duration Reached:</strong> Inspect vial broth (Purple = Sterile Pass, Yellow = Failure)';
+                subtextEl.innerHTML = '<strong class="text-green font-bold"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Incubation Duration Reached:</strong> Inspect vial broth (Purple = Sterile Pass, Yellow = Failure)';
             } else if (this.isRunning) {
                 subtextEl.innerHTML = `<span class="text-blue">● Active Incubation (56.5°C Dry Block):</span> ${hours}h ${minutes}m remaining for full enzymatic readout`;
             } else {
@@ -2018,7 +2018,7 @@ const BiologicalIncubatorManager = {
                 if (state === 'negative') {
                     if (vialOutcomeBadge) {
                         vialOutcomeBadge.className = 'bi-result-outcome outcome-pass';
-                        vialOutcomeBadge.innerHTML = '✓ NEGATIVE GROWTH: STERILIZATION CYCLE PASSED';
+                        vialOutcomeBadge.innerHTML = 'NEGATIVE GROWTH: STERILIZATION CYCLE PASSED';
                     }
                     if (vialExplanation) {
                         vialExplanation.innerHTML = 'Nutrient broth remained transparent purple (pH &gt; 6.8). All 10⁶ <em>Geobacillus stearothermophilus</em> bacterial endospores were effectively inactivated by lethal saturated steam exposure. Safe to release sterile packs.';
@@ -2026,7 +2026,7 @@ const BiologicalIncubatorManager = {
                 } else if (state === 'positive') {
                     if (vialOutcomeBadge) {
                         vialOutcomeBadge.className = 'bi-result-outcome outcome-fail';
-                        vialOutcomeBadge.innerHTML = '⚠️ POSITIVE GROWTH: STERILIZATION FAILURE';
+                        vialOutcomeBadge.innerHTML = 'POSITIVE GROWTH: STERILIZATION FAILURE';
                     }
                     if (vialExplanation) {
                         vialExplanation.innerHTML = '<strong class="text-red font-bold">CRITICAL FAILURE:</strong> Spores survived and produced acid metabolites, shifting bromocresol purple indicator to cloudy yellow (pH &lt; 5.2). Quarantine autoclave immediately and recall all packages processed in this batch!';
@@ -2059,7 +2059,7 @@ const BiologicalIncubatorManager = {
                     if (stripFront) stripFront.style.width = '85%';
                     if (stripBadge) {
                         stripBadge.className = 'bi-result-outcome outcome-pass';
-                        stripBadge.innerHTML = '✓ ACCEPT: TIME, TEMPERATURE &amp; STEAM REACHED';
+                        stripBadge.innerHTML = 'ACCEPT: TIME, TEMPERATURE &amp; STEAM REACHED';
                     }
                     if (stripExplanation) {
                         stripExplanation.innerHTML = 'The steam-sensitive chemical pellet melted and wicked safely past the red reject zone into the dark blue accept window, confirming all 3 critical sterilization parameters (time, temperature, saturated steam) were achieved inside the pack.';
@@ -2068,7 +2068,7 @@ const BiologicalIncubatorManager = {
                     if (stripFront) stripFront.style.width = '32%';
                     if (stripBadge) {
                         stripBadge.className = 'bi-result-outcome outcome-fail';
-                        stripBadge.innerHTML = '⚠️ REJECT: INADEQUATE STERILIZATION CONDITIONS';
+                        stripBadge.innerHTML = 'REJECT: INADEQUATE STERILIZATION CONDITIONS';
                     }
                     if (stripExplanation) {
                         stripExplanation.innerHTML = '<strong class="text-red font-bold">REJECT / STERILITY COMPROMISED:</strong> Chemical front failed to cross the threshold into the Accept zone. Possible causes: air pockets, inadequate exposure plateau, low steam quality, or chamber overloaded.';
@@ -2239,16 +2239,16 @@ function restoreSporeFormData() {
             const daysSinceTest = Math.ceil((today - lastTest) / (1000 * 60 * 60 * 24));
 
             let status = 'current';
-            let statusText = '✓ Current';
+            let statusText = 'Current';
             let statusClass = 'autoclave__spore-status-badge--current';
 
             if (daysUntilDue < 0) {
                 status = 'overdue';
-                statusText = '⚠️ OVERDUE';
+                statusText = 'OVERDUE';
                 statusClass = 'autoclave__spore-status-badge--overdue';
             } else if (daysUntilDue <= 2) {
                 status = 'due-soon';
-                statusText = '⚠ Due Soon';
+                statusText = 'Due Soon';
                 statusClass = 'autoclave__spore-status-badge--due-soon';
             }
 
@@ -2387,7 +2387,7 @@ function handleCompatibilityReset() {
    ============================================ */
 
 function initAutoclaveApp() {
-    console.log('🔬 Autoclave Calculator Initialized');
+    console.log('Autoclave Calculator Initialized');
     
     // Initialize Internationalization Selector
     const langSelect = document.getElementById('language-selector');
@@ -3041,7 +3041,7 @@ function displayCalculatorResults(autoclaveType, loadType, params) {
     // Update safety badge
     const safetyBadge = document.getElementById('results-safety-badge');
     safetyBadge.className = 'autoclave__safety-badge autoclave__safety-badge--safe';
-    safetyBadge.innerHTML = '✓ Safe Parameters';
+    safetyBadge.innerHTML = 'Safe Parameters';
 
     // Update temperature
     document.getElementById('result-temperature').innerHTML =
@@ -3079,7 +3079,7 @@ function displayCalculatorResults(autoclaveType, loadType, params) {
             <li>Estimated total cycle run: <strong>${params.totalCycle} minutes</strong></li>
             <li>Inspect internal Class 5 integrator and external process indicator strips prior to tool release</li>
         </ul>
-        <p><strong>⚠️ Always reference your autoclave's manufacturer operating manual for exact tray capacities.</strong></p>
+        <p><strong><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> Always reference your autoclave's manufacturer operating manual for exact tray capacities.</strong></p>
     `;
 }
 
@@ -3092,7 +3092,7 @@ function showInvalidCombination(autoclaveType, loadType) {
 
     const safetyBadge = document.getElementById('results-safety-badge');
     safetyBadge.className = 'autoclave__safety-badge autoclave__safety-badge--danger';
-    safetyBadge.innerHTML = '⚠️ Invalid Combination';
+    safetyBadge.innerHTML = 'Invalid Combination';
 
     const tempEl = document.getElementById('result-temperature');
     if (tempEl) tempEl.innerHTML = 'N/A';
@@ -3114,7 +3114,7 @@ function showInvalidCombination(autoclaveType, loadType) {
     const autoclaveInfo = AUTOCLAVE_DATABASE[autoclaveType] || { name: autoclaveType };
 
     descDiv.innerHTML = `
-        <p><strong>⚠️ This combination is not recommended or safe:</strong></p>
+        <p><strong><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> This combination is not recommended or safe:</strong></p>
         <p><strong>Autoclave Type:</strong> ${autoclaveInfo.name}</p>
         <p><strong>Load Type:</strong> ${formatLoadType(loadType)}</p>
         <p><strong>Why this doesn't work:</strong></p>
@@ -3193,16 +3193,16 @@ function handleSporeTestSubmit(event) {
 
     // Determine status
     let status = 'current';
-    let statusText = '✓ Current';
+    let statusText = 'Current';
     let statusClass = 'autoclave__spore-status-badge--current';
 
     if (daysUntilDue < 0) {
         status = 'overdue';
-        statusText = '⚠️ OVERDUE';
+        statusText = 'OVERDUE';
         statusClass = 'autoclave__spore-status-badge--overdue';
     } else if (daysUntilDue <= 2) {
         status = 'due-soon';
-        statusText = '⚠ Due Soon';
+        statusText = 'Due Soon';
         statusClass = 'autoclave__spore-status-badge--due-soon';
     }
 
@@ -3249,7 +3249,7 @@ function displaySporeTestResults(state, lastTest, nextTest, daysUntil, daysSince
 
     if (nextTestEl) {
         if (isDueWithin24Hours) {
-            nextTestEl.innerHTML = `<span>${formatDate(nextTest)}</span> <span class="autoclave__spore-due-warning-pill">⚠️ Due in &le; 24h</span>`;
+            nextTestEl.innerHTML = `<span>${formatDate(nextTest)}</span> <span class="autoclave__spore-due-warning-pill"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> Due in &le; 24h</span>`;
             nextTestEl.classList.add('autoclave__spore-next-test--pulse-red');
         } else {
             nextTestEl.textContent = formatDate(nextTest);
@@ -3282,7 +3282,7 @@ function displaySporeTestResults(state, lastTest, nextTest, daysUntil, daysSince
 
     if (status === 'overdue') {
         instructionsDiv.innerHTML = `
-            <p><strong>⚠️ YOUR SPORE TEST IS OVERDUE!</strong></p>
+            <p><strong><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> YOUR SPORE TEST IS OVERDUE!</strong></p>
             <p>You are ${Math.abs(daysUntil)} days past your required testing date.</p>
             <p><strong>Action Required:</strong></p>
             <ul>
@@ -3295,7 +3295,7 @@ function displaySporeTestResults(state, lastTest, nextTest, daysUntil, daysSince
         `;
     } else if (status === 'due-soon') {
         instructionsDiv.innerHTML = `
-            <p><strong>⚠ Spore test due in ${daysUntil} days</strong></p>
+            <p><strong><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> Spore test due in ${daysUntil} days</strong></p>
             <p><strong>Action Required:</strong></p>
             <ul>
                 <li>Schedule your next spore test for ${formatDate(nextTest)}</li>
@@ -3306,7 +3306,7 @@ function displaySporeTestResults(state, lastTest, nextTest, daysUntil, daysSince
         `;
     } else {
         instructionsDiv.innerHTML = `
-            <p><strong>✓ You are current on spore testing</strong></p>
+            <p><strong><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> You are current on spore testing</strong></p>
             <p>Your next spore test is due on ${formatDate(nextTest)} (in ${daysUntil} days).</p>
             <p><strong>Reminder:</strong></p>
             <ul>
@@ -3661,31 +3661,31 @@ const UnitConverterManager = {
         if (tempC >= 150) {
             // Dry heat regime
             eqBadge.className = 'steam-eq-badge status-dry-heat';
-            eqBadge.textContent = '🔥 DRY HEAT REGIME (NON-STEAM STERILIZATION)';
+            eqBadge.textContent = 'DRY HEAT REGIME (NON-STEAM STERILIZATION)';
             eqState.className = 'eq-val text-yellow';
             eqState.textContent = 'Dry Hot Air Oxidation';
             eqAdvisory.innerHTML = `<strong>Dry Heat Sterilization:</strong> At ${tempC.toFixed(1)}°C, sterilization relies on prolonged oxidative heat transfer rather than saturated steam. Minimum exposure: 2 hours at 160°C or 30 minutes at 180°C.`;
         } else if (Math.abs(deltaPsi) <= 2.5) {
             // Saturated steam equilibrium
             eqBadge.className = 'steam-eq-badge status-saturated';
-            eqBadge.textContent = '✓ 100% SATURATED STEAM (IDEAL LETHALITY)';
+            eqBadge.textContent = '100% SATURATED STEAM (IDEAL LETHALITY)';
             eqState.className = 'eq-val text-green';
             eqState.textContent = 'Saturated Vapor (Optimal Equilibrium)';
-            eqAdvisory.innerHTML = `<strong>✓ ${window.t('Physical Equilibrium Verified:')}</strong> ${window.t('Temperature ({temp}°C) and pressure ({psi} PSI) match the physical saturated steam tables. Steam will condense instantaneously upon cold stainless steel instruments, transferring ~2,166 kJ/kg of latent heat for microbial cell denaturation.', { temp: tempC.toFixed(1), psi: curGaugePsi.toFixed(1) })}`;
+            eqAdvisory.innerHTML = `<strong><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> ${window.t('Physical Equilibrium Verified:')}</strong> ${window.t('Temperature ({temp}°C) and pressure ({psi} PSI) match the physical saturated steam tables. Steam will condense instantaneously upon cold stainless steel instruments, transferring ~2,166 kJ/kg of latent heat for microbial cell denaturation.', { temp: tempC.toFixed(1), psi: curGaugePsi.toFixed(1) })}`;
         } else if (deltaPsi < -2.5) {
             // Sub-saturated steam (air cold spot risk)
             eqBadge.className = 'steam-eq-badge status-sub-saturated';
-            eqBadge.textContent = '⚠️ SUB-SATURATED STEAM / AIR RESIDUAL HAZARD';
+            eqBadge.textContent = 'SUB-SATURATED STEAM / AIR RESIDUAL HAZARD';
             eqState.className = 'eq-val text-red';
             eqState.textContent = 'Air Entrapment / Cold Spot Risk';
-            eqAdvisory.innerHTML = `<strong>⚠️ Thermodynamic Sub-Saturation:</strong> Pressure is ${Math.abs(deltaPsi).toFixed(1)} PSI below saturated vapor threshold. This indicates residual air pockets inside pouches or an incomplete pre-vacuum purge. Air prevents latent heat transfer, causing severe sterilization failures.`;
+            eqAdvisory.innerHTML = `<strong><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> Thermodynamic Sub-Saturation:</strong> Pressure is ${Math.abs(deltaPsi).toFixed(1)} PSI below saturated vapor threshold. This indicates residual air pockets inside pouches or an incomplete pre-vacuum purge. Air prevents latent heat transfer, causing severe sterilization failures.`;
         } else {
             // Superheated steam
             eqBadge.className = 'steam-eq-badge status-superheated';
-            eqBadge.textContent = '⚠️ SUPERHEATED STEAM / DRY GAS PHENOMENON';
+            eqBadge.textContent = 'SUPERHEATED STEAM / DRY GAS PHENOMENON';
             eqState.className = 'eq-val text-yellow';
             eqState.textContent = 'Superheated Dry Vapor (Slow Lethality)';
-            eqAdvisory.innerHTML = `<strong>⚠️ Superheated Steam Warning:</strong> Chamber pressure is ${deltaPsi.toFixed(1)} PSI higher than saturation equilibrium. Superheated steam acts as dry gas without condensing on instruments, multiplying required microbial kill time. Check boiler steam dry-fraction regulator.`;
+            eqAdvisory.innerHTML = `<strong><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> Superheated Steam Warning:</strong> Chamber pressure is ${deltaPsi.toFixed(1)} PSI higher than saturation equilibrium. Superheated steam acts as dry gas without condensing on instruments, multiplying required microbial kill time. Check boiler steam dry-fraction regulator.`;
         }
     }
 };
@@ -3809,7 +3809,7 @@ const ReferenceSearchManager = {
         if (statusEl) {
             if (query || category !== 'all') {
                 statusEl.style.display = 'block';
-                statusEl.innerHTML = `🔍 Found <strong>${matchCount}</strong> reference specifications matching "${query || category}"`;
+                statusEl.innerHTML = `Found <strong>${matchCount}</strong> reference specifications matching "${query || category}"`;
             } else {
                 statusEl.style.display = 'none';
             }
@@ -3999,7 +3999,7 @@ function populateReferenceContent() {
                     </tr>
                     <tr>
                         <td><strong>Hollow Lumens &amp; Piercing Needles</strong></td>
-                        <td><span class="text-red font-bold">⛔ Unsuitable (Cold Spots)</span></td>
+                        <td><span class="text-red font-bold"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-ban></use></svg> Unsuitable (Cold Spots)</span></td>
                         <td>4–10 min hold + 30m dry</td>
                         <td>3.5–5 min hold + 20m dry</td>
                         <td>6 min hold + 12m dry</td>
@@ -4023,7 +4023,7 @@ function populateReferenceContent() {
                         <td>45 min hold + 30m dry</td>
                         <td>8 min hold + 25m dry</td>
                         <td>5 min hold + 20m dry</td>
-                        <td><span class="text-red font-bold">⛔ Unsuitable</span></td>
+                        <td><span class="text-red font-bold"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-ban></use></svg> Unsuitable</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -4046,7 +4046,7 @@ function populateReferenceContent() {
 
                 <h4>Weekly Biological &amp; Mechanical Protocol</h4>
                 <ul class="autoclave__tips-list">
-                    <li><strong>✓ Biological Spore Testing:</strong> Process a Geobacillus stearothermophilus spore ampoule in a typical load challenge pack and incubate at 56°C for 24–48 hours.</li>
+                    <li><strong><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Biological Spore Testing:</strong> Process a Geobacillus stearothermophilus spore ampoule in a typical load challenge pack and incubate at 56°C for 24–48 hours.</li>
                     <li><strong>Bowie-Dick Air Removal Test (Class B Pre-Vac Only):</strong> Run a certified Bowie-Dick test pack in an empty chamber first thing every Monday morning to confirm vacuum pump integrity.</li>
                     <li><strong>Tray &amp; Rack Cleaning:</strong> Wash stainless steel loading racks with warm distilled water and non-abrasive hospital-grade detergent.</li>
                     <li><strong>Drain Strainer Inspection:</strong> Remove and clear lint, debris, and mineral particles from the chamber drain strainer mesh.</li>
@@ -4088,7 +4088,7 @@ function applyTheme(theme) {
 
     const icons = document.querySelectorAll('.autoclave__dark-mode-icon');
     icons.forEach(icon => {
-        icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        icon.innerHTML = theme === 'dark' ? '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-sun></use></svg>' : '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-moon></use></svg>';
     });
 
     const toggleButtons = document.querySelectorAll('#dark-mode-toggle');
@@ -4192,7 +4192,7 @@ function copyEmbedCode() {
         navigator.clipboard.writeText(code).then(() => {
             // Success feedback
             const originalHTML = button.innerHTML;
-            button.innerHTML = '<span class="autoclave__copy-icon">✓</span><span class="autoclave__copy-text">Copied!</span>';
+            button.innerHTML = '<span class="autoclave__copy-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span><span class="autoclave__copy-text">Copied!</span>';
             button.classList.add('autoclave__copy-button--success');
 
             setTimeout(() => {
@@ -4226,7 +4226,7 @@ function handleEmailSubmit(event) {
 
     // Disable button and show loading state
     submitButton.disabled = true;
-    const originalText = submitButton.textContent;
+    const originalText = submitButton.innerHTML;
     submitButton.textContent = 'Subscribing...';
 
     // Simulate API call (replace with actual endpoint)
@@ -4234,13 +4234,13 @@ function handleEmailSubmit(event) {
         console.log(`Email submitted from ${location}:`, email);
 
         // Success feedback
-        submitButton.textContent = '✓ Subscribed!';
+        submitButton.textContent = 'Subscribed!';
         emailInput.value = '';
 
         // Reset after 2 seconds
         setTimeout(() => {
             submitButton.disabled = false;
-            submitButton.textContent = originalText;
+            submitButton.innerHTML = originalText;
         }, 2000);
 
         // Show thank you message
@@ -4345,18 +4345,18 @@ function handleLoadOptimizationSubmit(event) {
     // Determine load status
     let loadStatus = 'optimal';
     let statusClass = 'autoclave__status--optimal';
-    let statusText = '✓ Optimal Load';
+    let statusText = 'Optimal Load';
     let statusMessage = 'Your load size is within optimal range for effective sterilization.';
 
     if (numInstruments > maxInstruments) {
         loadStatus = 'overloaded';
         statusClass = 'autoclave__status--danger';
-        statusText = '⚠️ OVERLOADED';
+        statusText = 'OVERLOADED';
         statusMessage = 'Too many instruments! This will prevent proper steam circulation and effective sterilization.';
     } else if (numInstruments > recommendedMax) {
         loadStatus = 'heavy';
         statusClass = 'autoclave__status--warning';
-        statusText = '⚠ Heavy Load';
+        statusText = 'Heavy Load';
         statusMessage = 'Load is acceptable but approaching maximum. Consider adding extra exposure time or splitting into two cycles.';
     }
 
@@ -4559,8 +4559,8 @@ function displayCompatibilityResults(data) {
     resultsDiv.style.display = 'block';
 
     const statusClass = data.isCompatible ? 'autoclave__status--optimal' : 'autoclave__status--danger';
-    const statusText = data.isCompatible ? '✓ SAFE TO USE' : '⚠️ NOT SAFE';
-    const statusIcon = data.isCompatible ? '✅' : '❌';
+    const statusText = data.isCompatible ? 'SAFE TO USE' : 'NOT SAFE';
+    const statusIcon = data.isCompatible ? '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>' : '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-x></use></svg>';
 
     let detailsHTML = '';
     if (data.isCompatible) {
@@ -4589,7 +4589,7 @@ function displayCompatibilityResults(data) {
     } else {
         detailsHTML = `
             <div class="autoclave__compatibility-danger">
-                <p><strong>⚠️ WARNING: This combination is NOT SAFE!</strong></p>
+                <p><strong><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> WARNING: This combination is NOT SAFE!</strong></p>
                 <p>${data.notes}</p>
 
                 <h4 class="autoclave__tips-title">Why This Is Unsafe:</h4>
@@ -4631,13 +4631,13 @@ function getSafeAlternatives(materialData) {
     const alternatives = [];
 
     if (materialData.gravity) {
-        alternatives.push('<li>✓ Steam - Gravity Displacement autoclave</li>');
+        alternatives.push('<li><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Steam - Gravity Displacement autoclave</li>');
     }
     if (materialData.prevacuum) {
-        alternatives.push('<li>✓ Steam - Pre-Vacuum autoclave</li>');
+        alternatives.push('<li><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Steam - Pre-Vacuum autoclave</li>');
     }
     if (materialData.chemical) {
-        alternatives.push('<li>✓ Chemical Vapor sterilization</li>');
+        alternatives.push('<li><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Chemical Vapor sterilization</li>');
     }
 
     if (alternatives.length === 0) {
@@ -4845,7 +4845,7 @@ function saveToRecords() {
     link.click();
     document.body.removeChild(link);
 
-    showToast(`✓ Batch ${batchNumber} saved and exported to CSV!`, 'success', 3000);
+    showToast(`Batch ${batchNumber} saved and exported to CSV!`, 'success', 3000);
 }
 
 /* ============================================
@@ -4857,13 +4857,13 @@ function showToast(message, type = 'success', duration = 3200) {
     if (!toast) return;
 
     const icons = {
-        success: '✓',
-        info: 'ℹ️',
-        error: '⚠️'
+        success: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>',
+        info: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-info></use></svg>',
+        error: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg>'
     };
 
     toast.className = `autoclave__toast autoclave__toast--${type} is-visible`;
-    toast.innerHTML = `<span style="font-size:16px;">${icons[type] || '✓'}</span> <span>${message}</span>`;
+    toast.innerHTML = `<span style="font-size:16px;">${icons[type] || '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>'}</span> <span>${message}</span>`;
 
     if (window.__toastTimeout) {
         clearTimeout(window.__toastTimeout);
@@ -5072,7 +5072,7 @@ const PrintHeaderDesigner = {
         } else {
             logoContent = `
                 <div class="doc-header-default-emblem" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--color-success); border-radius: 8px; color: var(--text-inverse); font-size: 22px; font-weight: 800;">
-                    ⚕️
+                    <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-health></use></svg>
                 </div>
             `;
         }
@@ -5213,7 +5213,7 @@ const PrintHeaderDesigner = {
                 const targetPos = zone.getAttribute('data-drop-pos');
                 if (targetPos) {
                     this.setLayout(targetPos);
-                    showToast(`✓ Header logo positioned: ${targetPos.toUpperCase()}`, 'success', 2000);
+                    showToast(`Header logo positioned: ${targetPos.toUpperCase()}`, 'success', 2000);
                 }
             });
         });
@@ -5406,31 +5406,31 @@ function updatePrintPreviewSheet() {
                         <td><strong>Sterilizing Temperature</strong></td>
                         <td>${params.temperature.f}°F (${params.temperature.c}°C)</td>
                         <td>${params.temperature.f}°F (${params.temperature.c}°C)</td>
-                        <td>✓ Compliant</td>
+                        <td><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Compliant</td>
                     </tr>
                     <tr>
                         <td><strong>Chamber Pressure</strong></td>
                         <td>${params.pressure.psi} PSI (${params.pressure.bar} bar)</td>
                         <td>${params.pressure.psi} PSI</td>
-                        <td>✓ Compliant</td>
+                        <td><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Compliant</td>
                     </tr>
                     <tr>
                         <td><strong>Exposure Plateau Duration</strong></td>
                         <td>${params.exposureTime} Minutes</td>
                         <td>${params.exposureTime} Min</td>
-                        <td>✓ Met</td>
+                        <td><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Met</td>
                     </tr>
                     <tr>
                         <td><strong>Drying Cycle Duration</strong></td>
                         <td>${params.dryTime || 0} Minutes</td>
                         <td>${params.dryTime || 0} Min</td>
-                        <td>✓ Complete</td>
+                        <td><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Complete</td>
                     </tr>
                     <tr>
                         <td><strong>Total Cycle Run Duration</strong></td>
                         <td>${params.totalCycle} Minutes</td>
                         <td>${params.totalCycle} Min</td>
-                        <td>✓ Complete</td>
+                        <td><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Complete</td>
                     </tr>
                 </tbody>
             </table>
@@ -5438,19 +5438,19 @@ function updatePrintPreviewSheet() {
             <h3 class="doc-section-heading">Quality Assurance Verification Checklist</h3>
             <ul class="doc-checklist">
                 <li>
-                    <span class="doc-checklist-box">${checkIntegrator ? '✓' : ''}</span>
+                    <span class="doc-checklist-box">${checkIntegrator ? '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>' : ''}</span>
                     <span>Class 5 Chemical Integrator / Internal indicator reached distinct endpoint pass</span>
                 </li>
                 <li>
-                    <span class="doc-checklist-box">${checkSeal ? '✓' : ''}</span>
+                    <span class="doc-checklist-box">${checkSeal ? '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>' : ''}</span>
                     <span>Sterilization pouch heat seal inspected intact; zero moisture or condensation present</span>
                 </li>
                 <li>
-                    <span class="doc-checklist-box">${checkGauges ? '✓' : ''}</span>
+                    <span class="doc-checklist-box">${checkGauges ? '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>' : ''}</span>
                     <span>Chamber temperature and pressure sensors maintained continuous plateau</span>
                 </li>
                 <li>
-                    <span class="doc-checklist-box">${checkBiological ? '✓' : ''}</span>
+                    <span class="doc-checklist-box">${checkBiological ? '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>' : ''}</span>
                     <span>Biological spore monitoring is up-to-date and compliant with state health standards</span>
                 </li>
             </ul>
@@ -5523,15 +5523,15 @@ function updatePrintPreviewSheet() {
             <h3 class="doc-section-heading">Spore Testing Protocol Safeguards</h3>
             <ul class="doc-checklist">
                 <li>
-                    <span class="doc-checklist-box">${checkBiological ? '✓' : ''}</span>
+                    <span class="doc-checklist-box">${checkBiological ? '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>' : ''}</span>
                     <span>Control vial from same lot incubated alongside test vial to confirm spore viability</span>
                 </li>
                 <li>
-                    <span class="doc-checklist-box">${checkIntegrator ? '✓' : ''}</span>
+                    <span class="doc-checklist-box">${checkIntegrator ? '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>' : ''}</span>
                     <span>Incubated at recommended temperature (55-60°C for Steam) for full required incubation hours</span>
                 </li>
                 <li>
-                    <span class="doc-checklist-box">${checkSeal ? '✓' : ''}</span>
+                    <span class="doc-checklist-box">${checkSeal ? '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>' : ''}</span>
                     <span>Sterilizer remained locked out or quarantined until negative test verification achieved</span>
                 </li>
             </ul>
@@ -6106,7 +6106,7 @@ const AudioChimeManager = {
             localStorage.setItem(STORAGE_KEYS.CUSTOM_CHIME_SIZE, sizeStr);
             localStorage.setItem(STORAGE_KEYS.CHIME_PRESET, 'custom');
             this.updateSettingsUI();
-            showToast(`✓ Custom chime "${file.name}" uploaded & selected!`, 'success', 3000);
+            showToast(`Custom chime "${file.name}" uploaded & selected!`, 'success', 3000);
             this.play('custom');
         };
         reader.onerror = () => {
@@ -6146,7 +6146,7 @@ const CalibrationManager = {
         if (typeof ComplianceStatusManager !== 'undefined') {
             ComplianceStatusManager.updateStatus();
         }
-        showToast('✓ Calibration certification record updated!', 'success', 2500);
+        showToast('Calibration certification record updated!', 'success', 2500);
     },
 
     getIntervalName: function(days) {
@@ -6248,10 +6248,10 @@ const CalibrationManager = {
             }
             if (badge) {
                 badge.className = 'autoclave__calibration-badge autoclave__calibration-badge--overdue';
-                badge.textContent = '🚨 CALIBRATION OVERDUE';
+                badge.textContent = 'CALIBRATION OVERDUE';
             }
             if (msg) {
-                msg.innerHTML = `<strong>⚠️ CRITICAL WARNING:</strong> Professional calibration expired <strong>${overdueDays} days ago</strong> (${daysElapsed} days since last inspection under ${intervalName} schedule). Autoclave requires immediate certified technician recertification.`;
+                msg.innerHTML = `<strong><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> CRITICAL WARNING:</strong> Professional calibration expired <strong>${overdueDays} days ago</strong> (${daysElapsed} days since last inspection under ${intervalName} schedule). Autoclave requires immediate certified technician recertification.`;
             }
             if (daysLeftDisplay) daysLeftDisplay.innerHTML = `<span class="text-red font-bold">OVERDUE (${overdueDays}d past)</span>`;
 
@@ -6269,10 +6269,10 @@ const CalibrationManager = {
             }
             if (badge) {
                 badge.className = 'autoclave__calibration-badge autoclave__calibration-badge--warning';
-                badge.textContent = '⚠️ CALIBRATION DUE SOON';
+                badge.textContent = 'CALIBRATION DUE SOON';
             }
             if (msg) {
-                msg.innerHTML = `<strong>⚠️ Action Recommended:</strong> Professional calibration expires in <strong>${daysRemaining} days</strong> (${intervalName}). Schedule an inspection with a certified biomedical technician.`;
+                msg.innerHTML = `<strong><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> Action Recommended:</strong> Professional calibration expires in <strong>${daysRemaining} days</strong> (${intervalName}). Schedule an inspection with a certified biomedical technician.`;
             }
             if (daysLeftDisplay) daysLeftDisplay.innerHTML = `<span class="text-warning font-bold">Due in ${daysRemaining} days</span>`;
 
@@ -6290,7 +6290,7 @@ const CalibrationManager = {
             }
             if (badge) {
                 badge.className = 'autoclave__calibration-badge autoclave__calibration-badge--valid';
-                badge.textContent = '✓ CALIBRATION CURRENT';
+                badge.textContent = 'CALIBRATION CURRENT';
             }
             if (msg) {
                 msg.textContent = `Chamber certified by ${data.tech || 'Certified Technician'}. ${intervalName} recertification due in ${daysRemaining} days.`;
@@ -6464,10 +6464,10 @@ const SporeHistoryManager = {
             if (typeof SporeFailureAlertManager !== 'undefined') {
                 SporeFailureAlertManager.show(record);
             } else {
-                alert('🚨 CRITICAL BIO-ALERT: Biological Spore Test Failed! Quarantine this autoclave immediately and check the Sterilization Troubleshooter.');
+                alert('CRITICAL BIO-ALERT: Biological Spore Test Failed! Quarantine this autoclave immediately and check the Sterilization Troubleshooter.');
             }
         } else {
-            showToast('✓ Spore test record with technician notes logged successfully!', 'success', 3000);
+            showToast('Spore test record with technician notes logged successfully!', 'success', 3000);
         }
 
         // Auto-push to Google Sheets if enabled
@@ -6496,7 +6496,7 @@ const SporeHistoryManager = {
         records = records.filter(r => !this.selectedIds.has(r.id));
         this.selectedIds.clear();
         this.saveRecords(records);
-        showToast(`✓ Deleted ${count} spore test record(s).`, 'success', 2500);
+        showToast(`Deleted ${count} spore test record(s).`, 'success', 2500);
     },
 
     clearAll: function() {
@@ -6563,7 +6563,7 @@ const SporeHistoryManager = {
             SettingsManager.updateStorageStats();
         }
 
-        showToast(`✓ Pruned ${totalPruned} records older than 3 years (${prunedSporeCount} spore tests, ${prunedCycleCount} batches). Storage optimized!`, 'success', 4000);
+        showToast(`Pruned ${totalPruned} records older than 3 years (${prunedSporeCount} spore tests, ${prunedCycleCount} batches). Storage optimized!`, 'success', 4000);
         return totalPruned;
     },
 
@@ -6660,14 +6660,14 @@ const SporeHistoryManager = {
                     }
 
                     const passBadgeClass = isPass ? 'autoclave__timeline-node-badge--pass' : 'autoclave__timeline-node-badge--fail';
-                    const passText = isPass ? '✓ NEGATIVE' : '⚠️ POSITIVE';
+                    const passText = isPass ? 'NEGATIVE' : 'POSITIVE';
                     const techDisplay = rec.operator || rec.technician || 'Studio Tech';
 
                     timelineHtml += `
                         <div class="autoclave__timeline-node autoclave__timeline-node--${colorClass}" title="${rec.date} • ${rec.lotNumber || 'BI'} • ${techDisplay} • Notes: ${(rec.technicianNotes || rec.notes || 'Routine run').replace(/"/g, '&quot;')}">
                             <span class="autoclave__timeline-node-date">${rec.date}</span>
                             <span class="autoclave__timeline-node-badge ${passBadgeClass}">${passText}</span>
-                            <span class="autoclave__timeline-node-tech" title="${techDisplay}">👤 ${techDisplay}</span>
+                            <span class="autoclave__timeline-node-tech" title="${techDisplay}"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-user></use></svg> ${techDisplay}</span>
                         </div>
                     `;
                 });
@@ -6713,25 +6713,25 @@ const SporeHistoryManager = {
                         const tr = document.createElement('tr');
                         const isPass = rec.result === 'pass' || rec.result === 'Passed' || rec.result === 'Negative';
                         const resultBadge = isPass
-                            ? '<span class="autoclave__spore-badge autoclave__spore-badge--pass">✓ NEGATIVE (PASS)</span>'
-                            : '<span class="autoclave__spore-badge autoclave__spore-badge--fail">⚠️ POSITIVE (FAIL)</span>';
+                            ? '<span class="autoclave__spore-badge autoclave__spore-badge--pass"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> NEGATIVE (PASS)</span>'
+                            : '<span class="autoclave__spore-badge autoclave__spore-badge--fail"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> POSITIVE (FAIL)</span>';
 
                         let gapDisplay = '<span style="color:var(--color-text-muted);">Baseline (0d)</span>';
-                        let intervalStatusBadge = '<span class="autoclave__interval-badge autoclave__interval-badge--green">✓ ON-SCHEDULE</span>';
+                        let intervalStatusBadge = '<span class="autoclave__interval-badge autoclave__interval-badge--green"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> ON-SCHEDULE</span>';
 
                         if (rec.gapDays !== null) {
                             if (!isPass) {
                                 gapDisplay = `<strong class="text-red font-bold">${rec.gapDays} days</strong>`;
-                                intervalStatusBadge = '<span class="autoclave__interval-badge autoclave__interval-badge--red">🚨 FAILED BI</span>';
+                                intervalStatusBadge = '<span class="autoclave__interval-badge autoclave__interval-badge--red"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-siren></use></svg> FAILED BI</span>';
                             } else if (rec.gapDays <= 7) {
                                 gapDisplay = `<strong class="text-green">${rec.gapDays} days</strong>`;
-                                intervalStatusBadge = '<span class="autoclave__interval-badge autoclave__interval-badge--green">✓ ON-SCHEDULE</span>';
+                                intervalStatusBadge = '<span class="autoclave__interval-badge autoclave__interval-badge--green"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> ON-SCHEDULE</span>';
                             } else if (rec.gapDays <= 13) {
                                 gapDisplay = `<strong class="text-warning font-bold">${rec.gapDays} days</strong>`;
-                                intervalStatusBadge = '<span class="autoclave__interval-badge autoclave__interval-badge--yellow">⚠️ BORDERLINE</span>';
+                                intervalStatusBadge = '<span class="autoclave__interval-badge autoclave__interval-badge--yellow"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> BORDERLINE</span>';
                             } else {
                                 gapDisplay = `<strong class="text-red font-bold">${rec.gapDays} days</strong>`;
-                                intervalStatusBadge = '<span class="autoclave__interval-badge autoclave__interval-badge--red">🚨 OVERDUE</span>';
+                                intervalStatusBadge = '<span class="autoclave__interval-badge autoclave__interval-badge--red"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-siren></use></svg> OVERDUE</span>';
                             }
                         }
 
@@ -6751,8 +6751,8 @@ const SporeHistoryManager = {
                             <td>${intervalStatusBadge}</td>
                             <td style="white-space: nowrap;">
                                 <div style="display: inline-flex; align-items: center; gap: 4px;">
-                                    <button type="button" class="autoclave__table-view-btn spore-view-btn" data-id="${rec.id}" title="View details and QR code">🔍 Details</button>
-                                    <button type="button" class="autoclave__spore-delete-btn" data-id="${rec.id}" title="Delete entry" style="background:none; border:none; color: var(--text-secondary); cursor:pointer; font-size:1.05rem; padding: 2px;">🗑️</button>
+                                    <button type="button" class="autoclave__table-view-btn spore-view-btn" data-id="${rec.id}" title="View details and QR code"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg> Details</button>
+                                    <button type="button" class="autoclave__spore-delete-btn" data-id="${rec.id}" title="Delete entry" style="background:none; border:none; color: var(--text-secondary); cursor:pointer; font-size:1.05rem; padding: 2px;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-trash></use></svg></button>
                                 </div>
                             </td>
                         `;
@@ -6861,7 +6861,7 @@ const SporeHistoryManager = {
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        showToast(`✓ Exported ${records.length} spore test record(s) to CSV`, 'success', 2500);
+        showToast(`Exported ${records.length} spore test record(s) to CSV`, 'success', 2500);
     },
 
     getProcessedRecords: function() {
@@ -7061,7 +7061,7 @@ const SporeHistoryManager = {
                 if (typeof ComplianceStatusManager !== 'undefined') {
                     ComplianceStatusManager.updateStatus();
                 }
-                showToast('✓ Sample biological indicator history loaded.', 'success', 2500);
+                showToast('Sample biological indicator history loaded.', 'success', 2500);
             });
         }
 
@@ -7274,7 +7274,7 @@ const DailyGoalManager = {
 
         if (statusText) {
             if (completed >= goal) {
-                statusText.textContent = '✓ Goal Met!';
+                statusText.textContent = 'Goal Met!';
                 statusText.style.color = 'var(--color-primary)';
             } else {
                 statusText.textContent = `${percent}% Met`;
@@ -7386,7 +7386,7 @@ const SporeFailureAlertManager = {
             }
         }, 150);
 
-        showToast('⚠️ Navigated to Sterilization Troubleshooter for Failed Spore Protocol', 'error', 4000);
+        showToast('Navigated to Sterilization Troubleshooter for Failed Spore Protocol', 'error', 4000);
     },
 
     attachListeners: function() {
@@ -7569,14 +7569,14 @@ https://poliinternational.com
         const mailtoUrl = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         window.location.href = mailtoUrl;
 
-        showToast('✓ Weekly compliance digest email client opened!', 'success', 3000);
+        showToast('Weekly compliance digest email client opened!', 'success', 3000);
     },
 
     copyToClipboard: function() {
         const text = this.generatePlainText();
         if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(text).then(() => {
-                showToast('✓ Weekly Compliance Digest copied to clipboard!', 'success', 3000);
+                showToast('Weekly Compliance Digest copied to clipboard!', 'success', 3000);
             }).catch(() => {
                 this.fallbackCopy(text);
             });
@@ -7594,7 +7594,7 @@ https://poliinternational.com
         ta.select();
         try {
             document.execCommand('copy');
-            showToast('✓ Weekly Compliance Digest copied to clipboard!', 'success', 3000);
+            showToast('Weekly Compliance Digest copied to clipboard!', 'success', 3000);
         } catch (e) {
             showToast('Could not copy to clipboard automatically.', 'info', 2000);
         }
@@ -7768,7 +7768,7 @@ const GoogleSheetsSyncManager = {
     structureSporeTestForSheets: function(record) {
         if (!record) return [];
         const date = record.date || '';
-        const isPass = record.result === 'pass' || record.result === 'Passed' || record.result === 'Negative' || record.result === '✓ PASSED';
+        const isPass = record.result === 'pass' || record.result === 'Passed' || record.result === 'Negative' || record.result === 'PASSED';
         const result = isPass ? 'PASS' : 'FAIL';
         const lot = record.lotNumber || 'N/A';
         const incubation = record.incubationHours 
@@ -7880,11 +7880,11 @@ const GoogleSheetsSyncManager = {
             }
 
             if (attempt > 1) {
-                showToast(`✓ Google Sheets Sync Succeeded on Retry (Attempt ${attempt}/${maxRetries}) — ${payload.totalRecords} records updated!`, 'success', 4000);
+                showToast(`Google Sheets Sync Succeeded on Retry (Attempt ${attempt}/${maxRetries}) — ${payload.totalRecords} records updated!`, 'success', 4000);
             } else if (!silent) {
-                showToast(`✓ Cloud Sync Successful: ${payload.totalRecords} records pushed to Google Sheets!`, 'success', 3500);
+                showToast(`Cloud Sync Successful: ${payload.totalRecords} records pushed to Google Sheets!`, 'success', 3500);
             } else {
-                showToast('☁️ Auto-synced records to Google Sheets', 'info', 2000);
+                showToast('Auto-synced records to Google Sheets', 'info', 2000);
             }
 
             if (typeof callback === 'function') {
@@ -7941,7 +7941,7 @@ const GoogleSheetsSyncManager = {
                 toggle.addEventListener('change', (e) => {
                     this.setAutoSync(e.target.checked);
                     autoSyncToggles.forEach(t => { if (t && t !== toggle) t.checked = e.target.checked; });
-                    showToast(e.target.checked ? '✓ Google Sheets Auto-Sync Enabled' : 'Google Sheets Auto-Sync Disabled', 'info', 2000);
+                    showToast(e.target.checked ? 'Google Sheets Auto-Sync Enabled' : 'Google Sheets Auto-Sync Disabled', 'info', 2000);
                 });
             }
         });
@@ -8156,7 +8156,7 @@ const SettingsManager = {
         this.updateLogoDisplays();
         this.updateStorageStats();
         this.close();
-        showToast('✓ All settings saved and synchronized across applet!', 'success', 3000);
+        showToast('All settings saved and synchronized across applet!', 'success', 3000);
     },
 
     updateLogoDisplays: function() {
@@ -8176,7 +8176,7 @@ const SettingsManager = {
             if (emptyState) emptyState.style.display = 'none';
             if (removeBtn) removeBtn.style.display = 'inline-flex';
             if (statusBadge) {
-                statusBadge.textContent = '✓ Logo Active';
+                statusBadge.textContent = 'Logo Active';
                 statusBadge.classList.add('is-active');
             }
         } else {
@@ -8231,7 +8231,7 @@ const SettingsManager = {
             if (typeof updatePrintPreviewSheet === 'function') {
                 updatePrintPreviewSheet();
             }
-            showToast('✓ Custom studio logo updated and synchronized across all logs!', 'success', 2500);
+            showToast('Custom studio logo updated and synchronized across all logs!', 'success', 2500);
         };
         reader.readAsDataURL(file);
     },
@@ -8539,7 +8539,7 @@ const SterilizationLogManager = {
             logEntry.releaseStatus = 'Quarantined';
             logEntry.status = 'Quarantined';
             logEntry.quarantineReason = compliance.message;
-            showToast('⚠️ Parameter deviation detected: Batch automatically moved to Quarantine status.', 'warning', 4000);
+            showToast('Parameter deviation detected: Batch automatically moved to Quarantine status.', 'warning', 4000);
         } else if (!logEntry.signOffStatus) {
             logEntry.signOffStatus = this.getSignOffStatus(logEntry);
         }
@@ -8625,11 +8625,11 @@ const SterilizationLogManager = {
 
     getSignOffBadgeHtml: function(status) {
         if (status === 'Released') {
-            return `<span class="autoclave__badge autoclave__badge--released" title="Batch Released: Quality parameters met, Class 5 integrator passed, authorized for clinical/client use."><span class="autoclave__status-icon autoclave__status-icon--passed">✓</span> Released</span>`;
+            return `<span class="autoclave__badge autoclave__badge--released" title="Batch Released: Quality parameters met, Class 5 integrator passed, authorized for clinical/client use."><span class="autoclave__status-icon autoclave__status-icon--passed"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span> Released</span>`;
         } else if (status === 'Quarantined') {
-            return `<span class="autoclave__badge autoclave__badge--quarantined" title="Safety Quarantine: Deviations detected or Class 5 integrator failed. Batch quarantined from use."><span class="autoclave__status-icon autoclave__status-icon--aborted">⚠️</span> Quarantined</span>`;
+            return `<span class="autoclave__badge autoclave__badge--quarantined" title="Safety Quarantine: Deviations detected or Class 5 integrator failed. Batch quarantined from use."><span class="autoclave__status-icon autoclave__status-icon--aborted"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg></span> Quarantined</span>`;
         } else {
-            return `<span class="autoclave__badge autoclave__badge--pending" title="Awaiting Sign-off: Operator signature or chemical integrator verification is pending."><span class="autoclave__status-icon autoclave__status-icon--pending">⏳</span> Pending</span>`;
+            return `<span class="autoclave__badge autoclave__badge--pending" title="Awaiting Sign-off: Operator signature or chemical integrator verification is pending."><span class="autoclave__status-icon autoclave__status-icon--pending"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clock></use></svg></span> Pending</span>`;
         }
     },
 
@@ -8659,7 +8659,7 @@ const SterilizationLogManager = {
             this.saveLogs(logs);
             this.renderTable();
             this.renderChart();
-            showToast(`✓ Batch sign-off status updated to ${newStatus}`, 'success', 2500);
+            showToast(`Batch sign-off status updated to ${newStatus}`, 'success', 2500);
             return logs[idx];
         }
         return null;
@@ -8720,7 +8720,7 @@ const SterilizationLogManager = {
             calcSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        showToast(`✓ Pre-filled calculator from batch ${log.batchNumber || log.batchId || 'record'}. Ready for new run!`, 'success', 3500);
+        showToast(`Pre-filled calculator from batch ${log.batchNumber || log.batchId || 'record'}. Ready for new run!`, 'success', 3500);
     },
 
     renderChart: function() {
@@ -9054,7 +9054,7 @@ const SterilizationLogManager = {
             tableBody.innerHTML = `
                 <tr>
                     <td colspan="12" style="text-align: center; padding: 2rem; color: var(--color-text-muted);">
-                        ${this.filterIncomplete ? '🛡️ Excellent! All sterilization batch logs have complete operator signatures and chemical integrator confirmations.' : (this.searchQuery.trim() ? '🔍 No sterilization batch logs match your search criteria.' : (this.dateFilterPreset !== 'all' ? '📅 No batch logs recorded in the selected date range. Try selecting "All Dates" or expanding your filter.' : '📋 No sterilization cycles recorded yet. Calculate and save a run or load sample batches.'))}
+                        ${this.filterIncomplete ? 'Excellent! All sterilization batch logs have complete operator signatures and chemical integrator confirmations.' : (this.searchQuery.trim() ? 'No sterilization batch logs match your search criteria.' : (this.dateFilterPreset !== 'all' ? 'No batch logs recorded in the selected date range. Try selecting "All Dates" or expanding your filter.' : 'No sterilization cycles recorded yet. Calculate and save a run or load sample batches.'))}
                     </td>
                 </tr>
             `;
@@ -9091,20 +9091,20 @@ const SterilizationLogManager = {
 
             let operatorVal = log.operator || '';
             if (!operatorVal || operatorVal.trim() === '' || operatorVal.toUpperCase() === 'N/A') {
-                operatorVal = '<span class="missing-field-highlight" title="Mandatory audit field: Missing Operator name/signature">⚠️ Missing Operator</span>';
+                operatorVal = '<span class="missing-field-highlight" title="Mandatory audit field: Missing Operator name/signature"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> Missing Operator</span>';
             }
 
             let integratorBadge = '';
             if (log.integratorPassed === undefined || log.integratorPassed === null) {
-                integratorBadge = '<span class="missing-field-highlight" class="missing-field-highlight badge-warning-dashed">⚠️ Unconfirmed</span>';
+                integratorBadge = '<span class="missing-field-highlight" class="missing-field-highlight badge-warning-dashed"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> Unconfirmed</span>';
             } else if (log.integratorPassed !== false) {
-                integratorBadge = '<span class="badge-pure-water">✓ PASS</span>';
+                integratorBadge = '<span class="badge-pure-water"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> PASS</span>';
             } else {
-                integratorBadge = '<span class="badge-danger-pill">⚠️ FAIL</span>';
+                integratorBadge = '<span class="badge-danger-pill"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> FAIL</span>';
             }
 
             const warnChip = isAuditWarning 
-                ? `<br><span class="autoclave__audit-warn-chip" title="Missing required fields: ${auditCheck.missing.join(', ')}">⚠️ ${window.t('Incomplete ({count} missing)', { count: auditCheck.missing.length })}</span>` 
+                ? `<br><span class="autoclave__audit-warn-chip" title="Missing required fields: ${auditCheck.missing.join(', ')}"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> ${window.t('Incomplete ({count} missing)', { count: auditCheck.missing.length })}</span>` 
                 : '';
 
             // Generate Mini QR Code SVG for in-table optical scan & click-to-preview
@@ -9128,7 +9128,7 @@ const SterilizationLogManager = {
                     miniQrSvg = qr.createSvgTag({ scalable: true, cellSize: 2 });
                 }
             } catch (e) {
-                miniQrSvg = '<span style="font-size: 14px;">📱</span>';
+                miniQrSvg = '<span style="font-size: 14px;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-phone></use></svg></span>';
             }
 
             rowsHtml += `
@@ -9165,16 +9165,16 @@ const SterilizationLogManager = {
                     <td style="text-align: center; white-space: nowrap;">
                         <div style="display: inline-flex; gap: 4px; align-items: center;">
                             <button type="button" class="autoclave__action-button autoclave__action-button--ghost cycle-quick-print-btn" data-id="${log.id}" style="padding: 4px 8px; font-size: 11px; margin: 0; color: var(--color-primary);" title="Quick Print: Immediately open print preview document for this cycle">
-                                <span>🖨️</span> Print
+                                <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-print></use></svg></span> Print
                             </button>
                             <button type="button" class="autoclave__action-button autoclave__action-button--ghost cycle-duplicate-btn" data-id="${log.id}" style="padding: 4px 8px; font-size: 11px; margin: 0; color: var(--color-primary);" title="Duplicate / Pre-fill calculator with this batch's settings">
-                                <span>📋</span> Duplicate
+                                <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clipboard></use></svg></span> Duplicate
                             </button>
                             <button type="button" class="autoclave__action-button autoclave__action-button--ghost cycle-view-btn" data-id="${log.id}" style="padding: 4px 8px; font-size: 11px; margin: 0;" title="View all parameters, notes, compliance audit, and QR code">
-                                <span>🔍</span> Details
+                                <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg></span> Details
                             </button>
                             <button type="button" class="autoclave__action-button autoclave__action-button--ghost cycle-delete-single-btn" data-id="${log.id}" style="padding: 4px 6px; font-size: 11px; margin: 0; color: var(--color-danger);" title="Delete this batch record">
-                                <span>🗑️</span>
+                                <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-trash></use></svg></span>
                             </button>
                         </div>
                     </td>
@@ -9312,7 +9312,7 @@ const SterilizationLogManager = {
         this.selectedLogIds.clear();
         this.saveLogs(logs);
         this.renderTable();
-        showToast(`✓ Successfully deleted ${count} sterilization batch record(s).`, 'success', 2800);
+        showToast(`Successfully deleted ${count} sterilization batch record(s).`, 'success', 2800);
     },
 
     exportCSV: function(filteredOnly = false) {
@@ -9353,7 +9353,7 @@ const SterilizationLogManager = {
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        showToast(`✓ Exported ${logs.length} sterilization cycle record(s) to CSV`, 'success', 2500);
+        showToast(`Exported ${logs.length} sterilization cycle record(s) to CSV`, 'success', 2500);
     },
 
     pendingCsvRecords: [],
@@ -9419,12 +9419,12 @@ const SterilizationLogManager = {
         if (headerBanner) {
             if (missingHeaders.length === 0) {
                 headerBanner.className = 'autoclave__csv-val-banner autoclave__csv-val-banner--success';
-                if (headerIcon) headerIcon.textContent = '✓';
+                if (headerIcon) headerIcon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>';
                 if (headerTitle) headerTitle.textContent = 'Column Headers Validated';
                 if (headerDesc) headerDesc.textContent = 'All essential sterilization parameter columns recognized and cleanly mapped.';
             } else {
                 headerBanner.className = 'autoclave__csv-val-banner autoclave__csv-val-banner--warning';
-                if (headerIcon) headerIcon.textContent = '⚠️';
+                if (headerIcon) headerIcon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg>';
                 if (headerTitle) headerTitle.textContent = `Header Notice: ${missingHeaders.length} Optional Column(s) Missing`;
                 if (headerDesc) headerDesc.textContent = `Unmapped columns (${missingHeaders.join(', ')}). Default clinical standards applied.`;
             }
@@ -9504,7 +9504,7 @@ const SterilizationLogManager = {
         this.closeCsvValidationModal();
 
         if (addedCount > 0) {
-            showToast(`✓ Successfully imported ${addedCount} sterilization log(s) from CSV!`, 'success', 3500);
+            showToast(`Successfully imported ${addedCount} sterilization log(s) from CSV!`, 'success', 3500);
         } else {
             showToast(`All ${records.length} batch record(s) in CSV already exist in current logs.`, 'info', 3500);
         }
@@ -9767,7 +9767,7 @@ const SterilizationLogManager = {
                 if (confirm(t('Load realistic 30-day compliance sterilization cycle logs?'))) {
                     this.seedSampleLogs();
                     this.renderTable();
-                    showToast('✓ 30-Day Sample Batches loaded into storage!', 'success', 2800);
+                    showToast('30-Day Sample Batches loaded into storage!', 'success', 2800);
                 }
             });
         }
@@ -9916,7 +9916,7 @@ const SterilizationLogManager = {
                 this.dateFilterPreset = 'custom';
                 this.renderTable();
                 this.renderChart();
-                showToast('✓ Custom date range applied to sterilization logs', 'info', 2200);
+                showToast('Custom date range applied to sterilization logs', 'info', 2200);
             });
         }
 
@@ -10009,7 +10009,7 @@ const ViewDetailsManager = {
 
         if (type === 'cycle') {
             if (typeBadge) {
-                typeBadge.textContent = '📋 STERILIZATION CYCLE RECORD';
+                typeBadge.textContent = 'STERILIZATION CYCLE RECORD';
                 typeBadge.style.background = 'rgba(0, 102, 204, 0.15)';
                 typeBadge.style.color = '#0066CC';
             }
@@ -10056,7 +10056,7 @@ const ViewDetailsManager = {
                     </div>
                     <div class="autoclave__details-prop-item">
                         <span class="prop-label">Class 5 Integrator:</span>
-                        <span class="prop-value" style="color: ${record.integratorPassed !== false ? '#00A86B' : '#DC2626'}; font-weight: 700;">${record.integratorPassed !== false ? '✓ Passed (Distinct endpoint)' : '⚠️ FAILED'}</span>
+                        <span class="prop-value" style="color: ${record.integratorPassed !== false ? '#00A86B' : '#DC2626'}; font-weight: 700;">${record.integratorPassed !== false ? 'Passed (Distinct endpoint)' : 'FAILED'}</span>
                     </div>
                 `;
             }
@@ -10101,7 +10101,7 @@ const ViewDetailsManager = {
         } else {
             // Spore record
             if (typeBadge) {
-                typeBadge.textContent = '🦠 BIOLOGICAL SPORE TEST RECORD';
+                typeBadge.textContent = 'BIOLOGICAL SPORE TEST RECORD';
                 typeBadge.style.background = 'rgba(0, 200, 127, 0.15)';
                 typeBadge.style.color = '#008757';
             }
@@ -10112,9 +10112,9 @@ const ViewDetailsManager = {
             if (bannerEl) {
                 bannerEl.innerHTML = `
                     <div style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 8px; background: ${isPass ? '#F0FDF4' : '#FEF2F2'}; border: 1.5px solid ${isPass ? '#00C87F' : '#EF4444'};">
-                        <span style="font-size: 22px;">${isPass ? '🛡️' : '⚠️'}</span>
+                        <span style="font-size: 22px;">${isPass ? '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-shield></use></svg>' : '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg>'}</span>
                         <div>
-                            <strong style="color: ${isPass ? '#008757' : '#DC2626'}; font-size: 13px; display: block;">${isPass ? '✓ CERTIFIED NEGATIVE (PASSED)' : '⚠️ BIOLOGICAL GROWTH DETECTED (FAILED)'}</strong>
+                            <strong style="color: ${isPass ? '#008757' : '#DC2626'}; font-size: 13px; display: block;">${isPass ? 'CERTIFIED NEGATIVE (PASSED)' : 'BIOLOGICAL GROWTH DETECTED (FAILED)'}</strong>
                             <span style="color: ${isPass ? '#008757' : '#DC2626'}; font-size: 11.5px; line-height: 1.4; display: block; opacity: 0.95;">
                                 ${isPass ? 'Zero biological indicator growth verified at conclusion of full incubation cycle. Complete bacterial endospore lethality achieved.' : 'Positive test indicator. Immediate autoclave quarantine and re-testing protocol mandated.'}
                             </span>
@@ -10147,7 +10147,7 @@ const ViewDetailsManager = {
                     </div>
                     <div class="autoclave__details-prop-item">
                         <span class="prop-label">Control Vial Status:</span>
-                        <span class="prop-value" class="text-green">✓ Verified Viable (Positive)</span>
+                        <span class="prop-value" class="text-green"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Verified Viable (Positive)</span>
                     </div>
                 `;
             }
@@ -10216,8 +10216,8 @@ const ViewDetailsManager = {
                 bgColor: '#F0FDF4',
                 borderColor: '#00C87F',
                 textColor: '#008757',
-                icon: '🛡️',
-                title: '✓ COMPLIANT STERILIZATION BATCH',
+                icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-shield></use></svg>',
+                title: 'COMPLIANT STERILIZATION BATCH',
                 message: `All physical parameters (temperature, pressure, exposure, and drying times) meet or exceed ANSI/AAMI ST79 & ISO 11140 standards for ${(record.autoclaveName || type).toUpperCase()}.`
             };
         } else {
@@ -10226,8 +10226,8 @@ const ViewDetailsManager = {
                 bgColor: '#FEF2F2',
                 borderColor: '#EF4444',
                 textColor: '#DC2626',
-                icon: '⚠️',
-                title: '⚠️ NON-COMPLIANT / PARAMETER DEVIATION',
+                icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg>',
+                title: 'NON-COMPLIANT / PARAMETER DEVIATION',
                 message: `Deviation detected: ${reasons.join(' ')} Instruments from this batch must be quarantined and re-sterilized.`
             };
         }
@@ -10277,7 +10277,7 @@ Integrator / Result: ${this.currentType === 'cycle' ? (r.integratorPassed !== fa
 Notes: ${r.notes || 'None'}`;
 
         navigator.clipboard.writeText(summary).then(() => {
-            showToast('✓ Record verification details copied to clipboard!', 'success', 2500);
+            showToast('Record verification details copied to clipboard!', 'success', 2500);
         }).catch(() => {
             showToast('Could not copy to clipboard automatically.', 'info', 2500);
         });
@@ -10469,7 +10469,7 @@ const PouchLabelManager = {
         if (techEl) techEl.textContent = options.operator;
         if (autoEl) autoEl.textContent = options.autoclave;
         if (ciEl) {
-            ciEl.textContent = options.integratorPassed ? '✓ PASS' : '⚠️ FAIL';
+            ciEl.textContent = options.integratorPassed ? 'PASS' : 'FAIL';
             ciEl.style.color = options.integratorPassed ? '#008757' : '#DC2626';
         }
         if (qrWrap && options.qrSvg) {
@@ -10481,7 +10481,7 @@ const PouchLabelManager = {
         const options = this.getLabelOptions();
         if (typeof PDFGenerator !== 'undefined' && typeof PDFGenerator.printPouchLabels === 'function') {
             PDFGenerator.printPouchLabels(options);
-            showToast(`🖨️ Printing ${options.quantity} pouch label${options.quantity === 1 ? '' : 's'} (${options.batchId})...`, 'success', 2500);
+            showToast(`Printing ${options.quantity} pouch label${options.quantity === 1 ? '' : 's'} (${options.batchId})...`, 'success', 2500);
         } else {
             window.print();
         }
@@ -10721,7 +10721,7 @@ https://poliinternational.com
         const email = (emailInput?.value || localStorage.getItem(STORAGE_KEYS.MONTHLY_AUDIT_EMAIL) || localStorage.getItem(STORAGE_KEYS.DIGEST_EMAIL) || '').trim();
 
         if (!email) {
-            showToast('⚠️ Please enter a recipient manager email address first.', 'warning', 3000);
+            showToast('Please enter a recipient manager email address first.', 'warning', 3000);
             if (emailInput) emailInput.focus();
             return;
         }
@@ -10738,13 +10738,13 @@ https://poliinternational.com
             this.updateScheduleUI();
         }
 
-        showToast(isTest ? `📧 Opening email client with test monthly audit report for ${email}...` : `📧 Opening your email program with the monthly audit report for ${email}: check it and press Send there.`, 'success', 3500);
+        showToast(isTest ? `Opening email client with test monthly audit report for ${email}...` : `Opening your email program with the monthly audit report for ${email}: check it and press Send there.`, 'success', 3500);
     },
 
     copyMonthlyAuditText: function() {
         const text = this.generateMonthlyAuditText();
         navigator.clipboard.writeText(text).then(() => {
-            showToast('✓ Monthly Compliance Audit Report text copied to clipboard!', 'success', 2500);
+            showToast('Monthly Compliance Audit Report text copied to clipboard!', 'success', 2500);
         }).catch(() => {
             showToast('Could not copy automatically.', 'info', 2000);
         });
@@ -10765,12 +10765,12 @@ https://poliinternational.com
 
         // If today is on or after the 1st of current month and not sent yet this month
         if (dayOfMonth >= 1 && lastSentMonthKey !== currentMonthKey) {
-            console.log('⏰ Monthly Compliance Audit Report scheduled run triggered for:', currentMonthKey);
+            console.log('Monthly Compliance Audit Report scheduled run triggered for:', currentMonthKey);
             localStorage.setItem(STORAGE_KEYS.MONTHLY_AUDIT_LAST_SENT, new Date().toISOString());
             this.updateScheduleUI();
             // Show non-intrusive notification toast
             setTimeout(() => {
-                showToast(`📅 Monthly Compliance Audit scheduled email generated for ${email}.`, 'info', 4000);
+                showToast(`Monthly Compliance Audit scheduled email generated for ${email}.`, 'info', 4000);
             }, 1200);
         }
     },
@@ -10913,7 +10913,7 @@ const SafetyBackupManager = {
         if (banner) banner.style.display = 'none';
 
         this.updateStorageBadge();
-        showToast('🛡️ Complete Safety JSON Backup successfully downloaded and verified!', 'success', 3500);
+        showToast('Complete Safety JSON Backup successfully downloaded and verified!', 'success', 3500);
     },
 
     dismissReminder: function(days = 7) {
@@ -10931,7 +10931,7 @@ const SafetyBackupManager = {
             try {
                 const data = JSON.parse(e.target.result);
                 if (!data || (data.format !== 'POLI_AUTOCLAVE_SAFETY_BACKUP' && !data.cycles && !data.spores)) {
-                    showToast('⚠️ Invalid backup file format. Expected JSON safety backup.', 'warning', 3000);
+                    showToast('Invalid backup file format. Expected JSON safety backup.', 'warning', 3000);
                     return;
                 }
 
@@ -10965,10 +10965,10 @@ const SafetyBackupManager = {
                 if (typeof SettingsManager !== 'undefined') SettingsManager.restoreSettings();
                 if (typeof ComplianceStatusManager !== 'undefined') ComplianceStatusManager.updateStatus();
 
-                showToast('✓ Safety Backup restored successfully!', 'success', 3000);
+                showToast('Safety Backup restored successfully!', 'success', 3000);
             } catch (err) {
                 console.error('Backup restore error:', err);
-                showToast('⚠️ Failed to parse backup JSON file.', 'warning', 3000);
+                showToast('Failed to parse backup JSON file.', 'warning', 3000);
             }
         };
         reader.readAsText(file);
@@ -11096,7 +11096,7 @@ const QRScannerManager = {
         const t = window.t || (k => k);
         if (!confirm(t('Clear all optical scan history entries?'))) return;
         this.saveHistory([]);
-        showToast('✓ Optical scan history cleared.', 'info', 2000);
+        showToast('Optical scan history cleared.', 'info', 2000);
     },
 
     renderHistory: function() {
@@ -11133,10 +11133,10 @@ const QRScannerManager = {
                     </div>
                     <div class="qr-history-actions">
                         <button type="button" class="qr-history-select-btn" data-raw="${escapedRaw}" title="Select and look up this lot number">
-                            <span>🔍 Select</span>
+                            <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg> Select</span>
                         </button>
                         <button type="button" class="qr-history-del-btn" data-lot="${escapedLot}" title="Remove this scan entry">
-                            <span>✕</span>
+                            <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-x></use></svg></span>
                         </button>
                     </div>
                 </div>
@@ -11243,7 +11243,7 @@ const QRScannerManager = {
         const modalContainer = document.querySelector('.autoclave__scanner-modal-container');
         const statusText = document.getElementById('qr-scanner-status-text');
 
-        if (statusText) statusText.innerHTML = '<strong class="text-green font-bold">✓ QR Code Verified!</strong>';
+        if (statusText) statusText.innerHTML = '<strong class="text-green font-bold"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> QR Code Verified!</strong>';
         if (viewport) viewport.classList.add('autoclave__scanner-viewport--success');
         if (reticle) reticle.classList.add('autoclave__scanner-reticle--success');
         if (modalContainer) modalContainer.classList.add('autoclave__scanner-modal-container--flash');
@@ -11393,7 +11393,7 @@ const QRScannerManager = {
             const field = document.getElementById(this.fillTarget);
             this.closeScanner();
             if (field) { field.value = qrData; field.dispatchEvent(new Event('input', { bubbles: true })); }
-            showToast('✓ Lot number scanned', 'success', 2500);
+            showToast('Lot number scanned', 'success', 2500);
             return;
         }
         this.addToHistory(qrData);
@@ -11413,7 +11413,7 @@ const QRScannerManager = {
                 isSpore = true;
             }
             if (parsed.type === 'maintenance' || parsed.schema === 'POLI_MAINT_V1') {
-                showToast(`✓ QR Scanned: Maintenance Service Tag verified (${parsed.unit || 'Autoclave'})`, 'success', 3000);
+                showToast(`QR Scanned: Maintenance Service Tag verified (${parsed.unit || 'Autoclave'})`, 'success', 3000);
                 if (typeof EquipmentMaintenanceManager !== 'undefined') {
                     EquipmentMaintenanceManager.openQrModal(parsed);
                 }
@@ -11432,7 +11432,7 @@ const QRScannerManager = {
         );
 
         if (matchedMaint) {
-            showToast(`✓ QR Scanned: Maintenance Record #${matchedMaint.id} found!`, 'success', 3000);
+            showToast(`QR Scanned: Maintenance Record #${matchedMaint.id} found!`, 'success', 3000);
             if (typeof EquipmentMaintenanceManager !== 'undefined') {
                 EquipmentMaintenanceManager.openQrModal(matchedMaint);
             }
@@ -11448,7 +11448,7 @@ const QRScannerManager = {
         );
 
         if (matchedCycle) {
-            showToast(`✓ QR Scanned: Batch ${matchedCycle.batchNumber || matchedCycle.batchId} found!`, 'success', 3000);
+            showToast(`QR Scanned: Batch ${matchedCycle.batchNumber || matchedCycle.batchId} found!`, 'success', 3000);
             if (typeof ViewDetailsManager !== 'undefined') {
                 ViewDetailsManager.openForCycle(matchedCycle);
             }
@@ -11463,7 +11463,7 @@ const QRScannerManager = {
         );
 
         if (matchedSpore) {
-            showToast(`✓ QR Scanned: Spore Test Lot ${matchedSpore.lotNumber} found!`, 'success', 3000);
+            showToast(`QR Scanned: Spore Test Lot ${matchedSpore.lotNumber} found!`, 'success', 3000);
             if (typeof ViewDetailsManager !== 'undefined') {
                 ViewDetailsManager.openForSpore(matchedSpore);
             }
@@ -11472,7 +11472,7 @@ const QRScannerManager = {
 
         // If not in local records but valid synthetic payload, display it
         if (syntheticRecord && syntheticRecord.schema === 'POLI_AUTOCLAVE_V1') {
-            showToast(`✓ QR Code Verified: Batch ${syntheticRecord.batch}`, 'success', 3000);
+            showToast(`QR Code Verified: Batch ${syntheticRecord.batch}`, 'success', 3000);
             if (typeof ViewDetailsManager !== 'undefined') {
                 ViewDetailsManager.openDetails(syntheticRecord, syntheticRecord.type || 'cycle');
             }
@@ -11653,7 +11653,7 @@ const SporeCloudSyncManager = {
         const timeEl = document.getElementById('spore-last-synced-time');
         if (pill) {
             pill.className = 'autoclave__cloud-pill autoclave__cloud-pill--syncing';
-            pill.textContent = '⚡ Syncing now...';
+            pill.textContent = 'Syncing now...';
         }
         if (timeEl) timeEl.textContent = 'Pushing records...';
 
@@ -11665,7 +11665,7 @@ const SporeCloudSyncManager = {
             setTimeout(() => {
                 localStorage.setItem('autoclave_last_sheets_sync', new Date().toISOString());
                 this.updateSyncStatusUI();
-                showToast('✓ Biological monitoring data synced with Google Sheets & Firestore', 'success', 3000);
+                showToast('Biological monitoring data synced with Google Sheets & Firestore', 'success', 3000);
             }, 800);
         }
     },
@@ -11764,7 +11764,7 @@ const ComplianceStatusManager = {
                 banner.style.color = '#007A4D';
                 banner.innerHTML = `
                     <div>
-                        <strong style="font-size: 15px; display: block; margin-bottom: 2px;">🛡️ All Systems Go — Fully Compliant</strong>
+                        <strong style="font-size: 15px; display: block; margin-bottom: 2px;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-shield></use></svg> All Systems Go — Fully Compliant</strong>
                         <span style="font-size: 12px;">Today's biological spore test is logged &amp; annual biomedical calibration certification is active.</span>
                     </div>
                     <span class="pill-verified-green">VERIFIED</span>
@@ -11775,7 +11775,7 @@ const ComplianceStatusManager = {
                 banner.style.color = '#DC2626';
                 banner.innerHTML = `
                     <div>
-                        <strong style="font-size: 15px; display: block; margin-bottom: 2px;">⚠️ Compliance Action Needed</strong>
+                        <strong style="font-size: 15px; display: block; margin-bottom: 2px;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> Compliance Action Needed</strong>
                         <span style="font-size: 12px;">One or more critical infection control mandates require attention before client procedures.</span>
                     </div>
                     <span class="pill-action-red">ACTION REQUIRED</span>
@@ -11789,11 +11789,11 @@ const ComplianceStatusManager = {
         if (sporeBadge && sporeDesc) {
             if (status.hasTodaySporeTest) {
                 sporeBadge.className = 'autoclave__compliance-pill autoclave__compliance-pill--pass';
-                sporeBadge.textContent = '✓ LOGGED TODAY';
+                sporeBadge.textContent = 'LOGGED TODAY';
                 sporeDesc.innerHTML = `Today's biological indicator test is recorded (Lot: <strong>${status.todaySporeTest.lotNumber || 'Verified'}</strong>, Result: Negative / Pass).`;
             } else {
                 sporeBadge.className = 'autoclave__compliance-pill autoclave__compliance-pill--warn';
-                sporeBadge.textContent = '⚠️ NOT LOGGED TODAY';
+                sporeBadge.textContent = 'NOT LOGGED TODAY';
                 sporeDesc.textContent = "No biological spore test has been recorded for today's date yet. In accordance with studio QA protocol, run your biological indicator.";
             }
         }
@@ -11804,11 +11804,11 @@ const ComplianceStatusManager = {
         if (calibBadge && calibDesc) {
             if (status.isCalibrationValid) {
                 calibBadge.className = 'autoclave__compliance-pill autoclave__compliance-pill--pass';
-                calibBadge.textContent = `✓ VALID (${status.calibDaysRemaining}d remaining)`;
+                calibBadge.textContent = `VALID (${status.calibDaysRemaining}d remaining)`;
                 calibDesc.innerHTML = `Annual biomedical certification is in good standing (Technician: <strong>${status.calibData.technician || 'Biomedical Service'}</strong>, Inspection: ${status.calibData.date}).`;
             } else {
                 calibBadge.className = 'autoclave__compliance-pill autoclave__compliance-pill--warn';
-                calibBadge.textContent = status.calibData?.date ? '🚨 OVERDUE' : '⚠️ NOT RECORDED';
+                calibBadge.textContent = status.calibData?.date ? 'OVERDUE' : 'NOT RECORDED';
                 calibDesc.textContent = status.calibData?.date
                     ? 'Annual calibration inspection has exceeded the 365-day safety mandate. Autoclave requires professional re-certification.'
                     : 'No annual calibration certificate recorded. Please record the date of your last annual inspection in Settings.';
@@ -11821,11 +11821,11 @@ const ComplianceStatusManager = {
         if (dailyBadge && dailyDesc) {
             if (status.hasTodaySterilizationLog) {
                 dailyBadge.className = 'autoclave__compliance-pill autoclave__compliance-pill--pass';
-                dailyBadge.textContent = '✓ RECORDED';
+                dailyBadge.textContent = 'RECORDED';
                 dailyDesc.textContent = "At least one sterilization batch run has been calculated and logged for today.";
             } else {
                 dailyBadge.className = 'autoclave__compliance-pill autoclave__compliance-pill--warn';
-                dailyBadge.textContent = '⚠️ PENDING TODAY';
+                dailyBadge.textContent = 'PENDING TODAY';
                 dailyDesc.textContent = "No sterilization batch cycle has been recorded yet today.";
             }
         }
@@ -11990,30 +11990,30 @@ const SporeDailyAlertManager = {
 
             if (isOverdue) {
                 const daysOver = Math.max(1, Math.abs(Math.floor(hoursRemaining / 24)));
-                if (titleEl) titleEl.textContent = `🚨 CRITICAL BIOLOGICAL ALERT: Spore Test Overdue by ${daysOver} Day${daysOver > 1 ? 's' : ''}!`;
+                if (titleEl) titleEl.textContent = `CRITICAL BIOLOGICAL ALERT: Spore Test Overdue by ${daysOver} Day${daysOver > 1 ? 's' : ''}!`;
                 if (pillEl) {
                     pillEl.className = 'autoclave__spore-alert-pill autoclave__spore-alert-pill--overdue';
-                    pillEl.textContent = '🚨 OVERDUE — ACTION REQUIRED';
+                    pillEl.textContent = 'OVERDUE — ACTION REQUIRED';
                 }
                 if (statusEl) {
-                    statusEl.textContent = `🚨 ${window.t('OVERDUE ({days}d overdue)', { days: daysOver })}`;
+                    statusEl.textContent = `${window.t('OVERDUE ({days}d overdue)', { days: daysOver })}`;
                     statusEl.style.color = '#EF4444';
                 }
             } else if (hoursRemaining <= 12) {
-                if (titleEl) titleEl.textContent = `⚠️ URGENT QA COMPLIANCE: Spore Test Due Today (< 12 Hours Remaining)`;
+                if (titleEl) titleEl.textContent = `URGENT QA COMPLIANCE: Spore Test Due Today (< 12 Hours Remaining)`;
                 if (pillEl) {
                     pillEl.className = 'autoclave__spore-alert-pill autoclave__spore-alert-pill--warning';
-                    pillEl.textContent = '⚠️ DUE TODAY';
+                    pillEl.textContent = 'DUE TODAY';
                 }
                 if (statusEl) {
-                    statusEl.textContent = `⚠️ Due Today (~${Math.max(1, Math.round(hoursRemaining))}h remaining)`;
+                    statusEl.textContent = `Due Today (~${Math.max(1, Math.round(hoursRemaining))}h remaining)`;
                     statusEl.style.color = '#F59E0B';
                 }
             } else {
-                if (titleEl) titleEl.textContent = `⚠️ MANDATORY BIOLOGICAL NOTICE: Spore Test Due Within 24 Hours`;
+                if (titleEl) titleEl.textContent = `MANDATORY BIOLOGICAL NOTICE: Spore Test Due Within 24 Hours`;
                 if (pillEl) {
                     pillEl.className = 'autoclave__spore-alert-pill autoclave__spore-alert-pill--warning';
-                    pillEl.textContent = '⏳ DUE IN < 24H';
+                    pillEl.textContent = 'DUE IN < 24H';
                 }
                 if (statusEl) {
                     statusEl.textContent = `Due in ${Math.round(hoursRemaining)} hours`;
@@ -12157,7 +12157,7 @@ const DailyChecklistAlertManager = {
         }
 
         this.closeModal();
-        showToast('✓ Morning baseline sterilization log recorded for today!', 'success', 3500);
+        showToast('Morning baseline sterilization log recorded for today!', 'success', 3500);
     },
 
     startCycleInCalculator: function() {
@@ -12242,12 +12242,12 @@ const PredictiveEfficiencyManager = {
             diagBtn.addEventListener('click', () => {
                 diagBtn.disabled = true;
                 const originalText = diagBtn.innerHTML;
-                diagBtn.innerHTML = '<span>⏳</span> Analyzing Telemetry...';
+                diagBtn.innerHTML = '<span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clock></use></svg></span> Analyzing Telemetry...';
                 setTimeout(() => {
                     this.analyzeAndRender();
                     diagBtn.disabled = false;
                     diagBtn.innerHTML = originalText;
-                    showToast('✓ Predictive hardware diagnostic complete: Telemetry analyzed across recent sterilization cycles.', 'success', 3200);
+                    showToast('Predictive hardware diagnostic complete: Telemetry analyzed across recent sterilization cycles.', 'success', 3200);
                 }, 400);
             });
         }
@@ -12386,19 +12386,19 @@ const PredictiveEfficiencyManager = {
         const advBox = document.getElementById('predictive-advisory-box');
         if (advTitle && advText) {
             if (meanLag > 2.5) {
-                advTitle.textContent = '⚠️ Predictive Alert: Minor Heating Lag Detected (+2.5 min)';
+                advTitle.textContent = 'Predictive Alert: Minor Heating Lag Detected (+2.5 min)';
                 advText.textContent = `Historical cycle duration has drifted ${meanLag.toFixed(1)} min above nominal specifications. This pattern typically correlates with mineral scale accumulation on internal heating elements. Perform a Speed-Clean descaling flush within the next 10 cycles.`;
                 if (advBox) {
                     advBox.className = 'predictive-advisory-box predictive-advisory-box--warning';
                 }
             } else if (gasketScore < 60) {
-                advTitle.textContent = '⚠️ Preventive Advisory: Door Gasket Wear Horizon Approaching';
+                advTitle.textContent = 'Preventive Advisory: Door Gasket Wear Horizon Approaching';
                 advText.textContent = `Door gasket has logged over 200 cycles. Inspect silicone/rubber seal for hardening, flat spots, or micro-cracking during morning chamber inspection.`;
                 if (advBox) {
                     advBox.className = 'predictive-advisory-box predictive-advisory-box--warning';
                 }
             } else {
-                advTitle.textContent = '✓ Hardware Status: All Autoclave Subsystems Operating Within Normal Parameters';
+                advTitle.textContent = 'Hardware Status: All Autoclave Subsystems Operating Within Normal Parameters';
                 advText.textContent = `Thermal ramp rate, pressure stabilization, and dry exhaust flow match manufacturer baseline performance curves (ANSI/AAMI ST79). No impending hardware failure or vacuum leaks detected.`;
                 if (advBox) {
                     advBox.className = 'predictive-advisory-box predictive-advisory-box--info';
@@ -12544,7 +12544,7 @@ const QuarterlyInspectorManager = {
         if (refreshBtn) {
             refreshBtn.addEventListener('click', () => {
                 this.renderLivePreview();
-                showToast('✓ Inspector dossier refreshed with latest ledger records.', 'info', 2000);
+                showToast('Inspector dossier refreshed with latest ledger records.', 'info', 2000);
             });
         }
 
@@ -12584,7 +12584,7 @@ const QuarterlyInspectorManager = {
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
         this.renderLivePreview();
-        showToast(`✓ Merged ${selectedLogs.length} selected batches into Inspector Submission Dossier`, 'success', 2800);
+        showToast(`Merged ${selectedLogs.length} selected batches into Inspector Submission Dossier`, 'success', 2800);
     },
 
     close: function() {
@@ -12780,7 +12780,7 @@ const EquipmentMaintenanceManager = {
                 <td style="font-size: 11.5px; color: var(--color-text-muted); max-width: 240px;">${r.notes || ''}</td>
                 <td style="text-align: center;">
                     <button type="button" class="btn-maint-qr-tag" data-id="${r.id}" title="Generate & Print Machine Service Tag QR" style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; font-size: 11px; font-weight: 600; background: var(--bg-tertiary); color: var(--color-primary); border: 1px solid var(--color-primary); border-radius: 6px; cursor: pointer;">
-                        <span>🏷️</span> Tag QR
+                        <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-tag></use></svg></span> Tag QR
                     </button>
                 </td>
             </tr>
@@ -12998,7 +12998,7 @@ const EquipmentMaintenanceManager = {
         const records = this.getRecords();
         records.unshift(newRec);
         this.saveRecords(records);
-        showToast(`✓ Logged: ${taskTitle}`, 'success', 3000);
+        showToast(`Logged: ${taskTitle}`, 'success', 3000);
     },
 
     openLogModal: function() {
@@ -13076,7 +13076,7 @@ const EquipmentMaintenanceManager = {
                 this.saveRecords(records);
                 this.closeLogModal();
                 form.reset();
-                showToast('✓ Maintenance and equipment service record saved to ledger.', 'success', 3200);
+                showToast('Maintenance and equipment service record saved to ledger.', 'success', 3200);
             });
         }
 
@@ -13099,7 +13099,7 @@ const EquipmentMaintenanceManager = {
                     localStorage.setItem(STORAGE_KEYS.EQUIPMENT_UNITS, JSON.stringify(units));
                     this.populateUnitDropdowns();
                     this.recalculateHours();
-                    showToast(`✓ Autoclave unit registered: ${unitName.trim()}`, 'success', 3000);
+                    showToast(`Autoclave unit registered: ${unitName.trim()}`, 'success', 3000);
                 }
             });
         }
@@ -13125,7 +13125,7 @@ const EquipmentMaintenanceManager = {
                         ...this.activeQrRecord
                     }, null, 2);
                     navigator.clipboard.writeText(payload).then(() => {
-                        showToast('✓ Machine Tag Payload copied to clipboard', 'success', 2200);
+                        showToast('Machine Tag Payload copied to clipboard', 'success', 2200);
                     }).catch(() => {
                         showToast('Payload ready in memory', 'info', 1800);
                     });
@@ -13155,7 +13155,7 @@ const EquipmentMaintenanceManager = {
                 a.click();
                 URL.revokeObjectURL(url);
                 document.body.removeChild(a);
-                showToast('✓ Maintenance ledger CSV downloaded.', 'success', 2500);
+                showToast('Maintenance ledger CSV downloaded.', 'success', 2500);
             });
         }
 
@@ -13544,7 +13544,7 @@ const PackagingShelfLifeManager = {
         if (calcBtn) {
             calcBtn.addEventListener('click', () => {
                 this.computeShelfLife();
-                showToast('✓ Sterile shelf-life and event-related protocol calculated.', 'success', 2500);
+                showToast('Sterile shelf-life and event-related protocol calculated.', 'success', 2500);
             });
         }
         if (openModalBtn) openModalBtn.addEventListener('click', () => this.openLabelModal());
@@ -13681,19 +13681,19 @@ const ChamberVisualizerManager = {
         const chkDry = document.getElementById('check-dry-cycle-burden');
 
         if (chkSteam) {
-            chkSteam.textContent = utilizationPct <= 85 ? '✓ 25mm Perimeter Steam Convection Clearance Verified' : '⚠️ Warning: Overcrowded chamber reduces steam penetration';
+            chkSteam.textContent = utilizationPct <= 85 ? '25mm Perimeter Steam Convection Clearance Verified' : 'Warning: Overcrowded chamber reduces steam penetration';
             chkSteam.style.color = utilizationPct <= 85 ? '#008757' : '#EF4444';
         }
         if (chkOrient) {
-            chkOrient.textContent = orientation === 'on_edge' ? '✓ Pouches Standing on Edge (Paper-to-Plastic Orientation)' : '❌ Non-Compliant: Flat stacking traps condensation & creates wet packs';
+            chkOrient.textContent = orientation === 'on_edge' ? 'Pouches Standing on Edge (Paper-to-Plastic Orientation)' : 'Non-Compliant: Flat stacking traps condensation & creates wet packs';
             chkOrient.style.color = orientation === 'on_edge' ? '#008757' : '#EF4444';
         }
         if (chkSensor) {
-            chkSensor.textContent = '✓ Chamber RTD Temperature Probe 50mm Clearance Unobstructed';
+            chkSensor.textContent = 'Chamber RTD Temperature Probe 50mm Clearance Unobstructed';
             chkSensor.style.color = '#008757';
         }
         if (chkDry) {
-            chkDry.textContent = utilizationPct <= 80 ? '✓ Standard 20m Dry Cycle Sufficient' : '⚠️ Heavy Load: Increase dry cycle to 30 min to avoid wet packs';
+            chkDry.textContent = utilizationPct <= 80 ? 'Standard 20m Dry Cycle Sufficient' : 'Heavy Load: Increase dry cycle to 30 min to avoid wet packs';
             chkDry.style.color = utilizationPct <= 80 ? '#008757' : '#F59E0B';
         }
     },
@@ -13720,7 +13720,7 @@ const ChamberVisualizerManager = {
             if (cassetteInput) cassetteInput.value = '0';
         }
         this.renderChamber();
-        showToast('✓ Load configuration preset applied.', 'info', 1800);
+        showToast('Load configuration preset applied.', 'info', 1800);
     },
 
     attachListeners: function() {
@@ -13732,7 +13732,7 @@ const ChamberVisualizerManager = {
         if (applyBtn) {
             applyBtn.addEventListener('click', () => {
                 this.renderChamber();
-                showToast('✓ Chamber packing plan validated for optimal steam dynamics.', 'success', 2500);
+                showToast('Chamber packing plan validated for optimal steam dynamics.', 'success', 2500);
             });
         }
         if (resetBtn) {
@@ -13759,7 +13759,7 @@ const ChamberVisualizerManager = {
 const DiagnosticDecisionTreeManager = {
     DECISION_TREES: {
         'wet-instruments': {
-            title: '💧 Wet Packs & Condensation Inside Pouches',
+            title: 'Wet Packs & Condensation Inside Pouches',
             question: 'When removing pouches at cycle completion, where is the moisture located?',
             options: [
                 { text: 'Moisture droplets inside sealed pouches', next: 'wet-inside' },
@@ -13793,7 +13793,7 @@ const DiagnosticDecisionTreeManager = {
             ]
         },
         'failed-spore': {
-            title: '🚨 Biological Indicator (Spore Test) Failure / Growth Detected',
+            title: 'Biological Indicator (Spore Test) Failure / Growth Detected',
             question: 'What type of biological indicator (BI) exhibited bacterial growth?',
             options: [
                 { text: 'Geobacillus stearothermophilus (Steam In-House / Mail-In)', next: 'spore-steam-fail' },
@@ -13801,7 +13801,7 @@ const DiagnosticDecisionTreeManager = {
             ]
         },
         'spore-steam-fail': {
-            title: '🚨 MANDATORY ACTION: Immediate Autoclave Quarantine Protocol',
+            title: 'MANDATORY ACTION: Immediate Autoclave Quarantine Protocol',
             findings: 'Positive biological growth indicates failure of microbial lethality. Autoclave is legally non-compliant.',
             correctiveActions: [
                 'IMMEDIATELY QUARANTINE AUTOCLAVE: Tag unit OUT OF SERVICE. Do not sterilize piercing tools.',
@@ -13811,7 +13811,7 @@ const DiagnosticDecisionTreeManager = {
             ]
         },
         'ci-incomplete': {
-            title: '🟡 Chemical Integrator (Class 5) Incomplete / Dark Line Not in PASS Window',
+            title: 'Chemical Integrator (Class 5) Incomplete / Dark Line Not in PASS Window',
             question: 'Did the Class 5 integrator fail in a single pouch or across all items in the load?',
             options: [
                 { text: 'Single pouch failed, other integrators passed', next: 'ci-single-fail' },
@@ -13835,7 +13835,7 @@ const DiagnosticDecisionTreeManager = {
             ]
         },
         'slow-cycle': {
-            title: '⏱️ Heating Ramp Lag / Extended Cycle Duration',
+            title: 'Heating Ramp Lag / Extended Cycle Duration',
             question: 'At which stage of the cycle is the machine lagging?',
             options: [
                 { text: 'Initial heating to 270°F takes > 20 minutes', next: 'lag-heating' },
@@ -13892,7 +13892,7 @@ const DiagnosticDecisionTreeManager = {
                 <div style="display: flex; flex-direction: column; gap: 8px;">
                     ${node.options.map(opt => `
                         <button type="button" class="btn-decision-choice autoclave__action-button" data-next="${opt.next}" style="text-align: left; justify-content: flex-start; padding: 10px 14px; font-size: 12.5px;">
-                            <span>👉</span> ${opt.text}
+                            <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-arrow></use></svg></span> ${opt.text}
                         </button>
                     `).join('')}
                 </div>
@@ -13909,7 +13909,7 @@ const DiagnosticDecisionTreeManager = {
                 </ul>
                 <div style="display: flex; gap: 8px;">
                     <button type="button" class="btn-decision-choice autoclave__action-button autoclave__action-button--primary-alt" data-next="wet-instruments" style="font-size: 11.5px;">
-                        <span>🔄</span> Restart Diagnostic Flow
+                        <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-refresh></use></svg></span> Restart Diagnostic Flow
                     </button>
                 </div>
             `;
@@ -14091,21 +14091,21 @@ const VoiceAnnouncerManager = {
             if (startBtn && startBtn.style.display !== 'none') {
                 startBtn.click();
                 this.speak('Timer started.');
-                if (typeof showToast === 'function') showToast('🎙️ Voice Command: Sterilization Timer Started', 'success', 2200);
+                if (typeof showToast === 'function') showToast('Voice Command: Sterilization Timer Started', 'success', 2200);
             }
         } else if (text.includes('pause timer') || text.includes('pause cycle') || text.includes('stop timer') || text.includes('hold timer')) {
             const pauseBtn = document.getElementById('timer-pause-btn');
             if (pauseBtn && pauseBtn.style.display !== 'none') {
                 pauseBtn.click();
                 this.speak('Timer paused.');
-                if (typeof showToast === 'function') showToast('🎙️ Voice Command: Timer Paused', 'info', 2000);
+                if (typeof showToast === 'function') showToast('Voice Command: Timer Paused', 'info', 2000);
             }
         } else if (text.includes('reset cycle') || text.includes('reset timer') || text === 'reset') {
             const resetBtn = document.getElementById('timer-reset-btn');
             if (resetBtn) {
                 resetBtn.click();
                 this.speak('Sterilization cycle reset.');
-                if (typeof showToast === 'function') showToast('🎙️ Voice Command: Cycle Reset', 'info', 2000);
+                if (typeof showToast === 'function') showToast('Voice Command: Cycle Reset', 'info', 2000);
             }
         } else if (text.includes('check compliance') || text.includes('compliance status') || text.includes('compliance audit') || text.includes('audit status')) {
             if (typeof ComplianceStatusManager !== 'undefined' && ComplianceStatusManager.openDetailsModal) {
@@ -14115,27 +14115,27 @@ const VoiceAnnouncerManager = {
                 if (btn) btn.click();
             }
             this.speak('Displaying clinical compliance verification.');
-            if (typeof showToast === 'function') showToast('🎙️ Voice Command: Compliance Status Opened', 'info', 2200);
+            if (typeof showToast === 'function') showToast('Voice Command: Compliance Status Opened', 'info', 2200);
         } else if (text.includes('print report') || text.includes('print preview') || text.includes('print log')) {
             const printBtn = document.getElementById('preview-results-btn');
             if (printBtn) {
                 printBtn.click();
                 this.speak('Opening sterilization print log preview.');
-                if (typeof showToast === 'function') showToast('🎙️ Voice Command: Print Preview Opened', 'info', 2200);
+                if (typeof showToast === 'function') showToast('Voice Command: Print Preview Opened', 'info', 2200);
             }
         } else if (text.includes('log spore') || text.includes('spore test') || text.includes('spore log') || text.includes('biological test')) {
             const sporeBtn = document.getElementById('btn-log-spore-test');
             if (sporeBtn) {
                 sporeBtn.click();
                 this.speak('Opening spore test log.');
-                if (typeof showToast === 'function') showToast('🎙️ Voice Command: Spore Test Log Opened', 'info', 2200);
+                if (typeof showToast === 'function') showToast('Voice Command: Spore Test Log Opened', 'info', 2200);
             }
         } else if (text.includes('log maintenance') || text.includes('service machine') || text.includes('equipment service')) {
             const maintBtn = document.getElementById('btn-open-log-maintenance-modal');
             if (maintBtn) {
                 maintBtn.click();
                 this.speak('Opening equipment maintenance logger.');
-                if (typeof showToast === 'function') showToast('🎙️ Voice Command: Maintenance Logger Opened', 'info', 2200);
+                if (typeof showToast === 'function') showToast('Voice Command: Maintenance Logger Opened', 'info', 2200);
             }
         } else if (text.includes('toggle theme') || text.includes('dark mode') || text.includes('light mode')) {
             const themeBtn = document.getElementById('dark-mode-toggle');
@@ -14145,7 +14145,7 @@ const VoiceAnnouncerManager = {
             }
         } else if (text.includes('mute voice') || text.includes('disable voice') || text.includes('stop listening')) {
             this.setEnabled(false);
-            if (typeof showToast === 'function') showToast('🔇 Voice Announcer Muted', 'info', 2000);
+            if (typeof showToast === 'function') showToast('Voice Announcer Muted', 'info', 2000);
         }
     },
 
@@ -14205,7 +14205,7 @@ const VoiceAnnouncerManager = {
                 const nextState = !this.isEnabled();
                 this.setEnabled(nextState);
                 if (typeof showToast === 'function') {
-                    showToast(nextState ? '🗣️ Hands-Free Voice Guidance Activated' : '🔇 Voice Announcements Muted', 'info', 2000);
+                    showToast(nextState ? 'Hands-Free Voice Guidance Activated' : 'Voice Announcements Muted', 'info', 2000);
                 }
                 if (nextState) {
                     this.speak('Voice guidance active.');
@@ -14249,7 +14249,7 @@ const VoiceAnnouncerManager = {
             muteOverlayBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 this.setEnabled(false);
-                if (typeof showToast === 'function') showToast('🔇 Voice Assistant Muted', 'info', 1800);
+                if (typeof showToast === 'function') showToast('Voice Assistant Muted', 'info', 1800);
             });
         }
 
@@ -14302,7 +14302,7 @@ const CycleAbortManager = {
         const allChecked = Array.from(chks).every(c => c.checked);
         if (!allChecked) {
             if (typeof showToast === 'function') {
-                showToast('⚠️ Please verify and check all 4 mandatory quarantine steps before logging.', 'warning', 3500);
+                showToast('Please verify and check all 4 mandatory quarantine steps before logging.', 'warning', 3500);
             }
             return;
         }
@@ -14344,7 +14344,7 @@ const CycleAbortManager = {
         }
 
         if (typeof showToast === 'function') {
-            showToast(`🚨 Cycle Abort recorded (${abortedLog.batchNumber}). Load quarantined.`, 'error', 4000);
+            showToast(`Cycle Abort recorded (${abortedLog.batchNumber}). Load quarantined.`, 'error', 4000);
         }
 
         this.close();
@@ -14469,7 +14469,7 @@ const WaterQualityManager = {
         }
 
         if (typeof showToast === 'function') {
-            showToast(`💧 Logged water purity reading: ${tds} PPM.`, 'success', 2500);
+            showToast(`Logged water purity reading: ${tds} PPM.`, 'success', 2500);
         }
     },
 
@@ -14483,23 +14483,23 @@ const WaterQualityManager = {
 
         if (currentDisp) currentDisp.textContent = currentTds;
 
-        let statusText = '✓ Pure Distilled (≤5 PPM)';
+        let statusText = 'Pure Distilled (≤5 PPM)';
         let statusBg = '#dcfce7';
         let statusColor = '#166534';
         let fillColor = '#00c87f';
 
         if (currentTds <= 5) {
-            statusText = '✓ Pure Distilled (≤5 PPM)';
+            statusText = 'Pure Distilled (≤5 PPM)';
             statusBg = '#dcfce7';
             statusColor = '#166534';
             fillColor = '#00c87f';
         } else if (currentTds <= 15) {
-            statusText = '⚠️ Marginal (Action limit 15 PPM)';
+            statusText = 'Marginal (Action limit 15 PPM)';
             statusBg = '#fef3c7';
             statusColor = '#92400e';
             fillColor = '#f59e0b';
         } else {
-            statusText = '🚨 CRITICAL: Mineral Scaling Hazard (>15 PPM)';
+            statusText = 'CRITICAL: Mineral Scaling Hazard (>15 PPM)';
             statusBg = '#fee2e2';
             statusColor = '#991b1b';
             fillColor = '#ef4444';
@@ -14682,7 +14682,7 @@ const RegionalComplianceManager = {
             QuickStatsStripManager.refresh();
         }
         if (typeof showToast === 'function') {
-            showToast(`🌐 Applied ${this.PRESETS[key].name} standard preset.`, 'info', 2500);
+            showToast(`Applied ${this.PRESETS[key].name} standard preset.`, 'info', 2500);
         }
     },
 
@@ -14750,7 +14750,7 @@ const QuickStatsStripManager = {
                 const latest = records[0];
                 const daysAgo = Math.floor((Date.now() - new Date(latest.date).getTime()) / (1000 * 60 * 60 * 24));
                 if (latest.result === 'failed' || latest.result === 'positive') {
-                    sporePill.textContent = '🚨 SPORE FAIL';
+                    sporePill.textContent = 'SPORE FAIL';
                     sporePill.style.color = '#ef4444';
                     if (sporeDot) sporeDot.className = 'quick-stat-dot quick-stat-dot--red';
                 } else if (daysAgo <= 7) {
@@ -14758,7 +14758,7 @@ const QuickStatsStripManager = {
                     sporePill.style.color = '#10b981';
                     if (sporeDot) sporeDot.className = 'quick-stat-dot quick-stat-dot--green';
                 } else {
-                    sporePill.textContent = `⚠️ Due (${daysAgo}d ago)`;
+                    sporePill.textContent = `Due (${daysAgo}d ago)`;
                     sporePill.style.color = '#f59e0b';
                     if (sporeDot) sporeDot.className = 'quick-stat-dot quick-stat-dot--yellow';
                 }
@@ -14806,7 +14806,7 @@ const QuickStatsStripManager = {
             });
         }
 
-        // Quick Action Toolbar Button 2: 🚨 Abort / Fail Wizard
+        // Quick Action Toolbar Button 2: Abort / Fail Wizard
         const abortBtn = document.getElementById('btn-quick-abort-wizard');
         if (abortBtn) {
             abortBtn.addEventListener('click', (e) => {
@@ -14817,7 +14817,7 @@ const QuickStatsStripManager = {
             });
         }
 
-        // Quick Action Toolbar Button 3: 🧪 Log Spore
+        // Quick Action Toolbar Button 3: Log Spore
         const logSporeBtn = document.getElementById('btn-quick-log-spore');
         if (logSporeBtn) {
             logSporeBtn.addEventListener('click', (e) => {
@@ -14831,7 +14831,7 @@ const QuickStatsStripManager = {
             });
         }
 
-        // Quick Action Toolbar Button 4: 💧 Water TDS
+        // Quick Action Toolbar Button 4: Water TDS
         const waterBtn = document.getElementById('btn-quick-water-tds');
         if (waterBtn) {
             waterBtn.addEventListener('click', (e) => {
@@ -14842,7 +14842,7 @@ const QuickStatsStripManager = {
             });
         }
 
-        // Quick Action Toolbar Button 5: 🏷️ Pouch Labels
+        // Quick Action Toolbar Button 5: Pouch Labels
         const labelsBtn = document.getElementById('btn-quick-pouch-labels');
         if (labelsBtn) {
             labelsBtn.addEventListener('click', (e) => {
@@ -14853,7 +14853,7 @@ const QuickStatsStripManager = {
             });
         }
 
-        // Quick Action Toolbar Button 6: 📋 Inspector Dossier
+        // Quick Action Toolbar Button 6: Inspector Dossier
         const dossierBtn = document.getElementById('btn-quick-dossier');
         if (dossierBtn) {
             dossierBtn.addEventListener('click', (e) => {
@@ -15207,7 +15207,7 @@ const AnatomyReferenceManager = {
         if (grid) {
             grid.innerHTML = `
                 <div class="anatomy-stat-pill">
-                    <div class="anatomy-stat-title">📏 Skin & Tissue Thickness</div>
+                    <div class="anatomy-stat-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-ruler></use></svg> Skin & Tissue Thickness</div>
                     <div class="anatomy-stat-value">${profile.thicknessText}</div>
                     <div class="anatomy-thickness-bar-wrap">
                         <div class="anatomy-thickness-bar-fill" style="width: ${profile.barPct}%;"></div>
@@ -15216,31 +15216,31 @@ const AnatomyReferenceManager = {
                 </div>
 
                 <div class="anatomy-stat-pill">
-                    <div class="anatomy-stat-title">🧬 Elasticity & Structure</div>
+                    <div class="anatomy-stat-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-dna></use></svg> Elasticity & Structure</div>
                     <div class="anatomy-stat-value" style="font-size: 0.92rem; line-height: 1.3;">${profile.elasticity.split('(')[0]}</div>
                     <div class="anatomy-stat-sub">${profile.elasticity}</div>
                 </div>
 
                 <div class="anatomy-stat-pill">
-                    <div class="anatomy-stat-title">💉 Gauge & Post Sizing</div>
+                    <div class="anatomy-stat-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-cartridge></use></svg> Gauge & Post Sizing</div>
                     <div class="anatomy-stat-value">${profile.gauge}</div>
                     <div class="anatomy-stat-sub">${profile.postLength}</div>
                 </div>
 
                 <div class="anatomy-stat-pill">
-                    <div class="anatomy-stat-title">🛡️ Certified Implant Alloy</div>
+                    <div class="anatomy-stat-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-shield></use></svg> Certified Implant Alloy</div>
                     <div class="anatomy-stat-value" class="anatomy-stat-blue">${profile.alloy.split('/')[0]}</div>
                     <div class="anatomy-stat-sub">Standards: Qualified Professional Piercer & ASTM Standard</div>
                 </div>
 
                 <div class="anatomy-stat-pill">
-                    <div class="anatomy-stat-title">🌡️ Autoclave Sterilization</div>
+                    <div class="anatomy-stat-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-thermo></use></svg> Autoclave Sterilization</div>
                     <div class="anatomy-stat-value" class="anatomy-stat-green">${profile.cycle.split('•')[0]}</div>
                     <div class="anatomy-stat-sub">${profile.cycle}</div>
                 </div>
 
                 <div class="anatomy-stat-pill">
-                    <div class="anatomy-stat-title">⏳ Healing & Downsize</div>
+                    <div class="anatomy-stat-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clock></use></svg> Healing & Downsize</div>
                     <div class="anatomy-stat-value">${profile.healing.split('(')[0]}</div>
                     <div class="anatomy-stat-sub">Downsize Milestone: <strong>${profile.downsize}</strong></div>
                 </div>
@@ -15275,7 +15275,7 @@ if (document.readyState === 'loading') {
     initAutoclaveApp();
 }
 
-console.log('%c🔬 Autoclave Sterilization Calculator', 'color: #00A86B; font-size: 16px; font-weight: bold;');
+console.log('%cAutoclave Sterilization Calculator', 'color: #00A86B; font-size: 16px; font-weight: bold;');
 console.log('%cPart of Poli International Widget Suite', 'color: #6C757D; font-size: 12px;');
 console.log('%cLearn more: https://poliinternational.com', 'color: #0066CC; font-size: 12px;');
 

@@ -4,7 +4,7 @@
 
 const I18N = {
   "en": {
-    "app.badge": "⚡ Machine Diagnostics",
+    "app.badge": "Machine Diagnostics",
     "app.title": "Power Supply & Machine Troubleshooter",
     "app.desc": "Step-by-step fault diagnosis for tattoo machines. Answer a few questions about your symptoms to get a targeted fix checklist.",
     "safety.title": "Safety note:",
@@ -407,7 +407,7 @@ const I18N = {
     "escalation.filter_service": "Bench Service (11)"
   },
   "fr": {
-    "app.badge": "⚡ Diagnostic machine",
+    "app.badge": "Diagnostic machine",
     "app.title": "Guide de dépannage alimentation et machine",
     "app.desc": "Diagnostic des pannes étape par étape pour machines de tatouage. Répondez à quelques questions sur vos symptômes pour obtenir une liste d’actions ciblées.",
     "safety.title": "Consigne de sécurité :",
@@ -810,7 +810,7 @@ const I18N = {
     "escalation.filter_service": "Service atelier (11)"
   },
   "it": {
-    "app.badge": "⚡ Diagnostica macchina",
+    "app.badge": "Diagnostica macchina",
     "app.title": "Guida alla risoluzione dei problemi di alimentazione e macchina",
     "app.desc": "Diagnosi dei guasti passo dopo passo per macchinette per tatuaggi. Rispondi a poche domande sui tuoi sintomi per ottenere un elenco mirato di controlli e soluzioni.",
     "safety.title": "Nota di sicurezza:",
@@ -1213,7 +1213,7 @@ const I18N = {
     "escalation.filter_service": "Assistenza banco (11)"
   },
   "de": {
-    "app.badge": "⚡ Maschinendiagnose",
+    "app.badge": "Maschinendiagnose",
     "app.title": "Fehlersuche für Netzgerät und Tattoomaschine",
     "app.desc": "Schritt-für-Schritt-Fehlerdiagnose für Tattoomaschinen. Beantworten Sie einige Fragen zu Ihren Symptomen, um eine gezielte Prüfliste zu erhalten.",
     "safety.title": "Sicherheitshinweis:",
@@ -1616,7 +1616,7 @@ const I18N = {
     "escalation.filter_service": "Werkstattservice (11)"
   },
   "es": {
-    "app.badge": "⚡ Diagnóstico de la máquina",
+    "app.badge": "Diagnóstico de la máquina",
     "app.title": "Guía de resolución de problemas para fuente de alimentación y máquina",
     "app.desc": "Diagnóstico de averías paso a paso para máquinas de tatuar. Responda unas pocas preguntas sobre los síntomas para obtener una lista de comprobación con soluciones específicas.",
     "safety.title": "Aviso de seguridad:",
@@ -2019,7 +2019,7 @@ const I18N = {
     "escalation.filter_service": "Servicio de banco (11)"
   },
   "nl": {
-    "app.badge": "⚡ Machinediagnose",
+    "app.badge": "Machinediagnose",
     "app.title": "Probleemoplosser voor voeding en tattoomachine",
     "app.desc": "Stapsgewijze storingsdiagnose voor tattoomachines. Beantwoord een paar vragen over uw symptomen om een gerichte checklist met oplossingen te ontvangen.",
     "safety.title": "Veiligheidswaarschuwing:",
@@ -2422,7 +2422,7 @@ const I18N = {
     "escalation.filter_service": "Werkplaatsservice (11)"
   },
   "pt": {
-    "app.badge": "⚡ Diagnóstico de máquinas",
+    "app.badge": "Diagnóstico de máquinas",
     "app.title": "Guia de resolução de problemas para fonte de alimentação e máquina",
     "app.desc": "Diagnóstico de avarias passo a passo para máquinas de tatuagem. Responda a algumas perguntas sobre os sintomas para obter uma lista prática de soluções direcionadas.",
     "safety.title": "Aviso de segurança:",
@@ -2825,7 +2825,7 @@ const I18N = {
     "escalation.filter_service": "Assistência bancada (11)"
   },
   "th": {
-    "app.badge": "⚡ การวินิจฉัยเครื่องสัก",
+    "app.badge": "การวินิจฉัยเครื่องสัก",
     "app.title": "Power Supply & Machine Troubleshooter",
     "app.desc": "การวินิจฉัยความผิดปกติทีละขั้นตอนสำหรับเครื่องสัก ตอบคำถามเกี่ยวกับอาการไม่กี่ข้อเพื่อรับรายการตรวจสอบการแก้ไขที่ตรงจุด",
     "safety.title": "หมายเหตุด้านความปลอดภัย:",

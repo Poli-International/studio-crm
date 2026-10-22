@@ -77,11 +77,12 @@
     function correctPrivacyNote() {
         var el = document.querySelector('.preview-footer-note');
         if (!el) return;
-        var want = '🔒 ' + t('privacy');
+        var want = t('privacy');
         // Only write when it differs. Assigning textContent replaces child nodes
         // even for an identical string, which emits a mutation and would re-enter
         // the observer below without this check.
-        if (el.textContent !== want) el.textContent = want;
+        // The lock icon carries no text, so the comparison still sees only the words.
+        if (el.textContent !== want) { el.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-lock></use></svg>'; el.appendChild(document.createTextNode(want)); }
     }
 
     function collectResponses() {
@@ -158,8 +159,9 @@
         btn.type = 'button';
         btn.id = 'crm-save-consent-btn';
         btn.className = 'btn-primary btn-large';
-        btn.textContent = '💾 ' + t('save') +
-            (host.clientName ? ' — ' + host.clientName : '');
+        btn.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-save></use></svg>';
+        btn.appendChild(document.createTextNode(t('save') +
+            (host.clientName ? ' — ' + host.clientName : '')));
         btn.addEventListener('click', function () { saveToClient(btn); });
 
         // Saving to the client record is the primary action inside the CRM, so it
@@ -179,7 +181,8 @@
         send.type = 'button';
         send.id = id;
         send.className = cls;
-        send.textContent = '📲 ' + t('sendKiosk');
+        send.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-phone></use></svg>';
+        send.appendChild(document.createTextNode(t('sendKiosk')));
         send.addEventListener('click', function () {
             var form = window.FormBuilderApp && window.FormBuilderApp.currentForm;
             if (!form) return;

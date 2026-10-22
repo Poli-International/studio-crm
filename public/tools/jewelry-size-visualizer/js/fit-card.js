@@ -98,7 +98,7 @@
         init() {
             this.bindEvents();
             this.render();
-            console.log('🖨️ FitCardModule initialized (Rule 3 compliant: starts empty)');
+            console.log('FitCardModule initialized (Rule 3 compliant: starts empty)');
         },
 
         bindEvents() {
@@ -192,13 +192,13 @@
                 navigator.clipboard.writeText(summary).then(() => {
                     const btn = document.getElementById('fit-card-copy-summary-btn');
                     if (btn) {
-                        const orig = btn.textContent;
-                        btn.textContent = tr('common.summaryCopied', '✓ Summary copied');
-                        setTimeout(() => { btn.textContent = orig; }, 2500);
+                        const orig = btn.innerHTML;
+                        btn.textContent = tr('common.summaryCopied', 'Summary copied');
+                        setTimeout(() => { btn.innerHTML = orig; }, 2500);
                     }
                 });
             } else if (typeof JewelleryCollectionModule !== 'undefined') {
-                JewelleryCollectionModule.copyToClipboard(summary, '✓ Size summary copied to clipboard!');
+                JewelleryCollectionModule.copyToClipboard(summary, 'Size summary copied to clipboard!');
             }
         },
 
@@ -353,7 +353,7 @@
                     </div>
 
                     <div class="fit-card-notice-box">
-                        <div class="fit-card-notice-icon">ℹ️</div>
+                        <div class="fit-card-notice-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-info></use></svg></div>
                         <div class="fit-card-notice-text">
                             ${tr('fitCard.notice', '<strong>Initial jewelry is longer to allow for swelling and is shortened once the piercing has healed.</strong><br>For downsize timing and aftercare, see')}
                             <a href="https://poliinternational.com/aftercare-schedule-generator/" target="_top" class="fit-card-link">https://poliinternational.com/aftercare-schedule-generator/</a>

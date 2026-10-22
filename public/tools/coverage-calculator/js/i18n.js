@@ -2,14 +2,14 @@
  * ═══════════════════════════════════════════════════════════
  * GLOBAL MULTILANGUAGE (i18n) ENGINE - DYNAMIC LOADER & PERSISTENCE
  * Supported Languages:
- *   🇬🇧 English (en)
- *   🇫🇷 Français (fr)
- *   🇮🇹 Italiano (it)
- *   🇩🇪 Deutsch (de)
- *   🇪🇸 Español (es)
- *   🇳🇱 Nederlands (nl)
- *   🇵🇹 Português (pt)
- *   🇹🇭 ไทย (th)
+ *   English (en)
+ *   Français (fr)
+ *   Italiano (it)
+ *   Deutsch (de)
+ *   Español (es)
+ *   Nederlands (nl)
+ *   Português (pt)
+ *   ไทย (th)
  * ═══════════════════════════════════════════════════════════
  */
 
@@ -17,14 +17,14 @@
     'use strict';
 
     const SUPPORTED_LANGUAGES = {
-        'en': { code: 'en', name: 'English', flag: '🇬🇧', label: '🇬🇧 English' },
-        'fr': { code: 'fr', name: 'Français', flag: '🇫🇷', label: '🇫🇷 Français' },
-        'it': { code: 'it', name: 'Italiano', flag: '🇮🇹', label: '🇮🇹 Italiano' },
-        'de': { code: 'de', name: 'Deutsch', flag: '🇩🇪', label: '🇩🇪 Deutsch' },
-        'es': { code: 'es', name: 'Español', flag: '🇪🇸', label: '🇪🇸 Español' },
-        'nl': { code: 'nl', name: 'Nederlands', flag: '🇳🇱', label: '🇳🇱 Nederlands' },
-        'pt': { code: 'pt', name: 'Português', flag: '🇵🇹', label: '🇵🇹 Português' },
-        'th': { code: 'th', name: 'ไทย', flag: '🇹🇭', label: '🇹🇭 ไทย' }
+        'en': { code: 'en', name: 'English', flag: '', label: 'English' },
+        'fr': { code: 'fr', name: 'Français', flag: '', label: 'Français' },
+        'it': { code: 'it', name: 'Italiano', flag: '', label: 'Italiano' },
+        'de': { code: 'de', name: 'Deutsch', flag: '', label: 'Deutsch' },
+        'es': { code: 'es', name: 'Español', flag: '', label: 'Español' },
+        'nl': { code: 'nl', name: 'Nederlands', flag: '', label: 'Nederlands' },
+        'pt': { code: 'pt', name: 'Português', flag: '', label: 'Português' },
+        'th': { code: 'th', name: 'ไทย', flag: '', label: 'ไทย' }
     };
 
     const STORAGE_KEY = 'coverage-app-lang';
@@ -51,20 +51,20 @@
             hero_feat_time: "Session Time",
             hero_feat_ink: "Ink Usage",
             hero_feat_pricing: "Pricing",
-            ctrl_unit: "📏 Unit:",
-            ctrl_style: "🎨 Style:",
-            ctrl_lang: "🌐 Language:",
-            btn_tour: "🗺️ Guided Tour",
-            btn_embed: "⚡ Free Embed",
+            ctrl_unit: "Unit:",
+            ctrl_style: "Style:",
+            ctrl_lang: "Language:",
+            btn_tour: "Guided Tour",
+            btn_embed: "Free Embed",
             btn_kofi: "Buy Me a Coffee",
             btn_theme_toggle: "Toggle dark mode",
-            tab_coverage: "📐 Needle Coverage",
-            tab_session: "⏱️ Session Time",
-            tab_ink: "💧 Ink Usage",
-            tab_pricing: "💰 Pricing",
-            tab_inventory: "📦 Ink Inventory",
-            tab_goals: "🎯 Session Goals",
-            tab_efficiency: "📊 Artist Efficiency",
+            tab_coverage: "Needle Coverage",
+            tab_session: "Session Time",
+            tab_ink: "Ink Usage",
+            tab_pricing: "Pricing",
+            tab_inventory: "Ink Inventory",
+            tab_goals: "Session Goals",
+            tab_efficiency: "Artist Efficiency",
             btn_client_pdf: "Client PDF Report",
             btn_download_pdf: "Download PDF Report",
             btn_batch_plan: "Multi-Session Plan",

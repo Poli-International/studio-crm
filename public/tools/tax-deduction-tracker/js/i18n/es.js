@@ -17,7 +17,7 @@
     'print.generated_prefix': 'Generado el:',
     'print.signature': 'Firma del artista o estudio: _____________________________________',
     'print.date': 'Fecha: ________________________',
-    'header.badge': '🧾 Registro de Gastos Deducibles V2',
+    'header.badge': 'Registro de Gastos Deducibles V2',
     'header.title': 'Registro de deducciones fiscales para tatuadores',
     'header.subtitle': 'Registre sus gastos profesionales a lo largo del año en categorías reconocidas por su gestor contable. Registro rápido por conceptos, referencias de facturas y tickets, control de desplazamientos y categorías configurables. Toda la información permanece en su navegador.',
     'toolbar.year': 'Año fiscal / natural:',

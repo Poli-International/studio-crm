@@ -4,7 +4,7 @@
  */
 window.I18N_EN = {
   header: {
-    badge: "🔧 Machine Maintenance",
+    badge: "Machine Maintenance",
     lang_label: "Language",
     lang_aria: "Select language",
     title: "Machine Maintenance Logbook",

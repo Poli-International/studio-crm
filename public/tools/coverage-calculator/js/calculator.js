@@ -784,7 +784,7 @@ function setGlobalUnit(newUnit, convertValues = true) {
     }));
 
     if (convertValues && prevUnit !== newUnit && typeof showToastNotification === 'function') {
-        showToastNotification(`📏 Switched global unit to <strong>${isMetric ? 'cm² (Square Centimeters)' : 'sq in (Square Inches)'}</strong>`);
+        showToastNotification(`Switched global unit to <strong>${isMetric ? 'cm² (Square Centimeters)' : 'sq in (Square Inches)'}</strong>`);
     }
 }
 
@@ -991,7 +991,7 @@ function handleCoverageReset() {
     if (progressContainer) progressContainer.style.display = 'none';
 
     // Show temporary reset notification
-    showToastNotification('🔄 Coverage Calculator fields reset!');
+    showToastNotification('Coverage Calculator fields reset!');
 }
 
 function showToastNotification(message, color = '#10b981') {
@@ -1186,7 +1186,7 @@ function displayCoverageResults(data) {
 
     // Set status badge
     const statusBadge = document.getElementById('coverage-status');
-    statusBadge.textContent = T("x.calculation_complete", "✓ Calculation Complete");
+    statusBadge.textContent = T("x.calculation_complete", "Calculation Complete");
     statusBadge.className = 'coverage__status-badge coverage__status-badge--optimal';
 
     // Create comparison (A-paper sizes + credit card)
@@ -1374,13 +1374,13 @@ function displaySessionResults(data) {
     // Set status badge
     const statusBadge = document.getElementById('session-status');
     if (data.status === 'optimal') {
-        statusBadge.textContent = T("x.achievable_timeline", "✓ Achievable Timeline");
+        statusBadge.textContent = T("x.achievable_timeline", "Achievable Timeline");
         statusBadge.className = 'coverage__status-badge coverage__status-badge--optimal';
     } else if (data.status === 'ambitious') {
-        statusBadge.textContent = T("x.ambitious_project", "⚠ Ambitious Project");
+        statusBadge.textContent = T("x.ambitious_project", "Ambitious Project");
         statusBadge.className = 'coverage__status-badge coverage__status-badge--ambitious';
     } else {
-        statusBadge.textContent = T("x.adjust_expectations", "⚠️ Adjust Expectations");
+        statusBadge.textContent = T("x.adjust_expectations", "Adjust Expectations");
         statusBadge.className = 'coverage__status-badge coverage__status-badge--unrealistic';
     }
 
@@ -1824,13 +1824,13 @@ function displayPricingResults(data) {
     // Set status badge
     const statusBadge = document.getElementById('pricing-status');
     if (data.status === 'underpriced') {
-        statusBadge.textContent = T("badge_underpriced", "⚠ Consider Increasing");
+        statusBadge.textContent = T("badge_underpriced", "Consider Increasing");
         statusBadge.className = 'coverage__status-badge coverage__status-badge--ambitious';
     } else if (data.status === 'premium') {
-        statusBadge.textContent = T("badge_premium", "✓ Premium Pricing");
+        statusBadge.textContent = T("badge_premium", "Premium Pricing");
         statusBadge.className = 'coverage__status-badge coverage__status-badge--optimal';
     } else {
-        statusBadge.textContent = T("badge_market_rate", "✓ Market Rate");
+        statusBadge.textContent = T("badge_market_rate", "Market Rate");
         statusBadge.className = 'coverage__status-badge coverage__status-badge--optimal';
     }
 
@@ -2157,10 +2157,10 @@ function renderRecentCalculations() {
                 <div class="coverage__recent-item-info">
                     <div class="coverage__recent-item-title">${item.title}</div>
                     <div class="coverage__recent-item-meta">${item.detail}</div>
-                    <div class="coverage__recent-item-date">📅 ${item.dateStr} | ${paramsText}</div>
+                    <div class="coverage__recent-item-date"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-calendar></use></svg> ${item.dateStr} | ${paramsText}</div>
                 </div>
                 <div class="coverage__recent-actions">
-                    <button type="button" class="coverage__recent-delete-btn" onclick="event.stopPropagation(); deleteRecentCalculation('${item.id}')" title="Delete record">✕</button>
+                    <button type="button" class="coverage__recent-delete-btn" onclick="event.stopPropagation(); deleteRecentCalculation('${item.id}')" title="Delete record"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-x></use></svg></button>
                 </div>
             </div>
         `;
@@ -2212,7 +2212,7 @@ function clearRecentCalculations() {
         selectedRecentCalcIds.clear();
         renderRecentCalculations();
         if (typeof showToastNotification === 'function') {
-            showToastNotification('🗑️ <strong>Cleared History</strong>: All saved calculations removed.');
+            showToastNotification('<strong>Cleared History</strong>: All saved calculations removed.');
         }
     }
 }
@@ -2231,7 +2231,7 @@ function deleteSelectedRecentCalculations() {
         }
         renderRecentCalculations();
         if (typeof showToastNotification === 'function') {
-            showToastNotification(`🗑️ Deleted <strong>${countDeleted} selected calculation(s)</strong>.`);
+            showToastNotification(`Deleted <strong>${countDeleted} selected calculation(s)</strong>.`);
         }
     }
 }
@@ -2256,7 +2256,7 @@ function openMultiSessionPlanningModal() {
 
     if (selected.length === 0) {
         if (typeof showToastNotification === 'function') {
-            showToastNotification(T('x.ms_pick_first', '⚠️ Please select at least one calculation from Recent History first.'));
+            showToastNotification(T('x.ms_pick_first', 'Please select at least one calculation from Recent History first.'));
         }
         return;
     }
@@ -2439,7 +2439,7 @@ function openMultiSessionPlanningModal() {
     if (clinicalBox) {
         clinicalBox.innerHTML = `
             <div style="font-weight: 700; color: #38bdf8; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.4rem;">
-                <span>🩺</span> ${T('x.ms_clinical_title', 'Clinical Multi-Session Spacing & Dermal Recovery Plan')}
+                <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-health></use></svg></span> ${T('x.ms_clinical_title', 'Clinical Multi-Session Spacing & Dermal Recovery Plan')}
             </div>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.6rem; margin-top: 0.4rem;">
                 <div>
@@ -2495,7 +2495,7 @@ function openMultiSessionPlanningModal() {
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(md).then(() => {
                     if (typeof showToastNotification === 'function') {
-                        showToastNotification(T('x.ms_copied_toast', '📋 <strong>Copied</strong>: Multi-session markdown project summary copied to clipboard!'));
+                        showToastNotification(T('x.ms_copied_toast', '<strong>Copied</strong>: Multi-session markdown project summary copied to clipboard!'));
                     }
                 });
             } else {
@@ -2532,7 +2532,7 @@ function openMultiSessionPlanningModal() {
             URL.revokeObjectURL(url);
 
             if (typeof showToastNotification === 'function') {
-                showToastNotification(T('x.ms_csv_toast', '📊 <strong>Exported CSV</strong>: Multi-session project spreadsheet downloaded.'));
+                showToastNotification(T('x.ms_csv_toast', '<strong>Exported CSV</strong>: Multi-session project spreadsheet downloaded.'));
             }
         };
     }
@@ -2657,7 +2657,7 @@ function openMultiSessionPlanningModal() {
                 doc.save(`multi_session_master_plan_${new Date().toISOString().slice(0, 10)}.pdf`);
 
                 if (typeof showToastNotification === 'function') {
-                    showToastNotification('📑 <strong>Downloaded Project PDF</strong>: Multi-session documentation plan saved.');
+                    showToastNotification('<strong>Downloaded Project PDF</strong>: Multi-session documentation plan saved.');
                 }
             } else {
                 window.print();
@@ -2940,12 +2940,12 @@ function initializeUnitConverter() {
         const deviationDiff = currentSat - historicalAvg;
         if (deviationBadge) {
             if (deviationDiff >= 15) {
-                deviationBadge.innerHTML = TP("x.vs_studio_avg", "⚠️ +{0}% vs Studio Avg", deviationDiff);
+                deviationBadge.innerHTML = TP("x.vs_studio_avg", "+{0}% vs Studio Avg", deviationDiff);
                 deviationBadge.style.background = 'rgba(255, 0, 110, 0.2)';
                 deviationBadge.style.color = '#ff006e';
                 deviationBadge.style.borderColor = 'rgba(255, 0, 110, 0.4)';
             } else if (deviationDiff <= -15) {
-                deviationBadge.innerHTML = TP("x.vs_studio_avg_2", "⚡ {0}% vs Studio Avg", deviationDiff);
+                deviationBadge.innerHTML = TP("x.vs_studio_avg_2", "{0}% vs Studio Avg", deviationDiff);
                 deviationBadge.style.background = 'rgba(56, 189, 248, 0.2)';
                 deviationBadge.style.color = '#38bdf8';
                 deviationBadge.style.borderColor = 'rgba(56, 189, 248, 0.4)';
@@ -2955,7 +2955,7 @@ function initializeUnitConverter() {
                 deviationBadge.style.color = '#fbbf24';
                 deviationBadge.style.borderColor = 'rgba(251, 191, 36, 0.4)';
             } else {
-                deviationBadge.innerHTML = TP("x.studio_baseline_2", "✓ Studio Baseline ({0}%)", historicalAvg);
+                deviationBadge.innerHTML = TP("x.studio_baseline_2", "Studio Baseline ({0}%)", historicalAvg);
                 deviationBadge.style.background = 'rgba(16, 185, 129, 0.18)';
                 deviationBadge.style.color = '#10b981';
                 deviationBadge.style.borderColor = 'rgba(16, 185, 129, 0.3)';
@@ -2969,13 +2969,13 @@ function initializeUnitConverter() {
                 deviationAlert.style.background = 'rgba(255, 0, 110, 0.1)';
                 deviationAlert.style.border = '1px solid rgba(255, 0, 110, 0.3)';
                 deviationAlert.style.color = '#fda4af';
-                deviationAlert.innerHTML = TP("x.high_saturation_dwell_deviation_vs_studio", "⚠️ <strong>High Saturation Dwell Deviation (+{0}% vs {1}% Studio Average):</strong> Current needle setup delivers dense pigment displacement. Ensure appropriate multi-pass bio-breaks and notify client of extended deep dermal healing timeline.", deviationDiff, historicalAvg);
+                deviationAlert.innerHTML = TP("x.high_saturation_dwell_deviation_vs_studio", "<strong>High Saturation Dwell Deviation (+{0}% vs {1}% Studio Average):</strong> Current needle setup delivers dense pigment displacement. Ensure appropriate multi-pass bio-breaks and notify client of extended deep dermal healing timeline.", deviationDiff, historicalAvg);
             } else if (deviationDiff <= -15) {
                 deviationAlert.style.display = 'block';
                 deviationAlert.style.background = 'rgba(56, 189, 248, 0.1)';
                 deviationAlert.style.border = '1px solid rgba(56, 189, 248, 0.3)';
                 deviationAlert.style.color = '#bae6fd';
-                deviationAlert.innerHTML = TP("x.light_wash_fine_line_mode_vs", "⚡ <strong>Light Wash / Fine Line Mode ({0}% vs {1}% Studio Average):</strong> Minimal pigment deposition with rapid superficial skin recovery (~7–10 days).", deviationDiff, historicalAvg);
+                deviationAlert.innerHTML = TP("x.light_wash_fine_line_mode_vs", "<strong>Light Wash / Fine Line Mode ({0}% vs {1}% Studio Average):</strong> Minimal pigment deposition with rapid superficial skin recovery (~7–10 days).", deviationDiff, historicalAvg);
             } else {
                 deviationAlert.style.display = 'none';
             }
@@ -3076,10 +3076,10 @@ function initializeUnitConverter() {
                                         const devText = devVsAvg >= 0 ? `+${devVsAvg}%` : `${devVsAvg}%`;
 
                                         return [
-                                            TP('x.ch_needle_cfg', '🎯 Needle Configuration: {0}', item.preset || T('x.ch_std_preset', 'Standard Preset')),
-                                            TP('x.ch_density', '💧 Specific Ink Density: ~{0} mL/in² ({1} mL/cm²)', density, densitySqcm),
-                                            TP('x.ch_sat_ratio', '📊 Saturation Ratio: {0}% ({1})', sat, level),
-                                            TP('x.ch_dev', '📈 Studio Deviation: {0} vs Historical Average ({1}%)', devText, historicalAvg)
+                                            TP('x.ch_needle_cfg', 'Needle Configuration: {0}', item.preset || T('x.ch_std_preset', 'Standard Preset')),
+                                            TP('x.ch_density', 'Specific Ink Density: ~{0} mL/in² ({1} mL/cm²)', density, densitySqcm),
+                                            TP('x.ch_sat_ratio', 'Saturation Ratio: {0}% ({1})', sat, level),
+                                            TP('x.ch_dev', 'Studio Deviation: {0} vs Historical Average ({1}%)', devText, historicalAvg)
                                         ];
                                     }
                                 }
@@ -3761,7 +3761,7 @@ function initializeUnitConverter() {
 
             const shareTitle = `Tattoo Ink Calculation: ${optName}`;
             const shareSummaryText = [
-                `📐 TATTOO NEEDLE & INK SUMMARY`,
+                `TATTOO NEEDLE & INK SUMMARY`,
                 `• Needle Preset: ${catTitle} — ${optName}`,
                 `• Coverage Area: ${areaText}`,
                 `• Ink Required: ${netMl} mL net | ${grossMl} mL gross (~${wastePct}% cartridge waste)`,
@@ -3777,7 +3777,7 @@ function initializeUnitConverter() {
                     url: window.location.href
                 }).then(() => {
                     if (typeof showToastNotification === 'function') {
-                        showToastNotification('📲 <strong>Shared successfully!</strong>');
+                        showToastNotification('<strong>Shared successfully!</strong>');
                     }
                 }).catch((err) => {
                     if (err && err.name !== 'AbortError') {
@@ -3792,7 +3792,7 @@ function initializeUnitConverter() {
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     navigator.clipboard.writeText(text).then(() => {
                         if (typeof showToastNotification === 'function') {
-                            showToastNotification('📲 <strong>Mobile Share</strong>: Calculation summary copied to clipboard!');
+                            showToastNotification('<strong>Mobile Share</strong>: Calculation summary copied to clipboard!');
                         }
                     }).catch(() => {
                         alert(text);
@@ -3838,7 +3838,7 @@ function initializeUnitConverter() {
             const areaText = `${sqinVal.toFixed(1)} sq in (${sqcmVal} cm²)`;
 
             const resultChatMsg = [
-                `✨ Tattoo Needle & Ink Result:`,
+                `Tattoo Needle & Ink Result:`,
                 `• Needle: ${catTitle} — ${optName}`,
                 `• Area: ${areaText}`,
                 `• Est. Ink: ${netMl} mL net | ${grossMl} mL gross (~${wastePct}% cartridge waste)`,
@@ -3851,16 +3851,16 @@ function initializeUnitConverter() {
                 converterCopyResultBtn.classList.add('converter-copy-btn--copied');
                 const copyIcon = document.getElementById('converter-copy-result-icon');
                 const copyLabel = document.getElementById('converter-copy-result-text');
-                if (copyIcon) copyIcon.textContent = '✓';
+                if (copyIcon) copyIcon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>';
                 if (copyLabel) copyLabel.textContent = T("x.copied", "Copied!");
 
                 if (typeof showToastNotification === 'function') {
-                    showToastNotification('💬 <strong>Copy Result</strong>: Clean chat summary copied to clipboard!');
+                    showToastNotification('<strong>Copy Result</strong>: Clean chat summary copied to clipboard!');
                 }
 
                 setTimeout(() => {
                     converterCopyResultBtn.classList.remove('converter-copy-btn--copied');
-                    if (copyIcon) copyIcon.textContent = '💬';
+                    if (copyIcon) copyIcon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-chat></use></svg>';
                     if (copyLabel) copyLabel.textContent = T("btn_copy_result", "Copy Result");
                 }, 2500);
             }
@@ -4046,7 +4046,7 @@ function initializeUnitConverter() {
                 formEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
 
-            showToastNotification(`📦 Synced <strong>${estMlTotal.toFixed(1)} mL</strong> pigment & <strong>${estChairDuration} hrs</strong> duration into Ink Inventory Planner!`);
+            showToastNotification(`Synced <strong>${estMlTotal.toFixed(1)} mL</strong> pigment & <strong>${estChairDuration} hrs</strong> duration into Ink Inventory Planner!`);
         });
     }
 
@@ -4117,7 +4117,7 @@ function initializeUnitConverter() {
             const volText = currentVolUnit === 'floz' ? `${estFloz} fl oz (${estMl} mL)` : `${estMl} mL (${estFloz} fl oz)`;
 
             const summaryText = [
-                `📋 TATTOO NEEDLE COVERAGE & INK SPECIFICATION`,
+                `TATTOO NEEDLE COVERAGE & INK SPECIFICATION`,
                 `══════════════════════════════════════════════`,
                 `• Needle Configuration:  ${catTitle} — ${optName}`,
                 `• Target Coverage Area:  ${areaText}`,
@@ -4136,16 +4136,16 @@ function initializeUnitConverter() {
                 converterCopyBtn.classList.add('converter-copy-btn--copied');
                 const copyIcon = document.getElementById('converter-copy-btn-icon');
                 const copyLabel = document.getElementById('converter-copy-btn-text');
-                if (copyIcon) copyIcon.textContent = '✓';
+                if (copyIcon) copyIcon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>';
                 if (copyLabel) copyLabel.textContent = T("x.copied", "Copied!");
 
                 if (typeof showToastNotification === 'function') {
-                    showToastNotification('📋 <strong>Copied to Clipboard</strong>: Formatted ink volume & needle specification summary ready to paste!');
+                    showToastNotification('<strong>Copied to Clipboard</strong>: Formatted ink volume & needle specification summary ready to paste!');
                 }
 
                 setTimeout(() => {
                     converterCopyBtn.classList.remove('converter-copy-btn--copied');
-                    if (copyIcon) copyIcon.textContent = '📋';
+                    if (copyIcon) copyIcon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clipboard></use></svg>';
                     if (copyLabel) copyLabel.textContent = T("btn_copy_summary", "Copy to Clipboard");
                 }, 2500);
             }
@@ -4261,7 +4261,7 @@ function initializeUnitConverter() {
             document.documentElement.classList.add('printing-converter-slip');
 
             if (typeof showToastNotification === 'function') {
-                showToastNotification('🖨️ Opening print window for coverage specification slip...');
+                showToastNotification('Opening print window for coverage specification slip...');
             }
 
             setTimeout(() => {
@@ -4468,7 +4468,7 @@ function initializeUnitConverter() {
                 doc.setTextColor(3, 105, 161);
                 doc.setFontSize(10.5);
                 doc.setFont('helvetica', 'bold');
-                doc.text('🩹 CLINICAL HEALING TIMELINE & SKIN TRAUMA PROFILE', 18, y + 8);
+                doc.text('CLINICAL HEALING TIMELINE & SKIN TRAUMA PROFILE', 18, y + 8);
 
                 doc.setFontSize(8.5);
                 doc.setFont('helvetica', 'normal');
@@ -4538,7 +4538,7 @@ function initializeUnitConverter() {
                 doc.save(filename);
 
                 if (typeof showToastNotification === 'function') {
-                    showToastNotification(`📑 <strong>Downloaded Client PDF Report</strong>: Saved '${filename}'`);
+                    showToastNotification(`<strong>Downloaded Client PDF Report</strong>: Saved '${filename}'`);
                 }
             } else {
                 window.print();
@@ -4599,7 +4599,7 @@ function initializeUnitConverter() {
                 }
             );
 
-            showToastNotification(`💾 Saved scenario <strong>${optName}</strong> (${displayArea}) to Recent Calculations!`);
+            showToastNotification(`Saved scenario <strong>${optName}</strong> (${displayArea}) to Recent Calculations!`);
         });
     }
 }
@@ -5101,19 +5101,19 @@ function updateSessionTimerDisplay() {
             if (pct >= 100) {
                 progressBar.style.background = '#ef4444';
                 if (statusTag) {
-                    statusTag.textContent = T("x.over_estimate", "⚠️ Over Estimate");
+                    statusTag.textContent = T("x.over_estimate", "Over Estimate");
                     statusTag.style.color = '#ef4444';
                 }
             } else if (pct > 80) {
                 progressBar.style.background = '#f59e0b';
                 if (statusTag) {
-                    statusTag.textContent = T("x.nearing_target", "⚡ Nearing Target");
+                    statusTag.textContent = T("x.nearing_target", "Nearing Target");
                     statusTag.style.color = '#f59e0b';
                 }
             } else {
                 progressBar.style.background = 'linear-gradient(90deg, #0693e3, #ff006e)';
                 if (statusTag) {
-                    statusTag.textContent = T("x.on_pace", "✓ On Pace");
+                    statusTag.textContent = T("x.on_pace", "On Pace");
                     statusTag.style.color = '#10b981';
                 }
             }
@@ -5187,14 +5187,14 @@ function populateComparisonDropdowns() {
 
     let optionsHtml = '<option value="">' + T('x.select_needle_or_calc', 'Select needle or calculation...') + '</option>';
 
-    optionsHtml += '<optgroup label="💉 Standard Needle Configurations">';
+    optionsHtml += '<optgroup label="Standard Needle Configurations">';
     NEEDLE_PRESETS_FOR_COMPARISON.forEach(n => {
         optionsHtml += `<option value="${n.id}">${npTitle(n)} (${n.detail})</option>`;
     });
     optionsHtml += '</optgroup>';
 
     if (records.length > 0) {
-        optionsHtml += '<optgroup label="🕒 Your Saved Calculation Records">';
+        optionsHtml += '<optgroup label="Your Saved Calculation Records">';
         records.forEach(r => {
             optionsHtml += `<option value="${r.id}">${r.type.toUpperCase()}: ${r.title} (${r.detail})</option>`;
         });
@@ -5302,18 +5302,18 @@ function renderComparisonCards() {
 
     let timeBadgeHtml = '';
     if (isFaster) {
-        timeBadgeHtml = `<span class="coverage__variance-delta-badge coverage__variance-delta-badge--faster">${TP('x.cmp_pct_faster', '⚡ {0}% FASTER', Math.abs(timeVariancePct).toFixed(1))}</span>`;
+        timeBadgeHtml = `<span class="coverage__variance-delta-badge coverage__variance-delta-badge--faster">${TP('x.cmp_pct_faster', '{0}% FASTER', Math.abs(timeVariancePct).toFixed(1))}</span>`;
     } else if (isSlower) {
-        timeBadgeHtml = `<span class="coverage__variance-delta-badge coverage__variance-delta-badge--slower">${TP('x.cmp_pct_slower', '⏳ +{0}% SLOWER', Math.abs(timeVariancePct).toFixed(1))}</span>`;
+        timeBadgeHtml = `<span class="coverage__variance-delta-badge coverage__variance-delta-badge--slower">${TP('x.cmp_pct_slower', '+{0}% SLOWER', Math.abs(timeVariancePct).toFixed(1))}</span>`;
     } else {
         timeBadgeHtml = `<span class="coverage__variance-delta-badge" style="background: rgba(255,255,255,0.1); color: #ffffff;">${T('x.cmp_identical_speed', 'IDENTICAL SPEED')}</span>`;
     }
 
     let inkBadgeHtml = '';
     if (isMoreInk) {
-        inkBadgeHtml = `<span class="coverage__variance-delta-badge coverage__variance-delta-badge--higher">${TP('x.cmp_pct_more_ink', '🧪 +{0}% INK VOLUME', Math.abs(inkVariancePct).toFixed(1))}</span>`;
+        inkBadgeHtml = `<span class="coverage__variance-delta-badge coverage__variance-delta-badge--higher">${TP('x.cmp_pct_more_ink', '+{0}% INK VOLUME', Math.abs(inkVariancePct).toFixed(1))}</span>`;
     } else if (isLessInk) {
-        inkBadgeHtml = `<span class="coverage__variance-delta-badge coverage__variance-delta-badge--lower">${TP('x.cmp_pct_less_ink', '💧 -{0}% INK VOLUME', Math.abs(inkVariancePct).toFixed(1))}</span>`;
+        inkBadgeHtml = `<span class="coverage__variance-delta-badge coverage__variance-delta-badge--lower">${TP('x.cmp_pct_less_ink', '-{0}% INK VOLUME', Math.abs(inkVariancePct).toFixed(1))}</span>`;
     } else {
         inkBadgeHtml = `<span class="coverage__variance-delta-badge" style="background: rgba(255,255,255,0.1); color: #ffffff;">${T('x.cmp_equal_volume', 'EQUAL VOLUME')}</span>`;
     }
@@ -5378,7 +5378,7 @@ function renderComparisonCards() {
         <div class="coverage__variance-insight-card">
             <div class="coverage__variance-header">
                 <h4 class="coverage__variance-title">
-                    ${T('x.variance_insight_title', '⚡ Variance Insight: Chair Time & Ink Volume Delta')}
+                    ${T('x.variance_insight_title', 'Variance Insight: Chair Time & Ink Volume Delta')}
                 </h4>
                 <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
                     ${timeBadgeHtml}
@@ -5391,7 +5391,7 @@ function renderComparisonCards() {
                 <div class="coverage__variance-stat-box">
                     <div>
                         <div class="coverage__variance-stat-label">
-                            <span>${T('x.chair_time_variance', '⏱️ Chair Time Variance')}</span>
+                            <span>${T('x.chair_time_variance', 'Chair Time Variance')}</span>
                             ${timeBadgeHtml}
                         </div>
                         <div class="coverage__variance-stat-value" style="color: ${isFaster ? '#10b981' : isSlower ? '#f59e0b' : '#ffffff'};">
@@ -5407,7 +5407,7 @@ function renderComparisonCards() {
                 <div class="coverage__variance-stat-box">
                     <div>
                         <div class="coverage__variance-stat-label">
-                            <span>${T('x.speed_multiplier', '🚀 Speed Multiplier')}</span>
+                            <span>${T('x.speed_multiplier', 'Speed Multiplier')}</span>
                             <span class="coverage__variance-pill" style="background: rgba(6,147,227,0.15); color: #0693e3;">${T('x.cmp_relative', 'Relative')}</span>
                         </div>
                         <div class="coverage__variance-stat-value" style="color: #38bdf8;">
@@ -5423,7 +5423,7 @@ function renderComparisonCards() {
                 <div class="coverage__variance-stat-box">
                     <div>
                         <div class="coverage__variance-stat-label">
-                            <span>${T('x.ink_volume_variance', '💧 Ink Volume Variance')}</span>
+                            <span>${T('x.ink_volume_variance', 'Ink Volume Variance')}</span>
                             ${inkBadgeHtml}
                         </div>
                         <div class="coverage__variance-stat-value" style="color: ${isMoreInk ? 'var(--color-neon-pink)' : '#0693e3'};">
@@ -5439,7 +5439,7 @@ function renderComparisonCards() {
                 <div class="coverage__variance-stat-box">
                     <div>
                         <div class="coverage__variance-stat-label">
-                            <span>${T('x.comparative_benchmark', '📐 Comparative Benchmark')}</span>
+                            <span>${T('x.comparative_benchmark', 'Comparative Benchmark')}</span>
                             <span class="coverage__variance-pill" style="background: rgba(167,139,250,0.15); color: #c084fc;">${T('x.cmp_normalized', 'Normalized')}</span>
                         </div>
                         <div class="coverage__variance-stat-value" style="color: #c084fc;">
@@ -5464,7 +5464,7 @@ function renderComparisonCards() {
    CONSOLE BRANDING
    ═══════════════════════════════════════════════════════════ */
 
-console.log('%c🎨 Professional Needle Coverage Calculator', 'color: #FF006E; font-size: 18px; font-weight: bold;');
+console.log('%cProfessional Needle Coverage Calculator', 'color: #FF006E; font-size: 18px; font-weight: bold;');
 console.log('%cPowered by Poli International', 'color: #2C5F7C; font-size: 12px;');
 console.log('%cFree tools for professional tattoo artists', 'color: #808080; font-size: 10px;');
 
@@ -5488,7 +5488,7 @@ function renderSessionHealthScore(data) {
     if (hours > 4.5) {
         const penalty = Math.min(30, (hours - 4.5) * 12);
         score -= penalty;
-        suggestions.push(`⏱️ <strong>Session Duration Warning:</strong> ${hours.toFixed(1)} hrs per sitting causes fatigue tremor and skin saturation. Consider capping sittings at 4 hours or splitting into ${data.sessionsNeeded > 1 ? data.sessionsNeeded : 2} appointments.`);
+        suggestions.push(`<strong>Session Duration Warning:</strong> ${hours.toFixed(1)} hrs per sitting causes fatigue tremor and skin saturation. Consider capping sittings at 4 hours or splitting into ${data.sessionsNeeded > 1 ? data.sessionsNeeded : 2} appointments.`);
     }
 
     // Body location sensitivity & difficulty penalty
@@ -5497,24 +5497,24 @@ function renderSessionHealthScore(data) {
 
     if (isSensitiveArea) {
         score -= 15;
-        suggestions.push(`⚡ <strong>Sensitive Skin Zone:</strong> ${locName} has elevated nerve density. Client twitching increases after 90 mins. Pre-plan short stretch breaks every 60-75 minutes.`);
+        suggestions.push(`<strong>Sensitive Skin Zone:</strong> ${locName} has elevated nerve density. Client twitching increases after 90 mins. Pre-plan short stretch breaks every 60-75 minutes.`);
     }
 
     // Low pain tolerance adjustment
     if (data.painTolerance === 'low') {
         score -= 15;
-        suggestions.push(`🧘 <strong>Pain Management:</strong> Client indicated low pain tolerance. Recommend pre-applying topical numbing cream or scheduling a shorter initial outline session.`);
+        suggestions.push(`<strong>Pain Management:</strong> Client indicated low pain tolerance. Recommend pre-applying topical numbing cream or scheduling a shorter initial outline session.`);
     }
 
     // High complexity on difficult location
     if (data.complexityData && data.complexityData.time_multiplier > 1.4 && isSensitiveArea) {
         score -= 15;
-        suggestions.push(`🎨 <strong>Complex Shading on Tender Skin:</strong> High detail work on ${locName} risks blowouts if skin swells. Line outline first and reserve shading for session #2.`);
+        suggestions.push(`<strong>Complex Shading on Tender Skin:</strong> High detail work on ${locName} risks blowouts if skin swells. Line outline first and reserve shading for session #2.`);
     }
 
     // Always provide baseline guidance if score is high
     if (suggestions.length === 0) {
-        suggestions.push(`✅ <strong>Optimal Ergonomic Conditions:</strong> Parameters are well-balanced. Keep workspace lit with 5000K LED and ensure ergonomic armrest support.`);
+        suggestions.push(`<strong>Optimal Ergonomic Conditions:</strong> Parameters are well-balanced. Keep workspace lit with 5000K LED and ensure ergonomic armrest support.`);
     }
 
     score = Math.max(20, Math.min(100, Math.round(score)));
@@ -5678,7 +5678,7 @@ function updateAnatomicalCallout(locationKey) {
     const data = ANATOMICAL_LOCATION_DATA[locationKey] || ANATOMICAL_LOCATION_DATA['outer-upper-arm'];
 
     var ak = 'x.anat_' + String(ANATOMICAL_LOCATION_DATA[locationKey] ? locationKey : 'outer-upper-arm').replace(/-/g, '_');
-    if (nameEl) nameEl.textContent = TP("x.muscle_group", "🦾 Muscle Group: {0}", T(ak + '_muscle', data.muscle));
+    if (nameEl) nameEl.textContent = TP("x.muscle_group", "Muscle Group: {0}", T(ak + '_muscle', data.muscle));
     if (badgeEl) {
         badgeEl.textContent = T(data.badgeKey || ('x.anat_badge_' + String(data.badge).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '')), data.badge);
         badgeEl.style.backgroundColor = `${data.badgeColor}25`;
@@ -5688,7 +5688,7 @@ function updateAnatomicalCallout(locationKey) {
         detailEl.innerHTML = TP("x.skin_tension_2", "<strong>Skin Tension:</strong> {0}", T(data.detailKey || (ak + '_detail'), data.detail));
     }
     if (tipEl) {
-        tipEl.innerHTML = TP("x.ergonomic_tip_2", "💡 <strong>Ergonomic Tip:</strong> {0}", T(data.tipKey || (ak + '_tip'), data.tip));
+        tipEl.innerHTML = TP("x.ergonomic_tip_2", "<strong>Ergonomic Tip:</strong> {0}", T(data.tipKey || (ak + '_tip'), data.tip));
     }
 }
 
@@ -5804,12 +5804,12 @@ function initializeSessionSummaryModal() {
 
             saveRecentCalculation(
                 'completed_session',
-                '🏁 Completed Tattoo Session',
+                'Completed Tattoo Session',
                 `Actual: ${actTimeText} (Est: ${estTimeText}) | Tag: ${currentSummaryTag.toUpperCase()}`,
                 `Variance: ${varianceText} | Notes: ${notes.substring(0, 40) || 'None'}`
             );
 
-            alert('✅ Tattoo session summary record saved to history!');
+            alert('Tattoo session summary record saved to history!');
             closeSessionSummaryModal();
         });
     }
@@ -5887,10 +5887,10 @@ function showToast({ type = 'info', title = 'Notification', message = '', action
     toast.className = `coverage__toast ${toastTypeClass}`;
     toast.setAttribute('role', 'alert');
 
-    let icon = 'ℹ️';
-    if (type === 'low-stock' || type === 'error') icon = '🚨';
-    else if (type === 'warning') icon = '⚠️';
-    else if (type === 'success') icon = '✅';
+    let icon = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-info></use></svg>';
+    if (type === 'low-stock' || type === 'error') icon = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-siren></use></svg>';
+    else if (type === 'warning') icon = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg>';
+    else if (type === 'success') icon = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>';
 
     toast.innerHTML = `
         <div class="coverage__toast-header">
@@ -5957,7 +5957,7 @@ function triggerLowStockToast(bottle, minThreshold) {
         type: 'low-stock',
         title: `Low Stock Alert: ${bottle.name}`,
         message: `Current volume (${bottle.currentMl} mL) has dropped below your studio minimum threshold (${minThreshold} mL). Consider restocking ${bottle.brand} immediately.`,
-        actionLabel: '📦 View Reorder Manifest',
+        actionLabel: 'View Reorder Manifest',
         onAction: () => {
             const tab = document.querySelector('[data-tab="inventory"]');
             if (tab) tab.click();
@@ -5975,7 +5975,7 @@ function triggerTestStockAlertToast() {
         type: 'low-stock',
         title: `Low Stock Alert: ${lowBottle ? lowBottle.name : 'World Famous Pitch Black'}`,
         message: `Simulated Alert: Current volume (${lowBottle ? lowBottle.currentMl : 14} mL) is below your studio threshold of ${minThreshold} mL. Restock required!`,
-        actionLabel: '📋 Open Inventory Matrix',
+        actionLabel: 'Open Inventory Matrix',
         onAction: () => {
             const tab = document.querySelector('[data-tab="inventory"]');
             if (tab) tab.click();
@@ -6243,8 +6243,8 @@ function renderStudioBottlesTable() {
                             </td>
                             <td style="padding: 0.5rem 0.6rem;">
                                 ${isLow 
-                                    ? `<span style="font-size: 0.7rem; font-weight: 800; color: #ef4444; background: rgba(239,68,68,0.2); padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(239,68,68,0.4); white-space: nowrap;">⚠️ LOW (< ${minThreshold}mL)</span>` 
-                                    : `<span style="font-size: 0.7rem; font-weight: 700; color: #10b981; background: rgba(16,185,129,0.15); padding: 2px 6px; border-radius: 4px; white-space: nowrap;">✓ OK</span>`}
+                                    ? `<span style="font-size: 0.7rem; font-weight: 800; color: #ef4444; background: rgba(239,68,68,0.2); padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(239,68,68,0.4); white-space: nowrap;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> LOW (< ${minThreshold}mL)</span>` 
+                                    : `<span style="font-size: 0.7rem; font-weight: 700; color: #10b981; background: rgba(16,185,129,0.15); padding: 2px 6px; border-radius: 4px; white-space: nowrap;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> OK</span>`}
                             </td>
                             <td style="padding: 0.5rem 0.6rem; text-align: right; white-space: nowrap;">
                                 <button type="button" onclick="adjustStudioBottleStock('${b.id}', -5)" style="background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); border-radius: 4px; padding: 2px 6px; font-size: 0.72rem; cursor: pointer; margin-right: 2px;" title="Use 5 mL">-5</button>
@@ -6434,7 +6434,7 @@ function renderInventoryWasteChart(family = 'all') {
             <div style="background: rgba(255, 0, 110, 0.08); border: 1px solid rgba(255, 0, 110, 0.25); border-radius: 8px; padding: 0.6rem 0.85rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
                     <span style="font-weight: 700; color: var(--color-neon-pink, #ff006e); font-size: 0.85rem;">${T('x.family_vivid_color', '● Vivid Color Packing')}</span>
-                    <span style="font-weight: 800; color: #ef4444; font-size: 0.85rem;">${TP('x.pct_waste_warning', '{0}% Waste ⚠️', colorsRatio)}</span>
+                    <span style="font-weight: 800; color: #ef4444; font-size: 0.85rem;">${TP('x.pct_waste_warning', '{0}% Waste', colorsRatio)}</span>
                 </div>
                 <div style="font-size: 0.72rem; color: var(--color-text-secondary);">
                     ${TP('x.consumed_waste_highest', 'Consumed: {0} mL | In-Cap Waste: {1} mL • Highest ratio; switch to small micro-caps', colorsC, colorsW)}
@@ -6555,7 +6555,7 @@ function renderHistoricalPigmentUsageChart(family = 'all') {
                             minWidth: '200px'
                         }
                     }, [
-                        React.createElement('div', { key: 'head', style: { fontWeight: 800, borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '4px', marginBottom: '6px', color: '#38bdf8' } }, `📅 ${row ? row.monthFull : label} Usage Total: ${totalMonth} mL`),
+                        React.createElement('div', { key: 'head', style: { fontWeight: 800, borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '4px', marginBottom: '6px', color: '#38bdf8' } }, `${row ? row.monthFull : label} Usage Total: ${totalMonth} mL`),
                         ...payload.map((entry, idx) => 
                             React.createElement('div', { key: idx, style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '3px 0' } }, [
                                 React.createElement('span', { key: 'name', style: { color: entry.color, fontWeight: 600 } }, `● ${entry.name}:`),
@@ -6772,7 +6772,7 @@ function initializeInkInventoryPlanner() {
             });
 
             if (sameDateConflict) {
-                const confMsg = `⚠️ SCHEDULE OVERLAP WARNING:\n\nThis session on ${date} (${startTime} for ${duration} hrs) overlaps with existing booking for "${sameDateConflict.client}" (${sameDateConflict.startTime || '10:00'}, ${sameDateConflict.duration || 3.5} hrs).\n\nDo you still want to add this booking?`;
+                const confMsg = `SCHEDULE OVERLAP WARNING:\n\nThis session on ${date} (${startTime} for ${duration} hrs) overlaps with existing booking for "${sameDateConflict.client}" (${sameDateConflict.startTime || '10:00'}, ${sameDateConflict.duration || 3.5} hrs).\n\nDo you still want to add this booking?`;
                 if (!confirm(confMsg)) {
                     return;
                 }
@@ -6856,10 +6856,10 @@ function renderDashboardStockAlertCenter() {
 
     if (badgeEl) {
         if (lowBottles.length > 0) {
-            badgeEl.textContent = TP("x.critical_low", "🚨 {0} CRITICAL LOW", lowBottles.length);
+            badgeEl.textContent = TP("x.critical_low", "{0} CRITICAL LOW", lowBottles.length);
             badgeEl.className = 'coverage__dash-stock-badge coverage__dash-stock-badge--alert';
         } else {
-            badgeEl.textContent = T("x.all_inks_adequate", "✓ ALL INKS ADEQUATE");
+            badgeEl.textContent = T("x.all_inks_adequate", "ALL INKS ADEQUATE");
             badgeEl.className = 'coverage__dash-stock-badge coverage__dash-stock-badge--ok';
         }
     }
@@ -6867,7 +6867,7 @@ function renderDashboardStockAlertCenter() {
     if (lowBottles.length === 0) {
         listContainer.innerHTML = `
             <div style="background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.25); border-radius: 8px; padding: 1rem; text-align: center;">
-                <div style="font-size: 1.1rem; margin-bottom: 0.2rem;">✨</div>
+                <div style="font-size: 1.1rem; margin-bottom: 0.2rem;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-spark></use></svg></div>
                 <div style="font-weight: 700; color: #10b981; font-size: 0.9rem;">Studio Ink Stock Levels Nominal</div>
                 <div style="font-size: 0.78rem; color: var(--color-text-secondary); margin-top: 0.2rem;">
                     All registered bottles are above your minimum alert threshold of <strong>${minThreshold} mL</strong>.
@@ -6971,7 +6971,7 @@ function renderInventoryPlanner() {
             shortageAlertBox.style.display = 'block';
             shortageAlertBox.innerHTML = `
                 <div class="inventory-alert-banner inventory-alert-banner--shortage">
-                    <div class="inventory-alert-icon">🚨</div>
+                    <div class="inventory-alert-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-siren></use></svg></div>
                     <div>
                         <div style="font-weight: 800; font-size: 0.92rem; margin-bottom: 0.2rem; color: #ef4444;">
                             ${T('x.insufficient_stock_warning', 'INSUFFICIENT STOCK WARNING: Total Demand Exceeds Available Inventory!')}
@@ -6999,7 +6999,7 @@ function renderInventoryPlanner() {
             <div class="${isBlackShortage ? 'inventory-card--shortage' : 'inventory-card--adequate'}" style="border-radius: 8px; padding: 0.85rem; text-align: center; transition: all 0.3s ease;">
                 <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--color-text-secondary); margin-bottom: 0.25rem;">
                     <span>${T('x.total_black_pigment', 'Total Black Pigment')}</span>
-                    ${isBlackShortage ? '<span class="inventory-badge--shortage">' + T('x.shortage_badge', '⚠️ SHORTAGE') + '</span>' : '<span style="color: #10b981; font-weight: 700; font-size: 0.7rem;">' + T('x.in_stock_ok', '✓ OK') + '</span>'}
+                    ${isBlackShortage ? '<span class="inventory-badge--shortage">' + T('x.shortage_badge', 'SHORTAGE') + '</span>' : '<span style="color: #10b981; font-weight: 700; font-size: 0.7rem;">' + T('x.in_stock_ok', 'OK') + '</span>'}
                 </div>
                 <div style="font-size: 1.35rem; font-weight: 800; color: ${isBlackShortage ? '#ef4444' : '#0693e3'};">
                     ${totalBlackMl} mL
@@ -7015,7 +7015,7 @@ function renderInventoryPlanner() {
             <div class="${isColorShortage ? 'inventory-card--shortage' : 'inventory-card--adequate'}" style="border-radius: 8px; padding: 0.85rem; text-align: center; transition: all 0.3s ease;">
                 <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--color-text-secondary); margin-bottom: 0.25rem;">
                     <span>${T('x.total_color_pigments', 'Total Color Pigments')}</span>
-                    ${isColorShortage ? '<span class="inventory-badge--shortage">' + T('x.shortage_badge', '⚠️ SHORTAGE') + '</span>' : '<span style="color: #10b981; font-weight: 700; font-size: 0.7rem;">' + T('x.in_stock_ok', '✓ OK') + '</span>'}
+                    ${isColorShortage ? '<span class="inventory-badge--shortage">' + T('x.shortage_badge', 'SHORTAGE') + '</span>' : '<span style="color: #10b981; font-weight: 700; font-size: 0.7rem;">' + T('x.in_stock_ok', 'OK') + '</span>'}
                 </div>
                 <div style="font-size: 1.35rem; font-weight: 800; color: ${isColorShortage ? '#ef4444' : 'var(--color-neon-pink, #ff006e)'};">
                     ${totalColorMl} mL
@@ -7042,7 +7042,7 @@ function renderInventoryPlanner() {
             const conflictDates = [...new Set(appointments.filter(a => conflictsMap.has(a.id)).map(a => a.date))];
             conflictAlertBox.innerHTML = `
                 <div class="inventory-alert-banner inventory-alert-banner--conflict">
-                    <div class="inventory-alert-icon">⚠️</div>
+                    <div class="inventory-alert-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg></div>
                     <div>
                         <div style="font-weight: 800; font-size: 0.92rem; margin-bottom: 0.2rem; color: #fbbf24;">
                             ${TP('x.schedule_conflict_detected', 'SCHEDULE CONFLICT DETECTED ({0} overlapping sessions on {1})', conflictingApptCount, conflictDates.join(', '))}
@@ -7092,7 +7092,7 @@ function renderInventoryPlanner() {
                                 ${hasConflict ? `
                                     <div style="margin-top: 4px;">
                                         <span class="inventory-badge--conflict">
-                                            ${TP('x.conflict_with_list', '⚠️ Conflict with {0}', conflicts.map(function (c) { return c.client + ' (' + c.timeRange + ')'; }).join(', '))}
+                                            ${TP('x.conflict_with_list', 'Conflict with {0}', conflicts.map(function (c) { return c.client + ' (' + c.timeRange + ')'; }).join(', '))}
                                         </span>
                                     </div>
                                 ` : ''}
@@ -7100,7 +7100,7 @@ function renderInventoryPlanner() {
                             <td style="padding: 0.6rem; color: var(--color-text-secondary);">
                                 <div style="font-weight: 600; color: var(--color-text-primary);">${app.date}</div>
                                 <div style="font-size: 0.75rem; color: ${hasConflict ? '#fbbf24' : 'var(--color-text-secondary)'};">
-                                    🕒 ${startTime} - ${endTimeStr}
+                                    <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clock></use></svg> ${startTime} - ${endTimeStr}
                                 </div>
                             </td>
                             <td style="padding: 0.6rem; color: var(--color-text-secondary); font-weight: 500;">
@@ -7217,17 +7217,17 @@ function renderRecommendedReorderList() {
             <div class="reorder-forecast-header">
                 <div>
                     <h3 class="reorder-forecast-title">
-                        <span>📦</span> ${T('x.reorder_forecast_title', '30-Day Recommended Reorder Forecast')}
+                        <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-box></use></svg></span> ${T('x.reorder_forecast_title', '30-Day Recommended Reorder Forecast')}
                     </h3>
                     <p style="font-size: 0.78rem; color: var(--color-text-secondary); margin: 0.2rem 0 0 0;">
                         ${TP('x.reorder_model_based_on', 'Predictive inventory depletion model based on <strong>{0} scheduled session(s)</strong> in the next 30 days.', next30Appts.length)}
                     </p>
                 </div>
-                <span class="reorder-badge-safe">✓ ALL PIGMENTS ADEQUATE (30D SAFE)</span>
+                <span class="reorder-badge-safe"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> ALL PIGMENTS ADEQUATE (30D SAFE)</span>
             </div>
             <div style="background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.25); border-radius: 8px; padding: 1rem; text-align: center;">
                 <div style="color: #10b981; font-weight: 700; font-size: 0.95rem; margin-bottom: 0.25rem;">
-                    ✨ No Reorders Required Within the Next 30 Days
+                    <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-spark></use></svg> No Reorders Required Within the Next 30 Days
                 </div>
                 <div style="font-size: 0.8rem; color: var(--color-text-secondary);">
                     Current studio stock of registered inks is sufficient to handle all ${next30Appts.length} bookings without falling below your safety buffer of <strong>${minThreshold} mL</strong>.
@@ -7242,22 +7242,22 @@ function renderRecommendedReorderList() {
         <div class="reorder-forecast-header">
             <div>
                 <h3 class="reorder-forecast-title">
-                    <span>📦</span> ${T('x.reorder_forecast_title', '30-Day Recommended Reorder Forecast')}
+                    <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-box></use></svg></span> ${T('x.reorder_forecast_title', '30-Day Recommended Reorder Forecast')}
                 </h3>
                 <p style="font-size: 0.78rem; color: var(--color-text-secondary); margin: 0.2rem 0 0 0;">
                     ${TP('x.reorder_model_calculated_from', 'Predictive inventory depletion model calculated from <strong>{0} scheduled session(s)</strong> in the next 30 days.', next30Appts.length)}
                 </p>
             </div>
             <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
-                <span class="reorder-badge-urgent">🚨 ${reorderItems.length} PIGMENT${reorderItems.length > 1 ? 'S' : ''} AT RISK</span>
+                <span class="reorder-badge-urgent"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-siren></use></svg> ${reorderItems.length} PIGMENT${reorderItems.length > 1 ? 'S' : ''} AT RISK</span>
                 <button type="button" onclick="copyReorderManifestText()" class="coverage__export-btn" style="font-size: 0.75rem; padding: 4px 10px;">
-                    ${T('x.copy_reorder_list', '📋 Copy Reorder List')}
+                    ${T('x.copy_reorder_list', 'Copy Reorder List')}
                 </button>
             </div>
         </div>
 
         <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.25); border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
-            <div style="font-size: 1.3rem;">⚠️</div>
+            <div style="font-size: 1.3rem;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg></div>
             <div style="font-size: 0.82rem; color: #fca5a5;">
                 <strong>${T('x.attention_artist_label', 'Attention Artist:')}</strong> ${TP('x.reorder_breach_warning', 'Based on upcoming bookings, {0} ink line(s) will breach your {1} mL safety threshold within 30 days. Place orders now to maintain continuous studio workflow.', reorderItems.length, minThreshold)}
             </div>
@@ -7317,7 +7317,7 @@ function renderRecommendedReorderList() {
                             </td>
                             <td style="text-align: right;">
                                 <button type="button" onclick="quickRestockFromReorder('${item.bottle.id}')" style="background: #10b981; color: #ffffff; border: none; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; cursor: pointer; white-space: nowrap;">
-                                    ${T('x.one_click_restock', '⚡ 1-Click Restock')}
+                                    ${T('x.one_click_restock', '1-Click Restock')}
                                 </button>
                             </td>
                         </tr>
@@ -7565,7 +7565,7 @@ function renderTourStep() {
 
     if (prevBtn) prevBtn.disabled = currentTourStep === 0;
     if (nextBtn) {
-        nextBtn.textContent = currentTourStep === TOUR_STEPS.length - 1 ? T("x.finish_tour", "Finish Tour ✓") : T("x.next_step", "Next Step →");
+        nextBtn.textContent = currentTourStep === TOUR_STEPS.length - 1 ? T("x.finish_tour", "Finish Tour") : T("x.next_step", "Next Step →");
     }
 }
 
@@ -7725,7 +7725,7 @@ function initializeStyleTheme() {
 
                 const styleName = this.options[this.selectedIndex] ? this.options[this.selectedIndex].text : themeKey;
                 if (typeof showToastNotification === 'function') {
-                    showToastNotification(`🎨 Applied Style Palette: <strong>${styleName}</strong>`);
+                    showToastNotification(`Applied Style Palette: <strong>${styleName}</strong>`);
                 }
             });
         }
@@ -7862,7 +7862,7 @@ function checkGoalMilestonesNotification(elapsedSeconds) {
 function showGoalReachedToast(title, hours) {
     const toast = document.createElement('div');
     toast.style.cssText = 'position: fixed; bottom: 20px; right: 20px; z-index: 10005; background: #10b981; color: white; padding: 1rem 1.25rem; border-radius: 10px; font-weight: 700; box-shadow: 0 10px 25px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 0.75rem; font-size: 0.92rem; animation: slideIn 0.3s ease;';
-    toast.innerHTML = TP("x.milestone_reached_h", "<span>🎯 Milestone Reached ({0}h)!</span> <span>{1}</span>", hours, title);
+    toast.innerHTML = TP("x.milestone_reached_h", "<span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-target></use></svg> Milestone Reached ({0}h)!</span> <span>{1}</span>", hours, title);
     document.body.appendChild(toast);
     setTimeout(() => {
         toast.remove();
@@ -7954,11 +7954,11 @@ function toggleEfficiencyPrintMode(forceState = null) {
         if (isEfficiencyPrintMode) {
             panel.classList.add('efficiency-dashboard--print-mode');
             if (banner) banner.style.display = 'flex';
-            if (printBtn) printBtn.textContent = T("x.exit_print_view", "✕ Exit Print View");
+            if (printBtn) printBtn.textContent = T("x.exit_print_view", "Exit Print View");
         } else {
             panel.classList.remove('efficiency-dashboard--print-mode');
             if (banner) banner.style.display = 'none';
-            if (printBtn) printBtn.textContent = T("x.high_contrast_print_view", "🖨️ High-Contrast Print View");
+            if (printBtn) printBtn.textContent = T("x.high_contrast_print_view", "High-Contrast Print View");
         }
     }
 
@@ -8099,7 +8099,7 @@ function renderEfficiencyDashboard() {
                                 </td>
                                 <td style="padding: 0.6rem;">
                                     <span style="font-size: 0.72rem; padding: 2px 6px; border-radius: 4px; font-weight: 600; background: ${l.tag === 'accurate' ? 'rgba(16,185,129,0.2)' : 'rgba(239,68,68,0.2)'}; color: ${l.tag === 'accurate' ? '#10b981' : '#ef4444'};">
-                                        ${l.tag === 'accurate' ? '✓ Baseline' : '⚠️ Outlier'}
+                                        ${l.tag === 'accurate' ? 'Baseline' : 'Outlier'}
                                     </span>
                                 </td>
                             </tr>
@@ -8258,9 +8258,9 @@ function initializeClientEmailModal() {
             if (previewEl) {
                 previewEl.select();
                 navigator.clipboard.writeText(previewEl.value).then(() => {
-                    const origText = copyBtn.textContent;
-                    copyBtn.textContent = T("toast_copied", "✅ Copied to Clipboard!");
-                    setTimeout(() => copyBtn.textContent = origText, 2000);
+                    const origText = copyBtn.innerHTML;
+                    copyBtn.textContent = T("toast_copied", "Copied to Clipboard!");
+                    setTimeout(() => copyBtn.innerHTML = origText, 2000);
                 });
             }
         });
@@ -8306,7 +8306,7 @@ function generateClientEmailText() {
     let body = `Hi ${clientName},\n\n`;
     body += `Thank you for booking your upcoming tattoo session with us! Below is your appointment summary, estimated chair time, and preparation guidance:\n\n`;
     body += `--------------------------------------------------\n`;
-    body += `📅 APPOINTMENT DETAILS & SUMMARY\n`;
+    body += `APPOINTMENT DETAILS & SUMMARY\n`;
     body += `--------------------------------------------------\n`;
     body += `• Scheduled Date: ${apptDate}\n`;
     body += `• Target Body Location: ${locName}\n`;
@@ -8315,7 +8315,7 @@ function generateClientEmailText() {
 
     if (includePrep) {
         body += `--------------------------------------------------\n`;
-        body += `🥣 PRE-SESSION PREPARATION CHECKLIST\n`;
+        body += `PRE-SESSION PREPARATION CHECKLIST\n`;
         body += `--------------------------------------------------\n`;
         body += `1. Get a good 8 hours of sleep the night before.\n`;
         body += `2. Eat a heavy, carbohydrate-rich meal 1-2 hours before arriving.\n`;
@@ -8326,7 +8326,7 @@ function generateClientEmailText() {
 
     if (includeCare) {
         body += `--------------------------------------------------\n`;
-        body += `✨ IMMEDIATE AFTERCARE HIGHLIGHTS\n`;
+        body += `IMMEDIATE AFTERCARE HIGHLIGHTS\n`;
         body += `--------------------------------------------------\n`;
         body += `• Keep wrap/bandage on as directed at the end of the sitting.\n`;
         body += `• Wash gently with fragrance-free antibacterial soap and warm water.\n`;
@@ -8419,7 +8419,7 @@ function renderInkOptimizationSuggestions(data) {
     container.innerHTML = `
         <div class="ink-opt-header">
             <h4 class="ink-opt-title">
-                <span>💡</span> ${T('x.io_title', 'Smart Needle & Technique Optimization Suggestions')}
+                <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bulb></use></svg></span> ${T('x.io_title', 'Smart Needle & Technique Optimization Suggestions')}
             </h4>
             <span style="font-size: 0.75rem; background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); padding: 3px 10px; border-radius: 20px; font-weight: 700;">
                 ${TP('x.io_save_up', 'Save up to {0}% Ink Volume', totalPotentialSavingsPct)}
@@ -8445,14 +8445,14 @@ function renderInkOptimizationSuggestions(data) {
             <!-- 1. Needle Recommendation -->
             <div class="ink-opt-item">
                 <div>
-                    <span class="ink-opt-item-badge ink-opt-item-badge--needle">🎯 ${needleRec.badge}</span>
+                    <span class="ink-opt-item-badge ink-opt-item-badge--needle"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-target></use></svg> ${needleRec.badge}</span>
                     <h5 class="ink-opt-item-title">${needleRec.title}</h5>
                     <p class="ink-opt-item-desc">${needleRec.desc}</p>
                 </div>
                 <div>
-                    <div class="ink-opt-item-savings-line">✨ ${needleRec.benefit}</div>
+                    <div class="ink-opt-item-savings-line"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-spark></use></svg> ${needleRec.benefit}</div>
                     <button type="button" class="ink-opt-apply-btn" onclick="applyInkOptimization('needle', '${data.technique}', '${needleRec.title}')">
-                        <span>⚡</span> ${TP('x.io_recommended', 'Recommended Setup: {0}', needleRec.type)}
+                        <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bolt></use></svg></span> ${TP('x.io_recommended', 'Recommended Setup: {0}', needleRec.type)}
                     </button>
                 </div>
             </div>
@@ -8460,7 +8460,7 @@ function renderInkOptimizationSuggestions(data) {
             <!-- 2. Pass Count & Technique Adjustment -->
             <div class="ink-opt-item">
                 <div>
-                    <span class="ink-opt-item-badge ink-opt-item-badge--technique">🔁 ${T('x.io_tech_badge', 'Technique & Passes')}</span>
+                    <span class="ink-opt-item-badge ink-opt-item-badge--technique"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-refresh></use></svg> ${T('x.io_tech_badge', 'Technique & Passes')}</span>
                     <h5 class="ink-opt-item-title">
                         ${hasPassOptimization ? TP('x.io_consolidate', 'Consolidate from {0} Passes → {1} Passes', currentPasses, optPasses) : TP('x.io_single_opt', 'Optimal Single-Pass Dynamic ({0} Pass)', currentPasses)}
                     </h5>
@@ -8472,14 +8472,14 @@ function renderInkOptimizationSuggestions(data) {
                 </div>
                 <div>
                     <div class="ink-opt-item-savings-line">
-                        ${hasPassOptimization ? TP('x.io_saves', '💰 Saves ~${0} ({1} mL) per session', passSavingsCost.toFixed(2), passSavingsMl.toFixed(1)) : T('x.io_opt_pass', '✓ Optimal Pass Count')}
+                        ${hasPassOptimization ? TP('x.io_saves', 'Saves ~${0} ({1} mL) per session', passSavingsCost.toFixed(2), passSavingsMl.toFixed(1)) : T('x.io_opt_pass', 'Optimal Pass Count')}
                     </div>
                     ${hasPassOptimization ? `
                     <button type="button" class="ink-opt-apply-btn" onclick="applyInkOptimization('passes', ${optPasses}, '${optPasses} Passes')">
-                        <span>⚡</span> ${TP('x.io_apply_passes', 'Apply {0} Passes Reduction', optPasses)}
+                        <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bolt></use></svg></span> ${TP('x.io_apply_passes', 'Apply {0} Passes Reduction', optPasses)}
                     </button>` : `
                     <button type="button" class="ink-opt-apply-btn" style="opacity: 0.8; pointer-events: none;">
-                        <span>✓</span> ${T('x.io_peak_pass', 'Already at Peak Pass Efficiency')}
+                        <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span> ${T('x.io_peak_pass', 'Already at Peak Pass Efficiency')}
                     </button>`}
                 </div>
             </div>
@@ -8487,7 +8487,7 @@ function renderInkOptimizationSuggestions(data) {
             <!-- 3. Staging & Waste Factor Optimization -->
             <div class="ink-opt-item">
                 <div>
-                    <span class="ink-opt-item-badge ink-opt-item-badge--waste">♻️ ${T('x.io_waste_badge', 'Cap Staging & Anti-Waste')}</span>
+                    <span class="ink-opt-item-badge ink-opt-item-badge--waste">${T('x.io_waste_badge', 'Cap Staging & Anti-Waste')}</span>
                     <h5 class="ink-opt-item-title">
                         ${hasWasteOptimization ? T('x.io_switch_micro', 'Switch to Micro-Cap Staging (Low 1.2x Waste)') : T('x.io_low_active', 'Low Waste Multiplier (1.2x Active)')}
                     </h5>
@@ -8499,14 +8499,14 @@ function renderInkOptimizationSuggestions(data) {
                 </div>
                 <div>
                     <div class="ink-opt-item-savings-line">
-                        ${hasWasteOptimization ? TP('x.io_recovers', '💧 Recovers ~{0} mL (${1}) from cap residue', wasteReductionMl.toFixed(1), wasteReductionCost.toFixed(2)) : T('x.io_opt_cap', '✓ Optimal Cap Staging')}
+                        ${hasWasteOptimization ? TP('x.io_recovers', 'Recovers ~{0} mL (${1}) from cap residue', wasteReductionMl.toFixed(1), wasteReductionCost.toFixed(2)) : T('x.io_opt_cap', 'Optimal Cap Staging')}
                     </div>
                     ${hasWasteOptimization ? `
                     <button type="button" class="ink-opt-apply-btn" onclick="applyInkOptimization('waste', 'low', 'Low Waste (1.2x)')">
-                        <span>⚡</span> ${T('x.io_apply_low', 'Apply Low-Waste Cap Staging')}
+                        <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bolt></use></svg></span> ${T('x.io_apply_low', 'Apply Low-Waste Cap Staging')}
                     </button>` : `
                     <button type="button" class="ink-opt-apply-btn" style="opacity: 0.8; pointer-events: none;">
-                        <span>✓</span> ${T('x.io_low_active_btn', 'Low Waste Staging Active')}
+                        <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span> ${T('x.io_low_active_btn', 'Low Waste Staging Active')}
                     </button>`}
                 </div>
             </div>
@@ -8517,7 +8517,7 @@ function renderInkOptimizationSuggestions(data) {
                 ${T('x.io_footer', 'Applying suggestions recalculates ink volume, caps needed, and bottle cost estimates instantly.')}
             </span>
             <button type="button" class="ink-opt-apply-btn" style="width: auto; padding: 0.5rem 1.25rem; background: linear-gradient(135deg, #0693e3 0%, #0073b7 100%); color: #ffffff; border: none; font-weight: 800;" onclick="applyAllInkOptimizations({ passes: ${optPasses}, waste: 'low' })">
-                <span>⚡</span> ${TP('x.io_apply_all', 'Apply All Recommended Optimizations (-{0}%)', totalPotentialSavingsPct)}
+                <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bolt></use></svg></span> ${TP('x.io_apply_all', 'Apply All Recommended Optimizations (-{0}%)', totalPotentialSavingsPct)}
             </button>
         </div>
     `;
@@ -8535,7 +8535,7 @@ function applyInkOptimization(field, value, label) {
         if (wasteSelect) wasteSelect.value = value;
     } else if (field === 'needle') {
         // Show informative notification for needle setup
-        showBrowserToast(TP('x.io_toast_setup', '🎯 Setup applied: {0}', label), 'success');
+        showBrowserToast(TP('x.io_toast_setup', 'Setup applied: {0}', label), 'success');
         return;
     }
 
@@ -8549,7 +8549,7 @@ function applyInkOptimization(field, value, label) {
             if (submitBtn) submitBtn.click();
         }
     }
-    showBrowserToast(TP('x.io_toast_opt', '⚡ Applied optimization: {0}', label), 'success');
+    showBrowserToast(TP('x.io_toast_opt', 'Applied optimization: {0}', label), 'success');
 }
 
 function applyAllInkOptimizations(opts) {
@@ -8571,7 +8571,7 @@ function applyAllInkOptimizations(opts) {
             if (submitBtn) submitBtn.click();
         }
     }
-    showBrowserToast(T('x.io_toast_all', '⚡ Applied all recommended needle & pass optimizations!'), 'success');
+    showBrowserToast(T('x.io_toast_all', 'Applied all recommended needle & pass optimizations!'), 'success');
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -8798,7 +8798,7 @@ function downloadIcsCalendarFile() {
     link.click();
     document.body.removeChild(link);
 
-    showBrowserToast('📅 Downloaded .ICS calendar file successfully!', 'success');
+    showBrowserToast('Downloaded .ICS calendar file successfully!', 'success');
 }
 
 function copyGoogleCalendarDetails() {
@@ -8810,12 +8810,12 @@ function copyGoogleCalendarDetails() {
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(() => {
-            showBrowserToast('📋 Copied appointment details to clipboard!', 'success');
+            showBrowserToast('Copied appointment details to clipboard!', 'success');
         }).catch(() => {
-            showBrowserToast('📋 Copied appointment details!', 'info');
+            showBrowserToast('Copied appointment details!', 'info');
         });
     } else {
-        showBrowserToast('📋 Details ready to copy', 'info');
+        showBrowserToast('Details ready to copy', 'info');
     }
 }
 

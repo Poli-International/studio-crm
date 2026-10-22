@@ -256,7 +256,7 @@ const ClinicalMatricesModule = {
         this.renderMaterialMatrix();
         this.renderWireGaugeMatrix();
         this.bindFilterEvents();
-        console.log('🔬 Clinical & Material Matrices module loaded');
+        console.log('Clinical & Material Matrices module loaded');
     },
 
     renderMaterialMatrix(filterQuery = '') {
@@ -315,7 +315,7 @@ const ClinicalMatricesModule = {
                 </div>
                 <div class="matrix-card__clinical">
                     <div class="matrix-clinical-status">
-                        <span class="matrix-icon">⚕️</span>
+                        <span class="matrix-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-health></use></svg></span>
                         <div>
                             <strong>${tr('matrices.lbl.clinical', 'Clinical Protocol Status:')}</strong> ${m.clinicalStatus}
                         </div>

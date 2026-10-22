@@ -40,7 +40,7 @@ const PhotoMeasureModule = {
 
         this.bindEvents();
         this.loadSamplePhotoWithCard();
-        console.log('📐 Photo Measurement Module initialized (85.60 mm ISO reference)');
+        console.log('Photo Measurement Module initialized (85.60 mm ISO reference)');
     },
 
     bindEvents() {
@@ -473,9 +473,9 @@ const PhotoMeasureModule = {
         if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(text).then(() => {
                 if (btn) {
-                    const original = btn.textContent;
-                    btn.textContent = window.i18n ? window.i18n.t('common.copied') : '✓ Copied!';
-                    setTimeout(() => { btn.textContent = original; }, 2000);
+                    const original = btn.innerHTML;
+                    btn.textContent = window.i18n ? window.i18n.t('common.copied') : 'Copied!';
+                    setTimeout(() => { btn.innerHTML = original; }, 2000);
                 }
             });
         }

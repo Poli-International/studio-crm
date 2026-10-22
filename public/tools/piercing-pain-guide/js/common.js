@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
             body.classList.remove('dark-mode');
             if (themeToggle) {
                 const icon = themeToggle.querySelector('.dark-mode-icon') || themeToggle;
-                icon.textContent = '☀️';
+                icon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-sun></use></svg>';
             }
         } else {
             body.classList.add('dark-mode');
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
             textarea.select();
             navigator.clipboard.writeText(textarea.value).then(() => {
                 const originalText = copyBtn.innerHTML;
-                copyBtn.innerHTML = (typeof window.t === 'function') ? window.t('btn.copied') : '✅ Copied!';
+                copyBtn.innerHTML = (typeof window.t === 'function') ? window.t('btn.copied') : 'Copied!';
                 setTimeout(() => copyBtn.innerHTML = originalText, 2000);
             });
         });
@@ -117,14 +117,14 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const input = form.querySelector('input');
             const btn = form.querySelector('button');
-            const originalText = btn.textContent;
+            const originalText = btn.innerHTML;
             
-            btn.textContent = (typeof window.t === 'function') ? window.t('btn.subscribed') : '✅ Subscribed!';
+            btn.textContent = (typeof window.t === 'function') ? window.t('btn.subscribed') : 'Subscribed!';
             btn.disabled = true;
             input.value = '';
             
             setTimeout(() => {
-                btn.textContent = originalText;
+                btn.innerHTML = originalText;
                 btn.disabled = false;
             }, 3000);
         });

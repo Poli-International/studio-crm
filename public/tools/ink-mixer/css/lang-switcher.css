@@ -158,3 +158,8 @@
     font-size: 0.95rem;
   }
 }
+
+/* The site header stays dark in both themes: its drawn globe icon is white like the links */
+.site-header .lang-switcher__icon {
+  color: #fff;
+}

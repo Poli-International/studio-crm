@@ -10701,7 +10701,7 @@ body.embed-mode {
 }
 
 .phase-step-node.completed .phase-node-indicator::after {
-    content: "✓";
+    content: "";
     font-size: 15px;
     font-weight: 800;
 }

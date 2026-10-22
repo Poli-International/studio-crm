@@ -19,7 +19,7 @@ const JewelleryCollectionModule = {
         this.loadCollection();
         this.bindEvents();
         this.render();
-        console.log('💎 Jewellery Collection Module initialized. Items count:', this.items.length);
+        console.log('Jewellery Collection Module initialized. Items count:', this.items.length);
     },
 
     getLocalDateString() {
@@ -85,7 +85,7 @@ const JewelleryCollectionModule = {
 
         this.items.push(newPiece);
         this.saveCollection();
-        this.showToast(t('collection.toast.added', '✓ Piece added to your saved jewellery collection.'));
+        this.showToast(t('collection.toast.added', 'Piece added to your saved jewellery collection.'));
         return true;
     },
 
@@ -137,7 +137,7 @@ const JewelleryCollectionModule = {
         if (emptyState) emptyState.style.display = 'none';
 
         const copyTitle = window.i18n ? window.i18n.t('collection.action.copyTitle') : 'Copy Size Summary';
-        const summaryBtn = window.i18n ? window.i18n.t('collection.action.summaryBtn') : '📋 Summary';
+        const summaryBtn = window.i18n ? window.i18n.t('collection.action.summaryBtn') : 'Summary';
         const deleteTitle = window.i18n ? window.i18n.t('collection.action.deleteTitle') : 'Delete piece from collection';
 
         tableBody.innerHTML = this.items.map(item => `
@@ -151,7 +151,7 @@ const JewelleryCollectionModule = {
                 <td><small style="color: var(--text-secondary);">${this.escapeHtml(item.dateAdded)}</small></td>
                 <td>
                     <button class="btn btn--small btn--secondary" onclick="JewelleryCollectionModule.copyItemSummary('${item.id}')" title="${copyTitle}">${summaryBtn}</button>
-                    <button class="btn btn--small" style="background: transparent; color: var(--color-error); border: 1px solid var(--border-color); margin-left: 4px;" onclick="JewelleryCollectionModule.removePiece('${item.id}')" title="${deleteTitle}">✕</button>
+                    <button class="btn btn--small" style="background: transparent; color: var(--color-error); border: 1px solid var(--border-color); margin-left: 4px;" onclick="JewelleryCollectionModule.removePiece('${item.id}')" title="${deleteTitle}"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-x></use></svg></button>
                 </td>
             </tr>
         `).join('');
@@ -162,14 +162,14 @@ const JewelleryCollectionModule = {
         if (!item) return;
 
         const line = `Placement: ${item.placement} | Gauge: ${item.gauge} | Length/Diameter: ${item.length} | Ball Size: ${item.ballSize} | Material: ${item.material} | Date: ${item.dateAdded}`;
-        const toastMsg = window.i18n ? window.i18n.t('collection.toast.copied') : '✓ Size summary copied to clipboard!';
+        const toastMsg = window.i18n ? window.i18n.t('collection.toast.copied') : 'Size summary copied to clipboard!';
         this.copyToClipboard(line, toastMsg);
     },
 
     copyToClipboard(text, successMsg) {
         if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(text).then(() => {
-                this.showToast(successMsg || '✓ Copied to clipboard!');
+                this.showToast(successMsg || 'Copied to clipboard!');
             }).catch(() => {
                 this.fallbackCopy(text, successMsg);
             });
@@ -187,7 +187,7 @@ const JewelleryCollectionModule = {
         ta.select();
         try {
             document.execCommand('copy');
-            this.showToast(successMsg || '✓ Copied to clipboard!');
+            this.showToast(successMsg || 'Copied to clipboard!');
         } catch (e) {
             prompt('Copy this summary:', text);
         }

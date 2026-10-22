@@ -433,6 +433,12 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.30
+
+**Two faults Henry found on a tablet (2026-10-20).**
+- **Digital Liability Waiver: the signature did not show.** The pad drew in dark ink (`#0F172A`) on a dark pad (`#111827`), so the signature was there but invisible. The pad is white now, like the paper the signature is shown and printed on. The waiver flow checks it.
+- **End-of-Day Sanitization & Audit Log: Save out of reach on a tablet.** The windows are sized in `vh`, and a tablet's browser counts the screen behind its address bar and toolbar in `vh`: a fixed window ended under the toolbar, below the Completion Timestamp, with Cancel and Log Closing Audit hidden. `01-base.css` gives every window sized `100vh` / `90vh` the height actually shown (`100dvh` / `90dvh`); browsers without `dvh` keep the `vh`. Desktop and the test browser have no toolbar, so it never showed there.
+
 ### 1.0.29
 
 **Client photos and the gallery are one (GitHub issue #14), and the tools' BioFlex® claims follow Patrick's rulings.**

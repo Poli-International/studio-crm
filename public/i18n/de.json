@@ -1937,5 +1937,21 @@
  "Open Southeast Asia Tattoo Ink Checker": "Tätowierfarben-Prüfer (Südostasien) öffnen",
  "Thailand only: check ink pigments by name, CI or CAS number against the Thai list of substances prohibited in cosmetics, each with its Royal Gazette entry, and print a record. Eight languages, Thai included.": "Nur Thailand: Pigmente einer Farbe nach Name, CI- oder CAS-Nummer gegen die thailändische Liste der in Kosmetika verbotenen Stoffe prüfen, jeder mit seinem Eintrag in der Royal Gazette, und ein Protokoll drucken. Acht Sprachen, Thai eingeschlossen.",
  "Ink regulation checkers: USA, Europe (REACH), Southeast Asia": "Prüfer für Farbvorschriften: USA, Europa (REACH), Südostasien",
- "Each checker answers for its own region only: a clear result in one says nothing about the others.": "Jeder Prüfer gilt nur für seine eigene Region: ein unauffälliges Ergebnis in einem sagt nichts über die anderen."
+ "Each checker answers for its own region only: a clear result in one says nothing about the others.": "Jeder Prüfer gilt nur für seine eigene Region: ein unauffälliges Ergebnis in einem sagt nichts über die anderen.",
+ "By Client": "Nach Kunde",
+ "Delete Flash Design": "Flash-Motiv löschen",
+ "Delete this flash design from the gallery?": "Dieses Flash-Motiv aus der Galerie löschen?",
+ "Flash design deleted": "Flash-Motiv gelöscht",
+ "No client": "Ohne Kunde",
+ "Saved, but no client has that exact name: pick the client from the list to link it": "Gespeichert, aber kein Kunde hat genau diesen Namen: Wählen Sie den Kunden aus der Liste, um ihn zu verknüpfen",
+ "Delete Portfolio Artwork": "Arbeit löschen",
+ "Are you sure you want to delete this artwork photo from the client portfolio?": "Möchten Sie dieses Foto wirklich aus dem Portfolio des Kunden löschen?",
+ "Delete Photo": "Foto löschen",
+ "Deleted artwork from client portfolio.": "Arbeit aus dem Portfolio des Kunden gelöscht.",
+ "Client Artwork Photo": "Foto der Arbeit des Kunden",
+ "Flash design": "Flash-Motiv",
+ "Confirm Deletion": "Löschen bestätigen",
+ "Delete Staff Note": "Mitarbeiternotiz löschen",
+ "Are you sure you want to permanently delete this confidential staff note?": "Möchten Sie diese vertrauliche Mitarbeiternotiz wirklich endgültig löschen?",
+ "Delete Note": "Notiz löschen"
 }

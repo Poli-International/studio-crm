@@ -334,6 +334,8 @@ export async function launchBrowser() {
     },
     // a phone or tablet screen
     viewport: (width, height) => cdp('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: true }),
+    // 'print' lays the page out as the printer gets it, '' back to the screen
+    media: (media) => cdp('Emulation.setEmulatedMedia', { media }),
     // a desktop window of an exact size (scripts/screenshots.mjs)
     size: (width, height, scale = 1) => cdp('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: scale, mobile: false }),
     // .webp and .png for presentation shots; anything else a light JPEG for debugging

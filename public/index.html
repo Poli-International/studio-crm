@@ -2334,7 +2334,7 @@ docker compose up -d</pre>
                         <button type="button" onclick="exportSessionDurationPDF()" style="padding:0.45rem 0.75rem;background:linear-gradient(135deg, var(--ti-green, #10B981) 0%, var(--ti-green-deep, #059669) 100%);color:#FFF;border:none;font-weight:700;font-size:0.8rem;cursor:pointer;display:inline-flex;align-items:center;gap:4px;" title="Export Session Duration report as PDF document"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-doc></use></svg> PDF Export</button>
                         <button type="button" onclick="exportSessionDurationCSV()" style="padding:0.45rem 0.75rem;background:var(--ti-green-deep, #059669);color:#FFF;border:none;border-left:1px solid rgba(255,255,255,0.2);font-weight:700;font-size:0.8rem;cursor:pointer;display:inline-flex;align-items:center;gap:4px;" title="Export Session Duration report as CSV spreadsheet"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-chart></use></svg> CSV Export</button>
                     </div>
-                    <button onclick="window.print()" style="padding:0.45rem 0.85rem;background:var(--ti-line, #374151);color:var(--ti-text, #F3F4F6);border:1px solid var(--ti-line2, #4B5563);border-radius:8px;font-weight:700;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;gap:4px;">
+                    <button onclick="printWindowOf(this)" style="padding:0.45rem 0.85rem;background:var(--ti-line, #374151);color:var(--ti-text, #F3F4F6);border:1px solid var(--ti-line2, #4B5563);border-radius:8px;font-weight:700;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;gap:4px;">
                         <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-print></use></svg> Print
                     </button>
                     <button onclick="closeSessionDurationReportModal()" style="background:none;border:none;color:var(--ti-muted, #9CA3AF);font-size:1.6rem;cursor:pointer;padding:0 6px;">&times;</button>
@@ -3087,7 +3087,7 @@ docker compose up -d</pre>
                 <span id="summary-report-timestamp" style="font-size:0.78rem;color:var(--ti-muted, #9CA3AF);"></span>
                 <div style="display:flex;gap:10px;">
                     <button onclick="copyDailySummaryToClipboard()" style="padding:0.6rem 1.1rem;background:var(--ti-line, #374151);color:var(--ti-text, #F3F4F6);border:none;border-radius:6px;font-weight:700;font-size:0.82rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-clipboard></use></svg> Copy Text Summary</button>
-                    <button onclick="printDailySummaryReport()" style="padding:0.6rem 1.25rem;background:var(--ti-green, #10B981);color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.82rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-print></use></svg> Print / Export Summary (PDF)</button>
+                    <button onclick="printWindowOf(this)" style="padding:0.6rem 1.25rem;background:var(--ti-green, #10B981);color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.82rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-print></use></svg> Print / Export Summary (PDF)</button>
                 </div>
             </div>
         </div>
@@ -3209,7 +3209,7 @@ docker compose up -d</pre>
             <!-- Footer -->
             <div style="padding:1rem 1.5rem;background:var(--ti-panel, #111827);border-top:1px solid var(--ti-line, #374151);display:flex;justify-content:space-between;align-items:center;">
                 <span style="font-size:0.8rem;color:var(--ti-muted, #9CA3AF);"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-warn></use></svg> Pre-Session Safety Checklist: Verify liability waiver signature & medical disclosures before tattooing.</span>
-                <button onclick="window.print()" style="padding:0.55rem 1.25rem;background:var(--ti-green, #10B981);color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.82rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-print></use></svg> Print Client Health Directory</button>
+                <button onclick="printWindowOf(this)" style="padding:0.55rem 1.25rem;background:var(--ti-green, #10B981);color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.82rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-print></use></svg> Print Client Health Directory</button>
             </div>
         </div>
     </div>
@@ -3897,7 +3897,7 @@ docker compose up -d</pre>
                 Loading financial splits...
             </div>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem;gap:10px;">
-                <button onclick="window.print()" style="padding:0.6rem 1.1rem;background:var(--ti-green, #10B981);color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.82rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;" title="Print physical commission breakdown sheet"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-print></use></svg> Print-Friendly Document</button>
+                <button onclick="printWindowOf(this)" style="padding:0.6rem 1.1rem;background:var(--ti-green, #10B981);color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.82rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;" title="Print physical commission breakdown sheet"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-print></use></svg> Print-Friendly Document</button>
                 <button onclick="closeCommissionModal()" style="padding:0.6rem 1.2rem;background:var(--ti-line, #374151);color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:600;">Close</button>
             </div>
         </div>
@@ -4801,7 +4801,7 @@ docker compose up -d</pre>
         </div>
         <div style="padding:14px 20px;background:var(--ti-panel2, #1E293B);border-top:1px solid var(--ti-line, #334155);display:flex;justify-content:flex-end;gap:10px;">
             <button onclick="closeThermalLabelPrinterModal()" style="padding:8px 16px;background:var(--ti-line, #334155);color:#FFF;border:none;border-radius:8px;font-weight:700;cursor:pointer;">Close</button>
-            <button onclick="window.print()" style="padding:8px 20px;background:linear-gradient(135deg, var(--ti-green, #10B981) 0%, var(--ti-green-deep, #059669) 100%);color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-print></use></svg> Print 80mm Labels</button>
+            <button onclick="printWindowOf(this)" style="padding:8px 20px;background:linear-gradient(135deg, var(--ti-green, #10B981) 0%, var(--ti-green-deep, #059669) 100%);color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-print></use></svg> Print 80mm Labels</button>
         </div>
     </div>
 </div>

@@ -2018,6 +2018,21 @@ function forceShowModal(id) {
     return el;
 }
 
+// Print only the window the button is in. window.print() alone printed the whole CRM, and the print
+// stylesheet showed every hidden window too: 25 to 33 pages for one table (Henry, 2026-10-22).
+function printWindowOf(button) {
+    const target = button.closest('[id$="-modal-overlay"], [id$="-modal"]') || document.body;
+    const marked = [];
+    for (let n = target; n && n !== document.body; n = n.parentElement) {
+        for (const sib of n.parentElement.children) if (sib !== n) { sib.classList.add('print-hide'); marked.push(sib); }
+    }
+    target.classList.add('print-this');
+    const done = () => { marked.forEach((m) => m.classList.remove('print-hide')); target.classList.remove('print-this'); };
+    window.addEventListener('afterprint', done, { once: true });
+    window.print();
+}
+window.printWindowOf = printWindowOf;
+
 function forceHideModal(id) {
     const el = document.getElementById(id);
     if (el) {
@@ -2908,10 +2923,6 @@ window.copyRecentScanCodeModal = copyRecentScanCodeModal;
 // =========================================================================
 
 
-function printDailySummaryReport() {
-    window.print();
-}
-window.printDailySummaryReport = printDailySummaryReport;
 
 // =========================================================================
 // 10. RESET ACTIONS (3)
@@ -5430,11 +5441,23 @@ function addQuickNote(event) {
 }
 window.addQuickNote = addQuickNote;
 
-function submitQuickLog(event) {
+// Log Activity: it handed over to addQuickNote, which reads the dashboard's quick-note box, found it
+// empty and saved nothing, and the window closed anyway (Henry, 2026-10-22).
+async function submitQuickLog(event) {
     if (event) event.preventDefault();
-    addQuickNote(event);
-    const modal = document.getElementById("quick-log-modal");
-    if (modal) modal.style.display = "none";
+    const val = (id) => ((document.getElementById(id) || {}).value || "").trim();
+    const body = { title: val("log-title-input"), category: val("log-category-select") || "general", user: val("log-user-input") || undefined, details: val("log-details-input"), action: "MANUAL_LOG" };
+    if (!body.title) { showStudioToast("Give the activity a title"); return; }
+    try {
+        const res = await fetch("/api/activity-logs", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+    } catch (e) {
+        showStudioToast("Could not save the activity: the server did not answer");
+        return;
+    }
+    showStudioToast("Activity saved to the studio activity stream");
+    if (event && event.target && event.target.reset) event.target.reset();
+    forceHideModal("quick-log-modal");
 }
 window.submitQuickLog = submitQuickLog;
 

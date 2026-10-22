@@ -278,6 +278,30 @@ await flow('A waiver signed in the profile can be read back and downloaded', asy
   await eventually(async () => b.seen.downloads.some((d) => d.endsWith('.pdf')), 'Download PDF made no file');
 });
 
+await flow('A Print button prints its own window, nothing else', async () => {
+  // Henry, 2026-10-22: the health directory, artist splits and stock labels each printed 25 to 33 pages of the CRM
+  await b.goto(url);
+  for (const id of ['client-directory-modal-overlay', 'commission-modal', 'printable-qr-tags-modal-overlay', 'session-duration-report-modal-overlay', 'daily-summary-modal-overlay']) {
+    await b.evaluate(`(forceShowModal('${id}'), printWindowOf(document.querySelector('#${id} [onclick="printWindowOf(this)"]')))`);
+    await b.media('print');
+    const extra = await b.evaluate(`[...document.body.querySelectorAll('*')].filter((e) => e.offsetParent !== null && e.getBoundingClientRect().height > 0 && !e.closest('#${id}') && !e.contains(document.getElementById('${id}'))).length`);
+    await b.media('');
+    await b.evaluate(`(dispatchEvent(new Event('afterprint')), forceHideModal('${id}'), 1)`);
+    check(extra === 0, `printing ${id} also prints ${extra} things from outside it`);
+  }
+});
+
+await flow('Log Activity saves the activity to the stream', async () => {
+  // Henry, 2026-10-22: Log Action closed the window and saved nothing
+  await b.goto(url);
+  await b.clickText('Log Activity');
+  await b.type('#log-title-input', 'Autoclave Cleaned Flow');
+  await b.type('#log-details-input', 'Chamber wiped, gasket checked');
+  await b.clickText('Log Action', '#quick-log-modal');
+  await eventually(async () => JSON.stringify(await api('/api/activity-logs?limit=20')).includes('Chamber wiped, gasket checked'), 'the activity was not saved');
+  check(!(await shown('quick-log-modal')), 'the Log Activity window stayed open after saving');
+});
+
 await flow('Health Alerts: View Profile opens the profile in front', async () => {
   await b.goto(url);
   await b.clickText('Clients');

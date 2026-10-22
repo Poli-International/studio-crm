@@ -35,11 +35,12 @@ const QUIET = [
   /shareToPlatform\('email'\)|email-doc-btn/, // hands the message to the computer's mail program
   /clear-search-btn/, // clears a search box that is still empty
   /Standard Comparison \(Flat Rent/, // booth rent: the comparison already shown
-  /BUTTON \|  \| (📊 Benchmark Table|View Formatted Guide|📏 Curvature Calculator|📐 Standard Stencil Mode|High-Res Print Reference \(4800 x 1600 px|File Backup & JSON|Export Direct Sync Payload) \| $/,
+  // the tools' emojis became icons in 1.0.27, so a label may come with or without its old emoji
+  /BUTTON \|  \| ((?:📊 )?Benchmark Table|View Formatted Guide|(?:📏 )?Curvature Calculator|(?:📐 )?Standard Stencil Mode|High-Res Print Reference \(4800 x 1600 px|File Backup & JSON|Export Direct Sync Payload) \| $/,
   /BUTTON \| tab_decoder_btn \|/, // ink decoder: the tab it opens on // the tab or mode already shown
   /BUTTON \|  \| (Pasted SDS \/ Label Screening|Ingredient Screening|All Jurisdictions) \| $/, // SEA and US ink checkers: the tab and the filter they open on
   /BUTTON \|  \| [^|]*Copied/, // a copy button whose label just said so: pressing again copies the same text
-  /BUTTON \|  \| 👂 Lobe vs Helix/, // angle guide: the comparison shown when compare mode opens
+  /BUTTON \|  \| (?:👂 )?Lobe vs Helix/, // angle guide: the comparison shown when compare mode opens
   /BUTTON \|  \| ❌ /, // ink mixer: picks again the colour already marked out of stock
   /BUTTON \|  \| View Record \| $/, // material checker: the record just made is already the one shown
   /btn-recheck-integrity/, // form builder: scans again, and an unchanged form gives the same report

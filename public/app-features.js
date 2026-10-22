@@ -2033,6 +2033,31 @@ function printWindowOf(button) {
 }
 window.printWindowOf = printWindowOf;
 
+// A window holding a list to read and print (Past Logs, the lot audit): built once, filled on each opening
+function showListWindow(id, icon, title, bodyHtml) {
+    let overlay = document.getElementById(id);
+    if (!overlay) {
+        overlay = document.createElement("div");
+        overlay.id = id;
+        overlay.setAttribute("role", "dialog");
+        overlay.setAttribute("aria-modal", "true");
+        overlay.style.cssText = "display:none;position:fixed;inset:0;background:rgba(15,23,42,0.85);z-index:2000007;align-items:center;justify-content:center;";
+        document.body.appendChild(overlay);
+    }
+    overlay.setAttribute("aria-label", title);
+    overlay.innerHTML = `
+        <div style="background:var(--ti-bg2, #0F172A);border:1px solid var(--ti-line, #334155);border-radius:14px;padding:22px;width:min(94vw,680px);max-height:90vh;overflow:auto;color:var(--ti-text, #F8FAFC);font-size:0.9rem;">
+            <h3 style="margin:0 0 12px;font-size:1.1rem;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-${icon}></use></svg> ${escapeHtml(title)}</h3>
+            ${bodyHtml}
+            <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px;">
+                <button type="button" onclick="printWindowOf(this)" style="padding:9px 16px;background:var(--ti-green, #10B981);color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-print></use></svg> Print</button>
+                <button type="button" onclick="forceHideModal('${id}')" style="padding:9px 16px;background:transparent;color:var(--ti-muted, #94A3B8);border:1px solid var(--ti-line2, #475569);border-radius:8px;cursor:pointer;">Close</button>
+            </div>
+        </div>`;
+    forceShowModal(id);
+}
+window.showListWindow = showListWindow;
+
 function forceHideModal(id) {
     const el = document.getElementById(id);
     if (el) {
@@ -2560,8 +2585,22 @@ function openStationHeatmapModal() {
 window.openStationHeatmapModal = openStationHeatmapModal;
 
 
-function openSterileAuditModal() {
-    forceShowModal('waiver-audit-modal-overlay');
+// The sterile lot audit: every stock item with its lot and expiry, expired first. Open Audit (Alt+O) and
+// Audit Lot Expirations opened the waiver audit window, which nothing ever filled (Henry, 2026-10-22).
+async function openSterileAuditModal() {
+    let audit = [];
+    try { const r = await fetch('/api/inventory/sterile-audit'); if (r.ok) audit = (await r.json()).audit || []; } catch (e) {}
+    const order = { EXPIRED: 0, EXPIRING_SOON: 1, VALID: 2 };
+    audit.sort((x, y) => (order[x.exp_status] ?? 2) - (order[y.exp_status] ?? 2) || (x.days_until_exp ?? 1e9) - (y.days_until_exp ?? 1e9));
+    const state = (i) => i.exp_status === 'EXPIRED' ? `<span style="color:var(--ti-alert, #EF4444);font-weight:800;">${pdfLabel('Expired')}</span>`
+        : i.exp_status === 'EXPIRING_SOON' ? `<span style="color:var(--ti-gold, #FBBF24);font-weight:800;">${pdfLabel('{0} days left').replace('{0}', Number(i.days_until_exp))}</span>`
+        : i.days_until_exp === null ? pdfLabel('No expiry date') : pdfLabel('In date');
+    const cell = 'padding:6px 8px;border-bottom:1px solid var(--ti-panel2, #1E293B);text-align:left;';
+    const body = audit.length ? `<table style="width:100%;border-collapse:collapse;font-size:0.84rem;">
+        <thead><tr>${['Item', 'Lot', 'Expires', 'Quantity', 'Status'].map((h) => `<th style="${cell}color:var(--ti-muted, #94A3B8);">${pdfLabel(h)}</th>`).join('')}</tr></thead>
+        <tbody>${audit.map((i) => `<tr><td style="${cell}">${escapeHtml(i.name || '')}</td><td style="${cell}">${escapeHtml(i.lot_number || '')}</td><td style="${cell}">${escapeHtml(i.exp_date || '')}</td><td style="${cell}">${escapeHtml(String(i.quantity ?? ''))}</td><td style="${cell}">${state(i)}</td></tr>`).join('')}</tbody>
+    </table>` : `<div>${pdfLabel('No stock items yet.')}</div>`;
+    showListWindow('sterile-audit-modal-overlay', 'flask', pdfLabel('Sterile lot audit: expiry dates'), body);
 }
 window.openSterileAuditModal = openSterileAuditModal;
 
@@ -2587,10 +2626,6 @@ function openVatSettingsModal() {
 }
 window.openVatSettingsModal = openVatSettingsModal;
 
-function openWaiverAuditModal() {
-    forceShowModal('waiver-audit-modal-overlay');
-}
-window.openWaiverAuditModal = openWaiverAuditModal;
 
 
 // =========================================================================
@@ -2700,8 +2735,6 @@ window.closeUploadWorkModal = closeUploadWorkModal;
 function closeVatSettingsModal() { forceHideModal('vat-settings-modal-overlay'); }
 window.closeVatSettingsModal = closeVatSettingsModal;
 
-function closeWaiverAuditModal() { forceHideModal('waiver-audit-modal-overlay'); }
-window.closeWaiverAuditModal = closeWaiverAuditModal;
 
 function closeWaiverModal() { forceHideModal('waiver-modal'); }
 window.closeWaiverModal = closeWaiverModal;
@@ -5534,16 +5567,6 @@ async function openSanitizationLogsModal() {
     await moveBrowserSanitizationLogs();
     let logs = [];
     try { const r = await fetch("/api/compliance/sanitization-logs"); if (r.ok) logs = await r.json(); } catch (e) {}
-    let overlay = document.getElementById("sanitization-logs-modal-overlay");
-    if (!overlay) {
-        overlay = document.createElement("div");
-        overlay.id = "sanitization-logs-modal-overlay";
-        overlay.setAttribute("role", "dialog");
-        overlay.setAttribute("aria-modal", "true");
-        overlay.setAttribute("aria-label", "Sanitization logs");
-        overlay.style.cssText = "display:none;position:fixed;inset:0;background:rgba(15,23,42,0.85);z-index:2000007;align-items:center;justify-content:center;";
-        document.body.appendChild(overlay);
-    }
     const rows = logs.map((l) => `
         <div style="padding:10px 0;border-bottom:1px solid var(--ti-panel2, #1E293B);">
             <div style="display:flex;justify-content:space-between;gap:10px;font-weight:700;"><span>${escapeHtml(new Date(l.timestamp).toLocaleString())}</span><span>${Number(l.completed)} / ${Number(l.total)}</span></div>
@@ -5551,16 +5574,7 @@ async function openSanitizationLogsModal() {
             <ul style="margin:6px 0 0;padding-left:18px;font-size:0.82rem;">${(l.items || []).map((i) => `<li>${i.done ? "[x]" : "[ ]"} ${escapeHtml(i.item)}</li>`).join("")}</ul>
             ${l.notes ? `<div style="margin-top:4px;font-size:0.82rem;">${escapeHtml(l.notes)}</div>` : ""}
         </div>`).join("");
-    overlay.innerHTML = `
-        <div style="background:var(--ti-bg2, #0F172A);border:1px solid var(--ti-line, #334155);border-radius:14px;padding:22px;width:min(94vw,640px);max-height:90vh;overflow:auto;color:var(--ti-text, #F8FAFC);font-size:0.9rem;">
-            <h3 style="margin:0 0 12px;font-size:1.1rem;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-pouch></use></svg> End-of-day sanitization logs</h3>
-            ${rows || `<div>No checklist has been saved yet.</div>`}
-            <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px;">
-                <button type="button" onclick="printWindowOf(this)" style="padding:9px 16px;background:var(--ti-green, #10B981);color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-print></use></svg> Print</button>
-                <button type="button" onclick="forceHideModal('sanitization-logs-modal-overlay')" style="padding:9px 16px;background:transparent;color:var(--ti-muted, #94A3B8);border:1px solid var(--ti-line2, #475569);border-radius:8px;cursor:pointer;">Close</button>
-            </div>
-        </div>`;
-    forceShowModal("sanitization-logs-modal-overlay");
+    showListWindow("sanitization-logs-modal-overlay", "pouch", "End-of-day sanitization logs", rows || `<div>No checklist has been saved yet.</div>`);
 }
 window.openSanitizationLogsModal = openSanitizationLogsModal;
 

@@ -319,6 +319,16 @@ await flow('A sanitization checklist is kept by the studio and shown under Past 
   check((await b.evaluate(`localStorage.getItem('studio_sanitization_logs')`)) === null, 'the moved checklist is still in the browser');
 });
 
+await flow('Open Audit lists the stock lots with their expiry', async () => {
+  // Henry, 2026-10-22: Open Audit (Alt+O) showed an empty window
+  await b.goto(url);
+  const items = (await api('/api/inventory/sterile-audit')).audit;
+  check(items.length > 0, 'the demo studio has no stock to audit');
+  await pressOn('openSterileAuditModal()');
+  await eventually(async () => (await b.evaluate(`document.querySelectorAll('#sterile-audit-modal-overlay tbody tr').length`)) === items.length, 'the lot audit does not list every stock item');
+  check((await text('#sterile-audit-modal-overlay')).includes(items[0].name), 'the lot audit does not name the items');
+});
+
 await flow('Health Alerts: View Profile opens the profile in front', async () => {
   await b.goto(url);
   await b.clickText('Clients');

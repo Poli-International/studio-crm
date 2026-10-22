@@ -890,7 +890,7 @@
                   <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-alert-ink, #F87171);">Sterile Lot Audit</h3>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Audit all needle batches, pigment lots & disposables nearing or past sterilisation expiration dates.</p>
                 </div>
-                <button onclick="openWaiverAuditModal()" style="width:100%;padding:0.5rem;background:var(--ti-alert, #DC2626);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                <button onclick="openSterileAuditModal()" style="width:100%;padding:0.5rem;background:var(--ti-alert, #DC2626);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
                   Audit Lot Expirations
                 </button>
               </div>
@@ -3697,24 +3697,6 @@ docker compose up -d</pre>
                 <button onclick="closeAftercarePipelineModal()" style="background:none;border:none;color:var(--ti-muted, #9CA3AF);font-size:1.5rem;cursor:pointer;">&times;</button>
             </div>
             <div style="padding:1.25rem;overflow-y:auto;display:flex;flex-direction:column;gap:1rem;" id="aftercare-pipeline-modal-body">
-                <!-- Content loaded dynamically -->
-            </div>
-        </div>
-    </div>
-
-    <!-- 6. Client Liability Waiver History & Expiration Audit Viewer Modal -->
-    <div id="waiver-audit-modal-overlay" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(15,23,42,0.88);backdrop-filter:blur(6px);z-index:2000015;align-items:center;justify-content:center;padding:1rem;">
-        <div style="background:var(--ti-panel, #111827);border:1px solid var(--ti-line, #374151);border-radius:16px;width:95%;max-width:880px;color:var(--ti-text, #F9FAFB);box-shadow:0 25px 50px -12px rgba(0,0,0,0.7);overflow:hidden;max-height:90vh;display:flex;flex-direction:column;">
-            <div style="padding:1.25rem 1.5rem;background:var(--ti-panel2, #1F2937);border-bottom:1px solid var(--ti-line, #374151);display:flex;justify-content:space-between;align-items:center;">
-                <div>
-                    <h3 style="margin:0;font-size:1.25rem;font-weight:800;color:var(--ti-gold-ink, #FDE047);display:flex;align-items:center;gap:8px;">
-                        <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-consent></use></svg> Client Consent Liability Waiver Expiration & Audit Trail
-                    </h3>
-                    <p style="margin:3px 0 0 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Audit digital signatures, IP encryption, age checks, and annual re-signature compliance warnings.</p>
-                </div>
-                <button onclick="closeWaiverAuditModal()" style="background:none;border:none;color:var(--ti-muted, #9CA3AF);font-size:1.5rem;cursor:pointer;">&times;</button>
-            </div>
-            <div style="padding:1.25rem;overflow-y:auto;display:flex;flex-direction:column;gap:1rem;" id="waiver-audit-modal-body">
                 <!-- Content loaded dynamically -->
             </div>
         </div>

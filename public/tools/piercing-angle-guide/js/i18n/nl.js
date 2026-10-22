@@ -1763,6 +1763,7 @@ window.i18n.translations["nl"] = {
   "common.lang_pt": "Portugees (PT)",
   "common.lang_ru": "Russisch (RU)",
   "common.lang_nl": "Nederlands (NL)",
+  "common.lang_th": "ไทย (TH)",
   "common.user_guide": "Gebruikershandleiding",
   "common.technical_docs": "Technische documentatie",
   "common.contributing": "Richtlijnen voor bijdragen",
@@ -2157,5 +2158,12 @@ window.i18n.translations["nl"] = {
   "jewelry.cad.curved_retention_tail": "Gebogen uiteinde",
   "jewelry.cad.arc_radius_rise": "Boogstraal en hoogte",
   "jewelry.cad.rigid_subdermal_rise": "Stijf 90°-opstaand deel",
-  "jewelry.cad.wearable_shaft_length": "Bruikbare staaflengte"
+  "jewelry.cad.wearable_shaft_length": "Bruikbare staaflengte",
+  "print.cmp_title": "{a} vs {b}: vergelijkend protocol",
+  "print.cmp_units": "Eenheden: {u}",
+  "print.unit_imperial": "Imperiaal (inch)",
+  "print.unit_metric": "Metrisch (mm)",
+  "print.cmp_hazard": "{name}, risico bij verkeerde hoek:",
+  "print.cmp_contra": "{name}, contra-indicaties:",
+  "print.standard_check": "Standaardcontrole"
 };

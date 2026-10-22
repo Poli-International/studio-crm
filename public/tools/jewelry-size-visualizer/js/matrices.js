@@ -351,19 +351,19 @@ const ClinicalMatricesModule = {
             <tr class="${g.initialApproved ? 'row-approved' : 'row-downsize'}">
                 <td>
                     <strong class="gauge-display">${g.gauge}</strong>
-                    <div class="gauge-sub">${g.statusBadge}</div>
+                    <div class="gauge-sub">${tr('matrices.g.' + g.statusBadge.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, ''), g.statusBadge)}</div>
                 </td>
                 <td><strong>${g.metric}</strong></td>
                 <td>${g.inches}</td>
                 <td><code>${g.area}</code></td>
                 <td>
                     <span class="stability-tag stability-tag--${g.stability.toLowerCase().includes('high') ? 'high' : (g.stability.toLowerCase().includes('low') ? 'low' : 'mid')}">
-                        ${g.stability}
+                        ${tr('matrices.g.' + g.stability.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, ''), g.stability)}
                     </span>
                 </td>
                 <td>
                     <span class="risk-indicator ${g.migrationRisk.includes('High') ? 'risk-indicator--high' : (g.migrationRisk.includes('Moderate') ? 'risk-indicator--mid' : 'risk-indicator--low')}">
-                        ${g.migrationRisk}
+                        ${tr('matrices.g.' + g.migrationRisk.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, ''), g.migrationRisk)}
                     </span>
                 </td>
                 <td class="clinical-guidance-cell">

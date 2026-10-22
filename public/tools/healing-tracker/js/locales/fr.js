@@ -1,5 +1,23 @@
 window.I18N_DICTIONARY = window.I18N_DICTIONARY || {};
 window.I18N_DICTIONARY.fr = {
+  "a11y": {
+    "tool_navigation": "Navigation de l'outil",
+    "dismiss": "Fermer",
+    "toggle_sun_exposure_risk_layer": "Afficher ou masquer le calque de risque solaire",
+    "toggle_front_and_back_body_views": "Basculer entre vue de face et vue de dos",
+    "interactive_body_placement_map": "Carte interactive des emplacements sur le corps",
+    "zone_specific_locations": "Emplacements de la zone",
+    "subtract_1_glass": "Retirer 1 verre",
+    "add_1_glass": "Ajouter 1 verre",
+    "milestone_view_options": "Options d'affichage des étapes",
+    "tension_gauge_scale": "Échelle de tension",
+    "healing_journey_infographic": "Infographie du parcours de cicatrisation",
+    "touch_up_tool_modules": "Modules de retouche",
+    "documentation_languages": "Langues de la documentation",
+    "close_lightbox": "Fermer la visionneuse",
+    "previous_photo": "Photo précédente",
+    "next_photo": "Photo suivante"
+  },
   "app": {
     "title": "Suite de cicatrisation et de longévité pour tatouage et piercing",
     "subtitle": "Suivez l'évolution quotidienne de la cicatrisation, comparez les photos d'étapes clés, détectez les tendances des symptômes et calculez la longévité des retouches à long terme."

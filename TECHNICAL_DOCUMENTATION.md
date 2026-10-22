@@ -433,6 +433,15 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.28
+
+**The last English inside the tools.** Brought over from the website's tools, all eight languages:
+- Coverage calculator: the embeddable version and the main tool's result panels, data tables, history and messages are translated; the result redraws when the language changes.
+- Medication checker: the printable brief and PDF use the reviewed per-medicine texts and the page language for dates; in Thai, the PDF button prints the page (the PDF fonts cannot draw Thai).
+- Form builder: the remaining messages and validation texts. Angle guide: the comparison print sheet. Jewelry visualizer: gauge-table labels.
+- Screen-reader labels: 53 control labels in 12 tools (menus, close buttons, search boxes, diagrams) follow the tool's language (`a11y.*` keys in each tool's dictionary).
+- Still English on purpose: medical protocol sentences, the jewelry clinical data sheets, the form builder's medical callouts, ink brand names, and the two tools with no language option (equipment compatibility, touch-up timeline).
+
 ### 1.0.27
 
 **Drawn icons inside the tools.** The tool files in `public/tools/` now use the same drawn icons as the CRM screens, matching the website's tools:

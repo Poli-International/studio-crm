@@ -1,5 +1,23 @@
 window.I18N_DICTIONARY = window.I18N_DICTIONARY || {};
 window.I18N_DICTIONARY.nl = {
+  "a11y": {
+    "tool_navigation": "Navigatie van de tool",
+    "dismiss": "Sluiten",
+    "toggle_sun_exposure_risk_layer": "Laag met zonrisico tonen of verbergen",
+    "toggle_front_and_back_body_views": "Wisselen tussen voor- en achteraanzicht",
+    "interactive_body_placement_map": "Interactieve lichaamskaart van plaatsingen",
+    "zone_specific_locations": "Plaatsen in deze zone",
+    "subtract_1_glass": "1 glas eraf",
+    "add_1_glass": "1 glas erbij",
+    "milestone_view_options": "Weergaveopties voor mijlpalen",
+    "tension_gauge_scale": "Spanningsschaal",
+    "healing_journey_infographic": "Infographic van het genezingsproces",
+    "touch_up_tool_modules": "Modules voor bijwerken",
+    "documentation_languages": "Talen van de documentatie",
+    "close_lightbox": "Viewer sluiten",
+    "previous_photo": "Vorige foto",
+    "next_photo": "Volgende foto"
+  },
   "app": {
     "title": "Tattoo & Piercing Genezingstijdlijn en Duurzaamheidssuite",
     "subtitle": "Volg je dagelijkse genezingsproces, vergelijk mijlpaalfoto's, herken symptoomtrends en bereken op de lange termijn de levensduur tot een touch-up."

@@ -720,7 +720,7 @@
       var printTechniqueSummary = document.getElementById('printSheetTechniqueSummary');
       var printRefusal = document.getElementById('printSheetRefusal');
 
-      var dateStr = new Date().toLocaleDateString('en-US', {
+      var dateStr = new Date().toLocaleDateString((window.i18n && window.i18n.currentLang) || 'en', {
         year: 'numeric',
         month: 'short',
         day: 'numeric'
@@ -728,8 +728,8 @@
 
       if (printDate) printDate.textContent = dateStr;
       if (printCategory) printCategory.textContent = window.translate ? window.translate('guide.comp_geometry', null, 'COMPARATIVE CLINICAL GEOMETRY') : 'COMPARATIVE CLINICAL GEOMETRY';
-      if (printTitle) printTitle.textContent = `${dataA.name} vs ${dataB.name} Comparative Protocol`;
-      if (printHouseBadge) printHouseBadge.textContent = `Units: ${currentUnit === 'imperial' ? 'Imperial (inches)' : 'Metric (mm)'}`;
+      if (printTitle) printTitle.textContent = tr('print.cmp_title', { a: dataA.name, b: dataB.name }, '{a} vs {b} Comparative Protocol');
+      if (printHouseBadge) printHouseBadge.textContent = tr('print.cmp_units', { u: currentUnit === 'imperial' ? tr('print.unit_imperial', null, 'Imperial (inches)') : tr('print.unit_metric', null, 'Metric (mm)') }, 'Units: {u}');
 
       if (printDiagram) {
         printDiagram.innerHTML = `
@@ -769,14 +769,14 @@
       }
       if (printTechniqueSummary) {
         printTechniqueSummary.innerHTML = `
-          <p><strong>${dataA.name} Off-Angle Hazard:</strong> ${dataA.badAngleConsequence}</p>
-          <p><strong>${dataB.name} Off-Angle Hazard:</strong> ${dataB.badAngleConsequence}</p>
+          <p><strong>${tr('print.cmp_hazard', { name: dataA.name }, '{name} Off-Angle Hazard:')}</strong> ${dataA.badAngleConsequence}</p>
+          <p><strong>${tr('print.cmp_hazard', { name: dataB.name }, '{name} Off-Angle Hazard:')}</strong> ${dataB.badAngleConsequence}</p>
         `;
       }
       if (printRefusal) {
         printRefusal.innerHTML = `
-          <p><strong>${dataA.name} Contraindications:</strong> ${dataA.refuse || 'Standard check'}</p>
-          <p><strong>${dataB.name} Contraindications:</strong> ${dataB.refuse || 'Standard check'}</p>
+          <p><strong>${tr('print.cmp_contra', { name: dataA.name }, '{name} Contraindications:')}</strong> ${dataA.refuse || tr('print.standard_check', null, 'Standard check')}</p>
+          <p><strong>${tr('print.cmp_contra', { name: dataB.name }, '{name} Contraindications:')}</strong> ${dataB.refuse || tr('print.standard_check', null, 'Standard check')}</p>
         `;
       }
 
@@ -1021,7 +1021,7 @@
       var printHouseNotes = document.getElementById('printHouseNotes') || document.getElementById('printSheetHouseNotes');
       var printCareNotes = document.getElementById('printSheetCareNotes');
 
-      var dateStr = new Date().toLocaleDateString('en-US', {
+      var dateStr = new Date().toLocaleDateString((window.i18n && window.i18n.currentLang) || 'en', {
         year: 'numeric',
         month: 'short',
         day: 'numeric'

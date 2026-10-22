@@ -4,6 +4,9 @@
  */
 window.i18nDictionaries = window.i18nDictionaries || {};
 window.i18nDictionaries['it'] = {
+  "a11y.breadcrumb": "Percorso di navigazione",
+  "a11y.quick_language_switch": "Cambio rapido di lingua",
+  "a11y.toggle_theme": "Cambia tema",
   "industrial.diagramLabels": "pallina  ←——distanza tra i fori——→  pallina\n      [      il valore inserito     ]",
   "anatomy.browse.all": "Mostra tutte le opzioni",
   "anatomy.browse.btn": "Sfoglia gioielli compatibili",
@@ -992,5 +995,31 @@ window.i18nDictionaries['it'] = {
   "fitCard.lbl.notes": "Note su misura e riduzione",
   "fitCard.none": "Nessuna",
   "fitCard.notice": "<strong>Il gioiello iniziale è più lungo per lasciare spazio al gonfiore e si accorcia quando il piercing è guarito.</strong><br>Per i tempi della riduzione e la cura, vedi",
-  "common.exploreTools": "Scopri tutti i nostri strumenti gratuiti →"
+  "common.exploreTools": "Scopri tutti i nostri strumenti gratuiti →",
+  "matrices.g.low": "Bassa",
+  "matrices.g.moderate_low": "Medio-bassa",
+  "matrices.g.high_clinical_standard": "Alta, standard clinico",
+  "matrices.g.very_high": "Molto alta",
+  "matrices.g.superior_mechanical_strength": "Resistenza meccanica superiore",
+  "matrices.g.maximum_load_bearing": "Carico massimo",
+  "matrices.g.extreme_structural_rigidity": "Rigidità strutturale estrema",
+  "matrices.g.extreme": "Estrema",
+  "matrices.g.high_wire_effect_cheese_cutter_risk": "Alto (effetto filo / rischio \"taglia-formaggio\")",
+  "matrices.g.moderate_high_in_high_movement_tissue": "Medio-alto nei tessuti molto mobili",
+  "matrices.g.low_standard_clinical_baseline": "Basso / riferimento clinico standard",
+  "matrices.g.very_low": "Molto basso",
+  "matrices.g.extremely_low": "Estremamente basso",
+  "matrices.g.negligible": "Trascurabile",
+  "matrices.g.zero_significant_tissue_dispersal": "Nullo (ampia distribuzione sui tessuti)",
+  "matrices.g.zero": "Nullo",
+  "matrices.g.healed_downsize_only": "Solo riduzione a guarigione avvenuta",
+  "matrices.g.approved_nostril_lobes": "Accettato (narice / lobi)",
+  "matrices.g.primary_clinical_baseline": "Riferimento clinico principale",
+  "matrices.g.primary_clinical_standard": "Standard clinico principale",
+  "matrices.g.heavy_duty_standard": "Standard rinforzato",
+  "matrices.g.genital_large_gauge": "Genitale / calibro grande",
+  "matrices.g.large_gauge_foundation": "Base per calibri grandi",
+  "matrices.g.advanced_stretched_size": "Misura di stretching avanzata",
+  "matrices.g.major_gauge_threshold": "Soglia di calibro importante",
+  "matrices.g.major_milestone": "Traguardo importante"
 };

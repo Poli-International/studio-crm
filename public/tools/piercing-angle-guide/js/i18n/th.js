@@ -2158,5 +2158,12 @@ window.i18n.translations["th"] = {
   "jewelry.cad.curved_retention_tail": "ปลายโค้ง",
   "jewelry.cad.arc_radius_rise": "รัศมีส่วนโค้งและความสูง",
   "jewelry.cad.rigid_subdermal_rise": "จุดยกแข็ง 90°",
-  "jewelry.cad.wearable_shaft_length": "ความยาวก้านที่สวมได้"
+  "jewelry.cad.wearable_shaft_length": "ความยาวก้านที่สวมได้",
+  "print.cmp_title": "โปรโตคอลเปรียบเทียบ {a} กับ {b}",
+  "print.cmp_units": "หน่วย: {u}",
+  "print.unit_imperial": "อิมพีเรียล (นิ้ว)",
+  "print.unit_metric": "เมตริก (มม.)",
+  "print.cmp_hazard": "{name} ความเสี่ยงเมื่อเจาะผิดมุม:",
+  "print.cmp_contra": "{name} ข้อห้าม:",
+  "print.standard_check": "ตรวจสอบตามมาตรฐาน"
 };

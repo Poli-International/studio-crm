@@ -1,5 +1,23 @@
 window.I18N_DICTIONARY = window.I18N_DICTIONARY || {};
 window.I18N_DICTIONARY.de = {
+  "a11y": {
+    "tool_navigation": "Werkzeugnavigation",
+    "dismiss": "Schließen",
+    "toggle_sun_exposure_risk_layer": "Ebene für Sonnenrisiko ein- oder ausblenden",
+    "toggle_front_and_back_body_views": "Zwischen Vorder- und Rückansicht wechseln",
+    "interactive_body_placement_map": "Interaktive Körperkarte der Platzierungen",
+    "zone_specific_locations": "Stellen in dieser Zone",
+    "subtract_1_glass": "1 Glas abziehen",
+    "add_1_glass": "1 Glas hinzufügen",
+    "milestone_view_options": "Anzeigeoptionen für Meilensteine",
+    "tension_gauge_scale": "Spannungsskala",
+    "healing_journey_infographic": "Infografik zum Heilungsverlauf",
+    "touch_up_tool_modules": "Module für Nachstechen",
+    "documentation_languages": "Sprachen der Dokumentation",
+    "close_lightbox": "Bildansicht schließen",
+    "previous_photo": "Vorheriges Foto",
+    "next_photo": "Nächstes Foto"
+  },
   "app": {
     "title": "Tattoo- und Piercing-Heilungsverlauf & Haltbarkeits-Suite",
     "subtitle": "Verfolgen Sie Ihren täglichen Heilungsverlauf, vergleichen Sie Meilenstein-Fotos, erkennen Sie Symptomtrends und berechnen Sie die langfristige Haltbarkeit bis zum Nachstechen."

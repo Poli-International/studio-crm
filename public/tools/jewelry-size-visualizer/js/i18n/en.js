@@ -4,6 +4,9 @@
  */
 window.i18nDictionaries = window.i18nDictionaries || {};
 window.i18nDictionaries['en'] = {
+  "a11y.breadcrumb": "Breadcrumb",
+  "a11y.quick_language_switch": "Quick language switch",
+  "a11y.toggle_theme": "Toggle theme",
   "industrial.diagramLabels": "ball  ←——hole-to-hole span——→  ball\n      [      your input     ]",
   "anatomy.browse.all": "View All Options",
   "anatomy.browse.btn": "Browse Compatible Jewelry",
@@ -992,5 +995,31 @@ window.i18nDictionaries['en'] = {
   "fitCard.lbl.notes": "Fitting & downsize notes",
   "fitCard.none": "None",
   "fitCard.notice": "<strong>Initial jewelry is longer to allow for swelling and is shortened once the piercing has healed.</strong><br>For downsize timing and aftercare, see",
-  "common.exploreTools": "Explore all our free tools →"
+  "common.exploreTools": "Explore all our free tools →",
+  "matrices.g.low": "Low",
+  "matrices.g.moderate_low": "Moderate-Low",
+  "matrices.g.high_clinical_standard": "High Clinical Standard",
+  "matrices.g.very_high": "Very High",
+  "matrices.g.superior_mechanical_strength": "Superior Mechanical Strength",
+  "matrices.g.maximum_load_bearing": "Maximum Load-Bearing",
+  "matrices.g.extreme_structural_rigidity": "Extreme Structural Rigidity",
+  "matrices.g.extreme": "Extreme",
+  "matrices.g.high_wire_effect_cheese_cutter_risk": "High (Wire Effect / \"Cheese-Cutter\" Risk)",
+  "matrices.g.moderate_high_in_high_movement_tissue": "Moderate-High in High-Movement Tissue",
+  "matrices.g.low_standard_clinical_baseline": "Low / Standard Clinical Baseline",
+  "matrices.g.very_low": "Very Low",
+  "matrices.g.extremely_low": "Extremely Low",
+  "matrices.g.negligible": "Negligible",
+  "matrices.g.zero_significant_tissue_dispersal": "Zero (Significant Tissue Dispersal)",
+  "matrices.g.zero": "Zero",
+  "matrices.g.healed_downsize_only": "Healed Downsize Only",
+  "matrices.g.approved_nostril_lobes": "Approved (Nostril / Lobes)",
+  "matrices.g.primary_clinical_baseline": "Primary Clinical Baseline",
+  "matrices.g.primary_clinical_standard": "Primary Clinical Standard",
+  "matrices.g.heavy_duty_standard": "Heavy-Duty Standard",
+  "matrices.g.genital_large_gauge": "Genital / Large Gauge",
+  "matrices.g.large_gauge_foundation": "Large Gauge Foundation",
+  "matrices.g.advanced_stretched_size": "Advanced Stretched Size",
+  "matrices.g.major_gauge_threshold": "Major Gauge Threshold",
+  "matrices.g.major_milestone": "Major Milestone"
 };

@@ -1763,6 +1763,7 @@ window.i18n.translations["de"] = {
   "common.lang_pt": "Português (PT)",
   "common.lang_ru": "Русский (RU)",
   "common.lang_nl": "Nederlands (NL)",
+  "common.lang_th": "ไทย (TH)",
   "common.user_guide": "Benutzerhandbuch",
   "common.technical_docs": "Technische Dokumentation",
   "common.contributing": "Richtlinien für Mitwirkende",
@@ -2157,5 +2158,12 @@ window.i18n.translations["de"] = {
   "jewelry.cad.curved_retention_tail": "Gebogenes Ende",
   "jewelry.cad.arc_radius_rise": "Bogenradius und Höhe",
   "jewelry.cad.rigid_subdermal_rise": "Starrer 90°-Schaft",
-  "jewelry.cad.wearable_shaft_length": "Nutzbare Stablänge"
+  "jewelry.cad.wearable_shaft_length": "Nutzbare Stablänge",
+  "print.cmp_title": "{a} vs. {b}: Vergleichsprotokoll",
+  "print.cmp_units": "Einheiten: {u}",
+  "print.unit_imperial": "Zoll",
+  "print.unit_metric": "Metrisch (mm)",
+  "print.cmp_hazard": "{name}, Risiko bei falschem Winkel:",
+  "print.cmp_contra": "{name}, Kontraindikationen:",
+  "print.standard_check": "Standardprüfung"
 };

@@ -4,6 +4,9 @@
  */
 window.i18nDictionaries = window.i18nDictionaries || {};
 window.i18nDictionaries['nl'] = {
+  "a11y.breadcrumb": "Kruimelpad",
+  "a11y.quick_language_switch": "Snel van taal wisselen",
+  "a11y.toggle_theme": "Thema wisselen",
   "industrial.diagramLabels": "kogel  ←——gat-tot-gat-afstand——→  kogel\n      [      uw invoer     ]",
   "anatomy.browse.all": "Alle opties bekijken",
   "anatomy.browse.btn": "Compatibele sieraden bekijken",
@@ -992,5 +995,31 @@ window.i18nDictionaries['nl'] = {
   "fitCard.lbl.notes": "Notities over passen en inkorten",
   "fitCard.none": "Geen",
   "fitCard.notice": "<strong>Het eerste sieraad is langer om ruimte te laten voor zwelling en wordt ingekort als de piercing genezen is.</strong><br>Voor het moment van inkorten en de nazorg, zie",
-  "common.exploreTools": "Bekijk al onze gratis tools →"
+  "common.exploreTools": "Bekijk al onze gratis tools →",
+  "matrices.g.low": "Laag",
+  "matrices.g.moderate_low": "Matig tot laag",
+  "matrices.g.high_clinical_standard": "Hoog, klinische standaard",
+  "matrices.g.very_high": "Zeer hoog",
+  "matrices.g.superior_mechanical_strength": "Hogere mechanische sterkte",
+  "matrices.g.maximum_load_bearing": "Maximale belastbaarheid",
+  "matrices.g.extreme_structural_rigidity": "Extreme structurele stijfheid",
+  "matrices.g.extreme": "Extreem",
+  "matrices.g.high_wire_effect_cheese_cutter_risk": "Hoog (draadeffect / \"kaassnijder\"-risico)",
+  "matrices.g.moderate_high_in_high_movement_tissue": "Matig tot hoog in weefsel dat veel beweegt",
+  "matrices.g.low_standard_clinical_baseline": "Laag / klinische standaardbasis",
+  "matrices.g.very_low": "Zeer laag",
+  "matrices.g.extremely_low": "Uiterst laag",
+  "matrices.g.negligible": "Verwaarloosbaar",
+  "matrices.g.zero_significant_tissue_dispersal": "Nul (sterke spreiding over het weefsel)",
+  "matrices.g.zero": "Nul",
+  "matrices.g.healed_downsize_only": "Alleen verkleinen na genezing",
+  "matrices.g.approved_nostril_lobes": "Toegestaan (neusvleugel / oorlellen)",
+  "matrices.g.primary_clinical_baseline": "Primaire klinische basis",
+  "matrices.g.primary_clinical_standard": "Primaire klinische standaard",
+  "matrices.g.heavy_duty_standard": "Verzwaarde standaard",
+  "matrices.g.genital_large_gauge": "Genitaal / grote dikte",
+  "matrices.g.large_gauge_foundation": "Basis grote dikte",
+  "matrices.g.advanced_stretched_size": "Gevorderde rekmaat",
+  "matrices.g.major_gauge_threshold": "Belangrijke diktegrens",
+  "matrices.g.major_milestone": "Belangrijke mijlpaal"
 };

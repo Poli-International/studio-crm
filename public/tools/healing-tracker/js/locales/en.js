@@ -1,5 +1,23 @@
 window.I18N_DICTIONARY = window.I18N_DICTIONARY || {};
 window.I18N_DICTIONARY.en = {
+  "a11y": {
+    "tool_navigation": "Tool Navigation",
+    "dismiss": "Dismiss",
+    "toggle_sun_exposure_risk_layer": "Toggle Sun Exposure Risk Layer",
+    "toggle_front_and_back_body_views": "Toggle front and back body views",
+    "interactive_body_placement_map": "Interactive body placement map",
+    "zone_specific_locations": "Zone specific locations",
+    "subtract_1_glass": "Subtract 1 glass",
+    "add_1_glass": "Add 1 glass",
+    "milestone_view_options": "Milestone View Options",
+    "tension_gauge_scale": "Tension Gauge Scale",
+    "healing_journey_infographic": "Healing Journey Infographic",
+    "touch_up_tool_modules": "Touch-Up Tool Modules",
+    "documentation_languages": "Documentation Languages",
+    "close_lightbox": "Close Lightbox",
+    "previous_photo": "Previous Photo",
+    "next_photo": "Next Photo"
+  },
   "app": {
     "title": "Tattoo & Piercing Healing Timeline & Longevity Suite",
     "subtitle": "Track daily healing progress, compare milestone photos, detect symptom trends, and calculate long-term touch-up longevity."

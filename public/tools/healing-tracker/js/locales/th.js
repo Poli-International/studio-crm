@@ -1,5 +1,23 @@
 window.I18N_DICTIONARY = window.I18N_DICTIONARY || {};
 window.I18N_DICTIONARY.th = {
+  "a11y": {
+    "tool_navigation": "การนำทางของเครื่องมือ",
+    "dismiss": "ปิด",
+    "toggle_sun_exposure_risk_layer": "แสดงหรือซ่อนชั้นความเสี่ยงจากแสงแดด",
+    "toggle_front_and_back_body_views": "สลับมุมมองด้านหน้าและด้านหลัง",
+    "interactive_body_placement_map": "แผนที่ตำแหน่งบนร่างกายแบบโต้ตอบ",
+    "zone_specific_locations": "ตำแหน่งในโซนนี้",
+    "subtract_1_glass": "ลด 1 แก้ว",
+    "add_1_glass": "เพิ่ม 1 แก้ว",
+    "milestone_view_options": "ตัวเลือกการแสดงหลักชัย",
+    "tension_gauge_scale": "มาตรวัดแรงตึง",
+    "healing_journey_infographic": "อินโฟกราฟิกเส้นทางการหาย",
+    "touch_up_tool_modules": "โมดูลสำหรับการเติมสี",
+    "documentation_languages": "ภาษาของเอกสาร",
+    "close_lightbox": "ปิดหน้าต่างดูภาพ",
+    "previous_photo": "รูปก่อนหน้า",
+    "next_photo": "รูปถัดไป"
+  },
   "app": {
     "title": "Tattoo & Piercing Healing Timeline & Longevity Suite",
     "subtitle": "ติดตามความคืบหน้าการหายของแผลรายวัน เปรียบเทียบภาพถ่ายตามระยะ ตรวจจับแนวโน้มอาการ และคำนวณอายุการใช้งานของการทัชอัปในระยะยาว"

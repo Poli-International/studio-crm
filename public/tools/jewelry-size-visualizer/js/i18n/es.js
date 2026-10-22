@@ -4,6 +4,9 @@
  */
 window.i18nDictionaries = window.i18nDictionaries || {};
 window.i18nDictionaries['es'] = {
+  "a11y.breadcrumb": "Ruta de navegación",
+  "a11y.quick_language_switch": "Cambio rápido de idioma",
+  "a11y.toggle_theme": "Cambiar tema",
   "industrial.diagramLabels": "bola  ←——distancia orificio a orificio——→  bola\n      [      su entrada     ]",
   "anatomy.browse.all": "Ver todas las opciones",
   "anatomy.browse.btn": "Explorar joyería compatible",
@@ -992,5 +995,31 @@ window.i18nDictionaries['es'] = {
   "fitCard.lbl.notes": "Notas de ajuste y reducción",
   "fitCard.none": "Ninguna",
   "fitCard.notice": "<strong>La joya inicial es más larga para dejar sitio a la inflamación y se acorta cuando la perforación ha cicatrizado.</strong><br>Para el momento de la reducción y los cuidados, consulta",
-  "common.exploreTools": "Descubre todas nuestras herramientas gratuitas →"
+  "common.exploreTools": "Descubre todas nuestras herramientas gratuitas →",
+  "matrices.g.low": "Baja",
+  "matrices.g.moderate_low": "Moderada a baja",
+  "matrices.g.high_clinical_standard": "Alta, estándar clínico",
+  "matrices.g.very_high": "Muy alta",
+  "matrices.g.superior_mechanical_strength": "Resistencia mecánica superior",
+  "matrices.g.maximum_load_bearing": "Carga máxima",
+  "matrices.g.extreme_structural_rigidity": "Rigidez estructural extrema",
+  "matrices.g.extreme": "Extrema",
+  "matrices.g.high_wire_effect_cheese_cutter_risk": "Alto (efecto alambre / riesgo de \"corta-quesos\")",
+  "matrices.g.moderate_high_in_high_movement_tissue": "Moderado a alto en tejido de mucho movimiento",
+  "matrices.g.low_standard_clinical_baseline": "Bajo / referencia clínica estándar",
+  "matrices.g.very_low": "Muy bajo",
+  "matrices.g.extremely_low": "Extremadamente bajo",
+  "matrices.g.negligible": "Insignificante",
+  "matrices.g.zero_significant_tissue_dispersal": "Nulo (amplia distribución en el tejido)",
+  "matrices.g.zero": "Nulo",
+  "matrices.g.healed_downsize_only": "Solo reducción tras la cicatrización",
+  "matrices.g.approved_nostril_lobes": "Aceptado (fosa nasal / lóbulos)",
+  "matrices.g.primary_clinical_baseline": "Referencia clínica principal",
+  "matrices.g.primary_clinical_standard": "Estándar clínico principal",
+  "matrices.g.heavy_duty_standard": "Estándar reforzado",
+  "matrices.g.genital_large_gauge": "Genital / calibre grande",
+  "matrices.g.large_gauge_foundation": "Base de calibre grande",
+  "matrices.g.advanced_stretched_size": "Tamaño de dilatación avanzado",
+  "matrices.g.major_gauge_threshold": "Umbral de calibre importante",
+  "matrices.g.major_milestone": "Hito importante"
 };

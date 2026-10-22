@@ -1,5 +1,23 @@
 window.I18N_DICTIONARY = window.I18N_DICTIONARY || {};
 window.I18N_DICTIONARY.es = {
+  "a11y": {
+    "tool_navigation": "Navegación de la herramienta",
+    "dismiss": "Cerrar",
+    "toggle_sun_exposure_risk_layer": "Mostrar u ocultar la capa de riesgo solar",
+    "toggle_front_and_back_body_views": "Cambiar entre vista frontal y posterior",
+    "interactive_body_placement_map": "Mapa interactivo de ubicaciones en el cuerpo",
+    "zone_specific_locations": "Ubicaciones de la zona",
+    "subtract_1_glass": "Restar 1 vaso",
+    "add_1_glass": "Añadir 1 vaso",
+    "milestone_view_options": "Opciones de vista de hitos",
+    "tension_gauge_scale": "Escala de tensión",
+    "healing_journey_infographic": "Infografía del proceso de cicatrización",
+    "touch_up_tool_modules": "Módulos de retoque",
+    "documentation_languages": "Idiomas de la documentación",
+    "close_lightbox": "Cerrar el visor",
+    "previous_photo": "Foto anterior",
+    "next_photo": "Foto siguiente"
+  },
   "app": {
     "title": "Suite de cronograma de cicatrización y longevidad para tatuajes y piercings",
     "subtitle": "Sigue el progreso diario de cicatrización, compara fotos de hitos, detecta tendencias en los síntomas y calcula la duración de los retoques a largo plazo."

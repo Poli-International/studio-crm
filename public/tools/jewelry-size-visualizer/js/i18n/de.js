@@ -4,6 +4,9 @@
  */
 window.i18nDictionaries = window.i18nDictionaries || {};
 window.i18nDictionaries['de'] = {
+  "a11y.breadcrumb": "Brotkrumennavigation",
+  "a11y.quick_language_switch": "Schneller Sprachwechsel",
+  "a11y.toggle_theme": "Design wechseln",
   "industrial.diagramLabels": "Kugel  ←——Loch-zu-Loch-Abstand——→  Kugel\n      [      Ihre Eingabe     ]",
   "anatomy.browse.all": "Alle Optionen anzeigen",
   "anatomy.browse.btn": "Passenden Schmuck durchstöbern",
@@ -992,5 +995,31 @@ window.i18nDictionaries['de'] = {
   "fitCard.lbl.notes": "Notizen zu Anpassung und Kürzen",
   "fitCard.none": "Keine",
   "fitCard.notice": "<strong>Erstschmuck ist länger, damit Platz für die Schwellung bleibt, und wird nach der Heilung gekürzt.</strong><br>Zeitpunkt des Kürzens und Pflege:",
-  "common.exploreTools": "Alle unsere kostenlosen Tools →"
+  "common.exploreTools": "Alle unsere kostenlosen Tools →",
+  "matrices.g.low": "Niedrig",
+  "matrices.g.moderate_low": "Mäßig bis niedrig",
+  "matrices.g.high_clinical_standard": "Hoch, klinischer Standard",
+  "matrices.g.very_high": "Sehr hoch",
+  "matrices.g.superior_mechanical_strength": "Höhere mechanische Festigkeit",
+  "matrices.g.maximum_load_bearing": "Maximale Belastbarkeit",
+  "matrices.g.extreme_structural_rigidity": "Extreme strukturelle Steifigkeit",
+  "matrices.g.extreme": "Extrem",
+  "matrices.g.high_wire_effect_cheese_cutter_risk": "Hoch (Draht-Effekt / „Käseschneider“-Risiko)",
+  "matrices.g.moderate_high_in_high_movement_tissue": "Mäßig bis hoch in sehr beweglichem Gewebe",
+  "matrices.g.low_standard_clinical_baseline": "Niedrig / klinischer Standardwert",
+  "matrices.g.very_low": "Sehr niedrig",
+  "matrices.g.extremely_low": "Äußerst niedrig",
+  "matrices.g.negligible": "Vernachlässigbar",
+  "matrices.g.zero_significant_tissue_dispersal": "Null (starke Verteilung im Gewebe)",
+  "matrices.g.zero": "Null",
+  "matrices.g.healed_downsize_only": "Nur Verkleinerung nach Abheilung",
+  "matrices.g.approved_nostril_lobes": "Zugelassen (Nasenflügel / Ohrläppchen)",
+  "matrices.g.primary_clinical_baseline": "Klinischer Hauptstandard",
+  "matrices.g.primary_clinical_standard": "Klinischer Hauptstandard",
+  "matrices.g.heavy_duty_standard": "Verstärkter Standard",
+  "matrices.g.genital_large_gauge": "Genital / großer Durchmesser",
+  "matrices.g.large_gauge_foundation": "Basis für große Durchmesser",
+  "matrices.g.advanced_stretched_size": "Fortgeschrittene Dehnungsgröße",
+  "matrices.g.major_gauge_threshold": "Wichtige Durchmessergrenze",
+  "matrices.g.major_milestone": "Wichtiger Meilenstein"
 };

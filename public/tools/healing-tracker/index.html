@@ -41,7 +41,7 @@
       <div class="brand-badge" title="Poli International Professional Tools">
         <span class="brand-label" data-i18n="common.brandTools">POLI</span>
       </div>
-      <nav class="tool-tabs" aria-label="Tool Navigation">
+      <nav class="tool-tabs" aria-label="Tool Navigation" data-i18n-aria="a11y.tool_navigation">
         <button class="tool-tab active" data-tab="healing" data-i18n-title="nav.healingTracker" data-i18n-aria="nav.healingTracker" aria-label="Healing Tracker"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bandage></use></svg></button>
         <button class="tool-tab" data-tab="touchup" data-i18n-title="nav.touchupTimeline" data-i18n-aria="nav.touchupTimeline" aria-label="Touch-Up Timeline"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clock></use></svg></button>
         <button class="tool-tab" data-tab="docs" data-i18n-title="nav.documentation" data-i18n-aria="nav.documentation" aria-label="Documentation"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-book></use></svg></button>
@@ -99,7 +99,7 @@
             <div class="hydration-prompt-actions">
               <button type="button" id="hydrationBannerDrinkBtn" class="hydration-banner-btn hydration-banner-btn--primary"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-drop></use></svg><span data-i18n="healing.hydration.drankWaterBtn" style="color:inherit">Log +1 Glass</span></button>
               <button type="button" id="hydrationBannerSnoozeBtn" class="hydration-banner-btn hydration-banner-btn--secondary" data-i18n="healing.hydration.snoozeBtn">Snooze (30m)</button>
-              <button type="button" id="hydrationBannerDismissBtn" class="hydration-banner-btn hydration-banner-btn--dismiss" aria-label="Dismiss" title="Dismiss">&times;</button>
+              <button type="button" id="hydrationBannerDismissBtn" class="hydration-banner-btn hydration-banner-btn--dismiss" aria-label="Dismiss" data-i18n-aria="a11y.dismiss" title="Dismiss">&times;</button>
             </div>
           </div>
 
@@ -129,10 +129,10 @@
                     <strong id="placementSelectedText" class="placement-selected-value" data-i18n="healing.map.noneSelected">None</strong>
                   </div>
                   <div class="placement-view-toggle">
-                    <button type="button" id="sunRiskToggleBtn" class="placement-toggle-btn sun-risk-toggle-btn active" aria-pressed="true" aria-label="Toggle Sun Exposure Risk Layer">
+                    <button type="button" id="sunRiskToggleBtn" class="placement-toggle-btn sun-risk-toggle-btn active" aria-pressed="true" aria-label="Toggle Sun Exposure Risk Layer" data-i18n-aria="a11y.toggle_sun_exposure_risk_layer">
                       <span id="sunRiskToggleText"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-sun></use></svg><span data-i18n="healing.map.sunRiskToggle" style="color:inherit">Sun Exposure Risk</span></span>
                     </button>
-                    <button type="button" id="bodyMapToggleBtn" class="placement-toggle-btn" aria-label="Toggle front and back body views">
+                    <button type="button" id="bodyMapToggleBtn" class="placement-toggle-btn" aria-label="Toggle front and back body views" data-i18n-aria="a11y.toggle_front_and_back_body_views">
                       <span id="bodyMapToggleText" data-i18n="healing.map.switchToBack">Switch to Back View</span>
                     </button>
                   </div>
@@ -140,7 +140,7 @@
 
                 <div class="placement-picker-body">
                   <div class="placement-map-col">
-<svg id="bodyPlacementMap" viewBox="0 0 280 380" width="100%" class="body-placement-svg" role="region" aria-label="Interactive body placement map">
+<svg id="bodyPlacementMap" viewBox="0 0 280 380" width="100%" class="body-placement-svg" role="region" aria-label="Interactive body placement map" data-i18n-aria="a11y.interactive_body_placement_map">
                     <style>
                       .body-part {
                         fill: var(--bg-tertiary, #e2e8f0);
@@ -361,7 +361,7 @@
                         <span id="zoneLocationsTitle" class="zone-locations-title"></span>
                         <span class="zone-locations-hint" data-i18n="healing.map.chooseSpecific">Select specific placement:</span>
                       </div>
-                      <div id="zoneLocationsList" class="zone-locations-grid" role="listbox" aria-label="Zone specific locations"></div>
+                      <div id="zoneLocationsList" class="zone-locations-grid" role="listbox" aria-label="Zone specific locations" data-i18n-aria="a11y.zone_specific_locations"></div>
                     </div>
 
                     <!-- Sun Exposure Risk Advisory & Preventative Tips -->
@@ -579,8 +579,8 @@
                       <span class="hydration-counter-unit" data-i18n="healing.hydration.unitGlasses">Glasses (250ml)</span>
                     </div>
                     <div class="hydration-btn-group">
-                      <button type="button" id="hydrationRemoveCupBtn" class="hydration-circle-btn" aria-label="Subtract 1 glass" title="Subtract 1 glass">-</button>
-                      <button type="button" id="hydrationAddCupBtn" class="hydration-circle-btn hydration-circle-btn--primary" aria-label="Add 1 glass" title="Add 1 glass" data-i18n="healing.hydration.addCupBtn">+ 1 Glass</button>
+                      <button type="button" id="hydrationRemoveCupBtn" class="hydration-circle-btn" aria-label="Subtract 1 glass" data-i18n-aria="a11y.subtract_1_glass" title="Subtract 1 glass">-</button>
+                      <button type="button" id="hydrationAddCupBtn" class="hydration-circle-btn hydration-circle-btn--primary" aria-label="Add 1 glass" data-i18n-aria="a11y.add_1_glass" title="Add 1 glass" data-i18n="healing.hydration.addCupBtn">+ 1 Glass</button>
                     </div>
                   </div>
 
@@ -644,7 +644,7 @@
                   </p>
                 </div>
                 <!-- View Mode Switcher -->
-                <div class="milestone-view-mode-tabs" role="tablist" aria-label="Milestone View Options">
+                <div class="milestone-view-mode-tabs" role="tablist" aria-label="Milestone View Options" data-i18n-aria="a11y.milestone_view_options">
                   <button type="button" class="milestone-tab-btn milestone-tab-btn--active" id="milestoneTabGallery" role="tab" aria-selected="true">
                     <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-image></use></svg><span data-i18n="healing.gallery.viewGalleryTab" style="color:inherit">Milestone Gallery Grid</span>
                   </button>
@@ -850,7 +850,7 @@
                   <strong id="tensionGaugeLevelDisplay" class="tension-gauge-level-display">Level 0: Normal / Comfortable Clearance</strong>
                 </div>
 
-                <div class="tension-gauge-bar" aria-label="Tension Gauge Scale">
+                <div class="tension-gauge-bar" aria-label="Tension Gauge Scale" data-i18n-aria="a11y.tension_gauge_scale">
                   <div class="tension-gauge-bar__segment active active--normal" data-level="0" title="Level 0: Normal Clearance"></div>
                   <div class="tension-gauge-bar__segment" data-level="1" title="Level 1: Snug"></div>
                   <div class="tension-gauge-bar__segment" data-level="2" title="Level 2: Moderate Tightness"></div>
@@ -980,7 +980,7 @@
               </div>
 
               <div id="journeySnapshotContainer" class="journey-snapshot-canvas-wrap" style="display: none; margin-top: var(--spacing-md); text-align: center;">
-                <canvas id="journeySnapshotCanvas" width="800" height="960" class="journey-snapshot-canvas" aria-label="Healing Journey Infographic"></canvas>
+                <canvas id="journeySnapshotCanvas" width="800" height="960" class="journey-snapshot-canvas" aria-label="Healing Journey Infographic" data-i18n-aria="a11y.healing_journey_infographic"></canvas>
               </div>
             </section>
 
@@ -1406,7 +1406,7 @@
     <div class="tool-main-content">
       <div class="touch-up-timeline__container">
         <!-- SUB-TABS -->
-        <section class="touch-up-timeline__tabs" aria-label="Touch-Up Tool Modules">
+        <section class="touch-up-timeline__tabs" aria-label="Touch-Up Tool Modules" data-i18n-aria="a11y.touch_up_tool_modules">
           <button class="touch-up-timeline__tab touch-up-timeline__tab--active" data-tab="calculator">
             <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-clock></use></svg><span data-i18n="touchup.tabs.calculator" style="color:inherit">Touch-Up Calculator</span>
           </button>
@@ -2093,7 +2093,7 @@
 
   <!-- Tab Content: Documentation -->
   <div id="tab-docs" class="wrapper-tab-content docs-frame-container" style="display:none;">
-    <div class="docs-lang-toolbar" role="navigation" aria-label="Documentation Languages">
+    <div class="docs-lang-toolbar" role="navigation" aria-label="Documentation Languages" data-i18n-aria="a11y.documentation_languages">
       <span class="docs-lang-label" data-i18n="nav.language">Language:</span>
       <button type="button" class="docs-lang-link active" data-lang="en" data-i18n="common.languages.en">English</button>
       <button type="button" class="docs-lang-link" data-lang="fr" data-i18n="common.languages.fr">Français</button>
@@ -2151,14 +2151,14 @@
           <h3 id="milestoneLightboxTitle" class="milestone-lightbox__title" data-i18n="healing.milestones.lightboxTitle">Milestone Inspection</h3>
           <span id="milestoneLightboxDate" class="milestone-lightbox__date"></span>
         </div>
-        <button type="button" class="milestone-lightbox__close" id="milestoneLightboxClose" aria-label="Close Lightbox">&times;</button>
+        <button type="button" class="milestone-lightbox__close" id="milestoneLightboxClose" aria-label="Close Lightbox" data-i18n-aria="a11y.close_lightbox">&times;</button>
       </div>
       <div class="milestone-lightbox__stage">
-        <button type="button" class="milestone-lightbox__nav-btn milestone-lightbox__nav-btn--prev" id="milestoneLightboxPrev" aria-label="Previous Photo">‹</button>
+        <button type="button" class="milestone-lightbox__nav-btn milestone-lightbox__nav-btn--prev" id="milestoneLightboxPrev" aria-label="Previous Photo" data-i18n-aria="a11y.previous_photo">‹</button>
         <div class="milestone-lightbox__image-box">
           <img id="milestoneLightboxImg" src="" alt="Milestone Inspection" class="milestone-lightbox__img">
         </div>
-        <button type="button" class="milestone-lightbox__nav-btn milestone-lightbox__nav-btn--next" id="milestoneLightboxNext" aria-label="Next Photo">›</button>
+        <button type="button" class="milestone-lightbox__nav-btn milestone-lightbox__nav-btn--next" id="milestoneLightboxNext" aria-label="Next Photo" data-i18n-aria="a11y.next_photo">›</button>
       </div>
       <div class="milestone-lightbox__footer">
         <div class="milestone-lightbox__details">
@@ -2354,7 +2354,7 @@
     </div>
     <div class="hydration-toast-actions">
       <button type="button" id="hydrationToastDrinkBtn" class="hydration-toast-btn hydration-toast-btn--drink" data-i18n="healing.hydration.toastDrinkBtn">+1 Glass</button>
-      <button type="button" id="hydrationToastCloseBtn" class="hydration-toast-btn hydration-toast-btn--close" aria-label="Dismiss">&times;</button>
+      <button type="button" id="hydrationToastCloseBtn" class="hydration-toast-btn hydration-toast-btn--close" aria-label="Dismiss" data-i18n-aria="a11y.dismiss">&times;</button>
     </div>
   </div>
 </body>

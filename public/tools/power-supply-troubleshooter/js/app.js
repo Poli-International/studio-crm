@@ -1577,6 +1577,9 @@ function applyStaticTranslations() {
     const key = el.getAttribute('data-i18n-placeholder');
     el.setAttribute('placeholder', t(key));
   });
+  document.querySelectorAll('[data-i18n-aria-label]').forEach((el) => {
+    el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria-label')));
+  });
 }
 
 function initLanguage() {

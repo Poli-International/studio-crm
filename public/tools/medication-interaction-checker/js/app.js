@@ -597,6 +597,32 @@ let currentLang = 'en';
 
 const TRANSLATIONS = {
   en: {
+    "a11y.select_language": "Select language",
+    "a11y.draft_a_message_to_your_doctor": "Draft a message to your doctor",
+    "a11y.studio_first_aid_and_emergency_protocols": "Studio first aid and emergency protocols",
+    "x.br_stamp": "Poli International - Client Medication & Safety Brief",
+    "x.br_date": "Date Generated:",
+    "x.br_total": "Total Disclosed Medications:",
+    "x.br_risk": "Risk Profile:",
+    "x.br_risk_high": "High Concern Items Present (Medical Clearance Recommended)",
+    "x.br_risk_std": "Standard Care & Disclosure",
+    "x.br_meds": "Disclosed Medications & Procedural Impact",
+    "x.br_tattoo": "Tattoo Impact:",
+    "x.br_piercing": "Piercing Impact:",
+    "x.br_action": "Recommended Action:",
+    "x.br_protocol": "Recommended Studio Protocol",
+    "x.br_p_hydration": "Hydration & Calories:",
+    "x.br_p_position": "Client Positioning:",
+    "x.br_p_bleeding": "Bleeding & Plasma Management:",
+    "x.br_p_bandage": "Aftercare Bandage Selection:",
+    "x.br_pdf_head": "POLI INTERNATIONAL - STUDIO SAFETY REFERENCE",
+    "x.br_pdf_title": "Client Medication & Safety Consultation Brief",
+    "x.br_pdf_risk_high": "Risk Assessment: HIGH CONCERN ITEMS PRESENT (Medical clearance advised)",
+    "x.br_pdf_risk_std": "Risk Assessment: Standard Disclosure & Routine Caution",
+    "x.br_pdf_effects": "Disclosed Medications & Procedural Effects",
+    "x.br_pdf_risk_tag": "[{sev} RISK]",
+    "x.br_pdf_action": "Action:",
+    "x.br_pdf_protocols": "Recommended Studio Protocols",
     // --- keyed from the markup 2026-09-02, see i18n-new-keys.en.json ---
     "x.high_concern": "High Concern",
     "x.moderate_concern": "Moderate Concern",
@@ -918,6 +944,32 @@ const TRANSLATIONS = {
     "x.alert_no_medications_selected": "No medications selected. Please select your medications in the Interaction Checker first."
   },
   fr: {
+    "a11y.select_language": "Choisir la langue",
+    "a11y.draft_a_message_to_your_doctor": "Rédiger un message pour votre médecin",
+    "a11y.studio_first_aid_and_emergency_protocols": "Premiers secours et protocoles d'urgence au studio",
+    "x.br_stamp": "Poli International - Fiche médicaments et sécurité du client",
+    "x.br_date": "Date de création :",
+    "x.br_total": "Médicaments déclarés :",
+    "x.br_risk": "Profil de risque :",
+    "x.br_risk_high": "Éléments préoccupants présents (avis médical recommandé)",
+    "x.br_risk_std": "Soins et déclaration standard",
+    "x.br_meds": "Médicaments déclarés et impact sur la séance",
+    "x.br_tattoo": "Impact sur le tatouage :",
+    "x.br_piercing": "Impact sur le piercing :",
+    "x.br_action": "Action recommandée :",
+    "x.br_protocol": "Protocole recommandé pour le studio",
+    "x.br_p_hydration": "Hydratation et calories :",
+    "x.br_p_position": "Position du client :",
+    "x.br_p_bleeding": "Saignement et plasma :",
+    "x.br_p_bandage": "Choix du pansement de soin :",
+    "x.br_pdf_head": "POLI INTERNATIONAL - RÉFÉRENCE SÉCURITÉ STUDIO",
+    "x.br_pdf_title": "Fiche de consultation médicaments et sécurité du client",
+    "x.br_pdf_risk_high": "Évaluation du risque : ÉLÉMENTS TRÈS PRÉOCCUPANTS (avis médical conseillé)",
+    "x.br_pdf_risk_std": "Évaluation du risque : déclaration standard et prudence habituelle",
+    "x.br_pdf_effects": "Médicaments déclarés et effets sur la séance",
+    "x.br_pdf_risk_tag": "[RISQUE {sev}]",
+    "x.br_pdf_action": "Action :",
+    "x.br_pdf_protocols": "Protocoles recommandés pour le studio",
     // --- keyed from the markup 2026-09-02, see i18n-new-keys.en.json ---
     "x.high_concern": "Préoccupation élevée",
     "x.moderate_concern": "Préoccupation modérée",
@@ -1239,6 +1291,32 @@ const TRANSLATIONS = {
     "x.alert_no_medications_selected": "Aucun médicament sélectionné. Veuillez d'abord sélectionner vos médicaments dans le vérificateur d'interactions."
   },
   it: {
+    "a11y.select_language": "Scegli la lingua",
+    "a11y.draft_a_message_to_your_doctor": "Scrivi un messaggio per il tuo medico",
+    "a11y.studio_first_aid_and_emergency_protocols": "Primo soccorso e protocolli di emergenza in studio",
+    "x.br_stamp": "Poli International - Scheda farmaci e sicurezza del cliente",
+    "x.br_date": "Data di creazione:",
+    "x.br_total": "Farmaci dichiarati:",
+    "x.br_risk": "Profilo di rischio:",
+    "x.br_risk_high": "Elementi di forte attenzione presenti (parere medico consigliato)",
+    "x.br_risk_std": "Cura e dichiarazione standard",
+    "x.br_meds": "Farmaci dichiarati e impatto sulla seduta",
+    "x.br_tattoo": "Impatto sul tatuaggio:",
+    "x.br_piercing": "Impatto sul piercing:",
+    "x.br_action": "Azione consigliata:",
+    "x.br_protocol": "Protocollo consigliato per lo studio",
+    "x.br_p_hydration": "Idratazione e calorie:",
+    "x.br_p_position": "Posizione del cliente:",
+    "x.br_p_bleeding": "Sanguinamento e plasma:",
+    "x.br_p_bandage": "Scelta della medicazione:",
+    "x.br_pdf_head": "POLI INTERNATIONAL - RIFERIMENTO SICUREZZA STUDIO",
+    "x.br_pdf_title": "Scheda di consulenza su farmaci e sicurezza del cliente",
+    "x.br_pdf_risk_high": "Valutazione del rischio: ELEMENTI DI FORTE ATTENZIONE (parere medico consigliato)",
+    "x.br_pdf_risk_std": "Valutazione del rischio: dichiarazione standard e prudenza abituale",
+    "x.br_pdf_effects": "Farmaci dichiarati ed effetti sulla seduta",
+    "x.br_pdf_risk_tag": "[RISCHIO {sev}]",
+    "x.br_pdf_action": "Azione:",
+    "x.br_pdf_protocols": "Protocolli consigliati per lo studio",
     // --- keyed from the markup 2026-09-02, see i18n-new-keys.en.json ---
     "x.high_concern": "Preoccupazione elevata",
     "x.moderate_concern": "Preoccupazione moderata",
@@ -1560,6 +1638,32 @@ const TRANSLATIONS = {
     "x.alert_no_medications_selected": "Nessun farmaco selezionato. Seleziona prima i tuoi farmaci nel verificatore di interazioni."
   },
   es: {
+    "a11y.select_language": "Elegir idioma",
+    "a11y.draft_a_message_to_your_doctor": "Redactar un mensaje para su médico",
+    "a11y.studio_first_aid_and_emergency_protocols": "Primeros auxilios y protocolos de emergencia en el estudio",
+    "x.br_stamp": "Poli International - Ficha de medicamentos y seguridad del cliente",
+    "x.br_date": "Fecha de creación:",
+    "x.br_total": "Medicamentos declarados:",
+    "x.br_risk": "Perfil de riesgo:",
+    "x.br_risk_high": "Hay elementos de alta preocupación (se recomienda autorización médica)",
+    "x.br_risk_std": "Cuidado y declaración estándar",
+    "x.br_meds": "Medicamentos declarados e impacto en la sesión",
+    "x.br_tattoo": "Impacto en el tatuaje:",
+    "x.br_piercing": "Impacto en el piercing:",
+    "x.br_action": "Acción recomendada:",
+    "x.br_protocol": "Protocolo recomendado para el estudio",
+    "x.br_p_hydration": "Hidratación y calorías:",
+    "x.br_p_position": "Posición del cliente:",
+    "x.br_p_bleeding": "Sangrado y plasma:",
+    "x.br_p_bandage": "Elección del vendaje de cuidado:",
+    "x.br_pdf_head": "POLI INTERNATIONAL - REFERENCIA DE SEGURIDAD DEL ESTUDIO",
+    "x.br_pdf_title": "Ficha de consulta sobre medicamentos y seguridad del cliente",
+    "x.br_pdf_risk_high": "Evaluación de riesgo: ELEMENTOS DE ALTA PREOCUPACIÓN (se aconseja autorización médica)",
+    "x.br_pdf_risk_std": "Evaluación de riesgo: declaración estándar y precaución habitual",
+    "x.br_pdf_effects": "Medicamentos declarados y efectos en la sesión",
+    "x.br_pdf_risk_tag": "[RIESGO {sev}]",
+    "x.br_pdf_action": "Acción:",
+    "x.br_pdf_protocols": "Protocolos recomendados para el estudio",
     // --- keyed from the markup 2026-09-02, see i18n-new-keys.en.json ---
     "x.high_concern": "Preocupación alta",
     "x.moderate_concern": "Preocupación moderada",
@@ -1881,6 +1985,32 @@ const TRANSLATIONS = {
     "x.alert_no_medications_selected": "No hay medicamentos seleccionados. Primero selecciona tus medicamentos en el verificador de interacciones."
   },
   de: {
+    "a11y.select_language": "Sprache wählen",
+    "a11y.draft_a_message_to_your_doctor": "Nachricht an Ihren Arzt entwerfen",
+    "a11y.studio_first_aid_and_emergency_protocols": "Erste Hilfe und Notfallabläufe im Studio",
+    "x.br_stamp": "Poli International - Medikamenten- und Sicherheitsbogen des Kunden",
+    "x.br_date": "Erstellt am:",
+    "x.br_total": "Angegebene Medikamente:",
+    "x.br_risk": "Risikoprofil:",
+    "x.br_risk_high": "Bedenkliche Einträge vorhanden (ärztliche Freigabe empfohlen)",
+    "x.br_risk_std": "Standardpflege und Angabe",
+    "x.br_meds": "Angegebene Medikamente und Auswirkung auf die Behandlung",
+    "x.br_tattoo": "Auswirkung auf das Tattoo:",
+    "x.br_piercing": "Auswirkung auf das Piercing:",
+    "x.br_action": "Empfohlene Maßnahme:",
+    "x.br_protocol": "Empfohlenes Studio-Protokoll",
+    "x.br_p_hydration": "Flüssigkeit und Kalorien:",
+    "x.br_p_position": "Lagerung des Kunden:",
+    "x.br_p_bleeding": "Blutung und Plasma:",
+    "x.br_p_bandage": "Wahl des Pflegeverbands:",
+    "x.br_pdf_head": "POLI INTERNATIONAL - SICHERHEITSREFERENZ FÜR STUDIOS",
+    "x.br_pdf_title": "Beratungsbogen zu Medikamenten und Sicherheit des Kunden",
+    "x.br_pdf_risk_high": "Risikobewertung: BEDENKLICHE EINTRÄGE (ärztliche Freigabe empfohlen)",
+    "x.br_pdf_risk_std": "Risikobewertung: Standardangabe und übliche Vorsicht",
+    "x.br_pdf_effects": "Angegebene Medikamente und Auswirkungen auf die Behandlung",
+    "x.br_pdf_risk_tag": "[RISIKO {sev}]",
+    "x.br_pdf_action": "Maßnahme:",
+    "x.br_pdf_protocols": "Empfohlene Studio-Protokolle",
     // --- keyed from the markup 2026-09-02, see i18n-new-keys.en.json ---
     "x.high_concern": "Hohes Risiko",
     "x.moderate_concern": "Mäßiges Risiko",
@@ -2202,6 +2332,32 @@ const TRANSLATIONS = {
     "x.alert_no_medications_selected": "Keine Medikamente ausgewählt. Bitte wählen Sie zuerst Ihre Medikamente im Wechselwirkungs-Check aus."
   },
   nl: {
+    "a11y.select_language": "Taal kiezen",
+    "a11y.draft_a_message_to_your_doctor": "Een bericht aan uw arts opstellen",
+    "a11y.studio_first_aid_and_emergency_protocols": "Eerste hulp en noodprocedures in de studio",
+    "x.br_stamp": "Poli International - Medicatie- en veiligheidsoverzicht van de klant",
+    "x.br_date": "Aangemaakt op:",
+    "x.br_total": "Opgegeven medicijnen:",
+    "x.br_risk": "Risicoprofiel:",
+    "x.br_risk_high": "Zorgwekkende items aanwezig (medisch akkoord aanbevolen)",
+    "x.br_risk_std": "Standaardzorg en melding",
+    "x.br_meds": "Opgegeven medicijnen en invloed op de behandeling",
+    "x.br_tattoo": "Invloed op de tattoo:",
+    "x.br_piercing": "Invloed op de piercing:",
+    "x.br_action": "Aanbevolen actie:",
+    "x.br_protocol": "Aanbevolen studioprotocol",
+    "x.br_p_hydration": "Hydratatie en calorieën:",
+    "x.br_p_position": "Houding van de klant:",
+    "x.br_p_bleeding": "Bloeding en plasma:",
+    "x.br_p_bandage": "Keuze van het nazorgverband:",
+    "x.br_pdf_head": "POLI INTERNATIONAL - VEILIGHEIDSREFERENTIE VOOR STUDIO'S",
+    "x.br_pdf_title": "Consultatieoverzicht medicatie en veiligheid van de klant",
+    "x.br_pdf_risk_high": "Risicobeoordeling: ZORGWEKKENDE ITEMS (medisch akkoord aangeraden)",
+    "x.br_pdf_risk_std": "Risicobeoordeling: standaardmelding en gebruikelijke voorzichtigheid",
+    "x.br_pdf_effects": "Opgegeven medicijnen en effecten op de behandeling",
+    "x.br_pdf_risk_tag": "[RISICO {sev}]",
+    "x.br_pdf_action": "Actie:",
+    "x.br_pdf_protocols": "Aanbevolen studioprotocollen",
     // --- keyed from the markup 2026-09-02, see i18n-new-keys.en.json ---
     "x.high_concern": "Hoog risico",
     "x.moderate_concern": "Matig risico",
@@ -2523,6 +2679,32 @@ const TRANSLATIONS = {
     "x.alert_no_medications_selected": "Geen medicijnen geselecteerd. Selecteer eerst je medicijnen in de interactiechecker."
   },
   pt: {
+    "a11y.select_language": "Escolher idioma",
+    "a11y.draft_a_message_to_your_doctor": "Redigir uma mensagem para o seu médico",
+    "a11y.studio_first_aid_and_emergency_protocols": "Primeiros socorros e protocolos de emergência no estúdio",
+    "x.br_stamp": "Poli International - Ficha de medicamentos e segurança do cliente",
+    "x.br_date": "Data de criação:",
+    "x.br_total": "Medicamentos declarados:",
+    "x.br_risk": "Perfil de risco:",
+    "x.br_risk_high": "Itens de alta preocupação presentes (recomenda-se autorização médica)",
+    "x.br_risk_std": "Cuidado e declaração padrão",
+    "x.br_meds": "Medicamentos declarados e impacto na sessão",
+    "x.br_tattoo": "Impacto na tatuagem:",
+    "x.br_piercing": "Impacto no piercing:",
+    "x.br_action": "Ação recomendada:",
+    "x.br_protocol": "Protocolo recomendado para o estúdio",
+    "x.br_p_hydration": "Hidratação e calorias:",
+    "x.br_p_position": "Posição do cliente:",
+    "x.br_p_bleeding": "Sangramento e plasma:",
+    "x.br_p_bandage": "Escolha do curativo:",
+    "x.br_pdf_head": "POLI INTERNATIONAL - REFERÊNCIA DE SEGURANÇA DO ESTÚDIO",
+    "x.br_pdf_title": "Ficha de consulta sobre medicamentos e segurança do cliente",
+    "x.br_pdf_risk_high": "Avaliação de risco: ITENS DE ALTA PREOCUPAÇÃO (aconselha-se autorização médica)",
+    "x.br_pdf_risk_std": "Avaliação de risco: declaração padrão e cautela habitual",
+    "x.br_pdf_effects": "Medicamentos declarados e efeitos na sessão",
+    "x.br_pdf_risk_tag": "[RISCO {sev}]",
+    "x.br_pdf_action": "Ação:",
+    "x.br_pdf_protocols": "Protocolos recomendados para o estúdio",
     // --- keyed from the markup 2026-09-02, see i18n-new-keys.en.json ---
     "x.high_concern": "Preocupação elevada",
     "x.moderate_concern": "Preocupação moderada",
@@ -2844,6 +3026,32 @@ const TRANSLATIONS = {
     "x.alert_no_medications_selected": "Nenhum medicamento selecionado. Selecione primeiro os seus medicamentos no verificador de interações."
   },
   th: {
+    "a11y.select_language": "เลือกภาษา",
+    "a11y.draft_a_message_to_your_doctor": "ร่างข้อความถึงแพทย์ของคุณ",
+    "a11y.studio_first_aid_and_emergency_protocols": "การปฐมพยาบาลและขั้นตอนฉุกเฉินในร้าน",
+    "x.br_stamp": "Poli International - เอกสารยาและความปลอดภัยของลูกค้า",
+    "x.br_date": "วันที่สร้าง:",
+    "x.br_total": "จำนวนยาที่แจ้ง:",
+    "x.br_risk": "ระดับความเสี่ยง:",
+    "x.br_risk_high": "มีรายการที่น่ากังวลสูง (แนะนำให้ปรึกษาแพทย์)",
+    "x.br_risk_std": "การดูแลและการแจ้งข้อมูลตามปกติ",
+    "x.br_meds": "ยาที่แจ้งและผลต่อการทำหัตถการ",
+    "x.br_tattoo": "ผลต่อการสัก:",
+    "x.br_piercing": "ผลต่อการเจาะ:",
+    "x.br_action": "สิ่งที่ควรทำ:",
+    "x.br_protocol": "แนวปฏิบัติที่แนะนำสำหรับสตูดิโอ",
+    "x.br_p_hydration": "น้ำและพลังงาน:",
+    "x.br_p_position": "การจัดท่าลูกค้า:",
+    "x.br_p_bleeding": "การจัดการเลือดและน้ำเหลือง:",
+    "x.br_p_bandage": "การเลือกผ้าปิดแผลหลังทำ:",
+    "x.br_pdf_head": "POLI INTERNATIONAL - ข้อมูลอ้างอิงความปลอดภัยสตูดิโอ",
+    "x.br_pdf_title": "เอกสารปรึกษาเรื่องยาและความปลอดภัยของลูกค้า",
+    "x.br_pdf_risk_high": "การประเมินความเสี่ยง: มีรายการที่น่ากังวลสูง (แนะนำให้ปรึกษาแพทย์)",
+    "x.br_pdf_risk_std": "การประเมินความเสี่ยง: การแจ้งข้อมูลปกติและความระมัดระวังทั่วไป",
+    "x.br_pdf_effects": "ยาที่แจ้งและผลต่อหัตถการ",
+    "x.br_pdf_risk_tag": "[ความเสี่ยง {sev}]",
+    "x.br_pdf_action": "สิ่งที่ควรทำ:",
+    "x.br_pdf_protocols": "แนวปฏิบัติที่แนะนำสำหรับสตูดิโอ",
     // --- Thai, added 2026-10-20 (Thai UI brief) ---
     "x.high_concern": "ความกังวลสูง",
     "x.moderate_concern": "ความกังวลปานกลาง",
@@ -3269,6 +3477,10 @@ function updateUILanguage(lang) {
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     const key = el.getAttribute('data-i18n-placeholder');
     if (dict[key]) el.placeholder = dict[key];
+  });
+  document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
+    const key = el.getAttribute('data-i18n-aria-label');
+    if (dict[key]) el.setAttribute('aria-label', dict[key]);
   });
 
   // English readers are reading the source, so the notice would be noise.
@@ -4245,24 +4457,24 @@ function updateBriefTab() {
   });
 
   const highCount = sorted.filter(id => medMap[id].sev === 'high').length;
-  const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  const dateStr = new Date().toLocaleDateString(currentLang, { year: 'numeric', month: 'long', day: 'numeric' });
 
   let briefTextHtml = `
     <div class="printable-brief">
-      <div class="brief-stamp">Poli International - Client Medication & Safety Brief</div>
+      <div class="brief-stamp">${escHtml(uiText('x.br_stamp', 'Poli International - Client Medication & Safety Brief'))}</div>
       <div class="brief-meta">
-        <div><strong>Date Generated:</strong> ${dateStr}</div>
-        <div><strong>Total Disclosed Medications:</strong> ${checked.length}</div>
-        <div><strong>Risk Profile:</strong> ${highCount > 0 ? 'High Concern Items Present (Medical Clearance Recommended)' : 'Standard Care & Disclosure'}</div>
+        <div><strong>${escHtml(uiText('x.br_date', 'Date Generated:'))}</strong> ${dateStr}</div>
+        <div><strong>${escHtml(uiText('x.br_total', 'Total Disclosed Medications:'))}</strong> ${checked.length}</div>
+        <div><strong>${escHtml(uiText('x.br_risk', 'Risk Profile:'))}</strong> ${escHtml(highCount > 0 ? uiText('x.br_risk_high', 'High Concern Items Present (Medical Clearance Recommended)') : uiText('x.br_risk_std', 'Standard Care & Disclosure'))}</div>
       </div>
 
-      <div class="brief-section-title">Disclosed Medications & Procedural Impact</div>
+      <div class="brief-section-title">${escHtml(uiText('x.br_meds', 'Disclosed Medications & Procedural Impact'))}</div>
       <div class="brief-med-table">
   `;
 
   sorted.forEach(id => {
     const m = medMap[id];
-    const riskPills = (m.riskBadges || []).map(rb => `<span class="card-risk-pill">${escHtml(rb)}</span>`).join(' ');
+    const riskPills = (m.riskBadges || []).map(rb => `<span class="card-risk-pill">${escHtml(riskBadgePlain(rb))}</span>`).join(' ');
 
     briefTextHtml += `
       <div class="brief-med-row ${escHtml(m.sev)}">
@@ -4273,9 +4485,9 @@ function updateBriefTab() {
         </div>
         <div class="brief-risk-pills-container">${riskPills}</div>
         <div class="brief-med-details">
-          <p><strong>Tattoo Impact:</strong> ${escHtml(m.tattoo)}</p>
-          <p><strong>Piercing Impact:</strong> ${escHtml(m.piercing)}</p>
-          ${m.wait ? `<p><strong>Recommended Action:</strong> ${escHtml(m.wait)}</p>` : ''}
+          <p><strong>${escHtml(uiText('x.br_tattoo', 'Tattoo Impact:'))}</strong> ${escHtml(medText(m, 'tattoo'))}</p>
+          <p><strong>${escHtml(uiText('x.br_piercing', 'Piercing Impact:'))}</strong> ${escHtml(medText(m, 'piercing'))}</p>
+          ${m.wait ? `<p><strong>${escHtml(uiText('x.br_action', 'Recommended Action:'))}</strong> ${escHtml(medText(m, 'wait'))}</p>` : ''}
         </div>
       </div>`;
   });
@@ -4283,12 +4495,12 @@ function updateBriefTab() {
   briefTextHtml += `
       </div>
 
-      <div class="brief-section-title">Recommended Studio Protocol</div>
+      <div class="brief-section-title">${escHtml(uiText('x.br_protocol', 'Recommended Studio Protocol'))}</div>
       <ul class="brief-protocol-list">
-        <li><strong>Hydration & Calories:</strong> Client should eat a full complex carb meal 1-2 hours pre-session and maintain active hydration.</li>
-        <li><strong>Client Positioning:</strong> ${highCount > 0 ? 'Recline client during procedure to manage potential vasovagal fainting or lightheadedness.' : 'Standard studio ergonomic seating.'}</li>
-        <li><strong>Bleeding & Plasma Management:</strong> ${sorted.some(id => ['pain', 'blood', 'supplement'].includes(medMap[id].cat)) ? 'Expect elevated plasma weeping. Gentle dab wiping recommended to preserve ink setting.' : 'Standard wiping protocol.'}</li>
-        <li><strong>Aftercare Bandage Selection:</strong> ${sorted.some(id => ['retinoid', 'corticosteroid'].includes(medMap[id].cat)) ? 'Skin may be fragile. Avoid aggressive adhesive second-skin bandages (Saniderm/Tegaderm). Use non-stick pads or breathable cling wrap.' : 'Standard aftercare wrap applicable.'}</li>
+        <li><strong>${escHtml(uiText('x.br_p_hydration', 'Hydration & Calories:'))}</strong> Client should eat a full complex carb meal 1-2 hours pre-session and maintain active hydration.</li>
+        <li><strong>${escHtml(uiText('x.br_p_position', 'Client Positioning:'))}</strong> ${highCount > 0 ? 'Recline client during procedure to manage potential vasovagal fainting or lightheadedness.' : 'Standard studio ergonomic seating.'}</li>
+        <li><strong>${escHtml(uiText('x.br_p_bleeding', 'Bleeding & Plasma Management:'))}</strong> ${sorted.some(id => ['pain', 'blood', 'supplement'].includes(medMap[id].cat)) ? 'Expect elevated plasma weeping. Gentle dab wiping recommended to preserve ink setting.' : 'Standard wiping protocol.'}</li>
+        <li><strong>${escHtml(uiText('x.br_p_bandage', 'Aftercare Bandage Selection:'))}</strong> ${sorted.some(id => ['retinoid', 'corticosteroid'].includes(medMap[id].cat)) ? 'Skin may be fragile. Avoid aggressive adhesive second-skin bandages (Saniderm/Tegaderm). Use non-stick pads or breathable cling wrap.' : 'Standard aftercare wrap applicable.'}</li>
       </ul>
 
       <div class="brief-footer-note">
@@ -4349,7 +4561,8 @@ function generateBriefPDF() {
     return;
   }
 
-  if (!window.jspdf || !window.jspdf.jsPDF) {
+  // jsPDF's Helvetica has no Thai glyphs: in Thai the brief is printed from the page, which renders it.
+  if (!window.jspdf || !window.jspdf.jsPDF || currentLang === 'th') {
     window.print();
     return;
   }
@@ -4357,7 +4570,7 @@ function generateBriefPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
 
-  const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  const dateStr = new Date().toLocaleDateString(currentLang, { year: 'numeric', month: 'long', day: 'numeric' });
   let y = 15;
 
   // Title & Header
@@ -4367,11 +4580,11 @@ function generateBriefPDF() {
   doc.setTextColor(68, 147, 248);
   doc.setFontSize(10);
   doc.setFont('helvetica', 'bold');
-  doc.text('POLI INTERNATIONAL - STUDIO SAFETY REFERENCE', 14, 11);
+  doc.text(uiText('x.br_pdf_head', 'POLI INTERNATIONAL - STUDIO SAFETY REFERENCE'), 14, 11);
 
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(16);
-  doc.text('Client Medication & Safety Consultation Brief', 14, 20);
+  doc.text(uiText('x.br_pdf_title', 'Client Medication & Safety Consultation Brief'), 14, 20);
 
   y = 36;
 
@@ -4383,17 +4596,17 @@ function generateBriefPDF() {
   doc.setTextColor(40, 40, 40);
   doc.setFontSize(9);
   doc.setFont('helvetica', 'normal');
-  doc.text(`Date Generated: ${dateStr}`, 18, y + 6);
-  doc.text(`Total Disclosed Medications: ${checked.length}`, 18, y + 12);
+  doc.text(`${uiText('x.br_date', 'Date Generated:')} ${dateStr}`, 18, y + 6);
+  doc.text(`${uiText('x.br_total', 'Total Disclosed Medications:')} ${checked.length}`, 18, y + 12);
 
   const highCount = checked.filter(id => medMap[id].sev === 'high').length;
   doc.setFont('helvetica', 'bold');
   if (highCount > 0) {
     doc.setTextColor(200, 40, 40);
-    doc.text(`Risk Assessment: HIGH CONCERN ITEMS PRESENT (Medical clearance advised)`, 18, y + 17);
+    doc.text(uiText('x.br_pdf_risk_high', 'Risk Assessment: HIGH CONCERN ITEMS PRESENT (Medical clearance advised)'), 18, y + 17);
   } else {
     doc.setTextColor(0, 130, 50);
-    doc.text(`Risk Assessment: Standard Disclosure & Routine Caution`, 18, y + 17);
+    doc.text(uiText('x.br_pdf_risk_std', 'Risk Assessment: Standard Disclosure & Routine Caution'), 18, y + 17);
   }
 
   y += 28;
@@ -4402,7 +4615,7 @@ function generateBriefPDF() {
   doc.setFontSize(11);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(9, 105, 218);
-  doc.text('Disclosed Medications & Procedural Effects', 14, y);
+  doc.text(uiText('x.br_pdf_effects', 'Disclosed Medications & Procedural Effects'), 14, y);
   doc.setLineWidth(0.5);
   doc.setDrawColor(9, 105, 218);
   doc.line(14, y + 2, 196, y + 2);
@@ -4443,22 +4656,22 @@ function generateBriefPDF() {
     if (m.sev === 'high') doc.setTextColor(200, 30, 30);
     else if (m.sev === 'mod') doc.setTextColor(180, 110, 0);
     else doc.setTextColor(30, 140, 50);
-    doc.text(`[${m.sev.toUpperCase()} RISK]`, 160, y + 6);
+    doc.text(uiFmt('x.br_pdf_risk_tag', '[{sev} RISK]', { sev: m.sev.toUpperCase() }), 160, y + 6);
 
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(60, 60, 60);
     doc.setFontSize(8);
 
-    const tattooLines = doc.splitTextToSize(`• Tattoo Impact: ${m.tattoo}`, 170);
+    const tattooLines = doc.splitTextToSize(`• ${uiText('x.br_tattoo', 'Tattoo Impact:')} ${medText(m, 'tattoo')}`, 170);
     doc.text(tattooLines, 18, y + 12);
 
-    const piercingLines = doc.splitTextToSize(`• Piercing Impact: ${m.piercing}`, 170);
+    const piercingLines = doc.splitTextToSize(`• ${uiText('x.br_piercing', 'Piercing Impact:')} ${medText(m, 'piercing')}`, 170);
     doc.text(piercingLines, 18, y + 19);
 
     if (m.wait) {
       doc.setFont('helvetica', 'bold');
       doc.setTextColor(180, 80, 0);
-      const waitLines = doc.splitTextToSize(`• Action: ${m.wait}`, 170);
+      const waitLines = doc.splitTextToSize(`• ${uiText('x.br_pdf_action', 'Action:')} ${medText(m, 'wait')}`, 170);
       doc.text(waitLines, 18, y + 26);
     }
 
@@ -4474,7 +4687,7 @@ function generateBriefPDF() {
   doc.setFontSize(11);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(9, 105, 218);
-  doc.text('Recommended Studio Protocols', 14, y);
+  doc.text(uiText('x.br_pdf_protocols', 'Recommended Studio Protocols'), 14, y);
   doc.line(14, y + 2, 196, y + 2);
 
   y += 8;
@@ -5238,8 +5451,8 @@ function generatePrintCoverPage() {
   const checked = getSelectedMedIds();
   const patientName = patientNameInput?.value.trim() || 'Client / Patient Name';
   const procType = procTypeInput?.value.trim() || 'Tattoo / Body Piercing Procedure';
-  const procDate = procDateInput?.value ? new Date(procDateInput.value).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : new Date().toLocaleDateString();
-  const dateGenerated = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  const procDate = procDateInput?.value ? new Date(procDateInput.value).toLocaleDateString(currentLang, { year: 'numeric', month: 'long', day: 'numeric' }) : new Date().toLocaleDateString();
+  const dateGenerated = new Date().toLocaleDateString(currentLang, { year: 'numeric', month: 'long', day: 'numeric' });
 
   const sorted = [...checked].sort((a, b) => {
     const sevOrder = { high: 0, mod: 1, low: 2 };

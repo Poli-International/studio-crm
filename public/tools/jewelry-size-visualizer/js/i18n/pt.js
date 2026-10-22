@@ -4,6 +4,9 @@
  */
 window.i18nDictionaries = window.i18nDictionaries || {};
 window.i18nDictionaries['pt'] = {
+  "a11y.breadcrumb": "Trilha de navegação",
+  "a11y.quick_language_switch": "Troca rápida de idioma",
+  "a11y.toggle_theme": "Alternar tema",
   "industrial.diagramLabels": "esfera  ←——distância entre orifícios——→  esfera\n      [      o seu valor     ]",
   "anatomy.browse.all": "Ver todas as opções",
   "anatomy.browse.btn": "Explorar joias compatíveis",
@@ -992,5 +995,31 @@ window.i18nDictionaries['pt'] = {
   "fitCard.lbl.notes": "Notas de ajuste e redução",
   "fitCard.none": "Nenhuma",
   "fitCard.notice": "<strong>A joia inicial é mais comprida para dar espaço ao inchaço e é encurtada quando a perfuração cicatriza.</strong><br>Para o momento da redução e os cuidados, veja",
-  "common.exploreTools": "Descubra todas as nossas ferramentas gratuitas →"
+  "common.exploreTools": "Descubra todas as nossas ferramentas gratuitas →",
+  "matrices.g.low": "Baixa",
+  "matrices.g.moderate_low": "Moderada a baixa",
+  "matrices.g.high_clinical_standard": "Alta, padrão clínico",
+  "matrices.g.very_high": "Muito alta",
+  "matrices.g.superior_mechanical_strength": "Resistência mecânica superior",
+  "matrices.g.maximum_load_bearing": "Carga máxima",
+  "matrices.g.extreme_structural_rigidity": "Rigidez estrutural extrema",
+  "matrices.g.extreme": "Extrema",
+  "matrices.g.high_wire_effect_cheese_cutter_risk": "Alto (efeito arame / risco de \"corta-queijo\")",
+  "matrices.g.moderate_high_in_high_movement_tissue": "Moderado a alto em tecido de muito movimento",
+  "matrices.g.low_standard_clinical_baseline": "Baixo / referência clínica padrão",
+  "matrices.g.very_low": "Muito baixo",
+  "matrices.g.extremely_low": "Extremamente baixo",
+  "matrices.g.negligible": "Insignificante",
+  "matrices.g.zero_significant_tissue_dispersal": "Nulo (ampla distribuição no tecido)",
+  "matrices.g.zero": "Nulo",
+  "matrices.g.healed_downsize_only": "Só redução após cicatrização",
+  "matrices.g.approved_nostril_lobes": "Aceite (narina / lóbulos)",
+  "matrices.g.primary_clinical_baseline": "Referência clínica principal",
+  "matrices.g.primary_clinical_standard": "Padrão clínico principal",
+  "matrices.g.heavy_duty_standard": "Padrão reforçado",
+  "matrices.g.genital_large_gauge": "Genital / calibre grande",
+  "matrices.g.large_gauge_foundation": "Base de calibre grande",
+  "matrices.g.advanced_stretched_size": "Tamanho de alargamento avançado",
+  "matrices.g.major_gauge_threshold": "Limiar de calibre importante",
+  "matrices.g.major_milestone": "Marco importante"
 };

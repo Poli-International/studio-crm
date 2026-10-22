@@ -4,6 +4,14 @@
 
 const I18N = {
   "en": {
+    "a11y.select_language": "Select Language",
+    "a11y.search_symptoms_and_error_codes": "Search symptoms and error codes",
+    "a11y.clear_search": "Clear search",
+    "a11y.troubleshooter_tools_and_references": "Troubleshooter tools and references",
+    "a11y.1_4_inch_mono_jack_pinout_diagram": "1/4 inch mono jack pinout diagram",
+    "a11y.rca_plug_diagram_showing_center_pin_and": "RCA plug diagram showing center pin and outer ground leaves",
+    "a11y.clip_cord_polarity_connection_on_coil_ma": "Clip-cord polarity connection on coil machine",
+    "a11y.filter_escalation_conditions": "Filter escalation conditions",
     "app.badge": "Machine Diagnostics",
     "app.title": "Power Supply & Machine Troubleshooter",
     "app.desc": "Step-by-step fault diagnosis for tattoo machines. Answer a few questions about your symptoms to get a targeted fix checklist.",
@@ -407,6 +415,14 @@ const I18N = {
     "escalation.filter_service": "Bench Service (11)"
   },
   "fr": {
+    "a11y.select_language": "Choisir la langue",
+    "a11y.search_symptoms_and_error_codes": "Rechercher des symptômes et codes d'erreur",
+    "a11y.clear_search": "Effacer la recherche",
+    "a11y.troubleshooter_tools_and_references": "Outils et références de dépannage",
+    "a11y.1_4_inch_mono_jack_pinout_diagram": "Schéma de brochage d'un jack mono 6,35 mm (1/4 pouce)",
+    "a11y.rca_plug_diagram_showing_center_pin_and": "Schéma d'une fiche RCA : broche centrale et lamelles de masse extérieures",
+    "a11y.clip_cord_polarity_connection_on_coil_ma": "Polarité du clip-cord sur une machine à bobines",
+    "a11y.filter_escalation_conditions": "Filtrer les situations à signaler",
     "app.badge": "Diagnostic machine",
     "app.title": "Guide de dépannage alimentation et machine",
     "app.desc": "Diagnostic des pannes étape par étape pour machines de tatouage. Répondez à quelques questions sur vos symptômes pour obtenir une liste d’actions ciblées.",
@@ -810,6 +826,14 @@ const I18N = {
     "escalation.filter_service": "Service atelier (11)"
   },
   "it": {
+    "a11y.select_language": "Scegli la lingua",
+    "a11y.search_symptoms_and_error_codes": "Cerca sintomi e codici di errore",
+    "a11y.clear_search": "Cancella la ricerca",
+    "a11y.troubleshooter_tools_and_references": "Strumenti e riferimenti per la diagnosi",
+    "a11y.1_4_inch_mono_jack_pinout_diagram": "Schema dei contatti di un jack mono da 6,35 mm (1/4 di pollice)",
+    "a11y.rca_plug_diagram_showing_center_pin_and": "Schema di uno spinotto RCA: pin centrale e lamelle di massa esterne",
+    "a11y.clip_cord_polarity_connection_on_coil_ma": "Polarità del clip-cord su una macchina a bobine",
+    "a11y.filter_escalation_conditions": "Filtra le situazioni da segnalare",
     "app.badge": "Diagnostica macchina",
     "app.title": "Guida alla risoluzione dei problemi di alimentazione e macchina",
     "app.desc": "Diagnosi dei guasti passo dopo passo per macchinette per tatuaggi. Rispondi a poche domande sui tuoi sintomi per ottenere un elenco mirato di controlli e soluzioni.",
@@ -1213,6 +1237,14 @@ const I18N = {
     "escalation.filter_service": "Assistenza banco (11)"
   },
   "de": {
+    "a11y.select_language": "Sprache wählen",
+    "a11y.search_symptoms_and_error_codes": "Symptome und Fehlercodes suchen",
+    "a11y.clear_search": "Suche löschen",
+    "a11y.troubleshooter_tools_and_references": "Werkzeuge und Referenzen zur Fehlersuche",
+    "a11y.1_4_inch_mono_jack_pinout_diagram": "Belegungsschema einer 6,35-mm-Monoklinke (1/4 Zoll)",
+    "a11y.rca_plug_diagram_showing_center_pin_and": "Schema eines Cinch-Steckers (RCA): Mittelstift und äußere Massekontakte",
+    "a11y.clip_cord_polarity_connection_on_coil_ma": "Polarität des Clipcords an der Spulenmaschine",
+    "a11y.filter_escalation_conditions": "Eskalationsfälle filtern",
     "app.badge": "Maschinendiagnose",
     "app.title": "Fehlersuche für Netzgerät und Tattoomaschine",
     "app.desc": "Schritt-für-Schritt-Fehlerdiagnose für Tattoomaschinen. Beantworten Sie einige Fragen zu Ihren Symptomen, um eine gezielte Prüfliste zu erhalten.",
@@ -1616,6 +1648,14 @@ const I18N = {
     "escalation.filter_service": "Werkstattservice (11)"
   },
   "es": {
+    "a11y.select_language": "Elegir idioma",
+    "a11y.search_symptoms_and_error_codes": "Buscar síntomas y códigos de error",
+    "a11y.clear_search": "Borrar la búsqueda",
+    "a11y.troubleshooter_tools_and_references": "Herramientas y referencias de diagnóstico",
+    "a11y.1_4_inch_mono_jack_pinout_diagram": "Diagrama de pines de un jack mono de 6,35 mm (1/4 de pulgada)",
+    "a11y.rca_plug_diagram_showing_center_pin_and": "Diagrama de un conector RCA: pin central y láminas de masa exteriores",
+    "a11y.clip_cord_polarity_connection_on_coil_ma": "Polaridad del clip-cord en una máquina de bobinas",
+    "a11y.filter_escalation_conditions": "Filtrar las situaciones a escalar",
     "app.badge": "Diagnóstico de la máquina",
     "app.title": "Guía de resolución de problemas para fuente de alimentación y máquina",
     "app.desc": "Diagnóstico de averías paso a paso para máquinas de tatuar. Responda unas pocas preguntas sobre los síntomas para obtener una lista de comprobación con soluciones específicas.",
@@ -2019,6 +2059,14 @@ const I18N = {
     "escalation.filter_service": "Servicio de banco (11)"
   },
   "nl": {
+    "a11y.select_language": "Taal kiezen",
+    "a11y.search_symptoms_and_error_codes": "Symptomen en foutcodes zoeken",
+    "a11y.clear_search": "Zoekopdracht wissen",
+    "a11y.troubleshooter_tools_and_references": "Hulpmiddelen en naslag voor storingen",
+    "a11y.1_4_inch_mono_jack_pinout_diagram": "Aansluitschema van een 6,35 mm mono-jack (1/4 inch)",
+    "a11y.rca_plug_diagram_showing_center_pin_and": "Schema van een RCA-stekker: middenpin en buitenste massacontacten",
+    "a11y.clip_cord_polarity_connection_on_coil_ma": "Polariteit van het clipcord op een spoelenmachine",
+    "a11y.filter_escalation_conditions": "Escalatiesituaties filteren",
     "app.badge": "Machinediagnose",
     "app.title": "Probleemoplosser voor voeding en tattoomachine",
     "app.desc": "Stapsgewijze storingsdiagnose voor tattoomachines. Beantwoord een paar vragen over uw symptomen om een gerichte checklist met oplossingen te ontvangen.",
@@ -2422,6 +2470,14 @@ const I18N = {
     "escalation.filter_service": "Werkplaatsservice (11)"
   },
   "pt": {
+    "a11y.select_language": "Escolher idioma",
+    "a11y.search_symptoms_and_error_codes": "Pesquisar sintomas e códigos de erro",
+    "a11y.clear_search": "Limpar a pesquisa",
+    "a11y.troubleshooter_tools_and_references": "Ferramentas e referências de diagnóstico",
+    "a11y.1_4_inch_mono_jack_pinout_diagram": "Diagrama de pinos de um jack mono de 6,35 mm (1/4 de polegada)",
+    "a11y.rca_plug_diagram_showing_center_pin_and": "Diagrama de um plugue RCA: pino central e lâminas de terra externas",
+    "a11y.clip_cord_polarity_connection_on_coil_ma": "Polaridade do clip-cord em uma máquina de bobinas",
+    "a11y.filter_escalation_conditions": "Filtrar as situações a escalar",
     "app.badge": "Diagnóstico de máquinas",
     "app.title": "Guia de resolução de problemas para fonte de alimentação e máquina",
     "app.desc": "Diagnóstico de avarias passo a passo para máquinas de tatuagem. Responda a algumas perguntas sobre os sintomas para obter uma lista prática de soluções direcionadas.",
@@ -2825,6 +2881,14 @@ const I18N = {
     "escalation.filter_service": "Assistência bancada (11)"
   },
   "th": {
+    "a11y.select_language": "เลือกภาษา",
+    "a11y.search_symptoms_and_error_codes": "ค้นหาอาการและรหัสข้อผิดพลาด",
+    "a11y.clear_search": "ล้างการค้นหา",
+    "a11y.troubleshooter_tools_and_references": "เครื่องมือและข้อมูลอ้างอิงสำหรับแก้ปัญหา",
+    "a11y.1_4_inch_mono_jack_pinout_diagram": "แผนภาพขาแจ็คโมโน 1/4 นิ้ว (6.35 มม.)",
+    "a11y.rca_plug_diagram_showing_center_pin_and": "แผนภาพปลั๊ก RCA แสดงขากลางและขั้วกราวด์ด้านนอก",
+    "a11y.clip_cord_polarity_connection_on_coil_ma": "ขั้วการต่อสายคลิปคอร์ดกับเครื่องคอยล์",
+    "a11y.filter_escalation_conditions": "กรองเงื่อนไขที่ต้องส่งต่อ",
     "app.badge": "การวินิจฉัยเครื่องสัก",
     "app.title": "Power Supply & Machine Troubleshooter",
     "app.desc": "การวินิจฉัยความผิดปกติทีละขั้นตอนสำหรับเครื่องสัก ตอบคำถามเกี่ยวกับอาการไม่กี่ข้อเพื่อรับรายการตรวจสอบการแก้ไขที่ตรงจุด",

@@ -21,6 +21,15 @@ function TP(key, fallback) {
 function T(key, fallback) {
   return (window.I18N && typeof window.I18N.t === 'function') ? window.I18N.t(key, fallback) : fallback;
 }
+// English text whose key is its own slug (x.outer_upper_arm), so data tables need no key column.
+function txKey(en) { return 'x.' + String(en).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 60); }
+function TX(en) { return en ? T(txKey(en), en) : en; }
+function TPX(en) { var a = Array.prototype.slice.call(arguments, 1); return TP.apply(null, [txKey(en), en].concat(a)); }
+// "Label:" with the colon each language uses (French puts a space before it).
+function TXc(en) {
+  var lang = (window.I18N && window.I18N.getCurrentLanguage && window.I18N.getCurrentLanguage()) || 'en';
+  return TX(en) + (lang === 'fr' ? ' :' : ':');
+}
 function bfKey(en) { return 'x.bf_' + String(en).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, ''); }
 // Needle preset name in the current language. Records and other items keep their own title.
 function npTitle(n) {
@@ -784,7 +793,7 @@ function setGlobalUnit(newUnit, convertValues = true) {
     }));
 
     if (convertValues && prevUnit !== newUnit && typeof showToastNotification === 'function') {
-        showToastNotification(`Switched global unit to <strong>${isMetric ? 'cm² (Square Centimeters)' : 'sq in (Square Inches)'}</strong>`);
+        showToastNotification(TPX('Switched global unit to {0}', `<strong>${TX(isMetric ? 'cm² (Square Centimeters)' : 'sq in (Square Inches)')}</strong>`));
     }
 }
 
@@ -912,7 +921,7 @@ function initializeHeroNavigation() {
         feature.setAttribute('tabindex', '0');
         if (!feature.hasAttribute('aria-label')) {
             const labelText = feature.textContent.trim();
-            feature.setAttribute('aria-label', `Navigate to ${labelText} calculator`);
+            feature.setAttribute('aria-label', TPX('Navigate to {0} calculator', labelText));
         }
 
         // Click event listener
@@ -991,7 +1000,7 @@ function handleCoverageReset() {
     if (progressContainer) progressContainer.style.display = 'none';
 
     // Show temporary reset notification
-    showToastNotification('Coverage Calculator fields reset!');
+    showToastNotification(TX('Coverage Calculator fields reset!'));
 }
 
 function showToastNotification(message, color = '#10b981') {
@@ -1022,7 +1031,7 @@ function handleCoverageCalculation(e) {
     // Get primary needle data
     const needleData = NEEDLE_COVERAGE_RATES[needleConfig];
     if (!needleData) {
-        alert('Please select a needle configuration');
+        alert(TX('Please select a needle configuration'));
         return;
     }
 
@@ -1192,26 +1201,26 @@ function displayCoverageResults(data) {
     // Create comparison (A-paper sizes + credit card)
     const comparisonDiv = document.getElementById('coverage-comparison');
     comparisonDiv.innerHTML = `
-        <h4>Size Comparison</h4>
+        <h4>${TX('Size Comparison')}</h4>
         <ul>
             <li>
-                <span>Approximately</span>
-                <strong>${(data.totalCoverage / 48.15).toFixed(2)}× A5 paper</strong>
+                <span>${TX('Approximately')}</span>
+                <strong>${(data.totalCoverage / 48.15).toFixed(2)}× ${TX('A5 paper')}</strong>
                 <small>(148mm × 210mm / 5.8" × 8.3")</small>
             </li>
             <li>
-                <span>Or about</span>
-                <strong>${(data.totalCoverage / 97.09).toFixed(2)}× A4 paper</strong>
+                <span>${TX('Or about')}</span>
+                <strong>${(data.totalCoverage / 97.09).toFixed(2)}× ${TX('A4 paper')}</strong>
                 <small>(210mm × 297mm / 8.3" × 11.7")</small>
             </li>
             <li>
-                <span>Or</span>
-                <strong>${(data.totalCoverage / 193.05).toFixed(2)}× A3 paper</strong>
+                <span>${TX('Or')}</span>
+                <strong>${(data.totalCoverage / 193.05).toFixed(2)}× ${TX('A3 paper')}</strong>
                 <small>(297mm × 420mm / 11.7" × 16.5")</small>
             </li>
             <li>
-                <span>About</span>
-                <strong>${(data.totalCoverage / 7.17).toFixed(1)}× credit cards</strong>
+                <span>${TX('About')}</span>
+                <strong>${(data.totalCoverage / 7.17).toFixed(1)}× ${TX('credit cards')}</strong>
                 <small>(85.6mm × 54mm / 3.375" × 2.125")</small>
             </li>
         </ul>
@@ -1219,33 +1228,33 @@ function displayCoverageResults(data) {
 
     // Create notes including secondary needle & elasticity details
     const notesDiv = document.getElementById('coverage-notes');
-    let needleComboHTML = `<strong>${data.needleData.name}</strong>`;
+    let needleComboHTML = `<strong>${TX(data.needleData.name)}</strong>`;
     if (data.secondaryNeedleData) {
-        needleComboHTML = `<strong>${data.needleData.name}</strong> + <strong>${data.secondaryNeedleData.name}</strong> <small style="color: #0693e3;">(Blended 50/50 Dual Configuration)</small>`;
+        needleComboHTML = `<strong>${TX(data.needleData.name)}</strong> + <strong>${TX(data.secondaryNeedleData.name)}</strong> <small style="color: #0693e3;">(${TX('Blended 50/50 Dual Configuration')})</small>`;
     }
 
     notesDiv.innerHTML = `
-        <h4>Needle & Skin Elasticity Parameters</h4>
+        <h4>${TX('Needle & Skin Elasticity Parameters')}</h4>
         <ul>
             <li>
-                <span>Needle Setup:</span>
+                <span>${TXc('Needle Setup')}</span>
                 <div>${needleComboHTML}</div>
             </li>
             <li>
-                <span>Skin Elasticity Factor:</span>
-                <strong>${data.elasticityLabel}</strong>
+                <span>${TXc('Skin Elasticity Factor')}</span>
+                <strong>${TX(data.elasticityLabel)}</strong>
             </li>
             <li>
                 <span>${T('x.best_for_label', 'Best For:')}</span>
                 <strong>${T(bfKey(data.needleData.best_for), data.needleData.best_for)}</strong>
             </li>
             <li>
-                <span>Passes Required:</span>
-                <strong>${data.passes} (${data.passes > data.needleData.passes_required ? 'more than typical' : 'standard'})</strong>
+                <span>${TXc('Passes Required')}</span>
+                <strong>${data.passes} (${TX(data.passes > data.needleData.passes_required ? 'more than typical' : 'standard')})</strong>
             </li>
             <li>
-                <span>Ink Efficiency:</span>
-                <strong>${data.needleData.ink_efficiency}</strong>
+                <span>${TXc('Ink Efficiency')}</span>
+                <strong>${TX(data.needleData.ink_efficiency)}</strong>
             </li>
         </ul>
     `;
@@ -1257,9 +1266,9 @@ function displayCoverageResults(data) {
     const estInkCoverage = (data.totalCoverage * 0.15).toFixed(2);
     saveRecentCalculation(
         'coverage',
-        'Coverage: ' + data.needleData.name,
+        TXc('Coverage') + ' ' + TX(data.needleData.name),
         data.totalCoverage.toFixed(1) + ' sq in (' + data.coverageMetric.toFixed(1) + ' cm²)',
-        'Work time: ' + data.workingTime.toFixed(1) + ' hrs',
+        TPX('Work time: {0} hrs', data.workingTime.toFixed(1)),
         {
             needleType: data.secondaryNeedleData ? `${data.needleData.name} + ${data.secondaryNeedleData.name}` : data.needleData.name,
             sessionHours: data.workingTime.toFixed(1),
@@ -1386,14 +1395,14 @@ function displaySessionResults(data) {
 
     // Create session breakdown
     const breakdownDiv = document.getElementById('session-breakdown');
-    let breakdownHTML = '<h4>Session Breakdown</h4><ul>';
+    let breakdownHTML = '<h4>' + TX('Session Breakdown') + '</h4><ul>';
 
     if (data.sessionsNeeded === 1) {
-        breakdownHTML += `<li><span>Single Session:</span><strong>${data.hoursPerSession.toFixed(1)} hours total</strong></li>`;
+        breakdownHTML += `<li><span>${TXc('Single Session')}</span><strong>${TPX('{0} hours total', data.hoursPerSession.toFixed(1))}</strong></li>`;
     } else {
         for (let i = 1; i <= data.sessionsNeeded; i++) {
-            const sessionType = i === 1 ? 'Outline' : (i === data.sessionsNeeded ? 'Details/Touch-ups' : 'Shading/Color');
-            breakdownHTML += `<li><span>Session ${i} (${sessionType}):</span><strong>${data.hoursPerSession.toFixed(1)} hours</strong></li>`;
+            const sessionType = TX(i === 1 ? 'Outline' : (i === data.sessionsNeeded ? 'Details/Touch-ups' : 'Shading/Color'));
+            breakdownHTML += `<li><span>${TPX('Session {0} ({1}):', i, sessionType)}</span><strong>${TPX('{0} hours', data.hoursPerSession.toFixed(1))}</strong></li>`;
         }
     }
 
@@ -1403,23 +1412,23 @@ function displaySessionResults(data) {
     // Create location notes
     const notesDiv = document.getElementById('session-location-notes');
     notesDiv.innerHTML = `
-        <h4>Location Considerations</h4>
+        <h4>${TX('Location Considerations')}</h4>
         <ul>
             <li>
-                <span>Body Location:</span>
-                <strong>${data.locationData.name}</strong>
+                <span>${TXc('Body Location')}</span>
+                <strong>${TX(data.locationData.name)}</strong>
             </li>
             <li>
-                <span>Pain Level:</span>
-                <strong>${data.locationData.pain_level} (${data.locationData.break_frequency} breaks)</strong>
+                <span>${TXc('Pain Level')}</span>
+                <strong>${TX(data.locationData.pain_level)} (${TPX('{0} breaks', TX(data.locationData.break_frequency))})</strong>
             </li>
             <li>
-                <span>Typical Session:</span>
-                <strong>${data.locationData.typical_session} hours max recommended</strong>
+                <span>${TXc('Typical Session')}</span>
+                <strong>${TPX('{0} hours max recommended', data.locationData.typical_session)}</strong>
             </li>
             <li>
-                <span>Notes:</span>
-                <strong>${data.locationData.notes}</strong>
+                <span>${TXc('Notes')}</span>
+                <strong>${TX(data.locationData.notes)}</strong>
             </li>
         </ul>
     `;
@@ -1445,9 +1454,9 @@ function displaySessionResults(data) {
     const estInkSession = (data.totalArea * 0.20).toFixed(2);
     saveRecentCalculation(
         'session',
-        'Session: ' + data.locationData.name,
-        data.totalTime.toFixed(1) + ' hrs total (' + data.sessionsNeeded + ' sessions)',
-        'Area: ' + data.totalArea + ' sq in, Complexity: ' + data.complexityData.name,
+        TXc('Session') + ' ' + TX(data.locationData.name),
+        TPX('{0} hrs total ({1} sessions)', data.totalTime.toFixed(1), data.sessionsNeeded),
+        TPX('Area: {0} sq in, Complexity: {1}', data.totalArea, TX(data.complexityData.name)),
         {
             needleType: 'Standard 9M1 Setup',
             sessionHours: data.totalTime.toFixed(1),
@@ -1689,31 +1698,31 @@ function displayInkResults(data) {
     const unitLabel = data.isMetric ? 'cm²' : 'sq in';
     const breakdownDiv = document.getElementById('ink-breakdown');
     breakdownDiv.innerHTML = `
-        <h4>Consumption & Bottle Waste Cost Analysis</h4>
+        <h4>${TX('Consumption & Bottle Waste Cost Analysis')}</h4>
         <ul>
             <li>
-                <span>Ink Brand / Line:</span>
-                <strong>${data.bottleBrand} ($${data.bottlePrice.toFixed(2)} for ${data.bottleSizeMl}ml — $${data.pricePerMl.toFixed(3)}/ml)</strong>
+                <span>${TXc('Ink Brand / Line')}</span>
+                <strong>${data.bottleBrand} (${TPX('${0} for {1}ml', data.bottlePrice.toFixed(2), data.bottleSizeMl)} — $${data.pricePerMl.toFixed(3)}/ml)</strong>
             </li>
             <li>
-                <span>Session Ink Cost:</span>
-                <strong>$${data.costEstimate.toFixed(2)} (${data.bottlePercentUsed.toFixed(1)}% of a bottle)</strong>
+                <span>${TXc('Session Ink Cost')}</span>
+                <strong>$${data.costEstimate.toFixed(2)} (${TPX('{0}% of a bottle', data.bottlePercentUsed.toFixed(1))})</strong>
             </li>
             <li>
-                <span>Pigment Deposited in Skin:</span>
+                <span>${TXc('Pigment Deposited in Skin')}</span>
                 <strong>${(data.totalInk - data.wastedInkMl).toFixed(1)} ml ($${((data.totalInk - data.wastedInkMl) * data.pricePerMl).toFixed(2)})</strong>
             </li>
             <li>
-                <span>Wasted Pigment (Caps/Wipes/Tubes):</span>
+                <span>${TXc('Wasted Pigment (Caps/Wipes/Tubes)')}</span>
                 <strong>${data.wastedInkMl.toFixed(1)} ml ($${data.wastedCostEstimate.toFixed(2)})</strong>
             </li>
             <li>
-                <span>Coverage & Technique:</span>
-                <strong>${data.area} ${unitLabel}, ${data.techniqueData.name} (${data.passes} passes)</strong>
+                <span>${TXc('Coverage & Technique')}</span>
+                <strong>${data.area} ${unitLabel}, ${TX(data.techniqueData.name)} (${TPX('{0} passes', data.passes)})</strong>
             </li>
             <li>
-                <span>Ink Caps & Reordering:</span>
-                <strong>${data.capsNeeded} caps needed (5ml each) | Approx. ${Math.ceil(data.totalInk / 30)} × 30ml bottles</strong>
+                <span>${TXc('Ink Caps & Reordering')}</span>
+                <strong>${TPX('{0} caps needed (5ml each) | Approx. {1} × 30ml bottles', data.capsNeeded, Math.ceil(data.totalInk / 30))}</strong>
             </li>
         </ul>
     `;
@@ -1728,9 +1737,9 @@ function displayInkResults(data) {
     const estHoursInk = (data.areaInSqin / 10).toFixed(1);
     saveRecentCalculation(
         'ink',
-        'Ink: ' + data.techniqueData.name + ' (' + data.bottleBrand + ')',
-        data.totalInk.toFixed(1) + ' ml (Cost: $' + data.costEstimate.toFixed(2) + ')',
-        'Area: ' + data.area + ' ' + unitLabel + ', Waste: ' + data.wastedInkMl.toFixed(1) + 'ml ($' + data.wastedCostEstimate.toFixed(2) + ')',
+        TXc('Ink') + ' ' + TX(data.techniqueData.name) + ' (' + data.bottleBrand + ')',
+        TPX('{0} ml (Cost: ${1})', data.totalInk.toFixed(1), data.costEstimate.toFixed(2)),
+        TPX('Area: {0} {1}, Waste: {2}ml (${3})', data.area, unitLabel, data.wastedInkMl.toFixed(1), data.wastedCostEstimate.toFixed(2)),
         {
             needleType: data.techniqueData.name + ' Config',
             sessionHours: estHoursInk,
@@ -1836,18 +1845,18 @@ function displayPricingResults(data) {
 
     // Create breakdown
     const breakdownDiv = document.getElementById('pricing-breakdown');
-    let breakdownHTML = '<h4>Payment Breakdown</h4><ul>';
+    let breakdownHTML = '<h4>' + TX('Payment Breakdown') + '</h4><ul>';
 
     if (data.sessions === 1) {
         breakdownHTML += `
-            <li><span>Deposit (upfront):</span><strong>$${data.deposit.toFixed(0)}</strong></li>
-            <li><span>Balance (at session):</span><strong>$${(data.suggestedPrice - data.deposit).toFixed(0)}</strong></li>
+            <li><span>${TXc('Deposit (upfront)')}</span><strong>$${data.deposit.toFixed(0)}</strong></li>
+            <li><span>${TXc('Balance (at session)')}</span><strong>$${(data.suggestedPrice - data.deposit).toFixed(0)}</strong></li>
         `;
     } else {
         breakdownHTML += `
-            <li><span>Deposit (booking):</span><strong>$${data.deposit.toFixed(0)}</strong></li>
-            <li><span>Per session (${data.sessions} sessions):</span><strong>$${data.perSession.toFixed(0)}</strong></li>
-            <li><span>Final session balance:</span><strong>$${(data.suggestedPrice - data.deposit - (data.perSession * (data.sessions - 1))).toFixed(0)}</strong></li>
+            <li><span>${TXc('Deposit (booking)')}</span><strong>$${data.deposit.toFixed(0)}</strong></li>
+            <li><span>${TPX('Per session ({0} sessions):', data.sessions)}</span><strong>$${data.perSession.toFixed(0)}</strong></li>
+            <li><span>${TXc('Final session balance')}</span><strong>$${(data.suggestedPrice - data.deposit - (data.perSession * (data.sessions - 1))).toFixed(0)}</strong></li>
         `;
     }
 
@@ -1857,23 +1866,23 @@ function displayPricingResults(data) {
     // Create profitability notes
     const profitDiv = document.getElementById('pricing-profitability');
     profitDiv.innerHTML = `
-        <h4>Profitability Analysis</h4>
+        <h4>${TX('Profitability Analysis')}</h4>
         <ul>
             <li>
-                <span>Effective Hourly Rate:</span>
+                <span>${TXc('Effective Hourly Rate')}</span>
                 <strong>$${(data.suggestedPrice / data.hours).toFixed(2)}/hr</strong>
             </li>
             <li>
-                <span>Complexity Adjustment:</span>
-                <strong>${data.complexityData.name} (${data.complexityData.price_multiplier}x)</strong>
+                <span>${TXc('Complexity Adjustment')}</span>
+                <strong>${TX(data.complexityData.name)} (${data.complexityData.price_multiplier}x)</strong>
             </li>
             <li>
-                <span>Per Square Inch:</span>
+                <span>${TXc('Per Square Inch')}</span>
                 <strong>$${data.perSqInch.toFixed(2)}/sq in</strong>
             </li>
             <li>
-                <span>Market Positioning:</span>
-                <strong>${data.status === 'underpriced' ? 'Below market - consider increasing' : (data.status === 'premium' ? 'Premium rate - ensure quality justifies' : 'Competitive market rate')}</strong>
+                <span>${TXc('Market Positioning')}</span>
+                <strong>${TX(data.status === 'underpriced' ? 'Below market - consider increasing' : (data.status === 'premium' ? 'Premium rate - ensure quality justifies' : 'Competitive market rate'))}</strong>
             </li>
         </ul>
     `;
@@ -1885,9 +1894,9 @@ function displayPricingResults(data) {
     const estInkPricing = data.area ? (data.area * 0.18).toFixed(2) : 'N/A';
     saveRecentCalculation(
         'pricing',
-        'Pricing: $' + data.suggestedPrice.toFixed(0),
-        'Deposit: $' + data.deposit.toFixed(0) + ' (' + data.perSqInch.toFixed(2) + '/sq in)',
-        'Hours: ' + data.hours + ' hrs @ $' + data.hourlyRate + '/hr',
+        TPX('Pricing: ${0}', data.suggestedPrice.toFixed(0)),
+        TPX('Deposit: ${0} ({1}/sq in)', data.deposit.toFixed(0), data.perSqInch.toFixed(2)),
+        TPX('Hours: {0} hrs @ ${1}/hr', data.hours, data.hourlyRate),
         {
             needleType: 'Studio Standard',
             sessionHours: data.hours.toFixed(1),
@@ -1961,7 +1970,7 @@ function initializeModal() {
                 }, 3000);
             }).catch(function(err) {
                 console.error('Failed to copy:', err);
-                alert('Failed to copy code. Please copy manually.');
+                alert(TX('Failed to copy code. Please copy manually.'));
             });
         });
     }
@@ -3306,15 +3315,15 @@ function initializeUnitConverter() {
 
         // Dynamic Color: Green for Low (<= 35%), Yellow for Medium (36-65%), Red for High (> 65%)
         if (saturationPercent <= 35) {
-            levelText = 'Light Saturation';
+            levelText = TX('Light Saturation');
             levelColor = '#10b981';
             colorClass = 'saturation-bar--low';
         } else if (saturationPercent <= 65) {
-            levelText = 'Medium Saturation';
+            levelText = TX('Medium Saturation');
             levelColor = '#eab308';
             colorClass = 'saturation-bar--med';
         } else {
-            levelText = 'Heavy Solid Saturation';
+            levelText = TX('Heavy Solid Saturation');
             levelColor = '#ef4444';
             colorClass = 'saturation-bar--high';
         }
@@ -3753,9 +3762,9 @@ function initializeUnitConverter() {
             const capsCount = Math.max(1, Math.ceil(grossMl / 1.5));
             const saturationPercent = Math.min(100, Math.max(12, Math.round((mlPerSqin / 0.28) * 100)));
 
-            let levelText = 'Medium Saturation';
-            if (saturationPercent <= 35) levelText = 'Light Saturation';
-            else if (saturationPercent > 65) levelText = 'Heavy Solid Saturation';
+            let levelText = TX('Medium Saturation');
+            if (saturationPercent <= 35) levelText = TX('Light Saturation');
+            else if (saturationPercent > 65) levelText = TX('Heavy Solid Saturation');
 
             const areaText = `${sqinVal.toFixed(1)} sq in (${sqcmVal} cm²)`;
 
@@ -3831,9 +3840,9 @@ function initializeUnitConverter() {
             const capsCount = Math.max(1, Math.ceil(grossMl / 1.5));
             const saturationPercent = Math.min(100, Math.max(12, Math.round((mlPerSqin / 0.28) * 100)));
 
-            let levelText = 'Medium Saturation';
-            if (saturationPercent <= 35) levelText = 'Light Saturation';
-            else if (saturationPercent > 65) levelText = 'Heavy Solid Saturation';
+            let levelText = TX('Medium Saturation');
+            if (saturationPercent <= 35) levelText = TX('Light Saturation');
+            else if (saturationPercent > 65) levelText = TX('Heavy Solid Saturation');
 
             const areaText = `${sqinVal.toFixed(1)} sq in (${sqcmVal} cm²)`;
 
@@ -4096,21 +4105,21 @@ function initializeUnitConverter() {
             const capsCount = Math.max(1, Math.ceil(parseFloat(estMl) / 1.5));
             const saturationPercent = Math.min(100, Math.max(12, Math.round((mlPerSqin / 0.28) * 100)));
 
-            let levelText = 'Medium Saturation';
-            let traumaText = 'Moderate (3/5) • Mid-Dermis Dwell';
+            let levelText = TX('Medium Saturation');
+            let traumaText = T('x.moderate_3_5_mid_dermis_dwell', 'Moderate (3/5) • Mid-Dermis Dwell');
             let healingText = '~12–16 days (Standard epidermal flaking)';
-            let aftercareText = 'SecondSkin 3–4 days; light unscented lotion days 5+.';
+            let aftercareText = T('x.secondskin_3_4_days_light_unscented', 'SecondSkin 3–4 days; light unscented lotion days 5+.');
 
             if (saturationPercent <= 35) {
-                levelText = 'Light Saturation';
-                traumaText = 'Low (1.5/5) • Superficial Dermal Dwell';
+                levelText = TX('Light Saturation');
+                traumaText = T('x.trauma_low_superficial', 'Low (1.5/5) • Superficial Dermal Dwell');
                 healingText = '~7–10 days (Rapid re-epithelialization)';
-                aftercareText = 'Breathable film 2–3 days; light moisturization from day 4.';
+                aftercareText = T('x.breathable_film_2_3_days_light', 'Breathable film 2–3 days; light moisturization from day 4.');
             } else if (saturationPercent > 65) {
-                levelText = 'Heavy Solid Saturation';
-                traumaText = 'Intense (4.8/5) • Dense Multi-Pass Trauma';
+                levelText = TX('Heavy Solid Saturation');
+                traumaText = T('x.trauma_intense_multipass', 'Intense (4.8/5) • Dense Multi-Pass Trauma');
                 healingText = '~18–25+ days (Extended deep remodeling)';
-                aftercareText = 'Protective film with exudate check; avoid heavy ointment over-saturation.';
+                aftercareText = T('x.protective_film_with_exudate_check_avoid', 'Protective film with exudate check; avoid heavy ointment over-saturation.');
             }
 
             const areaText = `${sqinVal.toFixed(1)} sq in (${sqcmVal} cm²)`;
@@ -4206,21 +4215,21 @@ function initializeUnitConverter() {
             const capsCount = Math.max(1, Math.ceil(parseFloat(estMl) / 1.5));
             const saturationPercent = Math.min(100, Math.max(12, Math.round((mlPerSqin / 0.28) * 100)));
 
-            let levelText = `Medium Saturation (${saturationPercent}%)`;
-            let traumaText = 'Moderate (3/5) • Mid-Dermis Dwell';
-            let healingText = '12 to 16 days (Standard epidermal regeneration)';
-            let aftercareText = 'SecondSkin 3–4 days; light unscented lotion days 5+.';
+            let levelText = TPX('Medium Saturation ({0}%)', saturationPercent);
+            let traumaText = T('x.moderate_3_5_mid_dermis_dwell', 'Moderate (3/5) • Mid-Dermis Dwell');
+            let healingText = T('x.12_to_16_days_standard_epidermal', '12 to 16 days (Standard epidermal regeneration)');
+            let aftercareText = T('x.secondskin_3_4_days_light_unscented', 'SecondSkin 3–4 days; light unscented lotion days 5+.');
 
             if (saturationPercent <= 35) {
-                levelText = `Light Saturation (${saturationPercent}%)`;
-                traumaText = 'Low (1.5/5) • Superficial Dermal Dwell';
-                healingText = '7 to 10 days (Rapid re-epithelialization)';
-                aftercareText = 'Breathable film 2–3 days; light moisturization from day 4.';
+                levelText = TPX('Light Saturation ({0}%)', saturationPercent);
+                traumaText = T('x.trauma_low_superficial', 'Low (1.5/5) • Superficial Dermal Dwell');
+                healingText = T('x.7_to_10_days_rapid_epidermal', '7 to 10 days (Rapid re-epithelialization)');
+                aftercareText = T('x.breathable_film_2_3_days_light', 'Breathable film 2–3 days; light moisturization from day 4.');
             } else if (saturationPercent > 65) {
-                levelText = `Heavy Solid Saturation (${saturationPercent}%)`;
-                traumaText = 'Intense (4.8/5) • Dense Multi-Pass Trauma';
-                healingText = '18 to 25+ days (Extended deep remodeling)';
-                aftercareText = 'Protective film with exudate check; avoid heavy ointment over-saturation.';
+                levelText = TPX('Heavy Solid Saturation ({0}%)', saturationPercent);
+                traumaText = T('x.trauma_intense_multipass', 'Intense (4.8/5) • Dense Multi-Pass Trauma');
+                healingText = T('x.18_to_25_days_extended_deep', '18 to 25+ days (Extended deep remodeling)');
+                aftercareText = T('x.protective_film_with_exudate_check_avoid', 'Protective film with exudate check; avoid heavy ointment over-saturation.');
             }
 
             // Populate Slip Header & Metadata
@@ -4306,20 +4315,20 @@ function initializeUnitConverter() {
             const capsCount = Math.max(1, Math.ceil(grossMl / 1.5));
             const saturationPercent = Math.min(100, Math.max(12, Math.round((mlPerSqin / 0.28) * 100)));
 
-            let levelText = 'Medium Saturation';
+            let levelText = TX('Medium Saturation');
             let traumaText = T('x.moderate_3_5_mid_dermis_dwell', 'Moderate (3 / 5) • Mid-Dermis Dwell');
             let healingTimeline = '12 to 16 days (Standard full-thickness dermal regeneration)';
             let passesText = '2–3 feathered blend passes with moderate stretching';
             let aftercareText = 'SecondSkin barrier film 3–4 days; unscented hydration lotion days 5+.';
 
             if (saturationPercent <= 35) {
-                levelText = 'Light Saturation';
+                levelText = TX('Light Saturation');
                 traumaText = 'Low (1.5 / 5) • Superficial Dermal Dwell';
                 healingTimeline = '7 to 10 days (Rapid epidermal re-epithelialization & mild flaking)';
                 passesText = '1–2 single-needle passes with minimal skin distress';
                 aftercareText = 'Breathable film 2–3 days; light moisturization from day 4 onwards.';
             } else if (saturationPercent > 65) {
-                levelText = 'Heavy Solid Saturation';
+                levelText = TX('Heavy Solid Saturation');
                 traumaText = 'Intense (4.8 / 5) • Dense Multi-Pass Trauma';
                 healingTimeline = '18 to 25+ days (Extended deep dermal remodeling, high inflammation response)';
                 passesText = '3–5 circular packing passes with continuous skin stretching';
@@ -4568,17 +4577,17 @@ function initializeUnitConverter() {
             const catTitle = catKey.charAt(0).toUpperCase() + catKey.slice(1);
             const displayArea = isMetric ? (sqinVal * 6.4516).toFixed(1) + ' cm²' : sqinVal.toFixed(1) + ' sq in';
 
-            let levelText = 'Medium Saturation';
-            if (saturationPercent <= 35) levelText = 'Light Saturation';
-            else if (saturationPercent > 65) levelText = 'Heavy Solid Saturation';
+            let levelText = TX('Medium Saturation');
+            if (saturationPercent <= 35) levelText = TX('Light Saturation');
+            else if (saturationPercent > 65) levelText = TX('Heavy Solid Saturation');
 
             const volFormatted = currentVolUnit === 'floz' ? `${estFloz} fl oz (${estMl} mL)` : `${estMl} mL (${estFloz} fl oz)`;
 
             // Save to Recent Calculations Engine
             saveRecentCalculation(
                 'ink',
-                `Scenario: ${optName} (${displayArea})`,
-                `Saturation: ${saturationPercent}% (${levelText}), Vol: ${volFormatted}, Chair Time: ${estHours} hrs`,
+                TPX('Scenario: {0} ({1})', optName, displayArea),
+                TPX('Saturation: {0}% ({1}), Vol: {2}, Chair Time: {3} hrs', saturationPercent, levelText, volFormatted, estHours),
                 {
                     area: displayArea,
                     preset: optTitle,
@@ -5804,9 +5813,9 @@ function initializeSessionSummaryModal() {
 
             saveRecentCalculation(
                 'completed_session',
-                'Completed Tattoo Session',
-                `Actual: ${actTimeText} (Est: ${estTimeText}) | Tag: ${currentSummaryTag.toUpperCase()}`,
-                `Variance: ${varianceText} | Notes: ${notes.substring(0, 40) || 'None'}`
+                TX('Completed Tattoo Session'),
+                TPX('Actual: {0} (Est: {1}) | Tag: {2}', actTimeText, estTimeText, currentSummaryTag.toUpperCase()),
+                TPX('Variance: {0} | Notes: {1}', varianceText, notes.substring(0, 40) || TX('None'))
             );
 
             alert('Tattoo session summary record saved to history!');
@@ -5955,9 +5964,9 @@ function showToast({ type = 'info', title = 'Notification', message = '', action
 function triggerLowStockToast(bottle, minThreshold) {
     showToast({
         type: 'low-stock',
-        title: `Low Stock Alert: ${bottle.name}`,
-        message: `Current volume (${bottle.currentMl} mL) has dropped below your studio minimum threshold (${minThreshold} mL). Consider restocking ${bottle.brand} immediately.`,
-        actionLabel: 'View Reorder Manifest',
+        title: TPX('Low Stock Alert: {0}', bottle.name),
+        message: TPX('Current volume ({0} mL) has dropped below your studio minimum threshold ({1} mL). Consider restocking {2} immediately.', bottle.currentMl, minThreshold, bottle.brand),
+        actionLabel: TX('View Reorder Manifest'),
         onAction: () => {
             const tab = document.querySelector('[data-tab="inventory"]');
             if (tab) tab.click();
@@ -5973,9 +5982,9 @@ function triggerTestStockAlertToast() {
     
     showToast({
         type: 'low-stock',
-        title: `Low Stock Alert: ${lowBottle ? lowBottle.name : 'World Famous Pitch Black'}`,
-        message: `Simulated Alert: Current volume (${lowBottle ? lowBottle.currentMl : 14} mL) is below your studio threshold of ${minThreshold} mL. Restock required!`,
-        actionLabel: 'Open Inventory Matrix',
+        title: TPX('Low Stock Alert: {0}', lowBottle ? lowBottle.name : 'World Famous Pitch Black'),
+        message: TPX('Simulated Alert: Current volume ({0} mL) is below your studio threshold of {1} mL. Restock required!', lowBottle ? lowBottle.currentMl : 14, minThreshold),
+        actionLabel: TX('Open Inventory Matrix'),
         onAction: () => {
             const tab = document.querySelector('[data-tab="inventory"]');
             if (tab) tab.click();
@@ -6799,8 +6808,8 @@ function initializeInkInventoryPlanner() {
 
             showToast({
                 type: 'success',
-                title: 'Appointment Saved',
-                message: `Booking for ${client} (${date}) successfully logged in inventory manifest.`,
+                title: TX('Appointment Saved'),
+                message: TPX('Booking for {0} ({1}) successfully logged in inventory manifest.', client, date),
                 duration: 3500
             });
         });
@@ -7831,9 +7840,9 @@ function renderSessionGoals() {
             <div style="display: flex; align-items: center; gap: 0.5rem;">
                 <input type="checkbox" onchange="toggleGoalCompletion(${g.id})" ${g.completed ? 'checked' : ''} style="cursor: pointer;">
                 <span style="font-weight: 600; color: var(--color-text-primary);">${g.title}</span>
-                <span style="font-size: 0.75rem; color: var(--color-neon-pink, #ff006e); background: rgba(255,0,110,0.1); padding: 1px 6px; border-radius: 4px;">Target: ${g.hours}h</span>
+                <span style="font-size: 0.75rem; color: var(--color-neon-pink, #ff006e); background: rgba(255,0,110,0.1); padding: 1px 6px; border-radius: 4px;">${TPX('Target: {0}h', g.hours)}</span>
             </div>
-            <button type="button" onclick="deleteGoal(${g.id})" style="background: none; border: none; color: #ef4444; cursor: pointer; font-size: 0.9rem;" title="Delete goal">&times;</button>
+            <button type="button" onclick="deleteGoal(${g.id})" style="background: none; border: none; color: #ef4444; cursor: pointer; font-size: 0.9rem;" title="${TX('Delete goal')}">&times;</button>
         </div>
     `).join('');
 }
@@ -8798,7 +8807,7 @@ function downloadIcsCalendarFile() {
     link.click();
     document.body.removeChild(link);
 
-    showBrowserToast('Downloaded .ICS calendar file successfully!', 'success');
+    showBrowserToast(TX('Downloaded .ICS calendar file successfully!'), 'success');
 }
 
 function copyGoogleCalendarDetails() {
@@ -8810,12 +8819,12 @@ function copyGoogleCalendarDetails() {
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(() => {
-            showBrowserToast('Copied appointment details to clipboard!', 'success');
+            showBrowserToast(TX('Copied appointment details to clipboard!'), 'success');
         }).catch(() => {
-            showBrowserToast('Copied appointment details!', 'info');
+            showBrowserToast(TX('Could not copy automatically. Select the details and copy them.'), 'info');
         });
     } else {
-        showBrowserToast('Details ready to copy', 'info');
+        showBrowserToast(TX('Details ready to copy'), 'info');
     }
 }
 

@@ -4,6 +4,9 @@
  */
 window.i18nDictionaries = window.i18nDictionaries || {};
 window.i18nDictionaries['th'] = {
+  "a11y.breadcrumb": "เส้นทางนำทาง",
+  "a11y.quick_language_switch": "เปลี่ยนภาษาอย่างรวดเร็ว",
+  "a11y.toggle_theme": "สลับธีม",
   "industrial.diagramLabels": "ลูกบอล  ←——ระยะห่างระหว่างรู——→  ลูกบอล\n      [      ค่าที่คุณกรอก     ]",
   "anatomy.browse.all": "ดูตัวเลือกทั้งหมด",
   "anatomy.browse.btn": "เรียกดูเครื่องประดับที่เข้ากันได้",
@@ -992,5 +995,31 @@ window.i18nDictionaries['th'] = {
   "fitCard.lbl.notes": "บันทึกการใส่และการลดขนาด",
   "fitCard.none": "ไม่มี",
   "fitCard.notice": "<strong>เครื่องประดับเริ่มต้นยาวกว่าเพื่อรองรับการบวม และจะถูกตัดให้สั้นลงเมื่อการเจาะหายแล้ว</strong><br>สำหรับเวลาการลดขนาดและการดูแล ดูที่",
-  "common.exploreTools": "สำรวจเครื่องมือฟรีทั้งหมดของเรา →"
+  "common.exploreTools": "สำรวจเครื่องมือฟรีทั้งหมดของเรา →",
+  "matrices.g.low": "ต่ำ",
+  "matrices.g.moderate_low": "ปานกลางถึงต่ำ",
+  "matrices.g.high_clinical_standard": "สูง มาตรฐานทางคลินิก",
+  "matrices.g.very_high": "สูงมาก",
+  "matrices.g.superior_mechanical_strength": "ความแข็งแรงเชิงกลสูงกว่า",
+  "matrices.g.maximum_load_bearing": "รับน้ำหนักได้สูงสุด",
+  "matrices.g.extreme_structural_rigidity": "ความแข็งแกร่งเชิงโครงสร้างสูงมาก",
+  "matrices.g.extreme": "สูงสุดขีด",
+  "matrices.g.high_wire_effect_cheese_cutter_risk": "สูง (ผลแบบลวด / เสี่ยง \"ลวดตัดชีส\")",
+  "matrices.g.moderate_high_in_high_movement_tissue": "ปานกลางถึงสูงในเนื้อเยื่อที่เคลื่อนไหวมาก",
+  "matrices.g.low_standard_clinical_baseline": "ต่ำ / ค่าพื้นฐานทางคลินิก",
+  "matrices.g.very_low": "ต่ำมาก",
+  "matrices.g.extremely_low": "ต่ำมากที่สุด",
+  "matrices.g.negligible": "แทบไม่มี",
+  "matrices.g.zero_significant_tissue_dispersal": "ไม่มี (กระจายแรงในเนื้อเยื่อได้มาก)",
+  "matrices.g.zero": "ไม่มี",
+  "matrices.g.healed_downsize_only": "ลดขนาดหลังหายดีเท่านั้น",
+  "matrices.g.approved_nostril_lobes": "ใช้ได้ (จมูก / ติ่งหู)",
+  "matrices.g.primary_clinical_baseline": "ค่าพื้นฐานทางคลินิกหลัก",
+  "matrices.g.primary_clinical_standard": "มาตรฐานทางคลินิกหลัก",
+  "matrices.g.heavy_duty_standard": "มาตรฐานงานหนัก",
+  "matrices.g.genital_large_gauge": "อวัยวะเพศ / ขนาดใหญ่",
+  "matrices.g.large_gauge_foundation": "ฐานขนาดใหญ่",
+  "matrices.g.advanced_stretched_size": "ขนาดขยายระดับสูง",
+  "matrices.g.major_gauge_threshold": "เกณฑ์ขนาดสำคัญ",
+  "matrices.g.major_milestone": "หมุดหมายสำคัญ"
 };

@@ -1,5 +1,23 @@
 window.I18N_DICTIONARY = window.I18N_DICTIONARY || {};
 window.I18N_DICTIONARY.it = {
+  "a11y": {
+    "tool_navigation": "Navigazione dello strumento",
+    "dismiss": "Chiudi",
+    "toggle_sun_exposure_risk_layer": "Mostra o nascondi il livello di rischio solare",
+    "toggle_front_and_back_body_views": "Passa dalla vista frontale a quella posteriore",
+    "interactive_body_placement_map": "Mappa interattiva delle posizioni sul corpo",
+    "zone_specific_locations": "Posizioni della zona",
+    "subtract_1_glass": "Togli 1 bicchiere",
+    "add_1_glass": "Aggiungi 1 bicchiere",
+    "milestone_view_options": "Opzioni di visualizzazione delle tappe",
+    "tension_gauge_scale": "Scala di tensione",
+    "healing_journey_infographic": "Infografica del percorso di guarigione",
+    "touch_up_tool_modules": "Moduli per il ritocco",
+    "documentation_languages": "Lingue della documentazione",
+    "close_lightbox": "Chiudi il visualizzatore",
+    "previous_photo": "Foto precedente",
+    "next_photo": "Foto successiva"
+  },
   "app": {
     "title": "Suite di guarigione e longevità per tatuaggi e piercing",
     "subtitle": "Monitora la guarigione quotidiana, confronta le foto delle tappe fondamentali, rileva l'andamento dei sintomi e calcola la durata a lungo termine dei ritocchi."

@@ -10,6 +10,9 @@
 
   const translations = {
   "en": {
+    "a11y.breadcrumb": "Breadcrumb",
+    "a11y.quick_language_switch": "Quick language switch",
+    "a11y.toggle_theme": "Toggle theme",
     "anatomy.browse.all": "View All Options",
     "anatomy.browse.btn": "Browse Compatible Jewelry",
     "anatomy.browseCompatible": "Browse Compatible Jewelry",
@@ -808,6 +811,9 @@
     "visualizer.title": "Interactive Jewelry Visualizer"
   },
   "de": {
+    "a11y.breadcrumb": "Brotkrumennavigation",
+    "a11y.quick_language_switch": "Schneller Sprachwechsel",
+    "a11y.toggle_theme": "Design wechseln",
     "anatomy.browse.all": "Alle Optionen anzeigen",
     "anatomy.browse.btn": "Passenden Schmuck durchstöbern",
     "anatomy.browseCompatible": "Passenden Schmuck durchsuchen",
@@ -1606,6 +1612,9 @@
     "visualizer.title": "Interaktiver Schmuck-Visualisierer"
   },
   "fr": {
+    "a11y.breadcrumb": "Fil d'Ariane",
+    "a11y.quick_language_switch": "Changement rapide de langue",
+    "a11y.toggle_theme": "Changer de thème",
     "anatomy.browse.all": "Voir toutes les options",
     "anatomy.browse.btn": "Parcourir les bijoux compatibles",
     "anatomy.browseCompatible": "Parcourir les bijoux compatibles",
@@ -2404,6 +2413,9 @@
     "visualizer.title": "Visualiseur Interactif de Bijoux"
   },
   "es": {
+    "a11y.breadcrumb": "Ruta de navegación",
+    "a11y.quick_language_switch": "Cambio rápido de idioma",
+    "a11y.toggle_theme": "Cambiar tema",
     "anatomy.browse.all": "Ver todas las opciones",
     "anatomy.browse.btn": "Explorar joyería compatible",
     "anatomy.browseCompatible": "Explorar joyas compatibles",
@@ -3202,6 +3214,9 @@
     "visualizer.title": "Visualizador Interactivo de Joyería"
   },
   "it": {
+    "a11y.breadcrumb": "Percorso di navigazione",
+    "a11y.quick_language_switch": "Cambio rapido di lingua",
+    "a11y.toggle_theme": "Cambia tema",
     "anatomy.browse.all": "Mostra tutte le opzioni",
     "anatomy.browse.btn": "Sfoglia gioielli compatibili",
     "anatomy.browseCompatible": "Esplora gioielli compatibili",
@@ -4000,6 +4015,9 @@
     "visualizer.title": "Visualizzatore Interattivo dei Gioielli"
   },
   "pt": {
+    "a11y.breadcrumb": "Trilha de navegação",
+    "a11y.quick_language_switch": "Troca rápida de idioma",
+    "a11y.toggle_theme": "Alternar tema",
     "anatomy.browse.all": "Ver todas as opções",
     "anatomy.browse.btn": "Explorar joias compatíveis",
     "anatomy.browseCompatible": "Explorar joias compatíveis",
@@ -4798,6 +4816,9 @@
     "visualizer.title": "Visualizador Interativo de Joias"
   },
   "nl": {
+    "a11y.breadcrumb": "Kruimelpad",
+    "a11y.quick_language_switch": "Snel van taal wisselen",
+    "a11y.toggle_theme": "Thema wisselen",
     "anatomy.browse.all": "Alle opties bekijken",
     "anatomy.browse.btn": "Compatibele sieraden bekijken",
     "anatomy.browseCompatible": "Compatibele sieraden bekijken",

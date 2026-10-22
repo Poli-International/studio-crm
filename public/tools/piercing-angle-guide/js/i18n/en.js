@@ -2158,5 +2158,12 @@ window.i18n.translations["en"] = {
   "jewelry.cad.curved_retention_tail": "Curved end",
   "jewelry.cad.arc_radius_rise": "Arc radius and rise",
   "jewelry.cad.rigid_subdermal_rise": "Rigid 90° rise",
-  "jewelry.cad.wearable_shaft_length": "Wearable shaft length"
+  "jewelry.cad.wearable_shaft_length": "Wearable shaft length",
+  "print.cmp_title": "{a} vs {b} Comparative Protocol",
+  "print.cmp_units": "Units: {u}",
+  "print.unit_imperial": "Imperial (inches)",
+  "print.unit_metric": "Metric (mm)",
+  "print.cmp_hazard": "{name} Off-Angle Hazard:",
+  "print.cmp_contra": "{name} Contraindications:",
+  "print.standard_check": "Standard check"
 };

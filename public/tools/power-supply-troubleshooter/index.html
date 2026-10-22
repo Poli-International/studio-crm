@@ -30,7 +30,7 @@
     <div class="tool-header-top" id="tool-header-top">
       <div class="tool-header__badge" id="tool-header-badge"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-bolt></use></svg><span data-i18n="app.badge" style="color:inherit">Machine Diagnostics</span></div>
       <div class="lang-selector-wrap" id="lang-selector-wrap">
-        <select id="lang-select" class="lang-select" aria-label="Select Language">
+        <select id="lang-select" class="lang-select" aria-label="Select Language" data-i18n-aria-label="a11y.select_language">
           <option value="en">English</option>
           <option value="fr">Français</option>
           <option value="it">Italiano</option>
@@ -49,13 +49,13 @@
   <div class="search-section" id="search-section">
     <div class="search-input-wrap" id="search-input-wrap">
       <span class="search-icon" id="search-icon" aria-hidden="true"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg></span>
-      <input type="search" id="symptom-search" class="symptom-search" placeholder="Search symptoms, error codes (E-1, OVERLOAD, etc.)..." aria-label="Search symptoms and error codes" autocomplete="off" spellcheck="false" data-i18n-placeholder="search.placeholder">
-      <button type="button" id="search-clear-btn" class="search-clear-btn" aria-label="Clear search" hidden>×</button>
+      <input type="search" id="symptom-search" class="symptom-search" placeholder="Search symptoms, error codes (E-1, OVERLOAD, etc.)..." aria-label="Search symptoms and error codes" data-i18n-aria-label="a11y.search_symptoms_and_error_codes" autocomplete="off" spellcheck="false" data-i18n-placeholder="search.placeholder">
+      <button type="button" id="search-clear-btn" class="search-clear-btn" aria-label="Clear search" data-i18n-aria-label="a11y.clear_search" hidden>×</button>
     </div>
     <div id="search-results" class="search-results" hidden aria-live="polite"></div>
   </div>
 
-  <nav class="tool-tabs" id="tool-tabs" role="tablist" aria-label="Troubleshooter tools and references">
+  <nav class="tool-tabs" id="tool-tabs" role="tablist" aria-label="Troubleshooter tools and references" data-i18n-aria-label="a11y.troubleshooter_tools_and_references">
     <button class="tool-tab active" id="tab-btn-wizard" role="tab" aria-selected="true" aria-controls="view-wizard" data-tab="wizard" data-i18n="nav.tab_wizard">Troubleshooting Wizard</button>
     <button class="tool-tab" id="tab-btn-calc" role="tab" aria-selected="false" aria-controls="view-calc" data-tab="calc" data-i18n="nav.tab_calc">Bench Calculator</button>
     <button class="tool-tab" id="tab-btn-audio" role="tab" aria-selected="false" aria-controls="view-audio" data-tab="audio" data-i18n="nav.tab_audio">Audio Library</button>
@@ -245,7 +245,7 @@
             <h3 class="pinout-card-title" id="pinout-title-jack" data-i18n="pinout.jack.title">1/4" (6.35 mm) Mono Phone Jack</h3>
             <p class="pinout-card-desc" id="pinout-desc-jack" data-i18n="pinout.jack.desc">Standard power supply output connector. Tip carries positive (+); sleeve provides ground/return (-).</p>
             <div class="svg-diagram-wrap" id="svg-wrap-jack">
-              <svg viewBox="0 0 460 140" class="pinout-svg" id="svg-jack" aria-label="1/4 inch mono jack pinout diagram">
+              <svg viewBox="0 0 460 140" class="pinout-svg" id="svg-jack" aria-label="1/4 inch mono jack pinout diagram" data-i18n-aria-label="a11y.1_4_inch_mono_jack_pinout_diagram">
                 <!-- Plug Body Outline -->
                 <rect x="20" y="45" width="90" height="50" rx="4" class="svg-handle" />
                 <rect x="110" y="52" width="25" height="36" class="svg-metal-dark" />
@@ -270,7 +270,7 @@
             <h3 class="pinout-card-title" id="pinout-title-rca" data-i18n="pinout.rca.title">RCA Plug Anatomy &amp; Ground Leaves</h3>
             <p class="pinout-card-desc" id="pinout-desc-rca" data-i18n="pinout.rca.desc">Center pin carries positive (+); outer segmented collar provides ground (-). Loose outer leaves lose friction fit, leading to intermittent power dropouts when cord flexes.</p>
             <div class="svg-diagram-wrap" id="svg-wrap-rca">
-              <svg viewBox="0 0 460 140" class="pinout-svg" id="svg-rca" aria-label="RCA plug diagram showing center pin and outer ground leaves">
+              <svg viewBox="0 0 460 140" class="pinout-svg" id="svg-rca" aria-label="RCA plug diagram showing center pin and outer ground leaves" data-i18n-aria-label="a11y.rca_plug_diagram_showing_center_pin_and">
                 <!-- Molded Grip -->
                 <rect x="20" y="45" width="100" height="50" rx="4" class="svg-handle" />
                 <!-- Ground Collar Base -->
@@ -297,7 +297,7 @@
             <h3 class="pinout-card-title" id="pinout-title-clip" data-i18n="pinout.clip.title">Coil Machine Clip-Cord Polarity</h3>
             <p class="pinout-card-desc" id="pinout-desc-clip" data-i18n="pinout.clip.desc">Traditional setup: connect positive (+) clip to rear binding post for proper capacitor discharge orientation; negative (-) clip to front binding post or frame.</p>
             <div class="svg-diagram-wrap" id="svg-wrap-clip">
-              <svg viewBox="0 0 460 150" class="pinout-svg" id="svg-clip" aria-label="Clip-cord polarity connection on coil machine">
+              <svg viewBox="0 0 460 150" class="pinout-svg" id="svg-clip" aria-label="Clip-cord polarity connection on coil machine" data-i18n-aria-label="a11y.clip_cord_polarity_connection_on_coil_ma">
                 <!-- Machine Frame Silhouette -->
                 <path d="M 50 120 L 390 120 L 390 100 L 260 100 L 260 35 L 220 35 L 220 100 L 110 100 L 110 50 L 50 50 Z" class="svg-frame" />
                 <!-- Rear Binding Post (Positive) -->
@@ -376,7 +376,7 @@
         <div class="escalation-header" id="escalation-header">
           <h2 class="panel-title" id="escalation-title" data-i18n="escalation.title">When to Call a Technician or the Manufacturer</h2>
           <p class="panel-intro" id="escalation-desc" data-i18n="escalation.intro">Consolidated escalation directory collecting every condition in the diagnostic tree requiring professional bench repair, component replacement, or manufacturer service.</p>
-          <div class="escalation-filters" id="escalation-filters" role="group" aria-label="Filter escalation conditions">
+          <div class="escalation-filters" id="escalation-filters" role="group" aria-label="Filter escalation conditions" data-i18n-aria-label="a11y.filter_escalation_conditions">
             <button type="button" class="escalation-filter-btn active" id="filter-all-btn" data-filter="all" data-i18n="escalation.filter_all">All Escalations (16)</button>
             <button type="button" class="escalation-filter-btn" id="filter-stop-btn" data-filter="stop" data-i18n="escalation.filter_stop">Immediate Stop (5)</button>
             <button type="button" class="escalation-filter-btn" id="filter-service-btn" data-filter="service" data-i18n="escalation.filter_service">Bench Service (11)</button>

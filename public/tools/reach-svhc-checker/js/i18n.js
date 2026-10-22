@@ -6,6 +6,7 @@
 
 const I18N_DICTIONARIES = {
   "en": {
+    "a11y.upload_sds_text_file": "Upload SDS text file",
     "footer.echa_source": "ECHA Candidate List Curated Subset (51 of 244 substances · snapshot 27 June 2024)",
     "theme.toggle": "Toggle color theme",
     "lang.selector_label": "Language",
@@ -339,6 +340,7 @@ const I18N_DICTIONARIES = {
     "watchlist.placeholder_reason": "e.g. Studio allergen policy"
   },
   "fr": {
+    "a11y.upload_sds_text_file": "Importer le fichier texte de la FDS",
     "footer.echa_source": "Liste des candidats de l'ECHA, sous-ensemble sélectionné (51 sur 244 substances · instantané du 27 juin 2024)",
     "theme.toggle": "Changer de thème visuel",
     "lang.selector_label": "Langue",
@@ -671,6 +673,7 @@ const I18N_DICTIONARIES = {
     "watchlist.placeholder_reason": "ex. Politique allergènes du studio"
   },
   "it": {
+    "a11y.upload_sds_text_file": "Carica il file di testo della SDS",
     "footer.echa_source": "Elenco di candidati ECHA, sottoinsieme selezionato (51 su 244 sostanze · situazione al 27 giugno 2024)",
     "theme.toggle": "Cambia tema visivo",
     "lang.selector_label": "Lingua",
@@ -1003,6 +1006,7 @@ const I18N_DICTIONARIES = {
     "watchlist.placeholder_reason": "es. Criterio allergeni dello studio"
   },
   "de": {
+    "a11y.upload_sds_text_file": "Textdatei des Sicherheitsdatenblatts hochladen",
     "footer.echa_source": "ECHA-Kandidatenliste, kuratierte Teilmenge (51 von 244 Stoffen · Stand 27. Juni 2024)",
     "theme.toggle": "Farbdesign umschalten",
     "lang.selector_label": "Sprache",
@@ -1335,6 +1339,7 @@ const I18N_DICTIONARIES = {
     "watchlist.placeholder_reason": "z. B. Studio-Allergenrichtlinie"
   },
   "es": {
+    "a11y.upload_sds_text_file": "Subir el archivo de texto de la FDS",
     "footer.echa_source": "Lista de candidatas de la ECHA, subconjunto seleccionado (51 de 244 sustancias · instantánea del 27 de junio de 2024)",
     "theme.toggle": "Alternar tema de color",
     "lang.selector_label": "Idioma",
@@ -1667,6 +1672,7 @@ const I18N_DICTIONARIES = {
     "watchlist.placeholder_reason": "ej. Política de alérgenos del estudio"
   },
   "nl": {
+    "a11y.upload_sds_text_file": "Tekstbestand van het VIB uploaden",
     "footer.echa_source": "ECHA-kandidatenlijst, samengestelde deelset (51 van 244 stoffen · momentopname 27 juni 2024)",
     "theme.toggle": "Kleurthema wisselen",
     "lang.selector_label": "Taal",
@@ -1999,6 +2005,7 @@ const I18N_DICTIONARIES = {
     "watchlist.placeholder_reason": "bijv. Studio-allergenenbeleid"
   },
   "pt": {
+    "a11y.upload_sds_text_file": "Carregar o arquivo de texto da FDS",
     "footer.echa_source": "Lista de candidatas da ECHA, subconjunto selecionado (51 de 244 substâncias · instantâneo de 27 de junho de 2024)",
     "theme.toggle": "Alternar tema de cores",
     "lang.selector_label": "Língua",
@@ -2331,6 +2338,7 @@ const I18N_DICTIONARIES = {
     "watchlist.placeholder_reason": "ex. Política de alergénios do estúdio"
   },
   "th": {
+    "a11y.upload_sds_text_file": "อัปโหลดไฟล์ข้อความ SDS",
     "footer.echa_source": "รายการผู้สมัคร ECHA ชุดย่อยที่คัดแล้ว (51 จาก 244 สาร · ข้อมูล ณ 27 มิถุนายน 2024)",
     "theme.toggle": "สลับธีมสี",
     "lang.selector_label": "ภาษา",

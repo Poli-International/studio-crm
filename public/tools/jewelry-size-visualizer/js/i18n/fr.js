@@ -4,6 +4,9 @@
  */
 window.i18nDictionaries = window.i18nDictionaries || {};
 window.i18nDictionaries['fr'] = {
+  "a11y.breadcrumb": "Fil d'Ariane",
+  "a11y.quick_language_switch": "Changement rapide de langue",
+  "a11y.toggle_theme": "Changer de thème",
   "industrial.diagramLabels": "bille  ←——écart trou à trou——→  bille\n      [      votre saisie     ]",
   "anatomy.browse.all": "Voir toutes les options",
   "anatomy.browse.btn": "Parcourir les bijoux compatibles",
@@ -992,5 +995,31 @@ window.i18nDictionaries['fr'] = {
   "fitCard.lbl.notes": "Notes de pose et de réduction",
   "fitCard.none": "Aucune",
   "fitCard.notice": "<strong>Le bijou de pose est plus long pour laisser place au gonflement ; il est raccourci une fois le piercing cicatrisé.</strong><br>Pour le moment de la réduction et les soins, voir",
-  "common.exploreTools": "Découvrir tous nos outils gratuits →"
+  "common.exploreTools": "Découvrir tous nos outils gratuits →",
+  "matrices.g.low": "Faible",
+  "matrices.g.moderate_low": "Modérée à faible",
+  "matrices.g.high_clinical_standard": "Élevée, standard clinique",
+  "matrices.g.very_high": "Très élevée",
+  "matrices.g.superior_mechanical_strength": "Résistance mécanique supérieure",
+  "matrices.g.maximum_load_bearing": "Charge maximale",
+  "matrices.g.extreme_structural_rigidity": "Rigidité structurelle extrême",
+  "matrices.g.extreme": "Extrême",
+  "matrices.g.high_wire_effect_cheese_cutter_risk": "Élevé (effet fil / risque de « fil à couper le beurre »)",
+  "matrices.g.moderate_high_in_high_movement_tissue": "Modéré à élevé dans les tissus très mobiles",
+  "matrices.g.low_standard_clinical_baseline": "Faible / référence clinique standard",
+  "matrices.g.very_low": "Très faible",
+  "matrices.g.extremely_low": "Extrêmement faible",
+  "matrices.g.negligible": "Négligeable",
+  "matrices.g.zero_significant_tissue_dispersal": "Nul (répartition importante sur les tissus)",
+  "matrices.g.zero": "Nul",
+  "matrices.g.healed_downsize_only": "Réduction après cicatrisation uniquement",
+  "matrices.g.approved_nostril_lobes": "Accepté (narine / lobes)",
+  "matrices.g.primary_clinical_baseline": "Référence clinique principale",
+  "matrices.g.primary_clinical_standard": "Standard clinique principal",
+  "matrices.g.heavy_duty_standard": "Standard renforcé",
+  "matrices.g.genital_large_gauge": "Génital / gros calibre",
+  "matrices.g.large_gauge_foundation": "Base gros calibre",
+  "matrices.g.advanced_stretched_size": "Taille d'étirement avancée",
+  "matrices.g.major_gauge_threshold": "Seuil de calibre important",
+  "matrices.g.major_milestone": "Étape majeure"
 };

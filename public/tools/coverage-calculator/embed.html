@@ -589,7 +589,7 @@
         <header class="embed__header">
             <h1 class="embed__title" data-i18n="embed_title">Needle Coverage Calculator</h1>
             <div style="display: flex; align-items: center; gap: 0.5rem;">
-                <select id="embed-language-select" aria-label="Select Language" onchange="window.I18N && window.I18N.setLanguage(this.value)" style="background: rgba(0,0,0,0.4); color: #fff; border: 1px solid #2C5F7C; font-size: 0.8rem; font-weight: 600; padding: 4px 6px; border-radius: 6px; cursor: pointer;">
+                <select id="embed-language-select" aria-label="Select Language" data-i18n-aria="x.select_language" onchange="window.I18N && window.I18N.setLanguage(this.value)" style="background: rgba(0,0,0,0.4); color: #fff; border: 1px solid #2C5F7C; font-size: 0.8rem; font-weight: 600; padding: 4px 6px; border-radius: 6px; cursor: pointer;">
                     <option value="en">EN</option>
                     <option value="fr">FR</option>
                     <option value="it">IT</option>
@@ -600,7 +600,7 @@
                     <option value="th">TH</option>
                 </select>
                 
-                <button id="theme-toggle" class="embed__theme-toggle" aria-label="Toggle theme">◐</button>
+                <button id="theme-toggle" class="embed__theme-toggle" aria-label="Toggle theme" data-i18n-aria="emb.toggle_theme">◐</button>
             </div>
         </header>
 
@@ -625,64 +625,64 @@
             <form id="coverage-form" class="embed__form">
                 <div class="embed__form-grid">
                     <div class="embed__form-group">
-                        <label for="needle-config">Needle Configuration</label>
+                        <label for="needle-config" data-i18n="lbl_needle_group">Needle Configuration</label>
                         <select id="needle-config" required>
-                            <optgroup label="Round Liners">
-                                <option value="1RL">1RL - Single Needle</option>
-                                <option value="3RL">3RL - 3 Round Liner</option>
-                                <option value="5RL">5RL - 5 Round Liner</option>
-                                <option value="7RL">7RL - 7 Round Liner</option>
+                            <optgroup label="Round Liners" data-i18n-label="emb.grp_round_liners">
+                                <option value="1RL" data-i18n="emb.n_1RL">1RL - Single Needle</option>
+                                <option value="3RL" data-i18n="emb.n_3RL">3RL - 3 Round Liner</option>
+                                <option value="5RL" data-i18n="emb.n_5RL">5RL - 5 Round Liner</option>
+                                <option value="7RL" data-i18n="emb.n_7RL">7RL - 7 Round Liner</option>
                             </optgroup>
-                            <optgroup label="Round Shaders">
-                                <option value="5RS">5RS - 5 Round Shader</option>
-                                <option value="7RS">7RS - 7 Round Shader</option>
-                                <option value="9RS">9RS - 9 Round Shader</option>
+                            <optgroup label="Round Shaders" data-i18n-label="emb.grp_round_shaders">
+                                <option value="5RS" data-i18n="emb.n_5RS">5RS - 5 Round Shader</option>
+                                <option value="7RS" data-i18n="emb.n_7RS">7RS - 7 Round Shader</option>
+                                <option value="9RS" data-i18n="emb.n_9RS">9RS - 9 Round Shader</option>
                             </optgroup>
-                            <optgroup label="Magnums">
-                                <option value="5M1">5M1 - 5 Magnum</option>
-                                <option value="7M1" selected>7M1 - 7 Magnum</option>
-                                <option value="9M1">9M1 - 9 Magnum (Most Common)</option>
-                                <option value="11M1">11M1 - 11 Magnum</option>
-                                <option value="13M1">13M1 - 13 Magnum</option>
-                                <option value="15M1">15M1 - 15 Magnum</option>
+                            <optgroup label="Magnums" data-i18n-label="emb.grp_magnums">
+                                <option value="5M1" data-i18n="emb.n_5M1">5M1 - 5 Magnum</option>
+                                <option value="7M1" selected data-i18n="emb.n_7M1">7M1 - 7 Magnum</option>
+                                <option value="9M1" data-i18n="emb.n_9M1">9M1 - 9 Magnum (Most Common)</option>
+                                <option value="11M1" data-i18n="emb.n_11M1">11M1 - 11 Magnum</option>
+                                <option value="13M1" data-i18n="emb.n_13M1">13M1 - 13 Magnum</option>
+                                <option value="15M1" data-i18n="emb.n_15M1">15M1 - 15 Magnum</option>
                             </optgroup>
-                            <optgroup label="Curved Magnums">
-                                <option value="9CM">9CM - 9 Curved Magnum</option>
-                                <option value="11CM">11CM - 11 Curved Magnum</option>
-                                <option value="13CM">13CM - 13 Curved Magnum</option>
+                            <optgroup label="Curved Magnums" data-i18n-label="emb.grp_curved_magnums">
+                                <option value="9CM" data-i18n="emb.n_9CM">9CM - 9 Curved Magnum</option>
+                                <option value="11CM" data-i18n="emb.n_11CM">11CM - 11 Curved Magnum</option>
+                                <option value="13CM" data-i18n="emb.n_13CM">13CM - 13 Curved Magnum</option>
                             </optgroup>
-                            <optgroup label="Flats">
-                                <option value="7F">7F - 7 Flat</option>
-                                <option value="9F">9F - 9 Flat</option>
+                            <optgroup label="Flats" data-i18n-label="emb.grp_flats">
+                                <option value="7F" data-i18n="emb.n_7F">7F - 7 Flat</option>
+                                <option value="9F" data-i18n="emb.n_9F">9F - 9 Flat</option>
                             </optgroup>
                         </select>
                     </div>
 
                     <div class="embed__form-group">
-                        <label for="work-speed">Work Speed</label>
+                        <label for="work-speed" data-i18n="x.work_speed">Work Speed</label>
                         <select id="work-speed" required>
-                            <option value="slow">Slow/Detailed (Precision)</option>
-                            <option value="medium" selected>Medium (Standard)</option>
-                            <option value="fast">Fast (Coverage)</option>
+                            <option value="slow" data-i18n="emb.speed_slow">Slow/Detailed (Precision)</option>
+                            <option value="medium" selected data-i18n="emb.sat_medium">Medium (Standard)</option>
+                            <option value="fast" data-i18n="emb.speed_fast">Fast (Coverage)</option>
                         </select>
                     </div>
 
                     <div class="embed__form-group">
-                        <label for="session-hours">Session Length (hours)</label>
+                        <label for="session-hours" data-i18n="emb.session_length">Session Length (hours)</label>
                         <input type="number" id="session-hours" min="0.5" max="12" step="0.5" value="4" required>
                     </div>
 
                     <div class="embed__form-group">
-                        <label for="break-time">Break Time (min/hour)</label>
+                        <label for="break-time" data-i18n="x.break_time_min_hour">Break Time (min/hour)</label>
                         <input type="number" id="break-time" min="0" max="30" step="5" value="10" required>
                     </div>
 
                     <div class="embed__form-group">
-                        <label for="passes">Number of Passes</label>
+                        <label for="passes" data-i18n="x.number_of_passes">Number of Passes</label>
                         <input type="number" id="passes" min="1" max="5" value="2" required>
                     </div>
                 </div>
-                <button type="submit" class="embed__calculate-btn">Calculate Coverage</button>
+                <button type="submit" class="embed__calculate-btn" data-i18n="emb.btn_coverage">Calculate Coverage</button>
             </form>
             <div id="coverage-results" class="embed__results" style="display: none;"></div>
         </div>
@@ -692,72 +692,72 @@
             <form id="session-form" class="embed__form">
                 <div class="embed__form-grid">
                     <div class="embed__form-group">
-                        <label for="tattoo-width">Tattoo Width (inches)</label>
+                        <label for="tattoo-width" data-i18n="emb.tattoo_width">Tattoo Width (inches)</label>
                         <input type="number" id="tattoo-width" min="0.5" max="50" step="0.5" value="6" required>
                     </div>
 
                     <div class="embed__form-group">
-                        <label for="tattoo-height">Tattoo Height (inches)</label>
+                        <label for="tattoo-height" data-i18n="emb.tattoo_height">Tattoo Height (inches)</label>
                         <input type="number" id="tattoo-height" min="0.5" max="50" step="0.5" value="8" required>
                     </div>
 
                     <div class="embed__form-group">
-                        <label for="complexity">Design Complexity</label>
+                        <label for="complexity" data-i18n="x.design_complexity">Design Complexity</label>
                         <select id="complexity" required>
-                            <option value="simple">Simple (Minimal detail)</option>
-                            <option value="moderate" selected>Moderate (Some detail)</option>
-                            <option value="detailed">Detailed (Complex work)</option>
-                            <option value="highly-detailed">Highly Detailed (Intricate)</option>
-                            <option value="masterwork">Masterwork (Maximum detail)</option>
+                            <option value="simple" data-i18n="emb.cx_simple">Simple (Minimal detail)</option>
+                            <option value="moderate" selected data-i18n="emb.cx_moderate">Moderate (Some detail)</option>
+                            <option value="detailed" data-i18n="emb.cx_detailed">Detailed (Complex work)</option>
+                            <option value="highly-detailed" data-i18n="emb.cx_highly">Highly Detailed (Intricate)</option>
+                            <option value="masterwork" data-i18n="emb.cx_masterwork">Masterwork (Maximum detail)</option>
                         </select>
                     </div>
 
                     <div class="embed__form-group">
-                        <label for="body-location">Body Location</label>
+                        <label for="body-location" data-i18n="x.body_location">Body Location</label>
                         <select id="body-location" required>
-                            <optgroup label="Easy Areas">
-                                <option value="outer-upper-arm" selected>Outer Upper Arm</option>
-                                <option value="outer-thigh">Outer Thigh</option>
-                                <option value="calf">Calf</option>
-                                <option value="shoulder">Shoulder</option>
+                            <optgroup label="Easy Areas" data-i18n-label="emb.grp_easy">
+                                <option value="outer-upper-arm" selected data-i18n="x.outer_upper_arm">Outer Upper Arm</option>
+                                <option value="outer-thigh" data-i18n="emb.loc_outer_thigh">Outer Thigh</option>
+                                <option value="calf" data-i18n="emb.loc_calf">Calf</option>
+                                <option value="shoulder" data-i18n="x.shoulder">Shoulder</option>
                             </optgroup>
-                            <optgroup label="Moderate Areas">
-                                <option value="inner-upper-arm">Inner Upper Arm</option>
-                                <option value="forearm">Forearm</option>
-                                <option value="back">Back</option>
-                                <option value="chest">Chest</option>
+                            <optgroup label="Moderate Areas" data-i18n-label="emb.grp_moderate">
+                                <option value="inner-upper-arm" data-i18n="emb.loc_inner_upper_arm">Inner Upper Arm</option>
+                                <option value="forearm" data-i18n="emb.loc_forearm">Forearm</option>
+                                <option value="back" data-i18n="emb.loc_back">Back</option>
+                                <option value="chest" data-i18n="x.chest">Chest</option>
                             </optgroup>
-                            <optgroup label="Difficult Areas">
-                                <option value="ribs">Ribs</option>
-                                <option value="inner-thigh">Inner Thigh</option>
-                                <option value="feet">Feet</option>
-                                <option value="hands">Hands</option>
-                                <option value="neck">Neck</option>
-                                <option value="spine">Spine</option>
-                                <option value="face">Face</option>
+                            <optgroup label="Difficult Areas" data-i18n-label="emb.grp_difficult">
+                                <option value="ribs" data-i18n="x.ribs">Ribs</option>
+                                <option value="inner-thigh" data-i18n="emb.loc_inner_thigh">Inner Thigh</option>
+                                <option value="feet" data-i18n="x.feet">Feet</option>
+                                <option value="hands" data-i18n="x.hands">Hands</option>
+                                <option value="neck" data-i18n="x.neck">Neck</option>
+                                <option value="spine" data-i18n="x.spine">Spine</option>
+                                <option value="face" data-i18n="emb.loc_face">Face</option>
                             </optgroup>
                         </select>
                     </div>
 
                     <div class="embed__form-group">
-                        <label for="color-work">Color Work</label>
+                        <label for="color-work" data-i18n="x.color_work">Color Work</label>
                         <select id="color-work" required>
-                            <option value="blackwork">Black Only</option>
-                            <option value="minimal-color">Minimal Color (1-2 colors)</option>
-                            <option value="full-color" selected>Full Color (3+ colors)</option>
+                            <option value="blackwork" data-i18n="emb.color_black">Black Only</option>
+                            <option value="minimal-color" data-i18n="emb.color_minimal">Minimal Color (1-2 colors)</option>
+                            <option value="full-color" selected data-i18n="emb.color_full">Full Color (3+ colors)</option>
                         </select>
                     </div>
 
                     <div class="embed__form-group">
-                        <label for="pain-tolerance">Pain Tolerance</label>
+                        <label for="pain-tolerance" data-i18n="emb.pain_tolerance">Pain Tolerance</label>
                         <select id="pain-tolerance" required>
-                            <option value="low">Low (Frequent breaks)</option>
-                            <option value="medium" selected>Medium (Normal breaks)</option>
-                            <option value="high">High (Minimal breaks)</option>
+                            <option value="low" data-i18n="x.low_frequent_breaks">Low (Frequent breaks)</option>
+                            <option value="medium" selected data-i18n="emb.pain_medium">Medium (Normal breaks)</option>
+                            <option value="high" data-i18n="emb.pain_high">High (Minimal breaks)</option>
                         </select>
                     </div>
                 </div>
-                <button type="submit" class="embed__calculate-btn">Estimate Session Time</button>
+                <button type="submit" class="embed__calculate-btn" data-i18n="emb.btn_session">Estimate Session Time</button>
             </form>
             <div id="session-results" class="embed__results" style="display: none;"></div>
         </div>
@@ -767,47 +767,47 @@
             <form id="ink-form" class="embed__form">
                 <div class="embed__form-grid">
                     <div class="embed__form-group">
-                        <label for="ink-width">Area Width (inches)</label>
+                        <label for="ink-width" data-i18n="emb.area_width">Area Width (inches)</label>
                         <input type="number" id="ink-width" min="0.5" max="50" step="0.5" value="6" required>
                     </div>
 
                     <div class="embed__form-group">
-                        <label for="ink-height">Area Height (inches)</label>
+                        <label for="ink-height" data-i18n="emb.area_height">Area Height (inches)</label>
                         <input type="number" id="ink-height" min="0.5" max="50" step="0.5" value="8" required>
                     </div>
 
                     <div class="embed__form-group">
-                        <label for="technique">Technique</label>
+                        <label for="technique" data-i18n="x.technique">Technique</label>
                         <select id="technique" required>
-                            <option value="lining">Lining (Outlines)</option>
-                            <option value="shading" selected>Shading (Gradients)</option>
-                            <option value="solid-packing">Solid Color Packing</option>
-                            <option value="whip-shading">Whip Shading</option>
-                            <option value="realism">Realism (High Detail)</option>
-                            <option value="geometric">Geometric (Precise)</option>
+                            <option value="lining" data-i18n="x.lining_outlines">Lining (Outlines)</option>
+                            <option value="shading" selected data-i18n="x.shading_gradients">Shading (Gradients)</option>
+                            <option value="solid-packing" data-i18n="emb.tech_packing">Solid Color Packing</option>
+                            <option value="whip-shading" data-i18n="x.whip_shading">Whip Shading</option>
+                            <option value="realism" data-i18n="emb.tech_realism">Realism (High Detail)</option>
+                            <option value="geometric" data-i18n="emb.tech_geometric">Geometric (Precise)</option>
                         </select>
                     </div>
 
                     <div class="embed__form-group">
-                        <label for="saturation">Saturation Level</label>
+                        <label for="saturation" data-i18n="x.saturation_level">Saturation Level</label>
                         <select id="saturation" required>
-                            <option value="light">Light (Subtle)</option>
-                            <option value="medium" selected>Medium (Standard)</option>
-                            <option value="heavy">Heavy (Bold/Solid)</option>
+                            <option value="light" data-i18n="emb.sat_light">Light (Subtle)</option>
+                            <option value="medium" selected data-i18n="emb.sat_medium">Medium (Standard)</option>
+                            <option value="heavy" data-i18n="emb.sat_heavy">Heavy (Bold/Solid)</option>
                         </select>
                     </div>
 
                     <div class="embed__form-group">
-                        <label for="colors">Number of Colors</label>
+                        <label for="colors" data-i18n="x.number_of_colors">Number of Colors</label>
                         <input type="number" id="colors" min="1" max="20" value="3" required>
                     </div>
 
                     <div class="embed__form-group">
-                        <label for="ink-passes">Passes Required</label>
+                        <label for="ink-passes" data-i18n="x.passes_required">Passes Required</label>
                         <input type="number" id="ink-passes" min="1" max="5" value="2" required>
                     </div>
                 </div>
-                <button type="submit" class="embed__calculate-btn">Calculate Ink Needed</button>
+                <button type="submit" class="embed__calculate-btn" data-i18n="emb.btn_ink">Calculate Ink Needed</button>
             </form>
             <div id="ink-results" class="embed__results" style="display: none;"></div>
         </div>
@@ -817,37 +817,37 @@
             <form id="pricing-form" class="embed__form">
                 <div class="embed__form-grid">
                     <div class="embed__form-group">
-                        <label for="estimated-hours">Estimated Hours</label>
+                        <label for="estimated-hours" data-i18n="emb.estimated_hours">Estimated Hours</label>
                         <input type="number" id="estimated-hours" min="0.5" max="100" step="0.5" value="8" required>
                     </div>
 
                     <div class="embed__form-group">
-                        <label for="hourly-rate">Hourly Rate ($)</label>
+                        <label for="hourly-rate" data-i18n="x.hourly_rate">Hourly Rate ($)</label>
                         <input type="number" id="hourly-rate" min="50" max="500" step="10" value="150" required>
                     </div>
 
                     <div class="embed__form-group">
-                        <label for="pricing-complexity">Design Complexity</label>
+                        <label for="pricing-complexity" data-i18n="x.design_complexity">Design Complexity</label>
                         <select id="pricing-complexity" required>
-                            <option value="simple">Simple (0-10% adjustment)</option>
-                            <option value="moderate" selected>Moderate (10-20% adjustment)</option>
-                            <option value="detailed">Detailed (20-30% adjustment)</option>
-                            <option value="highly-detailed">Highly Detailed (30-50% adjustment)</option>
-                            <option value="masterwork">Masterwork (50-100% adjustment)</option>
+                            <option value="simple" data-i18n="emb.pcx_simple">Simple (0-10% adjustment)</option>
+                            <option value="moderate" selected data-i18n="emb.pcx_moderate">Moderate (10-20% adjustment)</option>
+                            <option value="detailed" data-i18n="emb.pcx_detailed">Detailed (20-30% adjustment)</option>
+                            <option value="highly-detailed" data-i18n="emb.pcx_highly">Highly Detailed (30-50% adjustment)</option>
+                            <option value="masterwork" data-i18n="emb.pcx_masterwork">Masterwork (50-100% adjustment)</option>
                         </select>
                     </div>
 
                     <div class="embed__form-group">
-                        <label for="deposit-percent">Deposit Percentage</label>
+                        <label for="deposit-percent" data-i18n="emb.deposit_pct">Deposit Percentage</label>
                         <input type="number" id="deposit-percent" min="10" max="100" step="5" value="25" required>
                     </div>
 
                     <div class="embed__form-group">
-                        <label for="sessions">Number of Sessions</label>
+                        <label for="sessions" data-i18n="emb.num_sessions">Number of Sessions</label>
                         <input type="number" id="sessions" min="1" max="20" value="2" required>
                     </div>
                 </div>
-                <button type="submit" class="embed__calculate-btn">Calculate Pricing</button>
+                <button type="submit" class="embed__calculate-btn" data-i18n="emb.btn_pricing">Calculate Pricing</button>
             </form>
             <div id="pricing-results" class="embed__results" style="display: none;"></div>
         </div>
@@ -856,17 +856,17 @@
         <section class="embed__email-section">
             <div class="embed__email-box">
                 <h2 class="embed__email-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bell></use></svg> Get Notified of New Tools!</h2>
-                <p class="embed__email-subtitle">Be first to know when we launch new free tools for tattoo professionals.</p>
+                <p class="embed__email-subtitle" data-i18n="x.be_first_to_know_when_we">Be first to know when we launch new free tools for tattoo professionals.</p>
 
                 <form id="embed-email-form" class="embed__email-form">
                     <div class="embed__email-input-group">
                         <input type="email"
                                id="embed-email-input"
                                class="embed__email-input"
-                               placeholder="Your email address"
+                               placeholder="Your email address" data-i18n-placeholder="ph_newsletter_email"
                                required
-                               aria-label="Email address">
-                        <button type="submit" class="embed__email-submit">Notify Me</button>
+                               aria-label="Email address" data-i18n-aria="x.email_address">
+                        <button type="submit" class="embed__email-submit" data-i18n="btn_notify_me">Notify Me</button>
                     </div>
                     <p class="embed__email-success" id="embed-email-success" style="display: none;">
                         <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Thanks! We'll notify you when new tools launch!
@@ -889,35 +889,35 @@
             <div class="embed__features-grid">
                 <div class="embed__feature-item">
                     <span class="embed__feature-check"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span>
-                    <span class="embed__feature-text">Coverage Area Calculator</span>
+                    <span class="embed__feature-text" data-i18n="x.coverage_area_calculator">Coverage Area Calculator</span>
                 </div>
                 <div class="embed__feature-item">
                     <span class="embed__feature-check"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span>
-                    <span class="embed__feature-text">Session Time Estimator</span>
+                    <span class="embed__feature-text" data-i18n="x.session_time_estimator">Session Time Estimator</span>
                 </div>
                 <div class="embed__feature-item">
                     <span class="embed__feature-check"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span>
-                    <span class="embed__feature-text">Ink Consumption Planner</span>
+                    <span class="embed__feature-text" data-i18n="emb.feat_ink">Ink Consumption Planner</span>
                 </div>
                 <div class="embed__feature-item">
                     <span class="embed__feature-check"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span>
-                    <span class="embed__feature-text">Pricing Calculator</span>
+                    <span class="embed__feature-text" data-i18n="x.pricing_calculator">Pricing Calculator</span>
                 </div>
                 <div class="embed__feature-item">
                     <span class="embed__feature-check"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span>
-                    <span class="embed__feature-text">Mobile-Responsive Design</span>
+                    <span class="embed__feature-text" data-i18n="x.mobile_responsive_design">Mobile-Responsive Design</span>
                 </div>
                 <div class="embed__feature-item">
                     <span class="embed__feature-check"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span>
-                    <span class="embed__feature-text">Dark/Light Mode</span>
+                    <span class="embed__feature-text" data-i18n="x.dark_light_mode">Dark/Light Mode</span>
                 </div>
                 <div class="embed__feature-item">
                     <span class="embed__feature-check"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span>
-                    <span class="embed__feature-text">100% Free, No Ads</span>
+                    <span class="embed__feature-text" data-i18n="x.100_free_no_ads">100% Free, No Ads</span>
                 </div>
                 <div class="embed__feature-item">
                     <span class="embed__feature-check"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span>
-                    <span class="embed__feature-text">Professional Results</span>
+                    <span class="embed__feature-text" data-i18n="emb.feat_results">Professional Results</span>
                 </div>
             </div>
         </section>
@@ -927,10 +927,10 @@
         <div class="embed-footer-content">
             <a href="https://poliinternational.com/tools" target="_blank" class="embed-footer-btn embed-footer-btn--tools">
                 <span class="btn-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-wrench></use></svg></span>
-                <span class="btn-text">More Tools</span>
+                <span class="btn-text" data-i18n="emb.more_tools">More Tools</span>
             </a>
             
-            <a href="index.html" target="_blank" class="embed-footer-link">
+            <a href="index.html" target="_blank" class="embed-footer-link" data-i18n="emb.open_full">
                 Open Full Version →
             </a>
         </div>
@@ -997,6 +997,21 @@
             'geometric': { base_rate: 0.10, saturation: { light: 0.8, medium: 1.0, heavy: 1.2 }, waste_factor: 1.2 }
         };
 
+        // Text through the tool's dictionary; {n}/{a}/{b} filled in. Option text is already translated on the page.
+        const T = (key, fallback, vars) => {
+            let s = (window.I18N && window.I18N.t(key, fallback)) || fallback;
+            for (const k in (vars || {})) s = s.split('{' + k + '}').join(vars[k]);
+            return s;
+        };
+        const chosen = (id) => { const el = document.getElementById(id); return el.options[el.selectedIndex].text; };
+        window.addEventListener('languageChanged', () => {
+            document.querySelectorAll('[data-i18n-label]').forEach(g => { g.label = T(g.getAttribute('data-i18n-label'), g.label); });
+            // results already on screen are drawn again in the new language
+            document.querySelectorAll('.embed__results').forEach(r => {
+                if (r.style.display === 'block') r.closest('.embed__panel').querySelector('form').requestSubmit();
+            });
+        });
+
         // Theme Toggle
         const themeToggle = document.getElementById('theme-toggle');
         const savedTheme = localStorage.getItem('coverage-embed-theme');
@@ -1055,34 +1070,34 @@
             const resultsDiv = document.getElementById('coverage-results');
             resultsDiv.style.display = 'block';
             resultsDiv.innerHTML = `
-                <h3 class="embed__results-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Coverage Results</h3>
+                <h3 class="embed__results-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> ${T('emb.r_coverage', 'Coverage Results')}</h3>
                 <div class="embed__results-grid">
                     <div class="embed__result-card">
                         <div class="embed__result-value">${adjustedCoverage.toFixed(1)}</div>
-                        <div class="embed__result-label">Square Inches</div>
+                        <div class="embed__result-label">${T('x.square_inches', 'Square Inches')}</div>
                     </div>
                     <div class="embed__result-card">
                         <div class="embed__result-value">${coverageMetric.toFixed(1)}</div>
-                        <div class="embed__result-label">Square Cm</div>
+                        <div class="embed__result-label">${T('emb.r_sq_cm', 'Square Cm')}</div>
                     </div>
                     <div class="embed__result-card">
                         <div class="embed__result-value">${effectiveHours.toFixed(1)}</div>
-                        <div class="embed__result-label">Working Hours</div>
+                        <div class="embed__result-label">${T('emb.r_working_hours', 'Working Hours')}</div>
                     </div>
                     <div class="embed__result-card">
                         <div class="embed__result-value">${passes}</div>
-                        <div class="embed__result-label">Passes</div>
+                        <div class="embed__result-label">${T('emb.r_passes', 'Passes')}</div>
                     </div>
                 </div>
                 <div class="embed__result-details">
-                    <p><strong>Needle:</strong> ${needleConfig} (${needleData.needles} needles)</p>
-                    <p><strong>Speed:</strong> ${workSpeed.charAt(0).toUpperCase() + workSpeed.slice(1)}</p>
-                    <p><strong>Coverage per Hour:</strong> ${baseCoverageRate.toFixed(1)} sq in (${(baseCoverageRate * 6.4516).toFixed(1)} cm²)</p>
-                    <p><strong>Size Comparisons:</strong></p>
+                    <p><strong>${T('emb.r_needle', 'Needle:')}</strong> ${needleConfig} (${T('emb.r_needles_n', '{n} needles', { n: needleData.needles })})</p>
+                    <p><strong>${T('emb.r_speed', 'Speed:')}</strong> ${chosen('work-speed')}</p>
+                    <p><strong>${T('emb.r_per_hour', 'Coverage per Hour:')}</strong> ${baseCoverageRate.toFixed(1)} sq in (${(baseCoverageRate * 6.4516).toFixed(1)} cm²)</p>
+                    <p><strong>${T('emb.r_sizes', 'Size Comparisons:')}</strong></p>
                     <ul style="font-size: 0.85em; margin-left: 1.2em;">
-                        <li>${(adjustedCoverage / 48.15).toFixed(2)}× A5 paper (148×210mm / 5.8"×8.3")</li>
-                        <li>${(adjustedCoverage / 97.09).toFixed(2)}× A4 paper (210×297mm / 8.3"×11.7")</li>
-                        <li>${(adjustedCoverage / 7.17).toFixed(1)}× credit card (85.6×54mm / 3.375"×2.125")</li>
+                        <li>${(adjustedCoverage / 48.15).toFixed(2)}× ${T('emb.r_a5', 'A5 paper')} (148×210mm / 5.8"×8.3")</li>
+                        <li>${(adjustedCoverage / 97.09).toFixed(2)}× ${T('emb.r_a4', 'A4 paper')} (210×297mm / 8.3"×11.7")</li>
+                        <li>${(adjustedCoverage / 7.17).toFixed(1)}× ${T('emb.r_card', 'credit card')} (85.6×54mm / 3.375"×2.125")</li>
                     </ul>
                 </div>
             `;
@@ -1132,30 +1147,30 @@
             const resultsDiv = document.getElementById('session-results');
             resultsDiv.style.display = 'block';
             resultsDiv.innerHTML = `
-                <h3 class="embed__results-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Session Estimate</h3>
+                <h3 class="embed__results-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> ${T('emb.r_session', 'Session Estimate')}</h3>
                 <div class="embed__results-grid">
                     <div class="embed__result-card">
                         <div class="embed__result-value">${totalTime.toFixed(1)}</div>
-                        <div class="embed__result-label">Total Hours</div>
+                        <div class="embed__result-label">${T('x.total_hours', 'Total Hours')}</div>
                     </div>
                     <div class="embed__result-card">
                         <div class="embed__result-value">${sessionsNeeded}</div>
-                        <div class="embed__result-label">Sessions</div>
+                        <div class="embed__result-label">${T('x.sessions', 'Sessions')}</div>
                     </div>
                     <div class="embed__result-card">
                         <div class="embed__result-value">${timePerSession.toFixed(1)}</div>
-                        <div class="embed__result-label">Hours/Session</div>
+                        <div class="embed__result-label">${T('emb.r_hours_session', 'Hours/Session')}</div>
                     </div>
                     <div class="embed__result-card">
                         <div class="embed__result-value">${totalArea.toFixed(1)}</div>
-                        <div class="embed__result-label">Square Inches</div>
+                        <div class="embed__result-label">${T('x.square_inches', 'Square Inches')}</div>
                     </div>
                 </div>
                 <div class="embed__result-details">
-                    <p><strong>Size:</strong> ${width}" × ${height}"</p>
-                    <p><strong>Complexity:</strong> ${complexity.charAt(0).toUpperCase() + complexity.slice(1).replace('-', ' ')}</p>
-                    <p><strong>Location:</strong> ${BODY_LOCATION_FACTORS[bodyLocation].difficulty.charAt(0).toUpperCase() + BODY_LOCATION_FACTORS[bodyLocation].difficulty.slice(1)} area</p>
-                    <p><strong>Note:</strong> Estimate includes 15% buffer time for setup and breaks</p>
+                    <p><strong>${T('emb.r_size', 'Size:')}</strong> ${width}" × ${height}"</p>
+                    <p><strong>${T('emb.r_complexity', 'Complexity:')}</strong> ${chosen('complexity')}</p>
+                    <p><strong>${T('emb.r_location', 'Location:')}</strong> ${chosen('body-location')} (${document.getElementById('body-location').selectedOptions[0].parentElement.label})</p>
+                    <p><strong>${T('emb.r_note', 'Note:')}</strong> ${T('emb.r_buffer', 'Estimate includes 15% buffer time for setup and breaks')}</p>
                 </div>
             `;
         });
@@ -1190,30 +1205,30 @@
             const resultsDiv = document.getElementById('ink-results');
             resultsDiv.style.display = 'block';
             resultsDiv.innerHTML = `
-                <h3 class="embed__results-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Ink Requirements</h3>
+                <h3 class="embed__results-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> ${T('emb.r_ink', 'Ink Requirements')}</h3>
                 <div class="embed__results-grid">
                     <div class="embed__result-card">
                         <div class="embed__result-value">${totalInk.toFixed(1)}</div>
-                        <div class="embed__result-label">Total ml</div>
+                        <div class="embed__result-label">${T('emb.r_total_ml', 'Total ml')}</div>
                     </div>
                     <div class="embed__result-card">
                         <div class="embed__result-value">${inkPerColor.toFixed(1)}</div>
-                        <div class="embed__result-label">ml per Color</div>
+                        <div class="embed__result-label">${T('emb.r_ml_color', 'ml per Color')}</div>
                     </div>
                     <div class="embed__result-card">
                         <div class="embed__result-value">${totalCaps}</div>
-                        <div class="embed__result-label">Total Caps</div>
+                        <div class="embed__result-label">${T('emb.r_total_caps', 'Total Caps')}</div>
                     </div>
                     <div class="embed__result-card">
                         <div class="embed__result-value">${capsPerColor}</div>
-                        <div class="embed__result-label">Caps/Color</div>
+                        <div class="embed__result-label">${T('emb.r_caps_color', 'Caps/Color')}</div>
                     </div>
                 </div>
                 <div class="embed__result-details">
-                    <p><strong>Area:</strong> ${totalArea.toFixed(1)} square inches</p>
-                    <p><strong>Technique:</strong> ${technique.charAt(0).toUpperCase() + technique.slice(1).replace('-', ' ')}</p>
-                    <p><strong>Saturation:</strong> ${saturation.charAt(0).toUpperCase() + saturation.slice(1)}</p>
-                    <p><strong>Note:</strong> Includes ${((wasteFactor - 1) * 100).toFixed(0)}% waste factor and ${colors} colors</p>
+                    <p><strong>${T('emb.r_area', 'Area:')}</strong> ${T('emb.r_sq_in_n', '{n} square inches', { n: totalArea.toFixed(1) })}</p>
+                    <p><strong>${T('emb.r_technique', 'Technique:')}</strong> ${chosen('technique')}</p>
+                    <p><strong>${T('emb.r_saturation', 'Saturation:')}</strong> ${chosen('saturation')}</p>
+                    <p><strong>${T('emb.r_note', 'Note:')}</strong> ${T('emb.r_waste', 'Includes {a}% waste factor and {b} colors', { a: ((wasteFactor - 1) * 100).toFixed(0), b: colors })}</p>
                 </div>
             `;
         });
@@ -1247,30 +1262,30 @@
             const resultsDiv = document.getElementById('pricing-results');
             resultsDiv.style.display = 'block';
             resultsDiv.innerHTML = `
-                <h3 class="embed__results-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Pricing Suggestion</h3>
+                <h3 class="embed__results-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> ${T('emb.r_pricing', 'Pricing Suggestion')}</h3>
                 <div class="embed__results-grid">
                     <div class="embed__result-card">
                         <div class="embed__result-value">$${minPrice.toFixed(0)}</div>
-                        <div class="embed__result-label">Minimum Price</div>
+                        <div class="embed__result-label">${T('emb.r_min', 'Minimum Price')}</div>
                     </div>
                     <div class="embed__result-card">
                         <div class="embed__result-value">$${midPrice.toFixed(0)}</div>
-                        <div class="embed__result-label">Target Price</div>
+                        <div class="embed__result-label">${T('emb.r_target', 'Target Price')}</div>
                     </div>
                     <div class="embed__result-card">
                         <div class="embed__result-value">$${maxPrice.toFixed(0)}</div>
-                        <div class="embed__result-label">Maximum Price</div>
+                        <div class="embed__result-label">${T('emb.r_max', 'Maximum Price')}</div>
                     </div>
                     <div class="embed__result-card">
                         <div class="embed__result-value">$${depositAmount.toFixed(0)}</div>
-                        <div class="embed__result-label">Deposit</div>
+                        <div class="embed__result-label">${T('x.deposit_2', 'Deposit')}</div>
                     </div>
                 </div>
                 <div class="embed__result-details">
-                    <p><strong>Base Rate:</strong> $${rate}/hour × ${hours} hours = $${basePrice.toFixed(0)}</p>
-                    <p><strong>Complexity Adjustment:</strong> ${complexity.charAt(0).toUpperCase() + complexity.slice(1).replace('-', ' ')}</p>
-                    <p><strong>Per Session:</strong> $${perSessionMin.toFixed(0)} - $${perSessionMax.toFixed(0)} (${sessions} sessions)</p>
-                    <p><strong>Deposit:</strong> ${depositPercent}% upfront</p>
+                    <p><strong>${T('emb.r_base_rate', 'Base Rate:')}</strong> ${T('emb.r_rate_calc', '${a}/hour × {b} hours', { a: rate, b: hours })} = $${basePrice.toFixed(0)}</p>
+                    <p><strong>${T('emb.r_cx_adj', 'Complexity Adjustment:')}</strong> ${chosen('pricing-complexity')}</p>
+                    <p><strong>${T('emb.r_per_session', 'Per Session:')}</strong> $${perSessionMin.toFixed(0)} - $${perSessionMax.toFixed(0)} (${T('emb.r_sessions_n', '{n} sessions', { n: sessions })})</p>
+                    <p><strong>${T('emb.r_deposit', 'Deposit:')}</strong> ${T('emb.r_upfront', '{n}% upfront', { n: depositPercent })}</p>
                 </div>
             `;
         });

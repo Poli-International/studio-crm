@@ -5487,32 +5487,82 @@ function submitTipSplitRecord(event) {
 window.submitTipSplitRecord = submitTipSplitRecord;
 
 
-function submitSanitizationChecklist(event) {
+async function submitSanitizationChecklist(event) {
     if (event) event.preventDefault();
-    const items = [...document.querySelectorAll(".sani-chk")].map((b) => ({
-        item: (b.closest("label") || b.parentElement).textContent.replace(/\s+/g, " ").trim(),
-        done: b.checked
-    }));
     const log = {
-        id: Date.now(),
         supervisor: (document.getElementById("sani-staff-select") || {}).value || "",
         autoclave_cycle: ((document.getElementById("sani-autoclave-id") || {}).value || "").trim(),
         notes: ((document.getElementById("sani-notes") || {}).value || "").trim(),
-        items: items,
-        completed: items.filter((i) => i.done).length,
-        total: items.length,
-        timestamp: new Date().toISOString()
+        items: [...document.querySelectorAll(".sani-chk")].map((b) => ({
+            item: (b.closest("label") || b.parentElement).textContent.replace(/\s+/g, " ").trim(),
+            done: b.checked
+        }))
     };
-    let logs = [];
-    try { logs = JSON.parse(localStorage.getItem("studio_sanitization_logs") || "[]"); } catch (e) {}
-    logs.unshift(log);
-    try { localStorage.setItem("studio_sanitization_logs", JSON.stringify(logs)); } catch (e) {}
-    showStudioToast("Closing checklist saved: " + log.completed + " / " + log.total);
+    let saved;
+    try {
+        const res = await fetch("/api/compliance/sanitization-logs", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(log) });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        saved = (await res.json()).log;
+    } catch (e) {
+        showStudioToast("Could not save the checklist: the server did not answer");
+        return;
+    }
+    showStudioToast("Closing checklist saved: " + saved.completed + " / " + saved.total);
     closeSanitizationChecklistModal();
     if (event && event.target && event.target.reset) event.target.reset();
     updateSanitizationProgress();
 }
 window.submitSanitizationChecklist = submitSanitizationChecklist;
+
+// Checklists saved before 1.0.31 are in the browser that saved them: they go to the studio database once.
+async function moveBrowserSanitizationLogs() {
+    let logs = [];
+    try { logs = JSON.parse(localStorage.getItem("studio_sanitization_logs") || "[]"); } catch (e) { return; }
+    if (!Array.isArray(logs) || !logs.length) return;
+    const left = [];
+    for (const log of logs) {
+        try {
+            const res = await fetch("/api/compliance/sanitization-logs", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(log) });
+            if (!res.ok && res.status !== 400) left.push(log); // 400: an empty checklist, nothing to keep
+        } catch (e) { left.push(log); }
+    }
+    try { if (left.length) localStorage.setItem("studio_sanitization_logs", JSON.stringify(left)); else localStorage.removeItem("studio_sanitization_logs"); } catch (e) {}
+}
+
+// Past end-of-day checklists: who, when, what was ticked, with Print
+async function openSanitizationLogsModal() {
+    await moveBrowserSanitizationLogs();
+    let logs = [];
+    try { const r = await fetch("/api/compliance/sanitization-logs"); if (r.ok) logs = await r.json(); } catch (e) {}
+    let overlay = document.getElementById("sanitization-logs-modal-overlay");
+    if (!overlay) {
+        overlay = document.createElement("div");
+        overlay.id = "sanitization-logs-modal-overlay";
+        overlay.setAttribute("role", "dialog");
+        overlay.setAttribute("aria-modal", "true");
+        overlay.setAttribute("aria-label", "Sanitization logs");
+        overlay.style.cssText = "display:none;position:fixed;inset:0;background:rgba(15,23,42,0.85);z-index:2000007;align-items:center;justify-content:center;";
+        document.body.appendChild(overlay);
+    }
+    const rows = logs.map((l) => `
+        <div style="padding:10px 0;border-bottom:1px solid var(--ti-panel2, #1E293B);">
+            <div style="display:flex;justify-content:space-between;gap:10px;font-weight:700;"><span>${escapeHtml(new Date(l.timestamp).toLocaleString())}</span><span>${Number(l.completed)} / ${Number(l.total)}</span></div>
+            <div style="color:var(--ti-muted, #94A3B8);font-size:0.82rem;margin-top:2px;">${escapeHtml([l.supervisor, l.autoclave_cycle && pdfLabel("Autoclave cycle") + ": " + l.autoclave_cycle].filter(Boolean).join(" | "))}</div>
+            <ul style="margin:6px 0 0;padding-left:18px;font-size:0.82rem;">${(l.items || []).map((i) => `<li>${i.done ? "[x]" : "[ ]"} ${escapeHtml(i.item)}</li>`).join("")}</ul>
+            ${l.notes ? `<div style="margin-top:4px;font-size:0.82rem;">${escapeHtml(l.notes)}</div>` : ""}
+        </div>`).join("");
+    overlay.innerHTML = `
+        <div style="background:var(--ti-bg2, #0F172A);border:1px solid var(--ti-line, #334155);border-radius:14px;padding:22px;width:min(94vw,640px);max-height:90vh;overflow:auto;color:var(--ti-text, #F8FAFC);font-size:0.9rem;">
+            <h3 style="margin:0 0 12px;font-size:1.1rem;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-pouch></use></svg> End-of-day sanitization logs</h3>
+            ${rows || `<div>No checklist has been saved yet.</div>`}
+            <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px;">
+                <button type="button" onclick="printWindowOf(this)" style="padding:9px 16px;background:var(--ti-green, #10B981);color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-print></use></svg> Print</button>
+                <button type="button" onclick="forceHideModal('sanitization-logs-modal-overlay')" style="padding:9px 16px;background:transparent;color:var(--ti-muted, #94A3B8);border:1px solid var(--ti-line2, #475569);border-radius:8px;cursor:pointer;">Close</button>
+            </div>
+        </div>`;
+    forceShowModal("sanitization-logs-modal-overlay");
+}
+window.openSanitizationLogsModal = openSanitizationLogsModal;
 
 async function submitSendAftercareEmail(event) {
     if (event) event.preventDefault();

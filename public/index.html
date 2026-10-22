@@ -866,6 +866,9 @@
                 <button onclick="openSanitizationChecklistModal()" style="width:100%;padding:0.5rem;background:var(--ti-green, #10B981);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
                   Sanitization Checklist
                 </button>
+                <button onclick="openSanitizationLogsModal()" style="width:100%;margin-top:6px;padding:0.5rem;background:transparent;color:var(--ti-green, #34D399);border:1px solid var(--ti-green, #10B981);border-radius:6px;font-weight:700;font-size:0.82rem;cursor:pointer;">
+                  Past Logs
+                </button>
               </div>
 
               <!-- Module 3: Digital Consent Waivers -->
@@ -2823,6 +2826,7 @@ docker compose up -d</pre>
                 </div>
 
                 <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:0.25rem;">
+                    <button type="button" onclick="openSanitizationLogsModal()" style="margin-right:auto;padding:0.6rem 1rem;background:transparent;color:var(--ti-green, #34D399);border:1px solid var(--ti-green, #10B981);border-radius:8px;font-weight:600;cursor:pointer;">Past Logs</button>
                     <button type="button" onclick="closeSanitizationChecklistModal()" style="padding:0.6rem 1.2rem;background:var(--ti-line, #374151);color:var(--ti-text2, #D1D5DB);border:none;border-radius:8px;font-weight:600;cursor:pointer;">Cancel</button>
                     <button type="submit" style="padding:0.6rem 1.4rem;background:linear-gradient(135deg, var(--ti-green, #10B981) 0%, var(--ti-green-deep, #059669) 100%);color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">
                         <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-pouch></use></svg> Log Closing Audit

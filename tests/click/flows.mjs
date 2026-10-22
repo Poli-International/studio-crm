@@ -302,6 +302,23 @@ await flow('Log Activity saves the activity to the stream', async () => {
   check(!(await shown('quick-log-modal')), 'the Log Activity window stayed open after saving');
 });
 
+await flow('A sanitization checklist is kept by the studio and shown under Past Logs', async () => {
+  // Henry, 2026-10-22: the checklist said saved, but it was kept in that browser and shown nowhere
+  await b.goto(url);
+  // one saved by a browser before 1.0.31 moves to the studio database
+  await b.evaluate(`(localStorage.setItem('studio_sanitization_logs', JSON.stringify([{ supervisor: 'Old Tablet', notes: 'Browser Only Flow', items: [{ item: 'Sharps sealed', done: true }], timestamp: '2026-10-20T22:00:00.000Z' }])), 1)`);
+  await b.evaluate(`(openSanitizationChecklistModal(), 1)`);
+  await b.evaluate(`(document.querySelector('.sani-chk').click(), 1)`);
+  await b.type('#sani-autoclave-id', '1042');
+  await b.type('#sani-notes', 'Server Kept Flow');
+  await b.clickText('Log Closing Audit', '#sanitization-checklist-modal-overlay');
+  await eventually(async () => JSON.stringify(await api('/api/compliance/sanitization-logs')).includes('Server Kept Flow'), 'the checklist was not saved by the studio');
+  await b.evaluate(`(openSanitizationLogsModal(), 1)`);
+  await eventually(async () => (await text('#sanitization-logs-modal-overlay')).includes('Server Kept Flow'), 'Past Logs does not show the checklist');
+  await eventually(async () => (await text('#sanitization-logs-modal-overlay')).includes('Browser Only Flow'), 'a checklist kept in the browser did not move to the studio');
+  check((await b.evaluate(`localStorage.getItem('studio_sanitization_logs')`)) === null, 'the moved checklist is still in the browser');
+});
+
 await flow('Health Alerts: View Profile opens the profile in front', async () => {
   await b.goto(url);
   await b.clickText('Clients');

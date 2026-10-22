@@ -10599,6 +10599,30 @@ app.post('/api/compliance/autoclave-logs', (req, res) => {
   res.status(201).json({ success: true, log: newLog });
 });
 
+// End-of-day sanitization checklists. They were kept in the browser that saved them: a log saved on the
+// tablet could be seen nowhere else, and nowhere at all (Henry, 2026-10-22: "where is this info?").
+const sanitizationLogs = [];
+app.get('/api/compliance/sanitization-logs', (req, res) => res.json(sanitizationLogs));
+app.post('/api/compliance/sanitization-logs', (req, res) => {
+  const { supervisor, autoclave_cycle, notes, items, timestamp } = req.body || {};
+  const text = (v) => String(v ?? '').trim();
+  const list = (Array.isArray(items) ? items : []).map((i) => ({ item: text(i && i.item), done: !!(i && i.done) })).filter((i) => i.item);
+  if (!list.length) return res.status(400).json({ error: 'The checklist is empty' });
+  // a log moved from a browser keeps the time it was saved there
+  const when = timestamp && !Number.isNaN(Date.parse(timestamp)) && Date.parse(timestamp) <= Date.now() ? new Date(timestamp).toISOString() : new Date().toISOString();
+  const log = { id: Date.now() + Math.floor(Math.random() * 1000), supervisor: text(supervisor), autoclave_cycle: text(autoclave_cycle), notes: text(notes),
+    items: list, completed: list.filter((i) => i.done).length, total: list.length, timestamp: when };
+  sanitizationLogs.unshift(log);
+  sanitizationLogs.sort((x, y) => y.timestamp.localeCompare(x.timestamp));
+  logActivity({
+    category: 'compliance', action: 'SANITIZATION_LOGGED',
+    title: `End-of-day sanitization logged (${log.completed} / ${log.total})`,
+    details: [log.autoclave_cycle && 'Autoclave cycle: ' + log.autoclave_cycle, log.notes].filter(Boolean).join(' | '),
+    user: log.supervisor || 'Studio', badgeColor: log.completed === log.total ? 'green' : 'amber'
+  });
+  res.status(201).json({ success: true, log });
+});
+
 // 4. Interactive Station & Chair Capacity Heatmap Matrix
 app.get('/api/stations/capacity-matrix', (req, res) => {
   const dateStr = (req.query.date || new Date().toISOString().substring(0, 10)).toString();
@@ -11098,6 +11122,7 @@ const PERSISTED = {
   depositSplits: [() => depositSplits],
   aftercarePipeline: [() => aftercarePipeline],
   autoclaveLogs: [() => autoclaveLogs],
+  sanitizationLogs: [() => sanitizationLogs],
   temporaryPortalLinks: [() => temporaryPortalLinks, (v) => { temporaryPortalLinks = v; }],
   backupConfig: [() => backupConfig, (v) => { backupConfig = { ...backupConfig, ...v }; }],
   syncConfig: [() => ({ enabled: syncState.enabled, intervalMinutes: syncState.intervalMinutes, clientsUrl: syncState.clientsUrl, inventoryUrl: syncState.inventoryUrl }),

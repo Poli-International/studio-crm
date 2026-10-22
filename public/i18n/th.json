@@ -1937,5 +1937,21 @@
  "Open Southeast Asia Tattoo Ink Checker": "เปิดเครื่องมือตรวจหมึกสัก (เอเชียตะวันออกเฉียงใต้)",
  "Thailand only: check ink pigments by name, CI or CAS number against the Thai list of substances prohibited in cosmetics, each with its Royal Gazette entry, and print a record. Eight languages, Thai included.": "เฉพาะประเทศไทย: ตรวจเม็ดสีของหมึกตามชื่อ หมายเลข CI หรือ CAS เทียบกับบัญชีวัตถุที่ห้ามใช้ในเครื่องสำอางของไทย แต่ละรายการมีลำดับในราชกิจจานุเบกษา และพิมพ์บันทึกได้ แปดภาษา รวมภาษาไทย",
  "Ink regulation checkers: USA, Europe (REACH), Southeast Asia": "เครื่องมือตรวจกฎระเบียบหมึกสัก: สหรัฐอเมริกา ยุโรป (REACH) เอเชียตะวันออกเฉียงใต้",
- "Each checker answers for its own region only: a clear result in one says nothing about the others.": "เครื่องมือแต่ละตัวตอบได้เฉพาะภูมิภาคของตนเท่านั้น ผลที่ไม่พบสารในเครื่องมือหนึ่งไม่ได้บอกอะไรเกี่ยวกับภูมิภาคอื่น"
+ "Each checker answers for its own region only: a clear result in one says nothing about the others.": "เครื่องมือแต่ละตัวตอบได้เฉพาะภูมิภาคของตนเท่านั้น ผลที่ไม่พบสารในเครื่องมือหนึ่งไม่ได้บอกอะไรเกี่ยวกับภูมิภาคอื่น",
+ "By Client": "ตามลูกค้า",
+ "Delete Flash Design": "ลบลายแฟลช",
+ "Delete this flash design from the gallery?": "ลบลายแฟลชนี้ออกจากแกลเลอรีหรือไม่?",
+ "Flash design deleted": "ลบลายแฟลชแล้ว",
+ "No client": "ไม่มีลูกค้า",
+ "Saved, but no client has that exact name: pick the client from the list to link it": "บันทึกแล้ว แต่ไม่มีลูกค้าชื่อนี้ตรงกันทุกตัวอักษร: เลือกลูกค้าจากรายการเพื่อเชื่อมโยง",
+ "Delete Portfolio Artwork": "ลบผลงาน",
+ "Are you sure you want to delete this artwork photo from the client portfolio?": "ต้องการลบรูปผลงานนี้ออกจากพอร์ตโฟลิโอของลูกค้าใช่หรือไม่?",
+ "Delete Photo": "ลบรูป",
+ "Deleted artwork from client portfolio.": "ลบผลงานออกจากพอร์ตโฟลิโอของลูกค้าแล้ว",
+ "Client Artwork Photo": "รูปผลงานของลูกค้า",
+ "Flash design": "ลายแฟลช",
+ "Confirm Deletion": "ยืนยันการลบ",
+ "Delete Staff Note": "ลบบันทึกของพนักงาน",
+ "Are you sure you want to permanently delete this confidential staff note?": "ต้องการลบบันทึกลับของพนักงานนี้อย่างถาวรใช่หรือไม่?",
+ "Delete Note": "ลบบันทึก"
 }

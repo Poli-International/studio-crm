@@ -9400,8 +9400,64 @@ const galleryWorks = [
 ];
 
 // Gallery API Routes
+// The gallery and a client's "Work and photos" tab are one store (clientTattooWork): a photo added in
+// either place shows in both, and a delete removes it from both (GitHub issue #14). galleryWorks is only
+// read at start, to move a studio's older gallery photos across (moveGalleryIntoClientWork).
+const nextWorkId = () => clientTattooWork.reduce((m, w) => Math.max(m, Number(w.id) || 0), 0) + 1;
+// a typed name finds the client when it matches exactly (any case), so the photo lands on the profile
+function findClientFor(client_id, client_name) {
+  const byId = clients.find(c => c.id === parseInt(client_id, 10));
+  if (byId) return byId;
+  const name = String(client_name || '').trim().toLowerCase();
+  return name ? clients.find(c => String(c.name || '').trim().toLowerCase() === name) || null : null;
+}
+function galleryView(w) {
+  const artist = staff.find(s => s.id === parseInt(w.staff_id, 10)) || staff.find(s => s.name && s.name === w.artist);
+  return {
+    id: w.id,
+    staff_id: artist ? artist.id : null,
+    staff_name: w.artist || (artist ? artist.name : ''),
+    client_id: w.client_id || null,
+    client_name: w.client_name || '',
+    service_type: w.title || w.category || '',
+    session_date: w.date || '',
+    session_duration_hours: w.session_duration_hours || null,
+    notes: w.notes || w.description || '',
+    image_url: w.image_url || '',
+    likes_count: w.likes_count || 0,
+    created_at: w.created_at || w.date || ''
+  };
+}
+function workFromGallery(g, id) {
+  return {
+    id,
+    client_id: g.client_id || null,
+    client_name: g.client_name || '',
+    title: g.service_type || '',
+    category: 'Tattoo Session',
+    date: g.session_date || '',
+    artist: g.staff_name || '',
+    staff_id: g.staff_id || null,
+    session_duration_hours: g.session_duration_hours || null,
+    image_url: g.image_url || '',
+    notes: g.notes || '',
+    description: '',
+    tags: [],
+    likes_count: g.likes_count || 0,
+    created_at: g.created_at || new Date().toISOString()
+  };
+}
+function moveGalleryIntoClientWork() {
+  if (!galleryWorks.length) return false;
+  for (const g of galleryWorks.splice(0, galleryWorks.length).reverse()) {
+    const c = findClientFor(g.client_id, g.client_name);
+    clientTattooWork.unshift(workFromGallery({ ...g, client_id: c ? c.id : null, client_name: c ? c.name : g.client_name }, nextWorkId()));
+  }
+  return true;
+}
+
 app.get('/api/gallery', (req, res) => {
-  let result = [...galleryWorks];
+  let result = clientTattooWork.map(galleryView);
   const { staff_id, client_id, search } = req.query;
 
   if (staff_id) {
@@ -9412,12 +9468,7 @@ app.get('/api/gallery', (req, res) => {
   }
   if (search) {
     const q = search.toLowerCase();
-    result = result.filter(w =>
-      w.service_type.toLowerCase().includes(q) ||
-      w.notes.toLowerCase().includes(q) ||
-      w.client_name.toLowerCase().includes(q) ||
-      w.staff_name.toLowerCase().includes(q)
-    );
+    result = result.filter(w => [w.service_type, w.notes, w.client_name, w.staff_name].join(' ').toLowerCase().includes(q));
   }
 
   res.json(result);
@@ -9425,52 +9476,48 @@ app.get('/api/gallery', (req, res) => {
 
 app.post('/api/gallery', (req, res) => {
   const { staff_id, client_id, client_name, service_type, session_date, session_duration_hours, image_url, notes } = req.body;
+  if (!image_url) return res.status(400).json({ error: 'Take or choose a photo first' });
 
-  const staffMember = staff.find(s => s.id === parseInt(staff_id)) || { id: staff_id || 2, name: 'Jaxon Vance' };
-  const clientObj = clients.find(c => c.id === parseInt(client_id));
-  const finalClientName = clientObj ? clientObj.name : (client_name || 'Walk-in Client');
+  const staffMember = staff.find(s => s.id === parseInt(staff_id));
+  const clientObj = findClientFor(client_id, client_name);
 
-  const newWork = {
-    id: galleryWorks.length + 101,
-    staff_id: parseInt(staffMember.id),
-    staff_name: staffMember.name,
+  const work = workFromGallery({
+    staff_id: staffMember ? staffMember.id : null,
+    staff_name: staffMember ? staffMember.name : '',
     client_id: clientObj ? clientObj.id : null,
-    client_name: finalClientName,
-    service_type: service_type || 'Custom Body Art Session',
+    client_name: clientObj ? clientObj.name : String(client_name || '').trim(),
+    service_type: service_type || '',
     session_date: session_date || new Date().toISOString().split('T')[0],
-    session_duration_hours: parseFloat(session_duration_hours) || 2.0,
-    notes: notes || 'Client session work photo uploaded to portfolio gallery.',
-    image_url: image_url || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"><rect width="600" height="400" fill="%231F2937"/><text x="300" y="200" fill="%2334D399" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="middle">Studio Work Session Photo</text></svg>',
-    likes_count: 0,
-    created_at: new Date().toISOString()
-  };
-
-  galleryWorks.unshift(newWork);
+    session_duration_hours: parseFloat(session_duration_hours) || null,
+    notes: notes || '',
+    image_url
+  }, nextWorkId());
+  clientTattooWork.unshift(work);
 
   logActivity({
     category: 'staff',
     action: 'GALLERY_WORK_UPLOADED',
-    title: `New Portfolio Work Uploaded: ${staffMember.name}`,
-    details: `Uploaded session photo for ${finalClientName} (${newWork.service_type}, ${newWork.session_duration_hours}h session on ${newWork.session_date})`,
-    user: staffMember.name,
+    title: `New Portfolio Work Uploaded${work.artist ? ': ' + work.artist : ''}`,
+    details: `Uploaded session photo${work.client_name ? ' for ' + work.client_name : ''} (${work.title || 'work'}, ${work.date})`,
+    user: work.artist || 'Studio Staff',
     badgeColor: 'purple'
   });
 
-  res.status(201).json(newWork);
+  res.status(201).json(galleryView(work));
 });
 
 app.post('/api/gallery/:id/like', (req, res) => {
-  const work = galleryWorks.find(w => w.id === parseInt(req.params.id));
+  const work = clientTattooWork.find(w => Number(w.id) === parseInt(req.params.id));
   if (!work) return res.status(404).json({ error: 'Work not found' });
   work.likes_count = (work.likes_count || 0) + 1;
   res.json({ id: work.id, likes_count: work.likes_count });
 });
 
 app.delete('/api/gallery/:id', (req, res) => {
-  const index = galleryWorks.findIndex(w => w.id === parseInt(req.params.id));
+  const index = clientTattooWork.findIndex(w => Number(w.id) === parseInt(req.params.id));
   if (index === -1) return res.status(404).json({ error: 'Work not found' });
-  const removed = galleryWorks.splice(index, 1)[0];
-  res.json({ success: true, removed });
+  const removed = clientTattooWork.splice(index, 1)[0];
+  res.json({ success: true, removed: galleryView(removed) });
 });
 
 app.get('/api/staff/:id/works', (req, res) => {
@@ -9478,7 +9525,7 @@ app.get('/api/staff/:id/works', (req, res) => {
   const staffMember = staff.find(s => s.id === staffId);
   if (!staffMember) return res.status(404).json({ error: 'Staff member not found' });
 
-  const works = galleryWorks.filter(w => w.staff_id === staffId);
+  const works = clientTattooWork.map(galleryView).filter(w => w.staff_id === staffId);
   const staffClients = clients.filter(c => c.assigned_staff_id === staffId);
 
   res.json({
@@ -11097,6 +11144,8 @@ function scheduleStateSave() {
   }, 250);
 }
 restoreState();
+// gallery photos from before 1.0.29 join the client photos (one store since then)
+if (moveGalleryIntoClientWork()) scheduleStateSave();
 // the built-in aftercare sheets get the languages they lack (a studio's database from before 1.0.19 has
 // English only); a language the studio edited is never replaced
 if (addAftercareTranslations(aftercareTemplates)) scheduleStateSave();

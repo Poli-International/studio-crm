@@ -112,8 +112,46 @@ await flow('Work and photos: a photo taken or chosen on the device is added to t
   const work = (await api('/api/clients/' + client.id + '/profile')).tattoo_work || [];
   check(work.some((w) => w.title === 'Flow Stencil Photo' && !w.artist.includes('Jaxon')), 'the photo is credited to a sample artist');
   await press('.gallery-card-interactive', 'Flow Stencil Photo', 'Delete');
+  // asked in the page, not in a browser box (the dialog's markup was missing before 1.0.29)
+  check(await shown('data-deletion-confirm-modal'), 'Delete did not ask in the page first');
+  const boxes = b.seen.dialogs.filter((d) => d !== 'file chooser');
+  check(!boxes.length, 'Delete asked in a browser box: ' + boxes[0]);
+  await b.clickText('Delete Photo', '#data-deletion-confirm-modal');
   await eventually(async () => !(await text('#client-profile-modal-body')).includes('Flow Stencil Photo'), 'Delete did not remove the photo');
   await b.clickText('×', '#client-profile-modal-overlay');
+});
+
+await flow('Gallery: a photo for a typed client name shows on the profile, a profile photo shows in the gallery, delete removes both', async () => {
+  // GitHub issue #14: the gallery and the profile kept separate photos, a typed name linked nothing, no delete
+  const client = await b.evaluate(`fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Gallery Flow Client' }) }).then(r => r.json())`);
+  await b.evaluate(`navigateToDestination('tools')`);
+  await pressOn('openGalleryModal()');
+  await pressOn('openUploadWorkModal()');
+  await b.evaluate(`(async () => { const c = document.createElement('canvas'); c.width = 40; c.height = 30; c.getContext('2d').fillRect(0, 0, 40, 30);
+    const blob = await new Promise((r) => c.toBlob(r, 'image/png')); const dt = new DataTransfer(); dt.items.add(new File([blob], 'work.png', { type: 'image/png' }));
+    const i = document.getElementById('work-file-input'); i.files = dt.files; i.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+  await eventually(async () => b.evaluate(`!!document.querySelector('#work-image-preview-container img')`), 'the chosen photo is not shown');
+  await b.type('#work-service-input', 'Gallery Flow Piece');
+  await b.type('#work-client-search', 'gallery flow client'); // typed in another case, not picked from the list
+  await b.clickText('Save to Portfolio', '#upload-work-modal');
+  await eventually(async () => (await text('#gallery-grid')).includes('Gallery Flow Piece'), 'the work is not in the gallery');
+  let work = (await api('/api/clients/' + client.id + '/profile')).tattoo_work || [];
+  check(work.some((w) => w.title === 'Gallery Flow Piece'), 'the gallery photo is not on the client profile: ' + JSON.stringify(work.map((w) => w.title)));
+  // a photo added on the profile shows in the gallery, under its client in the By Client view
+  await b.evaluate(`fetch('/api/clients/${client.id}/tattoo-work', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title: 'Profile Flow Piece', image_url: 'data:image/png;base64,iVBORw0KGgo=' }) })`);
+  await b.evaluate(`loadGalleryData().then(() => { document.getElementById('gallery-mode-select').value = 'client'; renderGalleryGrid(); })`);
+  await eventually(async () => (await text('#gallery-grid')).includes('Profile Flow Piece'), 'the profile photo is not in the gallery');
+  check((await text('#gallery-grid')).includes('Gallery Flow Client'), 'By Client shows no heading for the client');
+  // delete in the gallery: asked in the page, then gone from the gallery and from the profile
+  await press('#gallery-grid > div', 'Gallery Flow Piece', 'Delete');
+  check(await shown('data-deletion-confirm-modal'), 'Delete did not ask in the page first');
+  await b.clickText('Delete Photo', '#data-deletion-confirm-modal');
+  await eventually(async () => !(await text('#gallery-grid')).includes('Gallery Flow Piece'), async () => 'Delete did not remove the work from the gallery: ' + JSON.stringify((await api('/api/gallery')).filter((w) => /Flow/.test(w.service_type)).map((w) => w.id + ' ' + w.service_type)));
+  work = (await api('/api/clients/' + client.id + '/profile')).tattoo_work || [];
+  check(!work.some((w) => w.title === 'Gallery Flow Piece'), 'the deleted work is still on the client profile');
+  check(work.some((w) => w.title === 'Profile Flow Piece'), 'Delete removed the wrong photo');
+  const boxes = b.seen.dialogs.filter((d) => d !== 'file chooser');
+  check(!boxes.length, 'a browser box was used: ' + boxes[0]);
 });
 
 await flow('Two quick taps on Save make one client, not two', async () => {

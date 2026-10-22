@@ -1937,5 +1937,21 @@
  "Open Southeast Asia Tattoo Ink Checker": "Ouvrir le vérificateur d'encres de tatouage (Asie du Sud-Est)",
  "Thailand only: check ink pigments by name, CI or CAS number against the Thai list of substances prohibited in cosmetics, each with its Royal Gazette entry, and print a record. Eight languages, Thai included.": "Thaïlande uniquement : vérifiez les pigments d'une encre par nom, numéro CI ou CAS au regard de la liste thaïlandaise des substances interdites dans les cosmétiques, chacune avec son entrée de la Royal Gazette, et imprimez un relevé. Huit langues, dont le thaï.",
  "Ink regulation checkers: USA, Europe (REACH), Southeast Asia": "Vérificateurs de réglementation des encres : États-Unis, Europe (REACH), Asie du Sud-Est",
- "Each checker answers for its own region only: a clear result in one says nothing about the others.": "Chaque vérificateur ne répond que pour sa propre région : un résultat sans alerte dans l'un ne dit rien des autres."
+ "Each checker answers for its own region only: a clear result in one says nothing about the others.": "Chaque vérificateur ne répond que pour sa propre région : un résultat sans alerte dans l'un ne dit rien des autres.",
+ "By Client": "Par client",
+ "Delete Flash Design": "Supprimer le flash",
+ "Delete this flash design from the gallery?": "Supprimer ce flash de la galerie ?",
+ "Flash design deleted": "Flash supprimé",
+ "No client": "Sans client",
+ "Saved, but no client has that exact name: pick the client from the list to link it": "Enregistré, mais aucun client ne porte exactement ce nom : choisissez le client dans la liste pour l'associer",
+ "Delete Portfolio Artwork": "Supprimer la réalisation",
+ "Are you sure you want to delete this artwork photo from the client portfolio?": "Voulez-vous vraiment supprimer cette photo de réalisation du portfolio du client ?",
+ "Delete Photo": "Supprimer la photo",
+ "Deleted artwork from client portfolio.": "Réalisation supprimée du portfolio du client.",
+ "Client Artwork Photo": "Photo de réalisation du client",
+ "Flash design": "Flash",
+ "Confirm Deletion": "Confirmer la suppression",
+ "Delete Staff Note": "Supprimer la note interne",
+ "Are you sure you want to permanently delete this confidential staff note?": "Voulez-vous vraiment supprimer définitivement cette note interne confidentielle ?",
+ "Delete Note": "Supprimer la note"
 }

@@ -67,7 +67,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
           "Spray salino 2-3 volte al giorno",
           "EVITARE di dormirci sopra",
           "Non toccare",
-          "Usare dischi di guarigione Poli per prevenire il contatto con il metallo e le escrescenze da irritazione",
+          "Usare dischi di guarigione per ridurre pressione e attrito",
           "Accorciare il gioiello (downsize) a 6-8 settimane"
         ]
       },
@@ -82,7 +82,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
           "Continuare con la soluzione salina 2 volte al giorno",
           "Se compaiono escrescenze da irritazione, assicurarsi che i dischi di guarigione siano posizionati",
           "Assicurarsi che il gioiello non sia eccessivamente lungo",
-          "I dischi antimicrobici prevengono l'accumulo batterico"
+          "Pulire intorno al gioiello e ai dischi con soluzione fisiologica sterile"
         ]
       },
       {
@@ -98,7 +98,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENTE CONSIGLIATO: I piercing alla cartilagine sono estremamente inclini alle escrescenze da irritazione (irritation bumps). I dischi di guarigione impediscono il contatto metallo-pelle che causa le escrescenze, mentre gli ioni d'argento antimicrobici proteggono dalle infezioni durante il lungo processo di guarigione. (Nota clinica: la linfa trasparente o biancastra che si asciuga formando crosticine è un normale essudato di guarigione e non pus; inoltre, sebbene il titanio sia sicuro, non è l'unico materiale idoneo: polimeri biocompatibili di grado medico come BioFlex, che è un copolimero PP-R monolitico e non PTFE, sono sicuri e non solo a breve termine)."
+    "healingDiscBenefits": "CONSIGLIATO: I piercing alla cartilagine tendono a sviluppare protuberanze da irritazione per pressione e attrito. I dischi di guarigione si posizionano tra il gioiello e la pelle per ridurre pressione, attrito e contatto del metallo con la pelle."
   },
   "industrial": {
     "name": "Industrial (scaffold)",
@@ -118,7 +118,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
           "Spray salino 3 volte al giorno su entrambi i fori",
           "Non dormirci mai sopra",
           "Non toccare la barra",
-          "Usare dischi di guarigione su ENTRAMBE le estremità per prevenire le escrescenze",
+          "Usare dischi di guarigione su entrambe le estremità fin dall'inizio",
           "Inizialmente può essere necessaria una barra più lunga"
         ]
       },
@@ -131,7 +131,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ],
         "care": [
           "Continuare con la soluzione salina 2 volte al giorno",
-          "I dischi di guarigione prevengono l'irritazione causata dalla barra metallica",
+          "Usare dischi di guarigione per ridurre pressione e attrito",
           "Accorciare la barra (downsize) a 2-3 mesi",
           "Avere molta pazienza",
           "Evitare che si impiglino i capelli"
@@ -149,7 +149,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "FONDAMENTALE PER IL SUCCESSO: I piercing industrial presentano DUE fori nella cartilagine che guariscono contemporaneamente con una tensione costante della barra. I dischi di guarigione su entrambe le estremità prevengono le escrescenze da irritazione e riducono il rischio di rigetto di uno dei fori. La protezione antimicrobica è essenziale per questo lungo processo di guarigione."
+    "healingDiscBenefits": "CONSIGLIATO: Due fori guariscono contemporaneamente sotto la pressione costante della barra. I dischi di guarigione si posizionano tra il gioiello e la pelle per ridurre pressione, attrito e contatto del metallo con la pelle."
   },
   "daith": {
     "name": "Daith (Cartilagine interna)",
@@ -182,13 +182,13 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ],
         "care": [
           "Continuare con la soluzione salina 2 volte al giorno",
-          "I dischi antimicrobici prevengono infezioni in questa piega",
+          "Pulire intorno al gioiello e ai dischi con soluzione fisiologica sterile",
           "Possibile riprendere con cautela l'uso delle cuffie dopo 4-5 mesi",
           "Nessun cambio di gioiello fino a completa guarigione"
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENTE CONSIGLIATO: Il piercing daith si trova in una piega difficile da pulire e altamente soggetta a escrescenze. I dischi di guarigione con protezione antimicrobica tengono lontani i batteri da questa zona difficile da raggiungere, prevenendo l'irritazione da contatto metallico."
+    "healingDiscBenefits": "CONSIGLIATO: I piercing alla cartilagine tendono a sviluppare protuberanze da irritazione per pressione e attrito. I dischi di guarigione si posizionano tra il gioiello e la pelle per ridurre pressione, attrito e contatto del metallo con la pelle."
   },
   "rook": {
     "name": "Rook (Piega dell'anti-helix)",
@@ -221,14 +221,14 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ],
         "care": [
           "Avere molta pazienza",
-          "I dischi di guarigione prevengono le escrescenze tipiche di questo piercing",
+          "Tenere i dischi di guarigione in posizione per ridurre pressione e attrito",
           "Continuare con la soluzione salina 2 volte al giorno",
           "Accorciare il gioiello (downsize) a 2-3 mesi",
           "Evitare qualsiasi irritazione"
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENTE CONSIGLIATO: I piercing rook sono notoriamente inclini alle escrescenze da irritazione e hanno uno dei tempi di guarigione più lunghi. I dischi di guarigione riducono drasticamente la formazione di escrescenze e proteggono dalle infezioni."
+    "healingDiscBenefits": "CONSIGLIATO: I piercing alla cartilagine tendono a sviluppare protuberanze da irritazione per pressione e attrito. I dischi di guarigione si posizionano tra il gioiello e la pelle per ridurre pressione, attrito e contatto del metallo con la pelle."
   },
   "tragus": {
     "name": "Tragus",
@@ -267,7 +267,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "CONSIGLIATO: Il piercing tragus subisce una pressione costante da auricolari e telefoni. I dischi di guarigione creano una barriera protettiva che previene l'irritazione derivante da queste attività quotidiane."
+    "healingDiscBenefits": "CONSIGLIATO: La pressione quotidiana di telefoni, cuffie o occhiali irrita questo piercing. I dischi di guarigione si posizionano tra il gioiello e la pelle per ridurre pressione, attrito e contatto del metallo con la pelle."
   },
   "anti_tragus": {
     "name": "Anti-tragus",
@@ -285,7 +285,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ],
         "care": [
           "Spray salino 2-3 volte al giorno con delicatezza",
-          "Usare subito dischi di guarigione per prevenire le escrescenze",
+          "Usare dischi di guarigione per ridurre pressione e attrito",
           "Niente auricolari",
           "Non dormirci sopra",
           "Evitare di toccare"
@@ -300,13 +300,13 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ],
         "care": [
           "Necessario un approccio di grande pazienza",
-          "I dischi di guarigione prevengono i consueti problemi di escrescenze",
+          "Tenere i dischi di guarigione in posizione per ridurre pressione e attrito",
           "Continuare con la soluzione salina 2 volte al giorno",
           "Accorciare il gioiello (downsize) a 2-3 mesi"
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENTE CONSIGLIATO: I piercing anti-tragus sono estremamente inclini a escrescenze a causa dell'anatomia e della pressione. I dischi di guarigione sono essenziali per una guarigione ottimale."
+    "healingDiscBenefits": "CONSIGLIATO: I piercing alla cartilagine tendono a sviluppare protuberanze da irritazione per pressione e attrito. I dischi di guarigione si posizionano tra il gioiello e la pelle per ridurre pressione, attrito e contatto del metallo con la pelle."
   },
   "conch": {
     "name": "Conch (Interna o esterna)",
@@ -325,7 +325,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         "care": [
           "Spray salino 2-3 volte al giorno",
           "Non dormirci sopra",
-          "Usare dischi di guarigione per prevenire l'irritazione da pressione",
+          "Usare dischi di guarigione per ridurre pressione e attrito",
           "Inizialmente si raccomanda una barretta dritta (stud)",
           "Niente cuffie su quell'orecchio"
         ]
@@ -364,7 +364,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         "care": [
           "Spray salino 3 volte al giorno",
           "Non dormirci mai sopra",
-          "Usare subito i dischi di guarigione: non negoziabile per questo piercing",
+          "Usare dischi di guarigione su entrambe le estremità fin dall'inizio",
           "Barbell curvo essenziale",
           "Evitare qualsiasi pressione"
         ]
@@ -378,14 +378,14 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ],
         "care": [
           "Richiesta estrema pazienza",
-          "I dischi di guarigione sono la migliore difesa contro escrescenze e rigetto",
+          "Tenere i dischi di guarigione in posizione per ridurre pressione e attrito",
           "Continuare con la soluzione salina 2 volte al giorno",
           "Monitorare un'eventuale migrazione",
           "Molte persone rinunciano a questo piercing"
         ]
       }
     ],
-    "healingDiscBenefits": "CRITICO: I piercing snug hanno il tasso più elevato di rigetto e complicanze. I dischi di guarigione sono assolutamente essenziali: possono fare la differenza tra mantenere o rimuovere questo piercing. Prevengono le tipiche escrescenze e riducono il rischio di rigetto."
+    "healingDiscBenefits": "CONSIGLIATO: I piercing alla cartilagine tendono a sviluppare protuberanze da irritazione per pressione e attrito. I dischi di guarigione si posizionano tra il gioiello e la pelle per ridurre pressione, attrito e contatto del metallo con la pelle."
   },
   "forward_helix": {
     "name": "Forward helix",
@@ -418,13 +418,13 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ],
         "care": [
           "Continuare con la soluzione salina 2 volte al giorno",
-          "I dischi di guarigione prevengono la formazione di escrescenze",
+          "Tenere i dischi di guarigione in posizione per ridurre pressione e attrito",
           "Accorciare il gioiello (downsize) a 6-8 settimane",
           "Possibile cambiare il gioiello dopo 3-4 mesi"
         ]
       }
     ],
-    "healingDiscBenefits": "CONSIGLIATO: I piercing forward helix sono inclini a impigliarsi e a subire la pressione degli occhiali. I dischi di guarigione offrono protezione e prevengono le escrescenze da irritazione."
+    "healingDiscBenefits": "CONSIGLIATO: La pressione quotidiana di telefoni, cuffie o occhiali irrita questo piercing. I dischi di guarigione si posizionano tra il gioiello e la pelle per ridurre pressione, attrito e contatto del metallo con la pelle."
   },
   "orbital": {
     "name": "Orbital (Cerchietti collegati)",
@@ -462,7 +462,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "CONSIGLIATO: Come i piercing industrial, gli orbital hanno due fori che guariscono sotto costante tensione. I dischi di guarigione su entrambi i lati prevengono l'irritazione e assicurano una guarigione uniforme di entrambi i fori."
+    "healingDiscBenefits": "CONSIGLIATO: Due fori guariscono contemporaneamente sotto la pressione costante della barra. I dischi di guarigione si posizionano tra il gioiello e la pelle per ridurre pressione, attrito e contatto del metallo con la pelle."
   },
   "nostril": {
     "name": "Nostril (Narice)",
@@ -479,10 +479,10 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ],
         "care": [
           "Nebulizzare soluzione salina 2-3 volte al giorno anche all'interno della narice",
-          "Usare il disco di guarigione all'interno del naso per prevenire escrescenze",
+          "Usare dischi di guarigione per ridurre pressione e attrito",
           "Soffiarsi il naso delicatamente",
           "Tenere lontano il trucco",
-          "Protezione antimicrobica fondamentale contro i batteri nasali"
+          "Pulire intorno al gioiello e ai dischi con soluzione fisiologica sterile"
         ]
       },
       {
@@ -499,7 +499,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENTE CONSIGLIATO: I piercing al nostril sono estremamente inclini alle escrescenze da irritazione (le cosiddette \"palline al naso\"). I dischi di guarigione impediscono alla base metallica del gioiello di irritare l'interno del naso, causa principale delle escrescenze. La protezione antimicrobica previene inoltre infezioni dai batteri nasali."
+    "healingDiscBenefits": "CONSIGLIATO: La parte interna dello stud nel naso è una causa frequente di protuberanze da irritazione. I dischi di guarigione si posizionano tra il gioiello e la pelle per ridurre pressione, attrito e contatto del metallo con la pelle."
   },
   "septum": {
     "name": "Septum",
@@ -1151,7 +1151,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
           "Spray salino 2 volte al giorno",
           "Usare subito dischi di guarigione su ENTRAMBE le sfere (superiore e inferiore)",
           "Indumenti larghi e comodi",
-          "I dischi prevengono la formazione di escrescenze dovuta alla pressione della cintura",
+          "I dischi attutiscono la pressione della cintura",
           "Evitare esercizi per gli addominali",
           "Prestare attenzione alla migrazione"
         ]
@@ -1164,9 +1164,9 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ],
         "care": [
           "Continuare con la soluzione salina quotidianamente",
-          "Mantenere i dischi in posizione: le escrescenze possono svilupparsi anche a metà guarigione",
+          "Tenere i dischi di guarigione in posizione per ridurre pressione e attrito",
           "Possibile riprendere l'attività fisica gradualmente",
-          "La protezione antimicrobica previene infezioni legate al sudore"
+          "Pulire intorno al gioiello e ai dischi con soluzione fisiologica sterile"
         ]
       },
       {
@@ -1178,11 +1178,11 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
           "Possibile cambiare il gioiello dopo 6+ mesi",
           "Continuare a usare i dischi fino a guarigione al 100%",
           "Monitorare un eventuale rigetto",
-          "In caso di predisposizione a cicatrici ipertrofiche, usare i dischi a lungo termine"
+          "Tenere i dischi di guarigione in posizione per ridurre pressione e attrito"
         ]
       }
     ],
-    "healingDiscBenefits": "CRITICO: I piercing all'ombelico (navel) sono i PIÙ inclini alle escrescenze da irritazione e a ipertrofie tissutali. I dischi di guarigione sono assolutamente essenziali: impediscono il contatto del metallo con la pelle durante i movimenti (sedersi, piegarsi), principale causa delle escrescenze all'ombelico. Molti piercing navel falliscono senza questa protezione."
+    "healingDiscBenefits": "CONSIGLIATO: Le cinture e i movimenti da seduti o piegati premono sui piercing all'ombelico. I dischi di guarigione si posizionano tra il gioiello e la pelle per ridurre pressione, attrito e contatto del metallo con la pelle."
   },
   "nipple": {
     "name": "Capezzolo (Nipple)",
@@ -1202,7 +1202,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
           "Spray salino 2 volte al giorno",
           "Usare dischi di guarigione su entrambe le estremità del barbell",
           "Reggiseno morbido e contenitivo",
-          "I dischi prevengono reazioni ai metalli e l'attrito del reggiseno",
+          "I dischi riducono il contatto con il metallo e l'attrito del reggiseno",
           "NESSUN contatto orale per almeno 6+ mesi",
           "Evitare indumenti ruvidi"
         ]
@@ -1215,14 +1215,14 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ],
         "care": [
           "Continuare la cura quotidiana",
-          "Dischi di guarigione particolarmente importanti in caso di sensibilità ai metalli",
+          "I dischi di guarigione riducono il contatto del metallo con la pelle",
           "Accorciare il gioiello (downsize) a 2-3 mesi",
           "Pazientare: richiede molto tempo",
-          "La protezione antimicrobica previene il trasferimento di batteri dai tessuti"
+          "Pulire intorno al gioiello e ai dischi con soluzione fisiologica sterile"
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENTE CONSIGLIATO: I piercing al capezzolo sono inclini a reazioni di sensibilità ai metalli e a irritazioni da sfregamento con gli indumenti. I dischi di guarigione eliminano il contatto diretto metallo-pelle (prevenendo reazioni al nichel) e ammortizzano l'attrito del reggiseno o dei vestiti. Essenziali per chi ha pelle sensibile o allergie ai metalli."
+    "healingDiscBenefits": "CONSIGLIATO: L'attrito dei vestiti e la sensibilità ai metalli irritano spesso i piercing al capezzolo. I dischi di guarigione si posizionano tra il gioiello e la pelle per ridurre pressione, attrito e contatto del metallo con la pelle."
   },
   "surface": {
     "name": "Piercing surface (Varie posizioni)",
@@ -1242,7 +1242,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
           "Spray salino 2-3 volte al giorno",
           "Solo surface bar",
           "Usare dischi di guarigione su ENTRAMBE le estremità immediatamente",
-          "I dischi riducono i micro-movimenti che causano il rigetto",
+          "I dischi riducono pressione e micro-movimenti contro la pelle",
           "Evitare qualsiasi pressione o movimento",
           "Prestare attenzione alla migrazione"
         ]
@@ -1255,15 +1255,15 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ],
         "care": [
           "Continuare con una cura delicata",
-          "Mantenere i dischi di guarigione: migliorano notevolmente il successo a lungo termine",
+          "Tenere i dischi di guarigione in posizione per ridurre pressione e attrito",
           "Monitorare attentamente",
           "Rimuovere se inizia il rigetto",
           "La posizione influisce sul tasso di successo",
-          "La protezione antimicrobica previene infezioni durante la fase delicata di guarigione"
+          "Pulire intorno al gioiello e ai dischi con soluzione fisiologica sterile"
         ]
       }
     ],
-    "healingDiscBenefits": "ASSOLUTAMENTE CRITICO: I piercing surface hanno il tasso di rigetto più alto tra TUTTI i piercing. I dischi di guarigione rappresentano la migliore opportunità di successo: riducono al minimo il movimento del metallo contro il tessuto superficiale e attenuano l'attrito che provoca il rigetto. Senza dischi, il tasso di rigetto è del 70-90%. Con i dischi, il successo aumenta considerevolmente."
+    "healingDiscBenefits": "CONSIGLIATO: Il movimento costante e l'attrito dei vestiti rendono questa posizione soggetta a rigetto. I dischi di guarigione si posizionano tra il gioiello e la pelle per ridurre pressione, attrito e contatto del metallo con la pelle."
   },
   "dermal_anchor": {
     "name": "Dermal Anchor / Microdermal",
@@ -1281,7 +1281,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ],
         "care": [
           "Spray salino 2-3 volte al giorno",
-          "Usare il disco di guarigione sulla parte superiore per prevenire impigliamenti",
+          "Usare un disco di guarigione sulla parte superiore per attutire gli impigli",
           "Non toccare né giocherellare con la testina",
           "Evitare la pressione",
           "Monitorare un eventuale rigetto"
@@ -1299,11 +1299,11 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
           "Possibile sostituire le testine con cautela",
           "Monitorare un eventuale rigetto",
           "Può durare anni oppure andare incontro a rigetto",
-          "La protezione antimicrobica previene infezioni attorno all'anchor"
+          "Pulire intorno al gioiello e ai dischi con soluzione fisiologica sterile"
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENTE CONSIGLIATO: I dermal anchor sono soggetti a impigliamenti e pressioni che possono provocarne il rigetto. I dischi di guarigione posizionati sulla parte visibile creano un cuscinetto che previene gli impigliamenti e riduce la pressione sulla base dell'anchor, migliorando notevolmente la tenuta."
+    "healingDiscBenefits": "CONSIGLIATO: Il movimento costante e l'attrito dei vestiti rendono questa posizione soggetta a rigetto. I dischi di guarigione si posizionano tra il gioiello e la pelle per ridurre pressione, attrito e contatto del metallo con la pelle."
   },
   "nape": {
     "name": "Nape (Nuca)",
@@ -1322,7 +1322,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         "care": [
           "Spray salino 2-3 volte al giorno",
           "Necessaria surface bar",
-          "Usare dischi di guarigione su entrambe le estremità: non negoziabile",
+          "Usare dischi di guarigione su entrambe le estremità fin dall'inizio",
           "I dischi ammortizzano i movimenti del collo e la pressione dei colletti",
           "Niente colletti alti",
           "Evitare di dormire sulla schiena",
@@ -1337,14 +1337,14 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ],
         "care": [
           "Continuare la cura",
-          "Mantenere i dischi di guarigione per massimizzare la tenuta",
+          "Tenere i dischi di guarigione in posizione per ridurre pressione e attrito",
           "Monitorare lo spessore della pelle",
           "Molte persone devono rimuoverlo",
           "I capelli possono irritarlo"
         ]
       }
     ],
-    "healingDiscBenefits": "CRITICO: I piercing nape (nuca) presentano tassi di rigetto estremamente elevati a causa del movimento continuo del collo e dell'attrito dei colletti. I dischi di guarigione sono essenziali: attutiscono i movimenti del collo e prevengono l'irritazione da indumenti. Senza di essi, il rigetto è quasi certo."
+    "healingDiscBenefits": "CONSIGLIATO: Il movimento costante e l'attrito dei vestiti rendono questa posizione soggetta a rigetto. I dischi di guarigione si posizionano tra il gioiello e la pelle per ridurre pressione, attrito e contatto del metallo con la pelle."
   },
   "sternum": {
     "name": "Sternum (Surface allo sterno)",
@@ -1376,14 +1376,14 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ],
         "care": [
           "Continuare la cura",
-          "I dischi di guarigione migliorano notevolmente il successo a lungo termine",
+          "Tenere i dischi di guarigione in posizione per ridurre pressione e attrito",
           "Prestare attenzione alla migrazione",
           "Rimuovere se la pelle si assottiglia",
-          "Protezione antimicrobica fondamentale per l'area toracica"
+          "Pulire intorno al gioiello e ai dischi con soluzione fisiologica sterile"
         ]
       }
     ],
-    "healingDiscBenefits": "CRITICO: I piercing sternum affrontano il movimento costante del torace (respirazione, variazioni di postura). I dischi di guarigione riducono al minimo i movimenti della barra che causano il rigetto e proteggono dalla pressione del reggiseno o degli abiti. Essenziali per qualsiasi possibilità di successo."
+    "healingDiscBenefits": "CONSIGLIATO: Il movimento costante e l'attrito dei vestiti rendono questa posizione soggetta a rigetto. I dischi di guarigione si posizionano tra il gioiello e la pelle per ridurre pressione, attrito e contatto del metallo con la pelle."
   },
   "madison": {
     "name": "Madison (Parte anteriore del collo)",
@@ -1402,7 +1402,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         "care": [
           "Spray salino 2-3 volte al giorno",
           "Barra da superficie",
-          "Usare dischi di guarigione su entrambe le estremità: requisito assoluto",
+          "Usare dischi di guarigione su entrambe le estremità fin dall'inizio",
           "I dischi attutiscono i movimenti dovuti alla deglutizione e alla parola",
           "Niente dolcevita o colli alti",
           "Rigetto molto frequente",
@@ -1416,14 +1416,14 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ],
         "care": [
           "Monitorare attentamente",
-          "Mantenere i dischi di guarigione per le migliori probabilità di riuscita",
+          "Tenere i dischi di guarigione in posizione per ridurre pressione e attrito",
           "Molti soggetti lo rigettano",
           "Rimuovere in caso di migrazione",
-          "Protezione antimicrobica importante contro i batteri del collo"
+          "Pulire intorno al gioiello e ai dischi con soluzione fisiologica sterile"
         ]
       }
     ],
-    "healingDiscBenefits": "ASSOLUTAMENTE CRITICO: I piercing madison hanno uno dei tassi di rigetto più elevati in assoluto a causa dei movimenti del collo durante la deglutizione e la parola. I dischi di guarigione sono obbligatori: attutiscono i continui movimenti della gola. Anche con i dischi il rigetto è comune, ma senza di essi il fallimento è pressoché garantito."
+    "healingDiscBenefits": "CONSIGLIATO: Il movimento costante e l'attrito dei vestiti rendono questa posizione soggetta a rigetto. I dischi di guarigione si posizionano tra il gioiello e la pelle per ridurre pressione, attrito e contatto del metallo con la pelle."
   },
   "prince_albert": {
     "name": "Prince Albert (PA)",
@@ -1443,7 +1443,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
           "Impacchi salini 2 volte al giorno",
           "Usare dischi di guarigione per proteggere i tessuti sensibili dal metallo",
           "Sciacquare dopo la minzione",
-          "I dischi antimicrobici prevengono infezioni batteriche derivanti dall'urina",
+          "Pulire intorno al gioiello e ai dischi con soluzione fisiologica sterile",
           "NESSUN contatto sessuale per almeno 4-6 settimane",
           "Circular barbell o anello",
           "Impacchi con sale marino"
@@ -1465,7 +1465,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "CONSIGLIATO: I piercing genitali traggono un enorme beneficio dai dischi di guarigione. Eliminano il contatto del metallo con i delicati tessuti genitali (fondamentale per chi presenta sensibilità ai metalli), ammortizzano l'attrito della biancheria intima e dei movimenti, e offrono una protezione antimicrobica essenziale in un'area ricca di batteri. Aumentano notevolmente il comfort durante la guarigione."
+    "healingDiscBenefits": "CONSIGLIATO: L'attrito della biancheria e il contatto con il metallo irritano i tessuti genitali sensibili. I dischi di guarigione si posizionano tra il gioiello e la pelle per ridurre pressione, attrito e contatto del metallo con la pelle."
   },
   "reverse_pa": {
     "name": "Prince Albert inverso",
@@ -1794,7 +1794,7 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
           "Impacchi salini 2 volte al giorno",
           "Usare dischi di guarigione su entrambe le sfere per comfort e protezione",
           "Sciacquare dopo la minzione",
-          "La protezione antimicrobica previene infezioni batteriche",
+          "Pulire intorno al gioiello e ai dischi con soluzione fisiologica sterile",
           "Nessun contatto sessuale per 4-6 settimane",
           "Barbell curvo",
           "I dischi attutiscono l'attrito con la biancheria o gli assorbenti",
@@ -1809,14 +1809,14 @@ window.I18N_DICTIONARY.it.piercingTimeline = {
         ],
         "care": [
           "Continuare gli impacchi",
-          "I dischi di guarigione eliminano i problemi di sensibilità ai metalli",
+          "I dischi di guarigione riducono il contatto del metallo con la pelle",
           "Possibile riprendere i rapporti sessuali dopo 6 settimane",
           "Buona igiene fondamentale",
           "I dischi assicurano un comfort costante"
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENTE CONSIGLIATO: I piercing VCH beneficiano immensamente dei dischi di guarigione. Impediscono alle sfere metalliche di irritare i sensibili tessuti genitali, ammortizzano l'attrito con la biancheria o gli assorbenti, eliminano i problemi di sensibilità ai metalli e forniscono la protezione antimicrobica fondamentale per l'area genitale. Incrementano notevolmente il comfort e prevengono l'irritazione."
+    "healingDiscBenefits": "CONSIGLIATO: L'attrito della biancheria e il contatto con il metallo irritano i tessuti genitali sensibili. I dischi di guarigione si posizionano tra il gioiello e la pelle per ridurre pressione, attrito e contatto del metallo con la pelle."
   },
   "hch": {
     "name": "Horizontal Clitoral Hood (HCH)",

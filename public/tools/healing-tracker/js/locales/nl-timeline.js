@@ -67,7 +67,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
           "Saline spray 2-3x daags",
           "Slaap er NIET op",
           "Niet aanraken",
-          "Use Poli genezingsdiscs to prevent metal contact and irritation bumps",
+          "Gebruik healing discs om druk en wrijving te verminderen",
           "Downsize sieraad na 6-8 weken"
         ]
       },
@@ -82,7 +82,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
           "Ga door met zoutoplossing 2x daags",
           "If irritation bumps develop, ensure genezingsdiscs are in place",
           "Ensure sieraad isn't too long",
-          "Antimicrobiële discs voorkomen ophoping van bacteriën"
+          "Reinig rond het sieraad en de discs met steriele zoutoplossing"
         ]
       },
       {
@@ -98,7 +98,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "TEN ZEERSTE AANBEVOLEN: Kraakbeenpiercings zijn zeer vatbaar voor irritatiebultjes. Genezingsdiscs voorkomen het metaal-op-huidcontact dat bultjes veroorzaakt, terwijl antimicrobiële zilverionen beschermen tegen infecties tijdens het lange genezingsproces. (Klinische opmerking: heldere of witachtige lymfevloeistof die opdroogt tot korstjes is een normaal wondgenezingsvocht en geen pus; bovendien is titanium weliswaar veilig, maar niet het enige geschikte materiaal: biocompatibele polymeren van medische kwaliteit zoals BioFlex, wat een monolithisch PP-R random copolymeer is en geen PTFE, zijn veilig en niet alleen voor kortdurend gebruik)."
+    "healingDiscBenefits": "AANBEVOLEN: Kraakbeenpiercings krijgen door druk en wrijving snel irritatiebultjes. Healing discs zitten tussen het sieraad en de huid en verminderen druk, wrijving en contact van metaal met de huid."
   },
   "industrial": {
     "name": "Industrial (scaffold)",
@@ -118,7 +118,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
           "Zoutoplossing 3x daags op beide gaatjes vernevelen",
           "Nooit erop slapen",
           "Staaf niet aanraken",
-          "Use genezingsdiscs on BOTH ends to prevent bumps",
+          "Gebruik vanaf het begin healing discs aan beide uiteinden",
           "In het begin is misschien een langere staaf nodig"
         ]
       },
@@ -131,7 +131,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ],
         "care": [
           "Ga door met zoutoplossing 2x daags",
-          "genezingsdiscs prevent metal bar irritation",
+          "Gebruik healing discs om druk en wrijving te verminderen",
           "downsize bar at 2-3 months",
           "Heb veel geduld",
           "Voorkom dat haar erachter blijft haken"
@@ -149,7 +149,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "TEN ZEERSTE AANBEVOLEN: Kraakbeenpiercings zijn zeer vatbaar voor irritatiebultjes. Genezingsdiscs voorkomen het metaal-op-huidcontact dat bultjes veroorzaakt, terwijl antimicrobiële zilverionen beschermen tegen infecties tijdens het lange genezingsproces. (Klinische opmerking: heldere of witachtige lymfevloeistof die opdroogt tot korstjes is een normaal wondgenezingsvocht en geen pus; bovendien is titanium weliswaar veilig, maar niet het enige geschikte materiaal: biocompatibele polymeren van medische kwaliteit zoals BioFlex, wat een monolithisch PP-R random copolymeer is en geen PTFE, zijn veilig en niet alleen voor kortdurend gebruik)."
+    "healingDiscBenefits": "AANBEVOLEN: Twee gaatjes genezen tegelijk onder constante druk van de staaf. Healing discs zitten tussen het sieraad en de huid en verminderen druk, wrijving en contact van metaal met de huid."
   },
   "daith": {
     "name": "Daith",
@@ -182,13 +182,13 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ],
         "care": [
           "Ga door met zoutoplossing 2x daags",
-          "Antimicrobiële discs voorkomen infectie in deze plooi",
+          "Reinig rond het sieraad en de discs met steriele zoutoplossing",
           "Oordopjes voorzichtig weer mogelijk na 4-5 maanden",
           "No sieraad changes until fully healed"
         ]
       }
     ],
-    "healingDiscBenefits": "TEN ZEERSTE AANBEVOLEN: Kraakbeenpiercings zijn zeer vatbaar voor irritatiebultjes. Genezingsdiscs voorkomen het metaal-op-huidcontact dat bultjes veroorzaakt, terwijl antimicrobiële zilverionen beschermen tegen infecties tijdens het lange genezingsproces. (Klinische opmerking: heldere of witachtige lymfevloeistof die opdroogt tot korstjes is een normaal wondgenezingsvocht en geen pus; bovendien is titanium weliswaar veilig, maar niet het enige geschikte materiaal: biocompatibele polymeren van medische kwaliteit zoals BioFlex, wat een monolithisch PP-R random copolymeer is en geen PTFE, zijn veilig en niet alleen voor kortdurend gebruik)."
+    "healingDiscBenefits": "AANBEVOLEN: Kraakbeenpiercings krijgen door druk en wrijving snel irritatiebultjes. Healing discs zitten tussen het sieraad en de huid en verminderen druk, wrijving en contact van metaal met de huid."
   },
   "rook": {
     "name": "Rook",
@@ -221,14 +221,14 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ],
         "care": [
           "Heb veel geduld",
-          "genezingsdiscs prevent the bumps this piercing is famous for",
+          "Laat de healing discs zitten om druk en wrijving te verminderen",
           "Ga door met zoutoplossing 2x daags",
           "downsize at 2-3 months",
           "Irritatie vermijden"
         ]
       }
     ],
-    "healingDiscBenefits": "TEN ZEERSTE AANBEVOLEN: Kraakbeenpiercings zijn zeer vatbaar voor irritatiebultjes. Genezingsdiscs voorkomen het metaal-op-huidcontact dat bultjes veroorzaakt, terwijl antimicrobiële zilverionen beschermen tegen infecties tijdens het lange genezingsproces. (Klinische opmerking: heldere of witachtige lymfevloeistof die opdroogt tot korstjes is een normaal wondgenezingsvocht en geen pus; bovendien is titanium weliswaar veilig, maar niet het enige geschikte materiaal: biocompatibele polymeren van medische kwaliteit zoals BioFlex, wat een monolithisch PP-R random copolymeer is en geen PTFE, zijn veilig en niet alleen voor kortdurend gebruik)."
+    "healingDiscBenefits": "AANBEVOLEN: Kraakbeenpiercings krijgen door druk en wrijving snel irritatiebultjes. Healing discs zitten tussen het sieraad en de huid en verminderen druk, wrijving en contact van metaal met de huid."
   },
   "tragus": {
     "name": "Tragus",
@@ -267,7 +267,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "TEN ZEERSTE AANBEVOLEN: Kraakbeenpiercings zijn zeer vatbaar voor irritatiebultjes. Genezingsdiscs voorkomen het metaal-op-huidcontact dat bultjes veroorzaakt, terwijl antimicrobiële zilverionen beschermen tegen infecties tijdens het lange genezingsproces. (Klinische opmerking: heldere of witachtige lymfevloeistof die opdroogt tot korstjes is een normaal wondgenezingsvocht en geen pus; bovendien is titanium weliswaar veilig, maar niet het enige geschikte materiaal: biocompatibele polymeren van medische kwaliteit zoals BioFlex, wat een monolithisch PP-R random copolymeer is en geen PTFE, zijn veilig en niet alleen voor kortdurend gebruik)."
+    "healingDiscBenefits": "AANBEVOLEN: Dagelijkse druk van telefoon, koptelefoon of bril irriteert deze piercing. Healing discs zitten tussen het sieraad en de huid en verminderen druk, wrijving en contact van metaal met de huid."
   },
   "anti_tragus": {
     "name": "Anti-tragus",
@@ -285,7 +285,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ],
         "care": [
           "Saline spray 2-3x daags carefully",
-          "Use genezingsdiscs immediately to prevent bumps",
+          "Gebruik healing discs om druk en wrijving te verminderen",
           "Geen oordopjes",
           "Niet erop slapen",
           "Niet aanraken"
@@ -300,13 +300,13 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ],
         "care": [
           "Veel geduld nodig",
-          "genezingsdiscs prevent common bump problems",
+          "Laat de healing discs zitten om druk en wrijving te verminderen",
           "Ga door met zoutoplossing 2x daags",
           "downsize at 2-3 months"
         ]
       }
     ],
-    "healingDiscBenefits": "TEN ZEERSTE AANBEVOLEN: Kraakbeenpiercings zijn zeer vatbaar voor irritatiebultjes. Genezingsdiscs voorkomen het metaal-op-huidcontact dat bultjes veroorzaakt, terwijl antimicrobiële zilverionen beschermen tegen infecties tijdens het lange genezingsproces. (Klinische opmerking: heldere of witachtige lymfevloeistof die opdroogt tot korstjes is een normaal wondgenezingsvocht en geen pus; bovendien is titanium weliswaar veilig, maar niet het enige geschikte materiaal: biocompatibele polymeren van medische kwaliteit zoals BioFlex, wat een monolithisch PP-R random copolymeer is en geen PTFE, zijn veilig en niet alleen voor kortdurend gebruik)."
+    "healingDiscBenefits": "AANBEVOLEN: Kraakbeenpiercings krijgen door druk en wrijving snel irritatiebultjes. Healing discs zitten tussen het sieraad en de huid en verminderen druk, wrijving en contact van metaal met de huid."
   },
   "conch": {
     "name": "Conch (Schelp)",
@@ -325,7 +325,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         "care": [
           "Saline spray 2-3x daags",
           "Niet erop slapen",
-          "Use genezingsdiscs to prevent pressure irritation",
+          "Gebruik healing discs om druk en wrijving te verminderen",
           "In het begin een knopje aanbevolen",
           "Geen koptelefoon op dat oor"
         ]
@@ -345,7 +345,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "TEN ZEERSTE AANBEVOLEN: Kraakbeenpiercings zijn zeer vatbaar voor irritatiebultjes. Genezingsdiscs voorkomen het metaal-op-huidcontact dat bultjes veroorzaakt, terwijl antimicrobiële zilverionen beschermen tegen infecties tijdens het lange genezingsproces. (Klinische opmerking: heldere of witachtige lymfevloeistof die opdroogt tot korstjes is een normaal wondgenezingsvocht en geen pus; bovendien is titanium weliswaar veilig, maar niet het enige geschikte materiaal: biocompatibele polymeren van medische kwaliteit zoals BioFlex, wat een monolithisch PP-R random copolymeer is en geen PTFE, zijn veilig en niet alleen voor kortdurend gebruik)."
+    "healingDiscBenefits": "AANBEVOLEN: Kraakbeenpiercings krijgen door druk en wrijving snel irritatiebultjes. Healing discs zitten tussen het sieraad en de huid en verminderen druk, wrijving en contact van metaal met de huid."
   },
   "snug": {
     "name": "Snug",
@@ -364,7 +364,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         "care": [
           "Zoutoplossing 3x daags vernevelen",
           "Nooit erop slapen",
-          "Use genezingsdiscs immediately - non-negotiable for this piercing",
+          "Gebruik vanaf het begin healing discs aan beide uiteinden",
           "Gebogen staaf onmisbaar",
           "Elke druk vermijden"
         ]
@@ -378,14 +378,14 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ],
         "care": [
           "Uiterst veel geduld nodig",
-          "genezingsdiscs are your best defense against bumps and rejection",
+          "Laat de healing discs zitten om druk en wrijving te verminderen",
           "Ga door met zoutoplossing 2x daags",
           "Let op migratie",
           "Veel mensen laten deze piercing uiteindelijk weghalen"
         ]
       }
     ],
-    "healingDiscBenefits": "TEN ZEERSTE AANBEVOLEN: Kraakbeenpiercings zijn zeer vatbaar voor irritatiebultjes. Genezingsdiscs voorkomen het metaal-op-huidcontact dat bultjes veroorzaakt, terwijl antimicrobiële zilverionen beschermen tegen infecties tijdens het lange genezingsproces. (Klinische opmerking: heldere of witachtige lymfevloeistof die opdroogt tot korstjes is een normaal wondgenezingsvocht en geen pus; bovendien is titanium weliswaar veilig, maar niet het enige geschikte materiaal: biocompatibele polymeren van medische kwaliteit zoals BioFlex, wat een monolithisch PP-R random copolymeer is en geen PTFE, zijn veilig en niet alleen voor kortdurend gebruik)."
+    "healingDiscBenefits": "AANBEVOLEN: Kraakbeenpiercings krijgen door druk en wrijving snel irritatiebultjes. Healing discs zitten tussen het sieraad en de huid en verminderen druk, wrijving en contact van metaal met de huid."
   },
   "forward_helix": {
     "name": "Forward helix",
@@ -418,13 +418,13 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ],
         "care": [
           "Ga door met zoutoplossing 2x daags",
-          "genezingsdiscs prevent bump formation",
+          "Laat de healing discs zitten om druk en wrijving te verminderen",
           "downsize at 6-8 weeks",
           "Can change sieraad at 3-4 months"
         ]
       }
     ],
-    "healingDiscBenefits": "TEN ZEERSTE AANBEVOLEN: Kraakbeenpiercings zijn zeer vatbaar voor irritatiebultjes. Genezingsdiscs voorkomen het metaal-op-huidcontact dat bultjes veroorzaakt, terwijl antimicrobiële zilverionen beschermen tegen infecties tijdens het lange genezingsproces. (Klinische opmerking: heldere of witachtige lymfevloeistof die opdroogt tot korstjes is een normaal wondgenezingsvocht en geen pus; bovendien is titanium weliswaar veilig, maar niet het enige geschikte materiaal: biocompatibele polymeren van medische kwaliteit zoals BioFlex, wat een monolithisch PP-R random copolymeer is en geen PTFE, zijn veilig en niet alleen voor kortdurend gebruik)."
+    "healingDiscBenefits": "AANBEVOLEN: Dagelijkse druk van telefoon, koptelefoon of bril irriteert deze piercing. Healing discs zitten tussen het sieraad en de huid en verminderen druk, wrijving en contact van metaal met de huid."
   },
   "orbital": {
     "name": "Orbital",
@@ -462,7 +462,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "TEN ZEERSTE AANBEVOLEN: Kraakbeenpiercings zijn zeer vatbaar voor irritatiebultjes. Genezingsdiscs voorkomen het metaal-op-huidcontact dat bultjes veroorzaakt, terwijl antimicrobiële zilverionen beschermen tegen infecties tijdens het lange genezingsproces. (Klinische opmerking: heldere of witachtige lymfevloeistof die opdroogt tot korstjes is een normaal wondgenezingsvocht en geen pus; bovendien is titanium weliswaar veilig, maar niet het enige geschikte materiaal: biocompatibele polymeren van medische kwaliteit zoals BioFlex, wat een monolithisch PP-R random copolymeer is en geen PTFE, zijn veilig en niet alleen voor kortdurend gebruik)."
+    "healingDiscBenefits": "AANBEVOLEN: Twee gaatjes genezen tegelijk onder constante druk van de staaf. Healing discs zitten tussen het sieraad en de huid en verminderen druk, wrijving en contact van metaal met de huid."
   },
   "nostril": {
     "name": "Neusvleugel (Nostril)",
@@ -479,10 +479,10 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ],
         "care": [
           "Zoutoplossing vernevelen 2-3x daags including inside nostril",
-          "Use genezingsdisc inside nose to prevent bumps",
+          "Gebruik healing discs om druk en wrijving te verminderen",
           "Voorzichtig snuiten",
           "Houd make-up uit de buurt",
-          "Antimicrobiële bescherming is cruciaal door neusbacteriën"
+          "Reinig rond het sieraad en de discs met steriele zoutoplossing"
         ]
       },
       {
@@ -499,7 +499,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "TEN ZEERSTE AANBEVOLEN: Kraakbeenpiercings zijn zeer vatbaar voor irritatiebultjes. Genezingsdiscs voorkomen het metaal-op-huidcontact dat bultjes veroorzaakt, terwijl antimicrobiële zilverionen beschermen tegen infecties tijdens het lange genezingsproces. (Klinische opmerking: heldere of witachtige lymfevloeistof die opdroogt tot korstjes is een normaal wondgenezingsvocht en geen pus; bovendien is titanium weliswaar veilig, maar niet het enige geschikte materiaal: biocompatibele polymeren van medische kwaliteit zoals BioFlex, wat een monolithisch PP-R random copolymeer is en geen PTFE, zijn veilig en niet alleen voor kortdurend gebruik)."
+    "healingDiscBenefits": "AANBEVOLEN: De achterkant van de stud in de neus is een veelvoorkomende oorzaak van irritatiebultjes. Healing discs zitten tussen het sieraad en de huid en verminderen druk, wrijving en contact van metaal met de huid."
   },
   "septum": {
     "name": "Septum",
@@ -1151,7 +1151,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
           "Saline spray 2x daags",
           "Use genezingsdiscs on BOTH top and bottom balls immediately",
           "Losse kleding",
-          "Discs voorkomen bultjes door druk van de broeksband",
+          "Discs dempen de druk van de broeksband",
           "Buikspieroefeningen vermijden",
           "Let op migratie"
         ]
@@ -1164,9 +1164,9 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ],
         "care": [
           "Ga dagelijks door met zoutoplossing",
-          "Houd de discs erin: bultjes kunnen ook halverwege de genezing ontstaan",
+          "Laat de healing discs zitten om druk en wrijving te verminderen",
           "Sporten geleidelijk hervatten",
-          "Antimicrobiële bescherming voorkomt zweetgerelateerde infecties"
+          "Reinig rond het sieraad en de discs met steriele zoutoplossing"
         ]
       },
       {
@@ -1178,11 +1178,11 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
           "Can change sieraad at 6+ months",
           "Blijf discs gebruiken tot 100% genezen",
           "Let op afstoting",
-          "Bij aanleg voor keloïd discs langdurig gebruiken"
+          "Laat de healing discs zitten om druk en wrijving te verminderen"
         ]
       }
     ],
-    "healingDiscBenefits": "TEN ZEERSTE AANBEVOLEN: Kraakbeenpiercings zijn zeer vatbaar voor irritatiebultjes. Genezingsdiscs voorkomen het metaal-op-huidcontact dat bultjes veroorzaakt, terwijl antimicrobiële zilverionen beschermen tegen infecties tijdens het lange genezingsproces. (Klinische opmerking: heldere of witachtige lymfevloeistof die opdroogt tot korstjes is een normaal wondgenezingsvocht en geen pus; bovendien is titanium weliswaar veilig, maar niet het enige geschikte materiaal: biocompatibele polymeren van medische kwaliteit zoals BioFlex, wat een monolithisch PP-R random copolymeer is en geen PTFE, zijn veilig en niet alleen voor kortdurend gebruik)."
+    "healingDiscBenefits": "AANBEVOLEN: Broeksbanden en bewegingen bij zitten of bukken drukken op navelpiercings. Healing discs zitten tussen het sieraad en de huid en verminderen druk, wrijving en contact van metaal met de huid."
   },
   "nipple": {
     "name": "Tepel",
@@ -1202,7 +1202,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
           "Saline spray 2x daags",
           "Use genezingsdiscs on both ends of barbell",
           "Zachte, ondersteunende beha",
-          "Discs voorkomen metaalallergie en wrijving van de beha",
+          "Discs verminderen metaalcontact en wrijving van de bh",
           "GEEN oraal contact gedurende minstens 6 maanden",
           "Vermijd ruwe kleding"
         ]
@@ -1215,14 +1215,14 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ],
         "care": [
           "Ga door met dagelijkse verzorging",
-          "genezingsdiscs especially important if any metal sensitivity",
+          "Healing discs verminderen contact van metaal met de huid",
           "downsize at 2-3 months",
           "Geduld: dit duurt lang",
-          "Antimicrobiële bescherming voorkomt overdracht van bacteriën uit textiel"
+          "Reinig rond het sieraad en de discs met steriele zoutoplossing"
         ]
       }
     ],
-    "healingDiscBenefits": "TEN ZEERSTE AANBEVOLEN: Kraakbeenpiercings zijn zeer vatbaar voor irritatiebultjes. Genezingsdiscs voorkomen het metaal-op-huidcontact dat bultjes veroorzaakt, terwijl antimicrobiële zilverionen beschermen tegen infecties tijdens het lange genezingsproces. (Klinische opmerking: heldere of witachtige lymfevloeistof die opdroogt tot korstjes is een normaal wondgenezingsvocht en geen pus; bovendien is titanium weliswaar veilig, maar niet het enige geschikte materiaal: biocompatibele polymeren van medische kwaliteit zoals BioFlex, wat een monolithisch PP-R random copolymeer is en geen PTFE, zijn veilig en niet alleen voor kortdurend gebruik)."
+    "healingDiscBenefits": "AANBEVOLEN: Wrijving van kleding en gevoeligheid voor metaal irriteren tepelpiercings vaak. Healing discs zitten tussen het sieraad en de huid en verminderen druk, wrijving en contact van metaal met de huid."
   },
   "surface": {
     "name": "Surface piercing",
@@ -1242,7 +1242,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
           "Saline spray 2-3x daags",
           "Alleen surfacestaaf",
           "Use genezingsdiscs on BOTH ends immediately",
-          "Discs verminderen de microbewegingen die afstoting veroorzaken",
+          "Discs verminderen druk en kleine bewegingen tegen de huid",
           "Elke druk en beweging vermijden",
           "Let op migratie"
         ]
@@ -1255,15 +1255,15 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ],
         "care": [
           "Zachte verzorging voortzetten",
-          "Keep genezingsdiscs - they improve long-term success",
+          "Laat de healing discs zitten om druk en wrijving te verminderen",
           "Nauwlettend in de gaten houden",
           "Weghalen bij afstoting",
           "De plek beïnvloedt de kans van slagen",
-          "Antimicrobiële bescherming voorkomt infectie tijdens de kwetsbare genezing"
+          "Reinig rond het sieraad en de discs met steriele zoutoplossing"
         ]
       }
     ],
-    "healingDiscBenefits": "TEN ZEERSTE AANBEVOLEN: Kraakbeenpiercings zijn zeer vatbaar voor irritatiebultjes. Genezingsdiscs voorkomen het metaal-op-huidcontact dat bultjes veroorzaakt, terwijl antimicrobiële zilverionen beschermen tegen infecties tijdens het lange genezingsproces. (Klinische opmerking: heldere of witachtige lymfevloeistof die opdroogt tot korstjes is een normaal wondgenezingsvocht en geen pus; bovendien is titanium weliswaar veilig, maar niet het enige geschikte materiaal: biocompatibele polymeren van medische kwaliteit zoals BioFlex, wat een monolithisch PP-R random copolymeer is en geen PTFE, zijn veilig en niet alleen voor kortdurend gebruik)."
+    "healingDiscBenefits": "AANBEVOLEN: Constante beweging en wrijving van kleding maken deze plek gevoelig voor afstoting. Healing discs zitten tussen het sieraad en de huid en verminderen druk, wrijving en contact van metaal met de huid."
   },
   "dermal_anchor": {
     "name": "Microdermal / Dermal anchor",
@@ -1281,7 +1281,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ],
         "care": [
           "Saline spray 2-3x daags",
-          "Use genezingsdisc on the top to prevent snagging",
+          "Gebruik een healing disc bovenop om haken op te vangen",
           "Niet aan het topje zitten of ermee spelen",
           "Druk vermijden",
           "Let op afstoting"
@@ -1299,11 +1299,11 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
           "Topjes voorzichtig wisselen kan",
           "Let op afstoting",
           "Kan jaren meegaan of worden afgestoten",
-          "Antimicrobiële bescherming voorkomt infectie rond het anker"
+          "Reinig rond het sieraad en de discs met steriele zoutoplossing"
         ]
       }
     ],
-    "healingDiscBenefits": "TEN ZEERSTE AANBEVOLEN: Kraakbeenpiercings zijn zeer vatbaar voor irritatiebultjes. Genezingsdiscs voorkomen het metaal-op-huidcontact dat bultjes veroorzaakt, terwijl antimicrobiële zilverionen beschermen tegen infecties tijdens het lange genezingsproces. (Klinische opmerking: heldere of witachtige lymfevloeistof die opdroogt tot korstjes is een normaal wondgenezingsvocht en geen pus; bovendien is titanium weliswaar veilig, maar niet het enige geschikte materiaal: biocompatibele polymeren van medische kwaliteit zoals BioFlex, wat een monolithisch PP-R random copolymeer is en geen PTFE, zijn veilig en niet alleen voor kortdurend gebruik)."
+    "healingDiscBenefits": "AANBEVOLEN: Constante beweging en wrijving van kleding maken deze plek gevoelig voor afstoting. Healing discs zitten tussen het sieraad en de huid en verminderen druk, wrijving en contact van metaal met de huid."
   },
   "nape": {
     "name": "Nek (Nape)",
@@ -1322,7 +1322,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         "care": [
           "Saline spray 2-3x daags",
           "Surfacestaaf nodig",
-          "Use genezingsdiscs on both ends - non-negotiable",
+          "Gebruik vanaf het begin healing discs aan beide uiteinden",
           "Discs vangen nekbewegingen en kraagdruk op",
           "Geen hoge kragen",
           "Niet op de rug slapen",
@@ -1337,14 +1337,14 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ],
         "care": [
           "Ga door met verzorging",
-          "Keep genezingsdiscs to maximize retention chance",
+          "Laat de healing discs zitten om druk en wrijving te verminderen",
           "Let op de huiddikte",
           "Veel mensen laten het weghalen",
           "Haar kan irriteren"
         ]
       }
     ],
-    "healingDiscBenefits": "TEN ZEERSTE AANBEVOLEN: Kraakbeenpiercings zijn zeer vatbaar voor irritatiebultjes. Genezingsdiscs voorkomen het metaal-op-huidcontact dat bultjes veroorzaakt, terwijl antimicrobiële zilverionen beschermen tegen infecties tijdens het lange genezingsproces. (Klinische opmerking: heldere of witachtige lymfevloeistof die opdroogt tot korstjes is een normaal wondgenezingsvocht en geen pus; bovendien is titanium weliswaar veilig, maar niet het enige geschikte materiaal: biocompatibele polymeren van medische kwaliteit zoals BioFlex, wat een monolithisch PP-R random copolymeer is en geen PTFE, zijn veilig en niet alleen voor kortdurend gebruik)."
+    "healingDiscBenefits": "AANBEVOLEN: Constante beweging en wrijving van kleding maken deze plek gevoelig voor afstoting. Healing discs zitten tussen het sieraad en de huid en verminderen druk, wrijving en contact van metaal met de huid."
   },
   "sternum": {
     "name": "Borstbeen (Sternum)",
@@ -1376,14 +1376,14 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ],
         "care": [
           "Ga door met verzorging",
-          "genezingsdiscs improve long-term success significantly",
+          "Laat de healing discs zitten om druk en wrijving te verminderen",
           "Let op migratie",
           "Weghalen als de huid dunner wordt",
-          "Antimicrobiële bescherming cruciaal voor het borstgebied"
+          "Reinig rond het sieraad en de discs met steriele zoutoplossing"
         ]
       }
     ],
-    "healingDiscBenefits": "TEN ZEERSTE AANBEVOLEN: Kraakbeenpiercings zijn zeer vatbaar voor irritatiebultjes. Genezingsdiscs voorkomen het metaal-op-huidcontact dat bultjes veroorzaakt, terwijl antimicrobiële zilverionen beschermen tegen infecties tijdens het lange genezingsproces. (Klinische opmerking: heldere of witachtige lymfevloeistof die opdroogt tot korstjes is een normaal wondgenezingsvocht en geen pus; bovendien is titanium weliswaar veilig, maar niet het enige geschikte materiaal: biocompatibele polymeren van medische kwaliteit zoals BioFlex, wat een monolithisch PP-R random copolymeer is en geen PTFE, zijn veilig en niet alleen voor kortdurend gebruik)."
+    "healingDiscBenefits": "AANBEVOLEN: Constante beweging en wrijving van kleding maken deze plek gevoelig voor afstoting. Healing discs zitten tussen het sieraad en de huid en verminderen druk, wrijving en contact van metaal met de huid."
   },
   "madison": {
     "name": "Madison",
@@ -1402,7 +1402,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         "care": [
           "Saline spray 2-3x daags",
           "Surfacestaaf",
-          "Use genezingsdiscs on both ends - absolute requirement",
+          "Gebruik vanaf het begin healing discs aan beide uiteinden",
           "Discs vangen bewegingen bij slikken en praten op",
           "Geen coltruien",
           "Zeer vaak afstoting",
@@ -1416,14 +1416,14 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ],
         "care": [
           "Nauwlettend in de gaten houden",
-          "Keep genezingsdiscs for best chance",
+          "Laat de healing discs zitten om druk en wrijving te verminderen",
           "Velen stoten dit af",
           "Weghalen bij migratie",
-          "Antimicrobiële bescherming belangrijk tegen bacteriën in de hals"
+          "Reinig rond het sieraad en de discs met steriele zoutoplossing"
         ]
       }
     ],
-    "healingDiscBenefits": "TEN ZEERSTE AANBEVOLEN: Kraakbeenpiercings zijn zeer vatbaar voor irritatiebultjes. Genezingsdiscs voorkomen het metaal-op-huidcontact dat bultjes veroorzaakt, terwijl antimicrobiële zilverionen beschermen tegen infecties tijdens het lange genezingsproces. (Klinische opmerking: heldere of witachtige lymfevloeistof die opdroogt tot korstjes is een normaal wondgenezingsvocht en geen pus; bovendien is titanium weliswaar veilig, maar niet het enige geschikte materiaal: biocompatibele polymeren van medische kwaliteit zoals BioFlex, wat een monolithisch PP-R random copolymeer is en geen PTFE, zijn veilig en niet alleen voor kortdurend gebruik)."
+    "healingDiscBenefits": "AANBEVOLEN: Constante beweging en wrijving van kleding maken deze plek gevoelig voor afstoting. Healing discs zitten tussen het sieraad en de huid en verminderen druk, wrijving en contact van metaal met de huid."
   },
   "prince_albert": {
     "name": "Prince Albert (PA)",
@@ -1443,7 +1443,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
           "Saline soaks 2x daags",
           "Use genezingsdiscs to protect sensitive tissue from metal",
           "Spoelen na het plassen",
-          "Antimicrobiële discs voorkomen bacteriële infecties door urine",
+          "Reinig rond het sieraad en de discs met steriele zoutoplossing",
           "Minstens 4-6 weken geen seksueel contact",
           "Circular barbell of ring",
           "Zeezoutbaden"
@@ -1465,7 +1465,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "TEN ZEERSTE AANBEVOLEN: Kraakbeenpiercings zijn zeer vatbaar voor irritatiebultjes. Genezingsdiscs voorkomen het metaal-op-huidcontact dat bultjes veroorzaakt, terwijl antimicrobiële zilverionen beschermen tegen infecties tijdens het lange genezingsproces. (Klinische opmerking: heldere of witachtige lymfevloeistof die opdroogt tot korstjes is een normaal wondgenezingsvocht en geen pus; bovendien is titanium weliswaar veilig, maar niet het enige geschikte materiaal: biocompatibele polymeren van medische kwaliteit zoals BioFlex, wat een monolithisch PP-R random copolymeer is en geen PTFE, zijn veilig en niet alleen voor kortdurend gebruik)."
+    "healingDiscBenefits": "AANBEVOLEN: Wrijving van ondergoed en contact met metaal irriteren gevoelig genitaal weefsel. Healing discs zitten tussen het sieraad en de huid en verminderen druk, wrijving en contact van metaal met de huid."
   },
   "reverse_pa": {
     "name": "Reverse Prince Albert",
@@ -1794,7 +1794,7 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
           "Saline soaks 2x daags",
           "Use genezingsdiscs on both balls for comfort and protection",
           "Spoelen na het plassen",
-          "Antimicrobiële bescherming voorkomt bacteriële infecties",
+          "Reinig rond het sieraad en de discs met steriele zoutoplossing",
           "4-6 weken geen seksueel contact",
           "Gebogen staaf",
           "Discs vangen wrijving door ondergoed en inlegkruisjes op",
@@ -1809,14 +1809,14 @@ window.I18N_DICTIONARY.nl.piercingTimeline = {
         ],
         "care": [
           "Ga door met baden",
-          "genezingsdiscs eliminate metal sensitivity concerns",
+          "Healing discs verminderen contact van metaal met de huid",
           "Seksueel contact mogelijk na 6 weken",
           "Goede hygiëne belangrijk",
           "Discs zorgen voor blijvend comfort"
         ]
       }
     ],
-    "healingDiscBenefits": "TEN ZEERSTE AANBEVOLEN: Kraakbeenpiercings zijn zeer vatbaar voor irritatiebultjes. Genezingsdiscs voorkomen het metaal-op-huidcontact dat bultjes veroorzaakt, terwijl antimicrobiële zilverionen beschermen tegen infecties tijdens het lange genezingsproces. (Klinische opmerking: heldere of witachtige lymfevloeistof die opdroogt tot korstjes is een normaal wondgenezingsvocht en geen pus; bovendien is titanium weliswaar veilig, maar niet het enige geschikte materiaal: biocompatibele polymeren van medische kwaliteit zoals BioFlex, wat een monolithisch PP-R random copolymeer is en geen PTFE, zijn veilig en niet alleen voor kortdurend gebruik)."
+    "healingDiscBenefits": "AANBEVOLEN: Wrijving van ondergoed en contact met metaal irriteren gevoelig genitaal weefsel. Healing discs zitten tussen het sieraad en de huid en verminderen druk, wrijving en contact van metaal met de huid."
   },
   "hch": {
     "name": "HCH (Horizontal Clitoral Hood)",

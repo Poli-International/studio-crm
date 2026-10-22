@@ -1937,5 +1937,21 @@
  "Open Southeast Asia Tattoo Ink Checker": "Abrir el comprobador de tintas de tatuaje (Sudeste Asiático)",
  "Thailand only: check ink pigments by name, CI or CAS number against the Thai list of substances prohibited in cosmetics, each with its Royal Gazette entry, and print a record. Eight languages, Thai included.": "Solo Tailandia: compruebe los pigmentos de una tinta por nombre, número CI o CAS frente a la lista tailandesa de sustancias prohibidas en cosméticos, cada una con su entrada de la Royal Gazette, e imprima un registro. Ocho idiomas, tailandés incluido.",
  "Ink regulation checkers: USA, Europe (REACH), Southeast Asia": "Comprobadores de normativa de tintas: EE. UU., Europa (REACH), Sudeste Asiático",
- "Each checker answers for its own region only: a clear result in one says nothing about the others.": "Cada comprobador responde solo por su propia región: un resultado limpio en uno no dice nada de los demás."
+ "Each checker answers for its own region only: a clear result in one says nothing about the others.": "Cada comprobador responde solo por su propia región: un resultado limpio en uno no dice nada de los demás.",
+ "By Client": "Por cliente",
+ "Delete Flash Design": "Eliminar el flash",
+ "Delete this flash design from the gallery?": "¿Eliminar este flash de la galería?",
+ "Flash design deleted": "Flash eliminado",
+ "No client": "Sin cliente",
+ "Saved, but no client has that exact name: pick the client from the list to link it": "Guardado, pero ningún cliente tiene exactamente ese nombre: elija el cliente de la lista para vincularlo",
+ "Delete Portfolio Artwork": "Eliminar el trabajo",
+ "Are you sure you want to delete this artwork photo from the client portfolio?": "¿Seguro que quiere eliminar esta foto del portafolio del cliente?",
+ "Delete Photo": "Eliminar la foto",
+ "Deleted artwork from client portfolio.": "Trabajo eliminado del portafolio del cliente.",
+ "Client Artwork Photo": "Foto del trabajo del cliente",
+ "Flash design": "Flash",
+ "Confirm Deletion": "Confirmar eliminación",
+ "Delete Staff Note": "Eliminar la nota del equipo",
+ "Are you sure you want to permanently delete this confidential staff note?": "¿Seguro que quiere eliminar de forma permanente esta nota confidencial del equipo?",
+ "Delete Note": "Eliminar la nota"
 }

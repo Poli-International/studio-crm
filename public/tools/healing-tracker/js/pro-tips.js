@@ -5,7 +5,7 @@
 
 (function() {
   // Professional Studio Advice Database
-  // Materials: ASTM F-136 titanium, BioFlex® body jewelry (PP-R; resin USP Class VI, tested to ISO 10993-6).
+  // Materials: ASTM F-136 titanium, BioFlex® body jewelry (PP-R; resin USP Class VI and Ph. Eur. 3.2.2; passed the ISO 10993 biological tests).
   const STUDIO_PRO_TIPS_DATABASE = {
     piercing: {
       acute: [

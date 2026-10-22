@@ -73,7 +73,7 @@
       get healing() { return translateKey("piercingTimeline.helix.healing", "3-6 months"); },
       get difficulty() { return translateKey("piercingTimeline.helix.difficulty", "Moderate"); },
       healingDiscRecommended: true,
-      get healingDiscBenefits() { return translateKey("piercingTimeline.helix.healingDiscBenefits", "HIGHLY RECOMMENDED: Cartilage piercings are extremely prone to irritation bumps. Healing discs prevent metal-to-skin contact that causes bumps, while antimicrobial silver ions protect against infection during the long healing process."); },
+      get healingDiscBenefits() { return translateKey("piercingTimeline.helix.healingDiscBenefits", "RECOMMENDED: Cartilage piercings are prone to irritation bumps from pressure and friction. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."); },
       stages: [
         {
           get stage() { return translateKey("piercingTimeline.helix.stages.0.stage", "Month 1-2: Initial Inflammation"); },
@@ -90,7 +90,7 @@
               translateKey("piercingTimeline.helix.stages.0.care.0", "Saline spray 2-3x daily"),
               translateKey("piercingTimeline.helix.stages.0.care.1", "AVOID sleeping on it"),
               translateKey("piercingTimeline.helix.stages.0.care.2", "No touching"),
-              translateKey("piercingTimeline.helix.stages.0.care.3", "Use Poli healing discs to prevent metal contact and irritation bumps"),
+              translateKey("piercingTimeline.helix.stages.0.care.3", "Use healing discs to reduce pressure and friction"),
               translateKey("piercingTimeline.helix.stages.0.care.4", "Downsize jewelry at 6-8 weeks")
             ];
           }
@@ -109,7 +109,7 @@
               translateKey("piercingTimeline.helix.stages.1.care.0", "Continue saline 2x daily"),
               translateKey("piercingTimeline.helix.stages.1.care.1", "If irritation bumps develop, ensure healing discs are in place"),
               translateKey("piercingTimeline.helix.stages.1.care.2", "Ensure jewelry isn't too long"),
-              translateKey("piercingTimeline.helix.stages.1.care.3", "Antimicrobial discs prevent bacterial buildup")
+              translateKey("piercingTimeline.helix.stages.1.care.3", "Clean around the jewelry and discs with sterile saline")
             ];
           }
         },
@@ -137,7 +137,7 @@
       get healing() { return translateKey("piercingTimeline.industrial.healing", "6-12 months"); },
       get difficulty() { return translateKey("piercingTimeline.industrial.difficulty", "Difficult"); },
       healingDiscRecommended: true,
-      get healingDiscBenefits() { return translateKey("piercingTimeline.industrial.healingDiscBenefits", "CRITICAL FOR SUCCESS: Industrial piercings have TWO cartilage holes healing simultaneously with constant bar pressure. Healing discs on both ends prevent irritation bumps and reduce the risk of one hole rejecting. The antimicrobial protection is essential for this long healing process."); },
+      get healingDiscBenefits() { return translateKey("piercingTimeline.industrial.healingDiscBenefits", "RECOMMENDED: Two holes heal at the same time under constant bar pressure. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."); },
       stages: [
         {
           get stage() { return translateKey("piercingTimeline.industrial.stages.0.stage", "Month 1-3: Initial Healing"); },
@@ -154,7 +154,7 @@
               translateKey("piercingTimeline.industrial.stages.0.care.0", "Saline spray 3x daily both holes"),
               translateKey("piercingTimeline.industrial.stages.0.care.1", "Never sleep on it"),
               translateKey("piercingTimeline.industrial.stages.0.care.2", "No touching bar"),
-              translateKey("piercingTimeline.industrial.stages.0.care.3", "Use healing discs on BOTH ends to prevent bumps"),
+              translateKey("piercingTimeline.industrial.stages.0.care.3", "Use healing discs on both ends from the start"),
               translateKey("piercingTimeline.industrial.stages.0.care.4", "May need longer bar initially")
             ];
           }
@@ -171,7 +171,7 @@
           get care() {
             return [
               translateKey("piercingTimeline.industrial.stages.1.care.0", "Continue saline 2x daily"),
-              translateKey("piercingTimeline.industrial.stages.1.care.1", "Healing discs prevent metal bar irritation"),
+              translateKey("piercingTimeline.industrial.stages.1.care.1", "Use healing discs to reduce pressure and friction"),
               translateKey("piercingTimeline.industrial.stages.1.care.2", "Downsize bar at 2-3 months"),
               translateKey("piercingTimeline.industrial.stages.1.care.3", "Be very patient"),
               translateKey("piercingTimeline.industrial.stages.1.care.4", "Avoid snagging hair")
@@ -201,7 +201,7 @@
       get healing() { return translateKey("piercingTimeline.daith.healing", "6-9 months"); },
       get difficulty() { return translateKey("piercingTimeline.daith.difficulty", "Difficult"); },
       healingDiscRecommended: true,
-      get healingDiscBenefits() { return translateKey("piercingTimeline.daith.healingDiscBenefits", "HIGHLY RECOMMENDED: Daith piercings are in a difficult-to-clean fold and highly prone to bumps. Healing discs with antimicrobial protection keep bacteria away from this hard-to-reach area while preventing metal irritation."); },
+      get healingDiscBenefits() { return translateKey("piercingTimeline.daith.healingDiscBenefits", "RECOMMENDED: Cartilage piercings are prone to irritation bumps from pressure and friction. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."); },
       stages: [
         {
           get stage() { return translateKey("piercingTimeline.daith.stages.0.stage", "Month 1-3: Initial Healing"); },
@@ -235,7 +235,7 @@
           get care() {
             return [
               translateKey("piercingTimeline.daith.stages.1.care.0", "Continue saline 2x daily"),
-              translateKey("piercingTimeline.daith.stages.1.care.1", "Antimicrobial discs prevent infection in this fold"),
+              translateKey("piercingTimeline.daith.stages.1.care.1", "Clean around the jewelry and discs with sterile saline"),
               translateKey("piercingTimeline.daith.stages.1.care.2", "Can resume headphones carefully after 4-5 months"),
               translateKey("piercingTimeline.daith.stages.1.care.3", "No jewelry changes until fully healed")
             ];
@@ -249,7 +249,7 @@
       get healing() { return translateKey("piercingTimeline.rook.healing", "6-12 months"); },
       get difficulty() { return translateKey("piercingTimeline.rook.difficulty", "Difficult"); },
       healingDiscRecommended: true,
-      get healingDiscBenefits() { return translateKey("piercingTimeline.rook.healingDiscBenefits", "HIGHLY RECOMMENDED: Rook piercings are notoriously prone to irritation bumps and have one of the longest healing times. Healing discs dramatically reduce bump formation and protect against infection."); },
+      get healingDiscBenefits() { return translateKey("piercingTimeline.rook.healingDiscBenefits", "RECOMMENDED: Cartilage piercings are prone to irritation bumps from pressure and friction. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."); },
       stages: [
         {
           get stage() { return translateKey("piercingTimeline.rook.stages.0.stage", "Month 1-3: Initial Healing"); },
@@ -283,7 +283,7 @@
           get care() {
             return [
               translateKey("piercingTimeline.rook.stages.1.care.0", "Be very patient"),
-              translateKey("piercingTimeline.rook.stages.1.care.1", "Healing discs prevent the bumps this piercing is famous for"),
+              translateKey("piercingTimeline.rook.stages.1.care.1", "Keep healing discs in place to reduce pressure and friction"),
               translateKey("piercingTimeline.rook.stages.1.care.2", "Continue saline 2x daily"),
               translateKey("piercingTimeline.rook.stages.1.care.3", "Downsize at 2-3 months"),
               translateKey("piercingTimeline.rook.stages.1.care.4", "Avoid irritation")
@@ -298,7 +298,7 @@
       get healing() { return translateKey("piercingTimeline.tragus.healing", "4-8 months"); },
       get difficulty() { return translateKey("piercingTimeline.tragus.difficulty", "Moderate"); },
       healingDiscRecommended: true,
-      get healingDiscBenefits() { return translateKey("piercingTimeline.tragus.healingDiscBenefits", "RECOMMENDED: Tragus piercings face constant pressure from headphones and phones. Healing discs create a protective barrier that prevents irritation from these daily activities."); },
+      get healingDiscBenefits() { return translateKey("piercingTimeline.tragus.healingDiscBenefits", "RECOMMENDED: Daily pressure from phones, headphones or glasses irritates this piercing. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."); },
       stages: [
         {
           get stage() { return translateKey("piercingTimeline.tragus.stages.0.stage", "Month 1-2: Initial Healing"); },
@@ -346,7 +346,7 @@
       get healing() { return translateKey("piercingTimeline.anti_tragus.healing", "6-12 months"); },
       get difficulty() { return translateKey("piercingTimeline.anti_tragus.difficulty", "Difficult"); },
       healingDiscRecommended: true,
-      get healingDiscBenefits() { return translateKey("piercingTimeline.anti_tragus.healingDiscBenefits", "HIGHLY RECOMMENDED: Anti-tragus piercings are extremely prone to bumps due to the anatomy and pressure. Healing discs are essential for successful healing."); },
+      get healingDiscBenefits() { return translateKey("piercingTimeline.anti_tragus.healingDiscBenefits", "RECOMMENDED: Cartilage piercings are prone to irritation bumps from pressure and friction. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."); },
       stages: [
         {
           get stage() { return translateKey("piercingTimeline.anti_tragus.stages.0.stage", "Month 1-3: Initial Healing"); },
@@ -361,7 +361,7 @@
           get care() {
             return [
               translateKey("piercingTimeline.anti_tragus.stages.0.care.0", "Saline spray 2-3x daily carefully"),
-              translateKey("piercingTimeline.anti_tragus.stages.0.care.1", "Use healing discs immediately to prevent bumps"),
+              translateKey("piercingTimeline.anti_tragus.stages.0.care.1", "Use healing discs to reduce pressure and friction"),
               translateKey("piercingTimeline.anti_tragus.stages.0.care.2", "No earbuds"),
               translateKey("piercingTimeline.anti_tragus.stages.0.care.3", "No sleeping on it"),
               translateKey("piercingTimeline.anti_tragus.stages.0.care.4", "Avoid touching")
@@ -380,7 +380,7 @@
           get care() {
             return [
               translateKey("piercingTimeline.anti_tragus.stages.1.care.0", "Very patient approach needed"),
-              translateKey("piercingTimeline.anti_tragus.stages.1.care.1", "Healing discs prevent common bump problems"),
+              translateKey("piercingTimeline.anti_tragus.stages.1.care.1", "Keep healing discs in place to reduce pressure and friction"),
               translateKey("piercingTimeline.anti_tragus.stages.1.care.2", "Continue saline 2x daily"),
               translateKey("piercingTimeline.anti_tragus.stages.1.care.3", "Downsize at 2-3 months")
             ];
@@ -410,7 +410,7 @@
             return [
               translateKey("piercingTimeline.conch.stages.0.care.0", "Saline spray 2-3x daily"),
               translateKey("piercingTimeline.conch.stages.0.care.1", "No sleeping on it"),
-              translateKey("piercingTimeline.conch.stages.0.care.2", "Use healing discs to prevent pressure irritation"),
+              translateKey("piercingTimeline.conch.stages.0.care.2", "Use healing discs to reduce pressure and friction"),
               translateKey("piercingTimeline.conch.stages.0.care.3", "Stud recommended initially"),
               translateKey("piercingTimeline.conch.stages.0.care.4", "No headphones on that ear")
             ];
@@ -442,7 +442,7 @@
       get healing() { return translateKey("piercingTimeline.snug.healing", "9-12 months"); },
       get difficulty() { return translateKey("piercingTimeline.snug.difficulty", "Very Difficult"); },
       healingDiscRecommended: true,
-      get healingDiscBenefits() { return translateKey("piercingTimeline.snug.healingDiscBenefits", "CRITICAL: Snug piercings have the highest rejection and complication rate. Healing discs are absolutely essential - they may be the difference between keeping or retiring this piercing. Prevents the notorious bumps and reduces rejection risk."); },
+      get healingDiscBenefits() { return translateKey("piercingTimeline.snug.healingDiscBenefits", "RECOMMENDED: Cartilage piercings are prone to irritation bumps from pressure and friction. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."); },
       stages: [
         {
           get stage() { return translateKey("piercingTimeline.snug.stages.0.stage", "Month 1-4: Initial Healing"); },
@@ -458,7 +458,7 @@
             return [
               translateKey("piercingTimeline.snug.stages.0.care.0", "Saline spray 3x daily"),
               translateKey("piercingTimeline.snug.stages.0.care.1", "Never sleep on it"),
-              translateKey("piercingTimeline.snug.stages.0.care.2", "Use healing discs immediately - non-negotiable for this piercing"),
+              translateKey("piercingTimeline.snug.stages.0.care.2", "Use healing discs on both ends from the start"),
               translateKey("piercingTimeline.snug.stages.0.care.3", "Curved barbell essential"),
               translateKey("piercingTimeline.snug.stages.0.care.4", "Avoid all pressure")
             ];
@@ -476,7 +476,7 @@
           get care() {
             return [
               translateKey("piercingTimeline.snug.stages.1.care.0", "Extreme patience required"),
-              translateKey("piercingTimeline.snug.stages.1.care.1", "Healing discs are your best defense against bumps and rejection"),
+              translateKey("piercingTimeline.snug.stages.1.care.1", "Keep healing discs in place to reduce pressure and friction"),
               translateKey("piercingTimeline.snug.stages.1.care.2", "Continue saline 2x daily"),
               translateKey("piercingTimeline.snug.stages.1.care.3", "Monitor for migration"),
               translateKey("piercingTimeline.snug.stages.1.care.4", "Many people retire this piercing")
@@ -491,7 +491,7 @@
       get healing() { return translateKey("piercingTimeline.forward_helix.healing", "4-6 months"); },
       get difficulty() { return translateKey("piercingTimeline.forward_helix.difficulty", "Moderate"); },
       healingDiscRecommended: true,
-      get healingDiscBenefits() { return translateKey("piercingTimeline.forward_helix.healingDiscBenefits", "RECOMMENDED: Forward helix piercings are prone to snagging and pressure from glasses. Healing discs provide protection and prevent irritation bumps."); },
+      get healingDiscBenefits() { return translateKey("piercingTimeline.forward_helix.healingDiscBenefits", "RECOMMENDED: Daily pressure from phones, headphones or glasses irritates this piercing. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."); },
       stages: [
         {
           get stage() { return translateKey("piercingTimeline.forward_helix.stages.0.stage", "Month 1-2: Initial Healing"); },
@@ -525,7 +525,7 @@
           get care() {
             return [
               translateKey("piercingTimeline.forward_helix.stages.1.care.0", "Continue saline 2x daily"),
-              translateKey("piercingTimeline.forward_helix.stages.1.care.1", "Healing discs prevent bump formation"),
+              translateKey("piercingTimeline.forward_helix.stages.1.care.1", "Keep healing discs in place to reduce pressure and friction"),
               translateKey("piercingTimeline.forward_helix.stages.1.care.2", "Downsize at 6-8 weeks"),
               translateKey("piercingTimeline.forward_helix.stages.1.care.3", "Can change jewelry at 3-4 months")
             ];
@@ -539,7 +539,7 @@
       get healing() { return translateKey("piercingTimeline.orbital.healing", "6-9 months"); },
       get difficulty() { return translateKey("piercingTimeline.orbital.difficulty", "Difficult"); },
       healingDiscRecommended: true,
-      get healingDiscBenefits() { return translateKey("piercingTimeline.orbital.healingDiscBenefits", "RECOMMENDED: Like industrial piercings, orbitals have two holes healing with constant tension. Healing discs on both sides prevent irritation and ensure both holes heal evenly."); },
+      get healingDiscBenefits() { return translateKey("piercingTimeline.orbital.healingDiscBenefits", "RECOMMENDED: Two holes heal at the same time under constant bar pressure. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."); },
       stages: [
         {
           get stage() { return translateKey("piercingTimeline.orbital.stages.0.stage", "Month 1-3: Initial Healing"); },
@@ -586,7 +586,7 @@
       get healing() { return translateKey("piercingTimeline.nostril.healing", "3-4 months"); },
       get difficulty() { return translateKey("piercingTimeline.nostril.difficulty", "Moderate"); },
       healingDiscRecommended: true,
-      get healingDiscBenefits() { return translateKey("piercingTimeline.nostril.healingDiscBenefits", "HIGHLY RECOMMENDED: Nostril piercings are extremely prone to irritation bumps (nose bumps). Healing discs prevent the metal stud backing from irritating the inside of your nose, which is the #1 cause of bumps. Antimicrobial protection also prevents infection from nasal bacteria."); },
+      get healingDiscBenefits() { return translateKey("piercingTimeline.nostril.healingDiscBenefits", "RECOMMENDED: The stud backing inside the nose is a common source of irritation bumps. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."); },
       stages: [
         {
           get stage() { return translateKey("piercingTimeline.nostril.stages.0.stage", "Month 1: Initial Healing"); },
@@ -600,10 +600,10 @@
           get care() {
             return [
               translateKey("piercingTimeline.nostril.stages.0.care.0", "Spray saline 2-3x daily including inside nostril"),
-              translateKey("piercingTimeline.nostril.stages.0.care.1", "Use healing disc inside nose to prevent bumps"),
+              translateKey("piercingTimeline.nostril.stages.0.care.1", "Use healing discs to reduce pressure and friction"),
               translateKey("piercingTimeline.nostril.stages.0.care.2", "Blow nose gently"),
               translateKey("piercingTimeline.nostril.stages.0.care.3", "Keep makeup away"),
-              translateKey("piercingTimeline.nostril.stages.0.care.4", "Antimicrobial protection critical with nasal bacteria")
+              translateKey("piercingTimeline.nostril.stages.0.care.4", "Clean around the jewelry and discs with sterile saline")
             ];
           }
         },
@@ -1409,7 +1409,7 @@
       get healing() { return translateKey("piercingTimeline.navel.healing", "6-12 months"); },
       get difficulty() { return translateKey("piercingTimeline.navel.difficulty", "Difficult"); },
       healingDiscRecommended: true,
-      get healingDiscBenefits() { return translateKey("piercingTimeline.navel.healingDiscBenefits", "CRITICAL: Navel piercings are THE MOST notorious for irritation bumps and keloid formation. Healing discs are absolutely essential - they prevent metal contact with the skin during movement (sitting, bending) which is the primary cause of navel bumps. Many navel piercings fail without this protection."); },
+      get healingDiscBenefits() { return translateKey("piercingTimeline.navel.healingDiscBenefits", "RECOMMENDED: Waistbands and movement when sitting or bending press on navel piercings. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."); },
       stages: [
         {
           get stage() { return translateKey("piercingTimeline.navel.stages.0.stage", "Month 1-3: Initial Healing"); },
@@ -1425,7 +1425,7 @@
               translateKey("piercingTimeline.navel.stages.0.care.0", "Saline spray 2x daily"),
               translateKey("piercingTimeline.navel.stages.0.care.1", "Use healing discs on BOTH top and bottom balls immediately"),
               translateKey("piercingTimeline.navel.stages.0.care.2", "Loose clothing"),
-              translateKey("piercingTimeline.navel.stages.0.care.3", "Discs prevent bump formation from waistband pressure"),
+              translateKey("piercingTimeline.navel.stages.0.care.3", "Discs cushion waistband pressure"),
               translateKey("piercingTimeline.navel.stages.0.care.4", "Avoid core exercises"),
               translateKey("piercingTimeline.navel.stages.0.care.5", "Watch for migration")
             ];
@@ -1442,9 +1442,9 @@
           get care() {
             return [
               translateKey("piercingTimeline.navel.stages.1.care.0", "Continue saline daily"),
-              translateKey("piercingTimeline.navel.stages.1.care.1", "Keep discs in place - bumps can develop even mid-healing"),
+              translateKey("piercingTimeline.navel.stages.1.care.1", "Keep healing discs in place to reduce pressure and friction"),
               translateKey("piercingTimeline.navel.stages.1.care.2", "Can resume exercise gradually"),
-              translateKey("piercingTimeline.navel.stages.1.care.3", "Antimicrobial protection prevents sweat-related infections")
+              translateKey("piercingTimeline.navel.stages.1.care.3", "Clean around the jewelry and discs with sterile saline")
             ];
           }
         },
@@ -1460,7 +1460,7 @@
               translateKey("piercingTimeline.navel.stages.2.care.0", "Can change jewelry at 6+ months"),
               translateKey("piercingTimeline.navel.stages.2.care.1", "Continue using discs until 100% healed"),
               translateKey("piercingTimeline.navel.stages.2.care.2", "Monitor for rejection"),
-              translateKey("piercingTimeline.navel.stages.2.care.3", "If keloid-prone, use discs long-term")
+              translateKey("piercingTimeline.navel.stages.2.care.3", "Keep healing discs in place to reduce pressure and friction")
             ];
           }
         }
@@ -1472,7 +1472,7 @@
       get healing() { return translateKey("piercingTimeline.nipple.healing", "6-12 months"); },
       get difficulty() { return translateKey("piercingTimeline.nipple.difficulty", "Difficult"); },
       healingDiscRecommended: true,
-      get healingDiscBenefits() { return translateKey("piercingTimeline.nipple.healingDiscBenefits", "HIGHLY RECOMMENDED: Nipple piercings are prone to metal sensitivity reactions and irritation from clothing. Healing discs eliminate metal-to-skin contact (preventing nickel reactions) and cushion against bra/clothing friction. Essential for those with sensitive skin or metal allergies."); },
+      get healingDiscBenefits() { return translateKey("piercingTimeline.nipple.healingDiscBenefits", "RECOMMENDED: Clothing friction and metal sensitivity often irritate nipple piercings. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."); },
       stages: [
         {
           get stage() { return translateKey("piercingTimeline.nipple.stages.0.stage", "Month 1-3: Initial Healing"); },
@@ -1489,7 +1489,7 @@
               translateKey("piercingTimeline.nipple.stages.0.care.0", "Saline spray 2x daily"),
               translateKey("piercingTimeline.nipple.stages.0.care.1", "Use healing discs on both ends of barbell"),
               translateKey("piercingTimeline.nipple.stages.0.care.2", "Soft supportive bra"),
-              translateKey("piercingTimeline.nipple.stages.0.care.3", "Discs prevent metal allergies and bra friction"),
+              translateKey("piercingTimeline.nipple.stages.0.care.3", "Discs reduce metal contact and bra friction"),
               translateKey("piercingTimeline.nipple.stages.0.care.4", "NO oral contact for 6+ months"),
               translateKey("piercingTimeline.nipple.stages.0.care.5", "Avoid rough clothing")
             ];
@@ -1506,10 +1506,10 @@
           get care() {
             return [
               translateKey("piercingTimeline.nipple.stages.1.care.0", "Continue daily care"),
-              translateKey("piercingTimeline.nipple.stages.1.care.1", "Healing discs especially important if any metal sensitivity"),
+              translateKey("piercingTimeline.nipple.stages.1.care.1", "Healing discs reduce metal contact with the skin"),
               translateKey("piercingTimeline.nipple.stages.1.care.2", "Downsize at 2-3 months"),
               translateKey("piercingTimeline.nipple.stages.1.care.3", "Be patient - takes long time"),
-              translateKey("piercingTimeline.nipple.stages.1.care.4", "Antimicrobial protection prevents fabric bacteria transfer")
+              translateKey("piercingTimeline.nipple.stages.1.care.4", "Clean around the jewelry and discs with sterile saline")
             ];
           }
         }
@@ -1521,7 +1521,7 @@
       get healing() { return translateKey("piercingTimeline.surface.healing", "6-12 months"); },
       get difficulty() { return translateKey("piercingTimeline.surface.difficulty", "Very Difficult"); },
       healingDiscRecommended: true,
-      get healingDiscBenefits() { return translateKey("piercingTimeline.surface.healingDiscBenefits", "ABSOLUTELY CRITICAL: Surface piercings have the highest rejection rate of ALL piercings. Healing discs are your best chance at success - they minimize metal movement against shallow tissue and reduce the friction that causes rejection. Without discs, rejection rate is 70-90%. With discs, significantly improved success."); },
+      get healingDiscBenefits() { return translateKey("piercingTimeline.surface.healingDiscBenefits", "RECOMMENDED: Constant movement and friction from clothing make this placement prone to rejection. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."); },
       stages: [
         {
           get stage() { return translateKey("piercingTimeline.surface.stages.0.stage", "Month 1-3: Initial Healing"); },
@@ -1538,7 +1538,7 @@
               translateKey("piercingTimeline.surface.stages.0.care.0", "Saline spray 2-3x daily"),
               translateKey("piercingTimeline.surface.stages.0.care.1", "Surface bar only"),
               translateKey("piercingTimeline.surface.stages.0.care.2", "Use healing discs on BOTH ends immediately"),
-              translateKey("piercingTimeline.surface.stages.0.care.3", "Discs reduce micro-movement that causes rejection"),
+              translateKey("piercingTimeline.surface.stages.0.care.3", "Discs reduce pressure and micro-movement against the skin"),
               translateKey("piercingTimeline.surface.stages.0.care.4", "Avoid all pressure/movement"),
               translateKey("piercingTimeline.surface.stages.0.care.5", "Watch for migration")
             ];
@@ -1555,11 +1555,11 @@
           get care() {
             return [
               translateKey("piercingTimeline.surface.stages.1.care.0", "Continue gentle care"),
-              translateKey("piercingTimeline.surface.stages.1.care.1", "Keep healing discs - they improve long-term success"),
+              translateKey("piercingTimeline.surface.stages.1.care.1", "Keep healing discs in place to reduce pressure and friction"),
               translateKey("piercingTimeline.surface.stages.1.care.2", "Monitor closely"),
               translateKey("piercingTimeline.surface.stages.1.care.3", "Retire if rejecting"),
               translateKey("piercingTimeline.surface.stages.1.care.4", "Location affects success rate"),
-              translateKey("piercingTimeline.surface.stages.1.care.5", "Antimicrobial protection prevents infection during vulnerable healing")
+              translateKey("piercingTimeline.surface.stages.1.care.5", "Clean around the jewelry and discs with sterile saline")
             ];
           }
         }
@@ -1571,7 +1571,7 @@
       get healing() { return translateKey("piercingTimeline.dermal_anchor.healing", "3-6 months"); },
       get difficulty() { return translateKey("piercingTimeline.dermal_anchor.difficulty", "Difficult"); },
       healingDiscRecommended: true,
-      get healingDiscBenefits() { return translateKey("piercingTimeline.dermal_anchor.healingDiscBenefits", "HIGHLY RECOMMENDED: Dermal anchors are prone to snagging and pressure that can cause rejection. Healing discs on the visible top create a cushion that prevents snags and reduces pressure on the anchor base, significantly improving retention."); },
+      get healingDiscBenefits() { return translateKey("piercingTimeline.dermal_anchor.healingDiscBenefits", "RECOMMENDED: Constant movement and friction from clothing make this placement prone to rejection. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."); },
       stages: [
         {
           get stage() { return translateKey("piercingTimeline.dermal_anchor.stages.0.stage", "Month 1-2: Initial Healing"); },
@@ -1586,7 +1586,7 @@
           get care() {
             return [
               translateKey("piercingTimeline.dermal_anchor.stages.0.care.0", "Saline spray 2-3x daily"),
-              translateKey("piercingTimeline.dermal_anchor.stages.0.care.1", "Use healing disc on the top to prevent snagging"),
+              translateKey("piercingTimeline.dermal_anchor.stages.0.care.1", "Use a healing disc on the top to cushion snags"),
               translateKey("piercingTimeline.dermal_anchor.stages.0.care.2", "No touching/playing with top"),
               translateKey("piercingTimeline.dermal_anchor.stages.0.care.3", "Avoid pressure"),
               translateKey("piercingTimeline.dermal_anchor.stages.0.care.4", "Watch for rejection")
@@ -1608,7 +1608,7 @@
               translateKey("piercingTimeline.dermal_anchor.stages.1.care.2", "Can change tops carefully"),
               translateKey("piercingTimeline.dermal_anchor.stages.1.care.3", "Monitor for rejection"),
               translateKey("piercingTimeline.dermal_anchor.stages.1.care.4", "May last years or reject"),
-              translateKey("piercingTimeline.dermal_anchor.stages.1.care.5", "Antimicrobial protection prevents infection around anchor")
+              translateKey("piercingTimeline.dermal_anchor.stages.1.care.5", "Clean around the jewelry and discs with sterile saline")
             ];
           }
         }
@@ -1620,7 +1620,7 @@
       get healing() { return translateKey("piercingTimeline.nape.healing", "6-12 months"); },
       get difficulty() { return translateKey("piercingTimeline.nape.difficulty", "Very Difficult"); },
       healingDiscRecommended: true,
-      get healingDiscBenefits() { return translateKey("piercingTimeline.nape.healingDiscBenefits", "CRITICAL: Nape piercings have extremely high rejection rates due to constant movement and collar friction. Healing discs are essential - they cushion against neck movement and prevent clothing irritation. Without them, almost certain to reject."); },
+      get healingDiscBenefits() { return translateKey("piercingTimeline.nape.healingDiscBenefits", "RECOMMENDED: Constant movement and friction from clothing make this placement prone to rejection. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."); },
       stages: [
         {
           get stage() { return translateKey("piercingTimeline.nape.stages.0.stage", "Month 1-3: Initial Healing"); },
@@ -1636,7 +1636,7 @@
             return [
               translateKey("piercingTimeline.nape.stages.0.care.0", "Saline spray 2-3x daily"),
               translateKey("piercingTimeline.nape.stages.0.care.1", "Surface bar needed"),
-              translateKey("piercingTimeline.nape.stages.0.care.2", "Use healing discs on both ends - non-negotiable"),
+              translateKey("piercingTimeline.nape.stages.0.care.2", "Use healing discs on both ends from the start"),
               translateKey("piercingTimeline.nape.stages.0.care.3", "Discs buffer neck movement and collar pressure"),
               translateKey("piercingTimeline.nape.stages.0.care.4", "No high collars"),
               translateKey("piercingTimeline.nape.stages.0.care.5", "Avoid sleeping on back"),
@@ -1655,7 +1655,7 @@
           get care() {
             return [
               translateKey("piercingTimeline.nape.stages.1.care.0", "Continue care"),
-              translateKey("piercingTimeline.nape.stages.1.care.1", "Keep healing discs to maximize retention chance"),
+              translateKey("piercingTimeline.nape.stages.1.care.1", "Keep healing discs in place to reduce pressure and friction"),
               translateKey("piercingTimeline.nape.stages.1.care.2", "Monitor skin thickness"),
               translateKey("piercingTimeline.nape.stages.1.care.3", "Many people retire this"),
               translateKey("piercingTimeline.nape.stages.1.care.4", "Hair can irritate")
@@ -1670,7 +1670,7 @@
       get healing() { return translateKey("piercingTimeline.sternum.healing", "6-12 months"); },
       get difficulty() { return translateKey("piercingTimeline.sternum.difficulty", "Very Difficult"); },
       healingDiscRecommended: true,
-      get healingDiscBenefits() { return translateKey("piercingTimeline.sternum.healingDiscBenefits", "CRITICAL: Sternum piercings face constant chest movement (breathing, posture changes). Healing discs minimize the bar movement that causes rejection and protect from bra/clothing pressure. Essential for any chance of success."); },
+      get healingDiscBenefits() { return translateKey("piercingTimeline.sternum.healingDiscBenefits", "RECOMMENDED: Constant movement and friction from clothing make this placement prone to rejection. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."); },
       stages: [
         {
           get stage() { return translateKey("piercingTimeline.sternum.stages.0.stage", "Month 1-3: Initial Healing"); },
@@ -1703,10 +1703,10 @@
           get care() {
             return [
               translateKey("piercingTimeline.sternum.stages.1.care.0", "Continue care"),
-              translateKey("piercingTimeline.sternum.stages.1.care.1", "Healing discs improve long-term success significantly"),
+              translateKey("piercingTimeline.sternum.stages.1.care.1", "Keep healing discs in place to reduce pressure and friction"),
               translateKey("piercingTimeline.sternum.stages.1.care.2", "Watch for migration"),
               translateKey("piercingTimeline.sternum.stages.1.care.3", "Retire if skin thinning"),
-              translateKey("piercingTimeline.sternum.stages.1.care.4", "Antimicrobial protection critical for chest area")
+              translateKey("piercingTimeline.sternum.stages.1.care.4", "Clean around the jewelry and discs with sterile saline")
             ];
           }
         }
@@ -1718,7 +1718,7 @@
       get healing() { return translateKey("piercingTimeline.madison.healing", "6-12 months"); },
       get difficulty() { return translateKey("piercingTimeline.madison.difficulty", "Very Difficult"); },
       healingDiscRecommended: true,
-      get healingDiscBenefits() { return translateKey("piercingTimeline.madison.healingDiscBenefits", "ABSOLUTELY CRITICAL: Madison piercings have one of the absolute highest rejection rates due to neck swallowing/talking movement. Healing discs are mandatory - they cushion constant throat movement. Even with discs, rejection is common, but without them, almost guaranteed to fail."); },
+      get healingDiscBenefits() { return translateKey("piercingTimeline.madison.healingDiscBenefits", "RECOMMENDED: Constant movement and friction from clothing make this placement prone to rejection. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."); },
       stages: [
         {
           get stage() { return translateKey("piercingTimeline.madison.stages.0.stage", "Month 1-3: Initial Healing"); },
@@ -1734,7 +1734,7 @@
             return [
               translateKey("piercingTimeline.madison.stages.0.care.0", "Saline spray 2-3x daily"),
               translateKey("piercingTimeline.madison.stages.0.care.1", "Surface bar"),
-              translateKey("piercingTimeline.madison.stages.0.care.2", "Use healing discs on both ends - absolute requirement"),
+              translateKey("piercingTimeline.madison.stages.0.care.2", "Use healing discs on both ends from the start"),
               translateKey("piercingTimeline.madison.stages.0.care.3", "Discs buffer swallowing and talking movement"),
               translateKey("piercingTimeline.madison.stages.0.care.4", "No high necks"),
               translateKey("piercingTimeline.madison.stages.0.care.5", "Very high rejection"),
@@ -1752,10 +1752,10 @@
           get care() {
             return [
               translateKey("piercingTimeline.madison.stages.1.care.0", "Monitor closely"),
-              translateKey("piercingTimeline.madison.stages.1.care.1", "Keep healing discs for best chance"),
+              translateKey("piercingTimeline.madison.stages.1.care.1", "Keep healing discs in place to reduce pressure and friction"),
               translateKey("piercingTimeline.madison.stages.1.care.2", "Many reject this"),
               translateKey("piercingTimeline.madison.stages.1.care.3", "Retire if migrating"),
-              translateKey("piercingTimeline.madison.stages.1.care.4", "Antimicrobial protection important for neck bacteria")
+              translateKey("piercingTimeline.madison.stages.1.care.4", "Clean around the jewelry and discs with sterile saline")
             ];
           }
         }
@@ -1767,7 +1767,7 @@
       get healing() { return translateKey("piercingTimeline.prince_albert.healing", "4-6 months"); },
       get difficulty() { return translateKey("piercingTimeline.prince_albert.difficulty", "Moderate"); },
       healingDiscRecommended: true,
-      get healingDiscBenefits() { return translateKey("piercingTimeline.prince_albert.healingDiscBenefits", "RECOMMENDED: Genital piercings benefit greatly from healing discs. They eliminate metal contact with sensitive genital tissue (important for those with metal sensitivities), cushion against underwear/movement friction, and provide critical antimicrobial protection in this bacteria-rich area. Increases comfort dramatically during healing."); },
+      get healingDiscBenefits() { return translateKey("piercingTimeline.prince_albert.healingDiscBenefits", "RECOMMENDED: Underwear friction and metal contact irritate sensitive genital tissue. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."); },
       stages: [
         {
           get stage() { return translateKey("piercingTimeline.prince_albert.stages.0.stage", "Month 1-2: Initial Healing"); },
@@ -1784,7 +1784,7 @@
               translateKey("piercingTimeline.prince_albert.stages.0.care.0", "Saline soaks 2x daily"),
               translateKey("piercingTimeline.prince_albert.stages.0.care.1", "Use healing discs to protect sensitive tissue from metal"),
               translateKey("piercingTimeline.prince_albert.stages.0.care.2", "Rinse after urination"),
-              translateKey("piercingTimeline.prince_albert.stages.0.care.3", "Antimicrobial discs prevent bacterial infections from urine"),
+              translateKey("piercingTimeline.prince_albert.stages.0.care.3", "Clean around the jewelry and discs with sterile saline"),
               translateKey("piercingTimeline.prince_albert.stages.0.care.4", "No sexual contact 4-6 weeks minimum"),
               translateKey("piercingTimeline.prince_albert.stages.0.care.5", "Circular barbell or ring"),
               translateKey("piercingTimeline.prince_albert.stages.0.care.6", "Sea salt soaks")
@@ -2199,7 +2199,7 @@
       get healing() { return translateKey("piercingTimeline.vch.healing", "4-8 weeks"); },
       get difficulty() { return translateKey("piercingTimeline.vch.difficulty", "Easy to Moderate"); },
       healingDiscRecommended: true,
-      get healingDiscBenefits() { return translateKey("piercingTimeline.vch.healingDiscBenefits", "HIGHLY RECOMMENDED: VCH piercings benefit immensely from healing discs. They prevent metal balls from irritating sensitive genital tissue, cushion against underwear/pad friction, eliminate metal sensitivity issues, and provide antimicrobial protection critical for the genital area. Dramatically increases comfort and prevents irritation."); },
+      get healingDiscBenefits() { return translateKey("piercingTimeline.vch.healingDiscBenefits", "RECOMMENDED: Underwear friction and metal contact irritate sensitive genital tissue. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."); },
       stages: [
         {
           get stage() { return translateKey("piercingTimeline.vch.stages.0.stage", "Week 1-4: Initial Healing"); },
@@ -2216,7 +2216,7 @@
               translateKey("piercingTimeline.vch.stages.0.care.0", "Saline soaks 2x daily"),
               translateKey("piercingTimeline.vch.stages.0.care.1", "Use healing discs on both balls for comfort and protection"),
               translateKey("piercingTimeline.vch.stages.0.care.2", "Rinse after urination"),
-              translateKey("piercingTimeline.vch.stages.0.care.3", "Antimicrobial protection prevents bacterial infections"),
+              translateKey("piercingTimeline.vch.stages.0.care.3", "Clean around the jewelry and discs with sterile saline"),
               translateKey("piercingTimeline.vch.stages.0.care.4", "No sexual contact 4-6 weeks"),
               translateKey("piercingTimeline.vch.stages.0.care.5", "Curved barbell"),
               translateKey("piercingTimeline.vch.stages.0.care.6", "Discs cushion against underwear/pad friction"),
@@ -2235,7 +2235,7 @@
           get care() {
             return [
               translateKey("piercingTimeline.vch.stages.1.care.0", "Continue soaks"),
-              translateKey("piercingTimeline.vch.stages.1.care.1", "Healing discs eliminate metal sensitivity concerns"),
+              translateKey("piercingTimeline.vch.stages.1.care.1", "Healing discs reduce metal contact with the skin"),
               translateKey("piercingTimeline.vch.stages.1.care.2", "Can have sexual contact after 6 weeks"),
               translateKey("piercingTimeline.vch.stages.1.care.3", "Good hygiene important"),
               translateKey("piercingTimeline.vch.stages.1.care.4", "Discs provide ongoing comfort")

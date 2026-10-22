@@ -1937,5 +1937,21 @@
  "Open Southeast Asia Tattoo Ink Checker": "Tatoeage-inktchecker (Zuidoost-Azië) openen",
  "Thailand only: check ink pigments by name, CI or CAS number against the Thai list of substances prohibited in cosmetics, each with its Royal Gazette entry, and print a record. Eight languages, Thai included.": "Alleen Thailand: controleer inktpigmenten op naam, CI- of CAS-nummer tegen de Thaise lijst van in cosmetica verboden stoffen, elk met zijn nummer in de Royal Gazette, en druk een verslag af. Acht talen, Thai inbegrepen.",
  "Ink regulation checkers: USA, Europe (REACH), Southeast Asia": "Inktregelgeving-checkers: VS, Europa (REACH), Zuidoost-Azië",
- "Each checker answers for its own region only: a clear result in one says nothing about the others.": "Elke checker geldt alleen voor zijn eigen regio: een schone uitslag in de ene zegt niets over de andere."
+ "Each checker answers for its own region only: a clear result in one says nothing about the others.": "Elke checker geldt alleen voor zijn eigen regio: een schone uitslag in de ene zegt niets over de andere.",
+ "By Client": "Per klant",
+ "Delete Flash Design": "Flash-ontwerp verwijderen",
+ "Delete this flash design from the gallery?": "Dit flash-ontwerp uit de galerij verwijderen?",
+ "Flash design deleted": "Flash-ontwerp verwijderd",
+ "No client": "Zonder klant",
+ "Saved, but no client has that exact name: pick the client from the list to link it": "Opgeslagen, maar geen klant heeft precies die naam: kies de klant uit de lijst om te koppelen",
+ "Delete Portfolio Artwork": "Werk verwijderen",
+ "Are you sure you want to delete this artwork photo from the client portfolio?": "Weet u zeker dat u deze foto uit het portfolio van de klant wilt verwijderen?",
+ "Delete Photo": "Foto verwijderen",
+ "Deleted artwork from client portfolio.": "Werk verwijderd uit het portfolio van de klant.",
+ "Client Artwork Photo": "Foto van het werk van de klant",
+ "Flash design": "Flash-ontwerp",
+ "Confirm Deletion": "Verwijderen bevestigen",
+ "Delete Staff Note": "Teamnotitie verwijderen",
+ "Are you sure you want to permanently delete this confidential staff note?": "Weet u zeker dat u deze vertrouwelijke teamnotitie definitief wilt verwijderen?",
+ "Delete Note": "Notitie verwijderen"
 }

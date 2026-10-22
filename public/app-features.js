@@ -652,7 +652,7 @@ function switchClientProfileTab(tabName) {
                                 <div style="font-size:0.75rem;color:var(--ti-text2, #D1D5DB);line-height:1.3;">${escapeHtml(w.notes || '')}</div>
                             </div>
                             <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center;">
-                                <button type="button" onclick="openLightboxModal('${w.image_url}', '${escapeHtml(w.title)}', '${escapeHtml(w.notes)}')" style="padding:2px 8px;background:var(--ti-line, #374151);color:var(--ti-blue-ink, #60A5FA);border:none;border-radius:4px;font-size:0.72rem;cursor:pointer;font-weight:600;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-search></use></svg> Zoom</button>
+                                <button type="button" onclick="openClientWorkLightbox(${Number(w.id)})" style="padding:2px 8px;background:var(--ti-line, #374151);color:var(--ti-blue-ink, #60A5FA);border:none;border-radius:4px;font-size:0.72rem;cursor:pointer;font-weight:600;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-search></use></svg> Zoom</button>
                                 <button type="button" onclick="deleteClientTattooWork(${client.id}, ${w.id})" style="background:none;border:none;color:var(--ti-alert, #EF4444);font-size:0.75rem;cursor:pointer;">Delete</button>
                             </div>
                         </div>
@@ -890,11 +890,9 @@ function openDeletionConfirmModal({ title, message, itemName, itemDetails, confi
         execBtn.textContent = confirmBtnText || 'Confirm Deletion';
         currentPendingDeletionCallback = onConfirm;
         execBtn.onclick = async () => {
+            const run = currentPendingDeletionCallback; // closing clears it, so it ran nothing
             closeDeletionConfirmModal();
-            if (typeof currentPendingDeletionCallback === 'function') {
-                await currentPendingDeletionCallback();
-                currentPendingDeletionCallback = null;
-            }
+            if (typeof run === 'function') await run();
         };
     }
 
@@ -1485,6 +1483,14 @@ async function submitClientTattooWork(event, clientId) {
 window.submitClientTattooWork = submitClientTattooWork;
 
 // Delete Client Tattoo Work
+// Zoom on a profile photo: looked up by id (an inline image address broke the button on an SVG photo)
+function openClientWorkLightbox(workId) {
+    const list = (currentActiveProfileClient && currentActiveProfileClient.tattoo_work) || [];
+    const w = list.find((x) => Number(x.id) === Number(workId));
+    if (w) openLightboxModal(w.image_url, w.title, w.notes);
+}
+window.openClientWorkLightbox = openClientWorkLightbox;
+
 async function deleteClientTattooWork(clientId, workId) {
     openDeletionConfirmModal({
         title: 'Delete Portfolio Artwork',
@@ -3805,15 +3811,44 @@ function renderGalleryGrid() {
         (!artist || String(w.staff_id) === artist) &&
         (!client || String(w.client_id) === client) &&
         (!q || [w.service_type, w.notes, w.client_name, w.staff_name].join(" ").toLowerCase().includes(q)));
+    // grouped by client: one heading per client, photos without a client last
+    const grouped = v("gallery-mode-select") === "client";
+    if (grouped) items.sort((a, b) => (!a.client_name) - (!b.client_name) || (a.client_name || "").localeCompare(b.client_name || ""));
     const badge = document.getElementById("gallery-count-badge");
     if (badge) badge.textContent = items.length + " Items";
-    grid.innerHTML = items.length ? items.map((w, i) => galleryCard(w.image_url, w.service_type || "",
-        [(w.client_name || "") + " · " + (w.staff_name || ""), (w.session_date || "") + (w.session_duration_hours ? " · " + w.session_duration_hours + " h" : ""), w.notes || ""],
-        galleryBtn("Share", `data-share="${i}"`))).join("")
+    const card = (w, i) => galleryCard(w.image_url, w.service_type || "",
+        [[w.client_name, w.staff_name].filter(Boolean).join(" · "), (w.session_date || "") + (w.session_duration_hours ? " · " + w.session_duration_hours + " h" : ""), w.notes || ""],
+        galleryBtn("Share", `data-share="${i}"`) + galleryBtn("Delete", `data-del="${i}" id="gallery-del-${Number(w.id)}"`));
+    const heading = (name) => `<div style="grid-column:1/-1;font-weight:800;color:var(--ti-text, #F9FAFB);padding-top:6px;">${escapeHtml(name)}</div>`;
+    grid.innerHTML = items.length ? items.map((w, i) =>
+        (grouped && (i === 0 || items[i - 1].client_name !== w.client_name) ? heading(w.client_name || "No client") : "") + card(w, i)).join("")
         : '<div style="padding:24px;color:var(--ti-muted, #94A3B8);">No portfolio works yet. Add one with Upload Work.</div>';
     bindGalleryGrid(grid, items, (w) => (w.service_type || "") + " · " + (w.client_name || ""));
+    grid.querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", () => deleteGalleryItem("work", items[Number(b.dataset.del)])));
 }
 window.renderGalleryGrid = renderGalleryGrid;
+
+// Delete from the gallery: a work photo is also gone from its client's profile (one store)
+function deleteGalleryItem(kind, item) {
+    const work = kind === "work";
+    openDeletionConfirmModal({
+        title: work ? "Delete Portfolio Artwork" : "Delete Flash Design",
+        message: work ? "Are you sure you want to delete this artwork photo from the client portfolio?" : "Delete this flash design from the gallery?",
+        itemName: work ? (item.service_type || "Client Artwork Photo") : (item.title || "Flash design"),
+        itemDetails: work ? (item.client_name || "No client") : (item.artist_name || ""),
+        confirmBtnText: "Delete Photo",
+        onConfirm: async () => {
+            try {
+                const r = await fetch((work ? "/api/gallery/" : "/api/flash/") + Number(item.id), { method: "DELETE" });
+                if (!r.ok) throw new Error();
+            } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
+            await loadGalleryData();
+            switchGalleryTab(work ? "portfolio" : "flash");
+            showStudioToast(work ? "Deleted artwork from client portfolio." : "Flash design deleted");
+        }
+    });
+}
+window.deleteGalleryItem = deleteGalleryItem;
 
 function renderFlashGrid() {
     const grid = document.getElementById("flash-grid");
@@ -3829,9 +3864,10 @@ function renderFlashGrid() {
         [(f.category || "") + " · " + (f.artist_name || ""), "$" + Number(f.price || 0).toFixed(2) + " · $" + Number(f.deposit || 0).toFixed(2) + " deposit",
          f.status === "claimed" ? "Claimed by " + (f.claimed_by_client_name || "") : "Available"],
         galleryBtn("Share", `data-share="${i}"`) + galleryBtn("Skin Tone Preview", `data-skin="${i}"`) +
-        (f.status === "claimed" ? "" : galleryBtn("Claim", `data-claim="${i}"`)))).join("")
+        (f.status === "claimed" ? "" : galleryBtn("Claim", `data-claim="${i}"`)) + galleryBtn("Delete", `data-del="${i}" id="flash-del-${Number(f.id)}"`))).join("")
         : '<div style="padding:24px;color:var(--ti-muted, #94A3B8);">No flash designs yet.</div>';
     bindGalleryGrid(grid, items, (f) => f.title || "");
+    grid.querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", () => deleteGalleryItem("flash", items[Number(b.dataset.del)])));
     grid.querySelectorAll("[data-skin]").forEach((b) => b.addEventListener("click", () => openSkinToneVisualizerModal(items[Number(b.dataset.skin)])));
     grid.querySelectorAll("[data-claim]").forEach((b) => b.addEventListener("click", () => claimFlashDesign(items[Number(b.dataset.claim)])));
 }
@@ -3949,15 +3985,18 @@ async function submitClientWorkPhoto(event) {
         service_type: v("work-service-input"), session_date: v("work-date-input"),
         session_duration_hours: v("work-duration-input"), notes: v("work-notes-input"), image_url: galleryState.pendingWorkImage
     };
+    let saved;
     try {
         const r = await fetch("/api/gallery", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
         if (!r.ok) throw new Error();
+        saved = await r.json();
     } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
     closeUploadWorkModal();
     if (event && event.target && event.target.reset) event.target.reset();
     await loadGalleryData();
     switchGalleryTab("portfolio");
-    showStudioToast("Work added to the portfolio");
+    // a typed name the server matched to no client: the photo is on no profile, so say so
+    showStudioToast(body.client_name.trim() && !saved.client_id ? "Saved, but no client has that exact name: pick the client from the list to link it" : "Work added to the portfolio");
 }
 window.submitClientWorkPhoto = submitClientWorkPhoto;
 

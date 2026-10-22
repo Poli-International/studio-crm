@@ -67,7 +67,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
           "Saline spray 2-3x ao dia",
           "EVITAR dormir sobre ele",
           "Não tocar",
-          "Use Poli discos de cicatrização to prevent metal contact and irritation bumps",
+          "Usar discos de cicatrização para reduzir a pressão e o atrito",
           "Diminuir a joia (downsize) em 6-8 semanas"
         ]
       },
@@ -82,7 +82,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
           "Continuar com soro fisiológico 2x ao dia",
           "If irritation bumps develop, ensure discos de cicatrização are in place",
           "Ensure joia isn't too long",
-          "Os discos antimicrobianos evitam o acúmulo de bactérias"
+          "Limpar ao redor da joia e dos discos com soro fisiológico estéril"
         ]
       },
       {
@@ -98,7 +98,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "ALTAMENTE RECOMENDADO: Piercings na cartilagem são extremamente propensos a protuberâncias por irritação. Os discos de cicatrização impedem o contato metal-pele que causa protuberâncias, enquanto íons de prata antimicrobianos protegem contra infecções durante o longo processo de cicatrização. (Nota clínica: a linfa límpida ou esbranquiçada que seca formando crostas é um exsudato normal de cicatrização e não pus; além disso, embora o titânio seja seguro, não é o único material adequado: polímeros biocompatíveis de grau médico como o BioFlex, que é um copolímero aleatório PP-R monolítico e não PTFE, são seguros e não se limitam ao uso de curto prazo)."
+    "healingDiscBenefits": "RECOMENDADO: Os piercings de cartilagem tendem a formar caroços de irritação por pressão e atrito. Os discos de cicatrização ficam entre a joia e a pele para reduzir a pressão, o atrito e o contato do metal com a pele."
   },
   "industrial": {
     "name": "Industrial (scaffold)",
@@ -118,7 +118,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
           "Borrifar soro fisiológico 3x ao dia nos dois furos",
           "Nunca dormir sobre ele",
           "Não tocar na barra",
-          "Use discos de cicatrização on BOTH ends to prevent bumps",
+          "Usar discos de cicatrização nas duas extremidades desde o início",
           "No início pode ser preciso uma barra mais longa"
         ]
       },
@@ -131,7 +131,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ],
         "care": [
           "Continuar com soro fisiológico 2x ao dia",
-          "discos de cicatrização prevent metal bar irritation",
+          "Usar discos de cicatrização para reduzir a pressão e o atrito",
           "downsize bar at 2-3 months",
           "Ter muita paciência",
           "Evitar que o cabelo enganche"
@@ -149,7 +149,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "ALTAMENTE RECOMENDADO: Piercings na cartilagem são extremamente propensos a protuberâncias por irritação. Os discos de cicatrização impedem o contato metal-pele que causa protuberâncias, enquanto íons de prata antimicrobianos protegem contra infecções durante o longo processo de cicatrização. (Nota clínica: a linfa límpida ou esbranquiçada que seca formando crostas é um exsudato normal de cicatrização e não pus; além disso, embora o titânio seja seguro, não é o único material adequado: polímeros biocompatíveis de grau médico como o BioFlex, que é um copolímero aleatório PP-R monolítico e não PTFE, são seguros e não se limitam ao uso de curto prazo)."
+    "healingDiscBenefits": "RECOMENDADO: Dois furos cicatrizam ao mesmo tempo sob a pressão constante da barra. Os discos de cicatrização ficam entre a joia e a pele para reduzir a pressão, o atrito e o contato do metal com a pele."
   },
   "daith": {
     "name": "Daith",
@@ -182,13 +182,13 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ],
         "care": [
           "Continuar com soro fisiológico 2x ao dia",
-          "Os discos antimicrobianos previnem infecções nesta dobra",
+          "Limpar ao redor da joia e dos discos com soro fisiológico estéril",
           "Pode voltar a usar fones com cuidado após 4-5 meses",
           "No joia changes until fully healed"
         ]
       }
     ],
-    "healingDiscBenefits": "ALTAMENTE RECOMENDADO: Piercings na cartilagem são extremamente propensos a protuberâncias por irritação. Os discos de cicatrização impedem o contato metal-pele que causa protuberâncias, enquanto íons de prata antimicrobianos protegem contra infecções durante o longo processo de cicatrização. (Nota clínica: a linfa límpida ou esbranquiçada que seca formando crostas é um exsudato normal de cicatrização e não pus; além disso, embora o titânio seja seguro, não é o único material adequado: polímeros biocompatíveis de grau médico como o BioFlex, que é um copolímero aleatório PP-R monolítico e não PTFE, são seguros e não se limitam ao uso de curto prazo)."
+    "healingDiscBenefits": "RECOMENDADO: Os piercings de cartilagem tendem a formar caroços de irritação por pressão e atrito. Os discos de cicatrização ficam entre a joia e a pele para reduzir a pressão, o atrito e o contato do metal com a pele."
   },
   "rook": {
     "name": "Rook",
@@ -221,14 +221,14 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ],
         "care": [
           "Ter muita paciência",
-          "discos de cicatrização prevent the bumps this piercing is famous for",
+          "Manter os discos de cicatrização no lugar para reduzir a pressão e o atrito",
           "Continuar com soro fisiológico 2x ao dia",
           "downsize at 2-3 months",
           "Evitar irritação"
         ]
       }
     ],
-    "healingDiscBenefits": "ALTAMENTE RECOMENDADO: Piercings na cartilagem são extremamente propensos a protuberâncias por irritação. Os discos de cicatrização impedem o contato metal-pele que causa protuberâncias, enquanto íons de prata antimicrobianos protegem contra infecções durante o longo processo de cicatrização. (Nota clínica: a linfa límpida ou esbranquiçada que seca formando crostas é um exsudato normal de cicatrização e não pus; além disso, embora o titânio seja seguro, não é o único material adequado: polímeros biocompatíveis de grau médico como o BioFlex, que é um copolímero aleatório PP-R monolítico e não PTFE, são seguros e não se limitam ao uso de curto prazo)."
+    "healingDiscBenefits": "RECOMENDADO: Os piercings de cartilagem tendem a formar caroços de irritação por pressão e atrito. Os discos de cicatrização ficam entre a joia e a pele para reduzir a pressão, o atrito e o contato do metal com a pele."
   },
   "tragus": {
     "name": "Tragus",
@@ -267,7 +267,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "ALTAMENTE RECOMENDADO: Piercings na cartilagem são extremamente propensos a protuberâncias por irritação. Os discos de cicatrização impedem o contato metal-pele que causa protuberâncias, enquanto íons de prata antimicrobianos protegem contra infecções durante o longo processo de cicatrização. (Nota clínica: a linfa límpida ou esbranquiçada que seca formando crostas é um exsudato normal de cicatrização e não pus; além disso, embora o titânio seja seguro, não é o único material adequado: polímeros biocompatíveis de grau médico como o BioFlex, que é um copolímero aleatório PP-R monolítico e não PTFE, são seguros e não se limitam ao uso de curto prazo)."
+    "healingDiscBenefits": "RECOMENDADO: A pressão diária de telefones, fones de ouvido ou óculos irrita este piercing. Os discos de cicatrização ficam entre a joia e a pele para reduzir a pressão, o atrito e o contato do metal com a pele."
   },
   "anti_tragus": {
     "name": "Anti-tragus",
@@ -285,7 +285,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ],
         "care": [
           "Saline spray 2-3x ao dia carefully",
-          "Use discos de cicatrização immediately to prevent bumps",
+          "Usar discos de cicatrização para reduzir a pressão e o atrito",
           "Sem fones intra-auriculares",
           "Não dormir sobre ele",
           "Evitar tocar"
@@ -300,13 +300,13 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ],
         "care": [
           "É preciso muita paciência",
-          "discos de cicatrização prevent common bump problems",
+          "Manter os discos de cicatrização no lugar para reduzir a pressão e o atrito",
           "Continuar com soro fisiológico 2x ao dia",
           "downsize at 2-3 months"
         ]
       }
     ],
-    "healingDiscBenefits": "ALTAMENTE RECOMENDADO: Piercings na cartilagem são extremamente propensos a protuberâncias por irritação. Os discos de cicatrização impedem o contato metal-pele que causa protuberâncias, enquanto íons de prata antimicrobianos protegem contra infecções durante o longo processo de cicatrização. (Nota clínica: a linfa límpida ou esbranquiçada que seca formando crostas é um exsudato normal de cicatrização e não pus; além disso, embora o titânio seja seguro, não é o único material adequado: polímeros biocompatíveis de grau médico como o BioFlex, que é um copolímero aleatório PP-R monolítico e não PTFE, são seguros e não se limitam ao uso de curto prazo)."
+    "healingDiscBenefits": "RECOMENDADO: Os piercings de cartilagem tendem a formar caroços de irritação por pressão e atrito. Os discos de cicatrização ficam entre a joia e a pele para reduzir a pressão, o atrito e o contato do metal com a pele."
   },
   "conch": {
     "name": "Conch (Concha)",
@@ -325,7 +325,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         "care": [
           "Saline spray 2-3x ao dia",
           "Não dormir sobre ele",
-          "Use discos de cicatrização to prevent pressure irritation",
+          "Usar discos de cicatrização para reduzir a pressão e o atrito",
           "No início recomenda-se um brinco de pino",
           "Sem fones nessa orelha"
         ]
@@ -345,7 +345,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "ALTAMENTE RECOMENDADO: Piercings na cartilagem são extremamente propensos a protuberâncias por irritação. Os discos de cicatrização impedem o contato metal-pele que causa protuberâncias, enquanto íons de prata antimicrobianos protegem contra infecções durante o longo processo de cicatrização. (Nota clínica: a linfa límpida ou esbranquiçada que seca formando crostas é um exsudato normal de cicatrização e não pus; além disso, embora o titânio seja seguro, não é o único material adequado: polímeros biocompatíveis de grau médico como o BioFlex, que é um copolímero aleatório PP-R monolítico e não PTFE, são seguros e não se limitam ao uso de curto prazo)."
+    "healingDiscBenefits": "RECOMENDADO: Os piercings de cartilagem tendem a formar caroços de irritação por pressão e atrito. Os discos de cicatrização ficam entre a joia e a pele para reduzir a pressão, o atrito e o contato do metal com a pele."
   },
   "snug": {
     "name": "Snug",
@@ -364,7 +364,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         "care": [
           "Borrifar soro fisiológico 3x ao dia",
           "Nunca dormir sobre ele",
-          "Use discos de cicatrização immediately - non-negotiable for this piercing",
+          "Usar discos de cicatrização nas duas extremidades desde o início",
           "Barra curva indispensável",
           "Evitar qualquer pressão"
         ]
@@ -378,14 +378,14 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ],
         "care": [
           "É preciso paciência extrema",
-          "discos de cicatrização are your best defense against bumps and rejection",
+          "Manter os discos de cicatrização no lugar para reduzir a pressão e o atrito",
           "Continuar com soro fisiológico 2x ao dia",
           "Observar migração",
           "Muitas pessoas acabam tirando este piercing"
         ]
       }
     ],
-    "healingDiscBenefits": "ALTAMENTE RECOMENDADO: Piercings na cartilagem são extremamente propensos a protuberâncias por irritação. Os discos de cicatrização impedem o contato metal-pele que causa protuberâncias, enquanto íons de prata antimicrobianos protegem contra infecções durante o longo processo de cicatrização. (Nota clínica: a linfa límpida ou esbranquiçada que seca formando crostas é um exsudato normal de cicatrização e não pus; além disso, embora o titânio seja seguro, não é o único material adequado: polímeros biocompatíveis de grau médico como o BioFlex, que é um copolímero aleatório PP-R monolítico e não PTFE, são seguros e não se limitam ao uso de curto prazo)."
+    "healingDiscBenefits": "RECOMENDADO: Os piercings de cartilagem tendem a formar caroços de irritação por pressão e atrito. Os discos de cicatrização ficam entre a joia e a pele para reduzir a pressão, o atrito e o contato do metal com a pele."
   },
   "forward_helix": {
     "name": "Forward Helix (Hélix anterior)",
@@ -418,13 +418,13 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ],
         "care": [
           "Continuar com soro fisiológico 2x ao dia",
-          "discos de cicatrização prevent bump formation",
+          "Manter os discos de cicatrização no lugar para reduzir a pressão e o atrito",
           "downsize at 6-8 weeks",
           "Can change joia at 3-4 months"
         ]
       }
     ],
-    "healingDiscBenefits": "ALTAMENTE RECOMENDADO: Piercings na cartilagem são extremamente propensos a protuberâncias por irritação. Os discos de cicatrização impedem o contato metal-pele que causa protuberâncias, enquanto íons de prata antimicrobianos protegem contra infecções durante o longo processo de cicatrização. (Nota clínica: a linfa límpida ou esbranquiçada que seca formando crostas é um exsudato normal de cicatrização e não pus; além disso, embora o titânio seja seguro, não é o único material adequado: polímeros biocompatíveis de grau médico como o BioFlex, que é um copolímero aleatório PP-R monolítico e não PTFE, são seguros e não se limitam ao uso de curto prazo)."
+    "healingDiscBenefits": "RECOMENDADO: A pressão diária de telefones, fones de ouvido ou óculos irrita este piercing. Os discos de cicatrização ficam entre a joia e a pele para reduzir a pressão, o atrito e o contato do metal com a pele."
   },
   "orbital": {
     "name": "Orbital",
@@ -462,7 +462,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "ALTAMENTE RECOMENDADO: Piercings na cartilagem são extremamente propensos a protuberâncias por irritação. Os discos de cicatrização impedem o contato metal-pele que causa protuberâncias, enquanto íons de prata antimicrobianos protegem contra infecções durante o longo processo de cicatrização. (Nota clínica: a linfa límpida ou esbranquiçada que seca formando crostas é um exsudato normal de cicatrização e não pus; além disso, embora o titânio seja seguro, não é o único material adequado: polímeros biocompatíveis de grau médico como o BioFlex, que é um copolímero aleatório PP-R monolítico e não PTFE, são seguros e não se limitam ao uso de curto prazo)."
+    "healingDiscBenefits": "RECOMENDADO: Dois furos cicatrizam ao mesmo tempo sob a pressão constante da barra. Os discos de cicatrização ficam entre a joia e a pele para reduzir a pressão, o atrito e o contato do metal com a pele."
   },
   "nostril": {
     "name": "Aba nasal (Nostril)",
@@ -479,10 +479,10 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ],
         "care": [
           "Borrifar soro fisiológico 2-3x ao dia including inside nostril",
-          "Use disco de cicatrização inside nose to prevent bumps",
+          "Usar discos de cicatrização para reduzir a pressão e o atrito",
           "Assoar o nariz com delicadeza",
           "Manter a maquiagem longe",
-          "Proteção antimicrobiana essencial contra as bactérias nasais"
+          "Limpar ao redor da joia e dos discos com soro fisiológico estéril"
         ]
       },
       {
@@ -499,7 +499,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "ALTAMENTE RECOMENDADO: Piercings na cartilagem são extremamente propensos a protuberâncias por irritação. Os discos de cicatrização impedem o contato metal-pele que causa protuberâncias, enquanto íons de prata antimicrobianos protegem contra infecções durante o longo processo de cicatrização. (Nota clínica: a linfa límpida ou esbranquiçada que seca formando crostas é um exsudato normal de cicatrização e não pus; além disso, embora o titânio seja seguro, não é o único material adequado: polímeros biocompatíveis de grau médico como o BioFlex, que é um copolímero aleatório PP-R monolítico e não PTFE, são seguros e não se limitam ao uso de curto prazo)."
+    "healingDiscBenefits": "RECOMENDADO: A parte de trás do stud dentro do nariz é uma causa frequente de caroços de irritação. Os discos de cicatrização ficam entre a joia e a pele para reduzir a pressão, o atrito e o contato do metal com a pele."
   },
   "septum": {
     "name": "Septo",
@@ -1151,7 +1151,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
           "Saline spray 2x ao dia",
           "Use discos de cicatrização on BOTH top and bottom balls immediately",
           "Roupas folgadas",
-          "Os discos evitam protuberâncias causadas pela pressão do cós",
+          "Os discos amortecem a pressão do cós",
           "Evitar exercícios abdominais",
           "Observar migração"
         ]
@@ -1164,9 +1164,9 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ],
         "care": [
           "Continuar com soro fisiológico diariamente",
-          "Manter os discos: protuberâncias podem surgir mesmo no meio da cicatrização",
+          "Manter os discos de cicatrização no lugar para reduzir a pressão e o atrito",
           "Pode retomar os exercícios aos poucos",
-          "A proteção antimicrobiana previne infecções ligadas ao suor"
+          "Limpar ao redor da joia e dos discos com soro fisiológico estéril"
         ]
       },
       {
@@ -1178,11 +1178,11 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
           "Can change joia at 6+ months",
           "Continuar usando os discos até estar 100% cicatrizado",
           "Observar rejeição",
-          "Com tendência a queloide, usar os discos a longo prazo"
+          "Manter os discos de cicatrização no lugar para reduzir a pressão e o atrito"
         ]
       }
     ],
-    "healingDiscBenefits": "ALTAMENTE RECOMENDADO: Piercings na cartilagem são extremamente propensos a protuberâncias por irritação. Os discos de cicatrização impedem o contato metal-pele que causa protuberâncias, enquanto íons de prata antimicrobianos protegem contra infecções durante o longo processo de cicatrização. (Nota clínica: a linfa límpida ou esbranquiçada que seca formando crostas é um exsudato normal de cicatrização e não pus; além disso, embora o titânio seja seguro, não é o único material adequado: polímeros biocompatíveis de grau médico como o BioFlex, que é um copolímero aleatório PP-R monolítico e não PTFE, são seguros e não se limitam ao uso de curto prazo)."
+    "healingDiscBenefits": "RECOMENDADO: Cós e movimentos ao sentar ou se curvar pressionam os piercings de umbigo. Os discos de cicatrização ficam entre a joia e a pele para reduzir a pressão, o atrito e o contato do metal com a pele."
   },
   "nipple": {
     "name": "Mamilo",
@@ -1202,7 +1202,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
           "Saline spray 2x ao dia",
           "Use discos de cicatrização on both ends of barbell",
           "Sutiã macio e com sustentação",
-          "Os discos evitam alergia a metal e atrito do sutiã",
+          "Os discos reduzem o contato com o metal e o atrito do sutiã",
           "NENHUM contato oral por pelo menos 6 meses",
           "Evitar roupas ásperas"
         ]
@@ -1215,14 +1215,14 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ],
         "care": [
           "Continuar os cuidados diários",
-          "discos de cicatrização especially important if any metal sensitivity",
+          "Os discos de cicatrização reduzem o contato do metal com a pele",
           "downsize at 2-3 months",
           "Paciência: leva muito tempo",
-          "A proteção antimicrobiana evita a transferência de bactérias dos tecidos"
+          "Limpar ao redor da joia e dos discos com soro fisiológico estéril"
         ]
       }
     ],
-    "healingDiscBenefits": "ALTAMENTE RECOMENDADO: Piercings na cartilagem são extremamente propensos a protuberâncias por irritação. Os discos de cicatrização impedem o contato metal-pele que causa protuberâncias, enquanto íons de prata antimicrobianos protegem contra infecções durante o longo processo de cicatrização. (Nota clínica: a linfa límpida ou esbranquiçada que seca formando crostas é um exsudato normal de cicatrização e não pus; além disso, embora o titânio seja seguro, não é o único material adequado: polímeros biocompatíveis de grau médico como o BioFlex, que é um copolímero aleatório PP-R monolítico e não PTFE, são seguros e não se limitam ao uso de curto prazo)."
+    "healingDiscBenefits": "RECOMENDADO: O atrito das roupas e a sensibilidade ao metal costumam irritar os piercings de mamilo. Os discos de cicatrização ficam entre a joia e a pele para reduzir a pressão, o atrito e o contato do metal com a pele."
   },
   "surface": {
     "name": "Piercing de superfície",
@@ -1242,7 +1242,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
           "Saline spray 2-3x ao dia",
           "Apenas barra de superfície",
           "Use discos de cicatrização on BOTH ends immediately",
-          "Os discos reduzem os micromovimentos que causam rejeição",
+          "Os discos reduzem a pressão e os micromovimentos contra a pele",
           "Evitar qualquer pressão ou movimento",
           "Observar migração"
         ]
@@ -1255,15 +1255,15 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ],
         "care": [
           "Continuar com cuidados suaves",
-          "Keep discos de cicatrização - they improve long-term success",
+          "Manter os discos de cicatrização no lugar para reduzir a pressão e o atrito",
           "Observar de perto",
           "Retirar em caso de rejeição",
           "O local influencia a taxa de sucesso",
-          "A proteção antimicrobiana previne infecções durante a cicatrização delicada"
+          "Limpar ao redor da joia e dos discos com soro fisiológico estéril"
         ]
       }
     ],
-    "healingDiscBenefits": "ALTAMENTE RECOMENDADO: Piercings na cartilagem são extremamente propensos a protuberâncias por irritação. Os discos de cicatrização impedem o contato metal-pele que causa protuberâncias, enquanto íons de prata antimicrobianos protegem contra infecções durante o longo processo de cicatrização. (Nota clínica: a linfa límpida ou esbranquiçada que seca formando crostas é um exsudato normal de cicatrização e não pus; além disso, embora o titânio seja seguro, não é o único material adequado: polímeros biocompatíveis de grau médico como o BioFlex, que é um copolímero aleatório PP-R monolítico e não PTFE, são seguros e não se limitam ao uso de curto prazo)."
+    "healingDiscBenefits": "RECOMENDADO: O movimento constante e o atrito das roupas tornam esta posição propensa à rejeição. Os discos de cicatrização ficam entre a joia e a pele para reduzir a pressão, o atrito e o contato do metal com a pele."
   },
   "dermal_anchor": {
     "name": "Microdermal / Dermal Anchor",
@@ -1281,7 +1281,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ],
         "care": [
           "Saline spray 2-3x ao dia",
-          "Use disco de cicatrização on the top to prevent snagging",
+          "Usar um disco de cicatrização na parte de cima para amortecer enroscos",
           "Não tocar nem brincar com a ponteira",
           "Evitar pressão",
           "Observar rejeição"
@@ -1299,11 +1299,11 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
           "Pode trocar as ponteiras com cuidado",
           "Observar rejeição",
           "Pode durar anos ou ser rejeitado",
-          "A proteção antimicrobiana previne infecções ao redor da âncora"
+          "Limpar ao redor da joia e dos discos com soro fisiológico estéril"
         ]
       }
     ],
-    "healingDiscBenefits": "ALTAMENTE RECOMENDADO: Piercings na cartilagem são extremamente propensos a protuberâncias por irritação. Os discos de cicatrização impedem o contato metal-pele que causa protuberâncias, enquanto íons de prata antimicrobianos protegem contra infecções durante o longo processo de cicatrização. (Nota clínica: a linfa límpida ou esbranquiçada que seca formando crostas é um exsudato normal de cicatrização e não pus; além disso, embora o titânio seja seguro, não é o único material adequado: polímeros biocompatíveis de grau médico como o BioFlex, que é um copolímero aleatório PP-R monolítico e não PTFE, são seguros e não se limitam ao uso de curto prazo)."
+    "healingDiscBenefits": "RECOMENDADO: O movimento constante e o atrito das roupas tornam esta posição propensa à rejeição. Os discos de cicatrização ficam entre a joia e a pele para reduzir a pressão, o atrito e o contato do metal com a pele."
   },
   "nape": {
     "name": "Nuca",
@@ -1322,7 +1322,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         "care": [
           "Saline spray 2-3x ao dia",
           "É preciso barra de superfície",
-          "Use discos de cicatrização on both ends - non-negotiable",
+          "Usar discos de cicatrização nas duas extremidades desde o início",
           "Os discos amortecem os movimentos do pescoço e a pressão da gola",
           "Sem golas altas",
           "Evitar dormir de barriga para cima",
@@ -1337,14 +1337,14 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ],
         "care": [
           "Continuar os cuidados",
-          "Keep discos de cicatrização to maximize retention chance",
+          "Manter os discos de cicatrização no lugar para reduzir a pressão e o atrito",
           "Observar a espessura da pele",
           "Muitas pessoas o retiram",
           "O cabelo pode irritar"
         ]
       }
     ],
-    "healingDiscBenefits": "ALTAMENTE RECOMENDADO: Piercings na cartilagem são extremamente propensos a protuberâncias por irritação. Os discos de cicatrização impedem o contato metal-pele que causa protuberâncias, enquanto íons de prata antimicrobianos protegem contra infecções durante o longo processo de cicatrização. (Nota clínica: a linfa límpida ou esbranquiçada que seca formando crostas é um exsudato normal de cicatrização e não pus; além disso, embora o titânio seja seguro, não é o único material adequado: polímeros biocompatíveis de grau médico como o BioFlex, que é um copolímero aleatório PP-R monolítico e não PTFE, são seguros e não se limitam ao uso de curto prazo)."
+    "healingDiscBenefits": "RECOMENDADO: O movimento constante e o atrito das roupas tornam esta posição propensa à rejeição. Os discos de cicatrização ficam entre a joia e a pele para reduzir a pressão, o atrito e o contato do metal com a pele."
   },
   "sternum": {
     "name": "Esterno",
@@ -1376,14 +1376,14 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ],
         "care": [
           "Continuar os cuidados",
-          "discos de cicatrização improve long-term success significantly",
+          "Manter os discos de cicatrização no lugar para reduzir a pressão e o atrito",
           "Observar migração",
           "Retirar se a pele afinar",
-          "Proteção antimicrobiana essencial na região do peito"
+          "Limpar ao redor da joia e dos discos com soro fisiológico estéril"
         ]
       }
     ],
-    "healingDiscBenefits": "ALTAMENTE RECOMENDADO: Piercings na cartilagem são extremamente propensos a protuberâncias por irritação. Os discos de cicatrização impedem o contato metal-pele que causa protuberâncias, enquanto íons de prata antimicrobianos protegem contra infecções durante o longo processo de cicatrização. (Nota clínica: a linfa límpida ou esbranquiçada que seca formando crostas é um exsudato normal de cicatrização e não pus; além disso, embora o titânio seja seguro, não é o único material adequado: polímeros biocompatíveis de grau médico como o BioFlex, que é um copolímero aleatório PP-R monolítico e não PTFE, são seguros e não se limitam ao uso de curto prazo)."
+    "healingDiscBenefits": "RECOMENDADO: O movimento constante e o atrito das roupas tornam esta posição propensa à rejeição. Os discos de cicatrização ficam entre a joia e a pele para reduzir a pressão, o atrito e o contato do metal com a pele."
   },
   "madison": {
     "name": "Madison",
@@ -1402,7 +1402,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         "care": [
           "Saline spray 2-3x ao dia",
           "Barra de superfície",
-          "Use discos de cicatrização on both ends - absolute requirement",
+          "Usar discos de cicatrização nas duas extremidades desde o início",
           "Os discos amortecem os movimentos de engolir e falar",
           "Sem golas altas",
           "Rejeição muito frequente",
@@ -1416,14 +1416,14 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ],
         "care": [
           "Observar de perto",
-          "Keep discos de cicatrização for best chance",
+          "Manter os discos de cicatrização no lugar para reduzir a pressão e o atrito",
           "Muitos rejeitam",
           "Retirar se migrar",
-          "Proteção antimicrobiana importante contra as bactérias do pescoço"
+          "Limpar ao redor da joia e dos discos com soro fisiológico estéril"
         ]
       }
     ],
-    "healingDiscBenefits": "ALTAMENTE RECOMENDADO: Piercings na cartilagem são extremamente propensos a protuberâncias por irritação. Os discos de cicatrização impedem o contato metal-pele que causa protuberâncias, enquanto íons de prata antimicrobianos protegem contra infecções durante o longo processo de cicatrização. (Nota clínica: a linfa límpida ou esbranquiçada que seca formando crostas é um exsudato normal de cicatrização e não pus; além disso, embora o titânio seja seguro, não é o único material adequado: polímeros biocompatíveis de grau médico como o BioFlex, que é um copolímero aleatório PP-R monolítico e não PTFE, são seguros e não se limitam ao uso de curto prazo)."
+    "healingDiscBenefits": "RECOMENDADO: O movimento constante e o atrito das roupas tornam esta posição propensa à rejeição. Os discos de cicatrização ficam entre a joia e a pele para reduzir a pressão, o atrito e o contato do metal com a pele."
   },
   "prince_albert": {
     "name": "Príncipe Albert (PA)",
@@ -1443,7 +1443,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
           "Saline soaks 2x ao dia",
           "Use discos de cicatrização to protect sensitive tissue from metal",
           "Enxaguar depois de urinar",
-          "Os discos antimicrobianos previnem infecções bacterianas causadas pela urina",
+          "Limpar ao redor da joia e dos discos com soro fisiológico estéril",
           "Sem contato sexual por no mínimo 4-6 semanas",
           "Barra circular ou argola",
           "Banhos de sal marinho"
@@ -1465,7 +1465,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "ALTAMENTE RECOMENDADO: Piercings na cartilagem são extremamente propensos a protuberâncias por irritação. Os discos de cicatrização impedem o contato metal-pele que causa protuberâncias, enquanto íons de prata antimicrobianos protegem contra infecções durante o longo processo de cicatrização. (Nota clínica: a linfa límpida ou esbranquiçada que seca formando crostas é um exsudato normal de cicatrização e não pus; além disso, embora o titânio seja seguro, não é o único material adequado: polímeros biocompatíveis de grau médico como o BioFlex, que é um copolímero aleatório PP-R monolítico e não PTFE, são seguros e não se limitam ao uso de curto prazo)."
+    "healingDiscBenefits": "RECOMENDADO: O atrito da roupa íntima e o contato com o metal irritam o tecido genital sensível. Os discos de cicatrização ficam entre a joia e a pele para reduzir a pressão, o atrito e o contato do metal com a pele."
   },
   "reverse_pa": {
     "name": "Príncipe Albert invertido",
@@ -1794,7 +1794,7 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
           "Saline soaks 2x ao dia",
           "Use discos de cicatrização on both balls for comfort and protection",
           "Enxaguar depois de urinar",
-          "A proteção antimicrobiana previne infecções bacterianas",
+          "Limpar ao redor da joia e dos discos com soro fisiológico estéril",
           "Sem contato sexual por 4-6 semanas",
           "Barra curva",
           "Os discos amortecem o atrito da roupa íntima e do absorvente",
@@ -1809,14 +1809,14 @@ window.I18N_DICTIONARY.pt.piercingTimeline = {
         ],
         "care": [
           "Continuar os banhos",
-          "discos de cicatrização eliminate metal sensitivity concerns",
+          "Os discos de cicatrização reduzem o contato do metal com a pele",
           "Contato sexual possível após 6 semanas",
           "Boa higiene é importante",
           "Os discos oferecem conforto contínuo"
         ]
       }
     ],
-    "healingDiscBenefits": "ALTAMENTE RECOMENDADO: Piercings na cartilagem são extremamente propensos a protuberâncias por irritação. Os discos de cicatrização impedem o contato metal-pele que causa protuberâncias, enquanto íons de prata antimicrobianos protegem contra infecções durante o longo processo de cicatrização. (Nota clínica: a linfa límpida ou esbranquiçada que seca formando crostas é um exsudato normal de cicatrização e não pus; além disso, embora o titânio seja seguro, não é o único material adequado: polímeros biocompatíveis de grau médico como o BioFlex, que é um copolímero aleatório PP-R monolítico e não PTFE, são seguros e não se limitam ao uso de curto prazo)."
+    "healingDiscBenefits": "RECOMENDADO: O atrito da roupa íntima e o contato com o metal irritam o tecido genital sensível. Os discos de cicatrização ficam entre a joia e a pele para reduzir a pressão, o atrito e o contato do metal com a pele."
   },
   "hch": {
     "name": "HCH (Capuz do clitóris horizontal)",

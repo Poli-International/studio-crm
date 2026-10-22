@@ -37,6 +37,7 @@
   body:not([data-level]) #nav-dest-clients, body:not([data-level]) #nav-dest-calendar, body:not([data-level]) #nav-dest-inventory,
   body:not([data-level]) #nav-dest-compliance, body:not([data-level]) #nav-dest-finance, body:not([data-level]) #nav-dest-settings { display: none !important; }
 </style>
+<style>/* Thai: the English tool name under the Thai one (ruling 2026-10-21) */.tool-name-en{display:none;font-size:0.75rem;font-weight:600;opacity:0.75;margin:-4px 0 6px 0}html[lang="th"] .tool-name-en{display:block}</style>
 </head>
 <body>
 <!-- Drawn icons (Anodised Titanium): <svg class=ti-i><use href=#i-name></use></svg> -->
@@ -974,7 +975,7 @@
               <div data-family="health" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-consent></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-purple-ink, #A78BFA);">Consent Form Builder</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-purple-ink, #A78BFA);">Consent Form Builder</h3><div class="tool-name-en" lang="en" data-no-phrase>Consent Form Builder</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Customise client consent agreements, medical health screening questions & signature clauses.</p>
                 </div>
                 <button onclick="openFormBuilderModal()" style="width:100%;padding:0.5rem;background:var(--ti-purple, #7C3AED);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -986,7 +987,7 @@
               <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-ruler></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-green, #34D399);">Gauge & Metric Converter</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-green, #34D399);">Gauge & Metric Converter</h3><div class="tool-name-en" lang="en" data-no-phrase>Gauge & Metric Converter</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Instant conversion matrix between American Wire Gauge (AWG), Millimeters, Inches & French gauges.</p>
                 </div>
                 <button onclick="openGaugeConverterModal()" style="width:100%;padding:0.5rem;background:var(--ti-green-deep, #059669);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -998,7 +999,7 @@
               <div data-family="business" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-compass></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-gold, #FBBF24);">Tattoo Price Estimator</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-gold, #FBBF24);">Tattoo Price Estimator</h3><div class="tool-name-en" lang="en" data-no-phrase>Tattoo Price Estimator</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Estimate tattoo pricing based on anatomical placement, dimensions, detail density & shading style.</p>
                 </div>
                 <button onclick="openTattooPriceEstimatorModal()" style="width:100%;padding:0.5rem;background:var(--ti-bronze, #D97706);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1010,7 +1011,7 @@
               <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-machine></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-rose-ink, #F472B6);">Skin Tone Visualizer</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-rose-ink, #F472B6);">Skin Tone Visualizer</h3><div class="tool-name-en" lang="en" data-no-phrase>Skin Tone Visualizer</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Simulate tattoo ink contrast and pigment saturation against varying skin undertones and melanin levels.</p>
                 </div>
                 <button onclick="openSkinVisualizerModal()" style="width:100%;padding:0.5rem;background:var(--ti-rose, #DB2777);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1034,7 +1035,7 @@
               <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-machine></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-rose-ink, #F472B6);">Ink Coverage Calculator</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-rose-ink, #F472B6);">Ink Coverage Calculator</h3><div class="tool-name-en" lang="en" data-no-phrase>Ink Coverage Calculator</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Ink volume, saturation and needle coverage for a piece, with session timing and consumption projections.</p>
                 </div>
                 <button onclick="openCoverageCalculatorModal()" style="width:100%;padding:0.5rem;background:var(--ti-rose, #DB2777);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1046,7 +1047,7 @@
               <div data-family="health" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-health></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-gold, #FBBF24);">Medication Interaction Checker</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-gold, #FBBF24);">Medication Interaction Checker</h3><div class="tool-name-en" lang="en" data-no-phrase>Medication Interaction Checker</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Screen a client's medications, supplements, alcohol and cannabis for bleeding and healing risk before you work. 38 medications, sourced.</p>
                 </div>
                 <button onclick="openMedicationCheckerModal()" style="width:100%;padding:0.5rem;background:var(--ti-bronze, #D97706);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1058,7 +1059,7 @@
               <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-ruler></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue, #38BDF8);">Stencil Calculator</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue, #38BDF8);">Stencil Calculator</h3><div class="tool-name-en" lang="en" data-no-phrase>Stencil Calculator</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Size a stencil for real anatomy: body curvature compensation, sleeve wrap, anatomical landmarks and a linework converter. Eight languages.</p>
                 </div>
                 <button onclick="openStencilCalculatorModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue, #0284C7);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1070,7 +1071,7 @@
               <div data-family="sterile" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-flask></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-green, #34D399);">Autoclave Calculator</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-green, #34D399);">Autoclave Calculator</h3><div class="tool-name-en" lang="en" data-no-phrase>Autoclave Calculator</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Plan sterilisation cycles: exposure time, load capacity, spore-test scheduling and SAL, with printable cycle logs. Eight languages.</p>
                 </div>
                 <button onclick="openAutoclaveCalculatorModal()" style="width:100%;padding:0.5rem;background:var(--ti-green-deep, #059669);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1082,7 +1083,7 @@
               <div data-family="business" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-receipt></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-gold, #FBBF24);">Tax Deduction Tracker</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-gold, #FBBF24);">Tax Deduction Tracker</h3><div class="tool-name-en" lang="en" data-no-phrase>Tax Deduction Tracker</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Log business expenses as you spend: receipt references, mileage, your own categories, and a year summary and CSV for your accountant. Eight languages.</p>
                 </div>
                 <button onclick="openTaxDeductionTrackerModal()" style="width:100%;padding:0.5rem;background:var(--ti-bronze, #D97706);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1094,7 +1095,7 @@
               <div data-family="business" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-scale></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-purple-ink, #A78BFA);">Booth Rent vs Commission</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-purple-ink, #A78BFA);">Booth Rent vs Commission</h3><div class="tool-name-en" lang="en" data-no-phrase>Booth Rent vs Commission</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Compare booth rent and commission from both sides: break-even revenue, a realistic month, who pays for supplies, and a printable summary. Eight languages.</p>
                 </div>
                 <button onclick="openBoothRentCalculatorModal()" style="width:100%;padding:0.5rem;background:var(--ti-purple, #7C3AED);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1106,7 +1107,7 @@
               <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-machine></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-rose-ink, #F472B6);">Ink Mixer</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-rose-ink, #F472B6);">Ink Mixer</h3><div class="tool-name-en" lang="en" data-no-phrase>Ink Mixer</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Mix inks by ratio, scale a recipe to any volume, swap an out-of-stock ink with a CIEDE2000 match check, and keep batch-recorded formulas. Eight languages.</p>
                 </div>
                 <button onclick="openInkMixerModal()" style="width:100%;padding:0.5rem;background:var(--ti-rose, #DB2777);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1118,7 +1119,7 @@
               <div data-family="sterile" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-flask></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue, #2DD4BF);">Material Certification Checker</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue, #2DD4BF);">Material Certification Checker</h3><div class="tool-name-en" lang="en" data-no-phrase>Material Certification Checker</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Read what a jewellery claim or supplier certificate actually proves, generate supplier questions, and keep a dated record for your supplier file. Eight languages.</p>
                 </div>
                 <button onclick="openMaterialCertificationCheckerModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue-deep, #0D9488);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1130,7 +1131,7 @@
               <div data-family="business" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-chart></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #60A5FA);">Studio Pricing Benchmark</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #60A5FA);">Studio Pricing Benchmark</h3><div class="tool-name-en" lang="en" data-no-phrase>Studio Pricing Benchmark</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Place your prices against typical ranges in nine markets, set your hourly rate, minimums and deposit, test a rate change, and print a rate card. Eight languages.</p>
                 </div>
                 <button onclick="openStudioPricingBenchmarkModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue, #2563EB);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1142,7 +1143,7 @@
               <div data-family="health" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-bandage></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-green, #34D399);">Tattoo & Piercing Healing Tracker</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-green, #34D399);">Tattoo & Piercing Healing Tracker</h3><div class="tool-name-en" lang="en" data-no-phrase>Tattoo & Piercing Healing Tracker</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Follow a client's piercing or tattoo: current healing stage, daily log with photos, trend alerts, downsizing dates, a health report and a touch-up planner. Eight languages.</p>
                 </div>
                 <button onclick="openHealingTrackerModal()" style="width:100%;padding:0.5rem;background:var(--ti-green-deep, #059669);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1154,7 +1155,7 @@
               <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-ruler></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-purple-ink, #A78BFA);">Piercing Angle & Depth Guide</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-purple-ink, #A78BFA);">Piercing Angle & Depth Guide</h3><div class="tool-name-en" lang="en" data-no-phrase>Piercing Angle & Depth Guide</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Tilt the channel and see the result: channel length, which disc edge presses in, error modes, pair symmetry and a printable placement sheet for 25 placements. Eight languages.</p>
                 </div>
                 <button onclick="openPiercingAngleGuideModal()" style="width:100%;padding:0.5rem;background:var(--ti-purple, #7C3AED);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1166,7 +1167,7 @@
               <div data-family="business" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-trend-up></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue, #38BDF8);">Equipment ROI Calculator</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue, #38BDF8);">Equipment ROI Calculator</h3><div class="tool-name-en" lang="en" data-no-phrase>Equipment ROI Calculator</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Whether a machine pays for itself and the month it crosses over: running costs most budgets miss, time valued only if you price it, the option of not buying, and a dated case for a partner or lender. Eight languages.</p>
                 </div>
                 <button onclick="openEquipmentRoiCalculatorModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue, #0284C7);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1178,7 +1179,7 @@
               <div data-family="sterile" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-health></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-alert-ink, #F87171);">BBP Training Tracker</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-alert-ink, #F87171);">BBP Training Tracker</h3><div class="tool-name-en" lang="en" data-no-phrase>BBP Training Tracker</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Who was trained, when, by whom and where the certificate is filed, with what lapses in 30, 60 and 90 days, a printable inspection roster and CSV in and out. Eight languages.</p>
                 </div>
                 <button onclick="openBbpTrainingTrackerModal()" style="width:100%;padding:0.5rem;background:var(--ti-alert, #DC2626);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1190,7 +1191,7 @@
               <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-search></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-rose-ink, #F0ABFC);">Genital Piercing Anatomy Suitability</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-rose-ink, #F0ABFC);">Genital Piercing Anatomy Suitability</h3><div class="tool-name-en" lang="en" data-no-phrase>Genital Piercing Anatomy Suitability</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">What anatomy each of 14 genital placements needs, how it is assessed in person, the reasons a placement is refused, and a printable consultation sheet with the questions for that placement. No verdict; eight languages.</p>
                 </div>
                 <button onclick="openGenitalPiercingSuitabilityModal()" style="width:100%;padding:0.5rem;background:var(--ti-rose, #C026D3);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1202,7 +1203,7 @@
               <div data-family="sterile" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-drop></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-alert-ink, #FCA5A5);">Sharps Disposal Tracker</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-alert-ink, #FCA5A5);">Sharps Disposal Tracker</h3><div class="tool-name-en" lang="en" data-no-phrase>Sharps Disposal Tracker</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Every sharps container from the day it is opened to the day it is collected: its own reference and station, your studio open-too-long limit, why it was sealed, the consignment note, and a printable collection register. Eight languages.</p>
                 </div>
                 <button onclick="openSharpsDisposalTrackerModal()" style="width:100%;padding:0.5rem;background:var(--ti-alert, #B91C1C);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1214,7 +1215,7 @@
               <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-flask></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #818CF8);">Tattoo Ink Ingredient Decoder</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #818CF8);">Tattoo Ink Ingredient Decoder</h3><div class="tool-name-en" lang="en" data-no-phrase>Tattoo Ink Ingredient Decoder</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Paste a bottle label or an SDS Section 3 table and see what EU 2020/2081 Entry 75 says about each substance, with compliant alternatives, ink expiry, client session lots, heavy metals from a certificate of analysis, and a maker question sheet. Seven languages.</p>
                 </div>
                 <button onclick="openInkIngredientDecoderModal()" style="width:100%;padding:0.5rem;background:var(--ti-purple, #4F46E5);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1226,7 +1227,7 @@
               <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-flask></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-muted, #94A3B8);">Nickel Release Calculator</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-muted, #94A3B8);">Nickel Release Calculator</h3><div class="tool-name-en" lang="en" data-no-phrase>Nickel Release Calculator</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">What EN 1811:2023 and REACH Annex XVII Entry 27 actually measure, why release rate is not nickel content, how the materials compare, and a supplier request for the test report that settles it. Eight languages.</p>
                 </div>
                 <button onclick="openNickelReleaseCalculatorModal()" style="width:100%;padding:0.5rem;background:var(--ti-line2, #475569);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1238,7 +1239,7 @@
               <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-ruler></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-bronze-ink, #FDBA74);">Ear Stretching Timeline Planner</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-bronze-ink, #FDBA74);">Ear Stretching Timeline Planner</h3><div class="tool-name-en" lang="en" data-no-phrase>Ear Stretching Timeline Planner</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Plan a client one size at a time at the pace the tissue tolerates: both ears tracked separately, the intermediate sizes most charts skip, a readiness check before each step, and a dated log. Eight languages.</p>
                 </div>
                 <button onclick="openEarStretchingTimelineModal()" style="width:100%;padding:0.5rem;background:var(--ti-bronze, #EA580C);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1250,7 +1251,7 @@
               <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-needle></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #67E8F9);">Tattoo Needle Selector</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #67E8F9);">Tattoo Needle Selector</h3><div class="tool-name-en" lang="en" data-no-phrase>Tattoo Needle Selector</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Pick a needle configuration for the style and technique, decode a blister-pack code such as 1207RL, and compare up to three needles side by side before you open a box. Eight languages.</p>
                 </div>
                 <button onclick="openNeedleSelectorModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue, #0891B2);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1262,7 +1263,7 @@
               <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-type></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-purple-ink, #C4B5FD);">Tattoo Font Previewer</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-purple-ink, #C4B5FD);">Tattoo Font Previewer</h3><div class="tool-name-en" lang="en" data-no-phrase>Tattoo Font Previewer</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Type the client lettering and see it in 107 fonts, curved, spaced and as a thermal stencil outline, with its printed size at 203 or 300 DPI and a side-by-side A/B comparison. Eight languages.</p>
                 </div>
                 <button onclick="openTattooFontPreviewerModal()" style="width:100%;padding:0.5rem;background:var(--ti-purple, #7C3AED);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1274,7 +1275,7 @@
               <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-bandage></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-alert-ink, #FDA4AF);">Tattoo & Piercing Pain Level Guide</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-alert-ink, #FDA4AF);">Tattoo & Piercing Pain Level Guide</h3><div class="tool-name-en" lang="en" data-no-phrase>Tattoo & Piercing Pain Level Guide</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Pain ranges by placement for tattoos and piercings from studio observation, a pre-appointment readiness quiz, a paced breathing aid, a kiosk mode for the waiting area and a printable consultation sheet. Eight languages.</p>
                 </div>
                 <button onclick="openPiercingPainGuideModal()" style="width:100%;padding:0.5rem;background:var(--ti-alert, #E11D48);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1286,7 +1287,7 @@
               <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-plug></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-gold-ink, #FDE68A);">Power Supply & Machine Troubleshooter</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-gold-ink, #FDE68A);">Power Supply & Machine Troubleshooter</h3><div class="tool-name-en" lang="en" data-no-phrase>Power Supply & Machine Troubleshooter</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Work through a machine or power supply fault one question at a time: rotary, coil and wireless, an Immediate Stop or Bench Service verdict, and a printable service ticket for the technician. Eight languages.</p>
                 </div>
                 <button onclick="openPowerSupplyTroubleshooterModal()" style="width:100%;padding:0.5rem;background:var(--ti-gold, #CA8A04);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1298,7 +1299,7 @@
               <div data-family="health" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-health></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #99F6E4);">Allergy Patch Test Protocol Generator</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #99F6E4);">Allergy Patch Test Protocol Generator</h3><div class="tool-name-en" lang="en" data-no-phrase>Allergy Patch Test Protocol Generator</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">A 96-hour patch test plan for a jewellery material, an ink or a numbing cream: readings at 24, 48, 72 and 96 hours, what each reaction looks like, calendar reminders and a record to keep. Education, not a diagnosis. Eight languages.</p>
                 </div>
                 <button onclick="openAllergyPatchTestModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue-deep, #0D9488);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1310,7 +1311,7 @@
               <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-ring></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-rose-ink, #F9A8D4);">Jewelry Size Visualizer</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-rose-ink, #F9A8D4);">Jewelry Size Visualizer</h3><div class="tool-name-en" lang="en" data-no-phrase>Jewelry Size Visualizer</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Jewelry at true 1:1 scale after a bank-card calibration, curved and industrial bar lengths for fresh and healed piercings, a photo span measure, try-on, comparison, and a printable client fit card. Eight languages.</p>
                 </div>
                 <button onclick="openJewelrySizeVisualizerModal()" style="width:100%;padding:0.5rem;background:var(--ti-rose, #DB2777);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1322,7 +1323,7 @@
               <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-wrench></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-gold-ink, #FCD34D);">Machine Maintenance Logbook</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-gold-ink, #FCD34D);">Machine Maintenance Logbook</h3><div class="tool-name-en" lang="en" data-no-phrase>Machine Maintenance Logbook</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Every machine by station and artist: services, calibrations and voltage checks, the intervals that fall due, running hours, parts and cost, and a CSV and backup for your records. Eight languages.</p>
                 </div>
                 <button onclick="openMachineMaintenanceLogbookModal()" style="width:100%;padding:0.5rem;background:var(--ti-bronze, #B45309);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1334,7 +1335,7 @@
               <div data-family="sterile" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-clipboard></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-green-ink, #86EFAC);">Inspection Readiness Checklist</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-green-ink, #86EFAC);">Inspection Readiness Checklist</h3><div class="tool-name-en" lang="en" data-no-phrase>Inspection Readiness Checklist</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">What an inspector asks to see in the UK, EU, US and Australia, where each piece of evidence is kept, and an inspection binder index. Preparation, not a compliance certificate. Eight languages.</p>
                 </div>
                 <button onclick="openInspectionReadinessChecklistModal()" style="width:100%;padding:0.5rem;background:var(--ti-green, #16A34A);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1346,7 +1347,7 @@
               <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
                   <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-ruler></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #93C5FD);">Body Jewelry Gauge Converter</h3>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #93C5FD);">Body Jewelry Gauge Converter</h3><div class="tool-name-en" lang="en" data-no-phrase>Body Jewelry Gauge Converter</div>
                   <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Gauge, millimetres and inches for 22G to 25 mm, with the AWG size, where suppliers round differently, true-scale view after a card calibration, and closest gauge from a caliper reading. Eight languages.</p>
                 </div>
                 <button onclick="openGaugeConverterModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue, #1D4ED8);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1365,7 +1366,7 @@
                   <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                     <div>
                       <div style="font-size:1.5rem;margin-bottom:8px;"></div>
-                      <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #7DD3FC);">US Tattoo Ink Checker</h3>
+                      <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #7DD3FC);">US Tattoo Ink Checker</h3><div class="tool-name-en" lang="en" data-no-phrase>US Tattoo Ink Checker</div>
                       <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">USA only: check ink pigments by name, CI or CAS number against MoCRA, FDA colour additive status and California Proposition 65, with a record to print. Eight languages.</p>
                     </div>
                     <button onclick="openUsTattooInkCheckerModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue, #0284C7);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1377,7 +1378,7 @@
                   <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                     <div>
                       <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-warn></use></svg></div>
-                      <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-green-ink, #BEF264);">REACH SVHC Pigment Checker</h3>
+                      <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-green-ink, #BEF264);">REACH SVHC Pigment Checker</h3><div class="tool-name-en" lang="en" data-no-phrase>REACH SVHC Pigment Checker</div>
                       <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Paste an ink label or an SDS composition block and screen it against 51 body-art substances from the ECHA SVHC Candidate List, with a studio stock register, a watchlist and a printable record. Eight languages.</p>
                     </div>
                     <button onclick="openReachSvhcCheckerModal()" style="width:100%;padding:0.5rem;background:var(--ti-green-deep, #65A30D);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
@@ -1389,7 +1390,7 @@
                   <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                     <div>
                       <div style="font-size:1.5rem;margin-bottom:8px;"></div>
-                      <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-gold-ink, #FCD34D);">Southeast Asia Tattoo Ink Checker</h3>
+                      <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-gold-ink, #FCD34D);">Southeast Asia Tattoo Ink Checker</h3><div class="tool-name-en" lang="en" data-no-phrase>Southeast Asia Tattoo Ink Checker</div>
                       <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Thailand only: check ink pigments by name, CI or CAS number against the Thai list of substances prohibited in cosmetics, each with its Royal Gazette entry, and print a record. Eight languages, Thai included.</p>
                     </div>
                     <button onclick="openSeaTattooInkCheckerModal()" style="width:100%;padding:0.5rem;background:var(--ti-bronze, #B45309);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">

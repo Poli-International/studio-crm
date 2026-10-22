@@ -67,7 +67,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
           "Kochsalzlösung 2-3x täglich aufsprühen",
           "Schlafen darauf UNBEDINGT VERMEIDEN",
           "Nicht berühren",
-          "Poli Healing Discs verwenden, um Metallkontakt und Reizbläschen zu verhindern",
+          "Healing Discs verwenden, um Druck und Reibung zu verringern",
           "Schmuck nach 6-8 Wochen kürzen (Downsize)"
         ]
       },
@@ -82,7 +82,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
           "Kochsalzlösung weiterhin 2x täglich anwenden",
           "Bei Reizbläschen sicherstellen, dass Healing Discs korrekt sitzen",
           "Sicherstellen, dass der Stab nicht zu lang ist",
-          "Antimikrobielle Discs verhindern Bakterienansammlungen"
+          "Rund um Schmuck und Discs mit steriler Kochsalzlösung reinigen"
         ]
       },
       {
@@ -98,7 +98,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "DRINGEND EMPFOHLEN: Knorpel-Piercings neigen stark zu Reizbläschen (Piercing Bumps). Healing Discs verhindern den direkten Kontakt zwischen Metall und Haut, der Reizungen auslöst, während antimikrobielle Silberionen während der langen Abheilzeit vor Infektionen schützen."
+    "healingDiscBenefits": "EMPFOHLEN: Knorpelpiercings neigen durch Druck und Reibung zu Reizknötchen. Healing Discs liegen zwischen Schmuck und Haut und verringern Druck, Reibung und den Kontakt von Metall mit der Haut."
   },
   "industrial": {
     "name": "Industrial (Scaffold)",
@@ -118,7 +118,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
           "Beide Einstiche 3x täglich mit Kochsalzlösung einsprühen",
           "Niemals darauf schlafen",
           "Den Stab nicht berühren oder bewegen",
-          "Healing Discs an BEIDEN Enden nutzen, um Bumps zu vermeiden",
+          "Healing Discs von Anfang an an beiden Enden verwenden",
           "Anfangs eventuell längerer Stab für Schwellung nötig"
         ]
       },
@@ -131,7 +131,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ],
         "care": [
           "Kochsalzlösung weiterhin 2x täglich anwenden",
-          "Healing Discs verhindern Reizungen durch den Metallstab",
+          "Healing Discs verwenden, um Druck und Reibung zu verringern",
           "Stab nach 2-3 Monaten kürzen (Downsize)",
           "Sehr viel Geduld erforderlich",
           "Hängenbleiben von Haaren vermeiden"
@@ -149,7 +149,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "ENTSCHEIDEND FÜR DEN ERFOLG: Industrial-Piercings besitzen ZWEI Knorpelkanäle, die unter ständiger Spannung des Stabes gleichzeitig abheilen. Healing Discs an beiden Enden verhindern Reizbläschen und minimieren das Risiko einer Abstoßung. Der antimikrobielle Schutz ist für diese lange Heilungsphase essenziell."
+    "healingDiscBenefits": "EMPFOHLEN: Zwei Löcher heilen gleichzeitig unter ständigem Druck des Stabs. Healing Discs liegen zwischen Schmuck und Haut und verringern Druck, Reibung und den Kontakt von Metall mit der Haut."
   },
   "daith": {
     "name": "Daith (innerer Knorpel)",
@@ -182,13 +182,13 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ],
         "care": [
           "Kochsalzlösung weiterhin 2x täglich anwenden",
-          "Antimikrobielle Discs schützen diese Falte vor Infektionen",
+          "Rund um Schmuck und Discs mit steriler Kochsalzlösung reinigen",
           "Kopfhörer nach 4-5 Monaten vorsichtig wieder möglich",
           "Kein Schmuckwechsel bis zur vollständigen Abheilung"
         ]
       }
     ],
-    "healingDiscBenefits": "DRINGEND EMPFOHLEN: Daith-Piercings liegen in einer schwer zugänglichen Falte und neigen stark zu Reizbläschen. Healing Discs mit antimikrobiellem Schutz halten Bakterien von diesem empfindlichen Areal fern und verhindern Reizungen."
+    "healingDiscBenefits": "EMPFOHLEN: Knorpelpiercings neigen durch Druck und Reibung zu Reizknötchen. Healing Discs liegen zwischen Schmuck und Haut und verringern Druck, Reibung und den Kontakt von Metall mit der Haut."
   },
   "rook": {
     "name": "Rook (Anti-Helix-Falte)",
@@ -221,14 +221,14 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ],
         "care": [
           "Sehr viel Geduld erforderlich",
-          "Healing Discs verhindern die für dieses Piercing typischen Bumps",
+          "Healing Discs eingesetzt lassen, um Druck und Reibung zu verringern",
           "Kochsalzlösung weiterhin 2x täglich anwenden",
           "Nach 2-3 Monaten kürzen (Downsize)",
           "Reizungen konsequent vermeiden"
         ]
       }
     ],
-    "healingDiscBenefits": "DRINGEND EMPFOHLEN: Rook-Piercings neigen notorisch zu Reizbläschen und haben eine der längsten Heilungszeiten. Healing Discs verringern die Entstehung von Reizungen drastisch und schützen vor Infektionen."
+    "healingDiscBenefits": "EMPFOHLEN: Knorpelpiercings neigen durch Druck und Reibung zu Reizknötchen. Healing Discs liegen zwischen Schmuck und Haut und verringern Druck, Reibung und den Kontakt von Metall mit der Haut."
   },
   "tragus": {
     "name": "Tragus",
@@ -267,7 +267,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "EMPFOHLEN: Tragus-Piercings sind ständigem Druck durch Kopfhörer und Telefone ausgesetzt. Healing Discs bilden eine Schutzbarriere, die Reizungen im Alltag zuverlässig verhindert."
+    "healingDiscBenefits": "EMPFOHLEN: Täglicher Druck durch Telefon, Kopfhörer oder Brille reizt dieses Piercing. Healing Discs liegen zwischen Schmuck und Haut und verringern Druck, Reibung und den Kontakt von Metall mit der Haut."
   },
   "anti_tragus": {
     "name": "Anti-Tragus",
@@ -285,7 +285,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ],
         "care": [
           "Kochsalzlösung 2-3x täglich vorsichtig aufsprühen",
-          "Healing Discs sofort einsetzen, um Bumps vorzubeugen",
+          "Healing Discs verwenden, um Druck und Reibung zu verringern",
           "Keine In-Ear-Kopfhörer",
           "Nicht darauf schlafen",
           "Berühren vermeiden"
@@ -300,13 +300,13 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ],
         "care": [
           "Besonders geduldiges Vorgehen nötig",
-          "Healing Discs verhindern typische Reizbläschen",
+          "Healing Discs eingesetzt lassen, um Druck und Reibung zu verringern",
           "Kochsalzlösung weiterhin 2x täglich anwenden",
           "Nach 2-3 Monaten kürzen (Downsize)"
         ]
       }
     ],
-    "healingDiscBenefits": "DRINGEND EMPFOHLEN: Anti-Tragus-Piercings neigen anatomie- und druckbedingt extrem zu Reizbläschen. Healing Discs sind für eine erfolgreiche Abheilung unverzichtbar."
+    "healingDiscBenefits": "EMPFOHLEN: Knorpelpiercings neigen durch Druck und Reibung zu Reizknötchen. Healing Discs liegen zwischen Schmuck und Haut und verringern Druck, Reibung und den Kontakt von Metall mit der Haut."
   },
   "conch": {
     "name": "Conch (innerer oder äußerer)",
@@ -325,7 +325,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         "care": [
           "Kochsalzlösung 2-3x täglich aufsprühen",
           "Nicht darauf schlafen",
-          "Healing Discs nutzen, um Druckreizungen zu vermeiden",
+          "Healing Discs verwenden, um Druck und Reibung zu verringern",
           "Anfangs Stecker empfohlen",
           "Keine Kopfhörer auf diesem Ohr"
         ]
@@ -364,7 +364,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         "care": [
           "Kochsalzlösung 3x täglich aufsprühen",
           "Niemals darauf schlafen",
-          "Healing Discs sofort einsetzen: bei diesem Piercing unverzichtbar",
+          "Healing Discs von Anfang an an beiden Enden verwenden",
           "Curved Barbell essenziell",
           "Jeglichen Druck vermeiden"
         ]
@@ -378,14 +378,14 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ],
         "care": [
           "Äußerste Geduld erforderlich",
-          "Healing Discs sind der beste Schutz vor Bumps und Abstoßung",
+          "Healing Discs eingesetzt lassen, um Druck und Reibung zu verringern",
           "Kochsalzlösung weiterhin 2x täglich anwenden",
           "Auf Herauswachsen / Wandern achten",
           "Wird von vielen letztlich aufgegeben"
         ]
       }
     ],
-    "healingDiscBenefits": "KRITISCH: Snug-Piercings haben die höchste Abstoßungs- und Komplikationsrate. Healing Discs sind absolut unverzichtbar: Sie können über Verbleib oder Entfernung des Piercings entscheiden, verhindern gefürchtete Bumps und senken das Abstoßungsrisiko."
+    "healingDiscBenefits": "EMPFOHLEN: Knorpelpiercings neigen durch Druck und Reibung zu Reizknötchen. Healing Discs liegen zwischen Schmuck und Haut und verringern Druck, Reibung und den Kontakt von Metall mit der Haut."
   },
   "forward_helix": {
     "name": "Forward Helix",
@@ -418,13 +418,13 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ],
         "care": [
           "Kochsalzlösung weiterhin 2x täglich anwenden",
-          "Healing Discs verhindern Entstehung von Reizbläschen",
+          "Healing Discs eingesetzt lassen, um Druck und Reibung zu verringern",
           "Nach 6-8 Wochen kürzen (Downsize)",
           "Schmuckwechsel nach 3-4 Monaten möglich"
         ]
       }
     ],
-    "healingDiscBenefits": "EMPFOHLEN: Forward-Helix-Piercings neigen zum Hängenbleiben und zu Druck durch Brillenbügel. Healing Discs bieten Schutz und verhindern Reizbläschen."
+    "healingDiscBenefits": "EMPFOHLEN: Täglicher Druck durch Telefon, Kopfhörer oder Brille reizt dieses Piercing. Healing Discs liegen zwischen Schmuck und Haut und verringern Druck, Reibung und den Kontakt von Metall mit der Haut."
   },
   "orbital": {
     "name": "Orbital (verbundene Ringe)",
@@ -462,7 +462,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "EMPFOHLEN: Wie bei Industrial-Piercings heilen bei Orbitals zwei Kanäle unter konstanter Spannung ab. Healing Discs auf beiden Seiten verhindern Reizungen und sorgen für eine gleichmäßige Abheilung beider Einstiche."
+    "healingDiscBenefits": "EMPFOHLEN: Zwei Löcher heilen gleichzeitig unter ständigem Druck des Stabs. Healing Discs liegen zwischen Schmuck und Haut und verringern Druck, Reibung und den Kontakt von Metall mit der Haut."
   },
   "nostril": {
     "name": "Nostril",
@@ -479,10 +479,10 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ],
         "care": [
           "Kochsalzlösung 2-3x täglich außen und innen im Nasenloch sprühen",
-          "Healing Disc innen anwenden, um Reizbläschen zu verhindern",
+          "Healing Discs verwenden, um Druck und Reibung zu verringern",
           "Nase nur sehr vorsichtig putzen",
           "Make-up fernhalten",
-          "Antimikrobieller Schutz bei Nasenbakterien entscheidend"
+          "Rund um Schmuck und Discs mit steriler Kochsalzlösung reinigen"
         ]
       },
       {
@@ -499,7 +499,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "DRINGEND EMPFOHLEN: Nostril-Piercings neigen sehr stark zu Reizbläschen (Nose Bumps). Healing Discs verhindern, dass die Rückseite des Steckers die Naseninnenseite reizt - die häufigste Ursache für Bumps. Der antimikrobielle Schutz schützt zusätzlich vor nasalen Bakterien."
+    "healingDiscBenefits": "EMPFOHLEN: Das Ende des Steckers in der Nase ist eine häufige Ursache für Reizknötchen. Healing Discs liegen zwischen Schmuck und Haut und verringern Druck, Reibung und den Kontakt von Metall mit der Haut."
   },
   "septum": {
     "name": "Septum",
@@ -1151,7 +1151,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
           "Kochsalzlösung 2x täglich aufsprühen",
           "Healing Discs SOFORT an oberer und unterer Kugel einsetzen",
           "Lockere Kleidung tragen",
-          "Discs verhindern Reizbläschen durch Hosenbunddruck",
+          "Discs dämpfen den Druck des Hosenbunds",
           "Bauchmuskeltraining zunächst meiden",
           "Auf Wandern / Herauswachsen achten"
         ]
@@ -1164,9 +1164,9 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ],
         "care": [
           "Täglich mit Kochsalzlösung pflegen",
-          "Discs belassen: Reizbläschen können auch während der Heilung entstehen",
+          "Healing Discs eingesetzt lassen, um Druck und Reibung zu verringern",
           "Sport langsam und vorsichtig wieder aufnehmen",
-          "Antimikrobieller Schutz beugt Schweißinfektionen vor"
+          "Rund um Schmuck und Discs mit steriler Kochsalzlösung reinigen"
         ]
       },
       {
@@ -1178,11 +1178,11 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
           "Schmuckwechsel nach 6+ Monaten möglich",
           "Discs tragen, bis das Piercing zu 100 % abgeheilt ist",
           "Auf Abstoßungsanzeichen beobachten",
-          "Bei Neigung zu Bumps Discs langfristig nutzen"
+          "Healing Discs eingesetzt lassen, um Druck und Reibung zu verringern"
         ]
       }
     ],
-    "healingDiscBenefits": "KRITISCH: Bauchnabel-Piercings sind am stärksten für Reizbläschen und Wulstbildung bekannt. Healing Discs sind essenziell: Sie verhindern den Kontakt des Metalls mit der Haut bei Bewegungen (Sitzen, Bücken), die Hauptursache für Nabel-Bumps. Viele Nabel-Piercings scheitern ohne diesen Schutz."
+    "healingDiscBenefits": "EMPFOHLEN: Hosenbund und Bewegungen beim Sitzen oder Bücken drücken auf Bauchnabelpiercings. Healing Discs liegen zwischen Schmuck und Haut und verringern Druck, Reibung und den Kontakt von Metall mit der Haut."
   },
   "nipple": {
     "name": "Brustwarze",
@@ -1202,7 +1202,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
           "Kochsalzlösung 2x täglich aufsprühen",
           "Healing Discs an beiden Enden des Barbells anbringen",
           "Weicher, stützender BH",
-          "Discs verhindern Metallreaktionen und BH-Reibung",
+          "Discs verringern Metallkontakt und Reibung durch den BH",
           "Mindestens 6+ Monate KEINERLEI Mund- oder Speichelkontakt",
           "Reibende oder grobe Kleidung meiden"
         ]
@@ -1215,14 +1215,14 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ],
         "care": [
           "Tägliche Pflege fortführen",
-          "Healing Discs besonders wichtig bei Materialempfindlichkeit",
+          "Healing Discs verringern den Kontakt von Metall mit der Haut",
           "Nach 2-3 Monaten kürzen (Downsize)",
           "Geduld haben: Heilung dauert viele Monate",
-          "Antimikrobieller Schutz verhindert Bakterientransfer von Kleidung"
+          "Rund um Schmuck und Discs mit steriler Kochsalzlösung reinigen"
         ]
       }
     ],
-    "healingDiscBenefits": "DRINGEND EMPFOHLEN: Brustwarzen-Piercings neigen zu Materialempfindlichkeiten und Reibung durch Kleidung. Healing Discs verhindern direkten Metallkontakt (beugen Nickelreaktionen vor) und polstern gegen Reibung von BH und Kleidung ab. Essenziell bei empfindlicher Haut."
+    "healingDiscBenefits": "EMPFOHLEN: Reibung durch Kleidung und Metallempfindlichkeit reizen Brustwarzenpiercings oft. Healing Discs liegen zwischen Schmuck und Haut und verringern Druck, Reibung und den Kontakt von Metall mit der Haut."
   },
   "surface": {
     "name": "Surface Piercing (verschiedene Stellen)",
@@ -1242,7 +1242,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
           "Kochsalzlösung 2-3x täglich aufsprühen",
           "Ausschließlich Surface Bar verwenden",
           "Healing Discs SOFORT an BEIDEN Enden nutzen",
-          "Discs reduzieren Mikrobewegungen, die zur Abstoßung führen",
+          "Discs verringern Druck und Mikrobewegungen auf der Haut",
           "Jeglichen Druck und Bewegung vermeiden",
           "Auf Wandern / Herauswachsen achten"
         ]
@@ -1255,15 +1255,15 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ],
         "care": [
           "Sanfte Pflege fortführen",
-          "Healing Discs belassen: sie verbessern die Dauerhaftigkeit",
+          "Healing Discs eingesetzt lassen, um Druck und Reibung zu verringern",
           "Genau beobachten",
           "Bei Abstoßung rechtzeitig entfernen",
           "Körperstelle beeinflusst Erfolgsrate stark",
-          "Antimikrobieller Schutz schützt in der vulnerablen Phase vor Infektionen"
+          "Rund um Schmuck und Discs mit steriler Kochsalzlösung reinigen"
         ]
       }
     ],
-    "healingDiscBenefits": "ABSOLUT KRITISCH: Surface-Piercings haben von ALLEN Piercings die höchste Abstoßungsrate. Healing Discs bieten die beste Erfolgschance: Sie minimieren Bewegungen im flachen Gewebe und reduzieren Reibung, die zum Herauswachsen führt. Ohne Discs liegt die Abstoßungsrate bei 70-90 %. Mit Discs verbessert sich der Heilungsverlauf signifikant."
+    "healingDiscBenefits": "EMPFOHLEN: Ständige Bewegung und Reibung durch Kleidung machen diese Stelle anfällig für Abstoßung. Healing Discs liegen zwischen Schmuck und Haut und verringern Druck, Reibung und den Kontakt von Metall mit der Haut."
   },
   "dermal_anchor": {
     "name": "Dermal Anchor / Microdermal",
@@ -1281,7 +1281,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ],
         "care": [
           "Kochsalzlösung 2-3x täglich aufsprühen",
-          "Healing Disc oben nutzen, um Hängenbleiben zu verhindern",
+          "Eine Healing Disc oben aufsetzen, um Hängenbleiben abzufedern",
           "Aufsatz nicht berühren oder daran spielen",
           "Druckbelastung vermeiden",
           "Auf Abstoßung achten"
@@ -1299,11 +1299,11 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
           "Aufsätze vorsichtig wechselbar",
           "Auf Abstoßungsanzeichen beobachten",
           "Kann jahrelang halten oder herauswachsen",
-          "Antimikrobieller Schutz beugt Infektionen um die Basis vor"
+          "Rund um Schmuck und Discs mit steriler Kochsalzlösung reinigen"
         ]
       }
     ],
-    "healingDiscBenefits": "DRINGEND EMPFOHLEN: Dermal Anchors neigen zum Hängenbleiben und zu Druckbelastung, was zur Abstoßung führen kann. Healing Discs auf dem Aufsatz schaffen ein Polster, verhindern Hängenbleiben und entlasten die Basis, was den dauerhaften Halt deutlich verbessert."
+    "healingDiscBenefits": "EMPFOHLEN: Ständige Bewegung und Reibung durch Kleidung machen diese Stelle anfällig für Abstoßung. Healing Discs liegen zwischen Schmuck und Haut und verringern Druck, Reibung und den Kontakt von Metall mit der Haut."
   },
   "nape": {
     "name": "Nape (Nacken)",
@@ -1322,7 +1322,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         "care": [
           "Kochsalzlösung 2-3x täglich aufsprühen",
           "Surface Bar erforderlich",
-          "Healing Discs an beiden Enden nutzen: unverzichtbar",
+          "Healing Discs von Anfang an an beiden Enden verwenden",
           "Discs federn Nackenbewegungen und Kragendruck ab",
           "Keine hohen oder engen Kragen",
           "Schlafen auf dem Rücken meiden",
@@ -1337,14 +1337,14 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ],
         "care": [
           "Pflege fortführen",
-          "Healing Discs belassen für maximale Haltechancen",
+          "Healing Discs eingesetzt lassen, um Druck und Reibung zu verringern",
           "Hautdicke laufend kontrollieren",
           "Wird von vielen wieder entfernt",
           "Haare können Reizungen auslösen"
         ]
       }
     ],
-    "healingDiscBenefits": "KRITISCH: Nape-Piercings haben durch ständige Nackenbewegungen und Kragenreibung extrem hohe Abstoßungsraten. Healing Discs sind unverzichtbar: Sie dämpfen Nackenbewegungen ab und verhindern Reibung durch Kleidung. Ohne sie droht fast immer eine Abstoßung."
+    "healingDiscBenefits": "EMPFOHLEN: Ständige Bewegung und Reibung durch Kleidung machen diese Stelle anfällig für Abstoßung. Healing Discs liegen zwischen Schmuck und Haut und verringern Druck, Reibung und den Kontakt von Metall mit der Haut."
   },
   "sternum": {
     "name": "Sternum (Brustbein-Surface)",
@@ -1376,14 +1376,14 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ],
         "care": [
           "Pflege fortführen",
-          "Healing Discs verbessern den Langzeiterfolg deutlich",
+          "Healing Discs eingesetzt lassen, um Druck und Reibung zu verringern",
           "Auf Wandern / Herauswachsen achten",
           "Bei dünner werdender Haut rechtzeitig entfernen",
-          "Antimikrobieller Schutz im Brustbereich essenziell"
+          "Rund um Schmuck und Discs mit steriler Kochsalzlösung reinigen"
         ]
       }
     ],
-    "healingDiscBenefits": "KRITISCH: Sternum-Piercings sind ständigen Brustkorbbewegungen (Atmung, Haltungswechsel) ausgesetzt. Healing Discs minimieren Stabbewegungen, die zum Herauswachsen führen, und schützen vor Druck durch Kleidung und BH. Essenziell für jede Erfolgschance."
+    "healingDiscBenefits": "EMPFOHLEN: Ständige Bewegung und Reibung durch Kleidung machen diese Stelle anfällig für Abstoßung. Healing Discs liegen zwischen Schmuck und Haut und verringern Druck, Reibung und den Kontakt von Metall mit der Haut."
   },
   "madison": {
     "name": "Madison (Drosselgrube)",
@@ -1402,7 +1402,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         "care": [
           "Kochsalzlösung 2-3x täglich aufsprühen",
           "Surface Bar",
-          "Healing Discs an beiden Enden nutzen: absolute Pflicht",
+          "Healing Discs von Anfang an an beiden Enden verwenden",
           "Discs federn Schluck- und Sprechbewegungen ab",
           "Keine engen Halsabschlüsse / Rollkragen",
           "Sehr hohe Abstoßungsrate",
@@ -1416,14 +1416,14 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ],
         "care": [
           "Genau beobachten",
-          "Discs für beste Heilungschancen belassen",
+          "Healing Discs eingesetzt lassen, um Druck und Reibung zu verringern",
           "Wächst bei vielen heraus",
           "Bei Wandern entfernen",
-          "Antimikrobieller Schutz wichtig gegen Nackenbakterien"
+          "Rund um Schmuck und Discs mit steriler Kochsalzlösung reinigen"
         ]
       }
     ],
-    "healingDiscBenefits": "ABSOLUT KRITISCH: Madison-Piercings haben eine der höchsten Abstoßungsraten überhaupt, bedingt durch Schluck- und Sprechbewegungen. Healing Discs sind zwingend erforderlich: Sie dämpfen die permanente Bewegung am Hals. Selbst mit Discs ist eine Abstoßung möglich, ohne sie scheitert das Piercing fast sicher."
+    "healingDiscBenefits": "EMPFOHLEN: Ständige Bewegung und Reibung durch Kleidung machen diese Stelle anfällig für Abstoßung. Healing Discs liegen zwischen Schmuck und Haut und verringern Druck, Reibung und den Kontakt von Metall mit der Haut."
   },
   "prince_albert": {
     "name": "Prince Albert (PA)",
@@ -1443,7 +1443,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
           "Kochsalzbäder 2x täglich",
           "Healing Discs nutzen, um empfindliches Gewebe vor Metall zu schützen",
           "Nach dem Wasserlassen mit klarem Wasser spülen",
-          "Antimikrobielle Discs schützen vor bakteriellen Infektionen durch Urin",
+          "Rund um Schmuck und Discs mit steriler Kochsalzlösung reinigen",
           "Mindestens 4-6 Wochen keinerlei sexuelle Kontakte",
           "Circular Barbell oder Ring",
           "Meersalzbäder durchführen"
@@ -1465,7 +1465,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "EMPFOHLEN: Intimpiercings profitieren stark von Healing Discs. Sie verhindern direkten Kontakt mit empfindlichem Gewebe (wichtig bei Materialempfindlichkeiten), dämpfen Reibung durch Unterwäsche und Bewegung ab und bieten essenziellen antimikrobiellen Schutz in diesem bakterienreichen Bereich. Erhöht den Tragekomfort während der Heilung enorm."
+    "healingDiscBenefits": "EMPFOHLEN: Reibung durch Unterwäsche und Metallkontakt reizen empfindliches Genitalgewebe. Healing Discs liegen zwischen Schmuck und Haut und verringern Druck, Reibung und den Kontakt von Metall mit der Haut."
   },
   "reverse_pa": {
     "name": "Reverse Prince Albert",
@@ -1794,7 +1794,7 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
           "Kochsalzbäder 2x täglich",
           "Healing Discs an beiden Kugeln für Komfort und Schutz nutzen",
           "Nach dem Wasserlassen mit klarem Wasser spülen",
-          "Antimikrobieller Schutz beugt bakteriellen Infektionen vor",
+          "Rund um Schmuck und Discs mit steriler Kochsalzlösung reinigen",
           "4-6 Wochen keine sexuellen Kontakte",
           "Curved Barbell",
           "Discs polstern gegen Reibung von Unterwäsche und Einlagen",
@@ -1809,14 +1809,14 @@ window.I18N_DICTIONARY.de.piercingTimeline = {
         ],
         "care": [
           "Bäder fortsetzen",
-          "Healing Discs eliminieren Materialunverträglichkeiten",
+          "Healing Discs verringern den Kontakt von Metall mit der Haut",
           "Sexuelle Kontakte nach 6 Wochen vorsichtig möglich",
           "Gute Hygiene wichtig",
           "Discs bieten dauerhaften Tragekomfort"
         ]
       }
     ],
-    "healingDiscBenefits": "DRINGEND EMPFOHLEN: VCH-Piercings profitieren immens von Healing Discs. Sie verhindern, dass Kugeln das empfindliche Gewebe reizen, polstern gegen Reibung durch Unterwäsche und Einlagen ab, eliminieren Materialreizungen und bieten im Intimbereich entscheidenden antimikrobiellen Schutz. Steigert das Wohlbefinden spürbar und verhindert Reizungen."
+    "healingDiscBenefits": "EMPFOHLEN: Reibung durch Unterwäsche und Metallkontakt reizen empfindliches Genitalgewebe. Healing Discs liegen zwischen Schmuck und Haut und verringern Druck, Reibung und den Kontakt von Metall mit der Haut."
   },
   "hch": {
     "name": "Horizontal Clitoral Hood (HCH)",

@@ -748,7 +748,6 @@
     "Belgium": "Belgium",
     "Bi-Monthly (60 Days - 2 Months)": "Bimestriel (60 Jours - 2 Mois)",
     "Biennial (730 Days - 2 Years Extended)": "Biennial (730 Jours - 2 Ans Extended)",
-    "BioFlex(R) body jewelry (Monolithic PP-R random copolymer)": "Bijoux corporels BioFlex(R) (Copolymère aléatoire PP-R monobloc)",
     "Biological Indicator (BI) / Spore Testing Center": "Centre d'Indicateurs Biologiques (IB) & Tests de Spores",
     "Biological Indicator (Spore Test) Incubation Clock & Visual Verifier": "Indicateur Biologique (Test de Spores) Incubation Clock & Visual Verifier",
     "Biological Monitoring (Spore)": "Surveillance biologique (spores)",

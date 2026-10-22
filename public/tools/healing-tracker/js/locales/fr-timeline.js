@@ -67,7 +67,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
           "Saline spray 2-3 fois par jour",
           "ÉVITER absolument de dormir dessus",
           "Ne pas toucher",
-          "Use Poli disques de cicatrisation to prevent metal contact and irritation bumps",
+          "Utiliser des disques de cicatrisation pour réduire la pression et les frottements",
           "Ajuster la taille du bijou (downsize) à 6-8 semaines"
         ]
       },
@@ -82,7 +82,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
           "Poursuivre la solution saline 2 fois par jour",
           "If irritation bumps develop, ensure disques de cicatrisation are in place",
           "Ensure bijou isn't too long",
-          "Les disques antimicrobiens limitent l'accumulation de bactéries"
+          "Nettoyer autour du bijou et des disques avec du sérum physiologique stérile"
         ]
       },
       {
@@ -98,7 +98,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENT RECOMMANDÉ : Les piercings de cartilage sont particulièrement sujets aux excroissances d'irritation. Les disques de cicatrisation évitent le contact métal-peau à l'origine des excroissances, tandis que les ions d'argent antimicrobiens protègent contre les infections pendant le long processus de cicatrisation. (Note clinique : la lymphe claire ou blanchâtre qui sèche en croûtes est un exsudat normal de cicatrisation et non du pus ; de plus, bien que le titane soit sûr, il n'est pas le seul matériau approprié : des polymères biocompatibles de qualité médicale comme le BioFlex, qui est un copolymère PP-R monolithique et non du PTFE, sont sûrs et ne sont pas réservés à un usage à court terme)."
+    "healingDiscBenefits": "RECOMMANDÉ : Les piercings du cartilage sont sujets aux bosses d'irritation dues à la pression et aux frottements. Les disques de cicatrisation se placent entre le bijou et la peau pour réduire la pression, les frottements et le contact du métal avec la peau."
   },
   "industrial": {
     "name": "Industriel (Scaffold)",
@@ -118,7 +118,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
           "Vaporiser une solution saline 3 fois par jour sur les deux trous",
           "Ne jamais dormir dessus",
           "Ne pas toucher la barre",
-          "Use disques de cicatrisation on BOTH ends to prevent bumps",
+          "Poser des disques de cicatrisation aux deux extrémités dès le début",
           "Une barre plus longue peut être nécessaire au début"
         ]
       },
@@ -131,7 +131,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ],
         "care": [
           "Poursuivre la solution saline 2 fois par jour",
-          "disques de cicatrisation prevent metal bar irritation",
+          "Utiliser des disques de cicatrisation pour réduire la pression et les frottements",
           "downsize (ajustement) bar at 2-3 months",
           "Être très patient",
           "Éviter d'accrocher les cheveux"
@@ -149,7 +149,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENT RECOMMANDÉ : Les piercings de cartilage sont particulièrement sujets aux excroissances d'irritation. Les disques de cicatrisation évitent le contact métal-peau à l'origine des excroissances, tandis que les ions d'argent antimicrobiens protègent contre les infections pendant le long processus de cicatrisation. (Note clinique : la lymphe claire ou blanchâtre qui sèche en croûtes est un exsudat normal de cicatrisation et non du pus ; de plus, bien que le titane soit sûr, il n'est pas le seul matériau approprié : des polymères biocompatibles de qualité médicale comme le BioFlex, qui est un copolymère PP-R monolithique et non du PTFE, sont sûrs et ne sont pas réservés à un usage à court terme)."
+    "healingDiscBenefits": "RECOMMANDÉ : Deux trous cicatrisent en même temps sous la pression constante de la barre. Les disques de cicatrisation se placent entre le bijou et la peau pour réduire la pression, les frottements et le contact du métal avec la peau."
   },
   "daith": {
     "name": "Daith",
@@ -182,13 +182,13 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ],
         "care": [
           "Poursuivre la solution saline 2 fois par jour",
-          "Les disques antimicrobiens préviennent l'infection dans ce pli",
+          "Nettoyer autour du bijou et des disques avec du sérum physiologique stérile",
           "Reprise prudente des écouteurs après 4-5 mois",
           "No bijou changes until fully healed"
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENT RECOMMANDÉ : Les piercings de cartilage sont particulièrement sujets aux excroissances d'irritation. Les disques de cicatrisation évitent le contact métal-peau à l'origine des excroissances, tandis que les ions d'argent antimicrobiens protègent contre les infections pendant le long processus de cicatrisation. (Note clinique : la lymphe claire ou blanchâtre qui sèche en croûtes est un exsudat normal de cicatrisation et non du pus ; de plus, bien que le titane soit sûr, il n'est pas le seul matériau approprié : des polymères biocompatibles de qualité médicale comme le BioFlex, qui est un copolymère PP-R monolithique et non du PTFE, sont sûrs et ne sont pas réservés à un usage à court terme)."
+    "healingDiscBenefits": "RECOMMANDÉ : Les piercings du cartilage sont sujets aux bosses d'irritation dues à la pression et aux frottements. Les disques de cicatrisation se placent entre le bijou et la peau pour réduire la pression, les frottements et le contact du métal avec la peau."
   },
   "rook": {
     "name": "Rook",
@@ -221,14 +221,14 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ],
         "care": [
           "Être très patient",
-          "disques de cicatrisation prevent the bumps this piercing is famous for",
+          "Garder les disques de cicatrisation en place pour réduire la pression et les frottements",
           "Poursuivre la solution saline 2 fois par jour",
           "downsize (ajustement) at 2-3 months",
           "Éviter l'irritation"
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENT RECOMMANDÉ : Les piercings de cartilage sont particulièrement sujets aux excroissances d'irritation. Les disques de cicatrisation évitent le contact métal-peau à l'origine des excroissances, tandis que les ions d'argent antimicrobiens protègent contre les infections pendant le long processus de cicatrisation. (Note clinique : la lymphe claire ou blanchâtre qui sèche en croûtes est un exsudat normal de cicatrisation et non du pus ; de plus, bien que le titane soit sûr, il n'est pas le seul matériau approprié : des polymères biocompatibles de qualité médicale comme le BioFlex, qui est un copolymère PP-R monolithique et non du PTFE, sont sûrs et ne sont pas réservés à un usage à court terme)."
+    "healingDiscBenefits": "RECOMMANDÉ : Les piercings du cartilage sont sujets aux bosses d'irritation dues à la pression et aux frottements. Les disques de cicatrisation se placent entre le bijou et la peau pour réduire la pression, les frottements et le contact du métal avec la peau."
   },
   "tragus": {
     "name": "Tragus",
@@ -267,7 +267,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENT RECOMMANDÉ : Les piercings de cartilage sont particulièrement sujets aux excroissances d'irritation. Les disques de cicatrisation évitent le contact métal-peau à l'origine des excroissances, tandis que les ions d'argent antimicrobiens protègent contre les infections pendant le long processus de cicatrisation. (Note clinique : la lymphe claire ou blanchâtre qui sèche en croûtes est un exsudat normal de cicatrisation et non du pus ; de plus, bien que le titane soit sûr, il n'est pas le seul matériau approprié : des polymères biocompatibles de qualité médicale comme le BioFlex, qui est un copolymère PP-R monolithique et non du PTFE, sont sûrs et ne sont pas réservés à un usage à court terme)."
+    "healingDiscBenefits": "RECOMMANDÉ : La pression quotidienne des téléphones, écouteurs ou lunettes irrite ce piercing. Les disques de cicatrisation se placent entre le bijou et la peau pour réduire la pression, les frottements et le contact du métal avec la peau."
   },
   "anti_tragus": {
     "name": "Anti-tragus",
@@ -285,7 +285,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ],
         "care": [
           "Saline spray 2-3 fois par jour carefully",
-          "Use disques de cicatrisation immediately to prevent bumps",
+          "Utiliser des disques de cicatrisation pour réduire la pression et les frottements",
           "Pas d'écouteurs",
           "Ne pas dormir dessus",
           "Éviter de toucher"
@@ -300,13 +300,13 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ],
         "care": [
           "Beaucoup de patience nécessaire",
-          "disques de cicatrisation prevent common bump problems",
+          "Garder les disques de cicatrisation en place pour réduire la pression et les frottements",
           "Poursuivre la solution saline 2 fois par jour",
           "downsize (ajustement) at 2-3 months"
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENT RECOMMANDÉ : Les piercings de cartilage sont particulièrement sujets aux excroissances d'irritation. Les disques de cicatrisation évitent le contact métal-peau à l'origine des excroissances, tandis que les ions d'argent antimicrobiens protègent contre les infections pendant le long processus de cicatrisation. (Note clinique : la lymphe claire ou blanchâtre qui sèche en croûtes est un exsudat normal de cicatrisation et non du pus ; de plus, bien que le titane soit sûr, il n'est pas le seul matériau approprié : des polymères biocompatibles de qualité médicale comme le BioFlex, qui est un copolymère PP-R monolithique et non du PTFE, sont sûrs et ne sont pas réservés à un usage à court terme)."
+    "healingDiscBenefits": "RECOMMANDÉ : Les piercings du cartilage sont sujets aux bosses d'irritation dues à la pression et aux frottements. Les disques de cicatrisation se placent entre le bijou et la peau pour réduire la pression, les frottements et le contact du métal avec la peau."
   },
   "conch": {
     "name": "Conque (Conch)",
@@ -325,7 +325,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         "care": [
           "Saline spray 2-3 fois par jour",
           "Ne pas dormir dessus",
-          "Use disques de cicatrisation to prevent pressure irritation",
+          "Utiliser des disques de cicatrisation pour réduire la pression et les frottements",
           "Clou recommandé au début",
           "Pas de casque sur cette oreille"
         ]
@@ -345,7 +345,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENT RECOMMANDÉ : Les piercings de cartilage sont particulièrement sujets aux excroissances d'irritation. Les disques de cicatrisation évitent le contact métal-peau à l'origine des excroissances, tandis que les ions d'argent antimicrobiens protègent contre les infections pendant le long processus de cicatrisation. (Note clinique : la lymphe claire ou blanchâtre qui sèche en croûtes est un exsudat normal de cicatrisation et non du pus ; de plus, bien que le titane soit sûr, il n'est pas le seul matériau approprié : des polymères biocompatibles de qualité médicale comme le BioFlex, qui est un copolymère PP-R monolithique et non du PTFE, sont sûrs et ne sont pas réservés à un usage à court terme)."
+    "healingDiscBenefits": "RECOMMANDÉ : Les piercings du cartilage sont sujets aux bosses d'irritation dues à la pression et aux frottements. Les disques de cicatrisation se placent entre le bijou et la peau pour réduire la pression, les frottements et le contact du métal avec la peau."
   },
   "snug": {
     "name": "Snug",
@@ -364,7 +364,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         "care": [
           "Vaporiser une solution saline 3 fois par jour",
           "Ne jamais dormir dessus",
-          "Use disques de cicatrisation immediately - non-negotiable for this piercing",
+          "Poser des disques de cicatrisation aux deux extrémités dès le début",
           "Barre courbée indispensable",
           "Éviter toute pression"
         ]
@@ -378,14 +378,14 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ],
         "care": [
           "Patience extrême nécessaire",
-          "disques de cicatrisation are your best defense against bumps and rejection",
+          "Garder les disques de cicatrisation en place pour réduire la pression et les frottements",
           "Poursuivre la solution saline 2 fois par jour",
           "Surveiller la migration",
           "Beaucoup de personnes finissent par retirer ce piercing"
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENT RECOMMANDÉ : Les piercings de cartilage sont particulièrement sujets aux excroissances d'irritation. Les disques de cicatrisation évitent le contact métal-peau à l'origine des excroissances, tandis que les ions d'argent antimicrobiens protègent contre les infections pendant le long processus de cicatrisation. (Note clinique : la lymphe claire ou blanchâtre qui sèche en croûtes est un exsudat normal de cicatrisation et non du pus ; de plus, bien que le titane soit sûr, il n'est pas le seul matériau approprié : des polymères biocompatibles de qualité médicale comme le BioFlex, qui est un copolymère PP-R monolithique et non du PTFE, sont sûrs et ne sont pas réservés à un usage à court terme)."
+    "healingDiscBenefits": "RECOMMANDÉ : Les piercings du cartilage sont sujets aux bosses d'irritation dues à la pression et aux frottements. Les disques de cicatrisation se placent entre le bijou et la peau pour réduire la pression, les frottements et le contact du métal avec la peau."
   },
   "forward_helix": {
     "name": "Hélix antérieur (Forward Helix)",
@@ -418,13 +418,13 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ],
         "care": [
           "Poursuivre la solution saline 2 fois par jour",
-          "disques de cicatrisation prevent bump formation",
+          "Garder les disques de cicatrisation en place pour réduire la pression et les frottements",
           "downsize (ajustement) at 6-8 weeks",
           "Can change bijou at 3-4 months"
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENT RECOMMANDÉ : Les piercings de cartilage sont particulièrement sujets aux excroissances d'irritation. Les disques de cicatrisation évitent le contact métal-peau à l'origine des excroissances, tandis que les ions d'argent antimicrobiens protègent contre les infections pendant le long processus de cicatrisation. (Note clinique : la lymphe claire ou blanchâtre qui sèche en croûtes est un exsudat normal de cicatrisation et non du pus ; de plus, bien que le titane soit sûr, il n'est pas le seul matériau approprié : des polymères biocompatibles de qualité médicale comme le BioFlex, qui est un copolymère PP-R monolithique et non du PTFE, sont sûrs et ne sont pas réservés à un usage à court terme)."
+    "healingDiscBenefits": "RECOMMANDÉ : La pression quotidienne des téléphones, écouteurs ou lunettes irrite ce piercing. Les disques de cicatrisation se placent entre le bijou et la peau pour réduire la pression, les frottements et le contact du métal avec la peau."
   },
   "orbital": {
     "name": "Orbital",
@@ -462,7 +462,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENT RECOMMANDÉ : Les piercings de cartilage sont particulièrement sujets aux excroissances d'irritation. Les disques de cicatrisation évitent le contact métal-peau à l'origine des excroissances, tandis que les ions d'argent antimicrobiens protègent contre les infections pendant le long processus de cicatrisation. (Note clinique : la lymphe claire ou blanchâtre qui sèche en croûtes est un exsudat normal de cicatrisation et non du pus ; de plus, bien que le titane soit sûr, il n'est pas le seul matériau approprié : des polymères biocompatibles de qualité médicale comme le BioFlex, qui est un copolymère PP-R monolithique et non du PTFE, sont sûrs et ne sont pas réservés à un usage à court terme)."
+    "healingDiscBenefits": "RECOMMANDÉ : Deux trous cicatrisent en même temps sous la pression constante de la barre. Les disques de cicatrisation se placent entre le bijou et la peau pour réduire la pression, les frottements et le contact du métal avec la peau."
   },
   "nostril": {
     "name": "Narine (Nostril)",
@@ -479,10 +479,10 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ],
         "care": [
           "Vaporiser une solution saline 2-3 fois par jour including inside nostril",
-          "Use disque de cicatrisation inside nose to prevent bumps",
+          "Utiliser des disques de cicatrisation pour réduire la pression et les frottements",
           "Se moucher doucement",
           "Tenir le maquillage à distance",
-          "Protection antimicrobienne essentielle face aux bactéries nasales"
+          "Nettoyer autour du bijou et des disques avec du sérum physiologique stérile"
         ]
       },
       {
@@ -499,7 +499,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENT RECOMMANDÉ : Les piercings de cartilage sont particulièrement sujets aux excroissances d'irritation. Les disques de cicatrisation évitent le contact métal-peau à l'origine des excroissances, tandis que les ions d'argent antimicrobiens protègent contre les infections pendant le long processus de cicatrisation. (Note clinique : la lymphe claire ou blanchâtre qui sèche en croûtes est un exsudat normal de cicatrisation et non du pus ; de plus, bien que le titane soit sûr, il n'est pas le seul matériau approprié : des polymères biocompatibles de qualité médicale comme le BioFlex, qui est un copolymère PP-R monolithique et non du PTFE, sont sûrs et ne sont pas réservés à un usage à court terme)."
+    "healingDiscBenefits": "RECOMMANDÉ : L'arrière du stud, à l'intérieur du nez, est une cause fréquente de bosses d'irritation. Les disques de cicatrisation se placent entre le bijou et la peau pour réduire la pression, les frottements et le contact du métal avec la peau."
   },
   "septum": {
     "name": "Septum",
@@ -1151,7 +1151,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
           "Saline spray 2 fois par jour",
           "Use disques de cicatrisation on BOTH top and bottom balls immediately",
           "Vêtements amples",
-          "Les disques évitent les boules dues à la pression de la ceinture",
+          "Les disques amortissent la pression de la ceinture",
           "Éviter les exercices abdominaux",
           "Surveiller la migration"
         ]
@@ -1164,9 +1164,9 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ],
         "care": [
           "Poursuivre la solution saline chaque jour",
-          "Garder les disques : des boules peuvent apparaître même en cours de cicatrisation",
+          "Garder les disques de cicatrisation en place pour réduire la pression et les frottements",
           "Reprise progressive du sport",
-          "La protection antimicrobienne prévient les infections liées à la transpiration"
+          "Nettoyer autour du bijou et des disques avec du sérum physiologique stérile"
         ]
       },
       {
@@ -1178,11 +1178,11 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
           "Can change bijou at 6+ months",
           "Continuer les disques jusqu'à cicatrisation totale",
           "Surveiller le rejet",
-          "En cas de tendance aux chéloïdes, utiliser les disques à long terme"
+          "Garder les disques de cicatrisation en place pour réduire la pression et les frottements"
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENT RECOMMANDÉ : Les piercings de cartilage sont particulièrement sujets aux excroissances d'irritation. Les disques de cicatrisation évitent le contact métal-peau à l'origine des excroissances, tandis que les ions d'argent antimicrobiens protègent contre les infections pendant le long processus de cicatrisation. (Note clinique : la lymphe claire ou blanchâtre qui sèche en croûtes est un exsudat normal de cicatrisation et non du pus ; de plus, bien que le titane soit sûr, il n'est pas le seul matériau approprié : des polymères biocompatibles de qualité médicale comme le BioFlex, qui est un copolymère PP-R monolithique et non du PTFE, sont sûrs et ne sont pas réservés à un usage à court terme)."
+    "healingDiscBenefits": "RECOMMANDÉ : Les ceintures et les mouvements en position assise ou penchée appuient sur les piercings du nombril. Les disques de cicatrisation se placent entre le bijou et la peau pour réduire la pression, les frottements et le contact du métal avec la peau."
   },
   "nipple": {
     "name": "Téton (Nipple)",
@@ -1202,7 +1202,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
           "Saline spray 2 fois par jour",
           "Use disques de cicatrisation on both ends of barbell",
           "Soutien-gorge souple et maintenant",
-          "Les disques évitent les allergies au métal et le frottement du soutien-gorge",
+          "Les disques réduisent le contact du métal et les frottements du soutien-gorge",
           "AUCUN contact buccal pendant 6 mois minimum",
           "Éviter les vêtements rugueux"
         ]
@@ -1215,14 +1215,14 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ],
         "care": [
           "Poursuivre les soins quotidiens",
-          "disques de cicatrisation especially important if any metal sensitivity",
+          "Les disques de cicatrisation réduisent le contact du métal avec la peau",
           "downsize (ajustement) at 2-3 months",
           "Patience : cela prend du temps",
-          "La protection antimicrobienne limite le transfert de bactéries depuis les tissus"
+          "Nettoyer autour du bijou et des disques avec du sérum physiologique stérile"
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENT RECOMMANDÉ : Les piercings de cartilage sont particulièrement sujets aux excroissances d'irritation. Les disques de cicatrisation évitent le contact métal-peau à l'origine des excroissances, tandis que les ions d'argent antimicrobiens protègent contre les infections pendant le long processus de cicatrisation. (Note clinique : la lymphe claire ou blanchâtre qui sèche en croûtes est un exsudat normal de cicatrisation et non du pus ; de plus, bien que le titane soit sûr, il n'est pas le seul matériau approprié : des polymères biocompatibles de qualité médicale comme le BioFlex, qui est un copolymère PP-R monolithique et non du PTFE, sont sûrs et ne sont pas réservés à un usage à court terme)."
+    "healingDiscBenefits": "RECOMMANDÉ : Les frottements des vêtements et la sensibilité au métal irritent souvent les piercings du téton. Les disques de cicatrisation se placent entre le bijou et la peau pour réduire la pression, les frottements et le contact du métal avec la peau."
   },
   "surface": {
     "name": "Barre de surface",
@@ -1242,7 +1242,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
           "Saline spray 2-3 fois par jour",
           "Barre de surface uniquement",
           "Use disques de cicatrisation on BOTH ends immediately",
-          "Les disques réduisent les micro-mouvements qui provoquent le rejet",
+          "Les disques réduisent la pression et les micro-mouvements contre la peau",
           "Éviter toute pression et tout mouvement",
           "Surveiller la migration"
         ]
@@ -1255,15 +1255,15 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ],
         "care": [
           "Continuer des soins doux",
-          "Keep disques de cicatrisation - they improve long-term success",
+          "Garder les disques de cicatrisation en place pour réduire la pression et les frottements",
           "Surveiller de près",
           "Retirer en cas de rejet",
           "L'emplacement influe sur le taux de réussite",
-          "La protection antimicrobienne prévient l'infection pendant la cicatrisation fragile"
+          "Nettoyer autour du bijou et des disques avec du sérum physiologique stérile"
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENT RECOMMANDÉ : Les piercings de cartilage sont particulièrement sujets aux excroissances d'irritation. Les disques de cicatrisation évitent le contact métal-peau à l'origine des excroissances, tandis que les ions d'argent antimicrobiens protègent contre les infections pendant le long processus de cicatrisation. (Note clinique : la lymphe claire ou blanchâtre qui sèche en croûtes est un exsudat normal de cicatrisation et non du pus ; de plus, bien que le titane soit sûr, il n'est pas le seul matériau approprié : des polymères biocompatibles de qualité médicale comme le BioFlex, qui est un copolymère PP-R monolithique et non du PTFE, sont sûrs et ne sont pas réservés à un usage à court terme)."
+    "healingDiscBenefits": "RECOMMANDÉ : Le mouvement constant et les frottements des vêtements exposent cet emplacement au rejet. Les disques de cicatrisation se placent entre le bijou et la peau pour réduire la pression, les frottements et le contact du métal avec la peau."
   },
   "dermal_anchor": {
     "name": "Microdermal / Implant dermique",
@@ -1281,7 +1281,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ],
         "care": [
           "Saline spray 2-3 fois par jour",
-          "Use disque de cicatrisation on the top to prevent snagging",
+          "Poser un disque de cicatrisation sur le dessus pour amortir les accrochages",
           "Ne pas toucher ni jouer avec l'embout",
           "Éviter la pression",
           "Surveiller le rejet"
@@ -1299,11 +1299,11 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
           "Changement d'embout possible avec précaution",
           "Surveiller le rejet",
           "Peut durer des années ou être rejeté",
-          "La protection antimicrobienne prévient l'infection autour de l'ancre"
+          "Nettoyer autour du bijou et des disques avec du sérum physiologique stérile"
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENT RECOMMANDÉ : Les piercings de cartilage sont particulièrement sujets aux excroissances d'irritation. Les disques de cicatrisation évitent le contact métal-peau à l'origine des excroissances, tandis que les ions d'argent antimicrobiens protègent contre les infections pendant le long processus de cicatrisation. (Note clinique : la lymphe claire ou blanchâtre qui sèche en croûtes est un exsudat normal de cicatrisation et non du pus ; de plus, bien que le titane soit sûr, il n'est pas le seul matériau approprié : des polymères biocompatibles de qualité médicale comme le BioFlex, qui est un copolymère PP-R monolithique et non du PTFE, sont sûrs et ne sont pas réservés à un usage à court terme)."
+    "healingDiscBenefits": "RECOMMANDÉ : Le mouvement constant et les frottements des vêtements exposent cet emplacement au rejet. Les disques de cicatrisation se placent entre le bijou et la peau pour réduire la pression, les frottements et le contact du métal avec la peau."
   },
   "nape": {
     "name": "Nuque (Nape)",
@@ -1322,7 +1322,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         "care": [
           "Saline spray 2-3 fois par jour",
           "Barre de surface nécessaire",
-          "Use disques de cicatrisation on both ends - non-negotiable",
+          "Poser des disques de cicatrisation aux deux extrémités dès le début",
           "Les disques amortissent les mouvements du cou et la pression du col",
           "Pas de cols montants",
           "Éviter de dormir sur le dos",
@@ -1337,14 +1337,14 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ],
         "care": [
           "Poursuivre les soins",
-          "Keep disques de cicatrisation to maximize retention chance",
+          "Garder les disques de cicatrisation en place pour réduire la pression et les frottements",
           "Surveiller l'épaisseur de la peau",
           "Beaucoup finissent par le retirer",
           "Les cheveux peuvent irriter"
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENT RECOMMANDÉ : Les piercings de cartilage sont particulièrement sujets aux excroissances d'irritation. Les disques de cicatrisation évitent le contact métal-peau à l'origine des excroissances, tandis que les ions d'argent antimicrobiens protègent contre les infections pendant le long processus de cicatrisation. (Note clinique : la lymphe claire ou blanchâtre qui sèche en croûtes est un exsudat normal de cicatrisation et non du pus ; de plus, bien que le titane soit sûr, il n'est pas le seul matériau approprié : des polymères biocompatibles de qualité médicale comme le BioFlex, qui est un copolymère PP-R monolithique et non du PTFE, sont sûrs et ne sont pas réservés à un usage à court terme)."
+    "healingDiscBenefits": "RECOMMANDÉ : Le mouvement constant et les frottements des vêtements exposent cet emplacement au rejet. Les disques de cicatrisation se placent entre le bijou et la peau pour réduire la pression, les frottements et le contact du métal avec la peau."
   },
   "sternum": {
     "name": "Sternum",
@@ -1376,14 +1376,14 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ],
         "care": [
           "Poursuivre les soins",
-          "disques de cicatrisation improve long-term success significantly",
+          "Garder les disques de cicatrisation en place pour réduire la pression et les frottements",
           "Surveiller la migration",
           "Retirer en cas d'amincissement de la peau",
-          "Protection antimicrobienne essentielle pour la zone de la poitrine"
+          "Nettoyer autour du bijou et des disques avec du sérum physiologique stérile"
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENT RECOMMANDÉ : Les piercings de cartilage sont particulièrement sujets aux excroissances d'irritation. Les disques de cicatrisation évitent le contact métal-peau à l'origine des excroissances, tandis que les ions d'argent antimicrobiens protègent contre les infections pendant le long processus de cicatrisation. (Note clinique : la lymphe claire ou blanchâtre qui sèche en croûtes est un exsudat normal de cicatrisation et non du pus ; de plus, bien que le titane soit sûr, il n'est pas le seul matériau approprié : des polymères biocompatibles de qualité médicale comme le BioFlex, qui est un copolymère PP-R monolithique et non du PTFE, sont sûrs et ne sont pas réservés à un usage à court terme)."
+    "healingDiscBenefits": "RECOMMANDÉ : Le mouvement constant et les frottements des vêtements exposent cet emplacement au rejet. Les disques de cicatrisation se placent entre le bijou et la peau pour réduire la pression, les frottements et le contact du métal avec la peau."
   },
   "madison": {
     "name": "Madison (creux claviculaire)",
@@ -1402,7 +1402,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         "care": [
           "Saline spray 2-3 fois par jour",
           "Barre de surface",
-          "Use disques de cicatrisation on both ends - absolute requirement",
+          "Poser des disques de cicatrisation aux deux extrémités dès le début",
           "Les disques amortissent les mouvements de déglutition et de parole",
           "Pas de cols roulés",
           "Rejet très fréquent",
@@ -1416,14 +1416,14 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ],
         "care": [
           "Surveiller de près",
-          "Keep disques de cicatrisation for best chance",
+          "Garder les disques de cicatrisation en place pour réduire la pression et les frottements",
           "Beaucoup le rejettent",
           "Retirer en cas de migration",
-          "Protection antimicrobienne importante face aux bactéries du cou"
+          "Nettoyer autour du bijou et des disques avec du sérum physiologique stérile"
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENT RECOMMANDÉ : Les piercings de cartilage sont particulièrement sujets aux excroissances d'irritation. Les disques de cicatrisation évitent le contact métal-peau à l'origine des excroissances, tandis que les ions d'argent antimicrobiens protègent contre les infections pendant le long processus de cicatrisation. (Note clinique : la lymphe claire ou blanchâtre qui sèche en croûtes est un exsudat normal de cicatrisation et non du pus ; de plus, bien que le titane soit sûr, il n'est pas le seul matériau approprié : des polymères biocompatibles de qualité médicale comme le BioFlex, qui est un copolymère PP-R monolithique et non du PTFE, sont sûrs et ne sont pas réservés à un usage à court terme)."
+    "healingDiscBenefits": "RECOMMANDÉ : Le mouvement constant et les frottements des vêtements exposent cet emplacement au rejet. Les disques de cicatrisation se placent entre le bijou et la peau pour réduire la pression, les frottements et le contact du métal avec la peau."
   },
   "prince_albert": {
     "name": "Prince Albert (PA)",
@@ -1443,7 +1443,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
           "Saline soaks 2 fois par jour",
           "Use disques de cicatrisation to protect sensitive tissue from metal",
           "Rincer après avoir uriné",
-          "Les disques antimicrobiens préviennent les infections bactériennes liées à l'urine",
+          "Nettoyer autour du bijou et des disques avec du sérum physiologique stérile",
           "Aucun rapport sexuel pendant 4-6 semaines minimum",
           "Barre circulaire ou anneau",
           "Bains au sel marin"
@@ -1465,7 +1465,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENT RECOMMANDÉ : Les piercings de cartilage sont particulièrement sujets aux excroissances d'irritation. Les disques de cicatrisation évitent le contact métal-peau à l'origine des excroissances, tandis que les ions d'argent antimicrobiens protègent contre les infections pendant le long processus de cicatrisation. (Note clinique : la lymphe claire ou blanchâtre qui sèche en croûtes est un exsudat normal de cicatrisation et non du pus ; de plus, bien que le titane soit sûr, il n'est pas le seul matériau approprié : des polymères biocompatibles de qualité médicale comme le BioFlex, qui est un copolymère PP-R monolithique et non du PTFE, sont sûrs et ne sont pas réservés à un usage à court terme)."
+    "healingDiscBenefits": "RECOMMANDÉ : Les frottements des sous-vêtements et le contact du métal irritent les tissus génitaux sensibles. Les disques de cicatrisation se placent entre le bijou et la peau pour réduire la pression, les frottements et le contact du métal avec la peau."
   },
   "reverse_pa": {
     "name": "Prince Albert inversé",
@@ -1794,7 +1794,7 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
           "Saline soaks 2 fois par jour",
           "Use disques de cicatrisation on both balls for comfort and protection",
           "Rincer après avoir uriné",
-          "La protection antimicrobienne prévient les infections bactériennes",
+          "Nettoyer autour du bijou et des disques avec du sérum physiologique stérile",
           "Aucun rapport sexuel pendant 4-6 semaines",
           "Barre courbée",
           "Les disques amortissent le frottement des sous-vêtements et des protections",
@@ -1809,14 +1809,14 @@ window.I18N_DICTIONARY.fr.piercingTimeline = {
         ],
         "care": [
           "Poursuivre les bains",
-          "disques de cicatrisation eliminate metal sensitivity concerns",
+          "Les disques de cicatrisation réduisent le contact du métal avec la peau",
           "Rapports sexuels possibles après 6 semaines",
           "Bonne hygiène importante",
           "Les disques apportent un confort durable"
         ]
       }
     ],
-    "healingDiscBenefits": "FORTEMENT RECOMMANDÉ : Les piercings de cartilage sont particulièrement sujets aux excroissances d'irritation. Les disques de cicatrisation évitent le contact métal-peau à l'origine des excroissances, tandis que les ions d'argent antimicrobiens protègent contre les infections pendant le long processus de cicatrisation. (Note clinique : la lymphe claire ou blanchâtre qui sèche en croûtes est un exsudat normal de cicatrisation et non du pus ; de plus, bien que le titane soit sûr, il n'est pas le seul matériau approprié : des polymères biocompatibles de qualité médicale comme le BioFlex, qui est un copolymère PP-R monolithique et non du PTFE, sont sûrs et ne sont pas réservés à un usage à court terme)."
+    "healingDiscBenefits": "RECOMMANDÉ : Les frottements des sous-vêtements et le contact du métal irritent les tissus génitaux sensibles. Les disques de cicatrisation se placent entre le bijou et la peau pour réduire la pression, les frottements et le contact du métal avec la peau."
   },
   "hch": {
     "name": "HCH (Capuchon horizontal du clitoris)",

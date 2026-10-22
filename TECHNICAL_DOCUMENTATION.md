@@ -433,6 +433,17 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.29
+
+**Client photos and the gallery are one (GitHub issue #14), and the tools' BioFlex® claims follow Patrick's rulings.**
+- The gallery (Tools, Artwork Gallery & Flash) shows the same photos as each client's "Work and photos" tab: one store (`clientTattooWork`), the gallery API is a view over it. A photo added in either place shows in both; deleting removes it from both. Gallery photos saved before 1.0.29 join the client photos at the first start (linked by client id, or by the exact client name).
+- A client name typed in the gallery upload links the photo when it matches a client exactly (any case); otherwise the save says no client has that name. No sample artist or "Walk-in Client" is filled in any more; ids are max + 1.
+- Gallery: Delete on every work and flash design; View mode "By Client" groups the works under each client.
+- The in-page delete confirmation (`data-deletion-confirm-modal`) was missing from the page, so those deletes used the browser's confirm box, and its button cleared the pending action before running it. Both fixed (client photos, staff notes, gallery).
+- Thai: tool screens show the Thai tool name with the English name under it, smaller (`public/tools/shared/tool-name.js`, names in each tool's script tag; site #189); the Tools cards do the same (`.tool-name-en`, shown when `<html lang="th">`, skipped by the phrase translator). Jewelry data sheets: metals are MR Conditional, not "MRI Safe" (site #188).
+- Profile "Work and photos": Zoom looks the photo up by id (the image address inside the button broke it for SVG photos).
+- Tools: BioFlex® wording per the rulings of 2026-10-21 (site #187), all eight languages: standards as "resin holds USP Class VI, meets Ph. Eur. 3.2.2, certified as passing the ISO 10993 biological tests"; "made in one piece, with no joints or glued parts"; MRI: no metal, not magnetic, the radiology staff decide; Healing Discs without antimicrobial or prevention claims; "implant grade" for metals only.
+
 ### 1.0.28
 
 **The last English inside the tools.** Brought over from the website's tools, all eight languages:

@@ -652,7 +652,7 @@ function switchClientProfileTab(tabName) {
                                 <div style="font-size:0.75rem;color:var(--ti-text2, #D1D5DB);line-height:1.3;">${escapeHtml(w.notes || '')}</div>
                             </div>
                             <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center;">
-                                <button type="button" onclick="openLightboxModal('${w.image_url}', '${escapeHtml(w.title)}', '${escapeHtml(w.notes)}')" style="padding:2px 8px;background:var(--ti-line, #374151);color:var(--ti-blue-ink, #60A5FA);border:none;border-radius:4px;font-size:0.72rem;cursor:pointer;font-weight:600;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-search></use></svg> Zoom</button>
+                                <button type="button" onclick="openClientWorkLightbox(${Number(w.id)})" style="padding:2px 8px;background:var(--ti-line, #374151);color:var(--ti-blue-ink, #60A5FA);border:none;border-radius:4px;font-size:0.72rem;cursor:pointer;font-weight:600;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-search></use></svg> Zoom</button>
                                 <button type="button" onclick="deleteClientTattooWork(${client.id}, ${w.id})" style="background:none;border:none;color:var(--ti-alert, #EF4444);font-size:0.75rem;cursor:pointer;">Delete</button>
                             </div>
                         </div>
@@ -1483,6 +1483,14 @@ async function submitClientTattooWork(event, clientId) {
 window.submitClientTattooWork = submitClientTattooWork;
 
 // Delete Client Tattoo Work
+// Zoom on a profile photo: looked up by id (an inline image address broke the button on an SVG photo)
+function openClientWorkLightbox(workId) {
+    const list = (currentActiveProfileClient && currentActiveProfileClient.tattoo_work) || [];
+    const w = list.find((x) => Number(x.id) === Number(workId));
+    if (w) openLightboxModal(w.image_url, w.title, w.notes);
+}
+window.openClientWorkLightbox = openClientWorkLightbox;
+
 async function deleteClientTattooWork(clientId, workId) {
     openDeletionConfirmModal({
         title: 'Delete Portfolio Artwork',

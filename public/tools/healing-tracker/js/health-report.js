@@ -311,7 +311,7 @@
         '</div>' +
 
         '<div class="report-footer-disclaimer">' +
-          t('healing.healthReport.privacyDisclaimer', 'Privacy notice: Health logs are stored locally in your browser cache and are never transmitted to external servers. Standards cited: ASTM F-136, ASTM F-138, ASTM F-67, USP Class VI, ISO 10993-6.') +
+          t('healing.healthReport.privacyDisclaimer', 'Privacy notice: Health logs are stored locally in your browser cache and are never transmitted to external servers. Standards cited: ASTM F-136, ASTM F-138, ASTM F-67, USP Class VI, Ph. Eur. 3.2.2, ISO 10993.') +
         '</div>' +
       '</div>';
 

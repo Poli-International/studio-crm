@@ -4,7 +4,7 @@
  * and fastener integrity check schedules based on anatomical location and metallurgy.
  * 
  * Standards cited: ASTM F-136, ASTM F-67, EN 1811, ISO 10993.
- * BioFlex(R) body jewelry is PP-R random copolymer (creator: Patrick Poli).
+ * BioFlex® body jewelry is PP-R random copolymer (creator: Patrick Poli).
  * Poli International Professional Tools
  */
 'use strict';
@@ -64,11 +64,11 @@
         nameKey: 'jewelryLongevity.materials.bioflex.name',
         fallbackName: 'BioFlex® body jewelry (PP-R random copolymer)',
         baseLifespanYears: 1, // Recommended 6-12 month replacement cycle for moving tissue/retainers
-        biocompatibility: 'USP Class VI (resin), tested to ISO 10993-6',
+        biocompatibility: 'USP Class VI and Ph. Eur. 3.2.2 (resin); passed the ISO 10993 biological tests',
         hardnessHv: 'Flexible polymer (Shore D ~72)',
         corrosionResistance: 'Immune to bodily fluids, oral acid, and sweat',
         finishRetention: 'Long-term wear; replace if scratched, bent or discoloured',
-        standards: ['USP Class VI (resin)', 'ISO 10993-6']
+        standards: ['USP Class VI (resin)', 'Ph. Eur. 3.2.2', 'ISO 10993 biological tests']
       }
     },
 

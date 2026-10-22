@@ -338,11 +338,11 @@ const MATERIAL_COMPATIBILITY = {
         notes: 'Steam only at correct temperatures'
     },
     'bioflex': {
-        name: 'BioFlex(R) body jewelry (PP-R random copolymer)',
+        name: 'BioFlex® body jewelry (PP-R random copolymer)',
         gravity: true,
         prevacuum: true,
         chemical: false,
-        notes: 'Safe for steam autoclave cycles (121°C / 134°C). Injection-moulded monolithic PP-R random copolymer (not PTFE).'
+        notes: 'Safe for steam autoclave cycles (121°C / 134°C). PP-R random copolymer made in one piece, with no joints or glued parts (not PTFE).'
     },
     'ptfe': {
         name: 'PTFE (Polytetrafluoroethylene)',

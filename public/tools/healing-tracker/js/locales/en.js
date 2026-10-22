@@ -535,7 +535,7 @@ window.I18N_DICTIONARY.en = {
       "q1Title": "Q: Is titanium the only safe material for initial piercing jewellery?",
       "q1Answer": "Fact: No. While implant-grade titanium (such as ASTM F-136 or ISO 5832-3) is an exceptional, highly inert material widely recommended for fresh piercings, it is not the only safe option. Other established, biocompatible materials suitable for initial healing include implant-grade surgical steel (such as ASTM F-138), biocompatible niobium (ASTM B392), solid 14k or 18k nickel-free gold, and BioFlex® body jewelry, a PP-R random copolymer whose resin holds USP Class VI. Safe initial jewellery requires proven biocompatibility, non-toxicity, and compliance with strict nickel release limits, rather than a single exclusive material.",
       "q2Title": "Q: Is BioFlex® body jewelry only intended for short-term or temporary wear?",
-      "q2Answer": "Fact: No. BioFlex® body jewelry is made from a PP-R (polypropylene random copolymer). The resin holds USP Class VI, and BioFlex® has been tested to ISO 10993-6. It is suitable for long-term wear as well as initial piercings, can be steam sterilised in an autoclave, and its flexibility reduces pressure on the tissue.\n\nNote on material distinction: BioFlex® is not PTFE (polytetrafluoroethylene). PTFE is a fluoropolymer machined from rod, with different mechanical and threading properties; BioFlex® is a moulded PP-R copolymer. Neither material is restricted to short-term wear when used appropriately.",
+      "q2Answer": "Fact: No. BioFlex® body jewelry is made from a PP-R (polypropylene random copolymer). The resin holds USP Class VI and meets Ph. Eur. 3.2.2, and the material is certified as passing the ISO 10993 biological tests. It is suitable for long-term wear as well as initial piercings, can be steam sterilised in an autoclave, and its flexibility reduces pressure on the tissue.\n\nNote on material distinction: BioFlex® is not PTFE (polytetrafluoroethylene). PTFE is a fluoropolymer machined from rod, with different mechanical and threading properties; BioFlex® body jewelry is a PP-R copolymer made in one piece, with no joints or glued parts. Neither material is restricted to short-term wear when used appropriately.",
       "q3Title": "Q: My piercing has clear or whitish crusty fluid. Does this mean it is infected?",
       "q3Answer": "Fact: No. Clear, pale whitish, or straw-coloured fluid that dries into crust (\"crusties\") is lymphatic fluid (lymph) mixed with dead cellular matter. Lymph production is a completely normal, healthy component of the body's wound-healing response across all piercing stages. It is not pus and is not a sign of infection.\n\nSigns of actual infection differ distinctly: thick opaque yellow or dark green pus, hot radiating warmth, spreading dark redness, throbbing pain, or systemic fever."
     },
@@ -820,31 +820,31 @@ window.I18N_DICTIONARY.en = {
     "severityNormal": "Normal",
     "msgConcerning": "These symptoms require professional attention. Contact your piercer/artist or healthcare provider immediately.",
     "solutionConcerningTitle": "Professional Recommendation:",
-    "solutionConcerningBody": "While you seek medical attention, ask your piercer about Poli International Healing Discs. They may help prevent further irritation and provide antimicrobial protection during recovery.",
+    "solutionConcerningBody": "While you seek medical attention, you can ask your piercer about Poli International Healing Discs: they sit between the jewelry and the skin to reduce pressure, friction and metal contact.",
     "msgMonitor": "These symptoms should be monitored. If they worsen or don't improve in 24-48 hours, contact your professional.",
     "solutionMonitorTitle": "Solution:",
-    "solutionMonitorIntro": "These symptoms often indicate metal irritation or bacterial buildup. Poli International Healing Discs can help by:",
-    "solutionMonitorBenefit1": "Eliminating metal-to-skin contact that causes irritation",
-    "solutionMonitorBenefit2": "Providing antimicrobial silver ion protection against bacteria",
-    "solutionMonitorBenefit3": "Preventing irritation bumps from developing further",
+    "solutionMonitorIntro": "Pressure, friction and metal contact can keep a piercing irritated. Poli International Healing Discs can help by:",
+    "solutionMonitorBenefit1": "Reducing metal contact with the skin",
+    "solutionMonitorBenefit2": "Cushioning pressure from clothing, sleep and phones",
+    "solutionMonitorBenefit3": "Reducing friction on the irritated area",
     "solutionMonitorBenefit4": "Creating a protective barrier during healing",
-    "solutionMonitorOutro": "Many piercers recommend healing discs specifically for these symptoms.",
+    "solutionMonitorOutro": "If the irritation does not settle, or you see spreading redness, heat or pus, see a doctor.",
     "msgNormal": "These symptoms are typical for healing. Continue your aftercare routine.",
-    "solutionNormalTitle": "Prevent Future Issues:",
-    "solutionNormalBody": "Even with normal healing, Poli International Healing Discs can prevent irritation bumps, keloids, and infections before they start. Recommended for all cartilage, navel, and surface piercings.",
+    "solutionNormalTitle": "For comfort:",
+    "solutionNormalBody": "Even with normal healing, Poli International Healing Discs reduce pressure, friction and metal contact with the skin. Useful for cartilage, navel and surface piercings.",
     "piercingTitle": "{name} Piercing",
     "tattooTitle": "{size} Tattoo",
     "dayOfHealing": "Day {day} of healing",
     "typicalHealingTime": "Typical healing time: {time}",
     "typicalSurfaceHealing": "Typical surface healing: {time}",
     "healingDiscRecTitle": "Healing Disc Recommendation for {name}",
-    "healingDiscRecFooter": "Poli International Healing Discs combine medical-grade elastomer with silver ion antimicrobial technology to prevent bumps, keloids, and infections while eliminating metal-to-skin contact.",
+    "healingDiscRecFooter": "Poli International Healing Discs are a blend of BioFlex® body jewelry material and medical-grade TPE (SEBS), with no additive. They sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin.",
     "whatToExpect": "What to expect:",
     "careInstructions": "Care instructions:",
     "checklist": {
       "piercing1": "Clean with sterile saline spray 2x daily",
       "piercing2": "Wash hands before touching piercing",
-      "piercing3": "Use Poli healing discs to prevent irritation bumps & infections",
+      "piercing3": "Use Poli healing discs to reduce pressure and metal contact",
       "piercing4": "DO NOT rotate jewelry",
       "piercing5": "Avoid sleeping on piercing if possible",
       "piercing6": "Check for signs of infection (redness, warmth, discharge)",
@@ -1459,7 +1459,7 @@ window.I18N_DICTIONARY.en = {
             "Saline spray 2-3x daily",
             "AVOID sleeping on it",
             "No touching",
-            "Use Poli healing discs to prevent metal contact and irritation bumps",
+            "Use healing discs to reduce pressure and friction",
             "Downsize jewelry at 6-8 weeks"
           ]
         },
@@ -1474,7 +1474,7 @@ window.I18N_DICTIONARY.en = {
             "Continue saline 2x daily",
             "If irritation bumps develop, ensure healing discs are in place",
             "Ensure jewelry isn't too long",
-            "Antimicrobial discs prevent bacterial buildup"
+            "Clean around the jewelry and discs with sterile saline"
           ]
         },
         {
@@ -1490,7 +1490,7 @@ window.I18N_DICTIONARY.en = {
           ]
         }
       ],
-      "healingDiscBenefits": "HIGHLY RECOMMENDED: Cartilage piercings are extremely prone to irritation bumps. Healing discs prevent metal-to-skin contact that causes bumps, while antimicrobial silver ions protect against infection during the long healing process."
+      "healingDiscBenefits": "RECOMMENDED: Cartilage piercings are prone to irritation bumps from pressure and friction. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."
     },
     "industrial": {
       "name": "Industrial (Scaffold)",
@@ -1510,7 +1510,7 @@ window.I18N_DICTIONARY.en = {
             "Saline spray 3x daily both holes",
             "Never sleep on it",
             "No touching bar",
-            "Use healing discs on BOTH ends to prevent bumps",
+            "Use healing discs on both ends from the start",
             "May need longer bar initially"
           ]
         },
@@ -1523,7 +1523,7 @@ window.I18N_DICTIONARY.en = {
           ],
           "care": [
             "Continue saline 2x daily",
-            "Healing discs prevent metal bar irritation",
+            "Use healing discs to reduce pressure and friction",
             "Downsize bar at 2-3 months",
             "Be very patient",
             "Avoid snagging hair"
@@ -1541,7 +1541,7 @@ window.I18N_DICTIONARY.en = {
           ]
         }
       ],
-      "healingDiscBenefits": "CRITICAL FOR SUCCESS: Industrial piercings have TWO cartilage holes healing simultaneously with constant bar pressure. Healing discs on both ends prevent irritation bumps and reduce the risk of one hole rejecting. The antimicrobial protection is essential for this long healing process."
+      "healingDiscBenefits": "RECOMMENDED: Two holes heal at the same time under constant bar pressure. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."
     },
     "daith": {
       "name": "Daith (Inner Cartilage)",
@@ -1574,13 +1574,13 @@ window.I18N_DICTIONARY.en = {
           ],
           "care": [
             "Continue saline 2x daily",
-            "Antimicrobial discs prevent infection in this fold",
+            "Clean around the jewelry and discs with sterile saline",
             "Can resume headphones carefully after 4-5 months",
             "No jewelry changes until fully healed"
           ]
         }
       ],
-      "healingDiscBenefits": "HIGHLY RECOMMENDED: Daith piercings are in a difficult-to-clean fold and highly prone to bumps. Healing discs with antimicrobial protection keep bacteria away from this hard-to-reach area while preventing metal irritation."
+      "healingDiscBenefits": "RECOMMENDED: Cartilage piercings are prone to irritation bumps from pressure and friction. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."
     },
     "rook": {
       "name": "Rook (Anti-Helix Fold)",
@@ -1613,14 +1613,14 @@ window.I18N_DICTIONARY.en = {
           ],
           "care": [
             "Be very patient",
-            "Healing discs prevent the bumps this piercing is famous for",
+            "Keep healing discs in place to reduce pressure and friction",
             "Continue saline 2x daily",
             "Downsize at 2-3 months",
             "Avoid irritation"
           ]
         }
       ],
-      "healingDiscBenefits": "HIGHLY RECOMMENDED: Rook piercings are notoriously prone to irritation bumps and have one of the longest healing times. Healing discs dramatically reduce bump formation and protect against infection."
+      "healingDiscBenefits": "RECOMMENDED: Cartilage piercings are prone to irritation bumps from pressure and friction. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."
     },
     "tragus": {
       "name": "Tragus",
@@ -1659,7 +1659,7 @@ window.I18N_DICTIONARY.en = {
           ]
         }
       ],
-      "healingDiscBenefits": "RECOMMENDED: Tragus piercings face constant pressure from headphones and phones. Healing discs create a protective barrier that prevents irritation from these daily activities."
+      "healingDiscBenefits": "RECOMMENDED: Daily pressure from phones, headphones or glasses irritates this piercing. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."
     },
     "anti_tragus": {
       "name": "Anti-Tragus",
@@ -1677,7 +1677,7 @@ window.I18N_DICTIONARY.en = {
           ],
           "care": [
             "Saline spray 2-3x daily carefully",
-            "Use healing discs immediately to prevent bumps",
+            "Use healing discs to reduce pressure and friction",
             "No earbuds",
             "No sleeping on it",
             "Avoid touching"
@@ -1692,13 +1692,13 @@ window.I18N_DICTIONARY.en = {
           ],
           "care": [
             "Very patient approach needed",
-            "Healing discs prevent common bump problems",
+            "Keep healing discs in place to reduce pressure and friction",
             "Continue saline 2x daily",
             "Downsize at 2-3 months"
           ]
         }
       ],
-      "healingDiscBenefits": "HIGHLY RECOMMENDED: Anti-tragus piercings are extremely prone to bumps due to the anatomy and pressure. Healing discs are essential for successful healing."
+      "healingDiscBenefits": "RECOMMENDED: Cartilage piercings are prone to irritation bumps from pressure and friction. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."
     },
     "conch": {
       "name": "Conch (Inner or Outer)",
@@ -1717,7 +1717,7 @@ window.I18N_DICTIONARY.en = {
           "care": [
             "Saline spray 2-3x daily",
             "No sleeping on it",
-            "Use healing discs to prevent pressure irritation",
+            "Use healing discs to reduce pressure and friction",
             "Stud recommended initially",
             "No headphones on that ear"
           ]
@@ -1756,7 +1756,7 @@ window.I18N_DICTIONARY.en = {
           "care": [
             "Saline spray 3x daily",
             "Never sleep on it",
-            "Use healing discs immediately - non-negotiable for this piercing",
+            "Use healing discs on both ends from the start",
             "Curved barbell essential",
             "Avoid all pressure"
           ]
@@ -1770,14 +1770,14 @@ window.I18N_DICTIONARY.en = {
           ],
           "care": [
             "Extreme patience required",
-            "Healing discs are your best defense against bumps and rejection",
+            "Keep healing discs in place to reduce pressure and friction",
             "Continue saline 2x daily",
             "Monitor for migration",
             "Many people retire this piercing"
           ]
         }
       ],
-      "healingDiscBenefits": "CRITICAL: Snug piercings have the highest rejection and complication rate. Healing discs are absolutely essential - they may be the difference between keeping or retiring this piercing. Prevents the notorious bumps and reduces rejection risk."
+      "healingDiscBenefits": "RECOMMENDED: Cartilage piercings are prone to irritation bumps from pressure and friction. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."
     },
     "forward_helix": {
       "name": "Forward Helix",
@@ -1810,13 +1810,13 @@ window.I18N_DICTIONARY.en = {
           ],
           "care": [
             "Continue saline 2x daily",
-            "Healing discs prevent bump formation",
+            "Keep healing discs in place to reduce pressure and friction",
             "Downsize at 6-8 weeks",
             "Can change jewelry at 3-4 months"
           ]
         }
       ],
-      "healingDiscBenefits": "RECOMMENDED: Forward helix piercings are prone to snagging and pressure from glasses. Healing discs provide protection and prevent irritation bumps."
+      "healingDiscBenefits": "RECOMMENDED: Daily pressure from phones, headphones or glasses irritates this piercing. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."
     },
     "orbital": {
       "name": "Orbital (Connected Hoops)",
@@ -1854,7 +1854,7 @@ window.I18N_DICTIONARY.en = {
           ]
         }
       ],
-      "healingDiscBenefits": "RECOMMENDED: Like industrial piercings, orbitals have two holes healing with constant tension. Healing discs on both sides prevent irritation and ensure both holes heal evenly."
+      "healingDiscBenefits": "RECOMMENDED: Two holes heal at the same time under constant bar pressure. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."
     },
     "nostril": {
       "name": "Nostril",
@@ -1871,10 +1871,10 @@ window.I18N_DICTIONARY.en = {
           ],
           "care": [
             "Spray saline 2-3x daily including inside nostril",
-            "Use healing disc inside nose to prevent bumps",
+            "Use healing discs to reduce pressure and friction",
             "Blow nose gently",
             "Keep makeup away",
-            "Antimicrobial protection critical with nasal bacteria"
+            "Clean around the jewelry and discs with sterile saline"
           ]
         },
         {
@@ -1891,7 +1891,7 @@ window.I18N_DICTIONARY.en = {
           ]
         }
       ],
-      "healingDiscBenefits": "HIGHLY RECOMMENDED: Nostril piercings are extremely prone to irritation bumps (nose bumps). Healing discs prevent the metal stud backing from irritating the inside of your nose, which is the #1 cause of bumps. Antimicrobial protection also prevents infection from nasal bacteria."
+      "healingDiscBenefits": "RECOMMENDED: The stud backing inside the nose is a common source of irritation bumps. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."
     },
     "septum": {
       "name": "Septum",
@@ -2543,7 +2543,7 @@ window.I18N_DICTIONARY.en = {
             "Saline spray 2x daily",
             "Use healing discs on BOTH top and bottom balls immediately",
             "Loose clothing",
-            "Discs prevent bump formation from waistband pressure",
+            "Discs cushion waistband pressure",
             "Avoid core exercises",
             "Watch for migration"
           ]
@@ -2556,9 +2556,9 @@ window.I18N_DICTIONARY.en = {
           ],
           "care": [
             "Continue saline daily",
-            "Keep discs in place - bumps can develop even mid-healing",
+            "Keep healing discs in place to reduce pressure and friction",
             "Can resume exercise gradually",
-            "Antimicrobial protection prevents sweat-related infections"
+            "Clean around the jewelry and discs with sterile saline"
           ]
         },
         {
@@ -2570,11 +2570,11 @@ window.I18N_DICTIONARY.en = {
             "Can change jewelry at 6+ months",
             "Continue using discs until 100% healed",
             "Monitor for rejection",
-            "If keloid-prone, use discs long-term"
+            "Keep healing discs in place to reduce pressure and friction"
           ]
         }
       ],
-      "healingDiscBenefits": "CRITICAL: Navel piercings are THE MOST notorious for irritation bumps and keloid formation. Healing discs are absolutely essential - they prevent metal contact with the skin during movement (sitting, bending) which is the primary cause of navel bumps. Many navel piercings fail without this protection."
+      "healingDiscBenefits": "RECOMMENDED: Waistbands and movement when sitting or bending press on navel piercings. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."
     },
     "nipple": {
       "name": "Nipple",
@@ -2594,7 +2594,7 @@ window.I18N_DICTIONARY.en = {
             "Saline spray 2x daily",
             "Use healing discs on both ends of barbell",
             "Soft supportive bra",
-            "Discs prevent metal allergies and bra friction",
+            "Discs reduce metal contact and bra friction",
             "NO oral contact for 6+ months",
             "Avoid rough clothing"
           ]
@@ -2607,14 +2607,14 @@ window.I18N_DICTIONARY.en = {
           ],
           "care": [
             "Continue daily care",
-            "Healing discs especially important if any metal sensitivity",
+            "Healing discs reduce metal contact with the skin",
             "Downsize at 2-3 months",
             "Be patient - takes long time",
-            "Antimicrobial protection prevents fabric bacteria transfer"
+            "Clean around the jewelry and discs with sterile saline"
           ]
         }
       ],
-      "healingDiscBenefits": "HIGHLY RECOMMENDED: Nipple piercings are prone to metal sensitivity reactions and irritation from clothing. Healing discs eliminate metal-to-skin contact (preventing nickel reactions) and cushion against bra/clothing friction. Essential for those with sensitive skin or metal allergies."
+      "healingDiscBenefits": "RECOMMENDED: Clothing friction and metal sensitivity often irritate nipple piercings. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."
     },
     "surface": {
       "name": "Surface Piercing (Various Locations)",
@@ -2634,7 +2634,7 @@ window.I18N_DICTIONARY.en = {
             "Saline spray 2-3x daily",
             "Surface bar only",
             "Use healing discs on BOTH ends immediately",
-            "Discs reduce micro-movement that causes rejection",
+            "Discs reduce pressure and micro-movement against the skin",
             "Avoid all pressure/movement",
             "Watch for migration"
           ]
@@ -2647,15 +2647,15 @@ window.I18N_DICTIONARY.en = {
           ],
           "care": [
             "Continue gentle care",
-            "Keep healing discs - they improve long-term success",
+            "Keep healing discs in place to reduce pressure and friction",
             "Monitor closely",
             "Retire if rejecting",
             "Location affects success rate",
-            "Antimicrobial protection prevents infection during vulnerable healing"
+            "Clean around the jewelry and discs with sterile saline"
           ]
         }
       ],
-      "healingDiscBenefits": "ABSOLUTELY CRITICAL: Surface piercings have the highest rejection rate of ALL piercings. Healing discs are your best chance at success - they minimize metal movement against shallow tissue and reduce the friction that causes rejection. Without discs, rejection rate is 70-90%. With discs, significantly improved success."
+      "healingDiscBenefits": "RECOMMENDED: Constant movement and friction from clothing make this placement prone to rejection. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."
     },
     "dermal_anchor": {
       "name": "Dermal Anchor/Microdermal",
@@ -2673,7 +2673,7 @@ window.I18N_DICTIONARY.en = {
           ],
           "care": [
             "Saline spray 2-3x daily",
-            "Use healing disc on the top to prevent snagging",
+            "Use a healing disc on the top to cushion snags",
             "No touching/playing with top",
             "Avoid pressure",
             "Watch for rejection"
@@ -2691,11 +2691,11 @@ window.I18N_DICTIONARY.en = {
             "Can change tops carefully",
             "Monitor for rejection",
             "May last years or reject",
-            "Antimicrobial protection prevents infection around anchor"
+            "Clean around the jewelry and discs with sterile saline"
           ]
         }
       ],
-      "healingDiscBenefits": "HIGHLY RECOMMENDED: Dermal anchors are prone to snagging and pressure that can cause rejection. Healing discs on the visible top create a cushion that prevents snags and reduces pressure on the anchor base, significantly improving retention."
+      "healingDiscBenefits": "RECOMMENDED: Constant movement and friction from clothing make this placement prone to rejection. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."
     },
     "nape": {
       "name": "Nape (Back of Neck)",
@@ -2714,7 +2714,7 @@ window.I18N_DICTIONARY.en = {
           "care": [
             "Saline spray 2-3x daily",
             "Surface bar needed",
-            "Use healing discs on both ends - non-negotiable",
+            "Use healing discs on both ends from the start",
             "Discs buffer neck movement and collar pressure",
             "No high collars",
             "Avoid sleeping on back",
@@ -2729,14 +2729,14 @@ window.I18N_DICTIONARY.en = {
           ],
           "care": [
             "Continue care",
-            "Keep healing discs to maximize retention chance",
+            "Keep healing discs in place to reduce pressure and friction",
             "Monitor skin thickness",
             "Many people retire this",
             "Hair can irritate"
           ]
         }
       ],
-      "healingDiscBenefits": "CRITICAL: Nape piercings have extremely high rejection rates due to constant movement and collar friction. Healing discs are essential - they cushion against neck movement and prevent clothing irritation. Without them, almost certain to reject."
+      "healingDiscBenefits": "RECOMMENDED: Constant movement and friction from clothing make this placement prone to rejection. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."
     },
     "sternum": {
       "name": "Sternum (Chest Surface)",
@@ -2768,14 +2768,14 @@ window.I18N_DICTIONARY.en = {
           ],
           "care": [
             "Continue care",
-            "Healing discs improve long-term success significantly",
+            "Keep healing discs in place to reduce pressure and friction",
             "Watch for migration",
             "Retire if skin thinning",
-            "Antimicrobial protection critical for chest area"
+            "Clean around the jewelry and discs with sterile saline"
           ]
         }
       ],
-      "healingDiscBenefits": "CRITICAL: Sternum piercings face constant chest movement (breathing, posture changes). Healing discs minimize the bar movement that causes rejection and protect from bra/clothing pressure. Essential for any chance of success."
+      "healingDiscBenefits": "RECOMMENDED: Constant movement and friction from clothing make this placement prone to rejection. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."
     },
     "madison": {
       "name": "Madison (Front Neck)",
@@ -2794,7 +2794,7 @@ window.I18N_DICTIONARY.en = {
           "care": [
             "Saline spray 2-3x daily",
             "Surface bar",
-            "Use healing discs on both ends - absolute requirement",
+            "Use healing discs on both ends from the start",
             "Discs buffer swallowing and talking movement",
             "No high necks",
             "Very high rejection",
@@ -2808,14 +2808,14 @@ window.I18N_DICTIONARY.en = {
           ],
           "care": [
             "Monitor closely",
-            "Keep healing discs for best chance",
+            "Keep healing discs in place to reduce pressure and friction",
             "Many reject this",
             "Retire if migrating",
-            "Antimicrobial protection important for neck bacteria"
+            "Clean around the jewelry and discs with sterile saline"
           ]
         }
       ],
-      "healingDiscBenefits": "ABSOLUTELY CRITICAL: Madison piercings have one of the absolute highest rejection rates due to neck swallowing/talking movement. Healing discs are mandatory - they cushion constant throat movement. Even with discs, rejection is common, but without them, almost guaranteed to fail."
+      "healingDiscBenefits": "RECOMMENDED: Constant movement and friction from clothing make this placement prone to rejection. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."
     },
     "prince_albert": {
       "name": "Prince Albert (PA)",
@@ -2835,7 +2835,7 @@ window.I18N_DICTIONARY.en = {
             "Saline soaks 2x daily",
             "Use healing discs to protect sensitive tissue from metal",
             "Rinse after urination",
-            "Antimicrobial discs prevent bacterial infections from urine",
+            "Clean around the jewelry and discs with sterile saline",
             "No sexual contact 4-6 weeks minimum",
             "Circular barbell or ring",
             "Sea salt soaks"
@@ -2857,7 +2857,7 @@ window.I18N_DICTIONARY.en = {
           ]
         }
       ],
-      "healingDiscBenefits": "RECOMMENDED: Genital piercings benefit greatly from healing discs. They eliminate metal contact with sensitive genital tissue (important for those with metal sensitivities), cushion against underwear/movement friction, and provide critical antimicrobial protection in this bacteria-rich area. Increases comfort dramatically during healing."
+      "healingDiscBenefits": "RECOMMENDED: Underwear friction and metal contact irritate sensitive genital tissue. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."
     },
     "reverse_pa": {
       "name": "Reverse Prince Albert",
@@ -3186,7 +3186,7 @@ window.I18N_DICTIONARY.en = {
             "Saline soaks 2x daily",
             "Use healing discs on both balls for comfort and protection",
             "Rinse after urination",
-            "Antimicrobial protection prevents bacterial infections",
+            "Clean around the jewelry and discs with sterile saline",
             "No sexual contact 4-6 weeks",
             "Curved barbell",
             "Discs cushion against underwear/pad friction",
@@ -3201,14 +3201,14 @@ window.I18N_DICTIONARY.en = {
           ],
           "care": [
             "Continue soaks",
-            "Healing discs eliminate metal sensitivity concerns",
+            "Healing discs reduce metal contact with the skin",
             "Can have sexual contact after 6 weeks",
             "Good hygiene important",
             "Discs provide ongoing comfort"
           ]
         }
       ],
-      "healingDiscBenefits": "HIGHLY RECOMMENDED: VCH piercings benefit immensely from healing discs. They prevent metal balls from irritating sensitive genital tissue, cushion against underwear/pad friction, eliminate metal sensitivity issues, and provide antimicrobial protection critical for the genital area. Dramatically increases comfort and prevents irritation."
+      "healingDiscBenefits": "RECOMMENDED: Underwear friction and metal contact irritate sensitive genital tissue. Healing discs sit between the jewelry and the skin to reduce pressure, friction and metal contact with the skin."
     },
     "hch": {
       "name": "Horizontal Clitoral Hood (HCH)",

@@ -375,13 +375,13 @@
       var downsizeStatusBadge = '';
       var downsizeStatusClass = '';
       if (isDownsizeOverdue) {
-        downsizeStatusBadge = t('jewelryLongevity.status.overdue', '⚠️ DOWNSIZE OVERDUE - CONTACT STUDIO');
+        downsizeStatusBadge = t('jewelryLongevity.status.overdue', 'DOWNSIZE OVERDUE - CONTACT STUDIO');
         downsizeStatusClass = 'jewelry-status-badge--overdue';
       } else if (isDownsizeDue) {
-        downsizeStatusBadge = t('jewelryLongevity.status.dueNow', '🔔 DOWNSIZE WINDOW ACTIVE (NOW)');
+        downsizeStatusBadge = t('jewelryLongevity.status.dueNow', 'DOWNSIZE WINDOW ACTIVE (NOW)');
         downsizeStatusClass = 'jewelry-status-badge--active';
       } else {
-        downsizeStatusBadge = t('jewelryLongevity.status.healing', '⏳ HEALING PHASE - DOWNSIZE IN {days} DAYS', { days: daysUntilDownsize });
+        downsizeStatusBadge = t('jewelryLongevity.status.healing', 'HEALING PHASE - DOWNSIZE IN {days} DAYS', { days: daysUntilDownsize });
         downsizeStatusClass = 'jewelry-status-badge--healing';
       }
 
@@ -413,7 +413,7 @@
               '<div class="jewelry-metric-value">' + locData.downsizeWeeksMin + ' - ' + locData.downsizeWeeksMax + ' ' + t('jewelryLongevity.labels.weeks', 'Weeks') + '</div>' +
               '<p class="jewelry-metric-subtext">' +
                 t('jewelryLongevity.labels.recommendedDates', 'Target Studio Visit:') + ' ' +
-                '<strong>' + minDownsizeDate.toLocaleDateString() + '</strong> ➔ <strong>' + maxDownsizeDate.toLocaleDateString() + '</strong>' +
+                '<strong>' + minDownsizeDate.toLocaleDateString() + '</strong> <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-arrow></use></svg> <strong>' + maxDownsizeDate.toLocaleDateString() + '</strong>' +
               '</p>' +
             '</div>' +
 
@@ -439,7 +439,7 @@
           // Professional Downsizing Guidance Box
           '<div class="jewelry-clinical-note ' + (locData.downsizeUrgency === 'critical' ? 'jewelry-clinical-note--urgent' : '') + '">' +
             '<div class="jewelry-note-heading">' +
-              '<span>' + (locData.downsizeUrgency === 'critical' ? '🚨' : '💡') + '</span>' +
+              '<span>' + (locData.downsizeUrgency === 'critical' ? '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-siren></use></svg>' : '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bulb></use></svg>') + '</span>' +
               '<strong>' + t('jewelryLongevity.downsizeGuidance.title', 'Why Professional Downsizing is Critical for this Placement') + '</strong>' +
             '</div>' +
             '<p>' +
@@ -455,12 +455,12 @@
           '<div class="jewelry-fastener-tips">' +
             '<h4 class="jewelry-section-title">' + t('jewelryLongevity.fastenerTips.title', 'Fastener Maintenance Protocol') + '</h4>' +
             '<div class="jewelry-tip-item">' +
-              '<span class="jewelry-tip-icon">🔧</span>' +
+              '<span class="jewelry-tip-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-wrench></use></svg></span>' +
               '<div class="jewelry-tip-text">' + t(fastData.maintenanceTipKey, fastData.fallbackTip) + '</div>' +
             '</div>' +
             (matKey === 'bioflex' ? (
               '<div class="jewelry-tip-item">' +
-                '<span class="jewelry-tip-icon">✨</span>' +
+                '<span class="jewelry-tip-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-spark></use></svg></span>' +
                 '<div class="jewelry-tip-text">' + t('jewelryLongevity.bioflexNote', 'BioFlex® body jewelry is a PP-R random copolymer and is suitable for long-term wear. Inspect it at every check and replace it if it is scratched, bent or discoloured, as you would any jewelry.') + '</div>' +
               '</div>'
             ) : '') +

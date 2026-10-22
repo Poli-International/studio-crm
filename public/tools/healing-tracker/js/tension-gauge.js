@@ -130,7 +130,7 @@
       if (hasProlongedTension) {
         status = 'alert';
         message = t('healing.tensionGauge.alert7Days', 
-          '⚠️ Prolonged Jewelry Tension ({days} Consecutive Days): Swelling has maintained continuous tightness on your post for over a week. Persistent compression restricts capillary perfusion, risks embedding into compromised tissue, and inhibits drainage. Professional studio consultation for post-length inspection or planned downsizing is strongly advised.', 
+          'Prolonged Jewelry Tension ({days} Consecutive Days): Swelling has maintained continuous tightness on your post for over a week. Persistent compression restricts capillary perfusion, risks embedding into compromised tissue, and inhibits drainage. Professional studio consultation for post-length inspection or planned downsizing is strongly advised.', 
           { days: consecutiveCount }
         );
       } else if (consecutiveCount > 0) {
@@ -216,13 +216,13 @@
       // Update streak badge
       if (streakEl) {
         if (evalResult.consecutiveTightDays >= 7) {
-          streakEl.textContent = t('healing.tensionGauge.streakAlertBadge', '⚠️ {days} Days Persistent Tightness', { days: evalResult.consecutiveTightDays });
+          streakEl.textContent = t('healing.tensionGauge.streakAlertBadge', '{days} Days Persistent Tightness', { days: evalResult.consecutiveTightDays });
           streakEl.className = 'tension-gauge-streak-badge tension-gauge-streak-badge--alert';
         } else if (evalResult.consecutiveTightDays > 0) {
-          streakEl.textContent = t('healing.tensionGauge.streakWatchBadge', '⏳ {days} Days Snug / Tight', { days: evalResult.consecutiveTightDays });
+          streakEl.textContent = t('healing.tensionGauge.streakWatchBadge', '{days} Days Snug / Tight', { days: evalResult.consecutiveTightDays });
           streakEl.className = 'tension-gauge-streak-badge tension-gauge-streak-badge--watch';
         } else {
-          streakEl.textContent = t('healing.tensionGauge.streakNormalBadge', '✓ Normal Clearance', {});
+          streakEl.textContent = t('healing.tensionGauge.streakNormalBadge', 'Normal Clearance', {});
           streakEl.className = 'tension-gauge-streak-badge tension-gauge-streak-badge--normal';
         }
       }

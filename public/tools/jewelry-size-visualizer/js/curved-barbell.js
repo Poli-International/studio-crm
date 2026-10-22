@@ -177,7 +177,7 @@ const CurvedBarbellCalculator = {
 
         // Initially render empty prompt
         this.renderEmptyState();
-        console.log('📐 CurvedBarbellCalculator initialized (Rule 3 compliant: starts empty)');
+        console.log('CurvedBarbellCalculator initialized (Rule 3 compliant: starts empty)');
     },
 
     updatePresetInfo(preset) {
@@ -223,7 +223,7 @@ const CurvedBarbellCalculator = {
         if (resultArea) {
             resultArea.innerHTML = `
                 <div class="calc-empty-prompt" style="padding: 2.5rem 1.5rem; text-align: center; background: var(--bg-secondary); border: 2px dashed var(--border-color); border-radius: 8px; color: var(--text-secondary);">
-                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📏</div>
+                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-ruler></use></svg></div>
                     <strong style="color: var(--text-primary); font-size: 1.05rem;">${tr('curved.ui.emptyTitle', 'Enter the tissue span above')}</strong>
                     <p style="margin: 0.5rem auto 0; max-width: 480px; font-size: 0.9rem; line-height: 1.5;">
                         ${tr('curved.ui.emptyDesc', 'Type your caliper or photo measurement in millimetres, or pick a typical depth, to get the fresh and healed bar lengths with calibrated diagrams.')}
@@ -292,7 +292,7 @@ const CurvedBarbellCalculator = {
             resultArea.innerHTML = `
                 <div class="cbb-err-card" role="alert" style="background: var(--bg-secondary); border: 2px solid var(--color-error); padding: 1.5rem; border-radius: 8px; color: var(--text-primary); margin: 1.5rem 0;">
                     <div style="font-weight: 700; color: var(--color-error); margin-bottom: 0.5rem; font-size: 1.05rem;">
-                        ⚠️ Impossible Anatomical Measurement (${this.escapeHtml(rawVal)} mm)
+                        <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> Impossible Anatomical Measurement (${this.escapeHtml(rawVal)} mm)
                     </div>
                     <p style="margin: 0; line-height: 1.5; font-size: 0.95rem;">
                         Tissue spans must be realistic positive values between <strong>1 mm and 35 mm</strong>. Human ear, brow, and navel tissue folds do not exceed 35 mm. Please measure with physical calipers or use the in-browser Photo Measurement tab.
@@ -315,8 +315,8 @@ const CurvedBarbellCalculator = {
 
         const isCalibrated = (typeof AppState !== 'undefined' && AppState.isCalibrated);
         const statusBadge = isCalibrated
-            ? `<span class="scale-status-badge scale-status-badge--calibrated">${tr('scale.badgeCalibrated', '✅ Calibrated (1:1)')}</span>`
-            : `<span class="scale-status-badge scale-status-badge--approx">${tr('scale.badgeApprox', '⚠️ Approximate preview: not calibrated')}</span>`;
+            ? `<span class="scale-status-badge scale-status-badge--calibrated">${tr('scale.badgeCalibrated', 'Calibrated (1:1)')}</span>`
+            : `<span class="scale-status-badge scale-status-badge--approx">${tr('scale.badgeApprox', 'Approximate preview: not calibrated')}</span>`;
 
         return `
             <div class="cbb-result-container">
@@ -413,7 +413,7 @@ const CurvedBarbellCalculator = {
                 <!-- Requirement H: Clinical explanation of undersized barbells -->
                 <div class="size-shortage-warning" style="background: var(--bg-secondary); border: 2px solid var(--color-error); border-radius: 8px; padding: 1.25rem; margin: 1.5rem 0;">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 0.75rem;">
-                        <span style="font-size: 1.25rem;">⚠️</span>
+                        <span style="font-size: 1.25rem;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg></span>
                         <strong style="color: var(--color-error); font-size: 1rem;">
                             ${tr('curved.res.warnTitle', 'Clinical Warning: Why Any Barbell Under {len} mm Will Fail on a Fresh Piercing', { len: fresh.recommended.toFixed(1) })}
                         </strong>
@@ -460,13 +460,13 @@ const CurvedBarbellCalculator = {
                 <!-- Action Controls: Requirement E & F -->
                 <div class="cbb-action-buttons" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1.5rem;">
                     <button type="button" class="btn btn--primary" id="cbb-copy-summary-btn">
-                        ${tr('curved.res.btnCopy', '📋 Copy Size Summary (Plain Text)')}
+                        ${tr('curved.res.btnCopy', 'Copy Size Summary (Plain Text)')}
                     </button>
                     <button type="button" class="btn btn--secondary" id="cbb-to-collection-btn">
-                        ${tr('curved.res.btnSave', '💎 Save to My Jewellery Collection')}
+                        ${tr('curved.res.btnSave', 'Save to My Jewellery Collection')}
                     </button>
                     <button type="button" class="btn btn--secondary" id="cbb-to-fitcard-btn">
-                        ${tr('curved.res.btnFit', '🖨️ Transfer to Printable Fit Card')}
+                        ${tr('curved.res.btnFit', 'Transfer to Printable Fit Card')}
                     </button>
                 </div>
             </div>
@@ -574,12 +574,12 @@ const CurvedBarbellCalculator = {
                 const text = tr('curved.res.copyText', 'Placement: {placement} | Gauge: {gauge} | Fresh Length: {fresh} mm | Healed Length: {healed} mm | Measured Span: {span} mm | Date: {date}', { placement: calc.preset.name, gauge: calc.preset.gauge, fresh: calc.fresh.bestFit, healed: calc.healed.bestFit, span: calc.span, date: date });
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     navigator.clipboard.writeText(text).then(() => {
-                        const orig = copySummaryBtn.textContent;
-                        copySummaryBtn.textContent = tr('common.summaryCopied', '✓ Summary copied');
-                        setTimeout(() => { copySummaryBtn.textContent = orig; }, 2500);
+                        const orig = copySummaryBtn.innerHTML;
+                        copySummaryBtn.textContent = tr('common.summaryCopied', 'Summary copied');
+                        setTimeout(() => { copySummaryBtn.innerHTML = orig; }, 2500);
                     });
                 } else if (typeof JewelleryCollectionModule !== 'undefined') {
-                    JewelleryCollectionModule.copyToClipboard(text, tr('curved.res.copied', '✓ Size summary copied!'));
+                    JewelleryCollectionModule.copyToClipboard(text, tr('curved.res.copied', 'Size summary copied!'));
                 }
             });
         }

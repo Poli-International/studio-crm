@@ -17,7 +17,7 @@
     'print.generated_prefix': 'Généré le :',
     'print.signature': 'Signature de l\'artiste ou du studio : _____________________________________',
     'print.date': 'Date : ________________________',
-    'header.badge': '🧾 Suivi des déductions fiscales V2',
+    'header.badge': 'Suivi des déductions fiscales V2',
     'header.title': 'Suivi des déductions fiscales pour tatoueurs',
     'header.subtitle': 'Enregistrez vos frais professionnels tout au long de l\'année dans les catégories reconnues par votre comptable. Saisie rapide poste par poste, références de justificatifs, journal des déplacements et catégories personnalisables. Tout reste dans votre navigateur.',
     'toolbar.year': 'Année fiscale / civile :',

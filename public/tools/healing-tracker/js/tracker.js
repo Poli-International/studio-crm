@@ -214,7 +214,7 @@ function generatePiercingTimeline(location, date) {
     if (timeline.healingDiscRecommended) {
         healingDiscAlert = `
             <div class="healing-disc-recommendation">
-                <div class="healing-disc-rec-icon">💎</div>
+                <div class="healing-disc-rec-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-ring></use></svg></div>
                 <div class="healing-disc-rec-content">
                     <h4>${window.t('tracker.healingDiscRecTitle', { name: timeline.name })}</h4>
                     <p>${timeline.healingDiscBenefits}</p>

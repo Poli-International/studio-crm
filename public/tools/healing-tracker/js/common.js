@@ -33,7 +33,7 @@
                 body.classList.remove('dark-mode');
                 if (themeToggle) {
                     const icon = themeToggle.querySelector('.dark-mode-icon') || themeToggle;
-                    icon.textContent = '☀️';
+                    icon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-sun></use></svg>';
                 }
             } else {
                 body.classList.add('dark-mode');
@@ -153,14 +153,14 @@
                 const input = form.querySelector('input');
                 const btn = form.querySelector('button');
                 if (!btn) return;
-                const originalText = btn.textContent;
+                const originalText = btn.innerHTML;
                 
                 btn.textContent = (window.t ? window.t('common.subscribed') : 'Subscribed');
                 btn.disabled = true;
                 if (input) input.value = '';
                 
                 setTimeout(() => {
-                    btn.textContent = originalText;
+                    btn.innerHTML = originalText;
                     btn.disabled = false;
                 }, 3000);
             });

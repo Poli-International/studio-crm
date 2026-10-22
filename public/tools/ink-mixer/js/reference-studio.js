@@ -325,7 +325,7 @@
         </div>
         <div class="ref-swatch-actions">
           <button type="button" class="ink-mixer__btn ink-mixer__btn--small ink-mixer__btn--primary send-to-solver-btn" data-hex="${item.hex}">
-            🎯 ${_t('refStudio.solveBtn')}
+            <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-target></use></svg> ${_t('refStudio.solveBtn')}
           </button>
         </div>
       `;
@@ -376,7 +376,7 @@
     if (lowContrastWarnings > 0) {
       warningHtml = `
         <div class="ink-mixer__alert ink-mixer__alert--warning" style="margin-top: 0.75rem;">
-          <div class="ink-mixer__alert-title">⚠️ ${_t('refStudio.longevityWarningTitle')}</div>
+          <div class="ink-mixer__alert-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> ${_t('refStudio.longevityWarningTitle')}</div>
           <div class="ink-mixer__alert-body">
             ${_t('refStudio.longevityWarningBody', { count: lowContrastWarnings })}
           </div>
@@ -385,7 +385,7 @@
     } else {
       warningHtml = `
         <div class="ink-mixer__alert ink-mixer__alert--success" style="margin-top: 0.75rem;">
-          <div class="ink-mixer__alert-title">✅ ${_t('refStudio.excellentHierarchyTitle')}</div>
+          <div class="ink-mixer__alert-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> ${_t('refStudio.excellentHierarchyTitle')}</div>
           <div class="ink-mixer__alert-body">
             ${_t('refStudio.excellentHierarchyBody')}
           </div>

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
             body.classList.remove('dark-mode');
             if (themeToggle) {
                 const icon = themeToggle.querySelector('.dark-mode-icon') || themeToggle;
-                icon.textContent = '☀️';
+                icon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-sun></use></svg>';
             }
         } else {
             body.classList.add('dark-mode');
@@ -119,20 +119,20 @@ document.addEventListener('DOMContentLoaded', function() {
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(textarea.value).then(() => {
                     const originalText = copyBtn.innerHTML;
-                    const copiedMsg = window.translate ? window.translate('common.copied', null, '✅ Copied!') : '✅ Copied!';
+                    const copiedMsg = window.translate ? window.translate('common.copied', null, 'Copied!') : 'Copied!';
                     copyBtn.innerHTML = copiedMsg;
                     setTimeout(() => { copyBtn.innerHTML = originalText; }, 2000);
                 }).catch(() => {
                     document.execCommand('copy');
                     const originalText = copyBtn.innerHTML;
-                    const copiedMsg = window.translate ? window.translate('common.copied', null, '✅ Copied!') : '✅ Copied!';
+                    const copiedMsg = window.translate ? window.translate('common.copied', null, 'Copied!') : 'Copied!';
                     copyBtn.innerHTML = copiedMsg;
                     setTimeout(() => { copyBtn.innerHTML = originalText; }, 2000);
                 });
             } else {
                 document.execCommand('copy');
                 const originalText = copyBtn.innerHTML;
-                const copiedMsg = window.translate ? window.translate('common.copied', null, '✅ Copied!') : '✅ Copied!';
+                const copiedMsg = window.translate ? window.translate('common.copied', null, 'Copied!') : 'Copied!';
                 copyBtn.innerHTML = copiedMsg;
                 setTimeout(() => { copyBtn.innerHTML = originalText; }, 2000);
             }

@@ -36,7 +36,7 @@
       }
       chip.setAttribute('data-piercing-key', key);
       chip.setAttribute('title', (window.translate ? window.translate('ui.recent_switch_title', { name: data.name, category: data.category || 'Piercing' }, 'Switch to {name} ({category})') : 'Switch to ' + data.name + ' (' + (data.category || 'Piercing') + ')'));
-      chip.innerHTML = `<span class="recent-chip-icon">📍</span> <span class="recent-chip-name">${data.name}</span>`;
+      chip.innerHTML = `<span class="recent-chip-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-pin></use></svg></span> <span class="recent-chip-name">${data.name}</span>`;
 
       chip.addEventListener('click', function () {
         if (typeof onSelect === 'function') {

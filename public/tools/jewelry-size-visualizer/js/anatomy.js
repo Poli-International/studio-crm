@@ -183,7 +183,7 @@ const AnatomyGuide = {
             });
         }
 
-        console.log('🎯 Anatomy Guide initialized');
+        console.log('Anatomy Guide initialized');
     },
 
     showLocation(location) {
@@ -262,7 +262,7 @@ const AnatomyGuide = {
             diagram.style.display = 'block';
         }
 
-        console.log('🎯 Showing anatomy for:', location);
+        console.log('Showing anatomy for:', location);
     },
 
     browseJewelry() {

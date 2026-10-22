@@ -431,7 +431,7 @@ function runBulkScan(isRedraw = false) {
     const alertEl = document.createElement('div');
     alertEl.className = 'alert-banner alert-banner--danger';
     const alertKey = flagged.length === 1 ? 'stats.alert_danger' : 'stats.alert_danger_plural';
-    alertEl.textContent = '⚠ ' + t(alertKey, { count: flagged.length });
+    alertEl.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> ' + t(alertKey, { count: flagged.length });
     bulkResults.appendChild(alertEl);
   } else {
     statsEl.innerHTML = `
@@ -552,7 +552,7 @@ function buildFlaggedCard(sub, query, matchType, confidence = 'high', matchedTok
     crossLinksHtml = `
       <div class="cross-link-box">
         <a href="https://poliinternational.com/nickel-release-calculator/" target="_top" class="cross-link-btn cross-link-btn--metal">
-          🧮 ${escHtml(t('cross_link.nickel'))}
+          <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-calc></use></svg> ${escHtml(t('cross_link.nickel'))}
         </a>
       </div>
     `;
@@ -560,7 +560,7 @@ function buildFlaggedCard(sub, query, matchType, confidence = 'high', matchedTok
     crossLinksHtml = `
       <div class="cross-link-box">
         <a href="https://poliinternational.com/material-certification-checker/" target="_top" class="cross-link-btn cross-link-btn--metal">
-          📜 ${escHtml(t('cross_link.metal'))}
+          <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-consent></use></svg> ${escHtml(t('cross_link.metal'))}
         </a>
       </div>
     `;
@@ -568,7 +568,7 @@ function buildFlaggedCard(sub, query, matchType, confidence = 'high', matchedTok
     crossLinksHtml = `
       <div class="cross-link-box">
         <a href="https://poliinternational.com/ink-ingredient-decoder/" target="_top" class="cross-link-btn cross-link-btn--ink">
-          🧪 ${escHtml(t('cross_link.ink'))}
+          <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-flask></use></svg> ${escHtml(t('cross_link.ink'))}
         </a>
       </div>
     `;
@@ -603,7 +603,7 @@ function buildFlaggedCard(sub, query, matchType, confidence = 'high', matchedTok
 
   card.innerHTML = `
     <div class="card-header" role="button" tabindex="0" aria-expanded="false">
-      <span class="card-status-icon" aria-hidden="true">⚠️</span>
+      <span class="card-status-icon" aria-hidden="true"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg></span>
       <div class="card-title-block">
         <div class="card-name">${escHtml(t(substanceNameKey))}</div>
         <div class="card-name-sub">CAS ${escHtml(casDisplay)}</div>
@@ -647,7 +647,7 @@ function buildFlaggedCard(sub, query, matchType, confidence = 'high', matchedTok
       ${crossLinksHtml}
       <div class="letter-action-row">
         <button type="button" class="btn-letter" data-substance-id="${escHtml(sub.id)}">
-          ✉️ ${escHtml(t('letter.btn'))}
+          <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-mail></use></svg> ${escHtml(t('letter.btn'))}
         </button>
       </div>
       <div class="card-action-row">
@@ -693,7 +693,7 @@ function buildNotFoundCard(query) {
   const div = document.createElement('div');
   div.className = 'not-found-card';
   div.innerHTML = `
-    <span class="nf-icon" aria-hidden="true">✅</span>
+    <span class="nf-icon" aria-hidden="true"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span>
     <div class="nf-text">
       <div class="nf-name">${escHtml(query)}</div>
       <div class="nf-sub">${escHtml(t('results.unknown_desc'))}</div>
@@ -710,7 +710,7 @@ function buildWatchlistResultCard(item, query) {
   div.innerHTML = `
     <div style="padding:1rem 1.25rem;">
       <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem;">
-        <span style="font-size:1.1rem">📋</span>
+        <span style="font-size:1.1rem"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clipboard></use></svg></span>
         <strong style="color:var(--text-primary);font-size:1rem;">${escHtml(item.name)}</strong>
         <span class="badge badge--warning" style="margin-left:auto">${escHtml(t('watchlist.tag_match'))}</span>
       </div>
@@ -1128,7 +1128,7 @@ function showToast(msg) {
 // ─── Helpers ─────────────────────────────────────────────────────
 function renderIdle(msg) {
   return `<div class="idle-state">
-    <div class="idle-state__icon" aria-hidden="true">🔬</div>
+    <div class="idle-state__icon" aria-hidden="true"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-flask></use></svg></div>
     <div class="idle-state__text">${escHtml(msg)}</div>
   </div>`;
 }
@@ -1147,7 +1147,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Theme button: dark is the default look, light is set with data-theme="light"
   const themeBtn = document.getElementById('theme-toggle-btn');
   const themeIcon = document.getElementById('theme-icon');
-  const showTheme = () => { if (themeIcon) themeIcon.textContent = document.documentElement.getAttribute('data-theme') === 'light' ? '🌙' : '☀️'; };
+  const showTheme = () => { if (themeIcon) themeIcon.innerHTML = document.documentElement.getAttribute('data-theme') === 'light' ? '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-moon></use></svg>' : '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-sun></use></svg>'; };
   if (themeBtn) themeBtn.addEventListener('click', () => {
     document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
     showTheme();

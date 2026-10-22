@@ -125,7 +125,7 @@
     const firstDay = cachedPhotoItems[0].day;
     const lastDay = cachedPhotoItems[cachedPhotoItems.length - 1].day;
     if (statSpan) {
-      statSpan.textContent = tr('healing.gallery.timelineSpan', 'Span: Day {start} ➔ Day {end}', { start: firstDay, end: lastDay });
+      statSpan.textContent = tr('healing.gallery.timelineSpan', 'Span: Day {start} Day {end}', { start: firstDay, end: lastDay });
     }
 
     const sortOrder = sortSelect ? sortSelect.value : 'asc';
@@ -156,7 +156,7 @@
         ? `<p class="milestone-card__notes">${escapeHtml(item.notes.length > 70 ? item.notes.substring(0, 70) + '...' : item.notes)}</p>`
         : '';
 
-      const inspectLabel = (window.t && window.t('healing.gallery.inspectBtn')) || '🔍 Inspect';
+      const inspectLabel = (window.t && window.t('healing.gallery.inspectBtn')) || 'Inspect';
       const compareLabel = (window.t && window.t('healing.gallery.compareBtn')) || '↔ Compare';
 
       return `
@@ -166,7 +166,7 @@
             <span class="milestone-card__badge ${item.isBaseline ? 'milestone-card__badge--baseline' : ''}">
               ${item.isBaseline ? tr('healing.gallery.baselineBadge', 'Day 0 - Baseline') : tr('healing.gallery.dayBadge', 'Day {day}', { day: item.day })}
             </span>
-            <span class="milestone-card__zoom-hint">🔍</span>
+            <span class="milestone-card__zoom-hint"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg></span>
           </div>
           <div class="milestone-card__body">
             <div class="milestone-card__meta">
@@ -785,10 +785,10 @@
     if (!container) return;
 
     const symptoms = [
-      { key: 'redness', label: (window.t && window.t('healing.severityComparison.symptomRedness')) || 'Redness', valA: entryA.redness || 0, valB: entryB.redness || 0, icon: '🔴' },
-      { key: 'swelling', label: (window.t && window.t('healing.severityComparison.symptomSwelling')) || 'Swelling', valA: entryA.swelling || 0, valB: entryB.swelling || 0, icon: '🟠' },
-      { key: 'tenderness', label: (window.t && window.t('healing.severityComparison.symptomTenderness')) || 'Tenderness', valA: entryA.tenderness || 0, valB: entryB.tenderness || 0, icon: '🟡' },
-      { key: 'discharge', label: (window.t && window.t('healing.severityComparison.symptomDischarge')) || 'Discharge', valA: entryA.discharge || 0, valB: entryB.discharge || 0, icon: '💧' }
+      { key: 'redness', label: (window.t && window.t('healing.severityComparison.symptomRedness')) || 'Redness', valA: entryA.redness || 0, valB: entryB.redness || 0, icon: '<svg class=ti-i width=.7em height=.7em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-dot-red></use></svg>' },
+      { key: 'swelling', label: (window.t && window.t('healing.severityComparison.symptomSwelling')) || 'Swelling', valA: entryA.swelling || 0, valB: entryB.swelling || 0, icon: '<svg class=ti-i width=.7em height=.7em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-dot-gold></use></svg>' },
+      { key: 'tenderness', label: (window.t && window.t('healing.severityComparison.symptomTenderness')) || 'Tenderness', valA: entryA.tenderness || 0, valB: entryB.tenderness || 0, icon: '<svg class=ti-i width=.7em height=.7em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-dot-gold></use></svg>' },
+      { key: 'discharge', label: (window.t && window.t('healing.severityComparison.symptomDischarge')) || 'Discharge', valA: entryA.discharge || 0, valB: entryB.discharge || 0, icon: '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-drop></use></svg>' }
     ];
 
     const levelNames = [0, 1, 2, 3].map((i) => tr('healing.severityComparison.level' + i, ['None', 'Mild', 'Moderate', 'Severe'][i]));
@@ -819,7 +819,7 @@
               <span class="severity-delta-val__label">${tr('healing.comparison.entry1', 'Entry 1')}:</span>
               <span class="severity-delta-val__num">${s.valA} (${levelNames[s.valA] || s.valA})</span>
             </div>
-            <div class="severity-delta-arrow">➔</div>
+            <div class="severity-delta-arrow"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-arrow></use></svg></div>
             <div class="severity-delta-val">
               <span class="severity-delta-val__label">${tr('healing.comparison.entry2', 'Entry 2')}:</span>
               <span class="severity-delta-val__num">${s.valB} (${levelNames[s.valB] || s.valB})</span>
@@ -857,7 +857,7 @@
       <div class="severity-overall-content ${statusClass}">
         <div class="severity-overall-header">
           <span class="severity-overall-label">${tr('healing.severityComparison.overallDelta', 'Overall Severity Change')}</span>
-          <span class="severity-overall-score">${scoreA}/12 ➔ ${scoreB}/12 (${totalDiff > 0 ? '+' + totalDiff : totalDiff})</span>
+          <span class="severity-overall-score">${scoreA}/12 ${scoreB}/12 (${totalDiff > 0 ? '+' + totalDiff : totalDiff})</span>
         </div>
         <p class="severity-overall-desc">${statusText}</p>
       </div>

@@ -30,7 +30,7 @@ const ComparisonModule = {
         // Create and append selector modal
         this.createSelectorModal();
 
-        console.log('⚖️ Comparison module initialized');
+        console.log('Comparison module initialized');
     },
 
     createSelectorModal() {
@@ -44,7 +44,7 @@ const ComparisonModule = {
             <div class="modal__content" style="max-width: 900px;">
                 <div class="modal__header">
                     <h3 class="modal__title" data-i18n="compare.modal.title">${t('compare.modal.title', 'Select Jewelry to Compare')}</h3>
-                    <button class="modal__close" id="selector-modal-close">✕</button>
+                    <button class="modal__close" id="selector-modal-close"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-x></use></svg></button>
                 </div>
                 <div class="modal__body">
                     <div class="selector-filters" style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
@@ -211,7 +211,7 @@ const ComparisonModule = {
         // Update comparison view
         this.updateComparison();
 
-        console.log(`⚖️ Added ${item.name} to slot ${slotNum}`);
+        console.log(`Added ${item.name} to slot ${slotNum}`);
     },
 
     updateComparison() {
@@ -234,7 +234,7 @@ const ComparisonModule = {
         // Update table
         this.updateTable(items);
 
-        console.log(`⚖️ Comparing ${items.length} items`);
+        console.log(`Comparing ${items.length} items`);
     },
 
     updateSlots(items) {
@@ -249,7 +249,7 @@ const ComparisonModule = {
                         <canvas width="80" height="80" data-jewelry-id="${item.id}" style="display: block; margin: 0 auto 0.5rem;"></canvas>
                         <h4 style="font-size: 0.875rem; margin-bottom: 0.25rem;">${item.name}</h4>
                         <p style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.5rem;">${item.gauge} (${gaugeMM}mm)</p>
-                        <button class="btn btn--small" onclick="ComparisonModule.removeItem(${index})">✕ ${removeLabel}</button>
+                        <button class="btn btn--small" onclick="ComparisonModule.removeItem(${index})"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-x></use></svg> ${removeLabel}</button>
                     </div>
                 `;
                 slot.classList.add('filled');
@@ -353,7 +353,7 @@ const ComparisonModule = {
     removeItem(index) {
         AppState.comparisonItems[index] = null;
         this.updateComparison();
-        console.log(`⚖️ Removed item from slot ${index + 1}`);
+        console.log(`Removed item from slot ${index + 1}`);
     }
 };
 

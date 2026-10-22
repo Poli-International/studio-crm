@@ -17,7 +17,7 @@
     'print.generated_prefix': 'Aangemaakt op:',
     'print.signature': 'Handtekening artiest / studio: _____________________________________',
     'print.date': 'Datum: ________________________',
-    'header.badge': '🧾 Aftrekposten Tracker V2',
+    'header.badge': 'Aftrekposten Tracker V2',
     'header.title': 'Kostentracker voor tatoeëerders',
     'header.subtitle': 'Registreer uw bedrijfskosten gedurende het hele jaar in categorieën die uw boekhouder herkent. Snelle registratie per post, factuurreferenties, rittenregistratie en aanpasbare categorieën. Alle gegevens blijven veilig in uw eigen browser.',
     'toolbar.year': 'Fiscaal / kalenderjaar:',

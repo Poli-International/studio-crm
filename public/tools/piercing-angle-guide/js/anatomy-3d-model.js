@@ -492,7 +492,7 @@
       view: view.toUpperCase(),
       angle: (angleDeg > 0 ? '+' : '') + angleDeg
     }, 'VIEW: ' + view.toUpperCase() + ' | ORBIT: ' + (angleDeg > 0 ? '+' : '') + angleDeg + '°') + ' | ' + zoomLevel.toFixed(1) + 'x';
-    var dragHint = t('anatomy.svg_drag_hint', null, '🖱️ Drag to rotate | Shift+Drag or Toggle ✋ to Pan | Wheel to Zoom');
+    var dragHint = t('anatomy.svg_drag_hint', null, 'Drag to rotate | Shift+Drag or Toggle to Pan | Wheel to Zoom');
 
     svgHtml += `
       <text x="14" y="24" fill="#64748b" font-size="11" font-weight="600" font-family="monospace">
@@ -701,7 +701,7 @@
         initialPanX = panX;
         initialPanY = panY;
         canvasWrap.setAttribute('data-drag-mode', 'pinch-pan');
-        showTouchHud(`🤏 ${zoomLevel.toFixed(1)}× | ✌️ Pan`);
+        showTouchHud(`${zoomLevel.toFixed(1)}× | Pan`);
       }
     }, { passive: false });
 
@@ -725,7 +725,7 @@
         panY = Math.round(initialPanY + dMidY);
 
         renderExplorerCanvas();
-        showTouchHud(`🤏 ${zoomLevel.toFixed(1)}× | ✌️ Pan (${panX}, ${panY})`);
+        showTouchHud(`${zoomLevel.toFixed(1)}× | Pan (${panX}, ${panY})`);
         return;
       }
 
@@ -894,10 +894,10 @@
       if (modeBtn) {
         if (interactionMode === 'pan') {
           modeBtn.classList.add('active');
-          modeBtn.textContent = '✋ ' + t('anatomy.mode_pan', null, 'Pan View');
+          modeBtn.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-gloves></use></svg> ' + t('anatomy.mode_pan', null, 'Pan View');
         } else {
           modeBtn.classList.remove('active');
-          modeBtn.textContent = '🔄 ' + t('anatomy.mode_orbit', null, 'Rotate 3D');
+          modeBtn.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-refresh></use></svg> ' + t('anatomy.mode_orbit', null, 'Rotate 3D');
         }
       }
     }

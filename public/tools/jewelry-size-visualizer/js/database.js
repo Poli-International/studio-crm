@@ -946,4 +946,4 @@ if (typeof module !== 'undefined' && module.exports) {
 }
 
 // Log database stats on load
-console.log('💎 Jewelry Database loaded:', getDatabaseStats());
+console.log('Jewelry Database loaded:', getDatabaseStats());

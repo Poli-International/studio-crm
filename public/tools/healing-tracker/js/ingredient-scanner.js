@@ -341,16 +341,16 @@
       var modCount = matchedIrritants.filter(function(m) { return m.rule.hazard === 'moderate'; }).length;
 
       var overallStatus = 'safe';
-      var badgeText = t('healing.scanner.statusSafe', '🟢 NO LISTED IRRITANTS FOUND');
+      var badgeText = t('healing.scanner.statusSafe', 'NO LISTED IRRITANTS FOUND');
       var summaryMsg = t('healing.scanner.summarySafe', 'None of the ingredients matched the irritants this scanner checks for. That is not a guarantee of safety: if in doubt, ask your piercer, artist or a pharmacist.');
 
       if (highCount > 0) {
         overallStatus = 'high';
-        badgeText = t('healing.scanner.statusHigh', '🔴 HIGH HAZARD / CONTRAINDICATED');
+        badgeText = t('healing.scanner.statusHigh', 'HIGH HAZARD / CONTRAINDICATED');
         summaryMsg = t('healing.scanner.summaryHigh', 'Contains {count} high-risk irritant(s) or cytotoxics known to delay wound closure, trigger allergic contact dermatitis, or damage healing tissue.', { count: highCount });
       } else if (modCount > 0) {
         overallStatus = 'moderate';
-        badgeText = t('healing.scanner.statusModerate', '🟡 CAUTION / POTENTIAL IRRITANT');
+        badgeText = t('healing.scanner.statusModerate', 'CAUTION / POTENTIAL IRRITANT');
         summaryMsg = t('healing.scanner.summaryModerate', 'Contains {count} moderate sensitizer(s) or comedogenic lipids. Use with caution or perform a 24-hour patch test before applying to active punctures.', { count: modCount });
       }
 
@@ -382,7 +382,7 @@
       if (irritantsListEl) {
         irritantsListEl.innerHTML = '';
         if (matchedIrritants.length === 0) {
-          irritantsListEl.innerHTML = '<div class="ingredient-clean-notice">' + t('healing.scanner.zeroIrritants', '✓ Zero known irritants, alcohols, or cytotoxics detected in this formula.') + '</div>';
+          irritantsListEl.innerHTML = '<div class="ingredient-clean-notice">' + t('healing.scanner.zeroIrritants', 'Zero known irritants, alcohols, or cytotoxics detected in this formula.') + '</div>';
         } else {
           matchedIrritants.forEach(function(m) {
             var itemEl = document.createElement('div');
@@ -419,7 +419,7 @@
           safeListEl.style.display = 'block';
           var safeTitle = document.createElement('h5');
           safeTitle.className = 'ingredient-safe-title';
-          safeTitle.textContent = t('healing.scanner.beneficialTitle', '✓ Beneficial & Compatible Ingredients Detected:');
+          safeTitle.textContent = t('healing.scanner.beneficialTitle', 'Beneficial & Compatible Ingredients Detected:');
           safeListEl.appendChild(safeTitle);
 
           var chipsContainer = document.createElement('div');
@@ -427,7 +427,7 @@
           matchedSafe.forEach(function(s) {
             var chip = document.createElement('span');
             chip.className = 'ingredient-safe-chip';
-            chip.textContent = '✓ ' + s.rule.name;
+            chip.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> ' + s.rule.name;
             chip.title = s.rule.reason;
             chipsContainer.appendChild(chip);
           });

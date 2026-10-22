@@ -377,7 +377,7 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 - **Language**: eight interface languages are selectable from the top bar (`en`, `fr`, `it`, `de`, `es`, `nl`, `pt`, `th`). Translations live in `i18n.js` and `js/i18n-phrases.js`. Localised user guides ship in `guide/`.
 - **Theme**: Anodised Titanium, dark only (since uiDesign 2). Colours are `--ti-*` custom properties in `public/css/04-titanium.css`; markup and scripts write them as `var(--ti-x, #original)` so print windows, PDFs and the kiosk, which do not load that sheet, keep their paper colours. Fonts (Satoshi, JetBrains Mono) are bundled in `public/fonts/`.
-- **Icons**: one drawn SVG sprite at the top of `public/index.html` (`<svg class=ti-i><use href=#i-name></use></svg>`), no emojis in the CRM screens; status dots are `<i class=ti-dot-green></i>` and the like. Text that cannot hold markup (toasts, dialogs, options, PDF labels) carries no icon.
+- **Icons**: one drawn SVG sprite at the top of `public/index.html` (`<svg class=ti-i><use href=#i-name></use></svg>`), no emojis in the CRM screens; status dots are `<i class=ti-dot-green></i>` and the like. Text that cannot hold markup (toasts, dialogs, options, PDF labels) carries no icon. Inside the tools (since 1.0.27): HTML tools use the shared sprite `public/tools/shared/icons.svg` (`<use href=../shared/icons.svg#i-name>`), the compiled React tools use lucide-react.
 - **Tool families**: each tool card on the Tools screen has `data-family` (sterile, pierce, tattoo, health, business), and each tool window's title bar takes its family from the modal id; both are styled in `04-titanium.css`. The tool files in `public/tools/` are shared with the website and keep their own look.
 - **Branding**: the sidebar logo is `assets/studio_crm_logo.jpg`; the studio's own logo can be uploaded in Settings and appears in the top bar.
 - **Studio settings**: prices, deposit rule, tax (VAT) rate, touch-up policy and stock thresholds are entered in Settings. The price estimator, quotes and invoices read these values. A price list can be exported to CSV, edited, and imported back.
@@ -432,6 +432,15 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 ---
 
 ## Version History
+
+### 1.0.27
+
+**Drawn icons inside the tools.** The tool files in `public/tools/` now use the same drawn icons as the CRM screens, matching the website's tools:
+- HTML tools: emojis replaced by the shared sprite `public/tools/shared/icons.svg` (referenced as `../shared/icons.svg#i-<name>`, stroke follows each tool's own light/dark theme). Text that cannot hold an icon (options, tooltips, canvas, toasts) kept its words without the emoji; translation entries that held only an emoji are empty, so a tool's own translator leaves the page's icon in place.
+- Compiled tools (stencil calculator, pricing benchmark, booth rent, SEA ink checker, font previewer): rebuilt from source with lucide-react icons, the icon set they already used. The price estimator's bundle renders sprite icons. The stencil calculator ships its full stylesheet again (its previous one was a 4.5 KB stub, so the tool showed unstyled).
+- Copy and submit buttons get their icon back after their confirmation message.
+- Form builder: the CRM bridge's Save to client and Send to kiosk buttons and the privacy note carry icons; the scanner field shows a drawn icon. The client's name on the Save button is still written as plain text.
+- Two unreferenced old bundles removed (booth rent, font previewer). Screenshots retaken.
 
 ### 1.0.26
 

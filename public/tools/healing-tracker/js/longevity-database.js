@@ -213,28 +213,28 @@
       "no_rush": {
         threshold: 5,
         get level() { return translateKey("longevity.urgencyLevels.no_rush.level", "Looking Great!"); },
-        icon: "✅",
+        icon: "<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>",
         statusClass: "status-great",
         get message() { return translateKey("longevity.urgencyLevels.no_rush.message", "Your tattoo is still in excellent condition. Keep up the great care routine!"); }
       },
       "plan_ahead": {
         threshold: 3,
         get level() { return translateKey("longevity.urgencyLevels.plan_ahead.level", "Plan Ahead"); },
-        icon: "📅",
+        icon: "<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-calendar></use></svg>",
         statusClass: "status-plan",
         get message() { return translateKey("longevity.urgencyLevels.plan_ahead.message", "Start planning for a touch-up in the next few years. Schedule a consultation with your artist."); }
       },
       "schedule_soon": {
         threshold: 1,
         get level() { return translateKey("longevity.urgencyLevels.schedule_soon.level", "Schedule Soon"); },
-        icon: "⏰",
+        icon: "<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clock></use></svg>",
         statusClass: "status-soon",
         get message() { return translateKey("longevity.urgencyLevels.schedule_soon.message", "Touch-up recommended within the next year to maintain vibrancy and detail."); }
       },
       "overdue": {
         threshold: 0,
         get level() { return translateKey("longevity.urgencyLevels.overdue.level", "Overdue"); },
-        icon: "🚨",
+        icon: "<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-siren></use></svg>",
         statusClass: "status-overdue",
         get message() { return translateKey("longevity.urgencyLevels.overdue.message", "Your tattoo is overdue for a touch-up. Significant fading may have occurred."); }
       }

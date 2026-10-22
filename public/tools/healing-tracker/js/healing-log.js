@@ -142,7 +142,7 @@
           if (textEl) {
             textEl.textContent = window.t
               ? window.t('healing.storage.lowWarning', { remaining: est.formattedRemaining })
-              : `⚠️ Storage is running low (${est.formattedRemaining} remaining).`;
+              : `Storage is running low (${est.formattedRemaining} remaining).`;
           }
         } else {
           banner.style.display = 'none';
@@ -375,7 +375,7 @@
             if (result.exceedsStorage) {
               const warnMsg = window.t
                 ? window.t('healing.photo.exceedsStorageWarning', { size: formatBytes(result.neededBytes), remaining: formatBytes(result.remainingBytes) })
-                : `⚠️ This photo requires ${formatBytes(result.neededBytes)}, but only ${formatBytes(result.remainingBytes)} remains in storage. Please drop older photos before saving.`;
+                : `This photo requires ${formatBytes(result.neededBytes)}, but only ${formatBytes(result.remainingBytes)} remains in storage. Please drop older photos before saving.`;
               alert(warnMsg);
             }
             if (baselinePreviewContainer) {
@@ -452,7 +452,7 @@
             if (result.exceedsStorage) {
               const warnMsg = window.t
                 ? window.t('healing.photo.exceedsStorageWarning', { size: formatBytes(result.neededBytes), remaining: formatBytes(result.remainingBytes) })
-                : `⚠️ This photo requires ${formatBytes(result.neededBytes)}, but only ${formatBytes(result.remainingBytes)} remains in storage. Please drop older photos before saving.`;
+                : `This photo requires ${formatBytes(result.neededBytes)}, but only ${formatBytes(result.remainingBytes)} remains in storage. Please drop older photos before saving.`;
               alert(warnMsg);
             }
             if (entryPreviewContainer) entryPreviewContainer.style.display = 'block';
@@ -785,7 +785,7 @@
           deleteBtn.className = 'healing-entry__delete-btn';
           deleteBtn.type = 'button';
           deleteBtn.title = window.t ? window.t('healing.log.deleteEntry') : 'Delete';
-          deleteBtn.textContent = '🗑️';
+          deleteBtn.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-trash></use></svg>';
           deleteBtn.addEventListener('click', function() {
             deleteEntry(entry.id);
           });
@@ -818,15 +818,15 @@
 
           const redChip = document.createElement('span');
           redChip.className = 'healing-entry__rating-chip';
-          redChip.textContent = `🔴 ${(window.t ? window.t('healing.log.redness') : 'Redness')}: ${entry.redness}/3`;
+          redChip.textContent = `${(window.t ? window.t('healing.log.redness') : 'Redness')}: ${entry.redness}/3`;
 
           const swellChip = document.createElement('span');
           swellChip.className = 'healing-entry__rating-chip';
-          swellChip.textContent = `🎈 ${(window.t ? window.t('healing.log.swelling') : 'Swelling')}: ${entry.swelling}/3`;
+          swellChip.textContent = `${(window.t ? window.t('healing.log.swelling') : 'Swelling')}: ${entry.swelling}/3`;
 
           const tendChip = document.createElement('span');
           tendChip.className = 'healing-entry__rating-chip';
-          tendChip.textContent = `🩹 ${(window.t ? window.t('healing.log.tenderness') : 'Tenderness')}: ${entry.tenderness}/3`;
+          tendChip.textContent = `${(window.t ? window.t('healing.log.tenderness') : 'Tenderness')}: ${entry.tenderness}/3`;
 
           const dischargeLevel = Math.min(3, Math.max(0, Number(entry.discharge) || 0));
           const dischargeDesc = window.t
@@ -835,7 +835,7 @@
 
           const disChip = document.createElement('span');
           disChip.className = 'healing-entry__rating-chip';
-          disChip.textContent = `💧 ${(window.t ? window.t('healing.log.discharge') : 'Discharge')}: ${dischargeDesc}`;
+          disChip.textContent = `${(window.t ? window.t('healing.log.discharge') : 'Discharge')}: ${dischargeDesc}`;
 
           ratingsGroup.appendChild(redChip);
           ratingsGroup.appendChild(swellChip);
@@ -852,8 +852,8 @@
             const causeBadge = document.createElement('div');
             causeBadge.className = 'healing-entry__cause-badge';
             causeBadge.textContent = window.t
-              ? ('⚡ ' + window.t('healing.whatChanged.causeRecorded', { causes: causeNames }))
-              : `⚡ Likely trigger: ${causeNames}`;
+              ? ('<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bolt></use></svg> ' + window.t('healing.whatChanged.causeRecorded', { causes: causeNames }))
+              : `Likely trigger: ${causeNames}`;
             details.appendChild(causeBadge);
           }
 
@@ -861,7 +861,7 @@
           if (entry.notes && typeof entry.notes === 'string') {
             const notesP = document.createElement('p');
             notesP.className = 'healing-entry__notes';
-            notesP.textContent = `📝 ${entry.notes}`;
+            notesP.textContent = `${entry.notes}`;
             details.appendChild(notesP);
           }
 
@@ -964,7 +964,7 @@
       const r = alertData.rednessScores[idx];
       const s = alertData.swellingScores[idx];
       return `${d} (R:${r}, S:${s})`;
-    }).join(' ➔ ');
+    }).join(' → ');
 
     const descMsg = t('healing.symptomTrendAlert.desc', 
       'Automated analysis detected 3 consecutive entries of escalating {symptom}: {progression}.',

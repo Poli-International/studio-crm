@@ -210,14 +210,14 @@ if (window.self !== window.top) {
 </head>
 <body>
   <div class="container">
-    <h1>🔧 Embed the Professional Gauge Converter</h1>
+    <h1><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-wrench></use></svg> Embed the Professional Gauge Converter</h1>
 
     <div class="intro">
       <p><strong>Add this powerful gauge conversion tool to your website in seconds!</strong></p>
       <p>Simply copy one of the embed codes below and paste it into your HTML. No dependencies, no API keys, no configuration needed.</p>
     </div>
 
-    <h2>📏 Choose Your Size</h2>
+    <h2><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-ruler></use></svg> Choose Your Size</h2>
     <p>Select the embed option that best fits your website layout:</p>
 
     <!-- Compact Version -->
@@ -277,7 +277,7 @@ if (window.self !== window.top) {
       </div>
 
       <div class="preview">
-        <div class="preview-label">📱 Live Preview:</div>
+        <div class="preview-label"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-phone></use></svg> Live Preview:</div>
         <iframe
           src="embed.html"
           width="100%"
@@ -316,7 +316,7 @@ if (window.self !== window.top) {
       </div>
     </div>
 
-    <h2>⚙️ Customization Options</h2>
+    <h2><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-gear></use></svg> Customization Options</h2>
     <p>You can customize the iframe styling by modifying CSS classes or attributes:</p>
 
     <div class="code-block">
@@ -331,13 +331,13 @@ if (window.self !== window.top) {
 &lt;/iframe&gt;</code>
     </div>
 
-    <h2>📋 Implementation Notes</h2>
+    <h2><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clipboard></use></svg> Implementation Notes</h2>
 
     <div class="note">
       <p><strong>Important:</strong> Replace <code>https://poliinternational.com/tools/gauge-converter/embed.html</code> with your actual hosted URL path when deploying to production.</p>
     </div>
 
-    <h3>✅ Features Included</h3>
+    <h3><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Features Included</h3>
     <ul class="features">
       <li><strong>No Dependencies:</strong> Everything is self-contained in the iframe</li>
       <li><strong>Responsive Design:</strong> Adapts to container width automatically</li>
@@ -348,7 +348,7 @@ if (window.self !== window.top) {
       <li><strong>SEO-Friendly:</strong> Proper semantic HTML and meta tags</li>
     </ul>
 
-    <h3>🔒 Security & Privacy</h3>
+    <h3><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-lock></use></svg> Security & Privacy</h3>
     <ul class="features">
       <li>No external API calls or tracking</li>
       <li>No cookies or data collection</li>
@@ -356,7 +356,7 @@ if (window.self !== window.top) {
       <li>No cross-origin security issues</li>
     </ul>
 
-    <h3>🌐 Browser Support</h3>
+    <h3><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-globe></use></svg> Browser Support</h3>
     <ul class="features">
       <li>Chrome 90+ (and all Chromium-based browsers)</li>
       <li>Firefox 88+</li>
@@ -366,7 +366,7 @@ if (window.self !== window.top) {
       <li>Android Chrome 90+</li>
     </ul>
 
-    <h2>🛠️ Technical Specifications</h2>
+    <h2><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-wrench></use></svg> Technical Specifications</h2>
     <p>The gauge converter includes:</p>
     <ul class="features">
       <li>14 standard gauge sizes (00G to 22G)</li>
@@ -377,11 +377,11 @@ if (window.self !== window.top) {
       <li>300ms debounce on numeric inputs for performance</li>
     </ul>
 
-    <h2>💼 License & Attribution</h2>
+    <h2><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-box></use></svg> License & Attribution</h2>
     <p>This tool is provided by <strong>Poli International</strong>, a leading B2B supplier of professional tattoo and piercing equipment.</p>
     <p>The embed includes a subtle "Powered by Poli International" footer with a link back to the Poli website. This attribution must remain intact.</p>
 
-    <h2>🆘 Support</h2>
+    <h2><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-siren></use></svg> Support</h2>
     <p>If you encounter any issues or have questions about embedding this tool:</p>
     <ul class="features">
       <li>Email: <a href="mailto:support@poliinternational.com">support@poliinternational.com</a></li>
@@ -403,12 +403,12 @@ if (window.self !== window.top) {
       // Copy to clipboard
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(textToCopy).then(() => {
-          const originalText = button.textContent;
-          button.textContent = '✓ Copied!';
+          const originalText = button.innerHTML;
+          button.textContent = 'Copied!';
           button.classList.add('copied');
 
           setTimeout(() => {
-            button.textContent = originalText;
+            button.innerHTML = originalText;
             button.classList.remove('copied');
           }, 2000);
         }).catch(err => {

@@ -590,14 +590,14 @@
             <h1 class="embed__title" data-i18n="embed_title">Needle Coverage Calculator</h1>
             <div style="display: flex; align-items: center; gap: 0.5rem;">
                 <select id="embed-language-select" aria-label="Select Language" onchange="window.I18N && window.I18N.setLanguage(this.value)" style="background: rgba(0,0,0,0.4); color: #fff; border: 1px solid #2C5F7C; font-size: 0.8rem; font-weight: 600; padding: 4px 6px; border-radius: 6px; cursor: pointer;">
-                    <option value="en">🇬🇧 EN</option>
-                    <option value="fr">🇫🇷 FR</option>
-                    <option value="it">🇮🇹 IT</option>
-                    <option value="de">🇩🇪 DE</option>
-                    <option value="es">🇪🇸 ES</option>
-                    <option value="nl">🇳🇱 NL</option>
-                    <option value="pt">🇵🇹 PT</option>
-                    <option value="th">🇹🇭 TH</option>
+                    <option value="en">EN</option>
+                    <option value="fr">FR</option>
+                    <option value="it">IT</option>
+                    <option value="de">DE</option>
+                    <option value="es">ES</option>
+                    <option value="nl">NL</option>
+                    <option value="pt">PT</option>
+                    <option value="th">TH</option>
                 </select>
                 
                 <button id="theme-toggle" class="embed__theme-toggle" aria-label="Toggle theme">◐</button>
@@ -606,17 +606,17 @@
 
         <!-- Tab Navigation -->
         <nav class="embed__tabs" role="tablist">
-            <button class="embed__tab embed__tab--active" data-tab="coverage" role="tab" aria-selected="true" data-i18n="tab_coverage">
-                📏 Coverage
+            <button class="embed__tab embed__tab--active" data-tab="coverage" role="tab" aria-selected="true">
+                <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-ruler></use></svg><span data-i18n="tab_coverage" style="color:inherit">Coverage</span>
             </button>
-            <button class="embed__tab" data-tab="session" role="tab" aria-selected="false" data-i18n="tab_session">
-                ⏱️ Session
+            <button class="embed__tab" data-tab="session" role="tab" aria-selected="false">
+                <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-clock></use></svg><span data-i18n="tab_session" style="color:inherit">Session</span>
             </button>
-            <button class="embed__tab" data-tab="ink" role="tab" aria-selected="false" data-i18n="tab_ink">
-                💧 Ink
+            <button class="embed__tab" data-tab="ink" role="tab" aria-selected="false">
+                <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-drop></use></svg><span data-i18n="tab_ink" style="color:inherit">Ink</span>
             </button>
-            <button class="embed__tab" data-tab="pricing" role="tab" aria-selected="false" data-i18n="tab_pricing">
-                💰 Pricing
+            <button class="embed__tab" data-tab="pricing" role="tab" aria-selected="false">
+                <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-cash></use></svg><span data-i18n="tab_pricing" style="color:inherit">Pricing</span>
             </button>
         </nav>
 
@@ -855,7 +855,7 @@
         <!-- Email Notification Section -->
         <section class="embed__email-section">
             <div class="embed__email-box">
-                <h2 class="embed__email-title">🔔 Get Notified of New Tools!</h2>
+                <h2 class="embed__email-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bell></use></svg> Get Notified of New Tools!</h2>
                 <p class="embed__email-subtitle">Be first to know when we launch new free tools for tattoo professionals.</p>
 
                 <form id="embed-email-form" class="embed__email-form">
@@ -869,15 +869,15 @@
                         <button type="submit" class="embed__email-submit">Notify Me</button>
                     </div>
                     <p class="embed__email-success" id="embed-email-success" style="display: none;">
-                        ✅ Thanks! We'll notify you when new tools launch!
+                        <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Thanks! We'll notify you when new tools launch!
                     </p>
                     <p class="embed__email-error" id="embed-email-error" style="display: none;">
-                        ❌ Please enter a valid email address.
+                        <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-x></use></svg> Please enter a valid email address.
                     </p>
                     <div class="embed__email-trust">
-                        <span>✅ Free tool updates only</span>
-                        <span>✅ No spam</span>
-                        <span>✅ Unsubscribe anytime</span>
+                        <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Free tool updates only</span>
+                        <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> No spam</span>
+                        <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Unsubscribe anytime</span>
                     </div>
                 </form>
             </div>
@@ -885,38 +885,38 @@
 
         <!-- Features Section -->
         <section class="embed__features-section">
-            <h2 class="embed__features-title">✨ Tool Features</h2>
+            <h2 class="embed__features-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-spark></use></svg> Tool Features</h2>
             <div class="embed__features-grid">
                 <div class="embed__feature-item">
-                    <span class="embed__feature-check">✅</span>
+                    <span class="embed__feature-check"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span>
                     <span class="embed__feature-text">Coverage Area Calculator</span>
                 </div>
                 <div class="embed__feature-item">
-                    <span class="embed__feature-check">✅</span>
+                    <span class="embed__feature-check"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span>
                     <span class="embed__feature-text">Session Time Estimator</span>
                 </div>
                 <div class="embed__feature-item">
-                    <span class="embed__feature-check">✅</span>
+                    <span class="embed__feature-check"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span>
                     <span class="embed__feature-text">Ink Consumption Planner</span>
                 </div>
                 <div class="embed__feature-item">
-                    <span class="embed__feature-check">✅</span>
+                    <span class="embed__feature-check"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span>
                     <span class="embed__feature-text">Pricing Calculator</span>
                 </div>
                 <div class="embed__feature-item">
-                    <span class="embed__feature-check">✅</span>
+                    <span class="embed__feature-check"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span>
                     <span class="embed__feature-text">Mobile-Responsive Design</span>
                 </div>
                 <div class="embed__feature-item">
-                    <span class="embed__feature-check">✅</span>
+                    <span class="embed__feature-check"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span>
                     <span class="embed__feature-text">Dark/Light Mode</span>
                 </div>
                 <div class="embed__feature-item">
-                    <span class="embed__feature-check">✅</span>
+                    <span class="embed__feature-check"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span>
                     <span class="embed__feature-text">100% Free, No Ads</span>
                 </div>
                 <div class="embed__feature-item">
-                    <span class="embed__feature-check">✅</span>
+                    <span class="embed__feature-check"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span>
                     <span class="embed__feature-text">Professional Results</span>
                 </div>
             </div>
@@ -926,7 +926,7 @@
     <footer class="embed-footer">
         <div class="embed-footer-content">
             <a href="https://poliinternational.com/tools" target="_blank" class="embed-footer-btn embed-footer-btn--tools">
-                <span class="btn-icon">🔧</span>
+                <span class="btn-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-wrench></use></svg></span>
                 <span class="btn-text">More Tools</span>
             </a>
             
@@ -1055,7 +1055,7 @@
             const resultsDiv = document.getElementById('coverage-results');
             resultsDiv.style.display = 'block';
             resultsDiv.innerHTML = `
-                <h3 class="embed__results-title">✓ Coverage Results</h3>
+                <h3 class="embed__results-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Coverage Results</h3>
                 <div class="embed__results-grid">
                     <div class="embed__result-card">
                         <div class="embed__result-value">${adjustedCoverage.toFixed(1)}</div>
@@ -1132,7 +1132,7 @@
             const resultsDiv = document.getElementById('session-results');
             resultsDiv.style.display = 'block';
             resultsDiv.innerHTML = `
-                <h3 class="embed__results-title">✓ Session Estimate</h3>
+                <h3 class="embed__results-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Session Estimate</h3>
                 <div class="embed__results-grid">
                     <div class="embed__result-card">
                         <div class="embed__result-value">${totalTime.toFixed(1)}</div>
@@ -1190,7 +1190,7 @@
             const resultsDiv = document.getElementById('ink-results');
             resultsDiv.style.display = 'block';
             resultsDiv.innerHTML = `
-                <h3 class="embed__results-title">✓ Ink Requirements</h3>
+                <h3 class="embed__results-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Ink Requirements</h3>
                 <div class="embed__results-grid">
                     <div class="embed__result-card">
                         <div class="embed__result-value">${totalInk.toFixed(1)}</div>
@@ -1247,7 +1247,7 @@
             const resultsDiv = document.getElementById('pricing-results');
             resultsDiv.style.display = 'block';
             resultsDiv.innerHTML = `
-                <h3 class="embed__results-title">✓ Pricing Suggestion</h3>
+                <h3 class="embed__results-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> Pricing Suggestion</h3>
                 <div class="embed__results-grid">
                     <div class="embed__result-card">
                         <div class="embed__result-value">$${minPrice.toFixed(0)}</div>

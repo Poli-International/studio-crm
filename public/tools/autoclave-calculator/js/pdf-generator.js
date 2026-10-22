@@ -189,9 +189,9 @@ const PDFGenerator = {
             const calDate = new Date(calibrationDate);
             const daysSince = Math.floor((now - calDate)/(1000*60*60*24));
             if (daysSince >= 365) {
-                calibStatusText = __tx('⚠️ Overdue ({d}d since cert on {date})', { d: daysSince, date: calDate.toLocaleDateString() });
+                calibStatusText = __tx('Overdue ({d}d since cert on {date})', { d: daysSince, date: calDate.toLocaleDateString() });
             } else {
-                calibStatusText = __tx('✓ Valid ({d}d remaining | Cert: {date})', { d: 365 - daysSince, date: calDate.toLocaleDateString() });
+                calibStatusText = __tx('Valid ({d}d remaining | Cert: {date})', { d: 365 - daysSince, date: calDate.toLocaleDateString() });
             }
         }
 
@@ -251,14 +251,14 @@ const PDFGenerator = {
 
                 <div class="print-checklist-title">${T("8-Point Clinical Release Verification Checklist")}</div>
                 <ul class="print-checklist">
-                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>${T("1. Pre-Clean & Ultrasonic:")}</strong> ${T("Instruments scrubbed, enzymatically rinsed, and 100% dry prior to packaging.")}</span></li>
-                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>${T("2. Pouch Integrity:")}</strong> ${T("Medical-grade autoclave pouches inspected; self-seals intact without tears or creases.")}</span></li>
-                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>${T("3. Internal Chemical Integrator:")}</strong> ${T("Class 4/5/6 multiparameter integrator placed in center of pack.")}</span></li>
-                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>${T("4. External Process Indicator:")}</strong> ${T("External color change ink verified after completed cycle.")}</span></li>
-                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>${T("5. Distilled Water & Gasket:")}</strong> ${T("Water purity verified; silicone door gasket clean with airtight seal.")}</span></li>
-                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>${T("6. Physical Parameters Sustained:")}</strong> ${T("Digital display logged full plateau temp & pressure continuously.")}</span></li>
-                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>${T("7. Dry Pack Release:")}</strong> ${T("Zero wet packs detected; items fully cooled before handling or storage.")}</span></li>
-                    <li class="print-checklist-item"><span class="print-checkbox">✓</span><span><strong>${T("8. Biological Spore Test:")}</strong> ${T("Autoclave has a valid passing biological spore test within mandated frequency.")}</span></li>
+                    <li class="print-checklist-item"><span class="print-checkbox"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span><span><strong>${T("1. Pre-Clean & Ultrasonic:")}</strong> ${T("Instruments scrubbed, enzymatically rinsed, and 100% dry prior to packaging.")}</span></li>
+                    <li class="print-checklist-item"><span class="print-checkbox"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span><span><strong>${T("2. Pouch Integrity:")}</strong> ${T("Medical-grade autoclave pouches inspected; self-seals intact without tears or creases.")}</span></li>
+                    <li class="print-checklist-item"><span class="print-checkbox"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span><span><strong>${T("3. Internal Chemical Integrator:")}</strong> ${T("Class 4/5/6 multiparameter integrator placed in center of pack.")}</span></li>
+                    <li class="print-checklist-item"><span class="print-checkbox"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span><span><strong>${T("4. External Process Indicator:")}</strong> ${T("External color change ink verified after completed cycle.")}</span></li>
+                    <li class="print-checklist-item"><span class="print-checkbox"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span><span><strong>${T("5. Distilled Water & Gasket:")}</strong> ${T("Water purity verified; silicone door gasket clean with airtight seal.")}</span></li>
+                    <li class="print-checklist-item"><span class="print-checkbox"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span><span><strong>${T("6. Physical Parameters Sustained:")}</strong> ${T("Digital display logged full plateau temp & pressure continuously.")}</span></li>
+                    <li class="print-checklist-item"><span class="print-checkbox"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span><span><strong>${T("7. Dry Pack Release:")}</strong> ${T("Zero wet packs detected; items fully cooled before handling or storage.")}</span></li>
+                    <li class="print-checklist-item"><span class="print-checkbox"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span><span><strong>${T("8. Biological Spore Test:")}</strong> ${T("Autoclave has a valid passing biological spore test within mandated frequency.")}</span></li>
                 </ul>
 
                 <div class="print-signoff-box">
@@ -271,7 +271,7 @@ const PDFGenerator = {
                         <div>
                             <strong>${T("Load Release Decision:")}</strong>
                             <div style="margin-top: 8px;">
-                                <span class="print-checkbox">✓</span> <strong>${T("PASSED & RELEASED")}</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="print-checkbox"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span> <strong>${T("PASSED & RELEASED")}</strong> &nbsp;&nbsp;&nbsp;&nbsp;
                                 <span class="print-checkbox"></span> <strong>${T("FAILED / QUARANTINE")}</strong>
                             </div>
                         </div>
@@ -382,7 +382,7 @@ const PDFGenerator = {
                         <td>${temp} / ${pressure}</td>
                         <td>${exposure} / ${dry} (Tot: ${total})</td>
                         <td>${op}</td>
-                        <td><span style="color: var(--color-success); font-weight: bold;">${T("✓ RELEASED")}</span></td>
+                        <td><span style="color: var(--color-success); font-weight: bold;">${T("RELEASED")}</span></td>
                     </tr>
                 `;
             });
@@ -398,7 +398,7 @@ const PDFGenerator = {
                 const badgeStyle = isPass
                     ? 'background: var(--color-success); color: var(--bg-primary);'
                     : 'background: var(--color-danger); color: var(--bg-primary);';
-                const resultText = isPass ? __tx('✓ NEGATIVE (PASS)') : __tx('⚠️ POSITIVE (FAIL)');
+                const resultText = isPass ? __tx('NEGATIVE (PASS)') : __tx('POSITIVE (FAIL)');
                 const gapText = s.gapDays !== undefined && s.gapDays !== null ? __tx('{n} days', { n: s.gapDays }) : (idx === 0 ? __tx('Baseline') : '--');
 
                 sporeRowsHtml += `
@@ -473,7 +473,7 @@ const PDFGenerator = {
 
                 <!-- Annual Calibration & Biomedical Service Attestation -->
                 <div style="background: var(--bg-secondary); border-left: 4px solid var(--color-success); padding: 8px 12px; border-radius: 4px; margin-bottom: 14px; font-size: 10.5px;">
-                    <strong>${T("🛡️ Equipment Calibration Attestation:")}</strong> ${T("This autoclave is under active annual preventive maintenance and biomedical temperature/pressure calibration per manufacturer guidelines and local health authority mandates. Last certified on")} <strong>${calibFormattedDate}</strong> ${T("by")} <strong>${calibTech}</strong> ${T('(Certificate/Decal #{decal}).', { decal: calibDecal })}
+                    <strong>${T("Equipment Calibration Attestation:")}</strong> ${T("This autoclave is under active annual preventive maintenance and biomedical temperature/pressure calibration per manufacturer guidelines and local health authority mandates. Last certified on")} <strong>${calibFormattedDate}</strong> ${T("by")} <strong>${calibTech}</strong> ${T('(Certificate/Decal #{decal}).', { decal: calibDecal })}
                 </div>
 
                 <!-- SECTION 1: 30-DAY STERILIZATION CYCLES LOG TABLE -->
@@ -589,7 +589,7 @@ const PDFGenerator = {
         if (calibrationDate) {
             const calDate = new Date(calibrationDate);
             const daysSince = Math.floor((now - calDate)/(1000*60*60*24));
-            calibInfo = daysSince >= 365 ? __tx('⚠️ Overdue ({n}d ago)', { n: daysSince }) : __tx('✓ Certified ({n}d left)', { n: 365 - daysSince });
+            calibInfo = daysSince >= 365 ? __tx('Overdue ({n}d ago)', { n: daysSince }) : __tx('Certified ({n}d left)', { n: 365 - daysSince });
         }
 
         return `
@@ -649,7 +649,7 @@ const PDFGenerator = {
                         <div>
                             <strong>${T("Compliance Certification:")}</strong>
                             <div style="margin-top: 8px;">
-                                <span class="print-checkbox">✓</span> <strong>${T("COMPLIANT WITH HEALTH DEPT STANDARDS")}</strong>
+                                <span class="print-checkbox"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span> <strong>${T("COMPLIANT WITH HEALTH DEPT STANDARDS")}</strong>
                             </div>
                         </div>
                     </div>
@@ -687,7 +687,7 @@ const PDFGenerator = {
         if (calibrationDate) {
             const calDate = new Date(calibrationDate);
             const daysSince = Math.floor((now - calDate) / (1000 * 60 * 60 * 24));
-            calibInfo = daysSince >= 365 ? `⚠️ Overdue (${daysSince}d ago)` : `✓ Certified (${365 - daysSince}d remaining)`;
+            calibInfo = daysSince >= 365 ? `Overdue (${daysSince}d ago)` : `Certified (${365 - daysSince}d remaining)`;
         }
 
         let rowsHtml = '';
@@ -795,7 +795,7 @@ const PDFGenerator = {
                         <div>
                             <strong>${T("Regulatory & Health Inspector Verification:")}</strong>
                             <div style="margin-top: 6px; font-size: 10.5px;">
-                                <span class="print-checkbox">✓</span> <strong>${T("COMPLETE HISTORICAL ARCHIVE CERTIFIED")}</strong>
+                                <span class="print-checkbox"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span> <strong>${T("COMPLETE HISTORICAL ARCHIVE CERTIFIED")}</strong>
                             </div>
                             <div style="font-size: 9.5px; color: var(--text-secondary); margin-top: 4px;">
                                 ${T("Verified compliant with 3-Year statutory biological monitoring audit requirements.")}
@@ -833,7 +833,7 @@ const PDFGenerator = {
             const html = this.generateAllSporeArchivePdfHtml(history, stateData);
             this.printDocument(html);
             if (typeof showToast === 'function') {
-                showToast(__tx('✓ Complete Spore Test Archive PDF ready for print/export!'), 'success', 2800);
+                showToast(__tx('Complete Spore Test Archive PDF ready for print/export!'), 'success', 2800);
             }
         } catch (err) {
             console.error('Error generating complete spore archive PDF:', err);
@@ -881,7 +881,7 @@ const PDFGenerator = {
                     </div>
                 </div>
                 <div class="pouch-print-footer">
-                    <span>${T("CI Class 5:")} <strong>${integratorPassed ? T('✓ PASS') : T('⚠️ FAIL')}</strong></span>
+                    <span>${T("CI Class 5:")} <strong>${integratorPassed ? T('PASS') : T('FAIL')}</strong></span>
                     <span>${autoclave}</span>
                 </div>
             </div>
@@ -919,7 +919,7 @@ const PDFGenerator = {
                         </div>
                     </div>
                     <div class="pouch-print-footer">
-                        <span>${T("CI Class 5:")} <strong>${integratorPassed ? T('✓ PASS') : T('⚠️ FAIL')}</strong></span>
+                        <span>${T("CI Class 5:")} <strong>${integratorPassed ? T('PASS') : T('FAIL')}</strong></span>
                         <span>${autoclave}</span>
                     </div>
                 </div>
@@ -1135,7 +1135,7 @@ const PDFGenerator = {
         if (calibrationDate) {
             const calDate = new Date(calibrationDate);
             const daysSince = Math.floor((now - calDate) / (1000 * 60 * 60 * 24));
-            calibInfo = daysSince >= 365 ? `⚠️ Overdue (${daysSince}d ago)` : `✓ Certified (${365 - daysSince}d remaining)`;
+            calibInfo = daysSince >= 365 ? `Overdue (${daysSince}d ago)` : `Certified (${365 - daysSince}d remaining)`;
         }
 
         let batchCardsHtml = '';
@@ -1208,8 +1208,8 @@ const PDFGenerator = {
                         <div><span style="color:var(--text-secondary);">${T("Dry Time:")}</span> <strong>${dry}</strong></div>
                         <div><span style="color:var(--text-secondary);">${T("Total Duration:")}</span> <strong>${total}</strong></div>
                         <div><span style="color:var(--text-secondary);">${T("Chamber ID:")}</span> <strong>${b.serialNumber || profile.autoclaveSerial || 'CHAMBER-01'}</strong></div>
-                        <div><span style="color:var(--text-secondary);">${T("Class 5 Integrator:")}</span> <strong style="color: ${isIntegratorPass ? 'var(--color-success)' : 'var(--color-danger)'};">${isIntegratorPass ? '✓ PASSED' : '⚠️ FAILED'}</strong></div>
-                        <div><span style="color:var(--text-secondary);">${T("Wet Pack Check:")}</span> <strong>${T("✓ 0% Moisture (Dry)")}</strong></div>
+                        <div><span style="color:var(--text-secondary);">${T("Class 5 Integrator:")}</span> <strong style="color: ${isIntegratorPass ? 'var(--color-success)' : 'var(--color-danger)'};">${isIntegratorPass ? 'PASSED' : 'FAILED'}</strong></div>
+                        <div><span style="color:var(--text-secondary);">${T("Wet Pack Check:")}</span> <strong>${T("0% Moisture (Dry)")}</strong></div>
                     </div>
 
                     <div style="font-size: 10px; color: var(--text-secondary); line-height: 1.35;">
@@ -1269,7 +1269,7 @@ const PDFGenerator = {
                         <div>
                             <strong>${T("Health Department & Audit Endorsement:")}</strong>
                             <div style="margin-top: 6px; font-size: 10.5px;">
-                                <span class="print-checkbox">✓</span> <strong>${T("BATCHES VERIFIED & COMPLIANT")}</strong>
+                                <span class="print-checkbox"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span> <strong>${T("BATCHES VERIFIED & COMPLIANT")}</strong>
                             </div>
                             <div style="font-size: 9.5px; color: var(--text-secondary); margin-top: 4px;">
                                 ${T("Verified compliant with CDC, OSHA, and established professional piercing practice.")}
@@ -1295,14 +1295,14 @@ const PDFGenerator = {
         try {
             if (!selectedLogs || selectedLogs.length === 0) {
                 if (typeof showToast === 'function') {
-                    showToast(__tx('⚠️ Please select one or more batch records using the checkboxes first.'), 'warning', 3000);
+                    showToast(__tx('Please select one or more batch records using the checkboxes first.'), 'warning', 3000);
                 }
                 return;
             }
             const html = this.generateConcatenatedBatchReportsHtml(selectedLogs);
             this.printDocument(html);
             if (typeof showToast === 'function') {
-                showToast(__tx('✓ Concatenated PDF report generated for {n} selected batch(es)!', { n: selectedLogs.length }), 'success', 2800);
+                showToast(__tx('Concatenated PDF report generated for {n} selected batch(es)!', { n: selectedLogs.length }), 'success', 2800);
             }
         } catch (err) {
             console.error('Error generating concatenated batch PDF:', err);
@@ -1391,7 +1391,7 @@ const PDFGenerator = {
                         <td>${bTemp} / ${bPress}</td>
                         <td>${bTime}</td>
                         <td>${l.operator || profile.operatorName || __tx('Lead Tech')}</td>
-                        <td style="color: ${statusColor}; font-weight: 700;">✓ ${bStatus}</td>
+                        <td style="color: ${statusColor}; font-weight: 700;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> ${bStatus}</td>
                     </tr>
                 `;
             }).join('');
@@ -1414,7 +1414,7 @@ const PDFGenerator = {
                         <td><code>${sLot}</code></td>
                         <td>${sType}</td>
                         <td>${s.incubatorTemp || '56°C'} / ${s.incubationHours || '24h'}</td>
-                        <td style="color: ${resColor}; font-weight: 700;">✓ ${sResult}</td>
+                        <td style="color: ${resColor}; font-weight: 700;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> ${sResult}</td>
                     </tr>
                 `;
             }).join('');
@@ -1469,7 +1469,7 @@ const PDFGenerator = {
                     </div>
                     <div class="print-meta-item">
                         <span class="print-meta-label">${T("Biomedical Calibration:")}</span>
-                        <span class="print-meta-value" style="color: var(--color-success);">✓ ${calibNum} (${calibTech})</span>
+                        <span class="print-meta-value" style="color: var(--color-success);"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> ${calibNum} (${calibTech})</span>
                     </div>
                     <div class="print-meta-item">
                         <span class="print-meta-label">${T("Lead Operator:")}</span>
@@ -1572,7 +1572,7 @@ const PDFGenerator = {
             const html = this.generateQuarterlyInspectorDossierHtml(quarter, year, customStart, customEnd, logs, spores, maints);
             this.printDocument(html);
             if (typeof showToast === 'function') {
-                showToast(__tx('✓ Printing Quarterly Inspector Dossier ({quarter} {year})...', { quarter: quarter, year: year }), 'success', 3000);
+                showToast(__tx('Printing Quarterly Inspector Dossier ({quarter} {year})...', { quarter: quarter, year: year }), 'success', 3000);
             }
         } catch (err) {
             console.error('Error generating inspector dossier printout:', err);
@@ -1621,7 +1621,7 @@ const PDFGenerator = {
                     ${qrDataUrl ? `<img src="${qrDataUrl}" style="width: 50px; height: 50px; flex-shrink: 0;" alt="LOT QR" />` : ''}
                 </div>
                 <div style="border-top: 1px solid var(--border-primary); padding-top: 2px; display: flex; justify-content: space-between; font-size: 6.5pt; color: var(--text-primary);">
-                    <span>${T("CI Class 5:")} <strong>${T("✓ PASS")}</strong></span>
+                    <span>${T("CI Class 5:")} <strong>${T("PASS")}</strong></span>
                     <span>${T("ANSI/AAMI ST79 Compliant")}</span>
                 </div>
             </div>
@@ -1637,7 +1637,7 @@ const PDFGenerator = {
         try {
             if (typeof JSZip === 'undefined') {
                 if (typeof showToast === 'function') {
-                    showToast('⚠️ JSZip library loading, please try again in a moment.', 'warning', 3000);
+                    showToast('JSZip library loading, please try again in a moment.', 'warning', 3000);
                 }
                 return;
             }
@@ -1682,7 +1682,7 @@ const PDFGenerator = {
                 document.body.removeChild(a);
 
                 if (typeof showToast === 'function') {
-                    showToast(__tx('✓ All audit records bundled into {name}.zip!', { name: folderName }), 'success', 3500);
+                    showToast(__tx('All audit records bundled into {name}.zip!', { name: folderName }), 'success', 3500);
                 }
             });
 
@@ -1733,11 +1733,11 @@ const PDFGenerator = {
         let sporeStatusHtml = `<span style="color: var(--text-secondary);">${T('No Spore Run in Period')}</span>`;
         if (latestSpore) {
             if (latestSpore.result === 'pass' || latestSpore.result === 'negative') {
-                sporeStatusHtml = `<span style="color: var(--color-success); font-weight: 700;">${T('✓ PASS (Negative / No Growth - Lot #{lot})', { lot: latestSpore.lotNumber || 'ST-79' })}</span>`;
+                sporeStatusHtml = `<span style="color: var(--color-success); font-weight: 700;">${T('PASS (Negative / No Growth - Lot #{lot})', { lot: latestSpore.lotNumber || 'ST-79' })}</span>`;
             } else if (latestSpore.result === 'fail' || latestSpore.result === 'positive') {
-                sporeStatusHtml = `<span style="color: var(--color-danger); font-weight: 700;">${T("⚠️ FAIL (Positive Spore Growth - Immediate Quarantine)")}</span>`;
+                sporeStatusHtml = `<span style="color: var(--color-danger); font-weight: 700;">${T("FAIL (Positive Spore Growth - Immediate Quarantine)")}</span>`;
             } else {
-                sporeStatusHtml = `<span style="color: var(--color-warning); font-weight: 700;">${T('⏳ Incubation Pending ({status})', { status: __tx(latestSpore.incubatorTime || 'In Progress') })}</span>`;
+                sporeStatusHtml = `<span style="color: var(--color-warning); font-weight: 700;">${T('Incubation Pending ({status})', { status: __tx(latestSpore.incubatorTime || 'In Progress') })}</span>`;
             }
         }
 
@@ -1776,7 +1776,7 @@ const PDFGenerator = {
                     <td style="text-align: center; padding: 6px 8px;">${T('{n} items', { n: d.pouches })}</td>
                     <td style="padding: 6px 8px;">${ops}</td>
                     <td style="text-align: center; padding: 6px 8px; color: ${d.count > 0 ? 'var(--color-success)' : 'var(--text-secondary)'}; font-weight: bold;">
-                        ${d.count > 0 ? T('✓ 100% Release') : '—'}
+                        ${d.count > 0 ? T('100% Release') : '—'}
                     </td>
                 </tr>
             `;
@@ -1805,7 +1805,7 @@ const PDFGenerator = {
                     <td style="padding: 5px 6px;">${oper}</td>
                     <td style="padding: 5px 6px; text-align: center;">
                         <span style="display: inline-block; padding: 2px 6px; border-radius: 3px; font-weight: bold; font-size: 9.5px; background: ${isReleased ? '#DEF7EC' : '#FDE8E8'}; color: ${isReleased ? '#03543F' : '#9B1C1C'};">
-                            ${isReleased ? __tx('✓ PASS / RELEASED') : __tx('⚠️ QUARANTINE')}
+                            ${isReleased ? __tx('PASS / RELEASED') : __tx('QUARANTINE')}
                         </span>
                     </td>
                 </tr>
@@ -1860,7 +1860,7 @@ const PDFGenerator = {
                 <!-- Studio & Hardware Metadata Grid -->
                 <div class="print-meta-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px 12px; background: var(--bg-tertiary); border: 1px solid var(--border-primary); border-radius: 6px; padding: 8px 12px; margin-bottom: 12px; font-size: 10px;">
                     <div><span class="print-meta-label" style="color: var(--text-secondary); font-weight: 600;">${T("Autoclave Unit:")}</span> <span style="font-weight: 700;">${profile.autoclaveSerial || 'Midmark M11 UltraClave (#MM-8472)'}</span></div>
-                    <div><span class="print-meta-label" style="color: var(--text-secondary); font-weight: 600;">${T("Calibration Status:")}</span> <span style="font-weight: 700; color: var(--color-success);">${T("✓ Certified Biomedical")}</span></div>
+                    <div><span class="print-meta-label" style="color: var(--text-secondary); font-weight: 600;">${T("Calibration Status:")}</span> <span style="font-weight: 700; color: var(--color-success);">${T("Certified Biomedical")}</span></div>
                     <div><span class="print-meta-label" style="color: var(--text-secondary); font-weight: 600;">${T("Lead Operator:")}</span> <span style="font-weight: 700;">${profile.operatorName || 'Qualified Professional Piercer'}</span></div>
                     <div><span class="print-meta-label" style="color: var(--text-secondary); font-weight: 600;">${T("Weekly Spore Verification:")}</span> ${sporeStatusHtml}</div>
                     <div><span class="print-meta-label" style="color: var(--text-secondary); font-weight: 600;">${T("Chemical Indicator:")}</span> <span style="font-weight: 700;">${T("ISO 11140-1 Class 5 Integrator")}</span></div>
@@ -1949,7 +1949,7 @@ const PDFGenerator = {
             const html = this.generateWeeklySummaryReportHtml(allLogs, allSpores, allMaints);
             this.printDocument(html);
             if (typeof showToast === 'function') {
-                showToast(__tx('✓ Weekly 7-Day Sterilization Audit Summary report sent to printer / PDF!'), 'success', 3200);
+                showToast(__tx('Weekly 7-Day Sterilization Audit Summary report sent to printer / PDF!'), 'success', 3200);
             }
         } catch (err) {
             console.error('Error generating weekly summary PDF:', err);

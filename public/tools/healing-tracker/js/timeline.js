@@ -303,12 +303,12 @@ function displayTouchUpResults(results, formData) {
 
       const icon = document.createElement('span');
       icon.className = 'touch-up-timeline__rec-icon';
-      if (rec.type === 'care') icon.textContent = '🧴';
-      else if (rec.type === 'sun') icon.textContent = '☀️';
-      else if (rec.type === 'location') icon.textContent = '📍';
-      else if (rec.type === 'color') icon.textContent = '🎨';
-      else if (rec.type === 'urgent') icon.textContent = '🚨';
-      else icon.textContent = '💡';
+      if (rec.type === 'care') icon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-gloves></use></svg>';
+      else if (rec.type === 'sun') icon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-sun></use></svg>';
+      else if (rec.type === 'location') icon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-pin></use></svg>';
+      else if (rec.type === 'color') icon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-machine></use></svg>';
+      else if (rec.type === 'urgent') icon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-siren></use></svg>';
+      else icon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bulb></use></svg>';
 
       const text = document.createElement('span');
       text.className = 'touch-up-timeline__rec-text';
@@ -360,7 +360,7 @@ function renderTouchUpReminder(results, formData) {
   let cardMessage = '';
 
   if (status === 'overdue') {
-    badgeText = (window.t && window.t('touchup.reminder.badgeOverdue')) || '⚠️ TOUCH-UP OVERDUE';
+    badgeText = (window.t && window.t('touchup.reminder.badgeOverdue')) || 'TOUCH-UP OVERDUE';
     badgeClass = 'touch-up-reminder-badge--overdue';
     alertMessage = (window.t && window.t('touchup.reminder.msgOverdue', {
       tattooAge: tattooAge,
@@ -370,7 +370,7 @@ function renderTouchUpReminder(results, formData) {
     })) || `Your tattoo was completed ${tattooAge} years ago, and ${elapsedText} has elapsed since your last recorded touch-up. The projected longevity before touch-up was ${longevity} years. Contact an artist to assess line clarity and prevent fading.`;
     cardMessage = alertMessage;
   } else if (status === 'due_soon') {
-    badgeText = (window.t && window.t('touchup.reminder.badgeDueSoon')) || '⏰ TOUCH-UP DUE SOON';
+    badgeText = (window.t && window.t('touchup.reminder.badgeDueSoon')) || 'TOUCH-UP DUE SOON';
     badgeClass = 'touch-up-reminder-badge--duesoon';
     const monthsRemaining = Math.max(1, Math.round(remaining * 12));
     alertMessage = (window.t && window.t('touchup.reminder.msgDueSoon', {
@@ -382,7 +382,7 @@ function renderTouchUpReminder(results, formData) {
     })) || `Your tattoo was completed ${tattooAge} years ago (last touch-up: ${elapsedText} ago). You have approximately ${monthsRemaining} months remaining before your projected touch-up threshold of ${longevity} years.`;
     cardMessage = alertMessage;
   } else {
-    badgeText = (window.t && window.t('touchup.reminder.badgeOnTrack')) || '✅ PIGMENT HEALTHY & ON TRACK';
+    badgeText = (window.t && window.t('touchup.reminder.badgeOnTrack')) || 'PIGMENT HEALTHY & ON TRACK';
     badgeClass = 'touch-up-reminder-badge--ontrack';
     alertMessage = (window.t && window.t('touchup.reminder.msgOnTrack', {
       date: lastDateStr || ((window.t && window.t('touchup.reminder.initialSession')) || 'initial session'),

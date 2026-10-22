@@ -164,8 +164,8 @@
         <div class="gradient-cap-meta">
           <strong style="font-size: 0.85rem; color: var(--text-primary);">${cap.stepTone}</strong>
           <div class="gradient-cap-drops" style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.25rem;">
-            <span>💧 <strong>${cap.originDrops}</strong> ${localizedOrigin}</span>
-            <span>➕ <strong>${cap.destDrops}</strong> ${localizedDest}</span>
+            <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-drop></use></svg> <strong>${cap.originDrops}</strong> ${localizedOrigin}</span>
+            <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-plus></use></svg> <strong>${cap.destDrops}</strong> ${localizedDest}</span>
           </div>
           <span style="font-size: 0.75rem; color: var(--text-tertiary);">${localizedRatio}</span>
         </div>

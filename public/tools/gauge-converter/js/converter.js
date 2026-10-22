@@ -358,7 +358,7 @@
 
     const calibrated = isCardCalibrated();
     if (calibStatus) {
-      calibStatus.textContent = calibrated ? '✓ ' + t('visual.instruction_card') : t('visual.instruction_approx');
+      calibStatus.innerHTML = calibrated ? '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> ' + t('visual.instruction_card') : t('visual.instruction_approx');
       calibStatus.className = 'calibration-status ' + (calibrated ? 'calibration-status--calibrated' : 'calibration-status--fallback');
     }
     if (resetBtn) {

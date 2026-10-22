@@ -42,10 +42,10 @@
         <span class="brand-label" data-i18n="common.brandTools">POLI</span>
       </div>
       <nav class="tool-tabs" aria-label="Tool Navigation">
-        <button class="tool-tab active" data-tab="healing" data-i18n-title="nav.healingTracker" data-i18n-aria="nav.healingTracker" aria-label="Healing Tracker">🩹</button>
-        <button class="tool-tab" data-tab="touchup" data-i18n-title="nav.touchupTimeline" data-i18n-aria="nav.touchupTimeline" aria-label="Touch-Up Timeline">⏱️</button>
-        <button class="tool-tab" data-tab="docs" data-i18n-title="nav.documentation" data-i18n-aria="nav.documentation" aria-label="Documentation">📖</button>
-        <button class="tool-tab" data-tab="embed" data-i18n-title="nav.embedCode" data-i18n-aria="nav.embedCode" aria-label="Embed Code">⚡</button>
+        <button class="tool-tab active" data-tab="healing" data-i18n-title="nav.healingTracker" data-i18n-aria="nav.healingTracker" aria-label="Healing Tracker"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bandage></use></svg></button>
+        <button class="tool-tab" data-tab="touchup" data-i18n-title="nav.touchupTimeline" data-i18n-aria="nav.touchupTimeline" aria-label="Touch-Up Timeline"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clock></use></svg></button>
+        <button class="tool-tab" data-tab="docs" data-i18n-title="nav.documentation" data-i18n-aria="nav.documentation" aria-label="Documentation"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-book></use></svg></button>
+        <button class="tool-tab" data-tab="embed" data-i18n-title="nav.embedCode" data-i18n-aria="nav.embedCode" aria-label="Embed Code"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bolt></use></svg></button>
       </nav>
     </div>
 
@@ -91,13 +91,13 @@
         <section class="scroll-pane content-col">
           <!-- Hydration Prompt Banner (Gentle Recurring Check-in) -->
           <div id="hydrationPromptBanner" class="hydration-prompt-banner" style="display: none;" role="alert">
-            <div class="hydration-prompt-icon">💧</div>
+            <div class="hydration-prompt-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-drop></use></svg></div>
             <div class="hydration-prompt-content">
               <div class="hydration-prompt-title" data-i18n="healing.hydration.promptTitle">Hydration Check-in</div>
               <div class="hydration-prompt-body" data-i18n="healing.hydration.promptBody">Time for a glass of water! Cellular regeneration and lymphatic pigment clearance require optimal epidermal hydration—especially vital during tattoo and piercing healing.</div>
             </div>
             <div class="hydration-prompt-actions">
-              <button type="button" id="hydrationBannerDrinkBtn" class="hydration-banner-btn hydration-banner-btn--primary" data-i18n="healing.hydration.drankWaterBtn">💧 Log +1 Glass</button>
+              <button type="button" id="hydrationBannerDrinkBtn" class="hydration-banner-btn hydration-banner-btn--primary"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-drop></use></svg><span data-i18n="healing.hydration.drankWaterBtn" style="color:inherit">Log +1 Glass</span></button>
               <button type="button" id="hydrationBannerSnoozeBtn" class="hydration-banner-btn hydration-banner-btn--secondary" data-i18n="healing.hydration.snoozeBtn">Snooze (30m)</button>
               <button type="button" id="hydrationBannerDismissBtn" class="hydration-banner-btn hydration-banner-btn--dismiss" aria-label="Dismiss" title="Dismiss">&times;</button>
             </div>
@@ -130,7 +130,7 @@
                   </div>
                   <div class="placement-view-toggle">
                     <button type="button" id="sunRiskToggleBtn" class="placement-toggle-btn sun-risk-toggle-btn active" aria-pressed="true" aria-label="Toggle Sun Exposure Risk Layer">
-                      <span id="sunRiskToggleText" data-i18n="healing.map.sunRiskToggle">☀️ Sun Exposure Risk</span>
+                      <span id="sunRiskToggleText"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-sun></use></svg><span data-i18n="healing.map.sunRiskToggle" style="color:inherit">Sun Exposure Risk</span></span>
                     </button>
                     <button type="button" id="bodyMapToggleBtn" class="placement-toggle-btn" aria-label="Toggle front and back body views">
                       <span id="bodyMapToggleText" data-i18n="healing.map.switchToBack">Switch to Back View</span>
@@ -246,7 +246,7 @@
                       <select id="piercingLocation" class="healing-tracker__select">
                         <option value="" data-i18n="healing.setup.selectLocation">-- Select Location --</option>
 
-                        <optgroup data-i18n-label="healing.piercingGroups.ear" label="👂 Ear Piercings">
+                        <optgroup data-i18n-label="healing.piercingGroups.ear" label="Ear Piercings">
                           <option value="earlobe" data-i18n="healing.piercingLocations.earlobe">Earlobe</option>
                           <option value="helix" data-i18n="healing.piercingLocations.helix">Helix (Upper Cartilage)</option>
                           <option value="industrial" data-i18n="healing.piercingLocations.industrial">Industrial (Scaffold)</option>
@@ -260,7 +260,7 @@
                           <option value="orbital" data-i18n="healing.piercingLocations.orbital">Orbital</option>
                         </optgroup>
 
-                        <optgroup data-i18n-label="healing.piercingGroups.facial" label="😊 Facial Piercings">
+                        <optgroup data-i18n-label="healing.piercingGroups.facial" label="Facial Piercings">
                           <option value="nostril" data-i18n="healing.piercingLocations.nostril">Nostril</option>
                           <option value="septum" data-i18n="healing.piercingLocations.septum">Septum</option>
                           <option value="bridge" data-i18n="healing.piercingLocations.bridge">Bridge (Earl)</option>
@@ -278,19 +278,19 @@
                           <option value="frowny" data-i18n="healing.piercingLocations.frowny">Frowny (Lower Frenulum)</option>
                         </optgroup>
 
-                        <optgroup data-i18n-label="healing.piercingGroups.oral" label="👅 Oral Piercings">
+                        <optgroup data-i18n-label="healing.piercingGroups.oral" label="Oral Piercings">
                           <option value="tongue" data-i18n="healing.piercingLocations.tongue">Tongue (Center)</option>
                           <option value="tongue_web" data-i18n="healing.piercingLocations.tongue_web">Tongue Web (Frenulum)</option>
                           <option value="venom" data-i18n="healing.piercingLocations.venom">Venom (Double Tongue)</option>
                           <option value="uvula" data-i18n="healing.piercingLocations.uvula">Uvula</option>
                         </optgroup>
 
-                        <optgroup data-i18n-label="healing.piercingGroups.body" label="💪 Body Piercings">
+                        <optgroup data-i18n-label="healing.piercingGroups.body" label="Body Piercings">
                           <option value="navel" data-i18n="healing.piercingLocations.navel">Navel (Belly Button)</option>
                           <option value="nipple" data-i18n="healing.piercingLocations.nipple">Nipple</option>
                         </optgroup>
 
-                        <optgroup data-i18n-label="healing.piercingGroups.surface" label="🔷 Surface &amp; Dermal Piercings">
+                        <optgroup data-i18n-label="healing.piercingGroups.surface" label="Surface &amp; Dermal Piercings">
                           <option value="surface" data-i18n="healing.piercingLocations.surface">Surface Piercing (General)</option>
                           <option value="dermal_anchor" data-i18n="healing.piercingLocations.dermal_anchor">Dermal Anchor (Microdermal)</option>
                           <option value="nape" data-i18n="healing.piercingLocations.nape">Nape (Back of Neck)</option>
@@ -298,7 +298,7 @@
                           <option value="madison" data-i18n="healing.piercingLocations.madison">Madison (Front Neck)</option>
                         </optgroup>
 
-                        <optgroup data-i18n-label="healing.piercingGroups.maleGenital" label="♂️ Male Genital Piercings">
+                        <optgroup data-i18n-label="healing.piercingGroups.maleGenital" label="Male Genital Piercings">
                           <option value="prince_albert" data-i18n="healing.piercingLocations.prince_albert">Prince Albert (PA)</option>
                           <option value="reverse_pa" data-i18n="healing.piercingLocations.reverse_pa">Reverse Prince Albert</option>
                           <option value="ampallang" data-i18n="healing.piercingLocations.ampallang">Ampallang (Horizontal)</option>
@@ -311,7 +311,7 @@
                           <option value="foreskin" data-i18n="healing.piercingLocations.foreskin">Foreskin</option>
                         </optgroup>
 
-                        <optgroup data-i18n-label="healing.piercingGroups.femaleGenital" label="♀️ Female Genital Piercings">
+                        <optgroup data-i18n-label="healing.piercingGroups.femaleGenital" label="Female Genital Piercings">
                           <option value="vch" data-i18n="healing.piercingLocations.vch">VCH (Vertical Clitoral Hood)</option>
                           <option value="hch" data-i18n="healing.piercingLocations.hch">HCH (Horizontal Clitoral Hood)</option>
                           <option value="inner_labia" data-i18n="healing.piercingLocations.inner_labia">Inner Labia</option>
@@ -367,7 +367,7 @@
                     <!-- Sun Exposure Risk Advisory & Preventative Tips -->
                     <div id="sunExposureRiskCard" class="sun-exposure-risk-card" style="display: none;">
                       <div class="sun-exposure-risk-card__header">
-                        <span class="sun-exposure-risk-card__badge" data-i18n="healing.map.sunRiskBadge">☀️ HIGH UV EXPOSURE ZONE</span>
+                        <span class="sun-exposure-risk-card__badge"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-sun></use></svg><span data-i18n="healing.map.sunRiskBadge" style="color:inherit">HIGH UV EXPOSURE ZONE</span></span>
                       </div>
                       <div class="sun-exposure-risk-card__body">
                         <h4 id="sunExposureRiskRegionTitle" class="sun-exposure-risk-card__title"></h4>
@@ -408,9 +408,9 @@
                 </div>
                 <div id="baselineStorageIndicator" class="healing-storage-status" style="margin-top: var(--spacing-xs); font-size: 0.85rem; color: var(--text-secondary);"></div>
                 <div id="baselineLowStorageBanner" class="healing-storage-low-banner" style="display: none; margin-top: var(--spacing-xs); padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--warning-orange); border-radius: var(--border-radius);">
-                  <div class="healing-storage-low-text" style="color: var(--warning-orange); font-size: 0.85rem;" data-i18n="healing.storage.lowWarning">⚠️ Storage is running low!</div>
+                  <div class="healing-storage-low-text" style="color: var(--warning-orange); font-size: 0.85rem;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-warn></use></svg><span data-i18n="healing.storage.lowWarning" style="color:inherit">Storage is running low!</span></div>
                   <p style="margin: 4px 0; font-size: 0.8rem; color: var(--text-secondary);" data-i18n="healing.storage.dropOldestPrompt">Free up space by dropping older photos while keeping their clinical entries, symptom ratings, and trend lines 100% intact.</p>
-                  <button type="button" class="drop-oldest-photos-btn healing-tracker__btn healing-tracker__btn--outline" style="margin-top: 6px; padding: 4px 8px; font-size: 0.8rem;" data-i18n="healing.storage.dropOldestBtn">🧹 Drop Oldest Photos</button>
+                  <button type="button" class="drop-oldest-photos-btn healing-tracker__btn healing-tracker__btn--outline" style="margin-top: 6px; padding: 4px 8px; font-size: 0.8rem;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-gloves></use></svg><span data-i18n="healing.storage.dropOldestBtn" style="color:inherit">Drop Oldest Photos</span></button>
                 </div>
               </div>
 
@@ -425,7 +425,7 @@
             <!-- Direction Reversal Alert (Feature 3) -->
             <div id="directionChangeAlert" style="display: none;"></div>
             <div id="symptomTrendEmergencyBanner" class="symptom-trend-alert" style="display: none;" role="alert">
-              <span class="symptom-trend-alert__badge" data-i18n="healing.symptomTrendAlert.badge">⚠️ SYMPTOM TREND ALERT</span>
+              <span class="symptom-trend-alert__badge"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-warn></use></svg><span data-i18n="healing.symptomTrendAlert.badge" style="color:inherit">SYMPTOM TREND ALERT</span></span>
               <h3 class="symptom-trend-alert__title" data-i18n="healing.symptomTrendAlert.title">Consecutive Worsening Detected</h3>
               <p id="symptomTrendAlertDesc" class="symptom-trend-alert__text"></p>
               <p class="symptom-trend-alert__text"><strong data-i18n="healing.symptomTrendAlert.recommendationLabel">Automated Clinical Recommendation:</strong>
@@ -546,7 +546,7 @@
               <div id="proTipsContainer" class="pro-tips-container" style="margin-top: var(--spacing-lg);">
                 <div class="pro-tips-header">
                   <div class="pro-tips-title-group">
-                    <span class="pro-tips-icon">💡</span>
+                    <span class="pro-tips-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bulb></use></svg></span>
                     <h3 class="pro-tips-title" data-i18n="healing.proTips.title">Studio Pro-Tips</h3>
                   </div>
                   <span id="proTipsStageBadge" class="pro-tips-stage-badge" data-i18n="healing.tips.stageMonitoring">[ STAGE_MONITORING ]</span>
@@ -561,7 +561,7 @@
               <div id="hydrationTrackerCard" class="hydration-tracker-card" style="margin-top: var(--spacing-lg);">
                 <div class="hydration-tracker-header">
                   <div class="hydration-tracker-title-group">
-                    <span class="hydration-tracker-icon">💧</span>
+                    <span class="hydration-tracker-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-drop></use></svg></span>
                     <div>
                       <h3 class="hydration-tracker-title" data-i18n="healing.hydration.title">Daily Dermal Hydration Check-in</h3>
                       <p class="hydration-tracker-subtitle" data-i18n="healing.hydration.subtitle">Track water intake to support epidermal mitosis, scab elasticity, and lymphatic pigment resolution.</p>
@@ -602,7 +602,7 @@
                   </div>
 
                   <div class="hydration-clinical-tip">
-                    <span class="hydration-tip-icon">🔬</span>
+                    <span class="hydration-tip-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-flask></use></svg></span>
                     <span data-i18n="healing.hydration.clinicalNote">Clinical Note: Dehydrated stratum corneum increases scab brittleness and causes premature micro-cracking in healing tattoos. Consistent oral hydration accelerates dermal interstitial fluid exchange.</span>
                   </div>
                 </div>
@@ -614,13 +614,13 @@
               <div class="healing-log__header">
                 <div>
                   <h2 class="healing-tracker__section-title" style="margin-bottom: var(--spacing-xs);">
-                    <span class="healing-tracker__step-number">📝</span>
+                    <span class="healing-tracker__step-number"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-note></use></svg></span>
                     <span data-i18n="healing.log.title">Daily Healing Log &amp; Entry</span>
                   </h2>
                   <p class="healing-tracker__helper-text" data-i18n="healing.log.subtitle">Log your daily observations to track progress, visualize trends, and capture milestone photos.</p>
                 </div>
-                <button id="openNewEntryBtn" class="healing-tracker__btn healing-tracker__btn--primary" data-i18n="healing.log.addNewEntry">
-                  ➕ Log Today's Entry
+                <button id="openNewEntryBtn" class="healing-tracker__btn healing-tracker__btn--primary">
+                  <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-plus></use></svg><span data-i18n="healing.log.addNewEntry" style="color:inherit">Log Today's Entry</span>
                 </button>
               </div>
 
@@ -636,7 +636,7 @@
               <div class="milestone-view-header">
                 <div class="milestone-view-header__title-area">
                   <h2 class="healing-tracker__section-title">
-                    <span class="healing-tracker__step-number">📸</span>
+                    <span class="healing-tracker__step-number"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-camera></use></svg></span>
                     <span data-i18n="healing.gallery.title">Milestone Gallery</span>
                   </h2>
                   <p class="healing-tracker__helper-text" data-i18n="healing.gallery.subtitle">
@@ -645,8 +645,8 @@
                 </div>
                 <!-- View Mode Switcher -->
                 <div class="milestone-view-mode-tabs" role="tablist" aria-label="Milestone View Options">
-                  <button type="button" class="milestone-tab-btn milestone-tab-btn--active" id="milestoneTabGallery" role="tab" aria-selected="true" data-i18n="healing.gallery.viewGalleryTab">
-                    🖼️ Milestone Gallery Grid
+                  <button type="button" class="milestone-tab-btn milestone-tab-btn--active" id="milestoneTabGallery" role="tab" aria-selected="true">
+                    <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-image></use></svg><span data-i18n="healing.gallery.viewGalleryTab" style="color:inherit">Milestone Gallery Grid</span>
                   </button>
                   <button type="button" class="milestone-tab-btn" id="milestoneTabSlider" role="tab" aria-selected="false" data-i18n="healing.gallery.viewSliderTab">
                     ↔ Split Comparison Slider
@@ -666,15 +666,15 @@
                   <div class="milestone-gallery-sort">
                     <label for="milestoneSortSelect" class="milestone-sort-label" data-i18n="healing.gallery.sortLabel">Sort:</label>
                     <select id="milestoneSortSelect" class="healing-tracker__select milestone-sort-select">
-                      <option value="asc" data-i18n="healing.gallery.sortOldest">Oldest First (Day 0 ➔)</option>
-                      <option value="desc" data-i18n="healing.gallery.sortNewest">Newest First (➔ Day 0)</option>
+                      <option value="asc" data-i18n="healing.gallery.sortOldest">Oldest First (Day 0 )</option>
+                      <option value="desc" data-i18n="healing.gallery.sortNewest">Newest First (Day 0)</option>
                     </select>
                   </div>
                 </div>
 
                 <!-- Empty State -->
                 <div id="milestoneGalleryEmpty" class="milestone-gallery-empty">
-                  <div class="milestone-empty-icon">📷</div>
+                  <div class="milestone-empty-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-camera></use></svg></div>
                   <h3 class="milestone-empty-title" data-i18n="healing.gallery.emptyTitle">No Milestone Photos Yet</h3>
                   <p class="milestone-empty-desc" data-i18n="healing.gallery.emptyDesc">Photos uploaded as Day 0 baseline or during daily check-ins will appear here in chronological order.</p>
                 </div>
@@ -729,7 +729,7 @@
             <!-- Feature: Side-by-Side Symptom Severity Comparison -->
             <section class="healing-tracker__section" id="symptomSeverityComparisonSection">
               <h2 class="healing-tracker__section-title">
-                <span class="healing-tracker__step-number">📊</span>
+                <span class="healing-tracker__step-number"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-chart></use></svg></span>
                 <span data-i18n="healing.severityComparison.title">Symptom Severity Comparison</span>
               </h2>
               <div class="severity-comparison-wrapper">
@@ -780,7 +780,7 @@
             <!-- Feature 2: Symptom Severity & Milestone Calendar -->
             <section class="healing-tracker__section" id="healingCalendarSection">
               <h2 class="healing-tracker__section-title">
-                <span class="healing-tracker__step-number">📅</span>
+                <span class="healing-tracker__step-number"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-calendar></use></svg></span>
                 <span data-i18n="healing.calendar.title">Healing &amp; Symptom Calendar</span>
               </h2>
               <p class="healing-tracker__helper-text" data-i18n="healing.calendar.subtitle">Map historical discomfort and milestone severity over time to recognize recovery patterns.</p>
@@ -816,7 +816,7 @@
             <!-- Feature 3: Symptom Trends Over Time -->
             <section class="healing-tracker__section" id="symptomTrendsSection">
               <h2 class="healing-tracker__section-title">
-                <span class="healing-tracker__step-number">📈</span>
+                <span class="healing-tracker__step-number"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-trend-up></use></svg></span>
                 <span data-i18n="healing.trends.title">Symptom Trends Over Time</span>
               </h2>
               <div class="symptom-trends-wrapper">
@@ -835,13 +835,13 @@
             <section class="healing-tracker__section" id="piercingTensionGaugeCard">
               <div class="tension-gauge-header">
                 <div class="tension-gauge-title-group">
-                  <span class="tension-gauge-icon">📏</span>
+                  <span class="tension-gauge-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-ruler></use></svg></span>
                   <div>
                     <h3 class="healing-tracker__section-title" style="margin: 0;" data-i18n="healing.tensionGauge.cardTitle">Piercing Tension Gauge</h3>
                     <p class="healing-tracker__helper-text" style="margin: 4px 0 0 0;" data-i18n="healing.tensionGauge.cardSubtitle">Daily jewelry tightness tracker. Evaluates tissue compression and recommends professional downsizing if persistent for 7+ days.</p>
                   </div>
                 </div>
-                <span id="tensionGaugeStreakBadge" class="tension-gauge-streak-badge tension-gauge-streak-badge--normal" data-i18n="healing.tensionGauge.streakNormal">✓ Normal Clearance</span>
+                <span id="tensionGaugeStreakBadge" class="tension-gauge-streak-badge tension-gauge-streak-badge--normal"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-check></use></svg><span data-i18n="healing.tensionGauge.streakNormal" style="color:inherit">Normal Clearance</span></span>
               </div>
 
               <div class="tension-gauge-body">
@@ -866,7 +866,7 @@
             <!-- Feature: Jewelry Longevity & Downsizing Calculator (piercings only) -->
             <section class="healing-tracker__section" id="jewelryLongevitySection">
               <h2 class="healing-tracker__section-title">
-                <span class="healing-tracker__step-number">💍</span>
+                <span class="healing-tracker__step-number"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-ring></use></svg></span>
                 <span data-i18n="jewelryLongevity.title">Jewelry Longevity &amp; Downsizing Calculator</span>
               </h2>
               <p class="healing-tracker__helper-text" data-i18n="jewelryLongevity.subtitle">Calculate expected jewelry material lifespan, optimal professional downsizing windows, and fastener integrity check schedules.</p>
@@ -918,29 +918,29 @@
             <!-- Feature: Summarized Healing Health Report -->
             <section class="healing-tracker__section" id="healthReportSection">
               <h2 class="healing-tracker__section-title">
-                <span class="healing-tracker__step-number">📋</span>
+                <span class="healing-tracker__step-number"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clipboard></use></svg></span>
                 <span data-i18n="healing.healthReport.title">Healing Health Report</span>
               </h2>
               <p class="healing-tracker__helper-text" data-i18n="healing.healthReport.subtitle">Generate a clinical summary of recovery trajectory, symptom ratings, and milestones to review with your piercer or tattoo artist.</p>
               
               <div id="symptomTrendHealthReportNotice" class="symptom-trend-alert symptom-trend-alert--compact" style="display: none;">
-                <span class="symptom-trend-alert__badge" data-i18n="healing.symptomTrendAlert.badge">⚠️ SYMPTOM TREND ALERT</span>
+                <span class="symptom-trend-alert__badge"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-warn></use></svg><span data-i18n="healing.symptomTrendAlert.badge" style="color:inherit">SYMPTOM TREND ALERT</span></span>
                 <p id="symptomTrendHealthNoticeText" class="symptom-trend-alert__text"></p>
               </div>
               <div class="health-report-container">
                 <div class="health-report-actions">
-                  <button id="generateHealthReportBtn" class="healing-tracker__btn healing-tracker__btn--primary" data-i18n="healing.healthReport.generateBtn">
-                    📄 Generate Health Summary
+                  <button id="generateHealthReportBtn" class="healing-tracker__btn healing-tracker__btn--primary">
+                    <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-doc></use></svg><span data-i18n="healing.healthReport.generateBtn" style="color:inherit">Generate Health Summary</span>
                   </button>
                   <div id="healthReportActionsBar" style="display: none; gap: var(--spacing-sm); flex-wrap: wrap;">
-                    <button id="printHealthReportBtn" class="healing-tracker__btn healing-tracker__btn--secondary" data-i18n="healing.healthReport.printBtn">
-                      🖨️ Print / Save as PDF
+                    <button id="printHealthReportBtn" class="healing-tracker__btn healing-tracker__btn--secondary">
+                      <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-print></use></svg><span data-i18n="healing.healthReport.printBtn" style="color:inherit">Print / Save as PDF</span>
                     </button>
-                    <button id="copyHealthReportBtn" class="healing-tracker__btn healing-tracker__btn--outline" data-i18n="healing.healthReport.copyTextBtn">
-                      📋 Copy Clinical Text
+                    <button id="copyHealthReportBtn" class="healing-tracker__btn healing-tracker__btn--outline">
+                      <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-clipboard></use></svg><span data-i18n="healing.healthReport.copyTextBtn" style="color:inherit">Copy Clinical Text</span>
                     </button>
-                    <button id="downloadHealthReportBtn" class="healing-tracker__btn healing-tracker__btn--outline" data-i18n="healing.healthReport.downloadTextBtn">
-                      💾 Download .TXT
+                    <button id="downloadHealthReportBtn" class="healing-tracker__btn healing-tracker__btn--outline">
+                      <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-save></use></svg><span data-i18n="healing.healthReport.downloadTextBtn" style="color:inherit">Download .TXT</span>
                     </button>
                   </div>
                 </div>
@@ -958,7 +958,7 @@
               <div class="snapshot-header">
                 <div>
                   <h2 class="healing-tracker__section-title" style="margin-bottom: var(--spacing-xs);">
-                    <span class="healing-tracker__step-number">🖼️</span>
+                    <span class="healing-tracker__step-number"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-image></use></svg></span>
                     <span data-i18n="healing.snapshot.title">Healing Journey Snapshot</span>
                   </h2>
                   <p class="healing-tracker__helper-text" data-i18n="healing.snapshot.subtitle">
@@ -968,14 +968,14 @@
               </div>
 
               <div class="snapshot-actions-bar">
-                <button type="button" id="generateSnapshotBtn" class="healing-tracker__btn healing-tracker__btn--primary" data-i18n="healing.snapshot.generateBtn">
-                  🖼️ Generate Infographic
+                <button type="button" id="generateSnapshotBtn" class="healing-tracker__btn healing-tracker__btn--primary">
+                  <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-image></use></svg><span data-i18n="healing.snapshot.generateBtn" style="color:inherit">Generate Infographic</span>
                 </button>
-                <button type="button" id="downloadSnapshotBtn" class="healing-tracker__btn healing-tracker__btn--secondary" data-i18n="healing.snapshot.downloadBtn">
-                  💾 Download Image (PNG)
+                <button type="button" id="downloadSnapshotBtn" class="healing-tracker__btn healing-tracker__btn--secondary">
+                  <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-save></use></svg><span data-i18n="healing.snapshot.downloadBtn" style="color:inherit">Download Image (PNG)</span>
                 </button>
-                <button type="button" id="copySnapshotBtn" class="healing-tracker__btn healing-tracker__btn--outline" data-i18n="healing.snapshot.copyBtn">
-                  📋 Copy to Clipboard
+                <button type="button" id="copySnapshotBtn" class="healing-tracker__btn healing-tracker__btn--outline">
+                  <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-clipboard></use></svg><span data-i18n="healing.snapshot.copyBtn" style="color:inherit">Copy to Clipboard</span>
                 </button>
               </div>
 
@@ -987,7 +987,7 @@
             <!-- Step 5: Product Allergy & Sensitivity Screener -->
             <section class="healing-tracker__section" id="allergyScreenerSection">
               <h2 class="healing-tracker__section-title">
-                <span class="healing-tracker__step-number">🧪</span>
+                <span class="healing-tracker__step-number"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-flask></use></svg></span>
                 <span data-i18n="healing.allergy.title">Product Allergy &amp; Sensitivity Screener</span>
               </h2>
               <p class="healing-tracker__helper-text" data-i18n="healing.allergy.subtitle">Screen aftercare washes, soaps, and ointments for contact allergens before applying to compromised skin or piercings.</p>
@@ -1053,7 +1053,7 @@
             <!-- Feature: Product Ingredient Scanner -->
             <section class="healing-tracker__section" id="ingredientScannerSection">
               <h2 class="healing-tracker__section-title">
-                <span class="healing-tracker__step-number">🔍</span>
+                <span class="healing-tracker__step-number"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg></span>
                 <span data-i18n="healing.scanner.title">Product Ingredient Scanner</span>
               </h2>
               <p class="healing-tracker__helper-text" data-i18n="healing.scanner.subtitle">
@@ -1076,8 +1076,8 @@
                 </div>
 
                 <div class="ingredient-actions-row">
-                  <button type="button" id="ingredientScanBtn" class="healing-tracker__btn healing-tracker__btn--primary" data-i18n="healing.scanner.scanBtn">
-                    🔍 Cross-Reference Ingredients
+                  <button type="button" id="ingredientScanBtn" class="healing-tracker__btn healing-tracker__btn--primary">
+                    <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-search></use></svg><span data-i18n="healing.scanner.scanBtn" style="color:inherit">Cross-Reference Ingredients</span>
                   </button>
                   <button type="button" id="ingredientResetBtn" class="healing-tracker__btn healing-tracker__btn--outline" data-i18n="healing.scanner.resetBtn">
                     Reset
@@ -1100,28 +1100,28 @@
             <!-- Feature 5: Backup & Restore Data -->
             <section class="healing-tracker__section" id="backupRestoreSection">
               <h2 class="healing-tracker__section-title">
-                <span class="healing-tracker__step-number">💾</span>
+                <span class="healing-tracker__step-number"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-save></use></svg></span>
                 <span data-i18n="healing.backup.title">Backup &amp; Restore Data</span>
               </h2>
               <div class="backup-restore-card">
                 <p class="healing-tracker__helper-text" data-i18n="healing.backup.subtitle">Your healing records and photos are stored entirely in your local browser. Export a backup file to move between phone and desktop or safeguard your data.</p>
                 <div class="backup-actions">
-                  <button id="exportBackupBtn" class="healing-tracker__btn healing-tracker__btn--secondary" data-i18n="healing.backup.exportBtn">
-                    📥 Export Complete JSON Backup
+                  <button id="exportBackupBtn" class="healing-tracker__btn healing-tracker__btn--secondary">
+                    <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-download></use></svg><span data-i18n="healing.backup.exportBtn" style="color:inherit">Export Complete JSON Backup</span>
                   </button>
-                  <button id="importBackupBtn" class="healing-tracker__btn healing-tracker__btn--outline" data-i18n="healing.backup.importBtn">
-                    📤 Restore from JSON Backup
+                  <button id="importBackupBtn" class="healing-tracker__btn healing-tracker__btn--outline">
+                    <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-upload></use></svg><span data-i18n="healing.backup.importBtn" style="color:inherit">Restore from JSON Backup</span>
                   </button>
                   <input type="file" id="importBackupInput" accept=".json,application/json" style="display: none;">
                 </div>
                 <div id="backupStorageIndicator" class="healing-storage-status" style="margin-top: var(--spacing-sm); font-size: 0.85rem; color: var(--text-secondary);"></div>
                 <div id="backupLowStorageBanner" class="healing-storage-low-banner" style="display: none; margin-top: var(--spacing-xs); padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--warning-orange); border-radius: var(--border-radius);">
-                  <div class="healing-storage-low-text" style="color: var(--warning-orange); font-size: 0.85rem;" data-i18n="healing.storage.lowWarning">⚠️ Storage is running low!</div>
+                  <div class="healing-storage-low-text" style="color: var(--warning-orange); font-size: 0.85rem;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-warn></use></svg><span data-i18n="healing.storage.lowWarning" style="color:inherit">Storage is running low!</span></div>
                   <p style="margin: 4px 0; font-size: 0.8rem; color: var(--text-secondary);" data-i18n="healing.storage.dropOldestPrompt">Free up space by dropping older photos while keeping their clinical entries, symptom ratings, and trend lines 100% intact.</p>
-                  <button type="button" class="drop-oldest-photos-btn healing-tracker__btn healing-tracker__btn--outline" style="margin-top: 6px; padding: 4px 8px; font-size: 0.8rem;" data-i18n="healing.storage.dropOldestBtn">🧹 Drop Oldest Photos</button>
+                  <button type="button" class="drop-oldest-photos-btn healing-tracker__btn healing-tracker__btn--outline" style="margin-top: 6px; padding: 4px 8px; font-size: 0.8rem;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-gloves></use></svg><span data-i18n="healing.storage.dropOldestBtn" style="color:inherit">Drop Oldest Photos</span></button>
                 </div>
-                <p class="healing-tracker__helper-text" style="margin-top: var(--spacing-sm); font-size: 0.85rem;" data-i18n="healing.backup.replaceNotice">
-                  ⚠️ Import Options: You can choose Complete Replacement (replaces current records) or Merge (keeps existing records and appends new ones).
+                <p class="healing-tracker__helper-text" style="margin-top: var(--spacing-sm); font-size: 0.85rem;">
+                  <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-warn></use></svg><span data-i18n="healing.backup.replaceNotice" style="color:inherit">Import Options: You can choose Complete Replacement (replaces current records) or Merge (keeps existing records and appends new ones).</span>
                 </p>
               </div>
             </section>
@@ -1154,7 +1154,7 @@
           </div>
 
           <div id="symptomTrendSidebarAlert" class="symptom-trend-alert symptom-trend-alert--compact" style="display: none;" role="status">
-            <span class="symptom-trend-alert__badge" data-i18n="healing.symptomTrendAlert.badge">⚠️ SYMPTOM TREND ALERT</span>
+            <span class="symptom-trend-alert__badge"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-warn></use></svg><span data-i18n="healing.symptomTrendAlert.badge" style="color:inherit">SYMPTOM TREND ALERT</span></span>
             <p id="symptomTrendSidebarText" class="symptom-trend-alert__text"></p>
           </div>
 
@@ -1214,7 +1214,7 @@
   <div id="newEntryModal" class="healing-modal-overlay" style="display: none;">
     <div class="healing-modal-content">
       <div class="healing-modal-header">
-        <h3 data-i18n="healing.log.addNewEntry">➕ Log Today's Entry</h3>
+        <h3><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-plus></use></svg><span data-i18n="healing.log.addNewEntry" style="color:inherit">Log Today's Entry</span></h3>
         <button id="closeEntryModalBtn" class="healing-modal-close">&times;</button>
       </div>
       <form id="logEntryForm">
@@ -1225,7 +1225,7 @@
           </div>
 
           <div class="healing-tracker__form-group">
-            <label class="healing-tracker__label" data-i18n="healing.log.photoUpload">📷 Entry Photo (Optional)</label>
+            <label class="healing-tracker__label"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-camera></use></svg><span data-i18n="healing.log.photoUpload" style="color:inherit">Entry Photo (Optional)</span></label>
             <input type="file" id="entryPhotoInput" accept="image/*" class="healing-tracker__file-input">
             <div id="entryPreviewContainer" style="display: none; margin-top: var(--spacing-sm);">
               <img id="entryPhotoPreview" src="" alt="Entry Preview" style="max-width: 140px; height: 140px; object-fit: cover; border-radius: var(--border-radius); border: 1px solid var(--border-primary);">
@@ -1233,9 +1233,9 @@
             </div>
             <div id="entryStorageIndicator" class="healing-storage-status" style="margin-top: var(--spacing-xs); font-size: 0.85rem; color: var(--text-secondary);"></div>
             <div id="entryLowStorageBanner" class="healing-storage-low-banner" style="display: none; margin-top: var(--spacing-xs); padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--warning-orange); border-radius: var(--border-radius);">
-              <div class="healing-storage-low-text" style="color: var(--warning-orange); font-size: 0.85rem;" data-i18n="healing.storage.lowWarning">⚠️ Storage is running low!</div>
+              <div class="healing-storage-low-text" style="color: var(--warning-orange); font-size: 0.85rem;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-warn></use></svg><span data-i18n="healing.storage.lowWarning" style="color:inherit">Storage is running low!</span></div>
               <p style="margin: 4px 0; font-size: 0.8rem; color: var(--text-secondary);" data-i18n="healing.storage.dropOldestPrompt">Free up space by dropping older photos while keeping their clinical entries, symptom ratings, and trend lines 100% intact.</p>
-              <button type="button" class="drop-oldest-photos-btn healing-tracker__btn healing-tracker__btn--outline" style="margin-top: 6px; padding: 4px 8px; font-size: 0.8rem;" data-i18n="healing.storage.dropOldestBtn">🧹 Drop Oldest Photos</button>
+              <button type="button" class="drop-oldest-photos-btn healing-tracker__btn healing-tracker__btn--outline" style="margin-top: 6px; padding: 4px 8px; font-size: 0.8rem;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-gloves></use></svg><span data-i18n="healing.storage.dropOldestBtn" style="color:inherit">Drop Oldest Photos</span></button>
             </div>
           </div>
 
@@ -1245,7 +1245,7 @@
             
             <!-- Redness -->
             <div class="severity-rating-group">
-              <label data-i18n="healing.log.redness">🔴 Redness</label>
+              <label><svg class=ti-i width=.7em height=.7em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-dot-red></use></svg><span data-i18n="healing.log.redness" style="color:inherit">Redness</span></label>
               <div class="severity-options">
                 <label class="severity-option"><input type="radio" name="entryRedness" value="0" class="entry-rating-input" checked> <span data-i18n="healing.severity.none">0 - None</span></label>
                 <label class="severity-option"><input type="radio" name="entryRedness" value="1" class="entry-rating-input"> <span data-i18n="healing.severity.mild">1 - Mild</span></label>
@@ -1256,7 +1256,7 @@
 
             <!-- Swelling -->
             <div class="severity-rating-group">
-              <label data-i18n="healing.log.swelling">🎈 Swelling</label>
+              <label><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-trend-up></use></svg><span data-i18n="healing.log.swelling" style="color:inherit">Swelling</span></label>
               <div class="severity-options">
                 <label class="severity-option"><input type="radio" name="entrySwelling" value="0" class="entry-rating-input" checked> <span data-i18n="healing.severity.none">0 - None</span></label>
                 <label class="severity-option"><input type="radio" name="entrySwelling" value="1" class="entry-rating-input"> <span data-i18n="healing.severity.slight">1 - Slight</span></label>
@@ -1267,7 +1267,7 @@
 
             <!-- Tenderness -->
             <div class="severity-rating-group">
-              <label data-i18n="healing.log.tenderness">🩹 Tenderness</label>
+              <label><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-bandage></use></svg><span data-i18n="healing.log.tenderness" style="color:inherit">Tenderness</span></label>
               <div class="severity-options">
                 <label class="severity-option"><input type="radio" name="entryTenderness" value="0" class="entry-rating-input" checked> <span data-i18n="healing.severity.none">0 - None</span></label>
                 <label class="severity-option"><input type="radio" name="entryTenderness" value="1" class="entry-rating-input"> <span data-i18n="healing.severity.mild">1 - Mild</span></label>
@@ -1278,7 +1278,7 @@
 
             <!-- Discharge -->
             <div class="severity-rating-group">
-              <label data-i18n="healing.log.discharge">💧 Discharge</label>
+              <label><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-drop></use></svg><span data-i18n="healing.log.discharge" style="color:inherit">Discharge</span></label>
               <p class="what-changed__help" style="margin-bottom: var(--spacing-xs);" data-i18n="healing.log.dischargeHelp">
                 Note: Clear or whitish lymph fluid that dries into crust is normal during healing. It is not pus and not an infection.
               </p>
@@ -1292,7 +1292,7 @@
 
             <!-- Piercing Tension / Tightness Rating (Piercing Only) -->
             <div id="entryTensionFormGroup" class="severity-rating-group" style="display: none;">
-              <label data-i18n="healing.tensionGauge.inputLabel">📏 Jewelry Tension / Tightness</label>
+              <label><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-ruler></use></svg><span data-i18n="healing.tensionGauge.inputLabel" style="color:inherit">Jewelry Tension / Tightness</span></label>
               <p class="what-changed__help" style="margin-bottom: var(--spacing-xs);" data-i18n="healing.tensionGauge.inputHelp">
                 Rate how snug or tight your jewelry feels against swelling. Persistent tightness for 7+ days risks embedding and requires studio inspection.
               </p>
@@ -1307,7 +1307,7 @@
 
           <!-- Feature 4: What Changed Section (Dynamic Trigger) -->
           <div id="whatChangedSection" class="what-changed-card" style="display: none;">
-            <h4 class="what-changed__title" data-i18n="healing.whatChanged.title">⚡ What Changed Since Last Entry?</h4>
+            <h4 class="what-changed__title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-bolt></use></svg><span data-i18n="healing.whatChanged.title" style="color:inherit">What Changed Since Last Entry?</span></h4>
             <p class="what-changed__prompt" data-i18n="healing.whatChanged.prompt">Your symptoms indicate higher irritation compared to your previous entry. Did any of the following occur recently?</p>
             
             <div class="what-changed__grid">
@@ -1364,7 +1364,7 @@
   <div id="importChoiceModal" class="healing-modal-overlay" style="display: none;">
     <div class="healing-modal-content" style="max-width: 540px;">
       <div class="healing-modal-header">
-        <h3 data-i18n="healing.backup.chooseModeTitle">📥 Choose Import Method</h3>
+        <h3><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-download></use></svg><span data-i18n="healing.backup.chooseModeTitle" style="color:inherit">Choose Import Method</span></h3>
         <button id="closeImportChoiceModalBtn" class="healing-modal-close" type="button">&times;</button>
       </div>
       <div class="healing-modal-body">
@@ -1407,20 +1407,20 @@
       <div class="touch-up-timeline__container">
         <!-- SUB-TABS -->
         <section class="touch-up-timeline__tabs" aria-label="Touch-Up Tool Modules">
-          <button class="touch-up-timeline__tab touch-up-timeline__tab--active" data-tab="calculator" data-i18n="touchup.tabs.calculator">
-            ⏱️ Touch-Up Calculator
+          <button class="touch-up-timeline__tab touch-up-timeline__tab--active" data-tab="calculator">
+            <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-clock></use></svg><span data-i18n="touchup.tabs.calculator" style="color:inherit">Touch-Up Calculator</span>
           </button>
-          <button class="touch-up-timeline__tab" data-tab="fading" data-i18n="touchup.tabs.fading">
-            📉 Fading Predictor
+          <button class="touch-up-timeline__tab" data-tab="fading">
+            <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-trend-down></use></svg><span data-i18n="touchup.tabs.fading" style="color:inherit">Fading Predictor</span>
           </button>
-          <button class="touch-up-timeline__tab" data-tab="maintenance" data-i18n="touchup.tabs.maintenance">
-            📋 Maintenance Plan
+          <button class="touch-up-timeline__tab" data-tab="maintenance">
+            <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-clipboard></use></svg><span data-i18n="touchup.tabs.maintenance" style="color:inherit">Maintenance Plan</span>
           </button>
-          <button class="touch-up-timeline__tab" data-tab="cost" data-i18n="touchup.tabs.cost">
-            💰 Lifetime Costs
+          <button class="touch-up-timeline__tab" data-tab="cost">
+            <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-cash></use></svg><span data-i18n="touchup.tabs.cost" style="color:inherit">Lifetime Costs</span>
           </button>
-          <button class="touch-up-timeline__tab" data-tab="readiness" data-i18n="touchup.tabs.readiness">
-            ✅ Touch-Up Readiness
+          <button class="touch-up-timeline__tab" data-tab="readiness">
+            <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-check></use></svg><span data-i18n="touchup.tabs.readiness" style="color:inherit">Touch-Up Readiness</span>
           </button>
         </section>
 
@@ -1429,7 +1429,7 @@
           <!-- Proactive Touch-Up Reminder Alert Banner -->
           <div id="touchUpReminderBanner" class="touch-up-reminder-banner" style="display: none;">
             <div class="touch-up-reminder-banner__header">
-              <span id="touchUpReminderBadge" class="touch-up-reminder-badge" data-i18n="touchup.reminder.badgeOverdue">⚠️ TOUCH-UP OVERDUE</span>
+              <span id="touchUpReminderBadge" class="touch-up-reminder-badge"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-warn></use></svg><span data-i18n="touchup.reminder.badgeOverdue" style="color:inherit">TOUCH-UP OVERDUE</span></span>
               <span id="touchUpReminderTimeMeta" class="touch-up-reminder-time"></span>
             </div>
             <h3 id="touchUpReminderTitle" class="touch-up-reminder-title" data-i18n="touchup.reminder.alertTitle">Touch-Up Alert & Maintenance Reminder</h3>
@@ -1598,7 +1598,7 @@
                   </div>
                   <!-- Conditional Advisory for Specialized Pigments -->
                   <div id="specialPigmentWarning" class="touch-up-timeline__special-pigment-warning" style="display: none;" role="alert">
-                    <div class="touch-up-timeline__warning-icon">⚠️</div>
+                    <div class="touch-up-timeline__warning-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg></div>
                     <div class="touch-up-timeline__warning-content">
                       <strong class="touch-up-timeline__warning-title" data-i18n="touchup.warnings.specialPigmentsTitle">Special Pigment Consultation Advisory</strong>
                       <p class="touch-up-timeline__warning-text" data-i18n="touchup.warnings.specialPigmentsText">You have selected specialized pigments (such as UV-reactive pigments or older organic ink formulations). These materials exhibit distinct breakdown patterns under sunlight, photolysis, and natural dermal clearance compared to standard carbon black or modern mineral pigments. Consult your professional tattoo artist directly to evaluate the specific fading behavior, lightfastness, and tailored maintenance protocol for these unique formulations.</p>
@@ -1668,8 +1668,8 @@
                 </div>
               </div>
 
-              <button type="submit" class="touch-up-timeline__btn touch-up-timeline__btn--primary" data-i18n="touchup.calc.submitBtn">
-                ⏱️ Calculate Touch-Up Timeline
+              <button type="submit" class="touch-up-timeline__btn touch-up-timeline__btn--primary">
+                <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-clock></use></svg><span data-i18n="touchup.calc.submitBtn" style="color:inherit">Calculate Touch-Up Timeline</span>
               </button>
             </form>
 
@@ -1679,7 +1679,7 @@
 
               <!-- Urgency Indicator -->
               <div id="urgencyIndicator" class="touch-up-timeline__urgency-card">
-                <div class="touch-up-timeline__urgency-icon">⏰</div>
+                <div class="touch-up-timeline__urgency-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clock></use></svg></div>
                 <div class="touch-up-timeline__urgency-content">
                   <h4 id="urgencyLevel" class="touch-up-timeline__urgency-level"></h4>
                   <p id="urgencyMessage" class="touch-up-timeline__urgency-message"></p>
@@ -1690,7 +1690,7 @@
               <div id="touchUpReminderCard" class="touch-up-reminder-card" style="display: none;">
                 <div class="touch-up-reminder-card__header">
                   <div class="touch-up-reminder-card__title-group">
-                    <span class="touch-up-reminder-card__icon">🔔</span>
+                    <span class="touch-up-reminder-card__icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bell></use></svg></span>
                     <h4 class="touch-up-reminder-card__title" data-i18n="touchup.reminder.cardTitle">Touch-Up Maintenance Alert</h4>
                   </div>
                   <span id="touchUpReminderStatusBadge" class="touch-up-reminder-badge"></span>
@@ -1711,8 +1711,8 @@
                   </div>
                 </div>
                 <div class="touch-up-reminder-actions" style="margin-top: 1rem;">
-                  <button type="button" id="saveTouchUpReminderBtn" class="btn btn--accent btn--sm" data-i18n="touchup.reminder.saveBtn">
-                    🔔 Save Touch-Up Reminder
+                  <button type="button" id="saveTouchUpReminderBtn" class="btn btn--accent btn--sm">
+                    <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-bell></use></svg><span data-i18n="touchup.reminder.saveBtn" style="color:inherit">Save Touch-Up Reminder</span>
                   </button>
                   <span id="touchUpReminderSavedNotice" class="touch-up-reminder-saved-notice" style="display: none;" data-i18n="touchup.reminder.savedConfirm">
                     Reminder saved locally! You will receive status alerts when visiting this tool.
@@ -1723,19 +1723,19 @@
               <!-- Timeline Stats -->
               <div class="touch-up-timeline__results-grid">
                 <div class="touch-up-timeline__result-card">
-                  <div class="touch-up-timeline__result-icon">📅</div>
+                  <div class="touch-up-timeline__result-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-calendar></use></svg></div>
                   <div class="touch-up-timeline__result-label" data-i18n="touchup.results.currentAge">Current Age</div>
                   <div id="currentAgeDisplay" class="touch-up-timeline__result-value">-</div>
                 </div>
 
                 <div class="touch-up-timeline__result-card touch-up-timeline__result-card--highlight">
-                  <div class="touch-up-timeline__result-icon">⏱️</div>
+                  <div class="touch-up-timeline__result-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clock></use></svg></div>
                   <div class="touch-up-timeline__result-label" data-i18n="touchup.results.touchUpIn">Touch-Up In</div>
                   <div id="touchUpTime" class="touch-up-timeline__result-value">-</div>
                 </div>
 
                 <div class="touch-up-timeline__result-card">
-                  <div class="touch-up-timeline__result-icon">📊</div>
+                  <div class="touch-up-timeline__result-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-chart></use></svg></div>
                   <div class="touch-up-timeline__result-label" data-i18n="touchup.results.longevityElapsed">Longevity Elapsed</div>
                   <div id="fadingProgress" class="touch-up-timeline__result-value">-</div>
                 </div>
@@ -1743,13 +1743,13 @@
 
               <!-- Fading Order -->
               <div class="touch-up-timeline__fading-order">
-                <h4 class="touch-up-timeline__subsection-title" data-i18n="touchup.results.fadingOrder">🎨 Estimated Pigment Fading Order</h4>
+                <h4 class="touch-up-timeline__subsection-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-machine></use></svg><span data-i18n="touchup.results.fadingOrder" style="color:inherit">Estimated Pigment Fading Order</span></h4>
                 <div id="fadingList" class="touch-up-timeline__fading-list"></div>
               </div>
 
               <!-- Recommendations -->
               <div class="touch-up-timeline__recommendations">
-                <h4 class="touch-up-timeline__subsection-title" data-i18n="touchup.results.recommendations">💡 Personalized Maintenance Recommendations</h4>
+                <h4 class="touch-up-timeline__subsection-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-bulb></use></svg><span data-i18n="touchup.results.recommendations" style="color:inherit">Personalized Maintenance Recommendations</span></h4>
                 <div id="recommendationsList"></div>
               </div>
             </div>
@@ -1768,7 +1768,7 @@
             </p>
 
             <div id="fadingInfoCard" class="touch-up-timeline__info-card">
-              <p data-i18n="touchup.fading.info">📊 Run the Touch-Up Calculator in Step 1 to generate your custom multi-year fading progression chart.</p>
+              <p><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-chart></use></svg><span data-i18n="touchup.fading.info" style="color:inherit">Run the Touch-Up Calculator in Step 1 to generate your custom multi-year fading progression chart.</span></p>
             </div>
 
             <div id="fadingPrediction" style="display: none;">
@@ -1796,7 +1796,7 @@
               <!-- Daily Care -->
               <div class="touch-up-timeline__maintenance-card">
                 <div class="touch-up-timeline__maintenance-header">
-                  <span class="touch-up-timeline__maintenance-icon">🧴</span>
+                  <span class="touch-up-timeline__maintenance-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-gloves></use></svg></span>
                   <h4 class="touch-up-timeline__maintenance-title" data-i18n="touchup.maintenance.dailyTitle">Daily Protocol</h4>
                 </div>
                 <ul class="touch-up-timeline__maintenance-list">
@@ -1809,7 +1809,7 @@
               <!-- Weekly Care -->
               <div class="touch-up-timeline__maintenance-card">
                 <div class="touch-up-timeline__maintenance-header">
-                  <span class="touch-up-timeline__maintenance-icon">📅</span>
+                  <span class="touch-up-timeline__maintenance-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-calendar></use></svg></span>
                   <h4 class="touch-up-timeline__maintenance-title" data-i18n="touchup.maintenance.weeklyTitle">Weekly Routine</h4>
                 </div>
                 <ul class="touch-up-timeline__maintenance-list">
@@ -1822,7 +1822,7 @@
               <!-- Seasonal / Ongoing -->
               <div class="touch-up-timeline__maintenance-card">
                 <div class="touch-up-timeline__maintenance-header">
-                  <span class="touch-up-timeline__maintenance-icon">☀️</span>
+                  <span class="touch-up-timeline__maintenance-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-sun></use></svg></span>
                   <h4 class="touch-up-timeline__maintenance-title" data-i18n="touchup.maintenance.sunTitle">Sun &amp; Outdoor Protocol</h4>
                 </div>
                 <ul class="touch-up-timeline__maintenance-list">
@@ -1835,7 +1835,7 @@
 
             <!-- Sun Damage Impact Calculator -->
             <div class="touch-up-timeline__sun-damage">
-              <h4 class="touch-up-timeline__subsection-title" data-i18n="touchup.sunCalc.title">☀️ Sun Exposure Impact Estimator</h4>
+              <h4 class="touch-up-timeline__subsection-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-sun></use></svg><span data-i18n="touchup.sunCalc.title" style="color:inherit">Sun Exposure Impact Estimator</span></h4>
               <p class="touch-up-timeline__section-subtitle" style="margin-bottom: 1rem;" data-i18n="touchup.sunCalc.subtitle">
                 Calculate how weekly direct UV exposure accelerates fading rate.
               </p>
@@ -1854,8 +1854,8 @@
                       <option value="always" data-i18n="touchup.spf.always">Always use SPF 50+</option>
                     </select>
                   </div>
-                  <button type="button" id="calculateSun" class="touch-up-timeline__btn touch-up-timeline__btn--secondary" data-i18n="touchup.sunCalc.calculateBtn">
-                    ☀️ Calculate Impact
+                  <button type="button" id="calculateSun" class="touch-up-timeline__btn touch-up-timeline__btn--secondary">
+                    <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-sun></use></svg><span data-i18n="touchup.sunCalc.calculateBtn" style="color:inherit">Calculate Impact</span>
                   </button>
                 </div>
               </form>
@@ -1907,8 +1907,8 @@
                 </div>
               </div>
 
-              <button type="submit" class="touch-up-timeline__btn touch-up-timeline__btn--primary" data-i18n="touchup.cost.submitBtn">
-                💰 Calculate Lifetime Projections
+              <button type="submit" class="touch-up-timeline__btn touch-up-timeline__btn--primary">
+                <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-cash></use></svg><span data-i18n="touchup.cost.submitBtn" style="color:inherit">Calculate Lifetime Projections</span>
               </button>
             </form>
 
@@ -1947,7 +1947,7 @@
                     <h5 data-i18n="touchup.cost.goodCareTitle">With Diligent Care (SPF + Hydration)</h5>
                     <div id="goodCareCost" class="touch-up-timeline__comparison-value">$0</div>
                     <div id="goodCareTouchUps" class="touch-up-timeline__comparison-detail" data-i18n="touchup.cost.defaultTouchUpsOver30">0 touch-ups over 30 years</div>
-                    <div id="savings" class="touch-up-timeline__comparison-savings" data-i18n="touchup.cost.highSavingsLabel">💰 High Savings</div>
+                    <div id="savings" class="touch-up-timeline__comparison-savings"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-cash></use></svg><span data-i18n="touchup.cost.highSavingsLabel" style="color:inherit">High Savings</span></div>
                   </div>
 
                   <div class="touch-up-timeline__comparison-card touch-up-timeline__comparison-card--poor">
@@ -1960,7 +1960,7 @@
               </div>
 
               <div class="touch-up-timeline__budget-tip">
-                <h4 class="touch-up-timeline__subsection-title" data-i18n="touchup.cost.tipTitle">💡 Studio Budget Tip</h4>
+                <h4 class="touch-up-timeline__subsection-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-bulb></use></svg><span data-i18n="touchup.cost.tipTitle" style="color:inherit">Studio Budget Tip</span></h4>
                 <p id="budgetRecommendation"></p>
               </div>
             </div>
@@ -2065,8 +2065,8 @@
                 </div>
               </div>
 
-              <button type="submit" class="touch-up-timeline__btn touch-up-timeline__btn--primary" data-i18n="touchup.readiness.submitBtn">
-                ✅ Evaluate Touch-Up Readiness
+              <button type="submit" class="touch-up-timeline__btn touch-up-timeline__btn--primary">
+                <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-check></use></svg><span data-i18n="touchup.readiness.submitBtn" style="color:inherit">Evaluate Touch-Up Readiness</span>
               </button>
             </form>
 
@@ -2113,7 +2113,7 @@
       <h2 class="tab-embed-title" data-i18n="embed.title">Embed This Tool</h2>
       <p class="tab-embed-description" data-i18n="embed.description">Copy the code below to embed the complete suite on your studio website:</p>
       <textarea id="embedCodeTab" class="tab-embed-textarea" readonly>&lt;iframe src="https://poliinternational.com/tools/healing-tracker/index.html" width="100%" height="1000" frameborder="0" style="border-radius:12px;"&gt;&lt;/iframe&gt;</textarea>
-      <button onclick="copyEmbedCode()" class="tab-embed-copy-btn" data-i18n="embed.copyBtn">📋 Copy Code</button>
+      <button onclick="copyEmbedCode()" class="tab-embed-copy-btn"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-clipboard></use></svg><span data-i18n="embed.copyBtn" style="color:inherit">Copy Code</span></button>
     </div>
   </div>
 
@@ -2126,15 +2126,15 @@
   <div id="embedModal" class="modal" style="display: none;">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title" data-i18n="embed.modalTitle">🎁 Use This Tool FREE</h2>
+        <h2 class="modal-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-gift></use></svg><span data-i18n="embed.modalTitle" style="color:inherit">Use This Tool FREE</span></h2>
         <span class="modal-close" id="modalClose">&times;</span>
       </div>
       <div class="modal-body">
         <div class="modal-section">
-          <h3 data-i18n="embed.copyEmbedCode">📋 Copy Embed Code</h3>
+          <h3><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-clipboard></use></svg><span data-i18n="embed.copyEmbedCode" style="color:inherit">Copy Embed Code</span></h3>
           <div class="code-container">
             <textarea id="embedCode" class="embed-code-textarea" readonly></textarea>
-            <button id="copyEmbedCode" class="btn btn--primary btn--small" data-i18n="embed.copyBtn">📋 Copy Code</button>
+            <button id="copyEmbedCode" class="btn btn--primary btn--small"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-clipboard></use></svg><span data-i18n="embed.copyBtn" style="color:inherit">Copy Code</span></button>
           </div>
         </div>
       </div>
@@ -2266,7 +2266,7 @@
         }
         // say so: a copy is otherwise invisible
         var btn = document.querySelector('[onclick="copyEmbedCode()"]');
-        if (btn) { var was = btn.innerHTML; btn.textContent = '✓ Copied'; setTimeout(function () { btn.innerHTML = was; }, 2000); }
+        if (btn) { var was = btn.innerHTML; btn.textContent = 'Copied'; setTimeout(function () { btn.innerHTML = was; }, 2000); }
       }
     }
 
@@ -2347,7 +2347,7 @@
 
   <!-- Hydration Floating Toast Notification -->
   <div id="hydrationToast" class="hydration-toast" style="display: none;" role="alert">
-    <div class="hydration-toast-icon">💧</div>
+    <div class="hydration-toast-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-drop></use></svg></div>
     <div class="hydration-toast-body">
       <strong class="hydration-toast-title" data-i18n="healing.hydration.toastTitle">Hydration Check-in</strong>
       <p class="hydration-toast-text" data-i18n="healing.hydration.toastText">Time to drink a glass of water for cell renewal!</p>

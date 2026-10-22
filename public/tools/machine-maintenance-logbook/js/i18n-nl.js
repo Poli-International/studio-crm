@@ -4,7 +4,7 @@
  */
 window.I18N_NL = {
   header: {
-    badge: "🔧 Machine-onderhoud",
+    badge: "Machine-onderhoud",
     lang_label: "Taal",
     lang_aria: "Selecteer taal",
     title: "Onderhoudslogboek voor Machines",

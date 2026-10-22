@@ -79,7 +79,7 @@ const IndustrialBarbellCalculator = {
 
         this.renderQuickSpans();
         this.renderEmptyState();
-        console.log('📏 IndustrialBarbellCalculator initialized (Rule 3 compliant: starts empty)');
+        console.log('IndustrialBarbellCalculator initialized (Rule 3 compliant: starts empty)');
     },
 
     renderQuickSpans() {
@@ -112,7 +112,7 @@ const IndustrialBarbellCalculator = {
         if (resultDiv) {
             resultDiv.innerHTML = `
                 <div class="calc-empty-prompt" style="padding: 2.5rem 1.5rem; text-align: center; background: var(--bg-secondary); border: 2px dashed var(--border-color); border-radius: 8px; color: var(--text-secondary);">
-                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📏</div>
+                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-ruler></use></svg></div>
                     <strong style="color: var(--text-primary); font-size: 1.05rem;">${tr('industrial.ui.emptyTitle', 'Enter the hole-to-hole distance above')}</strong>
                     <p style="margin: 0.5rem auto 0; max-width: 480px; font-size: 0.9rem; line-height: 1.5;">
                         ${tr('industrial.ui.emptyDesc', 'Type the measured distance between the two holes in millimetres, or pick a preset above, to get the bar length and calibrated 1:1 diagrams.')}
@@ -182,7 +182,7 @@ const IndustrialBarbellCalculator = {
             resultDiv.innerHTML = `
                 <div class="cbb-err-card" role="alert" style="background: var(--bg-secondary); border: 2px solid var(--color-error); padding: 1.5rem; border-radius: 8px; color: var(--text-primary); margin: 1.5rem 0;">
                     <div style="font-weight: 700; color: var(--color-error); margin-bottom: 0.5rem; font-size: 1.05rem;">
-                        ⚠️ Impossible Scaffold Distance (${this.escapeHtml(raw)} mm)
+                        <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> Impossible Scaffold Distance (${this.escapeHtml(raw)} mm)
                     </div>
                     <p style="margin: 0; line-height: 1.5; font-size: 0.95rem;">
                         Industrial scaffold distances must be between <strong>20 mm and 80 mm</strong>. Human ear scapha spans outside this range cannot safely accommodate a rigid straight barbell.
@@ -205,8 +205,8 @@ const IndustrialBarbellCalculator = {
     buildResultHtml(res) {
         const isCalibrated = (typeof AppState !== 'undefined' && AppState.isCalibrated);
         const statusBadge = isCalibrated
-            ? `<span class="scale-status-badge scale-status-badge--calibrated">${tr('scale.badgeCalibrated', '✅ Calibrated (1:1)')}</span>`
-            : `<span class="scale-status-badge scale-status-badge--approx">${tr('scale.badgeApprox', '⚠️ Approximate preview: not calibrated')}</span>`;
+            ? `<span class="scale-status-badge scale-status-badge--calibrated">${tr('scale.badgeCalibrated', 'Calibrated (1:1)')}</span>`
+            : `<span class="scale-status-badge scale-status-badge--approx">${tr('scale.badgeApprox', 'Approximate preview: not calibrated')}</span>`;
 
         return `
             <div class="cbb-result-container">
@@ -311,7 +311,7 @@ const IndustrialBarbellCalculator = {
                 <!-- Requirement H: Clinical explanation of undersized industrial barbell -->
                 <div class="size-shortage-warning" style="background: var(--bg-secondary); border: 2px solid var(--color-error); border-radius: 8px; padding: 1.25rem; margin: 1.5rem 0;">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 0.75rem;">
-                        <span style="font-size: 1.25rem;">⚠️</span>
+                        <span style="font-size: 1.25rem;"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg></span>
                         <strong style="color: var(--color-error); font-size: 1rem;">
                             ${tr('industrial.res.warnTitle', 'Clinical Warning: Why Any Industrial Barbell Under {len} mm Will Fail', { len: res.fresh.minRequired.toFixed(1) })}
                         </strong>
@@ -361,13 +361,13 @@ const IndustrialBarbellCalculator = {
                 <!-- Action Controls: Requirement E & F -->
                 <div class="cbb-action-buttons" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1.5rem;">
                     <button type="button" class="btn btn--primary" id="ibb-copy-summary-btn">
-                        ${tr('curved.res.btnCopy', '📋 Copy Size Summary (Plain Text)')}
+                        ${tr('curved.res.btnCopy', 'Copy Size Summary (Plain Text)')}
                     </button>
                     <button type="button" class="btn btn--secondary" id="ibb-to-collection-btn">
-                        ${tr('curved.res.btnSave', '💎 Save to My Jewellery Collection')}
+                        ${tr('curved.res.btnSave', 'Save to My Jewellery Collection')}
                     </button>
                     <button type="button" class="btn btn--secondary" id="ibb-to-fitcard-btn">
-                        ${tr('curved.res.btnFit', '🖨️ Transfer to Printable Fit Card')}
+                        ${tr('curved.res.btnFit', 'Transfer to Printable Fit Card')}
                     </button>
                 </div>
             </div>
@@ -469,12 +469,12 @@ const IndustrialBarbellCalculator = {
                 const text = tr('industrial.res.copyText', 'Placement: Industrial Barbell | Gauge: 14g (1.6 mm) | Fresh Length: {fresh} mm | Healed Length: {healed} mm | Measured Span: {span} mm | Date: {date}', { fresh: res.fresh.bestFit, healed: res.healed.bestFit, span: res.dist, date: date });
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     navigator.clipboard.writeText(text).then(() => {
-                        const orig = copySummaryBtn.textContent;
-                        copySummaryBtn.textContent = tr('common.summaryCopied', '✓ Summary copied');
-                        setTimeout(() => { copySummaryBtn.textContent = orig; }, 2500);
+                        const orig = copySummaryBtn.innerHTML;
+                        copySummaryBtn.textContent = tr('common.summaryCopied', 'Summary copied');
+                        setTimeout(() => { copySummaryBtn.innerHTML = orig; }, 2500);
                     });
                 } else if (typeof JewelleryCollectionModule !== 'undefined') {
-                    JewelleryCollectionModule.copyToClipboard(text, tr('curved.res.copied', '✓ Size summary copied!'));
+                    JewelleryCollectionModule.copyToClipboard(text, tr('curved.res.copied', 'Size summary copied!'));
                 }
             });
         }

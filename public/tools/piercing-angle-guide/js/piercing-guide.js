@@ -421,15 +421,15 @@
       if (v2StatusBanner) {
         if (absDev === 0) {
           v2StatusBanner.className = 'v2-status-banner v2-status-banner--optimal';
-          if (v2StatusIcon) v2StatusIcon.textContent = '✅';
+          if (v2StatusIcon) v2StatusIcon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg>';
           if (v2StatusText) v2StatusText.textContent = tr('visualizer.status_straight', null, 'Straight through. Both discs sit flat on the skin.');
         } else if (absDev <= 5) {
           v2StatusBanner.className = 'v2-status-banner v2-status-banner--warning';
-          if (v2StatusIcon) v2StatusIcon.textContent = '⚠️';
+          if (v2StatusIcon) v2StatusIcon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg>';
           if (v2StatusText) v2StatusText.textContent = tr('visualizer.status_slight', { dev: (dev > 0 ? '+' : '') + dev }, 'Tilted {dev}°. One disc edge starts to press into the skin, and swelling makes it worse.');
         } else {
           v2StatusBanner.className = 'v2-status-banner v2-status-banner--danger';
-          if (v2StatusIcon) v2StatusIcon.textContent = '🛑';
+          if (v2StatusIcon) v2StatusIcon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-ban></use></svg>';
           if (v2StatusText) v2StatusText.textContent = tr('visualizer.status_tilted', { dev: (dev > 0 ? '+' : '') + dev }, 'Tilted {dev}°. One disc edge presses in and the other lifts. Expect irritation bumps; the channel can migrate.');
         }
       }
@@ -647,23 +647,23 @@
 
         compareDiffGrid.innerHTML = `
           <div class="compare-diff-item">
-            <span class="compare-diff-item__label">${t('compare.vector_geometry_contrast', null, '📐 Vector Geometry Contrast')}</span>
+            <span class="compare-diff-item__label">${t('compare.vector_geometry_contrast', null, 'Vector Geometry Contrast')}</span>
             <span class="compare-diff-item__value">${diffAngle}</span>
           </div>
           <div class="compare-diff-item">
-            <span class="compare-diff-item__label">${t('compare.histological_vascular_delta', null, '🔬 Histological & Vascular Delta')}</span>
+            <span class="compare-diff-item__label">${t('compare.histological_vascular_delta', null, 'Histological & Vascular Delta')}</span>
             <span class="compare-diff-item__value">${diffTissue}</span>
           </div>
           <div class="compare-diff-item">
-            <span class="compare-diff-item__label">${t('compare.channel_depth_difference', null, '📏 Channel Depth Difference')}</span>
+            <span class="compare-diff-item__label">${t('compare.channel_depth_difference', null, 'Channel Depth Difference')}</span>
             <span class="compare-diff-item__value">${depthDiffText}</span>
           </div>
           <div class="compare-diff-item">
-            <span class="compare-diff-item__label">${t('compare.healing_duration_delta', null, '⏱️ Healing Duration Delta')}</span>
+            <span class="compare-diff-item__label">${t('compare.healing_duration_delta', null, 'Healing Duration Delta')}</span>
             <span class="compare-diff-item__value"><strong>${nameA}:</strong> ${healingA}<br><strong>${nameB}:</strong> ${healingB}</span>
           </div>
           <div class="compare-diff-item">
-            <span class="compare-diff-item__label">${t('compare.primary_clinical_risk', null, '⚠️ Primary Clinical Risk Factor')}</span>
+            <span class="compare-diff-item__label">${t('compare.primary_clinical_risk', null, 'Primary Clinical Risk Factor')}</span>
             <span class="compare-diff-item__value"><strong>${nameA}:</strong> ${hazardLabelA}<br><strong>${nameB}:</strong> ${hazardLabelB}</span>
           </div>
         `;
@@ -863,10 +863,10 @@
       var activeMode = mode || 'optimal';
       var t = window.translate || function (k, p, d) { return d; };
       var descriptions = {
-        'optimal': '<strong>' + t('visualizer.err_optimal_title', null, '✅ Optimal Perpendicular Alignment') + ':</strong> ' + t('visualizer.err_optimal_desc', null, 'The needle enters and exits at precisely 90° to the anatomical plane. Both anterior and posterior discs sit completely flush against the epidermal surface, distributing hydrostatic pressure uniformly with zero localized shear strain.'),
-        'shallow': '<strong>' + t('visualizer.err_shallow_title', null, '⚠️ Shallow Insertion Error') + ':</strong> ' + t('visualizer.err_shallow_desc', null, 'Entering at a shallow diagonal angle (-15°) elongates the fistula channel and causes the superior edge of the backing disc to bite into the dermis. This localized pressure triggers collagen hyperplasia and chronic hypertrophic bumps.'),
-        'steep': '<strong>' + t('visualizer.err_steep_title', null, '🛑 Steep / Off-Axis Incline Error') + ':</strong> ' + t('visualizer.err_steep_desc', null, 'A steep trajectory (+15°) forces the opposite disc edge to dig deeply into the tissue, creating high shear forces that cause the jewelry to migrate over time toward the path of least resistance.'),
-        'asymmetric': '<strong>' + t('visualizer.err_asym_title', null, '⚠️ Bilateral Asymmetric Skew') + ':</strong> ' + t('visualizer.err_asym_desc', null, 'Different entry/exit vectors on paired piercings create optical dissonance, uneven downward hang under gravity, and asymmetric friction during daily activity and sleep.')
+        'optimal': '<strong>' + t('visualizer.err_optimal_title', null, 'Optimal Perpendicular Alignment') + ':</strong> ' + t('visualizer.err_optimal_desc', null, 'The needle enters and exits at precisely 90° to the anatomical plane. Both anterior and posterior discs sit completely flush against the epidermal surface, distributing hydrostatic pressure uniformly with zero localized shear strain.'),
+        'shallow': '<strong>' + t('visualizer.err_shallow_title', null, 'Shallow Insertion Error') + ':</strong> ' + t('visualizer.err_shallow_desc', null, 'Entering at a shallow diagonal angle (-15°) elongates the fistula channel and causes the superior edge of the backing disc to bite into the dermis. This localized pressure triggers collagen hyperplasia and chronic hypertrophic bumps.'),
+        'steep': '<strong>' + t('visualizer.err_steep_title', null, 'Steep / Off-Axis Incline Error') + ':</strong> ' + t('visualizer.err_steep_desc', null, 'A steep trajectory (+15°) forces the opposite disc edge to dig deeply into the tissue, creating high shear forces that cause the jewelry to migrate over time toward the path of least resistance.'),
+        'asymmetric': '<strong>' + t('visualizer.err_asym_title', null, 'Bilateral Asymmetric Skew') + ':</strong> ' + t('visualizer.err_asym_desc', null, 'Different entry/exit vectors on paired piercings create optical dissonance, uneven downward hang under gravity, and asymmetric friction during daily activity and sleep.')
       };
 
       if (errorSvgContainer) {
@@ -1332,7 +1332,7 @@
       if (toggleFineTuneBtn) {
         toggleFineTuneBtn.classList.remove('active');
         toggleFineTuneBtn.setAttribute('aria-pressed', 'false');
-        toggleFineTuneBtn.innerHTML = tr('common.fine_tune_0_1mm', null, '🔬 Fine-Tune (0.1mm)');
+        toggleFineTuneBtn.innerHTML = tr('common.fine_tune_0_1mm', null, 'Fine-Tune (0.1mm)');
       }
 
       // Reset symmetry controls to clinical defaults
@@ -1381,7 +1381,7 @@
       // Visual feedback on Reset All button
       if (resetAllBtn) {
         var origHtml = resetAllBtn.innerHTML;
-        resetAllBtn.innerHTML = '<span class="reset-icon">✅</span> <span class="reset-text">' + tr('ui.reset_done', null, 'Reset Done') + '</span>';
+        resetAllBtn.innerHTML = '<span class="reset-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></span> <span class="reset-text">' + tr('ui.reset_done', null, 'Reset Done') + '</span>';
         setTimeout(function () {
           resetAllBtn.innerHTML = origHtml;
         }, 1500);
@@ -1649,7 +1649,7 @@
 
       if (downloadAngleDiagramSvgBtn) {
         var orig = downloadAngleDiagramSvgBtn.innerHTML;
-        downloadAngleDiagramSvgBtn.innerHTML = '✅ Saved SVG';
+        downloadAngleDiagramSvgBtn.innerHTML = 'Saved SVG';
         setTimeout(function () { downloadAngleDiagramSvgBtn.innerHTML = orig; }, 1500);
       }
     }
@@ -1698,7 +1698,7 @@
 
           if (downloadAngleDiagramPngBtn) {
             var orig = downloadAngleDiagramPngBtn.innerHTML;
-            downloadAngleDiagramPngBtn.innerHTML = '✅ Saved PNG';
+            downloadAngleDiagramPngBtn.innerHTML = 'Saved PNG';
             setTimeout(function () { downloadAngleDiagramPngBtn.innerHTML = orig; }, 1500);
           }
         }, 'image/png');
@@ -1784,7 +1784,7 @@
         visualizerAnimateAngleBtn.classList.add('active');
       }
       if (visualizerAnimateIcon) {
-        visualizerAnimateIcon.textContent = '⏸';
+        visualizerAnimateIcon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-pause></use></svg>';
       }
 
       // Sweep keyframe sequence: 75° (-15°) -> 105° (+15°) -> 90° (Flush)
@@ -1819,7 +1819,7 @@
 
       if (resetAngleVisualizerBtn) {
         var orig = resetAngleVisualizerBtn.innerHTML;
-        resetAngleVisualizerBtn.innerHTML = '✅ Reset Done';
+        resetAngleVisualizerBtn.innerHTML = 'Reset Done';
         setTimeout(function () { resetAngleVisualizerBtn.innerHTML = orig; }, 1200);
       }
     }
@@ -1840,11 +1840,11 @@
         if (isFineTuneMode) {
           toggleFineTuneBtn.classList.add('active');
           toggleFineTuneBtn.setAttribute('aria-pressed', 'true');
-          toggleFineTuneBtn.innerHTML = '🔬 Fine-Tune: ON (0.1mm)';
+          toggleFineTuneBtn.innerHTML = 'Fine-Tune: ON (0.1mm)';
         } else {
           toggleFineTuneBtn.classList.remove('active');
           toggleFineTuneBtn.setAttribute('aria-pressed', 'false');
-          toggleFineTuneBtn.innerHTML = '🔬 Fine-Tune (0.1mm)';
+          toggleFineTuneBtn.innerHTML = 'Fine-Tune (0.1mm)';
         }
       }
       if (caliperThicknessSlider) {
@@ -2060,7 +2060,7 @@ Reference: Poli International Piercing Angle & Depth Guide`;
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(summary).then(function () {
             var orig = copySummaryBtn.innerHTML;
-            copySummaryBtn.innerHTML = '✅ ' + tr('common.btn_copied', null, 'Copied to Clipboard!');
+            copySummaryBtn.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> ' + tr('common.btn_copied', null, 'Copied to Clipboard!');
             setTimeout(function () { copySummaryBtn.innerHTML = orig; }, 2000);
           });
         }
@@ -2136,7 +2136,7 @@ Reference: Poli International Piercing Angle & Depth Guide`;
       btns.forEach(function (btn) {
         if (!btn) return;
         var origHtml = btn.innerHTML;
-        btn.innerHTML = '✅ Exported JSON';
+        btn.innerHTML = 'Exported JSON';
         setTimeout(function () {
           btn.innerHTML = origHtml;
         }, 1800);

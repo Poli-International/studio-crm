@@ -17,7 +17,7 @@
     'print.generated_prefix': 'Generated:',
     'print.signature': 'Artist / Studio Signature: _____________________________________',
     'print.date': 'Date: ________________________',
-    'header.badge': '🧾 Tax Deduction Tracker V2',
+    'header.badge': 'Tax Deduction Tracker V2',
     'header.title': 'Tattoo Artist Tax Deduction Tracker',
     'header.subtitle': 'Record business expenses through the year in categories your accountant recognises. Fast line-item entry, receipt tracking references, travel logs, and customisable categories. Everything stays in your browser.',
     'toolbar.year': 'Tax / Calendar Year:',

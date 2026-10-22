@@ -400,7 +400,7 @@ function renderFormulaCard(formula) {
   if (brandCheck.hasMismatch) {
     const warning = document.createElement('div');
     warning.className = 'ink-mixer__card-warning';
-    warning.innerHTML = `<span class="ink-mixer__warning-icon" aria-hidden="true">⚠️</span> <span>${brandCheck.message}</span>`;
+    warning.innerHTML = `<span class="ink-mixer__warning-icon" aria-hidden="true"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg></span> <span>${brandCheck.message}</span>`;
     details.appendChild(warning);
   }
 

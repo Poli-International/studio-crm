@@ -17,7 +17,7 @@
     'print.generated_prefix': 'Erstellt am:',
     'print.signature': 'Unterschrift Artist / Studio: _____________________________________',
     'print.date': 'Datum: ________________________',
-    'header.badge': '🧾 Betriebsausgaben-Tracker V2',
+    'header.badge': 'Betriebsausgaben-Tracker V2',
     'header.title': 'Betriebsausgaben-Rechner für Tätowierer',
     'header.subtitle': 'Erfassen Sie Ihre Betriebsausgaben unterjährig in Kategorien, die Ihr Steuerberater anerkennt. Schnelle Einzelpostenerfassung, Belegreferenzen, Fahrtenbuch und anpassbare Kategorien. Alle Daten verbleiben in Ihrem Browser.',
     'toolbar.year': 'Steuer- / Kalenderjahr:',

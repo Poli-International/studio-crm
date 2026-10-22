@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
             body.classList.remove('dark-mode');
             if (themeToggle) {
                 const icon = themeToggle.querySelector('.dark-mode-icon') || themeToggle;
-                icon.textContent = '☀️';
+                icon.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-sun></use></svg>';
             }
         } else {
             body.classList.add('dark-mode');
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
             textarea.select();
             navigator.clipboard.writeText(textarea.value).then(() => {
                 const originalText = copyBtn.innerHTML;
-                copyBtn.innerHTML = '✅ ' + window.t('app.copied');
+                copyBtn.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> ' + window.t('app.copied');
                 setTimeout(() => copyBtn.innerHTML = originalText, 2000);
             }).catch(() => {
                 // Clipboard API refused (common inside an iframe): the text is

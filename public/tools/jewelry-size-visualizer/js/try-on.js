@@ -42,7 +42,7 @@ const TryOnModule = {
         this.bindControlEvents();
         this.bindCanvasEvents();
 
-        console.log('📸 Try-On module initialized');
+        console.log('Try-On module initialized');
     },
 
     /**
@@ -376,7 +376,7 @@ const TryOnModule = {
                 this.uploadedImage = img;
                 this.showWorkspace();
                 this.initializeCanvas();
-                console.log('📷 Photo uploaded:', file.name);
+                console.log('Photo uploaded:', file.name);
             };
             img.src = e.target.result;
         };
@@ -477,7 +477,7 @@ const TryOnModule = {
             this.uploadedImage = img;
             this.showWorkspace();
             this.initializeCanvas();
-            console.log('👂 Sample anatomical ear loaded into Try-On');
+            console.log('Sample anatomical ear loaded into Try-On');
         };
         img.src = offscreen.toDataURL('image/png');
     },
@@ -603,7 +603,7 @@ const TryOnModule = {
         if (this.uploadedImage) {
             this.redraw();
         }
-        console.log('💍 Set jewelry for try-on:', jewelry.name);
+        console.log('Set jewelry for try-on:', jewelry.name);
     },
 
     /**
@@ -622,7 +622,7 @@ const TryOnModule = {
             link.href = dataURL;
             link.click();
 
-            console.log('💾 Try-on saved');
+            console.log('Try-on saved');
             this.showSaveMessage(window.i18n ? window.i18n.t('tryon.msgSaved') : 'Try-on saved successfully!');
         } catch (error) {
             console.error('Failed to save try-on:', error);
@@ -650,7 +650,7 @@ const TryOnModule = {
                     text: 'Check out how this jewelry looks on me!',
                     files: [file]
                 }).then(() => {
-                    console.log('📤 Shared successfully');
+                    console.log('Shared successfully');
                 }).catch((error) => {
                     console.log('Share cancelled or failed:', error);
                 });
@@ -691,7 +691,7 @@ const TryOnModule = {
             this.uploadArea.parentElement.style.display = 'block';
         }
 
-        console.log('🔄 Try-on reset');
+        console.log('Try-on reset');
     },
 
     /**

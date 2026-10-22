@@ -60,7 +60,7 @@
         }
 
         // Try stripping leading icons / emojis / bullets / checkmarks
-        const iconMatch = trimmed.match(/^([\uD800-\uDBFF\uDC00-\uDFFF\s\u2600-\u27BF⚡🚨🧪💧🏷️📋🌡️💾🗑️📤📥🔬📦📏🔧⚖️▶⏸🔄🔔👁️🖨️➕•\-\+\/✓⚠️✅❌]+)(.+)$/u);
+        const iconMatch = trimmed.match(/^([\uD800-\uDBFF\uDC00-\uDFFF\s\u2600-\u27BF▶•\-\+\/]+)(.+)$/u);
         if (iconMatch) {
             const icon = iconMatch[1];
             const rest = iconMatch[2].trim();

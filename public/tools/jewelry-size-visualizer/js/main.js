@@ -452,7 +452,7 @@ const ScaleRenderer = {
      */
     renderLabret(ctx, jewelry) {
         // Debug: This should log for ALL labrets, nose screws, and dermal anchors
-        console.log(`🔧 Rendering labret: ${jewelry.name} (${jewelry.id})`);
+        console.log(`Rendering labret: ${jewelry.name} (${jewelry.id})`);
 
         // Check if this is a nose stud with special shape
         if (jewelry.noseType === 'screw') {
@@ -1059,7 +1059,7 @@ const DarkModeManager = {
             toggleBtn.addEventListener('click', () => this.toggleTheme());
         }
 
-        console.log('🌓 Dark Mode initialized:', savedTheme);
+        console.log('Dark Mode initialized:', savedTheme);
     },
 
     setTheme(theme, save = true) {
@@ -1069,13 +1069,13 @@ const DarkModeManager = {
         // Update button icon
         const icon = document.querySelector('.dark-mode-icon');
         if (icon) {
-            icon.textContent = theme === 'dark' ? '☀️' : '◐';
+            icon.innerHTML = theme === 'dark' ? '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-sun></use></svg>' : '◐';
         }
 
         // Save to localStorage
         if (save) {
             localStorage.setItem('theme', theme);
-            console.log('🌓 Theme changed to:', theme);
+            console.log('Theme changed to:', theme);
         }
     },
 
@@ -1144,23 +1144,23 @@ window.copyEmbedCode = copyEmbedCode;
 // Initialization
 // ===================================
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🎨 Tool #7: Interactive Jewelry Size Visualizer - Initializing...');
+    console.log('Tool #7: Interactive Jewelry Size Visualizer - Initializing...');
 
     try {
         // Check database loaded
         if (typeof getAllJewelry === 'undefined') {
-            console.error('❌ Database functions not loaded!');
+            console.error('Database functions not loaded!');
             alert('Critical Error: Jewelry database failed to load.\n\nThe database.js file may not be loading properly. Please check:\n1. Is database.js in the js/ folder?\n2. Are there any errors in the browser console (F12)?\n3. Is your browser blocking JavaScript?');
             return;
         }
-        console.log('✅ Database loaded');
+        console.log('Database loaded');
 
         // Test database functions
         try {
             const testData = getAllJewelry();
-            console.log(`✅ Database contains ${testData.length} items`);
+            console.log(`Database contains ${testData.length} items`);
         } catch (dbError) {
-            console.error('❌ Database test failed:', dbError);
+            console.error('Database test failed:', dbError);
             alert(`Database Error: ${dbError.message}\n\nThe database loaded but cannot be accessed properly.`);
             return;
         }
@@ -1176,36 +1176,36 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentLoc = (typeof window.i18n.getCurrentLocale === 'function')
                 ? window.i18n.getCurrentLocale()
                 : (typeof window.i18n.getLocale === 'function' ? window.i18n.getLocale() : (window.i18n.locale || 'en'));
-            console.log('✅ i18n initialized:', currentLoc);
+            console.log('i18n initialized:', currentLoc);
         }
 
         // Initialize dark mode
         DarkModeManager.init();
-        console.log('✅ Dark mode initialized');
+        console.log('Dark mode initialized');
 
         // Load saved state
         StorageManager.loadState();
-        console.log('✅ State loaded');
+        console.log('State loaded');
 
         // Initialize tab navigation
         initTabNavigation();
-        console.log('✅ Tab navigation initialized');
+        console.log('Tab navigation initialized');
 
         // Initialize calibration system
         if (typeof CalibrationSystem !== 'undefined') {
             CalibrationSystem.init();
-            console.log('✅ Calibration system initialized');
+            console.log('Calibration system initialized');
         } else {
-            console.warn('⚠️ CalibrationSystem not available');
+            console.warn('CalibrationSystem not available');
         }
 
         // Initialize visualizer module
         if (typeof Visualizer !== 'undefined') {
-            console.log('📦 Initializing Visualizer...');
+            console.log('Initializing Visualizer...');
             Visualizer.init();
-            console.log('✅ Visualizer initialized');
+            console.log('Visualizer initialized');
         } else {
-            console.error('❌ Visualizer not available');
+            console.error('Visualizer not available');
             alert('Critical Error: Visualizer module failed to load.\n\nThe visualizer.js file may not be loading properly. Please check the browser console (F12) for details.');
             return;
         }
@@ -1213,69 +1213,69 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initialize try-on module
         if (typeof TryOnModule !== 'undefined') {
             TryOnModule.init();
-            console.log('✅ Try-on module initialized');
+            console.log('Try-on module initialized');
         } else {
-            console.warn('⚠️ TryOnModule not available');
+            console.warn('TryOnModule not available');
         }
 
         // Initialize comparison module
         if (typeof ComparisonModule !== 'undefined') {
             ComparisonModule.init();
-            console.log('✅ Comparison module initialized');
+            console.log('Comparison module initialized');
         } else {
-            console.warn('⚠️ ComparisonModule not available');
+            console.warn('ComparisonModule not available');
         }
 
         // Initialize anatomy module
         if (typeof AnatomyGuide !== 'undefined') {
             AnatomyGuide.init();
-            console.log('✅ Anatomy guide initialized');
+            console.log('Anatomy guide initialized');
         } else {
-            console.warn('⚠️ AnatomyGuide not available');
+            console.warn('AnatomyGuide not available');
         }
 
         // Initialize clinical and material matrices
         if (typeof ClinicalMatricesModule !== 'undefined') {
             ClinicalMatricesModule.init();
-            console.log('✅ Clinical & Material Matrices initialized');
+            console.log('Clinical & Material Matrices initialized');
         } else {
-            console.warn('⚠️ ClinicalMatricesModule not available');
+            console.warn('ClinicalMatricesModule not available');
         }
 
         // Initialize curved barbell calculator
         if (typeof CurvedBarbellCalculator !== 'undefined') {
             CurvedBarbellCalculator.init();
-            console.log('✅ Curved Barbell Calculator initialized');
+            console.log('Curved Barbell Calculator initialized');
         } else {
-            console.warn('⚠️ CurvedBarbellCalculator not available');
+            console.warn('CurvedBarbellCalculator not available');
         }
 
         // Initialize industrial barbell calculator
         if (typeof IndustrialBarbellCalculator !== 'undefined') {
             IndustrialBarbellCalculator.init();
-            console.log('✅ Industrial Barbell Calculator initialized');
+            console.log('Industrial Barbell Calculator initialized');
         } else {
-            console.warn('⚠️ IndustrialBarbellCalculator not available');
+            console.warn('IndustrialBarbellCalculator not available');
         }
 
         // Initialize Fit Card module
         if (typeof FitCardModule !== 'undefined') {
             FitCardModule.init();
-            console.log('✅ Fit Card module initialized');
+            console.log('Fit Card module initialized');
         } else {
-            console.warn('⚠️ FitCardModule not available');
+            console.warn('FitCardModule not available');
         }
 
         // Initialize Photo Measurement module
         if (typeof PhotoMeasureModule !== 'undefined') {
             PhotoMeasureModule.init();
-            console.log('✅ Photo Measurement module initialized');
+            console.log('Photo Measurement module initialized');
         }
 
         // Initialize Jewellery Collection module
         if (typeof JewelleryCollectionModule !== 'undefined') {
             JewelleryCollectionModule.init();
-            console.log('✅ Jewellery Collection module initialized');
+            console.log('Jewellery Collection module initialized');
         }
 
         // Handle direct hash navigation to tabs
@@ -1291,7 +1291,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const embedButton = document.getElementById('embed-button');
         if (embedButton) {
             embedButton.addEventListener('click', showEmbedModal);
-            console.log('✅ Embed button initialized');
+            console.log('Embed button initialized');
         }
 
         // Initialize modal close buttons
@@ -1315,12 +1315,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        console.log('✅ Tool #7 initialized successfully');
-        console.log('📏 Current PPI:', ScaleRenderer.getDevicePPI());
-        console.log('🎯 Calibrated:', AppState.isCalibrated);
-        console.log('🌓 Theme:', DarkModeManager.getCurrentTheme());
+        console.log('Tool #7 initialized successfully');
+        console.log('Current PPI:', ScaleRenderer.getDevicePPI());
+        console.log('Calibrated:', AppState.isCalibrated);
+        console.log('Theme:', DarkModeManager.getCurrentTheme());
     } catch (error) {
-        console.error('❌ Initialization error:', error);
+        console.error('Initialization error:', error);
         console.error('Error stack:', error.stack);
         alert(`Failed to initialize tool.\n\nError: ${error.message}\n\nPlease check the browser console (press F12) for detailed error information.`);
     }

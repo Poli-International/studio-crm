@@ -15,7 +15,7 @@ const CATEGORIES = [
         sub: 'Advil / Nurofen / Motrin / Brufen / Ibuprom / Alivium / Cuprofen / Spidifen / Antalgic / Algiasdin / Neobrufen / Ibu-Ratiopharm / Espidifen / Dalsy',
         cat: 'pain',
         sev: 'mod',
-        riskBadges: ['🩸 Bleeding Risk', '💧 Plasma Oozing'],
+        riskBadges: ['Bleeding Risk', 'Plasma Oozing'],
         tattoo: 'Inhibits COX-1/2 enzymes, reducing platelet aggregation. Taking ibuprofen before a session increases procedural bleeding and plasma oozing, and heavier scabbing follows from that. Whether it affects ink retention itself has not been studied. Paracetamol/Acetaminophen is the better choice before a session.',
         piercing: 'Increases local bleeding and initial bruising at the piercing site. Not a total contraindication, but can cause prolonged oozing during tissue perforation.',
         wait: 'Avoid taking non-prescribed NSAIDs 24–48 hours prior to a session. Paracetamol is a safer alternative if approved by your doctor.',
@@ -27,7 +27,7 @@ const CATEGORIES = [
         sub: 'Aleve / Anaprox / Naprosyn / Synflex / Feminax Ultra / Apranax / Momendol / Antalgin / Naproxeno Ratiopharm / Feldene',
         cat: 'pain',
         sev: 'mod',
-        riskBadges: ['🩸 Bleeding Risk', '💧 Plasma Oozing'],
+        riskBadges: ['Bleeding Risk', 'Plasma Oozing'],
         tattoo: 'Longer-acting NSAID with significant platelet-inhibiting effects lasting up to 24–36 hours. Increased risk of prolonged bleeding and scab formation. As with other NSAIDs, the effect on ink retention itself has not been studied.',
         piercing: 'Increased bleeding and localized hematoma formation at fresh piercing sites.',
         wait: 'Avoid 48 hours pre-procedure if taken casually for pain. If prescribed, consult your doctor before pausing.',
@@ -39,7 +39,7 @@ const CATEGORIES = [
         sub: 'Tylenol / Panadol / Calpol / Hedex / Mapap / Dolo / Disprol / Efferalgan / Doliprane / Dafalgan / Tachipirina / Gelocatil / Ben-u-ron / Apotel / Termalgin / Paralen',
         cat: 'pain',
         sev: 'low',
-        riskBadges: ['✅ Safe Analgesic', '🩸 No Extra Bleeding'],
+        riskBadges: ['Safe Analgesic', 'No Extra Bleeding'],
         tattoo: 'Does NOT inhibit platelet function or increase bleeding. Safe and preferred analgesic for pre-procedure nervous tension or post-procedure soreness when taken at therapeutic doses.',
         piercing: 'Ideal over-the-counter pain reliever for post-piercing swelling or soreness as it does not promote bleeding or bruising.',
         wait: 'No pre-procedure wait required. Stay within recommended daily dosage limits.',
@@ -51,7 +51,7 @@ const CATEGORIES = [
         sub: 'Codeine / Tramadol / Oxycodone (OxyContin) / Hydrocodone (Vicodin) / Morphine / Fentanyl / Tramal / Contramal / Adolonta / Skenan / Oxygesic / Targin / Subutex / Co-Codamol / Klipal / Izalgi / Zaldiar',
         cat: 'pain',
         sev: 'high',
-        riskBadges: ['💫 Fainting Risk', '⚠️ Sedation Risk'],
+        riskBadges: ['Fainting Risk', 'Sedation Risk'],
         tattoo: 'Alters pain perception and central nervous system response. Causes sedation, lowered blood pressure, nausea, and increased risk of vasovagal syncope (fainting). Most professional studios will decline clients under active narcotic influence.',
         piercing: 'High risk of dizziness, nausea, and fainting during or after the procedure. Impaired consent issues if taking acute high-dose narcotics.',
         wait: 'Do not attend a session under the acute influence of narcotic painkillers. If taking chronic prescription pain medication, obtain physician clearance.',
@@ -69,7 +69,7 @@ const CATEGORIES = [
         sub: 'EMLA / TKTX / Mithra / J-Pro / LMX4 / Numb-It / Deep Numb / Anesten',
         cat: 'numbing',
         sev: 'mod',
-        riskBadges: ['🩹 Skin Texture Alteration', '⚡ Rebound Shock'],
+        riskBadges: ['Skin Texture Alteration', 'Rebound Shock'],
         tattoo: 'Alters skin texture by causing localized edema (swelling) and spongy/rubbery skin density. Can hinder clean needle penetration and line precision. When the cream wears off mid-session, sudden intense pain shock can occur. Unregulated high-concentration creams carry toxicity risks.',
         piercing: 'Topical creams only numb the superficial epidermis, not the deeper cartilage or subcutaneous tissue pierced. May cause localized skin blanching and swelling.',
         wait: 'Always inform your artist prior to applying numbing cream. Many studios prohibit client-applied numbing cream due to chemical burn and skin texture risks.',
@@ -81,7 +81,7 @@ const CATEGORIES = [
         sub: 'Adrenaline / Vascular Constrictor Additives',
         cat: 'numbing',
         sev: 'high',
-        riskBadges: ['🩸 Rebound Bleeding', '⚠️ Vasoconstriction'],
+        riskBadges: ['Rebound Bleeding', 'Vasoconstriction'],
         tattoo: 'Epinephrine causes strong vasoconstriction (narrowing blood vessels) to reduce bleeding. When it wears off, severe "rebound hyperemia" occurs — rapid vascular dilation, intense bleeding, and heavy plasma exudate that damages fresh ink setting.',
         piercing: 'Blanches skin during piercing marking, making accurate alignment difficult. Rebound bleeding and intense throbbing occur post-procedure.',
         wait: 'Avoid vasoconstrictive numbing agents unless administered directly by a medical professional or approved by your artist.',
@@ -99,7 +99,7 @@ const CATEGORIES = [
         sub: 'Coumadin / Jantoven / Marevan / Uniwarfin',
         cat: 'blood',
         sev: 'high',
-        riskBadges: ['🩸 High Bleeding Risk', '⏳ Delayed Healing'],
+        riskBadges: ['High Bleeding Risk', 'Delayed Healing'],
         tattoo: 'Significant bleeding during tattooing — prolonged oozing impairs ink setting. Colour saturation and linework clarity are affected. Most professional studios require medical clearance or decline clients on active therapeutic anticoagulation.',
         piercing: 'Excessive bleeding during piercing and prolonged healing phase. Any haematoma at a new piercing site delays fistula formation significantly.',
         wait: 'Discuss stopping or bridging with your prescribing physician — do not discontinue without medical guidance.',
@@ -111,7 +111,7 @@ const CATEGORIES = [
         sub: 'Eliquis / Xarelto / Pradaxa / Savaysa / Lixiana',
         cat: 'blood',
         sev: 'high',
-        riskBadges: ['🩸 High Bleeding Risk', '⏳ Delayed Healing'],
+        riskBadges: ['High Bleeding Risk', 'Delayed Healing'],
         tattoo: 'Same bleeding profile as warfarin. Direct oral anticoagulants (DOACs) have shorter half-lives but effects are still significant during skin-breaking procedures.',
         piercing: 'Elevated bleeding and bruising at piercing site. Jewellery pressure on a haematoma increases rejection risk.',
         wait: 'Half-life 8–12 hours — discuss a supervised pause with your physician. Do not pause without medical approval.',
@@ -123,7 +123,7 @@ const CATEGORIES = [
         sub: 'Bayer / Disprin / Anacin / Ecotrin / Bufferin / Asaphen (75–300 mg daily)',
         cat: 'blood',
         sev: 'mod',
-        riskBadges: ['🩸 Mild Bleeding Risk'],
+        riskBadges: ['Mild Bleeding Risk'],
         tattoo: 'Low-dose aspirin increases procedural bleeding and minor bruising. Does not typically prevent tattooing but your artist should be informed to adjust wiping technique.',
         piercing: 'Increased bruising and minor bleeding. Not usually a contraindication at low doses, but inform your piercer.',
         wait: 'Aspirin irreversibly inhibits platelets — effects last 7–10 days after last dose. Discuss temporary pause with your doctor if appropriate.',
@@ -135,7 +135,7 @@ const CATEGORIES = [
         sub: 'Plavix / Effient / Brilinta / Brilique',
         cat: 'blood',
         sev: 'high',
-        riskBadges: ['🩸 High Bleeding Risk', '⏳ Delayed Healing'],
+        riskBadges: ['High Bleeding Risk', 'Delayed Healing'],
         tattoo: 'Significant platelet inhibition — similar bleeding profile to aspirin but often combined with other anticoagulants. Most studios will request medical clearance.',
         piercing: 'Significant bleeding risk. Haematoma formation at piercing site is a real concern.',
         wait: 'Do not stop clopidogrel without cardiologist approval — prescribed for cardiac protection.',
@@ -147,7 +147,7 @@ const CATEGORIES = [
         sub: 'Lovenox / Clexane / Fragmin / Injections',
         cat: 'blood',
         sev: 'high',
-        riskBadges: ['🩸 High Bleeding Risk', '⏳ Delayed Healing'],
+        riskBadges: ['High Bleeding Risk', 'Delayed Healing'],
         tattoo: 'Injectable low-molecular-weight heparin causes strong anticoagulation. Very high bleeding risk during skin puncture. Elective tattooing should be deferred.',
         piercing: 'High bleeding risk and hematoma formation. Defer elective piercings while on therapeutic LMWH.',
         wait: 'Consult your prescribing doctor. Never miss doses without medical supervision.',
@@ -165,7 +165,7 @@ const CATEGORIES = [
         sub: 'Accutane / Roaccutane / Oratane / Curatane / Claravis / Amnesteem / Sotret / Myorisan',
         cat: 'retinoid',
         sev: 'high',
-        riskBadges: ['❌ Severe Scarring', '⏳ Healing Delay', '🩹 Fragile Skin'],
+        riskBadges: ['Severe Scarring', 'Healing Delay', 'Fragile Skin'],
         tattoo: 'Isotretinoin fundamentally alters epidermal cell turnover, thins the skin, and suppresses sebum production. Tattooing during treatment causes severe scarring, unpredictable ink loss, and impaired healing. Universal contraindication.',
         piercing: 'Skin is fragile and slow to heal. Fistula formation is severely impaired. High risk of hypertrophic scarring or piercing rejection.',
         wait: 'Standard professional guidance: wait 6–12 months after finishing isotretinoin treatment before tattooing or getting new piercings.',
@@ -177,7 +177,7 @@ const CATEGORIES = [
         sub: 'Retin-A / Stieva-A / Rejuva-A / Treclin / Aretin',
         cat: 'retinoid',
         sev: 'mod',
-        riskBadges: ['🩹 Skin Sensitivity', '☀️ Photosensitivity'],
+        riskBadges: ['Skin Sensitivity', 'Photosensitivity'],
         tattoo: 'Topical retinoids at the tattoo site thin the upper skin layers and increase sensitivity. Stop applying to the target area 2–4 weeks prior. Systemic absorption from topical use is minimal.',
         piercing: 'Avoid applying topical retinoids to or near a new piercing site during healing to prevent chemical irritation.',
         wait: 'Discontinue topical tretinoin at the specific site 2–4 weeks pre-tattoo.',
@@ -189,7 +189,7 @@ const CATEGORIES = [
         sub: 'Differin / Epiduo',
         cat: 'retinoid',
         sev: 'mod',
-        riskBadges: ['🩹 Skin Sensitivity'],
+        riskBadges: ['Skin Sensitivity'],
         tattoo: 'Topical retinoid causing localized skin sensitivity and peeling. Discontinue at the target site before tattooing.',
         piercing: 'Keep away from fresh piercing sites to prevent severe irritation or delayed epithelialization.',
         wait: 'Discontinue topical application at the target site 2 weeks prior to procedure.',
@@ -207,7 +207,7 @@ const CATEGORIES = [
         sub: 'Xanax / Valium / Ativan / Klonopin / Diazepam / Alprazolam / Lorazepam / Clonazepam / Temazepam / Lexotan',
         cat: 'anxiety',
         sev: 'mod',
-        riskBadges: ['💫 Fainting Risk', '⬇️ Low Blood Pressure'],
+        riskBadges: ['Fainting Risk', 'Low Blood Pressure'],
         tattoo: 'Causes central nervous system depression, drowsiness, and lowered blood pressure. Combined with pain or anxiety, can trigger sudden blood pressure drops or fainting. Inform your artist.',
         piercing: 'Increases risk of vasovagal syncope (fainting) post-procedure. Ensure you stay seated or reclined for 15 minutes after piercing.',
         wait: 'Inform your artist if taken pre-procedure for anxiety. Do not drive to or from your appointment if sedated.',
@@ -219,7 +219,7 @@ const CATEGORIES = [
         sub: 'Propranolol (Inderal) / Metoprolol (Lopressor) / Atenolol (Tenormin) / Bisoprolol',
         cat: 'anxiety',
         sev: 'mod',
-        riskBadges: ['💫 Fainting Risk', '❤️ Bradycardia'],
+        riskBadges: ['Fainting Risk', 'Bradycardia'],
         tattoo: 'Lowers heart rate and blunts normal epinephrine stress response. During long sessions or pain, clients are at higher risk of orthostatic hypotension and vasovagal fainting.',
         piercing: 'Higher fainting risk during rapid needle insertion. Piercer should perform procedure with client lying down.',
         wait: 'Do not skip prescribed cardiac medications. Inform your artist/piercer so they can adjust seating position.',
@@ -231,7 +231,7 @@ const CATEGORIES = [
         sub: 'Hydroxyzine (Vistaril / Atarax) / Diphenhydramine (Benadryl)',
         cat: 'anxiety',
         sev: 'low',
-        riskBadges: ['😴 Drowsiness'],
+        riskBadges: ['Drowsiness'],
         tattoo: 'Used for mild anxiety or hives. Causes mild drowsiness and dry mouth. Minimal direct interaction with tattooing.',
         piercing: 'Mild sedative effect. Stay hydrated during session.',
         wait: 'No washout required.',
@@ -249,7 +249,7 @@ const CATEGORIES = [
         sub: 'Pill / Patch / Ring / Depo-Provera / Hormonal IUD (Mirena / Jaydess)',
         cat: 'hormone',
         sev: 'low',
-        riskBadges: ['☀️ Minor Pigmentation Risk'],
+        riskBadges: ['Minor Pigmentation Risk'],
         tattoo: 'Estrogen-containing contraceptives slightly increase baseline hyperpigmentation risk (melasma) when exposed to sun during healing. Minimal impact on tattooing.',
         piercing: 'Progestin or estrogen can cause minor fluid retention or localized swelling sensitivity.',
         wait: 'No pre-procedure changes required.',
@@ -261,7 +261,7 @@ const CATEGORIES = [
         sub: 'Nebido / Sustanon / Testim / AndroGel / Testosterone Enanthate',
         cat: 'hormone',
         sev: 'low',
-        riskBadges: ['🩸 Slightly Thicker Blood'],
+        riskBadges: ['Slightly Thicker Blood'],
         tattoo: 'Testosterone therapy can increase skin oiliness, thickness, and hematocrit (red blood cell density), which may cause slightly thicker blood flow during sessions. Generally safe for tattooing.',
         piercing: 'Testosterone can cause skin thickening and increased sebum production near facial or body piercings. Maintain good hygiene.',
         wait: 'No pre-procedure changes required. Continue regular medical HRT dosing.',
@@ -273,7 +273,7 @@ const CATEGORIES = [
         sub: 'Estradiol / Spironolactone (Aldactone) / Cyproterone (Androcur)',
         cat: 'hormone',
         sev: 'low',
-        riskBadges: ['💧 Dehydration Sensitivity'],
+        riskBadges: ['Dehydration Sensitivity'],
         tattoo: 'Estrogen therapy thins the dermal layer slightly over time and increases skin softness. Spironolactone has mild diuretic and blood-pressure lowering properties; ensure full hydration.',
         piercing: 'Spironolactone increases urination and dehydrates tissue slightly — drink extra fluids before piercing.',
         wait: 'No pre-procedure changes required. Stay well-hydrated.',
@@ -291,7 +291,7 @@ const CATEGORIES = [
         sub: 'Adderall / Vyvanse (Elvanse / Tyvense) / Ritalin / Concerta / Foquest / Dexedrine / Focalin',
         cat: 'stimulant',
         sev: 'mod',
-        riskBadges: ['⚡ Heart Rate Increase', '💫 Fainting Risk'],
+        riskBadges: ['Heart Rate Increase', 'Fainting Risk'],
         tattoo: 'Stimulants elevate heart rate, blood pressure, and central nervous arousal. Can make clients jittery, lower pain tolerance during long sessions, and increase dehydration. Blood sugar drops faster.',
         piercing: 'Higher nervous tension and muscle tightness during piercing. Increased risk of sudden lightheadedness when adrenaline drops.',
         wait: 'Ensure you eat a heavy meal and drink plenty of water before your appointment. Inform your artist.',
@@ -309,7 +309,7 @@ const CATEGORIES = [
         sub: 'Ozempic / Wegovy / Mounjaro / Zepbound / Trulicity / Saxenda / Victoza / Rybelsus',
         cat: 'metabolic',
         sev: 'mod',
-        riskBadges: ['💫 Hypoglycemia Risk', '💫 Fainting Risk'],
+        riskBadges: ['Hypoglycemia Risk', 'Fainting Risk'],
         tattoo: 'GLP-1 drugs delay gastric emptying and alter blood glucose regulation. Clients undergoing long tattoo sessions are at risk for sudden hypoglycemia, nausea, and vasovagal fainting if they haven\'t consumed adequate calories.',
         piercing: 'Increased risk of nausea, lightheadedness, or fainting during piercing if blood sugar drops.',
         wait: 'Eat a small, easily digestible meal 1–2 hours before the session and bring sugary drinks (juice, soda) to maintain glucose levels.',
@@ -321,7 +321,7 @@ const CATEGORIES = [
         sub: 'Metformin (Glucophage) / Januvia / Jardiance / Insulin (Lantus / Humalog / Novolog)',
         cat: 'metabolic',
         sev: 'mod',
-        riskBadges: ['⏳ Delayed Healing', '🦠 Infection Risk'],
+        riskBadges: ['Delayed Healing', 'Infection Risk'],
         tattoo: 'Diabetes impairs microvascular circulation and wound healing. Poorer immune response increases infection risk and delays scab resolution. Well-controlled diabetes is low risk; poorly controlled increases infection risk.',
         piercing: 'Higher infection risk and slower fistula formation in poorly controlled diabetes. Lower extremity piercings (e.g. ankles) heal very slowly in diabetic clients.',
         wait: 'Ensure blood glucose is stable before session. Bring glucose tablets or snacks.',
@@ -339,7 +339,7 @@ const CATEGORIES = [
         sub: 'Prednisone (Deltasone) / Prednisolone (Panafcort) / Dexamethasone / Medrol',
         cat: 'corticosteroid',
         sev: 'mod',
-        riskBadges: ['🦠 Infection Risk', '⏳ Delayed Healing'],
+        riskBadges: ['Infection Risk', 'Delayed Healing'],
         tattoo: 'Systemic steroids suppress the immune response required for proper wound healing. Higher infection risk and altered inflammatory phase. Skin fragile on chronic doses.',
         piercing: 'Immunosuppression significantly increases infection risk during piercing healing. Fistula formation delayed.',
         wait: 'Short courses (<2 weeks): wait until course ends. Long-term steroid therapy: obtain physician clearance.',
@@ -351,7 +351,7 @@ const CATEGORIES = [
         sub: 'Fluticasone (Flonase) / Hydrocortisone / Betamethasone',
         cat: 'corticosteroid',
         sev: 'low',
-        riskBadges: ['🩹 Skin Fragility at Site'],
+        riskBadges: ['Skin Fragility at Site'],
         tattoo: 'Inhaled steroids have minimal systemic impact. Topical steroids applied at the tattoo site thin the skin and should be discontinued 2 weeks prior.',
         piercing: 'Standard risk unless topical steroid is applied directly to the piercing site.',
         wait: 'Discontinue topical steroids at the target area 2 weeks pre-procedure.',
@@ -369,7 +369,7 @@ const CATEGORIES = [
         sub: 'Rheumatrex / Maxtrex / Trexall / Metoject',
         cat: 'immuno',
         sev: 'high',
-        riskBadges: ['🦠 High Infection Risk', '⏳ Delayed Healing'],
+        riskBadges: ['High Infection Risk', 'Delayed Healing'],
         tattoo: 'Significant immune suppression means tattoo healing is unpredictable — increased infection risk, impaired inflammatory phase, and potential for opportunistic skin infection. Medical clearance required.',
         piercing: 'High infection risk. Elective piercings during methotrexate therapy are strongly inadvisable without specialist approval.',
         wait: 'Discuss with rheumatologist/dermatologist before booking. Do not pause without doctor guidance.',
@@ -381,7 +381,7 @@ const CATEGORIES = [
         sub: 'Adalimumab (Humira) / Enbrel / Stelara / Skyrizi / Tremfya / Cosentyx / Dupixent',
         cat: 'immuno',
         sev: 'high',
-        riskBadges: ['🦠 High Infection Risk', '⏳ Delayed Healing'],
+        riskBadges: ['High Infection Risk', 'Delayed Healing'],
         tattoo: 'Biologics suppress specific immune pathways (TNF-alpha, IL-17/23). Significantly elevated risk of bacterial skin infections and delayed wound closure.',
         piercing: 'High infection risk. Elective piercings should be discussed with your prescribing specialist.',
         wait: 'Do not interrupt biologic therapy. Schedule sessions relative to injection cycles after specialist consultation.',
@@ -393,7 +393,7 @@ const CATEGORIES = [
         sub: 'Ciclosporin / Tacrolimus (Neoral / Prograf)',
         cat: 'immuno',
         sev: 'high',
-        riskBadges: ['🦠 High Infection Risk', '⏳ Delayed Healing'],
+        riskBadges: ['High Infection Risk', 'Delayed Healing'],
         tattoo: 'Systemic immunosuppressants used in transplant medicine and severe autoimmune disease. Suppressing the immune system raises infection risk generally, and that is the reason for caution here. The effect on tattoo healing specifically has not been studied, so treat this entry as precautionary rather than evidence-based.',
         piercing: 'Elective piercings during active therapy are best deferred until your specialist has weighed in. This is a precaution, not a measured risk.',
         wait: 'Obtain clearance from transplant team or specialist.',
@@ -411,7 +411,7 @@ const CATEGORIES = [
         sub: 'EPA / DHA High-Dose Supplements',
         cat: 'supplement',
         sev: 'mod',
-        riskBadges: ['🩸 Mild Bleeding Risk'],
+        riskBadges: ['Mild Bleeding Risk'],
         tattoo: 'High doses (>2000mg/day) mildly inhibit platelet aggregation and thin blood. Often causes increased plasma oozing during tattooing.',
         piercing: 'Mildly increased bleeding and initial bruising.',
         wait: 'Consider pausing high-dose fish oil 5–7 days before session if approved by your doctor.',
@@ -423,7 +423,7 @@ const CATEGORIES = [
         sub: 'Tocopherol Supplements',
         cat: 'supplement',
         sev: 'mod',
-        riskBadges: ['🩸 Mild Bleeding Risk'],
+        riskBadges: ['Mild Bleeding Risk'],
         tattoo: 'Vitamin E antagonizes Vitamin K dependent clotting factors. High doses increase bleeding and bruising during tattooing.',
         piercing: 'Increased bruising at piercing site.',
         wait: 'Pause high-dose Vitamin E supplements 7 days prior to procedure.',
@@ -435,7 +435,7 @@ const CATEGORIES = [
         sub: 'Herbal Blood Thinners / Mood Supplements',
         cat: 'supplement',
         sev: 'mod',
-        riskBadges: ['🩸 Bleeding Risk', '☀️ Photosensitivity'],
+        riskBadges: ['Bleeding Risk', 'Photosensitivity'],
         tattoo: 'Ginkgo biloba inhibits PAF (platelet-activating factor) and causes excessive procedural bleeding. St. John\'s Wort induces liver enzymes and increases photosensitivity.',
         piercing: 'Increased bleeding risk from Ginkgo; photosensitivity from St. John\'s Wort.',
         wait: 'Pause herbal supplements 7–10 days before procedure.',
@@ -447,7 +447,7 @@ const CATEGORIES = [
         sub: 'High-Potency Extract Pills',
         cat: 'supplement',
         sev: 'mod',
-        riskBadges: ['🩸 Mild Bleeding Risk'],
+        riskBadges: ['Mild Bleeding Risk'],
         tattoo: 'High-dose curcumin and garlic extracts have antiplatelet effects. Can cause noticeable extra bleeding and plasma weeping.',
         piercing: 'Minor increase in bleeding during tissue perforation.',
         wait: 'Pause high-potency extracts 5–7 days before procedure. Culinary garlic/turmeric in food is completely safe.',
@@ -465,7 +465,7 @@ const CATEGORIES = [
         sub: 'Doxycycline / Minocycline',
         cat: 'antibiotic',
         sev: 'mod',
-        riskBadges: ['☀️ Photosensitivity', '🎨 Ink Staining Risk'],
+        riskBadges: ['Photosensitivity', 'Ink Staining Risk'],
         tattoo: 'Causes significant photosensitivity — UV exposure on new tattoos during treatment can trigger painful allergic reactions and ink fading. Minocycline can rarely cause blue-grey skin pigmentation.',
         piercing: 'No direct healing interaction, but protect fresh piercing site from sun exposure.',
         wait: 'Avoid sun/UV exposure on target area while taking tetracyclines.',
@@ -477,7 +477,7 @@ const CATEGORIES = [
         sub: 'Acyclovir / Valacyclovir (Zovirax / Valtrex / Famvir)',
         cat: 'antibiotic',
         sev: 'low',
-        riskBadges: ['👄 Outbreak Prevention'],
+        riskBadges: ['Outbreak Prevention'],
         tattoo: 'CRUCIAL FOR LIP TATTOOS / PERMANENT MAKEUP: Permanent lip blushing can trigger severe HSV-1 (cold sore) flare-ups. Prophylactic antivirals are strongly recommended before lip tattooing.',
         piercing: 'Lip or oral piercings can trigger cold sore outbreaks in HSV-positive clients. Taking prophylactic antivirals prevents painful herpes lesions on new piercings.',
         wait: 'Start prophylactic antiviral 2 days before lip tattooing or oral piercing as directed by your doctor.',
@@ -495,7 +495,7 @@ const CATEGORIES = [
         sub: 'Weed / Joint / Hash / Edibles / Medical Cannabis / Vapes',
         cat: 'substance',
         sev: 'mod',
-        riskBadges: ['⚡ Vasodilation', '💫 Fainting Risk', '🧠 Heightened Sensitivity'],
+        riskBadges: ['Vasodilation', 'Fainting Risk', 'Heightened Sensitivity'],
         tattoo: 'THC increases baseline heart rate, dilates blood vessels (increasing plasma weeping), and can significantly heighten anxiety or paranoia during skin puncture. Many artists will decline clients under acute influence.',
         piercing: 'Increases risk of vasovagal syncope or sudden panic during piercing insertion. Alters pain perception unexpectedly.',
         wait: 'Avoid smoking or consuming THC edibles 12–24 hours before your appointment.',
@@ -507,7 +507,7 @@ const CATEGORIES = [
         sub: 'Beer / Wine / Spirits / Hangover / Binge Drinking',
         cat: 'substance',
         sev: 'high',
-        riskBadges: ['🩸 High Bleeding Risk', '💧 Severe Dehydration', '💫 Hypoglycemia Risk'],
+        riskBadges: ['High Bleeding Risk', 'Severe Dehydration', 'Hypoglycemia Risk'],
         tattoo: 'Alcohol affects platelet function and coagulation, suppresses vasopressin (which promotes dehydration), and can lower blood glucose. The practical concern is more bleeding and oozing during a session, and a lower pain threshold when hungover. How much that affects ink retention has not been studied - treat claims about ink being "pushed out" with caution.',
         piercing: 'More bleeding and prolonged oozing. Dehydration increases fainting risk.',
         wait: 'Do NOT consume alcohol for 24–48 hours before or after your procedure.',
@@ -519,7 +519,7 @@ const CATEGORIES = [
         sub: 'Cigarettes / Vapes / Nicotine Pouches (Zyn) / Snus / Cigars',
         cat: 'substance',
         sev: 'mod',
-        riskBadges: ['⚠️ Vasoconstriction', '⏳ Delayed Healing'],
+        riskBadges: ['Vasoconstriction', 'Delayed Healing'],
         tattoo: 'Nicotine is a potent microvascular vasoconstrictor. It shrinks capillary blood vessels, reducing oxygenated blood delivery to fresh tattoo wounds and delaying dermal closure.',
         piercing: 'Dramatically slows down piercing fistula formation, especially for oral, ear cartilage, and nipple piercings.',
         wait: 'Avoid heavy vaping or smoking immediately before and during initial healing phase.',
@@ -531,7 +531,7 @@ const CATEGORIES = [
         sub: 'Cocaine / MDMA (Ecstasy) / Amphetamines / Kratom / Speed',
         cat: 'substance',
         sev: 'high',
-        riskBadges: ['⚡ Cardiac Stress', '💫 Fainting Risk', '🩸 Severe Vasoconstriction'],
+        riskBadges: ['Cardiac Stress', 'Fainting Risk', 'Severe Vasoconstriction'],
         tattoo: 'Stimulants raise sympathetic activity: elevated blood pressure, tachycardia and tremor are well documented. That makes someone a poor candidate for sitting still through a session and raises the stakes if anything goes wrong. Whether stimulants change the outcome of a tattoo has not been studied, so the concern here is your cardiovascular state during the procedure, not the ink.',
         piercing: 'Piercers will normally refuse to work on someone under the influence. Staying still and giving informed consent both matter, and neither is reliable in that state.',
         wait: 'Do not undergo any body modification procedure with active recreational stimulants in your system.',
@@ -603,12 +603,12 @@ const TRANSLATIONS = {
     "x.low_concern": "Low Concern",
     "x.low_syncope_risk": "Low Syncope Risk",
     "x.moderate_syncope_risk": "Moderate Syncope Risk",
-    "x.elevated_syncope_risk": "⚠️ Elevated Syncope Risk",
+    "x.elevated_syncope_risk": "Elevated Syncope Risk",
 
     // --- keyed from the markup 2026-09-02, see i18n-new-keys.en.json ---
-    "x.share_intake_deep_link": "📲 Share Intake Deep Link",
-    "x.quick_print_summary": "🖨️ Quick Print Summary",
-    "x.trending_inquiries": "🔥 Trending Inquiries:",
+    "x.share_intake_deep_link": "Share Intake Deep Link",
+    "x.quick_print_summary": "Quick Print Summary",
+    "x.trending_inquiries": "Trending Inquiries:",
     "x.advil_ibuprofen": "Advil / Ibuprofen",
     "x.accutane_retinoids": "Accutane / Retinoids",
     "x.tktx_numbing": "TKTX / Numbing",
@@ -617,36 +617,36 @@ const TRANSLATIONS = {
     "x.cannabis_thc": "Cannabis / THC",
     "x.alcohol_hangover": "Alcohol / Hangover",
     "x.aspirin_blood_thinners": "Aspirin / Blood Thinners",
-    "x.recent_searches": "🕒 Recent Searches:",
+    "x.recent_searches": "Recent Searches:",
     "x.clear_history": "Clear History",
     "x.share_intake_status": "Share Intake Status:",
-    "x.copy_shareable_link": "🔗 Copy Shareable Link",
-    "x.select_all_medications_and_supplements_you": "💡 Select all medications and supplements you take. Results will automatically highlight procedural risks, wait times, and recommended artist precautions.",
+    "x.copy_shareable_link": "Copy Shareable Link",
+    "x.select_all_medications_and_supplements_you": "Select all medications and supplements you take. Results will automatically highlight procedural risks, wait times, and recommended artist precautions.",
     "x.client_consultation_brief": "Client Consultation Brief",
     "x.a_printable_and_shareable_summary_of": "A printable and shareable summary of selected medications and procedural recommendations for your tattoo artist or piercer.",
-    "x.no_medications_selected_yet": "⚠️ No medications selected yet.",
+    "x.no_medications_selected_yet": "No medications selected yet.",
     "x.switch_to_the_interaction_checker": "Switch to the Interaction Checker",
-    "x.generate_full_clinic_packet_print": "📄 Generate Full Clinic Packet (Print)",
-    "x.share_deep_link": "🔗 Share Deep Link",
-    "x.export_data_json": "💾 Export Data (JSON)",
-    "x.export_text_file": "📄 Export Text File",
-    "x.download_pdf_document": "📥 Download PDF Document",
-    "x.copy_summary": "📋 Copy Summary",
-    "x.print_brief": "🖨️ Print Brief",
-    "x.expected_healing_journey_timeline": "🩺 Expected Healing Journey Timeline",
-    "x.tattoo_healing": "🎨 Tattoo Healing",
-    "x.piercing_healing": "💎 Piercing Healing",
+    "x.generate_full_clinic_packet_print": "Generate Full Clinic Packet (Print)",
+    "x.share_deep_link": "Share Deep Link",
+    "x.export_data_json": "Export Data (JSON)",
+    "x.export_text_file": "Export Text File",
+    "x.download_pdf_document": "Download PDF Document",
+    "x.copy_summary": "Copy Summary",
+    "x.print_brief": "Print Brief",
+    "x.expected_healing_journey_timeline": "Expected Healing Journey Timeline",
+    "x.tattoo_healing": "Tattoo Healing",
+    "x.piercing_healing": "Piercing Healing",
     "x.interactive_timeline_mapping_physiological_milestones_and": "Interactive timeline mapping physiological milestones and dynamic medication interaction impacts across healing phases.",
-    "x.pre_procedure_medication_washout_reminders": "⏰ Pre-Procedure Medication Washout & Reminders",
+    "x.pre_procedure_medication_washout_reminders": "Pre-Procedure Medication Washout & Reminders",
     "x.calculate_precise_discontinuation_deadlines_for_medications": "Calculate precise discontinuation deadlines for medications (NSAIDs, blood thinners, alcohol, retinoids) prior to your tattoo or piercing appointment, and set browser notifications or calendar alerts.",
-    "x.scheduled_appointment_date_time": "📅 Scheduled Appointment Date & Time:",
-    "x.save_compute_washout": "💾 Save & Compute Washout",
+    "x.scheduled_appointment_date_time": "Scheduled Appointment Date & Time:",
+    "x.save_compute_washout": "Save & Compute Washout",
     "x.setting_your_appointment_date_computes_live": "Setting your appointment date computes live countdowns showing exactly when to stop taking specific drugs.",
-    "x.enable_browser_notification_alerts": "🔔 Enable Browser Notification Alerts",
-    "x.download_google_calendar_ics_pre_filled": "📅 Download Google Calendar .ics (Pre-filled Washout Deadlines)",
-    "x.open_washout_in_google_calendar_web": "🌐 Open Washout in Google Calendar Web",
-    "x.export_standard_calendar_ics": "📅 Export Standard Calendar (.ics)",
-    "x.artist_piercer_readiness_self_assessment": "🎯 Artist & Piercer Readiness Self-Assessment",
+    "x.enable_browser_notification_alerts": "Enable Browser Notification Alerts",
+    "x.download_google_calendar_ics_pre_filled": "Download Google Calendar .ics (Pre-filled Washout Deadlines)",
+    "x.open_washout_in_google_calendar_web": "Open Washout in Google Calendar Web",
+    "x.export_standard_calendar_ics": "Export Standard Calendar (.ics)",
+    "x.artist_piercer_readiness_self_assessment": "Artist & Piercer Readiness Self-Assessment",
     "x.answer_3_quick_questions_about_your": "Answer 3 quick questions about your client's procedure and medication disclosures to generate a studio precautions checklist.",
     "x.1_what_procedure_is_being_performed": "1. What procedure is being performed?",
     "x.tattoo_body_linework_shading_color": "Tattoo (Body Linework / Shading / Color)",
@@ -664,9 +664,9 @@ const TRANSLATIONS = {
     "x.history_of_vasovagal_syncope_fainting_low": "History of vasovagal syncope / fainting / low blood sugar",
     "x.extremely_sensitive_skin_eczema_easy_bruising": "Extremely sensitive skin / Eczema / Easy bruising",
     "x.first_time_client_high_nervous_tension": "First-time client / High nervous tension",
-    "x.studio_safety_guide_progress": "🛡️ Studio Safety Guide Progress",
+    "x.studio_safety_guide_progress": "Studio Safety Guide Progress",
     "x.0_6_sections_read_0": "0 / 6 Sections Read (0%)",
-    "x.studio_safety_clinical_reference": "🛡️ Studio Safety & Clinical Reference",
+    "x.studio_safety_clinical_reference": "Studio Safety & Clinical Reference",
     "x.essential_clinical_reference_for_clients_tattoo": "Essential clinical reference for clients, tattoo artists, and piercers on managing common procedural challenges associated with medications.",
     "x.1_painkillers_pre_procedure_pain_management": "1. Painkillers & Pre-Procedure Pain Management",
     "x.clients_often_take_over_the_counter": "Clients often take over-the-counter painkillers before a session to manage pain. It is vital to understand the difference between drug classes:",
@@ -691,10 +691,10 @@ const TRANSLATIONS = {
     "x.6_alcohol_cannabis_recreational_substance_intake": "6. Alcohol, Cannabis & Recreational Substance Intake Policy",
     "x.informed_consent_legal_safety": "Informed Consent & Legal Safety:",
     "x.physiological_compromise": "Physiological Compromise:",
-    "x.studio_safety_lifestyle_quiz": "🎮 Studio Safety & Lifestyle Quiz",
+    "x.studio_safety_lifestyle_quiz": "Studio Safety & Lifestyle Quiz",
     "x.test_your_studio_safety_medication_iq": "Test Your Studio Safety & Medication IQ!",
     "x.answer_7_fun_educational_scenarios_about": "Answer 7 fun, educational scenarios about alcohol, cannabis, painkillers, numbing creams, and aftercare prep.",
-    "x.pre_session_prep_vasovagal_syncope_calculator": "💧 Pre-Session Prep & Vasovagal Syncope Calculator",
+    "x.pre_session_prep_vasovagal_syncope_calculator": "Pre-Session Prep & Vasovagal Syncope Calculator",
     "x.calculate_your_custom_fluid_target_blood": "Calculate your custom fluid target, blood sugar maintenance schedule, and syncope risk reduction plan before your appointment.",
     "x.body_weight": "Body Weight:",
     "x.lbs": "lbs",
@@ -712,13 +712,13 @@ const TRANSLATIONS = {
     "x.optional": "(Optional)",
     "x.blood_pressure_mmhg": "Blood Pressure (mmHg)",
     "x.risk_medication_factors_check_all_that": "Risk & Medication Factors (Check all that apply):",
-    "x.taking_adhd_stimulants_adderall_vyvanse_ritalin": "⚡ Taking ADHD Stimulants (Adderall/Vyvanse/Ritalin)",
-    "x.taking_beta_blockers_blood_pressure_meds": "❤️ Taking Beta Blockers / Blood Pressure Meds",
-    "x.taking_glp_1_weight_loss_meds": "💫 Taking GLP-1 Weight Loss Meds (Ozempic/Mounjaro)",
-    "x.taking_anxiety_meds_or_history_of": "⬇️ Taking Anxiety Meds or History of Fainting",
-    "x.faq_guidelines_progress": "❓ FAQ & Guidelines Progress",
+    "x.taking_adhd_stimulants_adderall_vyvanse_ritalin": "Taking ADHD Stimulants (Adderall/Vyvanse/Ritalin)",
+    "x.taking_beta_blockers_blood_pressure_meds": "Taking Beta Blockers / Blood Pressure Meds",
+    "x.taking_glp_1_weight_loss_meds": "Taking GLP-1 Weight Loss Meds (Ozempic/Mounjaro)",
+    "x.taking_anxiety_meds_or_history_of": "Taking Anxiety Meds or History of Fainting",
+    "x.faq_guidelines_progress": "FAQ & Guidelines Progress",
     "x.0_8_faqs_read_0": "0 / 8 FAQs Read (0%)",
-    "x.frequently_asked_questions": "❓ Frequently Asked Questions",
+    "x.frequently_asked_questions": "Frequently Asked Questions",
     "x.should_i_stop_taking_my_prescribed": "Should I stop taking my prescribed medication before getting a tattoo or piercing?",
     "x.never_stop_or_adjust_prescribed_medication": "NEVER stop or adjust prescribed medication",
     "x.why_is_accutane_isotretinoin_a_complete": "Why is Accutane (Isotretinoin) a complete contraindication?",
@@ -737,7 +737,7 @@ const TRANSLATIONS = {
     "x.it_is_strongly_recommended_to_avoid": "It is strongly recommended to avoid NSAIDs (Ibuprofen, Naproxen) and Aspirin 24–48 hours before tattooing or piercing because they thin blood and increase procedural bleeding. If you need mild pain relief, Acetaminophen (Paracetamol) is generally safer as it does not affect clotting.",
     "x.can_i_go_to_the_gym": "Can I go to the gym, swim, or exercise after getting a tattoo or piercing?",
     "x.avoid_heavy_exercise_for_24_48": "Avoid heavy exercise for 24–48 hours to prevent excessive sweating, stretching, or friction on fresh wounds. Swimming in pools, lakes, rivers, or ocean water is strictly prohibited for 2–4 weeks until completely healed, as standing water contains bacterial pathogens that easily cause severe skin infections.",
-    "x.consult_your_physician_message_draft": "✉️ Consult Your Physician - Message Draft",
+    "x.consult_your_physician_message_draft": "Consult Your Physician - Message Draft",
     "x.text": "&times;",
     "x.use_this_template_to_draft_an": "Use this template to draft an email or message to your doctor inquiring about safe medication adjustments before your upcoming procedure.",
     "x.doctor_or_clinic_name": "Doctor or Clinic Name:",
@@ -747,15 +747,15 @@ const TRANSLATIONS = {
     "x.selected_disclosed_medication_s": "Selected Disclosed Medication(s):",
     "x.no_medications_currently_selected_in_checker": "No medications currently selected in checker.",
     "x.generated_message_draft_editable_customize_your": "Generated Message Draft (Editable - customize your message below):",
-    "x.copy_draft_message": "📋 Copy Draft Message",
-    "x.open_email_app": "✉️ Open Email App",
-    "x.print_physician_note": "🖨️ Print Physician Note",
+    "x.copy_draft_message": "Copy Draft Message",
+    "x.open_email_app": "Open Email App",
+    "x.print_physician_note": "Print Physician Note",
     "x.close": "Close",
-    "x.studio_emergency_first_aid_protocols": "🚨 Studio Emergency First Aid Protocols",
-    "x.fainting_syncope": "💫 Fainting / Syncope",
-    "x.allergic_reaction": "🐝 Allergic Reaction",
-    "x.excessive_bleeding": "🩸 Excessive Bleeding",
-    "x.panic_breathing": "🫁 Panic & Breathing",
+    "x.studio_emergency_first_aid_protocols": "Studio Emergency First Aid Protocols",
+    "x.fainting_syncope": "Fainting / Syncope",
+    "x.allergic_reaction": "Allergic Reaction",
+    "x.excessive_bleeding": "Excessive Bleeding",
+    "x.panic_breathing": "Panic & Breathing",
     "x.vasovagal_syncope_fainting_protocol": "Vasovagal Syncope & Fainting Protocol",
     "x.common_response_to_sudden_pain_anxiety": "Common response to sudden pain, anxiety, or low blood sugar causing temporary cerebral hypoperfusion.",
     "x.stop_procedure_immediately": "Stop Procedure Immediately:",
@@ -781,7 +781,7 @@ const TRANSLATIONS = {
     "x.4_4_4_box_breathing": "4-4-4 Box Breathing:",
     "x.physical_grounding": "Physical Grounding:",
     "x.close_emergency_guide": "Close Emergency Guide",
-    "x.immediate_action": "🚨 Immediate Action",
+    "x.immediate_action": "Immediate Action",
     "x.search_medication_or_brand_e_g": "Search medication or brand (e.g. Advil, Accutane, Xanax, EMLA, Ozempic)...",
     "x.e_g_72_bpm": "e.g. 72 (bpm)",
     "x.e_g_dr_smith_city_health": "e.g. Dr. Smith / City Health Clinic",
@@ -793,7 +793,7 @@ const TRANSLATIONS = {
     waitLabel: 'Wait / Washout Recommendation:',
     medUntranslated: 'Some medication details above are shown in English - translation into this language is still in progress.',
     medSourcesLabel: 'Published sources',
-    tabSupplements: '🌿 Supplements',
+    tabSupplements: 'Supplements',
     suppHeading: 'Supplement & Medication Interaction Checker',
     suppIntro: 'Most people do not think of fish oil, garlic capsules or ginkgo as "medication", so they never mention them. Taken alongside a blood thinner or a painkiller, some supplements add to bleeding and oozing during a session. Add what you take below to see what the published evidence says.',
     suppSearchPlaceholder: 'Search a supplement (e.g. fish oil, vitamin E, turmeric, ginseng)...',
@@ -808,10 +808,10 @@ const TRANSLATIONS = {
     suppHuman: 'Human studies',
     suppCredit: 'Interaction evidence from SUPP.AI (Allen Institute for AI). Only human and clinical studies are shown; retracted papers are excluded.',
     geoLangLabel: 'Search in:',
-    geoFindStudio: '🎨 Find a studio nearby',
-    geoFindDoctor: '🩺 Find a doctor nearby',
-    geoFindPharmacy: '💊 Nearest pharmacy',
-    geoFindHospital: '🏥 Nearest hospital',
+    geoFindStudio: 'Find a studio nearby',
+    geoFindDoctor: 'Find a doctor nearby',
+    geoFindPharmacy: 'Nearest pharmacy',
+    geoFindHospital: 'Nearest hospital',
     geoNote: 'These open Google Maps and search in the local language of where you are, which finds far more than an English search does abroad. Your location is never sent to us - only a search word goes to Google. Change the language above if it guessed wrong.',
     emergHeadSub: 'Immediate step-by-step action guides for studio staff during procedural complications.',
     emergCallLabel: 'Call emergency services first:',
@@ -819,16 +819,16 @@ const TRANSLATIONS = {
     emergDisclaimer: 'This guide is a memory aid for people who are already trained in first aid. It is not first-aid training, and it does not replace it. Call emergency services first, do nothing you are not trained and permitted to do where you work, and stay with the person until help arrives.',
     disclaimerTitle: 'Important Disclaimer:',
     disclaimerBody: 'This tool is an educational reference only and does not constitute medical advice. Never stop or adjust prescribed medication without consulting your prescribing physician. Always inform your tattoo artist and piercer of any medications, health conditions, or supplements you are taking before the procedure.',
-    langLabel: '🌐 Language:',
-    headerBadge: '💊 Medication & Safety Reference',
+    langLabel: 'Language:',
+    headerBadge: 'Medication & Safety Reference',
     headerTitle: 'Medication Interaction Checker',
     headerSubtitle: 'Check how prescription medications, OTC painkillers, numbing creams, and supplements affect bleeding risk, ink setting, and piercing healing for tattoos & piercings.',
-    draftDoctorBtn: '✉️ Draft Message to Doctor',
-    tabChecker: '🔍 Checker',
-    tabBrief: '📄 Artist Brief',
-    tabSafety: '🛡️ Studio Safety',
-    tabFaq: '❓ FAQs & Tips',
-    tabReminders: '⏰ Reminders & Washout',
+    draftDoctorBtn: 'Draft Message to Doctor',
+    tabChecker: 'Checker',
+    tabBrief: 'Artist Brief',
+    tabSafety: 'Studio Safety',
+    tabFaq: 'FAQs & Tips',
+    tabReminders: 'Reminders & Washout',
     searchPlaceholder: 'Search medication or brand (e.g. Advil, Accutane, Xanax, EMLA, Ozempic)...',
     filterAll: 'All',
     filterPain: 'Painkillers & NSAIDs',
@@ -844,23 +844,23 @@ const TRANSLATIONS = {
     filterSupplement: 'Supplements',
     filterAntibiotic: 'Antibiotics & Antivirals',
     filterSubstance: 'Substances & Lifestyle',
-    infoNote: '💡 Select all medications and supplements you take. Results will automatically highlight procedural risks, wait times, and recommended artist precautions.',
+    infoNote: 'Select all medications and supplements you take. Results will automatically highlight procedural risks, wait times, and recommended artist precautions.',
     clearAll: 'Clear all',
-    draftDoctorNoteBtn: '✉️ Draft Doctor Note',
-    viewBriefBtn: '📄 View Artist Brief',
-    backToTopBtn: '⬆️ Back to Top',
-    backToMedListBtn: '⬆️ Back to Med List',
+    draftDoctorNoteBtn: 'Draft Doctor Note',
+    viewBriefBtn: 'View Artist Brief',
+    backToTopBtn: 'Back to Top',
+    backToMedListBtn: 'Back to Med List',
     "x.share_intake_deep_link_desc": "Generate a deep link containing your pre-selected medications for your artist or pre-arrival review.",
     "x.and_select_your_medications_to_generate_brief": "and select your medications to generate your custom consultation brief.",
-    "x.copy_artist_checklist": "📋 Copy Artist Checklist",
+    "x.copy_artist_checklist": "Copy Artist Checklist",
     "x.tailored_for_artist_intake": "Tailored for Artist Intake",
-    "x.studio_precautions_checklist": "📋 Studio Precautions & Checklist",
+    "x.studio_precautions_checklist": "Studio Precautions & Checklist",
     "x.question_counter": "Question {n} of {total}",
-    "x.next_question": "Next Question ➔",
+    "x.next_question": "Next Question",
     "x.quiz_score": "Score:",
-    "x.target_hydration_plan": "💧 Target Hydration Plan",
-    "x.blood_sugar_fuel_schedule": "🍌 Blood Sugar & Fuel Schedule",
-    "x.vasovagal_syncope_vitals_analysis": "💫 Vasovagal Syncope & Vitals Analysis",
+    "x.target_hydration_plan": "Target Hydration Plan",
+    "x.blood_sugar_fuel_schedule": "Blood Sugar & Fuel Schedule",
+    "x.vasovagal_syncope_vitals_analysis": "Vasovagal Syncope & Vitals Analysis",
     "x.24_hours_before": "24 Hours Before:",
     "x.2_hours_before": "2 Hours Before:",
     "x.pre_appointment_meal_label": "Pre-Appointment Meal (1.5–2h pre):",
@@ -876,9 +876,9 @@ const TRANSLATIONS = {
     "x.alert_select_medication_first": "Please select at least one medication first.",
     "x.alert_message_copied": "Message copied to clipboard!",
     "x.alert_copy_failed": "Copy failed. Please select the text and copy it manually.",
-    "x.cp_copied": "✅ Copied!",
-    "x.cp_copied_clipboard": "✅ Copied to Clipboard!",
-    "x.cp_copy_draft": "📋 Copy Draft Message",
+    "x.cp_copied": "Copied!",
+    "x.cp_copied_clipboard": "Copied to Clipboard!",
+    "x.cp_copy_draft": "Copy Draft Message",
     "x.cp_checklist_title": "ARTIST SAFETY CHECKLIST:",
     "x.cp_brief_title": "=== TATTOO & PIERCING MEDICATION CONSULTATION BRIEF ===",
     "x.cp_date": "Date: {date}",
@@ -889,7 +889,7 @@ const TRANSLATIONS = {
     "x.cp_piercing": "Piercing: {text}",
     "x.cp_action": "Action: {text}",
     "x.cp_generated": "Generated via Poli International Medication Reference.",
-    "x.cp_link_copied": "📲 Shareable intake deep link copied to clipboard!",
+    "x.cp_link_copied": "Shareable intake deep link copied to clipboard!",
     "x.cp_default_doctor": "Dr. [Doctor Name]",
     "x.cp_default_patient": "[Your Name]",
     "x.cp_default_proc": "[Tattoo / Piercing Procedure]",
@@ -924,12 +924,12 @@ const TRANSLATIONS = {
     "x.low_concern": "Préoccupation faible",
     "x.low_syncope_risk": "Risque de syncope faible",
     "x.moderate_syncope_risk": "Risque de syncope modéré",
-    "x.elevated_syncope_risk": "⚠️ Risque de syncope élevé",
+    "x.elevated_syncope_risk": "Risque de syncope élevé",
 
     // --- keyed from the markup 2026-09-02, see i18n-new-keys.en.json ---
-    "x.share_intake_deep_link": "📲 Partager le lien direct du questionnaire",
-    "x.quick_print_summary": "🖨️ Résumé à imprimer",
-    "x.trending_inquiries": "🔥 Recherches fréquentes :",
+    "x.share_intake_deep_link": "Partager le lien direct du questionnaire",
+    "x.quick_print_summary": "Résumé à imprimer",
+    "x.trending_inquiries": "Recherches fréquentes :",
     "x.advil_ibuprofen": "Advil / Ibuprofène",
     "x.accutane_retinoids": "Accutane / Rétinoïdes",
     "x.tktx_numbing": "TKTX / Crème anesthésiante",
@@ -938,36 +938,36 @@ const TRANSLATIONS = {
     "x.cannabis_thc": "Cannabis / THC",
     "x.alcohol_hangover": "Alcool / Gueule de bois",
     "x.aspirin_blood_thinners": "Aspirine / Anticoagulants",
-    "x.recent_searches": "🕒 Recherches récentes :",
+    "x.recent_searches": "Recherches récentes :",
     "x.clear_history": "Effacer l'historique",
     "x.share_intake_status": "Statut du partage du questionnaire :",
-    "x.copy_shareable_link": "🔗 Copier le lien de partage",
-    "x.select_all_medications_and_supplements_you": "💡 Sélectionnez tous les médicaments et compléments que vous prenez. Les résultats mettront automatiquement en évidence",
+    "x.copy_shareable_link": "Copier le lien de partage",
+    "x.select_all_medications_and_supplements_you": "Sélectionnez tous les médicaments et compléments que vous prenez. Les résultats mettront automatiquement en évidence",
     "x.client_consultation_brief": "Fiche de consultation du client",
     "x.a_printable_and_shareable_summary_of": "Un résumé imprimable et partageable des médicaments sélectionnés et des recommandations pour la séance",
-    "x.no_medications_selected_yet": "⚠️ Aucun médicament sélectionné pour l'instant.",
+    "x.no_medications_selected_yet": "Aucun médicament sélectionné pour l'instant.",
     "x.switch_to_the_interaction_checker": "Passer au vérificateur d'interactions",
-    "x.generate_full_clinic_packet_print": "📄 Générer le dossier clinique complet (impression)",
-    "x.share_deep_link": "🔗 Partager le lien direct",
-    "x.export_data_json": "💾 Exporter les données (JSON)",
-    "x.export_text_file": "📄 Exporter un fichier texte",
-    "x.download_pdf_document": "📥 Télécharger le document PDF",
-    "x.copy_summary": "📋 Copier le résumé",
-    "x.print_brief": "🖨️ Imprimer la fiche",
-    "x.expected_healing_journey_timeline": "🩺 Déroulement attendu de la cicatrisation",
-    "x.tattoo_healing": "🎨 Cicatrisation du tatouage",
-    "x.piercing_healing": "💎 Cicatrisation du piercing",
+    "x.generate_full_clinic_packet_print": "Générer le dossier clinique complet (impression)",
+    "x.share_deep_link": "Partager le lien direct",
+    "x.export_data_json": "Exporter les données (JSON)",
+    "x.export_text_file": "Exporter un fichier texte",
+    "x.download_pdf_document": "Télécharger le document PDF",
+    "x.copy_summary": "Copier le résumé",
+    "x.print_brief": "Imprimer la fiche",
+    "x.expected_healing_journey_timeline": "Déroulement attendu de la cicatrisation",
+    "x.tattoo_healing": "Cicatrisation du tatouage",
+    "x.piercing_healing": "Cicatrisation du piercing",
     "x.interactive_timeline_mapping_physiological_milestones_and": "Chronologie interactive des étapes physiologiques et des effets des médicaments",
-    "x.pre_procedure_medication_washout_reminders": "⏰ Arrêt des médicaments avant la séance et rappels",
+    "x.pre_procedure_medication_washout_reminders": "Arrêt des médicaments avant la séance et rappels",
     "x.calculate_precise_discontinuation_deadlines_for_medications": "Calculez les délais précis d'arrêt des médicaments (AINS, anticoagulants)",
-    "x.scheduled_appointment_date_time": "📅 Date et heure du rendez-vous prévu :",
-    "x.save_compute_washout": "💾 Enregistrer et calculer le délai d'arrêt",
+    "x.scheduled_appointment_date_time": "Date et heure du rendez-vous prévu :",
+    "x.save_compute_washout": "Enregistrer et calculer le délai d'arrêt",
     "x.setting_your_appointment_date_computes_live": "Renseigner la date du rendez-vous déclenche des comptes à rebours indiquant précisément quand cesser de prendre",
-    "x.enable_browser_notification_alerts": "🔔 Activer les notifications du navigateur",
-    "x.download_google_calendar_ics_pre_filled": "📅 Télécharger le fichier .ics Google Agenda (délais d'arrêt préremplis)",
-    "x.open_washout_in_google_calendar_web": "🌐 Ouvrir les délais d'arrêt dans Google Agenda",
-    "x.export_standard_calendar_ics": "📅 Exporter un calendrier standard (.ics)",
-    "x.artist_piercer_readiness_self_assessment": "🎯 Auto-évaluation de préparation du tatoueur et du perceur",
+    "x.enable_browser_notification_alerts": "Activer les notifications du navigateur",
+    "x.download_google_calendar_ics_pre_filled": "Télécharger le fichier .ics Google Agenda (délais d'arrêt préremplis)",
+    "x.open_washout_in_google_calendar_web": "Ouvrir les délais d'arrêt dans Google Agenda",
+    "x.export_standard_calendar_ics": "Exporter un calendrier standard (.ics)",
+    "x.artist_piercer_readiness_self_assessment": "Auto-évaluation de préparation du tatoueur et du perceur",
     "x.answer_3_quick_questions_about_your": "Répondez à 3 questions rapides sur la séance de votre client et les médicaments déclarés pour obtenir",
     "x.1_what_procedure_is_being_performed": "1. Quelle prestation est réalisée ?",
     "x.tattoo_body_linework_shading_color": "Tatouage (tracé corporel / ombrage / couleur)",
@@ -985,9 +985,9 @@ const TRANSLATIONS = {
     "x.history_of_vasovagal_syncope_fainting_low": "Antécédents de syncope vasovagale / malaise / hypoglycémie",
     "x.extremely_sensitive_skin_eczema_easy_bruising": "Peau très sensible / eczéma / bleus faciles",
     "x.first_time_client_high_nervous_tension": "Premier tatouage ou piercing / forte tension nerveuse",
-    "x.studio_safety_guide_progress": "🛡️ Progression du guide de sécurité du studio",
+    "x.studio_safety_guide_progress": "Progression du guide de sécurité du studio",
     "x.0_6_sections_read_0": "0 / 6 sections lues (0 %)",
-    "x.studio_safety_clinical_reference": "🛡️ Sécurité du studio et référence clinique",
+    "x.studio_safety_clinical_reference": "Sécurité du studio et référence clinique",
     "x.essential_clinical_reference_for_clients_tattoo": "Référence clinique essentielle pour les clients, les tatoueurs et les perceurs sur la gestion",
     "x.1_painkillers_pre_procedure_pain_management": "1. Antalgiques et gestion de la douleur avant la séance",
     "x.clients_often_take_over_the_counter": "Les clients prennent souvent des antalgiques en vente libre avant une séance pour gérer la douleur. Il est essentiel de",
@@ -1012,10 +1012,10 @@ const TRANSLATIONS = {
     "x.6_alcohol_cannabis_recreational_substance_intake": "6. Politique en matière d'alcool, de cannabis et de substances récréatives",
     "x.informed_consent_legal_safety": "Consentement éclairé et sécurité juridique :",
     "x.physiological_compromise": "Atteinte physiologique :",
-    "x.studio_safety_lifestyle_quiz": "🎮 Quiz sécurité du studio et mode de vie",
+    "x.studio_safety_lifestyle_quiz": "Quiz sécurité du studio et mode de vie",
     "x.test_your_studio_safety_medication_iq": "Testez vos connaissances en sécurité de studio et en médicaments !",
     "x.answer_7_fun_educational_scenarios_about": "Répondez à 7 mises en situation ludiques et pédagogiques sur l'alcool, le cannabis, les antalgiques, les crèmes anesthésiantes",
-    "x.pre_session_prep_vasovagal_syncope_calculator": "💧 Préparation avant séance et calculateur de syncope vasovagale",
+    "x.pre_session_prep_vasovagal_syncope_calculator": "Préparation avant séance et calculateur de syncope vasovagale",
     "x.calculate_your_custom_fluid_target_blood": "Calculez votre objectif d'hydratation personnalisé, votre plan de maintien de la glycémie et la réduction du risque de syncope",
     "x.body_weight": "Poids corporel :",
     "x.lbs": "lb",
@@ -1033,13 +1033,13 @@ const TRANSLATIONS = {
     "x.optional": "(facultatif)",
     "x.blood_pressure_mmhg": "Tension artérielle (mmHg)",
     "x.risk_medication_factors_check_all_that": "Facteurs de risque et médicaments (cochez tout ce qui s'applique) :",
-    "x.taking_adhd_stimulants_adderall_vyvanse_ritalin": "⚡ Prise de stimulants pour le TDAH (Adderall/Vyvanse/Ritaline)",
-    "x.taking_beta_blockers_blood_pressure_meds": "❤️ Prise de bêtabloquants / traitements pour la tension",
-    "x.taking_glp_1_weight_loss_meds": "💫 Prise de traitements GLP-1 pour la perte de poids (Ozempic/Mounjaro)",
-    "x.taking_anxiety_meds_or_history_of": "⬇️ Prise d'anxiolytiques ou antécédents de malaise",
-    "x.faq_guidelines_progress": "❓ Progression des questions fréquentes",
+    "x.taking_adhd_stimulants_adderall_vyvanse_ritalin": "Prise de stimulants pour le TDAH (Adderall/Vyvanse/Ritaline)",
+    "x.taking_beta_blockers_blood_pressure_meds": "Prise de bêtabloquants / traitements pour la tension",
+    "x.taking_glp_1_weight_loss_meds": "Prise de traitements GLP-1 pour la perte de poids (Ozempic/Mounjaro)",
+    "x.taking_anxiety_meds_or_history_of": "Prise d'anxiolytiques ou antécédents de malaise",
+    "x.faq_guidelines_progress": "Progression des questions fréquentes",
     "x.0_8_faqs_read_0": "0 / 8 questions lues (0 %)",
-    "x.frequently_asked_questions": "❓ Questions fréquentes",
+    "x.frequently_asked_questions": "Questions fréquentes",
     "x.should_i_stop_taking_my_prescribed": "Dois-je arrêter mon traitement prescrit avant un tatouage ou un piercing ?",
     "x.never_stop_or_adjust_prescribed_medication": "N'arrêtez et ne modifiez JAMAIS un traitement prescrit",
     "x.why_is_accutane_isotretinoin_a_complete": "Pourquoi l'Accutane (isotrétinoïne) est-il une contre-indication absolue ?",
@@ -1058,7 +1058,7 @@ const TRANSLATIONS = {
     "x.it_is_strongly_recommended_to_avoid": "Il est fortement recommandé d'éviter les AINS (ibuprofène, naproxène) et l'aspirine 24 à 48 heures avant",
     "x.can_i_go_to_the_gym": "Puis-je aller à la salle de sport, nager ou faire du sport après un tatouage ou un piercing ?",
     "x.avoid_heavy_exercise_for_24_48": "Évitez les efforts intenses pendant 24 à 48 heures afin de limiter la transpiration, les étirements et les frottements sur une plaie fraîche",
-    "x.consult_your_physician_message_draft": "✉️ Consulter votre médecin - modèle de message",
+    "x.consult_your_physician_message_draft": "Consulter votre médecin - modèle de message",
     "x.text": "&times;",
     "x.use_this_template_to_draft_an": "Utilisez ce modèle pour rédiger un e-mail ou un message à votre médecin au sujet d'un ajustement sûr de votre traitement",
     "x.doctor_or_clinic_name": "Nom du médecin ou de la clinique :",
@@ -1068,15 +1068,15 @@ const TRANSLATIONS = {
     "x.selected_disclosed_medication_s": "Médicament(s) sélectionné(s) et déclaré(s) :",
     "x.no_medications_currently_selected_in_checker": "Aucun médicament actuellement sélectionné dans le vérificateur.",
     "x.generated_message_draft_editable_customize_your": "Brouillon de message généré (modifiable - personnalisez votre message ci-dessous) :",
-    "x.copy_draft_message": "📋 Copier le brouillon",
-    "x.open_email_app": "✉️ Ouvrir l'application e-mail",
-    "x.print_physician_note": "🖨️ Imprimer la note pour le médecin",
+    "x.copy_draft_message": "Copier le brouillon",
+    "x.open_email_app": "Ouvrir l'application e-mail",
+    "x.print_physician_note": "Imprimer la note pour le médecin",
     "x.close": "Fermer",
-    "x.studio_emergency_first_aid_protocols": "🚨 Protocoles de premiers secours en studio",
-    "x.fainting_syncope": "💫 Malaise / syncope",
-    "x.allergic_reaction": "🐝 Réaction allergique",
-    "x.excessive_bleeding": "🩸 Saignement excessif",
-    "x.panic_breathing": "🫁 Panique et respiration",
+    "x.studio_emergency_first_aid_protocols": "Protocoles de premiers secours en studio",
+    "x.fainting_syncope": "Malaise / syncope",
+    "x.allergic_reaction": "Réaction allergique",
+    "x.excessive_bleeding": "Saignement excessif",
+    "x.panic_breathing": "Panique et respiration",
     "x.vasovagal_syncope_fainting_protocol": "Protocole en cas de syncope vasovagale et de malaise",
     "x.common_response_to_sudden_pain_anxiety": "Réaction fréquente à une douleur soudaine, à l'anxiété ou à une hypoglycémie, provoquant une hypoperfusion cérébrale passagère",
     "x.stop_procedure_immediately": "Arrêtez immédiatement la prestation :",
@@ -1102,7 +1102,7 @@ const TRANSLATIONS = {
     "x.4_4_4_box_breathing": "Respiration carrée 4-4-4 :",
     "x.physical_grounding": "Ancrage physique :",
     "x.close_emergency_guide": "Fermer le guide d'urgence",
-    "x.immediate_action": "🚨 Action immédiate",
+    "x.immediate_action": "Action immédiate",
     "x.search_medication_or_brand_e_g": "Rechercher un médicament ou une marque (ex. Advil, Accutane, Xanax, EMLA, Ozempic)...",
     "x.e_g_72_bpm": "ex. 72 (bpm)",
     "x.e_g_dr_smith_city_health": "ex. Dr Martin / Centre de santé de la ville",
@@ -1114,7 +1114,7 @@ const TRANSLATIONS = {
     waitLabel: 'Recommandation de délai / élimination :',
     medUntranslated: 'Certains détails sur les médicaments ci-dessus sont affichés en anglais : la traduction dans cette langue est encore en cours.',
     medSourcesLabel: 'Sources publiées',
-    tabSupplements: '🌿 Compléments',
+    tabSupplements: 'Compléments',
     suppHeading: 'Vérificateur d\'interactions compléments et médicaments',
     suppIntro: 'La plupart des gens ne considèrent pas l\'huile de poisson, les gélules d\'ail ou le ginkgo comme des « médicaments », et ne les mentionnent donc jamais. Pris avec un anticoagulant ou un antidouleur, certains compléments augmentent le saignement et le suintement pendant la séance. Ajoutez ce que vous prenez ci-dessous pour voir ce que dit la littérature publiée.',
     suppSearchPlaceholder: 'Rechercher un complément (ex. huile de poisson, vitamine E, curcuma, ginseng)...',
@@ -1129,10 +1129,10 @@ const TRANSLATIONS = {
     suppHuman: 'Études humaines',
     suppCredit: 'Données d\'interaction issues de SUPP.AI (Allen Institute for AI). Seules les études humaines et cliniques sont affichées ; les articles rétractés sont exclus.',
     geoLangLabel: 'Rechercher en :',
-    geoFindStudio: '🎨 Trouver un studio à proximité',
-    geoFindDoctor: '🩺 Trouver un médecin à proximité',
-    geoFindPharmacy: '💊 Pharmacie la plus proche',
-    geoFindHospital: '🏥 Hôpital le plus proche',
+    geoFindStudio: 'Trouver un studio à proximité',
+    geoFindDoctor: 'Trouver un médecin à proximité',
+    geoFindPharmacy: 'Pharmacie la plus proche',
+    geoFindHospital: 'Hôpital le plus proche',
     geoNote: 'Ces liens ouvrent Google Maps et lancent la recherche dans la langue du pays où vous vous trouvez, ce qui donne bien plus de résultats qu\'une recherche en anglais à l\'étranger. Votre position ne nous est jamais transmise : seul un mot de recherche est envoyé à Google. Changez la langue ci-dessus si la détection est incorrecte.',
     emergHeadSub: 'Guides d\'action immédiats, étape par étape, pour le personnel du studio en cas de complication pendant une seance.',
     emergCallLabel: 'Appelez d\'abord les secours :',
@@ -1140,16 +1140,16 @@ const TRANSLATIONS = {
     emergDisclaimer: 'Ce guide est un aide-mémoire destiné à des personnes déjà formées aux premiers secours. Ce n\'est pas une formation aux premiers secours et cela ne la remplace pas. Appelez d\'abord les secours, ne faites rien pour quoi vous n\'êtes ni formé ni autorisé là où vous exercez, et restez auprès de la personne jusqu\'à l\'arrivée des secours.',
     disclaimerTitle: 'Avertissement important :',
     disclaimerBody: 'Cet outil est une référence éducative uniquement et ne constitue pas un avis médical. N\'arrêtez et ne modifiez jamais un médicament prescrit sans consulter le médecin qui vous l\'a prescrit. Informez toujours votre tatoueur et votre perceur de tout médicament, problème de santé ou complément alimentaire que vous prenez avant l\'intervention.',
-    langLabel: '🌐 Langue:',
-    headerBadge: '💊 Référence Médicaments et Sécurité',
+    langLabel: 'Langue:',
+    headerBadge: 'Référence Médicaments et Sécurité',
     headerTitle: 'Vérificateur d\'Interactions Médicamenteuses',
     headerSubtitle: 'Vérifiez l\'impact des médicaments sur les saignements, la prise d\'encre et la cicatrisation des tatouages et piercings.',
-    draftDoctorBtn: '✉️ Rédiger un message pour le médecin',
-    tabChecker: '🔍 Vérificateur',
-    tabBrief: '📄 Rapport Artiste',
-    tabSafety: '🛡️ Sécurité Studio',
-    tabFaq: '❓ FAQ & Conseils',
-    tabReminders: '⏰ Rappels & Sevrage',
+    draftDoctorBtn: 'Rédiger un message pour le médecin',
+    tabChecker: 'Vérificateur',
+    tabBrief: 'Rapport Artiste',
+    tabSafety: 'Sécurité Studio',
+    tabFaq: 'FAQ & Conseils',
+    tabReminders: 'Rappels & Sevrage',
     searchPlaceholder: 'Rechercher un médicament (ex. Ibuprofène, Accutane, Xanax, EMLA)...',
     filterAll: 'Tous',
     filterPain: 'Anti-douleurs & AINS',
@@ -1165,23 +1165,23 @@ const TRANSLATIONS = {
     filterSupplement: 'Compléments alimentaires',
     filterAntibiotic: 'Antibiotiques & Antiviraux',
     filterSubstance: 'Substances & Mode de vie',
-    infoNote: '💡 Sélectionnez vos médicaments. Les résultats afficheront les risques et précautions recommandées.',
+    infoNote: 'Sélectionnez vos médicaments. Les résultats afficheront les risques et précautions recommandées.',
     clearAll: 'Tout effacer',
-    draftDoctorNoteBtn: '✉️ Note pour le médecin',
-    viewBriefBtn: '📄 Voir le rapport',
-    backToTopBtn: '⬆️ Haut de page',
-    backToMedListBtn: '⬆️ Retour à la liste',
+    draftDoctorNoteBtn: 'Note pour le médecin',
+    viewBriefBtn: 'Voir le rapport',
+    backToTopBtn: 'Haut de page',
+    backToMedListBtn: 'Retour à la liste',
     "x.share_intake_deep_link_desc": "Générez un lien profond contenant vos médicaments présélectionnés pour la relecture par votre artiste ou avant votre arrivée.",
     "x.and_select_your_medications_to_generate_brief": "et sélectionnez vos médicaments pour générer votre fiche de consultation personnalisée.",
-    "x.copy_artist_checklist": "📋 Copier la liste de contrôle pour l'artiste",
+    "x.copy_artist_checklist": "Copier la liste de contrôle pour l'artiste",
     "x.tailored_for_artist_intake": "Adapté à l'accueil par l'artiste",
-    "x.studio_precautions_checklist": "📋 Précautions du studio et liste de contrôle",
+    "x.studio_precautions_checklist": "Précautions du studio et liste de contrôle",
     "x.question_counter": "Question {n} sur {total}",
-    "x.next_question": "Question suivante ➔",
+    "x.next_question": "Question suivante",
     "x.quiz_score": "Score :",
-    "x.target_hydration_plan": "💧 Plan d'hydratation cible",
-    "x.blood_sugar_fuel_schedule": "🍌 Glycémie et calendrier énergétique",
-    "x.vasovagal_syncope_vitals_analysis": "💫 Syncope vasovagale et analyse des constantes vitales",
+    "x.target_hydration_plan": "Plan d'hydratation cible",
+    "x.blood_sugar_fuel_schedule": "Glycémie et calendrier énergétique",
+    "x.vasovagal_syncope_vitals_analysis": "Syncope vasovagale et analyse des constantes vitales",
     "x.24_hours_before": "24 heures avant :",
     "x.2_hours_before": "2 heures avant :",
     "x.pre_appointment_meal_label": "Repas avant le rendez-vous (1.5–2h avant) :",
@@ -1197,9 +1197,9 @@ const TRANSLATIONS = {
     "x.alert_select_medication_first": "Veuillez d'abord sélectionner au moins un médicament.",
     "x.alert_message_copied": "Message copié dans le presse-papiers !",
     "x.alert_copy_failed": "La copie a échoué. Veuillez sélectionner le texte et le copier manuellement.",
-    "x.cp_copied": "✅ Copié !",
-    "x.cp_copied_clipboard": "✅ Copié dans le presse-papiers !",
-    "x.cp_copy_draft": "📋 Copier le brouillon du message",
+    "x.cp_copied": "Copié !",
+    "x.cp_copied_clipboard": "Copié dans le presse-papiers !",
+    "x.cp_copy_draft": "Copier le brouillon du message",
     "x.cp_checklist_title": "LISTE DE CONTRÔLE DE SÉCURITÉ POUR L'ARTISTE :",
     "x.cp_brief_title": "=== RÉSUMÉ DE CONSULTATION SUR LES MÉDICAMENTS POUR TATOUAGE ET PIERCING ===",
     "x.cp_date": "Date : {date}",
@@ -1210,7 +1210,7 @@ const TRANSLATIONS = {
     "x.cp_piercing": "Piercing : {text}",
     "x.cp_action": "Action : {text}",
     "x.cp_generated": "Généré via la référence des médicaments de Poli International.",
-    "x.cp_link_copied": "📲 Lien d'accueil partageable copié dans le presse-papiers !",
+    "x.cp_link_copied": "Lien d'accueil partageable copié dans le presse-papiers !",
     "x.cp_default_doctor": "Dr [Nom du médecin]",
     "x.cp_default_patient": "[Votre nom]",
     "x.cp_default_proc": "[Tatouage / Piercing]",
@@ -1245,12 +1245,12 @@ const TRANSLATIONS = {
     "x.low_concern": "Preoccupazione bassa",
     "x.low_syncope_risk": "Rischio di sincope basso",
     "x.moderate_syncope_risk": "Rischio di sincope moderato",
-    "x.elevated_syncope_risk": "⚠️ Rischio di sincope elevato",
+    "x.elevated_syncope_risk": "Rischio di sincope elevato",
 
     // --- keyed from the markup 2026-09-02, see i18n-new-keys.en.json ---
-    "x.share_intake_deep_link": "📲 Condividi il link diretto al questionario",
-    "x.quick_print_summary": "🖨️ Riepilogo da stampare",
-    "x.trending_inquiries": "🔥 Ricerche frequenti:",
+    "x.share_intake_deep_link": "Condividi il link diretto al questionario",
+    "x.quick_print_summary": "Riepilogo da stampare",
+    "x.trending_inquiries": "Ricerche frequenti:",
     "x.advil_ibuprofen": "Advil / Ibuprofene",
     "x.accutane_retinoids": "Accutane / Retinoidi",
     "x.tktx_numbing": "TKTX / Crema anestetica",
@@ -1259,36 +1259,36 @@ const TRANSLATIONS = {
     "x.cannabis_thc": "Cannabis / THC",
     "x.alcohol_hangover": "Alcol / Postumi",
     "x.aspirin_blood_thinners": "Aspirina / Anticoagulanti",
-    "x.recent_searches": "🕒 Ricerche recenti:",
+    "x.recent_searches": "Ricerche recenti:",
     "x.clear_history": "Cancella la cronologia",
     "x.share_intake_status": "Stato della condivisione del questionario:",
-    "x.copy_shareable_link": "🔗 Copia il link di condivisione",
-    "x.select_all_medications_and_supplements_you": "💡 Seleziona tutti i farmaci e gli integratori che assumi. I risultati evidenzieranno automaticamente",
+    "x.copy_shareable_link": "Copia il link di condivisione",
+    "x.select_all_medications_and_supplements_you": "Seleziona tutti i farmaci e gli integratori che assumi. I risultati evidenzieranno automaticamente",
     "x.client_consultation_brief": "Scheda di consulenza del cliente",
     "x.a_printable_and_shareable_summary_of": "Un riepilogo stampabile e condivisibile dei farmaci selezionati e delle raccomandazioni per la seduta",
-    "x.no_medications_selected_yet": "⚠️ Nessun farmaco ancora selezionato.",
+    "x.no_medications_selected_yet": "Nessun farmaco ancora selezionato.",
     "x.switch_to_the_interaction_checker": "Passa al verificatore di interazioni",
-    "x.generate_full_clinic_packet_print": "📄 Genera il fascicolo clinico completo (stampa)",
-    "x.share_deep_link": "🔗 Condividi il link diretto",
-    "x.export_data_json": "💾 Esporta i dati (JSON)",
-    "x.export_text_file": "📄 Esporta un file di testo",
-    "x.download_pdf_document": "📥 Scarica il documento PDF",
-    "x.copy_summary": "📋 Copia il riepilogo",
-    "x.print_brief": "🖨️ Stampa la scheda",
-    "x.expected_healing_journey_timeline": "🩺 Percorso di guarigione previsto",
-    "x.tattoo_healing": "🎨 Guarigione del tatuaggio",
-    "x.piercing_healing": "💎 Guarigione del piercing",
+    "x.generate_full_clinic_packet_print": "Genera il fascicolo clinico completo (stampa)",
+    "x.share_deep_link": "Condividi il link diretto",
+    "x.export_data_json": "Esporta i dati (JSON)",
+    "x.export_text_file": "Esporta un file di testo",
+    "x.download_pdf_document": "Scarica il documento PDF",
+    "x.copy_summary": "Copia il riepilogo",
+    "x.print_brief": "Stampa la scheda",
+    "x.expected_healing_journey_timeline": "Percorso di guarigione previsto",
+    "x.tattoo_healing": "Guarigione del tatuaggio",
+    "x.piercing_healing": "Guarigione del piercing",
     "x.interactive_timeline_mapping_physiological_milestones_and": "Cronologia interattiva delle tappe fisiologiche e degli effetti dei farmaci",
-    "x.pre_procedure_medication_washout_reminders": "⏰ Sospensione dei farmaci prima della seduta e promemoria",
+    "x.pre_procedure_medication_washout_reminders": "Sospensione dei farmaci prima della seduta e promemoria",
     "x.calculate_precise_discontinuation_deadlines_for_medications": "Calcola i tempi precisi di sospensione dei farmaci (FANS, anticoagulanti)",
-    "x.scheduled_appointment_date_time": "📅 Data e ora dell'appuntamento previsto:",
-    "x.save_compute_washout": "💾 Salva e calcola la sospensione",
+    "x.scheduled_appointment_date_time": "Data e ora dell'appuntamento previsto:",
+    "x.save_compute_washout": "Salva e calcola la sospensione",
     "x.setting_your_appointment_date_computes_live": "Indicare la data dell'appuntamento avvia conti alla rovescia che mostrano esattamente quando smettere di assumere",
-    "x.enable_browser_notification_alerts": "🔔 Attiva le notifiche del browser",
-    "x.download_google_calendar_ics_pre_filled": "📅 Scarica il file .ics di Google Calendar (scadenze di sospensione precompilate)",
-    "x.open_washout_in_google_calendar_web": "🌐 Apri le scadenze di sospensione in Google Calendar",
-    "x.export_standard_calendar_ics": "📅 Esporta un calendario standard (.ics)",
-    "x.artist_piercer_readiness_self_assessment": "🎯 Autovalutazione della preparazione di tatuatore e piercer",
+    "x.enable_browser_notification_alerts": "Attiva le notifiche del browser",
+    "x.download_google_calendar_ics_pre_filled": "Scarica il file .ics di Google Calendar (scadenze di sospensione precompilate)",
+    "x.open_washout_in_google_calendar_web": "Apri le scadenze di sospensione in Google Calendar",
+    "x.export_standard_calendar_ics": "Esporta un calendario standard (.ics)",
+    "x.artist_piercer_readiness_self_assessment": "Autovalutazione della preparazione di tatuatore e piercer",
     "x.answer_3_quick_questions_about_your": "Rispondi a 3 domande rapide sulla seduta del cliente e sui farmaci dichiarati per ottenere",
     "x.1_what_procedure_is_being_performed": "1. Quale prestazione viene eseguita?",
     "x.tattoo_body_linework_shading_color": "Tatuaggio (tratto sul corpo / sfumatura / colore)",
@@ -1306,9 +1306,9 @@ const TRANSLATIONS = {
     "x.history_of_vasovagal_syncope_fainting_low": "Precedenti di sincope vasovagale / svenimento / ipoglicemia",
     "x.extremely_sensitive_skin_eczema_easy_bruising": "Pelle molto sensibile / eczema / lividi facili",
     "x.first_time_client_high_nervous_tension": "Prima volta / forte tensione nervosa",
-    "x.studio_safety_guide_progress": "🛡️ Avanzamento della guida alla sicurezza dello studio",
+    "x.studio_safety_guide_progress": "Avanzamento della guida alla sicurezza dello studio",
     "x.0_6_sections_read_0": "0 / 6 sezioni lette (0%)",
-    "x.studio_safety_clinical_reference": "🛡️ Sicurezza dello studio e riferimento clinico",
+    "x.studio_safety_clinical_reference": "Sicurezza dello studio e riferimento clinico",
     "x.essential_clinical_reference_for_clients_tattoo": "Riferimento clinico essenziale per clienti, tatuatori e piercer sulla gestione",
     "x.1_painkillers_pre_procedure_pain_management": "1. Antidolorifici e gestione del dolore prima della seduta",
     "x.clients_often_take_over_the_counter": "I clienti assumono spesso antidolorifici da banco prima di una seduta per gestire il dolore. È fondamentale",
@@ -1333,10 +1333,10 @@ const TRANSLATIONS = {
     "x.6_alcohol_cannabis_recreational_substance_intake": "6. Politica su alcol, cannabis e sostanze ricreative",
     "x.informed_consent_legal_safety": "Consenso informato e sicurezza legale:",
     "x.physiological_compromise": "Compromissione fisiologica:",
-    "x.studio_safety_lifestyle_quiz": "🎮 Quiz su sicurezza dello studio e stile di vita",
+    "x.studio_safety_lifestyle_quiz": "Quiz su sicurezza dello studio e stile di vita",
     "x.test_your_studio_safety_medication_iq": "Metti alla prova le tue conoscenze su sicurezza e farmaci!",
     "x.answer_7_fun_educational_scenarios_about": "Rispondi a 7 scenari divertenti e istruttivi su alcol, cannabis, antidolorifici, creme anestetiche",
-    "x.pre_session_prep_vasovagal_syncope_calculator": "💧 Preparazione pre-seduta e calcolatore della sincope vasovagale",
+    "x.pre_session_prep_vasovagal_syncope_calculator": "Preparazione pre-seduta e calcolatore della sincope vasovagale",
     "x.calculate_your_custom_fluid_target_blood": "Calcola il tuo obiettivo di idratazione personalizzato, il piano di mantenimento della glicemia e la riduzione del rischio di sincope",
     "x.body_weight": "Peso corporeo:",
     "x.lbs": "lb",
@@ -1354,13 +1354,13 @@ const TRANSLATIONS = {
     "x.optional": "(facoltativo)",
     "x.blood_pressure_mmhg": "Pressione arteriosa (mmHg)",
     "x.risk_medication_factors_check_all_that": "Fattori di rischio e farmaci (seleziona tutto ciò che si applica):",
-    "x.taking_adhd_stimulants_adderall_vyvanse_ritalin": "⚡ Assunzione di stimolanti per l'ADHD (Adderall/Vyvanse/Ritalin)",
-    "x.taking_beta_blockers_blood_pressure_meds": "❤️ Assunzione di betabloccanti / farmaci per la pressione",
-    "x.taking_glp_1_weight_loss_meds": "💫 Assunzione di farmaci GLP-1 per il dimagrimento (Ozempic/Mounjaro)",
-    "x.taking_anxiety_meds_or_history_of": "⬇️ Assunzione di ansiolitici o precedenti di svenimento",
-    "x.faq_guidelines_progress": "❓ Avanzamento delle domande frequenti",
+    "x.taking_adhd_stimulants_adderall_vyvanse_ritalin": "Assunzione di stimolanti per l'ADHD (Adderall/Vyvanse/Ritalin)",
+    "x.taking_beta_blockers_blood_pressure_meds": "Assunzione di betabloccanti / farmaci per la pressione",
+    "x.taking_glp_1_weight_loss_meds": "Assunzione di farmaci GLP-1 per il dimagrimento (Ozempic/Mounjaro)",
+    "x.taking_anxiety_meds_or_history_of": "Assunzione di ansiolitici o precedenti di svenimento",
+    "x.faq_guidelines_progress": "Avanzamento delle domande frequenti",
     "x.0_8_faqs_read_0": "0 / 8 domande lette (0%)",
-    "x.frequently_asked_questions": "❓ Domande frequenti",
+    "x.frequently_asked_questions": "Domande frequenti",
     "x.should_i_stop_taking_my_prescribed": "Devo sospendere il farmaco prescritto prima di un tatuaggio o di un piercing?",
     "x.never_stop_or_adjust_prescribed_medication": "Non sospendere né modificare MAI un farmaco prescritto",
     "x.why_is_accutane_isotretinoin_a_complete": "Perché l'Accutane (isotretinoina) è una controindicazione assoluta?",
@@ -1379,7 +1379,7 @@ const TRANSLATIONS = {
     "x.it_is_strongly_recommended_to_avoid": "Si raccomanda vivamente di evitare FANS (ibuprofene, naprossene) e aspirina nelle 24-48 ore precedenti",
     "x.can_i_go_to_the_gym": "Posso andare in palestra, nuotare o allenarmi dopo un tatuaggio o un piercing?",
     "x.avoid_heavy_exercise_for_24_48": "Evita sforzi intensi per 24-48 ore per limitare sudorazione, stiramenti e sfregamenti sulla zona fresca",
-    "x.consult_your_physician_message_draft": "✉️ Consultare il medico - bozza di messaggio",
+    "x.consult_your_physician_message_draft": "Consultare il medico - bozza di messaggio",
     "x.text": "&times;",
     "x.use_this_template_to_draft_an": "Usa questo modello per scrivere un'e-mail o un messaggio al tuo medico su un'eventuale modifica sicura della terapia",
     "x.doctor_or_clinic_name": "Nome del medico o della clinica:",
@@ -1389,15 +1389,15 @@ const TRANSLATIONS = {
     "x.selected_disclosed_medication_s": "Farmaco/i selezionato/i e dichiarato/i:",
     "x.no_medications_currently_selected_in_checker": "Nessun farmaco attualmente selezionato nel verificatore.",
     "x.generated_message_draft_editable_customize_your": "Bozza di messaggio generata (modificabile - personalizza il messaggio qui sotto):",
-    "x.copy_draft_message": "📋 Copia la bozza",
-    "x.open_email_app": "✉️ Apri l'app e-mail",
-    "x.print_physician_note": "🖨️ Stampa la nota per il medico",
+    "x.copy_draft_message": "Copia la bozza",
+    "x.open_email_app": "Apri l'app e-mail",
+    "x.print_physician_note": "Stampa la nota per il medico",
     "x.close": "Chiudi",
-    "x.studio_emergency_first_aid_protocols": "🚨 Protocolli di primo soccorso in studio",
-    "x.fainting_syncope": "💫 Svenimento / sincope",
-    "x.allergic_reaction": "🐝 Reazione allergica",
-    "x.excessive_bleeding": "🩸 Sanguinamento eccessivo",
-    "x.panic_breathing": "🫁 Panico e respirazione",
+    "x.studio_emergency_first_aid_protocols": "Protocolli di primo soccorso in studio",
+    "x.fainting_syncope": "Svenimento / sincope",
+    "x.allergic_reaction": "Reazione allergica",
+    "x.excessive_bleeding": "Sanguinamento eccessivo",
+    "x.panic_breathing": "Panico e respirazione",
     "x.vasovagal_syncope_fainting_protocol": "Protocollo per sincope vasovagale e svenimento",
     "x.common_response_to_sudden_pain_anxiety": "Reazione frequente a dolore improvviso, ansia o ipoglicemia, che provoca una temporanea ipoperfusione cerebrale",
     "x.stop_procedure_immediately": "Interrompi subito la prestazione:",
@@ -1423,7 +1423,7 @@ const TRANSLATIONS = {
     "x.4_4_4_box_breathing": "Respirazione quadrata 4-4-4:",
     "x.physical_grounding": "Radicamento fisico:",
     "x.close_emergency_guide": "Chiudi la guida di emergenza",
-    "x.immediate_action": "🚨 Azione immediata",
+    "x.immediate_action": "Azione immediata",
     "x.search_medication_or_brand_e_g": "Cerca un farmaco o una marca (es. Advil, Accutane, Xanax, EMLA, Ozempic)...",
     "x.e_g_72_bpm": "es. 72 (bpm)",
     "x.e_g_dr_smith_city_health": "es. Dott. Rossi / Poliambulatorio cittadino",
@@ -1435,7 +1435,7 @@ const TRANSLATIONS = {
     waitLabel: 'Raccomandazione di attesa / washout:',
     medUntranslated: 'Alcuni dettagli sui farmaci qui sopra sono mostrati in inglese: la traduzione in questa lingua è ancora in corso.',
     medSourcesLabel: 'Fonti pubblicate',
-    tabSupplements: '🌿 Integratori',
+    tabSupplements: 'Integratori',
     suppHeading: 'Verifica interazioni integratori e farmaci',
     suppIntro: 'La maggior parte delle persone non considera l\'olio di pesce, le capsule di aglio o il ginkgo come "farmaci", quindi non li menziona mai. Assunti insieme a un anticoagulante o a un antidolorifico, alcuni integratori aumentano il sanguinamento e l\'essudato durante la seduta. Aggiungi qui sotto quello che prendi per vedere cosa dice la letteratura pubblicata.',
     suppSearchPlaceholder: 'Cerca un integratore (es. olio di pesce, vitamina E, curcuma, ginseng)...',
@@ -1450,10 +1450,10 @@ const TRANSLATIONS = {
     suppHuman: 'Studi sull\'uomo',
     suppCredit: 'Dati sulle interazioni da SUPP.AI (Allen Institute for AI). Sono mostrati solo studi umani e clinici; gli articoli ritirati sono esclusi.',
     geoLangLabel: 'Cerca in:',
-    geoFindStudio: '🎨 Trova uno studio vicino',
-    geoFindDoctor: '🩺 Trova un medico vicino',
-    geoFindPharmacy: '💊 Farmacia più vicina',
-    geoFindHospital: '🏥 Ospedale più vicino',
+    geoFindStudio: 'Trova uno studio vicino',
+    geoFindDoctor: 'Trova un medico vicino',
+    geoFindPharmacy: 'Farmacia più vicina',
+    geoFindHospital: 'Ospedale più vicino',
     geoNote: 'Questi link aprono Google Maps e cercano nella lingua del posto in cui ti trovi: all\'estero trova molto più di una ricerca in inglese. La tua posizione non arriva mai a noi: a Google va solo una parola di ricerca. Cambia la lingua qui sopra se il rilevamento è sbagliato.',
     emergHeadSub: 'Guide di intervento immediato, passo per passo, per il personale dello studio in caso di complicazioni durante una seduta.',
     emergCallLabel: 'Chiami prima i soccorsi:',
@@ -1461,16 +1461,16 @@ const TRANSLATIONS = {
     emergDisclaimer: 'Questa guida è un promemoria per chi ha già una formazione di primo soccorso. Non è un corso di primo soccorso e non lo sostituisce. Chiami prima i soccorsi, non faccia nulla per cui non è formato e autorizzato dove lavora, e resti accanto alla persona fino all\'arrivo dei soccorsi.',
     disclaimerTitle: 'Avvertenza importante:',
     disclaimerBody: 'Questo strumento è solo un riferimento educativo e non costituisce un parere medico. Non interrompere né modificare mai un farmaco prescritto senza consultare il medico che lo ha prescritto. Informa sempre il tuo tatuatore e il tuo piercer di qualsiasi farmaco, condizione di salute o integratore che stai assumendo prima della procedura.',
-    langLabel: '🌐 Lingua:',
-    headerBadge: '💊 Riferimento Farmaci e Sicurezza',
+    langLabel: 'Lingua:',
+    headerBadge: 'Riferimento Farmaci e Sicurezza',
     headerTitle: 'Verifica Interazioni Farmacologiche',
     headerSubtitle: 'Scopri come i farmaci influiscono sul rischio di sanguinamento e sulla guarigione di tatuaggi e piercing.',
-    draftDoctorBtn: '✉️ Bozza per il medico',
-    tabChecker: '🔍 Verifica',
-    tabBrief: '📄 Report Artista',
-    tabSafety: '🛡️ Sicurezza Studio',
-    tabFaq: '❓ FAQ & Consigli',
-    tabReminders: '⏰ Promemoria & Sospensione',
+    draftDoctorBtn: 'Bozza per il medico',
+    tabChecker: 'Verifica',
+    tabBrief: 'Report Artista',
+    tabSafety: 'Sicurezza Studio',
+    tabFaq: 'FAQ & Consigli',
+    tabReminders: 'Promemoria & Sospensione',
     searchPlaceholder: 'Cerca farmaco o marca (es. Aspirina, Accutane, Xanax, EMLA)...',
     filterAll: 'Tutti',
     filterPain: 'Antidolorifici & FANS',
@@ -1486,23 +1486,23 @@ const TRANSLATIONS = {
     filterSupplement: 'Integratori',
     filterAntibiotic: 'Antibiotici & Antivirali',
     filterSubstance: 'Sostanze & Stile di vita',
-    infoNote: '💡 Seleziona i tuoi farmaci per visualizzare i rischi procedurali e le precauzioni.',
+    infoNote: 'Seleziona i tuoi farmaci per visualizzare i rischi procedurali e le precauzioni.',
     clearAll: 'Cancella tutto',
-    draftDoctorNoteBtn: '✉️ Bozza per il medico',
-    viewBriefBtn: '📄 Vedi Report',
-    backToTopBtn: '⬆️ Torna Su',
-    backToMedListBtn: '⬆️ Torna alla Lista',
+    draftDoctorNoteBtn: 'Bozza per il medico',
+    viewBriefBtn: 'Vedi Report',
+    backToTopBtn: 'Torna Su',
+    backToMedListBtn: 'Torna alla Lista',
     "x.share_intake_deep_link_desc": "Genera un link diretto con i farmaci preselezionati per la revisione del tuo artista o prima dell'arrivo.",
     "x.and_select_your_medications_to_generate_brief": "e seleziona i tuoi farmaci per generare il tuo riepilogo di consulenza personalizzato.",
-    "x.copy_artist_checklist": "📋 Copia la checklist per l'artista",
+    "x.copy_artist_checklist": "Copia la checklist per l'artista",
     "x.tailored_for_artist_intake": "Pensato per l'accoglienza dell'artista",
-    "x.studio_precautions_checklist": "📋 Precauzioni dello studio e checklist",
+    "x.studio_precautions_checklist": "Precauzioni dello studio e checklist",
     "x.question_counter": "Domanda {n} di {total}",
-    "x.next_question": "Domanda successiva ➔",
+    "x.next_question": "Domanda successiva",
     "x.quiz_score": "Punteggio:",
-    "x.target_hydration_plan": "💧 Piano di idratazione mirato",
-    "x.blood_sugar_fuel_schedule": "🍌 Glicemia e programma energetico",
-    "x.vasovagal_syncope_vitals_analysis": "💫 Sincope vasovagale e analisi dei parametri vitali",
+    "x.target_hydration_plan": "Piano di idratazione mirato",
+    "x.blood_sugar_fuel_schedule": "Glicemia e programma energetico",
+    "x.vasovagal_syncope_vitals_analysis": "Sincope vasovagale e analisi dei parametri vitali",
     "x.24_hours_before": "24 ore prima:",
     "x.2_hours_before": "2 ore prima:",
     "x.pre_appointment_meal_label": "Pasto prima dell'appuntamento (1.5–2h prima):",
@@ -1518,9 +1518,9 @@ const TRANSLATIONS = {
     "x.alert_select_medication_first": "Seleziona prima almeno un farmaco.",
     "x.alert_message_copied": "Messaggio copiato negli appunti!",
     "x.alert_copy_failed": "Copia non riuscita. Seleziona il testo e copialo manualmente.",
-    "x.cp_copied": "✅ Copiato!",
-    "x.cp_copied_clipboard": "✅ Copiato negli appunti!",
-    "x.cp_copy_draft": "📋 Copia la bozza del messaggio",
+    "x.cp_copied": "Copiato!",
+    "x.cp_copied_clipboard": "Copiato negli appunti!",
+    "x.cp_copy_draft": "Copia la bozza del messaggio",
     "x.cp_checklist_title": "CHECKLIST DI SICUREZZA PER L'ARTISTA:",
     "x.cp_brief_title": "=== RIEPILOGO DI CONSULTAZIONE SUI FARMACI PER TATUAGGI E PIERCING ===",
     "x.cp_date": "Data: {date}",
@@ -1531,7 +1531,7 @@ const TRANSLATIONS = {
     "x.cp_piercing": "Piercing: {text}",
     "x.cp_action": "Azione: {text}",
     "x.cp_generated": "Generato tramite il riferimento sui farmaci di Poli International.",
-    "x.cp_link_copied": "📲 Link di accoglienza condivisibile copiato negli appunti!",
+    "x.cp_link_copied": "Link di accoglienza condivisibile copiato negli appunti!",
     "x.cp_default_doctor": "Dott. [Nome del medico]",
     "x.cp_default_patient": "[Il tuo nome]",
     "x.cp_default_proc": "[Tatuaggio / Piercing]",
@@ -1566,12 +1566,12 @@ const TRANSLATIONS = {
     "x.low_concern": "Preocupación baja",
     "x.low_syncope_risk": "Riesgo de síncope bajo",
     "x.moderate_syncope_risk": "Riesgo de síncope moderado",
-    "x.elevated_syncope_risk": "⚠️ Riesgo de síncope elevado",
+    "x.elevated_syncope_risk": "Riesgo de síncope elevado",
 
     // --- keyed from the markup 2026-09-02, see i18n-new-keys.en.json ---
-    "x.share_intake_deep_link": "📲 Compartir el enlace directo al cuestionario",
-    "x.quick_print_summary": "🖨️ Resumen para imprimir",
-    "x.trending_inquiries": "🔥 Búsquedas frecuentes:",
+    "x.share_intake_deep_link": "Compartir el enlace directo al cuestionario",
+    "x.quick_print_summary": "Resumen para imprimir",
+    "x.trending_inquiries": "Búsquedas frecuentes:",
     "x.advil_ibuprofen": "Advil / Ibuprofeno",
     "x.accutane_retinoids": "Accutane / Retinoides",
     "x.tktx_numbing": "TKTX / Crema anestésica",
@@ -1580,36 +1580,36 @@ const TRANSLATIONS = {
     "x.cannabis_thc": "Cannabis / THC",
     "x.alcohol_hangover": "Alcohol / Resaca",
     "x.aspirin_blood_thinners": "Aspirina / Anticoagulantes",
-    "x.recent_searches": "🕒 Búsquedas recientes:",
+    "x.recent_searches": "Búsquedas recientes:",
     "x.clear_history": "Borrar el historial",
     "x.share_intake_status": "Estado del cuestionario compartido:",
-    "x.copy_shareable_link": "🔗 Copiar el enlace para compartir",
-    "x.select_all_medications_and_supplements_you": "💡 Seleccione todos los medicamentos y suplementos que toma. Los resultados destacarán automáticamente",
+    "x.copy_shareable_link": "Copiar el enlace para compartir",
+    "x.select_all_medications_and_supplements_you": "Seleccione todos los medicamentos y suplementos que toma. Los resultados destacarán automáticamente",
     "x.client_consultation_brief": "Ficha de consulta del cliente",
     "x.a_printable_and_shareable_summary_of": "Un resumen imprimible y compartible de los medicamentos seleccionados y las recomendaciones para la sesión",
-    "x.no_medications_selected_yet": "⚠️ Todavía no se ha seleccionado ningún medicamento.",
+    "x.no_medications_selected_yet": "Todavía no se ha seleccionado ningún medicamento.",
     "x.switch_to_the_interaction_checker": "Ir al verificador de interacciones",
-    "x.generate_full_clinic_packet_print": "📄 Generar el expediente clínico completo (impresión)",
-    "x.share_deep_link": "🔗 Compartir el enlace directo",
-    "x.export_data_json": "💾 Exportar los datos (JSON)",
-    "x.export_text_file": "📄 Exportar un archivo de texto",
-    "x.download_pdf_document": "📥 Descargar el documento PDF",
-    "x.copy_summary": "📋 Copiar el resumen",
-    "x.print_brief": "🖨️ Imprimir la ficha",
-    "x.expected_healing_journey_timeline": "🩺 Proceso de cicatrización previsto",
-    "x.tattoo_healing": "🎨 Cicatrización del tatuaje",
-    "x.piercing_healing": "💎 Cicatrización del piercing",
+    "x.generate_full_clinic_packet_print": "Generar el expediente clínico completo (impresión)",
+    "x.share_deep_link": "Compartir el enlace directo",
+    "x.export_data_json": "Exportar los datos (JSON)",
+    "x.export_text_file": "Exportar un archivo de texto",
+    "x.download_pdf_document": "Descargar el documento PDF",
+    "x.copy_summary": "Copiar el resumen",
+    "x.print_brief": "Imprimir la ficha",
+    "x.expected_healing_journey_timeline": "Proceso de cicatrización previsto",
+    "x.tattoo_healing": "Cicatrización del tatuaje",
+    "x.piercing_healing": "Cicatrización del piercing",
     "x.interactive_timeline_mapping_physiological_milestones_and": "Cronología interactiva de las etapas fisiológicas y los efectos de los medicamentos",
-    "x.pre_procedure_medication_washout_reminders": "⏰ Suspensión de medicamentos antes de la sesión y recordatorios",
+    "x.pre_procedure_medication_washout_reminders": "Suspensión de medicamentos antes de la sesión y recordatorios",
     "x.calculate_precise_discontinuation_deadlines_for_medications": "Calcule los plazos exactos de suspensión de los medicamentos (AINE, anticoagulantes)",
-    "x.scheduled_appointment_date_time": "📅 Fecha y hora de la cita prevista:",
-    "x.save_compute_washout": "💾 Guardar y calcular la suspensión",
+    "x.scheduled_appointment_date_time": "Fecha y hora de la cita prevista:",
+    "x.save_compute_washout": "Guardar y calcular la suspensión",
     "x.setting_your_appointment_date_computes_live": "Indicar la fecha de la cita activa cuentas atrás que muestran exactamente cuándo dejar de tomar",
-    "x.enable_browser_notification_alerts": "🔔 Activar las notificaciones del navegador",
-    "x.download_google_calendar_ics_pre_filled": "📅 Descargar el archivo .ics de Google Calendar (plazos de suspensión rellenados)",
-    "x.open_washout_in_google_calendar_web": "🌐 Abrir los plazos de suspensión en Google Calendar",
-    "x.export_standard_calendar_ics": "📅 Exportar un calendario estándar (.ics)",
-    "x.artist_piercer_readiness_self_assessment": "🎯 Autoevaluación de preparación del tatuador y del perforador",
+    "x.enable_browser_notification_alerts": "Activar las notificaciones del navegador",
+    "x.download_google_calendar_ics_pre_filled": "Descargar el archivo .ics de Google Calendar (plazos de suspensión rellenados)",
+    "x.open_washout_in_google_calendar_web": "Abrir los plazos de suspensión en Google Calendar",
+    "x.export_standard_calendar_ics": "Exportar un calendario estándar (.ics)",
+    "x.artist_piercer_readiness_self_assessment": "Autoevaluación de preparación del tatuador y del perforador",
     "x.answer_3_quick_questions_about_your": "Responda 3 preguntas rápidas sobre la sesión de su cliente y los medicamentos declarados para obtener",
     "x.1_what_procedure_is_being_performed": "1. ¿Qué procedimiento se va a realizar?",
     "x.tattoo_body_linework_shading_color": "Tatuaje (línea corporal / sombreado / color)",
@@ -1627,9 +1627,9 @@ const TRANSLATIONS = {
     "x.history_of_vasovagal_syncope_fainting_low": "Antecedentes de síncope vasovagal / desmayo / hipoglucemia",
     "x.extremely_sensitive_skin_eczema_easy_bruising": "Piel muy sensible / eccema / moratones fáciles",
     "x.first_time_client_high_nervous_tension": "Primera vez / gran tensión nerviosa",
-    "x.studio_safety_guide_progress": "🛡️ Progreso de la guía de seguridad del estudio",
+    "x.studio_safety_guide_progress": "Progreso de la guía de seguridad del estudio",
     "x.0_6_sections_read_0": "0 / 6 secciones leídas (0 %)",
-    "x.studio_safety_clinical_reference": "🛡️ Seguridad del estudio y referencia clínica",
+    "x.studio_safety_clinical_reference": "Seguridad del estudio y referencia clínica",
     "x.essential_clinical_reference_for_clients_tattoo": "Referencia clínica esencial para clientes, tatuadores y perforadores sobre el manejo",
     "x.1_painkillers_pre_procedure_pain_management": "1. Analgésicos y manejo del dolor antes de la sesión",
     "x.clients_often_take_over_the_counter": "Los clientes suelen tomar analgésicos sin receta antes de una sesión para controlar el dolor. Es fundamental",
@@ -1654,10 +1654,10 @@ const TRANSLATIONS = {
     "x.6_alcohol_cannabis_recreational_substance_intake": "6. Política sobre alcohol, cannabis y sustancias recreativas",
     "x.informed_consent_legal_safety": "Consentimiento informado y seguridad jurídica:",
     "x.physiological_compromise": "Compromiso fisiológico:",
-    "x.studio_safety_lifestyle_quiz": "🎮 Cuestionario de seguridad del estudio y estilo de vida",
+    "x.studio_safety_lifestyle_quiz": "Cuestionario de seguridad del estudio y estilo de vida",
     "x.test_your_studio_safety_medication_iq": "¡Ponga a prueba sus conocimientos sobre seguridad y medicamentos!",
     "x.answer_7_fun_educational_scenarios_about": "Responda a 7 casos amenos y didácticos sobre alcohol, cannabis, analgésicos, cremas anestésicas",
-    "x.pre_session_prep_vasovagal_syncope_calculator": "💧 Preparación previa a la sesión y calculadora de síncope vasovagal",
+    "x.pre_session_prep_vasovagal_syncope_calculator": "Preparación previa a la sesión y calculadora de síncope vasovagal",
     "x.calculate_your_custom_fluid_target_blood": "Calcule su objetivo personalizado de hidratación, su plan de glucemia y la reducción del riesgo de síncope",
     "x.body_weight": "Peso corporal:",
     "x.lbs": "lb",
@@ -1675,13 +1675,13 @@ const TRANSLATIONS = {
     "x.optional": "(opcional)",
     "x.blood_pressure_mmhg": "Tensión arterial (mmHg)",
     "x.risk_medication_factors_check_all_that": "Factores de riesgo y medicación (marque todo lo que corresponda):",
-    "x.taking_adhd_stimulants_adderall_vyvanse_ritalin": "⚡ Toma estimulantes para el TDAH (Adderall/Vyvanse/Ritalin)",
-    "x.taking_beta_blockers_blood_pressure_meds": "❤️ Toma betabloqueantes / medicación para la tensión",
-    "x.taking_glp_1_weight_loss_meds": "💫 Toma medicación GLP-1 para adelgazar (Ozempic/Mounjaro)",
-    "x.taking_anxiety_meds_or_history_of": "⬇️ Toma ansiolíticos o tiene antecedentes de desmayo",
-    "x.faq_guidelines_progress": "❓ Progreso de las preguntas frecuentes",
+    "x.taking_adhd_stimulants_adderall_vyvanse_ritalin": "Toma estimulantes para el TDAH (Adderall/Vyvanse/Ritalin)",
+    "x.taking_beta_blockers_blood_pressure_meds": "Toma betabloqueantes / medicación para la tensión",
+    "x.taking_glp_1_weight_loss_meds": "Toma medicación GLP-1 para adelgazar (Ozempic/Mounjaro)",
+    "x.taking_anxiety_meds_or_history_of": "Toma ansiolíticos o tiene antecedentes de desmayo",
+    "x.faq_guidelines_progress": "Progreso de las preguntas frecuentes",
     "x.0_8_faqs_read_0": "0 / 8 preguntas leídas (0 %)",
-    "x.frequently_asked_questions": "❓ Preguntas frecuentes",
+    "x.frequently_asked_questions": "Preguntas frecuentes",
     "x.should_i_stop_taking_my_prescribed": "¿Debo dejar mi medicación recetada antes de hacerme un tatuaje o un piercing?",
     "x.never_stop_or_adjust_prescribed_medication": "NUNCA deje ni ajuste una medicación recetada",
     "x.why_is_accutane_isotretinoin_a_complete": "¿Por qué el Accutane (isotretinoína) es una contraindicación absoluta?",
@@ -1700,7 +1700,7 @@ const TRANSLATIONS = {
     "x.it_is_strongly_recommended_to_avoid": "Se recomienda encarecidamente evitar los AINE (ibuprofeno, naproxeno) y la aspirina entre 24 y 48 horas antes",
     "x.can_i_go_to_the_gym": "¿Puedo ir al gimnasio, nadar o hacer ejercicio después de un tatuaje o un piercing?",
     "x.avoid_heavy_exercise_for_24_48": "Evite el ejercicio intenso entre 24 y 48 horas para no sudar en exceso ni estirar o rozar la zona reciente",
-    "x.consult_your_physician_message_draft": "✉️ Consultar a su médico - borrador de mensaje",
+    "x.consult_your_physician_message_draft": "Consultar a su médico - borrador de mensaje",
     "x.text": "&times;",
     "x.use_this_template_to_draft_an": "Use esta plantilla para redactar un correo o mensaje a su médico sobre un ajuste seguro de la medicación",
     "x.doctor_or_clinic_name": "Nombre del médico o de la clínica:",
@@ -1710,15 +1710,15 @@ const TRANSLATIONS = {
     "x.selected_disclosed_medication_s": "Medicamento(s) seleccionado(s) y declarado(s):",
     "x.no_medications_currently_selected_in_checker": "No hay ningún medicamento seleccionado en el verificador.",
     "x.generated_message_draft_editable_customize_your": "Borrador de mensaje generado (editable: personalice el mensaje abajo):",
-    "x.copy_draft_message": "📋 Copiar el borrador",
-    "x.open_email_app": "✉️ Abrir la aplicación de correo",
-    "x.print_physician_note": "🖨️ Imprimir la nota para el médico",
+    "x.copy_draft_message": "Copiar el borrador",
+    "x.open_email_app": "Abrir la aplicación de correo",
+    "x.print_physician_note": "Imprimir la nota para el médico",
     "x.close": "Cerrar",
-    "x.studio_emergency_first_aid_protocols": "🚨 Protocolos de primeros auxilios del estudio",
-    "x.fainting_syncope": "💫 Desmayo / síncope",
-    "x.allergic_reaction": "🐝 Reacción alérgica",
-    "x.excessive_bleeding": "🩸 Sangrado excesivo",
-    "x.panic_breathing": "🫁 Pánico y respiración",
+    "x.studio_emergency_first_aid_protocols": "Protocolos de primeros auxilios del estudio",
+    "x.fainting_syncope": "Desmayo / síncope",
+    "x.allergic_reaction": "Reacción alérgica",
+    "x.excessive_bleeding": "Sangrado excesivo",
+    "x.panic_breathing": "Pánico y respiración",
     "x.vasovagal_syncope_fainting_protocol": "Protocolo ante síncope vasovagal y desmayo",
     "x.common_response_to_sudden_pain_anxiety": "Respuesta frecuente al dolor repentino, la ansiedad o la hipoglucemia, que provoca hipoperfusión cerebral pasajera",
     "x.stop_procedure_immediately": "Detenga el procedimiento de inmediato:",
@@ -1744,7 +1744,7 @@ const TRANSLATIONS = {
     "x.4_4_4_box_breathing": "Respiración cuadrada 4-4-4:",
     "x.physical_grounding": "Anclaje físico:",
     "x.close_emergency_guide": "Cerrar la guía de emergencia",
-    "x.immediate_action": "🚨 Actuación inmediata",
+    "x.immediate_action": "Actuación inmediata",
     "x.search_medication_or_brand_e_g": "Buscar un medicamento o marca (p. ej. Advil, Accutane, Xanax, EMLA, Ozempic)...",
     "x.e_g_72_bpm": "p. ej. 72 (lpm)",
     "x.e_g_dr_smith_city_health": "p. ej. Dra. Sánchez / Centro de salud municipal",
@@ -1756,7 +1756,7 @@ const TRANSLATIONS = {
     waitLabel: 'Recomendación de espera / lavado:',
     medUntranslated: 'Algunos detalles sobre los medicamentos anteriores se muestran en inglés: la traducción a este idioma todavía está en curso.',
     medSourcesLabel: 'Fuentes publicadas',
-    tabSupplements: '🌿 Suplementos',
+    tabSupplements: 'Suplementos',
     suppHeading: 'Verificador de interacciones entre suplementos y medicamentos',
     suppIntro: 'La mayoría de la gente no considera el aceite de pescado, las cápsulas de ajo o el ginkgo como «medicación», así que nunca los menciona. Tomados junto a un anticoagulante o un analgésico, algunos suplementos aumentan el sangrado y el exudado durante la sesión. Añade lo que tomas para ver qué dice la literatura publicada.',
     suppSearchPlaceholder: 'Buscar un suplemento (p. ej. aceite de pescado, vitamina E, cúrcuma, ginseng)...',
@@ -1771,10 +1771,10 @@ const TRANSLATIONS = {
     suppHuman: 'Estudios en humanos',
     suppCredit: 'Datos de interacciones de SUPP.AI (Allen Institute for AI). Solo se muestran estudios humanos y clínicos; se excluyen los artículos retractados.',
     geoLangLabel: 'Buscar en:',
-    geoFindStudio: '🎨 Buscar un estudio cerca',
-    geoFindDoctor: '🩺 Buscar un médico cerca',
-    geoFindPharmacy: '💊 Farmacia más cercana',
-    geoFindHospital: '🏥 Hospital más cercano',
+    geoFindStudio: 'Buscar un estudio cerca',
+    geoFindDoctor: 'Buscar un médico cerca',
+    geoFindPharmacy: 'Farmacia más cercana',
+    geoFindHospital: 'Hospital más cercano',
     geoNote: 'Estos enlaces abren Google Maps y buscan en el idioma del lugar donde está, lo que encuentra mucho más que una búsqueda en inglés en el extranjero. Su ubicación nunca llega hasta nosotros: a Google solo va una palabra de búsqueda. Cambie el idioma de arriba si la detección no es correcta.',
     emergHeadSub: 'Guías de actuación inmediata, paso a paso, para el personal del estudio ante complicaciones durante una sesion.',
     emergCallLabel: 'Llame primero a los servicios de emergencia:',
@@ -1782,16 +1782,16 @@ const TRANSLATIONS = {
     emergDisclaimer: 'Esta guía es un recordatorio para personas que ya tienen formación en primeros auxilios. No es formación en primeros auxilios ni la sustituye. Llame primero a emergencias, no haga nada para lo que no esté formado y autorizado donde trabaja, y quédese con la persona hasta que llegue la ayuda.',
     disclaimerTitle: 'Aviso importante:',
     disclaimerBody: 'Esta herramienta es solo una referencia educativa y no constituye asesoramiento médico. Nunca suspenda ni modifique un medicamento recetado sin consultar al médico que se lo recetó. Informe siempre a su tatuador y a su perforador de cualquier medicamento, problema de salud o suplemento que esté tomando antes del procedimiento.',
-    langLabel: '🌐 Idioma:',
-    headerBadge: '💊 Referencia de Medicamentos y Seguridad',
+    langLabel: 'Idioma:',
+    headerBadge: 'Referencia de Medicamentos y Seguridad',
     headerTitle: 'Comprobador de Interacciones de Medicamentos',
     headerSubtitle: 'Consulta cómo los medicamentos afectan el riesgo de sangrado, la fijación de tinta y la cicatrización de tatuajes y piercings.',
-    draftDoctorBtn: '✉️ Redactar nota para el médico',
-    tabChecker: '🔍 Buscador',
-    tabBrief: '📄 Informe para el Artista',
-    tabSafety: '🛡️ Seguridad en el Estudio',
-    tabFaq: '❓ Preguntas Frecuentes',
-    tabReminders: '⏰ Recordatorios & Suspensión',
+    draftDoctorBtn: 'Redactar nota para el médico',
+    tabChecker: 'Buscador',
+    tabBrief: 'Informe para el Artista',
+    tabSafety: 'Seguridad en el Estudio',
+    tabFaq: 'Preguntas Frecuentes',
+    tabReminders: 'Recordatorios & Suspensión',
     searchPlaceholder: 'Buscar medicamento (ej. Ibuprofeno, Accutane, Xanax, EMLA)...',
     filterAll: 'Todos',
     filterPain: 'Analgésicos y AINEs',
@@ -1807,23 +1807,23 @@ const TRANSLATIONS = {
     filterSupplement: 'Suplementos',
     filterAntibiotic: 'Antibióticos y Antivirales',
     filterSubstance: 'Sustancias y Estilo de vida',
-    infoNote: '💡 Selecciona tus medicamentos para verificar precauciones e interacciones.',
+    infoNote: 'Selecciona tus medicamentos para verificar precauciones e interacciones.',
     clearAll: 'Borrar todo',
-    draftDoctorNoteBtn: '✉️ Nota médica',
-    viewBriefBtn: '📄 Ver Informe',
-    backToTopBtn: '⬆️ Volver Arriba',
-    backToMedListBtn: '⬆️ Volver a la Lista',
+    draftDoctorNoteBtn: 'Nota médica',
+    viewBriefBtn: 'Ver Informe',
+    backToTopBtn: 'Volver Arriba',
+    backToMedListBtn: 'Volver a la Lista',
     "x.share_intake_deep_link_desc": "Genera un enlace profundo con tus medicamentos preseleccionados para la revisión de tu artista o antes de tu llegada.",
     "x.and_select_your_medications_to_generate_brief": "y selecciona tus medicamentos para generar tu resumen de consulta personalizado.",
-    "x.copy_artist_checklist": "📋 Copiar lista de verificación para el artista",
+    "x.copy_artist_checklist": "Copiar lista de verificación para el artista",
     "x.tailored_for_artist_intake": "Adaptado para la admisión del artista",
-    "x.studio_precautions_checklist": "📋 Precauciones del estudio y lista de verificación",
+    "x.studio_precautions_checklist": "Precauciones del estudio y lista de verificación",
     "x.question_counter": "Pregunta {n} de {total}",
-    "x.next_question": "Siguiente pregunta ➔",
+    "x.next_question": "Siguiente pregunta",
     "x.quiz_score": "Puntuación:",
-    "x.target_hydration_plan": "💧 Plan de hidratación objetivo",
-    "x.blood_sugar_fuel_schedule": "🍌 Azúcar en sangre y horario energético",
-    "x.vasovagal_syncope_vitals_analysis": "💫 Síncope vasovagal y análisis de constantes vitales",
+    "x.target_hydration_plan": "Plan de hidratación objetivo",
+    "x.blood_sugar_fuel_schedule": "Azúcar en sangre y horario energético",
+    "x.vasovagal_syncope_vitals_analysis": "Síncope vasovagal y análisis de constantes vitales",
     "x.24_hours_before": "24 horas antes:",
     "x.2_hours_before": "2 horas antes:",
     "x.pre_appointment_meal_label": "Comida antes de la cita (1.5–2h antes):",
@@ -1839,9 +1839,9 @@ const TRANSLATIONS = {
     "x.alert_select_medication_first": "Primero selecciona al menos un medicamento.",
     "x.alert_message_copied": "¡Mensaje copiado al portapapeles!",
     "x.alert_copy_failed": "La copia falló. Selecciona el texto y cópialo manualmente.",
-    "x.cp_copied": "✅ ¡Copiado!",
-    "x.cp_copied_clipboard": "✅ ¡Copiado al portapapeles!",
-    "x.cp_copy_draft": "📋 Copiar el borrador del mensaje",
+    "x.cp_copied": "¡Copiado!",
+    "x.cp_copied_clipboard": "¡Copiado al portapapeles!",
+    "x.cp_copy_draft": "Copiar el borrador del mensaje",
     "x.cp_checklist_title": "LISTA DE VERIFICACIÓN DE SEGURIDAD PARA EL ARTISTA:",
     "x.cp_brief_title": "=== RESUMEN DE CONSULTA SOBRE MEDICAMENTOS PARA TATUAJES Y PIERCINGS ===",
     "x.cp_date": "Fecha: {date}",
@@ -1852,7 +1852,7 @@ const TRANSLATIONS = {
     "x.cp_piercing": "Piercing: {text}",
     "x.cp_action": "Acción: {text}",
     "x.cp_generated": "Generado mediante la referencia de medicamentos de Poli International.",
-    "x.cp_link_copied": "📲 ¡Enlace de admisión compartible copiado al portapapeles!",
+    "x.cp_link_copied": "¡Enlace de admisión compartible copiado al portapapeles!",
     "x.cp_default_doctor": "Dr. [Nombre del médico]",
     "x.cp_default_patient": "[Tu nombre]",
     "x.cp_default_proc": "[Tatuaje / Piercing]",
@@ -1887,12 +1887,12 @@ const TRANSLATIONS = {
     "x.low_concern": "Geringes Risiko",
     "x.low_syncope_risk": "Geringes Synkopenrisiko",
     "x.moderate_syncope_risk": "Mäßiges Synkopenrisiko",
-    "x.elevated_syncope_risk": "⚠️ Erhöhtes Synkopenrisiko",
+    "x.elevated_syncope_risk": "Erhöhtes Synkopenrisiko",
 
     // --- keyed from the markup 2026-09-02, see i18n-new-keys.en.json ---
-    "x.share_intake_deep_link": "📲 Direktlink zum Fragebogen teilen",
-    "x.quick_print_summary": "🖨️ Kurzfassung zum Ausdrucken",
-    "x.trending_inquiries": "🔥 Häufige Suchanfragen:",
+    "x.share_intake_deep_link": "Direktlink zum Fragebogen teilen",
+    "x.quick_print_summary": "Kurzfassung zum Ausdrucken",
+    "x.trending_inquiries": "Häufige Suchanfragen:",
     "x.advil_ibuprofen": "Advil / Ibuprofen",
     "x.accutane_retinoids": "Accutane / Retinoide",
     "x.tktx_numbing": "TKTX / Betäubungscreme",
@@ -1901,36 +1901,36 @@ const TRANSLATIONS = {
     "x.cannabis_thc": "Cannabis / THC",
     "x.alcohol_hangover": "Alkohol / Kater",
     "x.aspirin_blood_thinners": "Aspirin / Blutverdünner",
-    "x.recent_searches": "🕒 Letzte Suchanfragen:",
+    "x.recent_searches": "Letzte Suchanfragen:",
     "x.clear_history": "Verlauf löschen",
     "x.share_intake_status": "Status der Fragebogen-Freigabe:",
-    "x.copy_shareable_link": "🔗 Freigabelink kopieren",
-    "x.select_all_medications_and_supplements_you": "💡 Wählen Sie alle Medikamente und Nahrungsergänzungsmittel aus, die Sie einnehmen. Die Ergebnisse heben automatisch hervor",
+    "x.copy_shareable_link": "Freigabelink kopieren",
+    "x.select_all_medications_and_supplements_you": "Wählen Sie alle Medikamente und Nahrungsergänzungsmittel aus, die Sie einnehmen. Die Ergebnisse heben automatisch hervor",
     "x.client_consultation_brief": "Beratungsbogen für den Kunden",
     "x.a_printable_and_shareable_summary_of": "Eine druck- und teilbare Übersicht der gewählten Medikamente und der Empfehlungen für die Sitzung",
-    "x.no_medications_selected_yet": "⚠️ Noch keine Medikamente ausgewählt.",
+    "x.no_medications_selected_yet": "Noch keine Medikamente ausgewählt.",
     "x.switch_to_the_interaction_checker": "Zum Wechselwirkungs-Check wechseln",
-    "x.generate_full_clinic_packet_print": "📄 Vollständige Klinikmappe erzeugen (Druck)",
-    "x.share_deep_link": "🔗 Direktlink teilen",
-    "x.export_data_json": "💾 Daten exportieren (JSON)",
-    "x.export_text_file": "📄 Textdatei exportieren",
-    "x.download_pdf_document": "📥 PDF-Dokument herunterladen",
-    "x.copy_summary": "📋 Übersicht kopieren",
-    "x.print_brief": "🖨️ Bogen drucken",
-    "x.expected_healing_journey_timeline": "🩺 Erwarteter Heilungsverlauf",
-    "x.tattoo_healing": "🎨 Heilung des Tattoos",
-    "x.piercing_healing": "💎 Heilung des Piercings",
+    "x.generate_full_clinic_packet_print": "Vollständige Klinikmappe erzeugen (Druck)",
+    "x.share_deep_link": "Direktlink teilen",
+    "x.export_data_json": "Daten exportieren (JSON)",
+    "x.export_text_file": "Textdatei exportieren",
+    "x.download_pdf_document": "PDF-Dokument herunterladen",
+    "x.copy_summary": "Übersicht kopieren",
+    "x.print_brief": "Bogen drucken",
+    "x.expected_healing_journey_timeline": "Erwarteter Heilungsverlauf",
+    "x.tattoo_healing": "Heilung des Tattoos",
+    "x.piercing_healing": "Heilung des Piercings",
     "x.interactive_timeline_mapping_physiological_milestones_and": "Interaktive Zeitleiste der körperlichen Etappen und der Medikamentenwirkungen",
-    "x.pre_procedure_medication_washout_reminders": "⏰ Absetzen von Medikamenten vor der Sitzung und Erinnerungen",
+    "x.pre_procedure_medication_washout_reminders": "Absetzen von Medikamenten vor der Sitzung und Erinnerungen",
     "x.calculate_precise_discontinuation_deadlines_for_medications": "Berechnen Sie genaue Absetzfristen für Medikamente (NSAR, Blutverdünner)",
-    "x.scheduled_appointment_date_time": "📅 Datum und Uhrzeit des geplanten Termins:",
-    "x.save_compute_washout": "💾 Speichern und Absetzfrist berechnen",
+    "x.scheduled_appointment_date_time": "Datum und Uhrzeit des geplanten Termins:",
+    "x.save_compute_washout": "Speichern und Absetzfrist berechnen",
     "x.setting_your_appointment_date_computes_live": "Mit dem Termindatum starten Countdowns, die genau anzeigen, wann Sie die Einnahme beenden sollten von",
-    "x.enable_browser_notification_alerts": "🔔 Browser-Benachrichtigungen aktivieren",
-    "x.download_google_calendar_ics_pre_filled": "📅 Google-Kalender-.ics herunterladen (Absetzfristen vorausgefüllt)",
-    "x.open_washout_in_google_calendar_web": "🌐 Absetzfristen in Google Kalender öffnen",
-    "x.export_standard_calendar_ics": "📅 Standardkalender exportieren (.ics)",
-    "x.artist_piercer_readiness_self_assessment": "🎯 Selbsteinschätzung der Bereitschaft für Tätowierer und Piercer",
+    "x.enable_browser_notification_alerts": "Browser-Benachrichtigungen aktivieren",
+    "x.download_google_calendar_ics_pre_filled": "Google-Kalender-.ics herunterladen (Absetzfristen vorausgefüllt)",
+    "x.open_washout_in_google_calendar_web": "Absetzfristen in Google Kalender öffnen",
+    "x.export_standard_calendar_ics": "Standardkalender exportieren (.ics)",
+    "x.artist_piercer_readiness_self_assessment": "Selbsteinschätzung der Bereitschaft für Tätowierer und Piercer",
     "x.answer_3_quick_questions_about_your": "Beantworten Sie 3 kurze Fragen zur Sitzung Ihres Kunden und zu den angegebenen Medikamenten, um",
     "x.1_what_procedure_is_being_performed": "1. Welche Leistung wird durchgeführt?",
     "x.tattoo_body_linework_shading_color": "Tattoo (Linienarbeit am Körper / Schattierung / Farbe)",
@@ -1948,9 +1948,9 @@ const TRANSLATIONS = {
     "x.history_of_vasovagal_syncope_fainting_low": "Vasovagale Synkope / Ohnmacht / Unterzuckerung in der Vorgeschichte",
     "x.extremely_sensitive_skin_eczema_easy_bruising": "Sehr empfindliche Haut / Ekzem / leichte Blutergüsse",
     "x.first_time_client_high_nervous_tension": "Erstkunde / starke Nervosität",
-    "x.studio_safety_guide_progress": "🛡️ Fortschritt im Studio-Sicherheitsleitfaden",
+    "x.studio_safety_guide_progress": "Fortschritt im Studio-Sicherheitsleitfaden",
     "x.0_6_sections_read_0": "0 / 6 Abschnitte gelesen (0 %)",
-    "x.studio_safety_clinical_reference": "🛡️ Studiosicherheit und klinische Referenz",
+    "x.studio_safety_clinical_reference": "Studiosicherheit und klinische Referenz",
     "x.essential_clinical_reference_for_clients_tattoo": "Grundlegende klinische Referenz für Kunden, Tätowierer und Piercer zum Umgang",
     "x.1_painkillers_pre_procedure_pain_management": "1. Schmerzmittel und Schmerzbehandlung vor der Sitzung",
     "x.clients_often_take_over_the_counter": "Kunden nehmen vor einer Sitzung häufig rezeptfreie Schmerzmittel gegen die Schmerzen. Es ist wichtig,",
@@ -1975,10 +1975,10 @@ const TRANSLATIONS = {
     "x.6_alcohol_cannabis_recreational_substance_intake": "6. Regeln zu Alkohol, Cannabis und Freizeitdrogen",
     "x.informed_consent_legal_safety": "Aufgeklärte Einwilligung und Rechtssicherheit:",
     "x.physiological_compromise": "Körperliche Beeinträchtigung:",
-    "x.studio_safety_lifestyle_quiz": "🎮 Quiz zu Studiosicherheit und Lebensstil",
+    "x.studio_safety_lifestyle_quiz": "Quiz zu Studiosicherheit und Lebensstil",
     "x.test_your_studio_safety_medication_iq": "Testen Sie Ihr Wissen zu Studiosicherheit und Medikamenten!",
     "x.answer_7_fun_educational_scenarios_about": "Beantworten Sie 7 unterhaltsame, lehrreiche Fälle zu Alkohol, Cannabis, Schmerzmitteln, Betäubungscremes",
-    "x.pre_session_prep_vasovagal_syncope_calculator": "💧 Vorbereitung vor der Sitzung und Rechner zur vasovagalen Synkope",
+    "x.pre_session_prep_vasovagal_syncope_calculator": "Vorbereitung vor der Sitzung und Rechner zur vasovagalen Synkope",
     "x.calculate_your_custom_fluid_target_blood": "Berechnen Sie Ihr persönliches Trinkziel, Ihren Blutzuckerplan und die Senkung des Synkopenrisikos",
     "x.body_weight": "Körpergewicht:",
     "x.lbs": "lb",
@@ -1996,13 +1996,13 @@ const TRANSLATIONS = {
     "x.optional": "(optional)",
     "x.blood_pressure_mmhg": "Blutdruck (mmHg)",
     "x.risk_medication_factors_check_all_that": "Risiko- und Medikamentenfaktoren (Zutreffendes ankreuzen):",
-    "x.taking_adhd_stimulants_adderall_vyvanse_ritalin": "⚡ Einnahme von ADHS-Stimulanzien (Adderall/Vyvanse/Ritalin)",
-    "x.taking_beta_blockers_blood_pressure_meds": "❤️ Einnahme von Betablockern / Blutdruckmitteln",
-    "x.taking_glp_1_weight_loss_meds": "💫 Einnahme von GLP-1-Abnehmmitteln (Ozempic/Mounjaro)",
-    "x.taking_anxiety_meds_or_history_of": "⬇️ Einnahme von Angstmitteln oder Ohnmacht in der Vorgeschichte",
-    "x.faq_guidelines_progress": "❓ Fortschritt bei den häufigen Fragen",
+    "x.taking_adhd_stimulants_adderall_vyvanse_ritalin": "Einnahme von ADHS-Stimulanzien (Adderall/Vyvanse/Ritalin)",
+    "x.taking_beta_blockers_blood_pressure_meds": "Einnahme von Betablockern / Blutdruckmitteln",
+    "x.taking_glp_1_weight_loss_meds": "Einnahme von GLP-1-Abnehmmitteln (Ozempic/Mounjaro)",
+    "x.taking_anxiety_meds_or_history_of": "Einnahme von Angstmitteln oder Ohnmacht in der Vorgeschichte",
+    "x.faq_guidelines_progress": "Fortschritt bei den häufigen Fragen",
     "x.0_8_faqs_read_0": "0 / 8 Fragen gelesen (0 %)",
-    "x.frequently_asked_questions": "❓ Häufige Fragen",
+    "x.frequently_asked_questions": "Häufige Fragen",
     "x.should_i_stop_taking_my_prescribed": "Soll ich mein verschriebenes Medikament vor einem Tattoo oder Piercing absetzen?",
     "x.never_stop_or_adjust_prescribed_medication": "Setzen Sie ein verschriebenes Medikament NIEMALS ab und ändern Sie es nicht",
     "x.why_is_accutane_isotretinoin_a_complete": "Warum ist Accutane (Isotretinoin) eine absolute Gegenanzeige?",
@@ -2021,7 +2021,7 @@ const TRANSLATIONS = {
     "x.it_is_strongly_recommended_to_avoid": "Es wird dringend empfohlen, NSAR (Ibuprofen, Naproxen) und Aspirin 24 bis 48 Stunden vorher zu meiden",
     "x.can_i_go_to_the_gym": "Darf ich nach einem Tattoo oder Piercing ins Fitnessstudio, schwimmen oder Sport treiben?",
     "x.avoid_heavy_exercise_for_24_48": "Meiden Sie 24 bis 48 Stunden starke Anstrengung, um Schwitzen, Dehnen und Reibung an der frischen Stelle zu vermeiden",
-    "x.consult_your_physician_message_draft": "✉️ Ärztin oder Arzt fragen - Nachrichtenentwurf",
+    "x.consult_your_physician_message_draft": "Ärztin oder Arzt fragen - Nachrichtenentwurf",
     "x.text": "&times;",
     "x.use_this_template_to_draft_an": "Nutzen Sie diese Vorlage für eine E-Mail oder Nachricht an Ihre Ärztin oder Ihren Arzt zu einer sicheren Anpassung der Medikation",
     "x.doctor_or_clinic_name": "Name der Praxis oder Klinik:",
@@ -2031,15 +2031,15 @@ const TRANSLATIONS = {
     "x.selected_disclosed_medication_s": "Ausgewählte, angegebene Medikamente:",
     "x.no_medications_currently_selected_in_checker": "Derzeit ist im Check kein Medikament ausgewählt.",
     "x.generated_message_draft_editable_customize_your": "Erzeugter Nachrichtenentwurf (bearbeitbar - passen Sie die Nachricht unten an):",
-    "x.copy_draft_message": "📋 Entwurf kopieren",
-    "x.open_email_app": "✉️ E-Mail-App öffnen",
-    "x.print_physician_note": "🖨️ Notiz für die Praxis drucken",
+    "x.copy_draft_message": "Entwurf kopieren",
+    "x.open_email_app": "E-Mail-App öffnen",
+    "x.print_physician_note": "Notiz für die Praxis drucken",
     "x.close": "Schließen",
-    "x.studio_emergency_first_aid_protocols": "🚨 Erste-Hilfe-Protokolle im Studio",
-    "x.fainting_syncope": "💫 Ohnmacht / Synkope",
-    "x.allergic_reaction": "🐝 Allergische Reaktion",
-    "x.excessive_bleeding": "🩸 Starke Blutung",
-    "x.panic_breathing": "🫁 Panik und Atmung",
+    "x.studio_emergency_first_aid_protocols": "Erste-Hilfe-Protokolle im Studio",
+    "x.fainting_syncope": "Ohnmacht / Synkope",
+    "x.allergic_reaction": "Allergische Reaktion",
+    "x.excessive_bleeding": "Starke Blutung",
+    "x.panic_breathing": "Panik und Atmung",
     "x.vasovagal_syncope_fainting_protocol": "Protokoll bei vasovagaler Synkope und Ohnmacht",
     "x.common_response_to_sudden_pain_anxiety": "Häufige Reaktion auf plötzlichen Schmerz, Angst oder Unterzuckerung mit vorübergehender Minderdurchblutung des Gehirns",
     "x.stop_procedure_immediately": "Leistung sofort abbrechen:",
@@ -2065,7 +2065,7 @@ const TRANSLATIONS = {
     "x.4_4_4_box_breathing": "4-4-4-Boxatmung:",
     "x.physical_grounding": "Körperliche Erdung:",
     "x.close_emergency_guide": "Notfallleitfaden schließen",
-    "x.immediate_action": "🚨 Sofortmaßnahme",
+    "x.immediate_action": "Sofortmaßnahme",
     "x.search_medication_or_brand_e_g": "Medikament oder Marke suchen (z. B. Advil, Accutane, Xanax, EMLA, Ozempic)...",
     "x.e_g_72_bpm": "z. B. 72 (bpm)",
     "x.e_g_dr_smith_city_health": "z. B. Dr. Schmidt / Stadtgesundheitszentrum",
@@ -2077,7 +2077,7 @@ const TRANSLATIONS = {
     waitLabel: 'Warte- / Auswaschempfehlung:',
     medUntranslated: 'Einige Angaben zu den Medikamenten oben werden auf Englisch angezeigt - die Übersetzung in diese Sprache ist noch in Arbeit.',
     medSourcesLabel: 'Veröffentlichte Quellen',
-    tabSupplements: '🌿 Nahrungsergänzung',
+    tabSupplements: 'Nahrungsergänzung',
     suppHeading: 'Interaktions-Check für Nahrungsergänzung und Medikamente',
     suppIntro: 'Die meisten Menschen halten Fischöl, Knoblauchkapseln oder Ginkgo nicht für „Medikamente" und erwähnen sie deshalb nie. Zusammen mit einem Blutverdünner oder einem Schmerzmittel erhöhen manche Präparate Blutung und Nässen während der Sitzung. Tragen Sie unten ein, was Sie einnehmen, um zu sehen, was die veröffentlichte Literatur sagt.',
     suppSearchPlaceholder: 'Präparat suchen (z. B. Fischöl, Vitamin E, Kurkuma, Ginseng)...',
@@ -2092,10 +2092,10 @@ const TRANSLATIONS = {
     suppHuman: 'Humanstudien',
     suppCredit: 'Interaktionsdaten von SUPP.AI (Allen Institute for AI). Es werden nur Human- und klinische Studien gezeigt; zurückgezogene Arbeiten sind ausgeschlossen.',
     geoLangLabel: 'Suchen auf:',
-    geoFindStudio: '🎨 Studio in der Nähe finden',
-    geoFindDoctor: '🩺 Arzt in der Nähe finden',
-    geoFindPharmacy: '💊 Nächste Apotheke',
-    geoFindHospital: '🏥 Nächstes Krankenhaus',
+    geoFindStudio: 'Studio in der Nähe finden',
+    geoFindDoctor: 'Arzt in der Nähe finden',
+    geoFindPharmacy: 'Nächste Apotheke',
+    geoFindHospital: 'Nächstes Krankenhaus',
     geoNote: 'Diese Links öffnen Google Maps und suchen in der Landessprache Ihres Aufenthaltsorts, was im Ausland weit mehr findet als eine englische Suche. Ihr Standort erreicht uns nie: an Google geht nur ein Suchwort. Ändern Sie oben die Sprache, falls die Erkennung falsch liegt.',
     emergHeadSub: 'Sofortige Schritt-für-Schritt-Anleitungen für das Studiopersonal bei Komplikationen während einer Sitzung.',
     emergCallLabel: 'Rufen Sie zuerst den Rettungsdienst:',
@@ -2103,16 +2103,16 @@ const TRANSLATIONS = {
     emergDisclaimer: 'Dieser Leitfaden ist eine Gedächtnisstütze für Menschen, die bereits in Erster Hilfe ausgebildet sind. Er ist keine Erste-Hilfe-Ausbildung und ersetzt sie nicht. Rufen Sie zuerst den Rettungsdienst, tun Sie nichts, wofür Sie an Ihrem Arbeitsort nicht ausgebildet und befugt sind, und bleiben Sie bei der Person, bis Hilfe eintrifft.',
     disclaimerTitle: 'Wichtiger Hinweis:',
     disclaimerBody: 'Dieses Tool ist nur eine Bildungsreferenz und stellt keine medizinische Beratung dar. Setzen Sie verschriebene Medikamente niemals ohne Rücksprache mit Ihrem verschreibenden Arzt ab und ändern Sie sie nicht. Informieren Sie Ihren Tätowierer und Piercer immer über alle Medikamente, Gesundheitszustände oder Nahrungsergänzungsmittel, die Sie vor dem Eingriff einnehmen.',
-    langLabel: '🌐 Sprache:',
-    headerBadge: '💊 Medikamente & Sicherheitsreferenz',
+    langLabel: 'Sprache:',
+    headerBadge: 'Medikamente & Sicherheitsreferenz',
     headerTitle: 'Medikamenten-Interaktions-Checker',
     headerSubtitle: 'Prüfen Sie, wie Medikamente das Blutungsrisiko und die Heilung von Tattoos & Piercings beeinflussen.',
-    draftDoctorBtn: '✉️ Nachricht an Arzt entwerfen',
-    tabChecker: '🔍 Checker',
-    tabBrief: '📄 Künstler-Briefing',
-    tabSafety: '🛡️ Studio-Sicherheit',
-    tabFaq: '❓ FAQ & Tipps',
-    tabReminders: '⏰ Erinnerungen & Karenzzeit',
+    draftDoctorBtn: 'Nachricht an Arzt entwerfen',
+    tabChecker: 'Checker',
+    tabBrief: 'Künstler-Briefing',
+    tabSafety: 'Studio-Sicherheit',
+    tabFaq: 'FAQ & Tipps',
+    tabReminders: 'Erinnerungen & Karenzzeit',
     searchPlaceholder: 'Medikament suchen (z.B. Ibuprofen, Accutane, Xanax, EMLA)...',
     filterAll: 'Alle',
     filterPain: 'Schmerzmittel & NSAID',
@@ -2128,23 +2128,23 @@ const TRANSLATIONS = {
     filterSupplement: 'Nahrungsergänzung',
     filterAntibiotic: 'Antibiotika & Antivirale',
     filterSubstance: 'Substanzen & Lebensstil',
-    infoNote: '💡 Wählen Sie Ihre Medikamente aus, um Risiken und Vorsichtsmaßnahmen zu sehen.',
+    infoNote: 'Wählen Sie Ihre Medikamente aus, um Risiken und Vorsichtsmaßnahmen zu sehen.',
     clearAll: 'Alles löschen',
-    draftDoctorNoteBtn: '✉️ Arzt-Nachricht',
-    viewBriefBtn: '📄 Briefing anzeigen',
-    backToTopBtn: '⬆️ Nach Oben',
-    backToMedListBtn: '⬆️ Zurück zur Liste',
+    draftDoctorNoteBtn: 'Arzt-Nachricht',
+    viewBriefBtn: 'Briefing anzeigen',
+    backToTopBtn: 'Nach Oben',
+    backToMedListBtn: 'Zurück zur Liste',
     "x.share_intake_deep_link_desc": "Erstellen Sie einen Deep Link mit Ihren vorausgewählten Medikamenten zur Durchsicht durch Ihren Künstler oder vor Ihrer Ankunft.",
     "x.and_select_your_medications_to_generate_brief": "und wählen Sie Ihre Medikamente aus, um Ihr individuelles Beratungsdokument zu erstellen.",
-    "x.copy_artist_checklist": "📋 Checkliste für den Künstler kopieren",
+    "x.copy_artist_checklist": "Checkliste für den Künstler kopieren",
     "x.tailored_for_artist_intake": "Zugeschnitten auf die Aufnahme durch den Künstler",
-    "x.studio_precautions_checklist": "📋 Vorsichtsmaßnahmen im Studio & Checkliste",
+    "x.studio_precautions_checklist": "Vorsichtsmaßnahmen im Studio & Checkliste",
     "x.question_counter": "Frage {n} von {total}",
-    "x.next_question": "Nächste Frage ➔",
+    "x.next_question": "Nächste Frage",
     "x.quiz_score": "Punktzahl:",
-    "x.target_hydration_plan": "💧 Ziel-Hydrationsplan",
-    "x.blood_sugar_fuel_schedule": "🍌 Blutzucker- & Energieplan",
-    "x.vasovagal_syncope_vitals_analysis": "💫 Vasovagale Synkope & Vitalwertanalyse",
+    "x.target_hydration_plan": "Ziel-Hydrationsplan",
+    "x.blood_sugar_fuel_schedule": "Blutzucker- & Energieplan",
+    "x.vasovagal_syncope_vitals_analysis": "Vasovagale Synkope & Vitalwertanalyse",
     "x.24_hours_before": "24 Stunden vorher:",
     "x.2_hours_before": "2 Stunden vorher:",
     "x.pre_appointment_meal_label": "Mahlzeit vor dem Termin (1.5–2h vorher):",
@@ -2160,9 +2160,9 @@ const TRANSLATIONS = {
     "x.alert_select_medication_first": "Bitte wählen Sie zuerst mindestens ein Medikament aus.",
     "x.alert_message_copied": "Nachricht in die Zwischenablage kopiert!",
     "x.alert_copy_failed": "Kopieren fehlgeschlagen. Bitte markieren Sie den Text und kopieren Sie ihn manuell.",
-    "x.cp_copied": "✅ Kopiert!",
-    "x.cp_copied_clipboard": "✅ In die Zwischenablage kopiert!",
-    "x.cp_copy_draft": "📋 Nachrichtenentwurf kopieren",
+    "x.cp_copied": "Kopiert!",
+    "x.cp_copied_clipboard": "In die Zwischenablage kopiert!",
+    "x.cp_copy_draft": "Nachrichtenentwurf kopieren",
     "x.cp_checklist_title": "SICHERHEITS-CHECKLISTE FÜR DEN KÜNSTLER:",
     "x.cp_brief_title": "=== MEDIKAMENTEN-BERATUNGSZUSAMMENFASSUNG FÜR TATTOO UND PIERCING ===",
     "x.cp_date": "Datum: {date}",
@@ -2173,7 +2173,7 @@ const TRANSLATIONS = {
     "x.cp_piercing": "Piercing: {text}",
     "x.cp_action": "Maßnahme: {text}",
     "x.cp_generated": "Erstellt über die Medikamentenreferenz von Poli International.",
-    "x.cp_link_copied": "📲 Teilbarer Aufnahme-Link in die Zwischenablage kopiert!",
+    "x.cp_link_copied": "Teilbarer Aufnahme-Link in die Zwischenablage kopiert!",
     "x.cp_default_doctor": "Dr. [Name des Arztes]",
     "x.cp_default_patient": "[Ihr Name]",
     "x.cp_default_proc": "[Tattoo / Piercing-Eingriff]",
@@ -2208,12 +2208,12 @@ const TRANSLATIONS = {
     "x.low_concern": "Laag risico",
     "x.low_syncope_risk": "Laag syncoperisico",
     "x.moderate_syncope_risk": "Matig syncoperisico",
-    "x.elevated_syncope_risk": "⚠️ Verhoogd syncoperisico",
+    "x.elevated_syncope_risk": "Verhoogd syncoperisico",
 
     // --- keyed from the markup 2026-09-02, see i18n-new-keys.en.json ---
-    "x.share_intake_deep_link": "📲 Directe link naar de vragenlijst delen",
-    "x.quick_print_summary": "🖨️ Samenvatting om af te drukken",
-    "x.trending_inquiries": "🔥 Veelgezochte onderwerpen:",
+    "x.share_intake_deep_link": "Directe link naar de vragenlijst delen",
+    "x.quick_print_summary": "Samenvatting om af te drukken",
+    "x.trending_inquiries": "Veelgezochte onderwerpen:",
     "x.advil_ibuprofen": "Advil / Ibuprofen",
     "x.accutane_retinoids": "Accutane / Retinoïden",
     "x.tktx_numbing": "TKTX / Verdovende crème",
@@ -2222,36 +2222,36 @@ const TRANSLATIONS = {
     "x.cannabis_thc": "Cannabis / THC",
     "x.alcohol_hangover": "Alcohol / Kater",
     "x.aspirin_blood_thinners": "Aspirine / Bloedverdunners",
-    "x.recent_searches": "🕒 Recente zoekopdrachten:",
+    "x.recent_searches": "Recente zoekopdrachten:",
     "x.clear_history": "Geschiedenis wissen",
     "x.share_intake_status": "Status van de gedeelde vragenlijst:",
-    "x.copy_shareable_link": "🔗 Deelbare link kopiëren",
-    "x.select_all_medications_and_supplements_you": "💡 Selecteer alle medicijnen en supplementen die u gebruikt. De resultaten markeren automatisch",
+    "x.copy_shareable_link": "Deelbare link kopiëren",
+    "x.select_all_medications_and_supplements_you": "Selecteer alle medicijnen en supplementen die u gebruikt. De resultaten markeren automatisch",
     "x.client_consultation_brief": "Consultformulier voor de klant",
     "x.a_printable_and_shareable_summary_of": "Een afdrukbare en deelbare samenvatting van de gekozen medicijnen en de aanbevelingen voor de sessie",
-    "x.no_medications_selected_yet": "⚠️ Nog geen medicijnen geselecteerd.",
+    "x.no_medications_selected_yet": "Nog geen medicijnen geselecteerd.",
     "x.switch_to_the_interaction_checker": "Ga naar de interactiechecker",
-    "x.generate_full_clinic_packet_print": "📄 Volledig klinisch dossier maken (afdrukken)",
-    "x.share_deep_link": "🔗 Directe link delen",
-    "x.export_data_json": "💾 Gegevens exporteren (JSON)",
-    "x.export_text_file": "📄 Tekstbestand exporteren",
-    "x.download_pdf_document": "📥 PDF-document downloaden",
-    "x.copy_summary": "📋 Samenvatting kopiëren",
-    "x.print_brief": "🖨️ Formulier afdrukken",
-    "x.expected_healing_journey_timeline": "🩺 Verwacht genezingsverloop",
-    "x.tattoo_healing": "🎨 Genezing van de tatoeage",
-    "x.piercing_healing": "💎 Genezing van de piercing",
+    "x.generate_full_clinic_packet_print": "Volledig klinisch dossier maken (afdrukken)",
+    "x.share_deep_link": "Directe link delen",
+    "x.export_data_json": "Gegevens exporteren (JSON)",
+    "x.export_text_file": "Tekstbestand exporteren",
+    "x.download_pdf_document": "PDF-document downloaden",
+    "x.copy_summary": "Samenvatting kopiëren",
+    "x.print_brief": "Formulier afdrukken",
+    "x.expected_healing_journey_timeline": "Verwacht genezingsverloop",
+    "x.tattoo_healing": "Genezing van de tatoeage",
+    "x.piercing_healing": "Genezing van de piercing",
     "x.interactive_timeline_mapping_physiological_milestones_and": "Interactieve tijdlijn van de lichamelijke fasen en de invloed van medicijnen",
-    "x.pre_procedure_medication_washout_reminders": "⏰ Medicijnen stoppen vóór de sessie en herinneringen",
+    "x.pre_procedure_medication_washout_reminders": "Medicijnen stoppen vóór de sessie en herinneringen",
     "x.calculate_precise_discontinuation_deadlines_for_medications": "Bereken de precieze stopmomenten voor medicijnen (NSAID's, bloedverdunners)",
-    "x.scheduled_appointment_date_time": "📅 Datum en tijd van de geplande afspraak:",
-    "x.save_compute_washout": "💾 Opslaan en stopmoment berekenen",
+    "x.scheduled_appointment_date_time": "Datum en tijd van de geplande afspraak:",
+    "x.save_compute_washout": "Opslaan en stopmoment berekenen",
     "x.setting_your_appointment_date_computes_live": "Door de afspraakdatum in te vullen starten aftellers die precies laten zien wanneer u moet stoppen met",
-    "x.enable_browser_notification_alerts": "🔔 Browsermeldingen inschakelen",
-    "x.download_google_calendar_ics_pre_filled": "📅 Google Agenda-.ics downloaden (stopmomenten al ingevuld)",
-    "x.open_washout_in_google_calendar_web": "🌐 Stopmomenten openen in Google Agenda",
-    "x.export_standard_calendar_ics": "📅 Standaardagenda exporteren (.ics)",
-    "x.artist_piercer_readiness_self_assessment": "🎯 Zelfbeoordeling van gereedheid voor tatoeëerder en piercer",
+    "x.enable_browser_notification_alerts": "Browsermeldingen inschakelen",
+    "x.download_google_calendar_ics_pre_filled": "Google Agenda-.ics downloaden (stopmomenten al ingevuld)",
+    "x.open_washout_in_google_calendar_web": "Stopmomenten openen in Google Agenda",
+    "x.export_standard_calendar_ics": "Standaardagenda exporteren (.ics)",
+    "x.artist_piercer_readiness_self_assessment": "Zelfbeoordeling van gereedheid voor tatoeëerder en piercer",
     "x.answer_3_quick_questions_about_your": "Beantwoord 3 korte vragen over de sessie van uw klant en de opgegeven medicijnen voor",
     "x.1_what_procedure_is_being_performed": "1. Welke behandeling wordt uitgevoerd?",
     "x.tattoo_body_linework_shading_color": "Tatoeage (lijnwerk op het lichaam / schaduw / kleur)",
@@ -2269,9 +2269,9 @@ const TRANSLATIONS = {
     "x.history_of_vasovagal_syncope_fainting_low": "Vasovagale syncope / flauwvallen / lage bloedsuiker in de voorgeschiedenis",
     "x.extremely_sensitive_skin_eczema_easy_bruising": "Zeer gevoelige huid / eczeem / snel blauwe plekken",
     "x.first_time_client_high_nervous_tension": "Eerste keer / grote nervositeit",
-    "x.studio_safety_guide_progress": "🛡️ Voortgang van de veiligheidsgids",
+    "x.studio_safety_guide_progress": "Voortgang van de veiligheidsgids",
     "x.0_6_sections_read_0": "0 / 6 hoofdstukken gelezen (0 %)",
-    "x.studio_safety_clinical_reference": "🛡️ Studioveiligheid en klinische naslag",
+    "x.studio_safety_clinical_reference": "Studioveiligheid en klinische naslag",
     "x.essential_clinical_reference_for_clients_tattoo": "Onmisbare klinische naslag voor klanten, tatoeëerders en piercers over de omgang",
     "x.1_painkillers_pre_procedure_pain_management": "1. Pijnstillers en pijnbestrijding vóór de sessie",
     "x.clients_often_take_over_the_counter": "Klanten nemen vaak vrij verkrijgbare pijnstillers vóór een sessie. Het is van groot belang",
@@ -2296,10 +2296,10 @@ const TRANSLATIONS = {
     "x.6_alcohol_cannabis_recreational_substance_intake": "6. Beleid rond alcohol, cannabis en recreatieve middelen",
     "x.informed_consent_legal_safety": "Geïnformeerde toestemming en juridische veiligheid:",
     "x.physiological_compromise": "Lichamelijke belasting:",
-    "x.studio_safety_lifestyle_quiz": "🎮 Quiz over studioveiligheid en leefstijl",
+    "x.studio_safety_lifestyle_quiz": "Quiz over studioveiligheid en leefstijl",
     "x.test_your_studio_safety_medication_iq": "Test uw kennis over studioveiligheid en medicijnen!",
     "x.answer_7_fun_educational_scenarios_about": "Beantwoord 7 leerzame en leuke situaties over alcohol, cannabis, pijnstillers, verdovende crèmes",
-    "x.pre_session_prep_vasovagal_syncope_calculator": "💧 Voorbereiding vóór de sessie en rekenhulp voor vasovagale syncope",
+    "x.pre_session_prep_vasovagal_syncope_calculator": "Voorbereiding vóór de sessie en rekenhulp voor vasovagale syncope",
     "x.calculate_your_custom_fluid_target_blood": "Bereken uw persoonlijke vochtdoel, uw plan voor de bloedsuiker en de verlaging van het syncoperisico",
     "x.body_weight": "Lichaamsgewicht:",
     "x.lbs": "lb",
@@ -2317,13 +2317,13 @@ const TRANSLATIONS = {
     "x.optional": "(optioneel)",
     "x.blood_pressure_mmhg": "Bloeddruk (mmHg)",
     "x.risk_medication_factors_check_all_that": "Risico- en medicijnfactoren (kruis alles aan wat van toepassing is):",
-    "x.taking_adhd_stimulants_adderall_vyvanse_ritalin": "⚡ Gebruikt ADHD-stimulantia (Adderall/Vyvanse/Ritalin)",
-    "x.taking_beta_blockers_blood_pressure_meds": "❤️ Gebruikt bètablokkers / bloeddrukmedicatie",
-    "x.taking_glp_1_weight_loss_meds": "💫 Gebruikt GLP-1-afslankmedicatie (Ozempic/Mounjaro)",
-    "x.taking_anxiety_meds_or_history_of": "⬇️ Gebruikt angstmedicatie of is eerder flauwgevallen",
-    "x.faq_guidelines_progress": "❓ Voortgang van de veelgestelde vragen",
+    "x.taking_adhd_stimulants_adderall_vyvanse_ritalin": "Gebruikt ADHD-stimulantia (Adderall/Vyvanse/Ritalin)",
+    "x.taking_beta_blockers_blood_pressure_meds": "Gebruikt bètablokkers / bloeddrukmedicatie",
+    "x.taking_glp_1_weight_loss_meds": "Gebruikt GLP-1-afslankmedicatie (Ozempic/Mounjaro)",
+    "x.taking_anxiety_meds_or_history_of": "Gebruikt angstmedicatie of is eerder flauwgevallen",
+    "x.faq_guidelines_progress": "Voortgang van de veelgestelde vragen",
     "x.0_8_faqs_read_0": "0 / 8 vragen gelezen (0 %)",
-    "x.frequently_asked_questions": "❓ Veelgestelde vragen",
+    "x.frequently_asked_questions": "Veelgestelde vragen",
     "x.should_i_stop_taking_my_prescribed": "Moet ik mijn voorgeschreven medicijnen stoppen vóór een tatoeage of piercing?",
     "x.never_stop_or_adjust_prescribed_medication": "Stop of wijzig voorgeschreven medicatie NOOIT",
     "x.why_is_accutane_isotretinoin_a_complete": "Waarom is Accutane (isotretinoïne) een absolute contra-indicatie?",
@@ -2342,7 +2342,7 @@ const TRANSLATIONS = {
     "x.it_is_strongly_recommended_to_avoid": "Het wordt sterk aangeraden NSAID's (ibuprofen, naproxen) en aspirine 24 tot 48 uur vooraf te vermijden",
     "x.can_i_go_to_the_gym": "Mag ik sporten, zwemmen of naar de sportschool na een tatoeage of piercing?",
     "x.avoid_heavy_exercise_for_24_48": "Vermijd zware inspanning gedurende 24 tot 48 uur om overmatig zweten, rekken of wrijving op de verse plek te voorkomen",
-    "x.consult_your_physician_message_draft": "✉️ Uw arts raadplegen - conceptbericht",
+    "x.consult_your_physician_message_draft": "Uw arts raadplegen - conceptbericht",
     "x.text": "&times;",
     "x.use_this_template_to_draft_an": "Gebruik dit sjabloon voor een e-mail of bericht aan uw arts over een veilige aanpassing van uw medicatie",
     "x.doctor_or_clinic_name": "Naam van de arts of praktijk:",
@@ -2352,15 +2352,15 @@ const TRANSLATIONS = {
     "x.selected_disclosed_medication_s": "Geselecteerde, opgegeven medicijnen:",
     "x.no_medications_currently_selected_in_checker": "Er is nu geen medicijn geselecteerd in de checker.",
     "x.generated_message_draft_editable_customize_your": "Gegenereerd conceptbericht (aanpasbaar - pas het bericht hieronder aan):",
-    "x.copy_draft_message": "📋 Concept kopiëren",
-    "x.open_email_app": "✉️ E-mailprogramma openen",
-    "x.print_physician_note": "🖨️ Notitie voor de arts afdrukken",
+    "x.copy_draft_message": "Concept kopiëren",
+    "x.open_email_app": "E-mailprogramma openen",
+    "x.print_physician_note": "Notitie voor de arts afdrukken",
     "x.close": "Sluiten",
-    "x.studio_emergency_first_aid_protocols": "🚨 EHBO-protocollen voor de studio",
-    "x.fainting_syncope": "💫 Flauwvallen / syncope",
-    "x.allergic_reaction": "🐝 Allergische reactie",
-    "x.excessive_bleeding": "🩸 Overmatige bloeding",
-    "x.panic_breathing": "🫁 Paniek en ademhaling",
+    "x.studio_emergency_first_aid_protocols": "EHBO-protocollen voor de studio",
+    "x.fainting_syncope": "Flauwvallen / syncope",
+    "x.allergic_reaction": "Allergische reactie",
+    "x.excessive_bleeding": "Overmatige bloeding",
+    "x.panic_breathing": "Paniek en ademhaling",
     "x.vasovagal_syncope_fainting_protocol": "Protocol bij vasovagale syncope en flauwvallen",
     "x.common_response_to_sudden_pain_anxiety": "Veelvoorkomende reactie op plotselinge pijn, angst of lage bloedsuiker, met tijdelijk verminderde doorbloeding van de hersenen",
     "x.stop_procedure_immediately": "Stop de behandeling onmiddellijk:",
@@ -2386,7 +2386,7 @@ const TRANSLATIONS = {
     "x.4_4_4_box_breathing": "4-4-4-boxademhaling:",
     "x.physical_grounding": "Lichamelijke aarding:",
     "x.close_emergency_guide": "Noodgids sluiten",
-    "x.immediate_action": "🚨 Onmiddellijk handelen",
+    "x.immediate_action": "Onmiddellijk handelen",
     "x.search_medication_or_brand_e_g": "Zoek een medicijn of merk (bijv. Advil, Accutane, Xanax, EMLA, Ozempic)...",
     "x.e_g_72_bpm": "bijv. 72 (bpm)",
     "x.e_g_dr_smith_city_health": "bijv. dr. De Vries / Gezondheidscentrum",
@@ -2398,7 +2398,7 @@ const TRANSLATIONS = {
     waitLabel: 'Wacht- / uitwasadvies:',
     medUntranslated: 'Sommige medicatiegegevens hierboven worden in het Engels getoond - de vertaling naar deze taal is nog bezig.',
     medSourcesLabel: 'Gepubliceerde bronnen',
-    tabSupplements: '🌿 Supplementen',
+    tabSupplements: 'Supplementen',
     suppHeading: 'Interactiecheck voor supplementen en medicijnen',
     suppIntro: 'De meeste mensen zien visolie, knoflookcapsules of ginkgo niet als "medicijn" en noemen ze daarom nooit. Samen met een bloedverdunner of een pijnstiller verhogen sommige supplementen bloeding en vochtafscheiding tijdens de sessie. Voeg hieronder toe wat u gebruikt om te zien wat de gepubliceerde literatuur zegt.',
     suppSearchPlaceholder: 'Zoek een supplement (bijv. visolie, vitamine E, kurkuma, ginseng)...',
@@ -2413,10 +2413,10 @@ const TRANSLATIONS = {
     suppHuman: 'Humane studies',
     suppCredit: 'Interactiegegevens van SUPP.AI (Allen Institute for AI). Alleen humane en klinische studies worden getoond; teruggetrokken artikelen zijn uitgesloten.',
     geoLangLabel: 'Zoeken in:',
-    geoFindStudio: '🎨 Studio in de buurt zoeken',
-    geoFindDoctor: '🩺 Arts in de buurt zoeken',
-    geoFindPharmacy: '💊 Dichtstbijzijnde apotheek',
-    geoFindHospital: '🏥 Dichtstbijzijnd ziekenhuis',
+    geoFindStudio: 'Studio in de buurt zoeken',
+    geoFindDoctor: 'Arts in de buurt zoeken',
+    geoFindPharmacy: 'Dichtstbijzijnde apotheek',
+    geoFindHospital: 'Dichtstbijzijnd ziekenhuis',
     geoNote: 'Deze links openen Google Maps en zoeken in de taal van het land waar je bent. Dat levert in het buitenland veel meer op dan een Engelse zoekopdracht. Je locatie bereikt ons nooit: naar Google gaat alleen een zoekwoord. Wijzig hierboven de taal als de detectie ernaast zit.',
     emergHeadSub: 'Directe stap-voor-stap handelingsgidsen voor studiomedewerkers bij complicaties tijdens een sessie.',
     emergCallLabel: 'Bel eerst de hulpdiensten:',
@@ -2424,16 +2424,16 @@ const TRANSLATIONS = {
     emergDisclaimer: 'Deze gids is een geheugensteun voor mensen die al EHBO-geschoold zijn. Het is geen EHBO-opleiding en vervangt die niet. Bel eerst de hulpdiensten, doe niets waarvoor je op je werkplek niet geschoold en bevoegd bent, en blijf bij de persoon tot er hulp is.',
     disclaimerTitle: 'Belangrijke disclaimer:',
     disclaimerBody: 'Deze tool is alleen een educatieve referentie en vormt geen medisch advies. Stop of wijzig voorgeschreven medicatie nooit zonder overleg met uw voorschrijvend arts. Informeer uw tatoeëerder en piercer altijd over alle medicijnen, gezondheidsproblemen of supplementen die u gebruikt vóór de behandeling.',
-    langLabel: '🌐 Taal:',
-    headerBadge: '💊 Medicatie & Veiligheidsreferentie',
+    langLabel: 'Taal:',
+    headerBadge: 'Medicatie & Veiligheidsreferentie',
     headerTitle: 'Medicatie Interactie Checker',
     headerSubtitle: 'Controleer hoe medicijnen de bloedingsrisico\'s en genezing van tatoeages en piercings beïnvloeden.',
-    draftDoctorBtn: '✉️ Bericht voor arts opstellen',
-    tabChecker: '🔍 Checker',
-    tabBrief: '📄 Artiest Briefing',
-    tabSafety: '🛡️ Studio Veiligheid',
-    tabFaq: '❓ Veelgestelde Vragen',
-    tabReminders: '⏰ Herinneringen & Stopperiode',
+    draftDoctorBtn: 'Bericht voor arts opstellen',
+    tabChecker: 'Checker',
+    tabBrief: 'Artiest Briefing',
+    tabSafety: 'Studio Veiligheid',
+    tabFaq: 'Veelgestelde Vragen',
+    tabReminders: 'Herinneringen & Stopperiode',
     searchPlaceholder: 'Zoek medicijn (bijv. Ibuprofen, Accutane, Xanax, EMLA)...',
     filterAll: 'Alles',
     filterPain: 'Pijnstillers & NSAID\'s',
@@ -2449,23 +2449,23 @@ const TRANSLATIONS = {
     filterSupplement: 'Supplementen',
     filterAntibiotic: 'Antibiotica & Antiviraal',
     filterSubstance: 'Middelen & Levensstijl',
-    infoNote: '💡 Selecteer uw medicijnen om risico\'s en adviezen te bekijken.',
+    infoNote: 'Selecteer uw medicijnen om risico\'s en adviezen te bekijken.',
     clearAll: 'Alles wissen',
-    draftDoctorNoteBtn: '✉️ Bericht voor arts',
-    viewBriefBtn: '📄 Bekijk Briefing',
-    backToTopBtn: '⬆️ Naar Boven',
-    backToMedListBtn: '⬆️ Terug naar Lijst',
+    draftDoctorNoteBtn: 'Bericht voor arts',
+    viewBriefBtn: 'Bekijk Briefing',
+    backToTopBtn: 'Naar Boven',
+    backToMedListBtn: 'Terug naar Lijst',
     "x.share_intake_deep_link_desc": "Genereer een deeplink met je vooraf geselecteerde medicijnen voor de beoordeling door je artiest of vóór aankomst.",
     "x.and_select_your_medications_to_generate_brief": "en selecteer je medicijnen om je persoonlijke consultatieoverzicht te maken.",
-    "x.copy_artist_checklist": "📋 Checklist voor de artiest kopiëren",
+    "x.copy_artist_checklist": "Checklist voor de artiest kopiëren",
     "x.tailored_for_artist_intake": "Afgestemd op de intake door de artiest",
-    "x.studio_precautions_checklist": "📋 Voorzorgsmaatregelen studio & checklist",
+    "x.studio_precautions_checklist": "Voorzorgsmaatregelen studio & checklist",
     "x.question_counter": "Vraag {n} van {total}",
-    "x.next_question": "Volgende vraag ➔",
+    "x.next_question": "Volgende vraag",
     "x.quiz_score": "Score:",
-    "x.target_hydration_plan": "💧 Doel-hydratatieplan",
-    "x.blood_sugar_fuel_schedule": "🍌 Bloedsuiker- & voedingsschema",
-    "x.vasovagal_syncope_vitals_analysis": "💫 Vasovagale syncope & analyse van vitale functies",
+    "x.target_hydration_plan": "Doel-hydratatieplan",
+    "x.blood_sugar_fuel_schedule": "Bloedsuiker- & voedingsschema",
+    "x.vasovagal_syncope_vitals_analysis": "Vasovagale syncope & analyse van vitale functies",
     "x.24_hours_before": "24 uur van tevoren:",
     "x.2_hours_before": "2 uur van tevoren:",
     "x.pre_appointment_meal_label": "Maaltijd voor de afspraak (1.5–2h vooraf):",
@@ -2481,9 +2481,9 @@ const TRANSLATIONS = {
     "x.alert_select_medication_first": "Selecteer eerst minstens één medicijn.",
     "x.alert_message_copied": "Bericht gekopieerd naar het klembord!",
     "x.alert_copy_failed": "Kopiëren mislukt. Selecteer de tekst en kopieer deze handmatig.",
-    "x.cp_copied": "✅ Gekopieerd!",
-    "x.cp_copied_clipboard": "✅ Gekopieerd naar het klembord!",
-    "x.cp_copy_draft": "📋 Conceptbericht kopiëren",
+    "x.cp_copied": "Gekopieerd!",
+    "x.cp_copied_clipboard": "Gekopieerd naar het klembord!",
+    "x.cp_copy_draft": "Conceptbericht kopiëren",
     "x.cp_checklist_title": "VEILIGHEIDSCHECKLIST VOOR DE ARTIEST:",
     "x.cp_brief_title": "=== SAMENVATTING MEDICATIECONSULT VOOR TATOEAGE EN PIERCING ===",
     "x.cp_date": "Datum: {date}",
@@ -2494,7 +2494,7 @@ const TRANSLATIONS = {
     "x.cp_piercing": "Piercing: {text}",
     "x.cp_action": "Actie: {text}",
     "x.cp_generated": "Gegenereerd via de medicatiereferentie van Poli International.",
-    "x.cp_link_copied": "📲 Deelbare intakelink gekopieerd naar het klembord!",
+    "x.cp_link_copied": "Deelbare intakelink gekopieerd naar het klembord!",
     "x.cp_default_doctor": "Dr. [Naam van de arts]",
     "x.cp_default_patient": "[Uw naam]",
     "x.cp_default_proc": "[Tatoeage / Piercing]",
@@ -2529,12 +2529,12 @@ const TRANSLATIONS = {
     "x.low_concern": "Preocupação baixa",
     "x.low_syncope_risk": "Risco de síncope baixo",
     "x.moderate_syncope_risk": "Risco de síncope moderado",
-    "x.elevated_syncope_risk": "⚠️ Risco de síncope elevado",
+    "x.elevated_syncope_risk": "Risco de síncope elevado",
 
     // --- keyed from the markup 2026-09-02, see i18n-new-keys.en.json ---
-    "x.share_intake_deep_link": "📲 Partilhar a ligação direta ao questionário",
-    "x.quick_print_summary": "🖨️ Resumo para imprimir",
-    "x.trending_inquiries": "🔥 Pesquisas frequentes:",
+    "x.share_intake_deep_link": "Partilhar a ligação direta ao questionário",
+    "x.quick_print_summary": "Resumo para imprimir",
+    "x.trending_inquiries": "Pesquisas frequentes:",
     "x.advil_ibuprofen": "Advil / Ibuprofeno",
     "x.accutane_retinoids": "Accutane / Retinoides",
     "x.tktx_numbing": "TKTX / Creme anestésico",
@@ -2543,36 +2543,36 @@ const TRANSLATIONS = {
     "x.cannabis_thc": "Canábis / THC",
     "x.alcohol_hangover": "Álcool / Ressaca",
     "x.aspirin_blood_thinners": "Aspirina / Anticoagulantes",
-    "x.recent_searches": "🕒 Pesquisas recentes:",
+    "x.recent_searches": "Pesquisas recentes:",
     "x.clear_history": "Limpar o histórico",
     "x.share_intake_status": "Estado da partilha do questionário:",
-    "x.copy_shareable_link": "🔗 Copiar a ligação de partilha",
-    "x.select_all_medications_and_supplements_you": "💡 Selecione todos os medicamentos e suplementos que toma. Os resultados destacarão automaticamente",
+    "x.copy_shareable_link": "Copiar a ligação de partilha",
+    "x.select_all_medications_and_supplements_you": "Selecione todos os medicamentos e suplementos que toma. Os resultados destacarão automaticamente",
     "x.client_consultation_brief": "Ficha de consulta do cliente",
     "x.a_printable_and_shareable_summary_of": "Um resumo imprimível e partilhável dos medicamentos selecionados e das recomendações para a sessão",
-    "x.no_medications_selected_yet": "⚠️ Ainda não foi selecionado qualquer medicamento.",
+    "x.no_medications_selected_yet": "Ainda não foi selecionado qualquer medicamento.",
     "x.switch_to_the_interaction_checker": "Ir para o verificador de interações",
-    "x.generate_full_clinic_packet_print": "📄 Gerar o dossiê clínico completo (impressão)",
-    "x.share_deep_link": "🔗 Partilhar a ligação direta",
-    "x.export_data_json": "💾 Exportar os dados (JSON)",
-    "x.export_text_file": "📄 Exportar um ficheiro de texto",
-    "x.download_pdf_document": "📥 Transferir o documento PDF",
-    "x.copy_summary": "📋 Copiar o resumo",
-    "x.print_brief": "🖨️ Imprimir a ficha",
-    "x.expected_healing_journey_timeline": "🩺 Percurso de cicatrização previsto",
-    "x.tattoo_healing": "🎨 Cicatrização da tatuagem",
-    "x.piercing_healing": "💎 Cicatrização do piercing",
+    "x.generate_full_clinic_packet_print": "Gerar o dossiê clínico completo (impressão)",
+    "x.share_deep_link": "Partilhar a ligação direta",
+    "x.export_data_json": "Exportar os dados (JSON)",
+    "x.export_text_file": "Exportar um ficheiro de texto",
+    "x.download_pdf_document": "Transferir o documento PDF",
+    "x.copy_summary": "Copiar o resumo",
+    "x.print_brief": "Imprimir a ficha",
+    "x.expected_healing_journey_timeline": "Percurso de cicatrização previsto",
+    "x.tattoo_healing": "Cicatrização da tatuagem",
+    "x.piercing_healing": "Cicatrização do piercing",
     "x.interactive_timeline_mapping_physiological_milestones_and": "Cronologia interativa das etapas fisiológicas e dos efeitos dos medicamentos",
-    "x.pre_procedure_medication_washout_reminders": "⏰ Suspensão de medicamentos antes da sessão e lembretes",
+    "x.pre_procedure_medication_washout_reminders": "Suspensão de medicamentos antes da sessão e lembretes",
     "x.calculate_precise_discontinuation_deadlines_for_medications": "Calcule os prazos exatos de suspensão dos medicamentos (AINEs, anticoagulantes)",
-    "x.scheduled_appointment_date_time": "📅 Data e hora da marcação prevista:",
-    "x.save_compute_washout": "💾 Guardar e calcular a suspensão",
+    "x.scheduled_appointment_date_time": "Data e hora da marcação prevista:",
+    "x.save_compute_washout": "Guardar e calcular a suspensão",
     "x.setting_your_appointment_date_computes_live": "Indicar a data da marcação inicia contagens decrescentes que mostram exatamente quando parar de tomar",
-    "x.enable_browser_notification_alerts": "🔔 Ativar as notificações do navegador",
-    "x.download_google_calendar_ics_pre_filled": "📅 Transferir o ficheiro .ics do Google Agenda (prazos de suspensão preenchidos)",
-    "x.open_washout_in_google_calendar_web": "🌐 Abrir os prazos de suspensão no Google Agenda",
-    "x.export_standard_calendar_ics": "📅 Exportar um calendário padrão (.ics)",
-    "x.artist_piercer_readiness_self_assessment": "🎯 Autoavaliação de preparação do tatuador e do body piercer",
+    "x.enable_browser_notification_alerts": "Ativar as notificações do navegador",
+    "x.download_google_calendar_ics_pre_filled": "Transferir o ficheiro .ics do Google Agenda (prazos de suspensão preenchidos)",
+    "x.open_washout_in_google_calendar_web": "Abrir os prazos de suspensão no Google Agenda",
+    "x.export_standard_calendar_ics": "Exportar um calendário padrão (.ics)",
+    "x.artist_piercer_readiness_self_assessment": "Autoavaliação de preparação do tatuador e do body piercer",
     "x.answer_3_quick_questions_about_your": "Responda a 3 perguntas rápidas sobre a sessão do seu cliente e os medicamentos declarados para obter",
     "x.1_what_procedure_is_being_performed": "1. Que procedimento vai ser realizado?",
     "x.tattoo_body_linework_shading_color": "Tatuagem (traço no corpo / sombreado / cor)",
@@ -2590,9 +2590,9 @@ const TRANSLATIONS = {
     "x.history_of_vasovagal_syncope_fainting_low": "Antecedentes de síncope vasovagal / desmaio / hipoglicemia",
     "x.extremely_sensitive_skin_eczema_easy_bruising": "Pele muito sensível / eczema / nódoas negras fáceis",
     "x.first_time_client_high_nervous_tension": "Primeira vez / grande tensão nervosa",
-    "x.studio_safety_guide_progress": "🛡️ Progresso do guia de segurança do estúdio",
+    "x.studio_safety_guide_progress": "Progresso do guia de segurança do estúdio",
     "x.0_6_sections_read_0": "0 / 6 secções lidas (0 %)",
-    "x.studio_safety_clinical_reference": "🛡️ Segurança do estúdio e referência clínica",
+    "x.studio_safety_clinical_reference": "Segurança do estúdio e referência clínica",
     "x.essential_clinical_reference_for_clients_tattoo": "Referência clínica essencial para clientes, tatuadores e body piercers sobre a gestão",
     "x.1_painkillers_pre_procedure_pain_management": "1. Analgésicos e gestão da dor antes da sessão",
     "x.clients_often_take_over_the_counter": "Os clientes tomam muitas vezes analgésicos de venda livre antes de uma sessão. É fundamental",
@@ -2617,10 +2617,10 @@ const TRANSLATIONS = {
     "x.6_alcohol_cannabis_recreational_substance_intake": "6. Política sobre álcool, canábis e substâncias recreativas",
     "x.informed_consent_legal_safety": "Consentimento informado e segurança jurídica:",
     "x.physiological_compromise": "Comprometimento fisiológico:",
-    "x.studio_safety_lifestyle_quiz": "🎮 Questionário de segurança do estúdio e estilo de vida",
+    "x.studio_safety_lifestyle_quiz": "Questionário de segurança do estúdio e estilo de vida",
     "x.test_your_studio_safety_medication_iq": "Teste os seus conhecimentos sobre segurança e medicamentos!",
     "x.answer_7_fun_educational_scenarios_about": "Responda a 7 situações divertidas e educativas sobre álcool, canábis, analgésicos, cremes anestésicos",
-    "x.pre_session_prep_vasovagal_syncope_calculator": "💧 Preparação antes da sessão e calculadora de síncope vasovagal",
+    "x.pre_session_prep_vasovagal_syncope_calculator": "Preparação antes da sessão e calculadora de síncope vasovagal",
     "x.calculate_your_custom_fluid_target_blood": "Calcule o seu objetivo personalizado de hidratação, o plano de glicemia e a redução do risco de síncope",
     "x.body_weight": "Peso corporal:",
     "x.lbs": "lb",
@@ -2638,13 +2638,13 @@ const TRANSLATIONS = {
     "x.optional": "(opcional)",
     "x.blood_pressure_mmhg": "Tensão arterial (mmHg)",
     "x.risk_medication_factors_check_all_that": "Fatores de risco e medicação (assinale tudo o que se aplica):",
-    "x.taking_adhd_stimulants_adderall_vyvanse_ritalin": "⚡ Toma estimulantes para a PHDA (Adderall/Vyvanse/Ritalina)",
-    "x.taking_beta_blockers_blood_pressure_meds": "❤️ Toma betabloqueantes / medicação para a tensão",
-    "x.taking_glp_1_weight_loss_meds": "💫 Toma medicação GLP-1 para emagrecer (Ozempic/Mounjaro)",
-    "x.taking_anxiety_meds_or_history_of": "⬇️ Toma ansiolíticos ou tem antecedentes de desmaio",
-    "x.faq_guidelines_progress": "❓ Progresso das perguntas frequentes",
+    "x.taking_adhd_stimulants_adderall_vyvanse_ritalin": "Toma estimulantes para a PHDA (Adderall/Vyvanse/Ritalina)",
+    "x.taking_beta_blockers_blood_pressure_meds": "Toma betabloqueantes / medicação para a tensão",
+    "x.taking_glp_1_weight_loss_meds": "Toma medicação GLP-1 para emagrecer (Ozempic/Mounjaro)",
+    "x.taking_anxiety_meds_or_history_of": "Toma ansiolíticos ou tem antecedentes de desmaio",
+    "x.faq_guidelines_progress": "Progresso das perguntas frequentes",
     "x.0_8_faqs_read_0": "0 / 8 perguntas lidas (0 %)",
-    "x.frequently_asked_questions": "❓ Perguntas frequentes",
+    "x.frequently_asked_questions": "Perguntas frequentes",
     "x.should_i_stop_taking_my_prescribed": "Devo suspender a minha medicação prescrita antes de uma tatuagem ou de um piercing?",
     "x.never_stop_or_adjust_prescribed_medication": "NUNCA suspenda nem altere medicação prescrita",
     "x.why_is_accutane_isotretinoin_a_complete": "Porque é que o Accutane (isotretinoína) é uma contraindicação absoluta?",
@@ -2663,7 +2663,7 @@ const TRANSLATIONS = {
     "x.it_is_strongly_recommended_to_avoid": "Recomenda-se vivamente evitar AINEs (ibuprofeno, naproxeno) e aspirina 24 a 48 horas antes",
     "x.can_i_go_to_the_gym": "Posso ir ao ginásio, nadar ou fazer exercício depois de uma tatuagem ou de um piercing?",
     "x.avoid_heavy_exercise_for_24_48": "Evite exercício intenso durante 24 a 48 horas para não transpirar em excesso nem esticar ou friccionar a zona recente",
-    "x.consult_your_physician_message_draft": "✉️ Consultar o seu médico - rascunho de mensagem",
+    "x.consult_your_physician_message_draft": "Consultar o seu médico - rascunho de mensagem",
     "x.text": "&times;",
     "x.use_this_template_to_draft_an": "Use este modelo para escrever um e-mail ou mensagem ao seu médico sobre um ajuste seguro da medicação",
     "x.doctor_or_clinic_name": "Nome do médico ou da clínica:",
@@ -2673,15 +2673,15 @@ const TRANSLATIONS = {
     "x.selected_disclosed_medication_s": "Medicamento(s) selecionado(s) e declarado(s):",
     "x.no_medications_currently_selected_in_checker": "Não há qualquer medicamento selecionado no verificador.",
     "x.generated_message_draft_editable_customize_your": "Rascunho de mensagem gerado (editável - personalize a mensagem abaixo):",
-    "x.copy_draft_message": "📋 Copiar o rascunho",
-    "x.open_email_app": "✉️ Abrir a aplicação de e-mail",
-    "x.print_physician_note": "🖨️ Imprimir a nota para o médico",
+    "x.copy_draft_message": "Copiar o rascunho",
+    "x.open_email_app": "Abrir a aplicação de e-mail",
+    "x.print_physician_note": "Imprimir a nota para o médico",
     "x.close": "Fechar",
-    "x.studio_emergency_first_aid_protocols": "🚨 Protocolos de primeiros socorros do estúdio",
-    "x.fainting_syncope": "💫 Desmaio / síncope",
-    "x.allergic_reaction": "🐝 Reação alérgica",
-    "x.excessive_bleeding": "🩸 Hemorragia excessiva",
-    "x.panic_breathing": "🫁 Pânico e respiração",
+    "x.studio_emergency_first_aid_protocols": "Protocolos de primeiros socorros do estúdio",
+    "x.fainting_syncope": "Desmaio / síncope",
+    "x.allergic_reaction": "Reação alérgica",
+    "x.excessive_bleeding": "Hemorragia excessiva",
+    "x.panic_breathing": "Pânico e respiração",
     "x.vasovagal_syncope_fainting_protocol": "Protocolo para síncope vasovagal e desmaio",
     "x.common_response_to_sudden_pain_anxiety": "Reação frequente a dor súbita, ansiedade ou hipoglicemia, que provoca hipoperfusão cerebral passageira",
     "x.stop_procedure_immediately": "Pare o procedimento de imediato:",
@@ -2707,7 +2707,7 @@ const TRANSLATIONS = {
     "x.4_4_4_box_breathing": "Respiração quadrada 4-4-4:",
     "x.physical_grounding": "Ancoragem física:",
     "x.close_emergency_guide": "Fechar o guia de emergência",
-    "x.immediate_action": "🚨 Ação imediata",
+    "x.immediate_action": "Ação imediata",
     "x.search_medication_or_brand_e_g": "Procurar um medicamento ou marca (p. ex. Advil, Accutane, Xanax, EMLA, Ozempic)...",
     "x.e_g_72_bpm": "p. ex. 72 (bpm)",
     "x.e_g_dr_smith_city_health": "p. ex. Dr. Silva / Centro de Saúde da cidade",
@@ -2719,7 +2719,7 @@ const TRANSLATIONS = {
     waitLabel: 'Recomendação de espera / eliminação:',
     medUntranslated: 'Alguns detalhes sobre os medicamentos acima são mostrados em inglês: a tradução para este idioma ainda está em curso.',
     medSourcesLabel: 'Fontes publicadas',
-    tabSupplements: '🌿 Suplementos',
+    tabSupplements: 'Suplementos',
     suppHeading: 'Verificador de interações entre suplementos e medicamentos',
     suppIntro: 'A maioria das pessoas não considera o óleo de peixe, as cápsulas de alho ou o ginkgo como «medicação», por isso nunca os menciona. Tomados com um anticoagulante ou um analgésico, alguns suplementos aumentam a hemorragia e o exsudado durante a sessão. Adicione o que toma para ver o que diz a literatura publicada.',
     suppSearchPlaceholder: 'Procurar um suplemento (ex. óleo de peixe, vitamina E, curcuma, ginseng)...',
@@ -2734,10 +2734,10 @@ const TRANSLATIONS = {
     suppHuman: 'Estudos humanos',
     suppCredit: 'Dados de interação da SUPP.AI (Allen Institute for AI). São mostrados apenas estudos humanos e clínicos; artigos retratados são excluídos.',
     geoLangLabel: 'Pesquisar em:',
-    geoFindStudio: '🎨 Encontrar um estúdio perto',
-    geoFindDoctor: '🩺 Encontrar um médico perto',
-    geoFindPharmacy: '💊 Farmácia mais próxima',
-    geoFindHospital: '🏥 Hospital mais próximo',
+    geoFindStudio: 'Encontrar um estúdio perto',
+    geoFindDoctor: 'Encontrar um médico perto',
+    geoFindPharmacy: 'Farmácia mais próxima',
+    geoFindHospital: 'Hospital mais próximo',
     geoNote: 'Estas ligações abrem o Google Maps e pesquisam na língua do local onde está, o que encontra muito mais do que uma pesquisa em inglês no estrangeiro. A sua localização nunca chega até nós: para a Google vai apenas uma palavra de pesquisa. Mude a língua acima se a deteção estiver errada.',
     emergHeadSub: 'Guias de atuação imediata, passo a passo, para o pessoal do estudio perante complicações durante uma sessão.',
     emergCallLabel: 'Ligue primeiro para a emergência:',
@@ -2745,16 +2745,16 @@ const TRANSLATIONS = {
     emergDisclaimer: 'Este guia é um lembrete para quem já tem formação em primeiros socorros. Não é formação em primeiros socorros nem a substitui. Ligue primeiro para a emergência, não faça nada para que não esteja formado e autorizado onde trabalha, e fique junto da pessoa até a ajuda chegar.',
     disclaimerTitle: 'Aviso importante:',
     disclaimerBody: 'Esta ferramenta é apenas uma referência educativa e não constitui aconselhamento médico. Nunca pare nem ajuste medicamentos prescritos sem consultar o médico que os prescreveu. Informe sempre o seu tatuador e o seu body piercer sobre quaisquer medicamentos, problemas de saúde ou suplementos que esteja a tomar antes do procedimento.',
-    langLabel: '🌐 Idioma:',
-    headerBadge: '💊 Referência de Medicamentos e Segurança',
+    langLabel: 'Idioma:',
+    headerBadge: 'Referência de Medicamentos e Segurança',
     headerTitle: 'Verificador de Interação Medicamentosa',
     headerSubtitle: 'Verifique como medicamentos afetam o risco de sangramento e a cicatrização de tatuagens e piercings.',
-    draftDoctorBtn: '✉️ Rascunhar mensagem para o médico',
-    tabChecker: '🔍 Verificador',
-    tabBrief: '📄 Relatório para o Artista',
-    tabSafety: '🛡️ Segurança no Estúdio',
-    tabFaq: '❓ Perguntas Frecuentes',
-    tabReminders: '⏰ Lembretes & Suspensão',
+    draftDoctorBtn: 'Rascunhar mensagem para o médico',
+    tabChecker: 'Verificador',
+    tabBrief: 'Relatório para o Artista',
+    tabSafety: 'Segurança no Estúdio',
+    tabFaq: 'Perguntas Frecuentes',
+    tabReminders: 'Lembretes & Suspensão',
     searchPlaceholder: 'Buscar medicamento (ex. Ibuprofeno, Accutane, Xanax, EMLA)...',
     filterAll: 'Todos',
     filterPain: 'Analgésicos e AINEs',
@@ -2770,23 +2770,23 @@ const TRANSLATIONS = {
     filterSupplement: 'Suplementos',
     filterAntibiotic: 'Antibióticos e Antivirais',
     filterSubstance: 'Substâncias e Estilo de Vida',
-    infoNote: '💡 Selecione seus medicamentos para visualizar riscos e recomendações.',
+    infoNote: 'Selecione seus medicamentos para visualizar riscos e recomendações.',
     clearAll: 'Limpar tudo',
-    draftDoctorNoteBtn: '✉️ Nota médica',
-    viewBriefBtn: '📄 Ver Relatório',
-    backToTopBtn: '⬆️ Voltar ao Topo',
-    backToMedListBtn: '⬆️ Voltar à Lista',
+    draftDoctorNoteBtn: 'Nota médica',
+    viewBriefBtn: 'Ver Relatório',
+    backToTopBtn: 'Voltar ao Topo',
+    backToMedListBtn: 'Voltar à Lista',
     "x.share_intake_deep_link_desc": "Gere um link profundo com os seus medicamentos pré-selecionados para revisão pelo seu artista ou antes da chegada.",
     "x.and_select_your_medications_to_generate_brief": "e selecione os seus medicamentos para gerar o seu resumo de consulta personalizado.",
-    "x.copy_artist_checklist": "📋 Copiar lista de verificação para o artista",
+    "x.copy_artist_checklist": "Copiar lista de verificação para o artista",
     "x.tailored_for_artist_intake": "Adaptado para a admissão do artista",
-    "x.studio_precautions_checklist": "📋 Precauções do estúdio e lista de verificação",
+    "x.studio_precautions_checklist": "Precauções do estúdio e lista de verificação",
     "x.question_counter": "Pergunta {n} de {total}",
-    "x.next_question": "Próxima pergunta ➔",
+    "x.next_question": "Próxima pergunta",
     "x.quiz_score": "Pontuação:",
-    "x.target_hydration_plan": "💧 Plano de hidratação alvo",
-    "x.blood_sugar_fuel_schedule": "🍌 Açúcar no sangue e cronograma energético",
-    "x.vasovagal_syncope_vitals_analysis": "💫 Síncope vasovagal e análise de sinais vitais",
+    "x.target_hydration_plan": "Plano de hidratação alvo",
+    "x.blood_sugar_fuel_schedule": "Açúcar no sangue e cronograma energético",
+    "x.vasovagal_syncope_vitals_analysis": "Síncope vasovagal e análise de sinais vitais",
     "x.24_hours_before": "24 horas antes:",
     "x.2_hours_before": "2 horas antes:",
     "x.pre_appointment_meal_label": "Refeição antes da consulta (1.5–2h antes):",
@@ -2802,9 +2802,9 @@ const TRANSLATIONS = {
     "x.alert_select_medication_first": "Selecione primeiro pelo menos um medicamento.",
     "x.alert_message_copied": "Mensagem copiada para a área de transferência!",
     "x.alert_copy_failed": "A cópia falhou. Selecione o texto e copie-o manualmente.",
-    "x.cp_copied": "✅ Copiado!",
-    "x.cp_copied_clipboard": "✅ Copiado para a área de transferência!",
-    "x.cp_copy_draft": "📋 Copiar o rascunho da mensagem",
+    "x.cp_copied": "Copiado!",
+    "x.cp_copied_clipboard": "Copiado para a área de transferência!",
+    "x.cp_copy_draft": "Copiar o rascunho da mensagem",
     "x.cp_checklist_title": "LISTA DE VERIFICAÇÃO DE SEGURANÇA PARA O ARTISTA:",
     "x.cp_brief_title": "=== RESUMO DE CONSULTA SOBRE MEDICAMENTOS PARA TATUAGEM E PIERCING ===",
     "x.cp_date": "Data: {date}",
@@ -2815,7 +2815,7 @@ const TRANSLATIONS = {
     "x.cp_piercing": "Piercing: {text}",
     "x.cp_action": "Ação: {text}",
     "x.cp_generated": "Gerado através da referência de medicamentos da Poli International.",
-    "x.cp_link_copied": "📲 Ligação de admissão partilhável copiada para a área de transferência!",
+    "x.cp_link_copied": "Ligação de admissão partilhável copiada para a área de transferência!",
     "x.cp_default_doctor": "Dr. [Nome do médico]",
     "x.cp_default_patient": "[O seu nome]",
     "x.cp_default_proc": "[Tatuagem / Piercing]",
@@ -2850,10 +2850,10 @@ const TRANSLATIONS = {
     "x.low_concern": "ความกังวลต่ำ",
     "x.low_syncope_risk": "ความเสี่ยงต่อการเป็นลมต่ำ",
     "x.moderate_syncope_risk": "ความเสี่ยงต่อการเป็นลมปานกลาง",
-    "x.elevated_syncope_risk": "⚠️ ความเสี่ยงต่อการเป็นลมสูงขึ้น",
-    "x.share_intake_deep_link": "📲 แชร์ลิงก์ข้อมูลการรับลูกค้า",
-    "x.quick_print_summary": "🖨️ พิมพ์สรุปย่อด่วน",
-    "x.trending_inquiries": "🔥 คำค้นยอดนิยม:",
+    "x.elevated_syncope_risk": "ความเสี่ยงต่อการเป็นลมสูงขึ้น",
+    "x.share_intake_deep_link": "แชร์ลิงก์ข้อมูลการรับลูกค้า",
+    "x.quick_print_summary": "พิมพ์สรุปย่อด่วน",
+    "x.trending_inquiries": "คำค้นยอดนิยม:",
     "x.advil_ibuprofen": "Advil / Ibuprofen (ไอบูโพรเฟน)",
     "x.accutane_retinoids": "Accutane / เรตินอยด์",
     "x.tktx_numbing": "TKTX / ครีมชา",
@@ -2862,36 +2862,36 @@ const TRANSLATIONS = {
     "x.cannabis_thc": "กัญชา / THC",
     "x.alcohol_hangover": "แอลกอฮอล์ / อาการเมาค้าง",
     "x.aspirin_blood_thinners": "แอสไพริน (Aspirin) / ยาต้านการแข็งตัวของเลือด",
-    "x.recent_searches": "🕒 การค้นหาล่าสุด:",
+    "x.recent_searches": "การค้นหาล่าสุด:",
     "x.clear_history": "ล้างประวัติ",
     "x.share_intake_status": "สถานะการแชร์ข้อมูลการรับลูกค้า:",
-    "x.copy_shareable_link": "🔗 คัดลอกลิงก์สำหรับแชร์",
-    "x.select_all_medications_and_supplements_you": "💡 เลือกยาและอาหารเสริมทั้งหมดที่คุณใช้ ผลลัพธ์จะไฮไลต์ความเสี่ยงของหัตถการ ระยะเวลารอ และข้อควรระวังที่แนะนำสำหรับศิลปินโดยอัตโนมัติ",
+    "x.copy_shareable_link": "คัดลอกลิงก์สำหรับแชร์",
+    "x.select_all_medications_and_supplements_you": "เลือกยาและอาหารเสริมทั้งหมดที่คุณใช้ ผลลัพธ์จะไฮไลต์ความเสี่ยงของหัตถการ ระยะเวลารอ และข้อควรระวังที่แนะนำสำหรับศิลปินโดยอัตโนมัติ",
     "x.client_consultation_brief": "สรุปการปรึกษาลูกค้า",
     "x.a_printable_and_shareable_summary_of": "สรุปยาที่เลือกและคำแนะนำก่อนทำหัตถการ พิมพ์หรือแชร์ได้ สำหรับส่งให้ศิลปินสักหรือผู้เจาะ",
-    "x.no_medications_selected_yet": "⚠️ ยังไม่ได้เลือกยา",
+    "x.no_medications_selected_yet": "ยังไม่ได้เลือกยา",
     "x.switch_to_the_interaction_checker": "สลับไปยังตัวตรวจสอบปฏิกิริยาระหว่างยา",
-    "x.generate_full_clinic_packet_print": "📄 สร้างชุดเอกสารคลินิกฉบับเต็ม (พิมพ์)",
-    "x.share_deep_link": "🔗 แชร์ลิงก์",
-    "x.export_data_json": "💾 ส่งออกข้อมูล (JSON)",
-    "x.export_text_file": "📄 ส่งออกเป็นไฟล์ข้อความ",
-    "x.download_pdf_document": "📥 ดาวน์โหลดเอกสาร PDF",
-    "x.copy_summary": "📋 คัดลอกสรุป",
-    "x.print_brief": "🖨️ พิมพ์สรุป",
-    "x.expected_healing_journey_timeline": "🩺 ไทม์ไลน์การหายของแผลที่คาดไว้",
-    "x.tattoo_healing": "🎨 การหายของรอยสัก",
-    "x.piercing_healing": "💎 การหายของการเจาะ",
+    "x.generate_full_clinic_packet_print": "สร้างชุดเอกสารคลินิกฉบับเต็ม (พิมพ์)",
+    "x.share_deep_link": "แชร์ลิงก์",
+    "x.export_data_json": "ส่งออกข้อมูล (JSON)",
+    "x.export_text_file": "ส่งออกเป็นไฟล์ข้อความ",
+    "x.download_pdf_document": "ดาวน์โหลดเอกสาร PDF",
+    "x.copy_summary": "คัดลอกสรุป",
+    "x.print_brief": "พิมพ์สรุป",
+    "x.expected_healing_journey_timeline": "ไทม์ไลน์การหายของแผลที่คาดไว้",
+    "x.tattoo_healing": "การหายของรอยสัก",
+    "x.piercing_healing": "การหายของการเจาะ",
     "x.interactive_timeline_mapping_physiological_milestones_and": "ไทม์ไลน์เชิงโต้ตอบแสดงจุดสำคัญทางสรีรวิทยา และผลกระทบแบบพลวัตของปฏิกิริยาระหว่างยาในแต่ละระยะของการหายของแผล",
-    "x.pre_procedure_medication_washout_reminders": "⏰ การหยุดยาก่อนทำหัตถการและการแจ้งเตือน",
+    "x.pre_procedure_medication_washout_reminders": "การหยุดยาก่อนทำหัตถการและการแจ้งเตือน",
     "x.calculate_precise_discontinuation_deadlines_for_medications": "คำนวณกำหนดเวลาหยุดยา (ยาต้านการอักเสบที่ไม่ใช่สเตียรอยด์ (NSAIDs) ยาต้านการแข็งตัวของเลือด แอลกอฮอล์ เรตินอยด์) ก่อนนัดรอยสักหรือการเจาะ และตั้งการแจ้งเตือนในเบราว์เซอร์หรือปฏิทิน",
-    "x.scheduled_appointment_date_time": "📅 วันและเวลานัดหมาย:",
-    "x.save_compute_washout": "💾 บันทึกและคำนวณระยะหยุดยา",
+    "x.scheduled_appointment_date_time": "วันและเวลานัดหมาย:",
+    "x.save_compute_washout": "บันทึกและคำนวณระยะหยุดยา",
     "x.setting_your_appointment_date_computes_live": "เมื่อตั้งวันนัดหมาย ระบบจะคำนวณตัวนับถอยหลังแบบสดที่แสดงว่าต้องหยุดยาแต่ละชนิดเมื่อใด",
-    "x.enable_browser_notification_alerts": "🔔 เปิดการแจ้งเตือนในเบราว์เซอร์",
-    "x.download_google_calendar_ics_pre_filled": "📅 ดาวน์โหลดไฟล์ .ics สำหรับ Google Calendar (กรอกกำหนดเวลาหยุดยาไว้แล้ว)",
-    "x.open_washout_in_google_calendar_web": "🌐 เปิดระยะหยุดยาใน Google Calendar บนเว็บ",
-    "x.export_standard_calendar_ics": "📅 ส่งออกปฏิทินมาตรฐาน (.ics)",
-    "x.artist_piercer_readiness_self_assessment": "🎯 แบบประเมินความพร้อมของศิลปินและผู้เจาะ",
+    "x.enable_browser_notification_alerts": "เปิดการแจ้งเตือนในเบราว์เซอร์",
+    "x.download_google_calendar_ics_pre_filled": "ดาวน์โหลดไฟล์ .ics สำหรับ Google Calendar (กรอกกำหนดเวลาหยุดยาไว้แล้ว)",
+    "x.open_washout_in_google_calendar_web": "เปิดระยะหยุดยาใน Google Calendar บนเว็บ",
+    "x.export_standard_calendar_ics": "ส่งออกปฏิทินมาตรฐาน (.ics)",
+    "x.artist_piercer_readiness_self_assessment": "แบบประเมินความพร้อมของศิลปินและผู้เจาะ",
     "x.answer_3_quick_questions_about_your": "ตอบคำถามสั้นๆ 3 ข้อเกี่ยวกับหัตถการและการแจ้งยาของลูกค้า เพื่อสร้างรายการข้อควรระวังสำหรับสตูดิโอ",
     "x.1_what_procedure_is_being_performed": "1. ทำหัตถการอะไร?",
     "x.tattoo_body_linework_shading_color": "สัก (เส้น / การลงเงา / การลงสี บนร่างกาย)",
@@ -2909,9 +2909,9 @@ const TRANSLATIONS = {
     "x.history_of_vasovagal_syncope_fainting_low": "มีประวัติ vasovagal syncope / เป็นลม / น้ำตาลในเลือดต่ำ",
     "x.extremely_sensitive_skin_eczema_easy_bruising": "ผิวไวมาก / โรคผิวหนังอักเสบ (eczema) / จ้ำเลือดขึ้นง่าย",
     "x.first_time_client_high_nervous_tension": "ลูกค้าครั้งแรก / ความตึงเครียดทางใจสูง",
-    "x.studio_safety_guide_progress": "🛡️ ความคืบหน้าคู่มือความปลอดภัยของสตูดิโอ",
+    "x.studio_safety_guide_progress": "ความคืบหน้าคู่มือความปลอดภัยของสตูดิโอ",
     "x.0_6_sections_read_0": "อ่านแล้ว 0 / 6 หัวข้อ (0%)",
-    "x.studio_safety_clinical_reference": "🛡️ ความปลอดภัยของสตูดิโอและข้อมูลอ้างอิงทางคลินิก",
+    "x.studio_safety_clinical_reference": "ความปลอดภัยของสตูดิโอและข้อมูลอ้างอิงทางคลินิก",
     "x.essential_clinical_reference_for_clients_tattoo": "ข้อมูลอ้างอิงทางคลินิกที่จำเป็นสำหรับลูกค้า ศิลปินสัก และผู้เจาะ ในการจัดการปัญหาทั่วไปของหัตถการที่เกี่ยวข้องกับยา",
     "x.1_painkillers_pre_procedure_pain_management": "1. ยาแก้ปวดและการจัดการความเจ็บปวดก่อนทำหัตถการ",
     "x.clients_often_take_over_the_counter": "ลูกค้ามักรับประทานยาแก้ปวดที่หาซื้อได้เองก่อนเข้ารับบริการเพื่อบรรเทาอาการปวด การเข้าใจความแตกต่างระหว่างกลุ่มยาจึงสำคัญมาก:",
@@ -2936,10 +2936,10 @@ const TRANSLATIONS = {
     "x.6_alcohol_cannabis_recreational_substance_intake": "6. นโยบายการรับแอลกอฮอล์ กัญชา และสารเสพติดเพื่อการพักผ่อน",
     "x.informed_consent_legal_safety": "การยินยอมโดยได้รับข้อมูลและความปลอดภัยทางกฎหมาย:",
     "x.physiological_compromise": "ภาวะที่กระทบการทำงานของร่างกาย:",
-    "x.studio_safety_lifestyle_quiz": "🎮 แบบทดสอบความปลอดภัยของสตูดิโอและไลฟ์สไตล์",
+    "x.studio_safety_lifestyle_quiz": "แบบทดสอบความปลอดภัยของสตูดิโอและไลฟ์สไตล์",
     "x.test_your_studio_safety_medication_iq": "ทดสอบความรู้เรื่องความปลอดภัยในสตูดิโอและยาของคุณ!",
     "x.answer_7_fun_educational_scenarios_about": "ตอบสถานการณ์สนุกและให้ความรู้ 7 ข้อเกี่ยวกับแอลกอฮอล์ กัญชา ยาแก้ปวด ครีมชา และการเตรียมตัวหลังทำ",
-    "x.pre_session_prep_vasovagal_syncope_calculator": "💧 การเตรียมตัวก่อนรับบริการและเครื่องคำนวณ Vasovagal Syncope",
+    "x.pre_session_prep_vasovagal_syncope_calculator": "การเตรียมตัวก่อนรับบริการและเครื่องคำนวณ Vasovagal Syncope",
     "x.calculate_your_custom_fluid_target_blood": "คำนวณเป้าหมายการดื่มน้ำ ตารางรักษาระดับน้ำตาลในเลือด และแผนลดความเสี่ยงการเป็นลมของคุณก่อนนัดหมาย",
     "x.body_weight": "น้ำหนักตัว:",
     "x.lbs": "lbs",
@@ -2957,13 +2957,13 @@ const TRANSLATIONS = {
     "x.optional": "(ไม่บังคับ)",
     "x.blood_pressure_mmhg": "ความดันโลหิต (mmHg)",
     "x.risk_medication_factors_check_all_that": "ปัจจัยเสี่ยงและยา (เลือกทั้งหมดที่เกี่ยวข้อง):",
-    "x.taking_adhd_stimulants_adderall_vyvanse_ritalin": "⚡ กำลังใช้ยากระตุ้นสมาธิสั้น (Adderall / Vyvanse / Ritalin)",
-    "x.taking_beta_blockers_blood_pressure_meds": "❤️ กำลังใช้เบต้าบล็อกเกอร์ / ยาลดความดันโลหิต",
-    "x.taking_glp_1_weight_loss_meds": "💫 กำลังใช้ยาลดน้ำหนักกลุ่ม GLP-1 (Ozempic / Mounjaro)",
-    "x.taking_anxiety_meds_or_history_of": "⬇️ กำลังใช้ยาคลายกังวล หรือมีประวัติเป็นลม",
-    "x.faq_guidelines_progress": "❓ ความคืบหน้าคำถามที่พบบ่อยและแนวทาง",
+    "x.taking_adhd_stimulants_adderall_vyvanse_ritalin": "กำลังใช้ยากระตุ้นสมาธิสั้น (Adderall / Vyvanse / Ritalin)",
+    "x.taking_beta_blockers_blood_pressure_meds": "กำลังใช้เบต้าบล็อกเกอร์ / ยาลดความดันโลหิต",
+    "x.taking_glp_1_weight_loss_meds": "กำลังใช้ยาลดน้ำหนักกลุ่ม GLP-1 (Ozempic / Mounjaro)",
+    "x.taking_anxiety_meds_or_history_of": "กำลังใช้ยาคลายกังวล หรือมีประวัติเป็นลม",
+    "x.faq_guidelines_progress": "ความคืบหน้าคำถามที่พบบ่อยและแนวทาง",
     "x.0_8_faqs_read_0": "อ่านแล้ว 0 / 8 ข้อ (0%)",
-    "x.frequently_asked_questions": "❓ คำถามที่พบบ่อย",
+    "x.frequently_asked_questions": "คำถามที่พบบ่อย",
     "x.should_i_stop_taking_my_prescribed": "ฉันควรหยุดยาที่แพทย์สั่งก่อนสักหรือเจาะหรือไม่?",
     "x.never_stop_or_adjust_prescribed_medication": "ห้ามหยุดหรือปรับยาที่แพทย์สั่งโดยเด็ดขาด",
     "x.why_is_accutane_isotretinoin_a_complete": "ทำไม Accutane (Isotretinoin) จึงเป็นข้อห้ามเด็ดขาด?",
@@ -2982,7 +2982,7 @@ const TRANSLATIONS = {
     "x.it_is_strongly_recommended_to_avoid": "ขอแนะนำอย่างยิ่งให้หลีกเลี่ยง NSAIDs (ไอบูโพรเฟน นาโปรเซน) และแอสไพริน 24–48 ชั่วโมงก่อนสักหรือเจาะ เพราะยาเหล่านี้ทำให้เลือดเจือจางและเพิ่มการเลือดออกระหว่างหัตถการ หากต้องการยาบรรเทาปวดเล็กน้อย อะเซตามิโนเฟน (พาราเซตามอล) โดยทั่วไปปลอดภัยกว่า เพราะไม่กระทบการแข็งตัวของเลือด",
     "x.can_i_go_to_the_gym": "ฉันไปฟิตเนส ว่ายน้ำ หรือออกกำลังกายหลังสักหรือเจาะได้หรือไม่?",
     "x.avoid_heavy_exercise_for_24_48": "หลีกเลี่ยงการออกกำลังกายหนัก 24–48 ชั่วโมง เพื่อป้องกันเหงื่อออกมาก การยืดตัว หรือการเสียดสีกับแผลสด ห้ามว่ายน้ำในสระ ทะเลสาบ แม่น้ำ หรือทะเลโดยเด็ดขาดเป็นเวลา 2–4 สัปดาห์จนกว่าแผลจะหายสนิท เพราะน้ำนิ่งมีเชื้อแบคทีเรียที่ทำให้ผิวติดเชื้อรุนแรงได้ง่าย",
-    "x.consult_your_physician_message_draft": "✉️ ปรึกษาแพทย์ของคุณ - ร่างข้อความ",
+    "x.consult_your_physician_message_draft": "ปรึกษาแพทย์ของคุณ - ร่างข้อความ",
     "x.text": "&times;",
     "x.use_this_template_to_draft_an": "ใช้แม่แบบนี้เพื่อร่างอีเมลหรือข้อความถึงแพทย์ สอบถามเกี่ยวกับการปรับยาที่ปลอดภัยก่อนหัตถการที่จะถึง",
     "x.doctor_or_clinic_name": "ชื่อแพทย์หรือคลินิก:",
@@ -2992,15 +2992,15 @@ const TRANSLATIONS = {
     "x.selected_disclosed_medication_s": "ยาที่เลือกและแจ้งไว้:",
     "x.no_medications_currently_selected_in_checker": "ยังไม่ได้เลือกยาในตัวตรวจสอบ",
     "x.generated_message_draft_editable_customize_your": "ข้อความร่างที่สร้างขึ้น (แก้ไขได้ ปรับข้อความของคุณด้านล่าง):",
-    "x.copy_draft_message": "📋 คัดลอกข้อความร่าง",
-    "x.open_email_app": "✉️ เปิดแอปอีเมล",
-    "x.print_physician_note": "🖨️ พิมพ์บันทึกถึงแพทย์",
+    "x.copy_draft_message": "คัดลอกข้อความร่าง",
+    "x.open_email_app": "เปิดแอปอีเมล",
+    "x.print_physician_note": "พิมพ์บันทึกถึงแพทย์",
     "x.close": "ปิด",
-    "x.studio_emergency_first_aid_protocols": "🚨 แนวทางการปฐมพยาบาลฉุกเฉินของสตูดิโอ",
-    "x.fainting_syncope": "💫 เป็นลม / Syncope",
-    "x.allergic_reaction": "🐝 อาการแพ้",
-    "x.excessive_bleeding": "🩸 เลือดออกมากเกินไป",
-    "x.panic_breathing": "🫁 อาการตื่นตระหนกและการหายใจ",
+    "x.studio_emergency_first_aid_protocols": "แนวทางการปฐมพยาบาลฉุกเฉินของสตูดิโอ",
+    "x.fainting_syncope": "เป็นลม / Syncope",
+    "x.allergic_reaction": "อาการแพ้",
+    "x.excessive_bleeding": "เลือดออกมากเกินไป",
+    "x.panic_breathing": "อาการตื่นตระหนกและการหายใจ",
     "x.vasovagal_syncope_fainting_protocol": "แนวทาง Vasovagal Syncope และการเป็นลม",
     "x.common_response_to_sudden_pain_anxiety": "การตอบสนองทั่วไปต่อความเจ็บปวดฉับพลัน ความวิตกกังวล หรือระดับน้ำตาลในเลือดต่ำ ที่ทำให้เลือดไปเลี้ยงสมองลดลงชั่วคราว",
     "x.stop_procedure_immediately": "หยุดหัตถการทันที:",
@@ -3026,7 +3026,7 @@ const TRANSLATIONS = {
     "x.4_4_4_box_breathing": "การหายใจแบบกล่อง 4-4-4:",
     "x.physical_grounding": "การยึดเหนี่ยวกับร่างกาย:",
     "x.close_emergency_guide": "ปิดคู่มือฉุกเฉิน",
-    "x.immediate_action": "🚨 การดำเนินการทันที",
+    "x.immediate_action": "การดำเนินการทันที",
     "x.search_medication_or_brand_e_g": "ค้นหายาหรือชื่อการค้า (เช่น Advil, Accutane, Xanax, EMLA, Ozempic)...",
     "x.e_g_72_bpm": "เช่น 72 (bpm)",
     "x.e_g_dr_smith_city_health": "เช่น นพ. สมิธ / คลินิกสุขภาพเมือง",
@@ -3037,7 +3037,7 @@ const TRANSLATIONS = {
     "waitLabel": "คำแนะนำการรอ / ระยะหยุดยา:",
     "medUntranslated": "รายละเอียดยาบางส่วนด้านบนแสดงเป็นภาษาอังกฤษ การแปลเป็นภาษานี้ยังดำเนินการอยู่",
     "medSourcesLabel": "แหล่งข้อมูลที่เผยแพร่",
-    "tabSupplements": "🌿 อาหารเสริม",
+    "tabSupplements": "อาหารเสริม",
     "suppHeading": "ตัวตรวจสอบปฏิกิริยาระหว่างอาหารเสริมและยา",
     "suppIntro": "คนส่วนใหญ่ไม่ได้คิดว่าน้ำมันปลา แคปซูลกระเทียม หรือแปะก๊วยเป็น 'ยา' จึงไม่เคยกล่าวถึง เมื่อรับประทานร่วมกับยาต้านการแข็งตัวของเลือดหรือยาแก้ปวด อาหารเสริมบางชนิดอาจเพิ่มการเลือดออกและการซึมของเหลวระหว่างการรับบริการ เพิ่มอาหารเสริมที่คุณรับประทานด้านล่างเพื่อดูว่าหลักฐานที่เผยแพร่ระบุอะไรบ้าง",
     "suppSearchPlaceholder": "ค้นหาอาหารเสริม (เช่น น้ำมันปลา วิตามินอี ขมิ้น โสม)...",
@@ -3052,10 +3052,10 @@ const TRANSLATIONS = {
     "suppHuman": "การศึกษาในมนุษย์",
     "suppCredit": "ข้อมูลปฏิกิริยาระหว่างยาจาก SUPP.AI (Allen Institute for AI) แสดงเฉพาะการศึกษาในมนุษย์และการศึกษาทางคลินิก ไม่รวมเอกสารที่ถูกถอนออก",
     "geoLangLabel": "ค้นหาใน:",
-    "geoFindStudio": "🎨 หาสตูดิโอใกล้ฉัน",
-    "geoFindDoctor": "🩺 หาแพทย์ใกล้ฉัน",
-    "geoFindPharmacy": "💊 ร้านขายยาที่ใกล้ที่สุด",
-    "geoFindHospital": "🏥 โรงพยาบาลที่ใกล้ที่สุด",
+    "geoFindStudio": "หาสตูดิโอใกล้ฉัน",
+    "geoFindDoctor": "หาแพทย์ใกล้ฉัน",
+    "geoFindPharmacy": "ร้านขายยาที่ใกล้ที่สุด",
+    "geoFindHospital": "โรงพยาบาลที่ใกล้ที่สุด",
     "geoNote": "ลิงก์เหล่านี้จะเปิด Google Maps และค้นหาด้วยภาษาท้องถิ่นของที่ที่คุณอยู่ ซึ่งให้ผลลัพธ์มากกว่าการค้นหาด้วยภาษาอังกฤษเมื่ออยู่ต่างประเทศมาก ตำแหน่งของคุณจะไม่ถูกส่งมาที่เรา มีเพียงคำค้นหาที่ส่งไปยัง Google เปลี่ยนภาษาด้านบนหากระบบเดาผิด",
     "emergHeadSub": "คู่มือทีละขั้นตอนสำหรับทีมสตูดิโอเมื่อเกิดภาวะแทรกซ้อนระหว่างหัตถการ",
     "emergCallLabel": "โทรแจ้งบริการฉุกเฉินก่อน:",
@@ -3063,16 +3063,16 @@ const TRANSLATIONS = {
     "emergDisclaimer": "คู่มือนี้เป็นเครื่องช่วยจำสำหรับผู้ที่ผ่านการฝึกปฐมพยาบาลมาแล้ว ไม่ใช่การฝึกปฐมพยาบาล และไม่สามารถใช้แทนการฝึกได้ โทรแจ้งบริการฉุกเฉินก่อน อย่าทำสิ่งที่คุณไม่ได้รับการฝึกหรือไม่ได้รับอนุญาตให้ทำในที่ทำงานของคุณ และอยู่กับผู้ป่วยจนกว่าความช่วยเหลือจะมาถึง",
     "disclaimerTitle": "ข้อความสำคัญ (Disclaimer):",
     "disclaimerBody": "เครื่องมือนี้เป็นเพียงข้อมูลอ้างอิงเพื่อการศึกษา และไม่ถือเป็นคำแนะนำทางการแพทย์ ห้ามหยุดหรือปรับยาที่แพทย์สั่งโดยไม่ปรึกษาแพทย์ผู้สั่งยาของคุณ ควรแจ้งศิลปินสักและผู้เจาะทุกครั้งเกี่ยวกับยา ภาวะสุขภาพ หรืออาหารเสริมใดๆ ที่คุณกำลังใช้ ก่อนทำหัตถการ",
-    "langLabel": "🌐 ภาษา:",
-    "headerBadge": "💊 ข้อมูลอ้างอิงยาและความปลอดภัย",
+    "langLabel": "ภาษา:",
+    "headerBadge": "ข้อมูลอ้างอิงยาและความปลอดภัย",
     "headerTitle": "ตัวตรวจสอบปฏิกิริยาระหว่างยา",
     "headerSubtitle": "ตรวจสอบว่ายาที่แพทย์สั่ง ยาแก้ปวดที่หาซื้อเองได้ ครีมชา และอาหารเสริม ส่งผลต่อความเสี่ยงเลือดออก การตรึงหมึก และการหายของการเจาะอย่างไรสำหรับรอยสักและการเจาะ",
-    "draftDoctorBtn": "✉️ ร่างข้อความถึงแพทย์",
-    "tabChecker": "🔍 ตัวตรวจสอบ",
-    "tabBrief": "📄 สรุปสำหรับศิลปิน",
-    "tabSafety": "🛡️ ความปลอดภัยของสตูดิโอ",
-    "tabFaq": "❓ คำถามที่พบบ่อยและเคล็ดลับ",
-    "tabReminders": "⏰ การแจ้งเตือนและระยะหยุดยา",
+    "draftDoctorBtn": "ร่างข้อความถึงแพทย์",
+    "tabChecker": "ตัวตรวจสอบ",
+    "tabBrief": "สรุปสำหรับศิลปิน",
+    "tabSafety": "ความปลอดภัยของสตูดิโอ",
+    "tabFaq": "คำถามที่พบบ่อยและเคล็ดลับ",
+    "tabReminders": "การแจ้งเตือนและระยะหยุดยา",
     "searchPlaceholder": "ค้นหายาหรือชื่อการค้า (เช่น Advil, Accutane, Xanax, EMLA, Ozempic)...",
     "filterAll": "ทั้งหมด",
     "filterPain": "ยาแก้ปวดและ NSAIDs",
@@ -3088,23 +3088,23 @@ const TRANSLATIONS = {
     "filterSupplement": "อาหารเสริม",
     "filterAntibiotic": "ยาปฏิชีวนะและยาต้านไวรัส",
     "filterSubstance": "สารและไลฟ์สไตล์",
-    "infoNote": "💡 เลือกยาและอาหารเสริมทั้งหมดที่คุณใช้ ผลลัพธ์จะไฮไลต์ความเสี่ยงของหัตถการ ระยะเวลารอ และข้อควรระวังที่แนะนำสำหรับศิลปินโดยอัตโนมัติ",
+    "infoNote": "เลือกยาและอาหารเสริมทั้งหมดที่คุณใช้ ผลลัพธ์จะไฮไลต์ความเสี่ยงของหัตถการ ระยะเวลารอ และข้อควรระวังที่แนะนำสำหรับศิลปินโดยอัตโนมัติ",
     "clearAll": "ล้างทั้งหมด",
-    "draftDoctorNoteBtn": "✉️ ร่างบันทึกถึงแพทย์",
-    "viewBriefBtn": "📄 ดูสรุปสำหรับศิลปิน",
-    "backToTopBtn": "⬆️ กลับขึ้นด้านบน",
-    "backToMedListBtn": "⬆️ กลับไปรายการยา",
+    "draftDoctorNoteBtn": "ร่างบันทึกถึงแพทย์",
+    "viewBriefBtn": "ดูสรุปสำหรับศิลปิน",
+    "backToTopBtn": "กลับขึ้นด้านบน",
+    "backToMedListBtn": "กลับไปรายการยา",
     "x.share_intake_deep_link_desc": "สร้างลิงก์ที่มียาที่คุณเลือกไว้ล่วงหน้า เพื่อให้ศิลปินตรวจสอบหรือตรวจทานก่อนมาถึง",
     "x.and_select_your_medications_to_generate_brief": "และเลือกยาของคุณเพื่อสร้างสรุปสำหรับการปรึกษาที่กำหนดเองของคุณ",
-    "x.copy_artist_checklist": "📋 คัดลอกรายการตรวจสอบสำหรับศิลปิน",
+    "x.copy_artist_checklist": "คัดลอกรายการตรวจสอบสำหรับศิลปิน",
     "x.tailored_for_artist_intake": "จัดทำสำหรับการรับข้อมูลของศิลปิน",
-    "x.studio_precautions_checklist": "📋 ข้อควรระวังของสตูดิโอและรายการตรวจสอบ",
+    "x.studio_precautions_checklist": "ข้อควรระวังของสตูดิโอและรายการตรวจสอบ",
     "x.question_counter": "คำถามที่ {n} จาก {total}",
-    "x.next_question": "คำถามถัดไป ➔",
+    "x.next_question": "คำถามถัดไป",
     "x.quiz_score": "คะแนน:",
-    "x.target_hydration_plan": "💧 แผนการดื่มน้ำเป้าหมาย",
-    "x.blood_sugar_fuel_schedule": "🍌 ตารางน้ำตาลในเลือดและพลังงาน",
-    "x.vasovagal_syncope_vitals_analysis": "💫 Vasovagal Syncope และการวิเคราะห์สัญญาณชีพ",
+    "x.target_hydration_plan": "แผนการดื่มน้ำเป้าหมาย",
+    "x.blood_sugar_fuel_schedule": "ตารางน้ำตาลในเลือดและพลังงาน",
+    "x.vasovagal_syncope_vitals_analysis": "Vasovagal Syncope และการวิเคราะห์สัญญาณชีพ",
     "x.24_hours_before": "ก่อน 24 ชั่วโมง:",
     "x.2_hours_before": "ก่อน 2 ชั่วโมง:",
     "x.pre_appointment_meal_label": "มื้ออาหารก่อนนัด (ก่อน 1.5–2h):",
@@ -3120,9 +3120,9 @@ const TRANSLATIONS = {
     "x.alert_select_medication_first": "กรุณาเลือกยาอย่างน้อยหนึ่งรายการก่อน",
     "x.alert_message_copied": "คัดลอกข้อความไปยังคลิปบอร์ดแล้ว!",
     "x.alert_copy_failed": "คัดลอกไม่สำเร็จ โปรดเลือกข้อความแล้วคัดลอกด้วยตนเอง",
-    "x.cp_copied": "✅ คัดลอกแล้ว!",
-    "x.cp_copied_clipboard": "✅ คัดลอกไปยังคลิปบอร์ดแล้ว!",
-    "x.cp_copy_draft": "📋 คัดลอกร่างข้อความ",
+    "x.cp_copied": "คัดลอกแล้ว!",
+    "x.cp_copied_clipboard": "คัดลอกไปยังคลิปบอร์ดแล้ว!",
+    "x.cp_copy_draft": "คัดลอกร่างข้อความ",
     "x.cp_checklist_title": "รายการตรวจสอบความปลอดภัยสำหรับช่างสัก/ช่างเจาะ:",
     "x.cp_brief_title": "=== สรุปการปรึกษาเรื่องยาสำหรับการสักและการเจาะ ===",
     "x.cp_date": "วันที่: {date}",
@@ -3133,7 +3133,7 @@ const TRANSLATIONS = {
     "x.cp_piercing": "การเจาะ: {text}",
     "x.cp_action": "การดำเนินการ: {text}",
     "x.cp_generated": "สร้างจากข้อมูลอ้างอิงเรื่องยาของ Poli International",
-    "x.cp_link_copied": "📲 คัดลอกลิงก์แบบฟอร์มรับเข้าที่แชร์ได้ไปยังคลิปบอร์ดแล้ว!",
+    "x.cp_link_copied": "คัดลอกลิงก์แบบฟอร์มรับเข้าที่แชร์ได้ไปยังคลิปบอร์ดแล้ว!",
     "x.cp_default_doctor": "แพทย์ [ชื่อแพทย์]",
     "x.cp_default_patient": "[ชื่อของคุณ]",
     "x.cp_default_proc": "[การสัก / การเจาะ]",
@@ -3218,12 +3218,12 @@ function renderRiskBadgeHtml(rb) {
   // This used to strip the emoji with a long list of code-point ranges while the
   // prefix was taken separately, and the two did not match. Two live defects
   // came out of it, and neither threw:
-  //   "⬇ Low Blood Pressure"  U+2B07 was not in the ranges, so the emoji was
+  //   "Low Blood Pressure"  U+2B07 was not in the ranges, so the emoji was
   //                           never stripped and then prepended again:
-  //                           "⬇ ⬇ Low Blood Pressure".
-  //   "⏳ Delayed Healing"     U+23F3 WAS in the ranges, so the key became
+  //                           "Low Blood Pressure".
+  //   "Delayed Healing"     U+23F3 WAS in the ranges, so the key became
   //                           "Delayed Healing" while risk-i18n.js held it under
-  //                           "⏳ Delayed Healing": the lookup missed and that
+  //                           "Delayed Healing": the lookup missed and that
   //                           badge could never be translated at all.
   //
   // So the split is done once: everything before the first letter or digit is
@@ -3358,7 +3358,7 @@ function setupEventListeners() {
       popover.innerHTML = `
         <div class="risk-popover-title">
           <span>${escHtml(riskName)}</span>
-          <span style="cursor:pointer; font-size:1rem; opacity:0.7;" onclick="this.parentElement.parentElement.remove()">✕</span>
+          <span style="cursor:pointer; font-size:1rem; opacity:0.7;" onclick="this.parentElement.parentElement.remove()"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-x></use></svg></span>
         </div>
         <div>${escHtml(riskExp)}</div>
       `;
@@ -3723,8 +3723,8 @@ function renderMedList() {
       if (suggestion && suggestion.toLowerCase() !== searchQuery) {
         dymBox.style.display = 'flex';
         dymBox.innerHTML = `
-          <span>💡 Did you mean:</span>
-          <button class="dym-btn" id="dym-apply-btn" data-term="${escHtml(suggestion)}">${escHtml(suggestion)} 🔍</button>
+          <span><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bulb></use></svg> Did you mean:</span>
+          <button class="dym-btn" id="dym-apply-btn" data-term="${escHtml(suggestion)}">${escHtml(suggestion)}</button>
         `;
 
         document.getElementById('dym-apply-btn')?.addEventListener('click', () => {
@@ -3746,7 +3746,7 @@ function renderMedList() {
   if (totalVisible === 0) {
     medListEl.innerHTML = `
       <div class="no-search-results">
-        <div class="no-results-icon">🔍</div>
+        <div class="no-results-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg></div>
         <p class="no-results-title">No medications found matching "<strong>${escHtml(searchQuery)}</strong>"</p>
         <div class="no-results-box">
           <p><strong>Suggestions to find your medication:</strong></p>
@@ -3911,17 +3911,17 @@ function renderResults() {
         </div>
         <div class="interaction-body">
           <div class="effect-row">
-            <span class="effect-type tattoo-badge">🎨 Tattoo</span>
+            <span class="effect-type tattoo-badge"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-machine></use></svg> Tattoo</span>
             <span class="effect-text">${escHtml(medText(m, 'tattoo'))}</span>
           </div>
           <div class="effect-row">
-            <span class="effect-type piercing-badge">💎 Piercing</span>
+            <span class="effect-type piercing-badge"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-ring></use></svg> Piercing</span>
             <span class="effect-text">${escHtml(medText(m, 'piercing'))}</span>
           </div>
-          ${m.wait ? `<div class="wait-note">⏱️ <strong>${escHtml(dict.waitLabel || 'Wait / Washout Recommendation:')}</strong> ${escHtml(medText(m, 'wait'))}</div>` : ''}
+          ${m.wait ? `<div class="wait-note"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clock></use></svg> <strong>${escHtml(dict.waitLabel || 'Wait / Washout Recommendation:')}</strong> ${escHtml(medText(m, 'wait'))}</div>` : ''}
           ${renderMedSources(m.id)}
           <div style="margin-top:0.75rem; text-align:right;">
-            <button class="card-back-btn" data-med-id="${escHtml(m.id)}">${dict.backToMedListBtn || '⬆️ Back to Med List'}</button>
+            <button class="card-back-btn" data-med-id="${escHtml(m.id)}">${dict.backToMedListBtn || 'Back to Med List'}</button>
           </div>
         </div>
       </div>`;
@@ -3940,8 +3940,8 @@ function renderResults() {
         </span>
       </div>
       <div class="result-actions">
-        <button class="brief-jump-btn" onclick="openDoctorModal()">${dict.draftDoctorNoteBtn || '✉️ Draft Doctor Note'}</button>
-        <button class="brief-jump-btn" onclick="document.querySelector('[data-tab=\\'brief\\']').click()">${dict.viewBriefBtn || '📄 View Artist Brief'}</button>
+        <button class="brief-jump-btn" onclick="openDoctorModal()">${dict.draftDoctorNoteBtn || 'Draft Doctor Note'}</button>
+        <button class="brief-jump-btn" onclick="document.querySelector('[data-tab=\\'brief\\']').click()">${dict.viewBriefBtn || 'View Artist Brief'}</button>
         <button class="clear-btn" id="clear-btn">${dict.clearAll || 'Clear all'}</button>
       </div>
       ${renderGeoRow(highCount)}
@@ -4101,7 +4101,7 @@ function updatePrepCalculator() {
 
   let riskTag = '<span class="syncope-risk-tag low">' + uiText('x.low_syncope_risk', 'Low Syncope Risk') + '</span>';
   if (syncopeScore >= 4) {
-    riskTag = '<span class="syncope-risk-tag high">' + uiText('x.elevated_syncope_risk', '⚠️ Elevated Syncope Risk') + '</span>';
+    riskTag = '<span class="syncope-risk-tag high">' + uiText('x.elevated_syncope_risk', 'Elevated Syncope Risk') + '</span>';
   } else if (syncopeScore >= 2) {
     riskTag = '<span class="syncope-risk-tag mod">' + uiText('x.moderate_syncope_risk', 'Moderate Syncope Risk') + '</span>';
   }
@@ -4113,7 +4113,7 @@ function updatePrepCalculator() {
   resultsEl.innerHTML = `
     <div class="calc-result-box">
       <div class="calc-result-title">
-        <span>${uiText('x.target_hydration_plan', '💧 Target Hydration Plan')}</span>
+        <span>${uiText('x.target_hydration_plan', 'Target Hydration Plan')}</span>
         <span style="font-size:0.75rem; color:var(--primary); font-weight:700;">${totalWaterMl} ml (${totalWaterOz} oz)</span>
       </div>
       <div class="calc-result-desc">
@@ -4125,7 +4125,7 @@ function updatePrepCalculator() {
 
     <div class="calc-result-box">
       <div class="calc-result-title">
-        <span>${uiText('x.blood_sugar_fuel_schedule', '🍌 Blood Sugar & Fuel Schedule')}</span>
+        <span>${uiText('x.blood_sugar_fuel_schedule', 'Blood Sugar & Fuel Schedule')}</span>
         <span style="font-size:0.75rem; color:var(--primary); font-weight:700;">Glucose Target</span>
       </div>
       <div class="calc-result-desc">
@@ -4136,7 +4136,7 @@ function updatePrepCalculator() {
 
     <div class="calc-result-box">
       <div class="calc-result-title">
-        <span>${uiText('x.vasovagal_syncope_vitals_analysis', '💫 Vasovagal Syncope & Vitals Analysis')}</span>
+        <span>${uiText('x.vasovagal_syncope_vitals_analysis', 'Vasovagal Syncope & Vitals Analysis')}</span>
         ${riskTag}
       </div>
       <div class="calc-result-desc">
@@ -4199,14 +4199,14 @@ function updateArtistReadiness() {
 
   box.innerHTML = `
     <div class="readiness-checklist-title">
-      <span>${uiText('x.studio_precautions_checklist', '📋 Studio Precautions & Checklist')}</span>
+      <span>${uiText('x.studio_precautions_checklist', 'Studio Precautions & Checklist')}</span>
       <span style="font-size:0.75rem; color:var(--text-muted); font-weight:normal;">${uiText('x.tailored_for_artist_intake', 'Tailored for Artist Intake')}</span>
     </div>
     <ul class="readiness-list">
       ${checklistItems.map(item => `<li>${item}</li>`).join('')}
     </ul>
     <div class="readiness-actions">
-      <button class="action-btn secondary" id="copy-readiness-btn" style="font-size:0.78rem; padding:0.4rem 0.8rem;">${uiText('x.copy_artist_checklist', '📋 Copy Artist Checklist')}</button>
+      <button class="action-btn secondary" id="copy-readiness-btn" style="font-size:0.78rem; padding:0.4rem 0.8rem;">${uiText('x.copy_artist_checklist', 'Copy Artist Checklist')}</button>
     </div>
   `;
 
@@ -4215,8 +4215,8 @@ function updateArtistReadiness() {
     navigator.clipboard.writeText(uiText('x.cp_checklist_title', 'ARTIST SAFETY CHECKLIST:') + '\n• ' + text).then(() => {
       const btn = document.getElementById('copy-readiness-btn');
       if (btn) {
-        btn.textContent = uiText('x.cp_copied', '✅ Copied!');
-        setTimeout(() => { btn.textContent = uiText('x.copy_artist_checklist', '📋 Copy Artist Checklist'); }, 2000);
+        btn.textContent = uiText('x.cp_copied', 'Copied!');
+        setTimeout(() => { btn.textContent = uiText('x.copy_artist_checklist', 'Copy Artist Checklist'); }, 2000);
       }
     }).catch(() => {
       alert(uiText('x.alert_copy_failed', 'Copy failed. Please select the text and copy it manually.'));
@@ -4232,7 +4232,7 @@ function updateBriefTab() {
   if (checked.length === 0) {
     briefContentEl.innerHTML = `
       <div class="empty-brief-notice">
-        <p>⚠️ No medications selected yet.</p>
+        <p><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> No medications selected yet.</p>
         <p><a href="#" id="go-to-checker">${uiText('x.switch_to_the_interaction_checker', 'Switch to the Interaction Checker')}</a> ${uiText('x.and_select_your_medications_to_generate_brief', 'and select your medications to generate your custom consultation brief.')}</p>
       </div>`;
     briefActionsEl.style.display = 'none';
@@ -4253,7 +4253,7 @@ function updateBriefTab() {
       <div class="brief-meta">
         <div><strong>Date Generated:</strong> ${dateStr}</div>
         <div><strong>Total Disclosed Medications:</strong> ${checked.length}</div>
-        <div><strong>Risk Profile:</strong> ${highCount > 0 ? '⚠️ High Concern Items Present (Medical Clearance Recommended)' : '✅ Standard Care & Disclosure'}</div>
+        <div><strong>Risk Profile:</strong> ${highCount > 0 ? 'High Concern Items Present (Medical Clearance Recommended)' : 'Standard Care & Disclosure'}</div>
       </div>
 
       <div class="brief-section-title">Disclosed Medications & Procedural Impact</div>
@@ -4288,7 +4288,7 @@ function updateBriefTab() {
         <li><strong>Hydration & Calories:</strong> Client should eat a full complex carb meal 1-2 hours pre-session and maintain active hydration.</li>
         <li><strong>Client Positioning:</strong> ${highCount > 0 ? 'Recline client during procedure to manage potential vasovagal fainting or lightheadedness.' : 'Standard studio ergonomic seating.'}</li>
         <li><strong>Bleeding & Plasma Management:</strong> ${sorted.some(id => ['pain', 'blood', 'supplement'].includes(medMap[id].cat)) ? 'Expect elevated plasma weeping. Gentle dab wiping recommended to preserve ink setting.' : 'Standard wiping protocol.'}</li>
-        <li><strong>Aftercare Bandage Selection:</strong> ${sorted.some(id => ['retinoid', 'corticosteroid'].includes(medMap[id].cat)) ? '⚠️ Skin may be fragile. Avoid aggressive adhesive second-skin bandages (Saniderm/Tegaderm). Use non-stick pads or breathable cling wrap.' : 'Standard aftercare wrap applicable.'}</li>
+        <li><strong>Aftercare Bandage Selection:</strong> ${sorted.some(id => ['retinoid', 'corticosteroid'].includes(medMap[id].cat)) ? 'Skin may be fragile. Avoid aggressive adhesive second-skin bandages (Saniderm/Tegaderm). Use non-stick pads or breathable cling wrap.' : 'Standard aftercare wrap applicable.'}</li>
       </ul>
 
       <div class="brief-footer-note">
@@ -4334,7 +4334,7 @@ function copyBriefText() {
   navigator.clipboard.writeText(text).then(() => {
     const btn = document.getElementById('copy-brief-btn');
     const originalText = btn.innerHTML;
-    btn.innerHTML = uiText('x.cp_copied', '✅ Copied!');
+    btn.innerHTML = uiText('x.cp_copied', 'Copied!');
     setTimeout(() => { btn.innerHTML = originalText; }, 2000);
   }).catch(() => {
     alert(uiText('x.alert_copy_failed', 'Copy failed. Please select the text and copy it manually.'));
@@ -4622,7 +4622,7 @@ function copyDoctorMessage() {
   if (!modalDraftArea.value) return;
   navigator.clipboard.writeText(modalDraftArea.value).then(() => {
     const originalLabel = copyDocMsgBtn.innerHTML;
-    copyDocMsgBtn.innerHTML = uiText('x.cp_copied_clipboard', '✅ Copied to Clipboard!');
+    copyDocMsgBtn.innerHTML = uiText('x.cp_copied_clipboard', 'Copied to Clipboard!');
     setTimeout(() => { copyDocMsgBtn.innerHTML = originalLabel; }, 2000);
   }).catch(() => {
     alert(uiText('x.alert_copy_failed', 'Copy failed. Please select the text and copy it manually.'));
@@ -4734,10 +4734,10 @@ function renderQuizQuestion() {
   if (!container) return;
 
   if (quizCurrentIndex >= QUIZ_QUESTIONS.length) {
-    let rankTitle = '🏆 Master Studio Safety Expert!';
+    let rankTitle = 'Master Studio Safety Expert!';
     let rankDesc = 'Incredible job! You have an outstanding understanding of medication interactions, alcohol/substance risks, and studio aftercare safety.';
     if (quizScore < 5) {
-      rankTitle = '🩹 Studio Safety Apprentice';
+      rankTitle = 'Studio Safety Apprentice';
       rankDesc = 'Good effort! Review the Studio Safety guide and FAQs to sharpen your knowledge on painkillers, alcohol, and syncope prevention.';
     }
 
@@ -4746,7 +4746,7 @@ function renderQuizQuestion() {
         <div class="quiz-score-badge">${quizScore} / ${QUIZ_QUESTIONS.length}</div>
         <div class="quiz-rank-title">${rankTitle}</div>
         <div class="quiz-rank-desc">${rankDesc}</div>
-        <button class="quiz-next-btn" onclick="initQuiz()">🔄 Retake Quiz</button>
+        <button class="quiz-next-btn" onclick="initQuiz()"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-refresh></use></svg> Retake Quiz</button>
       </div>`;
     return;
   }
@@ -4769,7 +4769,7 @@ function renderQuizQuestion() {
         ${optionsHtml}
       </div>
       <div id="quiz-feedback" style="display:none;"></div>
-      <button class="quiz-next-btn" id="quiz-next-btn" style="display:none;">${escHtml(uiText('x.next_question', 'Next Question ➔'))}</button>
+      <button class="quiz-next-btn" id="quiz-next-btn" style="display:none;">${escHtml(uiText('x.next_question', 'Next Question'))}</button>
     </div>`;
 
   const optionBtns = container.querySelectorAll('.quiz-option-btn');
@@ -4793,7 +4793,7 @@ function renderQuizQuestion() {
       feedbackEl.style.display = 'block';
       feedbackEl.className = `quiz-feedback-box ${isCorrect ? 'correct' : 'incorrect'}`;
       feedbackEl.innerHTML = `
-        <strong>${isCorrect ? '✅ Correct!' : '❌ Incorrect!'}</strong> ${escHtml(item.explanation)}
+        <strong>${isCorrect ? 'Correct!' : 'Incorrect!'}</strong> ${escHtml(item.explanation)}
       `;
 
       const nextBtn = document.getElementById('quiz-next-btn');
@@ -4930,7 +4930,7 @@ function renderRecentSearches() {
 
   box.style.display = 'block';
   container.innerHTML = searches.map(s => `
-    <button class="recent-chip" data-term="${escHtml(s)}">🕒 ${escHtml(s)}</button>
+    <button class="recent-chip" data-term="${escHtml(s)}"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clock></use></svg> ${escHtml(s)}</button>
   `).join('');
 
   container.querySelectorAll('.recent-chip').forEach(btn => {
@@ -5119,19 +5119,19 @@ function renderHealingJourneyTimeline(procType) {
 
   if (isTattoo) {
     if (selectedCats.some(c => ['pain', 'blood', 'substance'].includes(c))) {
-      tattooStages[0].alerts.push('🩸 <strong>Bleeding & Plasma Risk:</strong> Disclosed NSAIDs, Anticoagulants, or Alcohol delay platelet aggregation. Expect elevated plasma weeping during Days 1–3. Dab gently with clean paper towel.');
+      tattooStages[0].alerts.push('<strong>Bleeding & Plasma Risk:</strong> Disclosed NSAIDs, Anticoagulants, or Alcohol delay platelet aggregation. Expect elevated plasma weeping during Days 1–3. Dab gently with clean paper towel.');
     }
     if (selectedCats.includes('numbing')) {
-      tattooStages[0].alerts.push('⚡ <strong>Rebound Edema Alert:</strong> Localized numbing cream wearing off causes rebound vasodilation, increasing throbbing and plasma outflow in Stage 1.');
+      tattooStages[0].alerts.push('<strong>Rebound Edema Alert:</strong> Localized numbing cream wearing off causes rebound vasodilation, increasing throbbing and plasma outflow in Stage 1.');
     }
     if (selectedCats.some(c => ['retinoid', 'corticosteroid'].includes(c))) {
-      tattooStages[1].alerts.push('⚡ <strong>Skin Fragility Warning:</strong> Isotretinoin (Accutane) or Corticosteroids impair epidermal cell turnover. Avoid aggressive adhesive second-skin bandages (Saniderm/Tegaderm). Use non-stick pads.');
+      tattooStages[1].alerts.push('<strong>Skin Fragility Warning:</strong> Isotretinoin (Accutane) or Corticosteroids impair epidermal cell turnover. Avoid aggressive adhesive second-skin bandages (Saniderm/Tegaderm). Use non-stick pads.');
     }
     if (selectedCats.some(c => ['immuno', 'metabolic'].includes(c))) {
-      tattooStages[2].alerts.push('🛡️ <strong>Delayed Dermal Repair:</strong> Disclosed Immunosuppressants or GLP-1/Diabetes medications slow collagen synthesis and cellular repair during Stage 3. Maintain strict hygiene.');
+      tattooStages[2].alerts.push('<strong>Delayed Dermal Repair:</strong> Disclosed Immunosuppressants or GLP-1/Diabetes medications slow collagen synthesis and cellular repair during Stage 3. Maintain strict hygiene.');
     }
     if (selectedCats.includes('hormone')) {
-      tattooStages[2].alerts.push('☀️ <strong>Hyperpigmentation Risk:</strong> Estrogen/HRT fluctuations increase melanocyte sensitivity. Apply daily SPF 50+ broad spectrum sunscreen once skin is scab-free.');
+      tattooStages[2].alerts.push('<strong>Hyperpigmentation Risk:</strong> Estrogen/HRT fluctuations increase melanocyte sensitivity. Apply daily SPF 50+ broad spectrum sunscreen once skin is scab-free.');
     }
   }
 
@@ -5169,19 +5169,19 @@ function renderHealingJourneyTimeline(procType) {
 
   if (!isTattoo) {
     if (selectedCats.some(c => ['pain', 'blood', 'substance'].includes(c))) {
-      piercingStages[0].alerts.push('🩸 <strong>Prolonged Channel Oozing:</strong> NSAIDs or Anticoagulants prolong capillary weeping around metal posts during Days 1–3. Do NOT rotate or twist jewelry.');
+      piercingStages[0].alerts.push('<strong>Prolonged Channel Oozing:</strong> NSAIDs or Anticoagulants prolong capillary weeping around metal posts during Days 1–3. Do NOT rotate or twist jewelry.');
     }
     if (selectedCats.includes('numbing')) {
-      piercingStages[0].alerts.push('⚡ <strong>Post-Numbing Swelling:</strong> Swelling from topical anesthetic may cause jewelry posts to press tight against tissue as numbing wears off.');
+      piercingStages[0].alerts.push('<strong>Post-Numbing Swelling:</strong> Swelling from topical anesthetic may cause jewelry posts to press tight against tissue as numbing wears off.');
     }
     if (selectedCats.includes('retinoid')) {
-      piercingStages[1].alerts.push('⚡ <strong>Severe Fistula Impairment:</strong> Isotretinoin (Accutane) halts normal epithelial cell migration. Ear/nose piercing fistulas may remain raw, crusty, and unhealed for months.');
+      piercingStages[1].alerts.push('<strong>Severe Fistula Impairment:</strong> Isotretinoin (Accutane) halts normal epithelial cell migration. Ear/nose piercing fistulas may remain raw, crusty, and unhealed for months.');
     }
     if (selectedCats.some(c => ['immuno', 'corticosteroid'].includes(c))) {
-      piercingStages[2].alerts.push('🛡️ <strong>High Cartilage Infection Risk:</strong> Immunosuppressive therapy impairs localized bacterial defenses. Apply sterile 0.9% saline spray twice daily.');
+      piercingStages[2].alerts.push('<strong>High Cartilage Infection Risk:</strong> Immunosuppressive therapy impairs localized bacterial defenses. Apply sterile 0.9% saline spray twice daily.');
     }
     if (selectedCats.includes('stimulant')) {
-      piercingStages[1].alerts.push('🫀 <strong>Microvascular Constriction:</strong> ADHD stimulants constrict skin capillaries. Ensure hydration and avoid over-cleansing with harsh soaps.');
+      piercingStages[1].alerts.push('<strong>Microvascular Constriction:</strong> ADHD stimulants constrict skin capillaries. Ensure hydration and avoid over-cleansing with harsh soaps.');
     }
   }
 
@@ -5274,7 +5274,7 @@ function generatePrintCoverPage() {
       <div class="cover-meta-item" style="grid-column: span 2;">
         <strong>Procedural Risk Profile:</strong>
         <span style="font-weight:bold; color: ${highCount > 0 ? '#dc2626' : '#16a34a'};">
-          ${highCount > 0 ? `⚠️ High Concern Items Present (${highCount} High Risk Item${highCount > 1 ? 's' : ''})` : '✅ Standard Care & Disclosure (Low / Moderate Risk Profile)'}
+          ${highCount > 0 ? `High Concern Items Present (${highCount} High Risk Item${highCount > 1 ? 's' : ''})` : 'Standard Care & Disclosure (Low / Moderate Risk Profile)'}
         </span>
       </div>
     </div>
@@ -5435,12 +5435,12 @@ function copyShareableDeepLink() {
   const link = generateShareableDeepLink();
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(link).then(() => {
-      showToast(uiText('x.cp_link_copied', '📲 Shareable intake deep link copied to clipboard!'));
+      showToast(uiText('x.cp_link_copied', 'Shareable intake deep link copied to clipboard!'));
     }).catch(() => {
-      showToast(fallbackCopyText(link) ? uiText('x.cp_link_copied', '📲 Shareable intake deep link copied to clipboard!') : uiText('x.alert_copy_failed', 'Copy failed. Please select the text and copy it manually.'));
+      showToast(fallbackCopyText(link) ? uiText('x.cp_link_copied', 'Shareable intake deep link copied to clipboard!') : uiText('x.alert_copy_failed', 'Copy failed. Please select the text and copy it manually.'));
     });
   } else {
-    showToast(fallbackCopyText(link) ? uiText('x.cp_link_copied', '📲 Shareable intake deep link copied to clipboard!') : uiText('x.alert_copy_failed', 'Copy failed. Please select the text and copy it manually.'));
+    showToast(fallbackCopyText(link) ? uiText('x.cp_link_copied', 'Shareable intake deep link copied to clipboard!') : uiText('x.alert_copy_failed', 'Copy failed. Please select the text and copy it manually.'));
   }
 }
 
@@ -5484,7 +5484,7 @@ function initDeepLinkFromUrl() {
   if (loadedCount > 0) {
     renderResults();
     updateBriefCount();
-    showToast(`📲 Shared intake link loaded: ${loadedCount} medication${loadedCount > 1 ? 's' : ''} pre-selected.`);
+    showToast(`Shared intake link loaded: ${loadedCount} medication${loadedCount > 1 ? 's' : ''} pre-selected.`);
   }
 }
 
@@ -5505,7 +5505,7 @@ function renderRemindersTab() {
   if (checked.length === 0) {
     container.innerHTML = `
       <div class="empty-brief-notice">
-        <p>⏰ No medications selected for washout calculation.</p>
+        <p><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clock></use></svg> No medications selected for washout calculation.</p>
         <p><a href="#" id="go-to-checker">Switch to the Interaction Checker</a> to select your medications and view specific pre-procedure discontinuation deadlines.</p>
       </div>`;
     return;
@@ -5518,7 +5518,7 @@ function renderRemindersTab() {
   if (washoutMeds.length === 0) {
     container.innerHTML = `
       <div class="empty-brief-notice" style="background:rgba(63, 185, 80, 0.08); border-color:#3fb950;">
-        <p>✅ All selected items have standard procedural safety.</p>
+        <p><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> All selected items have standard procedural safety.</p>
         <p>Maintain routine daily dosing unless explicitly directed by your prescribing physician.</p>
       </div>`;
     return;
@@ -5543,7 +5543,7 @@ function renderRemindersTab() {
       const diffMs = stopDeadline.getTime() - now.getTime();
 
       if (diffMs <= 0) {
-        countdownStr = '⚠️ STOP IMMEDIATELY (Discontinuation deadline passed or imminent)';
+        countdownStr = 'STOP IMMEDIATELY (Discontinuation deadline passed or imminent)';
       } else {
         const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -5555,7 +5555,7 @@ function renderRemindersTab() {
         parts.push(`${mins}m`);
 
         const formattedDeadline = stopDeadline.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-        countdownStr = `⏱️ Stop Intake Deadline: <strong>${formattedDeadline}</strong> (${parts.join(' ')} remaining)`;
+        countdownStr = `Stop Intake Deadline: <strong>${formattedDeadline}</strong> (${parts.join(' ')} remaining)`;
       }
     }
 
@@ -5576,8 +5576,8 @@ function renderRemindersTab() {
           <span>${countdownStr}</span>
         </div>
         <div class="reminder-card-actions">
-          <button class="reminder-action-btn" onclick="scheduleIndividualAlert('${escHtml(m.name)}')">🔔 Set 24h Alert</button>
-          <button class="reminder-action-btn" onclick="exportMedIcsEvent('${escHtml(m.name)}', '${escHtml(m.wait || 'Discontinue medication prior to appointment')}')">📅 Add to Calendar (.ics)</button>
+          <button class="reminder-action-btn" onclick="scheduleIndividualAlert('${escHtml(m.name)}')"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bell></use></svg> Set 24h Alert</button>
+          <button class="reminder-action-btn" onclick="exportMedIcsEvent('${escHtml(m.name)}', '${escHtml(m.wait || 'Discontinue medication prior to appointment')}')"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-calendar></use></svg> Add to Calendar (.ics)</button>
         </div>
       </div>
     `;
@@ -5593,7 +5593,7 @@ function saveAppointmentDate() {
     return;
   }
   localStorage.setItem('appointment_datetime', inputEl.value);
-  showToast('📅 Appointment date saved! Live washout countdowns calculated.');
+  showToast('Appointment date saved! Live washout countdowns calculated.');
   renderRemindersTab();
 }
 
@@ -5604,7 +5604,7 @@ function enableBrowserNotifications() {
   }
 
   if (Notification.permission === 'granted') {
-    showToast('🔔 Browser notifications active! Alerts will fire before your session.');
+    showToast('Browser notifications active! Alerts will fire before your session.');
     new Notification('Poli Safety Reference', {
       body: 'Browser alerts active for your pre-procedure medication washout deadlines!',
       icon: '/favicon.ico'
@@ -5612,7 +5612,7 @@ function enableBrowserNotifications() {
   } else if (Notification.permission !== 'denied') {
     Notification.requestPermission().then(permission => {
       if (permission === 'granted') {
-        showToast('🔔 Browser notifications enabled!');
+        showToast('Browser notifications enabled!');
         new Notification('Poli Safety Reference', {
           body: 'Notifications active! We will remind you when to stop taking specific medications.',
           icon: '/favicon.ico'
@@ -5626,7 +5626,7 @@ function enableBrowserNotifications() {
 
 function scheduleIndividualAlert(medName) {
   enableBrowserNotifications();
-  showToast(`🔔 Notification reminder scheduled for ${medName}!`);
+  showToast(`Notification reminder scheduled for ${medName}!`);
 }
 
 function exportMedIcsEvent(medName, waitText) {
@@ -5672,7 +5672,7 @@ function exportMedIcsEvent(medName, waitText) {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 
-  showToast(`📅 Calendar event (.ics) for ${medName} exported!`);
+  showToast(`Calendar event (.ics) for ${medName} exported!`);
 }
 
 function exportCalendarEvent() {
@@ -5723,13 +5723,13 @@ function exportCalendarEvent() {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 
-  showToast('📅 Full session calendar reminder (.ics) exported!');
+  showToast('Full session calendar reminder (.ics) exported!');
 }
 
 /* Quick Print Functionality */
 function triggerQuickPrint() {
   updateBriefTab();
-  showToast('🖨️ Opening print dialog...');
+  showToast('Opening print dialog...');
   setTimeout(() => {
     window.print();
   }, 150);
@@ -5794,7 +5794,7 @@ function exportGoogleCalendarIcs() {
 
   events.push([
     'BEGIN:VEVENT',
-    'SUMMARY:🎨 Tattoo / Piercing Studio Appointment',
+    'SUMMARY:Tattoo / Piercing Studio Appointment',
     `DESCRIPTION:Scheduled appointment at studio.\\nDisclosed Medications & Washouts: ${medsSummary}`,
     `DTSTART:${apptStartIso}`,
     `DTEND:${apptEndIso}`,
@@ -5826,7 +5826,7 @@ function exportGoogleCalendarIcs() {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 
-  showToast('📅 Google Calendar .ics file pre-filled & downloaded!');
+  showToast('Google Calendar .ics file pre-filled & downloaded!');
 }
 
 /* Direct Google Calendar Web Event Opener */
@@ -5856,7 +5856,7 @@ function openGoogleCalendarWeb() {
   const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startStr}/${endStr}&details=${encodeURIComponent(details)}`;
 
   window.open(gcalUrl, '_blank');
-  showToast('🌐 Opening Google Calendar with pre-filled washout details...');
+  showToast('Opening Google Calendar with pre-filled washout details...');
 }
 
 

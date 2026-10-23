@@ -523,6 +523,15 @@ function buildFlaggedCard(sub, query, matchType, confidence = 'high', matchedTok
   const reasonBadge = `<span class="badge badge--danger">${escHtml(t(reasonShortKey))}</span>`;
   const casDisplay = (sub.cas || []).join(', ');
 
+  // Not on the Candidate List, but restricted in body art by other EU law: say so, with the legal basis
+  const notCandidateBadge = sub.not_on_candidate_list ? `<span class="badge badge--neutral">${escHtml(t('card.not_candidate'))}</span>` : '';
+  const legalBasisHtml = sub.not_on_candidate_list ? `
+      <div class="concentration-banner concentration-banner--ambiguous" style="margin-bottom:0.75rem">
+        <strong>${escHtml(t('card.label_legal_basis'))}</strong>
+        <span>${escHtml(t('card.not_candidate_note'))}</span>
+        <ul style="margin:0.35rem 0 0 1.1rem;padding:0">${(sub.legal_basis || []).map((b) => `<li>${escHtml(b.law === 'pops' ? t('legal.pops') : t('legal.entry', { n: b.entry }))} (${escHtml(t('legal_scope.' + b.scope))}): ${escHtml(b.limit === 'prohibited' ? t('legal.prohibited') : b.limit)}</li>`).join('')}</ul>
+      </div>` : '';
+
   // Match description
   let matchNote = '';
   if (matchType === 'cas') {
@@ -610,6 +619,7 @@ function buildFlaggedCard(sub, query, matchType, confidence = 'high', matchedTok
         <div class="card-match-reason">${escHtml(matchNote)}</div>
       </div>
       <div class="card-badges">
+        ${notCandidateBadge}
         ${reasonBadge}
         ${relevanceBadge}
         ${confBadge}
@@ -617,6 +627,7 @@ function buildFlaggedCard(sub, query, matchType, confidence = 'high', matchedTok
       <span class="card-chevron" aria-hidden="true">▼</span>
     </div>
     <div class="card-body">
+      ${legalBasisHtml}
       ${concentrationHtml}
       <div class="detail-grid">
         <div class="detail-item">

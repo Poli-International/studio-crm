@@ -1,23 +1,24 @@
 /*
   REACH SVHC Candidate List - Body Art Curated Edition
   Poli International | 2026
-  Snapshot date: 27 June 2024 (ECHA Candidate List release)
+  Checked against the ECHA Candidate List of 4 February 2026 (253 entries; export of 12 July 2026)
   Source: ECHA Candidate List (https://echa.europa.eu/candidate-list-table)
-  Curated subset of 51 substances, selected from the Candidate List as of 27 June 2024
-  (253 entries as of 4 February 2026),
+  51 substances: 40 on the Candidate List, 11 not on it but restricted in body art by other EU law
+  (flagged not_on_candidate_list, with legal_basis),
   selected specifically for relevance to body art (tattoo inks, PMU pigments,
   body jewelry alloys, and studio consumables).
   Always verify against the official ECHA Candidate List for legally binding information.
 */
 
 const SVHC_METADATA = {
-  listDate: '27 June 2024',
-  snapshotIso: '2024-06-27',
+  listDate: '4 February 2026',
+  snapshotIso: '2026-02-04',
+  checkedIso: '2026-10-23', // the day this list was compared with ECHA's; the six-month notice counts from here
   // Verified 2026-09-15 by the site's REACH Monitor: 253 entries since ECHA's 4 February 2026
   // update. The curated subset below was selected from the list as of listDate and has not yet
   // been re-screened for later additions; the stale banner tells readers to check ECHA.
   officialTotal: 253,
-  subsetCount: 51,
+  subsetCount: 40,
   sourceUrl: 'https://echa.europa.eu/candidate-list-table'
 };
 
@@ -26,7 +27,7 @@ const SVHC_TOTAL_OFFICIAL = SVHC_METADATA.officialTotal;
 const SVHC_SUBSET_COUNT = SVHC_METADATA.subsetCount;
 
 function isSnapshotStale() {
-  const snapTime = new Date(SVHC_METADATA.snapshotIso).getTime();
+  const snapTime = new Date(SVHC_METADATA.checkedIso || SVHC_METADATA.snapshotIso).getTime();
   const now = Date.now();
   const daysOld = (now - snapTime) / (1000 * 60 * 60 * 24);
   return {
@@ -46,8 +47,10 @@ const SVHC_DATA = [
     name: 'Nickel',
     cas: ['7440-02-0'],
     ec: '231-111-4',
-    reason: 'Carcinogenic (Cat. 1A), Mutagenic (Cat. 2)',
-    reason_short: 'CMR',
+    not_on_candidate_list: true,
+    legal_basis: [{"entry": 75, "scope": "tattoo_inks", "limit": "0.0005 %"}, {"entry": 27, "scope": "jewelry_release", "limit": "0.2 µg/cm²/week (piercing posts), 0.5 µg/cm²/week (skin contact)"}],
+    reason: 'Carcinogenic (Cat. 2), Skin sensitiser (Cat. 1)',
+    reason_short: 'Carcinogenic',
     category: 'metal',
     body_art_relevance: 'high',
     found_in: ['piercing jewelry (low-grade alloys)', 'tattoo inks (trace)', 'studio tools & needles'],
@@ -59,7 +62,9 @@ const SVHC_DATA = [
     name: 'Cobalt',
     cas: ['7440-48-4'],
     ec: '231-158-0',
-    reason: 'Carcinogenic (Cat. 1B), Mutagenic (Cat. 2), Reprotoxic (Cat. 2)',
+    not_on_candidate_list: true,
+    legal_basis: [{"entry": 75, "scope": "tattoo_inks", "limit": "0.00005 %"}],
+    reason: 'Carcinogenic (Cat. 1B), Mutagenic (Cat. 2), Reprotoxic (Cat. 1B)',
     reason_short: 'CMR',
     category: 'metal',
     body_art_relevance: 'high',
@@ -72,7 +77,7 @@ const SVHC_DATA = [
     name: 'Cobalt dichloride',
     cas: ['7646-79-9', '69872-05-5'],
     ec: '231-589-4',
-    reason: 'Carcinogenic (Cat. 1B), Mutagenic (Cat. 2), Reprotoxic (Cat. 2)',
+    reason: 'Carcinogenic (Cat. 1B), Mutagenic (Cat. 2), Reprotoxic (Cat. 1B)',
     reason_short: 'CMR',
     category: 'metal',
     body_art_relevance: 'medium',
@@ -85,7 +90,7 @@ const SVHC_DATA = [
     name: 'Cobalt(II) sulphate',
     cas: ['10124-43-3'],
     ec: '233-334-2',
-    reason: 'Carcinogenic (Cat. 1B), Mutagenic (Cat. 2), Reprotoxic (Cat. 2)',
+    reason: 'Carcinogenic (Cat. 1B), Mutagenic (Cat. 2), Reprotoxic (Cat. 1B)',
     reason_short: 'CMR',
     category: 'metal',
     body_art_relevance: 'medium',
@@ -111,7 +116,7 @@ const SVHC_DATA = [
     name: 'Cadmium sulphide',
     cas: ['1306-23-6'],
     ec: '215-147-8',
-    reason: 'Carcinogenic (Cat. 2), Mutagenic (Cat. 2)',
+    reason: 'Carcinogenic (Cat. 1B), Mutagenic (Cat. 2)',
     reason_short: 'CMR',
     category: 'metal',
     body_art_relevance: 'high',
@@ -124,7 +129,7 @@ const SVHC_DATA = [
     name: 'Cadmium chloride',
     cas: ['10108-64-2'],
     ec: '233-296-7',
-    reason: 'Carcinogenic (Cat. 1B), Mutagenic (Cat. 1B), Reprotoxic (Cat. 2)',
+    reason: 'Carcinogenic (Cat. 1B), Mutagenic (Cat. 1B), Reprotoxic (Cat. 1B)',
     reason_short: 'CMR',
     category: 'metal',
     body_art_relevance: 'medium',
@@ -150,7 +155,7 @@ const SVHC_DATA = [
     name: 'Lead chromate',
     cas: ['7758-97-6'],
     ec: '231-846-0',
-    reason: 'Carcinogenic (Cat. 1A/1B), Reprotoxic (Cat. 1A)',
+    reason: 'Carcinogenic (Cat. 1B), Reprotoxic (Cat. 1A)',
     reason_short: 'CMR',
     category: 'metal',
     body_art_relevance: 'medium',
@@ -163,7 +168,7 @@ const SVHC_DATA = [
     name: 'Lead sulfochromate yellow',
     cas: ['1344-37-2'],
     ec: '215-693-7',
-    reason: 'Carcinogenic (Cat. 1A/1B), Reprotoxic (Cat. 1A)',
+    reason: 'Carcinogenic (Cat. 1B), Reprotoxic (Cat. 1A)',
     reason_short: 'CMR',
     category: 'metal',
     body_art_relevance: 'medium',
@@ -176,6 +181,8 @@ const SVHC_DATA = [
     name: 'Mercury',
     cas: ['7439-97-6'],
     ec: '231-106-7',
+    not_on_candidate_list: true,
+    legal_basis: [{"entry": 75, "scope": "tattoo_inks", "limit": "0.00005 %"}],
     reason: 'PBT (Persistent, Bioaccumulative, Toxic)',
     reason_short: 'PBT',
     category: 'metal',
@@ -202,7 +209,7 @@ const SVHC_DATA = [
     name: 'Potassium dichromate',
     cas: ['7778-50-9'],
     ec: '231-906-6',
-    reason: 'Carcinogenic (Cat. 1A), Mutagenic (Cat. 1B), Reprotoxic (Cat. 2)',
+    reason: 'Carcinogenic (Cat. 1B), Mutagenic (Cat. 1B), Reprotoxic (Cat. 1B)',
     reason_short: 'CMR',
     category: 'metal',
     body_art_relevance: 'medium',
@@ -215,7 +222,7 @@ const SVHC_DATA = [
     name: 'Sodium dichromate',
     cas: ['10588-01-9', '7789-12-0'],
     ec: '234-190-3',
-    reason: 'Carcinogenic (Cat. 1A), Mutagenic (Cat. 1B), Reprotoxic (Cat. 2)',
+    reason: 'Carcinogenic (Cat. 1B), Mutagenic (Cat. 1B), Reprotoxic (Cat. 1B)',
     reason_short: 'CMR',
     category: 'metal',
     body_art_relevance: 'medium',
@@ -228,7 +235,7 @@ const SVHC_DATA = [
     name: 'Strontium chromate',
     cas: ['7789-06-2'],
     ec: '232-142-6',
-    reason: 'Carcinogenic (Cat. 1A)',
+    reason: 'Carcinogenic (Cat. 1B)',
     reason_short: 'Carcinogenic',
     category: 'metal',
     body_art_relevance: 'low',
@@ -285,6 +292,8 @@ const SVHC_DATA = [
     name: 'Benzo[e]pyrene',
     cas: ['192-97-2'],
     ec: '205-892-7',
+    not_on_candidate_list: true,
+    legal_basis: [{"entry": 75, "scope": "tattoo_inks_pah", "limit": "0.00005 %"}, {"entry": 50, "scope": "skin_contact_articles", "limit": "1 mg/kg"}],
     reason: 'Carcinogenic (Cat. 1B)',
     reason_short: 'Carcinogenic',
     category: 'pah',
@@ -324,6 +333,8 @@ const SVHC_DATA = [
     name: 'Benzo[b]fluoranthene',
     cas: ['205-99-2'],
     ec: '205-911-9',
+    not_on_candidate_list: true,
+    legal_basis: [{"entry": 75, "scope": "tattoo_inks_pah", "limit": "0.00005 %"}, {"entry": 50, "scope": "skin_contact_articles", "limit": "1 mg/kg"}],
     reason: 'Carcinogenic (Cat. 1B)',
     reason_short: 'Carcinogenic',
     category: 'pah',
@@ -337,6 +348,8 @@ const SVHC_DATA = [
     name: 'Benzo[j]fluoranthene',
     cas: ['205-97-0'],
     ec: '205-910-3',
+    not_on_candidate_list: true,
+    legal_basis: [{"entry": 75, "scope": "tattoo_inks_pah", "limit": "0.00005 %"}, {"entry": 50, "scope": "skin_contact_articles", "limit": "1 mg/kg"}],
     reason: 'Carcinogenic (Cat. 1B)',
     reason_short: 'Carcinogenic',
     category: 'pah',
@@ -363,6 +376,8 @@ const SVHC_DATA = [
     name: 'Dibenzo[a,h]anthracene',
     cas: ['53-70-3'],
     ec: '200-179-4',
+    not_on_candidate_list: true,
+    legal_basis: [{"entry": 75, "scope": "tattoo_inks_pah", "limit": "0.00005 %"}, {"entry": 50, "scope": "skin_contact_articles", "limit": "1 mg/kg"}],
     reason: 'Carcinogenic (Cat. 1B)',
     reason_short: 'Carcinogenic',
     category: 'pah',
@@ -376,6 +391,8 @@ const SVHC_DATA = [
     name: 'Indeno[1,2,3-cd]pyrene',
     cas: ['193-39-5'],
     ec: '205-893-2',
+    not_on_candidate_list: true,
+    legal_basis: [{"entry": 75, "scope": "tattoo_inks_pah", "limit": "0.00005 %"}],
     reason: 'Carcinogenic (Cat. 1B)',
     reason_short: 'Carcinogenic',
     category: 'pah',
@@ -491,6 +508,8 @@ const SVHC_DATA = [
     name: 'Benzidine',
     cas: ['92-87-5'],
     ec: '202-199-1',
+    not_on_candidate_list: true,
+    legal_basis: [{"entry": 75, "scope": "tattoo_inks", "limit": "0.0005 %"}],
     reason: 'Carcinogenic (Cat. 1A)',
     reason_short: 'Carcinogenic',
     category: 'amine',
@@ -517,6 +536,8 @@ const SVHC_DATA = [
     name: '2-naphthylamine',
     cas: ['91-59-8'],
     ec: '202-080-4',
+    not_on_candidate_list: true,
+    legal_basis: [{"entry": 75, "scope": "tattoo_inks", "limit": "0.0005 %"}],
     reason: 'Carcinogenic (Cat. 1A)',
     reason_short: 'Carcinogenic',
     category: 'amine',
@@ -560,7 +581,7 @@ const SVHC_DATA = [
     name: 'Trichloroethylene',
     cas: ['79-01-6'],
     ec: '201-167-4',
-    reason: 'Carcinogenic (Cat. 1A)',
+    reason: 'Carcinogenic (Cat. 1B), Mutagenic (Cat. 2)',
     reason_short: 'Carcinogenic',
     category: 'solvent',
     body_art_relevance: 'medium',
@@ -647,6 +668,8 @@ const SVHC_DATA = [
     name: 'Perfluorooctane sulphonate (PFOS)',
     cas: ['1763-23-1'],
     ec: '217-179-8',
+    not_on_candidate_list: true,
+    legal_basis: [{"law": "pops", "scope": "pops", "limit": "prohibited"}],
     reason: 'PBT, vPvB, Endocrine Disruptor',
     reason_short: 'PBT + vPvB + ED',
     category: 'pfas',
@@ -660,7 +683,7 @@ const SVHC_DATA = [
     name: 'Perfluorooctanoic acid (PFOA)',
     cas: ['335-67-1'],
     ec: '206-397-9',
-    reason: 'PBT, Carcinogenic (Cat. 1B)',
+    reason: 'PBT, Carcinogenic (Cat. 2), Reprotoxic (Cat. 1B)',
     reason_short: 'PBT + Carcinogenic',
     category: 'pfas',
     body_art_relevance: 'medium',

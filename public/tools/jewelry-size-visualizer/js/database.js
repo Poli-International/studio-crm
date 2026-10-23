@@ -409,7 +409,7 @@ const JewelryDatabase = [
     // ===================================
     {
         id: 'plug-001',
-        name: 'Single Flare Glass Plug 2g (6mm)',
+        name: 'Single Flare Glass Plug 2g (6.5 mm; often sold as 6 mm)',
         category: 'plugs',
         gauge: '2g',
         diameter: 0.236,

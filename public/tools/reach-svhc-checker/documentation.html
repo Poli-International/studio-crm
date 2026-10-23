@@ -14,7 +14,7 @@
         .doc-hero { background: linear-gradient(135deg, #3B82F6, #8B5CF6); padding: 3rem 2rem; text-align: center; border-radius: 0.75rem; margin-bottom: 2rem; }
         .doc-hero h1 { font-size: 2.2rem; margin: 0 0 1rem; font-weight: 700; }
         .doc-hero p { font-size: 1.15rem; color: #E0E7FF; margin: 0; }
-        .doc-hero .v2 { display: inline-block; margin-bottom: 1rem; padding: 0.2rem 0.75rem; border-radius: 999px; background: #10B981; color: #04241a; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; }
+        .doc-hero .v2 { display: inline-block; margin-bottom: 1rem; padding: 0.2rem 0.75rem; border-radius: 999px; background: #10B981; color: #04253a; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; }
         .doc-section { margin: 2rem 0; padding: 2rem; background: #1a1a1a; border-radius: 0.75rem; border-left: 4px solid #3B82F6; }
         .doc-section h2 { color: #60A5FA; font-size: 1.7rem; margin: 0 0 1.25rem; font-weight: 600; }
         .doc-section h3 { color: #A78BFA; font-size: 1.3rem; margin: 1.75rem 0 0.75rem; font-weight: 600; }
@@ -47,7 +47,7 @@
         <div class="doc-section">
         <h2>What it is for</h2>
         <p>The REACH SVHC Pigment Checker screens chemical names, commercial aliases, and Chemical Abstracts Service (CAS) registry numbers against a curated subset of Substances of Very High Concern (SVHCs). The European Chemicals Agency (ECHA) manages the Candidate List under Regulation (EC) No 1907/2006 (REACH). When a substance enters the Candidate List, EU suppliers must disclose its presence above 0.1 percent weight by weight (w/w).</p>
-        <p>This tool compares single queries or Safety Data Sheet (SDS) composition blocks against 51 curated body-art entries from the official 241-substance ECHA snapshot (27 June 2024), presenting hazard classifications, studio uses, and match confidence tiers.</p>
+        <p>This tool compares single queries or Safety Data Sheet (SDS) composition blocks against 51 curated body-art entries from the official 253-substance ECHA snapshot (4 February 2026), presenting hazard classifications, studio uses, and match confidence tiers.</p>
         </div>
         <div class="doc-section">
         <h2>Who it is for</h2>
@@ -162,7 +162,7 @@
         <ul>
         <li><strong>Browser print stylesheet:</strong> You can print screening results or save them as a clean PDF using your browser print command (Ctrl+P or Cmd+P).</li>
         <li><strong>Print layout optimization:</strong> The stylesheet removes navigation tabs, buttons, search inputs, and modal backgrounds when printing.</li>
-        <li><strong>Audit header and footer:</strong> Printed records include the search date, the curated snapshot designation (51 of 253 substances, 27 June 2024 snapshot), and the tool URL (https://poliinternational.com/tools/reach-svhc-checker/index.html) for studio compliance records.</li>
+        <li><strong>Audit header and footer:</strong> Printed records include the search date, the curated snapshot designation (51 of 253 substances, 4 February 2026 snapshot), and the tool URL (https://poliinternational.com/tools/reach-svhc-checker/index.html) for studio compliance records.</li>
         </ul>
         </div>
         <div class="doc-section">
@@ -176,14 +176,14 @@
         <h3>How does the bulk SDS scanner extract chemical ingredients?</h3>
         <p>The bulk scanner parses text blocks using regular expressions that identify standard Chemical Abstracts Service (CAS) registry numbers formatted as two to seven digits, a hyphen, two digits, a hyphen, and a single check digit. It also strips percentage concentration figures, separates ingredients by commas, semicolons, or line breaks, and matches remaining chemical names and aliases against its indexed substance database.</p>
         <h3>What should a studio do if an ingredient is flagged as an SVHC?</h3>
-        <p>If an ingredient is flagged, check Section 3 of your supplier Safety Data Sheet to determine its stated concentration. Under European REACH Article 33, suppliers must notify recipients if an SVHC exceeds 0.1 percent weight by weight (w/w). If the substance is present above regulatory limits or restricted under REACH Annex XVII, contact your supplier immediately for technical clarification and quarantine the stock until full compliance is confirmed in writing.</p>
+        <p>If an ingredient is flagged, check Section 3 of your supplier Safety Data Sheet to determine its stated concentration. Under REACH Article 33, a supplier of an article (such as jewelry) containing a Candidate List substance above 0.1 percent weight by weight (w/w) must tell recipients, and consumers who ask within 45 days; for mixtures such as inks, Article 31 requires a Safety Data Sheet on request when a Candidate List substance is present at 0.1 percent or more. If the substance is present above regulatory limits or restricted under REACH Annex XVII, contact your supplier immediately for technical clarification and quarantine the stock until full compliance is confirmed in writing.</p>
         <h3>What is the difference between an SVHC Candidate List substance and an Annex XVII restriction?</h3>
         <p>The Candidate List identifies candidate substances under evaluation for authorization under REACH Title VII, triggering immediate disclosure duties when present above 0.1 percent w/w. Annex XVII represents REACH Title VIII restrictions that legally prohibit or limit the manufacture, marketing, or use of specific substances in consumer products regardless of authorization status, such as Entry 27 for nickel release in jewelry and Entry 75 for chemical substances in tattoo inks.</p>
         </div>
         <div class="doc-section">
         <h2>Limits</h2>
         <ul>
-        <li><strong>Static curated snapshot:</strong> The database represents a curated subset of 51 substances drawn from the ECHA Candidate List release of 27 June 2024. If the snapshot age exceeds six months without an updated revision, a staleness notice appears warning users to verify recent additions on the official ECHA website.</li>
+        <li><strong>Static curated snapshot:</strong> The database represents a curated subset of 51 substances drawn from the ECHA Candidate List release of 4 February 2026. If the snapshot age exceeds six months without an updated revision, a staleness notice appears warning users to verify recent additions on the official ECHA website.</li>
         <li><strong>No detection of unlisted constituents:</strong> The tool only inspects the text you provide. It cannot discover unlisted chemical constituents, undeclared carrier solvents, or secret formulation changes that a manufacturer omitted from the Safety Data Sheet.</li>
         <li><strong>Text recognition variations:</strong> Irregular trade names, spelling errors, or complex chemical salt variants not captured in the synonym dictionary may return a non-flagged result. When in doubt, search by exact CAS registry number rather than proprietary trade name.</li>
         <li><strong>Legal authority:</strong> This tool provides rapid screening assistance for body-art professionals but does not provide legal advice or formal compliance certification. Regulatory enforcement decisions rest exclusively with national competent authorities, chemical inspection bodies, and testing laboratories performing accredited analytical spectrometry.</li>

@@ -433,6 +433,14 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.32
+
+**Tool corrections from the website (2026-10-23), checked against current sources.**
+- **REACH SVHC checker.** Eleven entries that are not on the Candidate List (nickel, cobalt metal, mercury, PFOS, some PAHs and aromatic amines) are now marked "Not on the Candidate List", with the EU law that restricts them (REACH Annex XVII entries 27, 50 and 75; POPs Regulation 2019/1021). Counts updated (253 entries since 4 February 2026). Article 33 (articles, such as jewelry) and Article 31 (mixtures, such as inks) are no longer mixed up. Hazard labels match CLP Annex VI as listed in the IFA/DGUV CMR List of September 2026: nickel Carc. 2 and Skin Sens. 1; cobalt, cobalt dichloride and cobalt sulphate Repr. 1B; cadmium chloride Repr. 1B; potassium and sodium dichromate Carc. 1B and Repr. 1B; strontium chromate Carc. 1B; trichloroethylene Carc. 1B and Muta. 2; cadmium sulphide Carc. 1B; PFOA Carc. 2 and Repr. 1B; lead chromates Carc. 1B. In all 8 languages.
+- **2g gauge** is 6.5 mm by the AWG standard (often sold as 6 mm), in the gauge converter, the ear stretching timeline and the jewelry size visualizer.
+- **Autoclave calculator** documentation cites the CDC Guideline for Disinfection and Sterilization (2008): weekly spore tests and event-related sterility.
+- **Allergy patch test** documentation cites its sources for the late-reading figure (Uter et al. 1996; Güven et al. 2023).
+
 ### 1.0.31
 
 **Henry's list of 2026-10-22 (tested up to 1.0.28).**

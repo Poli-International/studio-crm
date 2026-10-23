@@ -44,7 +44,7 @@
     { id: '8G',  gauge: '8G',  awgExact: 3.264, mm: 3.2, inchDec: 0.126, fraction: '1/8"',  category: 'standard', placementKey: 'placement.lobe_stretch' },
     { id: '6G',  gauge: '6G',  awgExact: 4.115, mm: 4.0, inchDec: 0.157, fraction: '5/32"', category: 'standard', placementKey: 'placement.lobe_stretch' },
     { id: '4G',  gauge: '4G',  awgExact: 5.189, mm: 5.0, inchDec: 0.197, fraction: '3/16"', category: 'standard', placementKey: 'placement.lobe_stretch' },
-    { id: '2G',  gauge: '2G',  awgExact: 6.544, mm: 6.0, dualMm: 6.5, inchDec: 0.236, fraction: '1/4"',  category: 'standard', placementKey: 'placement.heavy_lobe' },
+    { id: '2G',  gauge: '2G',  awgExact: 6.544, mm: 6.5, dualMm: 6.0, inchDec: 0.256, fraction: '1/4"',  category: 'standard', placementKey: 'placement.heavy_lobe' },
     { id: '1G',  gauge: '1G',  awgExact: 7.348, mm: 7.0, inchDec: 0.276, fraction: '9/32"', category: 'standard', placementKey: 'placement.heavy_lobe' },
     { id: '0G',  gauge: '0G',  awgExact: 8.251, mm: 8.0, inchDec: 0.315, fraction: '5/16"', category: 'standard', placementKey: 'placement.heavy_lobe' },
     { id: '00G', gauge: '00G', awgExact: 9.266, mm: 10.0, dualMm: 9.5, inchDec: 0.394, fraction: '3/8"', category: 'standard', placementKey: 'placement.heavy_lobe' },

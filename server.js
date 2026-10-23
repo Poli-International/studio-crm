@@ -10820,10 +10820,9 @@ app.get('/api/audit-logs', (req, res) => {
 });
 
 // ==========================================
-// 💾 DATABASE SNAPSHOT BACKUP & PORTAL LINK APIs
+// 💾 DATABASE SNAPSHOT BACKUP APIs
 // ==========================================
 let lastDatabaseSnapshotTimestamp = null; // null = never backed up (it was set to "26 hours ago")
-let temporaryPortalLinks = [];
 
 // Backups: storage/backups/ on this computer, and the same file copied to a second folder the
 // studio chooses (a USB stick, or a Google Drive / OneDrive / Dropbox folder) so a dead disk or
@@ -10936,67 +10935,6 @@ app.post('/api/database/create-snapshot', async (req, res) => {
   } catch (err) {
     res.status(500).json({ success: false, message: 'The backup could not be written: ' + err.message });
   }
-});
-
-// POST Generate Quick Client Portal Link
-app.post('/api/client-portal/generate-link', (req, res) => {
-  const { clientId, expirationHours = 24, channel = 'sms', recipientPhone, recipientEmail } = req.body || {};
-  const client = (clients || []).find(c => String(c.id) === String(clientId));
-  if (!client) return res.status(404).json({ success: false, error: 'Client not found' });
-
-  const token = `sp_link_${globalThis.crypto.randomUUID().replace(/-/g, '')}`;
-  const expiresAt = new Date(Date.now() + (Number(expirationHours) * 60 * 60 * 1000)).toISOString();
-  
-  const protocol = req.protocol || 'https';
-  const host = req.get('host') || 'localhost:3000';
-  const portalUrl = `${protocol}://${host}/#portal/appointments?token=${token}&clientId=${client.id}`;
-
-  const linkEntry = {
-    id: temporaryPortalLinks.length + 1,
-    token,
-    clientId: client.id,
-    clientName: client.name,
-    clientPhone: recipientPhone || client.phone,
-    clientEmail: recipientEmail || client.email,
-    portalUrl,
-    expirationHours: Number(expirationHours),
-    createdAt: new Date().toISOString(),
-    expiresAt,
-    channel,
-    status: 'ACTIVE',
-    accessCount: 0
-  };
-
-  temporaryPortalLinks.unshift(linkEntry);
-
-  logActivity({
-    category: 'appointment',
-    action: 'QUICK_PORTAL_LINK_GENERATED',
-    title: `Quick Portal Link Generated: ${client.name}`,
-    details: `Generated secure temporary portal link valid for ${expirationHours}h via ${channel.toUpperCase()}.`,
-    user: 'Studio Staff',
-    badgeColor: 'blue'
-  });
-
-  res.json({
-    success: true,
-    portalUrl,
-    token,
-    clientName: client.name,
-    expiresAt,
-    expirationHours: Number(expirationHours),
-    deliveryMethod: channel,
-    recipient: channel === 'email' ? (recipientEmail || client.email) : (recipientPhone || client.phone),
-    messageSent: true
-  });
-});
-
-// GET Active Temporary Portal Links
-app.get('/api/client-portal/active-links', (req, res) => {
-  res.json({
-    success: true,
-    links: temporaryPortalLinks
-  });
 });
 
 // Browser-side datasets (settings, tips, checklists, macros...) mirrored by
@@ -11123,7 +11061,6 @@ const PERSISTED = {
   aftercarePipeline: [() => aftercarePipeline],
   autoclaveLogs: [() => autoclaveLogs],
   sanitizationLogs: [() => sanitizationLogs],
-  temporaryPortalLinks: [() => temporaryPortalLinks, (v) => { temporaryPortalLinks = v; }],
   backupConfig: [() => backupConfig, (v) => { backupConfig = { ...backupConfig, ...v }; }],
   syncConfig: [() => ({ enabled: syncState.enabled, intervalMinutes: syncState.intervalMinutes, clientsUrl: syncState.clientsUrl, inventoryUrl: syncState.inventoryUrl }),
     (v) => { Object.assign(syncState, v); }],

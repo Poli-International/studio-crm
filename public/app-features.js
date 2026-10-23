@@ -2484,12 +2484,6 @@ function openQuickNewAppointmentModal() {
 }
 window.openQuickNewAppointmentModal = openQuickNewAppointmentModal;
 
-function openQuickPortalAccessModal(clientId) {
-    forceShowModal('quick-portal-access-modal-overlay');
-    const idInput = document.getElementById('quick-portal-client-id');
-    if (idInput && clientId) idInput.value = clientId;
-}
-window.openQuickPortalAccessModal = openQuickPortalAccessModal;
 
 // Record Payment used to open the deposit ledger and say "Payment Recording Terminal ready":
 // nothing could be recorded. A real form now, saved as a transaction (/api/financial).

@@ -1,6 +1,7 @@
 {
   "_comment": "Words the guides and docs must not use, because the thing is gone. Add an entry when a screen, button or build is removed. 'allowIn' lists files where the word is history, not instructions (e.g. the changelog); 'crmOnly' skips the tool docs, which the website shares.",
   "entries": [
+    { "pattern": "Portal Lookup|Client Portal Quick Access", "why": "a placeholder (one fixed link, nothing behind it), removed in 1.0.31", "allowIn": ["TECHNICAL_DOCUMENTATION.md"] },
     { "pattern": "Studio Pro Suite", "why": "mock suite removed in 1.0.3; its buttons open the real tools" },
     { "pattern": "\\bLaravel\\b|php artisan|composer install", "why": "the Laravel build was removed on 2026-09-30; the CRM is a Node app" },
     { "pattern": "toggleGlobalDarkMode|theme toggle|light/dark toggle|dark/light toggle|Alt\\+T\\b", "crmOnly": true, "why": "the light/dark toggle was removed in the Anodised Titanium restyle (uiDesign 2); the tools keep theirs on the website" }

@@ -1056,5 +1056,7 @@
             updateExportColumnLegend();
         }
     }
+    // no button ever opened it (Henry, 2026-10-22, looking for the activity log as a PDF)
+    window.openActivityExportModal = openExportModal;
 
     

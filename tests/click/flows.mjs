@@ -329,6 +329,18 @@ await flow('Open Audit lists the stock lots with their expiry', async () => {
   check((await text('#sterile-audit-modal-overlay')).includes(items[0].name), 'the lot audit does not name the items');
 });
 
+await flow('The Live Studio Feed exports the activity log as a PDF', async () => {
+  // Henry, 2026-10-22: where can this be saved as a PDF? The export window existed, no button opened it
+  await b.goto(url);
+  await b.evaluate(`(toggleActivityDrawer(), 1)`);
+  await sleep(900); // the drawer slides in
+  await pressOn('openActivityExportModal()');
+  check(await shown('export-csv-modal'), 'Export does not open the export window');
+  b.reset();
+  await pressOn("confirmActivityExport('pdf')");
+  await eventually(async () => b.seen.downloads.some((d) => d.endsWith('.pdf')), 'the activity log PDF was not made');
+});
+
 await flow('Health Alerts: View Profile opens the profile in front', async () => {
   await b.goto(url);
   await b.clickText('Clients');

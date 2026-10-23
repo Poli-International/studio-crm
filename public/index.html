@@ -1680,6 +1680,9 @@ docker compose up -d</pre>
                 <button onclick="openDailyStudioSummaryModal()" style="padding:0.35rem 0.65rem;background:var(--ti-green, #10B981);color:#FFF;border:none;border-radius:6px;font-weight:700;font-size:0.75rem;cursor:pointer;display:inline-flex;align-items:center;gap:4px;" title="Generate Daily Executive Summary Report">
                     <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-chart></use></svg> Summary
                 </button>
+                <button onclick="openActivityExportModal()" style="padding:0.35rem 0.65rem;background:var(--ti-panel, #111827);color:var(--ti-text2, #D1D5DB);border:1px solid var(--ti-line, #374151);border-radius:6px;font-weight:700;font-size:0.75rem;cursor:pointer;display:inline-flex;align-items:center;gap:4px;" title="Save the activity log as CSV or PDF">
+                    <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-download></use></svg> Export
+                </button>
                 <label style="display:inline-flex;align-items:center;gap:6px;background:var(--ti-panel, #111827);padding:4px 10px;border-radius:20px;border:1px solid var(--ti-line, #374151);font-size:0.75rem;font-weight:600;color:var(--ti-text2, #D1D5DB);cursor:pointer;user-select:none;" title="Pause/Resume live SSE stream updates without closing drawer">
                     <input type="checkbox" class="live-stream-toggle-checkbox" checked onchange="toggleLiveStreamUpdates()" style="accent-color:var(--ti-green, #10B981);cursor:pointer;width:14px;height:14px;" />
                     <span>Live Updates</span>

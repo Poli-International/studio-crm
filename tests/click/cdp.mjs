@@ -125,9 +125,9 @@ export async function launchBrowser() {
   const exe = BROWSERS.find((p) => p && existsSync(p));
   if (!exe) throw new Error('No Chrome or Edge found. Set CHROME_PATH.');
   // a CI runner sometimes starts Chrome and never hears from it (4 tool jobs on 2026-10-22): try a fresh one
-  let proc, wsUrl;
+  let proc, wsUrl, dir;
   for (let attempt = 1; !wsUrl; attempt++) {
-    const dir = mkdtempSync(path.join(os.tmpdir(), 'crm-click-'));
+    dir = mkdtempSync(path.join(os.tmpdir(), 'crm-click-'));
     proc = spawn(exe, ['--headless=new', '--remote-debugging-port=0', `--user-data-dir=${dir}`, '--no-first-run',
       '--no-default-browser-check', '--disable-gpu', '--window-size=1440,1000',
       '--ignore-certificate-errors', // the CRM's https certificate is self-made

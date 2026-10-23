@@ -1221,7 +1221,6 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
         #aftercare-modal,
         div[id*="-modal"] {
             position: static !important;
-            display: block !important;
             width: 100% !important;
             height: auto !important;
             background: #ffffff !important;
@@ -1524,3 +1523,9 @@ body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
    without it keep the vh in the inline style. */
 div[id$="-modal-overlay"][style*="height:100vh"], div[id$="-modal"][style*="height:100vh"] { height: 100dvh !important; }
 div[id$="-modal-overlay"] > div[style*="max-height:90vh"], div[id$="-modal"] > div[style*="max-height:90vh"] { max-height: 90dvh !important; }
+
+/* printWindowOf(): only the window being printed, at its full length */
+@media print {
+    .print-hide { display: none !important; }
+    .print-this, .print-this * { max-height: none !important; overflow: visible !important; }
+}

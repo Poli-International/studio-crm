@@ -1953,5 +1953,22 @@
  "Confirm Deletion": "Verwijderen bevestigen",
  "Delete Staff Note": "Teamnotitie verwijderen",
  "Are you sure you want to permanently delete this confidential staff note?": "Weet u zeker dat u deze vertrouwelijke teamnotitie definitief wilt verwijderen?",
- "Delete Note": "Notitie verwijderen"
+ "Delete Note": "Notitie verwijderen",
+ "Past Logs": "Eerdere logboeken",
+ "End-of-day sanitization logs": "Desinfectielogboeken aan het eind van de dag",
+ "No checklist has been saved yet.": "Er is nog geen checklist opgeslagen.",
+ "Export": "Exporteren",
+ "Save the activity log as CSV or PDF": "Activiteitenlogboek opslaan als CSV of PDF",
+ "Give the activity a title": "Geef de activiteit een titel",
+ "Could not save the activity: the server did not answer": "Activiteit niet opgeslagen: de server antwoordde niet",
+ "Activity saved to the studio activity stream": "Activiteit opgeslagen in de activiteitenstroom van de studio",
+ "Could not save the checklist: the server did not answer": "Checklist niet opgeslagen: de server antwoordde niet",
+ "Autoclave cycle": "Autoclaafcyclus",
+ "Expired": "Verlopen",
+ "{0} days left": "nog {0} dagen",
+ "No expiry date": "Geen vervaldatum",
+ "In date": "Geldig",
+ "Quantity": "Aantal",
+ "No stock items yet.": "Nog geen voorraadartikelen.",
+ "Sterile lot audit: expiry dates": "Controle steriele partijen: vervaldata"
 }

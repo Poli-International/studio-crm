@@ -10599,6 +10599,30 @@ app.post('/api/compliance/autoclave-logs', (req, res) => {
   res.status(201).json({ success: true, log: newLog });
 });
 
+// End-of-day sanitization checklists. They were kept in the browser that saved them: a log saved on the
+// tablet could be seen nowhere else, and nowhere at all (Henry, 2026-10-22: "where is this info?").
+const sanitizationLogs = [];
+app.get('/api/compliance/sanitization-logs', (req, res) => res.json(sanitizationLogs));
+app.post('/api/compliance/sanitization-logs', (req, res) => {
+  const { supervisor, autoclave_cycle, notes, items, timestamp } = req.body || {};
+  const text = (v) => String(v ?? '').trim();
+  const list = (Array.isArray(items) ? items : []).map((i) => ({ item: text(i && i.item), done: !!(i && i.done) })).filter((i) => i.item);
+  if (!list.length) return res.status(400).json({ error: 'The checklist is empty' });
+  // a log moved from a browser keeps the time it was saved there
+  const when = timestamp && !Number.isNaN(Date.parse(timestamp)) && Date.parse(timestamp) <= Date.now() ? new Date(timestamp).toISOString() : new Date().toISOString();
+  const log = { id: Date.now() + Math.floor(Math.random() * 1000), supervisor: text(supervisor), autoclave_cycle: text(autoclave_cycle), notes: text(notes),
+    items: list, completed: list.filter((i) => i.done).length, total: list.length, timestamp: when };
+  sanitizationLogs.unshift(log);
+  sanitizationLogs.sort((x, y) => y.timestamp.localeCompare(x.timestamp));
+  logActivity({
+    category: 'compliance', action: 'SANITIZATION_LOGGED',
+    title: `End-of-day sanitization logged (${log.completed} / ${log.total})`,
+    details: [log.autoclave_cycle && 'Autoclave cycle: ' + log.autoclave_cycle, log.notes].filter(Boolean).join(' | '),
+    user: log.supervisor || 'Studio', badgeColor: log.completed === log.total ? 'green' : 'amber'
+  });
+  res.status(201).json({ success: true, log });
+});
+
 // 4. Interactive Station & Chair Capacity Heatmap Matrix
 app.get('/api/stations/capacity-matrix', (req, res) => {
   const dateStr = (req.query.date || new Date().toISOString().substring(0, 10)).toString();
@@ -10796,10 +10820,9 @@ app.get('/api/audit-logs', (req, res) => {
 });
 
 // ==========================================
-// 💾 DATABASE SNAPSHOT BACKUP & PORTAL LINK APIs
+// 💾 DATABASE SNAPSHOT BACKUP APIs
 // ==========================================
 let lastDatabaseSnapshotTimestamp = null; // null = never backed up (it was set to "26 hours ago")
-let temporaryPortalLinks = [];
 
 // Backups: storage/backups/ on this computer, and the same file copied to a second folder the
 // studio chooses (a USB stick, or a Google Drive / OneDrive / Dropbox folder) so a dead disk or
@@ -10912,67 +10935,6 @@ app.post('/api/database/create-snapshot', async (req, res) => {
   } catch (err) {
     res.status(500).json({ success: false, message: 'The backup could not be written: ' + err.message });
   }
-});
-
-// POST Generate Quick Client Portal Link
-app.post('/api/client-portal/generate-link', (req, res) => {
-  const { clientId, expirationHours = 24, channel = 'sms', recipientPhone, recipientEmail } = req.body || {};
-  const client = (clients || []).find(c => String(c.id) === String(clientId));
-  if (!client) return res.status(404).json({ success: false, error: 'Client not found' });
-
-  const token = `sp_link_${globalThis.crypto.randomUUID().replace(/-/g, '')}`;
-  const expiresAt = new Date(Date.now() + (Number(expirationHours) * 60 * 60 * 1000)).toISOString();
-  
-  const protocol = req.protocol || 'https';
-  const host = req.get('host') || 'localhost:3000';
-  const portalUrl = `${protocol}://${host}/#portal/appointments?token=${token}&clientId=${client.id}`;
-
-  const linkEntry = {
-    id: temporaryPortalLinks.length + 1,
-    token,
-    clientId: client.id,
-    clientName: client.name,
-    clientPhone: recipientPhone || client.phone,
-    clientEmail: recipientEmail || client.email,
-    portalUrl,
-    expirationHours: Number(expirationHours),
-    createdAt: new Date().toISOString(),
-    expiresAt,
-    channel,
-    status: 'ACTIVE',
-    accessCount: 0
-  };
-
-  temporaryPortalLinks.unshift(linkEntry);
-
-  logActivity({
-    category: 'appointment',
-    action: 'QUICK_PORTAL_LINK_GENERATED',
-    title: `Quick Portal Link Generated: ${client.name}`,
-    details: `Generated secure temporary portal link valid for ${expirationHours}h via ${channel.toUpperCase()}.`,
-    user: 'Studio Staff',
-    badgeColor: 'blue'
-  });
-
-  res.json({
-    success: true,
-    portalUrl,
-    token,
-    clientName: client.name,
-    expiresAt,
-    expirationHours: Number(expirationHours),
-    deliveryMethod: channel,
-    recipient: channel === 'email' ? (recipientEmail || client.email) : (recipientPhone || client.phone),
-    messageSent: true
-  });
-});
-
-// GET Active Temporary Portal Links
-app.get('/api/client-portal/active-links', (req, res) => {
-  res.json({
-    success: true,
-    links: temporaryPortalLinks
-  });
 });
 
 // Browser-side datasets (settings, tips, checklists, macros...) mirrored by
@@ -11098,7 +11060,7 @@ const PERSISTED = {
   depositSplits: [() => depositSplits],
   aftercarePipeline: [() => aftercarePipeline],
   autoclaveLogs: [() => autoclaveLogs],
-  temporaryPortalLinks: [() => temporaryPortalLinks, (v) => { temporaryPortalLinks = v; }],
+  sanitizationLogs: [() => sanitizationLogs],
   backupConfig: [() => backupConfig, (v) => { backupConfig = { ...backupConfig, ...v }; }],
   syncConfig: [() => ({ enabled: syncState.enabled, intervalMinutes: syncState.intervalMinutes, clientsUrl: syncState.clientsUrl, inventoryUrl: syncState.inventoryUrl }),
     (v) => { Object.assign(syncState, v); }],

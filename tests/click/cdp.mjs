@@ -124,18 +124,28 @@ export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 export async function launchBrowser() {
   const exe = BROWSERS.find((p) => p && existsSync(p));
   if (!exe) throw new Error('No Chrome or Edge found. Set CHROME_PATH.');
-  const dir = mkdtempSync(path.join(os.tmpdir(), 'crm-click-'));
-  const proc = spawn(exe, ['--headless=new', '--remote-debugging-port=0', `--user-data-dir=${dir}`, '--no-first-run',
-    '--no-default-browser-check', '--disable-gpu', '--window-size=1440,1000',
-    '--ignore-certificate-errors', // the CRM's https certificate is self-made
-    '--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream', // a pretend camera, so the scanner can be opened
-    ...(process.platform === 'linux' ? ['--no-sandbox'] : []), 'about:blank']);
-  const wsUrl = await new Promise((res, rej) => {
-    let buf = '';
-    proc.stderr.on('data', (d) => { buf += d; const m = buf.match(/DevTools listening on (ws:\/\/\S+)/); if (m) res(m[1]); });
-    proc.on('exit', (c) => rej(new Error(`browser exited (${c}): ${buf}`)));
-    setTimeout(() => rej(new Error('browser did not start in 30 s')), 30000);
-  });
+  // a CI runner sometimes starts Chrome and never hears from it (4 tool jobs on 2026-10-22): try a fresh one
+  let proc, wsUrl, dir;
+  for (let attempt = 1; !wsUrl; attempt++) {
+    dir = mkdtempSync(path.join(os.tmpdir(), 'crm-click-'));
+    proc = spawn(exe, ['--headless=new', '--remote-debugging-port=0', `--user-data-dir=${dir}`, '--no-first-run',
+      '--no-default-browser-check', '--disable-gpu', '--window-size=1440,1000',
+      '--ignore-certificate-errors', // the CRM's https certificate is self-made
+      '--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream', // a pretend camera, so the scanner can be opened
+      ...(process.platform === 'linux' ? ['--no-sandbox'] : []), 'about:blank']);
+    try {
+      wsUrl = await new Promise((res, rej) => {
+        let buf = '';
+        proc.stderr.on('data', (d) => { buf += d; const m = buf.match(/DevTools listening on (ws:\/\/\S+)/); if (m) res(m[1]); });
+        proc.on('exit', (c) => rej(new Error(`browser exited (${c}): ${buf}`)));
+        setTimeout(() => rej(new Error('browser did not start in 30 s')), 30000);
+      });
+    } catch (e) {
+      proc.kill();
+      if (attempt === 3) throw e;
+      console.log(`(${e.message.split(':')[0]}, starting it again)`);
+    }
+  }
   const ws = new WebSocket(wsUrl);
   await new Promise((res, rej) => { ws.onopen = res; ws.onerror = rej; });
 
@@ -334,6 +344,8 @@ export async function launchBrowser() {
     },
     // a phone or tablet screen
     viewport: (width, height) => cdp('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: true }),
+    // 'print' lays the page out as the printer gets it, '' back to the screen
+    media: (media) => cdp('Emulation.setEmulatedMedia', { media }),
     // a desktop window of an exact size (scripts/screenshots.mjs)
     size: (width, height, scale = 1) => cdp('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: scale, mobile: false }),
     // .webp and .png for presentation shots; anything else a light JPEG for debugging

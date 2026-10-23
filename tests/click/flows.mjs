@@ -278,6 +278,69 @@ await flow('A waiver signed in the profile can be read back and downloaded', asy
   await eventually(async () => b.seen.downloads.some((d) => d.endsWith('.pdf')), 'Download PDF made no file');
 });
 
+await flow('A Print button prints its own window, nothing else', async () => {
+  // Henry, 2026-10-22: the health directory, artist splits and stock labels each printed 25 to 33 pages of the CRM
+  await b.goto(url);
+  for (const id of ['client-directory-modal-overlay', 'commission-modal', 'printable-qr-tags-modal-overlay', 'session-duration-report-modal-overlay', 'daily-summary-modal-overlay']) {
+    await b.evaluate(`(forceShowModal('${id}'), printWindowOf(document.querySelector('#${id} [onclick="printWindowOf(this)"]')))`);
+    await b.media('print');
+    const extra = await b.evaluate(`[...document.body.querySelectorAll('*')].filter((e) => e.offsetParent !== null && e.getBoundingClientRect().height > 0 && !e.closest('#${id}') && !e.contains(document.getElementById('${id}'))).length`);
+    await b.media('');
+    await b.evaluate(`(dispatchEvent(new Event('afterprint')), forceHideModal('${id}'), 1)`);
+    check(extra === 0, `printing ${id} also prints ${extra} things from outside it`);
+  }
+});
+
+await flow('Log Activity saves the activity to the stream', async () => {
+  // Henry, 2026-10-22: Log Action closed the window and saved nothing
+  await b.goto(url);
+  await b.clickText('Log Activity');
+  await b.type('#log-title-input', 'Autoclave Cleaned Flow');
+  await b.type('#log-details-input', 'Chamber wiped, gasket checked');
+  await b.clickText('Log Action', '#quick-log-modal');
+  await eventually(async () => JSON.stringify(await api('/api/activity-logs?limit=20')).includes('Chamber wiped, gasket checked'), 'the activity was not saved');
+  check(!(await shown('quick-log-modal')), 'the Log Activity window stayed open after saving');
+});
+
+await flow('A sanitization checklist is kept by the studio and shown under Past Logs', async () => {
+  // Henry, 2026-10-22: the checklist said saved, but it was kept in that browser and shown nowhere
+  await b.goto(url);
+  // one saved by a browser before 1.0.31 moves to the studio database
+  await b.evaluate(`(localStorage.setItem('studio_sanitization_logs', JSON.stringify([{ supervisor: 'Old Tablet', notes: 'Browser Only Flow', items: [{ item: 'Sharps sealed', done: true }], timestamp: '2026-10-20T22:00:00.000Z' }])), 1)`);
+  await b.evaluate(`(openSanitizationChecklistModal(), 1)`);
+  await b.evaluate(`(document.querySelector('.sani-chk').click(), 1)`);
+  await b.type('#sani-autoclave-id', '1042');
+  await b.type('#sani-notes', 'Server Kept Flow');
+  await b.clickText('Log Closing Audit', '#sanitization-checklist-modal-overlay');
+  await eventually(async () => JSON.stringify(await api('/api/compliance/sanitization-logs')).includes('Server Kept Flow'), 'the checklist was not saved by the studio');
+  await b.evaluate(`(openSanitizationLogsModal(), 1)`);
+  await eventually(async () => (await text('#sanitization-logs-modal-overlay')).includes('Server Kept Flow'), 'Past Logs does not show the checklist');
+  await eventually(async () => (await text('#sanitization-logs-modal-overlay')).includes('Browser Only Flow'), 'a checklist kept in the browser did not move to the studio');
+  check((await b.evaluate(`localStorage.getItem('studio_sanitization_logs')`)) === null, 'the moved checklist is still in the browser');
+});
+
+await flow('Open Audit lists the stock lots with their expiry', async () => {
+  // Henry, 2026-10-22: Open Audit (Alt+O) showed an empty window
+  await b.goto(url);
+  const items = (await api('/api/inventory/sterile-audit')).audit;
+  check(items.length > 0, 'the demo studio has no stock to audit');
+  await pressOn('openSterileAuditModal()');
+  await eventually(async () => (await b.evaluate(`document.querySelectorAll('#sterile-audit-modal-overlay tbody tr').length`)) === items.length, 'the lot audit does not list every stock item');
+  check((await text('#sterile-audit-modal-overlay')).includes(items[0].name), 'the lot audit does not name the items');
+});
+
+await flow('The Live Studio Feed exports the activity log as a PDF', async () => {
+  // Henry, 2026-10-22: where can this be saved as a PDF? The export window existed, no button opened it
+  await b.goto(url);
+  await b.evaluate(`(toggleActivityDrawer(), 1)`);
+  await sleep(900); // the drawer slides in
+  await pressOn('openActivityExportModal()');
+  check(await shown('export-csv-modal'), 'Export does not open the export window');
+  b.reset();
+  await pressOn("confirmActivityExport('pdf')");
+  await eventually(async () => b.seen.downloads.some((d) => d.endsWith('.pdf')), 'the activity log PDF was not made');
+});
+
 await flow('Health Alerts: View Profile opens the profile in front', async () => {
   await b.goto(url);
   await b.clickText('Clients');

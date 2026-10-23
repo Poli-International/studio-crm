@@ -2018,6 +2018,46 @@ function forceShowModal(id) {
     return el;
 }
 
+// Print only the window the button is in. window.print() alone printed the whole CRM, and the print
+// stylesheet showed every hidden window too: 25 to 33 pages for one table (Henry, 2026-10-22).
+function printWindowOf(button) {
+    const target = button.closest('[id$="-modal-overlay"], [id$="-modal"]') || document.body;
+    const marked = [];
+    for (let n = target; n && n !== document.body; n = n.parentElement) {
+        for (const sib of n.parentElement.children) if (sib !== n) { sib.classList.add('print-hide'); marked.push(sib); }
+    }
+    target.classList.add('print-this');
+    const done = () => { marked.forEach((m) => m.classList.remove('print-hide')); target.classList.remove('print-this'); };
+    window.addEventListener('afterprint', done, { once: true });
+    window.print();
+}
+window.printWindowOf = printWindowOf;
+
+// A window holding a list to read and print (Past Logs, the lot audit): built once, filled on each opening
+function showListWindow(id, icon, title, bodyHtml) {
+    let overlay = document.getElementById(id);
+    if (!overlay) {
+        overlay = document.createElement("div");
+        overlay.id = id;
+        overlay.setAttribute("role", "dialog");
+        overlay.setAttribute("aria-modal", "true");
+        overlay.style.cssText = "display:none;position:fixed;inset:0;background:rgba(15,23,42,0.85);z-index:2000007;align-items:center;justify-content:center;";
+        document.body.appendChild(overlay);
+    }
+    overlay.setAttribute("aria-label", title);
+    overlay.innerHTML = `
+        <div style="background:var(--ti-bg2, #0F172A);border:1px solid var(--ti-line, #334155);border-radius:14px;padding:22px;width:min(94vw,680px);max-height:90vh;overflow:auto;color:var(--ti-text, #F8FAFC);font-size:0.9rem;">
+            <h3 style="margin:0 0 12px;font-size:1.1rem;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-${icon}></use></svg> ${escapeHtml(title)}</h3>
+            ${bodyHtml}
+            <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px;">
+                <button type="button" onclick="printWindowOf(this)" style="padding:9px 16px;background:var(--ti-green, #10B981);color:#FFF;border:none;border-radius:8px;font-weight:800;cursor:pointer;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-print></use></svg> Print</button>
+                <button type="button" onclick="forceHideModal('${id}')" style="padding:9px 16px;background:transparent;color:var(--ti-muted, #94A3B8);border:1px solid var(--ti-line2, #475569);border-radius:8px;cursor:pointer;">Close</button>
+            </div>
+        </div>`;
+    forceShowModal(id);
+}
+window.showListWindow = showListWindow;
+
 function forceHideModal(id) {
     const el = document.getElementById(id);
     if (el) {
@@ -2444,12 +2484,6 @@ function openQuickNewAppointmentModal() {
 }
 window.openQuickNewAppointmentModal = openQuickNewAppointmentModal;
 
-function openQuickPortalAccessModal(clientId) {
-    forceShowModal('quick-portal-access-modal-overlay');
-    const idInput = document.getElementById('quick-portal-client-id');
-    if (idInput && clientId) idInput.value = clientId;
-}
-window.openQuickPortalAccessModal = openQuickPortalAccessModal;
 
 // Record Payment used to open the deposit ledger and say "Payment Recording Terminal ready":
 // nothing could be recorded. A real form now, saved as a transaction (/api/financial).
@@ -2545,8 +2579,22 @@ function openStationHeatmapModal() {
 window.openStationHeatmapModal = openStationHeatmapModal;
 
 
-function openSterileAuditModal() {
-    forceShowModal('waiver-audit-modal-overlay');
+// The sterile lot audit: every stock item with its lot and expiry, expired first. Open Audit (Alt+O) and
+// Audit Lot Expirations opened the waiver audit window, which nothing ever filled (Henry, 2026-10-22).
+async function openSterileAuditModal() {
+    let audit = [];
+    try { const r = await fetch('/api/inventory/sterile-audit'); if (r.ok) audit = (await r.json()).audit || []; } catch (e) {}
+    const order = { EXPIRED: 0, EXPIRING_SOON: 1, VALID: 2 };
+    audit.sort((x, y) => (order[x.exp_status] ?? 2) - (order[y.exp_status] ?? 2) || (x.days_until_exp ?? 1e9) - (y.days_until_exp ?? 1e9));
+    const state = (i) => i.exp_status === 'EXPIRED' ? `<span style="color:var(--ti-alert, #EF4444);font-weight:800;">${pdfLabel('Expired')}</span>`
+        : i.exp_status === 'EXPIRING_SOON' ? `<span style="color:var(--ti-gold, #FBBF24);font-weight:800;">${pdfLabel('{0} days left').replace('{0}', Number(i.days_until_exp))}</span>`
+        : i.days_until_exp === null ? pdfLabel('No expiry date') : pdfLabel('In date');
+    const cell = 'padding:6px 8px;border-bottom:1px solid var(--ti-panel2, #1E293B);text-align:left;';
+    const body = audit.length ? `<table style="width:100%;border-collapse:collapse;font-size:0.84rem;">
+        <thead><tr>${['Item', 'Lot', 'Expires', 'Quantity', 'Status'].map((h) => `<th style="${cell}color:var(--ti-muted, #94A3B8);">${pdfLabel(h)}</th>`).join('')}</tr></thead>
+        <tbody>${audit.map((i) => `<tr><td style="${cell}">${escapeHtml(i.name || '')}</td><td style="${cell}">${escapeHtml(i.lot_number || '')}</td><td style="${cell}">${escapeHtml(i.exp_date || '')}</td><td style="${cell}">${escapeHtml(String(i.quantity ?? ''))}</td><td style="${cell}">${state(i)}</td></tr>`).join('')}</tbody>
+    </table>` : `<div>${pdfLabel('No stock items yet.')}</div>`;
+    showListWindow('sterile-audit-modal-overlay', 'flask', pdfLabel('Sterile lot audit: expiry dates'), body);
 }
 window.openSterileAuditModal = openSterileAuditModal;
 
@@ -2572,10 +2620,6 @@ function openVatSettingsModal() {
 }
 window.openVatSettingsModal = openVatSettingsModal;
 
-function openWaiverAuditModal() {
-    forceShowModal('waiver-audit-modal-overlay');
-}
-window.openWaiverAuditModal = openWaiverAuditModal;
 
 
 // =========================================================================
@@ -2685,8 +2729,6 @@ window.closeUploadWorkModal = closeUploadWorkModal;
 function closeVatSettingsModal() { forceHideModal('vat-settings-modal-overlay'); }
 window.closeVatSettingsModal = closeVatSettingsModal;
 
-function closeWaiverAuditModal() { forceHideModal('waiver-audit-modal-overlay'); }
-window.closeWaiverAuditModal = closeWaiverAuditModal;
 
 function closeWaiverModal() { forceHideModal('waiver-modal'); }
 window.closeWaiverModal = closeWaiverModal;
@@ -2908,10 +2950,6 @@ window.copyRecentScanCodeModal = copyRecentScanCodeModal;
 // =========================================================================
 
 
-function printDailySummaryReport() {
-    window.print();
-}
-window.printDailySummaryReport = printDailySummaryReport;
 
 // =========================================================================
 // 10. RESET ACTIONS (3)
@@ -5430,11 +5468,23 @@ function addQuickNote(event) {
 }
 window.addQuickNote = addQuickNote;
 
-function submitQuickLog(event) {
+// Log Activity: it handed over to addQuickNote, which reads the dashboard's quick-note box, found it
+// empty and saved nothing, and the window closed anyway (Henry, 2026-10-22).
+async function submitQuickLog(event) {
     if (event) event.preventDefault();
-    addQuickNote(event);
-    const modal = document.getElementById("quick-log-modal");
-    if (modal) modal.style.display = "none";
+    const val = (id) => ((document.getElementById(id) || {}).value || "").trim();
+    const body = { title: val("log-title-input"), category: val("log-category-select") || "general", user: val("log-user-input") || undefined, details: val("log-details-input"), action: "MANUAL_LOG" };
+    if (!body.title) { showStudioToast("Give the activity a title"); return; }
+    try {
+        const res = await fetch("/api/activity-logs", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+    } catch (e) {
+        showStudioToast("Could not save the activity: the server did not answer");
+        return;
+    }
+    showStudioToast("Activity saved to the studio activity stream");
+    if (event && event.target && event.target.reset) event.target.reset();
+    forceHideModal("quick-log-modal");
 }
 window.submitQuickLog = submitQuickLog;
 
@@ -5464,32 +5514,63 @@ function submitTipSplitRecord(event) {
 window.submitTipSplitRecord = submitTipSplitRecord;
 
 
-function submitSanitizationChecklist(event) {
+async function submitSanitizationChecklist(event) {
     if (event) event.preventDefault();
-    const items = [...document.querySelectorAll(".sani-chk")].map((b) => ({
-        item: (b.closest("label") || b.parentElement).textContent.replace(/\s+/g, " ").trim(),
-        done: b.checked
-    }));
     const log = {
-        id: Date.now(),
         supervisor: (document.getElementById("sani-staff-select") || {}).value || "",
         autoclave_cycle: ((document.getElementById("sani-autoclave-id") || {}).value || "").trim(),
         notes: ((document.getElementById("sani-notes") || {}).value || "").trim(),
-        items: items,
-        completed: items.filter((i) => i.done).length,
-        total: items.length,
-        timestamp: new Date().toISOString()
+        items: [...document.querySelectorAll(".sani-chk")].map((b) => ({
+            item: (b.closest("label") || b.parentElement).textContent.replace(/\s+/g, " ").trim(),
+            done: b.checked
+        }))
     };
-    let logs = [];
-    try { logs = JSON.parse(localStorage.getItem("studio_sanitization_logs") || "[]"); } catch (e) {}
-    logs.unshift(log);
-    try { localStorage.setItem("studio_sanitization_logs", JSON.stringify(logs)); } catch (e) {}
-    showStudioToast("Closing checklist saved: " + log.completed + " / " + log.total);
+    let saved;
+    try {
+        const res = await fetch("/api/compliance/sanitization-logs", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(log) });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        saved = (await res.json()).log;
+    } catch (e) {
+        showStudioToast("Could not save the checklist: the server did not answer");
+        return;
+    }
+    showStudioToast("Closing checklist saved: " + saved.completed + " / " + saved.total);
     closeSanitizationChecklistModal();
     if (event && event.target && event.target.reset) event.target.reset();
     updateSanitizationProgress();
 }
 window.submitSanitizationChecklist = submitSanitizationChecklist;
+
+// Checklists saved before 1.0.31 are in the browser that saved them: they go to the studio database once.
+async function moveBrowserSanitizationLogs() {
+    let logs = [];
+    try { logs = JSON.parse(localStorage.getItem("studio_sanitization_logs") || "[]"); } catch (e) { return; }
+    if (!Array.isArray(logs) || !logs.length) return;
+    const left = [];
+    for (const log of logs) {
+        try {
+            const res = await fetch("/api/compliance/sanitization-logs", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(log) });
+            if (!res.ok && res.status !== 400) left.push(log); // 400: an empty checklist, nothing to keep
+        } catch (e) { left.push(log); }
+    }
+    try { if (left.length) localStorage.setItem("studio_sanitization_logs", JSON.stringify(left)); else localStorage.removeItem("studio_sanitization_logs"); } catch (e) {}
+}
+
+// Past end-of-day checklists: who, when, what was ticked, with Print
+async function openSanitizationLogsModal() {
+    await moveBrowserSanitizationLogs();
+    let logs = [];
+    try { const r = await fetch("/api/compliance/sanitization-logs"); if (r.ok) logs = await r.json(); } catch (e) {}
+    const rows = logs.map((l) => `
+        <div style="padding:10px 0;border-bottom:1px solid var(--ti-panel2, #1E293B);">
+            <div style="display:flex;justify-content:space-between;gap:10px;font-weight:700;"><span>${escapeHtml(new Date(l.timestamp).toLocaleString())}</span><span>${Number(l.completed)} / ${Number(l.total)}</span></div>
+            <div style="color:var(--ti-muted, #94A3B8);font-size:0.82rem;margin-top:2px;">${escapeHtml([l.supervisor, l.autoclave_cycle && pdfLabel("Autoclave cycle") + ": " + l.autoclave_cycle].filter(Boolean).join(" | "))}</div>
+            <ul style="margin:6px 0 0;padding-left:18px;font-size:0.82rem;">${(l.items || []).map((i) => `<li>${i.done ? "[x]" : "[ ]"} ${escapeHtml(i.item)}</li>`).join("")}</ul>
+            ${l.notes ? `<div style="margin-top:4px;font-size:0.82rem;">${escapeHtml(l.notes)}</div>` : ""}
+        </div>`).join("");
+    showListWindow("sanitization-logs-modal-overlay", "pouch", "End-of-day sanitization logs", rows || `<div>No checklist has been saved yet.</div>`);
+}
+window.openSanitizationLogsModal = openSanitizationLogsModal;
 
 async function submitSendAftercareEmail(event) {
     if (event) event.preventDefault();

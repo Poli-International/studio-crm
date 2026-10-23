@@ -139,32 +139,6 @@ window.executeQuickExport = executeQuickExport;
 
 // 6. Test Diagnostics & Coverage
 
-// 7. Quick Portal Access Generator
-
-
-function closeQuickPortalAccessModal() {
-    const el = document.getElementById("quick-portal-access-modal-overlay");
-    if (el) el.style.display = "none";
-}
-window.closeQuickPortalAccessModal = closeQuickPortalAccessModal;
-
-function copyGeneratedPortalLink() {
-    const input = document.getElementById("quick-portal-link-input");
-    if (input) {
-        input.select();
-        navigator.clipboard.writeText(input.value).then(
-            () => showStudioToast("Client portal link copied"),
-            () => showStudioToast("Could not copy: select the link and press Ctrl+C"));
-    }
-}
-window.copyGeneratedPortalLink = copyGeneratedPortalLink;
-
-function openClientPortalDirectly() {
-    closeQuickPortalAccessModal();
-    window.location.hash = "portal-pass";
-    switchToClientPortalMode();
-}
-window.openClientPortalDirectly = openClientPortalDirectly;
 
 // 8. Client Photo Camera Capture
 

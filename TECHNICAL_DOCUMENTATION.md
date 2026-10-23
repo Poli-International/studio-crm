@@ -433,6 +433,17 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.31
+
+**Henry's list of 2026-10-22 (tested up to 1.0.28).**
+- **Print buttons printed 25 to 33 pages.** Print Client Health Directory, Artist Splits' Print-Friendly Document, Print 80mm Labels, and the session-duration and daily-summary Print called `window.print()`, which printed the whole CRM, and the print stylesheet forced every hidden window to `display: block`. `printWindowOf(button)` (`app-features.js`) prints only the button's window, at its full length (`.print-hide`, `.print-this` in `01-base.css`); the forced display is gone. A flow checks the five buttons in print layout.
+- **Log Activity saved nothing.** Log Action handed over to `addQuickNote`, which reads the dashboard's quick-note box, found it empty and returned, and the window closed anyway. `submitQuickLog` posts its own fields to `POST /api/activity-logs`; the entry shows in the Studio Operations Command Stream. It stays open with a message when the server does not answer.
+- **Sanitization checklists are kept by the studio.** They were in the localStorage of the browser that saved them: a checklist saved on the tablet was seen nowhere else, and no screen showed any. `GET` / `POST /api/compliance/sanitization-logs` (writing needs the compliance area), persisted with the other collections (`sanitizationLogs`), each checklist also in the activity stream. **Past Logs** (Compliance, Station Sanitization; and in the checklist window) lists every checklist with what was ticked, who, the autoclave cycle and the notes, with Print. Checklists a browser kept before move to the studio database the first time Past Logs opens there.
+- **Open Audit (Alt+O) and Audit Lot Expirations showed an empty window.** Both opened the waiver audit window, which nothing filled. `openSterileAuditModal` lists every stock item from `/api/inventory/sterile-audit` (lot, expiry, quantity, status), expired first, with Print. The empty window is gone. `showListWindow()` is the shell shared with Past Logs.
+- **Portal Lookup removed.** It always showed the same link to the website, the validity choice did nothing, and Open Portal went to the client list. `POST /api/client-portal/generate-link` made tokens nothing checked, for a portal view hidden since 1.0.25, and answered `messageSent: true` without sending. The button, the window, its functions and the two link routes are gone.
+- **Live Studio Feed: Export.** The activity log's CSV and PDF export window existed but no button opened it; Export in the feed's header does.
+- New phrases in the 7 other languages. Click tests: a browser that does not answer in 30 s is replaced (three tries); four CI tool jobs failed on it on 2026-10-22.
+
 ### 1.0.30
 
 **Two faults Henry found on a tablet (2026-10-20).**

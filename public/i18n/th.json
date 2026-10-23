@@ -1953,5 +1953,22 @@
  "Confirm Deletion": "ยืนยันการลบ",
  "Delete Staff Note": "ลบบันทึกของพนักงาน",
  "Are you sure you want to permanently delete this confidential staff note?": "ต้องการลบบันทึกลับของพนักงานนี้อย่างถาวรใช่หรือไม่?",
- "Delete Note": "ลบบันทึก"
+ "Delete Note": "ลบบันทึก",
+ "Past Logs": "บันทึกย้อนหลัง",
+ "End-of-day sanitization logs": "บันทึกการฆ่าเชื้อปิดร้านประจำวัน",
+ "No checklist has been saved yet.": "ยังไม่มีการบันทึกรายการตรวจ",
+ "Export": "ส่งออก",
+ "Save the activity log as CSV or PDF": "บันทึกประวัติกิจกรรมเป็น CSV หรือ PDF",
+ "Give the activity a title": "กรุณาตั้งชื่อกิจกรรม",
+ "Could not save the activity: the server did not answer": "บันทึกกิจกรรมไม่ได้: เซิร์ฟเวอร์ไม่ตอบสนอง",
+ "Activity saved to the studio activity stream": "บันทึกกิจกรรมลงในสตรีมกิจกรรมของร้านแล้ว",
+ "Could not save the checklist: the server did not answer": "บันทึกรายการตรวจไม่ได้: เซิร์ฟเวอร์ไม่ตอบสนอง",
+ "Autoclave cycle": "รอบหม้อนึ่งฆ่าเชื้อ",
+ "Expired": "หมดอายุแล้ว",
+ "{0} days left": "เหลือ {0} วัน",
+ "No expiry date": "ไม่มีวันหมดอายุ",
+ "In date": "ยังไม่หมดอายุ",
+ "Quantity": "จำนวน",
+ "No stock items yet.": "ยังไม่มีสินค้าในสต็อก",
+ "Sterile lot audit: expiry dates": "ตรวจสอบล็อตปลอดเชื้อ: วันหมดอายุ"
 }

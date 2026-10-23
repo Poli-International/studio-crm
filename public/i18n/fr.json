@@ -1953,5 +1953,22 @@
  "Confirm Deletion": "Confirmer la suppression",
  "Delete Staff Note": "Supprimer la note interne",
  "Are you sure you want to permanently delete this confidential staff note?": "Voulez-vous vraiment supprimer définitivement cette note interne confidentielle ?",
- "Delete Note": "Supprimer la note"
+ "Delete Note": "Supprimer la note",
+ "Past Logs": "Journaux précédents",
+ "End-of-day sanitization logs": "Journaux de désinfection de fin de journée",
+ "No checklist has been saved yet.": "Aucune liste n'a encore été enregistrée.",
+ "Export": "Exporter",
+ "Save the activity log as CSV or PDF": "Enregistrer le journal d'activité en CSV ou PDF",
+ "Give the activity a title": "Donnez un titre à l'activité",
+ "Could not save the activity: the server did not answer": "Impossible d'enregistrer l'activité : le serveur n'a pas répondu",
+ "Activity saved to the studio activity stream": "Activité enregistrée dans le flux d'activité du studio",
+ "Could not save the checklist: the server did not answer": "Impossible d'enregistrer la liste : le serveur n'a pas répondu",
+ "Autoclave cycle": "Cycle d'autoclave",
+ "Expired": "Expiré",
+ "{0} days left": "{0} jours restants",
+ "No expiry date": "Pas de date d'expiration",
+ "In date": "Valide",
+ "Quantity": "Quantité",
+ "No stock items yet.": "Aucun article en stock pour l'instant.",
+ "Sterile lot audit: expiry dates": "Audit des lots stériles : dates d'expiration"
 }

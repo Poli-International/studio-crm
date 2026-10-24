@@ -229,7 +229,6 @@ function switchClientProfileTab(tabName) {
                         <h4 style="margin:0;font-size:0.95rem;font-weight:700;color:var(--ti-text, #F9FAFB);display:flex;align-items:center;gap:6px;">
                             <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-trend-up></use></svg> Procedure & Session Progression Timeline
                         </h4>
-                        <span style="font-size:0.75rem;color:var(--ti-blue-ink, #818CF8);font-weight:700;">D3 Interactive Node Track</span>
                     </div>
                     <div id="d3-client-appointment-timeline" style="width:100%;min-height:120px;display:flex;align-items:center;justify-content:center;overflow-x:auto;"></div>
                 </div>
@@ -1926,6 +1925,9 @@ setInterval(() => {
     }
 }, 45000);
 
+// "1 Item" / "3 Items": the phrase files translate both forms
+function itemCount(n) { return n + (n === 1 ? " Item" : " Items"); }
+
 // =========================================================================
 // STERILE MEDICAL AUDIT DASHBOARD WARNING SUMMARY WIDGET
 // =========================================================================
@@ -1946,32 +1948,34 @@ async function fetchAndRenderSterileAuditDashboardWidget() {
         let expiringSoonCount = 0;
         let compliantCount = 0;
         const warningItems = [];
+        // names and lots are data; the words around them are left to the phrase translator
+        const lotLabel = (item) => `<span data-no-phrase>${escapeHtml(item.name)}</span> (${item.lot_number ? `<span data-no-phrase>${escapeHtml(item.lot_number)}</span>` : '<span>No lot number</span>'})`;
 
         audit.forEach(item => {
             if (item.exp_status === 'EXPIRED') {
                 expiredCount++;
-                warningItems.push(`${item.name} (${item.lot_number || 'No Lot'}) - EXPIRED`);
+                warningItems.push(`${lotLabel(item)} - <span>Expired</span>`);
             } else if (item.exp_status === 'EXPIRING_SOON') {
                 expiringSoonCount++;
-                warningItems.push(`${item.name} (${item.lot_number || 'No Lot'}) - ${item.days_until_exp}d left`);
+                warningItems.push(`${lotLabel(item)} - <span>${Number(item.days_until_exp)} days left</span>`);
             } else {
                 compliantCount++;
             }
         });
 
-        if (expiredEl) expiredEl.textContent = `${expiredCount} Items`;
-        if (expiringEl) expiringEl.textContent = `${expiringSoonCount} Items`;
-        if (compliantEl) compliantEl.textContent = `${compliantCount} Items`;
+        if (expiredEl) expiredEl.textContent = itemCount(expiredCount);
+        if (expiringEl) expiringEl.textContent = itemCount(expiringSoonCount);
+        if (compliantEl) compliantEl.textContent = itemCount(compliantCount);
 
         if (alertMsgEl && previewContainer) {
             if (expiredCount > 0) {
                 previewContainer.style.background = 'rgba(239, 68, 68, 0.15)';
                 previewContainer.style.borderColor = 'rgba(239, 68, 68, 0.45)';
-                alertMsgEl.innerHTML = `<strong style="color:var(--ti-alert, #EF4444);"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-siren></use></svg> IMMEDIATE COMPLIANCE RISK:</strong> ${expiredCount} expired sterile item(s) found! (${warningItems.slice(0, 2).join('; ')})`;
+                alertMsgEl.innerHTML = `<strong style="color:var(--ti-alert, #EF4444);"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-siren></use></svg> IMMEDIATE COMPLIANCE RISK:</strong> <span>${expiredCount} expired sterile item(s) found!</span> (${warningItems.slice(0, 2).join('; ')})`;
             } else if (expiringSoonCount > 0) {
                 previewContainer.style.background = 'rgba(245, 158, 11, 0.15)';
                 previewContainer.style.borderColor = 'rgba(245, 158, 11, 0.45)';
-                alertMsgEl.innerHTML = `<strong style="color:var(--ti-gold, #FBBF24);"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-warn></use></svg> UPCOMING EXPIRATIONS:</strong> ${expiringSoonCount} item(s) expiring within 30 days. (${warningItems.slice(0, 2).join('; ')})`;
+                alertMsgEl.innerHTML = `<strong style="color:var(--ti-gold, #FBBF24);"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-warn></use></svg> UPCOMING EXPIRATIONS:</strong> <span>${expiringSoonCount} item(s) expiring within 30 days.</span> (${warningItems.slice(0, 2).join('; ')})`;
             } else {
                 previewContainer.style.background = 'rgba(16, 185, 129, 0.12)';
                 previewContainer.style.borderColor = 'rgba(16, 185, 129, 0.35)';
@@ -3154,7 +3158,6 @@ function navigateClientPortalHash(hash) {
     document.querySelectorAll('.portal-view-section').forEach(sec => { sec.style.display = 'none'; });
     const target = document.getElementById('portal-section-' + hash);
     if (target) target.style.display = 'block';
-    showStudioToast('Navigated to ' + hash);
 }
 window.navigateClientPortalHash = navigateClientPortalHash;
 
@@ -3282,7 +3285,7 @@ async function renderClientDirectoryModal() {
         const chip = (text, color) => '<span style="display:inline-block;margin:4px 6px 0 0;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:700;background:' + color + '22;color:' + color + ';border:1px solid ' + color + '55;">' + escapeHtml(text) + '</span>';
         body.innerHTML = rows.length ? '<div style="display:flex;flex-direction:column;gap:8px;max-height:400px;overflow-y:auto;">' +
             rows.map(({ c, allergy, medical }) => '<div style="background:var(--ti-bg2, #0F172A);padding:10px 14px;border-radius:8px;border:1px solid ' + (allergy || medical ? '#7F1D1D' : '#334155') + ';display:flex;justify-content:space-between;align-items:center;gap:12px;"><div><strong>' + escapeHtml(c.name || 'Client') + '</strong><div style="font-size:0.8rem;color:var(--ti-muted, #94A3B8);">' + escapeHtml(c.phone || 'No phone') + ' | ' + escapeHtml(c.email || 'No email') + (c.assigned_staff_name ? ' | ' + escapeHtml(c.assigned_staff_name) : '') + '</div><div>' +
-                (allergy ? chip('Allergy: ' + allergy, '#EF4444') : '') + (medical ? chip('' + medical, '#EAB308') : '') +
+                (allergy ? chip(pdfLabel('Allergy:') + ' ' + allergy, '#EF4444') : '') + (medical ? chip('' + medical, '#EAB308') : '') +
                 (!allergy && !medical ? '<span style="font-size:0.75rem;color:var(--ti-faint, #64748B);">' + (String(c.allergies || c.medical_history || '').trim() ? 'No allergies or conditions recorded as present' : 'Nothing recorded yet: ask before the session') + '</span>' : '') +
                 '</div></div><button onclick="openClientProfileModal(' + Number(c.id) + ')" style="background:var(--ti-blue, #2563EB);color:#FFF;border:none;padding:6px 12px;border-radius:6px;font-size:0.8rem;cursor:pointer;flex-shrink:0;">View Profile</button></div>').join('') +
             '</div>' : '<div style="text-align:center;padding:24px;color:var(--ti-muted, #94A3B8);">No client matches this search and these filters.</div>';
@@ -3854,8 +3857,8 @@ function renderGalleryGrid() {
     const grouped = v("gallery-mode-select") === "client";
     if (grouped) items.sort((a, b) => (!a.client_name) - (!b.client_name) || (a.client_name || "").localeCompare(b.client_name || ""));
     const badge = document.getElementById("gallery-count-badge");
-    if (badge) badge.textContent = items.length + " Items";
-    const card = (w, i) => galleryCard(w.image_url, w.service_type || "",
+    if (badge) badge.textContent = itemCount(items.length);
+    const card =(w, i) => galleryCard(w.image_url, w.service_type || "",
         [[w.client_name, w.staff_name].filter(Boolean).join(" · "), (w.session_date || "") + (w.session_duration_hours ? " · " + w.session_duration_hours + " h" : ""), w.notes || ""],
         galleryBtn("Share", `data-share="${i}"`) + galleryBtn("Delete", `data-del="${i}" id="gallery-del-${Number(w.id)}"`));
     const heading = (name) => `<div style="grid-column:1/-1;font-weight:800;color:var(--ti-text, #F9FAFB);padding-top:6px;">${escapeHtml(name)}</div>`;
@@ -4058,7 +4061,7 @@ function renderFlashGrid() {
         (!q || [f.title, f.notes, f.needle_specs, f.pigment_palette, f.artist_name, f.size].join(" ").toLowerCase().includes(q)));
     renderFlashSummary(inSheet);
     const badge = document.getElementById("gallery-count-badge");
-    if (badge) badge.textContent = items.length + " Items";
+    if (badge) badge.textContent = itemCount(items.length);
     // drag to arrange only when one sheet is shown whole: the order is that sheet's printed order
     const arrange = !!sheet && sheet !== "none" && !cat && !status && !q;
     const hint = document.getElementById("flash-arrange-hint");
@@ -5080,7 +5083,7 @@ function onPOSupplierChange() {
         `<div style="display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--ti-panel2, #1F2937);font-size:0.8rem;"><span data-no-phrase>${escapeHtml(i.name)} ${i.sku ? "(" + escapeHtml(i.sku) + ")" : ""}</span><span>${i.qty} × $${i.unit.toFixed(2)}</span></div>`).join("")
         : '<div style="padding:8px;color:var(--ti-muted, #94A3B8);">No items are below their reorder level</div>';
     const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-    set("po-items-count-badge", poState.items.length + " Items");
+    set("po-items-count-badge", itemCount(poState.items.length));
     set("po-total-units", String(poState.items.reduce((t, i) => t + i.qty, 0)));
     set("po-total-cost", "$" + poState.items.reduce((t, i) => t + i.total, 0).toFixed(2));
 }

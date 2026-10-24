@@ -78,17 +78,27 @@
     }
   }
 
+  // A textarea's typed text is never touched, but its placeholder and title are interface.
+  function textareaAttrs(el) {
+    if (el.tagName === 'TEXTAREA' && !el.hasAttribute('data-no-phrase') && !(el.parentElement && skipped(el.parentElement))) doAttrs(el);
+  }
+
   function walk(root) {
     if (!root) return;
     if (root.nodeType === 3) {
       if (root.parentElement && !skipped(root.parentElement)) doText(root);
       return;
     }
-    if (root.nodeType !== 1 || skipped(root)) return;
+    if (root.nodeType !== 1) return;
+    if (skipped(root)) { textareaAttrs(root); return; }
     doAttrs(root);
     var tw = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, {
       acceptNode: function (n) {
-        if (n.nodeType === 1) return skipped(n) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+        if (n.nodeType === 1) {
+          if (!skipped(n)) return NodeFilter.FILTER_ACCEPT;
+          textareaAttrs(n);
+          return NodeFilter.FILTER_REJECT;
+        }
         return NodeFilter.FILTER_ACCEPT;
       }
     });

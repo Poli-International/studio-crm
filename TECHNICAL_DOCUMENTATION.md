@@ -433,6 +433,14 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.35
+
+**Translation pass, and a faster release (2026-10-25).**
+- **More of the CRM in the chosen language.** The Record a payment window, the Clients page header line, the Pricing Basis card, the allergy chips, the "Client:" line above the consent and aftercare forms, the on-shift time and the sterile-lot warning on the dashboard (only the item names and lot numbers stay as typed). Typed-text boxes now show their hint text translated (the flash sheet notes, procedure notes, health notes and five more). Counts say "1 item" and "3 items" in every language.
+- **Dates and times follow the CRM's language**, not the browser's: a browser set to US English showed "Oct 5, 2026, 10:00 AM" in every language. In English, or when the browser already uses the CRM's language, the browser's own date format is kept.
+- Removed: a "D3 Interactive Node Track" developer label on the client timeline, and a "Navigated to ..." message on every Client Portal tab.
+- Release: when a version tag has exactly the files of a pull request whose checks passed, the tool crawl is not repeated (about 70 minutes). The downloads are still packed and install-tested on Windows, macOS and Linux.
+
 ### 1.0.34
 
 **The complete tool set: four new tools, flash sheets in the Gallery, and the website's tool corrections (2026-10-25).**

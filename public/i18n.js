@@ -2038,6 +2038,21 @@
         return window.currentStudioLanguage || detectBrowserLanguage();
     }
 
+    // A date written with no locale follows the CRM's language, not the browser's: an en-US
+    // browser showed "Oct 5, 2026, 10:00 AM" in every language. English, or a browser already
+    // in the CRM's language (fr-CA for fr), keeps the browser's own format.
+    ['toLocaleString', 'toLocaleDateString', 'toLocaleTimeString'].forEach(function(fn) {
+        const orig = Date.prototype[fn];
+        Date.prototype[fn] = function(locales, options) {
+            if (locales === undefined) {
+                const lang = getLanguage();
+                const nav = String((typeof navigator !== 'undefined' && navigator.language) || '').toLowerCase();
+                if (lang !== DEFAULT_LANGUAGE && nav.split('-')[0] !== lang) locales = lang;
+            }
+            return orig.call(this, locales, options);
+        };
+    });
+
         /**
      * Translate key with optional parameter substitution and nested dot-notation fallback
      */

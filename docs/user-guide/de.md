@@ -91,7 +91,7 @@ Der Scanner in **Aktivitätsprotokoll** nutzt die Gerätekamera. Scannen Sie ein
 
 ## Galerie
 
-**Portfolio** enthält Fotos fertiger Arbeiten, verknüpft mit Kunde und Künstler. **Flash-Vorlagen** enthält Designs mit Preis und Anzahlung; markieren Sie eines als reserviert, wenn ein Kunde es reserviert. **Teilen** bereitet eine Nachricht für WhatsApp, LINE, X oder E-Mail vor; das Teilen-Menü des Telefons kann das Foto einschließen.
+**Portfolio** enthält Fotos fertiger Arbeiten, verknüpft mit Kunde und Künstler. **Flash-Vorlagen** enthält Motive mit ihrer Größe, Sitzungsdauer, Preis und Anzahlung; ein leerer Preis wird als "Auf Anfrage" angezeigt. Gruppieren Sie Motive in Bögen, ziehen Sie sie in die gewünschte Reihenfolge und drucken Sie einen Bogen oder eine Schalterpreisliste. **Reservieren** reserviert ein Motiv für einen Kunden aus Ihrer Liste mit dem Datum; **Verfügbar machen** hebt die Reservierung auf. Ein **Wiederholbar**-Motiv kann immer wieder gebucht werden und zählt seine Buchungen. **CSV exportieren** listet auf, was verkauft wurde. **Teilen** bereitet eine Nachricht für WhatsApp, LINE, X oder E-Mail vor; das Teilen-Menü des Telefons kann das Foto einschließen.
 
 ## Geld und Personal
 

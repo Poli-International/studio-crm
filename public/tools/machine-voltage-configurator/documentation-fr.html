@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta name="robots" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Voltage Configurator Documentation | Poli International</title>
+    <meta name="description" content="Get a starting voltage range for your machine type, stroke length and technique, with a note to tune from there.">
+    <link rel="canonical" href="https://poliinternational.com/machine-voltage-configurator/">
+    <style>
+        body { background: #0f0f0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; }
+        body.in-iframe .doc-hero h1 { display: none; }
+        * { box-sizing: border-box; }
+        .entry-content { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .doc-hero { background: linear-gradient(135deg, #3B82F6, #8B5CF6); padding: 3rem 2rem; text-align: center; border-radius: 0.75rem; margin-bottom: 2rem; }
+        .doc-hero h1 { font-size: 2.2rem; margin: 0 0 1rem; font-weight: 700; }
+        .doc-hero p { font-size: 1.15rem; color: #E0E7FF; margin: 0; }
+        .doc-hero .v2 { display: inline-block; margin-bottom: 1rem; padding: 0.2rem 0.75rem; border-radius: 999px; background: #10B981; color: #04241a; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; }
+        .doc-section { margin: 2rem 0; padding: 2rem; background: #1a1a1a; border-radius: 0.75rem; border-left: 4px solid #3B82F6; }
+        .doc-section h2 { color: #60A5FA; font-size: 1.7rem; margin: 0 0 1.25rem; font-weight: 600; }
+        .doc-section h3 { color: #A78BFA; font-size: 1.3rem; margin: 1.75rem 0 0.75rem; font-weight: 600; }
+        .doc-section p, .doc-section li { color: #ccc; line-height: 1.75; font-size: 1.02rem; }
+        .doc-section ul, .doc-section ol { padding-left: 1.5rem; }
+        .doc-section li { margin: 0.4rem 0; }
+        .doc-section code { background: #2a2a2a; padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.92em; }
+        .doc-section a { color: #60A5FA; font-weight: 600; }
+        .highlight-box { background: linear-gradient(135deg, #1E3A8A, #4C1D95); padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; border-left: 4px solid #10B981; }
+        .highlight-box p { color: #E0E7FF; margin: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border: 1px solid #333; vertical-align: top; }
+        th { background: #2a2a2a; color: #60A5FA; }
+        td { color: #ccc; }
+        .doc-langs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.5rem; font-size: 0.9rem; }
+        .doc-langs a, .doc-langs span { padding: 0.3rem 0.7rem; border-radius: 999px; border: 1px solid #333; text-decoration: none; }
+        .doc-langs a { color: #60A5FA; }
+        .doc-langs span { background: #1E3A8A; color: #E0E7FF; border-color: #1E3A8A; font-weight: 700; }
+    </style>
+</head>
+<body>
+<nav class="doc-langs" aria-label="Langue de la documentation" style="display:flex;flex-wrap:wrap;gap:6px 14px;max-width:900px;margin:12px auto 0;padding:0 16px;font-size:14px;"><a lang="en" href="documentation.html">English</a><span lang="fr">Français</span><a lang="de" href="documentation-de.html">Deutsch</a><a lang="it" href="documentation-it.html">Italiano</a><a lang="es" href="documentation-es.html">Español</a><a lang="nl" href="documentation-nl.html">Nederlands</a><a lang="pt" href="documentation-pt.html">Português</a><a lang="th" href="documentation-th.html">ไทย</a></nav>
+<script>if (window.self !== window.top) document.body.classList.add('in-iframe');</script>
+    <div class="entry-content">
+        <div class="doc-hero">
+            <span class="v2">V2</span>
+            <h1>Machine Voltage Configurator</h1>
+            <p>Get a starting voltage range for your machine type, stroke length and technique, with a note to tune from there.</p>
+        </div>
+        <p>Le configurateur de tension de machine fournit des plages de tension de départ (règle empirique en studio), la mécanique de course et des cartes de référence de poste de travail imprimables pour les tatoueurs utilisant des machines rotatives et à bobines.</p>
+        <div class="doc-section">
+        <h2>À quoi ça sert</h2>
+        <p>Le configurateur de tension de machine offre un point de départ pour la tension, la course et le réglage de l'alimentation de la machine à tatouer. Les artistes associent le type de machine, la longueur de course et la technique à une plage de départ, une règle empirique en studio plutôt qu'à une spécification du fabricant, au lieu de deviner les chiffres. L'outil explique également la mécanique de course, vérifie la compatibilité des connexions entre cordons et alimentations, et enregistre des cartes de référence personnalisées pour le poste de travail.</p>
+        </div>
+        <div class="doc-section">
+        <h2>À qui cela s'adresse</h2>
+        <p>Cet outil est conçu pour :</p>
+        <ul>
+        <li>Les tatoueurs professionnels réglant de nouveaux dermographes rotatifs, machines à entraînement direct ou machines à bobines.</li>
+        <li>Les apprentis apprenant comment la tension, la course de came et l'inertie du faisceau d'aiguilles influencent le traumatisme cutané.</li>
+        <li>Les gérants de studio établissant des standards opératoires homogènes sur chaque poste de travail.</li>
+        <li>Les artistes invités ou en déplacement réglant des alimentations ou batteries sans fil inconnues en convention ou studio d'accueil.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Comment l'utiliser</h2>
+        <h3>Calcul de base de la tension et de la course</h3>
+        <ol>
+        <li>Cliquez sur <code>Configurateur Tension &amp; Débattement</code> dans la barre de navigation.</li>
+        <li>Sous <code>Paramètres de la Machine</code>, choisissez votre architecture : <code>Rotative (Direct Drive, Slider ou Pen)</code> ou <code>Machine à Bobines (Masselotte Électromagnétique)</code>.</li>
+        <li>Sélectionnez votre <code>Course / Débattement (Excentrique)</code> entre <code>2,5 mm (Court / Ombrages Doux &amp; Grey Wash Fin)</code> et <code>4,5 mm (Très Long / Lignes Épaisses &amp; Grands Magnums)</code>.</li>
+        <li>Choisissez <code>Traçage (Lining)</code>, <code>Ombrage (Shading)</code>, <code>Remplissage Couleur (Packing)</code> ou <code>Pointillisme / Dotwork (Stippling)</code>.</li>
+        <li>Sous <code>Fenêtre Initiale Recommandée</code>, consultez la plage <code>Plage Initiale de Référence</code> en volts continus, avec <code>Vitesse Relative de l'Aiguille</code>, <code>Force d'Impact Relative</code> et <code>Rapport Cyclique</code>.</li>
+        <li>Cliquez sur <code>Enregistrer ce réglage dans la Fiche Mes Machines</code> pour copier cette configuration dans vos fiches.</li>
+        </ol>
+        <h3>Comparaison de la course et de la vitesse</h3>
+        <ol>
+        <li>Cliquez sur <code>Visualiseur de Course &amp; Vitesse</code> dans la barre de navigation.</li>
+        <li>Sous <code>Sélectionner la Course à Comparer :</code>, choisissez entre <code>2,5 mm (Course Courte)</code> et <code>4,5 mm (Course Lourde)</code>.</li>
+        <li>Sous <code>Sélectionner le Niveau de Tension Initial :</code>, basculez entre <code>Basse</code>, <code>Moyenne</code> ou <code>Haute</code>.</li>
+        <li>Observez les indicateurs mécaniques : <code>Course d'Excentrique :</code>, <code>Fréquence de Cycle Relative :</code>, <code>Inertie d'Impact / Force :</code> et <code>Temps de Contact Cutané de l'Aiguille :</code>.</li>
+        <li>Examinez le schéma animé illustrant <code>Débattement de l'Excentrique Moteur</code>, <code>Course de Pénétration de l'Aiguille</code> et la <code>Limite de Surface Cutanée (Ligne du Derme)</code>.</li>
+        </ol>
+        <h3>Enregistrement et gestion des machines personnelles</h3>
+        <ol>
+        <li>Cliquez sur <code>Mes Machines (Fiche Poste)</code> dans la barre de navigation.</li>
+        <li>Sous <code>Ajouter un Réglage Machine &amp; Technique</code>, saisissez le nom de votre machine dans <code>Nom / Modèle de Machine *</code>.</li>
+        <li>Sélectionnez <code>Rotative</code> ou <code>Bobines</code>, renseignez <code>Course (mm) *</code> et choisissez la <code>Technique Employée *</code>.</li>
+        <li>Renseignez la valeur dans <code>Tension Validée en Session (Volts) *</code> et précisez le faisceau dans <code>Configuration &amp; Conicité d'Aiguille (Taper) *</code>.</li>
+        <li>Notez vos observations dans <code>Notes / Observations de Session</code>, sélectionnez <code>Fonctionne Parfaitement</code>, <code>Trop Doux / Ralentit</code> ou <code>Trop Dur / Mâche la Peau</code>, puis cliquez sur <code>Enregistrer le Réglage Machine</code>.</li>
+        <li>Filtrez les fiches sous <code>Fiches Machines Enregistrées</code> avec <code>Toutes les Architectures</code>, <code>Rotative</code> ou <code>Bobines</code>, ou cliquez sur <code>Supprimer</code> pour supprimer une ligne.</li>
+        </ol>
+        <h3>Vérification des connexions électriques et alimentations</h3>
+        <ol>
+        <li>Cliquez sur <code>Vérificateur Connexion &amp; Alimentation</code> dans la barre de navigation.</li>
+        <li>Sous <code>1. Type de Connexion Machine</code>, choisissez votre connectique, par exemple <code>Prise RCA (La plupart des rotatives et stylos modernes)</code> ou <code>Clip Cord (Machines traditionnelles à bobines)</code>.</li>
+        <li>Sous <code>2. Type d'Alimentation &amp; Ampérage</code>, sélectionnez votre alimentation, telle que <code>Alimentation Digitale de Laboratoire (Sortie continue 2,0 A – 3,0 A, fonction jumpstart)</code> ou <code>Bloc Batterie Modulaire Sans Fil (Lithium-ion, 1500–2000 mAh)</code>.</li>
+        <li>Sous <code>3. Câble / Cordon de Liaison</code>, choisissez votre cordon, comme <code>Câble RCA Renforcé Standard</code> ou <code>Cordon Clip Cord Traditionnel à Ressort</code>.</li>
+        <li>Cliquez sur <code>Vérifier la Compatibilité du Matériel</code> pour identifier les incompatibilités éventuelles comme <code>Incohérence de Câblage</code>, <code>Incompatibilité Physique</code> ou <code>Limite d'Ampérage / Démarrage</code>.</li>
+        </ol>
+        <h3>Réglage pratique à l'oreille et ajustement des bobines</h3>
+        <ol>
+        <li>Cliquez sur <code>Réglage au Ressenti &amp; Guide Bobines / Batteries</code> dans la barre de navigation.</li>
+        <li>Suivez les étapes de test sur peau d'entraînement : <code>1. Écouter la Tonalité du Moteur</code>, <code>2. Observer la Pénétration de l'Aiguille</code> et <code>3. Ajuster par Paliers Minimes</code>.</li>
+        <li>Ajustez les machines à bobines selon la séquence mécanique : <code>1. Alignement mécanique : positionner la barre d'aiguille, l'œillet et le manchon parfaitement dans l'axe sans friction latérale.</code>, <code>2. Écartement de contact : ajuster l'espace au niveau de la vis (épaisseur d'une pièce de dix centimes pour tracer, pièce de cinquante centimes pour ombrer, comme repère physique).</code>, <code>3. Tension des ressorts : courber et régler le ressort arrière pour équilibrer la vitesse de rappel de la masselotte avant d'augmenter le voltage.</code> et <code>4. Calibrage fin de la tension : n'ajuster le potentiomètre d'alimentation qu'une fois la mécanique et les lames de ressort équilibrées.</code>.</li>
+        <li>Prenez en compte les limites des batteries sans fil : <code>1. Chute de Tension en Charge (Voltage Sag)</code>, <code>2. Fonction d'Aide au Démarrage (Jumpstart)</code> et <code>3. Baisse de Régime en Fin de Charge</code>.</li>
+        </ol>
+        <h3>Intégration de l'outil sur le site internet du studio</h3>
+        <ol>
+        <li>Cliquez sur <code>Code d'Intégration</code> dans la barre de navigation.</li>
+        <li>Repérez le fragment sous <code>Copiez le code iframe ci-dessous (utilise l'URL officielle hébergée par Poli International) :</code>.</li>
+        <li>Cliquez sur <code>Copier le Code d'Intégration</code> pour copier le code d'intégration HTML.</li>
+        </ol>
+        </div>
+        <div class="doc-section">
+        <h2>Ce qu'il ne fait pas</h2>
+        <p>Le Configurateur de tension pour machines se concentre exclusivement sur les plages de tension, la cinématique de course et la compatibilité électrique. Il ne propose pas :</p>
+        <ul>
+        <li>La sélection des pointes d'aiguilles, diamètres de cartouche ou géométries de faisceaux. Utilisez le sélecteur d'aiguilles sur https://poliinternational.com/needle-selector/.</li>
+        <li>Le diagnostic des pannes matérielles de pédales, fils internes coupés ou transformateurs défectueux. Utilisez le guide de dépannage d'alimentation sur https://poliinternational.com/power-supply-troubleshooter/.</li>
+        <li>Le carnet d'entretien, le calendrier de remplacement des ressorts ou le suivi des cycles d'autoclave. Utilisez le carnet d'entretien des machines sur https://poliinternational.com/machine-maintenance-logbook/.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Où vivent vos données</h2>
+        <p>Toutes les configurations de machines, notes de tension et réglages enregistrés dans cet outil restent exclusivement dans votre navigateur sur cet appareil précis. Les données sont conservées via <code>localStorage</code> sous la clé <code>poli_tattoo_machines</code>.</p>
+        <p>Aucun réglage, nom de studio ni paramètre n'est jamais transmis à un serveur externe ou une base de données tierce. Vos informations sont conservées d'une session à l'autre jusqu'à ce que vous cliquiez sur <code>Supprimer</code> ou que vous vidiez le cache et les données de votre navigateur.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Impression et exportation</h2>
+        <p>Pour imprimer une fiche technique destinée à votre poste de travail :</p>
+        <ol>
+        <li>Cliquez sur <code>Mes Machines (Fiche Poste)</code> et vérifiez vos réglages enregistrés.</li>
+        <li>Cliquez sur <code>Imprimer la Fiche Poste pour l'Atelier</code>.</li>
+        <li>Votre navigateur ouvre la boîte de dialogue d'impression avec une mise en page dédiée à fort contraste qui masque la navigation et les boutons.</li>
+        <li>Imprimez le tableau sur papier standard A4, plastifiez la feuille et fixez-la près de votre alimentation pour une consultation immédiate.</li>
+        </ol>
+        </div>
+        <div class="doc-section">
+        <h2>Questions et réponses</h2>
+        <h3>Quelle tension utiliser pour les tracés avec une machine rotative ?</h3>
+        <p>De nombreuses machines rotatives fonctionnent entre environ 6,5V et 8,5V pour les lignes, selon la course et le couple du moteur (une plage typique tirée de guides d'alimentation, et non une spécification de fabricant). Commencez par la valeur la plus basse et augmentez par incréments de 0,2V jusqu'à ce que les lignes pénètrent proprement en un seul passage.</p>
+        <h3>Comment la longueur de course influence-t-elle la tension d'une machine ?</h3>
+        <p>Une course courte (2,5 mm à 3,0 mm) effectue des cycles rapides avec un impact doux, exigeant une tension légèrement plus élevée face à la membrane des cartouches. Une course longue (4,0 mm à 4,5 mm) génère davantage d'inertie mécanique, déplaçant de gros faisceaux à tension modérée tout en exigeant une vitesse de main plus rapide.</p>
+        <h3>Pourquoi ma machine ralentit-elle dès que les aiguilles touchent la peau ?</h3>
+        <p>La résistance des tissus épidermiques et la tension de la membrane de cartouche augmentent la charge sur le moteur, ce qui entraîne une chute de tension de 0,3 V à 0,7 V sur les petites alimentations. Si la tonalité du moteur baisse sensiblement au contact de la peau, augmentez la tension de 0,2 V à 0,4 V ou utilisez une alimentation délivrant au moins 2,0 A continus.</p>
+        <h3>Peut-on faire tourner une machine à bobines avec une batterie sans fil ?</h3>
+        <p>Les machines à bobines traditionnelles ne doivent être raccordées qu'à des batteries sans fil spécialement conçues pour supporter les charges inductives. Les blocs de batteries rotatifs standards manquent d'amortissement contre les retours de force électromotrice de l'étincelle de contact, risquant de surchauffer les accus ou de couper les circuits.</p>
+        <h3>Quelle est la différence entre une course de 3,5 mm et de 4,0 mm ?</h3>
+        <p>Une course de 3,5 mm offre un débattement polyvalent convenant à l'ombrage doux, au grey wash et aux tracés moyens. Une course de 4,0 mm procure un débattement plus grand, une accélération supérieure et un impact plus franc, parfait pour les tracés gras nets et le remplissage dense aux grands magnums.</p>
+        <h3>Pourquoi ma machine à cartouches refuse-t-elle de démarrer à basse tension ?</h3>
+        <p>Les aiguilles à cartouche contiennent une membrane de rappel en caoutchouc qui résiste au moteur. Certains moteurs rotatifs ont du mal à démarrer contre celle-ci à basse tension ; certaines alimentations et batteries procurent un bref boost de démarrage (jumpstart) pour pallier cela. Consultez votre manuel.</p>
+        <h3>Comment régler l'écartement de la vis de contact sur une machine à bobines ?</h3>
+        <p>Desserrez la vis de blocage et ajustez la vis de contact jusqu'à ce qu'elle effleure le ressort avant lorsque la barre d'armature est au repos. Règle empirique en studio : un écart d'environ 1,0 mm pour un tracé rapide, ou de 1,5 mm à 2,0 mm pour un remplissage plus doux.</p>
+        <h3>Est-ce qu'augmenter la tension rend l'impact de l'aiguille plus puissant ?</h3>
+        <p>Sur une machine rotative, augmenter la tension accroît principalement la fréquence de rotation et non la force brute de pénétration, laquelle dépend de la course de came. Sur une machine à bobines, une tension plus forte augmente l'attraction magnétique, ce qui accroît la vitesse et la fermeté jusqu'à la limite élastique du ressort arrière.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Limites</h2>
+        <p>Le configurateur de tension de machine fournit des bases de départ qui constituent une règle empirique en studio, basées sur la pratique courante et les principes mécaniques. Il ne peut pas mesurer la résistance des enroulements du moteur, le frottement des paliers de came, la fatigue des ressorts ou la rigidité de la membrane de la cartouche.</p>
+        <p>De plus, cet outil ne peut pas évaluer l'élasticité, l'épaisseur ni l'hydratation de la peau propre à chaque client. Le tatoueur demeure seul responsable du contrôle de la profondeur de piqûre, de l'écoute du son du moteur et du respect des limites maximales prescrites par le fabricant de sa machine.</p>
+        </div>
+        <div class="doc-section">
+            <h2>Use the tool</h2>
+            <p><a href="https://poliinternational.com/machine-voltage-configurator/" target="_top">Open the Machine Voltage Configurator</a>. Everything runs in your browser; nothing you enter is sent anywhere.</p>
+        </div>
+    </div>
+</body>
+</html>

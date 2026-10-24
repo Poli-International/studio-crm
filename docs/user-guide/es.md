@@ -91,7 +91,7 @@ El escáner en **Registro de actividad** usa la cámara del dispositivo. Escanee
 
 ## Galería
 
-**Portafolio** contiene fotos de trabajos terminados, vinculadas al cliente y al artista. **Diseños flash** contiene diseños con precio y depósito; marque uno como reservado cuando un cliente lo reserve. **Compartir** prepara un mensaje para WhatsApp, LINE, X o correo; el menú de compartir del teléfono puede incluir la foto.
+**Portafolio** contiene fotos de trabajos terminados, vinculadas al cliente y al artista. **Diseños flash** contiene diseños con su tamaño, tiempo de sesión, precio y depósito; un precio en blanco se muestra como "A consultar". Agrupe los diseños en hojas, arrástrelos en el orden que desee e imprima una hoja o una lista de precios para el mostrador. **Reservar** reserva un diseño para un cliente de su lista, con la fecha; **Volver a poner disponible** cancela la reserva. Un diseño **Repetible** se puede reservar una y otra vez y cuenta sus reservas. **Exportar CSV** enumera lo vendido. **Compartir** prepara un mensaje para WhatsApp, LINE, X o correo; el menú de compartir del teléfono puede incluir la foto.
 
 ## Dinero y personal
 

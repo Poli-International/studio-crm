@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <script>
+    if (window.self !== window.top) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      window.addEventListener('message', function(e) {
+        if (e.data && e.data.type === 'poli-theme') {
+          document.documentElement.setAttribute('data-theme', e.data.light ? 'light' : 'dark');
+        }
+      });
+    }
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Estimate laser tattoo removal sessions using the published clinical Kirby-Desai scale (Kirby & Desai, 2009). Includes customized interval timelines, cover-up fading mode, calendar export, cost calculation, and printable consultation notes.">
+  <meta property="og:title" content="Tattoo Removal Sessions Estimator | Poli International">
+  <meta property="og:description" content="Estimate laser tattoo removal sessions using the published clinical Kirby-Desai scale. Calculate timeline, session ranges, and questions for your clinic.">
+  <title>Tattoo Removal Sessions Estimator | Poli International</title>
+  <link rel="stylesheet" href="./css/theme.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/print.css" media="print">
+  <link rel="stylesheet" href="./css/a11y.css">
+</head>
+<body>
+
+<div class="tool-wrapper">
+  <!-- Header -->
+  <header class="tool-header">
+    <div class="header-top-row">
+      <span class="brand-badge" data-i18n="brand.tools_badge">Poli International Tools</span>
+      <div class="lang-selector-wrap no-print">
+        <label for="lang-select" class="sr-only" data-i18n="lang.select_label">Language</label>
+        <select id="lang-select" class="lang-select" aria-label="Select Language" data-i18n-aria-label="lang.select_aria">
+          <option value="en">English</option>
+          <option value="es">Español</option>
+          <option value="de">Deutsch</option>
+          <option value="fr">Français</option>
+          <option value="it">Italiano</option>
+          <option value="pt">Português</option>
+          <option value="nl">Nederlands</option>
+          <option value="th">ไทย</option>
+        </select>
+      </div>
+    </div>
+    <h1 id="main-heading" data-i18n="app.title">Tattoo Removal Sessions Estimator</h1>
+    <p class="subtitle" data-i18n="app.subtitle">Published by Poli International • Clinical Kirby-Desai Scale (Kirby & Desai, 2009)</p>
+    <p class="description" data-i18n="app.description">Estimate how many laser tattoo removal sessions you may need using the published six-factor clinical Kirby-Desai scoring scale.</p>
+  </header>
+
+  <!-- Form -->
+  <form id="calc-form" class="calc-form" onsubmit="return false;">
+
+    <!-- Multi-Tattoo Profile Manager -->
+    <div class="profile-bar no-print mb-4">
+      <div class="profile-select-wrap">
+        <label for="profile-select" class="fw-bold text-sm" data-i18n="profile.label">Active Tattoo Profile:</label>
+        <select id="profile-select" class="form-select"></select>
+      </div>
+      <div class="profile-actions-wrap">
+        <button type="button" id="profile-new-btn" class="secondary-btn text-sm" data-i18n="profile.new_btn">+ New Assessment</button>
+        <button type="button" id="profile-rename-btn" class="secondary-btn text-sm" data-i18n="profile.rename_btn">Rename</button>
+        <button type="button" id="profile-delete-btn" class="secondary-btn danger-text-btn text-sm" data-i18n="profile.delete_btn">Delete</button>
+      </div>
+    </div>
+
+    <!-- Treatment Goal -->
+    <fieldset class="form-section goal-section">
+      <legend class="section-legend" data-i18n="goal.title">Treatment Goal</legend>
+      <div class="goal-grid">
+        <label class="goal-card" for="goal-clearance">
+          <input type="radio" id="goal-clearance" name="treatment-goal" value="clearance" checked>
+          <span class="goal-content">
+            <strong data-i18n="goal.clearance_label">Complete Removal</strong>
+            <span class="goal-desc" data-i18n="goal.clearance_desc">Aiming for the tattoo to be no longer visible.</span>
+          </span>
+        </label>
+        <label class="goal-card" for="goal-coverup">
+          <input type="radio" id="goal-coverup" name="treatment-goal" value="coverup">
+          <span class="goal-content">
+            <strong data-i18n="goal.coverup_label">Fade for a Cover-up</strong>
+            <span class="goal-desc" data-i18n="goal.coverup_desc">Partial lightening so a tattoo artist can work over the area. Many artists aim for about 50–70% fading (industry practice, not a measured threshold).</span>
+          </span>
+        </label>
+      </div>
+    </fieldset>
+
+    <!-- Section 1: Clinical Kirby-Desai Factors -->
+    <div class="form-section">
+      <h2 class="section-title" data-i18n="section.factors_title">1. Clinical Kirby-Desai Assessment Factors</h2>
+      <p class="section-subtitle" data-i18n="section.factors_subtitle">The published scale (Kirby W, Desai A et al., 2009) evaluates six physical characteristics.</p>
+
+      <div class="factors-grid">
+        <!-- Factor 1: Skin Type -->
+        <div class="factor-card">
+          <label class="factor-label" for="skin-type">
+            <span class="factor-num">1</span>
+            <span data-i18n="factor.skin.title">Fitzpatrick Skin Phototype</span>
+          </label>
+          <p class="factor-helper" data-i18n="factor.skin.helper">How does your skin react to sun exposure? Unsure? Use the guided phototype helper below.</p>
+
+          <!-- Phototype Wizard -->
+          <div class="wizard-box">
+            <div class="form-group">
+              <label for="skin-q1" class="sub-label" data-i18n="factor.skin.q1_label">Sunburn reaction (after 1 hour of midday summer sun without protection):</label>
+              <select id="skin-q1" class="form-select">
+                <option value="" selected data-i18n="factor.skin.q1_opt_prompt">Select sunburn reaction…</option>
+                <option value="1" data-i18n="factor.skin.q1_opt1">Always burns severely, painful blisters, peeling</option>
+                <option value="2" data-i18n="factor.skin.q1_opt2">Burns easily and severely, painful peeling</option>
+                <option value="3" data-i18n="factor.skin.q1_opt3">Burns moderately, mild peeling</option>
+                <option value="4" data-i18n="factor.skin.q1_opt4">Burns minimally or rarely</option>
+                <option value="5" data-i18n="factor.skin.q1_opt5">Rarely burns, high sun tolerance</option>
+                <option value="6" data-i18n="factor.skin.q1_opt6">Never burns, deeply pigmented</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="skin-q2" class="sub-label" data-i18n="factor.skin.q2_label">Tanning reaction (after repeated sun exposure):</label>
+              <select id="skin-q2" class="form-select">
+                <option value="" selected data-i18n="factor.skin.q2_opt_prompt">Select tanning reaction…</option>
+                <option value="1" data-i18n="factor.skin.q2_opt1">Never tans, skin remains pale or freckles</option>
+                <option value="2" data-i18n="factor.skin.q2_opt2">Tans minimally and with difficulty</option>
+                <option value="3" data-i18n="factor.skin.q2_opt3">Tans gradually to light brown</option>
+                <option value="4" data-i18n="factor.skin.q2_opt4">Tans easily and moderately to olive/brown</option>
+                <option value="5" data-i18n="factor.skin.q2_opt5">Tans profusely to dark brown</option>
+                <option value="6" data-i18n="factor.skin.q2_opt6">Never burns, deeply pigmented natural skin</option>
+              </select>
+            </div>
+            <div id="skin-wizard-badge" class="wizard-badge" hidden></div>
+          </div>
+
+          <div class="form-group">
+            <label for="skin-type" class="sub-label" data-i18n="factor.skin.override_label">Or select Fitzpatrick type directly:</label>
+            <select id="skin-type" class="form-select" required>
+              <option value="" selected data-i18n="factor.skin.opt_prompt">Select skin type…</option>
+              <option value="1" data-i18n="factor.skin.opt1">Type I - Very fair, pale skin, blue/hazel eyes, red/blond hair (1 pt)</option>
+              <option value="2" data-i18n="factor.skin.opt2">Type II - Fair skin, burns easily, tans minimally (2 pts)</option>
+              <option value="3" data-i18n="factor.skin.opt3">Type III - Medium / light olive skin, burns moderately, tans gradually (3 pts)</option>
+              <option value="4" data-i18n="factor.skin.opt4">Type IV - Olive or moderate brown skin, burns rarely, tans easily (4 pts)</option>
+              <option value="5" data-i18n="factor.skin.opt5">Type V - Dark brown skin, rarely burns, tans dark (5 pts)</option>
+              <option value="6" data-i18n="factor.skin.opt6">Type VI - Deeply pigmented black/darkest brown skin, never burns (6 pts)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Factor 2: Location -->
+        <div class="factor-card">
+          <label class="factor-label" for="location-named">
+            <span class="factor-num">2</span>
+            <span data-i18n="factor.location.title">Tattoo Location</span>
+          </label>
+          <p class="factor-helper" data-i18n="factor.location.helper">Ink clearance relies on blood supply and lymphatic drainage; head and trunk clear faster than hands and feet.</p>
+
+          <div class="form-group">
+            <label for="location-named" class="sub-label" data-i18n="factor.location.named_label">Select your specific body area:</label>
+            <select id="location-named" class="form-select" required>
+              <option value="" selected data-i18n="factor.location.named_prompt">Select specific location…</option>
+              <option value="1" data-i18n="factor.location.opt_head">Head, face, or neck (Group 1 - 1 pt)</option>
+              <option value="2" data-i18n="factor.location.opt_upper_trunk">Upper chest, upper back, shoulder blade (Group 2 - 2 pts)</option>
+              <option value="3" data-i18n="factor.location.opt_lower_trunk">Abdomen, lower back, ribs, hips (Group 3 - 3 pts)</option>
+              <option value="4" data-i18n="factor.location.opt_proximal_arm">Upper arm / shoulder (Group 4 - 4 pts)</option>
+              <option value="4" data-i18n="factor.location.opt_forearm">Forearm (Group 4 - 4 pts)</option>
+              <option value="4" data-i18n="factor.location.opt_proximal_leg">Thigh / upper leg (Group 4 - 4 pts)</option>
+              <option value="5" data-i18n="factor.location.opt_distal_arm">Wrist, hand, or fingers (Group 5 - 5 pts)</option>
+              <option value="5" data-i18n="factor.location.opt_distal_leg">Calf, shin, ankle, or foot (Group 5 - 5 pts)</option>
+            </select>
+          </div>
+          <div id="location-group-desc" class="info-callout" hidden></div>
+        </div>
+
+        <!-- Factor 3: Colour -->
+        <div class="factor-card">
+          <label class="factor-label" for="ink-colour">
+            <span class="factor-num">3</span>
+            <span data-i18n="factor.colour.title">Ink Colour(s)</span>
+          </label>
+          <p class="factor-helper" data-i18n="factor.colour.helper">Each ink colour absorbs particular laser wavelengths. Black absorbs the widest range; other colours, especially green and yellow, are harder to remove.</p>
+          <div class="form-group">
+            <select id="ink-colour" class="form-select" required>
+              <option value="" selected data-i18n="factor.colour.opt_prompt">Select ink colour profile…</option>
+              <option value="1" data-i18n="factor.colour.opt1">Black only - carbon / monochromatic black (1 pt)</option>
+              <option value="2" data-i18n="factor.colour.opt2">Black and Red - standard two-tone work (2 pts)</option>
+              <option value="3" data-i18n="factor.colour.opt3">Black, Red, and other colours - e.g. blue, green, purple (3 pts)</option>
+              <option value="4" data-i18n="factor.colour.opt4">Multiple colours - 4+ colours, neon, yellow, or bright pigments (4 pts)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Factor 4: Ink Amount -->
+        <div class="factor-card">
+          <label class="factor-label" for="ink-density">
+            <span class="factor-num">4</span>
+            <span data-i18n="factor.density.title">Amount of Ink / Density</span>
+          </label>
+          <p class="factor-helper" data-i18n="factor.density.helper">Amateur tattoos usually hold less ink than dense professional work.</p>
+          <div class="form-group">
+            <select id="ink-density" class="form-select" required>
+              <option value="" selected data-i18n="factor.density.opt_prompt">Select ink volume and density…</option>
+              <option value="1" data-i18n="factor.density.opt1">Amateur / Sparse - fine lines, letters, or small amateur ink (1 pt)</option>
+              <option value="2" data-i18n="factor.density.opt2">Minimal - light professional outline, delicate script, simple design (2 pts)</option>
+              <option value="3" data-i18n="factor.density.opt3">Moderate - solid outline with standard shading or medium fill (3 pts)</option>
+              <option value="4" data-i18n="factor.density.opt4">Significant - dense black fill, tribal, heavy pack, or multi-pass pigment (4 pts)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Factor 5: Scarring -->
+        <div class="factor-card">
+          <label class="factor-label" for="scarring">
+            <span class="factor-num">5</span>
+            <span data-i18n="factor.scarring.title">Scarring or Dermal Tissue Change</span>
+          </label>
+          <p class="factor-helper" data-i18n="factor.scarring.helper">Scarring or tissue change makes removal harder; the paper scores it from 0 to 5 points.</p>
+          <div class="form-group">
+            <select id="scarring" class="form-select" required>
+              <option value="" selected data-i18n="factor.scarring.opt_prompt">Select scarring level…</option>
+              <option value="0" data-i18n="factor.scarring.opt0">No scarring - skin is smooth with normal texture (0 pts)</option>
+              <option value="1" data-i18n="factor.scarring.opt1">Minimal - slight textural change, barely palpable (1 pt)</option>
+              <option value="3" data-i18n="factor.scarring.opt3">Moderate - noticeable raised tissue or firm textural change (3 pts)</option>
+              <option value="5" data-i18n="factor.scarring.opt5">Significant - marked raised hypertrophic scar or fibrotic tissue (5 pts)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Factor 6: Layering -->
+        <div class="factor-card">
+          <label class="factor-label" for="layering">
+            <span class="factor-num">6</span>
+            <span data-i18n="factor.layering.title">Layering / Cover-up Tattoo</span>
+          </label>
+          <p class="factor-helper" data-i18n="factor.layering.helper">A cover-up holds two layers of ink, so the paper adds 2 points.</p>
+          <div class="form-group">
+            <select id="layering" class="form-select" required>
+              <option value="" selected data-i18n="factor.layering.opt_prompt">Is this a layered tattoo or cover-up?</option>
+              <option value="0" data-i18n="factor.layering.opt0">No - original single tattoo on untouched skin (0 pts)</option>
+              <option value="2" data-i18n="factor.layering.opt2">Yes - tattooed over an older design (cover-up / re-done) (2 pts)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Clinic & Progress Parameters -->
+    <div class="form-section">
+      <h2 class="section-title" data-i18n="section.clinic_title">2. Your Clinic Spacing, Budget, & Past Progress</h2>
+      <p class="section-subtitle" data-i18n="section.clinic_subtitle">Personalize the timeline and cost using your clinic's actual schedule and rates.</p>
+
+      <div class="params-grid">
+        <!-- Interval -->
+        <div class="param-card">
+          <label for="clinic-interval" class="param-label">
+            <strong data-i18n="param.interval_label">Clinic session interval (weeks):</strong>
+          </label>
+          <p class="param-helper" data-i18n="param.interval_helper">Enter the interval your clinic recommends (the Kirby-Desai paper assumed 6 to 8 weeks).</p>
+          <input type="number" id="clinic-interval" class="form-input" min="2" max="52" step="1" required data-i18n-placeholder="param.interval_placeholder" placeholder="e.g. 8">
+        </div>
+
+        <!-- Price -->
+        <div class="param-card">
+          <label for="session-price" class="param-label">
+            <strong data-i18n="param.cost_label">Price per session (optional, enter your currency):</strong>
+          </label>
+          <p class="param-helper" data-i18n="param.cost_helper">Enter your clinic's quoted per-session price to calculate your total cost range.</p>
+          <div class="price-input-row">
+            <select id="currency-symbol" class="form-select currency-select" aria-label="Currency" data-i18n-aria-label="param.currency_aria">
+              <option value="$">$ (USD/AUD/CAD)</option>
+              <option value="£">£ (GBP)</option>
+              <option value="€">€ (EUR)</option>
+              <option value="¥">¥ (JPY/CNY)</option>
+              <option value="R$">R$ (BRL)</option>
+              <option value="CHF">CHF</option>
+            </select>
+            <input type="number" id="session-price" class="form-input" min="0" step="1" data-i18n-placeholder="param.cost_placeholder" placeholder="e.g. 120">
+          </div>
+        </div>
+      </div>
+
+      <!-- Started toggle -->
+      <div class="started-toggle-wrap">
+        <label class="checkbox-label" for="already-started">
+          <input type="checkbox" id="already-started">
+          <span class="custom-checkbox"></span>
+          <span data-i18n="param.started_toggle">I have already started laser treatments</span>
+        </label>
+      </div>
+
+      <!-- Started panel -->
+      <div id="started-panel" class="started-panel" hidden>
+        <div class="params-grid">
+          <div class="param-card">
+            <label for="sessions-completed" class="param-label">
+              <strong data-i18n="param.completed_label">Sessions completed so far:</strong>
+            </label>
+            <input type="number" id="sessions-completed" class="form-input" min="0" max="100" step="1" data-i18n-placeholder="param.completed_placeholder" placeholder="e.g. 3">
+          </div>
+          <div class="param-card">
+            <label for="current-fade" class="param-label">
+              <strong data-i18n="param.faded_label">Estimated fading achieved so far (0 to 10):</strong>
+            </label>
+            <p class="param-helper" data-i18n="param.faded_hint">0 = no visible change; 10 = completely gone</p>
+            <input type="number" id="current-fade" class="form-input" min="0" max="10" step="1" data-i18n-placeholder="param.faded_placeholder" placeholder="0–10">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Clinical Lifestyle Modifiers -->
+    <div class="form-section">
+      <h2 class="section-title" data-i18n="lifestyle.title">Smoking</h2>
+      <p class="section-subtitle" data-i18n="lifestyle.subtitle">Smoking is the one lifestyle factor with a published removal study. It does not change the Kirby-Desai number.</p>
+      <div class="params-grid">
+        <!-- Smoking -->
+        <div class="param-card">
+          <label for="lifestyle-smoking" class="param-label">
+            <strong data-i18n="lifestyle.smoking_label">Smoking:</strong>
+          </label>
+          <select id="lifestyle-smoking" class="form-select">
+            <option value="non" selected data-i18n="lifestyle.smoking_non">Non-smoker</option>
+            <option value="active" data-i18n="lifestyle.smoking_active">Smoker</option>
+          </select>
+          <p class="param-helper" data-i18n="lifestyle.smoking_hint">Bencini et al. (Arch Dermatol 2012, 352 patients): smokers were about 70% less likely to reach removal after 10 sessions. This tool shows it as a note and does not add a percentage to your sessions.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error Messages Display -->
+    <div id="calc-errors" class="error-container" hidden role="alert"></div>
+
+    <!-- Action Buttons -->
+    <div class="form-actions no-print">
+      <button type="button" id="calc-btn" class="primary-btn" data-i18n="btn.calculate">Calculate Kirby-Desai Estimate</button>
+      <button type="button" id="reset-btn" class="secondary-btn" data-i18n="btn.reset">Clear Form</button>
+    </div>
+  </form>
+
+  <!-- Results Section -->
+  <section id="results" class="results-section" hidden aria-live="polite" tabindex="-1">
+    <div class="results-header">
+      <h2 class="results-title" data-i18n="results.heading">Estimated Treatment Requirements</h2>
+      <p class="results-citation" data-i18n="results.score_citation">Based on published 100-patient retrospective model (Kirby & Desai, 2009).</p>
+    </div>
+
+    <!-- Cover-up Notice Badge -->
+    <div id="res-coverup-notice" class="coverup-alert-card" hidden>
+      <div class="badge-tag" data-i18n="results.coverup_badge">Cover-up Preparation Estimate</div>
+      <p data-i18n="results.coverup_note">Your goal is fading for a cover-up. The session range shown is for full removal; a cover-up usually needs fewer. Many artists look for about 50–70% fading (industry practice). No study gives a fixed fraction of sessions, so your clinic and your artist decide together when it is light enough.</p>
+    </div>
+
+    <!-- High-Score Referral Notice (Kirby & Desai's own stated threshold) -->
+    <div id="res-referral-notice" class="coverup-alert-card" hidden>
+      <div class="badge-tag" data-i18n="results.referral_badge">Above the Paper's Own Threshold</div>
+      <p data-i18n="results.referral_note">The published Kirby-Desai paper states that above 15 points, a tattoo may be difficult to remove and a physician should decide whether laser is the right method. Your score is above that threshold: bring this result to an in-person consultation with a licensed laser specialist or dermatologist before assuming laser removal is the right approach.</p>
+    </div>
+
+    <!-- Metric Cards Grid -->
+    <div class="metric-cards-grid">
+      <!-- Kirby-Desai Score -->
+      <div class="metric-card">
+        <span class="metric-label" data-i18n="results.score_label">Total Kirby-Desai Score</span>
+        <div id="res-score-value" class="metric-num"> - </div>
+        <span class="metric-sub" data-i18n="results.score_sub">Points (Scale: 4–26)</span>
+      </div>
+
+      <!-- Estimated Sessions -->
+      <div class="metric-card highlight">
+        <span id="res-sessions-heading" class="metric-label" data-i18n="results.sessions_label">Estimated Sessions</span>
+        <div id="res-sessions-value" class="metric-num"> - </div>
+        <span class="metric-sub" data-i18n="results.sessions_unit">sessions</span>
+      </div>
+
+      <!-- Projected Timeline -->
+      <div class="metric-card">
+        <span class="metric-label" data-i18n="results.timeline_label">Projected Timeline</span>
+        <div id="res-timeline-value" class="metric-num"> - </div>
+        <span class="metric-sub" data-i18n="results.timeline_unit">months elapsed</span>
+      </div>
+
+      <!-- Remaining Sessions (Conditional) -->
+      <div id="res-remaining-block" class="metric-card" hidden>
+        <span class="metric-label" data-i18n="results.remaining_label">Remaining Sessions</span>
+        <div id="res-remaining-value" class="metric-num"> - </div>
+        <span id="res-remaining-desc" class="metric-sub"></span>
+      </div>
+    </div>
+
+    <!-- Cost Block (Conditional) -->
+    <div id="res-cost-block" class="cost-summary-card" hidden>
+      <div class="cost-content">
+        <span class="cost-title" data-i18n="results.cost_label">Projected Total Cost</span>
+        <div id="res-cost-value" class="cost-num"> - </div>
+        <p id="res-cost-desc" class="cost-disclaimer"></p>
+      </div>
+    </div>
+
+    <!-- Dominant Factor Callout -->
+    <div class="dominant-factor-box">
+      <strong data-i18n="results.dominant_intro">Dominant Factor: </strong>
+      <span id="res-dominant-text"></span>
+    </div>
+
+    <!-- Lifestyle Adjusted Estimate Callout -->
+    <div id="res-lifestyle-block" class="dominant-factor-box" hidden>
+      <strong data-i18n="lifestyle.smoking_label">Smoking:</strong>
+      <span id="res-lifestyle-text"></span>
+    </div>
+
+    <!-- Biological Clearance Trajectory Chart -->
+    <div class="trajectory-card">
+      <h3 class="table-heading" data-i18n="trajectory.title">Illustrative Fading Curve</h3>
+      <p class="section-subtitle" data-i18n="trajectory.subtitle">A smooth curve drawn to fit your session range. It is an illustration, not a measured clearance rate: real fading is uneven and often plateaus.</p>
+      <div id="trajectory-chart-container"></div>
+    </div>
+
+    <!-- Cover-Up Colour Feasibility Matrix -->
+    <div class="trajectory-card" id="coverup-matrix-section">
+      <div class="d-flex justify-between align-center flex-wrap gap-2 mb-2">
+        <h3 class="table-heading mb-0" data-i18n="coverup.matrix_title">Cover-Up Colour Feasibility Matrix</h3>
+        <button type="button" id="coverup-matrix-toggle-btn" class="secondary-btn text-sm no-print" data-i18n="coverup.toggle_btn">Toggle Cover-Up Feasibility Matrix</button>
+      </div>
+      <p class="section-subtitle" data-i18n="coverup.matrix_subtitle">A studio rule of thumb for how faded undertones mix with new cover-up colours.</p>
+      <div id="coverup-matrix-container"></div>
+    </div>
+
+    <!-- Breakdown Table -->
+    <div class="breakdown-table-wrapper">
+      <h3 class="table-heading" data-i18n="table.title">Kirby-Desai Point Breakdown</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th data-i18n="table.col_factor">Assessment Factor</th>
+            <th data-i18n="table.col_selection">Your Entry</th>
+            <th class="pts-cell" data-i18n="table.col_points">Published Points</th>
+          </tr>
+        </thead>
+        <tbody id="res-breakdown-body"></tbody>
+      </table>
+      <div class="formula-explanations">
+        <p id="res-table-formula" class="formula-line"></p>
+        <p id="res-estimate-formula" class="formula-line"></p>
+      </div>
+    </div>
+
+    <!-- Projected Calendar Schedule -->
+    <div class="calendar-schedule-wrapper">
+      <div class="calendar-header-row">
+        <div>
+          <h3 class="calendar-title" data-i18n="calendar.title">Projected Session Schedule</h3>
+          <p class="calendar-subtitle" data-i18n="calendar.subtitle">Calculated using your clinic's interval starting from your designated start date.</p>
+        </div>
+        <div class="calendar-start-picker no-print">
+          <label for="calendar-start-date" class="sub-label" data-i18n="calendar.start_date_label">First / Next Session Date:</label>
+          <input type="date" id="calendar-start-date" class="form-input date-input">
+        </div>
+      </div>
+      <table class="data-table calendar-table">
+        <thead>
+          <tr>
+            <th data-i18n="calendar.col_session">Session #</th>
+            <th data-i18n="calendar.col_date">Projected Date</th>
+            <th data-i18n="calendar.col_interval">Spacing</th>
+            <th data-i18n="calendar.col_status">Status</th>
+          </tr>
+        </thead>
+        <tbody id="calendar-schedule-body"></tbody>
+      </table>
+      <div class="calendar-actions no-print">
+        <button type="button" id="export-ics-btn" class="secondary-btn" data-i18n="btn.export_ics">Download .ics Calendar Schedule</button>
+      </div>
+    </div>
+
+    <!-- What the Estimate Cannot Know -->
+    <div class="limits-card">
+      <h3 class="limits-title" data-i18n="limits.title">What the Kirby-Desai Scale Cannot Know</h3>
+      <p class="limits-intro" data-i18n="limits.p1">The Kirby-Desai scale provides a statistical reference range based on a 100-patient retrospective study. It is not an individual guarantee. Four clinical variables cannot be measured by a questionnaire:</p>
+      <div class="limits-grid">
+        <div class="limit-item">
+          <h4 data-i18n="limits.item_immune_title">1. Individual Immune & Lymphatic Phagocytosis</h4>
+          <p data-i18n="limits.item_immune_desc">Lasers shatter ink particles; your body's macrophages and lymphatic system actually clear the ink. Individual macrophage activity and metabolic clearance speed vary widely.</p>
+        </div>
+        <div class="limit-item">
+          <h4 data-i18n="limits.item_chemistry_title">2. Unregulated Ink Chemistry & Pigment Depth</h4>
+          <p data-i18n="limits.item_chemistry_desc">Tattoo inks are proprietary mixtures of pigments, binders and other ingredients, and the depth the needle reached varies. Both change how the ink responds to the laser.</p>
+        </div>
+        <div class="limit-item">
+          <h4 data-i18n="limits.item_smoking_title">3. Smoking & Microcirculation</h4>
+          <p data-i18n="limits.item_smoking_desc">One study of 352 patients (Bencini et al., Arch Dermatol 2012) found that smokers were about 70% less likely than non-smokers to reach removal after 10 sessions. The authors suggest that cigarette smoke may affect the cells that clear the pigment.</p>
+        </div>
+        <div class="limit-item">
+          <h4 data-i18n="limits.item_paradox_title">4. White Ink & Paradoxical Darkening</h4>
+          <p data-i18n="limits.item_paradox_desc">White, flesh-tone and cosmetic inks that contain titanium dioxide or iron oxide can turn grey or black when lasered (paradoxical darkening), and that darkening can be hard to remove.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Questions for the Clinic -->
+    <div class="questions-card">
+      <div class="questions-header">
+        <h3 class="questions-title" data-i18n="questions.title">Questions for Your Laser Clinic</h3>
+        <p class="questions-subtitle" data-i18n="questions.subtitle">Take this printable checklist to your initial consultation:</p>
+      </div>
+      <ol class="questions-list">
+        <li>
+          <strong data-i18n="questions.q1_title">1. Patch Testing</strong>
+          <p data-i18n="questions.q1_body">Will you perform a small test spot on an inconspicuous area first to evaluate my skin reaction and check for paradoxical pigment darkening before treating the full tattoo?</p>
+        </li>
+        <li>
+          <strong data-i18n="questions.q2_title">2. Session Spacing & Intervals</strong>
+          <p data-i18n="questions.q2_body">How do you determine spacing between treatments? Will we extend the interval as the ink fades to give my immune system adequate time to clear shattered pigment?</p>
+        </li>
+        <li>
+          <strong data-i18n="questions.q3_title">3. Pigment Specifics & Melanin Protection</strong>
+          <p data-i18n="questions.q3_body">What laser wavelengths will you use for my specific ink colours, and what precautions do you take to protect my natural skin melanin from hypopigmentation or hyperpigmentation?</p>
+        </li>
+        <li>
+          <strong data-i18n="questions.q4_title">4. Fading Plateaus & Treatment Changes</strong>
+          <p data-i18n="questions.q4_body">What is your clinical protocol if the tattoo hits a fading plateau or stalls after several sessions?</p>
+        </li>
+        <li>
+          <strong data-i18n="questions.q5_title">5. Cover-up Collaboration (If Applicable)</strong>
+          <p data-i18n="questions.q5_body">If fading for a cover-up, will you assess the tattoo alongside my tattoo artist to determine the exact point where sufficient lightening has occurred to support new artwork?</p>
+        </li>
+      </ol>
+      <div class="print-actions no-print">
+        <button type="button" id="print-btn" class="primary-btn" data-i18n="btn.print">Print Consultation Sheet</button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Frequently Asked Clinical Questions -->
+  <section id="faq-section" class="faq-section" aria-labelledby="faq-main-heading">
+    <div class="faq-header-row">
+      <div>
+        <h2 id="faq-main-heading" class="section-title" data-i18n="faq.title">Frequently Asked Clinical Questions</h2>
+        <p class="section-subtitle" data-i18n="faq.subtitle">Answers about how laser removal works, preparation and plateaus. Your clinic's advice comes first.</p>
+      </div>
+      <div class="faq-controls no-print">
+        <button type="button" id="faq-toggle-all-btn" class="secondary-btn text-sm" data-action="expand" aria-expanded="false" aria-controls="faq-q1 faq-q2 faq-q3 faq-q4 faq-q5 faq-q6 faq-q7 faq-q8 faq-q9">
+          <span id="faq-toggle-all-text" data-i18n="faq.expand_all">Expand All</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="faq-list" role="region" aria-labelledby="faq-main-heading">
+      <details class="faq-item" id="faq-q1">
+        <summary class="faq-summary">
+          <span class="faq-question-text" data-i18n="faq.q1_title">What happens if laser tattoo removal stops working or hits a fading plateau?</span>
+          <a href="#faq-q1" class="faq-permalink" title="Direct link to this question" aria-label="Direct link to this question" data-i18n-title="faq.direct_link" data-i18n-aria-label="faq.direct_link">#</a>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="faq-answer">
+          <p data-i18n="faq.q1_body">A fading plateau often occurs when the ink that breaks up easily has cleared, leaving deeper or more stubborn pigment behind. When fading stalls, your provider may change their approach for what remains, or leave longer gaps between sessions (often 12 weeks or more, a common clinic practice) to give the body more time to clear the fragments. What changes, if anything, is a decision your provider makes in person, not something this tool can specify.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" id="faq-q2">
+        <summary class="faq-summary">
+          <span class="faq-question-text" data-i18n="faq.q2_title">How should I prepare my skin before a laser tattoo removal session?</span>
+          <a href="#faq-q2" class="faq-permalink" title="Direct link to this question" aria-label="Direct link to this question" data-i18n-title="faq.direct_link" data-i18n-aria-label="faq.direct_link">#</a>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="faq-answer">
+          <p data-i18n="faq.q2_body">Clinics commonly ask you to avoid sun exposure, tanning beds and self-tanners for several weeks before treatment (often 4 weeks or more; follow your clinic's own rule), because tanned skin competes with the ink for laser energy and raises the risk of pigment changes. Many also ask you to shave the area the day before, arrive with clean skin without cosmetics, moisturisers or deodorant, and use numbing cream only if they tell you to. Some ask you to avoid alcohol and aspirin beforehand. These are clinic practices: your provider's instructions come first.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" id="faq-q3">
+        <summary class="faq-summary">
+          <span class="faq-question-text" data-i18n="faq.q3_title">Why do multi-colored inks (green, blue, yellow) require different lasers than black?</span>
+          <a href="#faq-q3" class="faq-permalink" title="Direct link to this question" aria-label="Direct link to this question" data-i18n-title="faq.direct_link" data-i18n-aria-label="faq.direct_link">#</a>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="faq-answer">
+          <p data-i18n="faq.q3_body">Laser tattoo removal works by a pigment absorbing light energy and fracturing into smaller pieces the body can clear; a given wavelength only works well if the target pigment actually absorbs it. Black ink absorbs a very broad range of light and generally responds most reliably. Red, blue, green, and purple pigments absorb more narrowly, and yellow is notoriously the hardest colour to clear because it absorbs light poorly across the range that is safe for skin. This is exactly why multi-colour work often needs more sessions than solid black. Which laser and wavelength your provider chooses for your specific ink is a clinical decision made in person, not something this tool can specify.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" id="faq-q4">
+        <summary class="faq-summary">
+          <span class="faq-question-text" data-i18n="faq.q4_title">Can white ink or cosmetic tattoo pigment turn black when lasered?</span>
+          <a href="#faq-q4" class="faq-permalink" title="Direct link to this question" aria-label="Direct link to this question" data-i18n-title="faq.direct_link" data-i18n-aria-label="faq.direct_link">#</a>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="faq-answer">
+          <p data-i18n="faq.q4_body">Yes. This is called paradoxical darkening. White, flesh-tone and many cosmetic pigments contain titanium dioxide or iron oxide. The laser pulse can chemically change these pigments, so that white, pink or skin-tone ink turns grey or black, and that darkening can be hard to remove. This is why practitioners test a small spot on cosmetic or white ink before treating the whole area.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" id="faq-q5">
+        <summary class="faq-summary">
+          <span class="faq-question-text" data-i18n="faq.q5_title">How much does smoking tobacco affect the number of sessions required?</span>
+          <a href="#faq-q5" class="faq-permalink" title="Direct link to this question" aria-label="Direct link to this question" data-i18n-title="faq.direct_link" data-i18n-aria-label="faq.direct_link">#</a>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="faq-answer">
+          <p data-i18n="faq.q5_body">One study of 352 patients in Milan (Bencini et al., Archives of Dermatology, 2012) found that smokers were about 70% less likely than non-smokers to reach removal after 10 sessions. The authors suggest that substances in cigarette smoke may affect the cells that clear the broken-up pigment. It is one study, and it measured the chance of success, not a number of extra sessions, so this tool does not add a smoking percentage to your estimate.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" id="faq-q6">
+        <summary class="faq-summary">
+          <span class="faq-question-text" data-i18n="faq.q6_title">When is a tattoo faded enough for a cover-up instead of complete clearance?</span>
+          <a href="#faq-q6" class="faq-permalink" title="Direct link to this question" aria-label="Direct link to this question" data-i18n-title="faq.direct_link" data-i18n-aria-label="faq.direct_link">#</a>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="faq-answer">
+          <p data-i18n="faq.q6_body">Many tattoo artists look for roughly 50% to 70% fading before a cover-up, rather than full removal (industry practice). A cover-up usually needs fewer sessions than full removal, but no study gives a fixed number. Work with your tattoo artist: once dark outlines have faded to a soft grey, the artist can usually design over them without the old work showing through. Studio rule of thumb: wait at least 8 to 12 weeks after your last laser session, until the skin has fully healed, before tattooing.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" id="faq-q7">
+        <summary class="faq-summary">
+          <span class="faq-question-text" data-i18n="faq.q7_title">How does my Fitzpatrick skin type influence laser safety and treatment speed?</span>
+          <a href="#faq-q7" class="faq-permalink" title="Direct link to this question" aria-label="Direct link to this question" data-i18n-title="faq.direct_link" data-i18n-aria-label="faq.direct_link">#</a>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="faq-answer">
+          <p data-i18n="faq.q7_body">Fitzpatrick skin types I to III have less epidermal melanin, which generally gives a provider more room to work without affecting the surrounding skin colour. Skin types IV to VI contain more natural melanin, which competes with the tattoo pigment for the laser's energy and raises the risk of the skin itself darkening or lightening (hyperpigmentation or hypopigmentation) if the approach is not adjusted for that skin type. A provider experienced with darker skin types will adjust their approach accordingly; this is exactly why the plan is set in person, not by a website.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" id="faq-q8">
+        <summary class="faq-summary">
+          <span class="faq-question-text" data-i18n="faq.q8_title">Does laser tattoo removal hurt, and what pain management options are available?</span>
+          <a href="#faq-q8" class="faq-permalink" title="Direct link to this question" aria-label="Direct link to this question" data-i18n-title="faq.direct_link" data-i18n-aria-label="faq.direct_link">#</a>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="faq-answer">
+          <p data-i18n="faq.q8_body">Most clients compare the sensation of a laser pulse to the snap of a rubber band against the skin accompanied by intense heat. Because treatment areas are often sensitive, modern clinics use several pain mitigation strategies: continuous forced cold air chilling directed at the skin before, during, and after pulses; topical compounded numbing creams applied 30 to 60 minutes prior; and ice compression. In clinical settings, local infiltration may be offered for highly sensitive anatomical sites.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" id="faq-q9">
+        <summary class="faq-summary">
+          <span class="faq-question-text" data-i18n="faq.q9_title">Why are sessions spaced weeks apart, and can treatments be scheduled sooner?</span>
+          <a href="#faq-q9" class="faq-permalink" title="Direct link to this question" aria-label="Direct link to this question" data-i18n-title="faq.direct_link" data-i18n-aria-label="faq.direct_link">#</a>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="faq-answer">
+          <p data-i18n="faq.q9_body">Rushing sessions does not speed up removal and raises the risk of skin damage. The laser breaks the ink into smaller fragments; your body then clears them over the following weeks. The Kirby-Desai paper assumed 6 to 8 weeks between sessions, and one large study (Bencini et al., 2012) linked intervals of 8 weeks or less to lower success, so many clinics now leave longer gaps. Your clinic sets the interval.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Personal Session & Fade Log -->
+  <section id="fadelog-section" class="fadelog-section">
+    <h2 class="section-title" data-i18n="fadelog.title">Personal Session & Fade Log</h2>
+    <p class="section-subtitle" data-i18n="fadelog.subtitle">Keep a record of each treatment and how faded it looks, for your practitioner. Saved only in your browser.</p>
+
+    <div class="fadelog-form-card no-print">
+      <div class="fadelog-inputs-grid">
+        <div class="form-group">
+          <label for="log-date" class="sub-label" data-i18n="fadelog.date_label">Session Date</label>
+          <input type="date" id="log-date" class="form-input">
+        </div>
+        <div class="form-group">
+          <label for="log-rating" class="sub-label" data-i18n="fadelog.rating_label">Fade Rating (0–10)</label>
+          <input type="number" id="log-rating" class="form-input" min="0" max="10" step="1" data-i18n-placeholder="fadelog.rating_placeholder" placeholder="0–10">
+        </div>
+        <div class="form-group span-two">
+          <label for="log-note" class="sub-label" data-i18n="fadelog.note_label">Treatment Note (reaction, blister, clinic feedback)</label>
+          <input type="text" id="log-note" class="form-input" data-i18n-placeholder="fadelog.note_placeholder" placeholder="e.g. Mild blistering resolved in 4 days, slight frosting">
+        </div>
+        <div class="form-group span-two">
+          <label class="sub-label" data-i18n="photo.attach_label">Attach Session Photo (Optional):</label>
+          <div class="d-flex align-center gap-2">
+            <input type="file" id="log-photo-file" accept="image/*" class="d-none">
+            <button type="button" id="log-photo-btn" class="secondary-btn text-sm" data-i18n="photo.attach_btn">Select Photo</button>
+            <span id="log-photo-name" class="text-sm text-muted"></span>
+          </div>
+        </div>
+      </div>
+      <button type="button" id="log-add-btn" class="secondary-btn" data-i18n="fadelog.add_btn">Add Session Entry</button>
+    </div>
+
+    <div class="fadelog-table-wrapper">
+      <div class="fadelog-table-header d-flex justify-between align-center mb-2">
+        <div id="log-empty-msg" class="empty-log-msg mb-0" data-i18n="fadelog.empty">No sessions logged yet. Record your treatment history here.</div>
+        <button type="button" id="open-photo-viewer-btn" class="secondary-btn text-sm no-print" data-i18n="photo.open_viewer_btn">Compare Session Photos</button>
+      </div>
+      <table class="data-table fadelog-table">
+        <thead>
+          <tr>
+            <th data-i18n="fadelog.col_session">Session #</th>
+            <th data-i18n="fadelog.col_date">Date</th>
+            <th data-i18n="fadelog.col_rating">Fade Rating</th>
+            <th data-i18n="photo.col_photo">Session Photo</th>
+            <th data-i18n="fadelog.col_note">Notes</th>
+            <th class="no-print" data-i18n="fadelog.col_action">Action</th>
+          </tr>
+        </thead>
+        <tbody id="log-table-body"></tbody>
+      </table>
+      <p class="text-sm text-muted mt-2 no-print" data-i18n="photo.privacy_note">Photos are stored exclusively in your browser local IndexedDB database and are never uploaded to any server or third party.</p>
+    </div>
+  </section>
+
+  <!-- Interactive Clinical Aftercare Checklist -->
+  <section class="aftercare-section no-print">
+    <h2 class="section-title" data-i18n="aftercare.title">Aftercare Checklist</h2>
+    <p class="section-subtitle" data-i18n="aftercare.subtitle">Careful aftercare lowers the risk of infection and pigment changes. Your clinic's own instructions come first.</p>
+    <div id="aftercare-container"></div>
+  </section>
+
+  <!-- Data Backup & Portability -->
+  <section class="backup-section no-print">
+    <h2 class="section-title" data-i18n="backup.title">Data Backup & Portability</h2>
+    <p class="section-subtitle" data-i18n="backup.subtitle">Export your profiles and session records to keep a local backup or transfer to another device.</p>
+    <div class="backup-buttons-row">
+      <button type="button" id="backup-export-json-btn" class="secondary-btn" data-i18n="backup.export_json_btn">Export Backup (JSON)</button>
+      <button type="button" id="backup-import-json-btn" class="secondary-btn" data-i18n="backup.import_json_btn">Import Backup (JSON)</button>
+      <input type="file" id="backup-import-file" accept=".json" class="d-none">
+      <button type="button" id="backup-export-csv-btn" class="secondary-btn" data-i18n="backup.export_csv_btn">Download Fade Log (CSV)</button>
+    </div>
+  </section>
+
+  <!-- SVG Filters for Photo Progress Viewer (Mathematical Edge Detection & High Contrast Kernels) -->
+  <svg style="position: absolute; width: 0; height: 0; pointer-events: none; overflow: hidden;" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="photo-edge-filter">
+        <feColorMatrix type="matrix" values="0.3333 0.3333 0.3333 0 0
+                                             0.3333 0.3333 0.3333 0 0
+                                             0.3333 0.3333 0.3333 0 0
+                                             0      0      0      1 0" />
+        <feConvolveMatrix order="3" kernelMatrix="0 -1 0 -1 4 -1 0 -1 0" preserveAlpha="true" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Photo Progress Viewer Modal -->
+  <div id="photo-modal" class="photo-modal-overlay d-none no-print" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="photo-modal-title">
+    <div class="photo-modal-card">
+      <div class="photo-modal-header d-flex justify-between align-center mb-3">
+        <div>
+          <h3 id="photo-modal-title" class="table-heading mb-0" data-i18n="photo.modal_title">Photo Progress Viewer</h3>
+          <p class="text-xs text-muted mb-0" data-i18n="photo.subtitle">Side-by-side session photo comparison to evaluate pigment fading and clearance.</p>
+        </div>
+        <button type="button" id="modal-close-btn" class="secondary-btn text-sm" data-i18n="photo.modal_close">Close Viewer</button>
+      </div>
+
+      <!-- Session Selection & Inspection Controls -->
+      <div class="photo-selector-toolbar mb-3 p-3 bg-card-subtle rounded border">
+        <div class="photo-selector-grid">
+          <div class="form-group mb-0">
+            <label for="photo-select-baseline" class="sub-label text-xs" data-i18n="photo.select_baseline_label">Baseline Photo (Reference):</label>
+            <select id="photo-select-baseline" class="form-select text-sm photo-picker-select" aria-label="Select Baseline Session" data-i18n-aria-label="a11y.select_baseline_session"></select>
+          </div>
+          <div class="photo-swap-col d-flex align-center justify-center">
+            <button type="button" id="photo-swap-btn" class="secondary-btn btn-icon text-sm" title="Swap Baseline and Comparison" aria-label="Swap Baseline and Comparison" data-i18n-aria-label="a11y.swap_baseline_and_comparison" data-i18n-title="photo.swap_btn">⇄</button>
+          </div>
+          <div class="form-group mb-0">
+            <label for="photo-select-current" class="sub-label text-xs" data-i18n="photo.select_current_label">Comparison Photo (Progress):</label>
+            <select id="photo-select-current" class="form-select text-sm photo-picker-select" aria-label="Select Comparison Session" data-i18n-aria-label="a11y.select_comparison_session"></select>
+          </div>
+        </div>
+
+        <!-- View Mode & Ink Isolation Filters Row -->
+        <div class="photo-tools-row d-flex flex-wrap justify-between align-center gap-2 mt-2 pt-2 border-top">
+          <!-- View Mode Selector -->
+          <div class="photo-tool-group d-flex align-center gap-2">
+            <label class="text-xs text-muted mb-0 font-medium" data-i18n="photo.view_mode_label">View Mode:</label>
+            <div id="photo-view-mode-pills" class="photo-pill-group d-flex gap-1" role="radiogroup" aria-label="Comparison View Mode" data-i18n-aria-label="a11y.comparison_view_mode">
+              <button type="button" class="photo-tool-pill text-xs active" data-mode="side-by-side" aria-pressed="true" data-i18n="photo.view_side_by_side">Side-by-Side</button>
+              <button type="button" class="photo-tool-pill text-xs" data-mode="slider" aria-pressed="false" data-i18n="photo.view_slider">Swipe Split Slider</button>
+            </div>
+          </div>
+
+          <!-- Ink Isolation Filters -->
+          <div class="photo-tool-group d-flex align-center gap-2">
+            <label class="text-xs text-muted mb-0 font-medium" data-i18n="photo.filters_label">Ink Isolation Filter:</label>
+            <div id="photo-filter-pills" class="photo-pill-group d-flex gap-1 flex-wrap" role="radiogroup" aria-label="Photo Filters" data-i18n-aria-label="a11y.photo_filters">
+              <button type="button" class="photo-tool-pill text-xs active" data-filter="normal" aria-pressed="true" data-i18n="photo.filter_normal">Original</button>
+              <button type="button" class="photo-tool-pill text-xs" data-filter="grayscale" aria-pressed="false" data-i18n="photo.filter_grayscale">Grayscale</button>
+              <button type="button" class="photo-tool-pill text-xs" data-filter="contrast" aria-pressed="false" data-i18n="photo.filter_contrast">High Contrast</button>
+              <button type="button" class="photo-tool-pill text-xs" data-filter="edge" aria-pressed="false" data-i18n="photo.filter_edge">Edge Detection</button>
+              <button type="button" class="photo-tool-pill text-xs" data-filter="thermal" aria-pressed="false" data-i18n="photo.filter_thermal">Inverted (Ink Focus)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail Inspection / Zoom & Ink Cluster Markers Toolbar -->
+        <div class="photo-zoom-toolbar d-flex flex-wrap justify-between align-center gap-2 mt-2 pt-2 border-top">
+          <!-- Zoom Power -->
+          <div class="photo-zoom-actions d-flex align-center gap-2">
+            <span class="photo-zoom-icon" aria-hidden="true"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg></span>
+            <label class="text-xs text-muted mb-0 font-medium" data-i18n="photo.zoom_level_label">Zoom Power:</label>
+            <div id="photo-zoom-pills" class="photo-zoom-pills d-flex gap-1" role="radiogroup" aria-label="Zoom Magnification" data-i18n-aria-label="a11y.zoom_magnification">
+              <button type="button" class="photo-zoom-pill text-xs" data-zoom="2" aria-pressed="false">2.0×</button>
+              <button type="button" class="photo-zoom-pill text-xs active" data-zoom="2.5" aria-pressed="true">2.5×</button>
+              <button type="button" class="photo-zoom-pill text-xs" data-zoom="3.5" aria-pressed="false">3.5×</button>
+            </div>
+          </div>
+
+          <!-- Stubborn Ink Cluster Markers Tool -->
+          <div class="photo-marker-actions d-flex align-center gap-2">
+            <button type="button" id="photo-add-marker-btn" class="secondary-btn text-xs btn-compact"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-pin></use></svg><span data-i18n="photo.marker_btn" style="color:inherit">Add Ink Marker</span></button>
+            <button type="button" id="photo-clear-markers-btn" class="secondary-btn text-xs btn-compact text-muted" data-i18n="photo.marker_clear_all">Clear All Markers</button>
+          </div>
+        </div>
+
+        <!-- Marker Placement Instruction Banner -->
+        <div id="photo-marker-banner" class="photo-marker-banner text-xs mt-2 p-1 text-center bg-card-subtle text-primary rounded border border-primary d-none">
+          <span data-i18n="photo.marker_instruction">Click anywhere on a photo to place a tracking marker on a stubborn ink cluster.</span>
+        </div>
+      </div>
+
+      <!-- Side-by-Side Comparison Grid -->
+      <div id="photo-comparison-grid" class="photo-comparison-grid">
+        <div id="modal-baseline-box" class="photo-box">
+          <div class="photo-box-header d-flex justify-between align-center mb-2">
+            <span class="photo-box-label font-bold text-sm" data-i18n="photo.baseline_heading">Baseline Photo</span>
+            <span id="baseline-session-meta" class="text-xs text-muted"></span>
+          </div>
+          <div class="photo-img-container" id="modal-baseline-container" data-slot="baseline">
+            <img id="modal-baseline-img" alt="Baseline Session" class="photo-comparison-img photo-filter-normal">
+            <div class="photo-markers-layer" id="modal-baseline-markers"></div>
+            <div id="modal-baseline-zoom-badge" class="photo-zoom-badge d-none" aria-hidden="true">
+              <span class="zoom-badge-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg></span> <span data-i18n="photo.hover_zoom_badge">Hover to Zoom</span>
+            </div>
+            <div id="modal-baseline-empty" class="photo-empty-state d-none">
+              <span class="photo-empty-icon" aria-hidden="true"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-camera></use></svg></span>
+              <p class="text-sm text-muted mb-0" data-i18n="photo.no_baseline_photo">No photo recorded for baseline session.</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="modal-current-box" class="photo-box">
+          <div class="photo-box-header d-flex justify-between align-center mb-2">
+            <span class="photo-box-label font-bold text-sm" data-i18n="photo.current_heading">Comparison Photo</span>
+            <span id="current-session-meta" class="text-xs text-muted"></span>
+          </div>
+          <div class="photo-img-container" id="modal-current-container" data-slot="current">
+            <img id="modal-current-img" alt="Current Session" class="photo-comparison-img photo-filter-normal">
+            <div class="photo-markers-layer" id="modal-current-markers"></div>
+            <div id="modal-current-zoom-badge" class="photo-zoom-badge d-none" aria-hidden="true">
+              <span class="zoom-badge-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-search></use></svg></span> <span data-i18n="photo.hover_zoom_badge">Hover to Zoom</span>
+            </div>
+            <div id="modal-current-empty" class="photo-empty-state d-none">
+              <span class="photo-empty-icon" aria-hidden="true"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-camera></use></svg></span>
+              <p class="text-sm text-muted mb-0" data-i18n="photo.no_current_photo">No photo recorded for comparison session.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Swipe Split Slider Comparison Stage (Alternative View Mode) -->
+      <div id="photo-slider-wrapper" class="photo-slider-wrapper d-none">
+        <div class="photo-slider-header d-flex justify-between align-center mb-2">
+          <span class="text-xs text-muted" data-i18n="photo.slider_label">Drag slider to compare baseline vs progress</span>
+          <button type="button" id="photo-slider-flash-btn" class="secondary-btn text-xs btn-compact" title="Blink toggle between baseline and progress"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-bolt></use></svg><span data-i18n="photo.slider_flash_btn" style="color:inherit">Blink Compare</span></button>
+        </div>
+        <div id="photo-slider-stage" class="photo-slider-stage" style="--slider-split: 50%;" tabindex="0" role="region" aria-label="Before and After Swipe Slider" data-i18n-aria-label="a11y.before_and_after_swipe_slider">
+          <img id="slider-base-img" class="photo-slider-img base-img photo-filter-normal" alt="Comparison Session">
+          <div id="slider-clip-pane" class="slider-clip-pane">
+            <img id="slider-overlay-img" class="photo-slider-img overlay-img photo-filter-normal" alt="Baseline Session">
+          </div>
+          <div id="slider-markers-layer" class="photo-markers-layer"></div>
+          <div id="slider-divider-line" class="slider-divider-line">
+            <div class="slider-divider-handle" aria-hidden="true"><span></span></div>
+          </div>
+          <span class="slider-stage-tag tag-left" id="slider-tag-left" data-i18n="photo.slider_baseline_tag">Baseline</span>
+          <span class="slider-stage-tag tag-right" id="slider-tag-right" data-i18n="photo.slider_current_tag">Comparison</span>
+        </div>
+        <div class="photo-slider-ctrls d-flex align-center justify-between gap-2 mt-2">
+          <span class="text-xs text-muted" id="slider-ctrl-baseline-label" data-i18n="photo.slider_baseline_tag">Baseline</span>
+          <input type="range" id="photo-slider-range" min="0" max="100" value="50" class="photo-split-range" aria-label="Swipe Split Slider Position" data-i18n-aria-label="a11y.swipe_split_slider_position">
+          <span class="text-xs text-muted" id="slider-ctrl-current-label" data-i18n="photo.slider_current_tag">Comparison</span>
+        </div>
+      </div>
+
+      <!-- Tracked Ink Clusters Panel -->
+      <div id="photo-markers-panel" class="photo-markers-panel mt-2 p-2 bg-card-subtle rounded border d-none">
+        <div class="d-flex justify-between align-center mb-1">
+          <span class="text-xs font-bold" data-i18n="photo.tracked_clusters_title">Tracked Ink Clusters:</span>
+          <span class="text-xs text-muted" id="photo-markers-count">0</span>
+        </div>
+        <div id="photo-markers-list" class="photo-markers-chips d-flex flex-wrap gap-1"></div>
+      </div>
+
+      <!-- Fading Progression Summary -->
+      <div id="photo-comparison-summary" class="photo-comparison-summary mt-3 p-2 bg-card-subtle rounded border text-center text-sm font-medium d-none">
+        <span id="photo-comparison-text"></span>
+      </div>
+
+      <p class="text-xs text-muted mt-3 mb-0" data-i18n="photo.privacy_note">Photos are stored exclusively in your browser local IndexedDB database and are never uploaded to any server or third party.</p>
+    </div>
+  </div>
+
+  <!-- Related Studio & Client Tools -->
+  <section class="related-tools-section no-print">
+    <h3 class="related-title" data-i18n="related.title">Related Studio & Client Tools</h3>
+    <div class="related-grid">
+      <a href="https://poliinternational.com/keloid-scar-risk/" target="_top" class="related-card">
+        <strong data-i18n="related.keloid_title">Keloid Scar Risk Evaluator</strong>
+        <p data-i18n="related.keloid_desc">Assess predisposition to hypertrophic or keloid scarring before invasive skin procedures.</p>
+      </a>
+      <a href="https://poliinternational.com/ink-ingredient-decoder/" target="_top" class="related-card">
+        <strong data-i18n="related.ink_title">Ink Ingredient Decoder</strong>
+        <p data-i18n="related.ink_desc">Look up CI pigment numbers, CAS registry codes, and EU REACH status for tattoo colorants.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- Legal & Clinical Disclaimer -->
+  <footer class="tool-footer">
+    <div class="print-only-brief" data-i18n="legal.print_disclaimer">Client Consultation Brief - Printed from Poli International Tattoo Removal Sessions Estimator. All entries, notes, and prices are the client's own records.</div>
+    <p class="disclaimer" data-i18n="legal.disclaimer">Clinical Reference Notice: This estimator applies the Kirby-Desai clinical scoring algorithm (Kirby W, Desai A, J Clin Aesthet Dermatol. 2009;2(3):32-37) as an educational reference guide. Actual session clearance varies with individual immune phagocytosis, laser device modality (nanosecond vs picosecond), operator technique, spot size, and ink chemical composition. This tool is not medical advice and does not guarantee complete removal. Always obtain an in-person consultation with a licensed laser specialist or dermatologist.</p>
+    <div class="footer-bottom">
+      <span data-i18n="footer.tagline">Tattoo Removal Sessions Estimator V2 • Poli International</span>
+    </div>
+  </footer>
+</div>
+
+<script src="./js/i18n.js"></script>
+<script src="./js/photo-store.js"></script>
+<script src="./js/features.js"></script>
+<script src="./js/input-guards.js"></script>
+<script src="./js/app.js"></script>
+<script src="./js/share.js"></script>
+<script src="../shared/tool-name.js" data-th="เครื่องประเมินจำนวนครั้งลบรอยสัก" data-en="Tattoo Removal Sessions Estimator" defer></script>
+</body>
+</html>

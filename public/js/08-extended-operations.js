@@ -401,13 +401,5 @@ window.showToastNotification = showToastNotification;
 function updateVatPreviewCalculation() {}
 window.updateVatPreviewCalculation = updateVatPreviewCalculation;
 
-function calculateInkWash(drops) {
-    return drops ? drops + " drops wash solution" : "Standard 50/50 wash";
-}
-window.calculateInkWash = calculateInkWash;
 
-function recommendPmuPigment(skinType) {
-    return "Warm Neutral Mineral Pigment";
-}
-window.recommendPmuPigment = recommendPmuPigment;
 

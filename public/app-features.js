@@ -3766,13 +3766,14 @@ function updateSanitizationProgress() {
 window.updateSanitizationProgress = updateSanitizationProgress;
 
 // --- Gallery: portfolio works (/api/gallery) and flash designs (/api/flash) ---
-const galleryState = { works: [], flash: [], tab: "portfolio", pendingWorkImage: "", shareItem: null };
+const galleryState = { works: [], flash: [], sheets: [], tab: "portfolio", pendingWorkImage: "", shareItem: null };
 
 async function loadGalleryData() {
     const get = (u) => fetch(u).then((r) => (r.ok ? r.json() : [])).catch(() => []);
-    const [works, flash] = await Promise.all([get("/api/gallery"), get("/api/flash")]);
+    const [works, flash, sheets] = await Promise.all([get("/api/gallery"), get("/api/flash"), get("/api/flash-sheets")]);
     galleryState.works = Array.isArray(works) ? works : [];
     galleryState.flash = Array.isArray(flash) ? flash : [];
+    galleryState.sheets = Array.isArray(sheets) ? sheets : [];
 }
 
 // Downscale a picked photo so the studio database stays small (max 1600 px, JPEG).
@@ -3888,42 +3889,6 @@ function deleteGalleryItem(kind, item) {
 }
 window.deleteGalleryItem = deleteGalleryItem;
 
-function renderFlashGrid() {
-    const grid = document.getElementById("flash-grid");
-    if (!grid) return;
-    const v = (id) => (document.getElementById(id) || {}).value || "";
-    const cat = v("flash-filter-category"), status = v("flash-filter-status"), q = v("flash-search-input").toLowerCase().trim();
-    const items = galleryState.flash.filter((f) =>
-        (!cat || f.category === cat) && (!status || f.status === status) &&
-        (!q || [f.title, f.notes, f.needle_specs, f.pigment_palette, f.artist_name].join(" ").toLowerCase().includes(q)));
-    const badge = document.getElementById("gallery-count-badge");
-    if (badge) badge.textContent = items.length + " Items";
-    grid.innerHTML = items.length ? items.map((f, i) => galleryCard(f.image_url, f.title || "",
-        [(f.category || "") + " · " + (f.artist_name || ""), "$" + Number(f.price || 0).toFixed(2) + " · $" + Number(f.deposit || 0).toFixed(2) + " deposit",
-         f.status === "claimed" ? "Claimed by " + (f.claimed_by_client_name || "") : "Available"],
-        galleryBtn("Share", `data-share="${i}"`) + galleryBtn("Skin Tone Preview", `data-skin="${i}"`) +
-        (f.status === "claimed" ? "" : galleryBtn("Claim", `data-claim="${i}"`)) + galleryBtn("Delete", `data-del="${i}" id="flash-del-${Number(f.id)}"`))).join("")
-        : '<div style="padding:24px;color:var(--ti-muted, #94A3B8);">No flash designs yet.</div>';
-    bindGalleryGrid(grid, items, (f) => f.title || "");
-    grid.querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", () => deleteGalleryItem("flash", items[Number(b.dataset.del)])));
-    grid.querySelectorAll("[data-skin]").forEach((b) => b.addEventListener("click", () => openSkinToneVisualizerModal(items[Number(b.dataset.skin)])));
-    grid.querySelectorAll("[data-claim]").forEach((b) => b.addEventListener("click", () => claimFlashDesign(items[Number(b.dataset.claim)])));
-}
-window.renderFlashGrid = renderFlashGrid;
-
-async function claimFlashDesign(flash) {
-    const name = window.prompt("Client name for this reservation:");
-    if (!name) return;
-    try {
-        const r = await fetch("/api/flash/" + Number(flash.id) + "/claim", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ client_name: name }) });
-        if (!r.ok) throw new Error();
-    } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
-    await loadGalleryData();
-    renderFlashGrid();
-    showStudioToast("Flash design reserved");
-}
-window.claimFlashDesign = claimFlashDesign;
-
 function openLightboxModal(src, caption) {
     const img = document.getElementById("lightbox-img");
     if (img) img.src = src || "";
@@ -4038,8 +4003,193 @@ async function submitClientWorkPhoto(event) {
 }
 window.submitClientWorkPhoto = submitClientWorkPhoto;
 
-// --- Upload a flash design ---
-function openUploadFlashModal() { forceShowModal("upload-flash-modal"); }
+// --- Flash designs: sheets, prices in the studio currency, claims tied to a client, printing ---
+// A price left blank is "POA" everywhere (no invented figure). Status: available, claimed, repeatable.
+const flashMoney = (n) => (n === null || n === undefined || n === "" ? "" :
+    (window.StudioSettings ? window.StudioSettings.format(Number(n)) : Number(n).toFixed(2)));
+const flashPrice = (f) => (f.price === null || f.price === undefined || f.price === "" ? pdfLabel("POA") : flashMoney(f.price));
+const flashBookings = (f) => (Array.isArray(f.bookings) ? f.bookings.length : 0);
+const flashStatusLabel = (f) => f.status === "claimed" ? pdfLabel("Claimed by {0}").replace("{0}", f.claimed_by_client_name || "")
+    : f.status === "repeatable" ? pdfLabel("Repeatable") : pdfLabel("Available");
+
+// designs of the chosen sheet ("" = every design, "none" = designs in no sheet), in sheet order
+function flashInSheet(sheet) {
+    return galleryState.flash
+        .filter((f) => !sheet || (sheet === "none" ? !f.sheet_id : String(f.sheet_id) === sheet))
+        .sort((a, b) => (Number(a.order) || 0) - (Number(b.order) || 0));
+}
+
+function fillFlashSheetSelects() {
+    const sheets = galleryState.sheets || [];
+    const opts = (first) => first + sheets.map((s) => `<option value="${Number(s.id)}">${escapeHtml(s.name)}</option>`).join("");
+    const filter = document.getElementById("flash-filter-sheet");
+    if (filter) {
+        const keep = filter.value;
+        filter.innerHTML = opts(`<option value="">${escapeHtml(pdfLabel("All designs"))}</option><option value="none">${escapeHtml(pdfLabel("In no sheet"))}</option>`);
+        filter.value = [...filter.options].some((o) => o.value === keep) ? keep : "";
+    }
+    const pick = document.getElementById("flash-sheet-select");
+    if (pick) pick.innerHTML = opts(`<option value="">${escapeHtml(pdfLabel("No sheet"))}</option>`);
+    const sheetOnly = !!(filter && filter.value && filter.value !== "none");
+    ["flash-edit-sheet-btn", "flash-delete-sheet-btn"].forEach((id) => { const b = document.getElementById(id); if (b) b.style.display = sheetOnly ? "" : "none"; });
+}
+
+function renderFlashSummary(items) {
+    const box = document.getElementById("flash-summary");
+    if (!box) return;
+    const count = (s) => items.filter((f) => f.status === s).length;
+    // what is still for sale: available and repeatable designs that have a price
+    const value = items.filter((f) => f.status !== "claimed" && f.price !== null && f.price !== undefined && f.price !== "")
+        .reduce((sum, f) => sum + Number(f.price), 0);
+    const cell = (label, v) => `<span style="white-space:nowrap;"><span style="color:var(--ti-muted, #9CA3AF);">${escapeHtml(label)}</span> <strong style="color:var(--ti-text, #F9FAFB);">${escapeHtml(String(v))}</strong></span>`;
+    box.innerHTML = [cell(pdfLabel("Designs"), items.length), cell(pdfLabel("Available"), count("available")), cell(pdfLabel("Claimed"), count("claimed")),
+        cell(pdfLabel("Repeatable"), count("repeatable")), cell(pdfLabel("Value still for sale"), flashMoney(value))].join("");
+}
+
+function renderFlashGrid() {
+    const grid = document.getElementById("flash-grid");
+    if (!grid) return;
+    fillFlashSheetSelects();
+    const v = (id) => (document.getElementById(id) || {}).value || "";
+    const sheet = v("flash-filter-sheet"), cat = v("flash-filter-category"), status = v("flash-filter-status"), q = v("flash-search-input").toLowerCase().trim();
+    const inSheet = flashInSheet(sheet);
+    const items = inSheet.filter((f) =>
+        (!cat || f.category === cat) && (!status || f.status === status) &&
+        (!q || [f.title, f.notes, f.needle_specs, f.pigment_palette, f.artist_name, f.size].join(" ").toLowerCase().includes(q)));
+    renderFlashSummary(inSheet);
+    const badge = document.getElementById("gallery-count-badge");
+    if (badge) badge.textContent = items.length + " Items";
+    // drag to arrange only when one sheet is shown whole: the order is that sheet's printed order
+    const arrange = !!sheet && sheet !== "none" && !cat && !status && !q;
+    const hint = document.getElementById("flash-arrange-hint");
+    if (hint) hint.style.display = arrange && items.length > 1 ? "" : "none";
+    grid.innerHTML = items.length ? items.map((f, i) => {
+        const lines = [
+            [f.category, f.artist_name, f.size].filter(Boolean).join(" · "),
+            flashPrice(f) + (f.deposit !== null && f.deposit !== undefined && f.deposit !== "" ? " · " + pdfLabel("{0} deposit").replace("{0}", flashMoney(f.deposit)) : "")
+                + (f.est_duration_hours ? " · " + pdfLabel("{0} h").replace("{0}", f.est_duration_hours) : ""),
+            flashStatusLabel(f) + (flashBookings(f) ? " · " + (flashBookings(f) === 1 ? pdfLabel("Booked once") : pdfLabel("Booked {0} times").replace("{0}", flashBookings(f))) : "")
+                + (f.likes_count ? " · " + pdfLabel("{0} likes").replace("{0}", f.likes_count) : ""),
+        ];
+        const card = galleryCard(f.image_url, (Number(f.span) === 2 ? "★ " : "") + (f.title || ""), lines,
+            galleryBtn("Edit", `data-edit="${i}"`) + galleryBtn("Share", `data-share="${i}"`) + galleryBtn("Skin Tone Preview", `data-skin="${i}"`) +
+            (f.status === "claimed" ? galleryBtn("Make Available", `data-release="${i}"`) : galleryBtn("Claim", `data-claim="${i}"`)) +
+            galleryBtn("Delete", `data-del="${i}" id="flash-del-${Number(f.id)}"`));
+        return arrange ? card.replace("<div ", `<div draggable="true" data-order="${i}" `) : card;
+    }).join("")
+        : '<div style="padding:24px;color:var(--ti-muted, #94A3B8);">No flash designs yet.</div>';
+    bindGalleryGrid(grid, items, (f) => f.title || "");
+    const on = (attr, fn) => grid.querySelectorAll(`[data-${attr}]`).forEach((b) => b.addEventListener("click", () => fn(items[Number(b.dataset[attr])])));
+    on("del", (f) => deleteGalleryItem("flash", f));
+    on("skin", openSkinToneVisualizerModal);
+    on("claim", openFlashClaimModal);
+    on("release", releaseFlashDesign);
+    on("edit", openUploadFlashModal);
+    if (arrange) bindFlashArrange(grid, items);
+}
+window.renderFlashGrid = renderFlashGrid;
+
+// Drag a card onto another to move it there; the new order is the sheet's printed order.
+function bindFlashArrange(grid, items) {
+    let from = null;
+    grid.querySelectorAll("[data-order]").forEach((card) => {
+        card.style.cursor = "grab";
+        card.addEventListener("dragstart", (e) => { from = Number(card.dataset.order); e.dataTransfer.effectAllowed = "move"; card.style.opacity = "0.5"; });
+        card.addEventListener("dragend", () => { card.style.opacity = ""; });
+        card.addEventListener("dragover", (e) => { e.preventDefault(); e.dataTransfer.dropEffect = "move"; });
+        card.addEventListener("drop", async (e) => {
+            e.preventDefault();
+            const to = Number(card.dataset.order);
+            if (from === null || from === to) return;
+            const ids = items.map((f) => Number(f.id));
+            ids.splice(to, 0, ids.splice(from, 1)[0]);
+            try {
+                const r = await fetch("/api/flash-order", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ids }) });
+                if (!r.ok) throw new Error();
+            } catch (err) { showStudioToast("Could not save: the server did not answer"); return; }
+            await loadGalleryData();
+            renderFlashGrid();
+        });
+    });
+}
+
+// --- Claim: a real client record and the date ---
+function openFlashClaimModal(flash) {
+    galleryState.claimItem = flash;
+    const title = document.getElementById("flash-claim-title");
+    if (title) title.textContent = flash.title || "";
+    ["flash-claim-client-search", "flash-claim-client-id"].forEach((id) => { const el = document.getElementById(id); if (el) el.value = ""; });
+    const date = document.getElementById("flash-claim-date");
+    if (date) date.value = new Date().toLocaleDateString("en-CA");
+    forceShowModal("flash-claim-modal");
+}
+window.openFlashClaimModal = openFlashClaimModal;
+function closeFlashClaimModal() { forceHideModal("flash-claim-modal"); }
+window.closeFlashClaimModal = closeFlashClaimModal;
+
+async function submitFlashClaim(event) {
+    if (event) event.preventDefault();
+    const v = (id) => (document.getElementById(id) || {}).value || "";
+    const flash = galleryState.claimItem;
+    if (!flash) return;
+    if (!v("flash-claim-client-id")) { showStudioToast("Pick the client from the list"); return; }
+    try {
+        const r = await fetch("/api/flash/" + Number(flash.id) + "/claim", { method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ client_id: v("flash-claim-client-id"), date: v("flash-claim-date") }) });
+        if (!r.ok) throw new Error();
+    } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
+    closeFlashClaimModal();
+    await loadGalleryData();
+    renderFlashGrid();
+    showStudioToast(flash.status === "repeatable" ? "Booking recorded" : "Flash design reserved");
+}
+window.submitFlashClaim = submitFlashClaim;
+// kept for anything that still calls the old name
+window.claimFlashDesign = openFlashClaimModal;
+
+async function releaseFlashDesign(flash) {
+    try {
+        const r = await fetch("/api/flash/" + Number(flash.id) + "/release", { method: "POST" });
+        if (!r.ok) throw new Error();
+    } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
+    await loadGalleryData();
+    renderFlashGrid();
+    showStudioToast("Flash design available again");
+}
+window.releaseFlashDesign = releaseFlashDesign;
+
+// --- Add or edit a flash design (one form) ---
+function openUploadFlashModal(flash) {
+    const f = flash && flash.id ? flash : null;
+    galleryState.editFlash = f;
+    fillFlashSheetSelects();
+    const set = (id, val) => { const el = document.getElementById(id); if (el) el.value = val === null || val === undefined ? "" : val; };
+    const sheetNow = (document.getElementById("flash-filter-sheet") || {}).value || "";
+    set("flash-title-input", f && f.title);
+    set("flash-category-select", f ? f.category : "Tattoo - Traditional");
+    set("flash-size-input", f && f.size);
+    set("flash-price-input", f && f.price);
+    set("flash-deposit-input", f && f.deposit);
+    set("flash-hours-input", f && f.est_duration_hours);
+    set("flash-needles-input", f && f.needle_specs);
+    set("flash-pigment-input", f && f.pigment_palette);
+    set("flash-notes-input", f && f.notes);
+    set("flash-status-select", f && f.status === "repeatable" ? "repeatable" : "available");
+    set("flash-sheet-select", f ? (f.sheet_id || "") : (sheetNow && sheetNow !== "none" ? sheetNow : ""));
+    const artist = document.getElementById("flash-artist-select");
+    if (artist && f && f.artist_id) artist.value = String(f.artist_id);
+    const span = document.getElementById("flash-span-input");
+    if (span) span.checked = !!f && Number(f.span) === 2;
+    const file = document.getElementById("flash-file-input");
+    if (file) file.value = "";
+    const status = document.getElementById("flash-status-select");
+    if (status) status.disabled = !!f && f.status === "claimed";
+    const heading = document.getElementById("flash-form-heading");
+    if (heading) heading.textContent = pdfLabel(f ? "Edit Flash Design" : "Publish New Flash Sheet / Design");
+    const submit = document.getElementById("flash-form-submit-label");
+    if (submit) submit.textContent = pdfLabel(f ? "Save Changes" : "Publish Flash Sheet");
+    forceShowModal("upload-flash-modal");
+}
 window.openUploadFlashModal = openUploadFlashModal;
 
 async function submitNewFlashDesign(event) {
@@ -4050,22 +4200,191 @@ async function submitNewFlashDesign(event) {
     if (file && file[0]) {
         try { image = await imageFileToDataUrl(file[0]); } catch (e) { showStudioToast("That file could not be read as an image"); return; }
     }
+    const editing = galleryState.editFlash;
     const body = {
-        title: v("flash-title-input"), artist_id: v("flash-artist-select"), category: v("flash-category-select"),
-        price: v("flash-price-input"), deposit: v("flash-deposit-input"), needle_specs: v("flash-needles-input"),
-        pigment_palette: v("flash-pigment-input"), notes: v("flash-notes-input"), image_url: image || undefined
+        title: v("flash-title-input"), artist_id: v("flash-artist-select"), category: v("flash-category-select"), size: v("flash-size-input"),
+        price: v("flash-price-input"), deposit: v("flash-deposit-input"), est_duration_hours: v("flash-hours-input"),
+        needle_specs: v("flash-needles-input"), pigment_palette: v("flash-pigment-input"), notes: v("flash-notes-input"),
+        sheet_id: v("flash-sheet-select"), span: (document.getElementById("flash-span-input") || {}).checked ? 2 : 1,
+        status: v("flash-status-select") || "available", image_url: image || undefined
     };
     try {
-        const r = await fetch("/api/flash", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        const r = await fetch(editing ? "/api/flash/" + Number(editing.id) : "/api/flash",
+            { method: editing ? "PUT" : "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
         if (!r.ok) throw new Error();
     } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
     closeUploadFlashModal();
     if (event && event.target && event.target.reset) event.target.reset();
+    galleryState.editFlash = null;
     await loadGalleryData();
     switchGalleryTab("flash");
-    showStudioToast("Flash design added");
+    showStudioToast(editing ? "Flash design saved" : "Flash design added");
 }
 window.submitNewFlashDesign = submitNewFlashDesign;
+
+// --- Sheets: a named set with the header the printed sheet carries ---
+function openFlashSheetModal(isNew) {
+    const id = (document.getElementById("flash-filter-sheet") || {}).value || "";
+    const sheet = isNew ? null : (galleryState.sheets || []).find((s) => String(s.id) === id);
+    galleryState.editSheet = sheet || null;
+    const set = (el, val) => { const e = document.getElementById(el); if (e) e.value = val || ""; };
+    const p = readStudioProfile();
+    set("flash-sheet-name", sheet ? sheet.name : "");
+    set("flash-sheet-artist", sheet ? sheet.artist : (p.studioName || ""));
+    set("flash-sheet-contact", sheet ? sheet.contact : [p.studioPhone, p.studioEmail].filter(Boolean).join(" · "));
+    set("flash-sheet-date", sheet ? sheet.date : new Date().toLocaleDateString("en-CA"));
+    forceShowModal("flash-sheet-modal");
+}
+window.openFlashSheetModal = openFlashSheetModal;
+function closeFlashSheetModal() { forceHideModal("flash-sheet-modal"); }
+window.closeFlashSheetModal = closeFlashSheetModal;
+
+async function submitFlashSheet(event) {
+    if (event) event.preventDefault();
+    const v = (id) => (document.getElementById(id) || {}).value || "";
+    const sheet = galleryState.editSheet;
+    const body = { name: v("flash-sheet-name"), artist: v("flash-sheet-artist"), contact: v("flash-sheet-contact"), date: v("flash-sheet-date") };
+    let saved;
+    try {
+        const r = await fetch(sheet ? "/api/flash-sheets/" + Number(sheet.id) : "/api/flash-sheets",
+            { method: sheet ? "PUT" : "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        if (!r.ok) throw new Error();
+        saved = await r.json();
+    } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
+    closeFlashSheetModal();
+    await loadGalleryData();
+    fillFlashSheetSelects();
+    const filter = document.getElementById("flash-filter-sheet");
+    if (filter) filter.value = String(saved.id);
+    renderFlashGrid();
+    showStudioToast(sheet ? "Sheet saved" : "Sheet created");
+}
+window.submitFlashSheet = submitFlashSheet;
+
+function deleteFlashSheet() {
+    const id = (document.getElementById("flash-filter-sheet") || {}).value || "";
+    const sheet = (galleryState.sheets || []).find((s) => String(s.id) === id);
+    if (!sheet) return;
+    openDeletionConfirmModal({
+        title: "Delete Flash Sheet",
+        message: "Delete this sheet? Its designs stay in the gallery, in no sheet.",
+        itemName: sheet.name, itemDetails: "", confirmBtnText: "Delete Sheet",
+        onConfirm: async () => {
+            try {
+                const r = await fetch("/api/flash-sheets/" + Number(sheet.id), { method: "DELETE" });
+                if (!r.ok) throw new Error();
+            } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
+            await loadGalleryData();
+            const filter = document.getElementById("flash-filter-sheet");
+            if (filter) filter.value = "";
+            renderFlashGrid();
+            showStudioToast("Sheet deleted");
+        }
+    });
+}
+window.deleteFlashSheet = deleteFlashSheet;
+
+// --- Printing: the flash sheet (2-4 columns, claimed and repeatable badges) or the counter price list ---
+async function flashPrintHtml(opts) {
+    const lang = uiLanguage();
+    const L = await phrasesIn(lang);
+    const esc = escapeHtml;
+    const sheetId = (document.getElementById("flash-filter-sheet") || {}).value || "";
+    const sheet = (galleryState.sheets || []).find((s) => String(s.id) === sheetId) || {};
+    const p = readStudioProfile();
+    const items = flashInSheet(sheetId);
+    const price = (f) => (f.price === null || f.price === undefined || f.price === "" ? L("POA") : flashMoney(f.price));
+    const status = (f) => f.status === "claimed" ? L("CLAIMED") : f.status === "repeatable" ? L("REPEATABLE") : "";
+    const title = sheet.name || L("Flash Sheet");
+    const who = [sheet.artist || p.studioName, sheet.contact || [p.studioPhone, p.studioEmail].filter(Boolean).join(" · ")].filter(Boolean).join(" · ");
+    const date = sheet.date || new Date().toLocaleDateString("en-CA");
+    const cols = [2, 3, 4].includes(Number(opts.cols)) ? Number(opts.cols) : 3;
+    const body = opts.mode === "list"
+        ? `<table><thead><tr><th>#</th><th>${esc(L("Design"))}</th><th>${esc(L("Size"))}</th><th>${esc(L("Price"))}</th><th>${esc(L("Deposit"))}</th><th>${esc(L("Est. time"))}</th><th>${esc(L("Status"))}</th></tr></thead><tbody>
+            ${items.map((f, i) => `<tr class="${f.status === "claimed" ? "gone" : ""}"><td>${i + 1}</td><td><strong>${esc(f.title || "")}</strong>${f.category ? `<br><small>${esc(f.category)}</small>` : ""}</td>
+            <td>${esc(f.size || "")}</td><td><strong>${esc(price(f))}</strong></td><td>${esc(flashMoney(f.deposit))}</td>
+            <td>${f.est_duration_hours ? esc(L("{0} h").replace("{0}", f.est_duration_hours)) : ""}</td><td>${esc(status(f) || L("AVAILABLE"))}</td></tr>`).join("")}
+           </tbody></table>`
+        : `<div class="grid" style="grid-template-columns:repeat(${cols},1fr)">${items.map((f, i) => `
+            <div class="card ${Number(f.span) === 2 ? "wide" : ""} ${f.status === "claimed" ? "gone" : ""}">
+              <div class="img">${f.image_url ? `<img src="${esc(f.image_url)}" alt="">` : ""}${status(f) ? `<span class="badge ${f.status}">${esc(status(f))}</span>` : ""}</div>
+              <div class="name">${i + 1}. ${esc(f.title || "")}</div>
+              <div class="meta">${esc([f.size, f.est_duration_hours ? L("{0} h").replace("{0}", f.est_duration_hours) : ""].filter(Boolean).join(" · "))}</div>
+              <div class="price">${esc(price(f))}${f.deposit !== null && f.deposit !== undefined && f.deposit !== "" ? ` <small>${esc(L("{0} deposit").replace("{0}", flashMoney(f.deposit)))}</small>` : ""}</div>
+            </div>`).join("")}</div>`;
+    return `<!doctype html><html lang="${esc(lang)}"><head><meta charset="utf-8"><title>${esc(title)}</title><style>
+        @page{size:${opts.paper === "letter" ? "letter" : "A4"};margin:12mm}
+        @media screen{body{padding:12px}}
+        body{font-family:Arial,Helvetica,sans-serif;color:#111;margin:0;font-size:10pt}
+        .head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #111;padding-bottom:6px;margin-bottom:10px}
+        h1{font-size:18pt;margin:0} .who{font-size:9.5pt;color:#333}
+        .grid{display:grid;gap:8px} .card{border:1px solid #999;border-radius:6px;padding:6px;break-inside:avoid;page-break-inside:avoid}
+        .card.wide{grid-column:span 2} .img{position:relative;height:150px;display:flex;align-items:center;justify-content:center;background:#fff}
+        .img img{max-width:100%;max-height:150px;object-fit:contain} .name{font-weight:bold;margin-top:4px} .meta{font-size:8.5pt;color:#444}
+        .price{font-size:12pt;font-weight:bold;margin-top:2px} .price small{font-size:8pt;font-weight:normal;color:#444}
+        .badge{position:absolute;top:4px;right:4px;font-size:8pt;font-weight:bold;padding:2px 6px;border:1.5px solid #111;background:#fff}
+        .badge.claimed{transform:rotate(-8deg)} .gone .img img{opacity:.35}
+        table{width:100%;border-collapse:collapse} th,td{border-bottom:1px solid #bbb;padding:5px 4px;text-align:left;vertical-align:top} th{font-size:9pt}
+        tr.gone td{color:#777;text-decoration:line-through} tr.gone td:last-child{text-decoration:none}
+        .foot{margin-top:10px;font-size:8.5pt;color:#555;border-top:1px solid #999;padding-top:4px}
+    </style></head><body>
+        <div class="head"><div><h1>${esc(opts.mode === "list" ? L("Flash price list") : title)}</h1>${opts.mode === "list" ? `<div class="who">${esc(title)}</div>` : ""}<div class="who">${esc(who)}</div></div><div class="who">${esc(date)}</div></div>
+        ${items.length ? body : `<p>${esc(L("No flash designs yet."))}</p>`}
+        <div class="foot">${esc(L("Prices in {0}. POA: price on asking.").replace("{0}", ((window.StudioSettings && window.StudioSettings.get().currency) || {}).code || ""))}</div>
+    </body></html>`;
+}
+
+function flashPrintOptions() {
+    const v = (id) => (document.getElementById(id) || {}).value || "";
+    return { mode: v("flash-print-mode") || "sheet", paper: v("flash-print-paper") || "a4", cols: v("flash-print-cols") || "3" };
+}
+
+async function refreshFlashPrintPreview() {
+    const frame = document.getElementById("flash-print-preview");
+    if (!frame) return;
+    const o = flashPrintOptions();
+    const cols = document.getElementById("flash-print-cols");
+    if (cols) cols.disabled = o.mode === "list";
+    frame.srcdoc = await flashPrintHtml(o);
+}
+window.refreshFlashPrintPreview = refreshFlashPrintPreview;
+
+async function openFlashPrintModal(mode) {
+    const m = document.getElementById("flash-print-mode");
+    if (m && mode) m.value = mode;
+    forceShowModal("flash-print-modal");
+    await refreshFlashPrintPreview();
+}
+window.openFlashPrintModal = openFlashPrintModal;
+function closeFlashPrintModal() { forceHideModal("flash-print-modal"); }
+window.closeFlashPrintModal = closeFlashPrintModal;
+
+async function printFlashSheet() {
+    printAftercareSheet(await flashPrintHtml(flashPrintOptions()));
+}
+window.printFlashSheet = printFlashSheet;
+
+// --- What sells: one row per design, with how often it was booked ---
+function exportFlashCsv() {
+    const sheetId = (document.getElementById("flash-filter-sheet") || {}).value || "";
+    const sheetName = (id) => ((galleryState.sheets || []).find((s) => s.id === id) || {}).name || "";
+    const cell = (x) => { const s = x === null || x === undefined ? "" : String(x); return /[",\n;]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+    const rows = [["Title", "Sheet", "Category", "Artist", "Size", "Price", "Deposit", "Est. hours", "Status", "Times booked", "Last booked", "Last client", "Likes", "Added"]];
+    flashInSheet(sheetId).forEach((f) => {
+        const b = Array.isArray(f.bookings) ? f.bookings : [];
+        const last = b[b.length - 1] || {};
+        rows.push([f.title, sheetName(f.sheet_id), f.category, f.artist_name, f.size, f.price, f.deposit, f.est_duration_hours, f.status,
+            b.length, last.date || "", last.client_name || "", f.likes_count || 0, String(f.created_at || "").slice(0, 10)]);
+    });
+    const blob = new Blob(["﻿" + rows.map((r) => r.map(cell).join(",")).join("\r\n")], { type: "text/csv;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "flash-designs-" + new Date().toLocaleDateString("en-CA") + ".csv";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+window.exportFlashCsv = exportFlashCsv;
 
 // --- Skin tone preview of a flash design ---
 function openSkinToneVisualizerModal(flash) {

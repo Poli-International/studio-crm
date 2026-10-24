@@ -91,7 +91,7 @@ Lo scanner in **Registro attività** usa la fotocamera del dispositivo. Scansion
 
 ## Galleria
 
-**Portfolio lavori** contiene le foto dei lavori finiti, collegate al cliente e all'artista. **Flash** contiene i disegni con prezzo e acconto; contrassegnate uno come riservato quando un cliente lo prenota. **Condividi** prepara un messaggio per WhatsApp, LINE, X o email; il menu di condivisione del telefono può includere la foto.
+**Portfolio lavori** contiene le foto dei lavori finiti, collegate al cliente e all'artista. **Flash** contiene i soggetti con relative dimensioni, tempo di seduta, prezzo e acconto; un prezzo vuoto viene mostrato come Su preventivo. Raggruppa i soggetti in foglio, trascinali nell'ordine desiderato e stampa un foglio o un listino prezzi al banco. **Prenota** riserva un soggetto per un cliente dalla tua lista, con la data; **Rendi disponibile** annulla la prenotazione. Un soggetto **Ripetibile** può essere prenotato ripetutamente e conta le sue prenotazioni. **Esporta CSV** elenca ciò che è stato venduto. **Condividi** prepara un messaggio per WhatsApp, LINE, X o email; il menu di condivisione del telefono può includere la foto.
 
 ## Denaro e personale
 

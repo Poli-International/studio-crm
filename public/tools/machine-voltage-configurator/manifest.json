@@ -1,0 +1,7 @@
+{
+  "name": "Machine Voltage Configurator",
+  "short_name": "Voltage Config",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone"
+}

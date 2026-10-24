@@ -91,7 +91,7 @@ Le scanner dans **Journal d'activité** utilise la caméra de l'appareil. Scanne
 
 ## Galerie
 
-**Portfolio** contient les photos des travaux terminés, liées au client et à l'artiste. **Flashs** contient des designs avec prix et acompte ; marquez-en un comme réservé lorsqu'un client le réserve. **Partager** prépare un message pour WhatsApp, LINE, X ou e-mail ; le menu de partage du téléphone peut inclure la photo.
+**Portfolio** contient les photos des travaux terminés, liées au client et à l'artiste. **Flashs** contient les motifs avec leur taille, leur temps de pose, leur prix et leur acompte ; un prix vide s'affiche en tant que « Sur devis ». Regroupez les motifs en planche, glissez-les dans l'ordre de votre choix, et imprimez une planche ou une liste de prix au comptoir. **Réserver** réserve un motif pour un client de votre liste, avec la date ; **Rendre disponible** annule la réservation. Un motif **Répétable** peut être réservé encore et encore et compte ses réservations. **Exporter en CSV** liste ce qui a été vendu. **Partager** prépare un message pour WhatsApp, LINE, X ou e-mail ; le menu de partage du téléphone peut inclure la photo.
 
 ## Argent et personnel
 

@@ -29,8 +29,9 @@
  * One mechanism reads both, and any language added later, without this file
  * knowing a single word of it.
  *
- * The numbers themselves are safe to parse: they are raw JavaScript numbers
- * rendered by React, never locale-formatted, so a decimal point stays a point.
+ * The hours are safe to parse: the tool groups only whole amounts of 1,000 and
+ * more, so hours and counts stay raw JavaScript numbers and a decimal point stays
+ * a point. Keep it that way in the tool (fmt in i18n.ts).
  *
  * WHAT IS STILL TRUE FROM THE FIRST VERSION
  * The tool estimates the WORK, the studio's settings decide the MONEY. The tool
@@ -126,7 +127,8 @@
     var el = document.getElementById('root');
     if (!el) return null;
     var m = el.textContent.replace(/\s+/g, ' ')
-      .match(/([^\s\d]{1,3})\s?([\d.,]+)\s*[–—-]\s*([^\s\d]{1,3})\s?([\d.,]+)/);
+      // amounts of 1,000 and more are grouped per language (1,200 / 1.200 / 1 200)
+      .match(/([^\s\d]{1,3})\s?(\d[\d.,\u00a0\u202f]*)\s*[–—-]\s*([^\s\d]{1,3})\s?(\d[\d.,\u00a0\u202f]*)/);
     return m ? m[1] + m[2] + ' - ' + m[3] + m[4] : null;
   }
 

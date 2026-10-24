@@ -91,7 +91,7 @@ De scanner in **Activiteitenlogboek** gebruikt de camera van het apparaat. Scan 
 
 ## Galerij
 
-**Portfolio** bevat foto's van afgewerkt werk, gekoppeld aan klant en artiest. **Flash sheets** bevat ontwerpen met prijs en aanbetaling; markeer een als gereserveerd wanneer een klant het reserveert. **Delen** bereidt een bericht voor WhatsApp, LINE, X of e-mail voor; het deelmenu van de telefoon kan de foto bevatten.
+**Portfolio** bevat foto's van afgewerkt werk, gekoppeld aan klant en artiest. **Flash sheets** bevat ontwerpen met hun formaat, zittijd, prijs en aanbetaling; een lege prijs wordt weergegeven als "Prijs op aanvraag". Groepeer ontwerpen in vellen, sleep ze in de gewenste volgorde en druk een vel of een toonbankprijslijst af. **Reserveren** reserveert een ontwerp voor een klant uit uw lijst, met de datum; **Beschikbaar maken** annuleert de reservering. Een **Herhaalbaar** ontwerp kan keer op keer worden geboekt en telt het aantal boekingen. **CSV exporteren** toont een overzicht van wat er is verkocht. **Delen** bereidt een bericht voor WhatsApp, LINE, X of e-mail voor; het deelmenu van de telefoon kan de foto bevatten.
 
 ## Geld en personeel
 

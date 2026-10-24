@@ -91,7 +91,7 @@ The scanner in **Log Activity** uses the device camera. Scan a stock SKU or lot 
 
 ## Gallery
 
-**Portfolio Works** holds photos of finished work, linked to the client and artist. **Flash Sheets** holds designs with price and deposit; mark one as claimed when a client reserves it. **Share** prepares a message for WhatsApp, LINE, X or email; the phone's share sheet can include the photo.
+**Portfolio Works** holds photos of finished work, linked to the client and artist. **Flash Sheets** holds designs with their size, sitting time, price and deposit; a blank price shows as POA. Group designs into sheets, drag them into the order you want, and print a sheet or a counter price list. **Claim** reserves a design for a client from your list, with the date; **Make Available** cancels the reservation. A **Repeatable** design can be booked again and again and counts its bookings. **Export CSV** lists what sold. **Share** prepares a message for WhatsApp, LINE, X or email; the phone's share sheet can include the photo.
 
 ## Money and staff
 

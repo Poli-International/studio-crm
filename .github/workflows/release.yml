@@ -16,6 +16,8 @@ on:
 
 permissions:
   contents: write
+  actions: read         # the tag run looks up the PR's own run (tool-list)
+  pull-requests: read
 
 jobs:
   # A dead button blocks the release: nothing is packed or published unless every
@@ -57,6 +59,7 @@ jobs:
       - id: list
         env:
           EVENT: ${{ github.event_name }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           all=$(ls public/tools | grep -v '^shared$')
           # the release before this one: for a tag, the tag before it; otherwise the last tag in the history
@@ -67,6 +70,19 @@ jobs:
             tools=$(git diff --name-only "$base" HEAD -- public/tools | cut -d/ -f3 | sort -u | grep -x -F "$all" || true)
           else
             tools="$all"
+          fi
+          # A tag on the squash commit of a PR whose own run passed, with the same files: that run
+          # already crawled these tools. Skip them (the ZIPs are still packed and tested on all 4 systems).
+          if [ "$GITHUB_REF_TYPE" = "tag" ] && [ -n "$tools" ]; then
+            tree=$(git rev-parse "HEAD^{tree}")
+            for pr in $(gh api "repos/$GITHUB_REPOSITORY/commits/$GITHUB_SHA/pulls" --jq '.[].number' || true); do
+              head=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$pr" --jq .head.sha || true)
+              [ -n "$head" ] || continue
+              [ "$(gh api "repos/$GITHUB_REPOSITORY/git/commits/$head" --jq .tree.sha || true)" = "$tree" ] || { echo "PR #$pr head has other files: crawling"; continue; }
+              green=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/release.yml/runs?head_sha=$head&event=pull_request&status=success" --jq .total_count || echo 0)
+              if [ "$green" -gt 0 ]; then echo "same files as PR #$pr ($head), whose run passed: no tool crawl"; tools=""; break; fi
+              echo "PR #$pr head has no green run: crawling"
+            done
           fi
           echo "since ${base:-the start}:" $tools
           echo "tools=$(printf '%s\n' $tools | jq -Rsc 'split("\n") | map(select(length > 0))')" >> "$GITHUB_OUTPUT"

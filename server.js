@@ -9654,6 +9654,39 @@ const flashDesigns = [
 ];
 
 // Flash Gallery API Endpoints
+// A blank field stays blank: no invented price, deposit, time, needles or pigments (a blank price
+// prints as POA). Status: available, claimed (one client has it) or repeatable (sold again and again).
+// Each claim is kept in `bookings` (client, date), so the studio can see what sells.
+const flashSheets = [];
+const FLASH_STATUSES = ['available', 'claimed', 'repeatable'];
+const flashNum = (v) => (v === '' || v === null || v === undefined || !Number.isFinite(Number(v)) ? null : Number(v));
+const flashText = (v) => (v === undefined || v === null ? '' : String(v).trim());
+const nextFlashId = () => flashDesigns.reduce((m, f) => Math.max(m, Number(f.id) || 0), 500) + 1;
+
+// the editable fields of a design, from a request body; only the fields the body has
+function flashFields(body) {
+  const out = {};
+  if ('title' in body) out.title = flashText(body.title);
+  if ('category' in body) out.category = flashText(body.category);
+  if ('size' in body) out.size = flashText(body.size);
+  if ('price' in body) out.price = flashNum(body.price);
+  if ('deposit' in body) out.deposit = flashNum(body.deposit);
+  if ('est_duration_hours' in body) out.est_duration_hours = flashNum(body.est_duration_hours);
+  if ('needle_specs' in body) out.needle_specs = flashText(body.needle_specs);
+  if ('pigment_palette' in body) out.pigment_palette = flashText(body.pigment_palette);
+  if ('notes' in body) out.notes = flashText(body.notes);
+  if ('sheet_id' in body) out.sheet_id = flashNum(body.sheet_id);
+  if ('span' in body) out.span = Number(body.span) === 2 ? 2 : 1;
+  if ('artist_id' in body) {
+    const artist = staff.find((s) => String(s.id) === String(body.artist_id));
+    out.artist_id = artist ? artist.id : null;
+    out.artist_name = artist ? artist.name : '';
+  }
+  if (body.image_url) out.image_url = String(body.image_url);
+  if (body.status && FLASH_STATUSES.includes(body.status) && body.status !== 'claimed') out.status = body.status;
+  return out;
+}
+
 app.get('/api/flash', (req, res) => {
   let result = [...flashDesigns];
   const { category, status, search } = req.query;
@@ -9666,73 +9699,98 @@ app.get('/api/flash', (req, res) => {
   }
   if (search) {
     const q = search.toLowerCase();
-    result = result.filter(f =>
-      f.title.toLowerCase().includes(q) ||
-      f.category.toLowerCase().includes(q) ||
-      f.notes.toLowerCase().includes(q) ||
-      f.artist_name.toLowerCase().includes(q)
-    );
+    result = result.filter(f => [f.title, f.category, f.notes, f.artist_name].some((t) => String(t || '').toLowerCase().includes(q)));
   }
 
   res.json(result);
 });
 
 app.post('/api/flash', (req, res) => {
-  const { title, artist_id, category, price, deposit, est_duration_hours, needle_specs, pigment_palette, notes, image_url, stencil_url } = req.body;
-
-  const artistObj = staff.find(s => s.id === parseInt(artist_id)) || { id: artist_id || 2, name: 'Jaxon Vance' };
-
+  const fields = flashFields(req.body || {});
+  if (!fields.title) return res.status(400).json({ error: 'A flash design needs a title' });
   const newFlash = {
-    id: flashDesigns.length + 501,
-    title: title || 'Custom Tattoo / PMU Flash Design',
-    artist_id: parseInt(artistObj.id),
-    artist_name: artistObj.name,
-    category: category || 'Tattoo - Custom',
-    price: parseFloat(price) || 250,
-    deposit: parseFloat(deposit) || 50,
-    est_duration_hours: parseFloat(est_duration_hours) || 2.0,
-    status: 'available',
-    claimed_by_client_name: null,
-    needle_specs: needle_specs || '3RL Line + 7RM Shading',
-    pigment_palette: pigment_palette || 'Studio Black & Grey Wash',
-    notes: notes || 'New custom flash design added to studio catalog.',
-    image_url: image_url || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"><rect width="600" height="400" fill="%231F2937"/><text x="300" y="200" fill="%23C084FC" font-family="sans-serif" font-size="22" font-weight="bold" text-anchor="middle">Custom Flash Artwork</text></svg>',
-    stencil_url: stencil_url || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"><rect width="600" height="400" fill="%23FFFFFF"/><rect x="100" y="80" width="400" height="240" fill="none" stroke="%23000000" stroke-width="4"/><text x="300" y="200" fill="%23000000" font-family="sans-serif" font-size="18" font-weight="bold" text-anchor="middle">STENCIL LINE ART</text></svg>',
+    id: nextFlashId(),
+    title: '', artist_id: null, artist_name: '', category: '', size: '',
+    price: null, deposit: null, est_duration_hours: null,
+    needle_specs: '', pigment_palette: '', notes: '', image_url: '',
+    sheet_id: null, span: 1, order: 0,
+    status: 'available', claimed_by_client_id: null, claimed_by_client_name: null, bookings: [],
     likes_count: 0,
-    created_at: new Date().toISOString()
+    created_at: new Date().toISOString(),
+    ...fields,
   };
-
+  // new designs go first, ahead of the others in their sheet
+  flashDesigns.forEach((f) => { f.order = (Number(f.order) || 0) + 1; });
   flashDesigns.unshift(newFlash);
 
   logActivity({
     category: 'staff',
     action: 'FLASH_DESIGN_CREATED',
     title: `New Flash Design Added: ${newFlash.title}`,
-    details: `Added ${newFlash.category} flash design by ${artistObj.name} ($${newFlash.price}, ${newFlash.est_duration_hours}h session)`,
-    user: artistObj.name,
+    details: [newFlash.category, newFlash.artist_name].filter(Boolean).join(' · '),
+    user: newFlash.artist_name || undefined,
     badgeColor: 'purple'
   });
 
   res.status(201).json(newFlash);
 });
 
+app.put('/api/flash/:id', (req, res) => {
+  const flash = flashDesigns.find(f => f.id === parseInt(req.params.id));
+  if (!flash) return res.status(404).json({ error: 'Flash design not found' });
+  const fields = flashFields(req.body || {});
+  if ('title' in fields && !fields.title) return res.status(400).json({ error: 'A flash design needs a title' });
+  // a claimed design stays claimed until it is made available again
+  if (flash.status === 'claimed') delete fields.status;
+  Object.assign(flash, fields);
+  res.json(flash);
+});
+
+// the order on the sheet: ids in the new order
+app.put('/api/flash-order', (req, res) => {
+  const ids = Array.isArray(req.body && req.body.ids) ? req.body.ids.map(Number) : [];
+  ids.forEach((id, i) => { const f = flashDesigns.find((x) => x.id === id); if (f) f.order = i; });
+  res.json({ success: true });
+});
+
 app.post('/api/flash/:id/claim', (req, res) => {
   const flash = flashDesigns.find(f => f.id === parseInt(req.params.id));
   if (!flash) return res.status(404).json({ error: 'Flash design not found' });
+  if (flash.status === 'claimed') return res.status(409).json({ error: 'This design is already claimed' });
+  const client = clients.find((c) => String(c.id) === String(req.body.client_id));
+  const clientName = client ? client.name : flashText(req.body.client_name);
+  if (!clientName) return res.status(400).json({ error: 'Choose the client' });
+  const date = /^\d{4}-\d{2}-\d{2}$/.test(String(req.body.date || '')) ? req.body.date : new Date().toISOString().slice(0, 10);
 
-  const clientName = req.body.client_name || 'Guest Client';
-  flash.status = 'claimed';
-  flash.claimed_by_client_name = clientName;
+  if (!Array.isArray(flash.bookings)) flash.bookings = [];
+  flash.bookings.push({ client_id: client ? client.id : null, client_name: clientName, date });
+  if (flash.status !== 'repeatable') {
+    flash.status = 'claimed';
+    flash.claimed_by_client_id = client ? client.id : null;
+    flash.claimed_by_client_name = clientName;
+  }
 
   logActivity({
     category: 'appointment',
     action: 'FLASH_CLAIMED',
     title: `Flash Design Claimed: ${flash.title}`,
-    details: `Claimed by client ${clientName} — Reserved for $${flash.price} ($${flash.deposit} deposit). Artist: ${flash.artist_name}`,
+    details: `Claimed by client ${clientName} on ${date}` + (flash.artist_name ? `. Artist: ${flash.artist_name}` : ''),
     user: 'Studio Front Desk',
     badgeColor: 'green'
   });
 
+  res.json({ success: true, flash });
+});
+
+// make a claimed design available again: the reservation is cancelled, so its booking goes too
+app.post('/api/flash/:id/release', (req, res) => {
+  const flash = flashDesigns.find(f => f.id === parseInt(req.params.id));
+  if (!flash) return res.status(404).json({ error: 'Flash design not found' });
+  if (flash.status !== 'claimed') return res.status(409).json({ error: 'This design is not claimed' });
+  if (Array.isArray(flash.bookings) && flash.bookings.length) flash.bookings.pop();
+  flash.status = 'available';
+  flash.claimed_by_client_id = null;
+  flash.claimed_by_client_name = null;
   res.json({ success: true, flash });
 });
 
@@ -9749,6 +9807,33 @@ app.delete('/api/flash/:id', (req, res) => {
   if (idx === -1) return res.status(404).json({ error: 'Flash design not found' });
 
   const removed = flashDesigns.splice(idx, 1)[0];
+  res.json({ success: true, removed });
+});
+
+// Flash sheets: a named set of designs with the header a printed sheet carries
+const sheetFields = (b) => ({ name: flashText(b.name), artist: flashText(b.artist), contact: flashText(b.contact), date: flashText(b.date) });
+app.get('/api/flash-sheets', (req, res) => res.json(flashSheets));
+app.post('/api/flash-sheets', (req, res) => {
+  const s = sheetFields(req.body || {});
+  if (!s.name) return res.status(400).json({ error: 'A sheet needs a name' });
+  const sheet = { id: flashSheets.reduce((m, x) => Math.max(m, x.id), 0) + 1, ...s };
+  flashSheets.push(sheet);
+  res.status(201).json(sheet);
+});
+app.put('/api/flash-sheets/:id', (req, res) => {
+  const sheet = flashSheets.find((s) => s.id === parseInt(req.params.id));
+  if (!sheet) return res.status(404).json({ error: 'Sheet not found' });
+  const s = sheetFields(req.body || {});
+  if (!s.name) return res.status(400).json({ error: 'A sheet needs a name' });
+  Object.assign(sheet, s);
+  res.json(sheet);
+});
+// deleting a sheet keeps its designs: they go back to "no sheet"
+app.delete('/api/flash-sheets/:id', (req, res) => {
+  const idx = flashSheets.findIndex((s) => s.id === parseInt(req.params.id));
+  if (idx === -1) return res.status(404).json({ error: 'Sheet not found' });
+  const [removed] = flashSheets.splice(idx, 1);
+  flashDesigns.forEach((f) => { if (f.sheet_id === removed.id) f.sheet_id = null; });
   res.json({ success: true, removed });
 });
 
@@ -11049,6 +11134,7 @@ const PERSISTED = {
   sentAftercareLogs: [() => sentAftercareLogs],
   galleryWorks: [() => galleryWorks],
   flashDesigns: [() => flashDesigns],
+  flashSheets: [() => flashSheets],
   studioStations: [() => studioStations, (v) => { studioStations = v; }],
   clientBodyMaps: [() => clientBodyMaps, (v) => { clientBodyMaps = v; }],
   receiptsLogs: [() => receiptsLogs, (v) => { receiptsLogs = v; }],

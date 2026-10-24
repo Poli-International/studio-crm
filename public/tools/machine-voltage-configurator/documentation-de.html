@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="de">
+<head><meta name="robots" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Voltage Configurator Documentation | Poli International</title>
+    <meta name="description" content="Get a starting voltage range for your machine type, stroke length and technique, with a note to tune from there.">
+    <link rel="canonical" href="https://poliinternational.com/machine-voltage-configurator/">
+    <style>
+        body { background: #0f0f0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; }
+        body.in-iframe .doc-hero h1 { display: none; }
+        * { box-sizing: border-box; }
+        .entry-content { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .doc-hero { background: linear-gradient(135deg, #3B82F6, #8B5CF6); padding: 3rem 2rem; text-align: center; border-radius: 0.75rem; margin-bottom: 2rem; }
+        .doc-hero h1 { font-size: 2.2rem; margin: 0 0 1rem; font-weight: 700; }
+        .doc-hero p { font-size: 1.15rem; color: #E0E7FF; margin: 0; }
+        .doc-hero .v2 { display: inline-block; margin-bottom: 1rem; padding: 0.2rem 0.75rem; border-radius: 999px; background: #10B981; color: #04241a; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; }
+        .doc-section { margin: 2rem 0; padding: 2rem; background: #1a1a1a; border-radius: 0.75rem; border-left: 4px solid #3B82F6; }
+        .doc-section h2 { color: #60A5FA; font-size: 1.7rem; margin: 0 0 1.25rem; font-weight: 600; }
+        .doc-section h3 { color: #A78BFA; font-size: 1.3rem; margin: 1.75rem 0 0.75rem; font-weight: 600; }
+        .doc-section p, .doc-section li { color: #ccc; line-height: 1.75; font-size: 1.02rem; }
+        .doc-section ul, .doc-section ol { padding-left: 1.5rem; }
+        .doc-section li { margin: 0.4rem 0; }
+        .doc-section code { background: #2a2a2a; padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.92em; }
+        .doc-section a { color: #60A5FA; font-weight: 600; }
+        .highlight-box { background: linear-gradient(135deg, #1E3A8A, #4C1D95); padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; border-left: 4px solid #10B981; }
+        .highlight-box p { color: #E0E7FF; margin: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border: 1px solid #333; vertical-align: top; }
+        th { background: #2a2a2a; color: #60A5FA; }
+        td { color: #ccc; }
+        .doc-langs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.5rem; font-size: 0.9rem; }
+        .doc-langs a, .doc-langs span { padding: 0.3rem 0.7rem; border-radius: 999px; border: 1px solid #333; text-decoration: none; }
+        .doc-langs a { color: #60A5FA; }
+        .doc-langs span { background: #1E3A8A; color: #E0E7FF; border-color: #1E3A8A; font-weight: 700; }
+    </style>
+</head>
+<body>
+<nav class="doc-langs" aria-label="Sprache der Dokumentation" style="display:flex;flex-wrap:wrap;gap:6px 14px;max-width:900px;margin:12px auto 0;padding:0 16px;font-size:14px;"><a lang="en" href="documentation.html">English</a><a lang="fr" href="documentation-fr.html">Français</a><span lang="de">Deutsch</span><a lang="it" href="documentation-it.html">Italiano</a><a lang="es" href="documentation-es.html">Español</a><a lang="nl" href="documentation-nl.html">Nederlands</a><a lang="pt" href="documentation-pt.html">Português</a><a lang="th" href="documentation-th.html">ไทย</a></nav>
+<script>if (window.self !== window.top) document.body.classList.add('in-iframe');</script>
+    <div class="entry-content">
+        <div class="doc-hero">
+            <span class="v2">V2</span>
+            <h1>Machine Voltage Configurator</h1>
+            <p>Get a starting voltage range for your machine type, stroke length and technique, with a note to tune from there.</p>
+        </div>
+        <p>Der Maschinenspannungs-Konfigurator liefert Startspannungsfenster (eine Studio-Faustregel), Hubmechaniken und druckbare Arbeitsplatz-Referenzkarten für Tätowierer, die mit Rotations- und Spulenmaschinen arbeiten.</p>
+        <div class="doc-section">
+        <h2>Wofür es gedacht ist</h2>
+        <p>Der Maschinenspannungs-Konfigurator bietet einen Startpunkt für die Einrichtung von Tattoomaschinenspannung, Hub und Stromversorgung. Statt zu raten, gleichen Künstler ihren Maschinentyp, ihre Hublänge und Technik mit einem Startfenster ab, bei dem es sich um eine Studio-Faustregel statt um eine Herstellerangabe handelt. Das Tool erklärt zudem die Hubmechanik, prüft die Anschlusskompatibilität über Kabel und Netzteile hinweg und speichert benutzerdefinierte Arbeitsplatz-Referenzkarten.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Für wen es gedacht ist</h2>
+        <p>Dieses Tool richtet sich an:</p>
+        <ul>
+        <li>Professionelle Tätowierer, die neue Rotary-Pens, Direktantriebs-Maschinen oder Spulenmaschinen einrichten.</li>
+        <li>Auszubildende, die verstehen wollen, wie Spannung, Hubexzenter und Nadelgruppen-Trägheit das Gewebetrauma beeinflussen.</li>
+        <li>Studioinhaber, die einheitliche Arbeitsstandards an allen Arbeitsplätzen gewährleisten wollen.</li>
+        <li>Gast-Tätowierer und Reisende, die fremde Netzteile oder Akku-Packs in Gaststudios kalibrieren müssen.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Wie man es benutzt</h2>
+        <h3>Basisspannung und Hubberechnung</h3>
+        <ol>
+        <li>Klicken Sie in der oberen Navigationsleiste auf <code>Spannungs- &amp; Hubkonfigurator</code>.</li>
+        <li>Wählen Sie unter <code>Maschinenparameter</code> die Bauart: <code>Rotary (Direktantrieb, Slider oder Pen)</code> oder <code>Spulenmaschine (Elektromagnetischer Anker)</code>.</li>
+        <li>Wählen Sie Ihre <code>Hublänge (Exzenterhub)</code> zwischen <code>2,5 mm (Kurz / Sanfte Schattierungen &amp; Zarte Grey-Wash-Töne)</code> und <code>4,5 mm (Extra Lang / Dicke Outlines &amp; Große Magnums)</code>.</li>
+        <li>Wählen Sie die gewünschte Technik: <code>Linienführung (Lining)</code>, <code>Schattierung (Shading)</code>, <code>Flächendeckendes Füllen (Color Packing)</code> oder <code>Punktierung / Dotwork (Stippling)</code>.</li>
+        <li>Lesen Sie unter <code>Empfohlenes Startfenster</code> das empfohlene <code>Grundlegender Startbereich</code> in Volt Gleichstrom sowie <code>Relative Nadelgeschwindigkeit</code>, <code>Relative Schlagkraft (Punch)</code> und <code>Tastgrad (Duty Cycle)</code> ab.</li>
+        <li>Klicken Sie auf <code>In der Arbeitsplatzkarte 'Meine Maschinen' speichern</code>, um die Werte in Ihre Referenzkarte zu übernehmen.</li>
+        </ol>
+        <h3>Hublänge und Geschwindigkeitsvergleich</h3>
+        <ol>
+        <li>Klicken Sie in der Navigationsleiste auf <code>Hub- &amp; Geschwindigkeits-Visualisierer</code>.</li>
+        <li>Wählen Sie unter <code>Zu vergleichenden Hub wählen:</code> einen Hub von <code>2,5 mm (Kurzhub)</code> bis <code>4,5 mm (Schwerer Hub)</code>.</li>
+        <li>Schalten Sie unter <code>Startspannungsstufe auswählen:</code> zwischen <code>Niedrig</code>, <code>Mittel</code> oder <code>Hoch</code> um.</li>
+        <li>Analysieren Sie die mechanischen Messwerte: <code>Exzenterhub:</code>, <code>Relative Taktfrequenz:</code>, <code>Schlagenergie / Punch:</code> und <code>Hautkontaktzeit der Nadel:</code>.</li>
+        <li>Beobachten Sie das Schema mit <code>Motorexzenter-Hubweg</code>, <code>Nadeleindringtiefe</code> und der <code>Hautoberflächenbegrenzung (Dermislinie)</code>.</li>
+        </ol>
+        <h3>Eigene Maschinen speichern und verwalten</h3>
+        <ol>
+        <li>Klicken Sie in der Navigationsleiste auf <code>Meine Maschinen (Arbeitsplatzkarte)</code>.</li>
+        <li>Geben Sie unter <code>Maschineneinstellung &amp; Technik erfassen</code> den Gerätenamen in <code>Maschinenbezeichnung / Modell *</code> ein.</li>
+        <li>Wählen Sie <code>Rotary-Maschine</code> oder <code>Spulen-Maschine</code>, tragen Sie den Hub in <code>Hub (mm) *</code> ein und wählen Sie die <code>Arbeitstechnik *</code>.</li>
+        <li>Tragen Sie die Spannung in <code>Erprobte Spannungseinstellung (Volt) *</code> ein und spezifizieren Sie die Nadeln in <code>Nadelkonfiguration &amp; Anschliff (Taper) *</code>.</li>
+        <li>Ergänzen Sie Notizen in <code>Notizen / Beobachtungen aus der Sitzung</code>, wählen Sie <code>Einwandfrei Gelaufen</code>, <code>Zu Sanft / Verliert Kraft</code> oder <code>Zu Aggressiv / Verletzt Haut</code> und klicken Sie auf <code>Maschineneinstellung Speichern</code>.</li>
+        <li>Filtern Sie die gespeicherten Karten unter <code>Gespeicherte Arbeitsplatzkarten</code> mit <code>Alle Bauarten</code>, <code>Rotary-Maschine</code> oder <code>Spulen-Maschine</code>, oder klicken Sie auf <code>Löschen</code>, um einen Eintrag zu entfernen.</li>
+        </ol>
+        <h3>Elektrische Verbindungen und Netzteile überprüfen</h3>
+        <ol>
+        <li>Klicken Sie in der Navigationsleiste auf <code>Anschluss- &amp; Netzteilprüfung</code>.</li>
+        <li>Wählen Sie unter <code>1. Maschinenanschluss</code> den Anschluss, z. B. <code>Cinch-Buchse / RCA (Moderne Rotarys und Tattoo-Pens)</code> oder <code>Clipcord (Traditionelle Spulenmaschinen)</code>.</li>
+        <li>Wählen Sie unter <code>2. Netzteil-Bauart &amp; Stromstärke</code> das Netzteil, z. B. <code>Digitales Tisch-Netzteil (Dauerstrom 2,0 A – 3,0 A, Jumpstart-Funktion)</code> oder <code>Kabelloser Modular-Akku (Lithium-Ionen, 1500–2000 mAh)</code>.</li>
+        <li>Wählen Sie unter <code>3. Verbindungskabel</code> das Kabel, z. B. <code>Hochwertiges Cinch- / RCA-Kabel</code> oder <code>Klassisches Federstahl-Clipcord</code>.</li>
+        <li>Klicken Sie auf <code>Komponenten auf Kompatibilität Prüfen</code>, um Inkompatibilitäten wie <code>Kabel-Fehlkonfiguration</code>, <code>Mechanische Inkompatibilität</code> oder <code>Eingeschränkter Anlaufstrom</code> zu erkennen.</li>
+        </ol>
+        <h3>Praktische Feinabstimmung nach Gehör und Spulenmechanik</h3>
+        <ol>
+        <li>Klicken Sie in der Navigationsleiste auf <code>Feinabstimmung nach Gehör &amp; Spulen-/Akku-Leitfaden</code>.</li>
+        <li>Folgen Sie den drei Schritten des Praxistests: <code>1. Hören Sie auf den Motorklang</code>, <code>2. Beurteilen Sie den Farbauftrag</code> und <code>3. Justieren Sie in Kleinen Schritten</code>.</li>
+        <li>Justieren Sie Spulenmaschinen in mechanischer Reihenfolge: <code>1. Mechanische Flucht: Nadelstange, Gummitülle (Grommet) und Griffrohr exakt mittig ohne seitliche Reibung ausrichten.</code>, <code>2. Kontaktabstand: Kontaktschraube mechanisch einstellen (ca. Zehn-Cent-Münzenstärke für Linien, Fünfzig-Cent-Münzenstärke für Schattierer).</code>, <code>3. Federspannung: Biegewinkel der hinteren Feder abstimmen, um die Rückstellkraft des Ankers zu tarieren, bevor die Voltzahl erhöht wird.</code> und <code>4. Feineinstellung der Spannung: Das Netzteil erst einstellen, wenn Mechanik und Federblätter perfekt harmonieren.</code>.</li>
+        <li>Beachten Sie die Besonderheiten kabelloser Akkus: <code>1. Spannungsabfall unter Last (Voltage Sag)</code>, <code>2. Starthilfe-Impuls (Jumpstart)</code> und <code>3. Leistungsabfall bei Niedrigem Akkustand</code>.</li>
+        </ol>
+        <h3>Tool auf der Studio-Website einbetten</h3>
+        <ol>
+        <li>Klicken Sie in der Navigationsleiste auf <code>Einbettungscode</code>.</li>
+        <li>Suchen Sie den Code-Ausschnitt unter <code>Kopieren Sie den nachfolgenden iframe-Code (nutzt die offizielle Adresse von Poli International):</code>.</li>
+        <li>Klicken Sie auf <code>Einbettungscode Kopieren</code>, um den HTML-Code zu kopieren.</li>
+        </ol>
+        </div>
+        <div class="doc-section">
+        <h2>Was es nicht tut</h2>
+        <p>Der Maschinen-Spannungs-Konfigurator konzentriert sich ausschließlich auf Spannungsempfehlungen, Hubkinematik und elektrische Verträglichkeit. Er bietet nicht:</p>
+        <ul>
+        <li>Nadelschliff-Auswahl, Cartridge-Durchmesser oder Nadelgruppierungs-Geometrie. Nutzen Sie dafür den Nadel-Selektor unter https://poliinternational.com/needle-selector/.</li>
+        <li>Hardware-Fehlerdiagnose bei defekten Fußschaltern, Kabelbrüchen oder Transformatorschäden. Nutzen Sie dafür die Netzteil-Fehlerbehebung unter https://poliinternational.com/power-supply-troubleshooter/.</li>
+        <li>Wartungspläne für Maschinen, Federwechsel-Protokolle oder Autoklaven-Sterilisationsprotokolle. Nutzen Sie dafür das Maschinen-Wartungsbuch unter https://poliinternational.com/machine-maintenance-logbook/.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Wo Ihre Daten gespeichert sind</h2>
+        <p>Alle Maschineneinstellungen, Spannungsnotizen und gespeicherten Konfigurationen bleiben ausschließlich lokal im Browser dieses Endgeräts gespeichert. Die Daten werden im clientseitigen <code>localStorage</code> unter dem Schlüssel <code>poli_tattoo_machines</code> abgelegt.</p>
+        <p>Es werden niemals Gerätedaten, Studionamen oder Arbeitsnotizen an externe Server oder Cloud-Datenbanken übertragen. Ihre Daten bleiben über Sitzungen hinweg erhalten, bis Sie einzelne Einträge über <code>Löschen</code> entfernen oder Ihre Browser-Website-Daten leeren.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Drucken und Exportieren</h2>
+        <p>So erstellen Sie eine laminierbare Referenzkarte für Ihren Arbeitsplatz:</p>
+        <ol>
+        <li>Klicken Sie auf <code>Meine Maschinen (Arbeitsplatzkarte)</code> und prüfen Sie Ihre gespeicherten Einträge.</li>
+        <li>Klicken Sie auf <code>Arbeitsplatzkarte für den Studiotisch Drucken</code>.</li>
+        <li>Der Browser öffnet das native Druckfenster mit einem optimierten Drucklayout, das Navigationsleisten und Schaltflächen ausblendet.</li>
+        <li>Drucken Sie die Referenztabelle auf Standard-A4-Papier aus, laminieren Sie die Karte und bringen Sie sie griffbereit am Arbeitsplatz an.</li>
+        </ol>
+        </div>
+        <div class="doc-section">
+        <h2>Fragen und Antworten</h2>
+        <h3>Welche Spannung sollte ich beim Linework mit einer Rotary-Maschine einstellen?</h3>
+        <p>Viele Rotationsmaschinen laufen für Linienarbeiten je nach Hub und Motordrehmoment zwischen etwa 6,5 V und 8,5 V (ein typischer Bereich aus Händlerleitfäden, keine Herstellerangabe). Beginnen Sie am unteren Ende und steigern Sie sich in 0,2-V-Schritten, bis Linien in einem einzigen Durchgang sauber gezogen sind.</p>
+        <h3>Wie beeinflusst der Nadelhub die erforderliche Spannung der Tattoomaschine?</h3>
+        <p>Ein kurzer Hub (2,5 mm bis 3,0 mm) führt schnelle Zyklen mit weicherem Anschlag aus und benötigt gegen den Membranwiderstand etwas mehr Grundspannung. Ein langer Hub (4,0 mm bis 4,5 mm) besitzt größere kinetische Trägheit und bewegt große Nadelgruppen bei moderater Spannung kraftvoll, verlangt aber eine schnellere Handführung.</p>
+        <h3>Warum wird meine Maschine langsamer, sobald die Nadel die Haut berührt?</h3>
+        <p>Der Widerstand der Hautschichten und die Spannung der Nadelmembran erhöhen die mechanische Last auf den Motor, was bei leistungsschwachen Netzteilen zu einem Spannungsabfall von 0,3 V bis 0,7 V führt. Sinkt die Tonhöhe des Motors beim Hautkontakt hörbar ab, erhöhen Sie die Spannung um 0,2 V bis 0,4 V oder nutzen Sie ein Netzteil mit mindestens 2,0 A Dauerstrom.</p>
+        <h3>Kann ich eine Spulenmaschine mit einem kabellosen Akku-Pack betreiben?</h3>
+        <p>Spulenmaschinen dürfen nur an kabellose Akkus angeschlossen werden, die ausdrücklich für induktive Lasten ausgelegt sind. Handelsübliche Akkus für Rotary-Pens besitzen keine Schutzschaltung gegen die Rückströme der Kontaktabrisse, wodurch Akkuzellen überhitzen oder Schutzabschaltungen auslösen können.</p>
+        <h3>Was ist der Unterschied zwischen 3,5 mm und 4,0 mm Hub?</h3>
+        <p>Ein 3,5-mm-Hub ist ein vielseitiger Allrounder für weiche Schattierungen, Greywash und feine bis mittlere Linien. Ein 4,0-mm-Hub bietet mehr Nadelweg, stärkere Beschleunigung und härteren Durchzug, was ihn ideal für kräftige Konturen und sattes Farbpacken mit großen Magnums macht.</p>
+        <h3>Warum startet meine Cartridge-Maschine bei niedriger Spannung nicht?</h3>
+        <p>Nadelmodule enthalten eine Gummi-Rückholmembran, die dem Motor Widerstand leistet. Einige Rotationsmotoren haben bei niedrigen Spannungen Schwierigkeiten, dagegen anzulaufen; einige Netzteile und Akkupacks bieten dafür einen kurzen Start-Boost (Jumpstart). Prüfen Sie Ihr Handbuch.</p>
+        <h3>Wie stelle ich den Kontaktschraubenabstand bei einer Spulenmaschine ein?</h3>
+        <p>Lösen Sie die Halteschraube und stellen Sie die Kontaktschraube so ein, dass sie bei aufliegendem Ankerarm die vordere Feder leicht berührt. Eine Studio-Faustregel: ein Abstand von ca. 1,0 mm für schnelles Linienziehen oder 1,5 mm bis 2,0 mm für weichere Schattierungen.</p>
+        <h3>Schlägt eine Tattoomaschine härter zu, wenn man die Spannung erhöht?</h3>
+        <p>Bei einer Rotary-Maschine erhöht eine höhere Spannung vor allem die Zyklenfrequenz des Motors, nicht jedoch die mechanische Schlagkraft, die durch den Nadelhub bestimmt wird. Bei einer Spulenmaschine verstärkt eine höhere Spannung das Magnetfeld, was Geschwindigkeit und Straffheit bis zur Elastizitätsgrenze der Feder steigert.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Grenzen</h2>
+        <p>Der Maschinenspannungs-Konfigurator liefert Ausgangswerte als Studio-Faustregel, basierend auf gängiger Praxis und mechanischen Prinzipien. Er kann weder den Motorwicklungswiderstand, die Nockenlagerreibung, die Federmüdung noch die Steifigkeit der Modulmembran messen.</p>
+        <p>Ebenso wenig kann dieses Tool die Elastizität, Dicke und Hydratation der Haut des individuellen Kunden beurteilen. Der Tätowierer bleibt stets selbst dafür verantwortlich, die Hautreaktion zu prüfen, die Einstichtiefe zu kontrollieren, das Motorgeräusch zu überwachen und die Herstellervorgaben für Maximalspannungen einzuhalten.</p>
+        </div>
+        <div class="doc-section">
+            <h2>Use the tool</h2>
+            <p><a href="https://poliinternational.com/machine-voltage-configurator/" target="_top">Open the Machine Voltage Configurator</a>. Everything runs in your browser; nothing you enter is sent anywhere.</p>
+        </div>
+    </div>
+</body>
+</html>

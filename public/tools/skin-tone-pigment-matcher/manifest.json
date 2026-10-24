@@ -1,0 +1,10 @@
+{
+  "name": "Skin Tone & Pigment Visibility Matcher",
+  "short_name": "Pigment Matcher",
+  "description": "Explore directional tattoo ink visibility and fade tendencies across the Fitzpatrick skin spectrum. An artist-opinion guide for consultation.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#0d1117"
+}

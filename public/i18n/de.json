@@ -1970,5 +1970,21 @@
  "In date": "Gültig",
  "Quantity": "Menge",
  "No stock items yet.": "Noch keine Lagerartikel.",
- "Sterile lot audit: expiry dates": "Prüfung steriler Chargen: Ablaufdaten"
+ "Sterile lot audit: expiry dates": "Prüfung steriler Chargen: Ablaufdaten",
+ "Skin Tone & Pigment Matcher": "Hautton- und Pigment-Matcher",
+ "How each ink colour tends to show and fade across the Fitzpatrick skin types, for the consultation: an artist-opinion guide, not a test. Eight languages.": "Wie jede Tintenfarbe auf den Fitzpatrick-Hauttypen meist wirkt und verblasst, für die Beratung: eine Einschätzung aus Künstlersicht, kein Test. Acht Sprachen.",
+ "Open Skin Tone & Pigment Matcher": "Hautton- und Pigment-Matcher öffnen",
+ "Machine Voltage Configurator": "Maschinenspannungs-Konfigurator",
+ "Starting voltage ranges by machine, needle and job, how speed and stroke work together, your own machines saved, and a printable station card. Eight languages.": "Startspannungsbereiche nach Maschine, Nadel und Arbeit, Zusammenspiel von Geschwindigkeit und Hub, Ihre eigenen gespeicherten Maschinen und eine druckbare Arbeitsplatzkarte. Acht Sprachen.",
+ "Open Machine Voltage Configurator": "Maschinenspannungs-Konfigurator öffnen",
+ "Tattoo Removal Estimator": "Tattoo-Entfernungs-Rechner",
+ "Laser sessions on the published Kirby-Desai scale (2009), the interval timeline, fading for a cover-up, cost, and printable consultation notes. Eight languages.": "Lasersitzungen nach der veröffentlichten Kirby-Desai-Skala (2009), der Sitzungsabstand, Verblassen für ein Cover-up, Kosten und druckbare Beratungsnotizen. Acht Sprachen.",
+ "Open Tattoo Removal Estimator": "Tattoo-Entfernungs-Rechner öffnen",
+ "Piercing Migration & Rejection Risk": "Risiko für Migration und Abstoßung beim Piercing",
+ "Score the factors behind migration and rejection, track caliper readings per piercing over time, follow the triage steps, and print a consultation summary. Eight languages.": "Bewerten Sie die Faktoren für Migration und Abstoßung, verfolgen Sie Schieblehrenmessungen pro Piercing im Zeitverlauf, befolgen Sie die Triage-Schritte und drucken Sie eine Beratungszusammenfassung aus. Acht Sprachen.",
+ "Open Piercing Migration & Rejection Risk": "Risiko für Migration und Abstoßung beim Piercing öffnen",
+ "Tattoo": "Tattoo",
+ "Piercing": "Piercing",
+ "Studio and compliance": "Studio und Compliance",
+ "Client care": "Kundenbetreuung"
 }

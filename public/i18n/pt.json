@@ -1970,5 +1970,21 @@
  "In date": "Dentro da validade",
  "Quantity": "Quantidade",
  "No stock items yet.": "Ainda não há artigos em stock.",
- "Sterile lot audit: expiry dates": "Auditoria de lotes estéreis: datas de validade"
+ "Sterile lot audit: expiry dates": "Auditoria de lotes estéreis: datas de validade",
+ "Skin Tone & Pigment Matcher": "Comparador de Tom de Pele e Pigmentos",
+ "How each ink colour tends to show and fade across the Fitzpatrick skin types, for the consultation: an artist-opinion guide, not a test. Eight languages.": "Como cada cor de tinta tende a mostrar-se e desbotar nos tipos de pele Fitzpatrick, para a consulta: um guia de opinião de artista, não um teste. Oito idiomas.",
+ "Open Skin Tone & Pigment Matcher": "Abrir Comparador de Tom de Pele e Pigmentos",
+ "Machine Voltage Configurator": "Configurador de Voltagem da Máquina",
+ "Starting voltage ranges by machine, needle and job, how speed and stroke work together, your own machines saved, and a printable station card. Eight languages.": "Intervalos de voltagem inicial por máquina, agulha e trabalho, como a velocidade e o curso funcionam em conjunto, as suas próprias máquinas guardadas e um cartão de posto de trabalho imprimível. Oito idiomas.",
+ "Open Machine Voltage Configurator": "Abrir Configurador de Voltagem da Máquina",
+ "Tattoo Removal Estimator": "Estimador de Remoção de Tatuagem",
+ "Laser sessions on the published Kirby-Desai scale (2009), the interval timeline, fading for a cover-up, cost, and printable consultation notes. Eight languages.": "Sessões a laser na escala publicada Kirby-Desai (2009), o calendário de intervalos, desbotamento para uma cobertura, custo e notas de consulta imprimíveis. Oito idiomas.",
+ "Open Tattoo Removal Estimator": "Abrir Estimador de Remoção de Tatuagem",
+ "Piercing Migration & Rejection Risk": "Risco de Migração e Rejeição de Piercing",
+ "Score the factors behind migration and rejection, track caliper readings per piercing over time, follow the triage steps, and print a consultation summary. Eight languages.": "Pontue os fatores por trás da migração e rejeição, acompanhe as leituras do paquímetro por piercing ao longo do tempo, siga os passos de triagem e imprima um resumo da consulta. Oito idiomas.",
+ "Open Piercing Migration & Rejection Risk": "Abrir Risco de Migração e Rejeição de Piercing",
+ "Tattoo": "Tatuagem",
+ "Piercing": "Piercing",
+ "Studio and compliance": "Estúdio e conformidade",
+ "Client care": "Cuidados ao cliente"
 }

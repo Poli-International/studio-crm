@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Theme handshake script -->
+  <script>
+    if (window.self !== window.top) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      window.addEventListener('message', function(e) {
+        if (e.data && e.data.type === 'poli-theme') {
+          document.documentElement.setAttribute('data-theme', e.data.light ? 'light' : 'dark');
+        }
+      });
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  </script>
+
+  <title>Skin Tone &amp; Pigment Visibility Matcher | Poli International</title>
+  <meta name="description" content="Explore directional tattoo ink visibility and fade tendencies across the Fitzpatrick skin spectrum. An artist-opinion guide for consultation.">
+  <meta property="og:title" content="Skin Tone &amp; Pigment Visibility Matcher | Poli International">
+  <meta property="og:description" content="Explore directional tattoo ink visibility and fade tendencies across the Fitzpatrick skin spectrum. An artist-opinion guide for consultation.">
+  <meta property="og:type" content="website">
+
+  <!-- Schema.org Structured Data (Valid JSON-LD without truncation or escape errors) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Skin Tone & Pigment Visibility Matcher",
+    "description": "Explore directional tattoo ink visibility and fade tendencies across the Fitzpatrick skin spectrum. An artist-opinion guide for consultation.",
+    "applicationCategory": "DesignApplication",
+    "operatingSystem": "All",
+    "browserRequirements": "Requires JavaScript. Requires HTML5."
+  }
+  </script>
+
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="manifest" href="./manifest.json">
+</head>
+<body>
+<div class="tool-wrapper" id="tool-wrapper">
+
+  <!-- Language selector bar -->
+  <nav class="top-bar" id="top-bar" aria-label="Tool options" data-i18n-attr="aria-label:nav.options_aria">
+    <div class="lang-selector-group">
+      <label for="lang-select" class="lang-label" data-i18n="language.select_label">Language</label>
+      <select id="lang-select" class="lang-select" aria-label="Language selection" data-i18n-attr="aria-label:language.select_aria">
+        <option value="en" data-i18n="language.en">English</option>
+        <option value="de" data-i18n="language.de">Deutsch</option>
+        <option value="fr" data-i18n="language.fr">Français</option>
+        <option value="es" data-i18n="language.es">Español</option>
+        <option value="it" data-i18n="language.it">Italiano</option>
+        <option value="pt" data-i18n="language.pt">Português</option>
+        <option value="nl" data-i18n="language.nl">Nederlands</option>
+        <option value="th" data-i18n="language.th">ไทย</option>
+      </select>
+    </div>
+  </nav>
+
+  <!-- Main header -->
+  <header class="tool-header" id="tool-header">
+    <div class="tool-header__badge" id="tool-badge" data-i18n="header.badge">Artist-Opinion Guide</div>
+    <h1 id="tool-title" data-i18n="header.title">Skin Tone &amp; Pigment Visibility Matcher</h1>
+    <p id="tool-intro" data-i18n="header.subtitle">Select a Fitzpatrick skin type to view general contrast tendencies, key fade factors, and practical consultation notes for nine standard tattoo ink families.</p>
+  </header>
+
+  <!-- Fitzpatrick selector -->
+  <section class="skin-selector" id="skin-selector-panel" aria-labelledby="skin-label">
+    <div class="skin-label" id="skin-label" data-i18n="skin.selector_label">Select Fitzpatrick Skin Type</div>
+    <div class="skin-grid" id="skin-grid" role="group" aria-labelledby="skin-label">
+      <button class="skin-btn" id="skin-btn-I" data-type="I" type="button" aria-pressed="false">
+        <span class="swatch" aria-hidden="true"></span>
+        <span class="type-label" data-i18n="skin.typeI_name">Type I</span>
+        <span class="type-desc" data-i18n="skin.typeI_desc">Very fair, pale white</span>
+      </button>
+      <button class="skin-btn" id="skin-btn-II" data-type="II" type="button" aria-pressed="false">
+        <span class="swatch" aria-hidden="true"></span>
+        <span class="type-label" data-i18n="skin.typeII_name">Type II</span>
+        <span class="type-desc" data-i18n="skin.typeII_desc">Fair, light skin</span>
+      </button>
+      <button class="skin-btn" id="skin-btn-III" data-type="III" type="button" aria-pressed="false">
+        <span class="swatch" aria-hidden="true"></span>
+        <span class="type-label" data-i18n="skin.typeIII_name">Type III</span>
+        <span class="type-desc" data-i18n="skin.typeIII_desc">Medium, golden / beige</span>
+      </button>
+      <button class="skin-btn" id="skin-btn-IV" data-type="IV" type="button" aria-pressed="false">
+        <span class="swatch" aria-hidden="true"></span>
+        <span class="type-label" data-i18n="skin.typeIV_name">Type IV</span>
+        <span class="type-desc" data-i18n="skin.typeIV_desc">Olive, moderate brown</span>
+      </button>
+      <button class="skin-btn" id="skin-btn-V" data-type="V" type="button" aria-pressed="false">
+        <span class="swatch" aria-hidden="true"></span>
+        <span class="type-label" data-i18n="skin.typeV_name">Type V</span>
+        <span class="type-desc" data-i18n="skin.typeV_desc">Brown, dark brown</span>
+      </button>
+      <button class="skin-btn" id="skin-btn-VI" data-type="VI" type="button" aria-pressed="false">
+        <span class="swatch" aria-hidden="true"></span>
+        <span class="type-label" data-i18n="skin.typeVI_name">Type VI</span>
+        <span class="type-desc" data-i18n="skin.typeVI_desc">Deep, dark brown to black</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Results section (starts empty / hidden) -->
+  <section id="results" class="results-panel" hidden aria-live="polite">
+    <div class="results-header" id="results-header">
+      <h2 id="results-heading"></h2>
+      <p id="type-summary" class="type-summary-text"></p>
+    </div>
+    <div class="ink-grid" id="ink-grid"></div>
+  </section>
+
+  <!-- Framing and Scope (Honest framing) -->
+  <section class="disclaimer-card" id="disclaimer-section" aria-labelledby="disclaimer-title">
+    <h3 class="disclaimer-title" id="disclaimer-title" data-i18n="disclaimer.title">Framing &amp; Professional Scope</h3>
+    <p class="disclaimer-text" id="disclaimer-text" data-i18n="disclaimer.text">This tool reflects general artist-community consensus and directional professional observations across skin phototypes. It is not a clinical or peer-reviewed measurement. Actual tattoo longevity and healed vibrancy depend on needle technique, ink formulation, saturation, placement, aftercare, individual immune response, and UV exposure. Consult an experienced tattoo artist for personalized design and palette recommendations.</p>
+  </section>
+
+  <!-- Related Poli Studio Tools -->
+  <section class="related-section" id="related-section" aria-labelledby="related-title">
+    <h3 class="related-title" id="related-title" data-i18n="related.title">Related Studio Tools</h3>
+    <div class="related-grid" id="related-grid">
+      <a href="https://poliinternational.com/allergy-patch-test/" target="_top" class="related-card" id="rel-allergy">
+        <div class="related-card__name" data-i18n="related.allergy_title">Allergy Patch Test Guide</div>
+        <div class="related-card__desc" data-i18n="related.allergy_desc">Evaluate pigment sensitivity, patch testing protocols, and client allergy screening.</div>
+      </a>
+      <a href="https://poliinternational.com/ink-ingredient-decoder/" target="_top" class="related-card" id="rel-ingredients">
+        <div class="related-card__name" data-i18n="related.ingredients_title">Ink Ingredient Decoder</div>
+        <div class="related-card__desc" data-i18n="related.ingredients_desc">Review pigment CI numbers, carrier components, and EU REACH Annex XVII compliance.</div>
+      </a>
+      <a href="https://poliinternational.com/tattoo-removal-estimator/" target="_top" class="related-card" id="rel-removal">
+        <div class="related-card__name" data-i18n="related.removal_title">Tattoo Removal Sessions Estimator</div>
+        <div class="related-card__desc" data-i18n="related.removal_desc">Estimate laser lightening and removal timelines using the Kirby-Desai scale.</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Embed section -->
+  <section class="embed-section" id="embed-section" aria-labelledby="embed-title">
+    <h3 class="embed-title" id="embed-title" data-i18n="embed.title">Embed This Free Tool</h3>
+    <p class="embed-desc" id="embed-desc" data-i18n="embed.desc">Add this client consultation tool to your studio website with this embed code:</p>
+    <div class="embed-controls">
+      <input type="text" class="embed-input" id="embed-code-snippet" readonly value='&lt;iframe src="https://poliinternational.com/tools/skin-tone-pigment-matcher/index.html" width="100%" height="850" frameborder="0" style="border:0; width:100%; min-height:850px;"&gt;&lt;/iframe&gt;' aria-label="Embed code" data-i18n-attr="aria-label:embed.code_aria">
+      <button type="button" class="embed-copy-btn" id="copy-embed-btn" data-i18n="embed.copy_button">Copy Embed Code</button>
+    </div>
+  </section>
+
+</div>
+
+<script src="./js/i18n.js"></script>
+<script src="./js/app.js"></script>
+<script src="../shared/tool-name.js" data-th="ตัวจับคู่สีผิวและการมองเห็นสี" data-en="Skin Tone &amp; Pigment Visibility Matcher" defer></script>
+</body>
+</html>

@@ -1970,5 +1970,21 @@
  "In date": "Geldig",
  "Quantity": "Aantal",
  "No stock items yet.": "Nog geen voorraadartikelen.",
- "Sterile lot audit: expiry dates": "Controle steriele partijen: vervaldata"
+ "Sterile lot audit: expiry dates": "Controle steriele partijen: vervaldata",
+ "Skin Tone & Pigment Matcher": "Huidtint- en pigmentvergelijker",
+ "How each ink colour tends to show and fade across the Fitzpatrick skin types, for the consultation: an artist-opinion guide, not a test. Eight languages.": "Hoe elke inktkleur zich doorgaans toont en vervaagt over de Fitzpatrick-huidtypen, voor de consultatie: een richtlijn op basis van artiestenmening, geen test. Acht talen.",
+ "Open Skin Tone & Pigment Matcher": "Open huidtint- en pigmentvergelijker",
+ "Machine Voltage Configurator": "Machinevoltage-configurator",
+ "Starting voltage ranges by machine, needle and job, how speed and stroke work together, your own machines saved, and a printable station card. Eight languages.": "Startspanningsbereik per machine, naald en klus, hoe snelheid en slag samenwerken, uw eigen opgeslagen machines en een afdrukbare werkplekkaart. Acht talen.",
+ "Open Machine Voltage Configurator": "Open machinevoltage-configurator",
+ "Tattoo Removal Estimator": "Schatting tatoeageverwijdering",
+ "Laser sessions on the published Kirby-Desai scale (2009), the interval timeline, fading for a cover-up, cost, and printable consultation notes. Eight languages.": "Lasersessies volgens de gepubliceerde Kirby-Desai-schaal (2009), de intervaltijdlijn, vervaging voor een cover-up, kosten en afdrukbare consultatienotities. Acht talen.",
+ "Open Tattoo Removal Estimator": "Open schatting tatoeageverwijdering",
+ "Piercing Migration & Rejection Risk": "Risico op migratie en afstoting van piercings",
+ "Score the factors behind migration and rejection, track caliper readings per piercing over time, follow the triage steps, and print a consultation summary. Eight languages.": "Beoordeel de factoren achter migratie en afstoting, volg schuifmaatmetingen per piercing in de tijd, doorloop de triagestappen en print een consultatiesamenvatting. Acht talen.",
+ "Open Piercing Migration & Rejection Risk": "Open risico op migratie en afstoting van piercings",
+ "Tattoo": "Tatoeage",
+ "Piercing": "Piercing",
+ "Studio and compliance": "Studio en naleving",
+ "Client care": "Klantverzorging"
 }

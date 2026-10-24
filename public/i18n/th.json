@@ -1970,5 +1970,21 @@
  "In date": "ยังไม่หมดอายุ",
  "Quantity": "จำนวน",
  "No stock items yet.": "ยังไม่มีสินค้าในสต็อก",
- "Sterile lot audit: expiry dates": "ตรวจสอบล็อตปลอดเชื้อ: วันหมดอายุ"
+ "Sterile lot audit: expiry dates": "ตรวจสอบล็อตปลอดเชื้อ: วันหมดอายุ",
+ "Skin Tone & Pigment Matcher": "ตัวจับคู่สีผิวและการมองเห็นสี",
+ "How each ink colour tends to show and fade across the Fitzpatrick skin types, for the consultation: an artist-opinion guide, not a test. Eight languages.": "แนวทางการแสดงผลและการจางลงของสีหมึกแต่ละสีบนประเภทผิว Fitzpatrick สำหรับการให้คำปรึกษา: คู่มือตามความเห็นของช่าง ไม่ใช่การทดสอบ รองรับแปดภาษา",
+ "Open Skin Tone & Pigment Matcher": "เปิดตัวจับคู่สีผิวและการมองเห็นสี",
+ "Machine Voltage Configurator": "ตัวตั้งค่าแรงดันไฟเครื่องสัก",
+ "Starting voltage ranges by machine, needle and job, how speed and stroke work together, your own machines saved, and a printable station card. Eight languages.": "ช่วงแรงดันไฟเริ่มต้นตามเครื่อง เข็ม และงาน การทำงานร่วมกันของความเร็วและช่วงชัก บันทึกเครื่องของคุณเอง และพิมพ์การ์ดประจำสถานีได้ รองรับแปดภาษา",
+ "Open Machine Voltage Configurator": "เปิดตัวตั้งค่าแรงดันไฟเครื่องสัก",
+ "Tattoo Removal Estimator": "เครื่องประเมินจำนวนครั้งลบรอยสัก",
+ "Laser sessions on the published Kirby-Desai scale (2009), the interval timeline, fading for a cover-up, cost, and printable consultation notes. Eight languages.": "จำนวนครั้งการยิงเลเซอร์ตามเกณฑ์ Kirby-Desai (2009) ที่เผยแพร่แล้ว ไทม์ไลน์ระยะเวลา การจางลงเพื่อเตรียมทับรอยสัก ค่าใช้จ่าย และพิมพ์บันทึกการปรึกษาได้ รองรับแปดภาษา",
+ "Open Tattoo Removal Estimator": "เปิดเครื่องประเมินจำนวนครั้งลบรอยสัก",
+ "Piercing Migration & Rejection Risk": "ความเสี่ยงการเคลื่อนและการถูกดันออกของรูเจาะ",
+ "Score the factors behind migration and rejection, track caliper readings per piercing over time, follow the triage steps, and print a consultation summary. Eight languages.": "ให้คะแนนปัจจัยเบื้องหลังการเคลื่อนและการถูกดันออก ติดตามค่าคาลิเปอร์ของแต่ละแผลเจาะตามเวลา ทำตามขั้นตอนการคัดแยก และพิมพ์สรุปการปรึกษา รองรับแปดภาษา",
+ "Open Piercing Migration & Rejection Risk": "เปิดความเสี่ยงการเคลื่อนและการถูกดันออกของรูเจาะ",
+ "Tattoo": "รอยสัก",
+ "Piercing": "การเจาะร่างกาย",
+ "Studio and compliance": "สตูดิโอและการปฏิบัติตามกฎระเบียบ",
+ "Client care": "การดูแลลูกค้า"
 }

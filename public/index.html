@@ -971,63 +971,29 @@
 
             <!-- Integrated Tools 6-Card Grid -->
             <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:1rem;">
-              <!-- Tool 1: Consent Form Builder -->
-              <div data-family="health" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-consent></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-purple-ink, #A78BFA);">Consent Form Builder</h3><div class="tool-name-en" lang="en" data-no-phrase>Consent Form Builder</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Customise client consent agreements, medical health screening questions & signature clauses.</p>
-                </div>
-                <button onclick="openFormBuilderModal()" style="width:100%;padding:0.5rem;background:var(--ti-purple, #7C3AED);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Launch Form Builder
-                </button>
-              </div>
+              <h3 class="tools-group-heading" style="grid-column:1/-1;margin:0.75rem 0 -0.25rem 0;font-size:0.95rem;font-weight:900;letter-spacing:0.04em;text-transform:uppercase;color:var(--ti-muted, #9CA3AF);">Tattoo</h3>
 
-              <!-- Tool 3: Needle & Gauge Converter -->
-              <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-ruler></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-green, #34D399);">Gauge & Metric Converter</h3><div class="tool-name-en" lang="en" data-no-phrase>Gauge & Metric Converter</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Instant conversion matrix between American Wire Gauge (AWG), Millimeters, Inches & French gauges.</p>
-                </div>
-                <button onclick="openGaugeConverterModal()" style="width:100%;padding:0.5rem;background:var(--ti-green-deep, #059669);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Gauge Converter
-                </button>
-              </div>
-
-              <!-- Tool 4: Tattoo Price Estimator & Body Map -->
-              <div data-family="business" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-compass></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-gold, #FBBF24);">Tattoo Price Estimator</h3><div class="tool-name-en" lang="en" data-no-phrase>Tattoo Price Estimator</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Estimate a tattoo's price range from size, detail, colour, placement and artist level, with 2026 prices in nine markets. Eight languages.</p>
-                </div>
-                <button onclick="openTattooPriceEstimatorModal()" style="width:100%;padding:0.5rem;background:var(--ti-bronze, #D97706);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Price Estimator
-                </button>
-              </div>
-
-              <!-- Tool 5: Skin Tone & Contrast Visualizer -->
+              <!-- Tool 25: Tattoo Needle Selector (V2, integrated 2026-09-26) -->
               <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-machine></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-rose-ink, #F472B6);">Skin Tone Visualizer</h3><div class="tool-name-en" lang="en" data-no-phrase>Skin Tone Visualizer</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Simulate tattoo ink contrast and pigment saturation against varying skin undertones and melanin levels.</p>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-needle></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #67E8F9);">Tattoo Needle Selector</h3><div class="tool-name-en" lang="en" data-no-phrase>Tattoo Needle Selector</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Pick a needle configuration for the style and technique, decode a blister-pack code such as 1207RL, and compare up to three needles side by side before you open a box. Eight languages.</p>
                 </div>
-                <button onclick="openSkinVisualizerModal()" style="width:100%;padding:0.5rem;background:var(--ti-rose, #DB2777);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Skin Visualizer
+                <button onclick="openNeedleSelectorModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue, #0891B2);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Tattoo Needle Selector
                 </button>
               </div>
 
-              <!-- Tool 6: Flash Art & Artwork Gallery -->
-              <div style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+              <!-- Tool 35: Skin Tone & Pigment Matcher (V2, integrated 2026-10-24) -->
+              <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-image></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #60A5FA);">Artwork Gallery & Flash</h3>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Browse available flash art, client portfolio showcases & before/after healing comparisons.</p>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-drop></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:#F472B6;">Skin Tone & Pigment Matcher</h3><div class="tool-name-en" lang="en" data-no-phrase>Skin Tone & Pigment Matcher</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">How each ink colour tends to show and fade across the Fitzpatrick skin types, for the consultation: an artist-opinion guide, not a test. Eight languages.</p>
                 </div>
-                <button onclick="openGalleryModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue, #2563EB);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Browse Gallery & Flash
+                <button onclick="openSkinTonePigmentMatcherModal()" style="width:100%;padding:0.5rem;background:#DB2777;color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Skin Tone & Pigment Matcher
                 </button>
               </div>
 
@@ -1043,18 +1009,6 @@
                 </button>
               </div>
 
-              <!-- Tool 8: Medication Interaction Checker (V2, integrated 2026-09-02) -->
-              <div data-family="health" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-health></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-gold, #FBBF24);">Medication Interaction Checker</h3><div class="tool-name-en" lang="en" data-no-phrase>Medication Interaction Checker</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Screen a client's medications, supplements, alcohol and cannabis for bleeding and healing risk before you work. 38 medications, sourced.</p>
-                </div>
-                <button onclick="openMedicationCheckerModal()" style="width:100%;padding:0.5rem;background:var(--ti-bronze, #D97706);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Medication Checker
-                </button>
-              </div>
-
               <!-- Tool 9: Tattoo Stencil Calculator (V2, integrated 2026-09-02) -->
               <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
@@ -1064,42 +1018,6 @@
                 </div>
                 <button onclick="openStencilCalculatorModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue, #0284C7);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
                   Open Stencil Calculator
-                </button>
-              </div>
-
-              <!-- Tool 10: Autoclave & Sterilization Calculator (V2, integrated 2026-09-02) -->
-              <div data-family="sterile" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-flask></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-green, #34D399);">Autoclave Calculator</h3><div class="tool-name-en" lang="en" data-no-phrase>Autoclave Calculator</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Plan sterilisation cycles: exposure time, load capacity, spore-test scheduling and SAL, with printable cycle logs. Eight languages.</p>
-                </div>
-                <button onclick="openAutoclaveCalculatorModal()" style="width:100%;padding:0.5rem;background:var(--ti-green-deep, #059669);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Autoclave Calculator
-                </button>
-              </div>
-
-              <!-- Tool 11: Tax Deduction Tracker (V2, integrated 2026-09-13) -->
-              <div data-family="business" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-receipt></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-gold, #FBBF24);">Tax Deduction Tracker</h3><div class="tool-name-en" lang="en" data-no-phrase>Tax Deduction Tracker</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Log business expenses as you spend: receipt references, mileage, your own categories, and a year summary and CSV for your accountant. Eight languages.</p>
-                </div>
-                <button onclick="openTaxDeductionTrackerModal()" style="width:100%;padding:0.5rem;background:var(--ti-bronze, #D97706);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Tax Deduction Tracker
-                </button>
-              </div>
-
-              <!-- Tool 12: Booth Rent vs Commission (V2, integrated 2026-09-13) -->
-              <div data-family="business" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-scale></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-purple-ink, #A78BFA);">Booth Rent vs Commission</h3><div class="tool-name-en" lang="en" data-no-phrase>Booth Rent vs Commission</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Compare booth rent and commission from both sides: break-even revenue, a realistic month, who pays for supplies, and a printable summary. Eight languages.</p>
-                </div>
-                <button onclick="openBoothRentCalculatorModal()" style="width:100%;padding:0.5rem;background:var(--ti-purple, #7C3AED);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Booth Rent vs Commission
                 </button>
               </div>
 
@@ -1115,150 +1033,6 @@
                 </button>
               </div>
 
-              <!-- Tool 14: Material Certification Checker (V2, integrated 2026-09-13) -->
-              <div data-family="sterile" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-flask></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue, #2DD4BF);">Material Certification Checker</h3><div class="tool-name-en" lang="en" data-no-phrase>Material Certification Checker</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Read what a jewellery claim or supplier certificate actually proves, generate supplier questions, and keep a dated record for your supplier file. Eight languages.</p>
-                </div>
-                <button onclick="openMaterialCertificationCheckerModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue-deep, #0D9488);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Material Certification Checker
-                </button>
-              </div>
-
-              <!-- Tool 15: Studio Pricing Benchmark (V2, integrated 2026-09-13) -->
-              <div data-family="business" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-chart></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #60A5FA);">Studio Pricing Benchmark</h3><div class="tool-name-en" lang="en" data-no-phrase>Studio Pricing Benchmark</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Place your prices against typical ranges in nine markets, set your hourly rate, minimums and deposit, test a rate change, and print a rate card. Eight languages.</p>
-                </div>
-                <button onclick="openStudioPricingBenchmarkModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue, #2563EB);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Studio Pricing Benchmark
-                </button>
-              </div>
-
-              <!-- Tool 16: Tattoo & Piercing Healing Tracker (V2, integrated 2026-09-13) -->
-              <div data-family="health" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-bandage></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-green, #34D399);">Tattoo & Piercing Healing Tracker</h3><div class="tool-name-en" lang="en" data-no-phrase>Tattoo & Piercing Healing Tracker</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Follow a client's piercing or tattoo: current healing stage, daily log with photos, trend alerts, downsizing dates, a health report and a touch-up planner. Eight languages.</p>
-                </div>
-                <button onclick="openHealingTrackerModal()" style="width:100%;padding:0.5rem;background:var(--ti-green-deep, #059669);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Tattoo & Piercing Healing Tracker
-                </button>
-              </div>
-
-              <!-- Tool 17: Piercing Angle & Depth Guide (V2, integrated 2026-09-13) -->
-              <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-ruler></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-purple-ink, #A78BFA);">Piercing Angle & Depth Guide</h3><div class="tool-name-en" lang="en" data-no-phrase>Piercing Angle & Depth Guide</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Tilt the channel and see the result: channel length, which disc edge presses in, error modes, pair symmetry and a printable placement sheet for 25 placements. Eight languages.</p>
-                </div>
-                <button onclick="openPiercingAngleGuideModal()" style="width:100%;padding:0.5rem;background:var(--ti-purple, #7C3AED);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Piercing Angle & Depth Guide
-                </button>
-              </div>
-
-              <!-- Tool 18: Equipment ROI Calculator (V2, integrated 2026-09-15) -->
-              <div data-family="business" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-trend-up></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue, #38BDF8);">Equipment ROI Calculator</h3><div class="tool-name-en" lang="en" data-no-phrase>Equipment ROI Calculator</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Whether a machine pays for itself and the month it crosses over: running costs most budgets miss, time valued only if you price it, the option of not buying, and a dated case for a partner or lender. Eight languages.</p>
-                </div>
-                <button onclick="openEquipmentRoiCalculatorModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue, #0284C7);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Equipment ROI Calculator
-                </button>
-              </div>
-
-              <!-- Tool 19: BBP Training Tracker (V2, integrated 2026-09-15) -->
-              <div data-family="sterile" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-health></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-alert-ink, #F87171);">BBP Training Tracker</h3><div class="tool-name-en" lang="en" data-no-phrase>BBP Training Tracker</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Who was trained, when, by whom and where the certificate is filed, with what lapses in 30, 60 and 90 days, a printable inspection roster and CSV in and out. Eight languages.</p>
-                </div>
-                <button onclick="openBbpTrainingTrackerModal()" style="width:100%;padding:0.5rem;background:var(--ti-alert, #DC2626);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open BBP Training Tracker
-                </button>
-              </div>
-
-              <!-- Tool 20: Genital Piercing Anatomy Suitability (V2, integrated 2026-09-15) -->
-              <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-search></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-rose-ink, #F0ABFC);">Genital Piercing Anatomy Suitability</h3><div class="tool-name-en" lang="en" data-no-phrase>Genital Piercing Anatomy Suitability</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">What anatomy each of 14 genital placements needs, how it is assessed in person, the reasons a placement is refused, and a printable consultation sheet with the questions for that placement. No verdict; eight languages.</p>
-                </div>
-                <button onclick="openGenitalPiercingSuitabilityModal()" style="width:100%;padding:0.5rem;background:var(--ti-rose, #C026D3);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Genital Piercing Anatomy Suitability
-                </button>
-              </div>
-
-              <!-- Tool 21: Sharps Disposal Tracker (V2, integrated 2026-09-18) -->
-              <div data-family="sterile" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-drop></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-alert-ink, #FCA5A5);">Sharps Disposal Tracker</h3><div class="tool-name-en" lang="en" data-no-phrase>Sharps Disposal Tracker</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Every sharps container from the day it is opened to the day it is collected: its own reference and station, your studio open-too-long limit, why it was sealed, the consignment note, and a printable collection register. Eight languages.</p>
-                </div>
-                <button onclick="openSharpsDisposalTrackerModal()" style="width:100%;padding:0.5rem;background:var(--ti-alert, #B91C1C);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Sharps Disposal Tracker
-                </button>
-              </div>
-
-              <!-- Tool 22: Tattoo Ink Ingredient Decoder (V2, integrated 2026-09-18) -->
-              <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-flask></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #818CF8);">Tattoo Ink Ingredient Decoder</h3><div class="tool-name-en" lang="en" data-no-phrase>Tattoo Ink Ingredient Decoder</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Paste a bottle label or an SDS Section 3 table and see what EU 2020/2081 Entry 75 says about each substance, with compliant alternatives, ink expiry, client session lots, heavy metals from a certificate of analysis, and a maker question sheet. Eight languages.</p>
-                </div>
-                <button onclick="openInkIngredientDecoderModal()" style="width:100%;padding:0.5rem;background:var(--ti-purple, #4F46E5);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Tattoo Ink Ingredient Decoder
-                </button>
-              </div>
-
-              <!-- Tool 23: Nickel Release Calculator (V2, integrated 2026-09-18) -->
-              <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-flask></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-muted, #94A3B8);">Nickel Release Calculator</h3><div class="tool-name-en" lang="en" data-no-phrase>Nickel Release Calculator</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">What EN 1811:2023 and REACH Annex XVII Entry 27 actually measure, why release rate is not nickel content, how the materials compare, and a supplier request for the test report that settles it. Eight languages.</p>
-                </div>
-                <button onclick="openNickelReleaseCalculatorModal()" style="width:100%;padding:0.5rem;background:var(--ti-line2, #475569);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Nickel Release Calculator
-                </button>
-              </div>
-
-              <!-- Tool 24: Ear Stretching Timeline Planner (V2, integrated 2026-09-18) -->
-              <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-ruler></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-bronze-ink, #FDBA74);">Ear Stretching Timeline Planner</h3><div class="tool-name-en" lang="en" data-no-phrase>Ear Stretching Timeline Planner</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Plan a client one size at a time at the pace the tissue tolerates: both ears tracked separately, the intermediate sizes most charts skip, a readiness check before each step, and a dated log. Eight languages.</p>
-                </div>
-                <button onclick="openEarStretchingTimelineModal()" style="width:100%;padding:0.5rem;background:var(--ti-bronze, #EA580C);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Ear Stretching Timeline Planner
-                </button>
-              </div>
-
-              <!-- Tool 25: Tattoo Needle Selector (V2, integrated 2026-09-26) -->
-              <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-needle></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #67E8F9);">Tattoo Needle Selector</h3><div class="tool-name-en" lang="en" data-no-phrase>Tattoo Needle Selector</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Pick a needle configuration for the style and technique, decode a blister-pack code such as 1207RL, and compare up to three needles side by side before you open a box. Eight languages.</p>
-                </div>
-                <button onclick="openNeedleSelectorModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue, #0891B2);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Tattoo Needle Selector
-                </button>
-              </div>
-
               <!-- Tool 26: Tattoo Font Previewer (V2, integrated 2026-09-26) -->
               <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
@@ -1271,15 +1045,39 @@
                 </button>
               </div>
 
-              <!-- Tool 27: Tattoo & Piercing Pain Level Guide (V2, integrated 2026-09-26) -->
-              <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+              <!-- Tool 6: Flash Art & Artwork Gallery -->
+              <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-bandage></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-alert-ink, #FDA4AF);">Tattoo & Piercing Pain Level Guide</h3><div class="tool-name-en" lang="en" data-no-phrase>Tattoo & Piercing Pain Level Guide</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Pain ranges by placement for tattoos and piercings from studio observation, a pre-appointment readiness quiz, a paced breathing aid, a kiosk mode for the waiting area and a printable consultation sheet. Eight languages.</p>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-image></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #60A5FA);">Artwork Gallery & Flash</h3><div class="tool-name-en" lang="en" data-no-phrase>Artwork Gallery & Flash</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Browse available flash art, client portfolio showcases & before/after healing comparisons.</p>
                 </div>
-                <button onclick="openPiercingPainGuideModal()" style="width:100%;padding:0.5rem;background:var(--ti-alert, #E11D48);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Tattoo & Piercing Pain Level Guide
+                <button onclick="openGalleryModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue, #2563EB);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Browse Gallery & Flash
+                </button>
+              </div>
+
+              <!-- Tool 4: Tattoo Price Estimator & Body Map -->
+              <div data-family="business" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-compass></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-gold, #FBBF24);">Tattoo Price Estimator</h3><div class="tool-name-en" lang="en" data-no-phrase>Tattoo Price Estimator</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Estimate a tattoo's price range from size, detail, colour, placement and artist level, with 2026 prices in nine markets. Eight languages.</p>
+                </div>
+                <button onclick="openTattooPriceEstimatorModal()" style="width:100%;padding:0.5rem;background:var(--ti-bronze, #D97706);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Price Estimator
+                </button>
+              </div>
+
+              <!-- Tool 36: Machine Voltage Configurator (V2, integrated 2026-10-24) -->
+              <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-bolt></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:#FCD34D;">Machine Voltage Configurator</h3><div class="tool-name-en" lang="en" data-no-phrase>Machine Voltage Configurator</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Starting voltage ranges by machine, needle and job, how speed and stroke work together, your own machines saved, and a printable station card. Eight languages.</p>
+                </div>
+                <button onclick="openMachineVoltageConfiguratorModal()" style="width:100%;padding:0.5rem;background:#B45309;color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Machine Voltage Configurator
                 </button>
               </div>
 
@@ -1295,30 +1093,6 @@
                 </button>
               </div>
 
-              <!-- Tool 29: Allergy Patch Test Protocol Generator (V2, integrated 2026-09-26) -->
-              <div data-family="health" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-health></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #99F6E4);">Allergy Patch Test Protocol Generator</h3><div class="tool-name-en" lang="en" data-no-phrase>Allergy Patch Test Protocol Generator</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">A 96-hour patch test plan for a jewellery material, an ink or a numbing cream: readings at 24, 48, 72 and 96 hours, what each reaction looks like, calendar reminders and a record to keep. Education, not a diagnosis. Eight languages.</p>
-                </div>
-                <button onclick="openAllergyPatchTestModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue-deep, #0D9488);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Allergy Patch Test Protocol Generator
-                </button>
-              </div>
-
-              <!-- Tool 31: Jewelry Size Visualizer (V2, integrated 2026-09-26) -->
-              <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
-                <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-ring></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-rose-ink, #F9A8D4);">Jewelry Size Visualizer</h3><div class="tool-name-en" lang="en" data-no-phrase>Jewelry Size Visualizer</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Jewelry at true 1:1 scale after a bank-card calibration, curved and industrial bar lengths for fresh and healed piercings, a photo span measure, try-on, comparison, and a printable client fit card. Eight languages.</p>
-                </div>
-                <button onclick="openJewelrySizeVisualizerModal()" style="width:100%;padding:0.5rem;background:var(--ti-rose, #DB2777);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Jewelry Size Visualizer
-                </button>
-              </div>
-
               <!-- Tool 32: Machine Maintenance Logbook (V2, integrated 2026-09-28) -->
               <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
@@ -1331,27 +1105,27 @@
                 </button>
               </div>
 
-              <!-- Tool 33: Inspection Readiness Checklist (V2, integrated 2026-09-28) -->
-              <div data-family="sterile" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+              <!-- Tool 22: Tattoo Ink Ingredient Decoder (V2, integrated 2026-09-18) -->
+              <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-clipboard></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-green-ink, #86EFAC);">Inspection Readiness Checklist</h3><div class="tool-name-en" lang="en" data-no-phrase>Inspection Readiness Checklist</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">What an inspector asks to see in the UK, EU, US and Australia, where each piece of evidence is kept, and an inspection binder index. Preparation, not a compliance certificate. Eight languages.</p>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-flask></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #818CF8);">Tattoo Ink Ingredient Decoder</h3><div class="tool-name-en" lang="en" data-no-phrase>Tattoo Ink Ingredient Decoder</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Paste a bottle label or an SDS Section 3 table and see what EU 2020/2081 Entry 75 says about each substance, with compliant alternatives, ink expiry, client session lots, heavy metals from a certificate of analysis, and a maker question sheet. Eight languages.</p>
                 </div>
-                <button onclick="openInspectionReadinessChecklistModal()" style="width:100%;padding:0.5rem;background:var(--ti-green, #16A34A);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Inspection Readiness Checklist
+                <button onclick="openInkIngredientDecoderModal()" style="width:100%;padding:0.5rem;background:var(--ti-purple, #4F46E5);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Tattoo Ink Ingredient Decoder
                 </button>
               </div>
 
-              <!-- Tool 34: Body Jewelry Gauge Converter (V2, integrated 2026-09-28) -->
-              <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+              <!-- Tool 37: Tattoo Removal Estimator (V2, integrated 2026-10-24) -->
+              <div data-family="tattoo" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
                 <div>
-                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-ruler></use></svg></div>
-                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #93C5FD);">Body Jewelry Gauge Converter</h3><div class="tool-name-en" lang="en" data-no-phrase>Body Jewelry Gauge Converter</div>
-                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Gauge, millimetres and inches for 22G to 25 mm, with the AWG size, where suppliers round differently, true-scale view after a card calibration, and closest gauge from a caliper reading. Eight languages.</p>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-target></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:#F472B6;">Tattoo Removal Estimator</h3><div class="tool-name-en" lang="en" data-no-phrase>Tattoo Removal Estimator</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Laser sessions on the published Kirby-Desai scale (2009), the interval timeline, fading for a cover-up, cost, and printable consultation notes. Eight languages.</p>
                 </div>
-                <button onclick="openGaugeConverterModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue, #1D4ED8);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
-                  Open Body Jewelry Gauge Converter
+                <button onclick="openTattooRemovalEstimatorModal()" style="width:100%;padding:0.5rem;background:#DB2777;color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Tattoo Removal Estimator
                 </button>
               </div>
 
@@ -1398,6 +1172,252 @@
                     </button>
                   </div>
                 </div>
+              </div>
+
+              <h3 class="tools-group-heading" style="grid-column:1/-1;margin:0.75rem 0 -0.25rem 0;font-size:0.95rem;font-weight:900;letter-spacing:0.04em;text-transform:uppercase;color:var(--ti-muted, #9CA3AF);">Piercing</h3>
+
+              <!-- Tool 34: Body Jewelry Gauge Converter (V2, integrated 2026-09-28) -->
+              <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-ruler></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #93C5FD);">Body Jewelry Gauge Converter</h3><div class="tool-name-en" lang="en" data-no-phrase>Body Jewelry Gauge Converter</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Gauge, millimetres and inches for 22G to 25 mm, with the AWG size, where suppliers round differently, true-scale view after a card calibration, and closest gauge from a caliper reading. Eight languages.</p>
+                </div>
+                <button onclick="openGaugeConverterModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue, #1D4ED8);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Body Jewelry Gauge Converter
+                </button>
+              </div>
+
+              <!-- Tool 31: Jewelry Size Visualizer (V2, integrated 2026-09-26) -->
+              <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-ring></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-rose-ink, #F9A8D4);">Jewelry Size Visualizer</h3><div class="tool-name-en" lang="en" data-no-phrase>Jewelry Size Visualizer</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Jewelry at true 1:1 scale after a bank-card calibration, curved and industrial bar lengths for fresh and healed piercings, a photo span measure, try-on, comparison, and a printable client fit card. Eight languages.</p>
+                </div>
+                <button onclick="openJewelrySizeVisualizerModal()" style="width:100%;padding:0.5rem;background:var(--ti-rose, #DB2777);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Jewelry Size Visualizer
+                </button>
+              </div>
+
+              <!-- Tool 17: Piercing Angle & Depth Guide (V2, integrated 2026-09-13) -->
+              <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-ruler></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-purple-ink, #A78BFA);">Piercing Angle & Depth Guide</h3><div class="tool-name-en" lang="en" data-no-phrase>Piercing Angle & Depth Guide</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Tilt the channel and see the result: channel length, which disc edge presses in, error modes, pair symmetry and a printable placement sheet for 25 placements. Eight languages.</p>
+                </div>
+                <button onclick="openPiercingAngleGuideModal()" style="width:100%;padding:0.5rem;background:var(--ti-purple, #7C3AED);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Piercing Angle & Depth Guide
+                </button>
+              </div>
+
+              <!-- Tool 20: Genital Piercing Anatomy Suitability (V2, integrated 2026-09-15) -->
+              <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-search></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-rose-ink, #F0ABFC);">Genital Piercing Anatomy Suitability</h3><div class="tool-name-en" lang="en" data-no-phrase>Genital Piercing Anatomy Suitability</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">What anatomy each of 14 genital placements needs, how it is assessed in person, the reasons a placement is refused, and a printable consultation sheet with the questions for that placement. No verdict; eight languages.</p>
+                </div>
+                <button onclick="openGenitalPiercingSuitabilityModal()" style="width:100%;padding:0.5rem;background:var(--ti-rose, #C026D3);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Genital Piercing Anatomy Suitability
+                </button>
+              </div>
+
+              <!-- Tool 24: Ear Stretching Timeline Planner (V2, integrated 2026-09-18) -->
+              <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-ruler></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-bronze-ink, #FDBA74);">Ear Stretching Timeline Planner</h3><div class="tool-name-en" lang="en" data-no-phrase>Ear Stretching Timeline Planner</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Plan a client one size at a time at the pace the tissue tolerates: both ears tracked separately, the intermediate sizes most charts skip, a readiness check before each step, and a dated log. Eight languages.</p>
+                </div>
+                <button onclick="openEarStretchingTimelineModal()" style="width:100%;padding:0.5rem;background:var(--ti-bronze, #EA580C);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Ear Stretching Timeline Planner
+                </button>
+              </div>
+
+              <!-- Tool 23: Nickel Release Calculator (V2, integrated 2026-09-18) -->
+              <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-flask></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-muted, #94A3B8);">Nickel Release Calculator</h3><div class="tool-name-en" lang="en" data-no-phrase>Nickel Release Calculator</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">What EN 1811:2023 and REACH Annex XVII Entry 27 actually measure, why release rate is not nickel content, how the materials compare, and a supplier request for the test report that settles it. Eight languages.</p>
+                </div>
+                <button onclick="openNickelReleaseCalculatorModal()" style="width:100%;padding:0.5rem;background:var(--ti-line2, #475569);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Nickel Release Calculator
+                </button>
+              </div>
+
+              <!-- Tool 38: Piercing Migration & Rejection Risk (V2, integrated 2026-10-24) -->
+              <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-ring></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:#93C5FD;">Piercing Migration & Rejection Risk</h3><div class="tool-name-en" lang="en" data-no-phrase>Piercing Migration & Rejection Risk</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Score the factors behind migration and rejection, track caliper readings per piercing over time, follow the triage steps, and print a consultation summary. Eight languages.</p>
+                </div>
+                <button onclick="openPiercingMigrationRiskModal()" style="width:100%;padding:0.5rem;background:#1D4ED8;color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Piercing Migration & Rejection Risk
+                </button>
+              </div>
+
+              <h3 class="tools-group-heading" style="grid-column:1/-1;margin:0.75rem 0 -0.25rem 0;font-size:0.95rem;font-weight:900;letter-spacing:0.04em;text-transform:uppercase;color:var(--ti-muted, #9CA3AF);">Studio and compliance</h3>
+
+              <!-- Tool 10: Autoclave & Sterilization Calculator (V2, integrated 2026-09-02) -->
+              <div data-family="sterile" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-flask></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-green, #34D399);">Autoclave Calculator</h3><div class="tool-name-en" lang="en" data-no-phrase>Autoclave Calculator</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Plan sterilisation cycles: exposure time, load capacity, spore-test scheduling and SAL, with printable cycle logs. Eight languages.</p>
+                </div>
+                <button onclick="openAutoclaveCalculatorModal()" style="width:100%;padding:0.5rem;background:var(--ti-green-deep, #059669);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Autoclave Calculator
+                </button>
+              </div>
+
+              <!-- Tool 14: Material Certification Checker (V2, integrated 2026-09-13) -->
+              <div data-family="sterile" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-flask></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue, #2DD4BF);">Material Certification Checker</h3><div class="tool-name-en" lang="en" data-no-phrase>Material Certification Checker</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Read what a jewellery claim or supplier certificate actually proves, generate supplier questions, and keep a dated record for your supplier file. Eight languages.</p>
+                </div>
+                <button onclick="openMaterialCertificationCheckerModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue-deep, #0D9488);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Material Certification Checker
+                </button>
+              </div>
+
+              <!-- Tool 19: BBP Training Tracker (V2, integrated 2026-09-15) -->
+              <div data-family="sterile" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-health></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-alert-ink, #F87171);">BBP Training Tracker</h3><div class="tool-name-en" lang="en" data-no-phrase>BBP Training Tracker</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Who was trained, when, by whom and where the certificate is filed, with what lapses in 30, 60 and 90 days, a printable inspection roster and CSV in and out. Eight languages.</p>
+                </div>
+                <button onclick="openBbpTrainingTrackerModal()" style="width:100%;padding:0.5rem;background:var(--ti-alert, #DC2626);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open BBP Training Tracker
+                </button>
+              </div>
+
+              <!-- Tool 21: Sharps Disposal Tracker (V2, integrated 2026-09-18) -->
+              <div data-family="sterile" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-drop></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-alert-ink, #FCA5A5);">Sharps Disposal Tracker</h3><div class="tool-name-en" lang="en" data-no-phrase>Sharps Disposal Tracker</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Every sharps container from the day it is opened to the day it is collected: its own reference and station, your studio open-too-long limit, why it was sealed, the consignment note, and a printable collection register. Eight languages.</p>
+                </div>
+                <button onclick="openSharpsDisposalTrackerModal()" style="width:100%;padding:0.5rem;background:var(--ti-alert, #B91C1C);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Sharps Disposal Tracker
+                </button>
+              </div>
+
+              <!-- Tool 33: Inspection Readiness Checklist (V2, integrated 2026-09-28) -->
+              <div data-family="sterile" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-clipboard></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-green-ink, #86EFAC);">Inspection Readiness Checklist</h3><div class="tool-name-en" lang="en" data-no-phrase>Inspection Readiness Checklist</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">What an inspector asks to see in the UK, EU, US and Australia, where each piece of evidence is kept, and an inspection binder index. Preparation, not a compliance certificate. Eight languages.</p>
+                </div>
+                <button onclick="openInspectionReadinessChecklistModal()" style="width:100%;padding:0.5rem;background:var(--ti-green, #16A34A);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Inspection Readiness Checklist
+                </button>
+              </div>
+
+              <!-- Tool 12: Booth Rent vs Commission (V2, integrated 2026-09-13) -->
+              <div data-family="business" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-scale></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-purple-ink, #A78BFA);">Booth Rent vs Commission</h3><div class="tool-name-en" lang="en" data-no-phrase>Booth Rent vs Commission</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Compare booth rent and commission from both sides: break-even revenue, a realistic month, who pays for supplies, and a printable summary. Eight languages.</p>
+                </div>
+                <button onclick="openBoothRentCalculatorModal()" style="width:100%;padding:0.5rem;background:var(--ti-purple, #7C3AED);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Booth Rent vs Commission
+                </button>
+              </div>
+
+              <!-- Tool 15: Studio Pricing Benchmark (V2, integrated 2026-09-13) -->
+              <div data-family="business" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-chart></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #60A5FA);">Studio Pricing Benchmark</h3><div class="tool-name-en" lang="en" data-no-phrase>Studio Pricing Benchmark</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Place your prices against typical ranges in nine markets, set your hourly rate, minimums and deposit, test a rate change, and print a rate card. Eight languages.</p>
+                </div>
+                <button onclick="openStudioPricingBenchmarkModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue, #2563EB);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Studio Pricing Benchmark
+                </button>
+              </div>
+
+              <!-- Tool 11: Tax Deduction Tracker (V2, integrated 2026-09-13) -->
+              <div data-family="business" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-receipt></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-gold, #FBBF24);">Tax Deduction Tracker</h3><div class="tool-name-en" lang="en" data-no-phrase>Tax Deduction Tracker</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Log business expenses as you spend: receipt references, mileage, your own categories, and a year summary and CSV for your accountant. Eight languages.</p>
+                </div>
+                <button onclick="openTaxDeductionTrackerModal()" style="width:100%;padding:0.5rem;background:var(--ti-bronze, #D97706);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Tax Deduction Tracker
+                </button>
+              </div>
+
+              <h3 class="tools-group-heading" style="grid-column:1/-1;margin:0.75rem 0 -0.25rem 0;font-size:0.95rem;font-weight:900;letter-spacing:0.04em;text-transform:uppercase;color:var(--ti-muted, #9CA3AF);">Client care</h3>
+
+              <!-- Tool 1: Consent Form Builder -->
+              <div data-family="health" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-consent></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-purple-ink, #A78BFA);">Consent Form Builder</h3><div class="tool-name-en" lang="en" data-no-phrase>Consent Form Builder</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Customise client consent agreements, medical health screening questions & signature clauses.</p>
+                </div>
+                <button onclick="openFormBuilderModal()" style="width:100%;padding:0.5rem;background:var(--ti-purple, #7C3AED);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Launch Form Builder
+                </button>
+              </div>
+
+              <!-- Tool 8: Medication Interaction Checker (V2, integrated 2026-09-02) -->
+              <div data-family="health" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-health></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-gold, #FBBF24);">Medication Interaction Checker</h3><div class="tool-name-en" lang="en" data-no-phrase>Medication Interaction Checker</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Screen a client's medications, supplements, alcohol and cannabis for bleeding and healing risk before you work. 38 medications, sourced.</p>
+                </div>
+                <button onclick="openMedicationCheckerModal()" style="width:100%;padding:0.5rem;background:var(--ti-bronze, #D97706);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Medication Checker
+                </button>
+              </div>
+
+              <!-- Tool 29: Allergy Patch Test Protocol Generator (V2, integrated 2026-09-26) -->
+              <div data-family="health" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-health></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-blue-ink, #99F6E4);">Allergy Patch Test Protocol Generator</h3><div class="tool-name-en" lang="en" data-no-phrase>Allergy Patch Test Protocol Generator</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">A 96-hour patch test plan for a jewellery material, an ink or a numbing cream: readings at 24, 48, 72 and 96 hours, what each reaction looks like, calendar reminders and a record to keep. Education, not a diagnosis. Eight languages.</p>
+                </div>
+                <button onclick="openAllergyPatchTestModal()" style="width:100%;padding:0.5rem;background:var(--ti-blue-deep, #0D9488);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Allergy Patch Test Protocol Generator
+                </button>
+              </div>
+
+              <!-- Tool 16: Tattoo & Piercing Healing Tracker (V2, integrated 2026-09-13) -->
+              <div data-family="health" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-bandage></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-green, #34D399);">Tattoo & Piercing Healing Tracker</h3><div class="tool-name-en" lang="en" data-no-phrase>Tattoo & Piercing Healing Tracker</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Follow a client's piercing or tattoo: current healing stage, daily log with photos, trend alerts, downsizing dates, a health report and a touch-up planner. Eight languages.</p>
+                </div>
+                <button onclick="openHealingTrackerModal()" style="width:100%;padding:0.5rem;background:var(--ti-green-deep, #059669);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Tattoo & Piercing Healing Tracker
+                </button>
+              </div>
+
+              <!-- Tool 27: Tattoo & Piercing Pain Level Guide (V2, integrated 2026-09-26) -->
+              <div data-family="pierce" style="background:var(--ti-bg2, #0F172A);padding:1.25rem;border-radius:12px;border:1px solid var(--ti-panel2, #1E293B);display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="font-size:1.5rem;margin-bottom:8px;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-bandage></use></svg></div>
+                  <h3 style="margin:0 0 6px 0;font-size:1.1rem;font-weight:800;color:var(--ti-alert-ink, #FDA4AF);">Tattoo & Piercing Pain Level Guide</h3><div class="tool-name-en" lang="en" data-no-phrase>Tattoo & Piercing Pain Level Guide</div>
+                  <p style="margin:0 0 12px 0;font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">Pain ranges by placement for tattoos and piercings from studio observation, a pre-appointment readiness quiz, a paced breathing aid, a kiosk mode for the waiting area and a printable consultation sheet. Eight languages.</p>
+                </div>
+                <button onclick="openPiercingPainGuideModal()" style="width:100%;padding:0.5rem;background:var(--ti-alert, #E11D48);color:#FFF;border:none;border-radius:6px;font-weight:800;font-size:0.82rem;cursor:pointer;">
+                  Open Tattoo & Piercing Pain Level Guide
+                </button>
               </div>
             </div>
           </div>
@@ -7194,6 +7214,266 @@ docker compose up -d</pre>
 
   window.closeSeaTattooInkCheckerModal = function () {
     var m = document.getElementById('poli-seainkcheck-modal');
+    if (m) m.style.display = 'none';
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build);
+  else build();
+})();
+</script>
+
+<script id="poli-skinmatch-integration">
+/* Skin Tone & Pigment Matcher V2, hosted in an iframe. Generated by
+   scripts/studio-crm-integration/integrate-tool.js. Built at runtime and
+   appended to document.body: markup placed before </body> textually has
+   rendered at zero width in this document before. */
+(function () {
+  function build() {
+    if (document.getElementById('poli-skinmatch-modal')) return;
+    var modal = document.createElement('div');
+    modal.id = 'poli-skinmatch-modal';
+    modal.style.cssText = 'display:none;position:fixed;inset:0;z-index:2000060;background:rgba(0,0,0,0.75);';
+    modal.addEventListener('click', function (e) { if (e.target === modal) window.closeSkinTonePigmentMatcherModal(); });
+
+    var shell = document.createElement('div');
+    shell.style.cssText = 'position:absolute;inset:2vh 2vw;display:flex;flex-direction:column;' +
+      'background:var(--ti-bg, #0d1117);border:1px solid var(--ti-panel3, #2a3441);border-radius:12px;overflow:hidden;';
+
+    var bar = document.createElement('div');
+    bar.style.cssText = 'display:flex;align-items:center;gap:0.75rem;padding:0.6rem 1rem;border-bottom:1px solid var(--ti-panel3, #2a3441);flex-shrink:0;';
+    bar.innerHTML = '<strong style="color:#fff;font-size:0.95rem;">Skin Tone & Pigment Matcher</strong>' +
+      '<span id="poli-skinmatch-status" style="color:var(--ti-gold, #fbbf24);font-size:0.85rem;"></span>';
+
+    var close = document.createElement('button');
+    close.type = 'button';
+    close.textContent = 'Close';
+    close.style.cssText = 'margin-left:auto;padding:0.4rem 0.9rem;background:var(--ti-panel2, #1f2937);color:var(--ti-text, #e5e7eb);' +
+      'border:1px solid var(--ti-line, #374151);border-radius:6px;cursor:pointer;font-weight:600;';
+    close.addEventListener('click', function () { window.closeSkinTonePigmentMatcherModal(); });
+    bar.appendChild(close);
+
+    var frame = document.createElement('iframe');
+    frame.id = 'poli-skinmatch-frame';
+    frame.title = 'Skin Tone & Pigment Matcher';
+    frame.style.cssText = 'flex:1;width:100%;border:0;background:var(--ti-bg, #0d1117);';
+
+    shell.appendChild(bar);
+    shell.appendChild(frame);
+    modal.appendChild(shell);
+    document.body.appendChild(modal);
+  }
+
+  window.openSkinTonePigmentMatcherModal = function () {
+    build();
+    var modal = document.getElementById('poli-skinmatch-modal');
+    var frame = document.getElementById('poli-skinmatch-frame');
+    if (!frame.getAttribute('src')) {
+      var status = document.getElementById('poli-skinmatch-status');
+      if (status) status.textContent = 'Loading...';
+      // Same URL as on the website: the CRM serves public/ as its web root.
+      frame.setAttribute('src', '/tools/skin-tone-pigment-matcher/index.html');
+      frame.addEventListener('load', function () { if (status) status.textContent = ''; }, { once: true });
+    }
+    modal.style.display = 'block';
+  };
+
+  window.closeSkinTonePigmentMatcherModal = function () {
+    var m = document.getElementById('poli-skinmatch-modal');
+    if (m) m.style.display = 'none';
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build);
+  else build();
+})();
+</script>
+
+<script id="poli-voltconf-integration">
+/* Machine Voltage Configurator V2, hosted in an iframe. Generated by
+   scripts/studio-crm-integration/integrate-tool.js. Built at runtime and
+   appended to document.body: markup placed before </body> textually has
+   rendered at zero width in this document before. */
+(function () {
+  function build() {
+    if (document.getElementById('poli-voltconf-modal')) return;
+    var modal = document.createElement('div');
+    modal.id = 'poli-voltconf-modal';
+    modal.style.cssText = 'display:none;position:fixed;inset:0;z-index:2000060;background:rgba(0,0,0,0.75);';
+    modal.addEventListener('click', function (e) { if (e.target === modal) window.closeMachineVoltageConfiguratorModal(); });
+
+    var shell = document.createElement('div');
+    shell.style.cssText = 'position:absolute;inset:2vh 2vw;display:flex;flex-direction:column;' +
+      'background:var(--ti-bg, #0d1117);border:1px solid var(--ti-panel3, #2a3441);border-radius:12px;overflow:hidden;';
+
+    var bar = document.createElement('div');
+    bar.style.cssText = 'display:flex;align-items:center;gap:0.75rem;padding:0.6rem 1rem;border-bottom:1px solid var(--ti-panel3, #2a3441);flex-shrink:0;';
+    bar.innerHTML = '<strong style="color:#fff;font-size:0.95rem;">Machine Voltage Configurator</strong>' +
+      '<span id="poli-voltconf-status" style="color:var(--ti-gold, #fbbf24);font-size:0.85rem;"></span>';
+
+    var close = document.createElement('button');
+    close.type = 'button';
+    close.textContent = 'Close';
+    close.style.cssText = 'margin-left:auto;padding:0.4rem 0.9rem;background:var(--ti-panel2, #1f2937);color:var(--ti-text, #e5e7eb);' +
+      'border:1px solid var(--ti-line, #374151);border-radius:6px;cursor:pointer;font-weight:600;';
+    close.addEventListener('click', function () { window.closeMachineVoltageConfiguratorModal(); });
+    bar.appendChild(close);
+
+    var frame = document.createElement('iframe');
+    frame.id = 'poli-voltconf-frame';
+    frame.title = 'Machine Voltage Configurator';
+    frame.style.cssText = 'flex:1;width:100%;border:0;background:var(--ti-bg, #0d1117);';
+
+    shell.appendChild(bar);
+    shell.appendChild(frame);
+    modal.appendChild(shell);
+    document.body.appendChild(modal);
+  }
+
+  window.openMachineVoltageConfiguratorModal = function () {
+    build();
+    var modal = document.getElementById('poli-voltconf-modal');
+    var frame = document.getElementById('poli-voltconf-frame');
+    if (!frame.getAttribute('src')) {
+      var status = document.getElementById('poli-voltconf-status');
+      if (status) status.textContent = 'Loading...';
+      // Same URL as on the website: the CRM serves public/ as its web root.
+      frame.setAttribute('src', '/tools/machine-voltage-configurator/index.html');
+      frame.addEventListener('load', function () { if (status) status.textContent = ''; }, { once: true });
+    }
+    modal.style.display = 'block';
+  };
+
+  window.closeMachineVoltageConfiguratorModal = function () {
+    var m = document.getElementById('poli-voltconf-modal');
+    if (m) m.style.display = 'none';
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build);
+  else build();
+})();
+</script>
+
+<script id="poli-removalest-integration">
+/* Tattoo Removal Estimator V2, hosted in an iframe. Generated by
+   scripts/studio-crm-integration/integrate-tool.js. Built at runtime and
+   appended to document.body: markup placed before </body> textually has
+   rendered at zero width in this document before. */
+(function () {
+  function build() {
+    if (document.getElementById('poli-removalest-modal')) return;
+    var modal = document.createElement('div');
+    modal.id = 'poli-removalest-modal';
+    modal.style.cssText = 'display:none;position:fixed;inset:0;z-index:2000060;background:rgba(0,0,0,0.75);';
+    modal.addEventListener('click', function (e) { if (e.target === modal) window.closeTattooRemovalEstimatorModal(); });
+
+    var shell = document.createElement('div');
+    shell.style.cssText = 'position:absolute;inset:2vh 2vw;display:flex;flex-direction:column;' +
+      'background:var(--ti-bg, #0d1117);border:1px solid var(--ti-panel3, #2a3441);border-radius:12px;overflow:hidden;';
+
+    var bar = document.createElement('div');
+    bar.style.cssText = 'display:flex;align-items:center;gap:0.75rem;padding:0.6rem 1rem;border-bottom:1px solid var(--ti-panel3, #2a3441);flex-shrink:0;';
+    bar.innerHTML = '<strong style="color:#fff;font-size:0.95rem;">Tattoo Removal Estimator</strong>' +
+      '<span id="poli-removalest-status" style="color:var(--ti-gold, #fbbf24);font-size:0.85rem;"></span>';
+
+    var close = document.createElement('button');
+    close.type = 'button';
+    close.textContent = 'Close';
+    close.style.cssText = 'margin-left:auto;padding:0.4rem 0.9rem;background:var(--ti-panel2, #1f2937);color:var(--ti-text, #e5e7eb);' +
+      'border:1px solid var(--ti-line, #374151);border-radius:6px;cursor:pointer;font-weight:600;';
+    close.addEventListener('click', function () { window.closeTattooRemovalEstimatorModal(); });
+    bar.appendChild(close);
+
+    var frame = document.createElement('iframe');
+    frame.id = 'poli-removalest-frame';
+    frame.title = 'Tattoo Removal Estimator';
+    frame.style.cssText = 'flex:1;width:100%;border:0;background:var(--ti-bg, #0d1117);';
+
+    shell.appendChild(bar);
+    shell.appendChild(frame);
+    modal.appendChild(shell);
+    document.body.appendChild(modal);
+  }
+
+  window.openTattooRemovalEstimatorModal = function () {
+    build();
+    var modal = document.getElementById('poli-removalest-modal');
+    var frame = document.getElementById('poli-removalest-frame');
+    if (!frame.getAttribute('src')) {
+      var status = document.getElementById('poli-removalest-status');
+      if (status) status.textContent = 'Loading...';
+      // Same URL as on the website: the CRM serves public/ as its web root.
+      frame.setAttribute('src', '/tools/tattoo-removal-estimator/index.html');
+      frame.addEventListener('load', function () { if (status) status.textContent = ''; }, { once: true });
+    }
+    modal.style.display = 'block';
+  };
+
+  window.closeTattooRemovalEstimatorModal = function () {
+    var m = document.getElementById('poli-removalest-modal');
+    if (m) m.style.display = 'none';
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build);
+  else build();
+})();
+</script>
+
+<script id="poli-migrationrisk-integration">
+/* Piercing Migration & Rejection Risk V2, hosted in an iframe. Generated by
+   scripts/studio-crm-integration/integrate-tool.js. Built at runtime and
+   appended to document.body: markup placed before </body> textually has
+   rendered at zero width in this document before. */
+(function () {
+  function build() {
+    if (document.getElementById('poli-migrationrisk-modal')) return;
+    var modal = document.createElement('div');
+    modal.id = 'poli-migrationrisk-modal';
+    modal.style.cssText = 'display:none;position:fixed;inset:0;z-index:2000060;background:rgba(0,0,0,0.75);';
+    modal.addEventListener('click', function (e) { if (e.target === modal) window.closePiercingMigrationRiskModal(); });
+
+    var shell = document.createElement('div');
+    shell.style.cssText = 'position:absolute;inset:2vh 2vw;display:flex;flex-direction:column;' +
+      'background:var(--ti-bg, #0d1117);border:1px solid var(--ti-panel3, #2a3441);border-radius:12px;overflow:hidden;';
+
+    var bar = document.createElement('div');
+    bar.style.cssText = 'display:flex;align-items:center;gap:0.75rem;padding:0.6rem 1rem;border-bottom:1px solid var(--ti-panel3, #2a3441);flex-shrink:0;';
+    bar.innerHTML = '<strong style="color:#fff;font-size:0.95rem;">Piercing Migration & Rejection Risk</strong>' +
+      '<span id="poli-migrationrisk-status" style="color:var(--ti-gold, #fbbf24);font-size:0.85rem;"></span>';
+
+    var close = document.createElement('button');
+    close.type = 'button';
+    close.textContent = 'Close';
+    close.style.cssText = 'margin-left:auto;padding:0.4rem 0.9rem;background:var(--ti-panel2, #1f2937);color:var(--ti-text, #e5e7eb);' +
+      'border:1px solid var(--ti-line, #374151);border-radius:6px;cursor:pointer;font-weight:600;';
+    close.addEventListener('click', function () { window.closePiercingMigrationRiskModal(); });
+    bar.appendChild(close);
+
+    var frame = document.createElement('iframe');
+    frame.id = 'poli-migrationrisk-frame';
+    frame.title = 'Piercing Migration & Rejection Risk';
+    frame.style.cssText = 'flex:1;width:100%;border:0;background:var(--ti-bg, #0d1117);';
+
+    shell.appendChild(bar);
+    shell.appendChild(frame);
+    modal.appendChild(shell);
+    document.body.appendChild(modal);
+  }
+
+  window.openPiercingMigrationRiskModal = function () {
+    build();
+    var modal = document.getElementById('poli-migrationrisk-modal');
+    var frame = document.getElementById('poli-migrationrisk-frame');
+    if (!frame.getAttribute('src')) {
+      var status = document.getElementById('poli-migrationrisk-status');
+      if (status) status.textContent = 'Loading...';
+      // Same URL as on the website: the CRM serves public/ as its web root.
+      frame.setAttribute('src', '/tools/piercing-migration-risk/index.html');
+      frame.addEventListener('load', function () { if (status) status.textContent = ''; }, { once: true });
+    }
+    modal.style.display = 'block';
+  };
+
+  window.closePiercingMigrationRiskModal = function () {
+    var m = document.getElementById('poli-migrationrisk-modal');
     if (m) m.style.display = 'none';
   };
 

@@ -433,6 +433,14 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.34
+
+**The complete tool set: four new tools, flash sheets in the Gallery, and the website's tool corrections (2026-10-25).**
+- **Four new tools** in the Tools grid, the same build as the website: Skin Tone & Pigment Matcher (in place of the old Skin Tone Visualizer card), Machine Voltage Configurator, Tattoo Removal Estimator ("an estimate, not a medical assessment") and Piercing Migration & Rejection Risk. The grid is in four groups: tattoo, piercing, studio and compliance, client care. One gauge converter card instead of two. Equipment ROI leaves the grid: Booth Rent vs Commission has an Equipment Payback tab.
+- **Needle Selector** has the Needle Taper section (it was a separate tool) and opens in the CRM's language.
+- **Gallery flash.** Sheets (named sets with artist or studio, contact and date), Size and estimated sitting time, Edit, Repeatable, Make Available again, claims tied to a real client with the date, a summary strip, print preview of the flash sheet (A4 / US Letter, 2-4 columns) or the counter price list, CSV export with times booked. A blank field stays blank (no invented price, deposit, time, needles or pigments); no price shows "POA"; prices in the studio currency. The Gallery's Tools tab opens the Ink Mixer and the Skin Tone & Pigment Matcher (its two old tools gave no result). Eight languages.
+- **Tool corrections from the website**, checked against their sources or labelled for what they are: Skin Tone & Pigment Matcher (unsourced timings and wrong pigment physics removed), Pain Guide (ratings are "an editorial scale based on studio experience"), Material Certification Checker (niobium is ASTM B392; an initial status based on the APP guidance; BioFlex withstands standard steam autoclave cycles, 121-134 C), Stencil Calculator (sizing factors are a studio rule of thumb), Power Supply Troubleshooter (voltage ranges from supply guides; invented battery thresholds removed), and the three new tools (invented multipliers and claims removed). All in 8 languages.
+
 ### 1.0.33
 
 **Tattoo price estimator and pricing benchmark at 2026 prices; ink decoder in Thai (2026-10-24).**

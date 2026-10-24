@@ -91,7 +91,7 @@ O scanner em **Registo de atividade** usa a câmara do dispositivo. Digitalize u
 
 ## Galeria
 
-**Portefólio** contém fotografias de trabalhos concluídos, associadas ao cliente e ao artista. **Flash sheets** contém desenhos com preço e depósito; marque um como reservado quando um cliente o reservar. **Partilhar** prepara uma mensagem para WhatsApp, LINE, X ou e-mail; o menu de partilha do telemóvel pode incluir a fotografia.
+**Portefólio** contém fotografias de trabalhos concluídos, associadas ao cliente e ao artista. **Flash sheets** guarda designs com o respetivo tamanho, tempo de sessão, preço e depósito; um preço em branco aparece como "Sob consulta". Agrupe os designs em folha, arraste-os para a ordem pretendida e imprima uma folha ou uma tabela de preços de balcão. **Reservar** reserva um design para um cliente da sua lista, com a data; **Tornar disponível** cancela a reserva. Um design **Repetível** pode ser reservado vezes sem conta e conta o número de reservas. **Exportar CSV** lista o que foi vendido. **Partilhar** prepara uma mensagem para WhatsApp, LINE, X ou e-mail; o menu de partilha do telemóvel pode incluir a fotografia.
 
 ## Dinheiro e equipa
 

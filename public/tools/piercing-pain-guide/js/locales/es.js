@@ -1,7 +1,7 @@
 // Spanish dictionary for Tattoo & Piercing Pain Level Guide
 window.i18nLocales = window.i18nLocales || {};
 window.i18nLocales.es = {
-  "app.framing": "Enfoque profesional honesto: Todas las calificaciones de dolor (1–10) reflejan observaciones profesionales en el estudio y testimonios recopilados de clientes. La molestia es intrínsecamente subjetiva y se ve influenciada por la fatiga, la hidratación, la anatomía de la zona y los nervios individuales. Cero estadísticas clínicas o mediciones simuladas.",
+  "app.framing": "Enfoque profesional honesto: las calificaciones de dolor (1–10) son una escala editorial basada en la experiencia en el estudio, no en mediciones ni encuestas a clientes. La molestia es intrínsecamente subjetiva y se ve influenciada por la fatiga, la hidratación, la anatomía de la zona y los nervios individuales.",
   "app.language": "Idioma de la aplicación",
   "app.page_title": "Guía de Dolor de Tatuajes y Piercings | Poli International",
   "app.subtitle": "Expectativas honestas y comparativas de molestias por zona, factores anatómicos, protocolos de preparación y hoja de consulta para el estudio.",

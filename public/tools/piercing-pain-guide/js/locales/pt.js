@@ -1,7 +1,7 @@
 // Portuguese dictionary for Tattoo & Piercing Pain Level Guide
 window.i18nLocales = window.i18nLocales || {};
 window.i18nLocales.pt = {
-  "app.framing": "Enquadramento profissional honesto: Todas as pontuações de dor (1–10) baseiam-se em observações profissionais de estúdio e relatos recolhidos de clientes. O desconforto é intrinsecamente subjetivo, variando com a fadiga, hidratação, anatomia do local e ansiedade. Sem estatísticas clínicas ou medições simuladas.",
+  "app.framing": "Enquadramento profissional honesto: as pontuações de dor (1–10) são uma escala editorial baseada na experiência de estúdio, não em medições nem inquéritos a clientes. O desconforto é intrinsecamente subjetivo, variando com a fadiga, hidratação, anatomia do local e ansiedade.",
   "app.language": "Língua da interface",
   "app.page_title": "Guia de Níveis de Dor em Tatuagens e Piercings | Poli International",
   "app.subtitle": "Expectativas honestas e comparativas de desconforto por zona, fatores anatómicos, protocolos de preparação e ficha de consulta para estúdio.",

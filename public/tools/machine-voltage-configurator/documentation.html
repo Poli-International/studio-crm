@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="robots" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Voltage Configurator Documentation | Poli International</title>
+    <meta name="description" content="Get a starting voltage range for your machine type, stroke length and technique, with a note to tune from there.">
+    <link rel="canonical" href="https://poliinternational.com/machine-voltage-configurator/">
+    <style>
+        body { background: #0f0f0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; }
+        body.in-iframe .doc-hero h1 { display: none; }
+        * { box-sizing: border-box; }
+        .entry-content { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .doc-hero { background: linear-gradient(135deg, #3B82F6, #8B5CF6); padding: 3rem 2rem; text-align: center; border-radius: 0.75rem; margin-bottom: 2rem; }
+        .doc-hero h1 { font-size: 2.2rem; margin: 0 0 1rem; font-weight: 700; }
+        .doc-hero p { font-size: 1.15rem; color: #E0E7FF; margin: 0; }
+        .doc-hero .v2 { display: inline-block; margin-bottom: 1rem; padding: 0.2rem 0.75rem; border-radius: 999px; background: #10B981; color: #04241a; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; }
+        .doc-section { margin: 2rem 0; padding: 2rem; background: #1a1a1a; border-radius: 0.75rem; border-left: 4px solid #3B82F6; }
+        .doc-section h2 { color: #60A5FA; font-size: 1.7rem; margin: 0 0 1.25rem; font-weight: 600; }
+        .doc-section h3 { color: #A78BFA; font-size: 1.3rem; margin: 1.75rem 0 0.75rem; font-weight: 600; }
+        .doc-section p, .doc-section li { color: #ccc; line-height: 1.75; font-size: 1.02rem; }
+        .doc-section ul, .doc-section ol { padding-left: 1.5rem; }
+        .doc-section li { margin: 0.4rem 0; }
+        .doc-section code { background: #2a2a2a; padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.92em; }
+        .doc-section a { color: #60A5FA; font-weight: 600; }
+        .highlight-box { background: linear-gradient(135deg, #1E3A8A, #4C1D95); padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; border-left: 4px solid #10B981; }
+        .highlight-box p { color: #E0E7FF; margin: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border: 1px solid #333; vertical-align: top; }
+        th { background: #2a2a2a; color: #60A5FA; }
+        td { color: #ccc; }
+        .doc-langs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.5rem; font-size: 0.9rem; }
+        .doc-langs a, .doc-langs span { padding: 0.3rem 0.7rem; border-radius: 999px; border: 1px solid #333; text-decoration: none; }
+        .doc-langs a { color: #60A5FA; }
+        .doc-langs span { background: #1E3A8A; color: #E0E7FF; border-color: #1E3A8A; font-weight: 700; }
+    </style>
+</head>
+<body>
+<nav class="doc-langs" aria-label="Documentation language" style="display:flex;flex-wrap:wrap;gap:6px 14px;max-width:900px;margin:12px auto 0;padding:0 16px;font-size:14px;"><span lang="en">English</span><a lang="fr" href="documentation-fr.html">Français</a><a lang="de" href="documentation-de.html">Deutsch</a><a lang="it" href="documentation-it.html">Italiano</a><a lang="es" href="documentation-es.html">Español</a><a lang="nl" href="documentation-nl.html">Nederlands</a><a lang="pt" href="documentation-pt.html">Português</a><a lang="th" href="documentation-th.html">ไทย</a></nav>
+<script>if (window.self !== window.top) document.body.classList.add('in-iframe');</script>
+    <div class="entry-content">
+        <div class="doc-hero">
+            <span class="v2">V2</span>
+            <h1>Machine Voltage Configurator</h1>
+            <p>Get a starting voltage range for your machine type, stroke length and technique, with a note to tune from there.</p>
+        </div>
+        <p>The Machine Voltage Configurator gives starting voltage windows (a studio rule of thumb), stroke mechanics and printable workstation reference cards for tattoo artists using rotary and coil machines.</p>
+        <div class="doc-section">
+        <h2>What it is for</h2>
+        <p>The Machine Voltage Configurator gives a starting point for tattoo machine voltage, stroke and power supply setup. Artists match their machine type, stroke length and technique to a starting window, a studio rule of thumb rather than a manufacturer rating, instead of guessing numbers. The tool also explains stroke mechanics, checks connection compatibility across cords and supplies, and saves custom workstation reference cards.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Who it is for</h2>
+        <p>This tool is designed for:</p>
+        <ul>
+        <li>Professional tattoo artists setting up rotary pens, direct drive machines, or coil machines.</li>
+        <li>Apprentices studying how voltage, cam throw, and needle grouping momentum affect tissue.</li>
+        <li>Studio owners creating standardized operational baselines across workstations.</li>
+        <li>Traveling artists calibrating unfamiliar power supplies or wireless battery packs in guest studios.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>How to use it</h2>
+        <h3>Baseline voltage and stroke calculation</h3>
+        <ol>
+        <li>Click <code>Voltage &amp; Stroke Configurator</code> in the navigation bar.</li>
+        <li>Under <code>Machine Parameters</code>, choose <code>Rotary (Direct Drive, Slider, or Pen)</code> or <code>Coil Machine (Electromagnetic Armature)</code>.</li>
+        <li>Choose your <code>Stroke Length (Cam Throw)</code> between <code>2.5 mm (Short / Soft Shading &amp; Fine Wash)</code> and <code>4.5 mm (Extra Long / Heavy Lining &amp; Large Mags)</code>.</li>
+        <li>Select <code>Lining</code>, <code>Shading</code>, <code>Color Packing</code>, or <code>Dotwork / Stippling</code>.</li>
+        <li>Under <code>Recommended Starting Window</code>, read the <code>Baseline Starting Range</code>, <code>Relative Needle Speed</code>, <code>Relative Punch</code>, and <code>Duty Cycle</code>.</li>
+        <li>Click <code>Save this setup to My Machines Reference Card</code> to copy the baseline into your records.</li>
+        </ol>
+        <h3>Stroke throw and speed comparison</h3>
+        <ol>
+        <li>Click <code>Stroke &amp; Speed Visualizer</code> in the navigation bar.</li>
+        <li>Under <code>Select Stroke to Compare:</code>, choose between <code>2.5 mm (Short Throw)</code> and <code>4.5 mm (Heavy Throw)</code>.</li>
+        <li>Under <code>Select Starting Voltage Level:</code>, toggle <code>Low</code>, <code>Medium</code>, or <code>High</code>.</li>
+        <li>Review the outputs: <code>Cam Throw:</code>, <code>Relative Cycle Rate:</code>, <code>Impact Momentum / Punch:</code>, and <code>Needle Skin Dwell Time:</code>.</li>
+        <li>Check the diagram showing <code>Motor Cam Throw</code>, <code>Needle Penetration Throw</code>, and the <code>Skin Surface Boundary (Dermis Line)</code>.</li>
+        </ol>
+        <h3>Saving and managing personal machines</h3>
+        <ol>
+        <li>Click <code>My Machines (Reference Card)</code> in the navigation bar.</li>
+        <li>Under <code>Add Machine &amp; Technique Setting</code>, enter your identifier in <code>Machine Name / Model *</code>.</li>
+        <li>Select <code>Rotary</code> or <code>Coil</code>, specify <code>Stroke (mm) *</code>, and select the <code>Technique *</code>.</li>
+        <li>Enter <code>Tested Voltage Setting (Volts) *</code> and specify the grouping in <code>Needle Configuration &amp; Taper *</code>.</li>
+        <li>Add notes in <code>Notes / Session Observations</code>, select <code>Worked Well</code>, <code>Too Soft / Bogged</code>, or <code>Too Harsh / Chew</code>, and click <code>Save Machine Setting</code>.</li>
+        <li>Filter cards under <code>Saved Machine Reference Cards</code> with <code>All Architectures</code>, <code>Rotary</code>, or <code>Coil</code>, or click <code>Delete</code> to remove an entry.</li>
+        </ol>
+        <h3>Verifying electrical connections and power supplies</h3>
+        <ol>
+        <li>Click <code>Connection &amp; Supply Checker</code> in the navigation bar.</li>
+        <li>Under <code>1. Machine Connection Type</code>, select <code>RCA Jack (Most modern rotaries and pens)</code> or <code>Clip Cord (Traditional coil machines)</code>.</li>
+        <li>Under <code>2. Power Supply Type &amp; Amperage</code>, choose <code>Bench Digital Supply (Continuous 2.0A - 3.0A output, jumpstart feature)</code> or <code>Wireless Modular Battery Pack (Lithium-ion, 1500-2000mAh)</code>.</li>
+        <li>Under <code>3. Connection Lead / Cable</code>, pick <code>Standard Heavy-Duty RCA Cord</code> or <code>Standard Spring Clip Cord</code>.</li>
+        <li>Click <code>Check Compatibility Checklist</code> to review match assessments such as <code>Cable Mismatch</code>, <code>Physical Incompatibility</code>, or <code>Current / Startup Limitation</code>.</li>
+        </ol>
+        <h3>Practical tuning by feel and coil adjustments</h3>
+        <ol>
+        <li>Click <code>Tuning by Feel &amp; Coil / Battery Guide</code> in the navigation bar.</li>
+        <li>Follow the skin test steps: <code>1. Listen to the Motor Pitch</code>, <code>2. Inspect the Needle Entry</code>, and <code>3. Adjust in Minimal Increments</code>.</li>
+        <li>Tune coils mechanically in order: <code>1. Mechanical alignment</code>, <code>2. Contact screw gap</code>, <code>3. Spring tension</code>, and <code>4. Fine voltage calibration</code>.</li>
+        <li>Review battery factors: <code>1. Voltage Sag Under Load</code>, <code>2. Jumpstart Features</code>, and <code>3. Low-Charge Output Drop</code>.</li>
+        </ol>
+        <h3>Embedding the tool on an external studio website</h3>
+        <ol>
+        <li>Click <code>Embed Code</code> in the navigation bar.</li>
+        <li>Locate the snippet under <code>Copy iframe code below (uses official Poli International hosted URL):</code>.</li>
+        <li>Click <code>Copy Embed Code</code> to copy the HTML iframe tag.</li>
+        </ol>
+        </div>
+        <div class="doc-section">
+        <h2>What it does not do</h2>
+        <p>The Machine Voltage Configurator focuses strictly on voltage baselines, stroke dynamics, and power compatibility. It does not provide:</p>
+        <ul>
+        <li>Needle taper selection, cartridge diameters, or grouping geometry. Use the Needle Selector at https://poliinternational.com/needle-selector/.</li>
+        <li>Electrical hardware diagnostics for broken foot switches, severed cord wires, or transformer faults. Use the Power Supply Troubleshooter at https://poliinternational.com/power-supply-troubleshooter/.</li>
+        <li>Equipment servicing schedules, spring replacement logs, autoclave tracking, or maintenance records. Use the Machine Maintenance Logbook at https://poliinternational.com/machine-maintenance-logbook/.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Where your data lives</h2>
+        <p>All machine records, voltage notes, and station settings created in this tool are saved exclusively in your local browser on this device. Data is preserved through client-side <code>localStorage</code> under the key <code>poli_tattoo_machines</code>.</p>
+        <p>No records, names, or machine configurations are ever transmitted to an external server or cloud database. Your data remains stored across sessions until you deliberately click <code>Delete</code> on an individual card or clear your browser site data.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Printing and exporting</h2>
+        <p>To generate a physical bench card for your workstation:</p>
+        <ol>
+        <li>Click <code>My Machines (Reference Card)</code> and review your saved setups.</li>
+        <li>Click <code>Print Reference Card for Station Wall</code>.</li>
+        <li>The browser opens its print dialog with clean, high-contrast print styling that omits navigation tabs and interactive buttons.</li>
+        <li>Print the resulting reference table on standard letter or A4 paper, laminate it, and place it at your workstation for immediate reference.</li>
+        </ol>
+        </div>
+        <div class="doc-section">
+        <h2>Questions and answers</h2>
+        <h3>What voltage should I run for lining with a rotary tattoo machine?</h3>
+        <p>Many rotary machines run between about 6.5V and 8.5V for linework, depending on stroke and motor torque (a typical range from supply guides, not a manufacturer rating). Start at the lower end and increase in 0.2V steps until lines go in cleanly in a single pass.</p>
+        <h3>How does stroke length affect tattoo machine voltage?</h3>
+        <p>A short stroke (2.5 mm to 3.0 mm) cycles quickly with soft impact, requiring higher voltage against membrane resistance. A long stroke (4.0 mm to 4.5 mm) carries greater momentum, driving large groupings at moderate voltage while demanding faster hands.</p>
+        <h3>Why does my tattoo machine slow down when the needle touches skin?</h3>
+        <p>Skin resistance and cartridge membrane tension increase mechanical load on the motor, causing power supply voltage to sag. If motor pitch drops audibly on skin contact, increase voltage by 0.2V to 0.4V or use a 2.0A continuous supply.</p>
+        <h3>Can I run a coil tattoo machine with a wireless battery pack?</h3>
+        <p>Coil machines should only connect to wireless batteries engineered for inductive loads. Standard rotary battery packs lack inductive surge dampening, causing contact spark back-EMF to overheat cells or trigger shutoff circuits.</p>
+        <h3>What is the difference between a 3.5 mm and 4.0 mm stroke?</h3>
+        <p>A 3.5 mm stroke balances cycle speed with moderate punch for smooth shading, blends, and medium lining. A 4.0 mm stroke provides longer needle travel and stronger impact force, excelling at bold lines and heavy color packing.</p>
+        <h3>Why won't my cartridge tattoo machine start at low voltage?</h3>
+        <p>Cartridge needles contain a rubber return membrane that resists the motor. Some rotary motors struggle to start against it at low voltages; some supplies and battery packs give a short start-up boost (jumpstart) for this. Check your manual.</p>
+        <h3>How do I adjust contact screw gap on a coil tattoo machine?</h3>
+        <p>Loosen the lock screw and adjust the contact screw until it lightly touches the front spring with the armature bar resting. A studio rule of thumb: a gap of about 1.0 mm for fast lining, or 1.5 mm to 2.0 mm for softer shading.</p>
+        <h3>Does increasing voltage make a tattoo machine hit harder?</h3>
+        <p>On a rotary machine, higher voltage increases cycling frequency rather than impact punch, which is governed by cam stroke length. On a coil machine, higher voltage increases magnetic pull, increasing speed and firmness up to spring limits.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Limits</h2>
+        <p>The Machine Voltage Configurator gives starting baselines that are a studio rule of thumb, based on common practice and mechanical principles. It cannot measure motor winding resistance, cam bearing friction, spring fatigue or cartridge membrane stiffness.</p>
+        <p>Furthermore, this tool cannot assess the elasticity, thickness, or hydration of individual client skin sites. The tattoo artist remains solely responsible for assessing tissue response, controlling needle depth, monitoring motor sound, and keeping operating voltages within manufacturer limits.</p>
+        </div>
+        <div class="doc-section">
+            <h2>Use the tool</h2>
+            <p><a href="https://poliinternational.com/machine-voltage-configurator/" target="_top">Open the Machine Voltage Configurator</a>. Everything runs in your browser; nothing you enter is sent anywhere.</p>
+        </div>
+    </div>
+</body>
+</html>

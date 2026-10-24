@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head><meta name="robots" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Voltage Configurator Documentation | Poli International</title>
+    <meta name="description" content="Get a starting voltage range for your machine type, stroke length and technique, with a note to tune from there.">
+    <link rel="canonical" href="https://poliinternational.com/machine-voltage-configurator/">
+    <style>
+        body { background: #0f0f0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; }
+        body.in-iframe .doc-hero h1 { display: none; }
+        * { box-sizing: border-box; }
+        .entry-content { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .doc-hero { background: linear-gradient(135deg, #3B82F6, #8B5CF6); padding: 3rem 2rem; text-align: center; border-radius: 0.75rem; margin-bottom: 2rem; }
+        .doc-hero h1 { font-size: 2.2rem; margin: 0 0 1rem; font-weight: 700; }
+        .doc-hero p { font-size: 1.15rem; color: #E0E7FF; margin: 0; }
+        .doc-hero .v2 { display: inline-block; margin-bottom: 1rem; padding: 0.2rem 0.75rem; border-radius: 999px; background: #10B981; color: #04241a; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; }
+        .doc-section { margin: 2rem 0; padding: 2rem; background: #1a1a1a; border-radius: 0.75rem; border-left: 4px solid #3B82F6; }
+        .doc-section h2 { color: #60A5FA; font-size: 1.7rem; margin: 0 0 1.25rem; font-weight: 600; }
+        .doc-section h3 { color: #A78BFA; font-size: 1.3rem; margin: 1.75rem 0 0.75rem; font-weight: 600; }
+        .doc-section p, .doc-section li { color: #ccc; line-height: 1.75; font-size: 1.02rem; }
+        .doc-section ul, .doc-section ol { padding-left: 1.5rem; }
+        .doc-section li { margin: 0.4rem 0; }
+        .doc-section code { background: #2a2a2a; padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.92em; }
+        .doc-section a { color: #60A5FA; font-weight: 600; }
+        .highlight-box { background: linear-gradient(135deg, #1E3A8A, #4C1D95); padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; border-left: 4px solid #10B981; }
+        .highlight-box p { color: #E0E7FF; margin: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border: 1px solid #333; vertical-align: top; }
+        th { background: #2a2a2a; color: #60A5FA; }
+        td { color: #ccc; }
+        .doc-langs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.5rem; font-size: 0.9rem; }
+        .doc-langs a, .doc-langs span { padding: 0.3rem 0.7rem; border-radius: 999px; border: 1px solid #333; text-decoration: none; }
+        .doc-langs a { color: #60A5FA; }
+        .doc-langs span { background: #1E3A8A; color: #E0E7FF; border-color: #1E3A8A; font-weight: 700; }
+    </style>
+</head>
+<body>
+<nav class="doc-langs" aria-label="Taal van de documentatie" style="display:flex;flex-wrap:wrap;gap:6px 14px;max-width:900px;margin:12px auto 0;padding:0 16px;font-size:14px;"><a lang="en" href="documentation.html">English</a><a lang="fr" href="documentation-fr.html">Français</a><a lang="de" href="documentation-de.html">Deutsch</a><a lang="it" href="documentation-it.html">Italiano</a><a lang="es" href="documentation-es.html">Español</a><span lang="nl">Nederlands</span><a lang="pt" href="documentation-pt.html">Português</a><a lang="th" href="documentation-th.html">ไทย</a></nav>
+<script>if (window.self !== window.top) document.body.classList.add('in-iframe');</script>
+    <div class="entry-content">
+        <div class="doc-hero">
+            <span class="v2">V2</span>
+            <h1>Machine Voltage Configurator</h1>
+            <p>Get a starting voltage range for your machine type, stroke length and technique, with a note to tune from there.</p>
+        </div>
+        <p>De Machine Voltage Configurator geeft startvoltagevensters (een vuistregel voor de studio), slagmechanica en afdrukbare referentiekaarten voor werkstations voor tatoeëerders die rotor- en spoelmachines gebruiken.</p>
+        <div class="doc-section">
+        <h2>Waarvoor het bedoeld is</h2>
+        <p>De Machine Voltage Configurator geeft een startpunt voor de voltage-, slag- en voedingsopstelling van de tatoeagemachine. Artiesten stemmen hun machinetype, slaglengte en techniek af op een startvenster, een vuistregel voor de studio in plaats van een beoordeling van de fabrikant, in plaats van te gissen naar getallen. De tool legt ook de slagmechanica uit, controleert de compatibiliteit van verbindingen tussen snoeren en voedingen, en slaat aangepaste referentiekaarten voor het werkstation op.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Voor wie het bedoeld is</h2>
+        <p>Deze tool is ontworpen voor:</p>
+        <ul>
+        <li>Professionele tatoeëerders die tattoo-pennen, direct drive machines of traditionele spoelmachines instellen.</li>
+        <li>Leerlingen die bestuderen hoe voltage, excentrische slag en naaldweerstand het huidweefsel beïnvloeden.</li>
+        <li>Studio-eigenaren die gestandaardiseerde operationele uitgangspunten willen vastleggen voor alle werkplekken in de studio.</li>
+        <li>Gastartiesten of reizende tatoeëerders die onbekende tafelvoedingen of draadloze accu's moeten inregelen in gaststudio's of op conventies.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Hoe het te gebruiken</h2>
+        <h3>Berekening van basisvoltage en slaglengte</h3>
+        <ol>
+        <li>Klik op <code>Voltage- &amp; Slagconfigurator</code> in de navigatiebalk.</li>
+        <li>Kies onder <code>Machineparameters</code> voor <code>Rotarymachine (Direct Drive, Slider of Pen-model)</code> of <code>Spoelmachine (Elektromagnetische Ankerstang)</code>.</li>
+        <li>Selecteer uw <code>Slaglengte (Excentrische Uitslag / Stroke)</code> tussen <code>2,5 mm (Kort / Zeer Zachte Schaduwen &amp; Grey Wash Lagering)</code> en <code>4,5 mm (Extra Lang / Dikke Outlines &amp; Grote Magnums)</code>.</li>
+        <li>Kies uit <code>Lijnen Zetten (Lining)</code>, <code>Schaduwwerk (Shading)</code>, <code>Kleur Verzadigen (Color Packing)</code> of <code>Stippeltechniek / Dotwork (Stippling)</code>.</li>
+        <li>Bekijk onder <code>Geadviseerd Startvenster</code> het <code>Basis Startbereik</code>, de <code>Relatieve Naaldsnelheid</code>, de <code>Relatieve Slagkracht (Punch)</code> en de <code>Inschakelduur (Duty Cycle)</code>.</li>
+        <li>Klik op <code>Opslaan op Werkplekkaart 'Mijn Machines'</code> om deze afstelling over te nemen in uw overzicht.</li>
+        </ol>
+        <h3>Vergelijking van slaglengte en snelheid</h3>
+        <ol>
+        <li>Klik op <code>Slag- &amp; Snelheidsvisualisator</code> in de navigatiebalk.</li>
+        <li>Kies onder <code>Selecteer te vergelijken slag:</code> tussen <code>2,5 mm (Korte Slag)</code> en <code>4,5 mm (Zware Slag)</code>.</li>
+        <li>Schakel onder <code>Startspanningsniveau kiezen:</code> tussen <code>Laag Voltage</code>, <code>Gemiddeld Voltage</code> of <code>Hoog Voltage</code>.</li>
+        <li>Bekijk de resulterende waarden: <code>Excentrische Slag:</code>, <code>Relatieve Cyclusfrequentie:</code>, <code>Slagenergie / Punch:</code> en <code>Verblijftijd in Huidweefsel:</code>.</li>
+        <li>Bestudeer het schema met de <code>Uitslag Excentrische Schijf</code>, de <code>Naaldpenetratiediepte</code> en de <code>Bovengrens Lederhuid (Dermislijn)</code>.</li>
+        </ol>
+        <h3>Opslaan en beheren van eigen machines</h3>
+        <ol>
+        <li>Klik op <code>Mijn Machines (Werkplekkaart)</code> in de navigatiebalk.</li>
+        <li>Voer onder <code>Machine-instelling &amp; Techniek Vastleggen</code> de identificatie in bij <code>Naam Machine / Model *</code>.</li>
+        <li>Selecteer <code>Rotary Modellen</code> of <code>Spoel Modellen</code>, geef de <code>Slaglengte (mm) *</code> op en kies de <code>Toepassingstechniek *</code>.</li>
+        <li>Vul het <code>In de Praktijk Getest Voltage (Volt) *</code> in en specificeer de groepering bij <code>Naaldconfiguratie &amp; Slijping (Taper) *</code>.</li>
+        <li>Voeg opmerkingen toe bij <code>Sessie-aantekeningen / Observaties</code>, selecteer <code>Uitstekend Gewerkt</code>, <code>Te Zacht / Verliest Kracht</code> of <code>Te Agressief / Huid Beschadigd</code>, en klik op <code>Machine-instelling Opslaan</code>.</li>
+        <li>Filter de kaarten onder <code>Opgeslagen Werkplekkaarten</code> met <code>Alle Gereedschappen</code>, <code>Rotary Modellen</code> of <code>Spoel Modellen</code>, of klik op <code>Verwijderen</code> om een regel te wissen.</li>
+        </ol>
+        <h3>Controleren van elektrische aansluitingen en voedingen</h3>
+        <ol>
+        <li>Klik op <code>Aansluitings- &amp; Voedingscontrole</code> in de navigatiebalk.</li>
+        <li>Kies onder <code>1. Machine-aansluiting</code> voor <code>RCA-contrastekker (Moderne rotarys en tattoo-pennen)</code> of <code>Clipcord-aansluitklemmen (Klassieke spoelmachines)</code>.</li>
+        <li>Selecteer onder <code>2. Type Voeding &amp; Stroomcapaciteit</code> een type zoals <code>Digitale Tafelvoeding (Continu 2,0 A – 3,0 A, met starthulp / jumpstart)</code> of <code>Modulair Accupack (Lithium-ion, 1500–2000 mAh)</code>.</li>
+        <li>Kies onder <code>3. Gebruikte Verbindingskabel</code> voor <code>Hoogwaardige RCA-kabel (Tulp)</code> of <code>Traditioneel Veerstaal Clipcord</code>.</li>
+        <li>Klik op <code>Onderdelen op Compatibiliteit Controleren</code> om waarschuwingen te controleren zoals <code>Overbodige Kabel Geselecteerd</code>, <code>Mechanische Onverenigbaarheid</code> of <code>Beperkte Aanloopstroom</code>.</li>
+        </ol>
+        <h3>Praktische afstelling op gehoor en spoelmechanica</h3>
+        <ol>
+        <li>Klik op <code>Fijnafstelling op Gehoor &amp; Spoel-/Accugids</code> in de navigatiebalk.</li>
+        <li>Volg de teststappen op oefenhuid: <code>1. Luister Goed naar de Motor</code>, <code>2. Beoordeel de Inktvloei</code> en <code>3. Verstel in Kleine Stappen</code>.</li>
+        <li>Stel spoelmachines af in mechanische volgorde: <code>1. Mechanische Uitlijning: Naaldstang, grommet en gripbuis exact recht centreren zonder zijwaartse wrijving.</code>, <code>2. Contactafstand: Stelschroef mechanisch positioneren (ongeveer de dikte van een tien-eurocentmunt voor lijnen, vijftig-centmunt voor schaduw).</code>, <code>3. Veerspanning: Buiging van de achterveer fijnstellen om de terugslag van het anker te doseren vóór aanpassing van het voltage.</code> en <code>4. Fijnafstelling Voltage: Regel de voeding pas in nadat de mechanica en veren volkomen synchroon bewegen.</code>.</li>
+        <li>Houd rekening met de kenmerken van draadloze accu's: <code>1. Spanningsval onder Belasting (Voltage Sag)</code>, <code>2. Starthulp-Impuls (Jumpstart)</code> en <code>3. Onbalans bij Lage Acculading</code>.</li>
+        </ol>
+        <h3>Insluiten van de tool op de website van de studio</h3>
+        <ol>
+        <li>Klik op <code>Insluitcode (Embed)</code> in de navigatiebalk.</li>
+        <li>Zoek het codefragment onder <code>Kopieer de onderstaande iframe-code (verwijst naar het officiële domein van Poli International):</code>.</li>
+        <li>Klik op <code>Insluitcode Kopiëren</code> om de HTML-iframe-tag te kopiëren.</li>
+        </ol>
+        </div>
+        <div class="doc-section">
+        <h2>Wat het niet doet</h2>
+        <p>De Tatoeagemachine Voltage Configurator richt zich strikt op startvoltages, slagdynamiek en elektrische compatibiliteit. Het biedt geen:</p>
+        <ul>
+        <li>Naaldselectie, cartridge-diameters of groeperingsgeometrie. Gebruik de Naaldselector op https://poliinternational.com/needle-selector/.</li>
+        <li>Elektrische storingsdiagnose voor defecte voetschakelaars, kabelbreuken of transformatorstoringen. Gebruik de Voedings-probleemoplosser op https://poliinternational.com/power-supply-troubleshooter/.</li>
+        <li>Onderhoudsschema's voor apparatuur, logboeken voor veerbladen, autoclaafregistraties of revisieverslagen. Gebruik het Machine Onderhoudslogboek op https://poliinternational.com/machine-maintenance-logbook/.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Waar uw gegevens worden bewaard</h2>
+        <p>Alle machinedossiers, voltage-aantekeningen en werkplekinstellingen die in deze tool worden aangemaakt, worden uitsluitend bewaard in uw lokale webbrowser op dit specifieke apparaat. Gegevens blijven behouden via client-side <code>localStorage</code> onder de sleutel <code>poli_tattoo_machines</code>.</p>
+        <p>Er worden nooit gegevens, namen of machine-instellingen verzonden naar een externe server of clouddatabase. Uw gegevens blijven bewaard tussen sessies totdat u bewust op <code>Verwijderen</code> klikt bij een specifieke kaart of de websitegegevens van uw browser wist.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Afdrukken en exporteren</h2>
+        <p>Zo genereert u een fysieke werkplekkaart voor uw werktafel:</p>
+        <ol>
+        <li>Klik op <code>Mijn Machines (Werkplekkaart)</code> en controleer uw opgeslagen configuraties.</li>
+        <li>Klik op <code>Werkplekkaart Afdrukken voor de Werktafel</code>.</li>
+        <li>De browser opent het afdrukvenster met een speciale afdrukopmaak met hoog contrast waarin navigatietabbladen en knoppen zijn weggelaten.</li>
+        <li>Druk de resulterende tabel af op standaard A4- of letterpapier, lamineer het document en leg of hang het bij uw werkplek voor direct overzicht.</li>
+        </ol>
+        </div>
+        <div class="doc-section">
+        <h2>Vragen en antwoorden</h2>
+        <h3>Welk voltage moet ik gebruiken voor lijnen met een rotarymachine?</h3>
+        <p>Veel rotormachines draaien tussen ongeveer 6,5 V en 8,5 V voor lijntjeswerk, afhankelijk van de slag en het motorkoppel (een typisch bereik uit voedingsgidsen, geen beoordeling van de fabrikant). Begin aan de onderkant en verhoog in stappen van 0,2 V totdat lijnen netjes in één beweging erin gaan.</p>
+        <h3>Hoe beïnvloedt de slaglengte het voltage van een tatoeagemachine?</h3>
+        <p>Een korte slag (2,5 mm tot 3,0 mm) maakt snelle cycli met een zachte slagkracht, waardoor een iets hoger voltage nodig is tegen de weerstand van cartridgemembranen. Een lange slag (4,0 mm tot 4,5 mm) heeft meer inertie en kan grote naaldgroepen aansturen bij een gematigd voltage, maar vraagt om een snellere handbeweging.</p>
+        <h3>Waarom vertraagt mijn machine zodra de naalden de huid raken?</h3>
+        <p>De weerstand van het huidweefsel en de spanning van het cartridgemembraan verhogen de belasting op de motor, wat bij compacte voedingen leidt tot een spanningsval. Als de motortoon hoorbaar daalt bij contact met de huid, verhoog dan het voltage met 0,2 V tot 0,4 V of gebruik een voeding die ten minste 2,0 A continu kan leveren.</p>
+        <h3>Kan ik een traditionele spoelmachine laten werken op een draadloze accu?</h3>
+        <p>Spoelmachines mogen alleen worden aangesloten op draadloze accupacks die specifiek zijn ontworpen voor inductieve belastingen. Standaard accupacks voor rotarys missen demping tegen inductieve pieken: de vonkvorming bij de contactschroef genereert tegen-elektromotorische krachten die de accucellen oververhitten of de beveiligingscircuits uitschakelen.</p>
+        <h3>Wat is het verschil tussen een slag van 3,5 mm en 4,0 mm?</h3>
+        <p>Een slag van 3,5 mm biedt een evenwichtige balans tussen snelheid en gematigde slagkracht, ideaal voor zachte schaduwen, vloeiende overgangen en medium outlines. Een slag van 4,0 mm biedt een langere naalduitslag en een hardere inslag, uitermate geschikt voor strakke dikke lijnen en verzadigd kleurwerk met grote magnums.</p>
+        <h3>Waarom start mijn cartridgemachine niet op bij een laag voltage?</h3>
+        <p>Cartridgenaalden bevatten een rubberen terugkeermembraan dat weerstand biedt tegen de motor. Sommige rotormotoren hebben hierdoor moeite om te starten bij lage voltages; sommige voedingen en batterijpacks geven hiervoor een korte opstartboost (jumpstart). Controleer uw handleiding.</p>
+        <h3>Hoe stel ik de contactschroefafstelling af op een spoelmachine?</h3>
+        <p>Draai de borgschroef los en stel de contactschroef af totdat deze licht de voorste veer raakt terwijl de ankerval rust. Een vuistregel voor de studio: een opening van ongeveer 1,0 mm voor snel lijnen, of 1,5 mm tot 2,0 mm voor zachter schaduwwerk.</p>
+        <h3>Slaat een machine harder toe als het voltage wordt verhoogd?</h3>
+        <p>Bij een rotarymachine verhoogt een hoger voltage vooral de rotatiefrequentie en niet de slagkracht, aangezien die laatste wordt bepaald door de excentrische slaglengte. Bij een spoelmachine verhoogt een hogere spanning de magnetische aantrekkingskracht, waardoor de snelheid en stevigheid toenemen tot aan de mechanische grens van de veer.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Beperkingen</h2>
+        <p>De Machine Voltage Configurator geeft startbaselines die een vuistregel voor de studio zijn, gebaseerd op de praktijk en mechanische principes. Het kan de weerstand van de motorwikkeling, de wrijving van het noklager, de veermoeheid of de stijfheid van het cartridgemembraan niet meten.</p>
+        <p>Bovendien kan deze tool de elasticiteit, dikte of hydratatie van de individuele huid van de klant niet beoordelen. De tatoeëerder blijft zelf te allen tijde verantwoordelijk voor het beoordelen van de huidreactie, het controleren van de naalddiepte, het luisteren naar het motorgeluid en het binnen de door de fabrikant gestelde grenzen houden van de werkspanning.</p>
+        </div>
+        <div class="doc-section">
+            <h2>Use the tool</h2>
+            <p><a href="https://poliinternational.com/machine-voltage-configurator/" target="_top">Open the Machine Voltage Configurator</a>. Everything runs in your browser; nothing you enter is sent anywhere.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -153,6 +153,90 @@ await flow('Gallery: a photo for a typed client name shows on the profile, a pro
   const boxes = b.seen.dialogs.filter((d) => d !== 'file chooser');
   check(!boxes.length, 'a browser box was used: ' + boxes[0]);
 });
+await flow('Flash: a sheet, a design with no price prints POA, edit, claim for a client with the date, make available, repeatable counts bookings, print and CSV', async () => {
+  // roadmap step 15: blank fields were saved as invented figures ($250, 2 h, "3RL Line + 7RM Shading"), claims were a typed name
+  const client = await b.evaluate(`fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Flash Flow Client' }) }).then(r => r.json())`);
+  await b.evaluate(`navigateToDestination('tools')`);
+  await pressOn('openGalleryModal()');
+  await pressOn("switchGalleryTab('flash')");
+  // a sheet with its printed header
+  await pressOn('openFlashSheetModal(true)');
+  await b.type('#flash-sheet-name', 'Flow Sheet');
+  await b.type('#flash-sheet-artist', 'Flow Artist');
+  await b.clickText('Save Sheet', '#flash-sheet-modal');
+  await eventually(async () => (await b.evaluate(`document.getElementById('flash-filter-sheet').selectedOptions[0].text`)) === 'Flow Sheet', 'the new sheet is not the one shown');
+  // a design with only a title: no invented price, time, needles or pigments
+  await b.clickText('Upload', '#gallery-modal');
+  check(await shown('upload-flash-modal'), 'Upload on the Flash tab did not open the flash form');
+  check(await b.evaluate(`document.getElementById('flash-sheet-select').value`) !== '', 'a design added while a sheet is shown does not go in that sheet');
+  await b.type('#flash-title-input', 'Flow Moth');
+  await b.clickText('Publish Flash Sheet', '#upload-flash-modal');
+  await eventually(async () => (await text('#flash-grid')).includes('Flow Moth'), 'the new design is not on the sheet');
+  let f = (await api('/api/flash')).find((x) => x.title === 'Flow Moth');
+  check(f.price === null && f.deposit === null && f.est_duration_hours === null && !f.needle_specs && !f.pigment_palette,
+    'a blank field was saved with a value: ' + JSON.stringify({ price: f.price, deposit: f.deposit, hours: f.est_duration_hours, needles: f.needle_specs, pigments: f.pigment_palette }));
+  check((await text('#flash-grid')).includes('POA'), 'a design with no price does not say POA');
+  check(!(await text('#flash-grid')).includes('$0.00'), 'a design with no price shows $0.00');
+  // edit: a price, a size and the time; the card shows them
+  await press('#flash-grid > div', 'Flow Moth', 'Edit');
+  check(await b.evaluate(`document.getElementById('flash-title-input').value`) === 'Flow Moth', 'Edit did not open the design');
+  await b.type('#flash-price-input', '180');
+  await b.type('#flash-size-input', '10 x 8 cm');
+  await b.type('#flash-hours-input', '1.5');
+  await b.clickText('Save Changes', '#upload-flash-modal');
+  await eventually(async () => (await text('#flash-grid')).includes('10 x 8 cm'), 'the edit is not on the card');
+  f = (await api('/api/flash')).find((x) => x.title === 'Flow Moth');
+  check(f.price === 180 && f.est_duration_hours === 1.5, 'Edit saved ' + JSON.stringify({ price: f.price, hours: f.est_duration_hours }));
+  // claim: a client from the list and the date
+  await press('#flash-grid > div', 'Flow Moth', 'Claim');
+  check(await shown('flash-claim-modal'), 'Claim did not open its window (a browser box was the old way)');
+  await b.type('#flash-claim-client-search', 'Flash Flow');
+  await eventually(async () => (await text('#flash-claim-client-autocomplete-dropdown')).includes('Flash Flow Client'), 'typing a name does not offer the client');
+  await b.evaluate(`document.querySelector('#flash-claim-client-autocomplete-dropdown [data-id="${client.id}"]').dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }))`);
+  await b.clickText('Save Claim', '#flash-claim-modal');
+  await eventually(async () => (await text('#flash-grid')).includes('Claimed by Flash Flow Client'), 'the claim is not on the card');
+  f = (await api('/api/flash')).find((x) => x.title === 'Flow Moth');
+  check(f.claimed_by_client_id === client.id && f.bookings.length === 1 && /^\d{4}-\d{2}-\d{2}$/.test(f.bookings[0].date), 'the claim did not keep the client and the date: ' + JSON.stringify(f.bookings));
+  // make available again: the reservation goes
+  await press('#flash-grid > div', 'Flow Moth', 'Make Available');
+  await eventually(async () => !(await text('#flash-grid')).includes('Claimed by Flash Flow Client'), 'Make Available did not free the design');
+  f = (await api('/api/flash')).find((x) => x.title === 'Flow Moth');
+  check(f.status === 'available' && f.bookings.length === 0, 'Make Available left ' + JSON.stringify({ status: f.status, bookings: f.bookings.length }));
+  // repeatable: two claims, still for sale, booked twice
+  await press('#flash-grid > div', 'Flow Moth', 'Edit');
+  await b.evaluate(`document.getElementById('flash-status-select').value = 'repeatable'`);
+  await b.clickText('Save Changes', '#upload-flash-modal');
+  // the available card already has a Claim button: wait for the saved status, or a slow runner claims it as available
+  await eventually(async () => (await api('/api/flash')).find((x) => x.title === 'Flow Moth').status === 'repeatable' && (await text('#flash-grid')).includes('Repeatable'), 'the design did not become repeatable');
+  for (let i = 0; i < 2; i++) {
+    await eventually(async () => !!(await rowButton('#flash-grid > div', 'Flow Moth', 'Claim')), 'a repeatable design has no Claim button');
+    await press('#flash-grid > div', 'Flow Moth', 'Claim');
+    await b.type('#flash-claim-client-search', 'Flash Flow');
+    await eventually(async () => (await text('#flash-claim-client-autocomplete-dropdown')).includes('Flash Flow Client'), 'typing a name does not offer the client');
+    await b.evaluate(`document.querySelector('#flash-claim-client-autocomplete-dropdown [data-id="${client.id}"]').dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }))`);
+    // a second booking is another day: the same form sent twice within 1.5 s is dropped as a double tap
+    if (i === 1) await b.evaluate(`document.getElementById('flash-claim-date').value = '2030-01-15'`);
+    await b.clickText('Save Claim', '#flash-claim-modal');
+    const booked = i === 0 ? 'Booked once' : 'Booked 2 times';
+    await eventually(async () => (await text('#flash-grid')).includes(booked), 'a repeatable design does not count its bookings');
+  }
+  await eventually(async () => (await text('#flash-grid')).includes('Booked 2 times'), 'a repeatable design does not count its bookings');
+  check((await text('#flash-summary')).includes('Repeatable'), 'no summary strip');
+  // print preview of the sheet and the price list, then the CSV
+  await pressOn("openFlashPrintModal('sheet')");
+  // the preview reloads on every option: read it only once its page is there
+  const preview = () => b.evaluate(`((document.getElementById('flash-print-preview').contentDocument || {}).body || {}).innerText || ''`);
+  await eventually(async () => (await preview()).includes('Flow Moth'), 'the print preview does not show the sheet');
+  const sheetText = await preview();
+  check(sheetText.includes('Flow Sheet') && sheetText.includes('Flow Artist') && sheetText.includes('REPEATABLE'), 'the printed sheet lacks its header or the badge: ' + sheetText.slice(0, 200));
+  await b.evaluate(`(() => { const s = document.getElementById('flash-print-mode'); s.value = 'list'; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+  await eventually(async () => (await preview()).includes('Flash price list'), 'the price list does not show');
+  await b.clickText('Print / Save as PDF', '#flash-print-modal');
+  await b.evaluate(`closeFlashPrintModal()`);
+  await pressOn('exportFlashCsv()');
+  const boxes = b.seen.dialogs.filter((d) => d !== 'file chooser');
+  check(!boxes.length, 'a browser box was used: ' + boxes[0]);
+});
 
 await flow('Two quick taps on Save make one client, not two', async () => {
   await b.goto(url);

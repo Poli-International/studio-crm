@@ -2,7 +2,7 @@
 // Studio-vetted terminology for German tattoo artists and body piercers
 window.i18nLocales = window.i18nLocales || {};
 window.i18nLocales.de = {
-  "app.framing": "Ehrliche professionelle Einordnung: Alle Schmerzbewertungen (1–10) basieren auf Beobachtungen aus dem Studioalltag und Rückmeldungen von Kunden. Schmerzempfinden ist naturgemäß subjektiv und wird von Müdigkeit, Flüssigkeitszufuhr, individueller Anatomie und Aufregung beeinflusst. Keine klinischen Statistiken oder simulierten Messwerte.",
+  "app.framing": "Ehrliche professionelle Einordnung: Die Schmerzbewertungen (1–10) sind eine redaktionelle Skala aus der Studioerfahrung, keine Messwerte und keine Kundenumfrage. Schmerzempfinden ist naturgemäß subjektiv und wird von Müdigkeit, Flüssigkeitszufuhr, individueller Anatomie und Aufregung beeinflusst.",
   "app.language": "Sprache",
   "app.page_title": "Schmerzskala für Tattoos & Piercings | Poli International",
   "app.subtitle": "Vergleichende, ehrliche Einschätzungen zum Schmerzempfinden, anatomische Faktoren, Vorbereitungsprotokolle und Beratungshilfen.",

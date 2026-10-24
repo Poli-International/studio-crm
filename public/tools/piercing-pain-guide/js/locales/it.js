@@ -2,7 +2,7 @@
 // Studio-vetted terminology for Italian tattoo artists and body piercers
 window.i18nLocales = window.i18nLocales || {};
 window.i18nLocales.it = {
-  "app.framing": "Approccio professionale onesto: Tutte le valutazioni del dolore (1–10) riflettono osservazioni professionali in studio e intervalli riferiti dai clienti. Il fastidio è intrinsecamente soggettivo e influenzato da stanchezza, idratazione, anatomia specifica e ansia individuale. Nessuna statistica clinica o misurazione simulata.",
+  "app.framing": "Approccio professionale onesto: le valutazioni del dolore (1–10) sono una scala editoriale basata sull’esperienza in studio, non su misurazioni o sondaggi tra i clienti. Il fastidio è intrinsecamente soggettivo e influenzato da stanchezza, idratazione, anatomia specifica e ansia individuale.",
   "app.language": "Lingua",
   "app.page_title": "Guida ai livelli di dolore per tatuaggi e piercing | Poli International",
   "app.subtitle": "Aspettative comparative e realistiche sul fastidio, fattori anatomici, protocolli di preparazione e consigli per la consultazione.",

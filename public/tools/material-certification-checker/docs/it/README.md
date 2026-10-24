@@ -9,7 +9,7 @@ I materiali biocompatibili di grado impiantabile convalidati dagli standard inte
 - **ASTM F136 / ISO 5832-3 Titanio (Ti-6Al-4V ELI)**
 - **BioFlex® Copolimero Medicale PP-R (USP Classe VI / ISO 10993)**
 - **ASTM F138 / ISO 5832-1 Acciaio Inossidabile Chirurgico (316LVM)**
-- **ASTM F2229 Niobio (Non legato)**
+- **ASTM B392 Niobio (Non legato)**
 - **Vetro Borosilicato 3.3 (ISO 3585)**
 - **Oro Massiccio 14K/18K Biocompatibile (Senza nichel)**
 

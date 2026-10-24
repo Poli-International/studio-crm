@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head><meta name="robots" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Voltage Configurator Documentation | Poli International</title>
+    <meta name="description" content="Get a starting voltage range for your machine type, stroke length and technique, with a note to tune from there.">
+    <link rel="canonical" href="https://poliinternational.com/machine-voltage-configurator/">
+    <style>
+        body { background: #0f0f0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; }
+        body.in-iframe .doc-hero h1 { display: none; }
+        * { box-sizing: border-box; }
+        .entry-content { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .doc-hero { background: linear-gradient(135deg, #3B82F6, #8B5CF6); padding: 3rem 2rem; text-align: center; border-radius: 0.75rem; margin-bottom: 2rem; }
+        .doc-hero h1 { font-size: 2.2rem; margin: 0 0 1rem; font-weight: 700; }
+        .doc-hero p { font-size: 1.15rem; color: #E0E7FF; margin: 0; }
+        .doc-hero .v2 { display: inline-block; margin-bottom: 1rem; padding: 0.2rem 0.75rem; border-radius: 999px; background: #10B981; color: #04241a; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; }
+        .doc-section { margin: 2rem 0; padding: 2rem; background: #1a1a1a; border-radius: 0.75rem; border-left: 4px solid #3B82F6; }
+        .doc-section h2 { color: #60A5FA; font-size: 1.7rem; margin: 0 0 1.25rem; font-weight: 600; }
+        .doc-section h3 { color: #A78BFA; font-size: 1.3rem; margin: 1.75rem 0 0.75rem; font-weight: 600; }
+        .doc-section p, .doc-section li { color: #ccc; line-height: 1.75; font-size: 1.02rem; }
+        .doc-section ul, .doc-section ol { padding-left: 1.5rem; }
+        .doc-section li { margin: 0.4rem 0; }
+        .doc-section code { background: #2a2a2a; padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.92em; }
+        .doc-section a { color: #60A5FA; font-weight: 600; }
+        .highlight-box { background: linear-gradient(135deg, #1E3A8A, #4C1D95); padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; border-left: 4px solid #10B981; }
+        .highlight-box p { color: #E0E7FF; margin: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border: 1px solid #333; vertical-align: top; }
+        th { background: #2a2a2a; color: #60A5FA; }
+        td { color: #ccc; }
+        .doc-langs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.5rem; font-size: 0.9rem; }
+        .doc-langs a, .doc-langs span { padding: 0.3rem 0.7rem; border-radius: 999px; border: 1px solid #333; text-decoration: none; }
+        .doc-langs a { color: #60A5FA; }
+        .doc-langs span { background: #1E3A8A; color: #E0E7FF; border-color: #1E3A8A; font-weight: 700; }
+    </style>
+</head>
+<body>
+<nav class="doc-langs" aria-label="Idioma da documentação" style="display:flex;flex-wrap:wrap;gap:6px 14px;max-width:900px;margin:12px auto 0;padding:0 16px;font-size:14px;"><a lang="en" href="documentation.html">English</a><a lang="fr" href="documentation-fr.html">Français</a><a lang="de" href="documentation-de.html">Deutsch</a><a lang="it" href="documentation-it.html">Italiano</a><a lang="es" href="documentation-es.html">Español</a><a lang="nl" href="documentation-nl.html">Nederlands</a><span lang="pt">Português</span><a lang="th" href="documentation-th.html">ไทย</a></nav>
+<script>if (window.self !== window.top) document.body.classList.add('in-iframe');</script>
+    <div class="entry-content">
+        <div class="doc-hero">
+            <span class="v2">V2</span>
+            <h1>Machine Voltage Configurator</h1>
+            <p>Get a starting voltage range for your machine type, stroke length and technique, with a note to tune from there.</p>
+        </div>
+        <p>O Configurador de Voltagem da Máquina fornece janelas de voltagem inicial (uma regra prática de estúdio), mecânica do curso (stroke) e cartões de referência de estação de trabalho imprimíveis para tatuadores que utilizam máquinas rotativas e de bobine.</p>
+        <div class="doc-section">
+        <h2>Para que serve</h2>
+        <p>O Configurador de Voltagem da Máquina fornece um ponto de partida para a voltagem, o curso (stroke) e a configuração da fonte de alimentação da máquina de tatuagem. Em vez de adivinhar números, os artistas correspondem o seu tipo de máquina, comprimento do curso (stroke) e técnica a uma janela inicial, que constitui uma regra prática de estúdio e não uma classificação do fabricante. A ferramenta também explica a mecânica do curso (stroke), verifica a compatibilidade de ligações entre cabos e fontes, e guarda cartões de referência de estação de trabalho personalizados.</p>
+        </div>
+        <div class="doc-section">
+        <h2>A quem se destina</h2>
+        <p>Esta ferramenta foi desenvolvida para:</p>
+        <ul>
+        <li>Tatuadores profissionais que configuram máquinas rotativas pen, máquinas direct drive ou máquinas de bobinas.</li>
+        <li>Aprendizes que estudam como a voltagem, a rotação do excêntrico e a inércia do agrupamento de agulhas afetam o tecido dérmico.</li>
+        <li>Proprietários de estúdios que pretendem estabelecer padrões operacionais homogéneos em todas as bancadas de trabalho.</li>
+        <li>Artistas convidados ou tatuadores em viagem que precisam de calibrar fontes de bancada ou baterias sem fios desconhecidas em convenções ou estúdios parceiros.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Como utilizar</h2>
+        <h3>Cálculo da tensão base e do curso</h3>
+        <ol>
+        <li>Clique em <code>Configurador de Voltagem e Curso</code> na barra de navegação.</li>
+        <li>Em <code>Parâmetros Mecânicos da Máquina</code>, selecione <code>Rotativa (Direct Drive, Slider ou Modelo Pen)</code> ou <code>Máquina de Bobinas (Batedor Eletromagnético)</code>.</li>
+        <li>Escolha o seu <code>Comprimento de Curso (Stroke Excêntrico)</code> entre <code>2,5 mm (Curto / Sombreamentos Muito Suaves e Camadas de Grey Wash)</code> e <code>4,5 mm (Extra Longo / Traços Grossos e Magnums Pesadas)</code>.</li>
+        <li>Selecione <code>Linha / Traço (Lining)</code>, <code>Sombreamento Suave (Shading)</code>, <code>Preenchimento de Cor Sólida (Color Packing)</code> ou <code>Pontilhismo / Chicote (Stippling)</code>.</li>
+        <li>Em <code>Janela de Tensão Sugerida</code>, consulte o <code>Intervalo Básico Inicial</code>, a <code>Velocidade Relativa da Agulha</code>, o <code>Impacto Mecânico Relativo (Punch)</code> e o <code>Ciclo de Trabalho (Duty Cycle)</code>.</li>
+        <li>Clique em <code>Salvar na Ficha 'Minhas Máquinas'</code> para copiar esta configuração para os seus registos.</li>
+        </ol>
+        <h3>Comparação de curso e velocidade</h3>
+        <ol>
+        <li>Clique em <code>Visualizador de Curso e Velocidade</code> na barra de navegação.</li>
+        <li>Em <code>Escolha o curso para comparar:</code>, selecione entre <code>2,5 mm (Curso Curto)</code> e <code>4,5 mm (Curso Pesado)</code>.</li>
+        <li>Em <code>Nível de tensão inicial para teste:</code>, alterne entre <code>Voltagem Baixa</code>, <code>Voltagem Média</code> ou <code>Voltagem Alta</code>.</li>
+        <li>Analise as saídas métricas: <code>Curso Excêntrico:</code>, <code>Frequência Relativa de Ciclo:</code>, <code>Energia de Batida / Punch:</code> e <code>Tempo de Permanência na Pele:</code>.</li>
+        <li>Observe o esquema dinâmico que ilustra o <code>Deslocamento da Roda Excêntrica</code>, a <code>Extensão de Entrada da Agulha</code> e a <code>Linha Limítrofe da Derme (Superfície Cutânea)</code>.</li>
+        </ol>
+        <h3>Guardar e gerir máquinas pessoais</h3>
+        <ol>
+        <li>Clique em <code>Minhas Máquinas (Ficha de Bancada)</code> na barra de navegação.</li>
+        <li>No painel <code>Cadastrar Regulagem de Máquina e Procedimento</code>, introduza o identificador em <code>Identificação da Máquina / Modelo *</code>.</li>
+        <li>Selecione <code>Modelos Rotativos</code> ou <code>Modelos de Bobinas</code>, especifique o <code>Curso da Máquina (mm) *</code> e selecione a <code>Técnica Aplicada *</code>.</li>
+        <li>Indique a <code>Voltagem Testada na Prática (Volts) *</code> e especifique o grupo em <code>Agrupamento de Agulha e Afiação (Taper) *</code>.</li>
+        <li>Adicione notas em <code>Anotações da Sessão / Observações</code>, selecione <code>Desempenho Impecável</code>, <code>Fraco Demais / Perde Força</code> ou <code>Agressivo Demais / Mastiga a Pele</code>, e clique em <code>Salvar Regulagem da Máquina</code>.</li>
+        <li>Filtre as fichas em <code>Fichas de Ponto Salvas</code> com <code>Todas as Máquinas Cadastradas</code>, <code>Modelos Rotativos</code> ou <code>Modelos de Bobinas</code>, ou clique em <code>Excluir Registro</code> para remover uma entrada.</li>
+        </ol>
+        <h3>Verificação de ligações elétricas e fontes de alimentação</h3>
+        <ol>
+        <li>Clique em <code>Verificador de Conexão e Fonte</code> na barra de navegação.</li>
+        <li>Em <code>1. Conector Presente na Máquina</code>, escolha <code>Entrada Fêmea RCA (Rotativas atuais e máquinas tipo pen)</code> ou <code>Pinos para Clipcord (Máquinas tradicionais de bobinas)</code>.</li>
+        <li>Em <code>2. Modelo da Fonte e Amperagem Contínua</code>, selecione uma fonte como <code>Fonte Digital de Bancada (2,0 A – 3,0 A contínuos, com função jumpstart)</code> ou <code>Bateria Portátil de Lítio (Íon de lítio modular, 1500–2000 mAh)</code>.</li>
+        <li>Em <code>3. Cabo de Alimentação Utilizado</code>, escolha <code>Cabo RCA de Alta Condutibilidade</code> ou <code>Cabo Clipcord Convencional de Aço Mola</code>.</li>
+        <li>Clique em <code>Checar Compatibilidade Elétrica</code> para rever alertas de diagnóstico como <code>Cabo Desnecessário Detectado</code>, <code>Incompatibilidade Mecânica</code> ou <code>Partida com Amperagem Limitada</code>.</li>
+        </ol>
+        <h3>Calibração prática pela sensibilidade e ajuste de bobinas</h3>
+        <ol>
+        <li>Clique em <code>Calibração por Sensibilidade e Guia de Bobinas / Baterias</code> na barra de navegação.</li>
+        <li>Siga os passos de teste em pele sintética: <code>1. Fique Atento ao Som do Motor</code>, <code>2. Analise o Fluxo do Pigmento</code> e <code>3. Mude a Tensão em Intervalos Sutis</code>.</li>
+        <li>Ajuste as máquinas de bobinas por sequência mecânica: <code>1. Geometria Mecânica: Haste de agulhas, grommet e biqueira devem correr centralizados sem roçar lateralmente.</code>, <code>2. Distância de Contato: Rosquear o parafuso de contato (aprox. espessura de moeda de dez centavos para traço, cinquenta centavos para sombra).</code>, <code>3. Curvatura da Mola Traseira: Ajustar a inclinação da mola para calibrar o retorno do batedor antes de mexer na fonte.</code> e <code>4. Ajuste Fino de Tensão: Acionar o botão da fonte apenas quando molas e contatos mecânicos estiverem em plena harmonia.</code>.</li>
+        <li>Considere as características das baterias sem fios: <code>1. Queda de Tensão sob Esforço (Voltage Sag)</code>, <code>2. Impulso Auxiliar de Partida (Jumpstart)</code> e <code>3. Instabilidade com Pouca Carga</code>.</li>
+        </ol>
+        <h3>Incorporar a ferramenta no site do estúdio</h3>
+        <ol>
+        <li>Clique em <code>Código de Incorporação</code> na barra de navegação.</li>
+        <li>Localize o código sob <code>Copie o código iframe abaixo (aponta para o domínio oficial da Poli International):</code>.</li>
+        <li>Clique em <code>Copiar Código de Incorporação</code> para copiar a tag iframe HTML.</li>
+        </ol>
+        </div>
+        <div class="doc-section">
+        <h2>O que não faz</h2>
+        <p>O Configurador de Voltagem para Máquinas foca-se estritamente na voltagem inicial, na dinâmica de curso e na compatibilidade de alimentação. Não disponibiliza:</p>
+        <ul>
+        <li>Seleção de afiação de agulhas (taper), diâmetros de cartuchos ou geometria de agrupamentos. Utilize o Seletor de Agulhas em https://poliinternational.com/needle-selector/.</li>
+        <li>Diagnóstico elétrico de falhas de hardware em pedais avariados, fios partidos ou transformadores queimados. Utilize o Guia de Resolução de Problemas de Alimentação em https://poliinternational.com/power-supply-troubleshooter/.</li>
+        <li>Cronogramas de manutenção preventiva, registo de substituição de molas, controlo de autoclave ou relatórios de revisão técnica. Utilize o Registo de Manutenção de Máquinas em https://poliinternational.com/machine-maintenance-logbook/.</li>
+        </ul>
+        </div>
+        <div class="doc-section">
+        <h2>Onde residem os seus dados</h2>
+        <p>Todos os registos de máquinas, notas de voltagem e configurações de bancada criados nesta ferramenta são guardados exclusivamente no navegador local deste dispositivo. Os dados são preservados através de <code>localStorage</code> sob a chave <code>poli_tattoo_machines</code>.</p>
+        <p>Nenhum registo, nome ou configuração de equipamento é transmitido para um servidor externo ou base de dados na nuvem. Os seus dados permanecem armazenados de sessão para sessão até que clique deliberadamente em <code>Excluir Registro</code> num cartão individual ou limpe os dados de navegação do site no seu navegador.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Impressão e exportação</h2>
+        <p>Para gerar uma ficha de bancada física para a sua estação de trabalho:</p>
+        <ol>
+        <li>Clique em <code>Minhas Máquinas (Ficha de Bancada)</code> e consulte as configurações guardadas.</li>
+        <li>Clique em <code>Imprimir Ficha de Bancada para a Estação</code>.</li>
+        <li>O navegador abre a janela de impressão com uma formatação de alto contraste adaptada que omite barras de navegação e botões interativos.</li>
+        <li>Imprima a tabela em papel normal A4 ou carta, plastifique a folha e fixe-a junto da sua fonte de alimentação para consulta imediata.</li>
+        </ol>
+        </div>
+        <div class="doc-section">
+        <h2>Perguntas e respostas</h2>
+        <h3>Que voltagem devo usar para traçar com uma máquina de tatuar rotativa?</h3>
+        <p>Muitas máquinas rotativas funcionam entre cerca de 6,5 V e 8,5 V para traçado (linework), dependendo do curso (stroke) e do binário do motor (um intervalo típico retirado de guias de fontes, e não uma classificação do fabricante). Comece na extremidade inferior e aumente em passos de 0,2 V até que as linhas entrem limpas numa única passagem.</p>
+        <h3>Como é que o comprimento de curso influencia a voltagem da máquina de tatuar?</h3>
+        <p>Um curso curto (2,5 mm a 3,0 mm) opera com ciclos rápidos e batida suave, exigindo uma voltagem ligeiramente superior para vencer a resistência da membrana dos cartuchos. Um curso longo (4,0 mm a 4,5 mm) transporta maior inércia mecânica, deslocando grupos de agulhas volumosos com voltagem moderada, embora exija uma mão mais rápida.</p>
+        <h3>Por que razão a minha máquina abranda quando a agulha toca na pele?</h3>
+        <p>A resistência do tecido dérmico e a tensão da membrana do cartucho aumentam o esforço mecânico sobre o motor, provocando uma queda de tensão em fontes pequenas. Se o tom do motor cair audivelmente ao contactar com a pele, aumente a tensão entre 0,2 V e 0,4 V ou utilize uma fonte de bancada que forneça pelo menos 2,0 A contínuos.</p>
+        <h3>Posso utilizar uma máquina de bobinas com uma bateria sem fios?</h3>
+        <p>As máquinas de bobinas tradicionais só devem ser ligadas a baterias sem fios concebidas especificamente para suportar cargas indutivas. As baterias comuns para máquinas rotativas não possuem amortecimento contra picos de força contraeletromotriz gerados pela faísca do parafuso de contato, o que pode sobreaquecer as células ou acionar circuitos internos de proteção.</p>
+        <h3>Qual é a diferença entre um curso de 3,5 mm e um de 4,0 mm?</h3>
+        <p>Um curso de 3,5 mm equilibra velocidade de ciclo com um impacto moderado, ideal para sombreamentos suaves, degradês de wash e traços intermédios. Um curso de 4,0 mm proporciona uma oscilação de agulha mais longa e uma batida mais firme, destacando-se em linhas grossas consistentes e preenchimento sólido com magnums grandes.</p>
+        <h3>Por que motivo a minha máquina de cartuchos não arranca com baixa voltagem?</h3>
+        <p>As agulhas de cartucho contêm uma membrana de retorno em borracha que oferece resistência ao motor. Alguns motores rotativos têm dificuldade em arrancar contra esta resistência a baixas voltagens; algumas fontes e baterias oferecem um breve impulso de arranque (jumpstart) para colmatar esta situação. Consulte o seu manual.</p>
+        <h3>Como ajusto a abertura do parafuso de contato numa máquina de bobinas?</h3>
+        <p>Desaperte o parafuso de fixação e ajuste o parafuso de contacto até que este toque ligeiramente na mola frontal com a barra de armadura em repouso. Uma regra prática de estúdio: uma folga de cerca de 1,0 mm para traçado rápido, ou de 1,5 mm a 2,0 mm para preenchimento ou sombreado mais suave.</p>
+        <h3>Aumentar a voltagem faz a máquina bater com mais força?</h3>
+        <p>Numa máquina rotativa, uma voltagem superior aumenta a frequência de rotação por segundo e não a força do golpe, que é determinada pelo comprimento de curso do excêntrico. Numa máquina de bobinas, uma tensão mais alta amplia a atração magnética, aumentando a velocidade e a firmeza da batida até ao limite mecânico da mola.</p>
+        </div>
+        <div class="doc-section">
+        <h2>Limites</h2>
+        <p>O Configurador de Voltagem da Máquina fornece bases iniciais que constituem uma regra prática de estúdio, com base na prática comum e em princípios mecânicos. Não consegue medir a resistência do enrolamento do motor, a fricção do rolamento do excêntrico, a fadiga da mola ou a rigidez da membrana do cartucho.</p>
+        <p>Além disso, esta ferramenta não avalia a elasticidade, espessura ou hidratação da pele de cada cliente individual. O tatuador permanece o único responsável por avaliar a resposta do tecido cutâneo, controlar a profundidade da agulha, escutar o som do motor e manter a voltagem de trabalho dentro dos limites estipulados pelo fabricante.</p>
+        </div>
+        <div class="doc-section">
+            <h2>Use the tool</h2>
+            <p><a href="https://poliinternational.com/machine-voltage-configurator/" target="_top">Open the Machine Voltage Configurator</a>. Everything runs in your browser; nothing you enter is sent anywhere.</p>
+        </div>
+    </div>
+</body>
+</html>

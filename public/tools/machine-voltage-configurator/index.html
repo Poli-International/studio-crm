@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="app.page_title">Machine Voltage Configurator | Poli International</title>
+    <meta name="description" content="Tattoo machine voltage, speed, and stroke calibration reference. Calculate starting ranges, visual stroke mechanics, and station reference card.">
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- IFRAME THEME SYNC & EMBED RUNTIME -->
+    <script>
+    (function() {
+        'use strict';
+        if (window.self !== window.top) {
+            var style = document.createElement('style');
+            style.textContent = `
+                header.site-header, footer.site-footer, .site-header__actions { 
+                    display: none !important; 
+                } 
+                body { padding: 0 !important; margin: 0 !important; background: transparent !important; }
+            `;
+            document.head.appendChild(style);
+
+            var poliRoot = document.documentElement;
+            var poliApply = function (light) {
+                poliRoot.setAttribute('data-theme', light ? 'light' : 'dark');
+                var b = document.body;
+                if (b) {
+                    b.classList.toggle('dark-mode', !light);
+                    b.classList.toggle('light-mode', !!light);
+                }
+            };
+            poliApply(false);
+            window.addEventListener('message', function (e) {
+                if (e.data && e.data.type === 'poli-theme') {
+                    poliApply(!!e.data.light);
+                }
+            });
+        }
+    })();
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Machine Voltage Configurator",
+      "url": "https://poliinternational.com/tools/machine-voltage-configurator/",
+      "description": "Calculate starting voltage ranges, visualize stroke mechanics, and maintain personal machine reference cards for tattoo artists.",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@type": "Organization", "name": "Poli International", "url": "https://poliinternational.com" },
+      "creator": { "@type": "Organization", "name": "Poli International", "url": "https://poliinternational.com" },
+      "maintainer": { "@type": "Organization", "name": "Poli International", "url": "https://poliinternational.com" },
+      "dateModified": "2026-09-19",
+      "license": "https://opensource.org/licenses/MIT",
+      "isAccessibleForFree": true
+    }
+    </script>
+</head>
+<body class="dark-mode">
+
+    <!-- STANDARD HEADER -->
+    <header class="site-header">
+        <div class="container site-header__container">
+            <div class="site-header__brand">
+                <img src="./images/Poli-International-Co.webp" alt="Poli International" class="site-header__logo">
+                <div>
+                    <h1 class="site-header__title" data-i18n="app.title">Machine Voltage Configurator</h1>
+                    <p class="site-header__subtitle" data-i18n="app.subtitle">Power Supply &amp; Stroke Calibration Reference for Tattoo Artists</p>
+                </div>
+            </div>
+            <div class="site-header__actions">
+                <div class="lang-selector-group">
+                    <label for="langSelect" data-i18n="lang.select.label">Language:</label>
+                    <select id="langSelect" class="lang-select">
+                        <option value="en" data-i18n="lang.en">English</option>
+                        <option value="de" data-i18n="lang.de">German</option>
+                        <option value="es" data-i18n="lang.es">Spanish</option>
+                        <option value="fr" data-i18n="lang.fr">French</option>
+                        <option value="it" data-i18n="lang.it">Italian</option>
+                        <option value="pt" data-i18n="lang.pt">Portuguese</option>
+                        <option value="nl" data-i18n="lang.nl">Dutch</option>
+                        <option value="th" data-i18n="lang.th">Thai</option>
+                    </select>
+                </div>
+                <button type="button" id="darkModeToggle" class="btn--icon" aria-label="Toggle dark mode" data-i18n-aria="common.aria.dark_mode">
+                    <span class="dark-mode-icon">◐</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- PRINT HEADER FOR WALL CARD -->
+    <div class="container print-header" hidden>
+        <h1 data-i18n="print.title">Tattoo Machine &amp; Voltage Station Reference Card</h1>
+        <p data-i18n="print.subtitle">Artist Workshop Reference • Generated locally from Machine Voltage Configurator V2</p>
+        <p><span data-i18n="print.date">Printed:</span> <strong id="printCurrentDate">-</strong></p>
+    </div>
+
+    <!-- NAVIGATION TABS -->
+    <nav class="tool-tabs" id="mainToolTabs" aria-label="Tool Sections" data-i18n-aria="nav.aria_sections">
+        <button type="button" class="tool-tab active" data-tab="configurator" data-i18n="nav.tool">Voltage &amp; Stroke Configurator</button>
+        <button type="button" class="tool-tab" data-tab="visualizer" data-i18n="nav.visualizer">Stroke &amp; Speed Visualizer</button>
+        <button type="button" class="tool-tab" data-tab="my_machines" data-i18n="nav.my_machines">My Machines (Reference Card)</button>
+        <button type="button" class="tool-tab" data-tab="compatibility" data-i18n="nav.compatibility">Connection &amp; Supply Checker</button>
+        <button type="button" class="tool-tab" data-tab="tuning" data-i18n="nav.tuning">Tuning by Feel &amp; Coil / Battery Guide</button>
+        <button type="button" class="tool-tab" data-tab="docs" data-i18n="nav.docs">Documentation</button>
+        <button type="button" class="tool-tab" data-tab="embed" data-i18n="nav.embed">Embed Code</button>
+    </nav>
+
+    <!-- MAIN INTERFACE -->
+    <main class="container">
+
+        <!-- ==========================================
+             TAB 1: VOLTAGE & STROKE CONFIGURATOR
+             ========================================== -->
+        <section id="tab-configurator" class="tab-pane">
+            <div class="section-intro">
+                <h2 class="section-title" data-i18n="config.title">Starting Voltage Range</h2>
+                <p class="section-desc" data-i18n="config.subtitle">Select your machine type, stroke length and technique to see a starting voltage window. These windows are a studio rule of thumb, not measurements or manufacturer ratings: start low, tune from there, and stay inside your machine maker's range.</p>
+            </div>
+
+            <div class="grid-2col">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title" data-i18n="config.card_title">Machine Parameters</h3>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="machine-type" class="form-label" data-i18n="config.machine_type.label">Machine Architecture</label>
+                        <select id="machine-type" class="form-select">
+                            <option value="rotary" data-i18n="config.machine_type.rotary">Rotary (Direct Drive, Slider, or Pen)</option>
+                            <option value="coil" data-i18n="config.machine_type.coil">Coil Machine (Electromagnetic Armature)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stroke-length" class="form-label" data-i18n="config.stroke.label">Stroke Length (Cam Throw)</label>
+                        <select id="stroke-length" class="form-select">
+                            <option value="2.5" data-i18n="config.stroke.25">2.5 mm (Short / Soft Shading &amp; Fine Wash)</option>
+                            <option value="3.0" data-i18n="config.stroke.30">3.0 mm (Short-Medium / Grey Wash &amp; Smooth Blends)</option>
+                            <option value="3.5" selected data-i18n="config.stroke.35">3.5 mm (Medium / All-Rounder &amp; Medium Groupings)</option>
+                            <option value="4.0" data-i18n="config.stroke.40">4.0 mm (Long / Solid Lining &amp; Color Packing)</option>
+                            <option value="4.5" data-i18n="config.stroke.45">4.5 mm (Extra Long / Heavy Lining &amp; Large Mags)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" data-i18n="config.technique.label">Technique / Application</label>
+                        <div class="btn-grid">
+                            <button type="button" class="choice-btn tech-btn active" data-tech="lining" data-i18n="config.tech.lining">Lining</button>
+                            <button type="button" class="choice-btn tech-btn" data-tech="shading" data-i18n="config.tech.shading">Shading</button>
+                            <button type="button" class="choice-btn tech-btn" data-tech="packing" data-i18n="config.tech.packing">Color Packing</button>
+                            <button type="button" class="choice-btn tech-btn" data-tech="stippling" data-i18n="config.tech.stippling">Dotwork / Stippling</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card range-display-card">
+                    <div class="card-header card-header--full">
+                        <h3 class="card-title" data-i18n="result.range_heading">Recommended Starting Window</h3>
+                    </div>
+
+                    <div class="range-box">
+                        <div class="range-label" data-i18n="result.starting_baseline">Baseline Starting Range</div>
+                        <div class="range-values">
+                            <span id="min-voltage">6.7</span> – <span id="max-voltage">8.8</span>
+                        </div>
+                        <div class="range-unit" data-i18n="result.unit">Volts (DC)</div>
+                    </div>
+
+                    <div class="metric-strip">
+                        <div class="metric-item">
+                            <div class="metric-label" data-i18n="result.relative_speed">Relative Needle Speed</div>
+                            <div class="metric-val" id="speed-rel" data-i18n="result.speed.medium">Medium</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-label" data-i18n="result.impact_punch">Relative Punch</div>
+                            <div class="metric-val" id="force-rel" data-i18n="result.punch.medium">Medium</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-label" data-i18n="result.duty_cycle">Duty Cycle</div>
+                            <div class="metric-val" id="duty-rel" data-i18n="result.duty.fixed">Not usually adjustable on a rotary; if your supply has a duty-cycle setting, follow its manual.</div>
+                        </div>
+                    </div>
+
+                    <p id="tech-description" class="tech-desc"></p>
+
+                    <button type="button" id="quickSaveCurrentBtn" class="btn btn--primary">
+                        <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-save></use></svg><span data-i18n="result.quick_save" style="color:inherit">Save this setup to My Machines Reference Card</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="notice-box warning">
+                <p><strong data-i18n="result.maker_warning">Manufacturer Notice:</strong> <span data-i18n="result.maker_warning_body">Always inspect your machine maker's manual. Operating above the manufacturer's rated maximum voltage can overheat motor armatures, fatigue return springs, and void warranties.</span></p>
+            </div>
+
+            <div class="notice-box">
+                <p><strong data-i18n="result.readout_truth">The Readout is Not the Truth:</strong> <span data-i18n="result.readout_truth_body">Bench and battery display numbers measure what the supply sends, not the mechanical force delivered at the needle. Cord resistance, motor drag, cartridge membrane tension, and tissue resistance reduce effective power. Use your eyes, ears, and hand feedback rather than treating the digital readout as absolute truth.</span></p>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             TAB 2: VOLTAGE, SPEED & STROKE VISUALIZER
+             ========================================== -->
+        <section id="tab-visualizer" class="tab-pane" hidden>
+            <div class="section-intro">
+                <h2 class="section-title" data-i18n="vis.title">Voltage, Speed &amp; Stroke Mechanics</h2>
+                <p class="section-desc" data-i18n="vis.subtitle">How stroke and voltage interact. At the same voltage, a longer stroke moves the needle further on each cycle, so it hits harder; the extra load can also slow the motor slightly.</p>
+            </div>
+
+            <div class="visualizer-container">
+                <div class="grid-2col grid-2col--aligned">
+                    <div class="form-group form-group--flush">
+                        <label for="vis-stroke" class="form-label" data-i18n="vis.stroke_select">Select Stroke to Compare:</label>
+                        <select id="vis-stroke" class="form-select">
+                            <option value="2.5" data-i18n="vis.stroke.25">2.5 mm (Short Throw)</option>
+                            <option value="3.0" data-i18n="vis.stroke.30">3.0 mm (Short-Medium)</option>
+                            <option value="3.5" selected data-i18n="vis.stroke.35">3.5 mm (Standard Throw)</option>
+                            <option value="4.0" data-i18n="vis.stroke.40">4.0 mm (Long Throw)</option>
+                            <option value="4.5" data-i18n="vis.stroke.45">4.5 mm (Heavy Throw)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group form-group--flush">
+                        <label class="form-label" data-i18n="vis.voltage_select">Select Starting Voltage Level:</label>
+                        <div class="btn-grid btn-grid--3col">
+                            <button type="button" class="choice-btn vis-volt-btn" data-volt-level="low" data-i18n="vis.volt_low">Low</button>
+                            <button type="button" class="choice-btn vis-volt-btn active" data-volt-level="med" data-i18n="vis.volt_med">Medium</button>
+                            <button type="button" class="choice-btn vis-volt-btn" data-volt-level="high" data-i18n="vis.volt_high">High</button>
+                        </div>
+                    </div>
+                </div>
+
+                <svg id="mechanicsSvg" class="svg-stage" viewBox="0 0 800 250" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Stroke throw and needle cycle mechanics diagram" data-i18n-aria="vis.aria_diagram">
+                    <line x1="50" y1="200" x2="750" y2="200" class="svg-dermis-line" />
+                    <text x="50" y="220" class="svg-text" data-i18n="vis.svg.dermis_line">Skin Surface Boundary (Dermis Line)</text>
+
+                    <!-- Motor Cam & Throw Circle -->
+                    <circle cx="160" cy="110" r="45" class="svg-orbit-ring" />
+                    <circle id="svgCamCircle" cx="160" cy="85" r="22" fill="var(--primary-light)" stroke="var(--primary-color)" stroke-width="3" />
+                    <text x="160" y="115" text-anchor="middle" class="svg-text--primary" data-i18n="vis.svg.cam_throw">Motor Cam Throw</text>
+
+                    <!-- Armature / Drive Bar Linkage -->
+                    <line x1="160" y1="85" x2="420" y2="90" class="svg-connector" />
+
+                    <!-- Needle Bar Assembly & Cartridge -->
+                    <rect x="390" y="30" width="60" height="150" rx="6" fill="var(--bg-card)" stroke="var(--border-color)" stroke-width="2" />
+                    <text x="420" y="55" text-anchor="middle" class="svg-text" data-i18n="vis.svg.cartridge">Cartridge</text>
+
+                    <!-- Needle Bar with Dynamic Stroke Depth -->
+                    <line id="svgNeedleBar" x1="420" y1="40" x2="420" y2="160" class="svg-needle-bar" />
+                    <circle id="svgNeedleTip" cx="420" cy="160" r="5" class="svg-needle-tip" />
+
+                    <!-- Stroke Range Indicator Bar -->
+                    <rect x="560" y="50" width="22" height="150" rx="4" fill="var(--bg-card-subtle)" stroke="var(--border-subtle)" stroke-width="1" />
+                    <rect id="svgStrokeRange" x="560" y="160" width="22" height="40" rx="4" fill="var(--primary-color)" />
+                    <text x="600" y="100" class="svg-text--bold" data-i18n="vis.svg.needle_throw">Needle Penetration Throw</text>
+                    <text x="600" y="125" class="svg-text" data-i18n="vis.svg.cycle_arc">Relative Cycle Arc</text>
+                </svg>
+
+                <div class="metric-strip metric-strip--spaced">
+                    <div class="metric-item">
+                        <div class="metric-label" data-i18n="vis.metric.stroke">Cam Throw:</div>
+                        <div class="metric-val" id="vis-metric-throw">3.5 mm</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label" data-i18n="vis.metric.speed">Relative Cycle Rate:</div>
+                        <div class="metric-val" id="vis-metric-speed" data-i18n="vis.mech.35.rate">Balanced</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label" data-i18n="vis.metric.inertia">Impact Momentum / Punch:</div>
+                        <div class="metric-val" id="vis-metric-force" data-i18n="vis.mech.35.force">Balanced Punch</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label" data-i18n="vis.metric.skin_contact">Needle Skin Dwell Time:</div>
+                        <div class="metric-val" id="vis-metric-dwell" data-i18n="vis.mech.35.dwell">Medium / Balanced</div>
+                    </div>
+                </div>
+
+                <div class="notice-box">
+                    <p><strong data-i18n="vis.explanation.header">Mechanical Principle:</strong> <span data-i18n="vis.explanation.body">A 4.0mm+ stroke gives the needle bar more momentum and deeper penetration capability with large groupings, but leaves less margin for slow hand speed. A 2.5mm stroke hits softly and rapidly, making it safer for delicate wash layers but prone to snagging if pushed fast on dense linework.</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             TAB 3: MY MACHINES (REFERENCE CARD & PRINT)
+             ========================================== -->
+        <section id="tab-my_machines" class="tab-pane" hidden>
+            <div class="section-intro">
+                <h2 class="section-title" data-i18n="machines.title">My Machines (Personal Reference Card)</h2>
+                <p class="section-desc" data-i18n="machines.subtitle">Record the exact settings you personally use on your machines in your browser. Stored locally on this device.</p>
+            </div>
+
+            <!-- Add Machine Form -->
+            <div class="card card--spaced" id="machineFormCard">
+                <div class="card-header">
+                    <h3 class="card-title" data-i18n="machines.form.title">Add Machine &amp; Technique Setting</h3>
+                </div>
+
+                <form id="machineForm" novalidate>
+                    <div id="formErrorMsg" class="notice-box warning" hidden></div>
+
+                    <div class="grid-2col">
+                        <div class="form-group">
+                            <label for="mach-name" class="form-label" data-i18n="machines.name.label">Machine Name / Model *</label>
+                            <input type="text" id="mach-name" class="form-input" placeholder="e.g., Bishop Wand Liner, FK Irons Flux, Custom Coil Liner" data-i18n-placeholder="machines.placeholder.name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mach-type" class="form-label" data-i18n="machines.type.label">Architecture *</label>
+                            <select id="mach-type" class="form-select">
+                                <option value="rotary" data-i18n="config.machine_type.rotary">Rotary (Direct Drive, Slider, or Pen)</option>
+                                <option value="coil" data-i18n="config.machine_type.coil">Coil Machine (Electromagnetic Armature)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mach-stroke" class="form-label" data-i18n="machines.stroke.label">Stroke (mm) *</label>
+                            <select id="mach-stroke" class="form-select">
+                                <option value="2.5">2.5 mm</option>
+                                <option value="3.0">3.0 mm</option>
+                                <option value="3.5" selected>3.5 mm</option>
+                                <option value="4.0">4.0 mm</option>
+                                <option value="4.5">4.5 mm</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mach-tech" class="form-label" data-i18n="machines.tech.label">Technique *</label>
+                            <select id="mach-tech" class="form-select">
+                                <option value="lining" data-i18n="config.tech.lining">Lining</option>
+                                <option value="shading" data-i18n="config.tech.shading">Shading</option>
+                                <option value="packing" data-i18n="config.tech.packing">Color Packing</option>
+                                <option value="stippling" data-i18n="config.tech.stippling">Dotwork / Stippling</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mach-voltage" class="form-label" data-i18n="machines.voltage.label">Tested Voltage Setting (Volts) *</label>
+                            <input type="number" id="mach-voltage" class="form-input" step="0.1" min="3.0" max="18.0" placeholder="e.g., 7.4" data-i18n-placeholder="machines.placeholder.voltage" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mach-needle" class="form-label" data-i18n="machines.needle.label">Needle Configuration &amp; Taper *</label>
+                            <input type="text" id="mach-needle" class="form-input" placeholder="e.g., 0803RL Long Taper, 1209M1 Medium Taper" data-i18n-placeholder="machines.placeholder.needle" required>
+                            <div class="field-hint">
+                                <a href="https://poliinternational.com/needle-selector/" target="_top" class="footer-link" data-i18n="machines.needle_link">Need guidance selecting needles? Open Needle Selector.</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mach-notes" class="form-label" data-i18n="machines.notes.label">Notes / Session Observations</label>
+                        <textarea id="mach-notes" class="form-textarea" rows="2" placeholder="e.g., Soft membrane cartridges only; runs warm above 8V" data-i18n-placeholder="machines.placeholder.notes"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" data-i18n="machines.evaluation.label">Initial Session Assessment:</label>
+                        <div class="radio-eval-group">
+                            <label class="radio-eval-label">
+                                <input type="radio" name="mach-eval" value="worked" checked>
+                                <span class="eval-badge worked" data-i18n="machines.eval.worked">Worked Well</span>
+                            </label>
+                            <label class="radio-eval-label">
+                                <input type="radio" name="mach-eval" value="too_soft">
+                                <span class="eval-badge too_soft" data-i18n="machines.eval.too_soft">Too Soft / Bogged</span>
+                            </label>
+                            <label class="radio-eval-label">
+                                <input type="radio" name="mach-eval" value="too_harsh">
+                                <span class="eval-badge too_harsh" data-i18n="machines.eval.too_harsh">Too Harsh / Chew</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn--primary" data-i18n="machines.save_btn">Save Machine Setting</button>
+                </form>
+            </div>
+
+            <!-- Saved Machines Reference List -->
+            <div class="card">
+                <div class="card-header card-header--split">
+                    <h3 class="card-title" data-i18n="machines.list.title">Saved Machine Reference Cards</h3>
+                    <div class="card-actions">
+                        <select id="archFilter" class="form-select arch-filter-select">
+                            <option value="all" data-i18n="machines.filter.all">All Architectures</option>
+                            <option value="rotary" data-i18n="config.machine_type.rotary">Rotary</option>
+                            <option value="coil" data-i18n="config.machine_type.coil">Coil</option>
+                        </select>
+                        <button type="button" id="printCardBtn" class="btn btn--secondary btn--small">
+                            <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-print></use></svg><span data-i18n="machines.print_btn" style="color:inherit">Print Reference Card for Station Wall</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="machineEmptyMsg" class="notice-box" data-i18n="machines.list.empty">
+                    No machines saved yet. Enter your machine and tested settings above to build your station reference card.
+                </div>
+
+                <div class="machine-table-wrapper">
+                    <table class="machine-table" aria-label="Saved tattoo machines and settings" data-i18n-aria="machines.aria_table">
+                        <thead>
+                            <tr>
+                                <th data-i18n="print.table.machine">Machine / Model</th>
+                                <th data-i18n="print.table.type">Type</th>
+                                <th data-i18n="print.table.stroke">Stroke</th>
+                                <th data-i18n="print.table.tech">Technique</th>
+                                <th data-i18n="print.table.voltage">Tested Voltage</th>
+                                <th data-i18n="print.table.needle">Needle Config &amp; Taper</th>
+                                <th data-i18n="print.table.eval">Evaluation</th>
+                                <th class="action-col" data-i18n="print.table.notes">Notes / Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="machineListBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Printable Layout Table (Target for Print Engine) -->
+            <div id="printableCardArea" hidden>
+                <div class="print-baseline-section">
+                    <h4 data-i18n="print.starting_ref_title" class="print-baseline-title">Starting Ranges (Studio Rule of Thumb, For Reference)</h4>
+                    <table class="machine-table">
+                        <thead>
+                            <tr>
+                                <th data-i18n="print.ref.machine_type">Machine Type</th>
+                                <th data-i18n="print.ref.stroke">Stroke</th>
+                                <th data-i18n="print.ref.lining">Lining Window</th>
+                                <th data-i18n="print.ref.shading">Shading Window</th>
+                                <th data-i18n="print.ref.packing">Packing Window</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-i18n="print.ref.rotary_slider">Rotary Pen / Slider</td>
+                                <td>3.5 mm</td>
+                                <td>6.7V – 8.8V</td>
+                                <td>5.5V – 7.5V</td>
+                                <td>7.0V – 9.2V</td>
+                            </tr>
+                            <tr>
+                                <td data-i18n="print.ref.rotary_direct">Rotary Pen / Direct Drive</td>
+                                <td>4.0 mm</td>
+                                <td>7.2V – 9.4V</td>
+                                <td>6.0V – 8.1V</td>
+                                <td>7.5V – 9.8V</td>
+                            </tr>
+                            <tr>
+                                <td data-i18n="print.ref.coil_standard">Coil Machine (Standard)</td>
+                                <td>3.5 mm</td>
+                                <td>7.2V – 9.5V</td>
+                                <td>5.6V – 7.8V</td>
+                                <td>7.4V – 9.8V</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="print-disclaimer-text" data-i18n="print.disclaimer">NOTICE: Printout of user-entered settings and starting ranges that are a studio rule of thumb. Not manufacturer ratings or a warranty.</p>
+                </div>
+                <table class="machine-table">
+                    <tbody id="printTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             TAB 4: CONNECTION & SUPPLY COMPATIBILITY
+             ========================================== -->
+        <section id="tab-compatibility" class="tab-pane" hidden>
+            <div class="section-intro">
+                <h2 class="section-title" data-i18n="compat.title">Connection &amp; Power Supply Compatibility</h2>
+                <p class="section-desc" data-i18n="compat.subtitle">Verify whether your machine connection, supply output, and cord match safely before turning on power.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title" data-i18n="compat.checklist_heading">Compatibility Checklist</h3>
+                </div>
+
+                <div class="grid-2col">
+                    <div class="form-group">
+                        <label for="compat-conn" class="form-label" data-i18n="compat.connection.label">1. Machine Connection Type</label>
+                        <select id="compat-conn" class="form-select">
+                            <option value="rca" data-i18n="compat.conn.rca">RCA Jack (Most modern rotaries and pens)</option>
+                            <option value="clipcord" data-i18n="compat.conn.clipcord">Clip Cord (Traditional coil machines)</option>
+                            <option value="cheyenne" data-i18n="compat.conn.cheyenne">3.5 mm Mini-Jack (Proprietary / Cheyenne type)</option>
+                            <option value="wireless" data-i18n="compat.conn.wireless">Wireless Battery Pack (Direct mount via RCA or custom socket)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="compat-supply" class="form-label" data-i18n="compat.supply.label">2. Power Supply Type &amp; Amperage</label>
+                        <select id="compat-supply" class="form-select">
+                            <option value="bench_high" data-i18n="compat.supply.bench_high">Bench Digital Supply (Continuous 2.0A - 3.0A output, jumpstart feature)</option>
+                            <option value="bench_low" data-i18n="compat.supply.bench_low">Compact Mini Supply (1.0A - 1.5A output, no jumpstart)</option>
+                            <option value="wireless_pack" data-i18n="compat.supply.wireless_pack">Wireless Modular Battery Pack (Lithium-ion, 1500-2000mAh)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="compat-cable" class="form-label" data-i18n="compat.cable.label">3. Connection Lead / Cable</label>
+                    <select id="compat-cable" class="form-select">
+                        <option value="rca" data-i18n="compat.cable.rca">Standard Heavy-Duty RCA Cord</option>
+                        <option value="clipcord" data-i18n="compat.cable.clipcord">Standard Spring Clip Cord</option>
+                        <option value="adapter" data-i18n="compat.cable.adapter">3.5 mm to 6.35 mm (1/4 in) Heavy Jack Adapter Cord</option>
+                        <option value="direct" data-i18n="compat.cable.direct">Direct Battery Mount (No external cable)</option>
+                    </select>
+                </div>
+
+                <button type="button" id="compatCheckBtn" class="btn btn--primary" data-i18n="compat.check_btn">
+                    Check Compatibility Checklist
+                </button>
+
+                <div id="compatResultBox"></div>
+
+                <div class="section-footer-link">
+                    <a href="https://poliinternational.com/power-supply-troubleshooter/" target="_top" class="footer-link" data-i18n="compat.troubleshooter_link">
+                        Having intermittent shutoffs or power drops? Open Power Supply Troubleshooter.
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             TAB 5: TUNING BY FEEL, COILS & BATTERIES
+             ========================================== -->
+        <section id="tab-tuning" class="tab-pane" hidden>
+            <div class="section-intro">
+                <h2 class="section-title" data-i18n="tuning.title">Tuning by Feel, Coils &amp; Battery Dynamics</h2>
+                <p class="section-desc" data-i18n="tuning.subtitle">Practical studio checks for dialing in power supplies on practice skin, understanding coil mechanics, and managing wireless battery voltage sag.</p>
+            </div>
+
+            <!-- Article 1: Tuning on Skin Practice -->
+            <article class="card tuning-article">
+                <h3 data-i18n="tuning.feel.title">Tuning on Skin Practice: Three Essential Steps</h3>
+                <ul class="step-list">
+                    <li class="step-item">
+                        <div class="step-title" data-i18n="tuning.feel.step1.title">1. Listen to the Motor Pitch</div>
+                        <div class="step-desc" data-i18n="tuning.feel.step1.body">A healthy rotary produces a smooth, consistent electric hum. If the pitch sags, sputters, or drops when the needle enters skin, the motor is struggling against membrane tension or tissue drag. If it screams at a high whine, the motor is over-revving.</div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-title" data-i18n="tuning.feel.step2.title">2. Inspect the Needle Entry</div>
+                        <div class="step-desc" data-i18n="tuning.feel.step2.body">Lines should deposit pigment crisply on a single continuous pass. If the needle snags or skips, do not just push harder: evaluate whether needle stroke or voltage needs a 0.2V-0.4V increase. For shading, look for controlled stipple dots rather than gouging tears.</div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-title" data-i18n="tuning.feel.step3.title">3. Adjust in Minimal Increments</div>
+                        <div class="step-desc" data-i18n="tuning.feel.step3.body">Never jump full volts. Tune in 0.2V to 0.5V steps. Run several test passes after each adjustment before touching the dial again.</div>
+                    </li>
+                </ul>
+            </article>
+
+            <!-- Article 2: Coils Are Not a Voltage -->
+            <article class="card tuning-article card--spaced">
+                <h3 data-i18n="tuning.coil.title">Coil Machines Are Not a Voltage</h3>
+                <p data-i18n="tuning.coil.intro">On a traditional coil machine, the voltage readout is only one part of the circuit. Contact screw gap, front and rear spring tension, armature bar weight, and capacitor microfarad rating (uF) dictate the stroke cycle.</p>
+
+                <h4 class="subhead" data-i18n="tuning.coil.order.title">Proper Mechanical Tuning Order for Coils:</h4>
+                <ul class="sublist">
+                    <li data-i18n="tuning.coil.order.1">1. Mechanical alignment: Seat needle bar, grommet, and tube straight without lateral binding.</li>
+                    <li data-i18n="tuning.coil.order.2">2. Contact screw gap: set the gap before raising voltage (a studio rule of thumb: about a dime's thickness for a liner, a nickel's for a shader).</li>
+                    <li data-i18n="tuning.coil.order.3">3. Spring tension: Adjust rear spring angle to balance armature return speed before raising voltage.</li>
+                    <li data-i18n="tuning.coil.order.4">4. Fine voltage calibration: Adjust power supply voltage only after mechanics and springs are aligned.</li>
+                </ul>
+
+                <h4 class="subhead" data-i18n="tuning.coil.limits.title">What Voltage CAN and CANNOT Fix on a Coil:</h4>
+                <div class="notice-box">
+                    <strong data-i18n="tuning.coil.limits.can">Voltage CAN:</strong> <span data-i18n="tuning.coil.limits.can_desc">Adjust magnetic pull strength and cycle frequency within the range allowed by the spring gauge.</span>
+                </div>
+                <div class="notice-box warning">
+                    <strong data-i18n="tuning.coil.limits.cannot">Voltage CANNOT:</strong> <span data-i18n="tuning.coil.limits.cannot_desc">Fix fatigued springs, a pitted contact screw, loose binding posts, or mismatched capacitor microfarads. Cranking voltage on an untuned coil causes severe sparking, hot coils, and rapid contact erosion.</span>
+                </div>
+
+                <div class="section-footer-link">
+                    <a href="https://poliinternational.com/machine-maintenance-logbook/" target="_top" class="footer-link" data-i18n="tuning.maintenance_link">
+                        Need mechanical spring alignment or coil maintenance steps? Open Machine Maintenance Logbook.
+                    </a>
+                </div>
+            </article>
+
+            <!-- Article 3: Wireless Battery Packs -->
+            <article class="card tuning-article card--spaced">
+                <h3 data-i18n="tuning.wireless.title">Wireless Battery Packs Behave Differently</h3>
+                <p data-i18n="tuning.wireless.intro">Wireless battery packs are now common in studios. Keep these three points in mind:</p>
+
+                <div class="grid-2col">
+                    <div class="metric-item">
+                        <h4 class="subhead" data-i18n="tuning.wireless.sag.title">1. Voltage Sag Under Load</h4>
+                        <p class="step-desc" data-i18n="tuning.wireless.sag.body">Under load, a battery pack's real output can drop below the number on its display, usually more than a bench supply's. If the machine slows when the needle enters the skin, check the pack's charge and output.</p>
+                    </div>
+                    <div class="metric-item">
+                        <h4 class="subhead" data-i18n="tuning.wireless.jump.title">2. Jumpstart Features</h4>
+                        <p class="step-desc" data-i18n="tuning.wireless.jump.body">A stiff cartridge membrane can stop some rotary motors from starting at low voltages. Some packs and supplies give a short start-up boost (jumpstart); check your manual to see whether yours does.</p>
+                    </div>
+                </div>
+
+                <div class="metric-item card--spaced">
+                    <h4 class="subhead" data-i18n="tuning.wireless.decay.title">3. Low-Charge Output Drop</h4>
+                    <p class="step-desc" data-i18n="tuning.wireless.decay.body">When the battery runs low, some packs give a less steady output. Keep a second charged battery at your station and swap before the charge indicator turns red.</p>
+                </div>
+            </article>
+        </section>
+
+        <!-- ==========================================
+             TAB 6: DOCUMENTATION (IN-APP & EMBEDDED)
+             ========================================== -->
+        <section id="tab-docs" class="tab-pane" hidden>
+            <div class="section-intro">
+                <h2 class="section-title" data-i18n="docs.title">Machine Voltage Configurator Documentation</h2>
+                <p class="section-desc" data-i18n="docs.generated_from">Generated from the official technical user guide.</p>
+            </div>
+
+            <div class="card doc-iframe-card">
+                <iframe src="./documentation.html" class="doc-iframe" title="Machine Voltage Configurator Documentation" data-i18n-title="docs.title"></iframe>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             TAB 7: EMBED CODE (SINGLE CLEAN SECTION)
+             ========================================== -->
+        <section id="tab-embed" class="tab-pane" hidden>
+            <div class="section-intro text-center">
+                <h2 class="section-title" data-i18n="embed.title">Embed This Tool on Your Website</h2>
+                <p class="section-desc" data-i18n="embed.subtitle">Studios, conventions, and educational academies may embed the Machine Voltage Configurator on their websites free of charge.</p>
+            </div>
+
+            <div class="card embed-card">
+                <p class="form-label" data-i18n="embed.code_label">Copy iframe code below (uses official Poli International hosted URL):</p>
+                <textarea id="embedCodeArea" class="embed-textarea" readonly>&lt;iframe src="https://poliinternational.com/tools/machine-voltage-configurator/index.html" width="100%" height="900" frameborder="0" style="border-radius:12px;"&gt;&lt;/iframe&gt;</textarea>
+                <div>
+                    <button type="button" id="copyEmbedBtn" class="btn btn--primary" onclick="copyEmbedSnippet()">
+                        <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none;margin-inline-end:.35em><use href=../shared/icons.svg#i-clipboard></use></svg><span data-i18n="embed.copy_btn" style="color:inherit">Copy Embed Code</span>
+                    </button>
+                </div>
+                <div class="notice-box notice-box--spaced text-left" data-i18n="embed.terms">
+                    The embed is licensed under MIT. Embeds run client-side in an iframe; no cookies, telemetry, or client tracking data are recorded.
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- STANDARD FOOTER -->
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <div class="site-header__brand">
+                <img src="./images/Poli-International-Co.webp" alt="Poli International" class="site-header__logo">
+                <div>
+                    <strong class="footer-brand-name" data-i18n="app.title">Machine Voltage Configurator</strong>
+                    <div class="footer-copy" data-i18n="footer.copyright">© 2026 Poli International Ltd. | Free Open-Source Studio Engineering Tools</div>
+                </div>
+            </div>
+
+            <div>
+                <div class="footer-links-title" data-i18n="footer.links_heading">Related Poli International Free Studio Tools:</div>
+                <div class="footer-links-grid">
+                    <a href="https://poliinternational.com/needle-selector/" target="_top" class="footer-link" data-i18n="footer.needle_selector">Needle Selector</a>
+                    <a href="https://poliinternational.com/power-supply-troubleshooter/" target="_top" class="footer-link" data-i18n="footer.power_troubleshooter">Power Supply Troubleshooter</a>
+                    <a href="https://poliinternational.com/machine-maintenance-logbook/" target="_top" class="footer-link" data-i18n="footer.maintenance_log">Machine Maintenance Logbook</a>
+                    <a href="https://poliinternational.com/tools/" target="_top" class="footer-link" data-i18n="footer.all_tools">All Free Studio Tools</a>
+                </div>
+            </div>
+
+            <div class="footer-meta" data-i18n="brand.disclaimer">Free professional tool for tattoo artists. Starting ranges are a studio rule of thumb only. Always follow your machine maker's specifications.</div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="./js/i18n.js"></script>
+    <script src="./js/database.js"></script>
+    <script src="./js/my-machines.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/common.js"></script>
+<script src="../shared/tool-name.js" data-th="ตัวตั้งค่าแรงดันไฟเครื่องสัก" data-en="Machine Voltage Configurator" defer></script>
+</body>
+</html>

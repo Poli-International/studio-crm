@@ -433,6 +433,15 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.33
+
+**Tattoo price estimator and pricing benchmark at 2026 prices; ink decoder in Thai (2026-10-24).**
+- **Tattoo price estimator.** Nine markets instead of five, the same nine as the pricing benchmark: Canada (C$), Central & Eastern Europe, South America (Brazil) and South East Asia (Thailand) join the UK, London, the US, Western Europe and Australia. Every figure (shop minimum, standard and specialist hourly rate, day rate, deposit) is at 2026 levels, from studio price lists and cost guides published in 2026; the tool shows "Prices updated: 2026" and lists its sources per market in its Documentation tab. Thai interface; German uses "Sie". Amounts of 1,000 and more are grouped the way each language writes them. The tabs and the embed section around the tool are translated, and the embed code uses the full poliinternational.com address.
+- **Your Studio Quote** (the CRM panel under the estimator) still prices the estimated hours at your own rate, minimum, tax and deposit from Settings, in your own currency. Its market-reference line now reads grouped amounts. Checked in English, German, French and Thai.
+- **Studio pricing benchmark.** Tattoo minimum, hourly and full-day ranges at 2026 levels in seven markets (London and Australia already matched), from the same sources as the estimator; "Figures last reviewed: October 2026".
+- **Tattoo price estimator guide** (the documentation pages) rewritten from the tool's own Documentation text in all 8 languages: it described the retired AI version ("AI-powered", square-inch pricing, an image studio).
+- **Tattoo ink ingredient decoder.** Thai interface. English names and synonyms are recognised in every language (six languages missed one ingredient of the blue sample label). The "not listed" reason is translated. Unused code removed: the RAPEX tab with its sample alerts, the photo scan and the QR image.
+
 ### 1.0.32
 
 **Tool corrections from the website (2026-10-23), checked against current sources.**

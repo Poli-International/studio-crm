@@ -9,7 +9,7 @@ Os materiais biocompatíveis de grau de implante validados por normas internacio
 - **ASTM F136 / ISO 5832-3 Titânio (Ti-6Al-4V ELI)**
 - **BioFlex® Copolímero Médico PP-R (USP Classe VI / ISO 10993)**
 - **ASTM F138 / ISO 5832-1 Aço Inoxidável Cirúrgico (316LVM)**
-- **ASTM F2229 Nióbio (Não ligado)**
+- **ASTM B392 Nióbio (Não ligado)**
 - **Vidro Borossilicato 3.3 (ISO 3585)**
 - **Ouro Maciço 14K/18K Biocompatível (Sem níquel)**
 

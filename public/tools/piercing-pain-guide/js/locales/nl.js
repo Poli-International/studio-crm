@@ -1,7 +1,7 @@
 // Dutch dictionary for Tattoo & Piercing Pain Level Guide
 window.i18nLocales = window.i18nLocales || {};
 window.i18nLocales.nl = {
-  "app.framing": "Eerlijke professionele context: Alle pijnscores (1–10) zijn gebaseerd op observaties in professionele studio's en ervaringen van klanten. Ongemak is inherent subjectief en wordt beïnvloed door vermoeidheid, hydratatie, anatomie en zenuwen. Geen klinische statistieken of gesimuleerde metingen.",
+  "app.framing": "Eerlijke professionele context: de pijnscores (1–10) zijn een redactionele schaal op basis van studio-ervaring, geen metingen of klantenenquête. Ongemak is inherent subjectief en wordt beïnvloed door vermoeidheid, hydratatie, anatomie en zenuwen.",
   "app.language": "Taal",
   "app.page_title": "Pijnschaal voor Tattoos & Piercings | Poli International",
   "app.subtitle": "Vergelijkende, eerlijke verwachtingen over pijn per lichaamszone, anatomische factoren, voorbereidingsprotocollen en studio-voorbereidingsformulieren.",

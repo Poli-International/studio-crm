@@ -48,7 +48,7 @@ Poli International
     {
       id: 'bioflex',
       name: 'BioFlex® Medical Polymer (PP-R)',
-      autoclave: '121°C - 134°C (Steam autoclave compatible, zero degradation)',
+      autoclave: '121°C - 134°C (withstands standard steam autoclave cycles)',
       ultrasonic: 'Suitable with low-temperature enzymatic bath',
       dryHeat: 'Not recommended for dry heat or dry glass bead sterilizers',
       chemicalDisinfection: 'High-level disinfectant safe (IPA and chlorhexidine compatible)',
@@ -56,7 +56,7 @@ Poli International
     },
     {
       id: 'niobium',
-      name: 'ASTM F2229 Niobium (Unalloyed)',
+      name: 'ASTM B392 Niobium (Unalloyed)',
       autoclave: '121°C - 134°C (Steam autoclave safe)',
       ultrasonic: 'Suitable with enzymatic wash',
       dryHeat: 'Compatible up to 200°C',

@@ -9,7 +9,7 @@ Biokompatible Werkstoffe in Implantatqualität gemäß internationalen Normen um
 - **ASTM F136 / ISO 5832-3 Titan (Ti-6Al-4V ELI)**
 - **BioFlex® Medizinisches PP-R Copolymer (USP Class VI / ISO 10993)**
 - **ASTM F138 / ISO 5832-1 Implantat-Edelstahl (316LVM)**
-- **ASTM F2229 Niob (Unlegiert)**
+- **ASTM B392 Niob (Unlegiert)**
 - **Borosilikatglas 3.3 (ISO 3585)**
 - **Massives 14K/18K biokompatibles Gold (Nickelfrei)**
 

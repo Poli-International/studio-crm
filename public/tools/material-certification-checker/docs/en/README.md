@@ -9,7 +9,7 @@ Biocompatible implant-grade materials recognized by international standards incl
 - **ASTM F136 / ISO 5832-3 Titanium (Ti-6Al-4V ELI)**
 - **BioFlex® Medical PP-R Copolymer (USP Class VI / ISO 10993)**
 - **ASTM F138 / ISO 5832-1 Implant Stainless Steel (316LVM)**
-- **ASTM F2229 Niobium (Unalloyed)**
+- **ASTM B392 Niobium (Unalloyed)**
 - **Borosilicate Glass 3.3 (ISO 3585)**
 - **Solid 14K / 18K Biocompatible Gold**
 

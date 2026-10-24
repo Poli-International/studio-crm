@@ -9,7 +9,7 @@ Les matériaux biocompatibles de qualité implantable reconnus par les normes in
 - **ASTM F136 / ISO 5832-3 Titane (Ti-6Al-4V ELI)**
 - **BioFlex® Copolymère Médical PP-R (USP Classe VI / ISO 10993)**
 - **ASTM F138 / ISO 5832-1 Acier Inoxydable d'Implantation (316LVM)**
-- **ASTM F2229 Niobium (Non allié)**
+- **ASTM B392 Niobium (Non allié)**
 - **Verre Borosilicate 3.3 (ISO 3585)**
 - **Or Massif 14K/18K Biocompatible (Sans nickel)**
 

@@ -9,7 +9,7 @@ Biocompatibele materialen van implantaatkwaliteit volgens internationale normen 
 - **ASTM F136 / ISO 5832-3 Titanium (Ti-6Al-4V ELI)**
 - **BioFlex® Medisch PP-R Copolymeer (USP Klasse VI / ISO 10993)**
 - **ASTM F138 / ISO 5832-1 Implantaat RVS (316LVM)**
-- **ASTM F2229 Niobium (Ongelegeerd)**
+- **ASTM B392 Niobium (Ongelegeerd)**
 - **Borosilicaatglas 3.3 (ISO 3585)**
 - **Massief 14K/18K Biocompatibel Goud (Nikkelvrij)**
 

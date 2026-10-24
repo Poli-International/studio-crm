@@ -82,12 +82,13 @@
         <div class="doc-section">
             <h2>Curvature Compensation</h2>
             <table>
-                <tr><th>Body Area</th><th>Compensation Factor</th><th>Notes</th></tr>
-                <tr><td>Flat (back, chest)</td><td>1.0x</td><td>No adjustment needed</td></tr>
-                <tr><td>Moderate (thigh, forearm)</td><td>1.05-1.1x</td><td>Slight stretch</td></tr>
-                <tr><td>High (bicep, calf)</td><td>1.15-1.2x</td><td>Significant curve</td></tr>
-                <tr><td>Extreme (ankle, wrist)</td><td>1.25-1.35x</td><td>Maximum curvature</td></tr>
+                <tr><th>Body Area</th><th>Width Factor</th><th>Notes</th></tr>
+                <tr><td>Flatter areas (outer forearm, shin, upper back)</td><td>1.12x</td><td>Light curve</td></tr>
+                <tr><td>Upper arm, inner forearm, thigh, calf, lower and full back, sleeve</td><td>1.14-1.18x</td><td>Moderate curve</td></tr>
+                <tr><td>Chest, inner thigh, wrist</td><td>1.20-1.22x</td><td>Strong curve</td></tr>
+                <tr><td>Ribs</td><td>1.25x</td><td>Strongest curve in the tool</td></tr>
             </table>
+            <p>These factors are a studio rule of thumb, not measurements. A horizontal placement adds 5% to the factor, a wraparound 10%. Always check the stencil on the skin before you start.</p>
         </div>
         <div class="doc-section">
             <h2>Technical Details</h2>
@@ -109,19 +110,19 @@
             <h2>Frequently Asked Questions</h2>
             <div class="faq-item" style="margin-bottom: 1.5rem;">
                 <p><strong>How do I account for the curve of a ribcage?</strong></p>
-                <p>Use the 'Convex' modifier in the settings to add a 5% width buffer, preventing the design from looking 'pinched' on the ribs.</p>
+                <p>Choose Ribs as the body zone: it has the highest factor in the tool (1.25x). For a design that wraps around the side, choose the wraparound orientation, which adds 10%.</p>
             </div>
             <div class="faq-item" style="margin-bottom: 1.5rem;">
                 <p><strong>Does the tool work for thermal or inkjet stencils?</strong></p>
                 <p>The dimensions provided are universal and apply to any stencil production method you use.</p>
             </div>
             <div class="faq-item" style="margin-bottom: 1.5rem;">
-                <p><strong>What is the 'Golden Ratio' feature?</strong></p>
-                <p>This automatically suggests design widths that are mathematically balanced to the client's limb circumference.</p>
+                <p><strong>Does the calculator measure my client?</strong></p>
+                <p>No. It uses one factor per body zone, a studio rule of thumb based on how a flat design looks narrower on a curve. Check the stencil on the skin and adjust before you start.</p>
             </div>
             <div class="faq-item" style="margin-bottom: 1.5rem;">
                 <p><strong>How do I prevent the stencil from smearing?</strong></p>
-                <p>While our tool handles the sizing, we recommend a high-quality transfer solution and at least 15 minutes of drying time.</p>
+                <p>Use a thin layer of transfer solution and let the stencil dry fully before you tattoo; follow the drying time on your product's label.</p>
             </div>
             <div class="faq-item" style="margin-bottom: 1.5rem;">
                 <p><strong>Can I scale by percentage?</strong></p>

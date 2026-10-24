@@ -206,14 +206,19 @@ await flow('Flash: a sheet, a design with no price prints POA, edit, claim for a
   await press('#flash-grid > div', 'Flow Moth', 'Edit');
   await b.evaluate(`document.getElementById('flash-status-select').value = 'repeatable'`);
   await b.clickText('Save Changes', '#upload-flash-modal');
+  // the available card already has a Claim button: wait for the saved status, or a slow runner claims it as available
+  await eventually(async () => (await api('/api/flash')).find((x) => x.title === 'Flow Moth').status === 'repeatable' && (await text('#flash-grid')).includes('Repeatable'), 'the design did not become repeatable');
   for (let i = 0; i < 2; i++) {
     await eventually(async () => !!(await rowButton('#flash-grid > div', 'Flow Moth', 'Claim')), 'a repeatable design has no Claim button');
     await press('#flash-grid > div', 'Flow Moth', 'Claim');
     await b.type('#flash-claim-client-search', 'Flash Flow');
     await eventually(async () => (await text('#flash-claim-client-autocomplete-dropdown')).includes('Flash Flow Client'), 'typing a name does not offer the client');
     await b.evaluate(`document.querySelector('#flash-claim-client-autocomplete-dropdown [data-id="${client.id}"]').dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }))`);
+    // a second booking is another day: the same form sent twice within 1.5 s is dropped as a double tap
+    if (i === 1) await b.evaluate(`document.getElementById('flash-claim-date').value = '2030-01-15'`);
     await b.clickText('Save Claim', '#flash-claim-modal');
-    await sleep(300);
+    const booked = i === 0 ? 'Booked once' : 'Booked 2 times';
+    await eventually(async () => (await text('#flash-grid')).includes(booked), 'a repeatable design does not count its bookings');
   }
   await eventually(async () => (await text('#flash-grid')).includes('Booked 2 times'), 'a repeatable design does not count its bookings');
   check((await text('#flash-summary')).includes('Repeatable'), 'no summary strip');

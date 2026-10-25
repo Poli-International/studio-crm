@@ -4903,7 +4903,7 @@ docker compose up -d</pre>
     pending = { clientId: clientId || null, clientName: clientName || '' };
     frame = document.getElementById('form-builder-frame');
     document.getElementById('form-builder-client').textContent =
-      clientName ? ('Client: ' + clientName) : 'No client selected';
+      clientName ? (pdfLabel('Client:') + ' ' + clientName) : 'No client selected';
     var status = document.getElementById('form-builder-status');
     if (!frame.getAttribute('src')) {
       if (status) status.textContent = 'Loading the form builder, this takes a few seconds the first time...';
@@ -5028,7 +5028,7 @@ docker compose up -d</pre>
           }
           clientId = same.id; clientName = same.name;
           pending = { clientId: clientId, clientName: clientName };
-          document.getElementById('form-builder-client').textContent = 'Client: ' + clientName;
+          document.getElementById('form-builder-client').textContent = pdfLabel('Client:') + ' ' + clientName;
         }
         var r = await fetch('/api/clients/' + encodeURIComponent(clientId) + '/consent-forms', {
           method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(e.data)
@@ -5097,7 +5097,7 @@ docker compose up -d</pre>
     modal = document.getElementById('poli-aftercare-modal');
     frame = document.getElementById('poli-aftercare-frame');
     document.getElementById('poli-aftercare-client').textContent =
-      clientName ? ('Client: ' + clientName) : '';
+      clientName ? (pdfLabel('Client:') + ' ' + clientName) : '';
 
     if (!frame.getAttribute('src')) {
       var status = document.getElementById('poli-aftercare-status');

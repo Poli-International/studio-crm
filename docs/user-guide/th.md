@@ -4,7 +4,7 @@ Studio CRM ทำงานบนคอมพิวเตอร์เครื่
 
 ## การติดตั้งและเริ่มใช้งาน
 
-1. ดาวน์โหลดไฟล์ ZIP ของ Studio CRM สำหรับคอมพิวเตอร์ของคุณ (Windows, Mac หรือ Linux) จากหน้า Studio CRM มี Node.js รวมอยู่ในไฟล์แล้ว ไม่ต้องติดตั้งอะไรเพิ่ม
+1. ดาวน์โหลดไฟล์ ZIP ของ Studio CRM สำหรับคอมพิวเตอร์ของคุณ (Windows, Mac หรือ Linux) จาก[หน้า Studio CRM](https://poliinternational.com/studio-crm/th/) มี Node.js รวมอยู่ในไฟล์แล้ว ไม่ต้องติดตั้งอะไรเพิ่ม
 2. แตกไฟล์ ZIP แล้ววางโฟลเดอร์ `studio-crm` ไว้ในที่ที่จะเก็บไว้ถาวร เช่น ในโฟลเดอร์ Documents
 3. ดับเบิลคลิกที่ **Start Studio CRM** (`Start Studio CRM.bat` บน Windows, `Start Studio CRM.command` บน Mac, `./start-studio-crm.sh` บน Linux) บน Mac ครั้งแรกให้คลิกขวาแล้วเลือก **Open**
 4. เบราวเซอร์จะเปิดที่ `http://localhost:3000` ให้เปิดหน้าต่างที่ปรากฏขึ้นค้างไว้ตลอดเวลาที่ใช้ CRM หากปิดหน้าต่างนั้น CRM จะหยุดทำงาน อุปกรณ์อื่นให้ใช้ที่อยู่เครือข่ายของคอมพิวเตอร์แทน `localhost` โดยมี `:3000` ต่อท้าย

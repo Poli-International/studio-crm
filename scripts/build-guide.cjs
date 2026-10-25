@@ -1,7 +1,7 @@
 // node scripts/build-guide.cjs
 // Builds public/guide/<lang>.html from docs/USER-GUIDE.md (en) and docs/user-guide/<lang>.md.
 // The Docs tab shows the page for the CRM's current language.
-// Markdown subset used by the guide: # / ## headings, "1." lists, paragraphs, **bold**, `code`.
+// Markdown subset used by the guide: # / ## headings, "1." lists, paragraphs, **bold**, `code`, [links](https://...).
 const fs = require('fs');
 const path = require('path');
 
@@ -10,7 +10,8 @@ const OUT = path.join(ROOT, 'public', 'guide');
 const LANGS = ['en', 'fr', 'it', 'de', 'es', 'nl', 'pt', 'th'];
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const inline = (s) => esc(s).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+const inline = (s) => esc(s).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+  .replace(/\[([^\]]+)\]\((https:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
 
 function toHtml(md) {
   const out = [];
@@ -32,7 +33,7 @@ function toHtml(md) {
 
 const CSS = `body{margin:0;padding:24px;background:#0F172A;color:#E2E8F0;font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
 main{max-width:760px;margin:0 auto}h1{font-size:1.6rem;color:#F8FAFC}h2{font-size:1.15rem;color:#38BDF8;margin-top:1.8em}
-code{background:#1E293B;padding:1px 5px;border-radius:4px;font-size:0.9em}strong{color:#F8FAFC}li{margin:4px 0}`;
+code{background:#1E293B;padding:1px 5px;border-radius:4px;font-size:0.9em}strong{color:#F8FAFC}li{margin:4px 0}a{color:#38BDF8}`;
 
 const sourceOf = (lang) => (lang === 'en' ? path.join(ROOT, 'docs', 'USER-GUIDE.md') : path.join(ROOT, 'docs', 'user-guide', `${lang}.md`));
 

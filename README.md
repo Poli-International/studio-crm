@@ -2,7 +2,9 @@
 
 **The free studio management app for tattoo and piercing studios.** Clients, consent forms signed on a tablet, appointments and deposits, stock and lots, compliance records, and 31 studio tools, in 8 languages. It runs on one computer in your studio, and your data never leaves it.
 
-[**Download**](#download) · [User guide](docs/USER-GUIDE.md) · [Try the online demo](https://poliinternational.com/tools/studio-crm/) · [Releases](https://github.com/Poli-International/studio-crm/releases)
+[**Download**](#download) · [User guide](docs/USER-GUIDE.md) · [Try the online demo](https://poliinternational.com/studio-crm/#demo-start) · [Releases](https://github.com/Poli-International/studio-crm/releases)
+
+The Studio CRM page in your language: [Français](https://poliinternational.com/studio-crm/fr/) · [Deutsch](https://poliinternational.com/studio-crm/de/) · [Español](https://poliinternational.com/studio-crm/es/) · [Italiano](https://poliinternational.com/studio-crm/it/) · [Nederlands](https://poliinternational.com/studio-crm/nl/) · [Português](https://poliinternational.com/studio-crm/pt/) · [ไทย](https://poliinternational.com/studio-crm/th/)
 
 ![The Studio CRM dashboard: today's revenue, station capacity, upcoming clients, stock alerts and expiring sterile lots](docs/screenshots/dashboard.webp)
 

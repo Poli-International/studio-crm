@@ -9520,6 +9520,31 @@ app.delete('/api/gallery/:id', (req, res) => {
   res.json({ success: true, removed: galleryView(removed) });
 });
 
+// Before & After pairs: two portfolio photos (the same photos as the client profiles), linked by id.
+// A pair whose photo was deleted is no longer listed.
+const galleryPairs = [];
+app.get('/api/gallery-pairs', (req, res) => {
+  const byId = new Map(clientTattooWork.map((w) => [Number(w.id), galleryView(w)]));
+  res.json(galleryPairs.filter((p) => byId.has(p.before_id) && byId.has(p.after_id))
+    .map((p) => ({ ...p, before: byId.get(p.before_id), after: byId.get(p.after_id) })));
+});
+app.post('/api/gallery-pairs', (req, res) => {
+  const b = req.body || {};
+  const before_id = parseInt(b.before_id), after_id = parseInt(b.after_id);
+  const has = (id) => clientTattooWork.some((w) => Number(w.id) === id);
+  if (!has(before_id) || !has(after_id)) return res.status(400).json({ error: 'Pick a Before and an After photo from the gallery' });
+  if (before_id === after_id) return res.status(400).json({ error: 'Before and After must be two different photos' });
+  const pair = { id: galleryPairs.reduce((m, x) => Math.max(m, x.id), 0) + 1, title: String(b.title || '').trim(), notes: String(b.notes || '').trim(),
+    before_id, after_id, created_at: new Date().toISOString() };
+  galleryPairs.unshift(pair);
+  res.status(201).json(pair);
+});
+app.delete('/api/gallery-pairs/:id', (req, res) => {
+  const idx = galleryPairs.findIndex((p) => p.id === parseInt(req.params.id));
+  if (idx === -1) return res.status(404).json({ error: 'Pair not found' });
+  res.json({ success: true, removed: galleryPairs.splice(idx, 1)[0] });
+});
+
 app.get('/api/staff/:id/works', (req, res) => {
   const staffId = parseInt(req.params.id);
   const staffMember = staff.find(s => s.id === staffId);
@@ -11133,6 +11158,7 @@ const PERSISTED = {
   aftercareTemplates: [() => aftercareTemplates],
   sentAftercareLogs: [() => sentAftercareLogs],
   galleryWorks: [() => galleryWorks],
+  galleryPairs: [() => galleryPairs],
   flashDesigns: [() => flashDesigns],
   flashSheets: [() => flashSheets],
   studioStations: [() => studioStations, (v) => { studioStations = v; }],

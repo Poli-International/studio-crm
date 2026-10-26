@@ -2086,5 +2086,22 @@
  "Type a message to include with the shared artwork...": "Bericht bij het gedeelde ontwerp...",
  "Record confidential artist feedback, skin texture notes, needle preferences, or consultation details (or use hands-free dictation)...": "Vertrouwelijke feedback van de artiest, notities over de huid, voorkeursnaalden of details van het consult (of spraakdictaat)...",
  "On shift since {0}": "In dienst sinds {0}",
- "{0} min": "{0} min"
+ "{0} min": "{0} min",
+ "Choose a photo...": "Kies een foto...",
+ "Before": "Voor",
+ "After": "Na",
+ "Before photo": "Foto voor",
+ "After photo": "Foto na",
+ "Before & After": "Voor & na",
+ "Delete pair": "Paar verwijderen",
+ "Delete Pair": "Paar verwijderen",
+ "Delete Before & After Pair": "Voor-en-na-paar verwijderen",
+ "No Before & After pairs yet. Link two photos with Link B&A Pair.": "Nog geen voor-en-na-paren. Koppel twee foto's met Voor/na-paar koppelen.",
+ "Unlink this pair? Both photos stay in the gallery and on the client profile.": "Dit paar ontkoppelen? Beide foto's blijven in de galerij en op het klantprofiel.",
+ "Before & After pair deleted. The photos are kept.": "Voor-en-na-paar verwijderd. De foto's blijven bewaard.",
+ "Before & After pair saved to the gallery": "Voor-en-na-paar opgeslagen in de galerij",
+ "Pick two different photos for Before and After": "Kies twee verschillende foto's voor voor en na",
+ "Pick a Before and an After photo from the gallery": "Kies een voor- en een na-foto uit de galerij",
+ "Before and After must be two different photos": "Voor en na moeten twee verschillende foto's zijn",
+ "Add photos with Upload Work (or on a client profile) first, then pair two of them": "Voeg eerst foto's toe met Werk uploaden (of op een klantprofiel) en koppel er dan twee"
 }

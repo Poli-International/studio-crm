@@ -153,6 +153,36 @@ await flow('Gallery: a photo for a typed client name shows on the profile, a pro
   const boxes = b.seen.dialogs.filter((d) => d !== 'file chooser');
   check(!boxes.length, 'a browser box was used: ' + boxes[0]);
 });
+await flow('Gallery: Link B&A Pair picks two gallery photos, the pair shows under Before & After Pairs, deleting it keeps the photos', async () => {
+  // Henry, 2026-10-25: the pair asked for a web address, saved to the browser only and was never shown
+  const add = (title) => b.evaluate(`fetch('/api/gallery', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ service_type: '${title}', image_url: 'data:image/png;base64,iVBORw0KGgo=' }) }).then(r => r.json())`);
+  const before = await add('Pair Flow Before'), after = await add('Pair Flow After');
+  await b.evaluate(`navigateToDestination('tools')`);
+  await pressOn('openGalleryModal()');
+  await pressOn('openBeforeAfterLinkModal()');
+  await eventually(async () => (await b.evaluate(`document.querySelectorAll('#ba-before-select option').length`)) > 2, 'the Before picker lists no gallery photos');
+  await b.type('#ba-set-title', 'Pair Flow Set');
+  await b.evaluate(`(() => { for (const [id, v] of [['ba-before-select', ${before.id}], ['ba-after-select', ${after.id}]]) { const s = document.getElementById(id); s.value = String(v); s.dispatchEvent(new Event('change', { bubbles: true })); } })()`);
+  check(await b.evaluate(`!!document.querySelector('#ba-after-preview img')`), 'the chosen After photo is not previewed');
+  await b.clickText('Link & Save Pair', '#gallery-before-after-modal-overlay');
+  await eventually(async () => (await api('/api/gallery-pairs')).some((p) => p.title === 'Pair Flow Set'), 'the pair was not saved by the studio');
+  await b.evaluate(`(() => { const m = document.getElementById('gallery-mode-select'); m.value = 'pairs'; m.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+  await eventually(async () => (await text('#gallery-grid')).includes('Pair Flow Set'), 'the pair is not shown under Before & After Pairs');
+  check(!(await text('#gallery-grid')).includes('Pair Flow Before'), 'Before & After Pairs also lists single photos');
+  await press('#gallery-grid > div', 'Pair Flow Set', 'Delete pair');
+  await b.clickText('Delete Pair', '#data-deletion-confirm-modal');
+  await eventually(async () => !(await api('/api/gallery-pairs')).some((p) => p.title === 'Pair Flow Set'), 'Delete pair did not remove the pair');
+  const titles = (await api('/api/gallery')).map((w) => w.service_type);
+  check(titles.includes('Pair Flow Before') && titles.includes('Pair Flow After'), 'deleting the pair deleted its photos');
+});
+await flow('Tattoo Removal Estimator: Calculate with every factor chosen shows the estimate', async () => {
+  // Henry, 2026-10-25: Calculate did nothing (a script error in the date helper)
+  await b.goto(url + 'tools/tattoo-removal-estimator/index.html');
+  await eventually(async () => b.evaluate(`!!document.getElementById('calc-btn')`), 'the removal estimator did not open');
+  await b.evaluate(`[...document.querySelectorAll('#calc-form select')].forEach((s) => { const o = [...s.options].find((o) => o.value); if (o) { s.value = o.value; s.dispatchEvent(new Event('change', { bubbles: true })); } })`);
+  await b.clickText('Calculate Kirby-Desai Estimate');
+  await eventually(async () => b.evaluate(`!document.getElementById('results').hidden && getComputedStyle(document.getElementById('results')).display !== 'none'`), async () => 'no estimate shown: ' + (b.seen.errors[0] || await text('#calc-errors')));
+});
 await flow('Flash: a sheet, a design with no price prints POA, edit, claim for a client with the date, make available, repeatable counts bookings, print and CSV', async () => {
   // roadmap step 15: blank fields were saved as invented figures ($250, 2 h, "3RL Line + 7RM Shading"), claims were a typed name
   const client = await b.evaluate(`fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Flash Flow Client' }) }).then(r => r.json())`);

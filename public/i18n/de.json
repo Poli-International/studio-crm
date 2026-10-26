@@ -2086,5 +2086,22 @@
  "Type a message to include with the shared artwork...": "Nachricht zum geteilten Motiv...",
  "Record confidential artist feedback, skin texture notes, needle preferences, or consultation details (or use hands-free dictation)...": "Vertrauliche Notizen des Artists, Hautbeschaffenheit, bevorzugte Nadeln oder Beratungsdetails (oder Diktat per Sprache)...",
  "On shift since {0}": "Im Dienst seit {0}",
- "{0} min": "{0} Min."
+ "{0} min": "{0} Min.",
+ "Choose a photo...": "Foto wählen...",
+ "Before": "Vorher",
+ "After": "Nachher",
+ "Before photo": "Vorher-Foto",
+ "After photo": "Nachher-Foto",
+ "Before & After": "Vorher & Nachher",
+ "Delete pair": "Paar löschen",
+ "Delete Pair": "Paar löschen",
+ "Delete Before & After Pair": "Vorher-Nachher-Paar löschen",
+ "No Before & After pairs yet. Link two photos with Link B&A Pair.": "Noch keine Vorher-Nachher-Paare. Verknüpfen Sie zwei Fotos mit „Vorher/Nachher-Paar verknüpfen“.",
+ "Unlink this pair? Both photos stay in the gallery and on the client profile.": "Dieses Paar trennen? Beide Fotos bleiben in der Galerie und im Kundenprofil.",
+ "Before & After pair deleted. The photos are kept.": "Vorher-Nachher-Paar gelöscht. Die Fotos bleiben erhalten.",
+ "Before & After pair saved to the gallery": "Vorher-Nachher-Paar in der Galerie gespeichert",
+ "Pick two different photos for Before and After": "Wählen Sie zwei verschiedene Fotos für Vorher und Nachher",
+ "Pick a Before and an After photo from the gallery": "Wählen Sie ein Vorher- und ein Nachher-Foto aus der Galerie",
+ "Before and After must be two different photos": "Vorher und Nachher müssen zwei verschiedene Fotos sein",
+ "Add photos with Upload Work (or on a client profile) first, then pair two of them": "Fügen Sie zuerst Fotos mit „Arbeit hochladen“ (oder im Kundenprofil) hinzu und verknüpfen Sie dann zwei davon"
 }

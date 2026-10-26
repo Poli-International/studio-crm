@@ -3175,13 +3175,13 @@ docker compose up -d</pre>
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
                     <div style="background:var(--ti-panel, #111827);border:1px dashed var(--ti-line, #374151);border-radius:10px;padding:0.85rem;text-align:center;">
                         <span style="font-size:0.75rem;font-weight:800;color:var(--ti-alert-ink, #F87171);text-transform:uppercase;display:block;margin-bottom:6px;">1. BEFORE Image (Original / Stencil)</span>
-                        <input type="url" id="ba-before-url" placeholder="... (or select work)" style="width:100%;padding:0.5rem;background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:6px;color:#fff;font-size:0.8rem;outline:none;margin-bottom:6px;" required />
+                        <select id="ba-before-select" aria-label="Before photo" onchange="previewBeforeAfterPick('before')" style="width:100%;padding:0.5rem;background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:6px;color:#fff;font-size:0.8rem;outline:none;margin-bottom:6px;" required></select>
                         <div id="ba-before-preview" style="height:100px;background:var(--ti-bg2, #0F172A);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--ti-faint, #6B7280);font-size:0.75rem;">Before Preview</div>
                     </div>
 
                     <div style="background:var(--ti-panel, #111827);border:1px dashed var(--ti-line, #374151);border-radius:10px;padding:0.85rem;text-align:center;">
                         <span style="font-size:0.75rem;font-weight:800;color:var(--ti-green, #34D399);text-transform:uppercase;display:block;margin-bottom:6px;">2. AFTER Image (Finished / Healed)</span>
-                        <input type="url" id="ba-after-url" placeholder="... (or select work)" style="width:100%;padding:0.5rem;background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:6px;color:#fff;font-size:0.8rem;outline:none;margin-bottom:6px;" required />
+                        <select id="ba-after-select" aria-label="After photo" onchange="previewBeforeAfterPick('after')" style="width:100%;padding:0.5rem;background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:6px;color:#fff;font-size:0.8rem;outline:none;margin-bottom:6px;" required></select>
                         <div id="ba-after-preview" style="height:100px;background:var(--ti-bg2, #0F172A);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--ti-faint, #6B7280);font-size:0.75rem;">After Preview</div>
                     </div>
                 </div>

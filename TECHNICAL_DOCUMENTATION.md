@@ -433,6 +433,13 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.36
+
+**Henry's two reports of 2026-10-25.**
+- **Tattoo Removal Estimator: Calculate works.** It did nothing since 1.0.34: a line was lost from the date helper, so the button stopped on a script error. The website's copy of the tool had the same fault and is fixed too.
+- **Before & After pairs are real.** Link B&A Pair asked for a web address, saved the pair in the browser only and never showed it. Before and After are now picked from the gallery photos (the same photos as the client profiles), with a preview; the pair is saved by the studio (`/api/gallery-pairs`) and shown under "All Works & Pairs" and "Before & After Pairs", with the two photos side by side. Deleting a pair keeps both photos. Eight languages.
+- Two new click flows: the removal estimate with every factor chosen, and a B&A pair from link to delete.
+
 ### 1.0.35
 
 **Translation pass, and a faster release (2026-10-25).**

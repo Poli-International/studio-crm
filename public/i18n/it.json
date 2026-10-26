@@ -2086,5 +2086,22 @@
  "Type a message to include with the shared artwork...": "Messaggio da allegare al disegno condiviso...",
  "Record confidential artist feedback, skin texture notes, needle preferences, or consultation details (or use hands-free dictation)...": "Note riservate dell'artista, note sulla pelle, aghi preferiti o dettagli della consulenza (o dettatura vocale)...",
  "On shift since {0}": "In turno dalle {0}",
- "{0} min": "{0} min"
+ "{0} min": "{0} min",
+ "Choose a photo...": "Scegli una foto...",
+ "Before": "Prima",
+ "After": "Dopo",
+ "Before photo": "Foto prima",
+ "After photo": "Foto dopo",
+ "Before & After": "Prima e dopo",
+ "Delete pair": "Elimina coppia",
+ "Delete Pair": "Elimina coppia",
+ "Delete Before & After Pair": "Elimina coppia prima/dopo",
+ "No Before & After pairs yet. Link two photos with Link B&A Pair.": "Nessuna coppia prima/dopo. Collega due foto con Collega coppia P/D.",
+ "Unlink this pair? Both photos stay in the gallery and on the client profile.": "Scollegare questa coppia? Entrambe le foto restano nella galleria e nel profilo del cliente.",
+ "Before & After pair deleted. The photos are kept.": "Coppia prima/dopo eliminata. Le foto restano.",
+ "Before & After pair saved to the gallery": "Coppia prima/dopo salvata nella galleria",
+ "Pick two different photos for Before and After": "Scegli due foto diverse per prima e dopo",
+ "Pick a Before and an After photo from the gallery": "Scegli dalla galleria una foto prima e una dopo",
+ "Before and After must be two different photos": "Prima e dopo devono essere due foto diverse",
+ "Add photos with Upload Work (or on a client profile) first, then pair two of them": "Aggiungi prima delle foto con Carica lavoro (o nel profilo di un cliente), poi abbinane due"
 }

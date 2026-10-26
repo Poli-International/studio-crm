@@ -2358,9 +2358,26 @@ async function openAutoclaveVaultModal() {
 }
 window.openAutoclaveVaultModal = openAutoclaveVaultModal;
 
-function openBeforeAfterLinkModal() {
+// Before and After are picked from the portfolio photos, which are also the client profile photos
+async function openBeforeAfterLinkModal() {
+    await loadGalleryData();
+    const label = (w) => [w.client_name, w.service_type, w.session_date].filter(Boolean).join(" · ") || "Photo " + w.id;
+    const options = '<option value="">Choose a photo...</option>' + galleryState.works.map((w) => `<option value="${Number(w.id)}">${escapeHtml(label(w))}</option>`).join("");
+    ["before", "after"].forEach((side) => {
+        const sel = document.getElementById("ba-" + side + "-select");
+        if (sel) sel.innerHTML = options;
+        previewBeforeAfterPick(side);
+    });
+    if (!galleryState.works.length) showStudioToast("Add photos with Upload Work (or on a client profile) first, then pair two of them");
     forceShowModal('gallery-before-after-modal-overlay');
 }
+function previewBeforeAfterPick(side) {
+    const id = Number((document.getElementById("ba-" + side + "-select") || {}).value);
+    const w = galleryState.works.find((x) => Number(x.id) === id);
+    const box = document.getElementById("ba-" + side + "-preview");
+    if (box) box.innerHTML = w ? `<img src="${escapeHtml(w.image_url || "")}" alt="" style="max-width:100%;max-height:100px;border-radius:6px;" />` : (side === "before" ? "Before Preview" : "After Preview");
+}
+window.previewBeforeAfterPick = previewBeforeAfterPick;
 window.openBeforeAfterLinkModal = openBeforeAfterLinkModal;
 
 async function openClientDirectoryModal() {
@@ -3769,12 +3786,13 @@ function updateSanitizationProgress() {
 window.updateSanitizationProgress = updateSanitizationProgress;
 
 // --- Gallery: portfolio works (/api/gallery) and flash designs (/api/flash) ---
-const galleryState = { works: [], flash: [], sheets: [], tab: "portfolio", pendingWorkImage: "", shareItem: null };
+const galleryState = { works: [], pairs: [], flash: [], sheets: [], tab: "portfolio", pendingWorkImage: "", shareItem: null };
 
 async function loadGalleryData() {
     const get = (u) => fetch(u).then((r) => (r.ok ? r.json() : [])).catch(() => []);
-    const [works, flash, sheets] = await Promise.all([get("/api/gallery"), get("/api/flash"), get("/api/flash-sheets")]);
+    const [works, pairs, flash, sheets] = await Promise.all([get("/api/gallery"), get("/api/gallery-pairs"), get("/api/flash"), get("/api/flash-sheets")]);
     galleryState.works = Array.isArray(works) ? works : [];
+    galleryState.pairs = Array.isArray(pairs) ? pairs : [];
     galleryState.flash = Array.isArray(flash) ? flash : [];
     galleryState.sheets = Array.isArray(sheets) ? sheets : [];
 }
@@ -3849,22 +3867,40 @@ function renderGalleryGrid() {
     if (!grid) return;
     const v = (id) => (document.getElementById(id) || {}).value || "";
     const artist = v("gallery-filter-artist"), client = v("gallery-filter-client"), q = v("gallery-search-input").toLowerCase().trim();
-    const items = galleryState.works.filter((w) =>
+    const matches = (w) =>
         (!artist || String(w.staff_id) === artist) &&
         (!client || String(w.client_id) === client) &&
-        (!q || [w.service_type, w.notes, w.client_name, w.staff_name].join(" ").toLowerCase().includes(q)));
+        (!q || [w.service_type, w.notes, w.client_name, w.staff_name].join(" ").toLowerCase().includes(q));
+    const mode = v("gallery-mode-select");
+    const items = mode === "pairs" ? [] : galleryState.works.filter(matches);
+    const pairs = mode === "pairs" || mode === "all" || !mode ? galleryState.pairs.filter((p) =>
+        matches(p.before) || matches(p.after) || (q && [p.title, p.notes].join(" ").toLowerCase().includes(q))) : [];
     // grouped by client: one heading per client, photos without a client last
     const grouped = v("gallery-mode-select") === "client";
     if (grouped) items.sort((a, b) => (!a.client_name) - (!b.client_name) || (a.client_name || "").localeCompare(b.client_name || ""));
     const badge = document.getElementById("gallery-count-badge");
-    if (badge) badge.textContent = itemCount(items.length);
+    if (badge) badge.textContent = itemCount(items.length + pairs.length);
     const card =(w, i) => galleryCard(w.image_url, w.service_type || "",
         [[w.client_name, w.staff_name].filter(Boolean).join(" · "), (w.session_date || "") + (w.session_duration_hours ? " · " + w.session_duration_hours + " h" : ""), w.notes || ""],
         galleryBtn("Share", `data-share="${i}"`) + galleryBtn("Delete", `data-del="${i}" id="gallery-del-${Number(w.id)}"`));
     const heading = (name) => `<div style="grid-column:1/-1;font-weight:800;color:var(--ti-text, #F9FAFB);padding-top:6px;">${escapeHtml(name)}</div>`;
-    grid.innerHTML = items.length ? items.map((w, i) =>
+    const half = (w, side, i) => `<figure style="margin:0;flex:1;min-width:0;"><img src="${escapeHtml(w.image_url || "")}" alt="${side}" data-pair-img="${i}:${side}" style="width:100%;height:160px;object-fit:cover;background:var(--ti-bg2, #0F172A);cursor:zoom-in;" /><figcaption style="font-size:0.7rem;font-weight:800;text-transform:uppercase;text-align:center;padding:3px;color:${side === "before" ? "var(--ti-alert-ink, #F87171)" : "var(--ti-green, #34D399)"};">${side === "before" ? "Before" : "After"}</figcaption></figure>`;
+    const pairCard = (p, i) => `<div data-pair="${i}" style="background:var(--ti-panel, #111827);border:1px solid var(--ti-purple-ink, #C084FC);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;">
+        <div style="display:flex;gap:2px;">${half(p.before, "before", i)}${half(p.after, "after", i)}</div>
+        <div style="padding:12px;display:flex;flex-direction:column;gap:4px;flex:1;">
+          <div style="font-weight:800;color:var(--ti-text, #F9FAFB);">${escapeHtml(p.title || "Before & After")}</div>
+          ${[p.after.client_name || p.before.client_name, p.notes].filter(Boolean).map((l) => `<div style="font-size:0.8rem;color:var(--ti-muted, #9CA3AF);">${escapeHtml(l)}</div>`).join("")}
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:8px;">${galleryBtn("Delete pair", `data-pair-del="${i}"`)}</div>
+        </div></div>`;
+    const empty = mode === "pairs" ? "No Before & After pairs yet. Link two photos with Link B&A Pair." : "No portfolio works yet. Add one with Upload Work.";
+    grid.innerHTML = items.length || pairs.length ? pairs.map(pairCard).join("") + items.map((w, i) =>
         (grouped && (i === 0 || items[i - 1].client_name !== w.client_name) ? heading(w.client_name || "No client") : "") + card(w, i)).join("")
-        : '<div style="padding:24px;color:var(--ti-muted, #94A3B8);">No portfolio works yet. Add one with Upload Work.</div>';
+        : `<div style="padding:24px;color:var(--ti-muted, #94A3B8);">${empty}</div>`;
+    grid.querySelectorAll("[data-pair-img]").forEach((img) => img.addEventListener("click", () => {
+        const [i, side] = img.dataset.pairImg.split(":"), p = pairs[Number(i)];
+        openLightboxModal(p[side].image_url, (p.title || "Before & After") + " · " + side);
+    }));
+    grid.querySelectorAll("[data-pair-del]").forEach((b) => b.addEventListener("click", () => deleteGalleryPair(pairs[Number(b.dataset.pairDel)])));
     bindGalleryGrid(grid, items, (w) => (w.service_type || "") + " · " + (w.client_name || ""));
     grid.querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", () => deleteGalleryItem("work", items[Number(b.dataset.del)])));
 }
@@ -3891,6 +3927,26 @@ function deleteGalleryItem(kind, item) {
     });
 }
 window.deleteGalleryItem = deleteGalleryItem;
+
+// Unlinking a pair keeps both photos in the gallery and on the client profile
+function deleteGalleryPair(pair) {
+    openDeletionConfirmModal({
+        title: "Delete Before & After Pair",
+        message: "Unlink this pair? Both photos stay in the gallery and on the client profile.",
+        itemName: pair.title || "Before & After",
+        itemDetails: pair.after.client_name || pair.before.client_name || "",
+        confirmBtnText: "Delete Pair",
+        onConfirm: async () => {
+            try {
+                const r = await fetch("/api/gallery-pairs/" + Number(pair.id), { method: "DELETE" });
+                if (!r.ok) throw new Error();
+            } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
+            await loadGalleryData();
+            renderGalleryGrid();
+            showStudioToast("Before & After pair deleted. The photos are kept.");
+        }
+    });
+}
 
 function openLightboxModal(src, caption) {
     const img = document.getElementById("lightbox-img");
@@ -5953,42 +6009,22 @@ function addCustomMessengerMacro(event) {
 }
 window.addCustomMessengerMacro = addCustomMessengerMacro;
 
-function submitLinkBeforeAfterPair(event) {
+async function submitLinkBeforeAfterPair(event) {
     if (event) event.preventDefault();
-    const clientSelect = document.getElementById("ba-client-select");
-    const dateInput = document.getElementById("ba-procedure-date");
-    const beforeUrl = document.getElementById("ba-before-url");
-    const afterUrl = document.getElementById("ba-after-url");
-    const notesInput = document.getElementById("ba-notes");
-
-    const pair = {
-        id: Date.now(),
-        client: clientSelect ? clientSelect.value : "Client",
-        date: dateInput ? dateInput.value : new Date().toLocaleDateString("en-CA"),
-        before_image: beforeUrl ? beforeUrl.value.trim() : "",
-        after_image: afterUrl ? afterUrl.value.trim() : "",
-        notes: notesInput ? notesInput.value.trim() : ""
-    };
-
-    let pairs = [];
+    const v = (id) => (document.getElementById(id) || {}).value || "";
+    const body = { title: v("ba-set-title"), notes: v("ba-artist-notes"), before_id: v("ba-before-select"), after_id: v("ba-after-select") };
+    if (body.before_id && body.before_id === body.after_id) { showStudioToast("Pick two different photos for Before and After"); return; }
     try {
-        const stored = localStorage.getItem("studio_before_after_gallery");
-        if (stored) pairs = JSON.parse(stored);
-    } catch (e) {}
-    pairs.unshift(pair);
-    try {
-        localStorage.setItem("studio_before_after_gallery", JSON.stringify(pairs));
-    } catch (e) {}
-
-    if (typeof showStudioToast === "function") {
-        showStudioToast("Before & After visual pair linked and cataloged");
-    }
-    if (typeof closeBeforeAfterLinkModal === "function") {
-        closeBeforeAfterLinkModal();
-    } else {
-        const el = document.getElementById("gallery-before-after-modal-overlay");
-        if (el) el.style.display = "none";
-    }
+        const r = await fetch("/api/gallery-pairs", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        if (!r.ok) { const e = await r.json().catch(() => ({})); showStudioToast(e.error || "Could not save the pair"); return; }
+    } catch (e) { showStudioToast("Could not save: the server did not answer"); return; }
+    closeBeforeAfterLinkModal();
+    if (event && event.target && event.target.reset) event.target.reset();
+    await loadGalleryData();
+    const mode = document.getElementById("gallery-mode-select");
+    if (mode && mode.value === "single") mode.value = "all";
+    renderGalleryGrid();
+    showStudioToast("Before & After pair saved to the gallery");
 }
 window.submitLinkBeforeAfterPair = submitLinkBeforeAfterPair;
 

@@ -127,6 +127,7 @@
     var y = parseInt(parts[0], 10);
     var m = parseInt(parts[1], 10) - 1;
     var d = parseInt(parts[2], 10);
+    var dt = new Date(y, m, d);
     dt.setDate(dt.getDate() + (weeks * 7));
     var resY = dt.getFullYear();
     var resM = String(dt.getMonth() + 1);

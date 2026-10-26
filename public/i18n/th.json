@@ -2086,5 +2086,22 @@
  "Type a message to include with the shared artwork...": "พิมพ์ข้อความที่จะแนบไปกับผลงานที่แชร์...",
  "Record confidential artist feedback, skin texture notes, needle preferences, or consultation details (or use hands-free dictation)...": "บันทึกความเห็นลับของช่าง ลักษณะผิว เข็มที่ชอบ หรือรายละเอียดการปรึกษา (หรือใช้การพูดพิมพ์ข้อความ)...",
  "On shift since {0}": "เข้ากะตั้งแต่ {0}",
- "{0} min": "{0} นาที"
+ "{0} min": "{0} นาที",
+ "Choose a photo...": "เลือกรูปภาพ...",
+ "Before": "ก่อน",
+ "After": "หลัง",
+ "Before photo": "รูปก่อน",
+ "After photo": "รูปหลัง",
+ "Before & After": "ก่อนและหลัง",
+ "Delete pair": "ลบคู่",
+ "Delete Pair": "ลบคู่",
+ "Delete Before & After Pair": "ลบคู่ก่อนและหลัง",
+ "No Before & After pairs yet. Link two photos with Link B&A Pair.": "ยังไม่มีคู่ก่อนและหลัง เชื่อมรูปสองรูปด้วยปุ่มเชื่อมคู่ก่อน/หลัง",
+ "Unlink this pair? Both photos stay in the gallery and on the client profile.": "ยกเลิกการเชื่อมคู่นี้? รูปทั้งสองยังอยู่ในแกลเลอรีและในโปรไฟล์ลูกค้า",
+ "Before & After pair deleted. The photos are kept.": "ลบคู่ก่อนและหลังแล้ว รูปภาพยังคงอยู่",
+ "Before & After pair saved to the gallery": "บันทึกคู่ก่อนและหลังในแกลเลอรีแล้ว",
+ "Pick two different photos for Before and After": "เลือกรูปสองรูปที่ต่างกันสำหรับก่อนและหลัง",
+ "Pick a Before and an After photo from the gallery": "เลือกรูปก่อนและรูปหลังจากแกลเลอรี",
+ "Before and After must be two different photos": "ก่อนและหลังต้องเป็นรูปสองรูปที่ต่างกัน",
+ "Add photos with Upload Work (or on a client profile) first, then pair two of them": "เพิ่มรูปด้วยปุ่มอัปโหลดผลงาน (หรือในโปรไฟล์ลูกค้า) ก่อน แล้วจึงจับคู่สองรูป"
 }

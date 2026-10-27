@@ -433,6 +433,14 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.37
+
+**Henry's report of 2026-10-27: the Settings price matrix.**
+- **Tattoo style multipliers sit with tattoo.** They were section 3 under a "Jewelry Style Fees" header; they are now section 5, "Tattoo Style Multipliers (x)", under the tattoo base rates.
+- **Headers show the studio currency.** Every header said "$ USD" whatever the currency; they now show the one chosen in Settings and follow the picker. Nothing is converted.
+- **The description tells the truth.** It claimed the matrix fed every estimate tool; nothing reads it yet except CSV export and import, and it now says so.
+- One new click flow for the layout and the currency headers.
+
 ### 1.0.36
 
 **Henry's two reports of 2026-10-25.**

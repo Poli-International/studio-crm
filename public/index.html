@@ -3557,7 +3557,7 @@ docker compose up -d</pre>
                                 <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-tag></use></svg> Studio Base Price Matrix & CSV Management (Management Access)
                             </div>
                             <div style="font-size:0.78rem;color:var(--ti-muted, #9CA3AF);margin-top:2px;">
-                                Define standard base prices for piercings, materials (BioFlex, Titanium, 18ct Gold, Stainless Steel), and tattoo estimate calculations. These serve as default lookup prices across all client estimate tools in the CRM.
+                                Your own reference prices for piercings, jewelry and tattoos. Enter them in your studio currency, chosen above: nothing is converted. They are saved with your settings and go out and back in with Export CSV and Import CSV. The Studio Quote in the Tattoo Price Estimator uses your hourly rate, minimum charge and deposit, not this matrix.
                             </div>
                         </div>
                         <div style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -3577,31 +3577,21 @@ docker compose up -d</pre>
                     <!-- Price Input Matrix Table -->
                     <div style="display:flex;flex-direction:column;gap:1rem;">
                         <div style="font-size:0.8rem;font-weight:800;color:var(--ti-blue, #38BDF8);text-transform:uppercase;letter-spacing:0.5px;">
-                            1. Anatomical Piercing Site Base Fees ($ USD)
+                            1. Anatomical Piercing Site Base Fees <span data-studio-currency>(USD)</span>
                         </div>
                         <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));gap:8px;" id="settings-site-pricing-grid">
                             <!-- Populated dynamically by JS -->
                         </div>
 
                         <div style="font-size:0.8rem;font-weight:800;color:var(--ti-purple-ink, #C084FC);text-transform:uppercase;letter-spacing:0.5px;margin-top:8px;">
-                            2. Jewelry Base Material Upgrades ($ USD)
+                            2. Jewelry Base Material Upgrades <span data-studio-currency>(USD)</span>
                         </div>
                         <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));gap:8px;" id="settings-material-pricing-grid">
                             <!-- Populated dynamically by JS -->
                         </div>
 
-                        <div style="font-size:0.8rem;font-weight:800;color:var(--ti-rose-ink, #F472B6);text-transform:uppercase;letter-spacing:0.5px;margin-top:8px;">
-                            3. Jewelry Style Fees & Multipliers ($ USD)
-                            <span style="font-size:0.7rem;color:var(--ti-muted, #9CA3AF);font-weight:400;text-transform:none;display:block;margin-top:2px;">
-                                Barbells, Circulars & Industrials contain 2 solid gold/titanium ball ends, reflecting extra metal weight.
-                            </span>
-                        </div>
-                        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:8px;" id="settings-style-pricing-grid">
-                            <!-- Populated dynamically by JS -->
-                        </div>
-
                         <div style="font-size:0.8rem;font-weight:800;color:var(--ti-gold, #EAB308);text-transform:uppercase;letter-spacing:0.5px;margin-top:8px;">
-                            4. Top Gem & Decorative Attachment Upgrades ($ USD)
+                            3. Top Gem & Decorative Attachment Upgrades <span data-studio-currency>(USD)</span>
                             <span style="font-size:0.7rem;color:var(--ti-muted, #9CA3AF);font-weight:400;text-transform:none;display:block;margin-top:2px;">
                                 CZ Bezels, Trinity Tops, Clusters, Rings Rims & Genuine Gold Solitaire Diamonds.
                             </span>
@@ -3611,9 +3601,19 @@ docker compose up -d</pre>
                         </div>
 
                         <div style="font-size:0.8rem;font-weight:800;color:var(--ti-green, #34D399);text-transform:uppercase;letter-spacing:0.5px;margin-top:8px;">
-                            5. Tattoo Estimation Base Rates ($ USD)
+                            4. Tattoo Estimation Base Rates <span data-studio-currency>(USD)</span>
                         </div>
                         <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));gap:8px;" id="settings-tattoo-pricing-grid">
+                            <!-- Populated dynamically by JS -->
+                        </div>
+
+                        <div style="font-size:0.8rem;font-weight:800;color:var(--ti-rose-ink, #F472B6);text-transform:uppercase;letter-spacing:0.5px;margin-top:8px;">
+                            5. Tattoo Style Multipliers (x)
+                            <span style="font-size:0.7rem;color:var(--ti-muted, #9CA3AF);font-weight:400;text-transform:none;display:block;margin-top:2px;">
+                                Applied to a tattoo base rate: 1.00 = no change, 1.25 = 25% more. A multiplier, not a price.
+                            </span>
+                        </div>
+                        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));gap:8px;" id="settings-style-pricing-grid">
                             <!-- Populated dynamically by JS -->
                         </div>
                     </div>

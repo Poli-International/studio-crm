@@ -1863,6 +1863,21 @@ await flow('Thai: the form builder, the consent form on the kiosk and the PDFs s
   }
 });
 
+await flow('Price matrix: the headers name the studio currency, tattoo style multipliers sit with tattoo', async () => {
+  // Henry, 2026-10-27: tattoo styles sat under a "Jewelry" header, and every header said $ USD with CAD chosen
+  await b.evaluate(`openVatSettingsModal()`);
+  await eventually(async () => shown('vat-settings-modal-overlay'), 'Settings did not open');
+  const heads = () => b.evaluate(`[...document.querySelectorAll('[data-studio-currency]')].map((s) => s.parentElement.textContent.replace(/\\s+/g, ' ').trim())`);
+  check((await heads()).length === 4, 'the matrix has no currency in its headers');
+  await b.evaluate(`(() => { const s = document.getElementById('settings-currency-code'); s.value = 'CAD'; s.dispatchEvent(new Event('change')); })()`);
+  const now = await heads();
+  check(now.every((h) => h.includes('(CAD)')), 'choosing CAD did not change the matrix headers: ' + now.join(' | '));
+  const placed = await b.evaluate(`(() => { const t = document.getElementById('settings-tattoo-pricing-grid'), s = document.getElementById('settings-style-pricing-grid');
+    return !!(t.compareDocumentPosition(s) & Node.DOCUMENT_POSITION_FOLLOWING) && s.previousElementSibling.textContent.includes('Tattoo Style Multipliers'); })()`);
+  check(placed, 'the tattoo style multipliers are not under the tattoo base rates');
+  check(!(await b.evaluate(`document.getElementById('vat-settings-modal-overlay').textContent.includes('Jewelry Style')`)), 'a Jewelry header is still over the tattoo styles');
+});
+
 await stop();
 console.log(failures.length ? `\n${failures.length} flow(s) failed` : '\nAll flows passed');
 process.exit(failures.length ? 1 : 0);

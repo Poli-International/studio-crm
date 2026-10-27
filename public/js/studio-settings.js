@@ -199,6 +199,10 @@
   }
 
   function fillGrids(settings) {
+    // The matrix headers name the studio currency, not a hardcoded USD.
+    document.querySelectorAll('[data-studio-currency]').forEach(function (el) {
+      el.textContent = '(' + ((settings.currency && settings.currency.code) || 'USD') + ')';
+    });
     GRIDS.forEach(function (pair) {
       var el = document.getElementById(pair[0]);
       if (!el) return;
@@ -409,7 +413,13 @@
     STORE: STORE
   };
 
-  function boot() { fillGrids(get()); syncDepositMode(); }
+  function boot() {
+    fillGrids(get()); syncDepositMode();
+    var cur = document.getElementById('settings-currency-code');
+    if (cur) cur.addEventListener('change', function () {
+      document.querySelectorAll('[data-studio-currency]').forEach(function (el) { el.textContent = '(' + cur.value + ')'; });
+    });
+  }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
 })();

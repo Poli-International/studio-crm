@@ -984,6 +984,23 @@ await flow('Scanner field: in the form builder, its own button text, a page scan
   await b.evaluate(`document.getElementById('form-builder-modal').style.display = 'none'`);
 });
 
+await flow('Consent form preview: a checkbox shows its text once, beside the box', async () => {
+  // Henry, 2026-10-28: every checkbox printed its text twice in Preview and Kiosk, which read as a duplicated question
+  await b.clickText('Clients');
+  await b.clickText('Consent Form Builder');
+  const f = b.frame('#form-builder-frame');
+  for (let i = 0; i < 80 && !(await f.evaluate('!!(window.FormBuilderApp && window.FormBuilderApp.currentForm && document.getElementById("btn-preview"))').catch(() => false)); i++) await sleep(250);
+  await sleep(800);
+  check(await f.evaluate(`window.FormBuilderApp.currentForm.sections.some(s => (s.fields || []).some(x => x.type === 'checkbox'))`), 'the default consent form has no checkbox to test');
+  await f.clickText('Preview Form');
+  await eventually(async () => f.evaluate(`document.querySelectorAll('#preview-container [data-type="checkbox"]').length > 0`), 'the preview shows no checkbox');
+  const doubled = await f.evaluate(`[...document.querySelectorAll('#preview-container [data-type="checkbox"]')].filter(g => g.querySelector('.preview-field-label')).map(g => g.dataset.fieldId)`);
+  check(!doubled.length, 'a checkbox still has its text above it as well: ' + doubled.join(', '));
+  check(await f.evaluate(`[...document.querySelectorAll('#preview-container [data-type="checkbox"][data-required="true"] .preview-checkbox-label')].every(l => l.textContent.includes('*'))`), 'a required checkbox lost its star');
+  await f.clickText('Back to Editor');
+  await b.evaluate(`document.getElementById('form-builder-modal').style.display = 'none'`);
+});
+
 await flow('Ink mixer: the diluent label is the size chosen, cap sizes change the formula, a reference photo shows; the autoclave tool claims no Google Sheets sync', async () => {
   // Henry, 2026-10-18: every container size gave 60 ml, on screen and on the label
   await b.goto(url.replace(/\/$/, '') + '/tools/ink-mixer/');

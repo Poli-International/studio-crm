@@ -433,6 +433,13 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.38
+
+**Henry's report of 2026-10-28: consent form checkboxes looked duplicated.**
+- **A checkbox shows its text once.** In Preview and on the kiosk every checkbox printed its text twice, in bold above the box and again beside it, which read as a duplicated question. It has done so since the first version; the editor never showed it. The text now appears beside the box only, with the required star.
+- The kiosk and validation messages still name a missing checkbox by its text.
+- One new click flow; it fails on the 1.0.37 file.
+
 ### 1.0.37
 
 **Henry's report of 2026-10-27: the Settings price matrix.**

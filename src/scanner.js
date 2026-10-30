@@ -3,7 +3,9 @@
 // the form. Windows: WIA, built into Windows, which almost every TWAIN scanner also installs a driver
 // for, so nothing extra is needed. Linux: SANE (`scanimage`). macOS: not yet (no built-in command line).
 // STUDIO_CRM_FAKE_SCANNER=1 gives a pretend scanner, for the tests.
-// ponytail: one page, default resolution and colour; options (dpi, duplex) when a studio needs them.
+// Paper in a document feeder: every page in it, both sides when the feeder is duplex (Henry, 2026-10-30:
+// a health card, front and back, in one run). Otherwise one page from the glass.
+// ponytail: default resolution and colour, Linux one page; options (dpi, SANE ADF) when a studio needs them.
 import { execFile } from 'child_process';
 import fs from 'fs';
 import os from 'os';
@@ -38,25 +40,37 @@ export async function listScanners() {
   return [];
 }
 
-// One page from the scanner (the first one when none is named), as a data: URL
-export async function scanPage(deviceId) {
-  if (process.env.STUDIO_CRM_FAKE_SCANNER === '1') return fakePng();
+// The pages from the scanner (the first one when none is named), as data: URLs, in scan order
+export async function scanPages(deviceId) {
+  if (process.env.STUDIO_CRM_FAKE_SCANNER === '1') return [fakePng(), fakePng()]; // a duplex feeder: front and back
   const devices = await listScanners();
   const dev = deviceId ? devices.find((d) => d.id === deviceId) : devices[0];
   if (!dev) throw Object.assign(new Error('No scanner was found on the CRM computer. Plug it into the computer that runs the CRM, and check it scans with its own software.'), { status: 404 });
-  const file = path.join(os.tmpdir(), `studio-crm-scan-${Date.now()}.${process.platform === 'win32' ? 'jpg' : 'png'}`);
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'studio-crm-scan-'));
   try {
     if (process.platform === 'win32') {
+      // WIA device properties: 3086 feeder capabilities, 3087 feeder status, 3088 feeder select, 3096 pages per transfer.
+      // Bits: 1 feeder (status: paper loaded), 4 duplex. In feeder mode each Transfer is the next side, until the feeder
+      // is empty, which WIA reports as an error: after the first page that error is the end of the stack.
       // {B96B3CAF-0728-11D3-9D7B-0000F81EF32E} is WIA's JPEG format
-      await ps(`$ErrorActionPreference='Stop'; $m = New-Object -ComObject WIA.DeviceManager; $i = $null; foreach ($d in $m.DeviceInfos) { if ($d.DeviceID -eq ${psString(dev.id)}) { $i = $d } }; if (-not $i) { throw 'scanner gone' }; $dev = $i.Connect(); $img = $dev.Items.Item(1).Transfer('{B96B3CAF-0728-11D3-9D7B-0000F81EF32E}'); $img.SaveFile(${psString(file)})`);
-      return 'data:image/jpeg;base64,' + fs.readFileSync(file).toString('base64');
+      await ps(`$ErrorActionPreference='Stop'; $m = New-Object -ComObject WIA.DeviceManager; $i = $null; foreach ($d in $m.DeviceInfos) { if ($d.DeviceID -eq ${psString(dev.id)}) { $i = $d } }; if (-not $i) { throw 'scanner gone' }; $dev = $i.Connect()
+function P($id) { foreach ($p in $dev.Properties) { if ($p.PropertyID -eq $id) { return $p } } }
+$cap = P 3086; $st = P 3087; $sel = P 3088; $n = 0
+$feeder = $cap -and $st -and $sel -and ($cap.Value -band 1) -and ($st.Value -band 1)
+if ($feeder) { $sel.Value = 1 -bor ($cap.Value -band 4); $pg = P 3096; if ($pg) { try { $pg.Value = 1 } catch {} } }
+do {
+  try { $img = $dev.Items.Item(1).Transfer('{B96B3CAF-0728-11D3-9D7B-0000F81EF32E}') } catch { if ($n -gt 0) { break }; throw }
+  $img.SaveFile((Join-Path ${psString(dir)} ('page-{0:D3}.jpg' -f $n))); $n++
+} while ($feeder -and $n -lt 50)`);
+      return fs.readdirSync(dir).sort().map((f) => 'data:image/jpeg;base64,' + fs.readFileSync(path.join(dir, f)).toString('base64'));
     }
     if (process.platform === 'linux') {
+      const file = path.join(dir, 'page.png');
       await run('scanimage', ['-d', dev.id, '--format=png', '-o', file]);
-      return 'data:image/png;base64,' + fs.readFileSync(file).toString('base64');
+      return ['data:image/png;base64,' + fs.readFileSync(file).toString('base64')];
     }
     throw Object.assign(new Error('Scanning from the CRM is not available on this computer yet.'), { status: 501 });
   } finally {
-    fs.rmSync(file, { force: true });
+    fs.rmSync(dir, { recursive: true, force: true });
   }
 }

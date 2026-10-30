@@ -433,6 +433,13 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.40
+
+**Henry's question of 2026-10-30: can the Scanner field use a duplex scanner?**
+- **A document feeder scans every page in it, both sides when it is duplex.** With paper in the feeder, the Scanner field's button now scans the whole stack, front and back when the scanner can, and adds each side to the form as its own page (a health card, front and back, in one run). With the feeder empty it scans one page from the glass, as before. Windows (WIA) only; Linux still scans one page.
+- `/api/scanner/scan` answers `dataUrls` (every page, in scan order) instead of `dataUrl`.
+- The Scanner click flow now expects two pages from the pretend duplex scanner.
+
 ### 1.0.39
 
 **Henry's report of 2026-10-30: a form made from "Blank Custom Form" was not kept.**

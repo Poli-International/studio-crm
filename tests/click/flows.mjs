@@ -974,7 +974,7 @@ await flow('Scanner field: in the form builder, its own button text, a page scan
   await eventually(async () => f.evaluate(`!!document.querySelector('#preview-container [data-scan-field="${id}"]')`), 'the preview does not show the scan button');
   check((await f.evaluate(`document.querySelector('#preview-container [data-scan-field="${id}"]').innerText.trim()`)) === 'PRESS HERE TO SCAN', 'the scan button does not show the studio\'s own text');
   await f.evaluate(`document.querySelector('#preview-container [data-scan-field="${id}"]').click()`);
-  await eventually(async () => f.evaluate(`(() => { const r = window.ActiveFormPreview.responses[${JSON.stringify(id)}]; return Array.isArray(r) && r.length === 1 && /^data:image\\//.test(r[0].dataUrl); })()`), 'the scanned page did not land in the form');
+  await eventually(async () => f.evaluate(`(() => { const r = window.ActiveFormPreview.responses[${JSON.stringify(id)}]; return Array.isArray(r) && r.length === 2 && r.every((x) => /^data:image\\//.test(x.dataUrl)); })()`), 'both sides from the duplex feeder did not land in the form');
   check(await f.evaluate(`!!document.querySelector('#photo-gallery-${id} img')`), 'the scanned page is not shown in the form');
   // the scanner answers the server's own endpoints
   check((await api('/api/scanner/devices')).some((d) => d.name === 'Test scanner'), 'the CRM does not list the scanner');

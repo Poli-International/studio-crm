@@ -433,6 +433,14 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.39
+
+**Henry's report of 2026-10-30: a form made from "Blank Custom Form" was not kept.**
+- **"Blank Custom Form" starts a new form of its own.** It used to be saved as the Blank form itself: the menu kept the name "Blank Custom Form", and opening Blank again (on another device, or a page opened earlier) wrote the empty form over it. Now each new form gets its own id, appears in the menu under the name you give it, with the sample forms, and "Blank Custom Form" stays last to start the next one.
+- A Blank opened and left without any change is not kept, so a misclick adds nothing to the menu.
+- A form made the old way (saved as Blank) moves once to its own entry, under its name.
+- One new click flow; it fails on the 1.0.38 files.
+
 ### 1.0.38
 
 **Henry's report of 2026-10-28: consent form checkboxes looked duplicated.**

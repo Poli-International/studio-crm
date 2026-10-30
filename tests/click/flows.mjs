@@ -1895,6 +1895,34 @@ await flow('Price matrix: the headers name the studio currency, tattoo style mul
   check(!(await b.evaluate(`document.getElementById('vat-settings-modal-overlay').textContent.includes('Jewelry Style')`)), 'a Jewelry header is still over the tattoo styles');
 });
 
+await flow('Form builder: a form made from Blank Custom Form is listed under its own name and survives a reload', async () => {
+  // Henry, 2026-10-30: it kept the name "Blank Custom Form" in the menu, and the next Blank wiped it
+  const open = async () => {
+    await b.goto(url);
+    await b.evaluate(`openFormBuilderModal()`);
+    const f = b.frame('#form-builder-frame');
+    for (let i = 0; i < 80 && !(await f.evaluate('!!(window.FormBuilderApp && window.FormBuilderApp.currentForm && document.getElementById("form-name-input"))').catch(() => false)); i++) await sleep(250);
+    await sleep(800);
+    return f;
+  };
+  const choose = (f, v) => f.evaluate(`(() => { const s = document.getElementById('template-select'); s.value = ${JSON.stringify(v)}; s.dispatchEvent(new Event('change')); })()`);
+  const menu = (f) => f.evaluate(`[...document.getElementById('template-select').options].map((o) => o.value + '=' + o.textContent.trim())`);
+  let f = await open();
+  await choose(f, 'blank');
+  await f.evaluate(`(() => { const i = document.getElementById('form-name-input'); i.value = 'Flow Own Form'; i.dispatchEvent(new Event('change')); })()`);
+  await eventually(async () => (await menu(f)).some((o) => o.endsWith('=Flow Own Form (Custom)')), async () => 'the new form is not in the menu under its name: ' + (await menu(f)).slice(-3).join(' | '));
+  check((await menu(f)).slice(-1)[0].startsWith('blank='), 'Blank Custom Form is not last in the menu, to start another form');
+  await choose(f, 'blank');
+  await sleep(1200); // an untouched Blank is not kept
+  check(!(await menu(f)).some((o) => o.includes('New custom form')), 'opening Blank without changing anything added an empty form');
+  f = await open();
+  const own = (await menu(f)).find((o) => o.endsWith('=Flow Own Form (Custom)'));
+  check(own, 'after a reload the form is gone from the menu');
+  await choose(f, own.split('=')[0]);
+  await eventually(async () => (await f.evaluate(`document.getElementById('form-name-input').value`)) === 'Flow Own Form', 'the form did not open after a reload');
+  await b.evaluate(`document.getElementById('form-builder-modal').style.display = 'none'`);
+});
+
 await stop();
 console.log(failures.length ? `\n${failures.length} flow(s) failed` : '\nAll flows passed');
 process.exit(failures.length ? 1 : 0);

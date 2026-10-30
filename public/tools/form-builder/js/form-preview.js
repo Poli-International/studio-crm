@@ -756,17 +756,20 @@ class FormPreview {
         try {
             const r = await fetch('/api/scanner/scan', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
             const d = await r.json().catch(() => ({}));
-            if (!r.ok || !d.dataUrl) throw new Error(d.error || TP('scanner.failed', 'The scan did not work'));
+            if (!r.ok || !(d.dataUrls || []).length) throw new Error(d.error || TP('scanner.failed', 'The scan did not work'));
             if (!this.photoUploads[fieldId]) this.photoUploads[fieldId] = [];
-            const n = this.photoUploads[fieldId].length + 1;
-            this.photoUploads[fieldId].push({
-                id: 'scan_' + Date.now() + '_' + n,
-                name: TP('scanner.page', 'Scanned page') + ' ' + n,
-                size: '',
-                type: d.dataUrl.slice(5, d.dataUrl.indexOf(';')),
-                dataUrl: d.dataUrl,
-                timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-            });
+            // a document feeder gives every page in it, both sides when it is duplex
+            for (const dataUrl of d.dataUrls) {
+                const n = this.photoUploads[fieldId].length + 1;
+                this.photoUploads[fieldId].push({
+                    id: 'scan_' + Date.now() + '_' + n,
+                    name: TP('scanner.page', 'Scanned page') + ' ' + n,
+                    size: '',
+                    type: dataUrl.slice(5, dataUrl.indexOf(';')),
+                    dataUrl,
+                    timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                });
+            }
             this.responses[fieldId] = this.photoUploads[fieldId];
             this.renderPhotoGallery(fieldId);
             this.updateProgress();

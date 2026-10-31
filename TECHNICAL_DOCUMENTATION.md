@@ -433,6 +433,12 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.41
+
+**Henry's report of 2026-10-31: on 1.0.40 his scanner ran, then the CRM showed "Catastrophic failure".**
+- **A scanner that refuses the feeder settings scans one side again, as in 1.0.39.** 1.0.40 changed the scanner's feeder and pages settings before the scan; his driver refused them on the first side. The pages setting is no longer touched. If the first side still fails with the feeder settings, they are put back, the CRM says so in plain words, and that scanner gets the plain one-side scan from then on (until the CRM restarts).
+- The two-sided scan is unchanged for scanners that accept it.
+
 ### 1.0.40
 
 **Henry's question of 2026-10-30: can the Scanner field use a duplex scanner?**

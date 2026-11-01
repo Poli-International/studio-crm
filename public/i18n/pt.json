@@ -2103,5 +2103,10 @@
  "{0}. Top Gem & Decorative Attachment Upgrades": "{0}. Melhorias de Gema Superior e Acessórios Decorativos",
  "Your own reference prices for piercings, jewelry and tattoos. Enter them in your studio currency, chosen above: nothing is converted. They are saved with your settings and go out and back in with Export CSV and Import CSV. The Studio Quote in the Tattoo Price Estimator uses your hourly rate, minimum charge and deposit, not this matrix.": "Os seus próprios preços de referência para piercings, joias e tatuagens. Introduza-os na moeda do seu estúdio, escolhida acima: nada é convertido. São guardados com as suas definições e saem e entram com Exportar CSV e Importar CSV. O orçamento do estúdio no estimador de preços de tatuagem usa a sua tarifa horária, o valor mínimo e o sinal, não esta matriz.",
  "{0}. Tattoo Style Multipliers (x)": "{0}. Multiplicadores por estilo de tatuagem (x)",
- "Applied to a tattoo base rate: {0} = no change, {1} = {2}% more. A multiplier, not a price.": "Aplicado a uma tarifa base de tatuagem: {0} = sem alteração, {1} = mais {2}%. Um multiplicador, não um preço."
+ "Applied to a tattoo base rate: {0} = no change, {1} = {2}% more. A multiplier, not a price.": "Aplicado a uma tarifa base de tatuagem: {0} = sem alteração, {1} = mais {2}%. Um multiplicador, não um preço.",
+ "Scans (": "Digitalizações (",
+ "Pages scanned with a Scanner field on this client's forms, at full size. A copy of each page is also kept in the folder storage/scans on the CRM computer, named with the DOC ID.": "As páginas digitalizadas com um campo Scanner nos formulários deste cliente, em tamanho real. Uma cópia de cada página fica também na pasta storage/scans do computador do CRM, com o DOC ID no nome.",
+ "No scans for this client yet.": "Ainda não há digitalizações deste cliente.",
+ "Page {0}": "Página {0}",
+ "Download": "Transferir"
 }

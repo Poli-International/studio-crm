@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { docIdFor, saveScanFiles } from '../src/scan-files.js';
+import { docIdFor, saveScanFiles, scanPagesOf } from '../src/scan-files.js';
 
 const jpg = 'data:image/jpeg;base64,' + Buffer.from('front side').toString('base64');
 const png = 'data:image/png;base64,' + Buffer.from('back side').toString('base64');
@@ -11,6 +11,15 @@ describe('DOC ID of a saved form', () => {
   it('is fixed by the record number and the year it was saved', () => {
     expect(docIdFor(42, '2026-11-01 01:27:10')).toBe('REC-2026-000042');
     expect(docIdFor(42, '2026-11-01 01:27:10')).toBe(docIdFor(42, '2026-11-01 01:27:10'));
+  });
+});
+
+describe('scanned pages of a form', () => {
+  it('lists each picture of each Scanner field in form order, pages counted per field', () => {
+    const schema = { sections: [{ fields: [{ id: 'a', type: 'scanner', label: 'Card' }, { id: 'b', type: 'scanner' }] }] };
+    const pages = scanPagesOf(schema, { a: [{ dataUrl: jpg }, { dataUrl: 'data:text/plain;base64,eA==' }, { dataUrl: png }], b: { dataUrl: jpg } });
+    expect(pages.map((p) => [p.label, p.page, p.mime])).toEqual([['Card', 1, 'image/jpeg'], ['Card', 2, 'image/png'], ['b', 1, 'image/jpeg']]);
+    expect(scanPagesOf(undefined, undefined)).toEqual([]);
   });
 });
 

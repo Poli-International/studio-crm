@@ -21,22 +21,36 @@ function scannerFields(fields, out = []) {
   return out;
 }
 
+// Every scanned page of a saved form, in form order: { label, page, mime, ext, bytes }. Anything that is not
+// a JPEG or PNG picture is left out.
+export function scanPagesOf(schema, responses) {
+  const out = [];
+  const fields = scannerFields([].concat(...((schema && schema.sections) || []).map((s) => (s && s.fields) || [])));
+  for (const f of fields) {
+    let page = 0;
+    for (const p of [].concat((responses && responses[f.id]) || [])) {
+      const m = /^data:image\/(jpeg|png);base64,([A-Za-z0-9+/=]+)$/.exec((p && p.dataUrl) || '');
+      if (!m) continue;
+      page++;
+      out.push({ label: String(f.label || f.id || 'Scan'), page, mime: 'image/' + m[1], ext: m[1] === 'png' ? 'png' : 'jpg', base64: m[2] });
+    }
+  }
+  return out;
+}
+
+// The file name of a page in storage/scans
+export const scanFileName = (date, clientName, docId, p) =>
+  `${new Date(date).toISOString().slice(0, 10)}_${slug(clientName) || 'client'}_${docId}_${slug(p.label) || 'scan'}-${p.page}.${p.ext}`;
+
 // Writes the pages and answers the file names written. Never throws: the form is already saved.
 export function saveScanFiles(dir, { docId, clientName, schema, responses, date = new Date() }) {
   const written = [];
   try {
-    const fields = scannerFields([].concat(...((schema && schema.sections) || []).map((s) => (s && s.fields) || [])));
-    const base = `${date.toISOString().slice(0, 10)}_${slug(clientName) || 'client'}_${docId}`;
-    for (const f of fields) {
-      const pages = [].concat((responses && responses[f.id]) || []);
-      pages.forEach((p, i) => {
-        const m = /^data:image\/(jpeg|png);base64,([A-Za-z0-9+/=]+)$/.exec((p && p.dataUrl) || '');
-        if (!m) return;
-        fs.mkdirSync(dir, { recursive: true });
-        const name = `${base}_${slug(f.label || f.id) || 'scan'}-${i + 1}.${m[1] === 'png' ? 'png' : 'jpg'}`;
-        fs.writeFileSync(path.join(dir, name), Buffer.from(m[2], 'base64'));
-        written.push(name);
-      });
+    for (const p of scanPagesOf(schema, responses)) {
+      fs.mkdirSync(dir, { recursive: true });
+      const name = scanFileName(date, clientName, docId, p);
+      fs.writeFileSync(path.join(dir, name), Buffer.from(p.base64, 'base64'));
+      written.push(name);
     }
   } catch (e) {
     console.warn('Scans: could not save a copy in ' + dir + ': ' + e.message);

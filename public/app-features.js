@@ -186,6 +186,9 @@ function renderClientProfileHeader(data) {
     const countWork = document.getElementById('cp-count-tattoo-work');
     if (countWork) countWork.textContent = (data.tattoo_work || []).length;
 
+    const countScans = document.getElementById('cp-count-scans');
+    if (countScans) countScans.textContent = (data.scans || []).length;
+
     const countNotes = document.getElementById('cp-count-notes');
     if (countNotes) countNotes.textContent = (data.staff_notes || []).length + appointmentNotes(data.appointments).length;
 }
@@ -663,9 +666,35 @@ function switchClientProfileTab(tabName) {
 
         workHtml += `</div>`;
         bodyEl.innerHTML = workHtml;
+    } else if (tabName === 'scans') {
+        // Henry, 2026-11-01: the pages scanned on the client's forms, at full size, in one place
+        const scans = data.scans || [];
+        const note = `<div style="font-size:0.8rem;color:var(--ti-muted, #9CA3AF);margin-bottom:1rem;line-height:1.4;">Pages scanned with a Scanner field on this client's forms, at full size. A copy of each page is also kept in the folder storage/scans on the CRM computer, named with the DOC ID.</div>`;
+        bodyEl.innerHTML = note + (!scans.length
+            ? `<div style="text-align:center;padding:2.5rem;background:var(--ti-panel2, #1F2937);border:1px dashed var(--ti-line, #374151);border-radius:12px;color:var(--ti-muted, #9CA3AF);">No scans for this client yet.</div>`
+            : `<div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));gap:1rem;">` + scans.map((s, i) => `
+                <div data-scan="${i}" style="background:var(--ti-panel2, #1F2937);border:1px solid var(--ti-line, #374151);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;">
+                    <button type="button" onclick="openClientScanLightbox(${i})" title="${escapeHtml(s.label)}" style="height:150px;padding:0;border:0;background:var(--ti-panel, #111827);cursor:zoom-in;">
+                        <img src="${escapeHtml(s.url)}" alt="${escapeHtml(s.label + ' ' + s.page)}" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block;" />
+                    </button>
+                    <div style="padding:0.75rem;display:flex;flex-direction:column;gap:2px;font-size:0.75rem;color:var(--ti-muted, #9CA3AF);">
+                        <div style="font-weight:700;font-size:0.85rem;color:var(--ti-text, #F9FAFB);">${escapeHtml(s.label)}</div>
+                        <div>Page ${Number(s.page)}</div>
+                        <div style="color:var(--ti-text2, #D1D5DB);">${escapeHtml(s.form_name || '')}</div>
+                        <div>${escapeHtml(String(s.saved_at || '').slice(0, 10))}</div>
+                        <div style="font-family:monospace;color:var(--ti-text2, #D1D5DB);">${escapeHtml(s.doc_id)}</div>
+                        <div style="margin-top:6px;"><a href="${escapeHtml(s.url)}" download="${escapeHtml(s.file_name)}" style="color:var(--ti-blue-ink, #60A5FA);font-weight:700;">Download</a></div>
+                    </div>
+                </div>`).join('') + `</div>`);
     }
 }
 window.switchClientProfileTab = switchClientProfileTab;
+
+function openClientScanLightbox(i) {
+    const s = ((currentActiveProfileClient && currentActiveProfileClient.scans) || [])[i];
+    if (s) openLightboxModal(s.url, s.label + ' ' + s.page + ' · ' + s.doc_id);
+}
+window.openClientScanLightbox = openClientScanLightbox;
 
 function generateClientAppointmentReceiptPDF(a) {
     const client = currentActiveProfileClient && (currentActiveProfileClient.client || currentActiveProfileClient);

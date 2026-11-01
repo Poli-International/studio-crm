@@ -765,7 +765,7 @@ async function downloadConsentFormPDF(formId) {
         fields: [{ id: '_age_when_signed', type: 'text', label: pdfLabel('Age when signed') }, { id: '_id_check', type: 'text', label: pdfLabel('ID check') }]
             .concat(form.minorWithoutGuardian ? [{ id: '_minor_flag', type: 'text', label: pdfLabel('Guardian') }] : []) }]) });
     const sigField = [].concat(...((form.schema && form.schema.sections) || []).map((s) => s.fields || [])).find((f) => f.type === 'signature' && typeof responses[f.id] === 'string' && responses[f.id].startsWith('data:image'));
-    try { await w.PDFGenerator.generateFormPDF(schema, responses, sigField ? responses[sigField.id] : null); }
+    try { await w.PDFGenerator.generateFormPDF(schema, responses, sigField ? responses[sigField.id] : null, { docId: form.docId }); }
     catch (e) { showStudioToast('The PDF could not be made: ' + e.message); }
 }
 window.downloadConsentFormPDF = downloadConsentFormPDF;

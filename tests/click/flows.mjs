@@ -984,6 +984,44 @@ await flow('Scanner field: in the form builder, its own button text, a page scan
   await b.evaluate(`document.getElementById('form-builder-modal').style.display = 'none'`);
 });
 
+await flow('Scanned pages: readable in the PDF, a fixed DOC ID, a full-size copy in storage/scans', async () => {
+  // Henry, 2026-11-01: a scanned health card was a 40 x 30 mm thumbnail in the PDF, too small to read, and he
+  // wanted the original scan kept on the CRM computer, named so it is found from the DOC ID on the form
+  const made = await b.evaluate(`fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Scan Copy Flow' }) }).then(r => r.json())`);
+  check(made && made.id, 'the client could not be added');
+  const card = await b.evaluate(`(() => { const c = document.createElement('canvas'); c.width = 1000; c.height = 630; const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, 1000, 630); x.fillStyle = '#000'; x.font = '60px sans-serif'; x.fillText('HEALTH CARD 1234', 80, 300); return c.toDataURL('image/jpeg', 0.9); })()`);
+  const schema = { sections: [{ id: 's1', title: 'ID', fields: [{ id: 'health_card', type: 'scanner', label: 'Health card' }] }] };
+  const responses = { full_name: 'Scan Copy Flow', health_card: [{ id: 'scan_1', name: 'Scanned page 1', type: 'image/jpeg', dataUrl: card }, { id: 'scan_2', name: 'Scanned page 2', type: 'image/jpeg', dataUrl: card }] };
+  const saved = await b.evaluate(`fetch('/api/clients/${made.id}/consent-forms', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(${JSON.stringify({ formName: 'Scan flow', schema, responses })}) }).then(r => r.json())`);
+  check(saved.ok && /^REC-\d{4}-\d{6}$/.test(saved.docId || ''), 'the saved form has no DOC ID: ' + JSON.stringify(saved));
+  check((await api('/api/consent-forms/' + saved.id)).docId === saved.docId, 'the form does not keep its DOC ID when opened again');
+  // both sides, full size, named by the date, the client and the DOC ID
+  const dir = path.join(process.env.CRM_ROOT || decodeURIComponent(new URL('../..', import.meta.url).pathname).replace(/^\/(\w:)/, '$1'), 'storage', 'scans'); // the server's folder (app.mjs)
+  const files = (() => { try { return fs.readdirSync(dir).filter((n) => n.includes('_Scan-Copy-Flow_' + saved.docId + '_')); } catch (e) { return []; } })();
+  try {
+    check(files.length === 2, 'the scanned pages were not saved in storage/scans: ' + JSON.stringify(files));
+    check(fs.readFileSync(path.join(dir, files[0])).equals(Buffer.from(card.split(',')[1], 'base64')), 'the saved scan is not the original');
+  } finally {
+    for (const n of files) fs.rmSync(path.join(dir, n), { force: true });
+  }
+  // the PDF: each scanned page across the page, its shape kept, and the form's own DOC ID
+  await b.evaluate(`openFormBuilderModal()`);
+  const f = b.frame('#form-builder-frame');
+  for (let i = 0; i < 80 && !(await f.evaluate('!!(window.PDFGenerator && window.jspdf && window.i18n && window.i18n.isLoaded)').catch(() => false)); i++) await sleep(250);
+  const drawn = await f.evaluate(`(async () => { const J = window.jspdf.jsPDF, seen = { text: [], images: [] };
+    window.jspdf.jsPDF = function (...args) { const d = new J(...args), text = d.text, img = d.addImage;
+      d.text = function (t, ...rest) { seen.text.push([].concat(t).join(' ')); return text.call(this, t, ...rest); };
+      d.addImage = function (data, fmt, x, y, w, h, ...rest) { if (data === ${JSON.stringify(card)}) seen.images.push([w, h]); return img.call(this, data, fmt, x, y, w, h, ...rest); };
+      d.save = function () { return this; }; return d; };
+    try { await window.PDFGenerator.generateFormPDF(${JSON.stringify(schema)}, ${JSON.stringify(responses)}, null, { docId: ${JSON.stringify(saved.docId)} }); } finally { window.jspdf.jsPDF = J; }
+    return seen; })()`);
+  check(drawn.images.length === 2, 'the PDF does not show both scanned pages: ' + JSON.stringify(drawn.images));
+  const [w, h] = drawn.images[0];
+  check(w > 150 && Math.abs(w / h - 1000 / 630) < 0.02, 'a scanned page is too small or stretched in the PDF: ' + w.toFixed(1) + ' x ' + h.toFixed(1) + ' mm');
+  check(drawn.text.some((t) => t.includes(saved.docId)), 'the PDF does not show the form\'s DOC ID');
+  await b.evaluate(`document.getElementById('form-builder-modal').style.display = 'none'`);
+});
+
 await flow('Consent form preview: a checkbox shows its text once, beside the box', async () => {
   // Henry, 2026-10-28: every checkbox printed its text twice in Preview and Kiosk, which read as a duplicated question
   await b.clickText('Clients');

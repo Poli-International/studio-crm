@@ -49,7 +49,7 @@ const PDFGenerator = {
         const own = (v) => v && !(typeof isSampleStudioValue === 'function' && isSampleStudioValue(v));
         let practitionerName = responses['practitioner_name'] || L('default_practitioner', 'Licensed Studio Practitioner');
         let clientName = responses['full_name'] || responses['client_name'] || responses['minor_name'] || L('client_record', 'Client Record');
-        let formDocId = `REC-${new Date().getFullYear()}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
+        let formDocId = options.docId || `REC-${new Date().getFullYear()}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`; // a saved form keeps its own (Studio CRM)
 
         // Look for studio fields in form definition or responses
         if (own(responses['studio_name'])) studioName = responses['studio_name'].toUpperCase();
@@ -244,6 +244,37 @@ const PDFGenerator = {
                                     yPos += mapH + (isCompact ? 2 : 4);
                                 } catch (e) {
                                     console.warn('PDFGenerator: Could not embed body map image', e);
+                                }
+                                return;
+                            }
+                        }
+
+                        // A scanned page across the width of the page, its shape kept, so it can be read: it was a
+                        // 40 x 30 mm thumbnail like a photo, too small to read a health card (Henry, 2026-11-01)
+                        if (field.type === 'scanner') {
+                            const pages = [].concat(responses[field.id] || []).map((p) => (p && p.dataUrl) || p)
+                                .filter((u) => typeof u === 'string' && u.startsWith('data:image'));
+                            if (pages.length > 0) {
+                                const x = margin + 2 + (isNested ? 4 : 0);
+                                const maxW = pageWidth - margin - x;
+                                const maxH = pageHeight - 2 * margin - 25;
+                                if (yPos + 20 > pageHeight - margin - 15) { doc.addPage(); yPos = margin; }
+                                doc.setFont('helvetica', 'bold');
+                                doc.setFontSize(isCompact ? 7.8 : 8.5);
+                                doc.setTextColor(71, 85, 105);
+                                doc.text(field.label || 'Scan', x, yPos);
+                                yPos += 4;
+                                for (const url of pages) {
+                                    try {
+                                        const img = doc.getImageProperties(url);
+                                        let w = maxW, h = (w * img.height) / img.width;
+                                        if (h > maxH) { h = maxH; w = (h * img.width) / img.height; }
+                                        if (yPos + h > pageHeight - margin - 15) { doc.addPage(); yPos = margin; }
+                                        doc.addImage(url, img.fileType, x, yPos, w, h);
+                                        yPos += h + 4;
+                                    } catch (e) {
+                                        console.warn('PDFGenerator: Could not embed a scanned page', e);
+                                    }
                                 }
                                 return;
                             }

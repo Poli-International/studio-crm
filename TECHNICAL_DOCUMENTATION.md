@@ -433,6 +433,13 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.42
+
+**Henry's emails of 2026-11-01: a scanned health card could not be read in the PDF, and he wanted the original scans kept.**
+- **Scanned pages are readable in the PDF.** A Scanner field's pages were drawn like photo thumbnails, 40 x 30 mm and stretched. Each page is now drawn across the width of the page with its own shape (a full page is fitted to the page height).
+- **A saved form keeps its DOC ID.** The PDF of a saved form shows `REC-<year>-<record number>`, the same each time it is printed; it was a new random one at every print. A form printed before it is saved still gets a random one.
+- **Every scanned page is also kept as a file** on the CRM computer, at full size, in `storage/scans/`: `<date>_<client>_<DOC ID>_<field>-<page>.jpg`. The pages stay in the saved form too; the files are a copy that is easy to find from the DOC ID. `storage/` is never touched by an update (`src/scan-files.js`).
+
 ### 1.0.41
 
 **Henry's report of 2026-10-31: on 1.0.40 his scanner ran, then the CRM showed "Catastrophic failure".**

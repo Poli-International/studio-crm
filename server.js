@@ -13,6 +13,7 @@ import { pruneAutoBackups, AUTO_BACKUP } from './src/backups.js';
 import { GUARDIAN_AGE, ageOn, isGuardianForm, dobFromResponses } from './src/consent-age.js';
 import { AFTERCARE_LANGS, addAftercareTranslations } from './src/aftercare-texts.js';
 import { listScanners, scanPages } from './src/scanner.js';
+import { docIdFor, saveScanFiles } from './src/scan-files.js';
 import { mergeMedicalInto } from './src/utils/crm-utils.js';
 import {
   users as dbUsers,
@@ -1088,6 +1089,11 @@ async function saveConsentForm(clientId, { formName, formCategory, language, sch
     return { status: 503, body: { error: 'No database configured, the consent form was not stored.' } };
   }
 
+  const newId = Array.isArray(saved) ? saved[0]?.id : undefined;
+  const docId = newId ? docIdFor(newId, saved[0].uploadedAt) : undefined;
+  // the scanned pages at full size, also as files on this computer (src/scan-files.js)
+  if (docId) saveScanFiles(path.join(__dirname, 'storage', 'scans'), { docId, clientName: client && client.name, schema, responses });
+
   mergeMedicalAnswers(clientId, responses || {});
   if (client && !client.dob && formDob) { client.dob = formDob; scheduleStateSave(); } // the record learns the birth date
   if (withoutGuardian) {
@@ -1095,7 +1101,7 @@ async function saveConsentForm(clientId, { formName, formCategory, language, sch
       details: `${record.description} was signed on the kiosk by a client aged ${age}, on a form with no parent or guardian signature. Have a parent or guardian sign a Minor Consent form before the procedure.`,
       user: 'Studio CRM', badgeColor: 'red' });
   }
-  return { status: 201, body: { ok: true, id: Array.isArray(saved) ? saved[0]?.id : undefined, minorWithoutGuardian: withoutGuardian || undefined } };
+  return { status: 201, body: { ok: true, id: newId, docId, minorWithoutGuardian: withoutGuardian || undefined } };
 }
 
 // The desk saw the client's ID: the type and at most its last 4 characters, never the whole number or a photo.
@@ -1743,7 +1749,7 @@ app.get('/api/consent-forms/:id', (req, res) => {
   if (!row) return res.status(404).json({ error: 'Consent form not found' });
   let content = {};
   try { content = JSON.parse(row.content); } catch (e) {}
-  res.json({ id: row.id, client_id: row.entity_id, name: row.description, saved_at: row.uploaded_at, ...content });
+  res.json({ id: row.id, docId: docIdFor(row.id, row.uploaded_at), client_id: row.entity_id, name: row.description, saved_at: row.uploaded_at, ...content });
 });
 
 app.get(['/api/clients/:id/profile', '/api/clients/:id/full-profile'], (req, res) => {

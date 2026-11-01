@@ -433,6 +433,12 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.43
+
+**Henry's idea of 2026-11-01: a Scans tab in the client's profile, next to Work and photos.**
+- **Scans tab.** Every page scanned with a Scanner field on the client's saved forms, newest form first, with the field, page, form, date and DOC ID. A click opens the page in the zoom view; **Download** saves it under its `storage/scans` file name. Forms saved before 1.0.42 show here too: the pages come from the saved forms, not the folder.
+- `GET /api/clients/:id/profile` returns `scans` (details only); each picture is `GET /api/consent-forms/:id/scans/:n`, served at full size from the saved form.
+
 ### 1.0.42
 
 **Henry's emails of 2026-11-01: a scanned health card could not be read in the PDF, and he wanted the original scans kept.**

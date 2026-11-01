@@ -13,7 +13,7 @@ import { pruneAutoBackups, AUTO_BACKUP } from './src/backups.js';
 import { GUARDIAN_AGE, ageOn, isGuardianForm, dobFromResponses } from './src/consent-age.js';
 import { AFTERCARE_LANGS, addAftercareTranslations } from './src/aftercare-texts.js';
 import { listScanners, scanPages } from './src/scanner.js';
-import { docIdFor, saveScanFiles } from './src/scan-files.js';
+import { docIdFor, saveScanFiles, scanPagesOf, scanFileName } from './src/scan-files.js';
 import { mergeMedicalInto } from './src/utils/crm-utils.js';
 import {
   users as dbUsers,
@@ -1716,6 +1716,34 @@ app.delete('/api/clients/:id', (req, res) => {
 });
 
 
+// The client's Scans tab (Henry, 2026-11-01): every page scanned with a Scanner field on the client's saved forms,
+// newest form first. Only the details: each picture is fetched from its url at full size.
+function clientScans(clientId) {
+  const name = (clients.find((c) => c.id === clientId) || {}).name;
+  try {
+    return sqlite.prepare("SELECT id, description, content, uploaded_at FROM documents WHERE entity_type = 'client' AND entity_id = ? AND type = 'consent_form' ORDER BY id DESC").all(clientId)
+      .flatMap((row) => {
+        let content = {};
+        try { content = JSON.parse(row.content) || {}; } catch (e) {}
+        const docId = docIdFor(row.id, row.uploaded_at);
+        return scanPagesOf(content.schema, content.responses).map((p, n) => ({
+          form_id: row.id, form_name: row.description, saved_at: row.uploaded_at, doc_id: docId, label: p.label, page: p.page,
+          url: `/api/consent-forms/${row.id}/scans/${n}`, file_name: scanFileName(String(row.uploaded_at || '').replace(' ', 'T') + 'Z', name, docId, p) }));
+      });
+  } catch (e) { return []; }
+}
+
+// One scanned page of a saved form, as the picture itself
+app.get('/api/consent-forms/:id/scans/:n', (req, res) => {
+  let row;
+  try { row = sqlite.prepare("SELECT content FROM documents WHERE id = ? AND type = 'consent_form'").get(Number(req.params.id)); } catch (e) {}
+  let content = {};
+  try { content = JSON.parse((row && row.content) || '{}') || {}; } catch (e) {}
+  const p = scanPagesOf(content.schema, content.responses)[Number(req.params.n)];
+  if (!p) return res.status(404).json({ error: 'Scan not found' });
+  res.set('Cache-Control', 'private, no-store').type(p.mime).send(Buffer.from(p.base64, 'base64'));
+});
+
 // Consent forms saved from the form builder, newest first (answers are fetched one at a time).
 function clientConsentForms(clientId) {
   try {
@@ -1782,6 +1810,7 @@ app.get(['/api/clients/:id/profile', '/api/clients/:id/full-profile'], (req, res
     appointments: clientApps,
     waivers: clientWaivers,
     consent_forms: clientConsentForms(clientId),
+    scans: clientScans(clientId),
     tattoo_work: clientWork,
     stats: {
       totalAppointments: clientApps.length,

@@ -1022,6 +1022,36 @@ await flow('Scanned pages: readable in the PDF, a fixed DOC ID, a full-size copy
   await b.evaluate(`document.getElementById('form-builder-modal').style.display = 'none'`);
 });
 
+await flow('Scans tab: the client profile shows the scanned pages of the client\'s forms, full size, with the DOC ID', async () => {
+  // Henry, 2026-11-01: "a tab in Client's Profile next to Work and Photos named Scans"
+  const made = await b.evaluate(`fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Scans Tab Flow' }) }).then(r => r.json())`);
+  const card = await b.evaluate(`(() => { const c = document.createElement('canvas'); c.width = 1000; c.height = 630; const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, 1000, 630); return c.toDataURL('image/jpeg', 0.9); })()`);
+  const schema = { sections: [{ id: 's1', title: 'ID', fields: [{ id: 'health_card', type: 'scanner', label: 'Health card' }] }] };
+  const responses = { health_card: [{ id: 'scan_1', dataUrl: card }, { id: 'scan_2', dataUrl: card }] };
+  const saved = await b.evaluate(`fetch('/api/clients/${made.id}/consent-forms', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(${JSON.stringify({ formName: 'Scans tab form', schema, responses })}) }).then(r => r.json())`);
+  check(saved.ok, 'the form was not saved: ' + JSON.stringify(saved));
+  const dir = path.join(process.env.CRM_ROOT || decodeURIComponent(new URL('../..', import.meta.url).pathname).replace(/^\/(\w:)/, '$1'), 'storage', 'scans');
+  try {
+    await b.evaluate(`openClientProfileModal(${made.id})`);
+    await eventually(async () => (await text('#cp-count-scans')) === '2', 'the Scans tab does not count the 2 scanned pages: ' + await text('#cp-count-scans'));
+    await pressOn(`switchClientProfileTab('scans')`);
+    await eventually(async () => b.evaluate(`document.querySelectorAll('#client-profile-modal-body [data-scan] img').length === 2`), 'the Scans tab does not show the 2 pages');
+    // the pictures are the scans themselves, at full size
+    await eventually(async () => b.evaluate(`[...document.querySelectorAll('#client-profile-modal-body [data-scan] img')].every((i) => i.complete && i.naturalWidth === 1000)`), 'the scanned pages did not load at full size');
+    const body = await text('#client-profile-modal-body');
+    check(body.includes(saved.docId) && body.includes('Scans tab form') && body.includes('Page 2'), 'a scan does not show its form, page and DOC ID: ' + body.slice(0, 300));
+    check((await b.evaluate(`document.querySelector('#client-profile-modal-body [data-scan] a[download]').getAttribute('download')`)).includes('_Scans-Tab-Flow_' + saved.docId + '_Health-card-1.jpg'), 'Download does not give the storage/scans file name');
+    // a click opens it in the zoom view
+    await b.evaluate(`document.querySelector('#client-profile-modal-body [data-scan] button').click()`);
+    await eventually(async () => shown('lightbox-modal') && (await b.evaluate(`document.getElementById('lightbox-img').src`)).includes('/api/consent-forms/' + saved.id + '/scans/0'), 'the scan does not open in the zoom view');
+    await b.evaluate(`closeLightboxModal()`);
+    check((await b.evaluate(`fetch('/api/consent-forms/${saved.id}/scans/9').then(r => r.status)`)) === 404, 'a scan that does not exist is not a 404');
+    await b.evaluate(`closeClientProfileModal()`);
+  } finally {
+    try { for (const n of fs.readdirSync(dir).filter((n) => n.includes('_' + saved.docId + '_'))) fs.rmSync(path.join(dir, n), { force: true }); } catch (e) {}
+  }
+});
+
 await flow('Consent form preview: a checkbox shows its text once, beside the box', async () => {
   // Henry, 2026-10-28: every checkbox printed its text twice in Preview and Kiosk, which read as a duplicated question
   await b.clickText('Clients');

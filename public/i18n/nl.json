@@ -2103,5 +2103,10 @@
  "{0}. Top Gem & Decorative Attachment Upgrades": "{0}. Top-steen & decoratieve toevoeging-upgrades",
  "Your own reference prices for piercings, jewelry and tattoos. Enter them in your studio currency, chosen above: nothing is converted. They are saved with your settings and go out and back in with Export CSV and Import CSV. The Studio Quote in the Tattoo Price Estimator uses your hourly rate, minimum charge and deposit, not this matrix.": "Uw eigen referentieprijzen voor piercings, sieraden en tatoeages. Voer ze in de valuta van uw studio in, hierboven gekozen: er wordt niets omgerekend. Ze worden met uw instellingen opgeslagen en gaan uit en weer in met CSV exporteren en CSV importeren. De studio-offerte in de tatoeageprijscalculator gebruikt uw uurtarief, minimumbedrag en aanbetaling, niet deze matrix.",
  "{0}. Tattoo Style Multipliers (x)": "{0}. Vermenigvuldigers per tatoeagestijl (x)",
- "Applied to a tattoo base rate: {0} = no change, {1} = {2}% more. A multiplier, not a price.": "Toegepast op een basistarief voor een tatoeage: {0} = geen verandering, {1} = {2}% meer. Een vermenigvuldiger, geen prijs."
+ "Applied to a tattoo base rate: {0} = no change, {1} = {2}% more. A multiplier, not a price.": "Toegepast op een basistarief voor een tatoeage: {0} = geen verandering, {1} = {2}% meer. Een vermenigvuldiger, geen prijs.",
+ "Scans (": "Scans (",
+ "Pages scanned with a Scanner field on this client's forms, at full size. A copy of each page is also kept in the folder storage/scans on the CRM computer, named with the DOC ID.": "De pagina's die met een Scannerveld op de formulieren van deze klant zijn gescand, op volle grootte. Een kopie van elke pagina staat ook in de map storage/scans op de CRM-computer, met de DOC ID in de naam.",
+ "No scans for this client yet.": "Nog geen scans voor deze klant.",
+ "Page {0}": "Pagina {0}",
+ "Download": "Downloaden"
 }

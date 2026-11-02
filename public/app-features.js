@@ -3244,7 +3244,7 @@ window.triggerInstantDatabaseSnapshot = triggerInstantDatabaseSnapshot;
 
 // Settings, Studio details: the studio's own name and contact on the consent forms. Merged into
 // poli_studio_profile (shared with the pricing settings and the form builder), not replacing it.
-const STUDIO_DETAIL_FIELDS = { name: "studioName", address: "studioAddress", phone: "studioPhone", email: "studioEmail", permit: "studioPermit" };
+const STUDIO_DETAIL_FIELDS = { name: "studioName", address: "studioAddress", phone: "studioPhone", email: "studioEmail", permit: "studioPermit", country: "studioCountry" };
 function readStudioProfile() { try { return JSON.parse(localStorage.getItem("poli_studio_profile") || "{}") || {}; } catch (e) { return {}; } }
 function renderStudioDetailsCard() {
     const p = readStudioProfile();

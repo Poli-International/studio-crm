@@ -8,6 +8,7 @@ import { jsPDF } from 'jspdf';
 import { db, safeDbQuery, sqlite } from './src/db/index.js';
 import { startHttps, studioAddress } from './src/https.js';
 import { installAccess } from './src/access.js';
+import { installAssessment } from './src/assessment.js';
 import { installUpdate } from './src/update.js';
 import { pruneAutoBackups, AUTO_BACKUP } from './src/backups.js';
 import { GUARDIAN_AGE, ageOn, isGuardianForm, dobFromResponses } from './src/consent-age.js';
@@ -57,6 +58,8 @@ app.use((req, res, next) => {
   if (req.method !== 'GET' && req.path.startsWith('/api/')) res.on('finish', () => { if (res.statusCode < 400) scheduleStateSave(); });
   next();
 });
+// New-artist assessment (Settings, New artists): its own tables in the SQLite file; the team list is staff above.
+installAssessment(app, sqlite, { staff: () => staff, country: () => { try { return JSON.parse(appData.poli_studio_profile || '{}').studioCountry; } catch (e) { return ''; } }, log: (e) => logActivity({ user: 'Admin Manager', badgeColor: 'purple', ...e }) });
 app.use(express.urlencoded({ extended: true }));
 
 // Tool pages get the clipboard fallback: dozens of Copy buttons in the tools call

@@ -136,7 +136,7 @@ export function needLevel(method, apiPath) {
   if (['/api/access', '/api/access/logout', '/api/kiosk/next', '/api/kiosk/submit', '/api/scanner/scan'].includes(apiPath)) return 'kiosk'; // a tablet's form may scan
   if (['/api/access/login', '/api/access/people'].includes(apiPath)) return 'any';
   const write = method !== 'GET' && method !== 'HEAD';
-  if (/^\/api\/(access|admin|database)\//.test(apiPath)) return 'admin';           // password, logins, roles, backups, empty studio
+  if (/^\/api\/(access|admin|database|assessment)\//.test(apiPath)) return 'admin';           // password, logins, roles, backups, empty studio, new-artist assessment
   if (write && /import/.test(apiPath)) return 'admin';                              // CSV imports
   if (write && /^\/api\/(staff|professionals)(\/\d+)?$/.test(apiPath)) return 'admin'; // the team itself
   if (write && /^\/api\/(settings|sync)/.test(apiPath)) return 'admin';             // settings, CSV sync

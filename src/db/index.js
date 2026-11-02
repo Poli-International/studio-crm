@@ -1,6 +1,7 @@
 import Database from 'better-sqlite3';
 import { drizzle } from 'drizzle-orm/better-sqlite3';
 import * as schema from './schema.js';
+import { ASSESSMENT_TABLES, COLUMN_MIGRATIONS as ASSESSMENT_COLUMNS } from '../assessment.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -32,7 +33,7 @@ try {
 
 // Columns added after a database may already exist. CREATE TABLE IF NOT
 // EXISTS will not add them, so each is applied here when missing.
-const columnMigrations = [['documents', 'content', 'TEXT']];
+const columnMigrations = [['documents', 'content', 'TEXT'], ...ASSESSMENT_COLUMNS];
 
 // Auto-initialize all schema tables on startup
 const tableInitStatements = [
@@ -208,7 +209,7 @@ const tableInitStatements = [
   )`
 ];
 
-tableInitStatements.forEach(stmt => {
+[...tableInitStatements, ...ASSESSMENT_TABLES].forEach(stmt => {
   try {
     sqlite.exec(stmt);
   } catch (err) {

@@ -41,6 +41,8 @@ describe('CRM user guide', () => {
     const bold = (s) => [...s.matchAll(/\*\*([^*]+)\*\*/g)].map((m) => m[1].trim());
     const norm = (s) => s.replace(/^[^\p{L}\p{N}+]+/u, '').trim();
     const enLabels = new Set(bold(md.en));
+    // labels of the computer itself, not of the CRM: "right-click it and choose **Open**" is the Mac menu
+    for (const os of ['Open']) enLabels.delete(os);
     const bad = [];
     for (const l of LANGS) {
       const dict = {};

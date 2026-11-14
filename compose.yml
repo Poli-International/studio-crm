@@ -7,6 +7,8 @@ services:
       - "3443:3443" # https, for tablets and phones (camera)
     volumes:
       - studio-crm-data:/app/data
+      - studio-crm-storage:/app/storage # scans and backups
     restart: unless-stopped
 volumes:
   studio-crm-data:
+  studio-crm-storage:

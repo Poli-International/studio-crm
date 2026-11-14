@@ -433,6 +433,16 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.44
+
+**Security: staff levels and who may reach the CRM. Nothing else in this version.**
+- **Staff levels.** The level check judged an address as typed, while the server answers an address in any case and with or without a final slash. Both now look at the same thing (`cleanPath()` in `src/access.js`), the team and station rules no longer depend on how a number is written, and a test compares every route in every form (`tests/access-gate.test.js`).
+- **Before sign-in** a device reaches the sign-in and the kiosk sign-in, nothing else under `/api/access`, and `GET /api/access` no longer lists roles to it.
+- **No password = this computer only.** Without a studio password the CRM answers the computer it runs on (`isLocalRequest()`: local connection, local name, no proxy, not sent by another website's page). Another device gets a page that says to create the password; at first start another device can only create one. The `cors` package is gone: no answer says "any website may read this".
+- **reset-password.txt** also brings back the first-start page, so a computer without a screen can get a password from another device.
+- **Removed:** the mock-up's client-portal routes (`/api/client-portal/*`) and its pretend login (`/api/login`, `/api/register`, `/api/user`, `/api/portal/*`). No screen used them.
+- **Docker:** `/app/storage` (scans, backups) is a volume, like `/app/data`.
+
 ### 1.0.43
 
 **Henry's idea of 2026-11-01: a Scans tab in the client's profile, next to Work and photos.**

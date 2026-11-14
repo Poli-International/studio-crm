@@ -43,7 +43,7 @@ Click the staff button at the top right (it reads **Staff Login** until someone 
 
 Other devices in the studio open the CRM with the address shown in the window that started it. A tablet or phone that needs the camera (the scanner) must use the address that starts with `https://` and ends with `:3443`. The first time, the browser warns that the connection is not private, because the certificate was made by your own computer: choose Advanced, then Continue. On the plain `http://` address everything works except the camera.
 
-The first time the CRM starts, it asks you to create the **studio password**. Every computer, tablet and phone then signs in once with it. You can choose **Continue without a password** and set one later in **Settings**, **Studio Password**. If you forget it, create an empty file named `reset-password.txt` in the `data` folder and start the CRM again: this removes the studio password and all staff logins.
+The first time the CRM starts, it asks you to create the **studio password**. Every computer, tablet and phone then signs in once with it. You can choose **Continue without a password** and set one later in **Settings**, **Studio Password**. Without a password, the CRM opens only on the computer it runs on: tablets, phones and other computers need the studio password. If you forget it, create an empty file named `reset-password.txt` in the `data` folder and start the CRM again: this removes the studio password and all staff logins. The CRM then asks you to create a new password.
 
 **Lock a device that is not used:** in **Settings**, under the studio password, choose how long a device may stay unused (5, 10, 15 or 30 minutes) before it signs out by itself. The tablet kiosk is never locked: it has its own exit PIN.
 

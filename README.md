@@ -91,7 +91,7 @@ English, French, Italian, German, Spanish, Dutch, Portuguese and Thai: the scree
 
 ### Security for a shared studio
 
-- A **studio password** keeps other people on your network out (the first start asks for it; you can set it later).
+- A **studio password** keeps other people on your network out (the first start asks for it; you can set it later). Without one, the CRM opens only on the computer it runs on.
 - **Staff logins** with levels: Front desk, Staff, Administrator, checked on the server.
 - A device that is not used locks itself after 5 to 30 minutes.
 - **Kiosk tablets** sign in with their own password and can do nothing but forms.
@@ -119,14 +119,14 @@ npm start
 docker compose up -d
 ```
 
-Then open `http://localhost:3000`. The CRM is its own web server: do not put the files behind Apache, nginx or PHP, the pages would load but nothing would save. Settings go in a `.env` file (copy `.env.example`): `PORT`, `STUDIO_MANAGER_EMAIL`, `SQLITE_DB_PATH`. These copies are updated the way they were installed; one-click updates are for the downloads above. Versions before 1.0.12 update once by hand: download the new ZIP, unzip it to a new folder, and copy your `data` folder from the old one into it.
+Then open `http://localhost:3000`. With Docker the CRM always asks you to create the studio password: to a container, every browser is another device. The data is kept in two volumes: `/app/data` (the database) and `/app/storage` (scans and backups). If you used Docker before version 1.0.44, copy the scans out before you rebuild: `docker compose cp studio-crm:/app/storage ./storage-copy`. The CRM is its own web server: do not put the files behind Apache, nginx or PHP, the pages would load but nothing would save. Settings go in a `.env` file (copy `.env.example`): `PORT`, `STUDIO_MANAGER_EMAIL`, `SQLITE_DB_PATH`. These copies are updated the way they were installed; one-click updates are for the downloads above. Versions before 1.0.12 update once by hand: download the new ZIP, unzip it to a new folder, and copy your `data` folder from the old one into it.
 
 ## Other devices in the studio
 
 - Computers open `http://THE-COMPUTER:3000`. **Settings**, **Kiosk Tablets** shows the computer's address.
 - Tablets and phones that need the camera (the scanner) open `https://THE-COMPUTER:3443`. The certificate is made by the CRM itself, so the browser warns once: choose **Advanced**, then **Continue**. `HTTPS_PORT=0` turns https off.
 - Give the CRM computer a fixed address in your router ("DHCP reservation" or "static IP"), or the tablets lose it when the address changes.
-- Forgotten the studio password: create an empty file `reset-password.txt` in the `data` folder and restart; it removes the studio password and the staff logins.
+- Forgotten the studio password: create an empty file `reset-password.txt` in the `data` folder and restart; it removes the studio password and the staff logins, and the CRM asks for a new password, from any device. Use the same file when the CRM has no password and runs on a computer without a screen (a server), where no other device can open it.
 
 ## Backups
 

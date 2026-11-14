@@ -283,14 +283,21 @@ jobs:
         run: |
           docker compose up -d --build
           for i in $(seq 1 30); do curl -sf http://127.0.0.1:3000/ > /dev/null && break; sleep 2; done
-          # a new install asks for the studio password first; this check continues without one
-          curl -sf -X POST http://127.0.0.1:3000/api/access/skip > /dev/null
-          code=$(curl -s -o /dev/null -w "%{http_code}" -X POST http://127.0.0.1:3000/api/clients -H "Content-Type: application/json" -d "{\"name\":\"Docker Test\"}")
+          # to a container every browser is another device: going on without a password is refused, one must be created
+          code=$(curl -s -o /dev/null -w "%{http_code}" -X POST http://127.0.0.1:3000/api/access/skip)
+          test "$code" = "401"
+          curl -sf -c "$RUNNER_TEMP/jar" -X POST http://127.0.0.1:3000/api/access/password -H "Content-Type: application/json" -d "{\"next\":\"docker-test-1\"}" > /dev/null
+          code=$(curl -s -b "$RUNNER_TEMP/jar" -o /dev/null -w "%{http_code}" -X POST http://127.0.0.1:3000/api/clients -H "Content-Type: application/json" -d "{\"name\":\"Docker Test\"}")
           test "$code" = "201"
+          # a file in storage/ (scans, backups) must outlive the container, like the database
+          docker compose exec -T studio-crm sh -c "echo kept > /app/storage/volume-test.txt"
           sleep 2
           docker compose down
           docker compose up -d
-          for i in $(seq 1 30); do curl -sf http://127.0.0.1:3000/ > /dev/null && break; sleep 2; done
-          list=$(curl -sf http://127.0.0.1:3000/api/clients)
+          for i in $(seq 1 30); do curl -s -o /dev/null http://127.0.0.1:3000/ && break; sleep 2; done
+          # a restart signs every device out: sign in again
+          curl -sf -c "$RUNNER_TEMP/jar" -X POST http://127.0.0.1:3000/api/access/login -H "Content-Type: application/json" -d "{\"password\":\"docker-test-1\"}" > /dev/null
+          list=$(curl -sf -b "$RUNNER_TEMP/jar" http://127.0.0.1:3000/api/clients)
           grep -q "Docker Test" <<< "$list"
+          docker compose exec -T studio-crm cat /app/storage/volume-test.txt | grep -q kept
           docker compose logs | tail -20

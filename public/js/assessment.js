@@ -146,8 +146,8 @@
         } else {
             controls = [[1, p.kind === 'must' ? 'Pass' : 'Yes'], [0, p.kind === 'must' ? 'Fail' : 'No']].map(([v, l]) => '<button type="button" data-act="pass" data-item="' + id + '" data-passed="' + v + '" data-stepkind="' + step + '"' + (done ? ' disabled' : '') + ' style="' + btn + (r && r.passed === v ? on : '') + '">' + E(T(l)) + '</button>').join('');
         }
-        const extra = (p.good_answer ? '<div style="' + muted + '"><strong>' + E(T('A good answer covers:')) + '</strong> ' + E(p.good_answer) + '</div>' : '')
-            + (p.red_flags ? '<div style="font-size:0.78rem;color:var(--ti-alert-ink, #FCA5A5);"><strong>' + E(T('Red flags:')) + '</strong> ' + E(p.red_flags) + '</div>' : '')
+        const extra = (p.good_answer ? '<div style="' + muted + '"><strong>' + E(T('A good answer covers:')) + '</strong> ' + E(T(p.good_answer)) + '</div>' : '')
+            + (p.red_flags ? '<div style="font-size:0.78rem;color:var(--ti-alert-ink, #FCA5A5);"><strong>' + E(T('Red flags:')) + '</strong> ' + E(T(p.red_flags)) + '</div>' : '')
             + (p.rule ? '<div style="' + muted + '"><strong>' + E(T('Studio rule:')) + '</strong> ' + E(p.rule) + '</div>' : '')
             + (p.wiki_slug ? '<a href="' + WIKI + encodeURIComponent(p.wiki_slug) + '/" target="_blank" rel="noopener" style="font-size:0.78rem;color:var(--ti-blue, #38BDF8);">' + E(T('Check the answer on our wiki')) + '</a>' : '');
         const waived = r && r.waived_note ? '<div style="font-size:0.78rem;color:var(--ti-gold, #FBBF24);">' + E(T('Set aside by the owner:')) + ' ' + E(r.waived_note) + '</div>' : '';
@@ -250,7 +250,7 @@
     function renderQuestions(el, res) {
         const src = { plan: 'From the assessment plan', patrick: "Patrick Poli's questions", studio: 'Your own' };
         el.innerHTML = topBar()
-            + '<p style="' + muted + 'margin:0;">' + E(T('Every question is about the work. A question about health is refused: it is unlawful before a job offer in many countries, and the CRM never records health.')) + '</p>'
+            + '<p style="' + muted + 'margin:0;">' + E(T("Every question is about the work. A question about the candidate's health is refused: it is unlawful before a job offer in many countries, and the CRM never records health.")) + '</p>'
             + res.questions.map((q) => '<div style="' + card + 'display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;' + (q.active ? '' : 'opacity:0.55;') + '"><div>'
                 + (q.must_pass ? '<span style="color:var(--ti-alert-ink, #FCA5A5);font-size:0.72rem;font-weight:900;margin-right:6px;">' + E(T('MUST PASS')) + '</span>' : '')
                 + '<span style="' + muted + '">' + E(T(q.topic)) + '</span><div style="font-weight:700;font-size:0.86rem;">' + E(T(q.question)) + '</div>'

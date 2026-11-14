@@ -433,6 +433,17 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 
 ## Version History
 
+### 1.0.45
+
+**New artists: assess a piercer or tattooist before giving them a work area, then follow the trial (Settings, New artists).**
+- **Five steps:** paper check, conversation (question bank), practical test, scorecard, trial. Items are ticked, passed or failed (MUST PASS), or scored 1 to 4. The minimum standard: every must-pass item passed (or set aside for that candidate with a written reason) and nothing scored 1. One calculation serves the list, the scorecard and **Start trial** (`gateOf()` in `src/assessment.js`): only the candidate's current items count.
+- **Trial:** starting it adds the person to the team list at the observe stage; the calendar lists the next checkpoint and the end; at a checkpoint the scored areas are scored again; the end is Accept or Stop, signed with a name. PDF of the whole assessment.
+- **Studio rules** per placement (empty until the studio writes them) and the studio's **own questions**. A must-pass question of the plan stays on. A question with a health word is refused unless it names a client (`asksAboutHealth()`).
+- **No health status anywhere:** no table column can hold one (`HEALTH_COLUMN`, tested); the only vaccination record is the date hepatitis B vaccination was offered. Studio country (Settings, Studio details) decides which questions show (`questionVisible()`).
+- **Data:** tables `candidates`, `assessment_items`, `question_bank`, `studio_rules` in the SQLite file; routes under `/api/assessment/`, administrators only.
+- **Languages:** the interview questions and the legal and ethics notes were approved in English by Patrick, written in the 7 other languages by NotebookLM, scored by Jev and read in full (26 corrections).
+- Also: the docs test that checks removed screens has its own time limit.
+
 ### 1.0.44
 
 **Security: staff levels and who may reach the CRM. Nothing else in this version.**

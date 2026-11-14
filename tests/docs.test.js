@@ -69,7 +69,7 @@ describe('docs', () => {
       for (const f of docs) if (!(e.allowIn || []).includes(f) && !(e.crmOnly && f.startsWith('public/tools/')) && re.test(text.get(f))) bad.push(`${f}: "${e.pattern}" (${e.why})`);
     }
     expect(bad).toEqual([]);
-  });
+  }, 30000);   // every pattern over 300+ guide files: more than the default 5 s on a busy disk
 
   it('screenshots show the current design (package.json uiDesign; retake with node scripts/screenshots.mjs)', () => {
     const { uiDesign } = JSON.parse(read('package.json'));

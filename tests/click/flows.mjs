@@ -1331,6 +1331,16 @@ await flow('New artists: a typed note is kept, the minimum standard gates the tr
   await b.type('#assessment-modal-overlay [data-notes-for="paper:licence"]', 'Seen, valid to 2027');
   await eventually(async () => { const rows = (await api('/api/assessment/candidates/' + id)).items.filter((r) => r.item === 'paper:licence'); return rows.length === 1 && rows[0].notes === 'Seen, valid to 2027'; }, 'a note typed after the answer was not saved on that answer');
 
+  // the questions of the plan, their red flag and the legal notes are in the CRM's language
+  await b.clickText('2. Conversation', '#assessment-modal-overlay');
+  await b.evaluate(`Promise.resolve(window.i18nPhrases.setLanguage('fr')).then(() => true)`);
+  check(await press('[data-act="step"][data-step="conversation"]'), 'no Conversation tab');   // the step writes its texts when it is drawn
+  await eventually(async () => { const said = await text('#assessment-modal-overlay'); return said.includes("N'a jamais refusé personne.") && said.includes('Parlez-moi d\'un client que vous avez refusé') && said.includes('TRAVAIL uniquement'); },
+    async () => 'the conversation step is not in French: ' + (await text('#assessment-step')).slice(0, 300));
+  await b.evaluate(`Promise.resolve(window.i18nPhrases.setLanguage('en')).then(() => true)`);
+  check(await press('[data-act="step"][data-step="conversation"]'), 'no Conversation tab');   // the step writes its texts when it is drawn
+  await eventually(async () => (await text('#assessment-modal-overlay')).includes('Has never refused anyone.'), 'the conversation step did not come back to English');
+
   // the minimum standard: Start trial is closed until every must-pass item passed
   await b.clickText('4. Scorecard', '#assessment-modal-overlay');
   check(await b.evaluate(`document.querySelector('#assessment-modal-overlay [data-act="start-trial"]').disabled`), 'Start trial was open with must-pass items not done');

@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import Database from 'better-sqlite3';
 import express from 'express';
-import { HEALTH_COLUMN, HEALTH_QUESTION, MUST_PASS_STAYS, PRACTICAL, installAssessment, questionVisible, trialGate } from '../src/assessment.js';
+import { HEALTH_COLUMN, HEALTH_QUESTION, MUST_PASS_STAYS, asksAboutHealth, PRACTICAL, installAssessment, questionVisible, trialGate } from '../src/assessment.js';
 import { needLevel } from '../src/access.js';
 
 // A studio on a throwaway database, as server.js installs it.
@@ -39,6 +39,13 @@ describe('no health status anywhere in the assessment', () => {
       expect((await call('POST', '/questions', { topic: 'x', question: q })).status, q).toBe(400);
     expect(HEALTH_QUESTION.test('What do you do if YOU are injured or bleeding during a session?')).toBe(false);
     expect((await call('POST', '/questions', { topic: 'Station', question: 'Show me how you open a sterile pouch.' })).status).toBe(201);
+  });
+  it('a health word in a question that names a client is about the work: accepted', async () => {
+    for (const q of ['A client comes back with an infected piercing. What do you do?', 'What do you do if a client tells you they are pregnant?', 'A customer takes blood-thinning medication. Do you tattoo them?'])
+      expect((await call('POST', '/questions', { topic: 'Clients', question: q })).status, q).toBe(201);
+    expect(asksAboutHealth('Do you have hepatitis B?')).toBe(true);
+    expect(asksAboutHealth('How do you clean the tray?', 'Red flag: says they were too sick to do it')).toBe(true);   // the notes count too
+    expect(asksAboutHealth('Un cliente con una infección: ¿qué hace?', 'infected')).toBe(false);
   });
   it('only an administrator reaches the assessment', () => {
     expect(needLevel('GET', '/api/assessment/candidates')).toBe('admin');

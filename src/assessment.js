@@ -100,7 +100,11 @@ export function trialGate(rows) {
 
 // Column names that would hold health status. The schema test fails if any table grows one.
 export const HEALTH_COLUMN = /hiv|hepatit|hbv|hcv|bbv|viral|diagnos|infect|disease|serolog|antibod|immun|test_result|vaccin(?!e_offered_on$)|declin|medical|health/i;
-// A question a studio writes must be about the WORK. Health is not asked (law table, 2026-11-02).
+// A question a studio writes must be about the WORK. The candidate's health is not asked (law table, 2026-11-02).
+// A health word in a question that names a client is about the work (an infected piercing, a pregnant client,
+// a client on medication): it is accepted (Patrick 2026-11-15). The check is a reminder to the owner, not a wall.
+export const NAMES_A_CLIENT = /\b(clients?|customers?|clientes?|clienti|kund(e|en|in|innen)|klant(en)?)\b|ลูกค้า/i;
+export const asksAboutHealth = (question, rest = '') => HEALTH_QUESTION.test(question + ' ' + rest) && !NAMES_A_CLIENT.test(question);
 export const HEALTH_QUESTION = /\b(hiv|aids|hepatitis|hep ?[bc]|hbv|hcv|viral|virus|pregnan\w*|disab\w*|illness\w*|diagnos\w*|medication\w*|medicines?|sick\w*|disease\w*|infected|positive status)\b/i;
 
 // The fixed items of steps 1 and 3. kind: tick (recorded, not a gate), must (gate), score (1-4).
@@ -310,7 +314,7 @@ export function installAssessment(app, sqlite, opts = {}) {
     const b = req.body || {};
     const q = { topic: str(b.topic, 100), question: str(b.question, 1000), good_answer: str(b.good_answer, 2000), red_flags: str(b.red_flags, 2000) };
     if (!q.topic || !q.question) return res.status(400).json({ error: 'A topic and a question are required' });
-    if (HEALTH_QUESTION.test([q.question, q.good_answer, q.red_flags].join(' '))) return res.status(400).json({ error: 'Ask about the work, never about health.' });
+    if (asksAboutHealth(q.question, q.good_answer + ' ' + q.red_flags)) return res.status(400).json({ error: 'Ask about the work, never about health.' });
     const id = sqlite.prepare("INSERT INTO question_bank (topic, question, good_answer, red_flags, must_pass, discipline, source) VALUES (?, ?, ?, ?, ?, ?, 'studio')")
       .run(q.topic, q.question, q.good_answer, q.red_flags, b.must_pass ? 1 : 0, oneOf(b.discipline, ['all', 'piercer', 'tattooist'], 'all')).lastInsertRowid;
     res.status(201).json(sqlite.prepare('SELECT * FROM question_bank WHERE id = ?').get(id));

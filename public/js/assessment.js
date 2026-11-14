@@ -45,19 +45,27 @@
     }
 
     // ---- views ----------------------------------------------------------------------------------
+    // Only the latest call draws: two calls close together (the calendar's Open: the list, then the candidate)
+    // once finished in either order, and the slower answer won.
+    let shown = 0;
     async function show(v) {
         view = v || view;
+        const mine = view;
+        const my = ++shown;
         const el = body();
         if (!el) return;
         try {
-            if (view.name === 'list') return renderList(el, await api('GET', '/api/assessment/candidates'));
-            if (view.name === 'new') return renderNew(el);
-            if (view.name === 'rules') return renderRules(el, await api('GET', '/api/assessment/rules'));
-            if (view.name === 'questions') return renderQuestions(el, await api('GET', '/api/assessment/questions'));
-            data = await api('GET', '/api/assessment/candidates/' + view.id);
+            if (mine.name === 'new') return renderNew(el);
+            const res = await api('GET', mine.name === 'list' ? '/api/assessment/candidates' : mine.name === 'rules' ? '/api/assessment/rules'
+                : mine.name === 'questions' ? '/api/assessment/questions' : '/api/assessment/candidates/' + mine.id);
+            if (my !== shown) return;
+            if (mine.name === 'list') return renderList(el, res);
+            if (mine.name === 'rules') return renderRules(el, res);
+            if (mine.name === 'questions') return renderQuestions(el, res);
+            data = res;
             renderCandidate(el);
         } catch (e) {
-            el.innerHTML = '<div style="padding:20px;color:var(--ti-alert-ink, #FCA5A5);">' + E(T('Could not load: ') + e.message) + '</div>';
+            if (my === shown) el.innerHTML = '<div style="padding:20px;color:var(--ti-alert-ink, #FCA5A5);">' + E(T('Could not load: ') + e.message) + '</div>';
         }
     }
 
@@ -76,7 +84,8 @@
                 + ['Name', 'Works as', 'Status', 'Minimum standard', ''].map((h) => '<th style="padding:6px;">' + E(h ? T(h) : '') + '</th>').join('') + '</tr></thead><tbody>'
                 + list.map((c) => '<tr style="border-top:1px solid var(--ti-line, #334155);"><td style="padding:8px 6px;font-weight:700;">' + E(c.name) + '</td>'
                     + '<td style="padding:6px;">' + E(T(LABELS[c.discipline] || c.discipline)) + '</td>'
-                    + '<td style="padding:6px;">' + E(T(LABELS[c.status] || c.status)) + '</td>'
+                    + '<td style="padding:6px;">' + E(T(LABELS[c.status] || c.status))
+                    + (c.delete_after && ['rejected', 'stopped'].includes(c.status) ? '<div data-delete-after style="font-size:0.76rem;' + (c.delete_after <= today() ? 'color:var(--ti-alert-ink, #FCA5A5);font-weight:800;">' + E(T('Time to delete this record')) + ': ' : 'color:var(--ti-muted, #94A3B8);">' + E(T('Delete the record after')) + ' ') + E(c.delete_after) + '</div>' : '') + '</td>'
                     + '<td style="padding:6px;">' + (c.status !== 'assessing' ? '' : c.gate.ok ? '<span style="color:var(--ti-green, #34D399);font-weight:700;">' + E(T('Met')) + '</span>' : E(T('Not met yet'))) + '</td>'
                     + '<td style="padding:6px;text-align:right;"><button type="button" data-act="open" data-id="' + Number(c.id) + '" style="' + btn + '">' + E(T('Open')) + '</button></td></tr>').join('')
                 + '</tbody></table>'
@@ -119,8 +128,16 @@
             + '<div id="assessment-step">' + stepHtml(step) + '</div>';
     }
 
+    // Notes typed and not saved yet. The whole candidate is redrawn after every answer, and a tab shows one
+    // step: without this, a note typed under one item was lost when another item was scored.
+    const drafts = {};
+    const draftKey = (item, step) => data.candidate.id + '|' + (step === 'checkpoint' ? 'checkpoint' : 'assessment') + '|' + item;
+    // a rule item is named after its placement: only the first words can be translated
+    const labelText = (p) => (p.item.indexOf('rule:') === 0 ? T('Follows the studio rule:') + ' ' + p.item.slice(5) : T(p.label));
+
     function itemRow(p, step) {
         const r = latest(data.items, p.item, step);
+        const draft = drafts[draftKey(p.item, step)];
         const done = step === 'checkpoint' ? false : data.candidate.status !== 'assessing';
         const id = E(p.item);
         let controls = '';
@@ -137,9 +154,9 @@
         return '<div class="assessment-item" style="' + card + 'display:flex;flex-direction:column;gap:6px;">'
             + '<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;"><div style="font-weight:700;font-size:0.88rem;">'
             + (p.kind === 'must' ? '<span style="color:var(--ti-alert-ink, #FCA5A5);font-size:0.72rem;font-weight:900;margin-right:6px;">' + E(T('MUST PASS')) + '</span>' : '')
-            + (p.topic ? '<span style="' + muted + 'margin-right:6px;">' + E(T(p.topic)) + '</span>' : '') + E(T(p.label)) + '</div>'
+            + (p.topic ? '<span style="' + muted + 'margin-right:6px;">' + E(T(p.topic)) + '</span>' : '') + E(labelText(p)) + '</div>'
             + '<div style="display:flex;gap:4px;flex-wrap:wrap;">' + controls + '</div></div>' + extra + waived
-            + '<input data-notes-for="' + id + '" value="' + E(r && r.notes) + '" placeholder="' + E(T('Notes')) + '" aria-label="' + E(T('Notes')) + '"' + (done ? ' disabled' : '') + ' style="' + field + '">'
+            + '<input data-notes-for="' + id + '" data-stepkind="' + step + '" value="' + E(draft !== undefined ? draft : r && r.notes) + '" placeholder="' + E(T('Notes')) + '" aria-label="' + E(T('Notes')) + '"' + (done ? ' disabled' : '') + ' style="' + field + '">'
             + (p.kind === 'must' && !done && step !== 'checkpoint' ? '<details><summary style="' + muted + 'cursor:pointer;">' + E(T('Set this item aside (the reason stays on the record)')) + '</summary>'
                 + '<div style="display:flex;gap:6px;margin-top:6px;"><input data-waive-for="' + id + '" placeholder="' + E(T('Why it does not apply in this studio')) + '" style="' + field + 'flex:1;">'
                 + '<button type="button" data-act="waive" data-item="' + id + '" style="' + btn + '">' + E(T('Set aside')) + '</button></div></details>' : '')
@@ -164,7 +181,7 @@
         return trialHtml();
     }
 
-    const labelOf = (item) => { const p = data.plan.find((x) => x.item === item); return p ? T(p.label) : item; };
+    const labelOf = (item) => { const p = data.plan.find((x) => x.item === item); return p ? labelText(p) : item; };
 
     function scorecardHtml() {
         const c = data.candidate;
@@ -206,7 +223,7 @@
             + labelled('Hepatitis B vaccination offered on', '<input type="date" id="trial-hepb" value="' + E(c.hepb_vaccine_offered_on) + '" style="' + field + '">')
             + '<div style="grid-column:1/-1;' + muted + '">' + E(T('Only the date it was offered is kept: whether someone is vaccinated is health data, so the CRM never asks or stores it. In the US, OSHA requires the offer, free, to employees exposed to blood.')) + ' '
             + E(T('Give their login the role that matches the stage (Settings, Staff).')) + '</div>'
-            + '<div><button type="button" data-act="save-trial" style="' + btn + '"' + (c.status !== 'trial' ? ' disabled' : '') + '>' + E(T('Save')) + '</button></div></div>'
+            + '<div><button type="button" data-act="save-trial" style="' + btn + '"' + (['trial', 'accepted'].includes(c.status) ? '' : ' disabled') + '>' + E(T('Save')) + '</button></div></div>'
             + (c.status === 'trial' ? '<strong>' + E(T('Checkpoint: score the same areas again')) + '</strong>' + scored.map((p) => itemRow(p, 'checkpoint')).join('')
                 + '<div style="' + card + 'display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;"><strong style="width:100%;">' + E(T('End of the trial')) + '</strong>'
                 + labelled('Signed by', '<input id="sign-name" value="' + E(me()) + '" style="' + field + '">')
@@ -238,7 +255,8 @@
                 + (q.must_pass ? '<span style="color:var(--ti-alert-ink, #FCA5A5);font-size:0.72rem;font-weight:900;margin-right:6px;">' + E(T('MUST PASS')) + '</span>' : '')
                 + '<span style="' + muted + '">' + E(T(q.topic)) + '</span><div style="font-weight:700;font-size:0.86rem;">' + E(T(q.question)) + '</div>'
                 + '<div style="' + muted + '">' + E(T(src[q.source] || q.source)) + (q.discipline !== 'all' ? ' | ' + E(T(LABELS[q.discipline])) : '') + '</div></div>'
-                + '<button type="button" data-act="toggle-question" data-id="' + Number(q.id) + '" data-active="' + (q.active ? 0 : 1) + '" style="' + btn + '">' + E(T(q.active ? 'Switch off' : 'Switch on')) + '</button></div>').join('')
+                + (q.must_pass && q.source !== 'studio' && q.active ? '<span style="' + muted + '">' + E(T('Always asked')) + '</span>'
+                    : '<button type="button" data-act="toggle-question" data-id="' + Number(q.id) + '" data-active="' + (q.active ? 0 : 1) + '" style="' + btn + '">' + E(T(q.active ? 'Switch off' : 'Switch on')) + '</button>') + '</div>').join('')
             + '<form id="assessment-question-form" style="' + card + 'display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;"><strong style="grid-column:1/-1;">' + E(T('Add your own question')) + '</strong>'
             + labelled('Topic', '<input id="q-topic" required style="' + field + '">')
             + labelled('For', select('q-discipline', 'all', ['all', 'piercer', 'tattooist']))
@@ -254,14 +272,36 @@
     async function act(fn) {
         try { await fn(); } catch (e) { toast(T(e.message)); }
     }
-    async function answer(item, step, extra) {
-        const notesEl = document.querySelector('[data-notes-for="' + CSS.escape(item) + '"]');
-        data = await api('POST', '/api/assessment/candidates/' + data.candidate.id + '/items',
-            { item, step, notes: notesEl ? notesEl.value : '', signed_by: me(), on_date: today(), ...extra });
-        const scroll = body().scrollTop;
-        renderCandidate(body());
-        body().scrollTop = scroll;
+    // Answers are sent one after the other, so the screen always ends on the last one given.
+    let sending = Promise.resolve();
+    function answer(item, step, extra, quiet) {
+        const run = sending.then(async () => {
+            const key = draftKey(item, step);
+            const notesEl = document.querySelector('[data-notes-for="' + CSS.escape(item) + '"]');
+            const notes = drafts[key] !== undefined ? drafts[key] : notesEl ? notesEl.value : '';
+            data = await api('POST', '/api/assessment/candidates/' + data.candidate.id + '/items',
+                { item, step, notes, signed_by: me(), on_date: today(), ...extra });
+            if (drafts[key] === notes) delete drafts[key];
+            if (quiet) return;   // a note alone: nothing to redraw, and a redraw would swallow the click that follows
+            const scroll = body().scrollTop;
+            renderCandidate(body());
+            body().scrollTop = scroll;
+        });
+        sending = run.catch(() => {});
+        return run;
     }
+    // typing a note keeps it; leaving the box saves it when the item already has its answer
+    document.addEventListener('input', (ev) => {
+        const el = ev.target;
+        if (el && el.matches && el.matches('#assessment-modal-overlay [data-notes-for]') && data) drafts[draftKey(el.dataset.notesFor, el.dataset.stepkind)] = el.value;
+    });
+    document.addEventListener('change', (ev) => {
+        const el = ev.target;
+        if (!(el && el.matches && el.matches('#assessment-modal-overlay [data-notes-for]')) || !data) return;
+        const r = latest(data.items, el.dataset.notesFor, el.dataset.stepkind);
+        if (!r || (r.notes || '') === el.value) return;   // no answer yet: the note waits for it
+        act(() => answer(el.dataset.notesFor, el.dataset.stepkind, r.score != null ? { score: r.score } : { passed: r.passed, waived_note: r.waived_note || undefined }, true));
+    });
 
     document.addEventListener('click', (ev) => {
         const b = ev.target.closest && ev.target.closest('#assessment-modal-overlay [data-act]');
@@ -302,7 +342,10 @@
             else if (a === 'save-rule' || a === 'remove-rule') {
                 const p = b.dataset.placement;
                 const rule = a === 'remove-rule' ? '' : (document.querySelector('[data-rule-for="' + CSS.escape(p) + '"]') || {}).value || '';
+                const typed = {};
+                body().querySelectorAll('[data-rule-for]').forEach((x) => { typed[x.dataset.ruleFor] = x.value; });
                 renderRules(body(), await api('PUT', '/api/assessment/rules', { placement: p, rule, updated_by: me() })); toast(T('Saved'));
+                body().querySelectorAll('[data-rule-for]').forEach((x) => { if (x.dataset.ruleFor !== p && typed[x.dataset.ruleFor] !== undefined) x.value = typed[x.dataset.ruleFor]; });
             } else if (a === 'toggle-question') {
                 await api('PATCH', '/api/assessment/questions/' + b.dataset.id, { active: b.dataset.active === '1' });
                 show({ name: 'questions' });
@@ -353,7 +396,7 @@
         };
         for (const [k, title] of STEPS.slice(0, 3)) {
             line(T(title), 12, 2);
-            for (const p of data.plan.filter((x) => x.step === k)) line((p.kind === 'must' ? '[' + T('MUST PASS') + '] ' : '') + T(p.label) + ': ' + result(p, k), 9);
+            for (const p of data.plan.filter((x) => x.step === k)) line((p.kind === 'must' ? '[' + T('MUST PASS') + '] ' : '') + labelText(p) + ': ' + result(p, k), 9);
             y += 2;
         }
         const g = data.gate;
@@ -390,14 +433,14 @@
     }
     document.addEventListener('click', (ev) => {
         const b = ev.target.closest && ev.target.closest('[data-trial-open]');
-        if (b) { openNewArtistsModal(); show({ name: 'candidate', id: Number(b.dataset.trialOpen), step: 'trial' }); }
+        if (b) openNewArtistsModal({ name: 'candidate', id: Number(b.dataset.trialOpen), step: 'trial' });
         if (ev.target.closest && ev.target.closest('#nav-dest-calendar')) loadTrialWidget();
     });
     document.addEventListener('DOMContentLoaded', loadTrialWidget);
 
-    function openNewArtistsModal() {
+    function openNewArtistsModal(v) {
         window.forceShowModal('assessment-modal-overlay');
-        show({ name: 'list' });
+        show(v && v.name ? v : { name: 'list' });
     }
     window.openNewArtistsModal = openNewArtistsModal;
     window.closeNewArtistsModal = () => window.forceHideModal('assessment-modal-overlay');

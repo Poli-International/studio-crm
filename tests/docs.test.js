@@ -63,9 +63,10 @@ describe('docs', () => {
   it('never mention a removed screen, button or build (tests/docs-removed-ui.json)', () => {
     const { entries } = JSON.parse(read('tests/docs-removed-ui.json'));
     const bad = [];
+    const text = new Map(docs.map((f) => [f, read(f)]));   // each guide is read once, not once per entry (it timed out on a slow disk)
     for (const e of entries) {
       const re = new RegExp(e.pattern, 'i');
-      for (const f of docs) if (!(e.allowIn || []).includes(f) && !(e.crmOnly && f.startsWith('public/tools/')) && re.test(read(f))) bad.push(`${f}: "${e.pattern}" (${e.why})`);
+      for (const f of docs) if (!(e.allowIn || []).includes(f) && !(e.crmOnly && f.startsWith('public/tools/')) && re.test(text.get(f))) bad.push(`${f}: "${e.pattern}" (${e.why})`);
     }
     expect(bad).toEqual([]);
   });

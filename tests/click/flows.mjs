@@ -1303,6 +1303,71 @@ await flow('Form builder: changes to one form are still there after opening anot
   check((await questions()) === second + 1, 'the second edited form did not reach a second device');
 });
 
+await flow('New artists: a typed note is kept, the minimum standard gates the trial, the calendar opens the candidate, a plan must-pass question stays on', async () => {
+  const post = (p, body) => b.evaluate(`fetch(${JSON.stringify(p)}, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: ${JSON.stringify(JSON.stringify(body))} }).then(r => r.json())`);
+  const noteOf = (item) => b.evaluate(`(document.querySelector('#assessment-modal-overlay [data-notes-for="${item}"]') || {}).value`);
+  const press = (sel) => b.evaluate(`(() => { const el = document.querySelector(${JSON.stringify('#assessment-modal-overlay ' + sel)}); if (!el) return false; el.click(); return true; })()`);
+  await b.clickText('Settings');
+  await pressOn('openNewArtistsModal()');
+  await b.clickText('+ New candidate', '#assessment-modal-overlay');
+  await b.type('#assessment-modal-overlay #cand-name', 'Flow Candidate');
+  await b.clickText('Start the assessment', '#assessment-modal-overlay');
+  await eventually(async () => (await b.evaluate(`document.querySelectorAll('#assessment-modal-overlay .assessment-item').length`)) > 3, 'the paper check did not open for the new candidate');
+  const id = (await api('/api/assessment/candidates')).find((c) => c.name === 'Flow Candidate').id;
+
+  // a note typed under one item, then another item answered: the whole step is redrawn, the note must still be there
+  await b.type('#assessment-modal-overlay [data-notes-for="paper:portfolio"]', 'Healed photos seen');
+  check(await press('[data-act="pass"][data-item="paper:licence"][data-passed="1"]'), 'no Yes button on the licence item');
+  await eventually(async () => (await api('/api/assessment/candidates/' + id)).items.some((r) => r.item === 'paper:licence' && r.passed === 1), 'the licence answer was not saved');
+  check((await noteOf('paper:portfolio')) === 'Healed photos seen', 'a note typed under one item was lost when another item was answered');
+  // ...and after looking at another step
+  await b.clickText('3. Practical test', '#assessment-modal-overlay');
+  await b.clickText('1. Paper check', '#assessment-modal-overlay');
+  check((await noteOf('paper:portfolio')) === 'Healed photos seen', 'a typed note was lost when another step was opened');
+  // the answer takes the note with it
+  check(await press('[data-act="pass"][data-item="paper:portfolio"][data-passed="1"]'), 'no Yes button on the portfolio item');
+  await eventually(async () => (await api('/api/assessment/candidates/' + id)).items.some((r) => r.item === 'paper:portfolio' && r.notes === 'Healed photos seen'), 'the note was not saved with its answer');
+  // a note typed AFTER the answer is saved when the box is left, on the same answer
+  await b.type('#assessment-modal-overlay [data-notes-for="paper:licence"]', 'Seen, valid to 2027');
+  await eventually(async () => { const rows = (await api('/api/assessment/candidates/' + id)).items.filter((r) => r.item === 'paper:licence'); return rows.length === 1 && rows[0].notes === 'Seen, valid to 2027'; }, 'a note typed after the answer was not saved on that answer');
+
+  // the minimum standard: Start trial is closed until every must-pass item passed
+  await b.clickText('4. Scorecard', '#assessment-modal-overlay');
+  check(await b.evaluate(`document.querySelector('#assessment-modal-overlay [data-act="start-trial"]').disabled`), 'Start trial was open with must-pass items not done');
+  const plan = (await api('/api/assessment/candidates/' + id)).plan;
+  for (const p of plan.filter((x) => x.kind === 'must')) await post('/api/assessment/candidates/' + id + '/items', { item: p.item, passed: 1 });
+  await b.clickText('Back to the list', '#assessment-modal-overlay');
+  await eventually(async () => (await text('#assessment-candidates-table')).includes('Flow Candidate'), 'the candidate is not in the list');
+  check((await text('#assessment-candidates-table')).includes('Met'), 'the list does not say the minimum standard is met');
+  await b.clickText('Open', '#assessment-candidates-table');
+  await b.clickText('4. Scorecard', '#assessment-modal-overlay');
+  await b.clickText('Start trial (observe stage)', '#assessment-modal-overlay');
+  await eventually(async () => (await api('/api/assessment/candidates/' + id)).candidate.status === 'trial', 'the trial did not start');
+  const staffId = (await api('/api/assessment/candidates/' + id)).candidate.staff_id;
+  await b.evaluate('closeNewArtistsModal()');
+
+  // the calendar lists the trial; Open goes to that candidate, not to the list
+  await b.clickText('Calendar');
+  await eventually(async () => (await text('#trial-checkpoints-tbody')).includes('Flow Candidate'), 'the trial is not on the calendar');
+  await b.clickText('Open', '#trial-checkpoints-tbody');
+  await eventually(async () => (await b.evaluate(`(document.querySelector('#assessment-modal-overlay #cand-name') || {}).value`)) === 'Flow Candidate', 'Open on the calendar did not show the candidate');
+  await sleep(400);
+  check(!(await b.evaluate(`!!document.getElementById('assessment-candidates-table')`)), 'Open on the calendar ended on the list of candidates');
+
+  // Questions: a must-pass question of the plan has no Switch off; the others have one
+  await b.clickText('Back to the list', '#assessment-modal-overlay');
+  await b.clickText('Questions', '#assessment-modal-overlay');
+  const qs = (await api('/api/assessment/questions')).questions;
+  const fixed = qs.filter((q) => q.must_pass && q.source !== 'studio' && q.active).length;
+  check(fixed >= 1, 'the plan has no must-pass question');
+  await eventually(async () => (await b.evaluate(`document.querySelectorAll('#assessment-modal-overlay [data-act="toggle-question"]').length`)) === qs.length - fixed, 'a must-pass question of the plan can be switched off');
+
+  // leave the studio as it was
+  await b.evaluate('closeNewArtistsModal()');
+  await b.evaluate(`fetch('/api/assessment/candidates/${id}', { method: 'DELETE' }).then(r => r.status)`);
+  await b.evaluate(`fetch('/api/staff/${staffId}', { method: 'DELETE' }).then(r => r.status)`);
+});
+
 await flow('Team board: a message is saved and still there after a reload', async () => {
   await b.clickText('Settings');
   await b.clickText('Team M Board');

@@ -141,6 +141,9 @@ const PLAN_QUESTIONS = [
   ['Working here', 'How do you handle pricing, social media and boundaries with clients?', '', 0, 'all', ''],
 ];
 
+// Agreed plan (2026-10-31): the owner cannot remove a hygiene must-pass item without a visible note on the record.
+export const MUST_PASS_STAYS = 'A must-pass question of the assessment stays on. To leave it out for one candidate, set it aside on their assessment, with the reason.';
+
 const str = (v, max = 2000) => (v == null ? '' : String(v)).trim().slice(0, max);
 const oneOf = (v, list, dflt) => (list.includes(v) ? v : dflt);
 const dateOrNull = (v) => (/^\d{4}-\d{2}-\d{2}$/.test(String(v || '')) ? String(v) : null);
@@ -190,13 +193,22 @@ export function installAssessment(app, sqlite, opts = {}) {
         label: 'Follows the studio rule: ' + r.placement, rule: r.rule }))),
     ];
   };
-  const full = (c) => {
-    const items = itemsOf(c.id);
-    return { candidate: c, items, plan: itemsFor(c), gate: trialGate(items), country: country() };
+  // The minimum standard for this candidate NOW, in one place for the list, the scorecard and "Start trial".
+  // Only the items of their current plan count: an answer to an item that is no longer theirs (another
+  // discipline, a question since switched off) neither blocks nor shows. A must-pass item never answered
+  // counts as not passed.
+  const gateOf = (c) => {
+    const plan = itemsFor({ ...c, status: 'assessing' });
+    const inPlan = new Set(plan.map((p) => p.item));
+    const rows = itemsOf(c.id).filter((r) => inPlan.has(r.item));
+    const answered = new Set(rows.filter((r) => r.step !== 'checkpoint').map((r) => r.item));
+    const missing = plan.filter((p) => p.kind === 'must' && !answered.has(p.item)).map((p) => ({ step: p.step, item: p.item, must_pass: 1, passed: null }));
+    return trialGate([...rows, ...missing]);
   };
+  const full = (c) => ({ candidate: c, items: itemsOf(c.id), plan: itemsFor(c), gate: gateOf(c), country: country() });
 
   app.get('/api/assessment/candidates', (req, res) => {
-    res.json(sqlite.prepare('SELECT * FROM candidates ORDER BY id DESC').all().map((c) => ({ ...c, gate: trialGate(itemsOf(c.id)) })));
+    res.json(sqlite.prepare('SELECT * FROM candidates ORDER BY id DESC').all().map((c) => ({ ...c, gate: gateOf(c) })));
   });
   app.get('/api/assessment/candidates/:id', (req, res) => {
     const c = getCandidate(req.params.id);
@@ -240,9 +252,16 @@ export function installAssessment(app, sqlite, opts = {}) {
     const passed = b.passed === true || b.passed === 1 ? 1 : b.passed === false || b.passed === 0 ? 0 : null;
     const score = def.kind === 'score' ? intIn(b.score, 1, 4) : null;
     const waived = def.kind === 'must' ? str(b.waived_note, 500) : '';
+    const on = dateOrNull(b.on_date) || new Date().toISOString().slice(0, 10);
+    const last = sqlite.prepare('SELECT * FROM assessment_items WHERE candidate_id = ? AND item = ? AND step = ? ORDER BY id DESC LIMIT 1').get(c.id, def.item, step);
+    const same = last && last.on_date === on && last.score === score && last.passed === (def.kind === 'score' ? null : passed) && (last.waived_note || '') === waived;
+    if (same) {
+      sqlite.prepare('UPDATE assessment_items SET notes = ?, signed_by = COALESCE(?, signed_by) WHERE id = ?').run(str(b.notes, 5000) || null, str(b.signed_by, 200) || null, last.id);
+      return res.status(200).json(full(getCandidate(c.id)));
+    }
     sqlite.prepare('INSERT INTO assessment_items (candidate_id, step, item, must_pass, passed, score, waived_note, notes, signed_by, on_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
       .run(c.id, step, def.item, def.kind === 'must' ? 1 : 0, def.kind === 'score' ? null : passed, score, waived || null, str(b.notes, 5000) || null,
-        str(b.signed_by, 200) || null, dateOrNull(b.on_date) || new Date().toISOString().slice(0, 10));
+        str(b.signed_by, 200) || null, on);
     res.status(201).json(full(getCandidate(c.id)));
   });
 
@@ -251,11 +270,7 @@ export function installAssessment(app, sqlite, opts = {}) {
     const c = getCandidate(req.params.id);
     if (!c) return res.status(404).json({ error: 'No such candidate' });
     if (c.status !== 'assessing') return res.status(400).json({ error: 'The trial has already started' });
-    // must-pass items never answered count as not passed
-    const rows = itemsOf(c.id);
-    const answered = new Set(rows.map((r) => r.item));
-    const missing = itemsFor(c).filter((p) => p.kind === 'must' && !answered.has(p.item)).map((p) => ({ step: p.step, item: p.item, must_pass: 1, passed: null }));
-    const gate = trialGate([...rows, ...missing]);
+    const gate = gateOf(c);
     if (!gate.ok) return res.status(409).json({ error: 'The minimum standard is not met', gate });
     const team = staff();
     const member = { id: team.length ? Math.max(...team.map((s) => Number(s.id) || 0)) + 1 : 1, name: c.name, email: c.email || '', phone: c.phone || '',
@@ -295,7 +310,7 @@ export function installAssessment(app, sqlite, opts = {}) {
     const b = req.body || {};
     const q = { topic: str(b.topic, 100), question: str(b.question, 1000), good_answer: str(b.good_answer, 2000), red_flags: str(b.red_flags, 2000) };
     if (!q.topic || !q.question) return res.status(400).json({ error: 'A topic and a question are required' });
-    if (HEALTH_QUESTION.test([q.question, q.good_answer, q.red_flags].join(' '))) return res.status(400).json({ error: 'Ask about the work, never about health. See the guide.' });
+    if (HEALTH_QUESTION.test([q.question, q.good_answer, q.red_flags].join(' '))) return res.status(400).json({ error: 'Ask about the work, never about health.' });
     const id = sqlite.prepare("INSERT INTO question_bank (topic, question, good_answer, red_flags, must_pass, discipline, source) VALUES (?, ?, ?, ?, ?, ?, 'studio')")
       .run(q.topic, q.question, q.good_answer, q.red_flags, b.must_pass ? 1 : 0, oneOf(b.discipline, ['all', 'piercer', 'tattooist'], 'all')).lastInsertRowid;
     res.status(201).json(sqlite.prepare('SELECT * FROM question_bank WHERE id = ?').get(id));
@@ -303,6 +318,7 @@ export function installAssessment(app, sqlite, opts = {}) {
   app.patch('/api/assessment/questions/:id', (req, res) => {
     const q = sqlite.prepare('SELECT * FROM question_bank WHERE id = ?').get(Number(req.params.id));
     if (!q) return res.status(404).json({ error: 'No such question' });
+    if (!(req.body && req.body.active) && q.must_pass && q.source !== 'studio') return res.status(400).json({ error: MUST_PASS_STAYS });
     sqlite.prepare('UPDATE question_bank SET active = ? WHERE id = ?').run(req.body && req.body.active ? 1 : 0, q.id);
     res.json(sqlite.prepare('SELECT * FROM question_bank WHERE id = ?').get(q.id));
   });

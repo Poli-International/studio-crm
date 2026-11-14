@@ -8,7 +8,7 @@ import { installAccess, needLevel, cleanPath, isLocalRequest } from '../src/acce
 // Express answers /API/Clients and /api/clients/ like /api/clients. The level check once judged the
 // address as typed, so capitals or a final slash passed for a page. These tests keep the two in step.
 describe('an address written another way needs the same level', () => {
-  const src = ['server.js', 'src/access.js', 'src/update.js'].map((f) => fs.readFileSync(f, 'utf8')).join('\n');
+  const src = ['server.js', 'src/access.js', 'src/update.js', 'src/assessment.js'].map((f) => fs.readFileSync(f, 'utf8')).join('\n');
   const paths = new Set();
   for (const m of src.matchAll(/app\.(?:get|post|put|patch|delete)\(\s*(\[[^\]]+\]|'[^']+')/g)) for (const p of m[1].matchAll(/'([^']+)'/g)) if (p[1].startsWith('/')) paths.add(p[1]);
 

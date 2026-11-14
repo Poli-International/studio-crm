@@ -7,6 +7,8 @@ RUN npm ci --omit=dev --no-audit --no-fund
 COPY . .
 ENV PORT=3000
 EXPOSE 3000 3443
-# All studio data is the SQLite file in /app/data: mount a volume there.
+# The studio's data: the SQLite file in /app/data, and the scans and backups in /app/storage.
+# Mount a volume on each, or they are lost when the container is replaced.
 VOLUME /app/data
+VOLUME /app/storage
 CMD ["node", "server.js"]

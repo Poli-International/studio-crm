@@ -1,6 +1,6 @@
 {
   "name": "studio-crm",
-  "version": "1.0.43",
+  "version": "1.0.44",
   "uiDesign": 3,
   "description": "Professional Studio Management System for Tattoo & Piercing Studios",
   "type": "module",
@@ -18,7 +18,6 @@
   },
   "dependencies": {
     "better-sqlite3": "^12.11.1",
-    "cors": "^2.8.5",
     "dotenv": "^17.4.2",
     "drizzle-orm": "^0.45.2",
     "express": "^4.21.2",

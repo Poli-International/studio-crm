@@ -113,27 +113,11 @@ describe('Job A: nothing is logged as a reminder, because none is sent', () => {
   });
 });
 
-describe('Job A: the purchase-order PDF carries the studio\'s own details', () => {
-  const po = { po_number: 'PO-000123', created_at: '2026-11-15T10:00:00.000Z' };
-  const items = [{ name: 'Nitrile gloves M', sku: 'GLV-M', currentQty: 2, orderQty: 3, estCost: 30 }];
-  const supplier = { supplier_name: 'Glove Supplier Co', supplier_email: 'orders@glove-supplier.example', contact_person: 'Sam Supplier' };
-  const money = (n) => 'THB ' + Number(n).toFixed(2);
-  const text = (dataUrl) => Buffer.from(String(dataUrl).split(',')[1], 'base64').toString('latin1');
-  it('prints the name, address and phone from Settings, and money in the studio currency', async () => {
-    const { poPdfDataUrl } = await import('../src/po-pdf.js');
-    const pdf = text(poPdfDataUrl(po, items, supplier, { studioName: 'Test Studio Bangkok', studioAddress: '12 Test Road', studioPhone: '02 555 0199' }, money));
-    for (const s of ['Test Studio Bangkok', '12 Test Road', '02 555 0199', 'Glove Supplier Co', 'PO-000123', 'THB 30.00']) expect(pdf, s).toContain(s);
-    expect(pdf).not.toMatch(/Headquarters|1042 Art|555-0100|Supply Admin|\$\d/);
-    expect(pdf).not.toMatch(/dispatched|Pre-approved|Automated/i);   // nothing was sent, nothing is automatic
-  });
-  it('a studio that has not filled in its details gets no invented ones', async () => {
-    const { poPdfDataUrl } = await import('../src/po-pdf.js');
-    const pdf = text(poPdfDataUrl(po, items, supplier, {}, money));
-    expect(pdf).toContain('PO-000123');
-    expect(pdf).not.toMatch(/Headquarters|1042 Art|555-0100|Supply Admin|Studio Name:|Address:/);
-  });
-  it('the sample studio is not written in the server', () => {
-    expect(read('server.js')).not.toMatch(/Studio CRM Headquarters|1042 Art & Tattoo Way|Studio Supply Admin/);
+// The server no longer builds a purchase-order PDF at all: the only one it made went into a record no screen read.
+describe('Job A: no sample studio on a purchase order', () => {
+  it('the sample studio is not written in the server, and the server builds no PDF', () => {
+    expect(read('server.js')).not.toMatch(/Studio CRM Headquarters|1042 Art & Tattoo Way|Studio Supply Admin|jsPDF/);
+    expect(fs.existsSync(path.join(root, 'src/po-pdf.js'))).toBe(false);
   });
 });
 
@@ -252,7 +236,7 @@ describe('Job B: one helper for the studio\'s day, and the studio\'s currency', 
   });
   it('no "$" is written in front of an amount, on the server or on a screen', () => {
     const hits = [];
-    for (const f of ['server.js', 'src/po-pdf.js', 'public/app-features.js', 'public/index.html', 'public/kiosk.html'])
+    for (const f of ['server.js', 'public/app-features.js', 'public/index.html', 'public/kiosk.html'])
       read(f).split(/\r?\n/).forEach((line, n) => { if (/\$\$\{|\$['"`]\s*\+/.test(line)) hits.push(`${f}:${n + 1}`); });
     expect(hits).toEqual([]);
   });

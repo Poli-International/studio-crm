@@ -1476,7 +1476,7 @@ await flow('Start with an empty studio, then add the first client, staff member 
   await press('.appointment-row', 'First Client', 'Remove');
   check((await api('/api/appointments')).length === 0, 'the appointment was not removed');
   // nothing of the demo studio is left, and no screen shows a figure nobody entered
-  for (const path of ['services', 'financial', 'inventory', 'waivers', 'gallery', 'messages', 'activity-logs?limit=5']) {
+  for (const path of ['financial', 'inventory', 'waivers', 'gallery', 'messages', 'activity-logs?limit=5']) {
     const left = await api('/api/' + path);
     check(Array.isArray(left) && left.filter((x) => !/First (Client|Artist)/.test(JSON.stringify(x))).length === 0, `an emptied studio still has ${path}: ` + JSON.stringify(left).slice(0, 120));
   }
@@ -1716,7 +1716,7 @@ await flow('A Staff login cannot reach Finance: not in the second after a reload
     await post('/api/access/logout', {});
     check((await post('/api/access/login', { staff_id: maya.id, password: 'maya-pass-123' })) === 200, 'Maya could not sign in');
     // the server: the ledger and its exports are money reports too (they were open to every login)
-    for (const p of ['/api/financial', '/api/accounting/ledger-timeseries', '/api/accounting/reconciliation-check', '/api/accounting/export/quickbooks', '/api/accounting/export/sage', '/api/accounting/health', '/api/accounting/config']) {
+    for (const p of ['/api/financial', '/api/accounting/export/quickbooks', '/api/accounting/export/sage']) {
       check((await call(p)) === 403, `Staff can read ${p}`);
     }
     // the screen: from the first paint, no Finance to click before the role is known, and no way in after

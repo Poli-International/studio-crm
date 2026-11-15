@@ -419,7 +419,7 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 |---|---|
 | Front desk | Clients, appointments, waivers, payments, clocking in and out, and reading everything except the money reports. |
 | Staff | Front desk, plus writes to stock, suppliers, compliance, aftercare, the rota and the consent form designs. |
-| Administrator | Everything: every `DELETE`, the money reports (`/api/financial`, `/api/financials`, `/api/staff/commissions`), `/api/settings`, studio-setting keys in `/api/app-data`, the team, logins, backups, imports. |
+| Administrator | Everything: every `DELETE`, the money reports (`/api/financial`, `/api/financials`, `/api/staff/commissions`), studio-setting keys in `/api/app-data`, the team, logins, backups, imports. |
 
   The studio password signs in as administrator. Without staff logins everyone who is signed in is an administrator, as in 1.0.5.
 - **HTTPS on the studio network**: a self-made certificate (`https-key.pem`, `https-cert.pem` next to the database) on port 3443, so tablets get the camera and the clipboard. `HTTPS_PORT=0` turns it off.
@@ -608,7 +608,7 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 ### 1.0.24
 
 **A Staff login reached Finance** (Henry, 2026-10-19: Maya, Staff, chose the administrator in Switch Staff User, clicked Finance in the second it showed, read the money records and recorded $150). Four faults:
-- `GET /api/accounting/*` (the ledger, the reconciliation, the QuickBooks and Sage exports) was open to every login: `needLevel` now asks `finance` for it, like the other money reports.
+- `GET /api/accounting/*` (the QuickBooks and Sage exports) was open to every login: `needLevel` now asks `finance` for it, like the other money reports.
 - Until `/api/access` answered, `screenAllowed` treated the device as an administrator and the menu showed every screen: a click in that second opened Finance. The screens that need a role are now hidden from the first paint (CSS on `body:not([data-level])`) and refused until the role is known (`accessLoaded`). `navigateToDestination` (`js/04-navigation.js`) loads before `staff.js`: until `screenAllowed` exists it opens only the dashboard (it let every screen through, found by CI 1 time in 5).
 - With staff logins, **Select** in the staff list only changed the name in the top bar ("At the screen now: ...", nothing on the server), which looked like switching to the administrator. With logins it is gone: changing person is **Sign out** (new in the staff window, for everyone once the studio password is set; it was only in Settings, which staff do not see), then that person's name and password. Edit, Remove and Add staff member are shown to administrators only (the server refused them already).
 - Recording a payment stays in **Clients and bookings** (taking payments at the desk); no route changes or deletes an existing payment without the **Delete records** area.

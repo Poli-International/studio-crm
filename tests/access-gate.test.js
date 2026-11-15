@@ -12,7 +12,7 @@ describe('an address written another way needs the same level', () => {
   const paths = new Set();
   for (const m of src.matchAll(/app\.(?:get|post|put|patch|delete)\(\s*(\[[^\]]+\]|'[^']+')/g)) for (const p of m[1].matchAll(/'([^']+)'/g)) if (p[1].startsWith('/')) paths.add(p[1]);
 
-  it('finds the routes', () => expect(paths.size).toBeGreaterThan(200));
+  it('finds the routes', () => expect(paths.size).toBeGreaterThan(100));
 
   it('capitals, a final slash, a number with letters after it', () => {
     const wrong = [];

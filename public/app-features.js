@@ -1,3 +1,6 @@
+// An amount in the studio's own currency (Settings); a plain number when the settings script is not loaded.
+const studioMoney = (n) => (window.StudioSettings ? window.StudioSettings.format(Number(n) || 0) : (Number(n) || 0).toFixed(2));
+
 // A save button outside a form (forms are guarded in js/01-boot.js): while one save is running, another tap does nothing.
 window.oneAtATime = function (fn) {
   var busy = false;
@@ -155,14 +158,14 @@ function renderClientProfileHeader(data) {
         const loyaltyTier = client.loyalty_tier || '';
         const phone = client.phone || 'No phone recorded';
         const email = client.email || 'No email recorded';
-        const totalSpent = Number((data.stats && data.stats.totalSpend) || 0).toFixed(2);
+        const totalSpent = studioMoney((data.stats && data.stats.totalSpend) || 0);
 
         tagsEl.innerHTML = `
             <span><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-mail></use></svg> ${escapeHtml(email)}</span>
             <span><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-phone></use></svg> ${escapeHtml(phone)}</span>
             ${loyaltyTier ? `<span style="background:rgba(99,102,241,0.2);color:var(--ti-blue-ink, #A5B4FC);padding:2px 8px;border-radius:10px;font-weight:700;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-ring></use></svg> ${escapeHtml(loyaltyTier)}</span>` : ''}
             ${isVip ? '<span style="background:rgba(234,179,8,0.2);color:var(--ti-gold-ink, #FDE047);padding:2px 8px;border-radius:10px;font-weight:800;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-star></use></svg> VIP</span>' : ''}
-            <span style="background:rgba(16,185,129,0.2);color:var(--ti-green-ink, #6EE7B7);padding:2px 8px;border-radius:10px;font-weight:700;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-cash></use></svg> Spent: $${totalSpent}</span>
+            <span style="background:rgba(16,185,129,0.2);color:var(--ti-green-ink, #6EE7B7);padding:2px 8px;border-radius:10px;font-weight:700;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-cash></use></svg> Spent: ${totalSpent}</span>
             ${clientAgeBadges(client)}
         `;
     }
@@ -510,12 +513,12 @@ function switchClientProfileTab(tabName) {
                         <div style="font-size:0.8rem;color:var(--ti-muted, #9CA3AF);margin-top:2px;">
                             <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-calendar></use></svg> <strong>${escapeHtml(a.date || (a.datetime ? new Date(a.datetime).toLocaleDateString() : ''))}</strong> &bull; ${escapeHtml(a.time || (a.datetime ? new Date(a.datetime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''))} &bull; Artist: <strong style="color:var(--ti-blue-ink, #60A5FA);">${escapeHtml(a.staff_name || 'Not recorded')}</strong>
                         </div>
-                        ${Number(a.deposit_paid) > 0 ? `<div class="cp-appt-deposit" style="font-size:0.8rem;color:var(--ti-gold, #FBBF24);margin-top:4px;">${escapeHtml(pdfLabel("Deposit paid"))}: $${Number(a.deposit_paid).toFixed(2)} &bull; ${escapeHtml(pdfLabel("Balance"))}: $${Math.max(0, Number(a.estimated_price || a.price || a.amount || 0) - Number(a.deposit_paid)).toFixed(2)}</div>` : ''}
+                        ${Number(a.deposit_paid) > 0 ? `<div class="cp-appt-deposit" style="font-size:0.8rem;color:var(--ti-gold, #FBBF24);margin-top:4px;">${escapeHtml(pdfLabel("Deposit paid"))}: ${studioMoney(a.deposit_paid)} &bull; ${escapeHtml(pdfLabel("Balance"))}: ${studioMoney(Math.max(0, Number(a.estimated_price || a.price || a.amount || 0) - Number(a.deposit_paid)))}</div>` : ''}
                         ${a.notes ? `<div class="cp-appt-note" style="font-size:0.8rem;color:var(--ti-text2, #CBD5E1);margin-top:4px;white-space:pre-wrap;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-note></use></svg> ${escapeHtml(a.notes)}</div>` : ''}
                     </div>
 
                     <div style="display:flex;align-items:center;gap:10px;">
-                        <span style="font-weight:800;font-size:1.05rem;color:var(--ti-green, #10B981);">$${Number(a.estimated_price || a.price || a.amount || 0).toFixed(2)}</span>
+                        <span style="font-weight:800;font-size:1.05rem;color:var(--ti-green, #10B981);">${studioMoney(a.estimated_price || a.price || a.amount || 0)}</span>
                         <span style="background:${statusColor}20;color:${statusColor};border:1px solid ${statusColor}50;padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:800;">
                             ${escapeHtml(a.status || '')}
                         </span>
@@ -2454,7 +2457,7 @@ window.filterCmdPaletteResults = filterCmdPaletteResults;
 // Tip split: the shares shown on the form (artist 80%, apprentice 15%, desk 5%).
 function recalculateTipSplit() {
     const tip = parseFloat((document.getElementById('tipcalc-tip') || {}).value) || 0;
-    const money = (n) => '$' + n.toFixed(2);
+    const money = studioMoney;
     [['tipcalc-val-artist', 0.8], ['tipcalc-val-apprentice', 0.15], ['tipcalc-val-desk', 0.05]].forEach(([id, share]) => {
         const el = document.getElementById(id);
         if (el) el.textContent = money(tip * share);
@@ -2590,7 +2593,7 @@ async function saveQuickPayment(event) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
     } catch (e) { showStudioToast('Could not save the payment: the server did not answer'); return; }
     forceHideModal('record-payment-modal-overlay');
-    showStudioToast('Payment recorded: $' + amount.toFixed(2));
+    showStudioToast('Payment recorded: ' + studioMoney(amount));
     if (typeof renderDashboardKpis === 'function') renderDashboardKpis();
     renderClientsTable();   // Total spent
     renderFinanceSummary();
@@ -3359,7 +3362,7 @@ async function renderFinanceSummary() {
     const get = (u) => fetch(u).then((r) => (r.ok ? r.json() : null), () => null);
     const [payments, appts] = await Promise.all([get('/api/financial'), get('/api/appointments')]);
     const month = new Date().toISOString().slice(0, 7);
-    const money = (n) => '$' + n.toFixed(2);
+    const money = studioMoney;
     const set = (id, value, sub) => { el('fin-' + id).textContent = value; el('fin-' + id + '-sub').textContent = sub; };
     if (Array.isArray(payments)) {
         const paid = payments.filter((p) => p.status === 'completed' && p.type !== 'refund' && String(p.transaction_date || '').slice(0, 7) === month);
@@ -3395,7 +3398,7 @@ async function renderClientsTable() {
         tbody.innerHTML = '<tr><td colspan="6" style="padding:16px;color:var(--ti-muted, #94A3B8);text-align:center;">No clients yet. Add your first client with New Client.</td></tr>';
         return;
     }
-    const money = (n) => "$" + Number(n || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const money = studioMoney;
     const flagged = (v) => v && !/^(none|n\/a|no)$/i.test(String(v).trim());
     tbody.innerHTML = clients.map((c) => {
         const initials = String(c.name || "?").split(/\s+/).map((w) => w[0] || "").join("").slice(0, 2).toUpperCase();
@@ -3545,7 +3548,7 @@ async function renderDashboardKpis() {
     const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
     const list = (x) => (Array.isArray(x) ? x : (x && Array.isArray(x.items) ? x.items : []));
     const today = new Date().toLocaleDateString("en-CA");
-    const money = (n) => "$" + Number(n || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const money = studioMoney;
 
     const paidToday = list(payments).filter((p) => String(p.transaction_date || "").slice(0, 10) === today && p.status === "completed" && p.type !== "refund");
     const apptsToday = list(appts).filter((a) => a.datetime && new Date(a.datetime).toLocaleDateString("en-CA") === today);
@@ -3593,7 +3596,7 @@ async function renderStationStripAndSessions() {
         body.innerHTML = done.length ? done.map((a) => {
             const hrs = Number(a.duration_minutes || 0) / 60;
             const price = Number(a.estimated_price || a.price || 0);
-            return `<tr style="border-bottom:1px solid var(--ti-panel2, #1E293B);"><td style="padding:8px;font-weight:700;">${escapeHtml(a.staff_name || "")}</td><td style="padding:8px;">${escapeHtml(a.service_type || "")}</td><td style="padding:8px;">${escapeHtml(a.client_name || "")}</td><td style="padding:8px;">${hrs.toFixed(1)} h</td><td style="padding:8px;">$${price.toFixed(2)}</td><td style="padding:8px;">${hrs ? "$" + (price / hrs).toFixed(2) + "/h" : "-"}</td></tr>`;
+            return `<tr style="border-bottom:1px solid var(--ti-panel2, #1E293B);"><td style="padding:8px;font-weight:700;">${escapeHtml(a.staff_name || "")}</td><td style="padding:8px;">${escapeHtml(a.service_type || "")}</td><td style="padding:8px;">${escapeHtml(a.client_name || "")}</td><td style="padding:8px;">${hrs.toFixed(1)} h</td><td style="padding:8px;">${studioMoney(price)}</td><td style="padding:8px;">${hrs ? studioMoney(price / hrs) + "/h" : "-"}</td></tr>`;
         }).join("") : '<tr><td colspan="6" style="padding:8px;color:var(--ti-muted, #94A3B8);">No completed sessions yet.</td></tr>';
     }
 }
@@ -4805,13 +4808,21 @@ async function executeAutoSchedulerBooking() {
     const sessions = Math.max(1, Math.min(6, parseInt(v("sched-sessions"), 10) || 1));
     const gapWeeks = Math.max(1, parseInt(v("sched-gap"), 10) || 3);
     const first = new Date(schedState.picked.datetime);
+    let saved = 0;
     try {
         for (let i = 0; i < sessions; i++) {
             const when = new Date(first.getTime() + i * gapWeeks * 7 * 86400000);
             const r = await fetch("/api/appointments", { method: "POST", headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ client_id: v("sched-client"), staff_id: v("sched-artist"), service_type: v("sched-service") || "Session",
                     datetime: when.toISOString(), duration_minutes: v("sched-duration"), station: schedState.picked.station || "", notes: sessions > 1 ? `Session ${i + 1} of ${sessions}` : "" }) });
+            if (r.status === 409) {
+                // a session clashes with another appointment: stop here, keep the window open
+                refreshAppointmentViews();
+                showStudioToast(pdfLabel("Booked {0} of {1} sessions. The next one clashes with another appointment: book it from the Calendar.").replace("{0}", saved).replace("{1}", sessions));
+                return;
+            }
             if (!r.ok) throw new Error();
+            saved++;
         }
     } catch (e) { showStudioToast("Could not save the appointment: the server did not answer"); return; }
     showStudioToast(sessions > 1 ? sessions + " sessions booked" : "Appointment booked");
@@ -5165,12 +5176,12 @@ function onPOSupplierChange() {
     });
     const table = document.getElementById("po-items-table");
     if (table) table.innerHTML = poState.items.length ? poState.items.map((i) =>
-        `<div style="display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--ti-panel2, #1F2937);font-size:0.8rem;"><span data-no-phrase>${escapeHtml(i.name)} ${i.sku ? "(" + escapeHtml(i.sku) + ")" : ""}</span><span>${i.qty} × $${i.unit.toFixed(2)}</span></div>`).join("")
+        `<div style="display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--ti-panel2, #1F2937);font-size:0.8rem;"><span data-no-phrase>${escapeHtml(i.name)} ${i.sku ? "(" + escapeHtml(i.sku) + ")" : ""}</span><span>${i.qty} × ${studioMoney(i.unit)}</span></div>`).join("")
         : '<div style="padding:8px;color:var(--ti-muted, #94A3B8);">No items are below their reorder level</div>';
     const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
     set("po-items-count-badge", itemCount(poState.items.length));
     set("po-total-units", String(poState.items.reduce((t, i) => t + i.qty, 0)));
-    set("po-total-cost", "$" + poState.items.reduce((t, i) => t + i.total, 0).toFixed(2));
+    set("po-total-cost", studioMoney(poState.items.reduce((t, i) => t + i.total, 0)));
 }
 window.onPOSupplierChange = onPOSupplierChange;
 function printPOPDF() {
@@ -5180,7 +5191,7 @@ function printPOPDF() {
     downloadPdfTable(poState.number + ".pdf", pdfLabel("Purchase order") + " " + poState.number, ["item", "SKU", "qty", "unit", "total"],
         poState.items.map((i) => [i.name, i.sku, i.qty, i.unit.toFixed(2), i.total.toFixed(2)]),
         ["To: " + (sup.name || "") + (sup.order_email || sup.email ? " <" + (sup.order_email || sup.email) + ">" : ""),
-         "Total: $" + poState.items.reduce((t, i) => t + i.total, 0).toFixed(2)]);
+         "Total: " + studioMoney(poState.items.reduce((t, i) => t + i.total, 0))]);
 }
 window.printPOPDF = printPOPDF;
 function triggerEmailDraftFromPO() {
@@ -5189,7 +5200,7 @@ function triggerEmailDraftFromPO() {
         to_email: (document.getElementById("po-supplier-email") || {}).value || "",
         subject: "Purchase order " + poState.number,
         body: poState.items.map((i) => `${i.qty} x ${i.name}${i.sku ? " (" + i.sku + ")" : ""}`).join("\n") +
-            "\n\nTotal: $" + poState.items.reduce((t, i) => t + i.total, 0).toFixed(2) +
+            "\n\nTotal: " + studioMoney(poState.items.reduce((t, i) => t + i.total, 0)) +
             (studioIdentity().name ? "\n\n" + [studioIdentity().name, studioIdentity().address].filter(Boolean).join("\n") : "")
     });
 }
@@ -5562,16 +5573,28 @@ async function handleSaveNewAppointment(event) {
     const pickedClient = (document.getElementById("new-appt-client-id") || {}).value || "";
     try {
         const when = new Date(newAppt.date + "T" + (newAppt.time || "00:00"));
-        const res = await fetch(editedId ? "/api/appointments/" + editedId : "/api/appointments", {
+        const payload = Object.assign({}, newAppt, {
+            staff_name: newAppt.artist_name,
+            client_id: pickedClient || undefined, // a client picked from the list: the booking is theirs
+            datetime: isNaN(when.getTime()) ? undefined : when.toISOString(),
+            status: editedId ? undefined : "scheduled"
+        });
+        const send = (extra) => fetch(editedId ? "/api/appointments/" + editedId : "/api/appointments", {
             method: editedId ? "PATCH" : "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(Object.assign({}, newAppt, {
-                staff_name: newAppt.artist_name,
-                client_id: pickedClient || undefined, // a client picked from the list: the booking is theirs
-                datetime: isNaN(when.getTime()) ? undefined : when.toISOString(),
-                status: editedId ? undefined : "scheduled"
-            }))
+            body: JSON.stringify(Object.assign({}, payload, extra))
         });
+        let res = await send();
+        if (res.status === 409) {
+            // the artist or the station is already booked then: ask, and book anyway only on a yes
+            const c = ((await res.json().catch(() => null)) || {}).conflict || {};
+            const w = c.with || {};
+            const asked = pdfLabel(c.same === "station" ? "{0} is already booked at that time: {1}, {2}. Book anyway?" : "{0} already has an appointment at that time: {1}, {2}. Book anyway?")
+                .replace("{0}", c.same === "station" ? w.station : w.staff_name).replace("{1}", w.client_name)
+                .replace("{2}", new Date(w.datetime).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }));
+            if (!window.confirm(asked)) return;
+            res = await send({ force: true });
+        }
         if (!res.ok) throw new Error("HTTP " + res.status);
     } catch (e) {
         if (typeof showStudioToast === "function") showStudioToast("Could not save the appointment: the server did not answer");

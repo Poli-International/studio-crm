@@ -3,8 +3,10 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { spawn } from 'child_process';
 import fs from 'fs';
-import { poPdfDataUrl } from './src/po-pdf.js';
 import { formatMoney } from './src/money.js';
+import { STATUSES, toTimestamp, findClash } from './src/bookings.js';
+import { paymentError, paymentAmount } from './src/payments.js';
+import { studioDay } from './src/studio-day.js';
 import { db, safeDbQuery, sqlite } from './src/db/index.js';
 import { startHttps, studioAddress } from './src/https.js';
 import { installAccess } from './src/access.js';
@@ -31,6 +33,14 @@ import {
   teamMessages as dbTeamMessages
 } from './src/db/schema.js';
 import { desc } from 'drizzle-orm';
+
+// A date or a timestamp as the studio's day (YYYY-MM-DD): the day on the studio's clock, not the UTC day. A bare day stays as it is.
+const dayOf = (v) => {
+  const s = String(v || '');
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  const d = new Date(s);
+  return Number.isNaN(d.getTime()) ? s.slice(0, 10) : studioDay(d);
+};
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -706,114 +716,6 @@ const inventory = [
   }
 ];
 
-const managerLowStockAlertsSent = [];
-const categoryStockAlertsSent = [];
-
-function checkAndTriggerCriticalLowStockEmail(item, triggeredBy = 'Automated Inventory System') {
-  if (!item) return null;
-  const reorderPoint = item.reorder_point !== undefined && item.reorder_point !== null ? Number(item.reorder_point) : 15;
-  const quantity = Number(item.quantity) || 0;
-  const isBelow15Units = quantity < 15;
-  const isBelowReorderPoint = quantity <= reorderPoint;
-
-  if (isBelow15Units || isBelowReorderPoint) {
-    const studioManagerEmail = (typeof studioGeneralSettings !== 'undefined' && studioGeneralSettings.manager_email) || process.env.STUDIO_MANAGER_EMAIL || (process.env.STUDIO_MANAGER_EMAIL || '');
-    const alertId = `low-stock-alert-${item.id}-${Date.now()}`;
-    const timestamp = new Date().toISOString();
-
-    const emailAlert = {
-      id: alertId,
-      item_id: item.id,
-      item_name: item.name,
-      sku: item.sku || 'N/A',
-      current_quantity: quantity,
-      reorder_threshold: reorderPoint,
-      reorder_point: reorderPoint,
-      is_below_15_units: isBelow15Units,
-      percentage_of_threshold: Math.round((quantity / Math.max(1, reorderPoint)) * 100),
-      recipient_role: 'Studio Manager',
-      recipient_email: studioManagerEmail,
-      subject: `🚨 AUTOMATED LOW STOCK ALERT: ${item.name} is at ${quantity} units (Below ${isBelow15Units ? '15 units threshold' : 'reorder point ' + reorderPoint})`,
-      body: `ATTENTION STUDIO MANAGER:\n\nInventory item "${item.name}" (SKU: ${item.sku || 'N/A'}) has fallen below critical stock limits.\n- Current Stock: ${quantity} units (Threshold: below 15 units / reorder point ${reorderPoint})\n- Reorder Point: ${reorderPoint} units\n- Category: ${item.category || item.item_type || 'Supplies'}\n- Supplier: ${item.supplier || 'Primary Depot'}\n- Recommended Restock Order: ${Math.max(50, reorderPoint * 2 - quantity)} units\n\nPlease review inventory levels and issue a supplier purchase order immediately to avoid appointment procedure disruption.`,
-      triggered_by: triggeredBy,
-      dispatched_at: timestamp,
-      status: 'DELIVERED'
-    };
-
-    // Check if an alert was already logged recently to prevent exact duplicate flood
-    const exists = managerLowStockAlertsSent.find(a => a.item_id === item.id && a.current_quantity === quantity);
-    if (!exists) {
-      managerLowStockAlertsSent.unshift(emailAlert);
-
-      logActivity({
-        category: 'inventory',
-        action: 'LOW_STOCK_MANAGER_EMAIL_DISPATCHED',
-        title: `🚨 Low Stock: ${item.name}`,
-        details: `Item "${item.name}" (SKU: ${item.sku || 'N/A'}) is at ${quantity} units (< 15 units / reorder point ${reorderPoint}). Reorder needed.`,
-        user: triggeredBy,
-        badgeColor: quantity < 5 ? 'red' : 'amber'
-      });
-    }
-
-    return emailAlert;
-  }
-  return null;
-}
-
-function checkAndTriggerCategoryStockAlerts(categoryName, triggeredBy = 'Automated Category Monitor') {
-  if (!categoryName) return null;
-  const cat = inventoryCategories.find(c => c.name.toLowerCase() === categoryName.trim().toLowerCase());
-  if (!cat) return null;
-
-  const minStock = cat.min_stock_level !== undefined ? cat.min_stock_level : (cat.default_reorder_point || 20);
-  const matchingItems = inventory.filter(i => (i.category || i.item_type || '').toLowerCase() === cat.name.toLowerCase());
-  const totalCategoryUnits = matchingItems.reduce((sum, i) => sum + (parseInt(i.quantity) || 0), 0);
-
-  if (totalCategoryUnits < minStock) {
-    const studioManagerEmail = (typeof studioGeneralSettings !== 'undefined' && studioGeneralSettings.manager_email) || process.env.STUDIO_MANAGER_EMAIL || (process.env.STUDIO_MANAGER_EMAIL || '');
-    const alertId = `cat-alert-${cat.id}-${Date.now()}`;
-    const timestamp = new Date().toISOString();
-
-    const lowItemsSummary = matchingItems
-      .map(i => `• ${i.name} (SKU: ${i.sku || 'N/A'}): ${i.quantity} units (Reorder: ${i.reorder_point || 10})`)
-      .join('\n');
-
-    const catAlert = {
-      id: alertId,
-      category_id: cat.id,
-      category_name: cat.name,
-      total_units: totalCategoryUnits,
-      min_stock_level: minStock,
-      item_count: matchingItems.length,
-      deficit: minStock - totalCategoryUnits,
-      recipient_role: 'Studio Staff & Inventory Manager',
-      recipient_email: studioManagerEmail,
-      subject: `🚨 CATEGORY STOCK ALERT: "${cat.name}" category is at ${totalCategoryUnits} units (below min ${minStock})`,
-      body: `ATTENTION STUDIO STAFF & INVENTORY MANAGER:\n\nThe entire "${cat.name}" inventory category has dropped below its configured minimum stock level.\n\n- Category: ${cat.name}\n- Total Stock In Studio: ${totalCategoryUnits} units\n- Configured Category Minimum: ${minStock} units\n- Stock Deficit: ${minStock - totalCategoryUnits} units below threshold\n\nItems in this Category:\n${lowItemsSummary}\n\nPlease review summarized supply requirements and submit consolidated purchase requisitions.`,
-      triggered_by: triggeredBy,
-      dispatched_at: timestamp,
-      status: 'DELIVERED'
-    };
-
-    const exists = categoryStockAlertsSent.find(a => a.category_id === cat.id && a.total_units === totalCategoryUnits);
-    if (!exists) {
-      categoryStockAlertsSent.unshift(catAlert);
-
-      logActivity({
-        category: 'inventory',
-        action: 'CATEGORY_STOCK_ALERT_DISPATCHED',
-        title: `🚨 Category Stock Alert: ${cat.name}`,
-        details: `Category "${cat.name}" aggregate stock (${totalCategoryUnits} units) fell below category minimum threshold (${minStock} units). Summarized staff notification dispatched.`,
-        user: triggeredBy,
-        badgeColor: 'red'
-      });
-    }
-
-    return catAlert;
-  }
-  return null;
-}
-
 const procedureConsumptions = [
   { id: 1, client_name: 'Alex Rivera', artist_name: 'Marcus Vance', procedure_type: 'Tattoo Session', date: '2025-01-20', items: [{ id: 1, name: 'Sterile Tattoo Needles 3RL', qty: 3 }, { id: 2, name: 'Black Tattoo Ink 8oz', qty: 1 }], notes: 'Upper arm tattoo sleeve outline' },
   { id: 2, client_name: 'Samantha Chen', artist_name: 'Elena Rostova', procedure_type: 'Helix Piercing', date: '2025-01-22', items: [{ id: 3, name: 'Titanium Helix Barbell 16G', qty: 1 }, { id: 4, name: 'Nitrile Gloves Box (M)', qty: 1 }], notes: 'Right ear helix piercing' }
@@ -828,8 +730,8 @@ const inventoryCategories = [
 ];
 
 const financial = [
-  { id: 1, client_id: 1, staff_id: 2, amount: 350.00, method: 'Card', type: 'payment', transaction_date: new Date(Date.now() - 6 * 864e5).toISOString().slice(0, 10), status: 'completed', source: 'in-studio', client_name: 'Alex Rivera' },
-  { id: 2, client_id: 2, staff_id: 3, amount: 65.00, method: 'Cash', type: 'payment', transaction_date: new Date(Date.now() - 2 * 864e5).toISOString().slice(0, 10), status: 'completed', source: 'in-studio', client_name: 'Samantha Chen' }
+  { id: 1, client_id: 1, staff_id: 2, amount: 350.00, method: 'Card', type: 'payment', transaction_date: studioDay(new Date(Date.now() - 6 * 864e5)), status: 'completed', source: 'in-studio', client_name: 'Alex Rivera' },
+  { id: 2, client_id: 2, staff_id: 3, amount: 65.00, method: 'Cash', type: 'payment', transaction_date: studioDay(new Date(Date.now() - 2 * 864e5)), status: 'completed', source: 'in-studio', client_name: 'Samantha Chen' }
 ];
 
 const compliance = [
@@ -935,9 +837,8 @@ function fillStudioFields(schema, client) {
   const join = (...v) => v.filter(Boolean).join(' | ');
   // the practitioner: the artist of the client's appointment, the coming one first (it said "Senior Resident Artist")
   const mine = client ? appointments.filter((a) => Number(a.client_id) === client.id && (a.staff_name || a.artist_name)) : [];
-  const now = new Date().toISOString();
   const when = (a) => String(a.datetime || a.date || '');
-  const appt = mine.filter((a) => when(a) >= now.slice(0, 10)).sort((a, b) => when(a).localeCompare(when(b)))[0]
+  const appt = mine.filter((a) => dayOf(when(a)) >= studioDay()).sort((a, b) => when(a).localeCompare(when(b)))[0]
     || mine.sort((a, b) => when(b).localeCompare(when(a)))[0];
   const artist = appt ? appt.staff_name || appt.artist_name : '';
   const valueFor = (f) => {
@@ -1532,7 +1433,7 @@ app.post('/api/clients/:id/tattoo-work', (req, res) => {
     client_name: clientObj.name,
     title: req.body.title || 'New Tattoo Session Work',
     category: req.body.category || 'Tattoo Session',
-    date: req.body.date || new Date().toISOString().split('T')[0],
+    date: req.body.date || studioDay(),
     artist: req.body.artist || clientObj.assigned_staff_name || '', // it named a sample artist
     image_url: req.body.image_url,
     notes: req.body.notes || '',
@@ -1589,7 +1490,7 @@ app.get('/api/appointments', (req, res) => {
 // Automated Appointment Slot Proposal Endpoint based on Shift Roster & Availability
 app.post('/api/appointments/propose-slots', (req, res) => {
   const { staff_id, date, duration_minutes = 60, service_type = 'Custom Tattoo Session' } = req.body;
-  const targetDate = date || new Date().toISOString().split('T')[0];
+  const targetDate = date || studioDay();
 
   const results = [];
   const targetStaffList = (staff_id && staff_id !== 'all')
@@ -1607,7 +1508,7 @@ app.post('/api/appointments/propose-slots', (req, res) => {
 
     const existingApps = appointments.filter(a => {
       if (Number(a.staff_id) !== Number(artist.id)) return false;
-      const appDate = safeIsoDate(a.datetime).split('T')[0];
+      const appDate = dayOf(a.datetime);
       return appDate === targetDate && a.status !== 'cancelled';
     });
 
@@ -1662,7 +1563,14 @@ app.post('/api/appointments/propose-slots', (req, res) => {
   });
 });
 
+// The answer when a booking is in the way of another: the screen asks, and sends the booking again with force: true.
+const clashAnswer = (clash) => ({ error: clash.same === 'artist' ? 'That artist already has an appointment at that time' : 'That station is already booked at that time', conflict: clash });
+
 app.post('/api/appointments', (req, res) => {
+  const when = toTimestamp(req.body.datetime);
+  if (!when) return res.status(400).json({ error: 'Choose a date and time for the appointment' });
+  const status = req.body.status || 'scheduled';
+  if (!STATUSES.includes(status)) return res.status(400).json({ error: 'The status must be one of: ' + STATUSES.join(', ') });
   let cName = req.body.client_name || '';
   if (req.body.client_id) {
     const client = clients.find(c => c.id === parseInt(req.body.client_id));
@@ -1682,9 +1590,9 @@ app.post('/api/appointments', (req, res) => {
     client_id: req.body.client_id ? parseInt(req.body.client_id) : null,
     staff_id: req.body.staff_id ? parseInt(req.body.staff_id) : null,
     service_type: req.body.service_type || 'Tattoo / Piercing Session',
-    datetime: req.body.datetime || new Date().toISOString(),
+    datetime: when,
     duration_minutes: parseInt(req.body.duration_minutes || 60),
-    status: req.body.status || 'scheduled',
+    status,
     notes: req.body.notes || '',
     client_name: cName,
     staff_name: sName,
@@ -1692,6 +1600,8 @@ app.post('/api/appointments', (req, res) => {
     estimated_price: Number(req.body.estimated_price) || 0,
     deposit_paid: Number(req.body.deposit_paid) || 0
   };
+  const clash = findClash(newApp, appointments);
+  if (clash && req.body.force !== true) return res.status(409).json(clashAnswer(clash));
   appointments.push(newApp);
 
   const appDate = new Date(newApp.datetime);
@@ -1713,17 +1623,24 @@ app.patch('/api/appointments/:id', (req, res) => {
   const appt = appointments.find((a) => a.id === parseInt(req.params.id, 10));
   if (!appt) return res.status(404).json({ error: 'Appointment not found' });
   const b = req.body || {};
+  if (b.datetime !== undefined && !toTimestamp(b.datetime)) return res.status(400).json({ error: 'The date and time are not a valid date' });
+  const next = { ...appt };   // changed on a copy: a clash saves nothing
   if (b.client_id) {
     const client = clients.find((c) => c.id === parseInt(b.client_id, 10));
-    if (client) { appt.client_id = client.id; appt.client_name = client.name; }
-  } else if (b.client_name) { appt.client_id = null; appt.client_name = String(b.client_name); }
+    if (client) { next.client_id = client.id; next.client_name = client.name; }
+  } else if (b.client_name) { next.client_id = null; next.client_name = String(b.client_name); }
   if (b.staff_id || b.staff_name) {
     const st = staff.find((s) => (b.staff_id && s.id === parseInt(b.staff_id, 10)) || s.name === b.staff_name);
-    appt.staff_id = st ? st.id : appt.staff_id;
-    appt.staff_name = st ? st.name : String(b.staff_name || appt.staff_name);
+    next.staff_id = st ? st.id : next.staff_id;
+    next.staff_name = st ? st.name : String(b.staff_name || next.staff_name);
   }
-  for (const f of ['service_type', 'datetime', 'station', 'notes']) if (b[f] !== undefined) appt[f] = String(b[f]);
-  for (const f of ['duration_minutes', 'estimated_price', 'deposit_paid']) if (b[f] !== undefined && !isNaN(Number(b[f]))) appt[f] = Number(b[f]);
+  for (const f of ['service_type', 'station', 'notes']) if (b[f] !== undefined) next[f] = String(b[f]);
+  if (b.datetime !== undefined) next.datetime = toTimestamp(b.datetime);
+  for (const f of ['duration_minutes', 'estimated_price', 'deposit_paid']) if (b[f] !== undefined && !isNaN(Number(b[f]))) next[f] = Number(b[f]);
+  const moved = ['datetime', 'duration_minutes', 'staff_id', 'staff_name', 'station'].some((f) => b[f] !== undefined);
+  const clash = moved && findClash(next, appointments);
+  if (clash && b.force !== true) return res.status(409).json(clashAnswer(clash));
+  Object.assign(appt, next);
   logActivity({ category: 'appointment', action: 'UPDATED', title: `Appointment Changed: ${appt.client_name}`,
     details: `${appt.service_type} on ${appt.datetime}`, user: 'Admin Manager', badgeColor: 'blue' });
   res.json(appt);
@@ -1732,16 +1649,14 @@ app.patch('/api/appointments/:id', (req, res) => {
 app.delete('/api/appointments/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const idx = appointments.findIndex(a => a.id === id);
-  let removedApp = null;
-  if (idx !== -1) {
-    removedApp = appointments.splice(idx, 1)[0];
-  }
+  if (idx === -1) return res.status(404).json({ error: 'Appointment not found' });
+  const removedApp = appointments.splice(idx, 1)[0];
 
   logActivity({
     category: 'appointment',
     action: 'CANCELLED',
     title: `Appointment Removed`,
-    details: removedApp ? `Cancelled ${removedApp.service_type} for ${removedApp.client_name}` : `Appointment ID #${id} deleted`,
+    details: `Cancelled ${removedApp.service_type} for ${removedApp.client_name}`,
     user: 'Admin Manager',
     badgeColor: 'red'
   });
@@ -1751,18 +1666,18 @@ app.delete('/api/appointments/:id', (req, res) => {
 
 app.patch('/api/appointments/:id/status', (req, res) => {
   const targetApp = appointments.find(a => a.id === parseInt(req.params.id));
-  if (targetApp) {
-    targetApp.status = req.body.status || 'updated';
-    logActivity({
-      category: 'appointment',
-      action: 'STATUS_CHANGE',
-      title: `Appointment Status Changed: ${targetApp.client_name || 'Client'}`,
-      details: `Status set to "${targetApp.status}" for ${targetApp.service_type} w/ ${targetApp.staff_name}`,
-      user: targetApp.staff_name || 'Admin Manager',
-      badgeColor: targetApp.status === 'completed' ? 'green' : (targetApp.status === 'cancelled' ? 'red' : 'blue')
-    });
-  }
-  res.json(targetApp || { success: true });
+  if (!targetApp) return res.status(404).json({ error: 'Appointment not found' });
+  if (!STATUSES.includes(req.body.status)) return res.status(400).json({ error: 'The status must be one of: ' + STATUSES.join(', ') });
+  targetApp.status = req.body.status;
+  logActivity({
+    category: 'appointment',
+    action: 'STATUS_CHANGE',
+    title: `Appointment Status Changed: ${targetApp.client_name || 'Client'}`,
+    details: `Status set to "${targetApp.status}" for ${targetApp.service_type} w/ ${targetApp.staff_name}`,
+    user: targetApp.staff_name || 'Admin Manager',
+    badgeColor: targetApp.status === 'completed' ? 'green' : (targetApp.status === 'cancelled' ? 'red' : 'blue')
+  });
+  res.json(targetApp);
 });
 
 // Supplier Configuration & PO Auto-Dispatch Engine
@@ -1857,66 +1772,6 @@ let supplierConfig = {
   auto_email_enabled: true
 };
 
-const poDispatches = [];
-
-function checkAndAutoDispatchSupplierPO(triggerItem) {
-  if (!supplierConfig.auto_email_enabled) return null;
-  const reorderThreshold = triggerItem.reorder_point !== undefined ? triggerItem.reorder_point : 10;
-  if (triggerItem.quantity > reorderThreshold) return null;
-
-  const lowStock = inventory.filter(i => i.quantity <= (i.reorder_point !== undefined ? i.reorder_point : 10));
-  if (!lowStock.length) return null;
-
-  const poNumber = `PO-AUTO-${Date.now().toString().slice(-6)}`;
-  const itemsToReorder = lowStock.map(i => {
-    const rPoint = i.reorder_point !== undefined ? i.reorder_point : 10;
-    const qtyNeeded = Math.max(20, rPoint * 2 - i.quantity);
-    const estCost = qtyNeeded * (i.price || 15);
-    return { id: i.id, name: i.name, sku: i.sku, currentQty: i.quantity, reorderPoint: rPoint, orderQty: qtyNeeded, estCost };
-  });
-
-  const totalCost = itemsToReorder.reduce((s, item) => s + item.estCost, 0);
-
-  const po = {
-    po_number: poNumber,
-    created_at: new Date().toISOString(),
-    items: itemsToReorder,
-    totalCost,
-    status: 'auto_emailed',
-    supplier_email: supplierConfig.supplier_email
-  };
-  purchaseOrders.unshift(po);
-
-  const pdfDataUrl = poPdfDataUrl(po, itemsToReorder, supplierConfig, studioProfile(), money);
-
-  const dispatchRecord = {
-    id: poDispatches.length + 1,
-    po_number: poNumber,
-    trigger_item: triggerItem.name,
-    trigger_item_id: triggerItem.id,
-    recipient_email: supplierConfig.supplier_email,
-    supplier_name: supplierConfig.supplier_name,
-    dispatched_at: new Date().toISOString(),
-    item_count: itemsToReorder.length,
-    total_cost: totalCost,
-    pdf_attachment: pdfDataUrl,
-    status: 'SENT'
-  };
-
-  poDispatches.unshift(dispatchRecord);
-
-  logActivity({
-    category: 'inventory',
-    action: 'PO_AUTO_EMAILED',
-    title: `PO Drafted for Supplier: ${poNumber}`,
-    details: `Purchase Order PDF drafted for ${supplierConfig.supplier_email} (${supplierConfig.supplier_name}) for low-stock item "${triggerItem.name}" (${triggerItem.quantity} <= ${reorderThreshold}). Total: $${totalCost.toFixed(2)}.`,
-    user: 'Auto Supply System',
-    badgeColor: 'purple'
-  });
-
-  return dispatchRecord;
-}
-
 // The items as the studio entered them. Every item came back with an invented order history
 // (purchase orders, past prices, a usage rate and a stockout date); no screen used it.
 app.get('/api/inventory', (req, res) => {
@@ -1937,68 +1792,15 @@ app.post('/api/inventory', (req, res) => {
     badgeColor: 'amber'
   });
 
-  let dispatched = null;
-  if (newItem.quantity <= (newItem.reorder_point !== undefined ? newItem.reorder_point : 10)) {
-    dispatched = checkAndAutoDispatchSupplierPO(newItem);
-  }
-
-  const criticalEmailAlert = checkAndTriggerCriticalLowStockEmail(newItem, 'Admin Manager (Item Added)');
-  const catAlert = checkAndTriggerCategoryStockAlerts(newItem.category || newItem.item_type, 'Admin Manager (Item Added)');
-
-  res.status(201).json({ ...newItem, auto_po_dispatched: dispatched, critical_email_alert: criticalEmailAlert, category_alert: catAlert });
+  res.status(201).json(newItem);
 });
 
 app.patch('/api/inventory/:id', (req, res) => {
   const item = inventory.find(i => i.id === parseInt(req.params.id));
   if (!item) return res.status(404).json({ error: 'Item not found' });
   const oldQty = item.quantity;
-  const oldPrice = item.price;
-  const oldSku = item.sku;
   const { id: _keep, ...changes } = req.body || {};
   Object.assign(item, changes);
-
-  // If price changed, or SKU changed, or stock adjusted, record into supplier audit logs
-  if (typeof supplierInventoryAuditLogs !== 'undefined' && Array.isArray(supplierInventoryAuditLogs)) {
-    const matchedSup = (typeof suppliers !== 'undefined') ? suppliers.find(s => s.name.toLowerCase() === (item.supplier || '').toLowerCase()) : null;
-    if (matchedSup) {
-      if (req.body.price !== undefined && req.body.price !== oldPrice) {
-        const delta = ((item.price - oldPrice) / (oldPrice || 1)) * 100;
-        supplierInventoryAuditLogs.unshift({
-          id: supplierInventoryAuditLogs.length + 1,
-          supplier_id: matchedSup.id,
-          supplier_name: matchedSup.name,
-          sku: item.sku || 'SKU',
-          item_name: item.name,
-          event_type: 'PRICE_UPDATE',
-          title: `Price Updated: ${item.name}`,
-          change_summary: `Price changed from $${parseFloat(oldPrice || 0).toFixed(2)} to $${parseFloat(item.price).toFixed(2)} (${delta >= 0 ? '+' : ''}${delta.toFixed(1)}%).`,
-          old_value: `$${parseFloat(oldPrice || 0).toFixed(2)}`,
-          new_value: `$${parseFloat(item.price).toFixed(2)}`,
-          variance_pct: `${delta >= 0 ? '+' : ''}${delta.toFixed(1)}%`,
-          user: 'Studio Manager',
-          timestamp: new Date().toISOString(),
-          details: `Manual price adjustment in studio catalog.`
-        });
-      } else if (req.body.quantity !== undefined && req.body.quantity !== oldQty) {
-        supplierInventoryAuditLogs.unshift({
-          id: supplierInventoryAuditLogs.length + 1,
-          supplier_id: matchedSup.id,
-          supplier_name: matchedSup.name,
-          sku: item.sku || 'SKU',
-          item_name: item.name,
-          event_type: 'SKU_MODIFICATION',
-          title: `Stock Quantity Adjusted: ${item.name}`,
-          change_summary: `Quantity adjusted from ${oldQty} to ${item.quantity} units.`,
-          old_value: `${oldQty} units`,
-          new_value: `${item.quantity} units`,
-          variance_pct: 'N/A',
-          user: 'Studio Manager',
-          timestamp: new Date().toISOString(),
-          details: `Inventory on-hand stock count updated.`
-        });
-      }
-    }
-  }
 
   logActivity({
     category: 'inventory',
@@ -2009,15 +1811,7 @@ app.patch('/api/inventory/:id', (req, res) => {
     badgeColor: item.quantity <= (item.reorder_point !== undefined ? item.reorder_point : 10) ? 'red' : 'amber'
   });
 
-  let dispatched = null;
-  if (item.quantity <= (item.reorder_point !== undefined ? item.reorder_point : 10)) {
-    dispatched = checkAndAutoDispatchSupplierPO(item);
-  }
-
-  const criticalEmailAlert = checkAndTriggerCriticalLowStockEmail(item, 'Admin Manager (Stock Adjustment)');
-  const catAlert = checkAndTriggerCategoryStockAlerts(item.category || item.item_type, 'Admin Manager (Stock Adjustment)');
-
-  res.json({ ...item, auto_po_dispatched: dispatched, critical_email_alert: criticalEmailAlert, category_alert: catAlert });
+  res.json(item);
 });
 
 app.delete('/api/inventory/:id', (req, res) => {
@@ -2131,6 +1925,8 @@ app.delete('/api/messages', (req, res) => {
 app.get('/api/financial', (req, res) => res.json(financial));
 
 app.post('/api/financial', (req, res) => {
+  const bad = paymentError(req.body);
+  if (bad) return res.status(400).json({ error: bad });
   let cName = req.body.client_name || '';
   let clientId = req.body.client_id ? parseInt(req.body.client_id) : null;
   if (clientId && !cName) {
@@ -2144,10 +1940,10 @@ app.post('/api/financial', (req, res) => {
     id: financial.length ? Math.max(...financial.map(f => f.id)) + 1 : 1,
     client_id: clientId,
     staff_id: staffId,
-    amount: parseFloat(req.body.amount || 0),
-    method: req.body.method || 'Card',
+    amount: paymentAmount(req.body.amount),
+    method: req.body.method.trim(),
     type: req.body.type || 'payment',
-    transaction_date: req.body.transaction_date || new Date().toISOString().split('T')[0],
+    transaction_date: req.body.transaction_date || studioDay(),
     status: req.body.status || 'completed',
     source: req.body.source || 'in-studio',
     client_name: cName
@@ -2157,7 +1953,7 @@ app.post('/api/financial', (req, res) => {
   logActivity({
     category: 'financial',
     action: 'PAYMENT_RECORDED',
-    title: `Payment Received: $${newTransaction.amount.toFixed(2)}`,
+    title: `Payment Received: ${money(newTransaction.amount)}`,
     details: `Transaction #${newTransaction.id} completed via ${newTransaction.method} (${newTransaction.source})${cName ? ` for ${cName}` : ''}`,
     user: 'Admin Manager',
     badgeColor: 'green'
@@ -2175,8 +1971,8 @@ app.delete('/api/financial/:id', (req, res) => {
   logActivity({
     category: 'financial',
     action: 'PAYMENT_VOIDED',
-    title: `Payment Voided: $${removed.amount.toFixed(2)}`,
-    details: `Voided transaction #${removed.id} ($${removed.amount.toFixed(2)} via ${removed.method}).`,
+    title: `Payment Voided: ${money(removed.amount)}`,
+    details: `Voided transaction #${removed.id} (${money(removed.amount)} via ${removed.method}).`,
     user: 'Admin Manager',
     badgeColor: 'red'
   });
@@ -2195,7 +1991,7 @@ app.get('/api/accounting/export/quickbooks', (req, res) => {
 
   (financial || []).forEach((f, idx) => {
     const trnsId = `TRNS-QB-${f.id || idx + 1}`;
-    const dateStr = f.transaction_date || new Date().toISOString().split('T')[0];
+    const dateStr = f.transaction_date || studioDay();
     const amount = (parseFloat(f.amount) || 0).toFixed(2);
     const memo = `POS Payment - ${f.client_name || 'Client'} (${f.method || 'Card'})`;
 
@@ -2214,7 +2010,7 @@ app.get('/api/accounting/export/sage', (req, res) => {
   let csv = `Date,Transaction_ID,GL_Account,Account_Description,Debit,Credit,Reference,Description,Client_Name\n`;
 
   (financial || []).forEach((f, idx) => {
-    const dateStr = f.transaction_date || new Date().toISOString().split('T')[0];
+    const dateStr = f.transaction_date || studioDay();
     const amount = parseFloat(f.amount) || 0;
     const ref = `SAGE-POS-${f.id || idx + 1}`;
     const client = f.client_name || 'Walk-in Client';
@@ -2233,7 +2029,7 @@ app.get('/api/accounting/export/sage', (req, res) => {
 // Compliance & Vault API
 app.get('/api/compliance', (req, res) => res.json(compliance));
 app.post('/api/compliance', (req, res) => {
-  const newLog = { id: compliance.length + 1, ...req.body, log_date: new Date().toISOString().split('T')[0], status: 'pass' };
+  const newLog = { id: compliance.length + 1, ...req.body, log_date: studioDay(), status: 'pass' };
   compliance.push(newLog);
 
   logActivity({
@@ -3144,238 +2940,6 @@ let supplierTimelineLogs = [
   }
 ];
 
-let supplierInventoryAuditLogs = [
-  // NeedleCraft Supply Co. (ID: 1)
-  {
-    id: 1,
-    supplier_id: 1,
-    supplier_name: 'NeedleCraft Supply Co.',
-    sku: 'NDL-3RL-100',
-    item_name: 'Sterile Tattoo Needles 3RL',
-    event_type: 'PRICE_UPDATE',
-    title: 'Unit Cost Adjusted',
-    change_summary: 'Unit cost updated from $24.50 to $25.00 (+2.04%) due to manufacturer surgical alloy index.',
-    old_value: '$24.50',
-    new_value: '$25.00',
-    variance_pct: '+2.04%',
-    user: 'Studio Manager',
-    timestamp: '2026-07-28T10:15:00.000Z',
-    details: 'Manufacturer catalog price index adjusted for surgical 316L stainless steel needle cartridges.'
-  },
-  {
-    id: 2,
-    supplier_id: 1,
-    supplier_name: 'NeedleCraft Supply Co.',
-    sku: 'NDL-3RL-100',
-    item_name: 'Sterile Tattoo Needles 3RL',
-    event_type: 'REORDER_EVENT',
-    title: 'Purchase Order Dispatched (PO-2026-0812)',
-    change_summary: 'Reordered 60 boxes ($1,440.00) triggered by automated low-stock threshold.',
-    old_value: 'Stock: 18 boxes',
-    new_value: 'Ordered: +60 boxes',
-    variance_pct: 'N/A',
-    user: 'Auto-Reorder Engine',
-    timestamp: '2026-08-05T14:30:00.000Z',
-    details: 'Delivered in 3 days on 2026-08-08 via UPS. 100% SLA compliant.'
-  },
-  {
-    id: 3,
-    supplier_id: 1,
-    supplier_name: 'NeedleCraft Supply Co.',
-    sku: 'NDL-7M1-50',
-    item_name: 'Magnum Tattoo Needles 7M1',
-    event_type: 'SKU_MODIFICATION',
-    title: 'Lot Number & Sterilization Expiry Updated',
-    change_summary: 'Updated lot number to LOT-NDL-2026B with extended EO gas sterilization expiry (2028-06-30).',
-    old_value: 'Lot: LOT-NDL-2025D (Exp: 2026-04)',
-    new_value: 'Lot: LOT-NDL-2026B (Exp: 2028-06-30)',
-    variance_pct: 'N/A',
-    user: 'Sterile Processing Officer',
-    timestamp: '2026-08-01T11:20:00.000Z',
-    details: 'Sterilization batch verified and biological indicator passed inspection.'
-  },
-  {
-    id: 4,
-    supplier_id: 1,
-    supplier_name: 'NeedleCraft Supply Co.',
-    sku: 'NDL-3RL-100',
-    item_name: 'Sterile Tattoo Needles 3RL',
-    event_type: 'SKU_MODIFICATION',
-    title: 'Reorder Safety Point Adjusted',
-    change_summary: 'Reorder threshold increased from 30 to 50 boxes due to peak summer guest bookings.',
-    old_value: 'Threshold: 30',
-    new_value: 'Threshold: 50',
-    variance_pct: '+66.7%',
-    user: 'Studio Manager',
-    timestamp: '2026-06-15T09:00:00.000Z',
-    details: 'Adjusted buffer stock for upcoming international guest artist residency.'
-  },
-  // Eternal Ink Direct (ID: 2)
-  {
-    id: 5,
-    supplier_id: 2,
-    supplier_name: 'Eternal Ink Direct',
-    sku: 'INK-BLK-08',
-    item_name: 'Black Tattoo Ink 8oz',
-    event_type: 'PRICE_UPDATE',
-    title: 'Quarterly Price Revision',
-    change_summary: 'Price increased from $42.50 to $45.00 (+5.88%) on 8oz pigment bottles.',
-    old_value: '$42.50',
-    new_value: '$45.00',
-    variance_pct: '+5.88%',
-    user: 'Supplier Sync (EDI)',
-    timestamp: '2026-07-01T08:00:00.000Z',
-    details: 'Standard annual manufacturer MSRP adjustment across lining blacks.'
-  },
-  {
-    id: 6,
-    supplier_id: 2,
-    supplier_name: 'Eternal Ink Direct',
-    sku: 'INK-DYN-BLK-8',
-    item_name: 'Dynamic Black Tattoo Ink 8oz',
-    event_type: 'REORDER_EVENT',
-    title: 'Purchase Order Dispatched (PO-2026-0720)',
-    change_summary: 'Reordered 25 bottles ($800.00) via USPS Priority.',
-    old_value: 'Stock: 3 bottles',
-    new_value: 'Ordered: +25 bottles',
-    variance_pct: 'N/A',
-    user: 'Auto-Reorder Engine',
-    timestamp: '2026-07-20T10:15:00.000Z',
-    details: 'Received on 2026-07-24 (4 days lead time).'
-  },
-  {
-    id: 7,
-    supplier_id: 2,
-    supplier_name: 'Eternal Ink Direct',
-    sku: 'INK-BLK-08',
-    item_name: 'Black Tattoo Ink 8oz',
-    event_type: 'SKU_MODIFICATION',
-    title: 'EU REACH Compliance Certification Logged',
-    change_summary: 'Updated SKU specifications with REACH 2026 certificates and laboratory pigment test data.',
-    old_value: 'Standard SDS v3.1',
-    new_value: 'REACH Compliant SDS v4.2',
-    variance_pct: 'N/A',
-    user: 'Quality Compliance Admin',
-    timestamp: '2026-06-10T14:30:00.000Z',
-    details: 'Heavy metal and aromatic amine testing documentation attached to SDS registry.'
-  },
-  // Piercing World Wholesale (ID: 3)
-  {
-    id: 8,
-    supplier_id: 3,
-    supplier_name: 'Piercing World Wholesale',
-    sku: 'JWL-THB-16',
-    item_name: 'Titanium Helix Barbell 16G',
-    event_type: 'PRICE_UPDATE',
-    title: 'Raw Titanium Market Adjustment',
-    change_summary: 'Unit price shifted from $17.50 to $18.50 (+5.71%).',
-    old_value: '$17.50',
-    new_value: '$18.50',
-    variance_pct: '+5.71%',
-    user: 'Vendor Catalog Sync',
-    timestamp: '2026-07-15T11:00:00.000Z',
-    details: 'Mill raw titanium grade ASTM F136 material cost index shift.'
-  },
-  {
-    id: 9,
-    supplier_id: 3,
-    supplier_name: 'Piercing World Wholesale',
-    sku: 'JWL-THB-16',
-    item_name: 'Titanium Helix Barbell 16G',
-    event_type: 'REORDER_EVENT',
-    title: 'PO #PO-2026-0708 Reorder Issued',
-    change_summary: 'Reordered 45x titanium barbells and 15x 14k gold studs ($1,627.50).',
-    old_value: 'Stock: 8 units',
-    new_value: 'Ordered: +60 units',
-    variance_pct: 'N/A',
-    user: 'Studio Manager',
-    timestamp: '2026-07-08T11:45:00.000Z',
-    details: 'Delivered in 5 days on 2026-07-13 via FedEx Express.'
-  },
-  {
-    id: 10,
-    supplier_id: 3,
-    supplier_name: 'Piercing World Wholesale',
-    sku: 'JW-14K-STUD-FL',
-    item_name: '14k Solid Gold Flower Stud',
-    event_type: 'SKU_MODIFICATION',
-    title: 'SKU Catalog Attribute & Mill Cert Attached',
-    change_summary: 'Added threading specification: Threadless 25G pin with certified 14k gold hallmark.',
-    old_value: 'Threaded 16G',
-    new_value: 'Universal Threadless Pin 25G',
-    variance_pct: 'N/A',
-    user: 'Head Piercer (Alex)',
-    timestamp: '2026-05-18T13:15:00.000Z',
-    details: 'Upgraded client jewelry catalog to universal push-fit pins.'
-  },
-  // MedSafe Studio Depot (ID: 4)
-  {
-    id: 11,
-    supplier_id: 4,
-    supplier_name: 'MedSafe Studio Depot',
-    sku: 'SUP-GLV-M',
-    item_name: 'Nitrile Gloves Box (M)',
-    event_type: 'REORDER_EVENT',
-    title: 'Emergency Restock PO-2026-0615',
-    change_summary: 'Restocked 30x Cavicide and 20x Autoclave Pouches ($942.50).',
-    old_value: 'Stock: 4 boxes',
-    new_value: 'Ordered: +50 units',
-    variance_pct: 'N/A',
-    user: 'Auto-Reorder Engine',
-    timestamp: '2026-06-15T09:00:00.000Z',
-    details: 'Delivered in 2 days (fast medical depot SLA compliant).'
-  },
-  {
-    id: 12,
-    supplier_id: 4,
-    supplier_name: 'MedSafe Studio Depot',
-    sku: 'SUP-GLV-M',
-    item_name: 'Nitrile Gloves Box (M)',
-    event_type: 'PRICE_UPDATE',
-    title: 'Bulk Case Contract Price Reduction',
-    change_summary: 'Discounted unit cost from $15.50 to $15.00 (-3.23%) on 10+ case contract.',
-    old_value: '$15.50',
-    new_value: '$15.00',
-    variance_pct: '-3.23%',
-    user: 'Studio Manager',
-    timestamp: '2026-05-10T16:45:00.000Z',
-    details: 'Renegotiated quarterly contract for studio hygiene supplies.'
-  },
-  // SkinCare Studio Pro (ID: 5)
-  {
-    id: 13,
-    supplier_id: 5,
-    supplier_name: 'SkinCare Studio Pro',
-    sku: 'AFT-BALM-02',
-    item_name: 'Tattoo Aftercare Balm 2oz',
-    event_type: 'PRICE_UPDATE',
-    title: 'Packaging & Formulation Update Price Shift',
-    change_summary: 'Unit price adjusted from $11.50 to $12.00 (+4.35%) with new aluminum eco-tin.',
-    old_value: '$11.50',
-    new_value: '$12.00',
-    variance_pct: '+4.35%',
-    user: 'Vendor Catalog Sync',
-    timestamp: '2026-07-10T12:00:00.000Z',
-    details: 'Switched to 100% recyclable tin packaging and organic butter formulation.'
-  },
-  {
-    id: 14,
-    supplier_id: 5,
-    supplier_name: 'SkinCare Studio Pro',
-    sku: 'AFT-BALM-02',
-    item_name: 'Tattoo Aftercare Balm 2oz',
-    event_type: 'REORDER_EVENT',
-    title: 'Reorder Dispatched (PO-2026-078)',
-    change_summary: 'Reordered 25 units ($300.00). Delivered in 3 days.',
-    old_value: 'Stock: 12 units',
-    new_value: 'Ordered: +25 units',
-    variance_pct: 'N/A',
-    user: 'Auto-Reorder Engine',
-    timestamp: '2026-07-10T14:30:00.000Z',
-    details: 'Delivered on time on 2026-07-13.'
-  }
-];
-
 // =========================================================================
 // 🚀 SUPPLIER COMMUNICATION TIMELINE ENDPOINTS
 // =========================================================================
@@ -3397,7 +2961,7 @@ app.get('/api/inventory/suppliers/:id/timeline', (req, res) => {
       supplier_name: supplier.name,
       type: 'po_dispatch',
       title: `Purchase Order ${po.po_number} Issued`,
-      details: `Order for ${po.items ? po.items.length : 0} items totaling $${(po.totalCost || 0).toFixed(2)}. Status: ${po.status.toUpperCase()}.`,
+      details: `Order for ${po.items ? po.items.length : 0} items totaling ${money((po.totalCost || 0))}. Status: ${po.status.toUpperCase()}.`,
       sender: 'Studio Inventory Admin',
       date: po.created_at,
       outcome: po.tracking_number ? `Tracking: ${po.tracking_number}` : 'Order Processed',
@@ -3724,34 +3288,17 @@ app.post('/api/inventory/send-po-email', (req, res) => {
   };
   purchaseOrders.unshift(po);
 
-  const pdfDataUrl = poPdfDataUrl(po, itemsToReorder, supplierConfig, studioProfile(), money);
-
-  const dispatchRecord = {
-    id: poDispatches.length + 1,
-    po_number: poNumber,
-    trigger_item: itemsToReorder[0].name,
-    recipient_email: targetEmail,
-    supplier_name: supplierConfig.supplier_name,
-    dispatched_at: new Date().toISOString(),
-    item_count: itemsToReorder.length,
-    total_cost: totalCost,
-    pdf_attachment: pdfDataUrl,
-    status: 'SENT'
-  };
-
-  poDispatches.unshift(dispatchRecord);
-
   logActivity({
     category: 'inventory',
-    action: 'PO_EMAILED',
-    title: `PO Ready for Supplier: ${poNumber}`,
-    details: `Purchase Order PDF generated for ${targetEmail} for ${itemsToReorder.length} item(s). Total: $${totalCost.toFixed(2)}.`,
+    action: 'PO_PREPARED',
+    title: `PO Prepared: ${poNumber}`,
+    details: `Purchase order prepared for ${targetEmail || 'the supplier'} for ${itemsToReorder.length} item(s). Total: ${money(totalCost)}.`,
     user: 'Admin Manager',
     badgeColor: 'purple'
   });
 
-  const compose = { to_email: targetEmail || '', subject: `Purchase order ${poNumber}`, body: itemsToReorder.map(i => `${i.orderQty} x ${i.name}${i.sku ? ` (${i.sku})` : ''}`).join('\n') + `\n\nEstimated total: $${totalCost.toFixed(2)}` };
-  res.json({ compose, success: true, po, dispatch: dispatchRecord });
+  const compose = { to_email: targetEmail || '', subject: `Purchase order ${poNumber}`, body: itemsToReorder.map(i => `${i.orderQty} x ${i.name}${i.sku ? ` (${i.sku})` : ''}`).join('\n') + `\n\nEstimated total: ${money(totalCost)}` };
+  res.json({ compose, success: true, po });
 });
 
 // GET all Historical Purchase Orders with filters
@@ -3799,7 +3346,7 @@ app.post('/api/inventory/purchase-orders', (req, res) => {
   let notes = body.notes || 'Automated studio purchase order requisition.';
   let paymentTerms = body.payment_terms || body.terms || 'Net 30';
   let shippingMethod = body.shipping_method || 'FedEx Express Freight';
-  let deliveryDate = body.delivery_date || body.expected_delivery || new Date(Date.now() + 3*86400000).toISOString().split('T')[0];
+  let deliveryDate = body.delivery_date || body.expected_delivery || studioDay(new Date(Date.now() + 3*86400000));
 
   if (Array.isArray(body.items) && body.items.length > 0) {
     itemsToReorder = body.items.map(item => {
@@ -3855,7 +3402,7 @@ app.post('/api/inventory/purchase-orders', (req, res) => {
     po_number: poNum,
     id: `PO-${Date.now()}`,
     created_at: new Date().toISOString(),
-    issue_date: new Date().toISOString().split('T')[0],
+    issue_date: studioDay(),
     expected_delivery: deliveryDate,
     supplier_id: supplierId,
     supplier_name: supplierName,
@@ -3884,10 +3431,10 @@ app.post('/api/inventory/purchase-orders', (req, res) => {
       supplier_name: matchedSupplier.name,
       type: 'purchase_order',
       title: `Purchase Order Ready: ${poNum}`,
-      details: `Generated requisition for ${itemsToReorder.length} item(s) totaling $${grandTotal.toFixed(2)}. Delivery requested via ${shippingMethod}.`,
+      details: `Generated requisition for ${itemsToReorder.length} item(s) totaling ${money(grandTotal)}. Delivery requested via ${shippingMethod}.`,
       sender: 'Studio Manager',
       date: new Date().toISOString(),
-      outcome: `Requisition Issued ($${grandTotal.toFixed(2)})`,
+      outcome: `Requisition Issued (${money(grandTotal)})`,
       metadata: { po_number: poNum, total: grandTotal, items_count: itemsToReorder.length }
     });
   }
@@ -3896,12 +3443,12 @@ app.post('/api/inventory/purchase-orders', (req, res) => {
     category: 'inventory',
     action: 'PO_GENERATED',
     title: `Purchase Order Issued: ${po.po_number}`,
-    details: `Generated Requisition PO for ${itemsToReorder.length} item(s) to ${supplierName}. Grand Total: $${grandTotal.toFixed(2)}`,
+    details: `Generated Requisition PO for ${itemsToReorder.length} item(s) to ${supplierName}. Grand Total: ${money(grandTotal)}`,
     user: 'Studio Manager',
     badgeColor: 'emerald'
   });
 
-  const compose = { to_email: (matchedSupplier && (matchedSupplier.email || matchedSupplier.contact_email)) || '', subject: `Purchase order ${po.po_number}`, body: itemsToReorder.map(i => `${i.order_qty || i.quantity || ''} x ${i.name || i.item_name || ''}`).join('\n') + `\n\nTotal: $${grandTotal.toFixed(2)}` };
+  const compose = { to_email: (matchedSupplier && (matchedSupplier.email || matchedSupplier.contact_email)) || '', subject: `Purchase order ${po.po_number}`, body: itemsToReorder.map(i => `${i.order_qty || i.quantity || ''} x ${i.name || i.item_name || ''}`).join('\n') + `\n\nTotal: ${money(grandTotal)}` };
   res.status(201).json({ compose, success: true, po });
 });
 
@@ -4066,7 +3613,7 @@ app.post('/api/inventory/import-csv', (req, res) => {
       if (supplier) existing.supplier = supplier;
       if (category) existing.item_type = category;
       if (name) existing.name = name;
-      if (qty !== null) existing.last_restocked = new Date().toISOString().split('T')[0];
+      if (qty !== null) existing.last_restocked = studioDay();
       updatedCount++;
       processedRows.push({ ...existing, action: 'updated', row: rowNum });
     } else {
@@ -4081,7 +3628,7 @@ app.post('/api/inventory/import-csv', (req, res) => {
         price: unitPrice ?? 0,
         supplier: supplier,
         lead_time_days: 3,
-        last_restocked: new Date().toISOString().split('T')[0]
+        last_restocked: studioDay()
       };
       inventory.push(createdItem);
       newCount++;
@@ -4596,7 +4143,7 @@ app.post('/api/clients/:id/aftercare', (req, res) => {
     template_id: tpl.id, title: tpl.title,
     lang: AFTERCARE_LANGS.includes(b.lang) ? b.lang : 'en',
     appointment_id: appt ? appt.id : null,
-    procedure: appt ? [appt.service_type || appt.service || '', String(appt.datetime || appt.date || '').slice(0, 10)].filter(Boolean).join(', ') : '',
+    procedure: appt ? [appt.service_type || appt.service || '', dayOf(appt.datetime || appt.date)].filter(Boolean).join(', ') : '',
     given_by: String(b.given_by || '').slice(0, 80) || 'Front desk',
     given_at: new Date().toISOString()
   };
@@ -4842,7 +4389,7 @@ app.post('/api/gallery', (req, res) => {
     client_id: clientObj ? clientObj.id : null,
     client_name: clientObj ? clientObj.name : String(client_name || '').trim(),
     service_type: service_type || '',
-    session_date: session_date || new Date().toISOString().split('T')[0],
+    session_date: session_date || studioDay(),
     session_duration_hours: parseFloat(session_duration_hours) || null,
     notes: notes || '',
     image_url
@@ -5118,7 +4665,7 @@ app.post('/api/flash/:id/claim', (req, res) => {
   const client = clients.find((c) => String(c.id) === String(req.body.client_id));
   const clientName = client ? client.name : flashText(req.body.client_name);
   if (!clientName) return res.status(400).json({ error: 'Choose the client' });
-  const date = /^\d{4}-\d{2}-\d{2}$/.test(String(req.body.date || '')) ? req.body.date : new Date().toISOString().slice(0, 10);
+  const date = /^\d{4}-\d{2}-\d{2}$/.test(String(req.body.date || '')) ? req.body.date : studioDay();
 
   if (!Array.isArray(flash.bookings)) flash.bookings = [];
   flash.bookings.push({ client_id: client ? client.id : null, client_name: clientName, date });
@@ -5348,7 +4895,7 @@ app.post('/api/compliance/autoclave-logs', (req, res) => {
     autoclave_id: text(autoclave_id),
     station: text(station),
     cycle_number: num(cycle_number),
-    date_run: new Date().toISOString().replace('T', ' ').substring(0, 16),
+    date_run: studioDay() + ' ' + new Date().toLocaleTimeString('sv').slice(0, 5),
     temperature_c: num(temperature_c),
     pressure_bar: num(pressure_bar),
     duration_minutes: num(duration_minutes),
@@ -5454,7 +5001,7 @@ function copyBackupOut(file) {
 }
 
 async function dailyBackup() {
-  const today = new Date().toLocaleDateString('sv'); // YYYY-MM-DD, the studio's own day
+  const today = studioDay();
   let names = [];
   try { names = fs.readdirSync(BACKUP_DIR); } catch (e) {}
   if (names.some((n) => n.startsWith(`auto_${today}_`))) return;
@@ -5606,8 +5153,6 @@ const PERSISTED = {
   appointments: [() => appointments],
   services: [() => services],
   inventory: [() => inventory],
-  managerLowStockAlertsSent: [() => managerLowStockAlertsSent],
-  categoryStockAlertsSent: [() => categoryStockAlertsSent],
   procedureConsumptions: [() => procedureConsumptions],
   inventoryCategories: [() => inventoryCategories],
   financial: [() => financial],
@@ -5615,13 +5160,11 @@ const PERSISTED = {
   documents: [() => documents],
   suppliers: [() => suppliers, (v) => { suppliers = v; }],
   supplierConfig: [() => supplierConfig, (v) => { supplierConfig = v; }],
-  poDispatches: [() => poDispatches],
   waivers: [() => waivers],
   staffShifts: [() => staffShifts],
   monthlySchedules: [() => monthlySchedules],
   purchaseOrders: [() => purchaseOrders, (v) => { purchaseOrders = v; }],
   supplierTimelineLogs: [() => supplierTimelineLogs, (v) => { supplierTimelineLogs = v; }],
-  supplierInventoryAuditLogs: [() => supplierInventoryAuditLogs, (v) => { supplierInventoryAuditLogs = v; }],
   csvImportHistory: [() => csvImportHistory, (v) => { csvImportHistory = v; }],
   aftercareTemplates: [() => aftercareTemplates],
   galleryWorks: [() => galleryWorks],

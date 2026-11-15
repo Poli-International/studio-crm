@@ -553,6 +553,32 @@ await flow('Book an appointment for a client picked from the list, then edit it'
   await b.evaluate(`closeClientProfileModal()`);
 });
 
+await flow('Booking the same artist at the same time asks first: "no" saves nothing, "yes" saves it', async () => {
+  const book = async (client, notes) => {
+    await b.goto(url);
+    await b.clickText('Calendar');
+    await pressOn('openQuickNewAppointmentModal()');
+    await b.type('#new-appt-client', client);
+    await b.evaluate(`(() => { const set = (id, v) => { const el = document.getElementById(id); el.value = v; el.dispatchEvent(new Event('change', { bubbles: true })); }; set('new-appt-date', '2031-04-02'); set('new-appt-time', '10:00'); set('new-appt-notes', ${JSON.stringify(notes)}); })()`);
+  };
+  const saved = async (notes) => (await api('/api/appointments')).filter((a) => a.notes === notes).length;
+  await book('Clash First', 'Clash first');
+  await b.clickText('Book appointment', '#new-appointment-modal-overlay');
+  await eventually(async () => (await saved('Clash first')) === 1, 'the first booking was not saved');
+  await book('Clash Second', 'Clash second');
+  await b.evaluate(`(() => { window.__asked = []; window.confirm = (m) => { window.__asked.push(m); return false; }; })()`);
+  await b.clickText('Book appointment', '#new-appointment-modal-overlay');
+  await eventually(async () => (await b.evaluate('window.__asked.length')) === 1, 'booking the same artist at the same time did not ask');
+  const asked = await b.evaluate('window.__asked[0]');
+  check(/already has an appointment at that time: Clash First,/.test(asked) && /Book anyway\?$/.test(asked), 'the question is not the approved one: ' + asked);
+  await sleep(1700); // the same form sent again within 1.5 s is dropped (js/01-boot.js): a person takes longer to answer
+  check((await saved('Clash second')) === 0, 'answering no still saved the booking');
+  check(await shown('new-appointment-modal-overlay'), 'answering no closed the form');
+  await b.evaluate(`window.confirm = () => true`);
+  await b.clickText('Book appointment', '#new-appointment-modal-overlay');
+  await eventually(async () => (await saved('Clash second')) === 1, 'answering yes did not save the booking');
+});
+
 await flow('Healing Pipeline lists the clients of completed sessions, with a PDF', async () => {
   const [client] = await api('/api/clients');
   const fiveDaysAgo = new Date(Date.now() - 5 * 86400000).toISOString();
@@ -799,7 +825,7 @@ await flow('Studio details: saved in Settings, on the consent form and on the fo
   await b.clickText('Save studio details');
   await eventually(async () => JSON.parse((await api('/api/app-data')).poli_studio_profile || '{}').studioName === 'Flow Ink Studio', 'the studio details were not saved on the server');
   const made = await b.evaluate(`fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Studio Details Flow' }) }).then(r => r.json())`);
-  await b.evaluate(`fetch('/api/appointments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ client_id: ${made.id}, client_name: 'Studio Details Flow', service_type: 'Body Piercing', staff_name: 'Flow Piercer Artist', date: '2031-06-07', time: '10:00', status: 'Confirmed' }) })`);
+  await b.evaluate(`fetch('/api/appointments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ client_id: ${made.id}, client_name: 'Studio Details Flow', service_type: 'Body Piercing', staff_name: 'Flow Piercer Artist', datetime: '2031-06-07T10:00:00.000Z', status: 'confirmed' }) })`);
   await b.clickText('Clients');
   await eventually(async () => (await text('#clients-table-tbody')).includes('Studio Details Flow'), 'the client is not listed');
   await press('.client-directory-row', 'Studio Details Flow', 'Sign Waiver');
@@ -902,7 +928,7 @@ await flow('Stations: added, given a type and a usual artist, offered in the boo
 await flow('Aftercare: printed from the profile with the client name, recorded on the appointment; a sheet with no client', async () => {
   // Henry, 2026-10-18: no tattoo aftercare; give it from the client's profile and keep a record of it
   const made = await b.evaluate(`fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Aftercare Flow' }) }).then(r => r.json())`);
-  const appt = await b.evaluate(`fetch('/api/appointments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ client_id: ${made.id}, client_name: 'Aftercare Flow', service_type: 'Custom Tattoo', date: '2031-05-06', time: '10:00', status: 'Confirmed' }) }).then(r => r.json())`);
+  const appt = await b.evaluate(`fetch('/api/appointments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ client_id: ${made.id}, client_name: 'Aftercare Flow', service_type: 'Custom Tattoo', datetime: '2031-05-06T10:00:00.000Z', status: 'confirmed' }) }).then(r => r.json())`);
   await b.clickText('Clients');
   await eventually(async () => (await text('#clients-table-tbody')).includes('Aftercare Flow'), 'the client is not listed');
   await press('.client-directory-row', 'Aftercare Flow', 'View Profile');

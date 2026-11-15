@@ -41,6 +41,8 @@ describe('CRM user guide', () => {
     const bold = (s) => [...s.matchAll(/\*\*([^*]+)\*\*/g)].map((m) => m[1].trim());
     const norm = (s) => s.replace(/^[^\p{L}\p{N}+]+/u, '').trim();
     const enLabels = new Set(bold(md.en));
+    // labels of the computer itself, not of the CRM: "right-click it and choose **Open**" is the Mac menu
+    for (const os of ['Open']) enLabels.delete(os);
     const bad = [];
     for (const l of LANGS) {
       const dict = {};
@@ -61,12 +63,13 @@ describe('docs', () => {
   it('never mention a removed screen, button or build (tests/docs-removed-ui.json)', () => {
     const { entries } = JSON.parse(read('tests/docs-removed-ui.json'));
     const bad = [];
+    const text = new Map(docs.map((f) => [f, read(f)]));   // each guide is read once, not once per entry (it timed out on a slow disk)
     for (const e of entries) {
       const re = new RegExp(e.pattern, 'i');
-      for (const f of docs) if (!(e.allowIn || []).includes(f) && !(e.crmOnly && f.startsWith('public/tools/')) && re.test(read(f))) bad.push(`${f}: "${e.pattern}" (${e.why})`);
+      for (const f of docs) if (!(e.allowIn || []).includes(f) && !(e.crmOnly && f.startsWith('public/tools/')) && re.test(text.get(f))) bad.push(`${f}: "${e.pattern}" (${e.why})`);
     }
     expect(bad).toEqual([]);
-  });
+  }, 30000);   // every pattern over 300+ guide files: more than the default 5 s on a busy disk
 
   it('screenshots show the current design (package.json uiDesign; retake with node scripts/screenshots.mjs)', () => {
     const { uiDesign } = JSON.parse(read('package.json'));

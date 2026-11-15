@@ -1166,7 +1166,8 @@ app.get('/api/clients', (req, res) => {
   const latexFilter = (req.query.latex_allergy || req.query.has_latex_allergy || req.query.latex || '').toString().toLowerCase().trim();
   const medicalFilter = (req.query.medical_flag || req.query.has_medical_flags || req.query.medical_history || '').toString().toLowerCase().trim();
 
-  let enriched = clients.map(c => {
+  const wantArchived = ['1', 'true'].includes((req.query.archived || '').toString());
+  let enriched = clients.filter(c => !!c.archived === wantArchived).map(c => {
     if (c.assigned_staff_id && !c.assigned_staff_name) {
       const st = staff.find(s => s.id === parseInt(c.assigned_staff_id));
       if (st) c.assigned_staff_name = st.name;
@@ -1220,6 +1221,8 @@ app.post('/api/clients', (req, res) => {
     assigned_staff_name: assignedName,
     created_at: new Date().toISOString()
   };
+  delete newClient.archived;
+  delete newClient.archived_at;
   clients.push(newClient);
 
   logActivity({
@@ -1249,7 +1252,8 @@ app.patch('/api/clients/:id', (req, res) => {
   const client = clients.find(c => c.id === parseInt(req.params.id));
   if (!client) return res.status(404).json({ error: 'Client not found' });
   
-  Object.assign(client, req.body);
+  const { archived: _a, archived_at: _at, ...edits } = req.body || {};
+  Object.assign(client, edits);
 
   if (client.assigned_staff_id !== undefined && client.assigned_staff_id !== null && client.assigned_staff_id !== '') {
     client.assigned_staff_id = parseInt(client.assigned_staff_id);
@@ -1272,22 +1276,39 @@ app.patch('/api/clients/:id', (req, res) => {
   res.json(client);
 });
 
+// A client is never deleted: archived = hidden from the lists, everything else kept.
 app.delete('/api/clients/:id', (req, res) => {
-  const idNum = parseInt(req.params.id);
-  const idx = clients.findIndex(c => c.id === idNum);
-  if (idx === -1) return res.status(404).json({ error: 'Client not found' });
-  const removed = clients.splice(idx, 1)[0];
+  const client = clients.find(c => c.id === parseInt(req.params.id));
+  if (!client) return res.status(404).json({ error: 'Client not found' });
+  if (!client.archived) {
+    client.archived = true;
+    client.archived_at = new Date().toISOString();
+    logActivity({
+      category: 'client',
+      action: 'ARCHIVED',
+      title: `Client Archived: ${client.name}`,
+      details: `Client #${client.id} (${client.name}) archived. Their appointments, payments and signed forms are kept.`,
+      user: 'Admin Manager',
+      badgeColor: 'red'
+    });
+  }
+  res.json({ success: true, client });
+});
 
+app.post('/api/clients/:id/restore', (req, res) => {
+  const client = clients.find(c => c.id === parseInt(req.params.id));
+  if (!client) return res.status(404).json({ error: 'Client not found' });
+  delete client.archived;
+  delete client.archived_at;
   logActivity({
     category: 'client',
-    action: 'DELETED',
-    title: `Client Profile Deleted: ${removed.name}`,
-    details: `Client #${removed.id} (${removed.name}) removed from studio database.`,
+    action: 'RESTORED',
+    title: `Client Restored: ${client.name}`,
+    details: `Client #${client.id} (${client.name}) restored to the client list.`,
     user: 'Admin Manager',
-    badgeColor: 'red'
+    badgeColor: 'purple'
   });
-
-  res.json({ success: true, removed });
+  res.json({ success: true, client });
 });
 
 // The client's Scans tab (Henry, 2026-11-01): every page scanned with a Scanner field on the client's saved forms,
@@ -2047,7 +2068,7 @@ app.post('/api/compliance', (req, res) => {
 // Staff & Professionals API
 app.get('/api/staff', (req, res) => {
   const enrichedStaff = staff.map(s => {
-    const assignedClients = clients.filter(c => Number(c.assigned_staff_id) === Number(s.id));
+    const assignedClients = clients.filter(c => !c.archived && Number(c.assigned_staff_id) === Number(s.id));
     const completedServices = services.filter(ser => Number(ser.staff_id) === Number(s.id));
     return {
       ...s,
@@ -2137,7 +2158,7 @@ app.delete('/api/staff/:id', (req, res) => {
 
 app.get('/api/staff/:id/clients', (req, res) => {
   const staffId = parseInt(req.params.id);
-  const assigned = clients.filter(c => c.assigned_staff_id === staffId);
+  const assigned = clients.filter(c => !c.archived && c.assigned_staff_id === staffId);
   res.json(assigned);
 });
 
@@ -3864,6 +3885,8 @@ async function runAutomatedCsvSync(triggeredBy = 'Automated Schedule') {
         );
 
         if (existing) {
+          delete existing.archived; // matched again: back on the list, not updated while hidden
+          delete existing.archived_at;
           existing.name = name || existing.name;
           if (r.email) existing.email = r.email;
           if (r.phone) existing.phone = r.phone;

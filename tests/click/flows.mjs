@@ -298,7 +298,7 @@ await flow('On a phone, nothing is cut off on any screen', async () => {
   } finally { await b.desktop(); }
 });
 
-await flow('Edit client saves the change; Delete removes the client', async () => {
+await flow('Edit client saves the change; Archive hides the client, Restore brings it back', async () => {
   await b.clickText('Clients');
   await press('.client-directory-row', 'Flow Client', 'View Profile');
   await b.clickText('Edit client');
@@ -307,8 +307,15 @@ await flow('Edit client saves the change; Delete removes the client', async () =
   await b.clickText('Save changes');
   await eventually(async () => (await text('#client-profile-tags')).includes('555-7777'), 'the profile does not show the edited phone');
   await eventually(async () => (await api('/api/clients')).some((c) => c.name === 'Flow Client' && c.phone === '555-7777'), 'the edit was not saved');
-  await b.clickText('Delete', '#client-profile-modal-overlay');
-  await eventually(async () => !(await api('/api/clients')).some((c) => c.name === 'Flow Client'), 'the client was not deleted');
+  await b.clickText('Archive', '#client-profile-modal-overlay');
+  await eventually(async () => !(await api('/api/clients')).some((c) => c.name === 'Flow Client'), 'the client was not archived');
+  check((await api('/api/clients?archived=1')).some((c) => c.name === 'Flow Client'), 'the archived client is not in the archived list');
+  await b.clickText('Archived clients');
+  await eventually(async () => (await text('#clients-table-tbody')).includes('Flow Client'), 'Archived clients does not show the client');
+  await press('.client-directory-row', 'Flow Client', 'Restore');
+  await eventually(async () => (await api('/api/clients')).some((c) => c.name === 'Flow Client'), 'the client was not restored');
+  await b.clickText('Back to clients');
+  await eventually(async () => (await text('#clients-table-tbody')).includes('Flow Client'), 'Back to clients does not show the client');
 });
 
 await flow('Staff: add, edit, select and remove a team member', async () => {

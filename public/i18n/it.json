@@ -2297,5 +2297,19 @@
  "A candidate's record is personal data: choose when you will delete it.": "La scheda di un candidato costituisce dati personali: scegli quando la eliminerai.",
  "Hepatitis B vaccination offered on": "Vaccinazione contro l'epatite B offerta il",
  "Only the date it was offered is kept: whether someone is vaccinated is health data, so the CRM never asks or stores it. In the US, OSHA requires the offer, free, to employees exposed to blood.": "Viene conservata solo la data in cui è stata offerta: sapere se qualcuno sia vaccinato costituisce dati relativi alla salute, quindi il CRM non li chiede né li memorizza mai. Negli Stati Uniti, l'OSHA richiede che venga offerta, gratuitamente, ai dipendenti esposti al sangue.",
- "Every question is about the work. A question about the candidate's health is refused: it is unlawful before a job offer in many countries, and the CRM never records health.": "Ogni domanda riguarda il lavoro. Una domanda sulla salute del candidato viene rifiutata: è illegale prima di un'offerta di lavoro in molti paesi, e il CRM non registra mai la salute."
+ "Every question is about the work. A question about the candidate's health is refused: it is unlawful before a job offer in many countries, and the CRM never records health.": "Ogni domanda riguarda il lavoro. Una domanda sulla salute del candidato viene rifiutata: è illegale prima di un'offerta di lavoro in molti paesi, e il CRM non registra mai la salute.",
+ "Archive": "Archivia",
+ "Archive {0}? They leave the client list. Their appointments, payments and signed forms are kept. You can restore them at any time from Archived clients.": "Archiviare {0}? Esce dall'elenco dei clienti. I suoi appuntamenti, pagamenti e moduli firmati vengono conservati. Puoi ripristinare il cliente in qualsiasi momento da Clienti archiviati.",
+ "Client archived: {0}": "Cliente archiviato: {0}",
+ "Could not archive the client: the server did not answer": "Impossibile archiviare il cliente: il server non ha risposto",
+ "Archived clients": "Clienti archiviati",
+ "Back to clients": "Torna ai clienti",
+ "No archived clients.": "Nessun cliente archiviato.",
+ "Restore": "Ripristina",
+ "Client restored: {0}": "Cliente ripristinato: {0}",
+ "Could not restore the client: the server did not answer": "Impossibile ripristinare il cliente: il server non ha risposto",
+ "Archived": "Archiviato",
+ "{0} already has an appointment at that time: {1}, {2}. Book anyway?": "{0} ha già un appuntamento a quell'ora: {1}, {2}. Prenotare comunque?",
+ "{0} is already booked at that time: {1}, {2}. Book anyway?": "{0} è già prenotata a quell'ora: {1}, {2}. Prenotare comunque?",
+ "Booked {0} of {1} sessions. The next one clashes with another appointment: book it from the Calendar.": "Prenotate {0} sessioni su {1}. La successiva è in conflitto con un altro appuntamento: prenotala dal Calendario."
 }

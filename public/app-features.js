@@ -100,19 +100,39 @@ function closeClientProfileModal() {
     renderClientsTable();   // a form signed on a kiosk meanwhile shows in the counts at once
 }
 
+// A client is never deleted: the profile button archives (or, for an archived client, restores).
 function confirmDeleteActiveClient() {
     const client = currentActiveProfileClient && (currentActiveProfileClient.client || currentActiveProfileClient);
     if (!client) return;
-    if (!window.confirm(`Delete ${client.name} from the studio database? This cannot be undone.`)) return;
+    if (client.archived) return restoreClientById(client.id, client.name, true);
+    if (!window.confirm(pdfLabel('Archive {0}? They leave the client list. Their appointments, payments and signed forms are kept. You can restore them at any time from Archived clients.').replace('{0}', client.name))) return;
     fetch(`/api/clients/${client.id}`, { method: 'DELETE' }).then((res) => {
         if (!res.ok) throw new Error('HTTP ' + res.status);
         closeClientProfileModal();
         renderClientsTable();
         populatePeopleSelects();
-        showStudioToast(`Client deleted: ${client.name}`);
-    }).catch(() => showStudioToast('Could not delete the client: the server did not answer'));
+        showStudioToast(pdfLabel('Client archived: {0}').replace('{0}', client.name));
+    }).catch(() => showStudioToast(pdfLabel('Could not archive the client: the server did not answer')));
 }
 window.confirmDeleteActiveClient = confirmDeleteActiveClient;
+
+function restoreClientById(id, name, fromProfile) {
+    return fetch(`/api/clients/${id}/restore`, { method: 'POST' }).then((res) => {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        if (fromProfile) closeClientProfileModal();
+        renderClientsTable();
+        populatePeopleSelects();
+        showStudioToast(pdfLabel('Client restored: {0}').replace('{0}', name));
+    }).catch(() => showStudioToast(pdfLabel('Could not restore the client: the server did not answer')));
+}
+window.restoreClientById = restoreClientById;
+
+let showArchivedClients = false;
+function toggleArchivedClients() {
+    showArchivedClients = !showArchivedClients;
+    renderClientsTable();
+}
+window.toggleArchivedClients = toggleArchivedClients;
 window.closeClientProfileModal = closeClientProfileModal;
 
 // Age and ID check (src/consent-age.js decides on the server; the age comes with the client)
@@ -167,8 +187,11 @@ function renderClientProfileHeader(data) {
             ${isVip ? '<span style="background:rgba(234,179,8,0.2);color:var(--ti-gold-ink, #FDE047);padding:2px 8px;border-radius:10px;font-weight:800;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-star></use></svg> VIP</span>' : ''}
             <span style="background:rgba(16,185,129,0.2);color:var(--ti-green-ink, #6EE7B7);padding:2px 8px;border-radius:10px;font-weight:700;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-cash></use></svg> Spent: ${totalSpent}</span>
             ${clientAgeBadges(client)}
+            ${client.archived ? `<span style="background:rgba(148,163,184,0.2);color:#E2E8F0;padding:2px 8px;border-radius:10px;font-weight:800;">${escapeHtml(pdfLabel('Archived'))}</span>` : ''}
         `;
     }
+    const archiveBtn = document.getElementById('client-profile-delete-btn');
+    if (archiveBtn) archiveBtn.innerHTML = `<svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-${client.archived ? 'refresh' : 'trash'}></use></svg> ${escapeHtml(pdfLabel(client.archived ? 'Restore' : 'Archive'))}`;
 
     if (avatarEl) {
         const savedPhoto = localStorage.getItem('client_photo_' + client.id);
@@ -3385,13 +3408,19 @@ async function renderClientsTable() {
     if (!tbody) return;
     let clients, waivers = [], payments = [], forms = [];
     try {
-        const [c, w, f, cf] = await Promise.all(["/api/clients", "/api/waivers", "/api/financial", "/api/consent-forms"].map((u) => fetch(u).then((r) => (r.ok ? r.json() : []))));
+        const [c, w, f, cf] = await Promise.all([showArchivedClients ? "/api/clients?archived=1" : "/api/clients", "/api/waivers", "/api/financial", "/api/consent-forms"].map((u) => fetch(u).then((r) => (r.ok ? r.json() : []))));
         clients = Array.isArray(c) ? c : [];
         waivers = Array.isArray(w) ? w : [];
         payments = Array.isArray(f) ? f : [];
         forms = Array.isArray(cf) ? cf : [];
     } catch (e) {
         tbody.innerHTML = '<tr><td colspan="6" style="padding:16px;color:var(--ti-alert, #EF4444);text-align:center;">Could not load clients: the server did not answer</td></tr>';
+        return;
+    }
+    const toggle = document.getElementById("clients-archived-toggle");
+    if (toggle) toggle.textContent = pdfLabel(showArchivedClients ? "Back to clients" : "Archived clients");
+    if (!clients.length && showArchivedClients) {
+        tbody.innerHTML = `<tr><td colspan="6" style="padding:16px;color:var(--ti-muted, #94A3B8);text-align:center;">${escapeHtml(pdfLabel("No archived clients."))}</td></tr>`;
         return;
     }
     if (!clients.length) {
@@ -3420,7 +3449,9 @@ async function renderClientsTable() {
           <td style="padding:10px;font-weight:800;color:var(--ti-green, #34D399);">${money(spent)}</td>
           <td style="padding:10px;text-align:right;">
             <button onclick="openClientProfileModal(${Number(c.id)})" style="padding:4px 8px;background:var(--ti-blue, #3B82F6);color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">View Profile</button>
-            <button onclick="openFormBuilderModal(${Number(c.id)}, ${escapeHtml(JSON.stringify(String(c.name || "")))})" style="padding:4px 8px;background:var(--ti-purple, #8B5CF6);color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;margin-left:4px;">Sign Waiver</button>
+            ${showArchivedClients
+              ? `<button onclick="restoreClientById(${Number(c.id)}, ${escapeHtml(JSON.stringify(String(c.name || "")))})" style="padding:4px 8px;background:var(--ti-purple, #8B5CF6);color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;margin-left:4px;">${escapeHtml(pdfLabel("Restore"))}</button>`
+              : `<button onclick="openFormBuilderModal(${Number(c.id)}, ${escapeHtml(JSON.stringify(String(c.name || "")))})" style="padding:4px 8px;background:var(--ti-purple, #8B5CF6);color:#FFF;border:none;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;margin-left:4px;">Sign Waiver</button>`}
           </td></tr>`;
     }).join("");
     const q = document.getElementById("clients-main-search");

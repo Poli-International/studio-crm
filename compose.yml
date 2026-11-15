@@ -8,6 +8,8 @@ services:
     volumes:
       - studio-crm-data:/app/data
       - studio-crm-storage:/app/storage # scans and backups
+    environment:
+      - TZ=${TZ:-UTC} # your time zone, for example Europe/Paris, so that "today" is your day
     restart: unless-stopped
 volumes:
   studio-crm-data:

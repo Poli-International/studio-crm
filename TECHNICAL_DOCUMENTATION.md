@@ -68,7 +68,9 @@ studio-crm/
 ├── data/
 │   └── studio_crm.sqlite           # Main database (path overridable via SQLITE_DB_PATH)
 └── storage/
-    └── backups/                    # Snapshot copies written by the snapshot button
+    ├── photos/                     # Every photo, one file each (since 1.0.47)
+    ├── scans/                      # A full-size copy of each scanned page
+    └── backups/                    # Database copies: daily, before an update, and Back up now
 ```
 
 ### Component / Logic Breakdown
@@ -312,6 +314,7 @@ Routes of the self-hosted server that the screens above rely on (the online demo
 | `GET` / `POST` / `PATCH` | `/api/inventory`, `/api/inventory/{id}` | Stock items list, + Add item and Edit. The id is always the server's. |
 | `GET` / `POST` / `PUT` | `/api/inventory/suppliers`, `/api/inventory/suppliers/{id}` | Suppliers list, + Add supplier and Edit. Missing contact details stay empty; purchase orders go to `order_email`. |
 | `POST` | `/api/database/create-snapshot` | Back up now: a full SQLite copy in `storage/backups/`. |
+| `GET` | `/api/photos/{name}` | A photo, from its file in `storage/photos/` (since 1.0.47). |
 | `GET` / `POST` | `/api/access`, `/api/access/login`, `/api/access/logout`, `/api/access/password` | The optional studio password. `GET /api/access` also returns `staffLogins`, `level`, `me` and (administrators only) `logins`. |
 | `POST` | `/api/access/skip` | First start: open the CRM without a password. |
 | `POST` | `/api/access/idle` | Idle lock minutes (0, 5, 10, 15, 30). |
@@ -432,6 +435,24 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 ---
 
 ## Version History
+
+### 1.0.47
+
+**Photos are files. Saving no longer slows down as photos accumulate.**
+- **Why:** almost all studio data is rewritten into `app_state` after each write, and photos were text inside those lists. Measured before: 100 photos of 1 MB made every request wait 5.3 seconds after any write. Measured now, with 1,000 photos: the longest wait after a write is under 10 ms.
+- **Where a photo lives** (`src/photo-files.js`): `storage/photos/<first 32 hex characters of its SHA-256>.<jpg|png|webp>`. The record holds the address `/api/photos/<name>`; `GET /api/photos/:name` answers the file to anyone signed in to the CRM (not to a kiosk tablet), only for a name of that exact form. The same picture is one file, whatever number of records show it.
+- **Which records:** every JPEG, PNG or WebP data URL, at any depth, in `clients` (profile photo: `photo`, `avatar`, `avatar_url`), `clientTattooWork` (Work & Photos and the gallery) and `flashDesigns`. Not moved, on purpose: the signature inside a signed form or a waiver, the scanned pages inside a signed form (table `documents`, never part of the rewrite), the studio logo, and the sample drawings (SVG).
+- **When:** `saveAll()` moves the photos out just before the rows are written, so a photo arrives as a data URL as before (the routes are unchanged) and is a file a quarter of a second later. The order is: write the file to a temporary name, flush it to the disk, rename it, and only then change the record. A photo whose file cannot be written stays in its record and is tried again at the next save.
+- **A studio from before 1.0.47,** once, at the first start: profile photos kept in the shared browser data (`client_photo_<id>` in `appData`) go to their client; `VACUUM INTO` writes `storage/backups/before-photos-to-files_<time>.sqlite` (the database as it was, also copied to the second folder); the photos become files; the rows are saved; `VACUUM` gives the room back. If that backup cannot be made, nothing moves until the next start. The backup is never pruned: delete it by hand once the photos have been checked.
+- **Timing of that first start** (one PC, an SSD): a 400 MB database with 1,000 photos of 300 KB answers after 16 seconds, and after 14 seconds in the updater's trial start (which skips the backup and the flush: its database is a copy and its folder, `.update/new/storage`, is thrown away). 1.0.46 answers after 4 seconds on the same database. The updater allows the trial one minute.
+- **Backups:** a backup file no longer holds the photos. `copyBackupOut()` also copies the photo files the second folder does not have yet into `<second folder>/photos`. A studio is put back from both: the database file and the `photos` folder.
+- **A deleted photo's file stays** in `storage/photos`, so a backup from before the deletion still finds its pictures. Removing files is the job of "Erase this person's data" (planned).
+- **The browser** no longer stores profile photos (`client_photo_<id>` in `localStorage`, 5 to 10 MB in all, and downloaded again at every page load). On its first load after the update a browser sends the profile photos only it has to their clients (`PUT /api/app-data/client_photo_<id>` is answered that way and fills a client that has no photo), then removes them from its storage. The profile shows `client.photo`. When the photo cannot be saved the screen says so instead of "saved".
+- **Going back to 1.0.46** after this start: the records hold addresses the old version does not answer, so photos show as broken pictures. Nothing is lost: the files are in `storage/photos` and the backup made before the move holds the old form.
+- `STUDIO_CRM_STORAGE` moves the `storage` folder; it exists for the tests.
+- **Tests:** `tests/photo-files.test.js`: the function itself, then the real `server.js` twice: a new studio (work photo, profile photo, an old browser tab, bad names, the second folder), and a database prepared the old way with 1,000 photos (every photo a file with the same bytes, one backup holding the old form, a database under 10 MB, the wait after a write under 100 ms, a second start that moves nothing).
+- **Languages:** one screen sentence and the guide's Backups and Updating paragraphs were approved in English by Patrick, written in the 7 other languages by NotebookLM, scored by Jev and read in full. Only the sentences whose English changed were replaced; in each language the sentence about the second folder keeps its earlier wording.
+- **Click tests:** a new flow (a profile photo taken on one device shows on another); 72 flows pass, and the crawl clicks 499 buttons with 0 dead and 0 broken.
 
 ### 1.0.46
 

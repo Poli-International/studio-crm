@@ -17,6 +17,7 @@ import { GUARDIAN_AGE, ageOn, isGuardianForm, dobFromResponses } from './src/con
 import { AFTERCARE_LANGS, addAftercareTranslations } from './src/aftercare-texts.js';
 import { listScanners, scanPages } from './src/scanner.js';
 import { docIdFor, saveScanFiles, scanPagesOf, scanFileName } from './src/scan-files.js';
+import { PHOTO_NAME, isPhotoData, countPhotos, photosToFiles, copyPhotos } from './src/photo-files.js';
 import { mergeMedicalInto } from './src/utils/crm-utils.js';
 import {
   users as dbUsers,
@@ -54,6 +55,9 @@ export function safeIsoDate(val, fallback = new Date().toISOString()) {
 const app = express();
 const PORT = process.env.PORT || 3000;
 const APP_VERSION = JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json'), 'utf8')).version;
+// the studio's files: photos, scans, backups (STUDIO_CRM_STORAGE is for the tests)
+const STORAGE_DIR = process.env.STUDIO_CRM_STORAGE || path.join(__dirname, 'storage');
+const PHOTO_DIR = path.join(STORAGE_DIR, 'photos');
 
 app.use(express.json({ limit: '15mb' })); // portfolio photos arrive as data URLs
 
@@ -907,7 +911,7 @@ async function saveConsentForm(clientId, { formName, formCategory, language, sch
   const newId = Array.isArray(saved) ? saved[0]?.id : undefined;
   const docId = newId ? docIdFor(newId, saved[0].uploadedAt) : undefined;
   // the scanned pages at full size, also as files on this computer (src/scan-files.js)
-  if (docId) saveScanFiles(path.join(__dirname, 'storage', 'scans'), { docId, clientName: client && client.name, schema, responses });
+  if (docId) saveScanFiles(path.join(STORAGE_DIR, 'scans'), { docId, clientName: client && client.name, schema, responses });
 
   mergeMedicalAnswers(clientId, responses || {});
   if (client && !client.dob && formDob) { client.dob = formDob; scheduleStateSave(); } // the record learns the birth date
@@ -1423,7 +1427,7 @@ app.post('/api/clients/:id/photo', (req, res) => {
   if (!clientObj) return res.status(404).json({ error: 'Client not found' });
 
   const photoUrl = req.body.photo_url || req.body.data_url || req.body.photo;
-  if (!photoUrl) return res.status(400).json({ error: 'Photo data URL required' });
+  if (!isPhotoData(photoUrl)) return res.status(400).json({ error: 'Photo data URL required' });
 
   clientObj.photo = photoUrl;
   clientObj.avatar = photoUrl;
@@ -1439,6 +1443,14 @@ app.post('/api/clients/:id/photo', (req, res) => {
   });
 
   res.json({ success: true, client: clientObj, photo_url: photoUrl });
+});
+
+// A photo, from its file in storage/photos (src/photo-files.js). The name says what is in the file, so a
+// browser may keep it for good.
+app.get('/api/photos/:name', (req, res) => {
+  if (!PHOTO_NAME.test(req.params.name)) return res.status(404).end();
+  res.sendFile(req.params.name, { root: PHOTO_DIR, immutable: true, maxAge: '1y', headers: { 'Cache-Control': 'private, max-age=31536000, immutable', 'X-Content-Type-Options': 'nosniff' } },
+    (e) => { if (e && !res.headersSent) res.status(404).end(); });
 });
 
 app.post('/api/clients/:id/tattoo-work', (req, res) => {
@@ -4991,7 +5003,7 @@ let lastDatabaseSnapshotTimestamp = null; // null = never backed up (it was set 
 // Backups: storage/backups/ on this computer, and the same file copied to a second folder the
 // studio chooses (a USB stick, or a Google Drive / OneDrive / Dropbox folder) so a dead disk or
 // a stolen PC does not take every copy with it. One automatic backup a day, the last 30 kept.
-const BACKUP_DIR = path.join(__dirname, 'storage', 'backups');
+const BACKUP_DIR = path.join(STORAGE_DIR, 'backups');
 const AUTO_BACKUPS_KEPT = 30;
 let backupConfig = { copyTo: '', lastCopyError: null, lastCopyTime: null };
 
@@ -5012,6 +5024,7 @@ function copyBackupOut(file) {
   if (!backupConfig.copyTo) return null;
   try {
     fs.copyFileSync(file, path.join(backupConfig.copyTo, path.basename(file)));
+    copyPhotos(PHOTO_DIR, path.join(backupConfig.copyTo, 'photos')); // the photos are files, not in the database file
     backupConfig.lastCopyError = null;
     backupConfig.lastCopyTime = new Date().toISOString();
     return true;
@@ -5109,6 +5122,13 @@ const APP_DATA_KEY = /^(studio_|poli_|client_photo_)[A-Za-z0-9_]{1,80}(:[A-Za-z0
 app.get('/api/app-data', (req, res) => res.json(appData));
 app.put('/api/app-data/:key', (req, res) => {
   if (!APP_DATA_KEY.test(req.params.key) || typeof req.body.value !== 'string') return res.status(400).json({ error: 'bad key or value' });
+  // a browser from before 1.0.47 kept profile photos here: the photo goes to its client, unless the client has a newer one
+  const photoOf = /^client_photo_(\d+)$/.exec(req.params.key);
+  if (photoOf) {
+    const c = clients.find((x) => x.id === Number(photoOf[1]));
+    if (c && !c.photo && isPhotoData(req.body.value)) c.photo = c.avatar = c.avatar_url = req.body.value;
+    return res.json({ ok: true });
+  }
   appData[req.params.key] = req.body.value;
   res.json({ ok: true });
 });
@@ -5229,10 +5249,54 @@ function restoreState() {
 }
 
 const saveStmt = sqlite.prepare('INSERT OR REPLACE INTO app_state (key, value, updated_at) VALUES (?, ?, ?)');
-const saveAll = sqlite.transaction(() => {
+const saveRows = sqlite.transaction(() => {
   const now = new Date().toISOString();
   for (const [key, [get]] of Object.entries(PERSISTED)) saveStmt.run(key, JSON.stringify(get()), now);
 });
+// Photos are files (src/photo-files.js): the lists that hold photos give them up before they are saved.
+// Signed forms and waivers keep their signature inside the record, and the logo stays with the settings.
+const PHOTO_LISTS = () => [clients, clientTattooWork, flashDesigns];
+let photosStay = false; // no backup could be made before the first move: nothing moves until the next start
+const TRIAL = !!process.env.STUDIO_CRM_TRIAL; // an update's trial start: a copy of the database, in a folder that is thrown away
+function saveAll() {
+  if (!photosStay) photosToFiles(PHOTO_DIR, PHOTO_LISTS(), { flush: !TRIAL });
+  saveRows();
+}
+// A studio from before 1.0.47 has its photos in the database. Once, at the start: a backup of the database
+// as it is, then the photos become files, then the database file gives the room back.
+function movePhotosOutOfTheDatabase() {
+  // profile photos the browsers kept in the shared browser data: that copy is the one the screens showed
+  for (const k of Object.keys(appData)) {
+    const m = /^client_photo_(\d+)$/.exec(k);
+    if (!m) continue;
+    const c = clients.find((x) => x.id === Number(m[1]));
+    if (c && isPhotoData(appData[k])) c.photo = c.avatar = c.avatar_url = appData[k];
+    delete appData[k];
+  }
+  const n = countPhotos(PHOTO_LISTS());
+  if (!n) return;
+  // The trial start moves them all too (measured: quicker than saving them back into the copy), without the backup.
+  let backedUp = [];
+  try { backedUp = fs.readdirSync(BACKUP_DIR).filter((f) => f.startsWith('before-photos-to-files_')); } catch (e) { /* no backups yet */ }
+  if (!TRIAL && !backedUp.length) {
+    const file = path.join(BACKUP_DIR, `before-photos-to-files_${new Date().toISOString().replace(/[:.]/g, '-')}.sqlite`);
+    try {
+      fs.mkdirSync(BACKUP_DIR, { recursive: true });
+      sqlite.exec(`VACUUM INTO '${file.replace(/'/g, "''")}'`);
+      copyBackupOut(file);
+    } catch (e) {
+      fs.rmSync(file, { force: true }); // half a backup must not count as one at the next start
+      photosStay = true;
+      console.error('[photos] no backup could be made, so the photos stay in the database until the next start: ' + e.message);
+      return;
+    }
+  }
+  const t = Date.now();
+  const out = photosToFiles(PHOTO_DIR, PHOTO_LISTS(), { flush: !TRIAL });
+  saveRows();
+  try { sqlite.exec('VACUUM'); sqlite.pragma('wal_checkpoint(TRUNCATE)'); } catch (e) { console.warn('[photos] the database file keeps its size for now: ' + e.message); }
+  console.log(`[photos] ${out.moved} photos moved from the database to ${PHOTO_DIR} in ${((Date.now() - t) / 1000).toFixed(1)} s` + (out.failed ? `; ${out.failed} could not be written and stay in the database` : ''));
+}
 let saveTimer = null;
 function scheduleStateSave() {
   if (saveTimer) return;
@@ -5249,6 +5313,7 @@ try { sqlite.exec("DELETE FROM activity_logs WHERE action = 'REMINDER_SENT'"); }
 scheduleStateSave();
 // gallery photos from before 1.0.29 join the client photos (one store since then)
 if (moveGalleryIntoClientWork()) scheduleStateSave();
+movePhotosOutOfTheDatabase();
 // the built-in aftercare sheets get the languages they lack (a studio's database from before 1.0.19 has
 // English only); a language the studio edited is never replaced
 if (addAftercareTranslations(aftercareTemplates)) scheduleStateSave();

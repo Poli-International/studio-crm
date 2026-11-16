@@ -419,7 +419,7 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 |---|---|
 | Front desk | Clients, appointments, waivers, payments, clocking in and out, and reading everything except the money reports. |
 | Staff | Front desk, plus writes to stock, suppliers, compliance, aftercare, the rota and the consent form designs. |
-| Administrator | Everything: every `DELETE`, the money reports (`/api/financial`, `/api/financials`, `/api/staff/commissions`), `/api/settings`, studio-setting keys in `/api/app-data`, the team, logins, backups, imports. |
+| Administrator | Everything: every `DELETE`, the money reports (`/api/financial`, `/api/financials`, `/api/staff/commissions`), studio-setting keys in `/api/app-data`, the team, logins, backups, imports. |
 
   The studio password signs in as administrator. Without staff logins everyone who is signed in is an administrator, as in 1.0.5.
 - **HTTPS on the studio network**: a self-made certificate (`https-key.pem`, `https-cert.pem` next to the database) on port 3443, so tablets get the camera and the clipboard. `HTTPS_PORT=0` turns it off.
@@ -432,6 +432,19 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 ---
 
 ## Version History
+
+### 1.0.46
+
+**Clean-up: what no screen used is gone, and what the desk types is checked.**
+- **Routes:** 115 route statements (122 addresses) that no screen, tool or test called are deleted with their lists, sample data and background jobs, and 7 unused second addresses of routes that stay (`/api/professionals...`, `/api/clients/:id/reassign`, `/api/clients/:id/full-profile`). `server.js` goes from 10,637 to about 5,300 lines. Kept on purpose: `GET /api/accounting/export/quickbooks` and `/sage` (no button yet). A saved studio still holds the deleted lists in `app_state`; the loader ignores keys it no longer knows.
+- **Nothing claims to be sent:** the job that marked appointments `reminder_sent` every 30 seconds is deleted, and at start-up the old marks and `REMINDER_SENT` activity lines are removed from a saved studio. The automatic purchase order on low stock (`auto_emailed`, dispatch `SENT`) and the "DELIVERED" low-stock alert records are deleted; `POST /api/inventory/send-po-email` logs `PO_PREPARED`. The server builds no PDF any more (the sample studio text was in it).
+- **Bookings** (`src/bookings.js`): `datetime` must be a date and is stored as a full timestamp; status is one of `scheduled`, `confirmed`, `completed`, `cancelled`, `no-show`; a booking that overlaps another one of the same artist (same `staff_id`, or the same name when there is no id) or the same station is answered 409 with `conflict: { same, with }` unless the body has `force: true`. Cancelled and no-show appointments do not block. Unknown appointment: 404, no activity line.
+- **Payments** (`src/payments.js`): the amount is a finite number above 0, a method is required, the type is `payment` or `refund` (a refund has a positive amount).
+- **Clients are archived, not deleted:** `DELETE /api/clients/:id` sets `archived` and `archived_at` and keeps the record, its appointments, payments and forms; `POST /api/clients/:id/restore` undoes it; `GET /api/clients` leaves archived clients out and `?archived=1` lists only them; `PATCH` and `POST` ignore the two fields. A client matched again by the CSV auto-sync is restored. Erasing a person's data for good is not in this version.
+- **The studio's day** (`src/studio-day.js`): every date-only value the server writes (payment date, stock dates, purchase-order dates, compliance log, the day used by the slot proposal) is the local day of the computer the CRM runs on, no longer the UTC day. With Docker, set `TZ` to the studio's time zone. Full timestamps are unchanged.
+- **The studio's currency** (`src/money.js`, `money()` in `server.js`, `studioMoney()` on the screens): no "$" is written in front of an amount; activity lines written before the update keep their text.
+- **Tests:** `tests/clean-up.test.js` starts the real `server.js` on a throwaway database in a time zone whose day is not the UTC day, and checks every point above; `tests/bookings.test.js`; two click flows (booking clash, archive and restore).
+- **Languages:** 14 new texts approved in English by Patrick, written in the 7 other languages by NotebookLM, scored by Jev and read in full (2 corrections); two guide sentences the same way.
 
 ### 1.0.45
 
@@ -608,7 +621,7 @@ The application shell and all logic are plain HTML, CSS and JavaScript. The only
 ### 1.0.24
 
 **A Staff login reached Finance** (Henry, 2026-10-19: Maya, Staff, chose the administrator in Switch Staff User, clicked Finance in the second it showed, read the money records and recorded $150). Four faults:
-- `GET /api/accounting/*` (the ledger, the reconciliation, the QuickBooks and Sage exports) was open to every login: `needLevel` now asks `finance` for it, like the other money reports.
+- `GET /api/accounting/*` (the QuickBooks and Sage exports) was open to every login: `needLevel` now asks `finance` for it, like the other money reports.
 - Until `/api/access` answered, `screenAllowed` treated the device as an administrator and the menu showed every screen: a click in that second opened Finance. The screens that need a role are now hidden from the first paint (CSS on `body:not([data-level])`) and refused until the role is known (`accessLoaded`). `navigateToDestination` (`js/04-navigation.js`) loads before `staff.js`: until `screenAllowed` exists it opens only the dashboard (it let every screen through, found by CI 1 time in 5).
 - With staff logins, **Select** in the staff list only changed the name in the top bar ("At the screen now: ...", nothing on the server), which looked like switching to the administrator. With logins it is gone: changing person is **Sign out** (new in the staff window, for everyone once the studio password is set; it was only in Settings, which staff do not see), then that person's name and password. Edit, Remove and Add staff member are shown to administrators only (the server refused them already).
 - Recording a payment stays in **Clients and bookings** (taking payments at the desk); no route changes or deletes an existing payment without the **Delete records** area.

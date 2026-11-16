@@ -2297,5 +2297,19 @@
  "A candidate's record is personal data: choose when you will delete it.": "ข้อมูลของผู้สมัครคือข้อมูลส่วนบุคคล: เลือกว่าคุณจะลบข้อมูลเมื่อใด",
  "Hepatitis B vaccination offered on": "เสนอการฉีดวัคซีนไวรัสตับอักเสบบีเมื่อวันที่",
  "Only the date it was offered is kept: whether someone is vaccinated is health data, so the CRM never asks or stores it. In the US, OSHA requires the offer, free, to employees exposed to blood.": "จะเก็บไว้เฉพาะวันที่ได้รับการเสนอเท่านั้น: ข้อมูลที่ว่าบุคคลนั้นได้รับการฉีดวัคซีนแล้วหรือไม่ถือเป็นข้อมูลสุขภาพ ดังนั้น CRM จึงไม่เคยถามหรือจัดเก็บข้อมูลนี้ ในสหรัฐอเมริกา OSHA กำหนดให้ต้องเสนอให้แก่พนักงานที่สัมผัสกับเลือดโดยไม่มีค่าใช้จ่าย",
- "Every question is about the work. A question about the candidate's health is refused: it is unlawful before a job offer in many countries, and the CRM never records health.": "ทุกคำถามเป็นเรื่องเกี่ยวกับงาน คำถามเกี่ยวกับสุขภาพของผู้สมัครจะถูกปฏิเสธ: การถามเช่นนี้ก่อนการเสนองานถือว่าผิดกฎหมายในหลายประเทศ และ CRM จะไม่บันทึกข้อมูลสุขภาพโดยเด็ดขาด"
+ "Every question is about the work. A question about the candidate's health is refused: it is unlawful before a job offer in many countries, and the CRM never records health.": "ทุกคำถามเป็นเรื่องเกี่ยวกับงาน คำถามเกี่ยวกับสุขภาพของผู้สมัครจะถูกปฏิเสธ: การถามเช่นนี้ก่อนการเสนองานถือว่าผิดกฎหมายในหลายประเทศ และ CRM จะไม่บันทึกข้อมูลสุขภาพโดยเด็ดขาด",
+ "Archive": "เก็บถาวร",
+ "Archive {0}? They leave the client list. Their appointments, payments and signed forms are kept. You can restore them at any time from Archived clients.": "เก็บถาวร {0} หรือไม่? ลูกค้าจะออกจากรายชื่อลูกค้า นัดหมาย การชำระเงิน และแบบฟอร์มที่ลงนามแล้วของลูกค้าจะถูกเก็บไว้ คุณสามารถกู้คืนลูกค้าได้ตลอดเวลาจาก ลูกค้าที่เก็บถาวร",
+ "Client archived: {0}": "เก็บถาวรลูกค้าแล้ว: {0}",
+ "Could not archive the client: the server did not answer": "ไม่สามารถเก็บถาวรลูกค้าได้: เซิร์ฟเวอร์ไม่ตอบสนอง",
+ "Archived clients": "ลูกค้าที่เก็บถาวร",
+ "Back to clients": "กลับไปยังลูกค้า",
+ "No archived clients.": "ไม่มีลูกค้าที่เก็บถาวร",
+ "Restore": "กู้คืน",
+ "Client restored: {0}": "กู้คืนลูกค้าแล้ว: {0}",
+ "Could not restore the client: the server did not answer": "ไม่สามารถกู้คืนลูกค้าได้: เซิร์ฟเวอร์ไม่ตอบสนอง",
+ "Archived": "เก็บถาวรแล้ว",
+ "{0} already has an appointment at that time: {1}, {2}. Book anyway?": "{0} มีนัดหมายในเวลานั้นอยู่แล้ว: {1}, {2} ยังคงจองหรือไม่?",
+ "{0} is already booked at that time: {1}, {2}. Book anyway?": "{0} ถูกจองในเวลานั้นอยู่แล้ว: {1}, {2} ยังคงจองหรือไม่?",
+ "Booked {0} of {1} sessions. The next one clashes with another appointment: book it from the Calendar.": "จองแล้ว {0} จาก {1} เซสชัน เซสชันถัดไปชนกับนัดหมายอื่น: โปรดจองจากปฏิทิน"
 }

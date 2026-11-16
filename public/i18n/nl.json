@@ -2297,5 +2297,19 @@
  "A candidate's record is personal data: choose when you will delete it.": "Het dossier van een kandidaat betreft persoonsgegevens: kies wanneer u het verwijdert.",
  "Hepatitis B vaccination offered on": "Hepatitis B-vaccinatie aangeboden op",
  "Only the date it was offered is kept: whether someone is vaccinated is health data, so the CRM never asks or stores it. In the US, OSHA requires the offer, free, to employees exposed to blood.": "Alleen de datum waarop deze is aangeboden wordt bewaard: of iemand gevaccineerd is, zijn gezondheidsgegevens, dus het CRM vraagt dit nooit en slaat dit niet op. In de VS vereist OSHA het aanbod, kosteloos, aan werknemers die worden blootgesteld aan bloed.",
- "Every question is about the work. A question about the candidate's health is refused: it is unlawful before a job offer in many countries, and the CRM never records health.": "Elke vraag gaat over het werk. Een vraag over de gezondheid van de kandidaat wordt geweigerd: dit is in veel landen onwettig vóór een aanbod van een baan, en het CRM registreert gezondheid nooit."
+ "Every question is about the work. A question about the candidate's health is refused: it is unlawful before a job offer in many countries, and the CRM never records health.": "Elke vraag gaat over het werk. Een vraag over de gezondheid van de kandidaat wordt geweigerd: dit is in veel landen onwettig vóór een aanbod van een baan, en het CRM registreert gezondheid nooit.",
+ "Archive": "Archiveren",
+ "Archive {0}? They leave the client list. Their appointments, payments and signed forms are kept. You can restore them at any time from Archived clients.": "{0} archiveren? De klant verlaat de klantenlijst. Diens afspraken, betalingen en ondertekende formulieren worden bewaard. U kunt de klant op elk moment herstellen vanuit Gearchiveerde klanten.",
+ "Client archived: {0}": "Klant gearchiveerd: {0}",
+ "Could not archive the client: the server did not answer": "Kon de klant niet archiveren: de server gaf geen antwoord",
+ "Archived clients": "Gearchiveerde klanten",
+ "Back to clients": "Terug naar klanten",
+ "No archived clients.": "Geen gearchiveerde klanten.",
+ "Restore": "Herstellen",
+ "Client restored: {0}": "Klant hersteld: {0}",
+ "Could not restore the client: the server did not answer": "Kon de klant niet herstellen: de server gaf geen antwoord",
+ "Archived": "Gearchiveerd",
+ "{0} already has an appointment at that time: {1}, {2}. Book anyway?": "{0} heeft op dat tijdstip al een afspraak: {1}, {2}. Toch boeken?",
+ "{0} is already booked at that time: {1}, {2}. Book anyway?": "{0} is op dat tijdstip al geboekt: {1}, {2}. Toch boeken?",
+ "Booked {0} of {1} sessions. The next one clashes with another appointment: book it from the Calendar.": "{0} van {1} sessies geboekt. De volgende conflicteert met een andere afspraak: boek deze vanuit de Agenda."
 }

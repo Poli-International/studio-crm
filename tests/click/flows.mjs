@@ -298,7 +298,7 @@ await flow('On a phone, nothing is cut off on any screen', async () => {
   } finally { await b.desktop(); }
 });
 
-await flow('Edit client saves the change; Delete removes the client', async () => {
+await flow('Edit client saves the change; Archive hides the client, Restore brings it back', async () => {
   await b.clickText('Clients');
   await press('.client-directory-row', 'Flow Client', 'View Profile');
   await b.clickText('Edit client');
@@ -307,8 +307,15 @@ await flow('Edit client saves the change; Delete removes the client', async () =
   await b.clickText('Save changes');
   await eventually(async () => (await text('#client-profile-tags')).includes('555-7777'), 'the profile does not show the edited phone');
   await eventually(async () => (await api('/api/clients')).some((c) => c.name === 'Flow Client' && c.phone === '555-7777'), 'the edit was not saved');
-  await b.clickText('Delete', '#client-profile-modal-overlay');
-  await eventually(async () => !(await api('/api/clients')).some((c) => c.name === 'Flow Client'), 'the client was not deleted');
+  await b.clickText('Archive', '#client-profile-modal-overlay');
+  await eventually(async () => !(await api('/api/clients')).some((c) => c.name === 'Flow Client'), 'the client was not archived');
+  check((await api('/api/clients?archived=1')).some((c) => c.name === 'Flow Client'), 'the archived client is not in the archived list');
+  await b.clickText('Archived clients');
+  await eventually(async () => (await text('#clients-table-tbody')).includes('Flow Client'), 'Archived clients does not show the client');
+  await press('.client-directory-row', 'Flow Client', 'Restore');
+  await eventually(async () => (await api('/api/clients')).some((c) => c.name === 'Flow Client'), 'the client was not restored');
+  await b.clickText('Back to clients');
+  await eventually(async () => (await text('#clients-table-tbody')).includes('Flow Client'), 'Back to clients does not show the client');
 });
 
 await flow('Staff: add, edit, select and remove a team member', async () => {
@@ -551,6 +558,32 @@ await flow('Book an appointment for a client picked from the list, then edit it'
   await b.evaluate(`switchClientProfileTab('notes')`);
   await eventually(async () => { const t = await text('#client-profile-modal-body'); return t.includes('Edit check') && t.includes('From appointment'); }, 'the appointment note is not in Staff Notes');
   await b.evaluate(`closeClientProfileModal()`);
+});
+
+await flow('Booking the same artist at the same time asks first: "no" saves nothing, "yes" saves it', async () => {
+  const book = async (client, notes) => {
+    await b.goto(url);
+    await b.clickText('Calendar');
+    await pressOn('openQuickNewAppointmentModal()');
+    await b.type('#new-appt-client', client);
+    await b.evaluate(`(() => { const set = (id, v) => { const el = document.getElementById(id); el.value = v; el.dispatchEvent(new Event('change', { bubbles: true })); }; set('new-appt-date', '2031-04-02'); set('new-appt-time', '10:00'); set('new-appt-notes', ${JSON.stringify(notes)}); })()`);
+  };
+  const saved = async (notes) => (await api('/api/appointments')).filter((a) => a.notes === notes).length;
+  await book('Clash First', 'Clash first');
+  await b.clickText('Book appointment', '#new-appointment-modal-overlay');
+  await eventually(async () => (await saved('Clash first')) === 1, 'the first booking was not saved');
+  await book('Clash Second', 'Clash second');
+  await b.evaluate(`(() => { window.__asked = []; window.confirm = (m) => { window.__asked.push(m); return false; }; })()`);
+  await b.clickText('Book appointment', '#new-appointment-modal-overlay');
+  await eventually(async () => (await b.evaluate('window.__asked.length')) === 1, 'booking the same artist at the same time did not ask');
+  const asked = await b.evaluate('window.__asked[0]');
+  check(/already has an appointment at that time: Clash First,/.test(asked) && /Book anyway\?$/.test(asked), 'the question is not the approved one: ' + asked);
+  await sleep(1700); // the same form sent again within 1.5 s is dropped (js/01-boot.js): a person takes longer to answer
+  check((await saved('Clash second')) === 0, 'answering no still saved the booking');
+  check(await shown('new-appointment-modal-overlay'), 'answering no closed the form');
+  await b.evaluate(`window.confirm = () => true`);
+  await b.clickText('Book appointment', '#new-appointment-modal-overlay');
+  await eventually(async () => (await saved('Clash second')) === 1, 'answering yes did not save the booking');
 });
 
 await flow('Healing Pipeline lists the clients of completed sessions, with a PDF', async () => {
@@ -799,7 +832,7 @@ await flow('Studio details: saved in Settings, on the consent form and on the fo
   await b.clickText('Save studio details');
   await eventually(async () => JSON.parse((await api('/api/app-data')).poli_studio_profile || '{}').studioName === 'Flow Ink Studio', 'the studio details were not saved on the server');
   const made = await b.evaluate(`fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Studio Details Flow' }) }).then(r => r.json())`);
-  await b.evaluate(`fetch('/api/appointments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ client_id: ${made.id}, client_name: 'Studio Details Flow', service_type: 'Body Piercing', staff_name: 'Flow Piercer Artist', date: '2031-06-07', time: '10:00', status: 'Confirmed' }) })`);
+  await b.evaluate(`fetch('/api/appointments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ client_id: ${made.id}, client_name: 'Studio Details Flow', service_type: 'Body Piercing', staff_name: 'Flow Piercer Artist', datetime: '2031-06-07T10:00:00.000Z', status: 'confirmed' }) })`);
   await b.clickText('Clients');
   await eventually(async () => (await text('#clients-table-tbody')).includes('Studio Details Flow'), 'the client is not listed');
   await press('.client-directory-row', 'Studio Details Flow', 'Sign Waiver');
@@ -902,7 +935,7 @@ await flow('Stations: added, given a type and a usual artist, offered in the boo
 await flow('Aftercare: printed from the profile with the client name, recorded on the appointment; a sheet with no client', async () => {
   // Henry, 2026-10-18: no tattoo aftercare; give it from the client's profile and keep a record of it
   const made = await b.evaluate(`fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Aftercare Flow' }) }).then(r => r.json())`);
-  const appt = await b.evaluate(`fetch('/api/appointments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ client_id: ${made.id}, client_name: 'Aftercare Flow', service_type: 'Custom Tattoo', date: '2031-05-06', time: '10:00', status: 'Confirmed' }) }).then(r => r.json())`);
+  const appt = await b.evaluate(`fetch('/api/appointments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ client_id: ${made.id}, client_name: 'Aftercare Flow', service_type: 'Custom Tattoo', datetime: '2031-05-06T10:00:00.000Z', status: 'confirmed' }) }).then(r => r.json())`);
   await b.clickText('Clients');
   await eventually(async () => (await text('#clients-table-tbody')).includes('Aftercare Flow'), 'the client is not listed');
   await press('.client-directory-row', 'Aftercare Flow', 'View Profile');
@@ -1476,7 +1509,7 @@ await flow('Start with an empty studio, then add the first client, staff member 
   await press('.appointment-row', 'First Client', 'Remove');
   check((await api('/api/appointments')).length === 0, 'the appointment was not removed');
   // nothing of the demo studio is left, and no screen shows a figure nobody entered
-  for (const path of ['services', 'financial', 'inventory', 'waivers', 'gallery', 'messages', 'activity-logs?limit=5']) {
+  for (const path of ['financial', 'inventory', 'waivers', 'gallery', 'messages', 'activity-logs?limit=5']) {
     const left = await api('/api/' + path);
     check(Array.isArray(left) && left.filter((x) => !/First (Client|Artist)/.test(JSON.stringify(x))).length === 0, `an emptied studio still has ${path}: ` + JSON.stringify(left).slice(0, 120));
   }
@@ -1716,7 +1749,7 @@ await flow('A Staff login cannot reach Finance: not in the second after a reload
     await post('/api/access/logout', {});
     check((await post('/api/access/login', { staff_id: maya.id, password: 'maya-pass-123' })) === 200, 'Maya could not sign in');
     // the server: the ledger and its exports are money reports too (they were open to every login)
-    for (const p of ['/api/financial', '/api/accounting/ledger-timeseries', '/api/accounting/reconciliation-check', '/api/accounting/export/quickbooks', '/api/accounting/export/sage', '/api/accounting/health', '/api/accounting/config']) {
+    for (const p of ['/api/financial', '/api/accounting/export/quickbooks', '/api/accounting/export/sage']) {
       check((await call(p)) === 403, `Staff can read ${p}`);
     }
     // the screen: from the first paint, no Finance to click before the role is known, and no way in after

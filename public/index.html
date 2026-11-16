@@ -444,6 +444,7 @@
                 <button onclick="openQuickAddClientModal()" style="padding:0.45rem 0.9rem;background:var(--ti-blue, #3B82F6);color:#FFF;border:none;border-radius:8px;font-size:0.82rem;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">
                   <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-plus></use></svg> New Client
                 </button>
+                <button id="clients-archived-toggle" onclick="toggleArchivedClients()" style="padding:0.45rem 0.9rem;background:transparent;color:var(--ti-muted, #9CA3AF);border:1px solid var(--ti-line, #374151);border-radius:8px;font-size:0.82rem;font-weight:700;cursor:pointer;">Archived clients</button>
                 <button onclick="openFormBuilderModal()" style="padding:0.45rem 0.9rem;background:linear-gradient(135deg, var(--ti-purple, #8B5CF6) 0%, var(--ti-purple, #6D28D9) 100%);color:#FFF;border:none;border-radius:8px;font-size:0.82rem;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:6px;" title="Open Consent Form & Waiver Builder">
                   <svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-consent></use></svg> Consent Form Builder
                 </button>
@@ -5158,7 +5159,7 @@ docker compose up -d</pre>
             </div>
             <div style="display:flex;align-items:center;gap:8px;">
                 <button type="button" id="client-profile-edit-btn" onclick="openEditClientModal()" style="padding:8px 14px;background:var(--ti-blue, #2563EB);color:#FFF;border:none;border-radius:8px;font-weight:800;font-size:0.82rem;cursor:pointer;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-pen></use></svg> Edit client</button>
-                <button type="button" id="client-profile-delete-btn" onclick="confirmDeleteActiveClient()" style="padding:8px 14px;background:transparent;color:var(--ti-alert-ink, #FCA5A5);border:1px solid rgba(239,68,68,0.5);border-radius:8px;font-weight:700;font-size:0.82rem;cursor:pointer;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-trash></use></svg> Delete</button>
+                <button type="button" id="client-profile-delete-btn" onclick="confirmDeleteActiveClient()" style="padding:8px 14px;background:transparent;color:var(--ti-alert-ink, #FCA5A5);border:1px solid rgba(239,68,68,0.5);border-radius:8px;font-weight:700;font-size:0.82rem;cursor:pointer;"><svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-trash></use></svg> Archive</button>
                 <button type="button" onclick="closeClientProfileModal()" aria-label="Close" style="background:none;border:none;color:var(--ti-muted, #94A3B8);font-size:1.5rem;cursor:pointer;">&times;</button>
             </div>
         </div>

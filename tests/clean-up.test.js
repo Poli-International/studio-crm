@@ -99,7 +99,7 @@ describe('Job A: routes no screen calls are gone', () => {
     expect((await call('POST', '/api/clients/import-csv', { rows: [] })).status).not.toBe(404);
     expect((await call('POST', '/api/inventory/import-csv', { rows: [] })).status).not.toBe(404);
     expect((await call('PATCH', '/api/clients/1', { phone: '555-0199' })).status).toBe(200);
-  });
+  }, 30000);   // listing the scanners starts PowerShell on Windows: over 5 seconds on a cold machine (the Windows runners, 1.0.47)
 });
 
 describe('Job A: nothing is logged as a reminder, because none is sent', () => {

@@ -3,6 +3,7 @@
 /public/storage
 /storage/*.key
 /storage/scans/
+/storage/photos/
 /vendor
 .env
 .env.backup

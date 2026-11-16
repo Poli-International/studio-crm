@@ -1800,6 +1800,7 @@
  "No stock items yet. Add them in Inventory, then print their labels here.": "Pas encore d'articles en stock. Ajoutez-les dans Stock, puis imprimez leurs étiquettes ici.",
  "CSV sync settings saved": "Réglages de synchronisation CSV enregistrés",
  "The CRM saves a full copy of the studio database every day in the storage/backups folder on the computer that runs it, and keeps the last 30 days.": "Le CRM enregistre chaque jour une copie complète de la base de données du studio dans le dossier storage/backups de l'ordinateur qui le fait tourner, et garde les 30 derniers jours.",
+ "Photos are files in the storage/photos folder; they are copied to the second folder too.": "Les photos sont des fichiers dans le dossier storage/photos ; elles sont aussi copiées dans le deuxième dossier.",
  "Also copy every backup to": "Copier aussi chaque sauvegarde dans",
  "A folder on a USB stick, another disk, or a Google Drive, OneDrive or Dropbox folder on this computer, so a dead disk or a stolen computer does not take every copy with it. Leave it empty for none.": "Un dossier sur une clé USB, un autre disque, ou un dossier Google Drive, OneDrive ou Dropbox sur cet ordinateur : un disque en panne ou un ordinateur volé n'emporte pas toutes les copies. Laissez vide pour aucun.",
  "Save folder": "Enregistrer le dossier",

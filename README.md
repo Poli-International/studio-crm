@@ -119,7 +119,7 @@ npm start
 docker compose up -d
 ```
 
-Then open `http://localhost:3000`. With Docker the CRM always asks you to create the studio password: to a container, every browser is another device. The data is kept in two volumes: `/app/data` (the database) and `/app/storage` (scans and backups). If you used Docker before version 1.0.44, copy the scans out before you rebuild: `docker compose cp studio-crm:/app/storage ./storage-copy`. The CRM is its own web server: do not put the files behind Apache, nginx or PHP, the pages would load but nothing would save. Settings go in a `.env` file (copy `.env.example`): `PORT`, `STUDIO_MANAGER_EMAIL`, `SQLITE_DB_PATH`. Add `TZ` with your time zone (for example `TZ=Europe/Paris`): a container runs on UTC, and dates would be a day off in the evening or early morning. These copies are updated the way they were installed; one-click updates are for the downloads above. Versions before 1.0.12 update once by hand: download the new ZIP, unzip it to a new folder, and copy your `data` folder from the old one into it.
+Then open `http://localhost:3000`. With Docker the CRM always asks you to create the studio password: to a container, every browser is another device. The data is kept in two volumes: `/app/data` (the database) and `/app/storage` (photos, scans and backups). If you used Docker before version 1.0.44, copy the scans out before you rebuild: `docker compose cp studio-crm:/app/storage ./storage-copy`. The CRM is its own web server: do not put the files behind Apache, nginx or PHP, the pages would load but nothing would save. Settings go in a `.env` file (copy `.env.example`): `PORT`, `STUDIO_MANAGER_EMAIL`, `SQLITE_DB_PATH`. Add `TZ` with your time zone (for example `TZ=Europe/Paris`): a container runs on UTC, and dates would be a day off in the evening or early morning. These copies are updated the way they were installed; one-click updates are for the downloads above. Versions before 1.0.12 update once by hand: download the new ZIP, unzip it to a new folder, and copy your `data` and `storage` folders from the old one into it.
 
 ## Other devices in the studio
 
@@ -130,7 +130,7 @@ Then open `http://localhost:3000`. With Docker the CRM always asks you to create
 
 ## Backups
 
-All data is in `data/studio_crm.sqlite`. The CRM saves a full copy in `storage/backups/` every day and keeps the last 30 days; **Back up now** in Settings saves one at any time, and every update makes one first. In **Settings**, **Database Backup**, **Also copy every backup to** a second folder (a USB stick, another disk, or a Google Drive, OneDrive or Dropbox folder) so a dead disk or a stolen computer does not take every copy with it.
+The studio's records are in `data/studio_crm.sqlite` (or the path set in `SQLITE_DB_PATH`) and its photos are files in `storage/photos/`. To back up the studio by hand, copy both. **Back up now** in **Settings** writes a copy of the database to `storage/backups/`. The CRM also saves a copy there every day and keeps the last 30 days. In **Settings**, **Database Backup**, **Also copy every backup to** a second folder (a USB stick, another disk, or a Google Drive, OneDrive or Dropbox folder) so a dead disk or a stolen computer does not take every copy with it; the photos are copied there too, in a `photos` folder. To put a studio back, put back the database file and the `photos` folder.
 
 ## User guide
 

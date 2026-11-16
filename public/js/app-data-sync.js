@@ -1,6 +1,6 @@
 /**
  * Keeps the CRM's browser-side datasets (studio settings and prices, tips, closing
- * checklists, aftercare dispatches, macros, before/after pairs, client photos, the consent
+ * checklists, aftercare dispatches, macros, before/after pairs, the consent
  * forms edited in the form builder...) in the
  * studio database via /api/app-data, so they survive a cleared browser and are shared
  * by every computer in the studio.
@@ -13,7 +13,7 @@
 (function () {
   'use strict';
 
-  var SYNCED = /^(studio_(ba_pairs|scheduled_reports|portal_pinned_notes|tip_records|sanitization_logs|aftercare_dispatches|messenger_macros|before_after_gallery|vat_config|remote_sync_config)|poli_(studio_profile|studio_logo|benchmark_studio_rates_v1|tattoo_estimate_draft|form_builder_autosave(:[A-Za-z0-9_-]+)?|pdf_generator_settings|builder_theme_customization|kiosk_exit_pin)|client_photo_[A-Za-z0-9_]+)$/;
+  var SYNCED = /^(studio_(ba_pairs|scheduled_reports|portal_pinned_notes|tip_records|sanitization_logs|aftercare_dispatches|messenger_macros|before_after_gallery|vat_config|remote_sync_config)|poli_(studio_profile|studio_logo|benchmark_studio_rates_v1|tattoo_estimate_draft|form_builder_autosave(:[A-Za-z0-9_-]+)?|pdf_generator_settings|builder_theme_customization|kiosk_exit_pin))$/;
   var proto = Storage.prototype;
   var setItem = proto.setItem, removeItem = proto.removeItem;
 
@@ -49,6 +49,14 @@
     Object.keys(server).forEach(function (k) {
       if (SYNCED.test(k)) { try { setItem.call(localStorage, k, server[k]); } catch (e) {} }
     });
+    // Profile photos lived in this storage until 1.0.47 and filled it. They are files on the CRM computer now:
+    // a photo only this browser has is sent to its client once, then all of them leave this storage.
+    for (var j = localStorage.length - 1; j >= 0; j--) {
+      var pk = localStorage.key(j);
+      if (!/^client_photo_\d+$/.test(pk)) continue;
+      send('PUT', pk, localStorage.getItem(pk));
+      removeItem.call(localStorage, pk);
+    }
     // Upload anything only this browser has.
     for (var i = 0; i < localStorage.length; i++) {
       var k = localStorage.key(i);

@@ -194,9 +194,9 @@ function renderClientProfileHeader(data) {
     if (archiveBtn) archiveBtn.innerHTML = `<svg class=ti-i width=16 height=16 aria-hidden=true><use href=#i-${client.archived ? 'refresh' : 'trash'}></use></svg> ${escapeHtml(pdfLabel(client.archived ? 'Restore' : 'Archive'))}`;
 
     if (avatarEl) {
-        const savedPhoto = localStorage.getItem('client_photo_' + client.id);
+        const savedPhoto = client.photo;   // a file on the CRM computer since 1.0.47, no longer kept in this browser
         if (savedPhoto) {
-            avatarEl.innerHTML = `<img src="${savedPhoto}" alt="${escapeHtml(client.name || '')}" style="width:100%;height:100%;object-fit:cover;" />`;
+            avatarEl.innerHTML = `<img src="${escapeHtml(savedPhoto)}" alt="${escapeHtml(client.name || '')}" style="width:100%;height:100%;object-fit:cover;" />`;
         } else {
             const initials = (client.name || 'CP').split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
             avatarEl.innerHTML = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.5rem;color:var(--ti-blue-ink, #818CF8);">${initials}</div>`;
@@ -1606,11 +1606,20 @@ window.saveCapturedClientProfilePhoto = saveCapturedClientProfilePhoto;
 async function captureAndSaveClientProfilePhoto(clientId, photoDataUrl) {
     if (!clientId || !photoDataUrl) return;
 
-    // Persist locally for instant offline and cross-session retrieval
+    // The CRM computer keeps the photo; when it does not answer, say so instead of "saved"
     try {
-        localStorage.setItem('client_photo_' + clientId, photoDataUrl);
-    } catch (e) {
-        console.warn('LocalStorage client photo quota notice:', e);
+        const r = await fetch(`/api/clients/${clientId}/photo`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                photo_url: photoDataUrl,
+                artist: (currentActiveProfileClient && currentActiveProfileClient.client) ? currentActiveProfileClient.client.assigned_staff_name : 'Studio Staff'
+            })
+        });
+        if (!r.ok) throw new Error('status ' + r.status);
+    } catch (err) {
+        showStudioToast("Could not save: the server did not answer");
+        return;
     }
 
     // Update active in-memory client state
@@ -1624,20 +1633,6 @@ async function captureAndSaveClientProfilePhoto(clientId, photoDataUrl) {
     const avatarEl = document.getElementById('client-profile-avatar');
     if (avatarEl) {
         avatarEl.innerHTML = `<img src="${photoDataUrl}" alt="Client Photo" style="width:100%;height:100%;object-fit:cover;" />`;
-    }
-
-    // Sync with backend API
-    try {
-        await fetch(`/api/clients/${clientId}/photo`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                photo_url: photoDataUrl,
-                artist: (currentActiveProfileClient && currentActiveProfileClient.client) ? currentActiveProfileClient.client.assigned_staff_name : 'Studio Staff'
-            })
-        });
-    } catch (err) {
-        console.warn('Backend client photo sync notice:', err);
     }
 
     // Refresh client directory view if active to display updated avatar
@@ -4060,7 +4055,7 @@ async function shareToPlatform(platform) {
         const data = { text };
         const it = galleryState.shareItem || {};
         try {
-            if (it.image_url && it.image_url.startsWith("data:image/") && navigator.canShare) {
+            if (it.image_url && /^(data:image\/|\/api\/photos\/)/.test(it.image_url) && navigator.canShare) {
                 const blob = await (await fetch(it.image_url)).blob();
                 const file = new File([blob], "studio-work." + (blob.type.split("/")[1] || "jpg").replace("svg+xml", "svg"), { type: blob.type });
                 if (navigator.canShare({ files: [file] })) data.files = [file];

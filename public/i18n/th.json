@@ -1800,6 +1800,7 @@
  "No stock items yet. Add them in Inventory, then print their labels here.": "ยังไม่มีสินค้า เพิ่มสินค้าในสต็อกก่อน แล้วพิมพ์ฉลากที่นี่",
  "CSV sync settings saved": "บันทึกการตั้งค่าการซิงค์ CSV แล้ว",
  "The CRM saves a full copy of the studio database every day in the storage/backups folder on the computer that runs it, and keeps the last 30 days.": "CRM จะบันทึกสำเนาฐานข้อมูลของสตูดิโอทั้งหมดทุกวันในโฟลเดอร์ storage/backups บนคอมพิวเตอร์ที่รัน CRM และเก็บไว้ 30 วันล่าสุด",
+ "Photos are files in the storage/photos folder; they are copied to the second folder too.": "รูปถ่ายเป็นไฟล์ในโฟลเดอร์ storage/photos และยังถูกคัดลอกไปยังโฟลเดอร์ที่สองด้วยเช่นกัน",
  "Also copy every backup to": "คัดลอกข้อมูลสำรองทุกชุดไปที่",
  "A folder on a USB stick, another disk, or a Google Drive, OneDrive or Dropbox folder on this computer, so a dead disk or a stolen computer does not take every copy with it. Leave it empty for none.": "โฟลเดอร์ในแฟลชไดรฟ์ USB ดิสก์อื่น หรือโฟลเดอร์ Google Drive, OneDrive หรือ Dropbox บนคอมพิวเตอร์เครื่องนี้ เพื่อไม่ให้ดิสก์เสียหรือคอมพิวเตอร์ถูกขโมยทำให้สำเนาทั้งหมดหายไป เว้นว่างไว้หากไม่ต้องการ",
  "Save folder": "บันทึกโฟลเดอร์",

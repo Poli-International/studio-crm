@@ -121,6 +121,26 @@ await flow('Work and photos: a photo taken or chosen on the device is added to t
   await b.clickText('×', '#client-profile-modal-overlay');
 });
 
+await flow('Profile photo: kept on the CRM computer, so another device shows it too', async () => {
+  // until 1.0.47 the photo lived in the browser that took it, and in the shared browser data loaded whole at every page
+  const made = await b.evaluate(`fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Portrait Flow Client' }) }).then(r => r.json())`);
+  const id = (made.client || made).id;
+  const openProfile = async () => {
+    await b.clickText('Clients');
+    await eventually(async () => (await text('#clients-table-tbody')).includes('Portrait Flow Client'), 'the client is not listed');
+    await press('.client-directory-row', 'Portrait Flow Client', 'View Profile');
+  };
+  await openProfile();
+  // the camera cannot be driven here: the picture it hands over goes straight to the function that saves it
+  await b.evaluate(`(() => { const c = document.createElement('canvas'); c.width = 40; c.height = 40; c.getContext('2d').fillRect(0, 0, 40, 40); return captureAndSaveClientProfilePhoto(${id}, c.toDataURL('image/jpeg')); })()`);
+  await eventually(async () => /^\/api\/photos\//.test((await api('/api/clients/' + id)).photo || ''), 'the profile photo did not become a file');
+  check(!(await b.evaluate(`Object.keys(localStorage).some(k => k.startsWith('client_photo_'))`)), 'the profile photo is still kept in the browser');
+  await b.goto(url);   // another device: goto starts with empty storage
+  await openProfile();
+  await eventually(async () => b.evaluate(`(() => { const i = document.querySelector('#client-profile-avatar img'); return !!i && i.getAttribute('src').startsWith('/api/photos/') && i.naturalWidth > 0; })()`),
+    'another device does not show the profile photo');
+});
+
 await flow('Gallery: a photo for a typed client name shows on the profile, a profile photo shows in the gallery, delete removes both', async () => {
   // GitHub issue #14: the gallery and the profile kept separate photos, a typed name linked nothing, no delete
   const client = await b.evaluate(`fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Gallery Flow Client' }) }).then(r => r.json())`);
